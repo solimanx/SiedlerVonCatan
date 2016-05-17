@@ -1,8 +1,8 @@
-package abstractModel;
+package model;
 
 import enums.ResourceType;
 
-public abstract class Field {
+public class Field {
     ResourceType resourceType;
     int diceIndex;
 }

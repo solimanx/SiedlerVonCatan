@@ -1,6 +1,6 @@
-package abstractModel;
+package model;
 
-public abstract class Edge {
+public class Edge {
     boolean hasStreet;
     PlayerModel ownedByPlayer;
 }

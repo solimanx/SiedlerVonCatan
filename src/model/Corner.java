@@ -1,9 +1,9 @@
-package abstractModel;
+package model;
 
 import enums.CornerStatus;
 import enums.HarbourStatus;
 
-public abstract class Corner {
+public class Corner {
     CornerStatus status;
     HarbourStatus harbourStatus;
     PlayerModel ownedByPlayer;
