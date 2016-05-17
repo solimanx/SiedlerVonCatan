@@ -2,7 +2,8 @@ package settings;
 
 public final class DefaultSettings {
 
-    public final static int BOARD_SIZE = 37;
+    // 7 equates to 37 hexagons
+    public final static int BOARD_SIZE = 7;
 
     public final static int MAX_VICTORY_POINTS = 10;
 
