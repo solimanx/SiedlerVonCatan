@@ -1,8 +1,8 @@
 package abstractModel;
 
-import javafx.beans.Observable;
+import java.util.Observable;
 
-public abstract class Board implements Observable {
+public abstract class Board extends Observable {
 
 	private Edge[] edges;
 	private Corner[] corners;
