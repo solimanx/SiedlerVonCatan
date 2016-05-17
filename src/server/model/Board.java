@@ -1,5 +1,6 @@
 package server.model;
 
-public class Board {
+public class Board extends abstractModel.Board {
+
 
 }
