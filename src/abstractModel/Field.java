@@ -1,5 +1,8 @@
 package abstractModel;
 
-public abstract class Field {
+import enums.ResourceType;
 
+public abstract class Field {
+    ResourceType resourceType;
+    int diceIndex;
 }
