@@ -15,7 +15,7 @@ import enums.ResourceType;
  */
 public class GameLogic {
 Board board;
-PlayerModel playerModels;
+private PlayerModel[] playerModels;
 private Field[][] fields;
 private Corner[][][] corners;
 private Edge[][][] edges;
@@ -39,7 +39,7 @@ private Edge[][][] edges;
 	 * @return
 	 */
 	public boolean buildSettlement(int x, int y,char dir,int player){
-		if (playerModels.get(player).amountVillages > 0){ //has this Player a Village left to build?
+		if (playerModels[player-1].getVillageAmount() > 0){ //has this Player a Village left to build?
 			enums.CornerStatus status = corners[x][y][dir].getStatus(); 
 			switch(status){
 			case EMPTY:
@@ -62,11 +62,11 @@ private Edge[][][] edges;
 				return false;
 			}
 		}
-		corners[x][y].dir.setStatus(enums.CornerStatus.VILLAGE);
-		corners[x][y].dir.setPlayer(player);
-		playerModels.get(player).decreaseVillageAmount();
-		//view.setCornerBuilding(x,y,dir,enums.CornerStatus.VILLAGE,player);
-		return true;
+		if (board.getCornerAt(x,y,dir).getStatus == enums.CornerStatus.EMPTY){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private boolean buildCity(int x, int y, char dir, int player) {
@@ -76,11 +76,16 @@ private Edge[][][] edges;
 				return false;
 			}
 		}
-		corners[x][y].dir.setStatus(enums.CornerStatus.CITY);
-		corners[x][y].dir.setPlayer(player);
-		playerModels.get(player).decreaseCityAmount();
-		//view.setCornerBuilding(x,y,dir,enums.CornerStatus.CITY,player);
-		return true;
+		Corner c = board.getCornerAt(x,y,dir);
+		if(c.getStatus() == enums.CornerStatus.VILLAGE){
+			Edge[] e = board.getSurroundingE(c);
+			for (int i = 0;i<e.length;i++){
+				if (e.getPlayer() == player){
+					return true;
+				}
+			}
+		}
+	  return false;
 	}
 	/**
 	 * Checks if the player can build this Street and if the Position of the Street is Valid
@@ -138,14 +143,6 @@ private Edge[][][] edges;
 		return result;
 	}
 	
-	public void setBandit(int x,int y){
-		board.setBandit(fields[x][y]);
-	}
-	private void addToPlayersResources(int player,enums.ResourceType resType,int amount){
-		for (int i = 0;i<amount;i++){
-		   playerModels.get(player).addResource(resType);
-		}
-	}
 	
 
 }
