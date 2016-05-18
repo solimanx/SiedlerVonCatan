@@ -2,8 +2,8 @@ package client.controller;
 
 /**
  * @author NiedlichePixel
- * Controls the game flow
+ * Controls the game flow.
  */
-public class GameController {
+public class FlowController {
 
 }
