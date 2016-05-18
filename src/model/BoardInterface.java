@@ -6,21 +6,21 @@ package model;
  */
 public interface BoardInterface {
     
-	public Field getFieldAt(int offsetX, int offsetY);
-	public Corner getCornerAt(int offsetX, int offsetY, int i);
-	public Edge getEdgeAt(int offsetX, int offsetY, int i);
+	public Field getFieldAt(int aX, int aY);
+	public Corner getCornerAt(int aX, int aY, int i);
+	public Edge getEdgeAt(int aX, int aY, int i);
 	
-	public Field[] getNeighbouringFields(int offsetX, int offsetY);
-	public Field[] getTouchingFields(int offsetX, int offsetY, int i);
-	public Field[] getConnectedFields(int offsetX, int offsetY, int i);
+	public Field[] getNeighbouringFields(int aX, int aY);
+	public Field[] getTouchingFields(int aX, int aY, int i);
+	public Field[] getConnectedFields(int aX, int aY, int i);
 
-	public Corner[] getSurroundingCorners(int offsetX, int offsetY);
-	public Corner[] getAdjacentCorners(int offsetX, int offsetY, int i);
-	public Corner[] getAttachedCorners(int offsetX, int offsetY, int i);
+	public Corner[] getSurroundingCorners(int aX, int aY);
+	public Corner[] getAdjacentCorners(int aX, int aY, int i);
+	public Corner[] getAttachedCorners(int aX, int aY, int i);
 
-	public Edge[] getBorderingEdges(int offsetX, int offsetY);
-	public Edge[] getProjectingEdges(int offsetX, int offsetY, int i);
-	public Edge[] getLinkedEdges(int offsetX, int offsetY, int i);
+	public Edge[] getBorderingEdges(int aX, int aY);
+	public Edge[] getProjectingEdges(int aX, int aY, int i);
+	public Edge[] getLinkedEdges(int aX, int aY, int i);
 
 	public int[] convertToCube(int[] a); // required for initialize Board
 	public int[] convertToAxial(int[] c);
