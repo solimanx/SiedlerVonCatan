@@ -128,9 +128,8 @@ public class Board extends Observable implements BoardInterface {
 			return this.edges[offsetX + DefaultSettings.BOARD_SIZE / 2][offsetY + DefaultSettings.BOARD_SIZE / 2][i];
 	}
 
-	
 	// Refer to relationships.pdf
-	
+
 	/**
 	 * Get neighbouring fields of a field with the following order:
 	 * <p>
@@ -217,7 +216,7 @@ public class Board extends Observable implements BoardInterface {
 	 */
 
 	@Override
-	public Edge[] getBorders(int offsetX, int offsetY) {
+	public Edge[] getBorderingEdges(int offsetX, int offsetY) {
 		Edge ne = getEdgeAt(offsetX, offsetY, 1);
 		Edge e = getEdgeAt(offsetX, offsetY, 2);
 		Edge se = getEdgeAt(offsetX, offsetY - 1, 0);
@@ -234,7 +233,7 @@ public class Board extends Observable implements BoardInterface {
 	 */
 
 	@Override
-	public Edge[] getSurroundingE(Corner c) {
+	public Edge[] getProjectingEdges(int offsetX, int offsetY, int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -244,7 +243,7 @@ public class Board extends Observable implements BoardInterface {
 	 */
 
 	@Override
-	public Edge[] getSurroundingE(Edge e) {
+	public Edge[] getLinkedEdges(int offsetX, int offsetY, int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}

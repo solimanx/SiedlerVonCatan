@@ -1,6 +1,6 @@
 package model;
 /**
- * Refer to 
+ * Refer to hexagonrelations.png in trello
  * 
  *
  */
@@ -18,9 +18,9 @@ public interface BoardInterface {
 	public Corner[] getAdjacentCorners(int offsetX, int offsetY, int i);
 	public Corner[] getAttachedCorners(int offsetX, int offsetY, int i);
 
-	public Edge[] getBorders(int offsetX, int offsetY);
-	public Edge[] getSurroundingE(Corner c);
-	public Edge[] getSurroundingE(Edge e);
+	public Edge[] getBorderingEdges(int offsetX, int offsetY);
+	public Edge[] getProjectingEdges(int offsetX, int offsetY, int i);
+	public Edge[] getLinkedEdges(int offsetX, int offsetY, int i);
 
 	public int[] convertToCube(int[] a); // required for initialize Board
 	public int[] convertToAxial(int[] c);
