@@ -12,8 +12,8 @@ public class View implements ViewInterface {
 	public int[][][][] edgeCoordinates; // [6][6][3][4]
 	public int[][][][] cornerCoordinates; // [6][6][2][2]
 	public static double radius;
-	public static int[] windowCenter; //[2]
-	public static double sin60 = Math.sqrt(3)/2; // Hilfsvariable sqrt(3)/2
+	public static int[] windowCenter; // [2]
+	public static double sin60 = Math.sqrt(3) / 2; // Hilfsvariable sqrt(3)/2
 
 	@Override
 	public boolean initialize() {
@@ -101,8 +101,11 @@ public class View implements ViewInterface {
 
 	@Override
 	public void calculateFieldCenters() {
-		// TODO Auto-generated method stub
-		
+		/*
+		* ausgehend von windowCenter = [x,y] die Mittelpunkte aller 43 Felder in fieldcoordinates speichern
+		* 0,0 -> 3,3     -2,-1 -> 1,2
+		*/
+
 	}
 
 }
