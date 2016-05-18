@@ -30,8 +30,9 @@ public class Board extends Observable {
 	edges = new Edge[r][r][3];
 	initializeEdges(edges);
 
-	// TODO players 
-	// TODO bandit (find desert through HexServices and place it on top of it)
+	// TODO players
+	// TODO bandit (find desert through HexServices and place it on top of
+	// it)
 
     }
 
@@ -90,13 +91,16 @@ public class Board extends Observable {
      * 
      */
     private void initializeFields(Field[][] fields) {
+	int offsetX;
+	int offsetY;
 	int absoluteValue;
 	for (int y = 0; y < fields.length; y++) {
 	    for (int x = 0; x < fields[0].length; x++) {
-		fields[y][x].setOffsetY(-3 + y); // TODO soft code
-		fields[y][x].setOffsetX(-3 + x); // TODO soft code
 
-		absoluteValue = Math.abs(fields[y][x].getOffsetY() + fields[y][x].getOffsetX());
+		offsetY = -3 + y; // TODO soft code
+		offsetX = -3 + x; // TODO soft code
+
+		absoluteValue = Math.abs(offsetY + offsetX);
 
 		if (absoluteValue > 3) // TODO soft code
 		    fields[y][x] = null;
@@ -107,8 +111,8 @@ public class Board extends Observable {
     }
 
     /**
-     * Sync the offset x and y coordinates of field with corners , and attach
-     * cardinal directions to them. Null fields are neglected.
+     * Sync the x and y coordinates of field with corners , and attach cardinal
+     * directions to them. Null fields are neglected.
      * 
      * @param corners
      */
@@ -116,12 +120,7 @@ public class Board extends Observable {
 	for (int y = 0; y < fields.length; y++) {
 	    for (int x = 0; x < fields[0].length; x++) {
 		if (fields[y][x] != null) {
-		    corners[y][x][0].setOffsetY(fields[y][x].getOffsetY());
-		    corners[y][x][0].setOffsetX(fields[y][x].getOffsetX());
 		    corners[y][x][0].setDirection(CardinalDirection.NORTH);
-
-		    corners[y][x][1].setOffsetY(fields[y][x].getOffsetY());
-		    corners[y][x][1].setOffsetX(fields[y][x].getOffsetX());
 		    corners[y][x][1].setDirection(CardinalDirection.SOUTH);
 		}
 	    }
@@ -130,8 +129,8 @@ public class Board extends Observable {
     }
 
     /**
-     * Sync the offset x and y coordinates of field with edges, and attach
-     * cardinal directions to them. Null fields are neglected.
+     * Sync the x and y coordinates of field with edges, and attach cardinal
+     * directions to them. Null fields are neglected.
      * 
      * @param edges
      */
@@ -139,16 +138,8 @@ public class Board extends Observable {
 	for (int y = 0; y < fields.length; y++) {
 	    for (int x = 0; x < fields[0].length; x++) {
 		if (fields[y][x] != null) {
-		    edges[y][x][0].setOffsetY(fields[y][x].getOffsetY());
-		    edges[y][x][0].setOffsetX(fields[y][x].getOffsetX());
 		    edges[y][x][0].setDirection(CardinalDirection.NORTH_WEST);
-
-		    edges[y][x][1].setOffsetY(fields[y][x].getOffsetY());
-		    edges[y][x][1].setOffsetX(fields[y][x].getOffsetX());
 		    edges[y][x][1].setDirection(CardinalDirection.NORTH_EAST);
-
-		    edges[y][x][2].setOffsetY(fields[y][x].getOffsetY());
-		    edges[y][x][2].setOffsetX(fields[y][x].getOffsetX());
 		    edges[y][x][2].setDirection(CardinalDirection.EAST);
 
 		}
@@ -160,6 +151,56 @@ public class Board extends Observable {
      * @author mattmoos Auxiliary class for navigating hexagonal game board
      */
     private class HexServices {
+	int[][] directions = { { 1, 0 }, { 0, -1 }, { -1, -1 }, { -1, 0 }, { -1, +1 }, { 0, 1 } };
+	
+	
+
+	//Field, Corner, Edge getters
+	public Field getFieldAt(int offsetX, int offsetY) {
+	    /* TODO
+	     *	if (offsetX<4 && offsetX >-4 && offsetY<4 && offsetY >-4) {
+	     *		int y = offsetY + 3; 
+	     *		int x = offsetX + 3; 
+	     *		return fields[y][x];
+	     * 	}
+	     * else
+	     * 		return null;
+	     */
+
+	    return null;
+	}
+	public Corner getCornerAt(int offsetX, int offsetY, CardinalDirection Z){
+	    //TODO similar to getFieldAt
+	    return null;
+	}
+	public Edge getEdgeAt(int offsetX, int offsetY, CardinalDirection Z){
+	    //TODO similar to getFieldAt
+	    return null;
+	}
+	
+	public Field[] getNeighboursOfFieldAt(int offsetX, int offsetY){
+	    //TODO adapt with hexservice
+	    //NorthWest
+	    Field nw;//=getFieldAt(offsetX)(offsetY - 1);
+	    
+	    //NorthEast
+	    Field ne;//=getFieldAt(offsetX + 1)(offsetY - 1);
+	    
+	    //East
+	    Field e;//=getFieldAt(offsetX - 1)(offsetY);
+	    
+	    //West
+	    Field w;//=getFieldAt(offsetX + 1)(offsetY);
+	    
+	    //SouthWest
+	    Field sw;//=getFieldAt(offsetX - 1)(offsetY + 1)
+	    
+	    //SouthEast
+	    Field se;//=getFieldAt(offsetX)(offsetY + 1);
+	    Field[] neighbours = null; // = {nw, ne, e, w, sw, se};
+	    
+	    return neighbours;
+	}
 
     }
 

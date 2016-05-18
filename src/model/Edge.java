@@ -3,23 +3,13 @@ package model;
 import enums.CardinalDirection;
 
 public class Edge {
-    int offsetX;
-    int offsetY;
-    CardinalDirection direction;
+    private CardinalDirection direction;
 
-    boolean hasStreet;
-    PlayerModel ownedByPlayer;
+    private boolean hasStreet;
+    private PlayerModel ownedByPlayer;
 
     public Edge() {
 	hasStreet = false; // TODO constructor
-    }
-
-    public int getOffsetX() {
-	return offsetX;
-    }
-
-    public int getOffsetY() {
-	return offsetY;
     }
 
     public CardinalDirection getDirection() {
@@ -32,14 +22,6 @@ public class Edge {
 
     public PlayerModel getOwnedByPlayer() {
 	return ownedByPlayer;
-    }
-
-    public void setOffsetX(int offsetX) {
-	this.offsetX = offsetX;
-    }
-
-    public void setOffsetY(int offsetY) {
-	this.offsetY = offsetY;
     }
 
     public void setDirection(CardinalDirection direction) {

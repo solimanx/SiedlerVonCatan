@@ -6,25 +6,15 @@ import enums.HarbourStatus;
 
 public class Corner {
 
-    int offsetX;
-    int offsetY;
-    CardinalDirection direction;
+    private CardinalDirection direction;
 
-    CornerStatus status;
-    HarbourStatus harbourStatus;
-    PlayerModel ownedByPlayer;
+    private CornerStatus status;
+    private HarbourStatus harbourStatus;
+    private PlayerModel ownedByPlayer;
 
     public Corner() { // TODO Constructor
 	status = CornerStatus.EMPTY;
 	harbourStatus = HarbourStatus.NULL;
-    }
-
-    public int getOffsetX() {
-	return offsetX;
-    }
-
-    public int getOffsetY() {
-	return offsetY;
     }
 
     public CardinalDirection getDirection() {
@@ -41,14 +31,6 @@ public class Corner {
 
     public PlayerModel getOwnedByPlayer() {
 	return ownedByPlayer;
-    }
-
-    public void setOffsetX(int offsetX) {
-	this.offsetX = offsetX;
-    }
-
-    public void setOffsetY(int offsetY) {
-	this.offsetY = offsetY;
     }
 
     public void setDirection(CardinalDirection direction) {
