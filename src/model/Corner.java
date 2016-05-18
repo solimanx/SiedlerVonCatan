@@ -1,12 +1,9 @@
 package model;
 
-import enums.CardinalDirection;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 
 public class Corner {
-
-    private CardinalDirection direction;
 
     private CornerStatus status;
     private HarbourStatus harbourStatus;
@@ -17,9 +14,6 @@ public class Corner {
 	harbourStatus = HarbourStatus.NULL;
     }
 
-    public CardinalDirection getDirection() {
-	return direction;
-    }
 
     public CornerStatus getStatus() {
 	return status;
@@ -31,10 +25,6 @@ public class Corner {
 
     public PlayerModel getOwnedByPlayer() {
 	return ownedByPlayer;
-    }
-
-    public void setDirection(CardinalDirection direction) {
-	this.direction = direction;
     }
 
     public void setStatus(CornerStatus status) {
