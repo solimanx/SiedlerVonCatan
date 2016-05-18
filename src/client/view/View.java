@@ -34,7 +34,7 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public void drawChips(double[] centerPoints, int[] diceIndex) {
+	public void drawChips() {
 		// TODO Auto-generated method stub
 
 	}
@@ -105,6 +105,9 @@ public class View implements ViewInterface {
 		* ausgehend von windowCenter = [x,y] die Mittelpunkte aller 43 Felder in fieldcoordinates speichern
 		* 0,0 -> 3,3     -2,-1 -> 1,2
 		*/
+		
+		
+		
 
 	}
 

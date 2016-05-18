@@ -13,7 +13,11 @@ public interface ViewInterface {
 
 	public void drawHexagon(double[] points);
 
-	public void drawChips(double[] centerPoints, int[] diceIndex);
+	public void drawChips();
+	
+	public int convertToHex(int x);
+	
+	public int convertToRect(int x);
 
 	public void drawVillage();
 
