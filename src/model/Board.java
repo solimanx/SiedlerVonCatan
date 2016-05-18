@@ -30,8 +30,7 @@ public class Board extends Observable implements BoardInterface {
 		initializeEdges(edges);
 
 		// TODO players
-		// TODO bandit (find desert through HexServices and place it on top of
-		// it)
+		// TODO bandit
 
 	}
 
@@ -53,16 +52,15 @@ public class Board extends Observable implements BoardInterface {
 		int offsetX;
 		int offsetY;
 		int absoluteValue;
-		for (int y = 0; y < fields.length; y++) {
-			for (int x = 0; x < fields[0].length; x++) {
+		for (int x = 0; x < fields.length; x++) {
+			for (int y = 0; y < fields[0].length; y++) {
 
-				offsetY = -3 + y; // TODO soft code
-				offsetX = -3 + x; // TODO soft code
-
+				offsetX = x - DefaultSettings.BOARD_SIZE;
+				offsetY = y - DefaultSettings.BOARD_SIZE;
 				absoluteValue = Math.abs(offsetY + offsetX);
 
-				if (absoluteValue != 3) // TODO soft code
-					fields[y][x] = new Field();
+				if (absoluteValue != DefaultSettings.BOARD_SIZE)
+					fields[x][y] = new Field();
 
 			}
 		}
@@ -76,11 +74,11 @@ public class Board extends Observable implements BoardInterface {
 	 * @param corners
 	 */
 	private void initializeCorners(Corner[][][] corners) {
-		for (int y = 0; y < fields.length; y++) {
-			for (int x = 0; x < fields[0].length; x++) {
-				if (fields[y][x] != null) {
-					corners[y][x][0] = new Corner(); // North
-					corners[y][x][1] = new Corner(); // South
+		for (int x = 0; x < fields.length; x++) {
+			for (int y = 0; y < fields[0].length; y++) {
+				if (fields[x][y] != null) {
+					corners[x][y][0] = new Corner(); // North
+					corners[x][y][1] = new Corner(); // South
 				}
 			}
 		}
@@ -94,42 +92,64 @@ public class Board extends Observable implements BoardInterface {
 	 * @param edges
 	 */
 	private void initializeEdges(Edge[][][] edges) {
-		for (int y = 0; y < fields.length; y++) {
-			for (int x = 0; x < fields[0].length; x++) {
-				if (fields[y][x] != null) {
-					edges[y][x][0] = new Edge(); // Northwest
-					edges[y][x][1] = new Edge(); // Northeast
-					edges[y][x][2] = new Edge(); // East
+		for (int x = 0; x < fields.length; x++) {
+			for (int y = 0; y < fields[0].length; y++) {
+				if (fields[x][y] != null) {
+					edges[x][y][0] = new Edge(); // Northwest
+					edges[x][y][1] = new Edge(); // Northeast
+					edges[x][y][2] = new Edge(); // East
 
 				}
 			}
 		}
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public Field getFieldAt(int offsetX, int offsetY) {
-		return this.fields[offsetY + DefaultSettings.BOARD_SIZE / 2][offsetX + DefaultSettings.BOARD_SIZE / 2];
+		if (offsetX + DefaultSettings.BOARD_SIZE / 2 < 0 || offsetY + DefaultSettings.BOARD_SIZE / 2 < 0)
+			return null;
+		else
+			return this.fields[offsetX + DefaultSettings.BOARD_SIZE / 2][offsetY + DefaultSettings.BOARD_SIZE / 2];
 	}
-
-	/**
-	 *
-	 */
 
 	@Override
 	public Corner getCornerAt(int offsetX, int offsetY, int i) {
-		return this.corners[offsetY + DefaultSettings.BOARD_SIZE / 2][offsetX + DefaultSettings.BOARD_SIZE / 2][i];
+		if (offsetX + DefaultSettings.BOARD_SIZE / 2 < 0 || offsetY + DefaultSettings.BOARD_SIZE / 2 < 0)
+			return null;
+		else
+			return this.corners[offsetX + DefaultSettings.BOARD_SIZE / 2][offsetY + DefaultSettings.BOARD_SIZE / 2][i];
 	}
-
-	/**
-	 *
-	 */
 
 	@Override
 	public Edge getEdgeAt(int offsetX, int offsetY, int i) {
-		return this.edges[offsetY + DefaultSettings.BOARD_SIZE / 2][offsetX + DefaultSettings.BOARD_SIZE / 2][i];
+		if (offsetX + DefaultSettings.BOARD_SIZE / 2 < 0 || offsetY + DefaultSettings.BOARD_SIZE / 2 < 0)
+			return null;
+		else
+			return this.edges[offsetX + DefaultSettings.BOARD_SIZE / 2][offsetY + DefaultSettings.BOARD_SIZE / 2][i];
+	}
+
+	
+	// Refer to relationships.pdf
+	
+	/**
+	 * Get neighbouring fields of a field with the following order:
+	 * <p>
+	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}
+	 */
+
+	@Override
+	public Field[] getNeighbouringFields(int offsetX, int offsetY) {
+
+		Field ne = getFieldAt(offsetX + 1, offsetY - 1);
+		Field e = getFieldAt(offsetX + 1, offsetY);
+		Field se = getFieldAt(offsetX, offsetY + 1);
+		Field sw = getFieldAt(offsetX - 1, offsetY + 1);
+		Field w = getFieldAt(offsetX - 1, offsetY);
+		Field nw = getFieldAt(offsetX, offsetY - 1);
+
+		Field[] neighbours = { ne, e, se, sw, w, nw };
+
+		return neighbours;
 	}
 
 	/**
@@ -137,42 +157,7 @@ public class Board extends Observable implements BoardInterface {
 	 */
 
 	@Override
-	public Field[] getSurroundingF(Field f) {
-		// TODO Auto-generated method stub
-		// NorthWest Field nw;//=getFieldAt(offsetX)(offsetY - 1);
-
-		// NorthEast Field ne;// =getFieldAt(offsetX + 1)(offsetY - 1);
-
-		// East Field e;// =getFieldAt(offsetX - 1)(offsetY);
-
-		// West Field w;// =getFieldAt(offsetX + 1)(offsetY);
-
-		// SouthWest Field sw;// =getFieldAt(offsetX - 1)(offsetY + 1)
-
-		// SouthEast Field se;// =getFieldAt(offsetX)(offsetY + 1); Field[]
-		// neighbours = null; // = {nw, ne, e, w, sw, se}; TODO 12 Uhr //
-		// uhrzeiger
-
-		// return neighbours;
-		return null;
-	}
-
-	/**
-	 *
-	 */
-
-	@Override
-	public Field[] getSurroundingF(Corner c) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 *
-	 */
-
-	@Override
-	public Field[] getSurroundingF(Edge e) {
+	public Field[] getTouchingFields(int offsetX, int offsetY, int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -182,7 +167,35 @@ public class Board extends Observable implements BoardInterface {
 	 */
 
 	@Override
-	public Corner[] getSurroundingC(Field f) {
+	public Field[] getConnectedFields(int offsetX, int offsetY, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * Get all corners of a field with the following order:
+	 * <p>
+	 * {North, NorthEast, SouthEast, South, SouthWest, NorthWest}
+	 */
+
+	@Override
+	public Corner[] getSurroundingCorners(int offsetX, int offsetY) {
+		Corner n = getCornerAt(offsetX, offsetY, 0);
+		Corner ne = getCornerAt(offsetX + 1, offsetY - 1, 1);
+		Corner se = getCornerAt(offsetX, offsetY + 1, 0);
+		Corner s = getCornerAt(offsetX, offsetY, 1);
+		Corner sw = getCornerAt(offsetX - 1, offsetY + 1, 0);
+		Corner nw = getCornerAt(offsetX, offsetY - 1, 1);
+		Corner[] surrCorners = { n, ne, se, s, sw, nw };
+		return surrCorners;
+	}
+
+	/**
+	 *
+	 */
+
+	@Override
+	public Corner[] getAdjacentCorners(int offsetX, int offsetY, int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -192,28 +205,30 @@ public class Board extends Observable implements BoardInterface {
 	 */
 
 	@Override
-	public Corner[] getSurroundingC(Corner c) {
+	public Corner[] getAttachedCorners(int offsetX, int offsetY, int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**
-	 *
+	 * Get bordering edges of a field with the following order:
+	 * <p>
+	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}
 	 */
 
 	@Override
-	public Corner[] getSurroundingC(Edge e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	/**
-	 *
-	 */
+	public Edge[] getBorders(int offsetX, int offsetY) {
+		Edge ne = getEdgeAt(offsetX, offsetY, 1);
+		Edge e = getEdgeAt(offsetX, offsetY, 2);
+		Edge se = getEdgeAt(offsetX, offsetY - 1, 0);
+		Edge sw = getEdgeAt(offsetX - 1, offsetY + 1, 1);
+		Edge w = getEdgeAt(offsetX - 1, offsetY, 2);
+		Edge nw = getEdgeAt(offsetX, offsetY, 0);
 
-	@Override
-	public Edge[] getSurroundingE(Field f) {
-		// TODO Auto-generated method stub
-		return null;
+		Edge[] borders = { ne, e, se, sw, w, nw };
+		return borders;
 	}
+
 	/**
 	 *
 	 */
@@ -223,6 +238,7 @@ public class Board extends Observable implements BoardInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**
 	 *
 	 */
@@ -232,6 +248,7 @@ public class Board extends Observable implements BoardInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**
 	 *
 	 */
@@ -251,6 +268,7 @@ public class Board extends Observable implements BoardInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**
 	 *
 	 */
@@ -260,14 +278,14 @@ public class Board extends Observable implements BoardInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**
 	 *
 	 */
 
 	@Override
-	public Field[][][] getFields() {
-		// TODO Auto-generated method stub
-		return null;
+	public Field[][] getFields() {
+		return this.fields;
 	}
 
 	@Override
@@ -285,17 +303,14 @@ public class Board extends Observable implements BoardInterface {
 		return this.players;
 	}
 
-
 	@Override
 	public Field getBandit() {
-		return null;
+		return this.bandit;
 	}
-
-
 
 	@Override
 	public void setBandit(Field f) {
-		this.bandit=f;
+		this.bandit = f;
 
 	}
 
