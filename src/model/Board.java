@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import settings.DefaultSettings;
 
-public class Board extends Observable {
+public class Board extends Observable implements BoardInterface {
 
 	private Field[][] fields;
 	private Corner[][][] corners;
@@ -40,46 +40,6 @@ public class Board extends Observable {
 			Board.instance = new Board();
 		}
 		return Board.instance;
-	}
-
-	public Edge[][][] getEdges() {
-		return edges;
-	}
-
-	public void setEdges(Edge[][][] edges) {
-		this.edges = edges;
-	}
-
-	public Corner[][][] getCorners() {
-		return corners;
-	}
-
-	public void setCorners(Corner[][][] corners) {
-		this.corners = corners;
-	}
-
-	public Field[][] getFields() {
-		return fields;
-	}
-
-	public void setFields(Field[][] fields) {
-		this.fields = fields;
-	}
-
-	public PlayerModel[] getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(PlayerModel[] players) {
-		this.players = players;
-	}
-
-	public Field getBandit() {
-		return bandit;
-	}
-
-	public void setBandit(Field bandit) {
-		this.bandit = bandit;
 	}
 
 	/**
@@ -119,8 +79,8 @@ public class Board extends Observable {
 		for (int y = 0; y < fields.length; y++) {
 			for (int x = 0; x < fields[0].length; x++) {
 				if (fields[y][x] != null) {
-					corners[y][x][0] = new Corner(); //North
-					corners[y][x][1] = new Corner(); //South
+					corners[y][x][0] = new Corner(); // North
+					corners[y][x][1] = new Corner(); // South
 				}
 			}
 		}
@@ -137,9 +97,9 @@ public class Board extends Observable {
 		for (int y = 0; y < fields.length; y++) {
 			for (int x = 0; x < fields[0].length; x++) {
 				if (fields[y][x] != null) {
-					edges[y][x][0] = new Edge(); //Northwest
-					edges[y][x][1] = new Edge(); //Northeast
-					edges[y][x][2] = new Edge(); //East
+					edges[y][x][0] = new Edge(); // Northwest
+					edges[y][x][1] = new Edge(); // Northeast
+					edges[y][x][2] = new Edge(); // East
 
 				}
 			}
@@ -147,54 +107,195 @@ public class Board extends Observable {
 	}
 
 	/**
-	 * @author mattmoos Auxiliary class for navigating hexagonal game board
+	 *
 	 */
-	private class HexServices {
+	@Override
+	public Field getFieldAt(int offsetX, int offsetY) {
+		return this.fields[offsetY + DefaultSettings.BOARD_SIZE / 2][offsetX + DefaultSettings.BOARD_SIZE / 2];
+	}
 
-		// Field, Corner, Edge getters
-		public Field getFieldAt(int offsetX, int offsetY) {
-			/*
-			 * TODO if (offsetX<4 && offsetX >-4 && offsetY<4 && offsetY >-4) {
-			 * int y = offsetY + 3; int x = offsetX + 3; return fields[y][x]; }
-			 * else return null;
-			 */
+	/**
+	 *
+	 */
 
-			return null;
-		}
+	@Override
+	public Corner getCornerAt(int offsetX, int offsetY, int i) {
+		return this.corners[offsetY + DefaultSettings.BOARD_SIZE / 2][offsetX + DefaultSettings.BOARD_SIZE / 2][i];
+	}
 
-		public Corner getCornerAt(int offsetX, int offsetY, int i) {
-			// TODO similar to getFieldAt
-			return null;
-		}
+	/**
+	 *
+	 */
 
-		public Edge getEdgeAt(int offsetX, int offsetY, int i) {
-			// TODO similar to getFieldAt
-			return null;
-		}
+	@Override
+	public Edge getEdgeAt(int offsetX, int offsetY, int i) {
+		return this.edges[offsetY + DefaultSettings.BOARD_SIZE / 2][offsetX + DefaultSettings.BOARD_SIZE / 2][i];
+	}
 
-		public Field[] getNeighboursOfFieldAt(int offsetX, int offsetY) {
-			// TODO adapt with hexservice
-			// NorthWest
-			Field nw;// =getFieldAt(offsetX)(offsetY - 1);
+	/**
+	 *
+	 */
 
-			// NorthEast
-			Field ne;// =getFieldAt(offsetX + 1)(offsetY - 1);
+	@Override
+	public Field[] getSurroundingF(Field f) {
+		// TODO Auto-generated method stub
+		// NorthWest Field nw;//=getFieldAt(offsetX)(offsetY - 1);
 
-			// East
-			Field e;// =getFieldAt(offsetX - 1)(offsetY);
+		// NorthEast Field ne;// =getFieldAt(offsetX + 1)(offsetY - 1);
 
-			// West
-			Field w;// =getFieldAt(offsetX + 1)(offsetY);
+		// East Field e;// =getFieldAt(offsetX - 1)(offsetY);
 
-			// SouthWest
-			Field sw;// =getFieldAt(offsetX - 1)(offsetY + 1)
+		// West Field w;// =getFieldAt(offsetX + 1)(offsetY);
 
-			// SouthEast
-			Field se;// =getFieldAt(offsetX)(offsetY + 1);
-			Field[] neighbours = null; // = {nw, ne, e, w, sw, se}; TODO 12 Uhr uhrzeiger
+		// SouthWest Field sw;// =getFieldAt(offsetX - 1)(offsetY + 1)
 
-			return neighbours;
-		}
+		// SouthEast Field se;// =getFieldAt(offsetX)(offsetY + 1); Field[]
+		// neighbours = null; // = {nw, ne, e, w, sw, se}; TODO 12 Uhr //
+		// uhrzeiger
+
+		// return neighbours;
+		return null;
+	}
+
+	/**
+	 *
+	 */
+
+	@Override
+	public Field[] getSurroundingF(Corner c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 *
+	 */
+
+	@Override
+	public Field[] getSurroundingF(Edge e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 *
+	 */
+
+	@Override
+	public Corner[] getSurroundingC(Field f) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 *
+	 */
+
+	@Override
+	public Corner[] getSurroundingC(Corner c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *
+	 */
+
+	@Override
+	public Corner[] getSurroundingC(Edge e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *
+	 */
+
+	@Override
+	public Edge[] getSurroundingE(Field f) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *
+	 */
+
+	@Override
+	public Edge[] getSurroundingE(Corner c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *
+	 */
+
+	@Override
+	public Edge[] getSurroundingE(Edge e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *
+	 */
+
+	@Override
+	public int[] convertToCube(int[] a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 *
+	 */
+
+	@Override
+	public int[] convertToAxial(int[] c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *
+	 */
+
+	@Override
+	public Field[] getSpiral(Field f) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *
+	 */
+
+	@Override
+	public Field[][][] getFields() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Corner[][][] getCorners() {
+		return this.corners;
+	}
+
+	@Override
+	public Edge[][][] getEdges() {
+		return this.edges;
+	}
+
+	@Override
+	public PlayerModel[] getPlayerModels() {
+		return this.players;
+	}
+
+
+	@Override
+	public Field getBandit() {
+		return null;
+	}
+
+
+
+	@Override
+	public void setBandit(Field f) {
+		this.bandit=f;
 
 	}
 
