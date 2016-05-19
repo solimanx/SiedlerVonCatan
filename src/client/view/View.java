@@ -172,32 +172,31 @@ public class View implements ViewInterface {
 		 * in fieldcoordinates speichern 0,0 -> 3,3 -2,-1 -> 1,2
 		 */
 		 int[] windowCenter={50,50};
-		 //The integer Array windowCenter has two ELements widowCenter[0]= x Koordinate;
-		 // windowCenter[1]= y Koordinate of the Middle Point od the Window
+		 //The integer Array windowCenter has two eLements widowCenter[0]= x coordinate;
+		 // windowCenter[1]= y coordinate of the middle point of the Window
 		// int x=50;//X koordinate of Middle Point set as 50
 		// int y=50;//Y Koordinate of Middle Point set as 50
-	//int[] WCkoord;// Array that saves the 2 Elements, the x Koordinate od the new Middle point, from 
-		// a neighbour Field , also the y Koordinate from this Field.
-		for(int i=-3;i<=3;i++){// three neighbours of the Middle Field that are right from it , and left from it
+	//int[] WCkoord;// Array that saves the 2 Elements, the x Koordinate od the new Middle point, from a neighbour field , also the y Koordinate from this field.
+		for(int i=-3;i<=3;i++){// three neighbours of the middle field that are right from it , and left from it
 			if(i!=0){// i shouldnt be 0
-				//X koordinate is the same
+				//X coordinate is the same
 				int x=windowCenter[0];
 				int y=windowCenter[1]+i*sin60*radius;//or y=y+i*sin60*radius
 				//example: for i=1
-				// it gets the first right neighbours koordinates 
+				// it gets the first right neighbours coordinates 
 				int []WCkoord={x,y};
-				//Save the new koordinate in fieldcoordinates, not done
+				//Save the new coordinate in fieldcoordinates, not done
 			}
 		}
-		for(int j=-2;j<=2;j++){//j is the amount of radiuses that we need in order to go one row higher/lower or three rows higher/lower
+		for(int j=-2;j<=2;j++){//j is the amount of radiuses that we need in order to go one row above/under or three rows above/under
 			
 		if(j!=0){//j shouldnt be 0 
 			int x=windowCenter[0]+sin60*radius;
 			int y=windowCenter[1]+j*radius;
-			//if j=1, we get the koordinates of a field one row above our middle Field
+			//if j=1, we get the coordinates of a field one row above our middle field
 			int []WCkoord={x,y};
-			//Save those koordinates to fieldcoordinates, not done
-			//so now we have the koordinates of the field one row above the middle Field
+			//Save those coordinates to fieldcoordinates, not done
+			//so now we have the coordinates of the field one row above the middle field
 			// we go three times right and left in order to get their neighbours coordinates
 			for(int i=-3;i<=3;i++){
 				if(i!=0);{
