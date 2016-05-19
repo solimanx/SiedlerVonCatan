@@ -17,7 +17,7 @@ public class Board extends Observable implements BoardInterface {
 
 	private static Board instance;
 
-	private Board() {
+	public Board() {
 
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
@@ -82,10 +82,10 @@ public class Board extends Observable implements BoardInterface {
 				if (fields[x][y] != null) {
 					corners[x][y][0] = new Corner(); // North
 					corners[x][y][1] = new Corner(); // South
-				
+
 				}
 			}
-			//TODO: better solution
+			// TODO: better solution
 			filterUnusedCorners();
 		}
 	}
@@ -95,24 +95,24 @@ public class Board extends Observable implements BoardInterface {
 		corners[4][0][0] = null;
 		corners[5][0][0] = null;
 		corners[6][0][0] = null;
-		
+
 		corners[2][1][0] = null;
 		corners[6][1][0] = null;
-		
+
 		corners[1][2][0] = null;
 		corners[6][2][0] = null;
-		
+
 		corners[0][3][0] = null;
 		corners[0][3][1] = null;
 		corners[6][3][0] = null;
 		corners[6][3][1] = null;
-		
+
 		corners[0][4][1] = null;
 		corners[5][4][1] = null;
-		
+
 		corners[0][5][1] = null;
 		corners[4][5][1] = null;
-		
+
 		corners[0][6][1] = null;
 		corners[1][6][1] = null;
 		corners[2][6][1] = null;
@@ -132,80 +132,79 @@ public class Board extends Observable implements BoardInterface {
 					edges[x][y][0] = new Edge(); // Northwest
 					edges[x][y][1] = new Edge(); // Northeast
 					edges[x][y][2] = new Edge(); // East
-					
+
 				}
 			}
 		}
-		//TODO: better solution
+		// TODO: better solution
 		filterUnusedEdges();
 	}
 
 	private void filterUnusedEdges() {
-		//row 0
+		// row 0
 		edges[3][0][0] = null;
 		edges[3][0][1] = null;
 		edges[3][0][2] = null;
-		
+
 		edges[4][0][0] = null;
 		edges[4][0][1] = null;
 		edges[4][0][2] = null;
-		
+
 		edges[5][0][0] = null;
 		edges[5][0][1] = null;
 		edges[5][0][2] = null;
-		
+
 		edges[6][0][0] = null;
-		edges[6][0][1] = null;	
+		edges[6][0][1] = null;
 		edges[6][0][2] = null;
-		
-		//row 1
+
+		// row 1
 		edges[2][1][0] = null;
 		edges[2][1][1] = null;
-		
+
 		edges[6][1][0] = null;
 		edges[6][1][1] = null;
 		edges[6][1][2] = null;
-		
-		//row 2
+
+		// row 2
 		edges[1][2][0] = null;
 		edges[1][2][1] = null;
-		
+
 		edges[6][2][0] = null;
 		edges[6][2][1] = null;
 		edges[6][2][2] = null;
-		
-		//row 3
+
+		// row 3
 		edges[0][3][0] = null;
 		edges[0][3][1] = null;
-		
+
 		edges[6][3][0] = null;
 		edges[6][3][1] = null;
 		edges[6][3][2] = null;
-		
-		//row 4
+
+		// row 4
 		edges[0][4][0] = null;
-		
+
 		edges[5][4][1] = null;
 		edges[5][4][2] = null;
-		
-		//row 5
+
+		// row 5
 		edges[0][5][0] = null;
-		
+
 		edges[4][5][1] = null;
 		edges[4][5][2] = null;
-		
-		//row 6
+
+		// row 6
 		edges[0][6][0] = null;
 		edges[0][6][2] = null;
-		
+
 		edges[1][6][2] = null;
-		
+
 		edges[2][6][2] = null;
-		
+
 		edges[3][6][1] = null;
 		edges[3][6][2] = null;
-		
-		
+
 	}
 
 	/**
@@ -554,7 +553,7 @@ public class Board extends Observable implements BoardInterface {
 
 		Edge ne = getEdgeAt(aX, aY, 1);
 		Edge e = getEdgeAt(aX, aY, 2);
-		Edge se = getEdgeAt(aX, aY - 1, 0);
+		Edge se = getEdgeAt(aX, aY + 1, 0);
 		Edge sw = getEdgeAt(aX - 1, aY + 1, 1);
 		Edge w = getEdgeAt(aX - 1, aY, 2);
 		Edge nw = getEdgeAt(aX, aY, 0);
