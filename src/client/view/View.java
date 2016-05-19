@@ -21,7 +21,7 @@ public class View implements ViewInterface {
 	public int[][][] fieldCoordinates; // [6][6][2]
 	public int[][][][] edgeCoordinates; // [6][6][3][4]
 	public int[][][][] cornerCoordinates; // [6][6][2][2]
-	private AnchorPane rootPane;
+	private BorderPane rootPane;
 	public static double radius = 50.0;
 	public static double[] windowCenter = new double[2]; // [2]
 	public static double sin60 = Math.sqrt(3) / 2;
@@ -33,7 +33,7 @@ public class View implements ViewInterface {
 	public View(Stage stage) {
 		this.primaryStage = stage;
 		try {
-			rootPane = new AnchorPane();
+			rootPane = new BorderPane();
 			Scene scene = new Scene(rootPane, 400, 400);
 			primaryStage.setMaximized(true);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -58,17 +58,16 @@ public class View implements ViewInterface {
 			hexagon.setVisible(true);
 			hexagons.add(hexagon);
 		}
-		
-		HBox hb = new HBox();
+
 		button = new Button("Do Something!");
-		hb.getChildren().add(button);
+		rootPane.setTop(button);
 
 		Pane centerPane = new Pane();
 		centerPane.getChildren().addAll(0, hexagons);
 		centerPane.getChildren().add(drawVillage(windowCenter));
-		rootPane.getChildren().addAll(hb, centerPane);
-		AnchorPane.setLeftAnchor(centerPane, 10.0);
-		AnchorPane.setTopAnchor(hb, 10.0);
+
+		rootPane.setCenter(centerPane);
+
 		return true;
 	}
 
