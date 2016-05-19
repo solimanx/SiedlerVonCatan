@@ -204,7 +204,7 @@ public class View implements ViewInterface {
 				int v= WCkoord[0];//the neighbour has the same x koordinate
 				int u=WCkoord[1]+i*sin60*radius;
 				int[] NeighbourKoord1_3={v,u};//koordinates of the neighbours from the Field that we got first, starting from the Middle Field and going one row or three roads above or under 
-				//Problem: we have calculated more neighbours than we actually had, we calculated also the koordinates of Fiels that are with Water
+				//Problem: we have calculated more neighbours than we actually had, we calculated also the coordinates of fields that are with Water
 				//Filter them?
 				//Save into fieldCoordinates, not done
 			}
