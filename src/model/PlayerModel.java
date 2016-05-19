@@ -18,4 +18,23 @@ public class PlayerModel {
 	boolean hasLongestRoad;
 	boolean hasLargestArmy;
 	PlayerState playerState;
+	
+	
+	
+	public int getAmountStreets() {		
+		return amountStreets;
+	}
+
+	public ArrayList<ResourceType> getResourceCards() {
+		return resourceCards;
+	}
+
+	public int getAmountCities() {
+		return amountCities;
+	}
+
+	public int getAmountVillages() {
+		return amountVillages;
+	}
+	
 }
