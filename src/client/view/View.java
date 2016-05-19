@@ -165,86 +165,21 @@ public class View implements ViewInterface {
 
 	}
 
-	@Override
-	public void calculateFieldCenters() {
-		/*
-		 * ausgehend von windowCenter = [x,y] die Mittelpunkte aller 43 Felder
-		 * in fieldcoordinates speichern 0,0 -> 3,3 -2,-1 -> 1,2
-		 */
-		 int[] windowCenter={50,50};
-		 //The integer Array windowCenter has two eLements widowCenter[0]= x coordinate;
-		 // windowCenter[1]= y coordinate of the middle point of the Window
-		// int x=50;//X koordinate of Middle Point set as 50
-		// int y=50;//Y Koordinate of Middle Point set as 50
-	//int[] WCkoord;// Array that saves the 2 Elements, the x Koordinate od the new Middle point, from a neighbour field , also the y Koordinate from this field.
-		for(int i=-3;i<=3;i++){// three neighbours of the middle field that are right from it , and left from it
-			if(i!=0){// i shouldnt be 0
-				//X coordinate is the same
-				int x=windowCenter[0];
-				int y=windowCenter[1]+i*sin60*radius;//or y=y+i*sin60*radius
-				//example: for i=1
-				// it gets the first right neighbours coordinates 
-				int []WCkoord={x,y};
-				//Save the new coordinate in fieldcoordinates, not done
-			}
-		}
-		for(int j=-2;j<=2;j++){//j is the amount of radiuses that we need in order to go one row above/under or three rows above/under
-			
-		if(j!=0){//j shouldnt be 0 
-			int x=windowCenter[0]+sin60*radius;
-			int y=windowCenter[1]+j*radius;
-			//if j=1, we get the coordinates of a field one row above our middle field
-			int []WCkoord={x,y};
-			//Save those coordinates to fieldcoordinates, not done
-			//so now we have the coordinates of the field one row above the middle field
-			// we go three times right and left in order to get their neighbours coordinates
-			for(int i=-3;i<=3;i++){
-				if(i!=0);{
-				int v= WCkoord[0];//the neighbour has the same x coordinate
-				int u=WCkoord[1]+i*sin60*radius;
-				int[] NeighbourKoord1_3={v,u};//coordinates of the neighbours from the field that we got first, starting from the middle field and going one row or three rows above or under 
-				//Problem: we have calculated more neighbours than we actually had, we calculated also the coordinates of fields that are Water
-				//Filter them?
-				//Save into fieldCoordinates, not done
-			}
-			}
-		}
-		}
-		//In order to calculate the coordinates of a field, that is two rows above or under our middle field
-		for(int k=-2;k<=2;k++){
-			if(k!=-1){
-				if(k!=0){
-					if(k!=1){
-						int x=windowCenter[0];
-					   int y=windowCenter[1]+k*sin60*radius;
-					   int []WCkoord={x,y};
-					   //SAVE ,not done
-					   for(int i=-3;i<=3;i++){
-							if(i!=0);{
-							int g= WCkoord[0];//the neighbour has the same x coordinate
-							int h=WCkoord[1]+i*sin60*radius;
-							//Problem: we have calculated more neighbours than we actually had, we calculated also the coordinates of the fields that are with Water
-							//Filter them?
-							int [] NeighbourKoord2={g,h};
-							//Save into fieldCoordinates, not done
-						}
-					}
-					}
-				}
-			}
-		}
-		//WCkoord sind die Koordinaten der Felder der mitlleren Reihe von links nach rechts
-		//WCkoord dazu kommen die Koordinaten eines Feldes das eine Reihen unten ist
-		//NeighbourKoord1_3 Nachbarn diese Feldes von links nach recht
-		//WCkoord dazu  kommen die Koordinaten eines Feldes das eine Reihen oben ist
-		//NeighbourKoord1_3 Nachbarn diese Feldes von links nach recht
-		//WCKoord dazu kommen die Koordinaten eines Feldes das zwei Reihen oben ist
-		//NeighbourKoord1_3 Nachbarn diese Feldes von links nach recht
-		//WCkoord dazu kommen die Koordinaten des Feldes das zwei Reihen unten ist
-		//NeighbourKoord2 nachbarn dieses Feldes von links nach rechts
-		//WCkoord dazu kommen die Koordinaten des Feldes das zwei Reihen oben ist
-	    //NeighbourKoord2 Nachbarn dieses Feldes von links nach rechts
+	public void calculateFieldCenters(int x, int y) {
 
+		for (int i = 0; i < 7; i++) {
+			windowCenter[0] = i;
+			x = (int) (i * sin60);
+
+			for (int j = 0; j < 7; j++) {
+				windowCenter[1] = j;
+				y = (int) (j * radius * 3 / 4);
+
+			}
+
+		}
+		fieldCoordinates[0][0][0] = x;
+		fieldCoordinates[0][0][1] = y;
 	}
 
 	@Override
@@ -258,6 +193,5 @@ public class View implements ViewInterface {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
 
 }
