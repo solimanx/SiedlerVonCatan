@@ -186,7 +186,7 @@ public class View implements ViewInterface {
 				//example: for i=1
 				// it gets the first right neighbours koordinates 
 				int []WCkoord={x,y};
-				//Save the new koordinate in fieldcoordinates TODO
+				//Save the new koordinate in fieldcoordinates, not done
 			}
 		}
 		for(int j=-2;j<=2;j++){//j is the amount of radiuses that we need in order to go one row higher/lower or three rows higher/lower
@@ -196,7 +196,7 @@ public class View implements ViewInterface {
 			int y=windowCenter[1]+j*radius;
 			//if j=1, we get the koordinates of a field one row above our middle Field
 			int []WCkoord={x,y};
-			//Save those koordinates to fieldcoordinates TODO
+			//Save those koordinates to fieldcoordinates, not done
 			//so now we have the koordinates of the field one row above the middle Field
 			// we go tree times right and left in order to get their neighbours coordinates
 			for(int i=-3;i<=3;i++){
