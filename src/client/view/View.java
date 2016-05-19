@@ -198,13 +198,13 @@ public class View implements ViewInterface {
 			int []WCkoord={x,y};
 			//Save those koordinates to fieldcoordinates, not done
 			//so now we have the koordinates of the field one row above the middle Field
-			// we go tree times right and left in order to get their neighbours coordinates
+			// we go three times right and left in order to get their neighbours coordinates
 			for(int i=-3;i<=3;i++){
 				if(i!=0);{
-				int v= WCkoord[0];//the neighbour has the same x koordinate
+				int v= WCkoord[0];//the neighbour has the same x coordinate
 				int u=WCkoord[1]+i*sin60*radius;
-				int[] NeighbourKoord1_3={v,u};//koordinates of the neighbours from the Field that we got first, starting from the Middle Field and going one row or three roads above or under 
-				//Problem: we have calculated more neighbours than we actually had, we calculated also the coordinates of fields that are with Water
+				int[] NeighbourKoord1_3={v,u};//coordinates of the neighbours from the field that we got first, starting from the middle field and going one row or three rows above or under 
+				//Problem: we have calculated more neighbours than we actually had, we calculated also the coordinates of fields that are Water
 				//Filter them?
 				//Save into fieldCoordinates, not done
 			}
