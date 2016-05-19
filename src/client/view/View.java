@@ -178,7 +178,7 @@ public class View implements ViewInterface {
 		// int y=50;//Y Koordinate of Middle Point set as 50
 	//int[] WCkoord;// Array that saves the 2 Elements, the x Koordinate od the new Middle point, from 
 		// a neighbour Field , also the y Koordinate from this Field.
-		for(int i=-3;i<=3;i++){// tree neighbours of the Middle Field that are right from it , and left from it
+		for(int i=-3;i<=3;i++){// three neighbours of the Middle Field that are right from it , and left from it
 			if(i!=0){// i shouldnt be 0
 				//X koordinate is the same
 				int x=windowCenter[0];
