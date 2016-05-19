@@ -10,122 +10,144 @@ import model.PlayerModel;
 import enums.ResourceType;
 
 /**
- * @author 
- * Implements rules of the game
+ * @author Implements rules of the game
  */
-public class GameLogic {
-Board board;
-private PlayerModel[] playerModels;
-private Field[][] fields;
-private Corner[][][] corners;
-private Edge[][][] edges;
+public class GameLogic implements GameLogicInterface {
+	Board board;
+	private PlayerModel[] playerModels;
 
-
-    public GameLogic(Board b){
-    	this.board = b;
-    	this.playerModels = board.getPlayerModels();
-        this.fields = board.getFields();
-        this.corners = board.getCorners();
-        this.edges = board.getEdges();
-    }
+	public GameLogic(Board b) {
+		this.board = b;
+		this.playerModels = board.getPlayerModels();
+	}
 	
 	/**
-	 * tries to build a settlement on the given position with the given player. 
-	 * if there is already a village 
+	 * Checks if the player can build a city at the given position
 	 * @param x
 	 * @param y
 	 * @param dir
 	 * @param player
-	 * @return
+	 * @return boolean true/false
 	 */
-	public boolean buildSettlement(int x, int y,char dir,int player){
-		if (playerModels[player-1].getVillageAmount() > 0){ //has this Player a Village left to build?
-			enums.CornerStatus status = corners[x][y][dir].getStatus(); 
-			switch(status){
-			case EMPTY:
-				return buildVillage(x,y,dir,player);
-			case VILLAGE:
-				return buildCity(x,y,dir,player);
-			default: //CITY or BLOCKED; do nothing
-				return false;
-			}
-		} else {
-			return false;
+	
+	public boolean checkBuildVillage(int x, int y, char dir, int player) {
+		if (playerModels[player].getAmountVillages() <= 0) {
+			return false; // no Village left to build
 		}
-		
-	}
-
-	private boolean buildVillage(int x, int y, char dir, int player) {
 		int[] resources = getPlayerResources(player);
-		for (int i = 0;i < 5;i++){
-			if (resources[i] < settings.DefaultSettings.VILLAGE_BUILD_COST[i]){
-				return false;
+		for (int i = 0; i < 5; i++) {
+			if (resources[i] < settings.DefaultSettings.VILLAGE_BUILD_COST[i]) {
+				return false; // not enough resources
 			}
 		}
-		if (board.getCornerAt(x,y,dir).getStatus == enums.CornerStatus.EMPTY){
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean buildCity(int x, int y, char dir, int player) {
-		int[] resources = getPlayerResources(player);
-		for (int i = 0;i < 5;i++){
-			if (resources[i] < settings.DefaultSettings.CITY_BUILD_COST[i]){
-				return false;
-			}
-		}
-		Corner c = board.getCornerAt(x,y,dir);
-		if(c.getStatus() == enums.CornerStatus.VILLAGE){
+		Corner c = board.getCornerAt(x, y, dir);
+		if (c != null){ //valid corner
+		if (c.getStatus() == enums.CornerStatus.EMPTY) { // is the Corner Empty?
 			Edge[] e = board.getSurroundingE(c);
-			for (int i = 0;i<e.length;i++){
-				if (e.getPlayer() == player){
+			for (int i = 0; i < e.length; i++) {
+				if (e.getPlayer() == player) { // is there an adjusting street
+												// with correct player
 					return true;
 				}
 			}
 		}
-	  return false;
+		}
+		return false;
 	}
+
 	/**
-	 * Checks if the player can build this Street and if the Position of the Street is Valid
+	 * Checks if the player can build a city at the given position
 	 * @param x
 	 * @param y
 	 * @param dir
 	 * @param player
-	 * @return boolean successful
+	 * @return boolean true/false
 	 */
-	public boolean buildStreet(int x, int y, char dir, int player){
-		if (playerModels.get(player).amountStreets > 0){ //has this Player a Street left to build?
-			if (edges[x][y].dir.hasStreet == false){
-				int[] resources = getPlayerResources(player);
-				for (int i = 0;i < 5;i++){
-					if (resources[i] < settings.DefaultSettings.STREET_BUILD_COST[i]){
-						return false;
-					}
-				}
-				//Edge Get Neighbor Corners; check if village/city there
-				// + edge get adjusting edges; check if there is any street of this player
-				edges[x][y].dir.createStreet(player);
-				playerModels.get(player).decreaseStreetAmount();
-				//view.setStreet(x,y,dir,player);
-				return true;
+	public boolean checkBuildCity(int x, int y, char dir, int player) {
+		if (playerModels[player].getAmountCities() <= 0) {
+			return false; // no Cities left to build
+		}
+		int[] resources = getPlayerResources(player);
+		for (int i = 0; i < 5; i++) {
+			if (resources[i] < settings.DefaultSettings.CITY_BUILD_COST[i]) {
+				return false; // not enough resources
 			}
 		}
-			return false;
+		Corner c = board.getCornerAt(x, y, dir);
+		if (c != null){
+		if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnedByPlayer() == playerModels[player]) { 
+			Edge[] e = board.getSurroundingE(c);
+			for (int i = 0; i < e.length; i++) {
+				if (e.getPlayer() == player) { // is there an adjusting streetof this player?
+ 					return true;
+				}
+			}
+		}
+		}
+		return false;
 	}
+
 	/**
-	 * Gets an array wich contains the player resources in form of (AmountWood,AmountClay...)
+	 * Checks if the player can build a Street at the given position
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param player
+	 * @return boolean true/false
+	 */
+	public boolean checkBuildStreet(int x, int y, char dir, int player) {
+		if (playerModels[player].getAmountStreets() <= 0) { // has this Player a Street left to build?
+			return false;
+		}
+		int[] resources = getPlayerResources(player);
+		for (int i = 0; i < 5; i++) {
+			if (resources[i] < settings.DefaultSettings.STREET_BUILD_COST[i]) {
+				return false;
+			}
+		}
+		Edge e = board.getEdgeAt(x,y,dir);
+		if (e != null){  //valid edge
+		if (e.isHasStreet() == false) {
+			Edge[] neighbors = board.getSurroundingE(e);
+			for (int i = 0; i <= neighbors.length; i++) {
+				if (neighbors[i].getOwnedByPlayer() == playerModels[player]) {
+					return true;
+				}
+			}
+		}
+		}
+		return false;
+	}
+	
+	/**
+	 * checks if bandit can be set at specified position
+	 * @param x
+	 * @param y
+	 * @return true/false
+	 */
+	public boolean checkSetBandit(int x, int y){
+		Field f = board.getFieldAt(x, y);
+		if (f != null && f != board.getBandit()){ //valid position and not the same as before
+			return true;
+		}
+		
+		return false;
+	}
+
+	/**
+	 * Gets an array wich contains the player resources in form of
+	 * (AmountWood,AmountClay...)
+	 * 
 	 * @param player
 	 * @return resource Array
 	 */
-	private int[] getPlayerResources(int player){
-		ArrayList<ResourceType> resList = playerModels.get(player).getResourceCards();
+	private int[] getPlayerResources(int player) {
+		ArrayList<ResourceType> resList = playerModels[player].getResourceCards();
 		int[] result = new int[5];
 		enums.ResourceType resType;
-		for (int i = 0;i<resList.size();i++){
+		for (int i = 0; i < resList.size(); i++) {
 			resType = resList.get(i);
-			switch(resType){
+			switch (resType) {
 			// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
 			case WOOD:
 				result[0]++;
@@ -137,12 +159,22 @@ private Edge[][][] edges;
 				result[3]++;
 			case CORN:
 				result[4]++;
-			default:	
+			default:
 			}
 		}
 		return result;
 	}
-	
-	
+
+	@Override
+	public boolean canTrade() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canPlayCard() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
