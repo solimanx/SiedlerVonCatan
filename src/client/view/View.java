@@ -211,7 +211,7 @@ public class View implements ViewInterface {
 			}
 		}
 		}
-		//In order to calculate the Coordinates of a Field, that is two rows above or under our Middle Field
+		//In order to calculate the coordinates of a field, that is two rows above or under our middle field
 		for(int k=-2;k<=2;k++){
 			if(k!=-1){
 				if(k!=0){
