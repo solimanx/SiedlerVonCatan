@@ -222,9 +222,9 @@ public class View implements ViewInterface {
 					   //SAVE ,not done
 					   for(int i=-3;i<=3;i++){
 							if(i!=0);{
-							int g= WCkoord[0];//the neighbour has the same x koordinate
+							int g= WCkoord[0];//the neighbour has the same x coordinate
 							int h=WCkoord[1]+i*sin60*radius;
-							//Problem: we have calculated more neighbours than we actually had, we calculated also the koordinates od the Fiels that are with Water
+							//Problem: we have calculated more neighbours than we actually had, we calculated also the coordinates of the fields that are with Water
 							//Filter them?
 							int [] NeighbourKoord2={g,h};
 							//Save into fieldCoordinates, not done
