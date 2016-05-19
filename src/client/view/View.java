@@ -26,7 +26,7 @@ public class View implements ViewInterface {
 	public static double[] windowCenter = new double[2]; // [2]
 	public static double sin60 = Math.sqrt(3) / 2;
 	public static double rad60 = Math.PI / 3;// Hilfsvariable sqrt(3)/2
-	
+
 	public Button button;
 	public ArrayList<Polygon> hexagons = new ArrayList<Polygon>(1);
 
@@ -52,17 +52,16 @@ public class View implements ViewInterface {
 	@Override
 	public boolean initialize() {
 		double[] hexpoints;
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 1; i++) {
 			hexpoints = createHexagon(windowCenter);
 			Polygon hexagon = drawHexagon(hexpoints);
 			hexagon.setVisible(true);
 			hexagons.add(hexagon);
 		}
 
-		
 		button = new Button("Do Something!");
 		rootPane.setTop(button);
-		
+
 		Pane centerPane = new Pane();
 		centerPane.getChildren().addAll(0, hexagons);
 		centerPane.getChildren().add(drawVillage(windowCenter));
@@ -102,20 +101,11 @@ public class View implements ViewInterface {
 
 	@Override
 	public Polygon drawVillage(double[] center) {
-		double[] points = {
-				center[0] + 20,
-				center[1],
-				center[0],
-				center[1] + 20,
-				center[0] - 20,
-				center[1],
-				center[0] - 20,
-				center[1] - 10,
-				center[0] +20,
-				center[1] -10
-				};
-		Polygon village = new Polygon(points);
-				
+		double[] points = { center[0] + 20, center[1], center[0], center[1] + 20, center[0] - 20, center[1],
+				center[0] - 20, center[1] - 10, center[0] + 20, center[1] - 10 };
+		Polygon village = new Polygon(center[0], center[1] - 18, center[0] + 10, center[1] - 10, center[0] + 10,
+				center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10, center[1] - 10);
+
 		return village;
 	}
 
