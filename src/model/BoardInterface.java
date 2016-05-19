@@ -22,8 +22,8 @@ public interface BoardInterface {
 	public Edge[] getProjectingEdges(int aX, int aY, int i);
 	public Edge[] getLinkedEdges(int aX, int aY, int i);
 
-	public int[] convertToCube(int[] a); // required for initialize Board
-	public int[] convertToAxial(int[] c);
+	public int[] convertAxialToCube(int[] a); // required for initialize Board
+	public int[] convertCubeToAxial(int[] c);
 
 	public Field[] getSpiral(Field f); // out -> in
 

@@ -61,7 +61,7 @@ public class Board extends Observable implements BoardInterface {
 				aX = x - DefaultSettings.BOARD_SIZE / 2;
 				aY = y - DefaultSettings.BOARD_SIZE / 2;
 
-				absoluteValue = Math.abs(aY + aX);
+				absoluteValue = Math.abs(aX + aY);
 
 				if (absoluteValue <= DefaultSettings.BOARD_SIZE / 2) {
 					fields[x][y] = new Field();
@@ -82,10 +82,41 @@ public class Board extends Observable implements BoardInterface {
 				if (fields[x][y] != null) {
 					corners[x][y][0] = new Corner(); // North
 					corners[x][y][1] = new Corner(); // South
-					// TODO unused corners / undefined edges
+				
 				}
 			}
+			//TODO: better solution
+			filterUnusedCorners();
 		}
+	}
+
+	private void filterUnusedCorners() {
+		corners[3][0][0] = null;
+		corners[4][0][0] = null;
+		corners[5][0][0] = null;
+		corners[6][0][0] = null;
+		
+		corners[2][1][0] = null;
+		corners[6][1][0] = null;
+		
+		corners[1][2][0] = null;
+		corners[6][2][0] = null;
+		
+		corners[0][3][0] = null;
+		corners[0][3][1] = null;
+		corners[6][3][0] = null;
+		corners[6][3][1] = null;
+		
+		corners[0][4][1] = null;
+		corners[5][4][1] = null;
+		
+		corners[0][5][1] = null;
+		corners[4][5][1] = null;
+		
+		corners[0][6][1] = null;
+		corners[1][6][1] = null;
+		corners[2][6][1] = null;
+		corners[3][6][1] = null;
 	}
 
 	/**
@@ -101,11 +132,80 @@ public class Board extends Observable implements BoardInterface {
 					edges[x][y][0] = new Edge(); // Northwest
 					edges[x][y][1] = new Edge(); // Northeast
 					edges[x][y][2] = new Edge(); // East
-					// TODO unused edges / undefined edges
-
+					
 				}
 			}
 		}
+		//TODO: better solution
+		filterUnusedEdges();
+	}
+
+	private void filterUnusedEdges() {
+		//row 0
+		edges[3][0][0] = null;
+		edges[3][0][1] = null;
+		edges[3][0][2] = null;
+		
+		edges[4][0][0] = null;
+		edges[4][0][1] = null;
+		edges[4][0][2] = null;
+		
+		edges[5][0][0] = null;
+		edges[5][0][1] = null;
+		edges[5][0][2] = null;
+		
+		edges[6][0][0] = null;
+		edges[6][0][1] = null;	
+		edges[6][0][2] = null;
+		
+		//row 1
+		edges[2][1][0] = null;
+		edges[2][1][1] = null;
+		
+		edges[6][1][0] = null;
+		edges[6][1][1] = null;
+		edges[6][1][2] = null;
+		
+		//row 2
+		edges[1][2][0] = null;
+		edges[1][2][1] = null;
+		
+		edges[6][2][0] = null;
+		edges[6][2][1] = null;
+		edges[6][2][2] = null;
+		
+		//row 3
+		edges[0][3][0] = null;
+		edges[0][3][1] = null;
+		
+		edges[6][3][0] = null;
+		edges[6][3][1] = null;
+		edges[6][3][2] = null;
+		
+		//row 4
+		edges[0][4][0] = null;
+		
+		edges[5][4][1] = null;
+		edges[5][4][2] = null;
+		
+		//row 5
+		edges[0][5][0] = null;
+		
+		edges[4][5][1] = null;
+		edges[4][5][2] = null;
+		
+		//row 6
+		edges[0][6][0] = null;
+		edges[0][6][2] = null;
+		
+		edges[1][6][2] = null;
+		
+		edges[2][6][2] = null;
+		
+		edges[3][6][1] = null;
+		edges[3][6][2] = null;
+		
+		
 	}
 
 	/**
@@ -119,16 +219,17 @@ public class Board extends Observable implements BoardInterface {
 
 	@Override
 	public Field getFieldAt(int aX, int aY) {
-		try {
+
+		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
+				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aY > DefaultSettings.BOARD_SIZE / 2) {
+
+			return null;
+
+		} else {
 
 			return this.fields[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2];
 
-		} catch (ArrayIndexOutOfBoundsException e) {
-			// TODO: logging
-			System.out.println("Field doesn't exist " + e);
-			return null;
 		}
-
 	}
 
 	/**
@@ -145,14 +246,16 @@ public class Board extends Observable implements BoardInterface {
 
 	@Override
 	public Corner getCornerAt(int aX, int aY, int i) {
-		try {
+
+		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
+				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || i < 0 || i > 1) {
+
+			return null;
+
+		} else {
 
 			return this.corners[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][i];
 
-		} catch (ArrayIndexOutOfBoundsException e) {
-			// TODO: logging
-			System.out.println("Corner doesn't exist " + e);
-			return null;
 		}
 	}
 
@@ -170,14 +273,16 @@ public class Board extends Observable implements BoardInterface {
 
 	@Override
 	public Edge getEdgeAt(int aX, int aY, int i) {
-		try {
+
+		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
+				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || i < 0 || i > 2) {
+
+			return null;
+
+		} else {
 
 			return this.edges[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][i];
 
-		} catch (ArrayIndexOutOfBoundsException e) {
-			// TODO: logging
-			System.out.println("Edge array is out of bounds " + e);
-			return null;
 		}
 	}
 
@@ -349,7 +454,7 @@ public class Board extends Observable implements BoardInterface {
 	 * @param i
 	 *            Corner index/direction (0 = North, 1 = South)
 	 */
-	
+
 	@Override
 	public Corner[] getAdjacentCorners(int aX, int aY, int i) {
 
@@ -443,7 +548,7 @@ public class Board extends Observable implements BoardInterface {
 	 * @param aY
 	 *            Field axial y-coordinate
 	 */
-	
+
 	@Override
 	public Edge[] getBorderingEdges(int aX, int aY) {
 
@@ -563,23 +668,52 @@ public class Board extends Observable implements BoardInterface {
 	}
 
 	/**
-	 *
+	 * Converts Axial (x,y) to Cube (x,y,z)
+	 * 
+	 * @param a
+	 *            (x,y)
 	 */
 
 	@Override
-	public int[] convertToCube(int[] a) {
-		// TODO Auto-generated method stub
-		return null;
+	public int[] convertAxialToCube(int[] a) {
+
+		if (a.length != 2) {
+			// TODO: logging
+			System.out.println("Unable to convert: " + a.toString() + " to cube.");
+			return null;
+
+		} else {
+
+			int x = a[0];
+			int z = a[1];
+			int y = -x - z;
+
+			return new int[] { x, y, z };
+		}
 	}
 
 	/**
-	 *
+	 * Converts Cube (x,y,z) to Axial (x,y)
+	 * 
+	 * @param c
+	 *            (x,y,z)
 	 */
 
 	@Override
-	public int[] convertToAxial(int[] c) {
-		// TODO Auto-generated method stub
-		return null;
+	public int[] convertCubeToAxial(int[] c) {
+
+		if (c.length != 3) {
+			// TODO: logging
+			System.out.println("Unable to convert: " + c.toString() + " to axial.");
+			return null;
+
+		} else {
+
+			int x = c[0];
+			int y = c[2];
+
+			return new int[] { x, y };
+		}
 	}
 
 	/**
@@ -591,10 +725,6 @@ public class Board extends Observable implements BoardInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	/**
-	 *
-	 */
 
 	@Override
 	public Field[][] getFields() {
@@ -626,7 +756,7 @@ public class Board extends Observable implements BoardInterface {
 		this.bandit = f;
 
 	}
-	
-	//TODO test the relation methods
+
+	// TODO test the relation methods
 
 }
