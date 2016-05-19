@@ -2,6 +2,7 @@ package client.view;
 
 import java.util.ArrayList;
 
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -25,6 +26,9 @@ public class View implements ViewInterface {
 	public static double[] windowCenter = new double[2]; // [2]
 	public static double sin60 = Math.sqrt(3) / 2;
 	public static double rad60 = Math.PI / 3;// Hilfsvariable sqrt(3)/2
+	
+	public Button button;
+	public ArrayList<Polygon> hexagons = new ArrayList<Polygon>(1);
 
 	public View(Stage stage) {
 		this.primaryStage = stage;
@@ -47,9 +51,8 @@ public class View implements ViewInterface {
 
 	@Override
 	public boolean initialize() {
-		ArrayList<Polygon> hexagons = new ArrayList<Polygon>(1);
 		double[] hexpoints;
-		for (int i = 0; i < hexagons.size(); i++) {
+		for (int i = 0; i < 2; i++) {
 			hexpoints = createHexagon(windowCenter);
 			Polygon hexagon = drawHexagon(hexpoints);
 			hexagon.setVisible(true);
@@ -57,12 +60,13 @@ public class View implements ViewInterface {
 		}
 
 		
-		Button button = new Button("Do Something!");
+		button = new Button("Do Something!");
 		rootPane.setTop(button);
-		button.setOnAction(e -> {
-			hexagons.get(0).setVisible(true);
-		});
-		rootPane.getChildren().addAll(hexagons);
+		
+		Pane centerPane = new Pane();
+		centerPane.getChildren().addAll(0, hexagons);
+		centerPane.getChildren().add(drawVillage(windowCenter));
+		rootPane.setCenter(centerPane);
 		return true;
 	}
 
@@ -97,9 +101,22 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public void drawVillage() {
-		// TODO Auto-generated method stub
-
+	public Polygon drawVillage(double[] center) {
+		double[] points = {
+				center[0] + 20,
+				center[1],
+				center[0],
+				center[1] + 20,
+				center[0] - 20,
+				center[1],
+				center[0] - 20,
+				center[1] - 10,
+				center[0] +20,
+				center[1] -10
+				};
+		Polygon village = new Polygon(points);
+				
+		return village;
 	}
 
 	@Override

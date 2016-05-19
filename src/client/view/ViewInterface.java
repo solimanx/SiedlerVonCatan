@@ -20,7 +20,7 @@ public interface ViewInterface {
 	
 	public int convertToRect(int x);
 
-	public void drawVillage();
+	public Polygon drawVillage(double[] center);
 
 	public void drawStreet();
 
