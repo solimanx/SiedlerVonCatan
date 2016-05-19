@@ -1,36 +1,93 @@
 package client.view;
 
+import java.util.ArrayList;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
+import javafx.stage.Stage;
 import model.Corner;
 import model.Edge;
 import model.Field;
 
 public class View implements ViewInterface {
 
+	private Stage primaryStage;
 	// jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
 	// für Edge 2 Koordinaten (4 Punkte), weil Anfangs- und Endpunkt
 	public int[][][] fieldCoordinates; // [6][6][2]
 	public int[][][][] edgeCoordinates; // [6][6][3][4]
 	public int[][][][] cornerCoordinates; // [6][6][2][2]
-	public static double radius;
-	public static int[] windowCenter; // [2]
-	public static double sin60 = Math.sqrt(3) / 2; // Hilfsvariable sqrt(3)/2
+	private BorderPane rootPane;
+	public static double radius = 50.0;
+	public static double[] windowCenter = new double[2]; // [2]
+	public static double sin60 = Math.sqrt(3) / 2;
+	public static double rad60 = Math.PI / 3;// Hilfsvariable sqrt(3)/2
+
+	public View(Stage stage) {
+		this.primaryStage = stage;
+		try {
+			rootPane = new BorderPane();
+			Scene scene = new Scene(rootPane, 400, 400);
+			primaryStage.setMaximized(true);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			windowCenter[0] = primaryStage.getWidth() / 2;
+			windowCenter[1] = primaryStage.getHeight() / 2;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		initialize();
+		// TODO getFields
+	}
 
 	@Override
 	public boolean initialize() {
-		// TODO Auto-generated method stub
-		return false;
+		ArrayList<Polygon> hexagons = new ArrayList<Polygon>(1);
+		double[] hexpoints;
+		for (int i = 0; i < hexagons.size(); i++) {
+			hexpoints = createHexagon(windowCenter);
+			Polygon hexagon = drawHexagon(hexpoints);
+			hexagon.setVisible(true);
+			hexagons.add(hexagon);
+		}
+
+		
+		Button button = new Button("Do Something!");
+		rootPane.setTop(button);
+		button.setOnAction(e -> {
+			hexagons.get(0).setVisible(true);
+		});
+		rootPane.getChildren().addAll(hexagons);
+		return true;
+	}
+
+	/**
+	 * @param centerCoordinates
+	 * @return double array of coordinates of 6 Points (12 double values)
+	 *         calculates coordinates of Hexagon from given center coordinates
+	 */
+	@Override
+	public double[] createHexagon(double[] centerCoordinates) {
+		double[] points = new double[12];
+		int j = 1;
+		for (int i = 0; i < points.length; i = i + 2) {
+			points[i] = (double) (centerCoordinates[0] + radius * Math.sin(j * rad60));
+			points[i + 1] = (double) (centerCoordinates[1] + radius * Math.cos(j * rad60));
+			j++;
+		}
+		return points;
 	}
 
 	@Override
-	public double[] createHexagon(double[] center) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void drawHexagon(double[] points) {
-		// TODO Auto-generated method stub
-
+	public Polygon drawHexagon(double[] points) {
+		Polygon hexagon = new Polygon(points);
+		hexagon.setFill(Color.DARKMAGENTA);
+		return hexagon;
 	}
 
 	@Override
@@ -102,13 +159,22 @@ public class View implements ViewInterface {
 	@Override
 	public void calculateFieldCenters() {
 		/*
-		* ausgehend von windowCenter = [x,y] die Mittelpunkte aller 43 Felder in fieldcoordinates speichern
-		* 0,0 -> 3,3     -2,-1 -> 1,2
-		*/
-		
-		
-		
+		 * ausgehend von windowCenter = [x,y] die Mittelpunkte aller 43 Felder
+		 * in fieldcoordinates speichern 0,0 -> 3,3 -2,-1 -> 1,2
+		 */
 
+	}
+
+	@Override
+	public int convertToHex(int x) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int convertToRect(int x) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

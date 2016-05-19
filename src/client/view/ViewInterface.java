@@ -1,5 +1,6 @@
 package client.view;
 
+import javafx.scene.shape.Polygon;
 import model.Corner;
 import model.Edge;
 import model.Field;
@@ -11,7 +12,7 @@ public interface ViewInterface {
 
 	public double[] createHexagon(double[] center);
 
-	public void drawHexagon(double[] points);
+	public Polygon drawHexagon(double[] points);
 
 	public void drawChips();
 	
