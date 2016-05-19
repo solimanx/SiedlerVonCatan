@@ -16,7 +16,7 @@ public interface ViewInterface {
 
 	public void drawChips();
 	
-	public int convertToHex(int x);
+	public int convertFromHexToWorld(int x);
 	
 	public int convertToRect(int x);
 
