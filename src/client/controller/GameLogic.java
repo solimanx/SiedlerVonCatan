@@ -30,7 +30,7 @@ public class GameLogic implements GameLogicInterface {
 	 * @return boolean true/false
 	 */
 	
-	public boolean checkBuildVillage(int x, int y, char dir, int player) {
+	public boolean checkBuildVillage(int x, int y, int dir, int player) {
 		if (playerModels[player].getAmountVillages() <= 0) {
 			return false; // no Village left to build
 		}
@@ -43,9 +43,9 @@ public class GameLogic implements GameLogicInterface {
 		Corner c = board.getCornerAt(x, y, dir);
 		if (c != null){ //valid corner
 		if (c.getStatus() == enums.CornerStatus.EMPTY) { // is the Corner Empty?
-			Edge[] e = board.getSurroundingE(c);
+			Edge[] e = board.getProjectingEdges(x,y,dir);
 			for (int i = 0; i < e.length; i++) {
-				if (e.getPlayer() == player) { // is there an adjusting street
+				if (e[i].getOwnedByPlayer() == playerModels[player]) { // is there an adjusting street
 												// with correct player
 					return true;
 				}
@@ -63,7 +63,7 @@ public class GameLogic implements GameLogicInterface {
 	 * @param player
 	 * @return boolean true/false
 	 */
-	public boolean checkBuildCity(int x, int y, char dir, int player) {
+	public boolean checkBuildCity(int x, int y, int dir, int player) {
 		if (playerModels[player].getAmountCities() <= 0) {
 			return false; // no Cities left to build
 		}
@@ -76,9 +76,9 @@ public class GameLogic implements GameLogicInterface {
 		Corner c = board.getCornerAt(x, y, dir);
 		if (c != null){
 		if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnedByPlayer() == playerModels[player]) { 
-			Edge[] e = board.getSurroundingE(c);
+			Edge[] e = board.getProjectingEdges(x,y,dir);
 			for (int i = 0; i < e.length; i++) {
-				if (e.getPlayer() == player) { // is there an adjusting streetof this player?
+				if (e[i].getOwnedByPlayer() == playerModels[player]) { // is there an adjusting streetof this player?
  					return true;
 				}
 			}
@@ -95,7 +95,7 @@ public class GameLogic implements GameLogicInterface {
 	 * @param player
 	 * @return boolean true/false
 	 */
-	public boolean checkBuildStreet(int x, int y, char dir, int player) {
+	public boolean checkBuildStreet(int x, int y, int dir, int player) {
 		if (playerModels[player].getAmountStreets() <= 0) { // has this Player a Street left to build?
 			return false;
 		}
@@ -108,7 +108,7 @@ public class GameLogic implements GameLogicInterface {
 		Edge e = board.getEdgeAt(x,y,dir);
 		if (e != null){  //valid edge
 		if (e.isHasStreet() == false) {
-			Edge[] neighbors = board.getSurroundingE(e);
+			Edge[] neighbors = board.getLinkedEdges(x,y,dir);
 			for (int i = 0; i <= neighbors.length; i++) {
 				if (neighbors[i].getOwnedByPlayer() == playerModels[player]) {
 					return true;
