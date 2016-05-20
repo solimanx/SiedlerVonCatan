@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Contains all Board methods, retrieving fields, edges and corners.
- * 
+ *
  * @author Adam
  */
 public class Board implements BoardInterface {
@@ -55,6 +55,29 @@ public class Board implements BoardInterface {
 				}
 			}
 		}
+
+		//TODO: better solution
+
+		getFieldAt(0,-2).setFieldID("A");
+		getFieldAt(1,-2).setFieldID("B");
+		getFieldAt(2,-2).setFieldID("C");
+		getFieldAt(-1,1).setFieldID("D");
+		getFieldAt(0,-1).setFieldID("E");
+		getFieldAt(1,-1).setFieldID("F");
+		getFieldAt(2,-1).setFieldID("G");
+		getFieldAt(-2,0).setFieldID("H");
+		getFieldAt(-1,0).setFieldID("I");
+		getFieldAt(0,0).setFieldID("J");
+		getFieldAt(1,0).setFieldID("K");
+		getFieldAt(2,0).setFieldID("L");
+		getFieldAt(-2,1).setFieldID("M");
+		getFieldAt(-1,1).setFieldID("N");
+		getFieldAt(0,1).setFieldID("O");
+		getFieldAt(1,1).setFieldID("P");
+		getFieldAt(-2,2).setFieldID("Q");
+		getFieldAt(-1,2).setFieldID("R");
+		getFieldAt(0,2).setFieldID("S");
+
 	}
 
 	/**
@@ -79,6 +102,12 @@ public class Board implements BoardInterface {
 	 * Set unused corners to null
 	 */
 	private void filterUnusedCorners() {
+
+		for(int i=0; i<DefaultSettings.BOARD_SIZE; i++){
+
+		}
+
+
 		// row 0
 		corners[3][0][0] = null;
 		corners[4][0][0] = null;
@@ -199,7 +228,7 @@ public class Board implements BoardInterface {
 
 	/**
 	 * Returns field given axial coordinates, if field doesn't exist then null
-	 * 
+	 *
 	 * @param aX
 	 *            Field axial x-coordinate
 	 * @param aY
@@ -218,7 +247,7 @@ public class Board implements BoardInterface {
 	/**
 	 * Returns corner given axial coordinates and index(direction), if corner
 	 * doesn't exist then null
-	 * 
+	 *
 	 * @param aX
 	 *            Corner axial x-coordinate
 	 * @param aY
@@ -239,7 +268,7 @@ public class Board implements BoardInterface {
 	/**
 	 * Returns edge given axial coordinates and index(direction), if edge
 	 * doesn't exist then null
-	 * 
+	 *
 	 * @param aX
 	 *            Edge axial x-coordinate
 	 * @param aY
@@ -261,12 +290,12 @@ public class Board implements BoardInterface {
 	 * Get neighbouring fields of the specified field with the following order:
 	 * <p>
 	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}
-	 * 
+	 *
 	 * @param aX
 	 *            Field axial x-coordinate
 	 * @param aY
 	 *            Field axial y-coordinate
-	 * 
+	 *
 	 */
 	@Override
 	public Field[] getNeighbouringFields(int aX, int aY) {
@@ -281,13 +310,13 @@ public class Board implements BoardInterface {
 	}
 
 	/**
-	 * 
+	 *
 	 * Get fields that touch the specified corner with the following order:
 	 * <p>
 	 * For Northern corner (i = 0): {NorthEast, South, NorthWest}
 	 * <p>
 	 * For Southern corner (i = 1): {North, SouthEast, SouthWest}
-	 * 
+	 *
 	 * @param aX
 	 *            Corner axial x-coordinate
 	 * @param aY
@@ -315,7 +344,7 @@ public class Board implements BoardInterface {
 	}
 
 	/**
-	 * 
+	 *
 	 * Get fields that are connected to the specified edge with the following
 	 * order:
 	 * <p>
@@ -324,7 +353,7 @@ public class Board implements BoardInterface {
 	 * For NorthEastern edge (i = 1): {NorthEast, SouthWest}
 	 * <p>
 	 * for Eastern edge (i = 2): {West, East}
-	 * 
+	 *
 	 * @param aX
 	 *            Edge axial x-coordinate
 	 * @param aY
@@ -356,7 +385,7 @@ public class Board implements BoardInterface {
 	/**
 	 * Get all surrounding corners of a field with the following order:
 	 * <p>
-	 * 
+	 *
 	 * {North, NorthEast, SouthEast, South, SouthWest, NorthWest}
 	 *
 	 * @param aX
@@ -377,14 +406,14 @@ public class Board implements BoardInterface {
 	}
 
 	/**
-	 * 
+	 *
 	 * Get corners that are adjacent to the specified corner with the following
 	 * order:
 	 * <p>
 	 * For Northern corner (i = 0): {North, SouthEast, SouthWest}
 	 * <p>
 	 * For Southern corner (i = 1): {NorthEast, South, NorthWest}
-	 * 
+	 *
 	 * @param aX
 	 *            Corner axial x-coordinate
 	 * @param aY
@@ -422,7 +451,7 @@ public class Board implements BoardInterface {
 	}
 
 	/**
-	 * 
+	 *
 	 * Get corners that are attached to the specified edge with the following
 	 * order:
 	 * <p>
@@ -431,7 +460,7 @@ public class Board implements BoardInterface {
 	 * For NorthEastern edge (i = 1): {NorthWest, SouthEast}
 	 * <p>
 	 * for Eastern edge (i = 2): {North, South}
-	 * 
+	 *
 	 * @param aX
 	 *            Edge axial x-coordinate
 	 * @param aY
@@ -475,10 +504,10 @@ public class Board implements BoardInterface {
 
 	/**
 	 * Get bordering edges of a field with the following order:
-	 * 
+	 *
 	 * <p>
 	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}
-	 * 
+	 *
 	 * @param aX
 	 *            Field axial x-coordinate
 	 * @param aY
@@ -497,14 +526,14 @@ public class Board implements BoardInterface {
 	}
 
 	/**
-	 * 
+	 *
 	 * Get edges that are projected to the specified corner with the following
 	 * order:
 	 * <p>
 	 * For Northern corner (i = 0): {North, SouthEast, SouthWest}
 	 * <p>
 	 * For Southern corner (i = 1): {NorthEast, South, NorthWest}
-	 * 
+	 *
 	 * @param aX
 	 *            Corner axial x-coordinate
 	 * @param aY
@@ -532,7 +561,7 @@ public class Board implements BoardInterface {
 	}
 
 	/**
-	 * 
+	 *
 	 * Get edges that are linked to the specified edge with the following order:
 	 * <p>
 	 * For NorthWestern edge (i = 0): {North, SouthEast, South, NorthWest}
@@ -540,7 +569,7 @@ public class Board implements BoardInterface {
 	 * For NorthEastern edge (i = 1): {North, NorthEast, South, SouthWest}
 	 * <p>
 	 * for Eastern edge (i = 2): {NorthEast, SouthEast, SouthWest, NorthWest}
-	 * 
+	 *
 	 * @param aX
 	 *            Edge axial x-coordinate
 	 * @param aY
@@ -574,26 +603,35 @@ public class Board implements BoardInterface {
 		}
 		return linkedEdges;
 	}
-	
+
+	public int[] getFieldCoordinates(Field f){
+		//TODO fix
+		return new int[]{0,2};
+	}
+
 	public Field[] getSpiral(Field f) {
 		// TODO Auto-generated method stub
-		ArrayList<Field> result = new ArrayList<Field>();
-		Field nextField;
-		for(int k = 2; k >= 1; k--){
-			for(int i = 0; i<= 6; i++){
+		int[] coord = getFieldCoordinates(f);
+		Field[] result = new Field[19];
+		Field nextField = getFieldAt(coord[0], coord[1]);
+		int counter = 0;
+		for(int k =2; k>=1; k--){
+			for(int i = 0; i< 6; i++){
 				for(int j = 0; j <= k; j++){
-					nextField = getNextField(nextField, i);
-					result = result.add(nextField);
+					nextField = getNextField(coord[0],coord[1], i);
+					result[counter]=nextField;
+					coord = getFieldCoordinates(nextField);
+					counter++;
 				}
 			}
 		}
-		result.add(getFieldAt(0, 0));
-		return (Field[]) result.toArray();
+		result[18]=getFieldAt(0,0);
+		return result;
 	}
-	
-	public Field getNextField(Field f, int i){
-		Field[] result = getNeighbouringFields(aX, aY) //To Do field to coordinates
-		switch(i){
+
+	public Field getNextField(int aX, int aY, int dir){
+		Field[] result = getNeighbouringFields(aX, aY); //To Do field to coordinates
+		switch(dir){
 		case 0: return result[0];
 		case 1: return result[1];
 		case 2: return result[2];
@@ -602,12 +640,11 @@ public class Board implements BoardInterface {
 		case 5: return result[5];
 		default: return null;
 		}
-		return null;
 	}
 
 	/**
 	 * Converts Axial (x,y) to Cube (x,y,z)
-	 * 
+	 *
 	 * @param a
 	 *            (x,y)
 	 */
@@ -631,7 +668,7 @@ public class Board implements BoardInterface {
 
 	/**
 	 * Converts Cube (x,y,z) to Axial (x,y)
-	 * 
+	 *
 	 * @param c
 	 *            (x,y,z)
 	 */
