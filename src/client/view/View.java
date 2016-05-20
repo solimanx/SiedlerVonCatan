@@ -2,13 +2,18 @@ package client.view;
 
 import java.util.ArrayList;
 
+import com.sun.javafx.geom.Shape;
+
+import client.controller.GameControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
+import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
@@ -18,19 +23,24 @@ public class View implements ViewInterface {
 	private Stage primaryStage;
 	// jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
 	// für Edge 2 Koordinaten (4 Punkte), weil Anfangs- und Endpunkt
-	public int[][][] fieldCoordinates; // [6][6][2]
+	public double[][][] fieldCoordinates = new double[7][7][2]; // [6][6][2]
 	public int[][][][] edgeCoordinates; // [6][6][3][4]
-	public int[][][][] cornerCoordinates; // [6][6][2][2]
+	private Polygon[][][] corners;
+	public double[][][][] cornerCoordinates = new double[7][7][2][2]; // [6][6][2][2]
 	private BorderPane rootPane;
+	private Board board;
+	private GameControllerInterface gc;
 	public static double radius = 50.0;
 	public static double[] windowCenter = new double[2]; // [2]
 	public static double sin60 = Math.sqrt(3) / 2;
-	public static double rad60 = Math.PI / 3;// Hilfsvariable sqrt(3)/2
+	public static double rad60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
+	private static double halfWidth = sin60 * radius;
 
 	public Button button;
-	public ArrayList<Polygon> hexagons = new ArrayList<Polygon>(1);
+	public ArrayList<Polygon> figures = new ArrayList<Polygon>(1);
+	private Pane centerPane;
 
-	public View(Stage stage) {
+	public View(Board board, Stage stage) {
 		this.primaryStage = stage;
 		try {
 			rootPane = new BorderPane();
@@ -51,19 +61,29 @@ public class View implements ViewInterface {
 
 	@Override
 	public boolean initialize() {
-		double[] hexpoints;
-		for (int i = 0; i < 1; i++) {
-			hexpoints = createHexagon(windowCenter);
-			Polygon hexagon = drawHexagon(hexpoints);
-			hexagon.setVisible(true);
-			hexagons.add(hexagon);
+		calculateFieldCenters(windowCenter);
+		calculateCornerCenters();
+		for (int i = 0; i < fieldCoordinates.length; i++) {
+			for (int j = 0; j < fieldCoordinates.length; j++) {
+				if (fieldCoordinates[i][j][0] > 0) {
+					Polygon hexagon = drawHexagon(createHexagon(fieldCoordinates[i][j][0], fieldCoordinates[i][j][1]));
+					hexagon.setVisible(true);
+					figures.add(0, hexagon);
+					for (int k = 0; k < 2; k++) {
+						Polygon village = drawVillage(cornerCoordinates[i][j][k]);
+						village.setVisible(true);
+						figures.add(village);
+					}
+				}
+			}
 		}
 
 		button = new Button("Do Something!");
 		rootPane.setTop(button);
 
-		Pane centerPane = new Pane();
-		centerPane.getChildren().addAll(0, hexagons);
+		centerPane = new Pane();
+		centerPane.getChildren().addAll(0, figures);
+
 		centerPane.getChildren().add(drawVillage(windowCenter));
 
 		rootPane.setCenter(centerPane);
@@ -77,12 +97,12 @@ public class View implements ViewInterface {
 	 *         calculates coordinates of Hexagon from given center coordinates
 	 */
 	@Override
-	public double[] createHexagon(double[] centerCoordinates) {
+	public double[] createHexagon(double x, double y) {
 		double[] points = new double[12];
 		int j = 1;
 		for (int i = 0; i < points.length; i = i + 2) {
-			points[i] = (double) (centerCoordinates[0] + radius * Math.sin(j * rad60));
-			points[i + 1] = (double) (centerCoordinates[1] + radius * Math.cos(j * rad60));
+			points[i] = (double) (x + radius * Math.sin(j * rad60));
+			points[i + 1] = (double) (y + radius * Math.cos(j * rad60));
 			j++;
 		}
 		return points;
@@ -103,8 +123,6 @@ public class View implements ViewInterface {
 
 	@Override
 	public Polygon drawVillage(double[] center) {
-		double[] points = { center[0] + 20, center[1], center[0], center[1] + 20, center[0] - 20, center[1],
-				center[0] - 20, center[1] - 10, center[0] + 20, center[1] - 10 };
 		Polygon village = new Polygon(center[0], center[1] - 18, center[0] + 10, center[1] - 10, center[0] + 10,
 				center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10, center[1] - 10);
 
@@ -165,31 +183,116 @@ public class View implements ViewInterface {
 
 	}
 
-	public void calculateFieldCenters(int x, int y) {
+	private void calculateFieldCenters(double[] windowCenter) {
+		double x;
+		double y;
+		for (int u = -3; u <= 3; u++) {
+			for (int v = -3; v <= 3; v++) {
+				if (Math.abs(u + v) <= 3) {
+					x = -1 * halfWidth * (u + 2 * v) + windowCenter[0];
+					y = -1 * 1.5 * radius * u + windowCenter[1];
+					fieldCoordinates[u + 3][v + 3][0] = x;
+					fieldCoordinates[u + 3][v + 3][1] = y;
+				}
+			}
+		}
+	}
 
-		for (int i = 0; i < 7; i++) {
-			windowCenter[0] = i;
-			x = (int) (i * sin60);
-
-			for (int j = 0; j < 7; j++) {
-				windowCenter[1] = j;
-				y = (int) (j * radius * 3 / 4);
-
+	private void calculateCornerCenters() {
+		double x;
+		double y;
+		for (int u = 0; u < 7; u++) {
+			for (int v = 0; v < 7; v++) {
+				if (Math.abs(u + v - 6) <= 3) {
+						x = fieldCoordinates[u][v][0];
+						y = fieldCoordinates[u][v][1] - radius;
+						cornerCoordinates[u][v][0][0] = x;
+						cornerCoordinates[u][v][0][1] = y;
+						// x = fieldCoordinates[u][v][0];
+						y = fieldCoordinates[u][v][1] + radius;
+						cornerCoordinates[u][v][1][0] = x;
+						cornerCoordinates[u][v][1][1] = y;
+				}
 			}
 
 		}
-		fieldCoordinates[0][0][0] = x;
-		fieldCoordinates[0][0][1] = y;
+		filterUnusedCorners();
+	}
+	
+	private void filterUnusedCorners() {
+		// row 0
+		cornerCoordinates[3][0][0][0] = 0;
+		cornerCoordinates[4][0][0][0] = 0;
+		cornerCoordinates[5][0][0][0] = 0;
+		cornerCoordinates[6][0][0][0] = 0;
+		// row 1
+		cornerCoordinates[2][1][0][0] = 0;
+		cornerCoordinates[6][1][0][0] = 0;
+		// row 2
+		cornerCoordinates[1][2][0][0] = 0;
+		cornerCoordinates[6][2][0][0] = 0;
+		// row 3
+		cornerCoordinates[0][3][0][0] = 0;
+		cornerCoordinates[0][3][1][0] = 0;
+		cornerCoordinates[6][3][0][0] = 0;
+		cornerCoordinates[6][3][1][0] = 0;
+		// row 4
+		cornerCoordinates[0][4][1][0] = 0;
+		cornerCoordinates[5][4][1][0] = 0;
+		// row 5
+		cornerCoordinates[0][5][1][0] = 0;
+		cornerCoordinates[4][5][1][0] = 0;
+		// row 6
+		cornerCoordinates[0][6][1][0] = 0;
+		cornerCoordinates[1][6][1][0] = 0;
+		cornerCoordinates[2][6][1][0] = 0;
+		cornerCoordinates[3][6][1][0] = 0;
 	}
 
 	@Override
 	public int convertToHex(int x) {
-		// TODO Auto-generated method stub
-		return 0;
+		return x - 3;
 	}
 
 	@Override
 	public int convertToRect(int x) {
+		return x + 3;
+	}
+
+	public void initCorners() {
+		for (int i = 0; i < fieldCoordinates.length; i++) {
+			for (int j = 0; j < fieldCoordinates.length; j++) {
+				corners[i][j][0] = createVillage(i, j, 0);
+			}
+		}
+
+	}
+
+	private Polygon createVillage(int i, int j, int k) {
+		Polygon village;
+		if (k == 0) {
+			double[] center = { fieldCoordinates[i][j][0], fieldCoordinates[i][j][1] - radius };
+			village = drawVillage(center);
+			village.setVisible(false);
+			village.setOnMouseClicked(e -> gc.buildVillage()); // TODO
+																// Methodensignatur
+																// im gc
+																// unvollständig
+			return village;
+		} else {
+			double[] center = { fieldCoordinates[i][j][0], fieldCoordinates[i][j][1] + radius };
+			village = drawVillage(center);
+			village.setVisible(false);
+			return village;
+		}
+	}
+
+	public void afterVillageBuilt(int i, int j, int dir) {
+		corners[i][j][dir].setOnMouseClicked(e -> gc.buildCity());
+	}
+
+	@Override
+	public int convertFromHexToWorld(int x) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

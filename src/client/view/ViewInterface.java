@@ -10,7 +10,7 @@ import model.Field;
 public interface ViewInterface {
 	public boolean initialize();
 
-	public double[] createHexagon(double[] center);
+	public double[] createHexagon(double x, double y);
 
 	public Polygon drawHexagon(double[] points);
 
@@ -53,7 +53,8 @@ public interface ViewInterface {
 	 */
 	public void setBandid(Field field);
 	
-	public void calculateFieldCenters();
+
+	int convertToHex(int x);
 	
 	
 }

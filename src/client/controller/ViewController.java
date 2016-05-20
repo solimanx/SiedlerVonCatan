@@ -3,13 +3,16 @@ package client.controller;
 import client.view.View;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
+import model.Board;
 
 public class ViewController {
 
 	private View view;
+	private Board board;
 	
-	public ViewController(Stage primaryStage) {
-		view = new View(primaryStage);
+	public ViewController(Stage primaryStage, Board board) {
+		this.board = board;
+		view = new View(board, primaryStage);
 		init();
 	}
 	
@@ -19,7 +22,7 @@ public class ViewController {
 
 	private void init() {
 		view.button.setOnAction(e -> {
-			Polygon hexagon = view.hexagons.get(0);
+			Polygon hexagon = view.figures.get(0);
 			hexagon.setVisible(!hexagon.isVisible());
 		});
 		
