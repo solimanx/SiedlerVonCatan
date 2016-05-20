@@ -1,15 +1,15 @@
 package model;
 /**
  * Refer to hexagonrelations.png in trello
- * 
+ *
  *
  */
 public interface BoardInterface {
-    
+
 	public Field getFieldAt(int aX, int aY);
 	public Corner getCornerAt(int aX, int aY, int i);
 	public Edge getEdgeAt(int aX, int aY, int i);
-	
+
 	public Field[] getNeighbouringFields(int aX, int aY);
 	public Field[] getTouchingFields(int aX, int aY, int i);
 	public Field[] getConnectedFields(int aX, int aY, int i);
@@ -29,10 +29,12 @@ public interface BoardInterface {
 	public Corner[][][] getCorners();
 	public Edge[][][] getEdges();
 	public PlayerModel[] getPlayerModels();
-	
+
 	public Field getBandit();
 	public void setBandit(Field f);
-	
+
+	public int[] getFieldCoordinates(Field f);
+
 	//public Field[] getSpiral(Field f); TODO in controller
 
 }
