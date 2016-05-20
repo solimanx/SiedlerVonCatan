@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.sun.javafx.geom.Shape;
 
-import client.controller.GameControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,11 +24,10 @@ public class View implements ViewInterface {
 	// für Edge 2 Koordinaten (4 Punkte), weil Anfangs- und Endpunkt
 	public double[][][] fieldCoordinates = new double[7][7][2]; // [6][6][2]
 	public int[][][][] edgeCoordinates; // [6][6][3][4]
-	private Polygon[][][] corners;
+	private Polygon[][][] corners = new Polygon[7][7][2];
 	public double[][][][] cornerCoordinates = new double[7][7][2][2]; // [6][6][2][2]
 	private BorderPane rootPane;
 	private Board board;
-	private GameControllerInterface gc;
 	public static double radius = 50.0;
 	public static double[] windowCenter = new double[2]; // [2]
 	public static double sin60 = Math.sqrt(3) / 2;
@@ -71,7 +69,9 @@ public class View implements ViewInterface {
 					figures.add(0, hexagon);
 					for (int k = 0; k < 2; k++) {
 						Polygon village = drawVillage(cornerCoordinates[i][j][k]);
+						//set event listener
 						village.setVisible(true);
+						corners[i][j][k] = village;
 						figures.add(village);
 					}
 				}
@@ -79,6 +79,7 @@ public class View implements ViewInterface {
 		}
 
 		button = new Button("Do Something!");
+		button.setOpacity(0.0);
 		rootPane.setTop(button);
 
 		centerPane = new Pane();
@@ -178,7 +179,7 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public void setBandid(Field field) {
+	public void setBandit(Field field) {
 		// TODO Auto-generated method stub
 
 	}
@@ -274,7 +275,7 @@ public class View implements ViewInterface {
 			double[] center = { fieldCoordinates[i][j][0], fieldCoordinates[i][j][1] - radius };
 			village = drawVillage(center);
 			village.setVisible(false);
-			village.setOnMouseClicked(e -> gc.buildVillage()); // TODO
+			//village.setOnMouseClicked(e -> gc.buildVillage()); // TODO
 																// Methodensignatur
 																// im gc
 																// unvollständig
@@ -288,7 +289,7 @@ public class View implements ViewInterface {
 	}
 
 	public void afterVillageBuilt(int i, int j, int dir) {
-		corners[i][j][dir].setOnMouseClicked(e -> gc.buildCity());
+		//corners[i][j][dir].setOnMouseClicked(e -> gc.buildCity());
 	}
 
 	@Override

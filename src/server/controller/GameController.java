@@ -37,7 +37,7 @@ public class GameController implements GameControllerInterface {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		generateBoard(fields[-2][-2],true);
+		//generateBoard(fields[-2][-2],true);
 		// TODO Auto-generated method stub
 		
 	}	

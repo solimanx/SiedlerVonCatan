@@ -51,7 +51,9 @@ public interface ViewInterface {
 	 * @param field
 	 * TODO: Bandit an alter Position vorher löschen
 	 */
-	public void setBandid(Field field);
+	public void setBandit(Field field);
+	
+	
 	
 
 	int convertToHex(int x);
