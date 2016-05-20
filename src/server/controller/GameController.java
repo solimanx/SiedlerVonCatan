@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import client.controller.GameLogic;
+import client.controller.ViewController;
 import enums.PlayerState;
 import enums.ResourceType;
+import javafx.stage.Stage;
 import model.Board;
 import model.Corner;
 import model.Edge;
@@ -22,6 +24,12 @@ public class GameController implements GameControllerInterface {
 	GameLogic gameLogic;
 	PlayerModel[] playerModels;
 	Field[][] fields;
+	ViewController viewController;
+	
+	public GameController(Stage primaryStage){
+		init();
+		viewController = new ViewController(primaryStage,board);
+	}
 
 	@Override
 	public void init() {
@@ -29,17 +37,18 @@ public class GameController implements GameControllerInterface {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		generateBoardResources(fields[-2][-2],true);
+		generateBoard(fields[-2][-2],true);
 		// TODO Auto-generated method stub
 		
 	}	
 	
-	private void generateBoardResources(Field initialField,boolean randomDesert){
+	private void generateBoard(Field initialField,boolean randomDesert){
 		Field[] fields = getSpiral(initialField);
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
 		int currNum;
 		if (randomDesert){
-			for (int i = 0;i < 19;i++){ //TODO: calculate Num of Fields via DefaultSettings
+			int diceInd = 0;
+			for (int i = 0;i < fields.length;i++){ 
 				Random r = new Random();
 				boolean notFound = true;
 				do {
@@ -50,9 +59,13 @@ public class GameController implements GameControllerInterface {
 				} while (notFound);
 				cards[currNum] --;
 				fields[i].setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+				if (currNum != 5){
+				    fields[i].setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
+				    diceInd ++;
+				}
 			}
 		} else {
-		for (int i = 0;i < 18;i++){ //TODO: calculate Num of Fields via DefaultSettings
+		for (int i = 0;i < fields.length-1;i++){ 
 			Random r = new Random();
 			boolean notFound = true;
 			do {
@@ -63,6 +76,7 @@ public class GameController implements GameControllerInterface {
 			} while (notFound);
 			cards[currNum] --;
 			fields[i].setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+			fields[i].setDiceIndex(DefaultSettings.DICE_NUMBERS[currNum]);
 		}
 		fields[18].setResourceType(ResourceType.NOTHING);
 		}
@@ -102,14 +116,6 @@ public class GameController implements GameControllerInterface {
 		}
 		
 	}
-	
-	private void addToPlayersResource(PlayerModel ownedByPlayer, ResourceType resType, int amount) {
-		ArrayList<ResourceType> resourceCards = ownedByPlayer.getResourceCards();
-		for (int i = 0;i < amount;i++){
-			resourceCards.add(resType);
-		}
-		ownedByPlayer.setResourceCards(resourceCards);
-	}
 
 	@Override
 	public void buildVillage(int x,int y,int dir,PlayerModel player) {
@@ -117,6 +123,10 @@ public class GameController implements GameControllerInterface {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
 			c.setOwnedByPlayer(player);
+			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
+			for (int i = 0;i<neighbors.length;i++){
+				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+			}
 			int[] costs = DefaultSettings.VILLAGE_BUILD_COST;
 			subFromPlayersResources(player,costs);
 			
@@ -149,7 +159,15 @@ public class GameController implements GameControllerInterface {
 		}
 		
 	}
-
+	
+	private void addToPlayersResource(PlayerModel player, ResourceType resType, int amount) {
+		ArrayList<ResourceType> resourceCards = player.getResourceCards();
+		for (int i = 0;i < amount;i++){
+			resourceCards.add(resType);
+		}
+		player.setResourceCards(resourceCards);
+	}
+	
 	private void subFromPlayersResources(PlayerModel player, int[] costs) {
 		ResourceType currResType;
 	    ArrayList<ResourceType> list = player.getResourceCards();			
@@ -159,7 +177,7 @@ public class GameController implements GameControllerInterface {
 				switch(currResType){
 				// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
 				case WOOD:
-					if (costs[0] > 0){
+					if (costs[0] > 0) {
 						list.remove(j);
 						costs[0] --;
 					}

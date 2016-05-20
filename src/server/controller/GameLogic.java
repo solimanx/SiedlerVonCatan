@@ -165,6 +165,46 @@ public class GameLogic implements client.controller.GameLogicInterface {
 		return result;
 	}
 
+	/**
+	 * Checks if the player can build a Street at the given position at the beginning of the game
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param player
+	 * @return boolean true/false
+	 */
+	public boolean checkBuildInitialStreet(int x, int y, int dir, PlayerModel player) {
+		Edge e = board.getEdgeAt(x,y,dir);
+		if (e != null){  //valid edge
+		if (e.isHasStreet() == false) {
+			Corner[] neighbors = board.getAttachedCorners(x,y,dir);
+			for (int i = 0; i <= neighbors.length; i++) {
+				if (neighbors[i].getOwnedByPlayer() == player) {
+					return true;
+				}
+			}
+		}
+		}
+		return false;
+	}	
+
+	/**
+	 * Checks if the player can build a Street at the given position at the beginning of the game
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param player
+	 * @return boolean true/false
+	 */
+	public boolean checkBuildInitialVillage(int x, int y, int dir, PlayerModel player) {
+		Corner c = board.getCornerAt(x,y,dir);
+		if (c != null){  //valid edge
+		if (c.getStatus() == enums.CornerStatus.EMPTY) {
+			return true;
+		}
+		}
+		return false;
+	}	
 	@Override
 	public boolean canTrade() {
 		// TODO Auto-generated method stub

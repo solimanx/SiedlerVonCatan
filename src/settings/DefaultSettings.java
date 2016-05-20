@@ -28,5 +28,7 @@ public final class DefaultSettings {
     // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN, NOTHING (desert)}
     public final static int[] LANDSCAPE_CARDS = { 4, 3, 3, 4, 4, 1}; 
 
-    public final static ResourceType[] RESOURCE_ORDER = { ResourceType.WOOD, ResourceType.CLAY, ResourceType.ORE, ResourceType.SHEEP, ResourceType.CORN, ResourceType.NOTHING}; 
+    public final static ResourceType[] RESOURCE_ORDER = { ResourceType.WOOD, ResourceType.CLAY, ResourceType.ORE, ResourceType.SHEEP, ResourceType.CORN, ResourceType.NOTHING};
+    
+    public final static int[] DICE_NUMBERS = {2,5,10,8,4,11,12,9,10,8,3,6,4,9,11,3,6,5};
 }
