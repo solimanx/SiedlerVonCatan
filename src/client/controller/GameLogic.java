@@ -14,11 +14,9 @@ import enums.ResourceType;
  */
 public class GameLogic implements GameLogicInterface {
 	Board board;
-	private PlayerModel[] playerModels;
 
 	public GameLogic(Board b) {
 		this.board = b;
-		this.playerModels = board.getPlayerModels();
 	}
 	
 	/**
@@ -30,8 +28,8 @@ public class GameLogic implements GameLogicInterface {
 	 * @return boolean true/false
 	 */
 	
-	public boolean checkBuildVillage(int x, int y, int dir, int player) {
-		if (playerModels[player].getAmountVillages() <= 0) {
+	public boolean checkBuildVillage(int x, int y, int dir, PlayerModel player) {
+		if (player.getAmountVillages() <= 0) {
 			return false; // no Village left to build
 		}
 		int[] resources = getPlayerResources(player);
@@ -45,7 +43,7 @@ public class GameLogic implements GameLogicInterface {
 		if (c.getStatus() == enums.CornerStatus.EMPTY) { // is the Corner Empty?
 			Edge[] e = board.getProjectingEdges(x,y,dir);
 			for (int i = 0; i < e.length; i++) {
-				if (e[i].getOwnedByPlayer() == playerModels[player]) { // is there an adjusting street
+				if (e[i].getOwnedByPlayer() == player) { // is there an adjusting street
 												// with correct player
 					return true;
 				}
@@ -63,8 +61,8 @@ public class GameLogic implements GameLogicInterface {
 	 * @param player
 	 * @return boolean true/false
 	 */
-	public boolean checkBuildCity(int x, int y, int dir, int player) {
-		if (playerModels[player].getAmountCities() <= 0) {
+	public boolean checkBuildCity(int x, int y, int dir, PlayerModel player) {
+		if (player.getAmountCities() <= 0) {
 			return false; // no Cities left to build
 		}
 		int[] resources = getPlayerResources(player);
@@ -75,10 +73,10 @@ public class GameLogic implements GameLogicInterface {
 		}
 		Corner c = board.getCornerAt(x, y, dir);
 		if (c != null){
-		if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnedByPlayer() == playerModels[player]) { 
+		if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnedByPlayer() == player) { 
 			Edge[] e = board.getProjectingEdges(x,y,dir);
 			for (int i = 0; i < e.length; i++) {
-				if (e[i].getOwnedByPlayer() == playerModels[player]) { // is there an adjusting streetof this player?
+				if (e[i].getOwnedByPlayer() == player) { // is there an adjusting streetof this player?
  					return true;
 				}
 			}
@@ -95,8 +93,8 @@ public class GameLogic implements GameLogicInterface {
 	 * @param player
 	 * @return boolean true/false
 	 */
-	public boolean checkBuildStreet(int x, int y, int dir, int player) {
-		if (playerModels[player].getAmountStreets() <= 0) { // has this Player a Street left to build?
+	public boolean checkBuildStreet(int x, int y, int dir, PlayerModel player) {
+		if (player.getAmountStreets() <= 0) { // has this Player a Street left to build?
 			return false;
 		}
 		int[] resources = getPlayerResources(player);
@@ -110,7 +108,7 @@ public class GameLogic implements GameLogicInterface {
 		if (e.isHasStreet() == false) {
 			Edge[] neighbors = board.getLinkedEdges(x,y,dir);
 			for (int i = 0; i <= neighbors.length; i++) {
-				if (neighbors[i].getOwnedByPlayer() == playerModels[player]) {
+				if (neighbors[i].getOwnedByPlayer() == player) {
 					return true;
 				}
 			}
@@ -141,8 +139,8 @@ public class GameLogic implements GameLogicInterface {
 	 * @param player
 	 * @return resource Array
 	 */
-	private int[] getPlayerResources(int player) {
-		ArrayList<ResourceType> resList = playerModels[player].getResourceCards();
+	private int[] getPlayerResources(PlayerModel player) {
+		ArrayList<ResourceType> resList = player.getResourceCards();
 		int[] result = new int[5];
 		enums.ResourceType resType;
 		for (int i = 0; i < resList.size(); i++) {

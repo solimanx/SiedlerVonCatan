@@ -36,5 +36,53 @@ public class PlayerModel {
 	public int getAmountVillages() {
 		return amountVillages;
 	}
+
+	public int getVictoryPoints() {
+		return victoryPoints;
+	}
+
+	public void setVictoryPoints(int victoryPoints) {
+		this.victoryPoints = victoryPoints;
+	}
+
+	public boolean isHasLongestRoad() {
+		return hasLongestRoad;
+	}
+
+	public void setHasLongestRoad(boolean hasLongestRoad) {
+		this.hasLongestRoad = hasLongestRoad;
+	}
+
+	public boolean isHasLargestArmy() {
+		return hasLargestArmy;
+	}
+
+	public void setHasLargestArmy(boolean hasLargestArmy) {
+		this.hasLargestArmy = hasLargestArmy;
+	}
+
+	public PlayerState getPlayerState() {
+		return playerState;
+	}
+
+	public void setPlayerState(PlayerState playerState) {
+		this.playerState = playerState;
+	}
+
+	public void setResourceCards(ArrayList<ResourceType> resourceCards) {
+		this.resourceCards = resourceCards;
+	}
+
+	public void setAmountVillages(int amountVillages) {
+		this.amountVillages = amountVillages;
+	}
+
+	public void setAmountCities(int amountCities) {
+		this.amountCities = amountCities;
+	}
+
+	public void setAmountStreets(int amountStreets) {
+		this.amountStreets = amountStreets;
+	}
 	
 }

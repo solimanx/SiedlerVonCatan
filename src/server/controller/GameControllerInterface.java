@@ -1,6 +1,7 @@
 package server.controller;
 
 import enums.PlayerState;
+import model.PlayerModel;
 
 public interface GameControllerInterface {
 	/**
@@ -19,11 +20,11 @@ public interface GameControllerInterface {
 	 */
 	public void setGameState();
 	
-	public void gainBoardResources();
+	public void gainBoardResources(int diceNum);
 	
 	
-	public void buildVillage(); //request only!!
-	public void buildStreet();
-	public void buildCity();
-	public void setBandit();
+	public void buildVillage(int x,int y,int dir,PlayerModel player);
+	public void buildStreet(int x,int y,int dir,PlayerModel player);
+	public void buildCity(int x,int y,int dir,PlayerModel player);
+	public void setBandit(int x,int y);
 }
