@@ -4,27 +4,36 @@ import enums.ResourceType;
 
 public class Field {
 
-    private ResourceType resourceType;
-    private int diceIndex;
+	private String id;
+	private ResourceType resourceType;
+	private int diceIndex;
 
-    public Field() {
-	resourceType = ResourceType.NOTHING; // TODO Constructor
-    }
+	public Field() {
+		resourceType = ResourceType.NOTHING; // TODO Constructor
+	}
 
-    public ResourceType getResourceType() {
-	return resourceType;
-    }
+	public String getFieldID() {
+		return id;
+	}
 
-    public int getDiceIndex() {
-	return diceIndex;
-    }
+	public void setFieldID(String id) {
+		this.id = id;
+	}
 
-    public void setResourceType(ResourceType resourceType) {
-	this.resourceType = resourceType;
-    }
+	public ResourceType getResourceType() {
+		return resourceType;
+	}
 
-    public void setDiceIndex(int diceIndex) {
-	this.diceIndex = diceIndex;
-    }
+	public int getDiceIndex() {
+		return diceIndex;
+	}
+
+	public void setResourceType(ResourceType resourceType) {
+		this.resourceType = resourceType;
+	}
+
+	public void setDiceIndex(int diceIndex) {
+		this.diceIndex = diceIndex;
+	}
 
 }
