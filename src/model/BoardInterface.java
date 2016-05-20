@@ -22,17 +22,17 @@ public interface BoardInterface {
 	public Edge[] getProjectingEdges(int aX, int aY, int i);
 	public Edge[] getLinkedEdges(int aX, int aY, int i);
 
-	public int[] convertAxialToCube(int[] a); // required for initialize Board
+	public int[] convertAxialToCube(int[] a);
 	public int[] convertCubeToAxial(int[] c);
-
-	public Field[] getSpiral(Field f); // out -> in
 
 	public Field[][] getFields();
 	public Corner[][][] getCorners();
 	public Edge[][][] getEdges();
 	public PlayerModel[] getPlayerModels();
+	
 	public Field getBandit();
-
 	public void setBandit(Field f);
+	
+	//public Field[] getSpiral(Field f); TODO in controller
 
 }

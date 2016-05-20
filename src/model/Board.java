@@ -1,37 +1,31 @@
 package model;
 
-import java.util.Observable;
-
 import settings.DefaultSettings;
 
-public class Board extends Observable implements BoardInterface {
-
+/**
+ * Contains all Board methods, retrieving fields, edges and corners.
+ * 
+ * @author Adam
+ */
+public class Board implements BoardInterface {
+	private static Board instance;
 	private Field[][] fields;
 	private Corner[][][] corners;
 	private Edge[][][] edges;
-
 	private PlayerModel[] players;
-
 	private Field bandit;
 	// TODO private DevDeck devDeck;
 
-	private static Board instance;
-
 	public Board() {
-
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
 		initializeFields(fields);
-
 		corners = new Corner[r][r][2];
 		initializeCorners(corners);
-
 		edges = new Edge[r][r][3];
 		initializeEdges(edges);
-
 		// TODO players
 		// TODO bandit
-
 	}
 
 	public static synchronized Board getInstance() {
@@ -42,27 +36,19 @@ public class Board extends Observable implements BoardInterface {
 	}
 
 	/**
-	 *
 	 * Initialize used cells axial in the 2d array, unused cells remain null.
 	 *
 	 * @param fields
-	 *
 	 */
-
 	private void initializeFields(Field[][] fields) {
-
 		int aX; // axial x coordinate
 		int aY; // axial y coordinate
 		int absoluteValue;
-
 		for (int x = 0; x < fields.length; x++) {
 			for (int y = 0; y < fields[0].length; y++) {
-
 				aX = x - DefaultSettings.BOARD_SIZE / 2;
 				aY = y - DefaultSettings.BOARD_SIZE / 2;
-
 				absoluteValue = Math.abs(aX + aY);
-
 				if (absoluteValue <= DefaultSettings.BOARD_SIZE / 2) {
 					fields[x][y] = new Field();
 				}
@@ -75,14 +61,12 @@ public class Board extends Observable implements BoardInterface {
 	 *
 	 * @param corners
 	 */
-
 	private void initializeCorners(Corner[][][] corners) {
 		for (int x = 0; x < fields.length; x++) {
 			for (int y = 0; y < fields[0].length; y++) {
 				if (fields[x][y] != null) {
 					corners[x][y][0] = new Corner(); // North
 					corners[x][y][1] = new Corner(); // South
-
 				}
 			}
 			// TODO: better solution
@@ -90,29 +74,33 @@ public class Board extends Observable implements BoardInterface {
 		}
 	}
 
+	/**
+	 * Set unused corners to null
+	 */
 	private void filterUnusedCorners() {
+		// row 0
 		corners[3][0][0] = null;
 		corners[4][0][0] = null;
 		corners[5][0][0] = null;
 		corners[6][0][0] = null;
-
+		// row 1
 		corners[2][1][0] = null;
 		corners[6][1][0] = null;
-
+		// row 2
 		corners[1][2][0] = null;
 		corners[6][2][0] = null;
-
+		// row 3
 		corners[0][3][0] = null;
 		corners[0][3][1] = null;
 		corners[6][3][0] = null;
 		corners[6][3][1] = null;
-
+		// row 4
 		corners[0][4][1] = null;
 		corners[5][4][1] = null;
-
+		// row 5
 		corners[0][5][1] = null;
 		corners[4][5][1] = null;
-
+		// row 6
 		corners[0][6][1] = null;
 		corners[1][6][1] = null;
 		corners[2][6][1] = null;
@@ -124,7 +112,6 @@ public class Board extends Observable implements BoardInterface {
 	 *
 	 * @param edges
 	 */
-
 	private void initializeEdges(Edge[][][] edges) {
 		for (int x = 0; x < fields.length; x++) {
 			for (int y = 0; y < fields[0].length; y++) {
@@ -132,7 +119,6 @@ public class Board extends Observable implements BoardInterface {
 					edges[x][y][0] = new Edge(); // Northwest
 					edges[x][y][1] = new Edge(); // Northeast
 					edges[x][y][2] = new Edge(); // East
-
 				}
 			}
 		}
@@ -140,6 +126,9 @@ public class Board extends Observable implements BoardInterface {
 		filterUnusedEdges();
 	}
 
+	/**
+	 * Set unused edges to null.
+	 */
 	private void filterUnusedEdges() {
 		// row 0
 		edges[3][0][0] = null;
@@ -215,19 +204,13 @@ public class Board extends Observable implements BoardInterface {
 	 * @param aY
 	 *            Field axial y-coordinate
 	 */
-
 	@Override
 	public Field getFieldAt(int aX, int aY) {
-
 		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
 				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aY > DefaultSettings.BOARD_SIZE / 2) {
-
 			return null;
-
 		} else {
-
 			return this.fields[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2];
-
 		}
 	}
 
@@ -239,22 +222,16 @@ public class Board extends Observable implements BoardInterface {
 	 *            Corner axial x-coordinate
 	 * @param aY
 	 *            Corner axial y-coordinate
-	 * @param i
-	 *            Corner index/direction (0 = North, 1 = South)
+	 * @param dir
+	 *            Corner direction (0 = North, 1 = South)
 	 */
-
 	@Override
-	public Corner getCornerAt(int aX, int aY, int i) {
-
+	public Corner getCornerAt(int aX, int aY, int dir) {
 		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
-				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || i < 0 || i > 1) {
-
+				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || dir < 0 || dir > 1) {
 			return null;
-
 		} else {
-
-			return this.corners[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][i];
-
+			return this.corners[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][dir];
 		}
 	}
 
@@ -266,26 +243,19 @@ public class Board extends Observable implements BoardInterface {
 	 *            Edge axial x-coordinate
 	 * @param aY
 	 *            Edge axial y-coordinate
-	 * @param i
+	 * @param dir
 	 *            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
 	 */
-
 	@Override
-	public Edge getEdgeAt(int aX, int aY, int i) {
-
+	public Edge getEdgeAt(int aX, int aY, int dir) {
 		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
-				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || i < 0 || i > 2) {
-
+				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || dir < 0 || dir > 2) {
 			return null;
-
 		} else {
-
-			return this.edges[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][i];
-
+			return this.edges[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][dir];
 		}
 	}
 
-	// Refer to hexagonrelations.png in trello for this part
 	/**
 	 * Get neighbouring fields of the specified field with the following order:
 	 * <p>
@@ -295,20 +265,17 @@ public class Board extends Observable implements BoardInterface {
 	 *            Field axial x-coordinate
 	 * @param aY
 	 *            Field axial y-coordinate
+	 * 
 	 */
-
 	@Override
 	public Field[] getNeighbouringFields(int aX, int aY) {
-
 		Field ne = getFieldAt(aX + 1, aY - 1);
 		Field e = getFieldAt(aX + 1, aY);
 		Field se = getFieldAt(aX, aY + 1);
 		Field sw = getFieldAt(aX - 1, aY + 1);
 		Field w = getFieldAt(aX - 1, aY);
 		Field nw = getFieldAt(aX, aY - 1);
-
 		Field[] neighbours = { ne, e, se, sw, w, nw };
-
 		return neighbours;
 	}
 
@@ -324,36 +291,25 @@ public class Board extends Observable implements BoardInterface {
 	 *            Corner axial x-coordinate
 	 * @param aY
 	 *            Corner axial y-coordinate
-	 * @param i
+	 * @param dir
 	 *            Corner index/direction (0 = North, 1 = South)
 	 */
-
 	@Override
-	public Field[] getTouchingFields(int aX, int aY, int i) {
-
+	public Field[] getTouchingFields(int aX, int aY, int dir) {
 		Field[] touchedFields;
-
-		if (i == 0) {
-
+		if (dir == 0) {
 			Field ne = getFieldAt(aX + 1, aY - 1);
 			Field s = getFieldAt(aX, aY);
 			Field nw = getFieldAt(aX, aY - 1);
-
 			touchedFields = new Field[] { ne, s, nw };
-
-		} else if (i == 1) {
-
+		} else if (dir == 1) {
 			Field n = getFieldAt(aX, aY);
 			Field se = getFieldAt(aX, aY + 1);
 			Field sw = getFieldAt(aX - 1, aY + 1);
-
 			touchedFields = new Field[] { n, se, sw };
-
 		} else {
-
 			return null;
 		}
-
 		return touchedFields;
 	}
 
@@ -372,41 +328,27 @@ public class Board extends Observable implements BoardInterface {
 	 *            Edge axial x-coordinate
 	 * @param aY
 	 *            Edge axial y-coordinate
-	 * @param i
+	 * @param dir
 	 *            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
 	 */
-
 	@Override
-	public Field[] getConnectedFields(int aX, int aY, int i) {
-
+	public Field[] getConnectedFields(int aX, int aY, int dir) {
 		Field[] connectedFields;
-
-		if (i == 0) {
-
+		if (dir == 0) {
 			Field nw = getFieldAt(aX, aY - 1);
 			Field se = getFieldAt(aX, aY);
-
 			connectedFields = new Field[] { nw, se };
-
-		} else if (i == 1) {
-
+		} else if (dir == 1) {
 			Field ne = getFieldAt(aX + 1, aY - 1);
 			Field sw = getFieldAt(aX, aY);
-
 			connectedFields = new Field[] { ne, sw };
-
-		} else if (i == 2) {
-
+		} else if (dir == 2) {
 			Field w = getFieldAt(aX, aY);
 			Field e = getFieldAt(aX + 1, aY);
-
 			connectedFields = new Field[] { w, e };
-
 		} else {
-
 			return null;
 		}
-
 		return connectedFields;
 	}
 
@@ -421,19 +363,15 @@ public class Board extends Observable implements BoardInterface {
 	 * @param aY
 	 *            Field axial y-coordinate
 	 */
-
 	@Override
 	public Corner[] getSurroundingCorners(int aX, int aY) {
-
 		Corner n = getCornerAt(aX, aY, 0);
 		Corner ne = getCornerAt(aX + 1, aY - 1, 1);
 		Corner se = getCornerAt(aX, aY + 1, 0);
 		Corner s = getCornerAt(aX, aY, 1);
 		Corner sw = getCornerAt(aX - 1, aY + 1, 0);
 		Corner nw = getCornerAt(aX, aY - 1, 1);
-
 		Corner[] surroundingCorners = { n, ne, se, s, sw, nw };
-
 		return surroundingCorners;
 	}
 
@@ -450,16 +388,15 @@ public class Board extends Observable implements BoardInterface {
 	 *            Corner axial x-coordinate
 	 * @param aY
 	 *            Corner axial y-coordinate
-	 * @param i
+	 * @param dir
 	 *            Corner index/direction (0 = North, 1 = South)
 	 */
-
 	@Override
-	public Corner[] getAdjacentCorners(int aX, int aY, int i) {
+	public Corner[] getAdjacentCorners(int aX, int aY, int dir) {
 
 		Corner[] adjacentCorners;
 
-		if (i == 0) {
+		if (dir == 0) {
 
 			Corner n = getCornerAt(aX + 1, aY - 2, 1);
 			Corner se = getCornerAt(aX + 1, aY - 1, 1);
@@ -467,7 +404,7 @@ public class Board extends Observable implements BoardInterface {
 
 			adjacentCorners = new Corner[] { n, se, sw };
 
-		} else if (i == 1) {
+		} else if (dir == 1) {
 
 			Corner ne = getCornerAt(aX, aY + 1, 0);
 			Corner s = getCornerAt(aX - 1, aY + 2, 0);
@@ -498,30 +435,29 @@ public class Board extends Observable implements BoardInterface {
 	 *            Edge axial x-coordinate
 	 * @param aY
 	 *            Edge axial y-coordinate
-	 * @param i
+	 * @param dir
 	 *            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
 	 */
-
 	@Override
-	public Corner[] getAttachedCorners(int aX, int aY, int i) {
+	public Corner[] getAttachedCorners(int aX, int aY, int dir) {
 
 		Corner[] attachedCorners;
 
-		if (i == 0) {
+		if (dir == 0) {
 
 			Corner ne = getCornerAt(aX, aY, 0);
 			Corner sw = getCornerAt(aX, aY - 1, 1);
 
 			attachedCorners = new Corner[] { ne, sw };
 
-		} else if (i == 1) {
+		} else if (dir == 1) {
 
 			Corner nw = getCornerAt(aX, aY, 0);
 			Corner se = getCornerAt(aX + 1, aY - 1, 1);
 
 			attachedCorners = new Corner[] { nw, se };
 
-		} else if (i == 2) {
+		} else if (dir == 2) {
 
 			Corner n = getCornerAt(aX + 1, aY - 1, 1);
 			Corner s = getCornerAt(aX, aY + 1, 0);
@@ -547,19 +483,15 @@ public class Board extends Observable implements BoardInterface {
 	 * @param aY
 	 *            Field axial y-coordinate
 	 */
-
 	@Override
 	public Edge[] getBorderingEdges(int aX, int aY) {
-
 		Edge ne = getEdgeAt(aX, aY, 1);
 		Edge e = getEdgeAt(aX, aY, 2);
 		Edge se = getEdgeAt(aX, aY + 1, 0);
 		Edge sw = getEdgeAt(aX - 1, aY + 1, 1);
 		Edge w = getEdgeAt(aX - 1, aY, 2);
 		Edge nw = getEdgeAt(aX, aY, 0);
-
 		Edge[] borders = { ne, e, se, sw, w, nw };
-
 		return borders;
 	}
 
@@ -576,35 +508,25 @@ public class Board extends Observable implements BoardInterface {
 	 *            Corner axial x-coordinate
 	 * @param aY
 	 *            Corner axial y-coordinate
-	 * @param i
+	 * @param dir
 	 *            Corner index/direction (0 = North, 1 = South)
 	 */
-
 	@Override
-	public Edge[] getProjectingEdges(int aX, int aY, int i) {
+	public Edge[] getProjectingEdges(int aX, int aY, int dir) {
 		Edge[] projectedEdges;
-
-		if (i == 0) {
-
+		if (dir == 0) {
 			Edge n = getEdgeAt(aX, aY - 1, 2);
 			Edge se = getEdgeAt(aX, aY, 1);
 			Edge sw = getEdgeAt(aX, aY, 0);
-
 			projectedEdges = new Edge[] { n, se, sw };
-
-		} else if (i == 1) {
-
+		} else if (dir == 1) {
 			Edge ne = getEdgeAt(aX, aY + 1, 0);
 			Edge s = getEdgeAt(aX - 1, aY + 1, 2);
 			Edge nw = getEdgeAt(aX - 1, aY + 1, 1);
-
 			projectedEdges = new Edge[] { ne, s, nw };
-
 		} else {
-
 			return null;
 		}
-
 		return projectedEdges;
 	}
 
@@ -622,47 +544,33 @@ public class Board extends Observable implements BoardInterface {
 	 *            Edge axial x-coordinate
 	 * @param aY
 	 *            Edge axial y-coordinate
-	 * @param i
+	 * @param dir
 	 *            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
 	 */
-
 	@Override
-	public Edge[] getLinkedEdges(int aX, int aY, int i) {
-
+	public Edge[] getLinkedEdges(int aX, int aY, int dir) {
 		Edge[] linkedEdges;
-
-		if (i == 0) {
-
+		if (dir == 0) {
 			Edge n = getEdgeAt(aX, aY - 1, 2);
 			Edge se = getEdgeAt(aX, aY, 1);
 			Edge s = getEdgeAt(aX - 1, aY, 2);
 			Edge nw = getEdgeAt(aX - 1, aY, 1);
-
 			linkedEdges = new Edge[] { n, se, s, nw };
-
-		} else if (i == 1) {
-
+		} else if (dir == 1) {
 			Edge n = getEdgeAt(aX, aY - 1, 2);
 			Edge ne = getEdgeAt(aX + 1, aY, 0);
 			Edge s = getEdgeAt(aX, aY, 2);
 			Edge sw = getEdgeAt(aX, aY, 0);
-
 			linkedEdges = new Edge[] { n, ne, s, sw };
-
-		} else if (i == 2) {
-
+		} else if (dir == 2) {
 			Edge ne = getEdgeAt(aX + 1, aY, 0);
 			Edge se = getEdgeAt(aX, aY + 1, 1);
 			Edge sw = getEdgeAt(aX, aY + 1, 0);
 			Edge nw = getEdgeAt(aX, aY, 1);
-
 			linkedEdges = new Edge[] { ne, se, sw, nw };
-
 		} else {
-
 			return null;
 		}
-
 		return linkedEdges;
 	}
 
@@ -672,7 +580,6 @@ public class Board extends Observable implements BoardInterface {
 	 * @param a
 	 *            (x,y)
 	 */
-
 	@Override
 	public int[] convertAxialToCube(int[] a) {
 
@@ -697,65 +604,66 @@ public class Board extends Observable implements BoardInterface {
 	 * @param c
 	 *            (x,y,z)
 	 */
-
 	@Override
 	public int[] convertCubeToAxial(int[] c) {
-
 		if (c.length != 3) {
 			// TODO: logging
 			System.out.println("Unable to convert: " + c.toString() + " to axial.");
 			return null;
-
 		} else {
-
 			int x = c[0];
 			int y = c[2];
-
 			return new int[] { x, y };
 		}
 	}
 
 	/**
-	 *
+	 * Returns fields array
 	 */
-
-	@Override
-	public Field[] getSpiral(Field f) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public Field[][] getFields() {
 		return this.fields;
 	}
 
+	/**
+	 * Returns corners array
+	 */
 	@Override
 	public Corner[][][] getCorners() {
 		return this.corners;
 	}
 
+	/**
+	 * Returns edges array
+	 */
 	@Override
 	public Edge[][][] getEdges() {
 		return this.edges;
 	}
 
+	/**
+	 * Returns PlayerModel array
+	 */
 	@Override
 	public PlayerModel[] getPlayerModels() {
 		return this.players;
 	}
 
+	/**
+	 * Returns bandit.
+	 */
 	@Override
 	public Field getBandit() {
 		return this.bandit;
 	}
 
+	/**
+	 * Sets bandit
+	 */
 	@Override
 	public void setBandit(Field f) {
 		this.bandit = f;
 
 	}
-
-	// TODO test the relation methods
 
 }
