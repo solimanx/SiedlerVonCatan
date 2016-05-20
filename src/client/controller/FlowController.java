@@ -14,10 +14,11 @@ import settings.DefaultSettings;
  * @author NiedlichePixel
  * Controls the game flow.
  */
-public class FlowController implements GameControllerInterface {
+public class FlowController implements FlowControllerInterface {
 	Board board;
 	GameLogic gameLogic;
 	PlayerModel[] playerModels;
+	PlayerState playerState;
 
 	@Override
 	public void init() {
@@ -41,26 +42,33 @@ public class FlowController implements GameControllerInterface {
 	}
 
 	@Override
-	public void buildVillage() {
-		// TODO Auto-generated method stub
+	public void buildVillage(int x, int y,int dir, PlayerModel player) {
+		if (gameLogic.checkBuildVillage(x, y, dir, player)){
+			//networkController.buildVillage(x, y, dir, player);
+		}
 		
 	}
 
 	@Override
-	public void buildStreet() {
-		// TODO Auto-generated method stub
+	public void buildStreet(int x, int y,int dir,PlayerModel player) {
+		if (gameLogic.checkBuildStreet(x, y, dir, player)){
+			//networkController.buildStreet(x, y, dir, player);
+		}		
 		
 	}
 
 	@Override
-	public void buildCity() {
-		// TODO Auto-generated method stub
-		
+	public void buildCity(int x, int y,int dir,PlayerModel player) {
+		if (gameLogic.checkBuildCity(x, y, dir, player)){
+			//networkController.buildCity(x, y, dir, player);
+		}
 	}
 
 	@Override
-	public void setBandit() {
-		// TODO Auto-generated method stub
+	public void setBandit(int x,int y) {
+		if (gameLogic.checkSetBandit(x, y)){
+			//networkController.setBandit(x,y);
+		}
 		
 	}
 

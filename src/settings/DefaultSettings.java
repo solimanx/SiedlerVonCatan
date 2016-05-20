@@ -1,5 +1,7 @@
 package settings;
 
+import enums.ResourceType;
+
 public final class DefaultSettings {
 
     // 7 equates to 37 hexagons
@@ -23,5 +25,8 @@ public final class DefaultSettings {
     public final static int[] CITY_BUILD_COST = { 0, 0, 0, 0, 0 };
     // TODO Fix this
     public final static int[] DEVCARD_BUILD_COST = { 0, 0, 0, 0, 0 };
+    // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN, NOTHING (desert)}
+    public final static int[] LANDSCAPE_CARDS = { 4, 3, 3, 4, 4, 1}; 
 
+    public final static ResourceType[] RESOURCE_ORDER = { ResourceType.WOOD, ResourceType.CLAY, ResourceType.ORE, ResourceType.SHEEP, ResourceType.CORN, ResourceType.NOTHING}; 
 }

@@ -1,6 +1,7 @@
 package server.controller;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import client.controller.GameLogic;
 import enums.PlayerState;
@@ -28,9 +29,44 @@ public class GameController implements GameControllerInterface {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
+		generateBoardResources(fields[-2][-2],true);
 		// TODO Auto-generated method stub
 		
 	}	
+	
+	private void generateBoardResources(Field initialField,boolean randomDesert){
+		Field[] fields = getSpiral(initialField);
+		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
+		int currNum;
+		if (randomDesert){
+			for (int i = 0;i < 19;i++){ //TODO: calculate Num of Fields via DefaultSettings
+				Random r = new Random();
+				boolean notFound = true;
+				do {
+					currNum = r.nextInt(5); //desert allowed
+					if (cards[currNum] > 0){
+						notFound = false;
+					}
+				} while (notFound);
+				cards[currNum] --;
+				fields[i].setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+			}
+		} else {
+		for (int i = 0;i < 18;i++){ //TODO: calculate Num of Fields via DefaultSettings
+			Random r = new Random();
+			boolean notFound = true;
+			do {
+				currNum = r.nextInt(4);
+				if (cards[currNum] > 0){
+					notFound = false;
+				}
+			} while (notFound);
+			cards[currNum] --;
+			fields[i].setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+		}
+		fields[18].setResourceType(ResourceType.NOTHING);
+		}
+	}
 	
 	public void gainBoardResources(int diceNum){
 		ArrayList<model.Field> correspondingFields = new ArrayList<model.Field>();
