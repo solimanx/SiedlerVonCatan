@@ -37,7 +37,7 @@ public class GameController implements GameControllerInterface {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		//generateBoard(fields[-2][-2],true);
+		generateBoard(fields[-2][-2],true);
 		// TODO Auto-generated method stub
 		
 	}	
@@ -117,7 +117,7 @@ public class GameController implements GameControllerInterface {
 		
 	}
 
-	@Override
+	@Override //TODO: playerID instead of PlayerModel
 	public void buildVillage(int x,int y,int dir,PlayerModel player) {
 		if (gameLogic.checkBuildVillage(x, y, dir, player)){
 			Corner c = board.getCornerAt(x, y, dir);
