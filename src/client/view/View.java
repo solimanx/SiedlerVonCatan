@@ -23,7 +23,7 @@ public class View implements ViewInterface {
 	// jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
 	// für Edge 2 Koordinaten (4 Punkte), weil Anfangs- und Endpunkt
 	public double[][][] fieldCoordinates = new double[7][7][2]; // [6][6][2]
-	public int[][][][] edgeCoordinates; // [6][6][3][4]
+	public int[][][][] edgeCoordinates = new double[7][7][3][4]; // [6][6][3][4]
 	private Polygon[][][] corners = new Polygon[7][7][2];
 	public double[][][][] cornerCoordinates = new double[7][7][2][2]; // [6][6][2][2]
 	private BorderPane rootPane;
@@ -69,7 +69,7 @@ public class View implements ViewInterface {
 					figures.add(0, hexagon);
 					for (int k = 0; k < 2; k++) {
 						Polygon village = drawVillage(cornerCoordinates[i][j][k]);
-						//set event listener
+						// set event listener
 						village.setVisible(true);
 						corners[i][j][k] = village;
 						figures.add(village);
@@ -205,21 +205,21 @@ public class View implements ViewInterface {
 		for (int u = 0; u < 7; u++) {
 			for (int v = 0; v < 7; v++) {
 				if (Math.abs(u + v - 6) <= 3) {
-						x = fieldCoordinates[u][v][0];
-						y = fieldCoordinates[u][v][1] - radius;
-						cornerCoordinates[u][v][0][0] = x;
-						cornerCoordinates[u][v][0][1] = y;
-						// x = fieldCoordinates[u][v][0];
-						y = fieldCoordinates[u][v][1] + radius;
-						cornerCoordinates[u][v][1][0] = x;
-						cornerCoordinates[u][v][1][1] = y;
+					x = fieldCoordinates[u][v][0];
+					y = fieldCoordinates[u][v][1] - radius;
+					cornerCoordinates[u][v][0][0] = x;
+					cornerCoordinates[u][v][0][1] = y;
+					// x = fieldCoordinates[u][v][0];
+					y = fieldCoordinates[u][v][1] + radius;
+					cornerCoordinates[u][v][1][0] = x;
+					cornerCoordinates[u][v][1][1] = y;
 				}
 			}
 
 		}
 		filterUnusedCorners();
 	}
-	
+
 	private void filterUnusedCorners() {
 		// row 0
 		cornerCoordinates[3][0][0][0] = 0;
@@ -249,10 +249,49 @@ public class View implements ViewInterface {
 		cornerCoordinates[2][6][1][0] = 0;
 		cornerCoordinates[3][6][1][0] = 0;
 	}
-     
+
 	private void calculateEdgeCorners() {
-		
+		double x1;
+		double y1;
+		double x2;
+		double y2;
+		for (int u = 0; u < 7; u++) {
+			for (int v = 0; v < 7; v++) {
+				if (Math.abs(u + v - 6) <= 3) {
+					x1 = fieldCoordinates[u][v][0];
+					y2 = fieldCoordinates[u][v][1] + radius;
+					x2 = fieldCoordinates[u][v][0] + halfWidth;
+					y2 = fieldCoordinates[u][v][1] + radius / 2;
+					edgeCoordinates[u][v][0][0] = x1;
+					edgeCoordinates[u][v][0][1] = y1;
+					edgeCoordinates[u][v][0][2] = x2;
+					edgeCoordinates[u][v][0][3] = x2;
+
+					x1 = fieldCoordinates[u][v][0] + halfWidth;
+					y1 = fieldCoordinates[u][v][1] + radius / 2;
+					x2 = fieldCoordinates[u][v][0] + halfWidth;
+					y2 = fieldCoordinates[u][v][1] - radius / 2;
+					edgeCoordinates[u][v][1][0] = x1;
+					edgeCoordinates[u][v][1][1] = y1;
+					edgeCoordinates[u][v][1][2] = x2;
+					edgeCoordinates[u][v][1][3] = y2;
+
+					x1 = fieldCoordinates[u][v][0] + halfWidth;
+					y1 = fieldCoordinates[u][v][1] - radius / 2;
+					x2 = fieldCoordinates[u][v][0];
+					y2 = fieldCoordinates[u][v][1] - radius;
+					edgeCoordinates[u][v][2][0] = x1;
+					edgeCoordinates[u][v][2][1] = y1;
+					edgeCoordinates[u][v][2][2] = x1;
+					edgeCoordinates[u][v][2][3] = y2;
+
+				}
+			}
+
+		}
+
 	}
+
 	@Override
 	public int convertToHex(int x) {
 		return x - 3;
@@ -278,10 +317,10 @@ public class View implements ViewInterface {
 			double[] center = { fieldCoordinates[i][j][0], fieldCoordinates[i][j][1] - radius };
 			village = drawVillage(center);
 			village.setVisible(false);
-			//village.setOnMouseClicked(e -> gc.buildVillage()); // TODO
-																// Methodensignatur
-																// im gc
-																// unvollständig
+			// village.setOnMouseClicked(e -> gc.buildVillage()); // TODO
+			// Methodensignatur
+			// im gc
+			// unvollständig
 			return village;
 		} else {
 			double[] center = { fieldCoordinates[i][j][0], fieldCoordinates[i][j][1] + radius };
@@ -292,7 +331,7 @@ public class View implements ViewInterface {
 	}
 
 	public void afterVillageBuilt(int i, int j, int dir) {
-		//corners[i][j][dir].setOnMouseClicked(e -> gc.buildCity());
+		// corners[i][j][dir].setOnMouseClicked(e -> gc.buildCity());
 	}
 
 	@Override
