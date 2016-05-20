@@ -1,6 +1,7 @@
 package model;
 
 import settings.DefaultSettings;
+import java.util.ArrayList;
 
 /**
  * Contains all Board methods, retrieving fields, edges and corners.
@@ -572,6 +573,36 @@ public class Board implements BoardInterface {
 			return null;
 		}
 		return linkedEdges;
+	}
+	
+	public Field[] getSpiral(Field f) {
+		// TODO Auto-generated method stub
+		ArrayList<Field> result = new ArrayList<Field>();
+		Field nextField;
+		for(int k = 2; k >= 1; k--){
+			for(int i = 0; i<= 6; i++){
+				for(int j = 0; j <= k; j++){
+					nextField = getNextField(nextField, i);
+					result = result.add(nextField);
+				}
+			}
+		}
+		result.add(getFieldAt(0, 0));
+		return (Field[]) result.toArray();
+	}
+	
+	public Field getNextField(Field f, int i){
+		Field[] result = getNeighbouringFields(aX, aY) //To Do field to coordinates
+		switch(i){
+		case 0: return result[0];
+		case 1: return result[1];
+		case 2: return result[2];
+		case 3: return result[3];
+		case 4: return result[4];
+		case 5: return result[5];
+		default: return null;
+		}
+		return null;
 	}
 
 	/**
