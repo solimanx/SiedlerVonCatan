@@ -42,24 +42,24 @@ public class FlowController implements FlowControllerInterface {
 	}
 
 	@Override
-	public void buildVillage(int x, int y,int dir, PlayerModel player) {
-		if (gameLogic.checkBuildVillage(x, y, dir, player)){
+	public void buildVillage(int x, int y,int dir, int playerId) {
+		if (gameLogic.checkBuildVillage(x, y, dir, playerId)){
 			//networkController.buildVillage(x, y, dir, player);
 		}
 		
 	}
 
 	@Override
-	public void buildStreet(int x, int y,int dir,PlayerModel player) {
-		if (gameLogic.checkBuildStreet(x, y, dir, player)){
+	public void buildStreet(int x, int y,int dir,int playerId) {
+		if (gameLogic.checkBuildStreet(x, y, dir, playerId)){
 			//networkController.buildStreet(x, y, dir, player);
 		}		
 		
 	}
 
 	@Override
-	public void buildCity(int x, int y,int dir,PlayerModel player) {
-		if (gameLogic.checkBuildCity(x, y, dir, player)){
+	public void buildCity(int x, int y,int dir,int playerId) {
+		if (gameLogic.checkBuildCity(x, y, dir, playerId)){
 			//networkController.buildCity(x, y, dir, player);
 		}
 	}

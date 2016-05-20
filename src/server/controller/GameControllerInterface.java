@@ -23,8 +23,23 @@ public interface GameControllerInterface {
 	public void gainBoardResources(int diceNum);
 	
 	
-	public void buildVillage(int x,int y,int dir,PlayerModel player);
-	public void buildStreet(int x,int y,int dir,PlayerModel player);
-	public void buildCity(int x,int y,int dir,PlayerModel player);
+	/**
+	 * asks the Game Logic if build is allowed and sets a village at the specified position
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerId
+	 */
+	public void buildVillage(int x,int y,int dir,int playerId);
+	
+	/**
+	 * asks the Game Logic if build is allowed and sets a street at the specified position
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerId
+	 */
+	public void buildStreet(int x,int y,int dir,int playerId);
+	public void buildCity(int x,int y,int dir,int playerId);
 	public void setBandit(int x,int y);
 }

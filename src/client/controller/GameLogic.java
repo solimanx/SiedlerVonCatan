@@ -14,9 +14,11 @@ import enums.ResourceType;
  */
 public class GameLogic implements GameLogicInterface {
 	Board board;
+	PlayerModel[] playerModels;
 
 	public GameLogic(Board b) {
 		this.board = b;
+		this.playerModels = board.getPlayerModels();
 	}
 	
 	/**
@@ -28,11 +30,11 @@ public class GameLogic implements GameLogicInterface {
 	 * @return boolean true/false
 	 */
 	
-	public boolean checkBuildVillage(int x, int y, int dir, PlayerModel player) {
-		if (player.getAmountVillages() <= 0) {
+	public boolean checkBuildVillage(int x, int y, int dir, int playerId) {
+		if (playerModels[playerId].getAmountVillages() <= 0) {
 			return false; // no Village left to build
 		}
-		int[] resources = getPlayerResources(player);
+		int[] resources = getPlayerResources(playerId);
 		for (int i = 0; i < 5; i++) {
 			if (resources[i] < settings.DefaultSettings.VILLAGE_BUILD_COST[i]) {
 				return false; // not enough resources
@@ -43,7 +45,7 @@ public class GameLogic implements GameLogicInterface {
 		if (c.getStatus() == enums.CornerStatus.EMPTY) { // is the Corner Empty?
 			Edge[] e = board.getProjectingEdges(x,y,dir);
 			for (int i = 0; i < e.length; i++) {
-				if (e[i].getOwnedByPlayer() == player) { // is there an adjusting street
+				if (e[i].getOwnedByPlayer().getId() == playerId) { // is there an adjusting street
 												// with correct player
 					return true;
 				}
@@ -61,11 +63,11 @@ public class GameLogic implements GameLogicInterface {
 	 * @param player
 	 * @return boolean true/false
 	 */
-	public boolean checkBuildCity(int x, int y, int dir, PlayerModel player) {
-		if (player.getAmountCities() <= 0) {
+	public boolean checkBuildCity(int x, int y, int dir, int playerId) {
+		if (playerModels[playerId].getAmountCities() <= 0) {
 			return false; // no Cities left to build
 		}
-		int[] resources = getPlayerResources(player);
+		int[] resources = getPlayerResources(playerId);
 		for (int i = 0; i < 5; i++) {
 			if (resources[i] < settings.DefaultSettings.CITY_BUILD_COST[i]) {
 				return false; // not enough resources
@@ -73,10 +75,10 @@ public class GameLogic implements GameLogicInterface {
 		}
 		Corner c = board.getCornerAt(x, y, dir);
 		if (c != null){
-		if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnedByPlayer() == player) { 
+		if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnedByPlayer().getId() == playerId) { 
 			Edge[] e = board.getProjectingEdges(x,y,dir);
 			for (int i = 0; i < e.length; i++) {
-				if (e[i].getOwnedByPlayer() == player) { // is there an adjusting streetof this player?
+				if (e[i].getOwnedByPlayer().getId() == playerId) { // is there an adjusting streetof this player?
  					return true;
 				}
 			}
@@ -93,11 +95,11 @@ public class GameLogic implements GameLogicInterface {
 	 * @param player
 	 * @return boolean true/false
 	 */
-	public boolean checkBuildStreet(int x, int y, int dir, PlayerModel player) {
-		if (player.getAmountStreets() <= 0) { // has this Player a Street left to build?
+	public boolean checkBuildStreet(int x, int y, int dir, int playerId) {
+		if (playerModels[playerId].getAmountStreets() <= 0) { // has this Player a Street left to build?
 			return false;
 		}
-		int[] resources = getPlayerResources(player);
+		int[] resources = getPlayerResources(playerId);
 		for (int i = 0; i < 5; i++) {
 			if (resources[i] < settings.DefaultSettings.STREET_BUILD_COST[i]) {
 				return false;
@@ -108,7 +110,7 @@ public class GameLogic implements GameLogicInterface {
 		if (e.isHasStreet() == false) {
 			Edge[] neighbors = board.getLinkedEdges(x,y,dir);
 			for (int i = 0; i <= neighbors.length; i++) {
-				if (neighbors[i].getOwnedByPlayer() == player) {
+				if (neighbors[i].getOwnedByPlayer().getId() == playerId) {
 					return true;
 				}
 			}
@@ -136,11 +138,11 @@ public class GameLogic implements GameLogicInterface {
 	 * Gets an array wich contains the player resources in form of
 	 * (AmountWood,AmountClay...)
 	 * 
-	 * @param player
+	 * @param playerId
 	 * @return resource Array
 	 */
-	private int[] getPlayerResources(PlayerModel player) {
-		ArrayList<ResourceType> resList = player.getResourceCards();
+	private int[] getPlayerResources(int playerId) {
+		ArrayList<ResourceType> resList = playerModels[playerId].getResourceCards();
 		int[] result = new int[5];
 		enums.ResourceType resType;
 		for (int i = 0; i < resList.size(); i++) {
@@ -163,6 +165,45 @@ public class GameLogic implements GameLogicInterface {
 		return result;
 	}
 
+	/**
+	 * Checks if the player can build a Street at the given position at the beginning of the game
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerId
+	 * @return boolean true/false
+	 */
+	public boolean checkBuildInitialStreet(int x, int y, int dir, int playerId) {
+		Edge e = board.getEdgeAt(x,y,dir);
+		if (e != null){  //valid edge
+		if (e.isHasStreet() == false) {
+			Corner[] neighbors = board.getAttachedCorners(x,y,dir);
+			for (int i = 0; i <= neighbors.length; i++) {
+				if (neighbors[i].getOwnedByPlayer().getId() == playerId) {
+					return true;
+				}
+			}
+		}
+		}
+		return false;
+	}	
+
+	/**
+	 * Checks if the player can build a Street at the given position at the beginning of the game
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @return boolean true/false
+	 */
+	public boolean checkBuildInitialVillage(int x, int y, int dir) {
+		Corner c = board.getCornerAt(x,y,dir);
+		if (c != null){  //valid edge
+		if (c.getStatus() == enums.CornerStatus.EMPTY) {
+			return true;
+		}
+		}
+		return false;
+	}	
 	@Override
 	public boolean canTrade() {
 		// TODO Auto-generated method stub

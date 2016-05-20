@@ -18,11 +18,35 @@ public class PlayerModel {
 	boolean hasLongestRoad;
 	boolean hasLargestArmy;
 	PlayerState playerState;
+	int id;
 	
+	// every Player gets own id (1..4)
+	public PlayerModel(int id){
+		this.id = id;
+	}
 	
+	public int getId() {		
+		return id;
+	}	
 	
 	public int getAmountStreets() {		
 		return amountStreets;
+	}
+	
+	public void decreaseAmountStreets(){
+		amountStreets--;
+	}
+
+	public void decreaseAmountVillages(){
+		amountVillages--;
+	}	
+	
+	public void increaseAmountVillages(){
+		amountVillages++;
+	}
+	
+	public void decreaseAmountCities(){
+		amountCities--;
 	}
 
 	public ArrayList<ResourceType> getResourceCards() {
@@ -45,7 +69,7 @@ public class PlayerModel {
 		this.victoryPoints = victoryPoints;
 	}
 
-	public boolean isHasLongestRoad() {
+	public boolean hasLongestRoad() {
 		return hasLongestRoad;
 	}
 
@@ -53,7 +77,7 @@ public class PlayerModel {
 		this.hasLongestRoad = hasLongestRoad;
 	}
 
-	public boolean isHasLargestArmy() {
+	public boolean hasLargestArmy() {
 		return hasLargestArmy;
 	}
 

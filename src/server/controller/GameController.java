@@ -42,6 +42,13 @@ public class GameController implements GameControllerInterface {
 		
 	}	
 	
+	/**
+	 * Generates the resource and the dice index of each field
+	 * calls gui via setField to set the correct graphics
+	 * if randomDesert is set then the desert will be placed random at the board, else it will be set in the middle 
+	 * @param initialField
+	 * @param randomDesert
+	 */
 	private void generateBoard(Field initialField,boolean randomDesert){
 		Field[] fields = getSpiral(initialField);
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
@@ -82,6 +89,9 @@ public class GameController implements GameControllerInterface {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see server.controller.GameControllerInterface#gainBoardResources(int)
+	 */
 	public void gainBoardResources(int diceNum){
 		ArrayList<model.Field> correspondingFields = new ArrayList<model.Field>();
 		for (int i = 0; i< fields.length;i++){
@@ -106,9 +116,9 @@ public class GameController implements GameControllerInterface {
 				status = o.getStatus();
 				switch(status){
 				case VILLAGE:
-					addToPlayersResource(o.getOwnedByPlayer(),resType,1);
+					addToPlayersResource(o.getOwnedByPlayer().getId(),resType,1);
 				case CITY:
-					addToPlayersResource(o.getOwnedByPlayer(),resType,2);
+					addToPlayersResource(o.getOwnedByPlayer().getId(),resType,2);
 				default:	
 				}
 			}
@@ -117,60 +127,92 @@ public class GameController implements GameControllerInterface {
 		
 	}
 
-	@Override //TODO: playerID instead of PlayerModel
-	public void buildVillage(int x,int y,int dir,PlayerModel player) {
-		if (gameLogic.checkBuildVillage(x, y, dir, player)){
+	/* (non-Javadoc)
+	 * @see server.controller.GameControllerInterface#buildVillage(int, int, int, int)
+	 */
+	@Override 
+	public void buildVillage(int x,int y,int dir,int playerId) {
+		if (gameLogic.checkBuildVillage(x, y, dir, playerId)){
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnedByPlayer(player);
+			c.setOwnedByPlayer(playerModels[playerId]);
+			playerModels[playerId].decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0;i<neighbors.length;i++){
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 			}
 			int[] costs = DefaultSettings.VILLAGE_BUILD_COST;
-			subFromPlayersResources(player,costs);
+			subFromPlayersResources(playerId,costs);
 			
+			viewController.setCorner(x,y,dir,enums.CornerStatus.VILLAGE,playerId);
 		}
 		
 	}
 
 	@Override
-	public void buildStreet(int x,int y,int dir,PlayerModel player) {
-		if (gameLogic.checkBuildStreet(x, y, dir, player)){
+	public void buildStreet(int x,int y,int dir,int playerId) {
+		if (gameLogic.checkBuildStreet(x, y, dir, playerId)){
 			Edge e = board.getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(player);
+			e.setOwnedByPlayer(playerModels[playerId]);
+			playerModels[playerId].decreaseAmountStreets();
 			int[] costs = DefaultSettings.STREET_BUILD_COST;
-			subFromPlayersResources(player,costs);
+			subFromPlayersResources(playerId,costs);
 			
+			viewController.setStreet(x,y,dir,playerId);
 		}
 		
 	}
 
 	@Override
-	public void buildCity(int x,int y,int dir,PlayerModel player) {
-		if (gameLogic.checkBuildCity(x, y, dir, player)){
+	public void buildCity(int x,int y,int dir,int playerId) {
+		if (gameLogic.checkBuildCity(x, y, dir, playerId)){
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.CITY);
-			c.setOwnedByPlayer(player);
+			c.setOwnedByPlayer(playerModels[playerId]);
+			playerModels[playerId].increaseAmountVillages();
+			playerModels[playerId].decreaseAmountCities();
 			int[] costs = DefaultSettings.CITY_BUILD_COST;
-			subFromPlayersResources(player,costs);
+			subFromPlayersResources(playerId,costs);
 			
+			viewController.setCorner(x,y,dir,playerId,enums.CornerStatus.CITY);
 		}
 		
 	}
 	
-	private void addToPlayersResource(PlayerModel player, ResourceType resType, int amount) {
-		ArrayList<ResourceType> resourceCards = player.getResourceCards();
+	public void buildInitialStreet(int x, int y,int dir,int playerId){
+		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerId)){
+			Edge e = board.getEdgeAt(x, y, dir);
+			e.setHasStreet(true);
+			e.setOwnedByPlayer(playerModels[playerId]);
+			playerModels[playerId].decreaseAmountStreets();	
+			
+			viewController.setStreet(x,y,dir,playerId);
+		}
+	}
+	
+	public void buildInitialVillage(int x, int y,int dir,int playerId){
+		if (gameLogic.checkBuildInitialVillage(x, y, dir)){
+			Corner c = board.getCornerAt(x, y, dir);
+			c.setStatus(enums.CornerStatus.VILLAGE);
+			c.setOwnedByPlayer(playerModels[playerId]);
+			playerModels[playerId].decreaseAmountVillages();
+			
+			viewController.setCorner(x,y,dir,playerId,enums.CornerStatus.VILLAGE);
+		}
+	}
+	
+	private void addToPlayersResource(int playerId, ResourceType resType, int amount) {
+		ArrayList<ResourceType> resourceCards = playerModels[playerId].getResourceCards();
 		for (int i = 0;i < amount;i++){
 			resourceCards.add(resType);
 		}
-		player.setResourceCards(resourceCards);
+		playerModels[playerId].setResourceCards(resourceCards);
 	}
 	
-	private void subFromPlayersResources(PlayerModel player, int[] costs) {
+	private void subFromPlayersResources(int playerId, int[] costs) {
 		ResourceType currResType;
-	    ArrayList<ResourceType> list = player.getResourceCards();			
+	    ArrayList<ResourceType> list = playerModels[playerId].getResourceCards();			
 		for (int i = 0;i< costs.length;i++){
 			for (int j = list.size() - 1;j >= 0 ;j--){ //umkehren wegen remove
 				currResType = list.get(j);
@@ -206,7 +248,7 @@ public class GameController implements GameControllerInterface {
 			}
 			
 		}
-		player.setResourceCards(list);		
+		playerModels[playerId].setResourceCards(list);		
 	}
 
 	@Override
