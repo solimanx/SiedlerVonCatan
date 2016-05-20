@@ -282,7 +282,7 @@ public class View implements ViewInterface {
 					y2 = fieldCoordinates[u][v][1] - radius;
 					edgeCoordinates[u][v][2][0] = x1;
 					edgeCoordinates[u][v][2][1] = y1;
-					edgeCoordinates[u][v][2][2] = x1;
+					edgeCoordinates[u][v][2][2] = x2;
 					edgeCoordinates[u][v][2][3] = y2;
 
 				}
