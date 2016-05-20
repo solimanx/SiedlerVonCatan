@@ -249,7 +249,10 @@ public class View implements ViewInterface {
 		cornerCoordinates[2][6][1][0] = 0;
 		cornerCoordinates[3][6][1][0] = 0;
 	}
-
+     
+	private void calculateEdgeCorners() {
+		
+	}
 	@Override
 	public int convertToHex(int x) {
 		return x - 3;
