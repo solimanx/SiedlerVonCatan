@@ -13,7 +13,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		gc = new GameController(primaryStage);
+		gc = new GameController(primaryStage,1); //one player Only
 		
 	}
 

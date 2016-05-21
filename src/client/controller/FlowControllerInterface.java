@@ -7,7 +7,7 @@ public interface FlowControllerInterface {
 	 * is called by network controller after Game Field was initialized by Server
 	 * creates complete Board
 	 */
-	public void init(int ownPlayerId);
+	public void init(int ownPlayerId,int amountOfPlayers);
 	/**
 	 * @param state
 	 * sets Player State

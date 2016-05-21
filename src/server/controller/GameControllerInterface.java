@@ -7,7 +7,7 @@ public interface GameControllerInterface {
 	 * inserts Fields with DiceIndex and ResourceType
 	 * sets Bandit
 	 */
-	public void init(int amountOfPlayers);
+	public void init();
 	/**
 	 * @param state
 	 * sets Player State

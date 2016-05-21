@@ -29,26 +29,25 @@ public class GameController implements GameControllerInterface {
 	Field[][] fields;
 	ViewController viewController;
 
-	public GameController(Stage primaryStage) {
-		init(1); // one player only
-		viewController = new ViewController(primaryStage,board); //DEBUG ONLY!!
-	}
-
-	@Override
-	public void init(int amountPlayers) { //evtl. int amountPlayers
+	public GameController(Stage primaryStage,int amountPlayers) {
 		this.board = Board.getInstance(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		generateBoard(fields[2][2],true);		
+		viewController = new ViewController(primaryStage,board); //DEBUG ONLY!!
+		init();		
+	}
+
+	@Override
+	public void init() { 
+
+		generateBoard(fields[2][2],true);	
 		/*
 		  for (int i = 1; i <= amountPlayers;i++){
 		      networkController.initClients(i,board)...
 		  end
 		 */
 		setPlayerState(1,PlayerState.PLAYING); // player 1 begins
-		//generateBoard(fields[-2][-2], true);
-		// TODO Auto-generated method stub
 
 	}
 
@@ -62,7 +61,7 @@ public class GameController implements GameControllerInterface {
 	 * @param randomDesert
 	 */
 	private void generateBoard(Field initialField, boolean randomDesert) {
-		ArrayList<Field> fields = board.getSpiral(1); //getSpiral(initialField);
+		ArrayList<Field> fields = board.getAllFields(); //spiral implementieren
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
 		int currNum;
 		if (randomDesert) {
@@ -81,6 +80,8 @@ public class GameController implements GameControllerInterface {
 				if (currNum != 5) {
 					fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
 					diceInd++;
+				} else {
+					fields.get(i).setDiceIndex(0);
 				}
 			}
 		} else {
@@ -98,6 +99,12 @@ public class GameController implements GameControllerInterface {
 				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[currNum]);
 			}
 			fields.get(fields.size()-1).setResourceType(ResourceType.NOTHING); //inner field = desert;
+			fields.get(fields.size()-1).setDiceIndex(0);
+		}
+		int[] viewCoord = new int[2];
+		for (int i = 0;i <fields.size();i++){
+			viewCoord = board.getFieldCoordinates(fields.get(i));
+			viewController.setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(), fields.get(i).getDiceIndex());
 		}
 	}
 
@@ -290,7 +297,7 @@ public class GameController implements GameControllerInterface {
 	public void setPlayerState(int playerId,PlayerState state) {
 		switch(state){
 		case TRADING: //set all other players to offering
-		for (int i = 1; i <= playerModels.length;i++){
+		for (int i = 1; i < playerModels.length;i++){
 			if (i == playerId){
 				playerModels[i].setPlayerState(state);
 			} else{
@@ -298,7 +305,7 @@ public class GameController implements GameControllerInterface {
 			}
 		}
 		case PLAYING: //set all other players waiting
-			for (int i = 1; i <= playerModels.length;i++){
+			for (int i = 1; i < playerModels.length;i++){
 				if (i == playerId){
 					playerModels[i].setPlayerState(state);
 				} else{

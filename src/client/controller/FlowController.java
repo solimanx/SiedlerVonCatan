@@ -21,8 +21,8 @@ public class FlowController implements FlowControllerInterface {
 	int ownPlayerId;
 
 	@Override
-	public void init(int ownPlayerId) {
-		this.board = Board.getInstance();
+	public void init(int ownPlayerId,int amountOfPlayers) {
+		this.board = Board.getInstance(amountOfPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.ownPlayerId = ownPlayerId;
