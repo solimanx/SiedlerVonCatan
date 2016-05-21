@@ -1,20 +1,19 @@
 package server.controller;
 
 import enums.PlayerState;
-import model.PlayerModel;
 
 public interface GameControllerInterface {
 	/**
 	 * inserts Fields with DiceIndex and ResourceType
 	 * sets Bandit
 	 */
-	public void init();
+	public void init(int amountOfPlayers);
 	/**
 	 * @param state
 	 * sets Player State
 	 * notifies GUI 
 	 */
-	public void setPlayerState(PlayerState state); //player	
+	public void setPlayerState(int playerId, PlayerState state); //player	
 	/**
 	 * If Player hasLost/hasWon notify GUI...
 	 */

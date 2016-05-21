@@ -18,21 +18,30 @@ public class FlowController implements FlowControllerInterface {
 	Board board;
 	GameLogic gameLogic;
 	PlayerModel[] playerModels;
-	PlayerState playerState;
+	int ownPlayerId;
 
 	@Override
-	public void init() {
+	public void init(int ownPlayerId) {
 		this.board = Board.getInstance();
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
+		this.ownPlayerId = ownPlayerId;
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * sets player state in own client model; 
+	 * is called by network controller after server has changed a player state
+	 * @param state
+	 */
 	@Override
-	public void setPlayerState(PlayerState state) {
-		// TODO Auto-generated method stub
-		
+	public void setPlayerState(int playerId, PlayerState state) {
+		playerModels[playerId].setPlayerState(state);
+		if (playerId == ownPlayerId){
+		   //update GUI
+		   //viewController.setPlayerState(state);			
+		}		
 	}
 
 	@Override
@@ -42,25 +51,25 @@ public class FlowController implements FlowControllerInterface {
 	}
 
 	@Override
-	public void buildVillage(int x, int y,int dir, int playerId) {
-		if (gameLogic.checkBuildVillage(x, y, dir, playerId)){
-			//networkController.buildVillage(x, y, dir, player);
+	public void buildVillage(int x, int y,int dir) {
+		if (gameLogic.checkBuildVillage(x, y, dir, ownPlayerId)){
+			//networkController.buildVillage(x, y, dir, ownPlayerId);
 		}
 		
 	}
 
 	@Override
-	public void buildStreet(int x, int y,int dir,int playerId) {
-		if (gameLogic.checkBuildStreet(x, y, dir, playerId)){
-			//networkController.buildStreet(x, y, dir, player);
+	public void buildStreet(int x, int y,int dir) {
+		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)){
+			//networkController.buildStreet(x, y, dir, ownPlayerId);
 		}		
 		
 	}
 
 	@Override
-	public void buildCity(int x, int y,int dir,int playerId) {
-		if (gameLogic.checkBuildCity(x, y, dir, playerId)){
-			//networkController.buildCity(x, y, dir, player);
+	public void buildCity(int x, int y,int dir) {
+		if (gameLogic.checkBuildCity(x, y, dir, ownPlayerId)){
+			//networkController.buildCity(x, y, dir, ownPlayerId);
 		}
 	}
 
