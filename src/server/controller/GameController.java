@@ -30,16 +30,23 @@ public class GameController implements GameControllerInterface {
 	ViewController viewController;
 
 	public GameController(Stage primaryStage) {
-		init();
-		viewController = new ViewController(primaryStage, board);
+		init(1); // one player only
+		viewController = new ViewController(primaryStage,board); //DEBUG ONLY!!
 	}
 
 	@Override
-	public void init() {
-		this.board = Board.getInstance();
+	public void init(int amountPlayers) { //evtl. int amountPlayers
+		this.board = Board.getInstance(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
+		generateBoard(fields[-2][-2],true);		
+		/*
+		  for (int i = 1; i <= amountPlayers;i++){
+		      networkController.initClients(i,board)...
+		  end
+		 */
+		setPlayerState(1,PlayerState.PLAYING); // player 1 begins
 		//generateBoard(fields[-2][-2], true);
 		// TODO Auto-generated method stub
 
@@ -271,10 +278,43 @@ public class GameController implements GameControllerInterface {
 
 	}
 
+	/**
+	 * basic method for switching the player states 
+	 * updates all clients via networkController
+	 * @param playerId
+	 * @param state
+	 */
 	@Override
-	public void setPlayerState(PlayerState state) {
-		// TODO Auto-generated method stub
+	public void setPlayerState(int playerId,PlayerState state) {
+		switch(state){
+		case TRADING: //set all other players to offering
+		for (int i = 1; i <= playerModels.length;i++){
+			if (i == playerId){
+				playerModels[i].setPlayerState(state);
+			} else{
+				playerModels[i].setPlayerState(PlayerState.OFFERING);
+			}
+		}
+		case PLAYING: //set all other players waiting
+			for (int i = 1; i <= playerModels.length;i++){
+				if (i == playerId){
+					playerModels[i].setPlayerState(state);
+				} else{
+					playerModels[i].setPlayerState(PlayerState.WAITING);
+				}
+			}
+		default: //else set only player state of playerId
+			playerModels[playerId].setPlayerState(state);
+		}
 
+		//DEBUG ONLY!
+		//viewController.setPlayerState(playerId);
+		/*
+		 for (int i = 1;i < playerModels.length;i++){
+		     networkController.setPlayerState(i,playerModels[i].getPlayerState());
+		 }    
+		 */
+		
 	}
 
 	@Override
