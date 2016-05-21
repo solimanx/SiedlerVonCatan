@@ -17,7 +17,7 @@ public class Board implements BoardInterface {
 	private Field bandit;
 	// TODO private DevDeck devDeck;
 
-	public Board() {
+	public Board(int amountPlayers) {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
 		initializeFields(fields);
@@ -25,15 +25,23 @@ public class Board implements BoardInterface {
 		initializeCorners(corners);
 		edges = new Edge[r][r][3];
 		initializeEdges(edges);
+		players = new PlayerModel[amountPlayers+1]; // 0 = noPlayer; 1 = player1...
+		initializePlayers(players);
 		// TODO players
 		// TODO bandit
 	}
 
-	public static synchronized Board getInstance() {
+	public static synchronized Board getInstance(int amountPlayers) {
 		if (Board.instance == null) {
-			Board.instance = new Board();
+			Board.instance = new Board(amountPlayers);
 		}
 		return Board.instance;
+	}
+	
+	private void initializePlayers(PlayerModel[] playerModels){ //keine Ahnung ob das richtig ist so; wenn nicht einfach überschreiben
+		for (int i = 1;i < playerModels.length;i++){
+			playerModels[i] = new PlayerModel(i);
+		}
 	}
 
 	/**

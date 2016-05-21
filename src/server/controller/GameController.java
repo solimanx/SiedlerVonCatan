@@ -40,7 +40,7 @@ public class GameController implements GameControllerInterface {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		generateBoard(fields[-2][-2],true);		
+		generateBoard(fields[2][2],true);		
 		/*
 		  for (int i = 1; i <= amountPlayers;i++){
 		      networkController.initClients(i,board)...
@@ -62,12 +62,12 @@ public class GameController implements GameControllerInterface {
 	 * @param randomDesert
 	 */
 	private void generateBoard(Field initialField, boolean randomDesert) {
-		Field[] fields = getSpiral(initialField);
+		ArrayList<Field> fields = board.getSpiral(1); //getSpiral(initialField);
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
 		int currNum;
 		if (randomDesert) {
 			int diceInd = 0;
-			for (int i = 0; i < fields.length; i++) {
+			for (int i = 0; i < fields.size(); i++) {
 				Random r = new Random();
 				boolean notFound = true;
 				do {
@@ -77,14 +77,14 @@ public class GameController implements GameControllerInterface {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				fields[i].setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
 				if (currNum != 5) {
-					fields[i].setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
+					fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
 					diceInd++;
 				}
 			}
 		} else {
-			for (int i = 0; i < fields.length - 1; i++) {
+			for (int i = 0; i < fields.size() - 1; i++) {
 				Random r = new Random();
 				boolean notFound = true;
 				do {
@@ -94,10 +94,10 @@ public class GameController implements GameControllerInterface {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				fields[i].setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
-				fields[i].setDiceIndex(DefaultSettings.DICE_NUMBERS[currNum]);
+				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[currNum]);
 			}
-			fields[18].setResourceType(ResourceType.NOTHING);
+			fields.get(fields.size()-1).setResourceType(ResourceType.NOTHING); //inner field = desert;
 		}
 	}
 
@@ -122,9 +122,11 @@ public class GameController implements GameControllerInterface {
 		enums.CornerStatus status;
 		enums.ResourceType resType;
 		Field bandit = board.getBandit();
+		int[] fieldCoordinates = new int[2];
 		for (Field p : correspondingFields) {
 			if (p != bandit) {
-				neighborCorners = board.getSurroundingCorners(p);
+				fieldCoordinates = board.getFieldCoordinates(p);
+				neighborCorners = board.getSurroundingCorners(fieldCoordinates[0],fieldCoordinates[1]);
 				resType = p.getResourceType();
 				for (Corner o : neighborCorners) {
 					status = o.getStatus();
@@ -192,7 +194,7 @@ public class GameController implements GameControllerInterface {
 			int[] costs = DefaultSettings.CITY_BUILD_COST;
 			subFromPlayersResources(playerId, costs);
 
-			viewController.setCorner(x, y, dir, playerId, enums.CornerStatus.CITY);
+			viewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
 		}
 
 	}
@@ -215,7 +217,7 @@ public class GameController implements GameControllerInterface {
 			c.setOwnedByPlayer(playerModels[playerId]);
 			playerModels[playerId].decreaseAmountVillages();
 
-			viewController.setCorner(x, y, dir, playerId, enums.CornerStatus.VILLAGE);
+			viewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
 		}
 	}
 
