@@ -5,24 +5,19 @@ import java.util.ArrayList;
 import com.sun.javafx.geom.Shape;
 
 import enums.ResourceType;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import model.Board;
-import model.Corner;
-import model.Edge;
 import model.Field;
 
 public class View implements ViewInterface {
 
 	private Stage primaryStage;
 	private BorderPane rootPane;
-	private Board board;
 	private Pane centerPane;
 
 	// jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
@@ -129,6 +124,7 @@ public class View implements ViewInterface {
 	public Polygon drawHexagon(double[] points) {
 		Polygon hexagon = new Polygon(points);
 		hexagon.setFill(Color.LIGHTSKYBLUE);
+		hexagon.setStroke(Color.LIGHTGRAY);;
 		return hexagon;
 	}
 
@@ -180,14 +176,17 @@ public class View implements ViewInterface {
 
 	@Override
 	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
+		
 
 	}
 
 	@Override
 	public void setVillage(int u, int v, int dir, Color playerColor) {
-		Polygon village = corners[u][v][dir];
+		Polygon village = corners[u+3][v+3][dir];
 		village.setFill(playerColor);
 		village.setOpacity(1.0);
+		
+		System.out.println("Village set on " + u +","+v+ " Direction: " +dir );
 	}
 
 	@Override
@@ -198,7 +197,7 @@ public class View implements ViewInterface {
 
 	@Override
 	public void setCity(int u, int v, int dir, Color playerColor) {
-		Polygon city = drawCity(cornerCoordinates[u][v][dir]);
+		Polygon city = drawCity(cornerCoordinates[u+3][v+3][dir]);
 		city.setFill(playerColor);
 		city.setVisible(true);
 		centerPane.getChildren().add(city);
