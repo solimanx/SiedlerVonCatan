@@ -1,11 +1,14 @@
 package client.controller;
 
 import client.view.View;
+import enums.CornerStatus;
+import enums.ResourceType;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import model.Board;
 
-public class ViewController {
+public class ViewController implements ViewControllerInterface {
 
 	private View view;
 	private Board board;
@@ -21,10 +24,50 @@ public class ViewController {
 	}
 
 	private void init() {
+		view.button.setText("toggle village 0,-1");
 		view.button.setOnAction(e -> {
-			Polygon hexagon = view.figures.get(0);
+			Polygon hexagon = view.corners[3][2][0];
 			hexagon.setVisible(!hexagon.isVisible());
 		});
+		
+	}
+
+	@Override
+	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
+		view.setField(u,v,resourceType,diceIndex);
+		
+	}
+
+	@Override
+	public void setCorner(int u, int v, int dir, CornerStatus cornerStatus, int playerID) {
+		Color playerColor = getPlayerColor(playerID);
+		
+		switch (cornerStatus) {
+		case VILLAGE:
+			view.setVillage(u,v,dir,playerColor);
+			break;
+		case CITY:
+			view.setCity(u,v,dir,playerColor);
+		default:
+			break;
+		}
+		
+	}
+
+	private Color getPlayerColor(int playerID) {
+		// TODO Auto-generated method stub
+		return Color.BLUEVIOLET;
+	}
+
+	@Override
+	public void setStreet(int u, int v, int dir, int playerID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setBandid(int u, int v) {
+		// TODO Auto-generated method stub
 		
 	}
 

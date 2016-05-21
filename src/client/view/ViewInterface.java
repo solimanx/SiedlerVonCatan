@@ -1,5 +1,9 @@
 package client.view;
 
+import com.sun.javafx.geom.Shape;
+
+import enums.ResourceType;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import model.Corner;
 import model.Edge;
@@ -14,7 +18,7 @@ public interface ViewInterface {
 
 	public Polygon drawHexagon(double[] points);
 
-	public void drawChips();
+	public Shape drawChips(double[] center, int diceIndex);
 	
 	public int convertFromHexToWorld(int x);
 	
@@ -22,30 +26,30 @@ public interface ViewInterface {
 
 	public Polygon drawVillage(double[] center);
 
-	public void drawStreet();
+	public Polygon drawStreet();
 
-	public void drawCity();
+	public Polygon drawCity(double[] center);
 
 	public void drawDices();
 
-	public void drawBandit();
+	public Polygon drawBandit();
 
 	/**
 	 * @param fields
 	 *            TODO: aus jedem Field den RessourceType holen und entsprechend
 	 *            zeichnen
 	 */
-	public void fillFields(Field[] fields);
+	public void setField(int u, int v, ResourceType resourceType, int diceIndex);
 
-	public void setVillage(Corner corner);
+	public void setVillage(int u, int v, int dir, Color playerColor);
 
-	public void setStreet(Edge edge);
+	public void setStreet(int u, int v, int dir, Color playerColor);
 
 	/**
 	 * @param corner
 	 *            TODO: vorher village hier auf der corner löschen
 	 */
-	public void setCity(Corner corner);
+	public void setCity(int u, int v, int dir, Color playerColor);
 	
 	/**
 	 * @param field
