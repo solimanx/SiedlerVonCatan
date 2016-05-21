@@ -682,7 +682,7 @@ public class Board implements BoardInterface {
 						coord[0] = getFieldCoordinates(nextField)[0];
 						coord[1] = getFieldCoordinates(nextField)[1];
 						nextField = getNextField(coord[0],coord[1], m);
-						System.out.println(result.get(result.size()-1).getFieldID());
+						//System.out.println(result.get(result.size()-1).getFieldID());
 					}
 				}
 			}
@@ -726,6 +726,20 @@ public class Board implements BoardInterface {
 		default: return null;
 		}
 	}
+	
+	
+	public ArrayList<Field> getAllFields(){
+		ArrayList<Field> result = new ArrayList<Field>();
+		for(int i = 0; i < fields.length; i++){
+			for(int j = 0; j < fields[i].length; j++){
+				if(fields[i][j].getFieldID() != null){
+					result.add(fields[i][j]);
+				}
+			}
+		}
+		return result;
+	}
+	
 
 	/**
 	 * Converts Axial (x,y) to Cube (x,y,z)
