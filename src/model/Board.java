@@ -732,8 +732,10 @@ public class Board implements BoardInterface {
 		ArrayList<Field> result = new ArrayList<Field>();
 		for(int i = 0; i < fields.length; i++){
 			for(int j = 0; j < fields[i].length; j++){
-				if(fields[i][j].getFieldID() != null){
-					result.add(fields[i][j]);
+				if(fields[i][j] != null){
+					if(fields[i][j].getFieldID() != null){
+						result.add(fields[i][j]);
+					}
 				}
 			}
 		}
