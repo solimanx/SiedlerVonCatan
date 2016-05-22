@@ -271,7 +271,7 @@ public class View implements ViewInterface {
 
 	@Override
 	public Circle drawBandit() {
-		Circle bandit = new Circle(15.0);
+		Circle bandit = new Circle(25.0);
 		bandit.setFill(Color.BLACK);
 		bandit.setCenterX(windowCenter[0]);
 		bandit.setCenterY(windowCenter[1]);
@@ -307,6 +307,7 @@ public class View implements ViewInterface {
 	public void setBandit(int u, int v) {
 		bandit.setCenterX(fieldCoordinates[u+3][v+3][0]);
 		bandit.setCenterY(fieldCoordinates[u+3][v+3][1]);
+		bandit.setOpacity(1.0);
 		// TODO Auto-generated method stub
 
 	}
