@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
@@ -179,8 +180,14 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public Polygon drawStreet() {
-		return null;
+	public Polygon drawStreet(double [] center) {
+		Rectangle street = new Rectangle();
+		street.setX(center[0]);
+		street.setY(center[1]);
+		street.setWidth(radius);
+		street.setHeight(10);
+		
+	    return street;
 	}
 
 	@Override
