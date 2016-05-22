@@ -15,26 +15,20 @@ import javafx.stage.Stage;
 import model.Board;
 import model.Field;
 
-public class View {
+public class View implements ViewInterface {
 
 	private Stage primaryStage;
-
-	private Pane centerPane;
 	private BorderPane rootPane;
-	private Board board;
+	private Pane centerPane;
 
 	// jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
 	// für Edge 2 Koordinaten (4 Punkte), weil Anfangs- und Endpunkt
 	public double[][][] fieldCoordinates = new double[7][7][2]; // [6][6][2]
 	public double[][][][] edgeCoordinates = new double[7][7][3][4]; // [6][6][3][4]
 	public double[][][][] cornerCoordinates = new double[7][7][2][2]; // [6][6][2][2]
-
 	public Polygon[][][] corners = new Polygon[7][7][2];
-	public Polygon[][] fields = new Polygon[7][7];
-	public ArrayList<Polygon> figures = new ArrayList<Polygon>(1);
 
 	// Constant values for calculations
-
 	public static double radius = 50.0;
 	public static double[] windowCenter = new double[2]; // [2]
 	public static double sin60 = Math.sqrt(3) / 2;
@@ -43,12 +37,9 @@ public class View {
 
 	// Items on the Board
 	public Button button;
+	public ArrayList<Polygon> figures = new ArrayList<Polygon>(1);
 	public Polygon testHex;
 
-	/**
-	 * @param board
-	 * @param stage
-	 */
 	public View(Board board, Stage stage) {
 		this.primaryStage = stage;
 		try {
@@ -64,46 +55,47 @@ public class View {
 		initialize();
 	}
 
-	private boolean initialize() {
+	@Override
+	public boolean initialize() {
 		windowCenter[0] = primaryStage.getWidth() / 2;
 		windowCenter[1] = primaryStage.getHeight() / 2;
 		calculateFieldCenters(windowCenter);
 		calculateCornerCenters();
 
-		initBoard();
+		for (int i = -3; i <= 3; i++) {
+			for (int j = -3; j <= 3; j++) {
+				if (fieldCoordinates[i + 3][j + 3][0] > 0) {
+					Polygon hexagon = drawHexagon(
+							createHexagon(fieldCoordinates[i + 3][j + 3][0], fieldCoordinates[i + 3][j + 3][1]));
+					hexagon.setVisible(true);
+					figures.add(0, hexagon);
+					if (i == 0 && j == -2) {
+						testHex = hexagon;
+					}
+					for (int k = 0; k < 2; k++) {
+						if (cornerCoordinates[i + 3][j + 3][k][0] > 0) {
+							Polygon village = drawVillage(cornerCoordinates[i + 3][j + 3][k]);
+							// set event listener
+							village.setVisible(true);
+							corners[i + 3][j + 3][k] = village;
+							figures.add(village);
+						}
+					}
+				}
+			}
+		}
 
 		button = new Button("Do Something!");
-		button.setOpacity(0.0);
+		button.setOpacity(1.0);
 		rootPane.setTop(button);
 
 		centerPane = new Pane();
 		centerPane.getChildren().addAll(0, figures);
 
-		centerPane.getChildren().add(drawVillage(windowCenter));
-
 		rootPane.setCenter(centerPane);
 
+		// TODO getFields
 		return true;
-	}
-
-	private void initBoard() {
-		for (int i = 0; i < fieldCoordinates.length; i++) {
-			for (int j = 0; j < fieldCoordinates.length; j++) {
-				if (fieldCoordinates[i][j][0] > 0) {
-					Polygon hexagon = drawHexagon(createHexagon(fieldCoordinates[i][j][0], fieldCoordinates[i][j][1]));
-					hexagon.setVisible(true);
-					fields[i][j] = hexagon;
-					figures.add(0, hexagon);
-					for (int k = 0; k < 2; k++) {
-						Polygon village = drawVillage(cornerCoordinates[i][j][k]);
-						// set event listener
-						village.setVisible(true);
-						corners[i][j][k] = village;
-						figures.add(village);
-					}
-				}
-			}
-		}
 	}
 
 	/**
@@ -111,6 +103,7 @@ public class View {
 	 * @return double array of coordinates of 6 Points (12 double values)
 	 *         calculates coordinates of Hexagon from given center coordinates
 	 */
+	@Override
 	public double[] createHexagon(double x, double y) {
 		double[] points = new double[12];
 		int j = 1;
@@ -128,14 +121,13 @@ public class View {
 	 * @param points
 	 * @return Polygon
 	 */
+	@Override
 	public Polygon drawHexagon(double[] points) {
 		Polygon hexagon = new Polygon(points);
 		hexagon.setFill(Color.LIGHTSKYBLUE);
-		hexagon.setStroke(Color.LIGHTGRAY);
-		;
+		hexagon.setStroke(Color.LIGHTGRAY);;
 		return hexagon;
 	}
-
 
 	/**
 	 * draws a Circle with diceIndex
@@ -160,6 +152,7 @@ public class View {
 	 * @param center
 	 * @return Polygon
 	 */
+	@Override
 	public Polygon drawVillage(double[] center) {
 		Polygon village = new Polygon(center[0], center[1] - 18, center[0] + 10, center[1] - 10, center[0] + 10,
 				center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10, center[1] - 10);
@@ -167,10 +160,12 @@ public class View {
 		return village;
 	}
 
+	@Override
 	public Polygon drawStreet() {
 		return null;
 	}
 
+	@Override
 	public Polygon drawCity(double[] center) {
 		Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
 				center[1] - 20, center[0] + 10, center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10,
@@ -178,40 +173,48 @@ public class View {
 		return city;
 	}
 
+	@Override
 	public void drawDices() {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public Polygon drawBandit() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
+		
 
 	}
 
+	@Override
 	public void setVillage(int u, int v, int dir, Color playerColor) {
-		Polygon village = corners[u + 3][v + 3][dir];
+		Polygon village = corners[u+3][v+3][dir];
 		village.setFill(playerColor);
 		village.setOpacity(1.0);
-
-		System.out.println("Village set on " + u + "," + v + " Direction: " + dir);
+		
+		System.out.println("Village set on " + u +","+v+ " Direction: " +dir );
 	}
 
+	@Override
 	public void setStreet(int u, int v, int dir, Color playerColor) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public void setCity(int u, int v, int dir, Color playerColor) {
-		Polygon city = drawCity(cornerCoordinates[u + 3][v + 3][dir]);
+		Polygon city = drawCity(cornerCoordinates[u+3][v+3][dir]);
 		city.setFill(playerColor);
 		city.setVisible(true);
 		centerPane.getChildren().add(city);
 	}
 
+	@Override
 	public void setBandit(Field field) {
 		// TODO Auto-generated method stub
 
@@ -268,33 +271,33 @@ public class View {
 	 */
 	private void filterUnusedCorners() {
 
-		// row 0
-		cornerCoordinates[3][0][0][0] = 0;
-		cornerCoordinates[4][0][0][0] = 0;
-		cornerCoordinates[5][0][0][0] = 0;
-		cornerCoordinates[6][0][0][0] = 0;
-		// row 1
-		cornerCoordinates[2][1][0][0] = 0;
-		cornerCoordinates[6][1][0][0] = 0;
-		// row 2
-		cornerCoordinates[1][2][0][0] = 0;
-		cornerCoordinates[6][2][0][0] = 0;
-		// row 3
-		cornerCoordinates[0][3][0][0] = 0;
-		cornerCoordinates[0][3][1][0] = 0;
-		cornerCoordinates[6][3][0][0] = 0;
-		cornerCoordinates[6][3][1][0] = 0;
-		// row 4
-		cornerCoordinates[0][4][1][0] = 0;
-		cornerCoordinates[5][4][1][0] = 0;
-		// row 5
-		cornerCoordinates[0][5][1][0] = 0;
-		cornerCoordinates[4][5][1][0] = 0;
-		// row 6
-		cornerCoordinates[0][6][1][0] = 0;
-		cornerCoordinates[1][6][1][0] = 0;
-		cornerCoordinates[2][6][1][0] = 0;
-		cornerCoordinates[3][6][1][0] = 0;
+		 // row 0
+		 cornerCoordinates[3][0][0][0] = 0;
+		 cornerCoordinates[4][0][0][0] = 0;
+		 cornerCoordinates[5][0][0][0] = 0;
+		 cornerCoordinates[6][0][0][0] = 0;
+		 // row 1
+		 cornerCoordinates[2][1][0][0] = 0;
+		 cornerCoordinates[6][1][0][0] = 0;
+		 // row 2
+		 cornerCoordinates[1][2][0][0] = 0;
+		 cornerCoordinates[6][2][0][0] = 0;
+		 // row 3
+		 cornerCoordinates[0][3][0][0] = 0;
+		 cornerCoordinates[0][3][1][0] = 0;
+		 cornerCoordinates[6][3][0][0] = 0;
+		 cornerCoordinates[6][3][1][0] = 0;
+		 // row 4
+		 cornerCoordinates[0][4][1][0] = 0;
+		 cornerCoordinates[5][4][1][0] = 0;
+		 // row 5
+		 cornerCoordinates[0][5][1][0] = 0;
+		 cornerCoordinates[4][5][1][0] = 0;
+		 // row 6
+		 cornerCoordinates[0][6][1][0] = 0;
+		 cornerCoordinates[1][6][1][0] = 0;
+		 cornerCoordinates[2][6][1][0] = 0;
+		 cornerCoordinates[3][6][1][0] = 0;
 	}
 
 	private void calculateEdgeCorners() {
@@ -339,10 +342,12 @@ public class View {
 
 	}
 
+	@Override
 	public int convertToHex(int x) {
 		return x - 3;
 	}
 
+	@Override
 	public int convertToRect(int x) {
 		return x + 3;
 	}
@@ -379,6 +384,7 @@ public class View {
 		// corners[i][j][dir].setOnMouseClicked(e -> gc.buildCity());
 	}
 
+	@Override
 	public int convertFromHexToWorld(int x) {
 		// TODO Auto-generated method stub
 		return 0;
