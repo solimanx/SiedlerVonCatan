@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import model.Board;
+import server.controller.GameController;
 
 public class ViewController implements ViewControllerInterface {
 
@@ -16,8 +17,10 @@ public class ViewController implements ViewControllerInterface {
 	private Board board;
 	private HashMap<Integer, Color> playerColors = new HashMap<Integer, Color>(4);
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
+	private GameController gc;
 
-	public ViewController(Stage primaryStage, Board board) {
+	public ViewController(Stage primaryStage, Board board,GameController gc) {
+		this.gc = gc;
 		this.board = board;
 		view = new View(board, primaryStage);
 		init();
@@ -37,12 +40,25 @@ public class ViewController implements ViewControllerInterface {
 		
 		view.button.setText("set village 2,-2,0");
 		view.button.setOnAction(e -> {
-			setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
+			//setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
+			gc.buildVillage(2, -2, 0, 1);
 		});
-		view.button2.setText("set Field -1,-1 to SHEEP");
+		view.button2.setText("set street -1,-1,0");
 		view.button2.setOnAction(e -> {
-			view.setFieldResourceType(-1, -1, fieldColors.get(ResourceType.SHEEP));
+			//setStreet(-1,-1,0,1);
+			gc.buildStreet(-1, -1, 0, 1);
+			//view.setFieldResourceType(-1, -1, fieldColors.get(ResourceType.SHEEP));			
 		});
+		view.button3.setText("set city 0,-2,1");
+		view.button3.setOnAction(e -> {
+			//setCorner(0, -2, 1, CornerStatus.CITY, 1);
+			gc.buildVillage(0, -2, 1, 1);
+		});
+		view.button4.setText("set bandit 2,-2");
+		view.button4.setOnAction(e -> {
+			gc.setBandit(2,-2);
+		});		
+				
 
 	}
 
@@ -75,12 +91,14 @@ public class ViewController implements ViewControllerInterface {
 
 	@Override
 	public void setStreet(int u, int v, int dir, int playerID) {
+		view.setStreet(u, v, dir, getPlayerColor(playerID));
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void setBandid(int u, int v) {
+	public void setBandit(int u, int v) {
+		view.setBandit(board.getFieldAt(u, v));
 		// TODO Auto-generated method stub
 
 	}

@@ -34,7 +34,7 @@ public class GameController implements GameControllerInterface {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		viewController = new ViewController(primaryStage,board); //DEBUG ONLY!!
+		viewController = new ViewController(primaryStage,board,this); //DEBUG ONLY!!
 		init();		
 	}
 
@@ -286,6 +286,7 @@ public class GameController implements GameControllerInterface {
 	public void setBandit(int x, int y) {
 		if (gameLogic.checkSetBandit(x, y)) {
 			board.setBandit(board.getFieldAt(x, y));
+			viewController.setBandit(x, y);
 			// view.setBandit ?
 		}
 

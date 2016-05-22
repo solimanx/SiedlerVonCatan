@@ -31,7 +31,7 @@ public interface ViewControllerInterface {
 	 * @param u
 	 * @param v
 	 */
-	public void setBandid(int u, int v);
+	public void setBandit(int u, int v);
 	
 	
 }
