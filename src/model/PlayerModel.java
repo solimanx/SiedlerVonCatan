@@ -23,6 +23,7 @@ public class PlayerModel {
 	// every Player gets own id (1..4)
 	public PlayerModel(int id){
 		this.id = id;
+		this.resourceCards = new ArrayList<ResourceType>();
 	}
 	
 	public int getId() {		

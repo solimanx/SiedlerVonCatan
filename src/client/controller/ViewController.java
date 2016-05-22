@@ -38,21 +38,21 @@ public class ViewController implements ViewControllerInterface {
 		fieldColors.put(ResourceType.SHEEP, Color.LIGHTGREEN);
 		fieldColors.put(ResourceType.WOOD, Color.FORESTGREEN);
 		
-		view.button.setText("set village 2,-2,0");
+		view.button.setText("build initial village 2,-2,0");
 		view.button.setOnAction(e -> {
 			//setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
-			gc.buildVillage(2, -2, 0, 1);
+			gc.buildInitialVillage(2, -2, 0, 1);
 		});
-		view.button2.setText("set street -1,-1,0");
+		view.button2.setText("build initial street 2,-2,1");
 		view.button2.setOnAction(e -> {
 			//setStreet(-1,-1,0,1);
-			gc.buildStreet(-1, -1, 0, 1);
+			gc.buildInitialStreet(2, -2, 1, 1);
 			//view.setFieldResourceType(-1, -1, fieldColors.get(ResourceType.SHEEP));			
 		});
-		view.button3.setText("set city 0,-2,1");
+		view.button3.setText("build city 2,-2,0");
 		view.button3.setOnAction(e -> {
 			//setCorner(0, -2, 1, CornerStatus.CITY, 1);
-			gc.buildVillage(0, -2, 1, 1);
+			gc.buildCity(2, -2, 0, 1);
 		});
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {

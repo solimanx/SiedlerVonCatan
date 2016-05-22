@@ -47,6 +47,11 @@ public class GameController implements GameControllerInterface {
 		      networkController.initClients(i,board)...
 		  end
 		 */
+		addToPlayersResource(1,ResourceType.WOOD,3); //All DEBUG!!
+		addToPlayersResource(1,ResourceType.CLAY,3);
+		addToPlayersResource(1,ResourceType.ORE,3);
+		addToPlayersResource(1,ResourceType.SHEEP,3);
+		addToPlayersResource(1,ResourceType.CORN,3);
 		setPlayerState(1,PlayerState.PLAYING); // player 1 begins
 
 	}
