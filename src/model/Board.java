@@ -69,7 +69,7 @@ public class Board implements BoardInterface {
 		getFieldAt(0,-2).setFieldID("A");
 		getFieldAt(1,-2).setFieldID("B");
 		getFieldAt(2,-2).setFieldID("C");
-		getFieldAt(-1,1).setFieldID("D");
+		getFieldAt(-1,-1).setFieldID("D");
 		getFieldAt(0,-1).setFieldID("E");
 		getFieldAt(1,-1).setFieldID("F");
 		getFieldAt(2,-1).setFieldID("G");
@@ -85,6 +85,26 @@ public class Board implements BoardInterface {
 		getFieldAt(-2,2).setFieldID("Q");
 		getFieldAt(-1,2).setFieldID("R");
 		getFieldAt(0,2).setFieldID("S");
+		
+		//water
+		getFieldAt(0,-3).setFieldID("a");
+		getFieldAt(1,-3).setFieldID("b");
+		getFieldAt(2,-3).setFieldID("c");
+		getFieldAt(3,-3).setFieldID("d");
+		getFieldAt(-1,-2).setFieldID("e");
+		getFieldAt(3,-2).setFieldID("f");
+		getFieldAt(-2,-1).setFieldID("g");
+		getFieldAt(3,-1).setFieldID("h");
+		getFieldAt(-3,0).setFieldID("i");
+		getFieldAt(3,0).setFieldID("j");
+		getFieldAt(-3,1).setFieldID("k");
+		getFieldAt(2,1).setFieldID("l");
+		getFieldAt(-3,2).setFieldID("m");
+		getFieldAt(1,2).setFieldID("n");
+		getFieldAt(-3,3).setFieldID("o");
+		getFieldAt(-2,3).setFieldID("p");
+		getFieldAt(-1,3).setFieldID("q");
+		getFieldAt(0,3).setFieldID("r");
 
 	}
 
