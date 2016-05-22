@@ -38,7 +38,8 @@ public class ViewController implements ViewControllerInterface {
 
 	@Override
 	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
-		view.setField(u, v, resourceType, diceIndex);
+		//view.setFieldResourceType(u, v, resourceType);
+		//view.setFieldChip(u, v, diceIndex);
 
 	}
 

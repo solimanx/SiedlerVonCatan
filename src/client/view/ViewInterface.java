@@ -9,8 +9,6 @@ import model.Corner;
 import model.Edge;
 import model.Field;
 
-
-
 public interface ViewInterface {
 	public boolean initialize();
 
@@ -19,9 +17,9 @@ public interface ViewInterface {
 	public Polygon drawHexagon(double[] points);
 
 	public Shape drawChips(double[] center, int diceIndex);
-	
+
 	public int convertFromHexToWorld(int x);
-	
+
 	public int convertToRect(int x);
 
 	public Polygon drawVillage(double[] center);
@@ -50,17 +48,13 @@ public interface ViewInterface {
 	 *            TODO: vorher village hier auf der corner löschen
 	 */
 	public void setCity(int u, int v, int dir, Color playerColor);
-	
+
 	/**
 	 * @param field
-	 * TODO: Bandit an alter Position vorher löschen
+	 *            TODO: Bandit an alter Position vorher löschen
 	 */
 	public void setBandit(Field field);
-	
-	
-	
 
 	int convertToHex(int x);
-	
-	
+
 }
