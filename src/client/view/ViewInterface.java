@@ -18,7 +18,7 @@ public interface ViewInterface {
 
 	public void setFieldChip(int u, int v, int diceIndex);
 
-	public int convertFromHexToWorld(int x);
+	
 
 	public int convertToRect(int x);
 
