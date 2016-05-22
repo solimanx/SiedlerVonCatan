@@ -245,9 +245,14 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public Polygon drawBandit() {
-		// TODO Auto-generated method stub
-		return null;
+	public Circle drawBandit() {
+		Circle bandit = new Circle(15.0);
+		bandit.setFill(Color.BLACK);
+		bandit.setCenterX(windowCenter[0]);
+		bandit.setCenterY(windowCenter[1]);
+		
+	
+		return bandit;
 	}
 
 	@Override
@@ -276,12 +281,13 @@ public class View implements ViewInterface {
 
 	@Override
 	public void setBandit(Field field) {
+		
 		// TODO Auto-generated method stub
 
 	}
 
 	/**
-	 * auxilary method calculating center coordinates of every field.
+	 * auxiliary method calculating center coordinates of every field.
 	 * windowsCenter is taken as center point of board
 	 * 
 	 * @param windowCenter
