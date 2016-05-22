@@ -98,7 +98,7 @@ public class ViewController implements ViewControllerInterface {
 
 	@Override
 	public void setBandit(int u, int v) {
-		view.setBandit(board.getFieldAt(u, v));
+		view.setBandit(u, v);
 		// TODO Auto-generated method stub
 
 	}
