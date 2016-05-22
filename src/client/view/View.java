@@ -111,28 +111,28 @@ public class View implements ViewInterface {
 	 * 
 	 */
 	private void initBoard() {
-		for (int i = -3; i <= 3; i++) {
-			for (int j = -3; j <= 3; j++) {
-				if (fieldCoordinates[i + 3][j + 3][0] > 0) {
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (fieldCoordinates[i][j][0] > 0) {
 					Polygon hexagon = drawHexagon(
-							createHexagon(fieldCoordinates[i + 3][j + 3][0], fieldCoordinates[i + 3][j + 3][1]));
+							createHexagon(fieldCoordinates[i][j][0], fieldCoordinates[i][j][1]));
 					hexagon.setVisible(true);
 					figures.add(0, hexagon);
-					fields[i + 3][j + 3] = hexagon;
+					fields[i][j] = hexagon;
 					for (int k = 0; k < 2; k++) {
-						if (cornerCoordinates[i + 3][j + 3][k][0] > 0) {
-							Polygon village = drawVillage(cornerCoordinates[i + 3][j + 3][k]);
+						if (cornerCoordinates[i][j][k][0] > 0) {
+							Polygon village = drawVillage(cornerCoordinates[i][j][k]);
 							// set event listener
 							village.setOpacity(0);
-							corners[i + 3][j + 3][k] = village;
+							corners[i][j][k] = village;
 							figures.add(village);
-							for (int l = 0; l < 3; l++) {
-								Line street = drawStreet(edgeCoordinates[i + 3][j + 3][l]);
-								street.setOpacity(0);
-								streets[i + 3][i + 3][l] = street;
-								figures.add(street);
-							}
 						}
+					}
+					for (int l = 0; l < 3; l++) {
+						Line street = drawStreet(edgeCoordinates[i][j][l]);
+						street.setOpacity(1.0);
+						streets[i][i][l] = street;
+						figures.add(street);
 					}
 				}
 			}
@@ -278,14 +278,16 @@ public class View implements ViewInterface {
 		Polygon village = corners[u + 3][v + 3][dir];
 		village.setFill(playerColor);
 		village.setOpacity(1.0);
-
 		System.out.println("Village set on " + u + "," + v + " Direction: " + dir);
 	}
 
 	@Override
 	public void setStreet(int u, int v, int dir, Color playerColor) {
-		// set opacity
-
+		Line street = streets[u+3][v+3][dir];
+		street.setOpacity(1.0);
+		street.setStroke(playerColor);
+		System.out.println("Street set on " + u + "," + v + " Direction: " + dir);
+		
 	}
 
 	@Override
@@ -390,7 +392,9 @@ public class View implements ViewInterface {
 		double y2;
 		for (int u = 0; u < 7; u++) {
 			for (int v = 0; v < 7; v++) {
-
+				if(u == 3){
+					System.out.println("");
+				}
 				x1 = fieldCoordinates[u][v][0];
 				y1 = fieldCoordinates[u][v][1] - radius;
 				x2 = fieldCoordinates[u][v][0] - halfWidth;
@@ -400,8 +404,8 @@ public class View implements ViewInterface {
 				edgeCoordinates[u][v][0][2] = x2;
 				edgeCoordinates[u][v][0][3] = y2;
 
-				// x1 = fieldCoordinates[u][v][0];
-				// y1 = fieldCoordinates[u][v][1] - radius;
+				x1 = fieldCoordinates[u][v][0];
+				y1 = fieldCoordinates[u][v][1] - radius;
 				x2 = fieldCoordinates[u][v][0] + halfWidth;
 				y2 = fieldCoordinates[u][v][1] - (radius / 2);
 				edgeCoordinates[u][v][1][0] = x1;
