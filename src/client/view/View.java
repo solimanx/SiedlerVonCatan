@@ -180,7 +180,7 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public Polygon drawStreet(double [] center) {
+	public Rectangle drawStreet(double [] center) {
 		Rectangle street = new Rectangle();
 		street.setX(center[0]);
 		street.setY(center[1]);
