@@ -62,15 +62,18 @@ public class GameController implements GameControllerInterface {
 	 */
 	private void generateBoard(Field initialField, boolean randomDesert) {
 		ArrayList<Field> fields = board.getAllFields(); //spiral implementieren
+		System.out.println("Size" +fields.size());
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
 		int currNum;
 		if (randomDesert) {
 			int diceInd = 0;
 			for (int i = 0; i < fields.size(); i++) {
+
 				Random r = new Random();
 				boolean notFound = true;
 				do {
-					currNum = r.nextInt(5); // desert allowed
+					currNum = r.nextInt(6); // desert allowed
+					System.out.println(currNum);
 					if (cards[currNum] > 0) {
 						notFound = false;
 					}
@@ -105,6 +108,7 @@ public class GameController implements GameControllerInterface {
 		for (int i = 0;i <fields.size();i++){
 			viewCoord = board.getFieldCoordinates(fields.get(i));
 			viewController.setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(), fields.get(i).getDiceIndex());
+			System.out.println(i+" set field "+ viewCoord[0] + "  " + viewCoord[1]);
 		}
 	}
 
