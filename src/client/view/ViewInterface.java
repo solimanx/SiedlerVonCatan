@@ -4,7 +4,9 @@ import com.sun.javafx.geom.Shape;
 
 import enums.ResourceType;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import model.Corner;
 import model.Edge;
 import model.Field;
@@ -24,7 +26,7 @@ public interface ViewInterface {
 
 	public Polygon drawVillage(double[] center);
 
-	public Polygon drawStreet();
+	public Line drawStreet(double[] center);
 
 	public Polygon drawCity(double[] center);
 
