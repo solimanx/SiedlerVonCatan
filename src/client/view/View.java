@@ -42,6 +42,7 @@ public class View implements ViewInterface {
 	public Polygon[][] fields = new Polygon[7][7];
 	public Polygon[][][] corners = new Polygon[7][7][2];
 	public Line[][][] streets = new Line[7][7][3];
+	public Circle bandit;
 
 	// Constant values for calculations
 	public static double radius = 50.0;
@@ -130,13 +131,17 @@ public class View implements ViewInterface {
 					}
 					for (int l = 0; l < 3; l++) {
 						Line street = drawStreet(edgeCoordinates[i][j][l]);
-						street.setOpacity(1.0);
-						streets[i][i][l] = street;
+						street.setOpacity(0);
+						streets[i][j][l] = street;
 						figures.add(street);
 					}
 				}
 			}
 		}
+		bandit = drawBandit();
+		bandit.setOpacity(0);
+		bandit.toFront();
+		figures.add(bandit);
 	}
 
 	/**
@@ -265,12 +270,12 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public Polygon drawBandit() {
+	public Circle drawBandit() {
 		Circle bandit = new Circle(15.0);
 		bandit.setFill(Color.BLACK);
 		bandit.setCenterX(windowCenter[0]);
 		bandit.setCenterY(windowCenter[1]);
-		return null;
+		return bandit;
 	}
 
 	@Override
@@ -299,8 +304,9 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public void setBandit(Field field) {
-
+	public void setBandit(int u, int v) {
+		bandit.setCenterX(fieldCoordinates[u+3][v+3][0]);
+		bandit.setCenterY(fieldCoordinates[u+3][v+3][1]);
 		// TODO Auto-generated method stub
 
 	}

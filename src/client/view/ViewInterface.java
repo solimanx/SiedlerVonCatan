@@ -4,6 +4,7 @@ import com.sun.javafx.geom.Shape;
 
 import enums.ResourceType;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -32,7 +33,7 @@ public interface ViewInterface {
 
 	public void drawDices();
 
-	public Polygon drawBandit();
+	public Circle drawBandit();
 
 	public void setFieldResourceType(int u, int v, Color color);
 
@@ -50,7 +51,7 @@ public interface ViewInterface {
 	 * @param field
 	 *            TODO: Bandit an alter Position vorher löschen
 	 */
-	public void setBandit(Field field);
+	public void setBandit(int u, int v);
 
 	int convertToHex(int x);
 
