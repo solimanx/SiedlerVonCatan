@@ -221,7 +221,8 @@ public class View implements ViewInterface {
 
 	@Override
 	public void setStreet(int u, int v, int dir, Color playerColor) {
-		// TODO Auto-generated method stub
+		Rectangle street = drawStreet(edgeCoordinates[u + 3][v + 3][dir]);
+		street.setFill(playerColor);
 
 	}
 
