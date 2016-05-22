@@ -160,8 +160,8 @@ public class View implements ViewInterface {
 		circle.setFill(Color.WHITE);
 		StackPane chip = new StackPane(circle, text);
 		chip.toFront();
-		chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0]-15.0);
-		chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1]-15.0);
+		chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0] - 15.0);
+		chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 15.0);
 		centerPane.getChildren().add(chip);
 	}
 
@@ -180,14 +180,14 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public Rectangle drawStreet(double [] center) {
+	public Rectangle drawStreet(double[] center) {
 		Rectangle street = new Rectangle();
 		street.setX(center[0]);
 		street.setY(center[1]);
 		street.setWidth(radius);
 		street.setHeight(10);
-		
-	    return street;
+
+		return street;
 	}
 
 	@Override
@@ -200,51 +200,48 @@ public class View implements ViewInterface {
 
 	@Override
 	public void drawDices() {
-		Pane dice=new Pane();
-    	
-    	dice.setTranslateX(200);
-    	dice.setTranslateY(200);
-		Box b=new Box(100,100,100);
-    	b.setMaterial(new PhongMaterial(Color.BEIGE));
-    	b.getTransforms().add(new Rotate(10,0,0,0,Rotate.X_AXIS));
-        b.getTransforms().add(new Rotate(10,0,0,0,Rotate.Y_AXIS));
-    	b.getTransforms().add(new Rotate(10,0,0,0,Rotate.Z_AXIS));
-    
-    	dice.getChildren().addAll(b);
-    	
-   	
-    	TranslateTransition t1= new TranslateTransition(Duration.millis(2000),b);
-    	t1.setToX(100);
-    	t1.setCycleCount(2);
-    	t1.setAutoReverse(true);
-    	
-    	RotateTransition r2= new RotateTransition(Duration.millis(2000),b);
-    	r2.setAxis(Rotate.X_AXIS);
-    	r2.setToAngle(45);
-    	r2.setCycleCount(2);
-    	r2.setAutoReverse(true);
-    	r2.setAutoReverse(true);
-    	
-    	
-    	RotateTransition r3= new RotateTransition(Duration.millis(2000),b);
-    	r3.setAxis(Rotate.Y_AXIS);
-    	r3.setToAngle(45);
-    	r3.setCycleCount(2);
-    	r3.setAutoReverse(true);
-    	r3.setAutoReverse(true);
-    	
-    	
-    	RotateTransition r4= new RotateTransition(Duration.millis(2000),b);
-    	r4.setAxis(Rotate.Z_AXIS);
-    	r4.setToAngle(45);
-    	r4.setCycleCount(2);
-    	r4.setAutoReverse(true);
-    	r4.setAutoReverse(true);
-    	
-    	SequentialTransition s= new SequentialTransition ();
-    	s.getChildren().addAll(t1,r2,r3,r4);
-    	s.play();
-    	
+		Pane dice = new Pane();
+
+		dice.setTranslateX(200);
+		dice.setTranslateY(200);
+		Box b = new Box(100, 100, 100);
+		b.setMaterial(new PhongMaterial(Color.BEIGE));
+		b.getTransforms().add(new Rotate(10, 0, 0, 0, Rotate.X_AXIS));
+		b.getTransforms().add(new Rotate(10, 0, 0, 0, Rotate.Y_AXIS));
+		b.getTransforms().add(new Rotate(10, 0, 0, 0, Rotate.Z_AXIS));
+
+		dice.getChildren().addAll(b);
+
+		TranslateTransition t1 = new TranslateTransition(Duration.millis(2000), b);
+		t1.setToX(100);
+		t1.setCycleCount(2);
+		t1.setAutoReverse(true);
+
+		RotateTransition r2 = new RotateTransition(Duration.millis(2000), b);
+		r2.setAxis(Rotate.X_AXIS);
+		r2.setToAngle(45);
+		r2.setCycleCount(2);
+		r2.setAutoReverse(true);
+		r2.setAutoReverse(true);
+
+		RotateTransition r3 = new RotateTransition(Duration.millis(2000), b);
+		r3.setAxis(Rotate.Y_AXIS);
+		r3.setToAngle(45);
+		r3.setCycleCount(2);
+		r3.setAutoReverse(true);
+		r3.setAutoReverse(true);
+
+		RotateTransition r4 = new RotateTransition(Duration.millis(2000), b);
+		r4.setAxis(Rotate.Z_AXIS);
+		r4.setToAngle(45);
+		r4.setCycleCount(2);
+		r4.setAutoReverse(true);
+		r4.setAutoReverse(true);
+
+		SequentialTransition s = new SequentialTransition();
+		s.getChildren().addAll(t1, r2, r3, r4);
+		s.play();
+
 	}
 
 	@Override
@@ -446,8 +443,6 @@ public class View implements ViewInterface {
 	public void afterVillageBuilt(int i, int j, int dir) {
 		// corners[i][j][dir].setOnMouseClicked(e -> gc.buildCity());
 	}
-
-
 
 	public void setFieldResourceType(int u, int v, Color color) {
 		fields[u + 3][v + 3].setFill(color);
