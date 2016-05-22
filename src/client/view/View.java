@@ -2,21 +2,29 @@ package client.view;
 
 import java.util.ArrayList;
 
-import com.sun.javafx.geom.Shape;
-
-import enums.ResourceType;
-import javafx.scene.Group;
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Board;
 import model.Field;
 
@@ -31,8 +39,9 @@ public class View implements ViewInterface {
 	public double[][][] fieldCoordinates = new double[7][7][2]; // [6][6][2]
 	public double[][][][] edgeCoordinates = new double[7][7][3][4]; // [6][6][3][4]
 	public double[][][][] cornerCoordinates = new double[7][7][2][2]; // [6][6][2][2]
-	public Polygon[][][] corners = new Polygon[7][7][2];
 	public Polygon[][] fields = new Polygon[7][7];
+	public Polygon[][][] corners = new Polygon[7][7][2];
+	public Line[][][] streets = new Line[7][7][3];
 
 	// Constant values for calculations
 	public static double radius = 50.0;
@@ -44,7 +53,10 @@ public class View implements ViewInterface {
 	// Items on the Board
 	public Button button;
 	public Button button2;
-	public ArrayList<Polygon> figures = new ArrayList<Polygon>(1);
+	public Button button3;
+	public Button button4;
+
+	public ArrayList<Shape> figures = new ArrayList<Shape>();
 
 	/**
 	 * @param board
@@ -72,12 +84,16 @@ public class View implements ViewInterface {
 
 		calculateFieldCenters(windowCenter);
 		calculateCornerCenters();
+		calculateEdgeCorners();
 		initBoard();
+		// drawDices();
 
 		// Test Buttons
 		button = new Button("Do Something!");
 		button2 = new Button();
-		HBox buttons = new HBox(button, button2);
+		button3 = new Button();
+		button4 = new Button();
+		HBox buttons = new HBox(button, button2, button3, button4);
 		rootPane.setTop(buttons);
 
 		// end Test Buttons
@@ -110,6 +126,12 @@ public class View implements ViewInterface {
 							village.setOpacity(0);
 							corners[i + 3][j + 3][k] = village;
 							figures.add(village);
+							for (int l = 0; l < 3; l++) {
+								Line street = drawStreet(edgeCoordinates[i + 3][j + 3][l]);
+								street.setOpacity(0);
+								streets[i + 3][i + 3][l] = street;
+								figures.add(street);
+							}
 						}
 					}
 				}
@@ -180,12 +202,9 @@ public class View implements ViewInterface {
 	}
 
 	@Override
-	public Rectangle drawStreet(double[] center) {
-		Rectangle street = new Rectangle();
-		street.setX(center[0]);
-		street.setY(center[1]);
-		street.setWidth(radius);
-		street.setHeight(10);
+	public Line drawStreet(double[] coordinates) {
+		Line street = new Line(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
+		street.setStrokeWidth(4.0);
 
 		return street;
 	}
@@ -242,17 +261,16 @@ public class View implements ViewInterface {
 		s.getChildren().addAll(t1, r2, r3, r4);
 		s.play();
 
+		rootPane.getChildren().add(dice);
 	}
 
 	@Override
-	public Circle drawBandit() {
+	public Polygon drawBandit() {
 		Circle bandit = new Circle(15.0);
 		bandit.setFill(Color.BLACK);
 		bandit.setCenterX(windowCenter[0]);
 		bandit.setCenterY(windowCenter[1]);
-		
-	
-		return bandit;
+		return null;
 	}
 
 	@Override
@@ -266,8 +284,7 @@ public class View implements ViewInterface {
 
 	@Override
 	public void setStreet(int u, int v, int dir, Color playerColor) {
-		Rectangle street = drawStreet(edgeCoordinates[u + 3][v + 3][dir]);
-		street.setFill(playerColor);
+		// set opacity
 
 	}
 
@@ -281,7 +298,7 @@ public class View implements ViewInterface {
 
 	@Override
 	public void setBandit(Field field) {
-		
+
 		// TODO Auto-generated method stub
 
 	}
@@ -373,35 +390,34 @@ public class View implements ViewInterface {
 		double y2;
 		for (int u = 0; u < 7; u++) {
 			for (int v = 0; v < 7; v++) {
-				if (Math.abs(u + v - 6) <= 3) {
-					x1 = fieldCoordinates[u][v][0];
-					y1 = fieldCoordinates[u][v][1] + radius;
-					x2 = fieldCoordinates[u][v][0] + halfWidth;
-					y2 = fieldCoordinates[u][v][1] + radius / 2;
-					edgeCoordinates[u][v][0][0] = x1;
-					edgeCoordinates[u][v][0][1] = y1;
-					edgeCoordinates[u][v][0][2] = x2;
-					edgeCoordinates[u][v][0][3] = x2;
 
-					x1 = fieldCoordinates[u][v][0] + halfWidth;
-					y1 = fieldCoordinates[u][v][1] + radius / 2;
-					x2 = fieldCoordinates[u][v][0] + halfWidth;
-					y2 = fieldCoordinates[u][v][1] - radius / 2;
-					edgeCoordinates[u][v][1][0] = x1;
-					edgeCoordinates[u][v][1][1] = y1;
-					edgeCoordinates[u][v][1][2] = x2;
-					edgeCoordinates[u][v][1][3] = y2;
+				x1 = fieldCoordinates[u][v][0];
+				y1 = fieldCoordinates[u][v][1] - radius;
+				x2 = fieldCoordinates[u][v][0] - halfWidth;
+				y2 = fieldCoordinates[u][v][1] - radius / 2;
+				edgeCoordinates[u][v][0][0] = x1;
+				edgeCoordinates[u][v][0][1] = y1;
+				edgeCoordinates[u][v][0][2] = x2;
+				edgeCoordinates[u][v][0][3] = y2;
 
-					x1 = fieldCoordinates[u][v][0] + halfWidth;
-					y1 = fieldCoordinates[u][v][1] - radius / 2;
-					x2 = fieldCoordinates[u][v][0];
-					y2 = fieldCoordinates[u][v][1] - radius;
-					edgeCoordinates[u][v][2][0] = x1;
-					edgeCoordinates[u][v][2][1] = y1;
-					edgeCoordinates[u][v][2][2] = x2;
-					edgeCoordinates[u][v][2][3] = y2;
+				// x1 = fieldCoordinates[u][v][0];
+				// y1 = fieldCoordinates[u][v][1] - radius;
+				x2 = fieldCoordinates[u][v][0] + halfWidth;
+				y2 = fieldCoordinates[u][v][1] - (radius / 2);
+				edgeCoordinates[u][v][1][0] = x1;
+				edgeCoordinates[u][v][1][1] = y1;
+				edgeCoordinates[u][v][1][2] = x2;
+				edgeCoordinates[u][v][1][3] = y2;
 
-				}
+				// x1 = fieldCoordinates[u][v][0];
+				// y1 = fieldCoordinates[u][v][1] - radius;
+				// x2 = fieldCoordinates[u][v][0] - halfWidth;
+				// y2 = fieldCoordinates[u][v][1] - radius / 2;
+				edgeCoordinates[u][v][2][0] = x2;
+				edgeCoordinates[u][v][2][1] = y2;
+				edgeCoordinates[u][v][2][2] = x2;
+				edgeCoordinates[u][v][2][3] = y2 + radius;
+
 			}
 
 		}
