@@ -447,11 +447,7 @@ public class View implements ViewInterface {
 		// corners[i][j][dir].setOnMouseClicked(e -> gc.buildCity());
 	}
 
-	@Override
-	public int convertFromHexToWorld(int x) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	public void setFieldResourceType(int u, int v, Color color) {
 		fields[u + 3][v + 3].setFill(color);
