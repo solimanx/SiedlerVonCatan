@@ -16,7 +16,7 @@ public interface ViewInterface {
 
 	public Polygon drawHexagon(double[] points);
 
-	public Shape drawChips(double[] center, int diceIndex);
+	public void setFieldChip(int u, int v, int diceIndex);
 
 	public int convertFromHexToWorld(int x);
 
@@ -32,12 +32,7 @@ public interface ViewInterface {
 
 	public Polygon drawBandit();
 
-	/**
-	 * @param fields
-	 *            TODO: aus jedem Field den RessourceType holen und entsprechend
-	 *            zeichnen
-	 */
-	public void setField(int u, int v, ResourceType resourceType, int diceIndex);
+	public void setFieldResourceType(int u, int v, Color color);
 
 	public void setVillage(int u, int v, int dir, Color playerColor);
 
