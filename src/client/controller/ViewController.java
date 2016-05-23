@@ -47,12 +47,14 @@ public class ViewController implements ViewControllerInterface {
 		view.button2.setOnAction(e -> {
 			//setStreet(-1,-1,0,1);
 			gc.buildInitialStreet(2, -2, 1, 1);
+			gc.buildStreet(2, -2, 2, 1);
 			//view.setFieldResourceType(-1, -1, fieldColors.get(ResourceType.SHEEP));			
 		});
 		view.button3.setText("build city 2,-2,0");
 		view.button3.setOnAction(e -> {
 			//setCorner(0, -2, 1, CornerStatus.CITY, 1);
 			gc.buildCity(2, -2, 0, 1);
+			gc.buildVillage(2, -1, 0, 1);
 		});
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {

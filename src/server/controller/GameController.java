@@ -174,7 +174,9 @@ public class GameController implements GameControllerInterface {
 			playerModels[playerId].decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
+				if (neighbors[i] != null){
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+				}
 			}
 			int[] costs = DefaultSettings.VILLAGE_BUILD_COST;
 			subFromPlayersResources(playerId, costs);
@@ -232,7 +234,12 @@ public class GameController implements GameControllerInterface {
 			c.setStatus(enums.CornerStatus.VILLAGE);
 			c.setOwnedByPlayer(playerModels[playerId]);
 			playerModels[playerId].decreaseAmountVillages();
-
+			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
+			for (int i = 0; i < neighbors.length; i++) {
+				if (neighbors[i] != null){
+				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+				}
+			}
 			viewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
 		}
 	}
