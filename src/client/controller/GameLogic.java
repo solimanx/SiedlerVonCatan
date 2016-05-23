@@ -211,7 +211,7 @@ public class GameLogic implements GameLogicInterface {
 		if (e != null){  //valid edge
 		if (e.isHasStreet() == false) {
 			Corner[] neighbors = board.getAttachedCorners(x,y,dir);
-			for (int i = 0; i <= neighbors.length; i++) {
+			for (int i = 0; i < neighbors.length; i++) {
 				if (neighbors[i] != null){
 					if (neighbors[i].getOwnedByPlayer() != null){				
 				if (neighbors[i].getOwnedByPlayer().getId() == playerId) {
