@@ -41,7 +41,7 @@ public class GameController implements GameControllerInterface {
 	@Override
 	public void init() { 
 
-		generateBoard(fields[2][2],true);	
+		generateBoard(fields[2][2],false);
 		/*
 		  for (int i = 1; i <= amountPlayers;i++){
 		      networkController.initClients(i,board)...
@@ -96,14 +96,14 @@ public class GameController implements GameControllerInterface {
 				Random r = new Random();
 				boolean notFound = true;
 				do {
-					currNum = r.nextInt(4);
+					currNum = r.nextInt(5);
 					if (cards[currNum] > 0) {
 						notFound = false;
 					}
 				} while (notFound);
 				cards[currNum]--;
 				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
-				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[currNum]);
+				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[i]);
 			}
 			fields.get(fields.size()-1).setResourceType(ResourceType.NOTHING); //inner field = desert;
 			fields.get(fields.size()-1).setDiceIndex(0);
@@ -179,11 +179,8 @@ public class GameController implements GameControllerInterface {
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
-			int[] costs = new int[5];
-			for (int i = 0; i < costs.length; i++) {
-				costs[i] = settings.DefaultSettings.VILLAGE_BUILD_COST[i];
-			}
-			subFromPlayersResources(playerId, costs);
+			
+			subFromPlayersResources(playerId, settings.DefaultSettings.VILLAGE_BUILD_COST);
 
 			viewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
 		}
@@ -197,11 +194,8 @@ public class GameController implements GameControllerInterface {
 			e.setHasStreet(true);
 			e.setOwnedByPlayer(playerModels[playerId]);
 			playerModels[playerId].decreaseAmountStreets();
-			int[] costs = new int[5];
-			for (int i = 0; i < costs.length; i++) {
-				costs[i] = settings.DefaultSettings.STREET_BUILD_COST[i];
-			}
-			subFromPlayersResources(playerId, costs);
+
+			subFromPlayersResources(playerId, settings.DefaultSettings.STREET_BUILD_COST);
 
 			viewController.setStreet(x, y, dir, playerId);
 		}
@@ -216,12 +210,8 @@ public class GameController implements GameControllerInterface {
 			c.setOwnedByPlayer(playerModels[playerId]);
 			playerModels[playerId].increaseAmountVillages();
 			playerModels[playerId].decreaseAmountCities();
-			int[] costs = new int[5];
-			for (int i = 0; i < costs.length; i++) {
-				costs[i] = settings.DefaultSettings.CITY_BUILD_COST[i];
-			}
 
-			subFromPlayersResources(playerId, costs);
+			subFromPlayersResources(playerId, settings.DefaultSettings.CITY_BUILD_COST);
 
 			viewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
 		}
@@ -320,8 +310,8 @@ public class GameController implements GameControllerInterface {
 	public void setBandit(int x, int y) {
 		if (gameLogic.checkSetBandit(x, y)) {
 			board.setBandit(board.getFieldAt(x, y));
-			viewController.setBandit(x, y);
-			// view.setBandit ?
+			
+			viewController.setBandit(x, y); //Debug
 		}
 
 	}
