@@ -78,7 +78,6 @@ public class GameController implements GameControllerInterface {
 				boolean notFound = true;
 				do {
 					currNum = r.nextInt(6); // desert allowed
-					System.out.println(currNum);
 					if (cards[currNum] > 0) {
 						notFound = false;
 					}
@@ -113,7 +112,6 @@ public class GameController implements GameControllerInterface {
 		for (int i = 0;i <fields.size();i++){
 			viewCoord = board.getFieldCoordinates(fields.get(i));
 			viewController.setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(), fields.get(i).getDiceIndex());
-			System.out.println(i+" set field "+ viewCoord[0] + "  " + viewCoord[1]);
 		}
 	}
 

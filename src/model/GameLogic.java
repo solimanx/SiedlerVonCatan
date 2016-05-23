@@ -70,7 +70,6 @@ public class GameLogic implements GameLogicInterface {
 		}
 		int[] resources = getPlayerResources(playerId);
 		for (int i = 0; i < 5; i++) {
-			System.out.println("getResources: resource[i] = "+resources[i]+" defaultCity = "+settings.DefaultSettings.CITY_BUILD_COST[i]);
 			if (resources[i] < settings.DefaultSettings.CITY_BUILD_COST[i]) {
 				System.out.println("not enough resources");
 				return false; // not enough resources
@@ -118,8 +117,6 @@ public class GameLogic implements GameLogicInterface {
 		if (e.isHasStreet() == false) {
 			Edge[] neighbors = board.getLinkedEdges(x,y,dir);
 			for (int i = 0; i < neighbors.length; i++) {
-				System.out.println(neighbors[i]);
-				//System.out.println(neighbors[i].getOwnedByPlayer());
 				if (neighbors[i] != null){
 					if (neighbors[i].getOwnedByPlayer() != null){
 				if (neighbors[i].getOwnedByPlayer().getId() == playerId) {
@@ -156,11 +153,6 @@ public class GameLogic implements GameLogicInterface {
 	 * @return resource Array
 	 */
 	private int[] getPlayerResources(int playerId) {
-		System.out.println("new");
-		ArrayList<ResourceType> resList1 = playerModels[1].getResourceCards();
-		for (int i = 0;i <resList1.size();i++){
-			System.out.println(resList1.get(i));
-		}
 		int[] result = {0,0,0,0,0};
 		ArrayList<ResourceType> resList = playerModels[playerId].getResourceCards();	
 		if (resList == null){
