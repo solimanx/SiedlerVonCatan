@@ -149,9 +149,12 @@ public class GameController implements GameControllerInterface {
 					switch (status) {
 					case VILLAGE:
 						addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 1);
+						break;
 					case CITY:
 						addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 2);
+						break;
 					default:
+						break;
 					}
 				}
 			}
@@ -178,7 +181,10 @@ public class GameController implements GameControllerInterface {
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
-			int[] costs = DefaultSettings.VILLAGE_BUILD_COST;
+			int[] costs = new int[5];
+			for (int i = 0; i < costs.length; i++) {
+				costs[i] = settings.DefaultSettings.VILLAGE_BUILD_COST[i];
+			}
 			subFromPlayersResources(playerId, costs);
 
 			viewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
@@ -193,7 +199,10 @@ public class GameController implements GameControllerInterface {
 			e.setHasStreet(true);
 			e.setOwnedByPlayer(playerModels[playerId]);
 			playerModels[playerId].decreaseAmountStreets();
-			int[] costs = DefaultSettings.STREET_BUILD_COST;
+			int[] costs = new int[5];
+			for (int i = 0; i < costs.length; i++) {
+				costs[i] = settings.DefaultSettings.STREET_BUILD_COST[i];
+			}
 			subFromPlayersResources(playerId, costs);
 
 			viewController.setStreet(x, y, dir, playerId);
@@ -209,7 +218,11 @@ public class GameController implements GameControllerInterface {
 			c.setOwnedByPlayer(playerModels[playerId]);
 			playerModels[playerId].increaseAmountVillages();
 			playerModels[playerId].decreaseAmountCities();
-			int[] costs = DefaultSettings.CITY_BUILD_COST;
+			int[] costs = new int[5];
+			for (int i = 0; i < costs.length; i++) {
+				costs[i] = settings.DefaultSettings.CITY_BUILD_COST[i];
+			}
+
 			subFromPlayersResources(playerId, costs);
 
 			viewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
@@ -252,9 +265,14 @@ public class GameController implements GameControllerInterface {
 		playerModels[playerId].setResourceCards(resourceCards);
 	}
 
-	private void subFromPlayersResources(int playerId, int[] costs) {
+	private void subFromPlayersResources(int playerId, int[] costsparam) {
+		int[] costs = new int[5];
+		for (int i = 0;i<costsparam.length;i++){
+			costs[i] = costsparam[i];
+		}
 		ResourceType currResType;
-		ArrayList<ResourceType> list = playerModels[playerId].getResourceCards();
+		ArrayList<ResourceType> list = new ArrayList<ResourceType>();
+		list = playerModels[playerId].getResourceCards();
 		for (int i = 0; i < costs.length; i++) {
 			for (int j = list.size() - 1; j >= 0; j--) { // umkehren wegen
 															// remove
@@ -266,27 +284,33 @@ public class GameController implements GameControllerInterface {
 						list.remove(j);
 						costs[0]--;
 					}
+					break;
 				case CLAY:
 					if (costs[1] > 0) {
 						list.remove(j);
 						costs[1]--;
 					}
+					break;
 				case ORE:
 					if (costs[2] > 0) {
 						list.remove(j);
 						costs[2]--;
 					}
+					break;
 				case SHEEP:
 					if (costs[3] > 0) {
 						list.remove(j);
 						costs[3]--;
 					}
+					break;
 				case CORN:
 					if (costs[4] > 0) {
 						list.remove(j);
 						costs[4]--;
 					}
+					break;
 				default:
+					break;
 				}
 			}
 

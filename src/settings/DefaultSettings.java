@@ -20,9 +20,9 @@ public final class DefaultSettings {
     // Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
     public final static int[] VILLAGE_BUILD_COST = { 1, 1, 0, 1, 1 };
     // TODO Fix this
-    public final static int[] STREET_BUILD_COST = { 0, 0, 0, 0, 0 };
+    public final static int[] STREET_BUILD_COST = { 1, 1, 0, 0, 0 };
     // TODO Fix this
-    public final static int[] CITY_BUILD_COST = { 0, 0, 0, 0, 0 };
+    public final static int[] CITY_BUILD_COST = { 0, 0, 3, 0, 2 };
     // TODO Fix this
     public final static int[] DEVCARD_BUILD_COST = { 0, 0, 0, 0, 0 };
     // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN, NOTHING (desert)}

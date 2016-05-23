@@ -1,5 +1,6 @@
 package client.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import client.view.View;
@@ -55,6 +56,7 @@ public class ViewController implements ViewControllerInterface {
 			//setCorner(0, -2, 1, CornerStatus.CITY, 1);
 			gc.buildCity(2, -2, 0, 1);
 			gc.buildVillage(2, -1, 0, 1);
+			gc.buildCity(2, -1, 0, 1);
 		});
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {

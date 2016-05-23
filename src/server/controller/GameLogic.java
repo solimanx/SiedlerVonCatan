@@ -144,6 +144,10 @@ public class GameLogic implements client.controller.GameLogicInterface {
 	 * @return resource Array
 	 */
 	private int[] getPlayerResources(int playerId) {
+		ArrayList<ResourceType> resList1 = playerModels[1].getResourceCards();
+		for (int i = 0;i <resList1.size();i++){
+			System.out.println(resList1.get(i));
+		}
 		ArrayList<ResourceType> resList = playerModels[playerId].getResourceCards();
 		int[] result = new int[5];
 		enums.ResourceType resType;

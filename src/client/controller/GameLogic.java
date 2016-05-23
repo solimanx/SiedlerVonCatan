@@ -74,6 +74,7 @@ public class GameLogic implements GameLogicInterface {
 		}
 		int[] resources = getPlayerResources(playerId);
 		for (int i = 0; i < 5; i++) {
+			System.out.println("getResources: resource[i] = "+resources[i]+" defaultCity = "+settings.DefaultSettings.CITY_BUILD_COST[i]);
 			if (resources[i] < settings.DefaultSettings.CITY_BUILD_COST[i]) {
 				System.out.println("not enough resources");
 				return false; // not enough resources
@@ -159,12 +160,16 @@ public class GameLogic implements GameLogicInterface {
 	 * @return resource Array
 	 */
 	private int[] getPlayerResources(int playerId) {
+		System.out.println("new");
+		ArrayList<ResourceType> resList1 = playerModels[1].getResourceCards();
+		for (int i = 0;i <resList1.size();i++){
+			System.out.println(resList1.get(i));
+		}
+		int[] result = {0,0,0,0,0};
 		ArrayList<ResourceType> resList = playerModels[playerId].getResourceCards();	
 		if (resList == null){
-			int[] result = {0,0,0,0,0};
 			return result;
-		}
-		int[] result = new int[5];
+		} else {
 		enums.ResourceType resType;
 		for (int i = 0; i < resList.size(); i++) {
 			resType = resList.get(i);
@@ -172,18 +177,25 @@ public class GameLogic implements GameLogicInterface {
 			// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
 			case WOOD:
 				result[0]++;
+				break;
 			case CLAY:
 				result[1]++;
+				break;				
 			case ORE:
 				result[2]++;
+				break;				
 			case SHEEP:
 				result[3]++;
+				break;				
 			case CORN:
 				result[4]++;
+				break;				
 			default:
+				break;
 			}
 		}
 		return result;
+		}
 	}
 
 	/**
