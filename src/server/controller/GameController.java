@@ -3,7 +3,6 @@ package server.controller;
 import java.util.ArrayList;
 import java.util.Random;
 
-import client.controller.GameLogic;
 import client.controller.ViewController;
 import enums.PlayerState;
 import enums.ResourceType;
@@ -12,6 +11,7 @@ import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
+import model.GameLogic;
 import model.PlayerModel;
 import settings.DefaultSettings;
 

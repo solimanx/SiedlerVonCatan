@@ -1,12 +1,8 @@
-package client.controller;
+package model;
 
 import java.util.ArrayList;
 
-import model.Board;
-import model.Corner;
-import model.Edge;
-import model.Field;
-import model.PlayerModel;
+import client.controller.GameLogicInterface;
 import enums.ResourceType;
 
 /**
@@ -153,7 +149,7 @@ public class GameLogic implements GameLogicInterface {
 	}
 
 	/**
-	 * Gets an array wich contains the player resources in form of
+	 * Gets an array which contains the player resources in form of
 	 * (AmountWood,AmountClay...)
 	 * 
 	 * @param playerId

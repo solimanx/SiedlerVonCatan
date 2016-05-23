@@ -7,6 +7,7 @@ import enums.ResourceType;
 import model.Board;
 import model.Corner;
 import model.Edge;
+import model.GameLogic;
 import model.PlayerModel;
 import settings.DefaultSettings;
 
