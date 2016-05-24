@@ -1,11 +1,16 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import enums.ResourceType;
 
 public class Field {
-
+	
+	@SerializedName("Ort")
 	private String id;
+	@SerializedName("Typ")
 	private ResourceType resourceType;
+	@SerializedName("Zahl")
 	private int diceIndex;
 
 	public Field() {
@@ -24,12 +29,12 @@ public class Field {
 		return resourceType;
 	}
 
-	public int getDiceIndex() {
-		return diceIndex;
-	}
-
 	public void setResourceType(ResourceType resourceType) {
 		this.resourceType = resourceType;
+	}
+
+	public int getDiceIndex() {
+		return diceIndex;
 	}
 
 	public void setDiceIndex(int diceIndex) {
