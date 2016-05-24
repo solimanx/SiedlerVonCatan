@@ -1,43 +1,20 @@
 package client.client;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Scanner;
 
 public class Client {
-	  public static void main( String[] args )
-	  {
-	    Socket server = null;
-
-	    try
-	    {
-	      server = new Socket( "localhost", 3141 );
-	      Scanner     in  = new Scanner( server.getInputStream() );
-	      PrintWriter out = new PrintWriter( server.getOutputStream(), true );
-
-	      out.println( "2" );
-	      out.println( "4" );
-	      System.out.println( in.nextLine() );
-
-	      server = new Socket( "localhost", 3141 );
-	      in  = new Scanner( server.getInputStream() );
-	      out = new PrintWriter( server.getOutputStream(), true );
-
-	      out.println( "23895737895" );
-	      out.println( "434589358935857" );
-	      System.out.println( in.nextLine() );
-	    }
-	    catch ( UnknownHostException e ) {
-	      e.printStackTrace();
-	    }
-	    catch ( IOException e ) {
-	      e.printStackTrace();
-	    }
-	    finally {
-	      if ( server != null )
-	        try { server.close(); } catch ( IOException e ) { }
-	    }
-	  }
+	public static void main(String[] args) throws IOException {
+		Socket socket = new Socket("localhost", 8080); //TODO: alle paar Sekunden neu versuchen.
+		OutputStreamWriter writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+		
+				
+		
+		socket.close();
+	}
 }

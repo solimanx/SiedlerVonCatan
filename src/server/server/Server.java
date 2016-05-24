@@ -1,46 +1,55 @@
 package server.server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.invoke.SwitchPoint;
-import java.math.BigInteger;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
+
 
 public class Server {
 
-	private static void handleConnection(Socket client) throws IOException {
-		Scanner in = new Scanner(client.getInputStream());
-		PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-
-		String factor1 = in.nextLine();
-		String factor2 = in.nextLine();
-
-		out.println(new BigInteger(factor1).multiply(new BigInteger(factor2)));
-	}
-
 	public static void main(String[] args) throws IOException {
-		ServerSocket server = new ServerSocket(3141);
 
-		while (true) {
-			Socket client = null;
+		ServerSocket serverSocket = new ServerSocket(8080);
 
-			try {
-				client = server.accept();
-				handleConnection(client);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-				if (client != null)
-					try {
-						client.close();
-					} catch (IOException e) {
-						
-					}
+		try {
+			while (true) {
+				Socket socket = serverSocket.accept();
+				startHandler(socket);
 			}
+		} finally {
+			serverSocket.close();
 		}
 	}
 
+	private static void startHandler(Socket socket) throws IOException {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				try {
+					OutputStreamWriter writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+					BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					closeSocket();
+				}
+			}
+
+			private void closeSocket() {
+				try {
+					socket.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		
+		thread.start();
+	}
 
 }
