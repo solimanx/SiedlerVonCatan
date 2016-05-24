@@ -7,6 +7,8 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.google.gson.Gson;
+
 
 public class Server {
 
@@ -32,6 +34,13 @@ public class Server {
 					OutputStreamWriter writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 					BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
+					
+					String line = reader.readLine();
+					Gson gsonObject = new Gson();
+					gsonObject.toJson(line);
+					
+					writer.write(gsonObject.toString() + "\n");
+					writer.flush();
 
 				} catch (IOException e) {
 					e.printStackTrace();
