@@ -1,18 +1,13 @@
 package model;
 
-import com.google.gson.annotations.Since;
-
 import enums.ResourceType;
 
 public class Field {
 	
-	@Since(0.1)
 	private String id;
 	
-	@Since(0.1)
 	private ResourceType resourceType;
 	
-	@Since(0.1)
 	private int diceIndex;
 
 	public Field() {
