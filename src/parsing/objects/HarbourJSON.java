@@ -1,5 +1,11 @@
 package parsing.objects;
 
+import com.google.gson.Gson;
+
+import parsing.JSONInterface;
+import parsing.serverinstructions.StatusUpdateJSON;
+import parsing.serverinstructions.T;
+
 /**
  * 
  * <b>4.3: "Häfen"</b>
@@ -9,6 +15,26 @@ package parsing.objects;
  * 
  * @version 0.1
  */
-public class HarbourJSON {
+public class HarbourJSON implements JSONInterface<HarbourJSON>{
+	
+	@Override
+	public String toString(){
+		
+	}
+	
+	@Override
+	public void createJSON(T t){
+		
+	}
+	
+	@Override
+	public T getFromJSON(Gson g){
+		
+	}
+	
+	@Override
+	public void handleJSON(){
+		
+	}
 
 }

@@ -1,5 +1,11 @@
 package parsing.objects;
 
+import com.google.gson.Gson;
+
+import parsing.JSONInterface;
+import parsing.serverinstructions.StatusUpdateJSON;
+import parsing.serverinstructions.T;
+
 /**
  * 
  * <b>4.6: "Rohstoffe"</b>
@@ -10,6 +16,26 @@ package parsing.objects;
  * @see parsing.objects.PlayerJSON
  * @version 0.1
  */
-public class ResourceJSON {
+public class ResourceJSON implements JSONInterface<ResourceJSON>{
+	
+	@Override
+	public String toString(){
+		
+	}
+	
+	@Override
+	public void createJSON(T t){
+		
+	}
+	
+	@Override
+	public T getFromJSON(Gson g){
+		
+	}
+	
+	@Override
+	public void handleJSON(){
+		
+	}
 
 }
