@@ -1,5 +1,22 @@
 package enums;
 
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * @see parsing.objects.HarbourJSON
+ */
 public enum HarbourStatus {
-    THREE_TO_ONE, WOOD, CLAY, ORE, SHEEP, CORN, NULL
+	@SerializedName("Hafen") THREE_TO_ONE,
+
+	@SerializedName("Holz Hafen") WOOD,
+
+	@SerializedName("Lehm Hafen") CLAY,
+
+	@SerializedName("Erz Hafen") ORE,
+
+	@SerializedName("Wolle Hafen") SHEEP,
+
+	@SerializedName("Getreide Hafen") CORN,
+
+	NULL // TODO: serialization
 }

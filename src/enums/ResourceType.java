@@ -2,6 +2,9 @@ package enums;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * @see parsing.objects.ResourceJSON
+ */
 public enum ResourceType {
 	@SerializedName("Wald") WOOD,
 
