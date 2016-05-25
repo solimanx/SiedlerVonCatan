@@ -14,25 +14,24 @@ import parsing.JSONInterface;
  * @version 0.1
  */
 public class DiceRollResultJSON implements JSONInterface<DiceRollResultJSON>{
-	
+
 	@Override
-	public String toString(){
+	public void createJSON(DiceRollResultJSON t) {
+		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	public void createJSON(T t){
+	public DiceRollResultJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
 		
 	}
-	
-	@Override
-	public T getFromJSON(Gson g){
-		
-	}
-	
-	@Override
-	public void handleJSON(){
-		
-	}
+
 
 }

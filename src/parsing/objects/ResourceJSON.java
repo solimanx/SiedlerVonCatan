@@ -3,8 +3,6 @@ package parsing.objects;
 import com.google.gson.Gson;
 
 import parsing.JSONInterface;
-import parsing.serverinstructions.StatusUpdateJSON;
-import parsing.serverinstructions.T;
 
 /**
  * 
@@ -17,25 +15,24 @@ import parsing.serverinstructions.T;
  * @version 0.1
  */
 public class ResourceJSON implements JSONInterface<ResourceJSON>{
-	
+
 	@Override
-	public String toString(){
+	public void createJSON(ResourceJSON t) {
+		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	public void createJSON(T t){
+	public ResourceJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
 		
 	}
-	
-	@Override
-	public T getFromJSON(Gson g){
-		
-	}
-	
-	@Override
-	public void handleJSON(){
-		
-	}
+
 
 }

@@ -14,25 +14,25 @@ import parsing.JSONInterface;
  * @version 0.1
  */
 public class BuildProcessJSON implements JSONInterface<BuildProcessJSON>{
-	
+
 	@Override
-	public String toString(){
+	public void createJSON(BuildProcessJSON t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BuildProcessJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
 		
 	}
 	
-	@Override
-	public void createJSON(T t){
-		
-	}
-	
-	@Override
-	public T getFromJSON(Gson g){
-		
-	}
-	
-	@Override
-	public void handleJSON(){
-		
-	}
+
 
 }

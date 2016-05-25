@@ -14,23 +14,23 @@ import parsing.JSONInterface;
  * @version 0.1
  */
 public class ResourceObtainJSON implements JSONInterface<ResourceObtainJSON>{
+
 	@Override
-	public String toString(){
+	public void createJSON(ResourceObtainJSON t) {
+		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	public void createJSON(T t){
+	public ResourceObtainJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
 		
 	}
-	
-	@Override
-	public T getFromJSON(Gson g){
-		
-	}
-	
-	@Override
-	public void handleJSON(){
-		
-	}
+
 }
