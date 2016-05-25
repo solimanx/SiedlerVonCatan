@@ -1,5 +1,9 @@
 package parsing.messaging;
 
+import com.google.gson.Gson;
+
+import parsing.JSONInterface;
+
 /**
  * 
  * <b>5.3: "Chat empfangen"</b>
@@ -9,6 +13,24 @@ package parsing.messaging;
  * 
  * @version 0.1
  */
-public class ChatReceiveMessageJSON {
+public class ChatReceiveMessageJSON implements JSONInterface<ChatReceiveMessageJSON>{
+
+	@Override
+	public void createJSON(ChatReceiveMessageJSON t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ChatReceiveMessageJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

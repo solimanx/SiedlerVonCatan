@@ -1,5 +1,9 @@
 package parsing.messaging;
 
+import com.google.gson.Gson;
+
+import parsing.JSONInterface;
+
 /**
  * 
  * <b>5.1: "Bestätigungen und Fehler"</b>
@@ -9,6 +13,24 @@ package parsing.messaging;
  * 
  * @version 0.1
  */
-public class ServerConfirmationJSON {
+public class ServerConfirmationJSON implements JSONInterface<ServerConfirmationJSON>{
+
+	@Override
+	public void createJSON(ServerConfirmationJSON t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ServerConfirmationJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

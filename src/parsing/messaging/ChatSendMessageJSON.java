@@ -1,5 +1,9 @@
 package parsing.messaging;
 
+import com.google.gson.Gson;
+
+import parsing.JSONInterface;
+
 /**
  * 
  * <b>5.2: "Chat senden"</b>
@@ -9,6 +13,24 @@ package parsing.messaging;
  * 
  * @version 0.1
  */
-public class ChatSendMessageJSON {
+public class ChatSendMessageJSON implements JSONInterface<ChatSendMessageJSON>{
+
+	@Override
+	public void createJSON(ChatSendMessageJSON t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ChatSendMessageJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

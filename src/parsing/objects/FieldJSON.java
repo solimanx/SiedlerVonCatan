@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 
 import enums.ResourceType;
 import model.Field;
+import parsing.JSONInterface;
 
 /**
  * 
@@ -20,7 +21,7 @@ import model.Field;
  * 
  * @version 0.1
  */
-public class FieldJSON {
+public class FieldJSON implements JSONInterface<Field>{
 	public static String toFieldJson(Field f) {
 		Field field = new Field();
 		// Ort
@@ -36,8 +37,8 @@ public class FieldJSON {
 		return gson.toJson(field);
 	}
 
-	public void writeFieldJson(Field f) throws IOException {
-		try (Writer writer = new OutputStreamWriter(new FileOutputStream("SS.json"), "UTF-8")) {
+	public static void writeFieldJson(Field f) throws IOException {
+		try (Writer writer = new OutputStreamWriter(new FileOutputStream("SSS.json"), "UTF-8")) {
 
 			Gson gson = new GsonBuilder().create();
 			gson.toJson(toFieldJson(f), writer);
@@ -59,5 +60,23 @@ public class FieldJSON {
 			gson.toJson(field, writer);
 		}
 
+	}
+
+	@Override
+	public void createJSON(Field t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Field getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
+		
 	}
 }

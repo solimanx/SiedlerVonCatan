@@ -1,5 +1,9 @@
 package parsing.connection;
 
+import com.google.gson.Gson;
+
+import parsing.JSONInterface;
+
 /**
  * 
  * <b>3: "Verbindungsaufbau"</b>
@@ -9,6 +13,24 @@ package parsing.connection;
  * 
  * @version 0.1
  */
-public class WelcomeJSON {
+public class WelcomeJSON implements JSONInterface<WelcomeJSON> {
+
+	@Override
+	public void createJSON(WelcomeJSON t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public WelcomeJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

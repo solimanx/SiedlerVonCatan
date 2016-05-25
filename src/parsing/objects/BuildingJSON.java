@@ -1,5 +1,9 @@
 package parsing.objects;
 
+import com.google.gson.Gson;
+
+import parsing.JSONInterface;
+
 /**
  * 
  * <b>4.2: "Gebäude"</b>
@@ -9,6 +13,24 @@ package parsing.objects;
  * 
  * @version 0.1
  */
-public class BuildingJSON {
+public class BuildingJSON implements JSONInterface<BuildingJSON>{
+
+	@Override
+	public void createJSON(BuildingJSON t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BuildingJSON getFromJSON(Gson g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleJSON() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
