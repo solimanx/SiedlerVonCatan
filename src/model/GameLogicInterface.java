@@ -1,4 +1,4 @@
-package client.controller;
+package model;
 
 
 public interface GameLogicInterface {

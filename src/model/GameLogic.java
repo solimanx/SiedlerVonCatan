@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import client.controller.GameLogicInterface;
 import enums.ResourceType;
 
 /**
