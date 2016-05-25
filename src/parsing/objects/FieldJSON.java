@@ -21,7 +21,7 @@ import model.Field;
  * @version 0.1
  */
 public class FieldJSON {
-	public Object toFieldJson(Field f) {
+	public static String toFieldJson(Field f) {
 		Field field = new Field();
 		// Ort
 		field.setFieldID("A");
