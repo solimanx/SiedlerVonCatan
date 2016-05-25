@@ -1,7 +1,5 @@
 package parsing.messaging;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class ChatReceiveMessageJSON implements JSONInterface<ChatReceiveMessageJ
 	}
 
 	@Override
-	public ChatReceiveMessageJSON getFromJSON(Gson g) {
+	public ChatReceiveMessageJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

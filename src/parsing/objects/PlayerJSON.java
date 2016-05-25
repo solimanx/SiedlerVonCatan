@@ -1,7 +1,5 @@
 package parsing.objects;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class PlayerJSON implements JSONInterface<PlayerJSON>{
 	}
 
 	@Override
-	public PlayerJSON getFromJSON(Gson g) {
+	public PlayerJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

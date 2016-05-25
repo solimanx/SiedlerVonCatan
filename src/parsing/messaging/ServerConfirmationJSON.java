@@ -1,7 +1,5 @@
 package parsing.messaging;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class ServerConfirmationJSON implements JSONInterface<ServerConfirmationJ
 	}
 
 	@Override
-	public ServerConfirmationJSON getFromJSON(Gson g) {
+	public ServerConfirmationJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

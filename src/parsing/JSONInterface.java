@@ -1,11 +1,11 @@
 package parsing;
 
-import com.google.gson.Gson;
+import java.io.IOException;
 
 public interface JSONInterface<T> {
 	public String toString();
-	public void createJSON(T t);
-	public T getFromJSON(Gson g);
+	public void createJSON(T t) throws IOException;
+	public T getFromJSON(String json);
 	public void handleJSON();
 
 }

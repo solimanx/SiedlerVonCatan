@@ -1,7 +1,5 @@
 package parsing.serverinstructions;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class StatusUpdateJSON implements JSONInterface<StatusUpdateJSON>{
 	}
 
 	@Override
-	public StatusUpdateJSON getFromJSON(Gson g) {
+	public StatusUpdateJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

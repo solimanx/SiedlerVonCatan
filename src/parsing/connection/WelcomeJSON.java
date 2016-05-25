@@ -1,7 +1,5 @@
 package parsing.connection;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class WelcomeJSON implements JSONInterface<WelcomeJSON> {
 	}
 
 	@Override
-	public WelcomeJSON getFromJSON(Gson g) {
+	public WelcomeJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

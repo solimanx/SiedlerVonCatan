@@ -1,7 +1,5 @@
 package parsing.serverinstructions;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class ResourceObtainJSON implements JSONInterface<ResourceObtainJSON>{
 	}
 
 	@Override
-	public ResourceObtainJSON getFromJSON(Gson g) {
+	public ResourceObtainJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

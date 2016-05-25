@@ -1,7 +1,5 @@
 package parsing.clientinstructions;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class TurnEndJSON implements JSONInterface<TurnEndJSON> {
 	}
 
 	@Override
-	public TurnEndJSON getFromJSON(Gson g) {
+	public TurnEndJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

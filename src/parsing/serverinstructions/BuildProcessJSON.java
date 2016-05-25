@@ -1,7 +1,5 @@
 package parsing.serverinstructions;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class BuildProcessJSON implements JSONInterface<BuildProcessJSON>{
 	}
 
 	@Override
-	public BuildProcessJSON getFromJSON(Gson g) {
+	public BuildProcessJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

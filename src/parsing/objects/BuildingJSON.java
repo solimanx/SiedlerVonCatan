@@ -1,7 +1,5 @@
 package parsing.objects;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class BuildingJSON implements JSONInterface<BuildingJSON>{
 	}
 
 	@Override
-	public BuildingJSON getFromJSON(Gson g) {
+	public BuildingJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

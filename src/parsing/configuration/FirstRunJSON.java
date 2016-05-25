@@ -1,7 +1,5 @@
 package parsing.configuration;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class FirstRunJSON implements JSONInterface<FirstRunJSON>{
 	}
 
 	@Override
-	public FirstRunJSON getFromJSON(Gson g) {
+	public FirstRunJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}

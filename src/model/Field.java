@@ -1,16 +1,18 @@
 package model;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 import enums.ResourceType;
 
 public class Field {
 	
-	@SerializedName("Ort")
+	@Since(0.1)
 	private String id;
-	@SerializedName("Typ")
+	
+	@Since(0.1)
 	private ResourceType resourceType;
-	@SerializedName("Zahl")
+	
+	@Since(0.1)
 	private int diceIndex;
 
 	public Field() {

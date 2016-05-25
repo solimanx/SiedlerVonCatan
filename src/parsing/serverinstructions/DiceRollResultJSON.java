@@ -1,7 +1,5 @@
 package parsing.serverinstructions;
 
-import com.google.gson.Gson;
-
 import parsing.JSONInterface;
 
 /**
@@ -22,7 +20,7 @@ public class DiceRollResultJSON implements JSONInterface<DiceRollResultJSON>{
 	}
 
 	@Override
-	public DiceRollResultJSON getFromJSON(Gson g) {
+	public DiceRollResultJSON getFromJSON(String json) {
 		// TODO Auto-generated method stub
 		return null;
 	}
