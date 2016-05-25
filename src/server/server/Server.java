@@ -15,7 +15,7 @@ public class Server {
 	public static void main(String[] args) throws IOException {
 
 		ServerSocket serverSocket = new ServerSocket(8080);
-
+		System.out.println("Server Running!");
 		try {
 			while (true) {
 				Socket socket = serverSocket.accept();
@@ -34,12 +34,11 @@ public class Server {
 					OutputStreamWriter writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 					BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
-					
+
 					String line = reader.readLine();
-					Gson gsonObject = new Gson();
-					gsonObject.toJson(line);
-					
-					writer.write(gsonObject.toString() + "\n");
+					line = line + "hat Server bekommen";
+
+					writer.write(line + "\n");
 					writer.flush();
 
 				} catch (IOException e) {
@@ -57,7 +56,7 @@ public class Server {
 				}
 			}
 		};
-		
+
 		thread.start();
 	}
 

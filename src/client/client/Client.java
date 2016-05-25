@@ -13,22 +13,18 @@ public class Client {
 		Socket socket = new Socket("localhost", 8080); //TODO: alle paar Sekunden neu versuchen.
 		OutputStreamWriter writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-		
-		String jsonTestString = "Hallo Welt";
-		
-		Gson gsonObject = new Gson();
 
-		gsonObject.toJson(jsonTestString);
-		writer.write(gsonObject.toString() + "\n");
+		int i = 5;
+
+		writer.write(i + "\n");
 		writer.flush();
-		
-		
+
+
 		String line = reader.readLine();
-		gsonObject = new Gson();
-		gsonObject.toJson(line);
-		
-		System.out.println("Received from Server:\n" + gsonObject.toString());
-		
+
+		System.out.println("Received from Server:\n" + line);
+
 		socket.close();
 	}
+
 }
