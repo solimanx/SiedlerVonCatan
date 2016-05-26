@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="OFF">
+
+<appenders>
+
+<Console name="Console" target="System_Out"
+<PatternLayout pattern="%d [%t] %-5Level %Logger(36) - %msg%n"/)/>
+</Console>
+<File name="File" fileName="LoggerTst.Log">
+<PatternLayout pattern="%d [%t] %-5Level %Logger(36) - %msg%n"</PatternLayout>
+</File>
+
+</appenders></configuration>
