@@ -31,6 +31,15 @@ public class FieldJSON {
 	public static Field read() throws IOException {
 		try (Reader reader = new InputStreamReader(Main.class.getResourceAsStream("/Test.json"), "UTF-8")) {
 			Gson gson = new GsonBuilder().create();
+			/* String p = gson.fromJson(reader, String.class);
+			 * parse p nach erstem vorkommenden String;
+			 * unterscheide zwischen 7.1 bis 7.4 
+			 * Beispiel: Statusupdate
+			 * StatusUpdateNetMessage m = gson.fromJson(reader alles was nach Statusupdate kommt, StatusUpdateNetMessage.class);
+			 * handleStatusUpdateNetMessage(m) diese Methode ergänzt in m um alle anderen Variablen
+			 * 
+			 * return m
+			 */
 			Field p = gson.fromJson(reader, Field.class);
 			return p;
 		}
