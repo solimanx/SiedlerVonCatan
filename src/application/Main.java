@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 import server.controller.GameController;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main extends Application {
 	private GameController gc;
