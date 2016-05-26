@@ -14,9 +14,8 @@ public class TestMain {
 		f.setResourceType(ResourceType.CORN);
 		
 		FieldJSON fj = new FieldJSON(f);
-		fj.write();
+		System.out.println(fj.write());
 		
-		Field g = FieldJSON.read();
 
 	}
 }

@@ -21,12 +21,10 @@ public class FieldJSON {
 
 	}
 
-	public void write() throws IOException {
-		//TODO wrap
-		try (Writer writer = new OutputStreamWriter(new FileOutputStream("FIELDFIELD.json"), "UTF-8")) {
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			gson.toJson(f, writer);
-		}
+	public String write() {
+		Gson gson = new GsonBuilder().create();
+		String result = gson.toJson(f);
+		return result;
 
 	}
 
