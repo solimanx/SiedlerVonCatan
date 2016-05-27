@@ -1,4 +1,4 @@
-package parsing.clientinstructions;
+package parsing.serverinstructions;
 
 import java.io.IOException;
 
@@ -6,21 +6,23 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
+import parsing.JSONInterface;
+
 /**
- *
- * <b>8.3: "Zug beenden"</b>
+ * 
+ * <b>7.4: "Bauvorgang"</b>
  * <p>
- * To end the turn.
+ * Server sends building object to clients.
  * </p>
- *
+ * 
  * @version 0.1
  */
-public class TurnEndTypeAdapter extends TypeAdapter<String> {
+public class BuildTypeAdapter extends TypeAdapter<String> {
 
 	@Override
 	public void write(JsonWriter out, String value) throws IOException {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -29,6 +31,7 @@ public class TurnEndTypeAdapter extends TypeAdapter<String> {
 		return null;
 	}
 
+	
 
 
 }

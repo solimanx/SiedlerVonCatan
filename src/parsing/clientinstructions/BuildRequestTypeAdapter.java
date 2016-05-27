@@ -5,16 +5,17 @@ import java.io.IOException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+
 /**
  *
- * <b>8.1: "Würfeln"</b>
+ * <b>8.2: "Bauen"</b>
  * <p>
- * For rolling the dice.
+ * To build a road, city or village.
  * </p>
  *
  * @version 0.1
  */
-public class DiceRollTypeAdapter extends TypeAdapter<String> {
+public class BuildRequestTypeAdapter extends TypeAdapter<String> {
 
 	@Override
 	public void write(JsonWriter out, String value) throws IOException {

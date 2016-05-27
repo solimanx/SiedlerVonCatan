@@ -1,4 +1,4 @@
-package parsing.clientinstructions;
+package parsing.configuration;
 
 import java.io.IOException;
 
@@ -8,14 +8,14 @@ import com.google.gson.stream.JsonWriter;
 
 /**
  *
- * <b>8.2: "Bauen"</b>
+ * <b>6: "Konfiguration und Spielstart"</b>
  * <p>
- * To build a road, city or village.
+ * TODO write a better explanation
  * </p>
  *
  * @version 0.1
  */
-public class BuildTypeAdapter extends TypeAdapter<String> {
+public class PlayerProfileAdapter extends TypeAdapter<String>{
 
 	@Override
 	public void write(JsonWriter out, String value) throws IOException {
@@ -28,6 +28,7 @@ public class BuildTypeAdapter extends TypeAdapter<String> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 

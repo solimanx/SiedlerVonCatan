@@ -1,4 +1,4 @@
-package protocol;
+package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
 

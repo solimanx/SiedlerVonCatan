@@ -3,7 +3,7 @@ package enums;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * @see parsing.objects.HarbourJSON
+ * @see parsing.objects.HarbourTypeAdapter
  */
 public enum HarbourStatus {
 	@SerializedName("Hafen") THREE_TO_ONE,

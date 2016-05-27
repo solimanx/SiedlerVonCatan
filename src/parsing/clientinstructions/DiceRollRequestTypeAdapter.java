@@ -1,21 +1,20 @@
-package parsing.configuration;
+package parsing.clientinstructions;
 
 import java.io.IOException;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
 /**
  *
- * <b>6: "Konfiguration und Spielstart"</b>
+ * <b>8.1: "Würfeln"</b>
  * <p>
- * TODO write a better explanation
+ * For rolling the dice.
  * </p>
  *
  * @version 0.1
  */
-public class FirstRunTypeAdapter extends TypeAdapter<String>{
+public class DiceRollRequestTypeAdapter extends TypeAdapter<String> {
 
 	@Override
 	public void write(JsonWriter out, String value) throws IOException {
@@ -28,7 +27,6 @@ public class FirstRunTypeAdapter extends TypeAdapter<String>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 
 
