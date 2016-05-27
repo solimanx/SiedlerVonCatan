@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Board;
@@ -46,7 +48,8 @@ public class View implements ViewInterface {
 
 	// Constant values for calculations
 	public static double radius = 50.0;
-	public static double[] windowCenter = new double[2]; // [2]
+	public double[] windowCenter = new double[2];
+	public double[] screenCenter = new double[2];// [2]
 	public static double sin60 = Math.sqrt(3) / 2;
 	public static double rad60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
 	private static double halfWidth = sin60 * radius;
@@ -82,6 +85,9 @@ public class View implements ViewInterface {
 	public boolean initialize() {
 		windowCenter[0] = primaryStage.getWidth() / 2;
 		windowCenter[1] = primaryStage.getHeight() / 2;
+		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+		windowCenter[1] = screenBounds.getHeight() / 2;
+		windowCenter[0] = screenBounds.getWidth() / 2;
 
 		calculateFieldCenters(windowCenter);
 		calculateCornerCenters();
@@ -109,7 +115,7 @@ public class View implements ViewInterface {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initBoard() {
 		for (int i = 0; i < 7; i++) {
@@ -163,7 +169,7 @@ public class View implements ViewInterface {
 
 	/**
 	 * takes 6 coordinate pairs (x,y) and draws a Polygon hexagon
-	 * 
+	 *
 	 * @param points
 	 * @return Polygon
 	 */
@@ -194,7 +200,7 @@ public class View implements ViewInterface {
 
 	/**
 	 * takes pair of coordinates as center point and draws a village
-	 * 
+	 *
 	 * @param center
 	 * @return Polygon
 	 */
@@ -292,7 +298,7 @@ public class View implements ViewInterface {
 		street.setOpacity(1.0);
 		street.setStroke(playerColor);
 		System.out.println("Street set on " + u + "," + v + " Direction: " + dir);
-		
+
 	}
 
 	@Override
@@ -315,7 +321,7 @@ public class View implements ViewInterface {
 	/**
 	 * auxiliary method calculating center coordinates of every field.
 	 * windowsCenter is taken as center point of board
-	 * 
+	 *
 	 * @param windowCenter
 	 */
 	private void calculateFieldCenters(double[] windowCenter) {
