@@ -6,8 +6,6 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-import parsing.JSONInterface;
-
 /**
  *
  * <b>4.4: "Karte"</b>
@@ -31,7 +29,5 @@ public class BoardTypeAdapter extends TypeAdapter<String> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 }
