@@ -12,4 +12,9 @@ public class ProtocolBuild {
 
 		this.building = building;
 	}
+
+	public ProtocolBuilding getBuilding() {
+
+		return building;
+	}
 }
