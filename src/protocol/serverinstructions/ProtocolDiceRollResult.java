@@ -13,4 +13,12 @@ public class ProtocolDiceRollResult {
 		this.player = player;
 		this.roll = roll;
 	}
+
+	public int getPlayer() {
+		return player;
+	}
+
+	public int getRoll() {
+		return roll;
+	}
 }
