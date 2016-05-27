@@ -72,7 +72,7 @@ public class Response {
   
     //Client Instructions
 
-    @SerializedName("Bauvorgang")
+    @SerializedName("Bauen")
     public ProtocolBuildRequest pBuildRequest;
 
     @SerializedName("Würfeln")
