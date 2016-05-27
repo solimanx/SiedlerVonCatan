@@ -1,6 +1,12 @@
 package protocol.connection;
 
-public class ProtocolHello {
+import com.google.gson.annotations.SerializedName;
 
+public class ProtocolHello {
+    
+        @SerializedName("Version")
+		public String version;
+		@SerializedName("Protokoll")
+		public String protokoll;
 
 }
