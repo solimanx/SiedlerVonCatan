@@ -56,7 +56,7 @@ public class ProtocolPlayer {
 		return resources;
 	}
 
-	private enum ColorType {
+	public enum ColorType {
 
 		@SerializedName("ROT") RED,
 
