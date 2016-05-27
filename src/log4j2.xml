@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="OFF">
+
+	<appenders>
+
+		<Console name="Console" target="System_Out">
+			<PatternLayout pattern="%d [%t] %-5Level %Logger{36} - %msg%n" />
+		</Console>
+		<File name="File" fileName="log/test.log">
+			<PatternLayout pattern="%d [%t] %-5Level %Logger{36} - %msg%n" />
+		</File>
+
+	</appenders>
+	<loggers>
+
+		<root level="trace">
+			<appender-ref ref="Console" />
+			<appender-ref ref="File" />
+		</root>
+
+	</loggers>
+
+</configuration>
