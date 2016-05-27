@@ -14,17 +14,16 @@ public class Main extends Application {
 	private static Logger logger = LogManager.getLogger(Main.class.getName());
 	
 	private GameController gc;
-	
-	
 
 	@Override
 	public void start(Stage primaryStage) {
 		gc = new GameController(primaryStage,1); //one player Only
-		logger.info("Test");
 		
 	}
 
 	public static void main(String[] args) {
+		
 		launch(args);
+		
 	}
 }
