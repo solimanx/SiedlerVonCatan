@@ -1,24 +1,24 @@
-package model.protocol;
+package protocol;
 
 import com.google.gson.annotations.SerializedName;
 
 import model.Field;
 
-public class Board {
+public class ProtocolBoard {
 	
 	@SerializedName("Felder")
 	Field[] fields;
 	
 	@SerializedName("Gebäude")
-	Building[] buildings;
+	ProtocolBuilding[] buildings;
 	
 	@SerializedName("Häfen")
-	Harbour[] harbours;
+	ProtocolHarbour[] harbours;
 	
 	@SerializedName("Räuber")
 	String robber_location;
 
-	public Board(Field[] fields, Building[] buildings, Harbour[] harbours, String robber_location) {
+	public ProtocolBoard(Field[] fields, ProtocolBuilding[] buildings, ProtocolHarbour[] harbours, String robber_location) {
 		this.fields = fields;
 		this.buildings = buildings;
 		this.harbours = harbours;
@@ -29,11 +29,11 @@ public class Board {
 		return fields;
 	}
 
-	public Building[] getBuildings() {
+	public ProtocolBuilding[] getBuildings() {
 		return buildings;
 	}
 
-	public Harbour[] getHarbours() {
+	public ProtocolHarbour[] getHarbours() {
 		return harbours;
 	}
 
@@ -45,11 +45,11 @@ public class Board {
 		this.fields = fields;
 	}
 
-	public void setBuildings(Building[] buildings) {
+	public void setBuildings(ProtocolBuilding[] buildings) {
 		this.buildings = buildings;
 	}
 
-	public void setHarbours(Harbour[] harbours) {
+	public void setHarbours(ProtocolHarbour[] harbours) {
 		this.harbours = harbours;
 	}
 

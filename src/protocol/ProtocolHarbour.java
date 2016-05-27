@@ -1,12 +1,12 @@
-package model.protocol;
+package protocol;
 
 import enums.protocol.HarbourType;
 
-public class Harbour {
+public class ProtocolHarbour {
 	String ID;
 	HarbourType type;
 
-	public Harbour(String iD, HarbourType type) {
+	public ProtocolHarbour(String iD, HarbourType type) {
 		ID = iD;
 		this.type = type;
 	}

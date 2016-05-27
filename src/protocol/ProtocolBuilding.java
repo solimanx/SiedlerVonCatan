@@ -1,10 +1,10 @@
-package model.protocol;
+package protocol;
 
 import com.google.gson.annotations.SerializedName;
 
 import enums.protocol.BuildingType;
 
-public class Building {
+public class ProtocolBuilding {
 
 	@SerializedName("Eigentümer")
 	int player_id;
@@ -15,7 +15,7 @@ public class Building {
 	@SerializedName("Ort")
 	String id;
 
-	public Building(int player_id, BuildingType building, String id) {
+	public ProtocolBuilding(int player_id, BuildingType building, String id) {
 		this.player_id = player_id;
 		this.building = building;
 		this.id = id;
