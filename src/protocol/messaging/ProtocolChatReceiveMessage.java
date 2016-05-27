@@ -13,4 +13,12 @@ public class ProtocolChatReceiveMessage {
 		this.sender = sender;
 		this.message = message;
 	}
+
+	public int getSender() {
+		return sender;
+	}
+
+	public String getMessage() {
+		return message;
+	}
 }
