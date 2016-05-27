@@ -5,8 +5,13 @@ import com.google.gson.annotations.SerializedName;
 public class ProtocolResourceObtain {
 
 	@SerializedName("Spieler")
-	public int player;
+	private int player;
 	@SerializedName("Rohstoffe")
-	public ProtocolResource resource;
+	private ProtocolResource resource;
 
+	public ProtocolResourceObtain(int player, ProtocolResource resource) {
+
+		this.player = player;
+		this.resource = resource;
+	}
 }
