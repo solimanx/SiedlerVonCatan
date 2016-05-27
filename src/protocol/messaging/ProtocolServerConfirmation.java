@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProtocolServerConfirmation {
 	 @SerializedName("Spieler")
-		public String ;
+		public String player ;
 		
 
 }
