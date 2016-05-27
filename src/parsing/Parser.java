@@ -3,83 +3,85 @@ package parsing;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import protocol.connection.ProtocolHello;
+
 public class Parser {
-	public Object parseString(String string){
+	public <T> T parseString(String string){
 
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		Response response = gson.fromJson(string , Response.class);
 
 
 		if (response.pHello != null){
-		    return response.pHello;
+		    return (T) response.pHello;
 		}
 
 		if (response.pWelcome != null){
-		    return response.pWelcome;
+		    return (T) response.pWelcome;
 		}
 
 		//
 
 		if (response.pClientReady != null){
-		    return response.pClientReady;
+		    return (T) response.pClientReady;
 		}
 
 		if (response.pError != null){
-		    return response.pError;
+		    return (T) response.pError;
 		}
 
 		if (response.pGameStarted != null){
-		    return response.pGameStarted;
+		    return (T) response.pGameStarted;
 		}
 
 		if (response.pPlayerProfile != null){
-		    return response.pPlayerProfile;
+		    return (T) response.pPlayerProfile;
 		}
 
 		//
 
 		if (response.pBuild != null){
-		    return response.pBuild;
+		    return (T) response.pBuild;
 		}
 
 		if (response.pDRResult != null){
-		    return response.pDRResult;
+		    return (T) response.pDRResult;
 		}
 
 		if (response.pRObtain != null){
-		    return response.pRObtain;
+		    return (T) response.pRObtain;
 		}
 
 		if (response.pSUpdate != null){
-		    return response.pSUpdate;
+		    return (T) response.pSUpdate;
 		}
 
 		//...
 
 		if (response.pChatReceive != null){
-		    return response.pChatReceive;
+		    return (T) response.pChatReceive;
 		}
 
 		if (response.pChatSend != null){
-		    return response.pChatSend;
+		    return (T) response.pChatSend;
 		}
 
 		if (response.pServerConfirmation != null){
-		    return response.pServerConfirmation;
+		    return (T) response.pServerConfirmation;
 		}
 
 		// ..
 
-		if (response.pHello != null){
-		    return response.pBuildRequest;
+		if (response.pBuildRequest != null){
+		    return (T) response.pBuildRequest;
 		}
 
 		if (response.pDiceRollRequest != null){
-		    return response.pDiceRollRequest;
+		    return (T) response.pDiceRollRequest;
 		}
 
 		if (response.pEndTurn != null){
-		    return response.pEndTurn;
+		    return (T) response.pEndTurn;
 		}
 
 		return null;
