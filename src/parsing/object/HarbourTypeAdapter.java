@@ -1,4 +1,4 @@
-package parsing.objects;
+package parsing.object;
 
 import java.io.IOException;
 
@@ -8,15 +8,14 @@ import com.google.gson.stream.JsonWriter;
 
 /**
  *
- * <b>4.6: "Rohstoffe"</b>
+ * <b>4.3: "Häfen"</b>
  * <p>
- * Determines the amount of each resource that a player owns.
+ * Determines harbours's ID (location) and it's type.
  * </p>
  *
- * @see parsing.objects.PlayerTypeAdapter
  * @version 0.1
  */
-public class ResourceTypeAdapter extends TypeAdapter<String>{
+public class HarbourTypeAdapter extends TypeAdapter<String>{
 
 	@Override
 	public void write(JsonWriter out, String value) throws IOException {
@@ -29,5 +28,4 @@ public class ResourceTypeAdapter extends TypeAdapter<String>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

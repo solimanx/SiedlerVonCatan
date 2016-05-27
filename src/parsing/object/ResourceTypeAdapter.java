@@ -1,4 +1,4 @@
-package parsing.objects;
+package parsing.object;
 
 import java.io.IOException;
 
@@ -8,14 +8,15 @@ import com.google.gson.stream.JsonWriter;
 
 /**
  *
- * <b>4.2: "Gebäude"</b>
+ * <b>4.6: "Rohstoffe"</b>
  * <p>
- * Determines buildings owner/owner-ID , building type and location.
+ * Determines the amount of each resource that a player owns.
  * </p>
  *
+ * @see parsing.object.PlayerTypeAdapter
  * @version 0.1
  */
-public class BuildingTypeAdapter extends TypeAdapter<String>{
+public class ResourceTypeAdapter extends TypeAdapter<String>{
 
 	@Override
 	public void write(JsonWriter out, String value) throws IOException {

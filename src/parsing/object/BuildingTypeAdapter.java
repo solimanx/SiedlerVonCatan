@@ -1,4 +1,4 @@
-package parsing.objects;
+package parsing.object;
 
 import java.io.IOException;
 
@@ -6,19 +6,16 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-import parsing.JSONInterface;
-
 /**
  *
- * <b>4.4: "Karte"</b>
+ * <b>4.2: "Gebäude"</b>
  * <p>
- * Determines the board: fields, buildings and harbours, as well as robber's
- * location.
+ * Determines buildings owner/owner-ID , building type and location.
  * </p>
  *
  * @version 0.1
  */
-public class BoardTypeAdapter extends TypeAdapter<String> {
+public class BuildingTypeAdapter extends TypeAdapter<String>{
 
 	@Override
 	public void write(JsonWriter out, String value) throws IOException {
@@ -31,7 +28,5 @@ public class BoardTypeAdapter extends TypeAdapter<String> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 }
