@@ -1,10 +1,16 @@
 package protocol.messaging;
 
-public class ProtocolChatReceiveMessage {
-	
-	 @SerializedName("Absender")
-		public int sender;
-		@SerializedName("Nachricht")
-		public String message;
+import com.google.gson.annotations.SerializedName;
 
+public class ProtocolChatReceiveMessage {
+
+	@SerializedName("Absender")
+	private int sender;
+	@SerializedName("Nachricht")
+	private String message;
+
+	public ProtocolChatReceiveMessage(int sender, String message) {
+		this.sender = sender;
+		this.message = message;
+	}
 }
