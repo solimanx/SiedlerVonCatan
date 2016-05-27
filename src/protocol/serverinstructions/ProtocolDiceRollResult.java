@@ -4,8 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProtocolDiceRollResult {
 	@SerializedName("Spieler")
-	public int player;
+	private int player;
 	@SerializedName("Wurf")
-	public int roll;
+	private int roll;
 
+	public ProtocolDiceRollResult(int player, int roll) {
+
+		this.player = player;
+		this.roll = roll;
+	}
 }
