@@ -8,6 +8,7 @@ public class ProtocolHarbour {
 
 	@SerializedName("Ort")
 	String ID;
+
 	@SerializedName("Typ")
 	HarbourType type;
 
@@ -24,11 +25,4 @@ public class ProtocolHarbour {
 		return type;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
-	}
-
-	public void setType(HarbourType type) {
-		this.type = type;
-	}
 }

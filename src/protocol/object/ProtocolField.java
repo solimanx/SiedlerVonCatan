@@ -7,43 +7,46 @@ import enums.protocol.FieldType;
 public class ProtocolField {
 
 	@SerializedName("Ort")
-	String field_id;
+	private String field_id;
 
 	@SerializedName("Typ")
-	String field_type;
+	private FieldType field_type;
 
 	@SerializedName("Zahl")
-	int dice_index;
+	private int dice_index;
 
-	public ProtocolField(){
+	private enum FieldType {
+
+		@SerializedName("Ackerland") FARMLAND,
+
+		@SerializedName("Hügelland") HILL,
+
+		@SerializedName("Wald") FOREST,
+
+		@SerializedName("Gebirge") MOUNTAIN,
+
+		@SerializedName("Wüste") DESERT,
+
+		@SerializedName("Meer") SEA
+
 	}
 
-	public String getField_id() {
-		return field_id;
-	}
-
-	public String getField_type() {
-		return field_type;
-	}
-
-	public int getDice_index() {
-		return dice_index;
-	}
-
-	public void setField_id(String field_id) {
+	public ProtocolField(String field_id, FieldType field_type, int dice_index) {
 		this.field_id = field_id;
-	}
-
-	public void setField_type(String field_type) {
 		this.field_type = field_type;
-	}
-
-	public void setDice_index(int dice_index) {
 		this.dice_index = dice_index;
 	}
 
-	@Override
-	public String toString() {
-		return "Field [field_id=" + field_id + ", field_type=" + field_type + ", dice_index=" + dice_index + "]";
+	public String getFieldID() {
+		return field_id;
 	}
+
+	public FieldType getFieldType()  {
+		return field_type;
+	}
+
+	public int getDiceIndex()  {
+		return dice_index;
+	}
+
 }
