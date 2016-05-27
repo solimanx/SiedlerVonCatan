@@ -4,5 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProtocolStatusUpdate {
 	@SerializedName("Spieler")
-	public ProtocolPlayer player;
+	private ProtocolPlayer player;
+
+	public ProtocolStatusUpdate(ProtocolPlayer player) {
+		this.player = player;
+	}
 }
