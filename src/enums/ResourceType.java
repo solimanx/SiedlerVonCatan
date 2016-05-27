@@ -1,5 +1,5 @@
 package enums;
 
 public enum ResourceType {
-	WOOD, CLAY, ORE, SHEEP, CORN, NOTHING
+	WOOD, CLAY, ORE, SHEEP, CORN, NOTHING, SEA
 }
