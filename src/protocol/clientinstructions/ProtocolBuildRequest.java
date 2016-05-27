@@ -2,19 +2,21 @@ package protocol.clientinstructions;
 
 import com.google.gson.annotations.SerializedName;
 
+import enums.protocol.BuildingType;
+
 public class ProtocolBuildRequest {
 
 	@SerializedName("Bauen")
 	private String build;
 	@SerializedName("Typ")
-	private String type;
+	private BuildingType building;
 	@SerializedName("Ort")
 	private String location;
 
 	public ProtocolBuildRequest(String sendMessage, String message) {
 
 		this.build = build;
-		this.type = type;
+		this.building = building;
 		this.location = location;
 	}
 
@@ -22,8 +24,8 @@ public class ProtocolBuildRequest {
 		return build;
 	}
 
-	public String getType() {
-		return type;
+	public BuildingType getBuilding() {
+		return building;
 	}
 
 	public String getLocation() {
