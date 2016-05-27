@@ -1,9 +1,14 @@
 package protocol;
 
+import com.google.gson.annotations.SerializedName;
+
 import enums.protocol.HarbourType;
 
 public class ProtocolHarbour {
+
+	@SerializedName("Ort")
 	String ID;
+	@SerializedName("Typ")
 	HarbourType type;
 
 	public ProtocolHarbour(String iD, HarbourType type) {

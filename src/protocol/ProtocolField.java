@@ -1,10 +1,18 @@
 package protocol;
 
+import com.google.gson.annotations.SerializedName;
+
 import enums.protocol.FieldType;
 
 public class ProtocolField {
+
+	@SerializedName("Ort")
 	String field_id;
+
+	@SerializedName("Typ")
 	FieldType field_type;
+
+	@SerializedName("Zahl")
 	int dice_index;
 
 	public ProtocolField(String field_id, FieldType field_type, int dice_index) {
