@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 public class ProtocolBuild {
 
 	@SerializedName("Gebäude")
-	public ProtocolBuilding building;
 
+	private ProtocolBuilding building;
+
+	public ProtocolBuild(ProtocolBuilding building) {
+
+		this.building = building;
+	}
 }
