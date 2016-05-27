@@ -15,19 +15,21 @@ import com.google.gson.stream.JsonWriter;
  *
  * @version 0.1
  */
-public class FirstRunTypeAdapter extends TypeAdapter{
+public class FirstRunTypeAdapter extends TypeAdapter<String>{
 
 	@Override
-	public void write(JsonWriter out, Object value) throws IOException {
+	public void write(JsonWriter out, String value) throws IOException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Object read(JsonReader in) throws IOException {
+	public String read(JsonReader in) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 
 }
