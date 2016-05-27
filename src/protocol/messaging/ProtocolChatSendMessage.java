@@ -14,4 +14,12 @@ public class ProtocolChatSendMessage {
 		this.sendMessage = sendMessage;
 		this.message = message;
 	}
+
+	public String getSendMessage() {
+		return sendMessage;
+	}
+
+	public String getMessage() {
+		return message;
+	}
 }
