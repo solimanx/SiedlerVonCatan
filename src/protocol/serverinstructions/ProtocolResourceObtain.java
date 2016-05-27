@@ -14,4 +14,12 @@ public class ProtocolResourceObtain {
 		this.player = player;
 		this.resource = resource;
 	}
+
+	public int getPlayer() {
+		return player;
+	}
+
+	public ProtocolResource getResource() {
+		return resource;
+	}
 }
