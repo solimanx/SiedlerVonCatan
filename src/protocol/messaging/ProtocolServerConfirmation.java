@@ -14,4 +14,12 @@ public class ProtocolServerConfirmation {
 		this.name = name;
 		this.color = color;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public ColorType getColor() {
+		return color;
+	}
 }
