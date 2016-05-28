@@ -2,9 +2,11 @@ package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
 
+import protocol.object.ProtocolBuilding;
+
 public class ProtocolBuild {
 
-	@SerializedName("Geb‰ude")
+	@SerializedName("Geb√§ude")
 
 	private ProtocolBuilding building;
 

@@ -7,9 +7,9 @@ public class ProtocolServerConfirmation {
 	@SerializedName("Name")
 	private String name;
 	@SerializedName("Farbe")
-	private ColorType color;
+	private String color;
 
-	public ProtocolServerConfirmation(String name, ColorType color) {
+	public ProtocolServerConfirmation(String name, String color) {
 
 		this.name = name;
 		this.color = color;
@@ -19,7 +19,7 @@ public class ProtocolServerConfirmation {
 		return name;
 	}
 
-	public ColorType getColor() {
+	public String getColor() {
 		return color;
 	}
 }

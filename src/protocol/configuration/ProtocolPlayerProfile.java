@@ -2,16 +2,14 @@ package protocol.configuration;
 
 import com.google.gson.annotations.SerializedName;
 
-import enums.protocol.ColorType;
-
 public class ProtocolPlayerProfile {
 
 	@SerializedName("Name")
 	private String name;
 	@SerializedName("Farbe")
-	private ColorType color;
+	private String color;
 
-	public ProtocolPlayerProfile(String name, ColorType color) {
+	public ProtocolPlayerProfile(String name, String color) {
 
 		this.name = name;
 		this.color = color;
@@ -22,7 +20,7 @@ public class ProtocolPlayerProfile {
 		return name;
 	}
 
-	public ColorType getColor() {
+	public String getColor() {
 		return color;
 	}
 

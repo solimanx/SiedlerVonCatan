@@ -2,20 +2,18 @@ package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
 
-import enums.protocol.BuildingType;
-
 public class ProtocolBuilding {
 
 	@SerializedName("Eigentümer")
 	int player_id;
 
 	@SerializedName("Typ")
-	BuildingType building;
+	String building;
 
 	@SerializedName("Ort")
 	String id;
 
-	public ProtocolBuilding(int player_id, BuildingType building, String id) {
+	public ProtocolBuilding(int player_id, String building, String id) {
 		this.player_id = player_id;
 		this.building = building;
 		this.id = id;
@@ -25,13 +23,12 @@ public class ProtocolBuilding {
 		return player_id;
 	}
 
-	public BuildingType getBuilding() {
+	public String getBuilding() {
 		return building;
 	}
 
 	public String getId() {
 		return id;
 	}
-
 
 }

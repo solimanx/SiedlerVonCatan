@@ -2,6 +2,8 @@ package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
 
+import protocol.object.ProtocolResource;
+
 public class ProtocolResourceObtain {
 
 	@SerializedName("Spieler")
