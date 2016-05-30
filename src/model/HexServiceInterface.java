@@ -9,4 +9,7 @@ public interface HexServiceInterface {
 	
 	public String getSpiral(String starting_point_id);
 	public String getRing(int radius);
+	
+	public int[] convertAxialToCube(int[] a);
+	public int[] convertCubeToAxial(int[] c);
 }

@@ -104,13 +104,13 @@ public class HexService implements HexServiceInterface {
 
 	@Override
 	public int[] getCornerCoordinates(String field_ids) {
-		//TODO write
+		// TODO write
 		return null;
 	}
 
 	@Override
 	public int[] getEdgeCoordinates(String field_ids) {
-		//TODO write
+		// TODO write
 		return null;
 	}
 
@@ -180,7 +180,32 @@ public class HexService implements HexServiceInterface {
 	}
 
 	public String getRing(int radius) {
-		//TODO write
+		int check;
+		String ring = null;
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				check = sumAbsoluteValues(convertAxialToCube(new int[] { i, j }));
+				if (check == radius * 2) {
+					ring += board.getFieldAt(i, j).getFieldID();
+				}
+			}
+		}
+		return ring;
+	}
+
+	private int sumAbsoluteValues(int[] temp) {
+		return Math.abs(temp[0]) + Math.abs(temp[1]) + Math.abs(temp[2]);
+	}
+
+	@Override
+	public int[] convertAxialToCube(int[] a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] convertCubeToAxial(int[] c) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
