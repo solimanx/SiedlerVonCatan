@@ -19,149 +19,152 @@ import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 
 public class InputHandler {
-private Parser parser;	
-    
-   public InputHandler(){
-	   this.parser = new Parser();
-   }
-	
-	public void sendToParser(String s){
-		Object object = parser.parseString(s); 
+	private Parser parser;
+
+	public InputHandler() {
+		this.parser = new Parser();
+	}
+
+	/**
+	 * sends JSON formatted string to parser and initiates handling of parsed object
+	 * @param s
+	 */
+	public void sendToParser(String s) {
+		Object object = parser.parseString(s);
 		System.out.println(object.getClass());
 		handle(object);
-		//handle(object.getClass().cast(object));
+		// handle(object.getClass().cast(object));
 	}
-	
-	private void handle(Object o){
+
+	/**
+	 * takes parsed object and redirects to its proper method depending on objects "real" class. ( object will be casted to "real" class )
+	 * @param o
+	 */
+	private void handle(Object o) {
 		Class cl = o.getClass();
 
-		if(cl.equals(ProtocolHello.class)){
+		if (cl.equals(ProtocolHello.class)) {
 			ProtocolHello ph = (ProtocolHello) o;
 			handle(ph);
-		}
-		else if(cl.equals(ProtocolWelcome.class)){
+		} else if (cl.equals(ProtocolWelcome.class)) {
 			ProtocolWelcome pw = (ProtocolWelcome) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolClientReady.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolClientReady.class)) {
 			ProtocolClientReady pw = (ProtocolClientReady) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolGameStarted.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolGameStarted.class)) {
 			ProtocolGameStarted pw = (ProtocolGameStarted) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolError.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolError.class)) {
 			ProtocolError pw = (ProtocolError) o;
-			handle(pw);			
-		}	
-		else if(cl.equals(ProtocolPlayerProfile.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolPlayerProfile.class)) {
 			ProtocolPlayerProfile pw = (ProtocolPlayerProfile) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolChatReceiveMessage.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolChatReceiveMessage.class)) {
 			ProtocolChatReceiveMessage pw = (ProtocolChatReceiveMessage) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolChatSendMessage.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolChatSendMessage.class)) {
 			ProtocolChatSendMessage pw = (ProtocolChatSendMessage) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolServerConfirmation.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolServerConfirmation.class)) {
 			ProtocolServerConfirmation pw = (ProtocolServerConfirmation) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolBuild.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolBuild.class)) {
 			ProtocolBuild pw = (ProtocolBuild) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolDiceRollResult.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolDiceRollResult.class)) {
 			ProtocolDiceRollResult pw = (ProtocolDiceRollResult) o;
-			handle(pw);			
-		}	
-		else if(cl.equals(ProtocolResourceObtain.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolResourceObtain.class)) {
 			ProtocolResourceObtain pw = (ProtocolResourceObtain) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolStatusUpdate.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolStatusUpdate.class)) {
 			ProtocolStatusUpdate pw = (ProtocolStatusUpdate) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolDiceRollResult.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolDiceRollResult.class)) {
 			ProtocolDiceRollResult pw = (ProtocolDiceRollResult) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolBuildRequest.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolBuildRequest.class)) {
 			ProtocolBuildRequest pw = (ProtocolBuildRequest) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolDiceRollRequest.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolDiceRollRequest.class)) {
 			ProtocolDiceRollRequest pw = (ProtocolDiceRollRequest) o;
-			handle(pw);			
-		}
-		else if(cl.equals(ProtocolEndTurn.class)){
+			handle(pw);
+		} else if (cl.equals(ProtocolEndTurn.class)) {
 			ProtocolEndTurn pw = (ProtocolEndTurn) o;
-			handle(pw);			
-		}		
+			handle(pw);
+		}
 	}
-	private void handle(ProtocolHello hello){
+
+	private void handle(ProtocolHello hello) {
 		System.out.println("Hello gelesen!");
 	}
-	private void handle(ProtocolWelcome welcome){
-		
-	}
-	private void handle(ProtocolClientReady clientReady){
-		
-	}
-	private void handle(ProtocolGameStarted gameStarted){
-		
-	}
-	private void handle(ProtocolError error){
-		
-	}
-	private void handle(ProtocolPlayerProfile playerProfile){
-		
-	}
-	
-	//
-	
-	private void handle(ProtocolChatReceiveMessage chatReceiveMessage){
-		
-	}
-	private void handle(ProtocolChatSendMessage chatSendMessage){
-		
-	}
-	private void handle(ProtocolServerConfirmation serverConfirmation){
-		
-	}
-	
-	//
-	
-	private void handle(ProtocolBuild build){
-		
-	}
-	private void handle(ProtocolDiceRollResult diceRollResult){
-		
-	}
-	private void handle(ProtocolResourceObtain resourceObtain){
-		
-	}
-	private void handle(ProtocolStatusUpdate statusUpdate){
-		
-	}
-	
-	//
-	
-	
-	private void handle(ProtocolBuildRequest buildRequest){
-		
-	}	
-	private void handle(ProtocolDiceRollRequest diceRollRequest){
-		
-	}
-	private void handle(ProtocolEndTurn endTurn){
-		
-	}	
 
-	
+	private void handle(ProtocolWelcome welcome) {
+
+	}
+
+	private void handle(ProtocolClientReady clientReady) {
+
+	}
+
+	private void handle(ProtocolGameStarted gameStarted) {
+
+	}
+
+	private void handle(ProtocolError error) {
+
+	}
+
+	private void handle(ProtocolPlayerProfile playerProfile) {
+
+	}
+
+	//
+
+	private void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
+
+	}
+
+	private void handle(ProtocolChatSendMessage chatSendMessage) {
+
+	}
+
+	private void handle(ProtocolServerConfirmation serverConfirmation) {
+
+	}
+
+	//
+
+	private void handle(ProtocolBuild build) {
+
+	}
+
+	private void handle(ProtocolDiceRollResult diceRollResult) {
+
+	}
+
+	private void handle(ProtocolResourceObtain resourceObtain) {
+
+	}
+
+	private void handle(ProtocolStatusUpdate statusUpdate) {
+
+	}
+
+	//
+
+	private void handle(ProtocolBuildRequest buildRequest) {
+
+	}
+
+	private void handle(ProtocolDiceRollRequest diceRollRequest) {
+
+	}
+
+	private void handle(ProtocolEndTurn endTurn) {
+
+	}
+
 }
