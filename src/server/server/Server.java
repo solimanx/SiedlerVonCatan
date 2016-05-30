@@ -45,33 +45,33 @@ public class Server {
 					writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 					reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
-
-					String line = reader.readLine();
-					// inputHandler.sendToParser(line, id);
+					while (true) {
+						String line = reader.readLine();
+						// inputHandler.sendToParser(line, id);						
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
 					closeSocket();
 				}
 			}
-
-			public void write(String s) throws IOException {
-				writer.write(s + "\n");
-				writer.flush();
-			}
-
-			public void closeSocket() {
-				try {
-					socket.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		};
-
 		thread.start();
 		clients.put(clientCounter, thread);
 		clientCounter++;
+	}
+	
+	public void write(String s) throws IOException {
+//		writer.write(s + "\n");
+//		writer.flush();
+	}
+
+	public static void closeSocket() {
+//		try {
+////			socket.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }
