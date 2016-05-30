@@ -20,7 +20,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		gc = new GameController(primaryStage,1);
 		client = new Client();
-		client.run();
+		client.start();
 		
 	}
 	

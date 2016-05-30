@@ -6,18 +6,23 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
-import com.google.gson.Gson;
+import client.client.InputHandler;
 
 
 public class Server {
-
+    
+    private InputHandler inputHandler;
+    ArrayList<Thread> clients = new ArrayList<Thread>(4);
+    int maxClients = settings.DefaultSettings.maxClients;
+    
 	public static void main(String[] args) throws IOException {
 
 		ServerSocket serverSocket = new ServerSocket(8080);
 		System.out.println("Server Running!");
 		try {
-			while (true) {
+			while (clients. < maxClients) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket);
 			}
@@ -36,19 +41,20 @@ public class Server {
 					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
 
 					String line = reader.readLine();
-					line = line + "hat Server bekommen";
-
-					writer.write(line + "\n");
-					writer.flush();
-
+					inputHandler.sendToParser(line);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
 					closeSocket();
 				}
 			}
-
-			private void closeSocket() {
+            
+            public void write(String s){
+                writer.write(s + "\n");
+				writer.flush();
+            }
+            
+			public void closeSocket() {
 				try {
 					socket.close();
 				} catch (IOException e) {
@@ -58,6 +64,7 @@ public class Server {
 		};
 
 		thread.start();
+		clients.add(thread);
 	}
 
 }

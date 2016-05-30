@@ -1,8 +1,16 @@
 package client.controller;
 
-import javafx.event.ActionEvent;
+import client.view.View;
 
 public class MainViewController {
+	private View view;
+	private ViewController vc;
+	
+	public MainViewController(View view, ViewController vc) {
+		super();
+		this.vc = vc;
+		this.view = view;
+	}
 
 	public void villageClick(int[] villageCoordinates) {
 		System.out.println("Clicked on Village " + villageCoordinates[0] + " , " + villageCoordinates[1] + " , " + villageCoordinates[2]);

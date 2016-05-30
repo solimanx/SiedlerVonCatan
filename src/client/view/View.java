@@ -428,9 +428,6 @@ public class View implements ViewInterface {
 		double y2;
 		for (int u = 0; u < 7; u++) {
 			for (int v = 0; v < 7; v++) {
-				if (u == 3) {
-					System.out.println("");
-				}
 				x1 = fieldCoordinates[u][v][0];
 				y1 = fieldCoordinates[u][v][1] - radius;
 				x2 = fieldCoordinates[u][v][0] - halfWidth;

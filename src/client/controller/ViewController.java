@@ -24,13 +24,18 @@ public class ViewController implements ViewControllerInterface {
 	public ViewController(Stage primaryStage, Board board,GameController gc) {
 		this.gc = gc;
 		this.board = board;
-		this.mainVC = new MainViewController();
 		view = new View(board, primaryStage, mainVC);
+		this.mainVC = new MainViewController(view, this);
+		
 		init();
 	}
 
 	public View getView() {
 		return view;
+	}
+	
+	public MainViewController getMainViewController(){
+		return mainVC;
 	}
 
 	private void init() {
@@ -45,8 +50,7 @@ public class ViewController implements ViewControllerInterface {
 		view.button.setOnAction(e -> {
 			//setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
 			gc.buildInitialVillage(2, -2, 0, 1);
-		});
-		view.button2.setText("build initial street 2,-2,1");
+		});		view.button2.setText("build initial street 2,-2,1");
 		view.button2.setOnAction(e -> {
 			//setStreet(-1,-1,0,1);
 			gc.buildInitialStreet(2, -2, 1, 1);

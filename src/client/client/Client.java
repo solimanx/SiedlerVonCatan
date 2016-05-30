@@ -55,7 +55,7 @@ public class Client extends Thread {
 		}
 	}
 
-	private void write(String s) throws IOException {
+	public void write(String s) throws IOException {
 		writer.write(s + "\n");
 		writer.flush();
 	}
