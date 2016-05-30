@@ -17,8 +17,7 @@ public class Server {
     private static ArrayList<Thread> clients = new ArrayList<Thread>(settings.DefaultSettings.maxClients);
     static int maxClients = settings.DefaultSettings.maxClients;
     
-	public static void main(String[] args) throws IOException {
-
+	public void start() throws IOException{
 		ServerSocket serverSocket = new ServerSocket(8080);
 		System.out.println("Server Running!");
 		try {
@@ -28,9 +27,9 @@ public class Server {
 			}
 		} finally {
 			serverSocket.close();
-		}
+		}	
 	}
-
+	
 	private static void startHandler(Socket socket) throws IOException {
 		Thread thread = new Thread() {
 			OutputStreamWriter writer; 

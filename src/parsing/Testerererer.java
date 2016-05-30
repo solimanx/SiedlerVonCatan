@@ -11,7 +11,7 @@ public class Testerererer{
 
 	        String jsonstring = "{ \"Hallo\" : { \"Version\" : \"JavaFXClient 0.1 (RuhendeRebellionen)\" } }";
 	        System.out.println(jsonstring);
-	        InputHandler handler = new InputHandler();
+	        InputHandler handler = new InputHandler(null);
 	        handler.sendToParser(jsonstring);
 	        /*Parser p = new Parser();
 	        Object o = p.parseString(jsonstring);
