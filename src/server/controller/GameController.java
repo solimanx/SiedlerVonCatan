@@ -29,30 +29,30 @@ public class GameController implements GameControllerInterface {
 	Field[][] fields;
 	ViewController viewController;
 
-	public GameController(Stage primaryStage,int amountPlayers) {
+	public GameController(Stage primaryStage, int amountPlayers) {
 		this.board = Board.getInstance(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		viewController = new ViewController(primaryStage,board,this); //DEBUG ONLY!!
-		init();		
+		viewController = new ViewController(primaryStage, board, this); // DEBUG
+																		// ONLY!!
+		init();
 	}
 
 	@Override
-	public void init() { 
+	public void init() {
 
-		generateBoard(fields[2][2],false);
+		generateBoard(fields[2][2], false);
 		/*
-		  for (int i = 1; i <= amountPlayers;i++){
-		      networkController.initClients(i,board)...
-		  end
+		 * for (int i = 1; i <= amountPlayers;i++){
+		 * networkController.initClients(i,board)... end
 		 */
-		addToPlayersResource(1,ResourceType.WOOD,3); //All DEBUG!!
-		addToPlayersResource(1,ResourceType.CLAY,3);
-		addToPlayersResource(1,ResourceType.ORE,3);
-		addToPlayersResource(1,ResourceType.SHEEP,3);
-		addToPlayersResource(1,ResourceType.CORN,3);
-		setPlayerState(1,PlayerState.PLAYING); // player 1 begins
+		addToPlayersResource(1, ResourceType.WOOD, 3); // All DEBUG!!
+		addToPlayersResource(1, ResourceType.CLAY, 3);
+		addToPlayersResource(1, ResourceType.ORE, 3);
+		addToPlayersResource(1, ResourceType.SHEEP, 3);
+		addToPlayersResource(1, ResourceType.CORN, 3);
+		setPlayerState(1, PlayerState.PLAYING); // player 1 begins
 
 	}
 
@@ -66,8 +66,8 @@ public class GameController implements GameControllerInterface {
 	 * @param randomDesert
 	 */
 	private void generateBoard(Field initialField, boolean randomDesert) {
-		ArrayList<Field> fields = board.getAllFields(); //spiral implementieren
-		System.out.println("Size" +fields.size());
+		ArrayList<Field> fields = board.getAllFields(); // spiral implementieren
+		System.out.println("Size" + fields.size());
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
 		int currNum;
 		if (randomDesert) {
@@ -105,13 +105,17 @@ public class GameController implements GameControllerInterface {
 				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
 				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[i]);
 			}
-			fields.get(fields.size()-1).setResourceType(ResourceType.NOTHING); //inner field = desert;
-			fields.get(fields.size()-1).setDiceIndex(0);
+			fields.get(fields.size() - 1).setResourceType(ResourceType.NOTHING); // inner
+																					// field
+																					// =
+																					// desert;
+			fields.get(fields.size() - 1).setDiceIndex(0);
 		}
 		int[] viewCoord = new int[2];
-		for (int i = 0;i <fields.size();i++){
+		for (int i = 0; i < fields.size(); i++) {
 			viewCoord = board.getFieldCoordinates(fields.get(i));
-			viewController.setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(), fields.get(i).getDiceIndex());
+			viewController.setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
+					fields.get(i).getDiceIndex());
 		}
 	}
 
@@ -140,7 +144,7 @@ public class GameController implements GameControllerInterface {
 		for (Field p : correspondingFields) {
 			if (p != bandit) {
 				fieldCoordinates = board.getFieldCoordinates(p);
-				neighborCorners = board.getSurroundingCorners(fieldCoordinates[0],fieldCoordinates[1]);
+				neighborCorners = board.getSurroundingCorners(fieldCoordinates[0], fieldCoordinates[1]);
 				resType = p.getResourceType();
 				for (Corner o : neighborCorners) {
 					status = o.getStatus();
@@ -175,11 +179,11 @@ public class GameController implements GameControllerInterface {
 			playerModels[playerId].decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
-				if (neighbors[i] != null){
-				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+				if (neighbors[i] != null) {
+					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
-			
+
 			subFromPlayersResources(playerId, settings.DefaultSettings.VILLAGE_BUILD_COST);
 
 			viewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
@@ -237,8 +241,8 @@ public class GameController implements GameControllerInterface {
 			playerModels[playerId].decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
-				if (neighbors[i] != null){
-				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+				if (neighbors[i] != null) {
+					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
 			viewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
@@ -255,7 +259,7 @@ public class GameController implements GameControllerInterface {
 
 	private void subFromPlayersResources(int playerId, int[] costsparam) {
 		int[] costs = new int[5];
-		for (int i = 0;i<costsparam.length;i++){
+		for (int i = 0; i < costsparam.length; i++) {
 			costs[i] = costsparam[i];
 		}
 		ResourceType currResType;
@@ -310,49 +314,50 @@ public class GameController implements GameControllerInterface {
 	public void setBandit(int x, int y) {
 		if (gameLogic.checkSetBandit(x, y)) {
 			board.setBandit(board.getFieldAt(x, y));
-			
-			viewController.setBandit(x, y); //Debug
+
+			viewController.setBandit(x, y); // Debug
 		}
 
 	}
 
 	/**
-	 * basic method for switching the player states 
-	 * updates all clients via networkController
+	 * basic method for switching the player states updates all clients via
+	 * networkController
+	 * 
 	 * @param playerId
 	 * @param state
 	 */
 	@Override
-	public void setPlayerState(int playerId,PlayerState state) {
-		switch(state){
-		case TRADING: //set all other players to offering
-		for (int i = 1; i < playerModels.length;i++){
-			if (i == playerId){
-				playerModels[i].setPlayerState(state);
-			} else{
-				playerModels[i].setPlayerState(PlayerState.OFFERING);
-			}
-		}
-		case PLAYING: //set all other players waiting
-			for (int i = 1; i < playerModels.length;i++){
-				if (i == playerId){
+	public void setPlayerState(int playerId, PlayerState state) {
+		switch (state) {
+		case TRADING: // set all other players to offering
+			for (int i = 1; i < playerModels.length; i++) {
+				if (i == playerId) {
 					playerModels[i].setPlayerState(state);
-				} else{
+				} else {
+					playerModels[i].setPlayerState(PlayerState.OFFERING);
+				}
+			}
+		case PLAYING: // set all other players waiting
+			for (int i = 1; i < playerModels.length; i++) {
+				if (i == playerId) {
+					playerModels[i].setPlayerState(state);
+				} else {
 					playerModels[i].setPlayerState(PlayerState.WAITING);
 				}
 			}
-		default: //else set only player state of playerId
+		default: // else set only player state of playerId
 			playerModels[playerId].setPlayerState(state);
 		}
 
-		//DEBUG ONLY!
-		//viewController.setPlayerState(playerId);
+		// DEBUG ONLY!
+		// viewController.setPlayerState(playerId);
 		/*
-		 for (int i = 1;i < playerModels.length;i++){
-		     networkController.setPlayerState(i,playerModels[i].getPlayerState());
-		 }    
+		 * for (int i = 1;i < playerModels.length;i++){
+		 * networkController.setPlayerState(i,playerModels[i].getPlayerState());
+		 * }
 		 */
-		
+
 	}
 
 	@Override

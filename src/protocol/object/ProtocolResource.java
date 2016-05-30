@@ -62,6 +62,6 @@ public class ProtocolResource {
 	public int getUnknown() {
 		return unknown;
 	}
-	//TODO special adapter
+	// TODO special adapter
 
 }

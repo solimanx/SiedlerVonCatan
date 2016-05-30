@@ -21,8 +21,6 @@ public interface ViewInterface {
 
 	public void setFieldChip(int u, int v, int diceIndex);
 
-	
-
 	public int convertToRect(int x);
 
 	public Polygon drawVillage(double[] center);

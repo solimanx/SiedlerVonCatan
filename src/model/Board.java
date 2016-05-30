@@ -620,7 +620,7 @@ public class Board implements BoardInterface {
 		}
 		return linkedEdges;
 	}
-	
+
 	@Override
 	public int[] getFieldCoordinates(Field f) {
 		String field_id = f.getFieldID();

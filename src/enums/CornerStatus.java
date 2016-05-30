@@ -1,5 +1,5 @@
 package enums;
 
 public enum CornerStatus {
-    EMPTY, VILLAGE, CITY, BLOCKED
+	EMPTY, VILLAGE, CITY, BLOCKED
 }

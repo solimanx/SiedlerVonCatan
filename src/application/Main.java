@@ -14,14 +14,13 @@ import server.server.Server;
 
 public class Main extends Application {
 	private static Logger logger = LogManager.getLogger(Main.class.getName());
-	
+
 	private GameController gc;
 	private Client client;
 	private Server server;
-	
-	//true for server, false for client
+
+	// true for server, false for client
 	private boolean mode = false;
-	
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -34,27 +33,27 @@ public class Main extends Application {
 				e.printStackTrace();
 			}
 		} else {
-			gc = new GameController(primaryStage,1);
+			gc = new GameController(primaryStage, 1);
 			client = new Client();
-			client.start();			
+			client.start();
 		}
-		
+
 	}
-	
+
 	@Override
-	public void init() throws Exception{
+	public void init() throws Exception {
 		Parameters p = getParameters();
 		List<String> raw = p.getRaw();
 		for (String string : raw) {
-			if (string.equals("server")){
+			if (string.equals("server")) {
 				mode = true;
 			}
 		}
 	}
 
 	public static void main(String[] args) {
-		
+
 		launch(args);
-		
+
 	}
 }

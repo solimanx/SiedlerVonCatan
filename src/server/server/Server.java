@@ -10,14 +10,13 @@ import java.util.ArrayList;
 
 import client.client.InputHandler;
 
-
 public class Server {
-    
-    private InputHandler inputHandler;
-    private static ArrayList<Thread> clients = new ArrayList<Thread>(settings.DefaultSettings.maxClients);
-    static int maxClients = settings.DefaultSettings.maxClients;
-    
-	public void start() throws IOException{
+
+	private InputHandler inputHandler;
+	private static ArrayList<Thread> clients = new ArrayList<Thread>(settings.DefaultSettings.maxClients);
+	static int maxClients = settings.DefaultSettings.maxClients;
+
+	public void start() throws IOException {
 		ServerSocket serverSocket = new ServerSocket(8080);
 		System.out.println("Server Running!");
 		try {
@@ -27,14 +26,14 @@ public class Server {
 			}
 		} finally {
 			serverSocket.close();
-		}	
+		}
 	}
-	
+
 	private static void startHandler(Socket socket) throws IOException {
 		Thread thread = new Thread() {
-			OutputStreamWriter writer; 
+			OutputStreamWriter writer;
 			BufferedReader reader;
-			
+
 			@Override
 			public void run() {
 				try {
@@ -43,19 +42,19 @@ public class Server {
 					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
 
 					String line = reader.readLine();
-//					inputHandler.sendToParser(line);
+					// inputHandler.sendToParser(line);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
 					closeSocket();
 				}
 			}
-            
-            public void write(String s) throws IOException{
-                writer.write(s + "\n");
+
+			public void write(String s) throws IOException {
+				writer.write(s + "\n");
 				writer.flush();
-            }
-            
+			}
+
 			public void closeSocket() {
 				try {
 					socket.close();

@@ -19,34 +19,34 @@ public class PlayerModel {
 	boolean hasLargestArmy;
 	PlayerState playerState;
 	int id;
-	
+
 	// every Player gets own id (1..4)
-	public PlayerModel(int id){
+	public PlayerModel(int id) {
 		this.id = id;
 		this.resourceCards = new ArrayList<ResourceType>();
 	}
-	
-	public int getId() {		
+
+	public int getId() {
 		return id;
-	}	
-	
-	public int getAmountStreets() {		
+	}
+
+	public int getAmountStreets() {
 		return amountStreets;
 	}
-	
-	public void decreaseAmountStreets(){
+
+	public void decreaseAmountStreets() {
 		amountStreets--;
 	}
 
-	public void decreaseAmountVillages(){
+	public void decreaseAmountVillages() {
 		amountVillages--;
-	}	
-	
-	public void increaseAmountVillages(){
+	}
+
+	public void increaseAmountVillages() {
 		amountVillages++;
 	}
-	
-	public void decreaseAmountCities(){
+
+	public void decreaseAmountCities() {
 		amountCities--;
 	}
 
@@ -109,5 +109,5 @@ public class PlayerModel {
 	public void setAmountStreets(int amountStreets) {
 		this.amountStreets = amountStreets;
 	}
-	
+
 }

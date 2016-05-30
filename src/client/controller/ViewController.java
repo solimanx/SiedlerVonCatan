@@ -16,25 +16,25 @@ public class ViewController implements ViewControllerInterface {
 
 	private View view;
 	private Board board;
-	private HashMap<Integer, Color> playerColors = new HashMap<Integer, Color>(4);
+	private HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	private GameController gc;
 	private MainViewController mainVC;
 
-	public ViewController(Stage primaryStage, Board board,GameController gc) {
+	public ViewController(Stage primaryStage, Board board, GameController gc) {
 		this.gc = gc;
 		this.board = board;
 		view = new View(board, primaryStage, mainVC);
 		this.mainVC = new MainViewController(view, this);
-		
+
 		init();
 	}
 
 	public View getView() {
 		return view;
 	}
-	
-	public MainViewController getMainViewController(){
+
+	public MainViewController getMainViewController() {
 		return mainVC;
 	}
 
@@ -45,30 +45,36 @@ public class ViewController implements ViewControllerInterface {
 		fieldColors.put(ResourceType.ORE, Color.DARKGRAY);
 		fieldColors.put(ResourceType.SHEEP, Color.LIGHTGREEN);
 		fieldColors.put(ResourceType.WOOD, Color.FORESTGREEN);
-		
+
+		playerColors.put(enums.Color.BLUE, Color.BLUE);
+		playerColors.put(enums.Color.ORANGE, Color.ORANGE);
+		playerColors.put(enums.Color.RED, Color.RED);
+		playerColors.put(enums.Color.WHITE, Color.WHITE);
+
 		view.button.setText("build initial village 2,-2,0");
 		view.button.setOnAction(e -> {
-			//setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
+			// setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
 			gc.buildInitialVillage(2, -2, 0, 1);
-		});		view.button2.setText("build initial street 2,-2,1");
+		});
+		view.button2.setText("build initial street 2,-2,1");
 		view.button2.setOnAction(e -> {
-			//setStreet(-1,-1,0,1);
+			// setStreet(-1,-1,0,1);
 			gc.buildInitialStreet(2, -2, 1, 1);
 			gc.buildStreet(2, -2, 2, 1);
-			//view.setFieldResourceType(-1, -1, fieldColors.get(ResourceType.SHEEP));			
+			// view.setFieldResourceType(-1, -1,
+			// fieldColors.get(ResourceType.SHEEP));
 		});
 		view.button3.setText("build city 2,-2,0");
 		view.button3.setOnAction(e -> {
-			//setCorner(0, -2, 1, CornerStatus.CITY, 1);
+			// setCorner(0, -2, 1, CornerStatus.CITY, 1);
 			gc.buildCity(2, -2, 0, 1);
 			gc.buildVillage(2, -1, 0, 1);
 			gc.buildCity(2, -1, 0, 1);
 		});
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {
-			gc.setBandit(2,-2);
-		});		
-				
+			gc.setBandit(2, -2);
+		});
 
 	}
 

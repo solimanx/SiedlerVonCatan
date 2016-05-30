@@ -15,7 +15,7 @@ public class NetworkController {
 	private InputHandler inputHandler;
 	private Server server;
 
-	public NetworkController(GameController gc){
+	public NetworkController(GameController gc) {
 		this.gameController = gc;
 		this.server = new Server();
 		try {
@@ -24,7 +24,7 @@ public class NetworkController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.outputHandler = new OutputHandler(this,server);
+		this.outputHandler = new OutputHandler(this, server);
 		this.inputHandler = new InputHandler(this);
 	}
 }

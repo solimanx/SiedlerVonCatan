@@ -17,7 +17,7 @@ public class ProtocolResourceObtain {
 
 	@SerializedName("Spieler")
 	private int player_id;
-	
+
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resource;
 

@@ -20,64 +20,60 @@ import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 
 public class Response {
-	   
-    // connection
-    @SerializedName("Hallo")
-    public ProtocolHello pHello; 
-    
-    @SerializedName("Willkommen")
-    public ProtocolWelcome pWelcome; 
-    
-    // configuration
-    @SerializedName("Spiel starten")
-    public ProtocolClientReady pClientReady;
-    
-    @SerializedName("Fehler")
-    public ProtocolError pError;
-    
-    @SerializedName("Spiel gestartet")
-    public ProtocolGameStarted pGameStarted;
-    
-    @SerializedName("Spieler")
-    public ProtocolPlayerProfile pPlayerProfile;
-    
-   
-    // server instructions
-    
-    @SerializedName("Bauvorgang")
-    public ProtocolBuild pBuild;
-    
-    @SerializedName("Würfelwurf")
-    public ProtocolDiceRollResult pDRResult;
-    
-    @SerializedName("Ertrag")
-    public ProtocolResourceObtain pRObtain;
-    
-    @SerializedName("Statusupdate")
-    public ProtocolStatusUpdate pSUpdate;
-    
-    
-    
-    // messaging
-    
-    @SerializedName("Chatnachricht")
-    public ProtocolChatReceiveMessage pChatReceive;
-    
-    @SerializedName("Chatnachricht senden")
-    public ProtocolChatSendMessage pChatSend;
-    
-    @SerializedName("Serverantwort")
-    public ProtocolServerConfirmation pServerConfirmation;
-    
-  
-    //Client Instructions
 
-    @SerializedName("Bauen")
-    public ProtocolBuildRequest pBuildRequest;
+	// connection
+	@SerializedName("Hallo")
+	public ProtocolHello pHello;
 
-    @SerializedName("Würfeln")
-    public ProtocolDiceRollRequest pDiceRollRequest;
-    
-    @SerializedName("Zug beenden")
-    public ProtocolEndTurn pEndTurn;
+	@SerializedName("Willkommen")
+	public ProtocolWelcome pWelcome;
+
+	// configuration
+	@SerializedName("Spiel starten")
+	public ProtocolClientReady pClientReady;
+
+	@SerializedName("Fehler")
+	public ProtocolError pError;
+
+	@SerializedName("Spiel gestartet")
+	public ProtocolGameStarted pGameStarted;
+
+	@SerializedName("Spieler")
+	public ProtocolPlayerProfile pPlayerProfile;
+
+	// server instructions
+
+	@SerializedName("Bauvorgang")
+	public ProtocolBuild pBuild;
+
+	@SerializedName("Würfelwurf")
+	public ProtocolDiceRollResult pDRResult;
+
+	@SerializedName("Ertrag")
+	public ProtocolResourceObtain pRObtain;
+
+	@SerializedName("Statusupdate")
+	public ProtocolStatusUpdate pSUpdate;
+
+	// messaging
+
+	@SerializedName("Chatnachricht")
+	public ProtocolChatReceiveMessage pChatReceive;
+
+	@SerializedName("Chatnachricht senden")
+	public ProtocolChatSendMessage pChatSend;
+
+	@SerializedName("Serverantwort")
+	public ProtocolServerConfirmation pServerConfirmation;
+
+	// Client Instructions
+
+	@SerializedName("Bauen")
+	public ProtocolBuildRequest pBuildRequest;
+
+	@SerializedName("Würfeln")
+	public ProtocolDiceRollRequest pDiceRollRequest;
+
+	@SerializedName("Zug beenden")
+	public ProtocolEndTurn pEndTurn;
 }

@@ -10,6 +10,6 @@ public class InputHandler {
 	public InputHandler(NetworkController nc) {
 		this.networkController = nc;
 		this.parser = new Parser();
-	}	
+	}
 
 }
