@@ -14,15 +14,15 @@ import client.client.InputHandler;
 public class Server {
     
     private InputHandler inputHandler;
-    ArrayList<Thread> clients = new ArrayList<Thread>(4);
-    int maxClients = settings.DefaultSettings.maxClients;
+    private static ArrayList<Thread> clients = new ArrayList<Thread>(4);
+    static int maxClients = settings.DefaultSettings.maxClients;
     
 	public static void main(String[] args) throws IOException {
 
 		ServerSocket serverSocket = new ServerSocket(8080);
 		System.out.println("Server Running!");
 		try {
-			while (clients. < maxClients) {
+			while (clients.size() < maxClients) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket);
 			}
@@ -33,15 +33,18 @@ public class Server {
 
 	private static void startHandler(Socket socket) throws IOException {
 		Thread thread = new Thread() {
+			OutputStreamWriter writer; 
+			BufferedReader reader;
+			
 			@Override
 			public void run() {
 				try {
-					OutputStreamWriter writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-					BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+					writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+					reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
 
 					String line = reader.readLine();
-					inputHandler.sendToParser(line);
+//					inputHandler.sendToParser(line);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
@@ -49,7 +52,7 @@ public class Server {
 				}
 			}
             
-            public void write(String s){
+            public void write(String s) throws IOException{
                 writer.write(s + "\n");
 				writer.flush();
             }
