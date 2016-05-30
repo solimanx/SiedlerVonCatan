@@ -19,11 +19,13 @@ public class ViewController implements ViewControllerInterface {
 	private HashMap<Integer, Color> playerColors = new HashMap<Integer, Color>(4);
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	private GameController gc;
+	private MainViewController mainVC;
 
 	public ViewController(Stage primaryStage, Board board,GameController gc) {
 		this.gc = gc;
 		this.board = board;
-		view = new View(board, primaryStage);
+		this.mainVC = new MainViewController();
+		view = new View(board, primaryStage, mainVC);
 		init();
 	}
 

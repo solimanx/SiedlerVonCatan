@@ -1,13 +1,19 @@
 package client.view;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
+import client.controller.MainViewController;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -60,14 +66,16 @@ public class View implements ViewInterface {
 	public Button button3;
 	public Button button4;
 
-	public ArrayList<Shape> figures = new ArrayList<Shape>();
+	public List<Shape> figures = new LinkedList<Shape>();
+	private MainViewController vc;
 
 	/**
 	 * @param board
 	 * @param stage
 	 */
-	public View(Board board, Stage stage) {
+	public View(Board board, Stage stage, MainViewController vc) {
 		this.primaryStage = stage;
+		this.vc = vc;
 		try {
 			rootPane = new BorderPane();
 			Scene scene = new Scene(rootPane, 400, 400);
@@ -102,7 +110,6 @@ public class View implements ViewInterface {
 		button4 = new Button();
 		HBox buttons = new HBox(button, button2, button3, button4);
 		rootPane.setTop(buttons);
-
 		// end Test Buttons
 
 		centerPane = new Pane();
@@ -110,7 +117,6 @@ public class View implements ViewInterface {
 
 		rootPane.setCenter(centerPane);
 
-		// TODO getFields
 		return true;
 	}
 
@@ -121,25 +127,42 @@ public class View implements ViewInterface {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 7; j++) {
 				if (fieldCoordinates[i][j][0] > 0) {
-					Polygon hexagon = drawHexagon(
-							createHexagon(fieldCoordinates[i][j][0], fieldCoordinates[i][j][1]));
+					Polygon hexagon = drawHexagon(createHexagon(fieldCoordinates[i][j][0], fieldCoordinates[i][j][1]));
 					hexagon.setVisible(true);
 					figures.add(0, hexagon);
 					fields[i][j] = hexagon;
+					for (int l = 0; l < 3; l++) {
+						if (edgeCoordinates[i][j][l][0] > 0) {
+							Line street = drawStreet(edgeCoordinates[i][j][l]);
+							street.setOpacity(0);
+							street.setStroke(Color.WHITE);
+							street.getStyleClass().add("street");
+							streets[i][j][l] = street;
+
+							int[] streetCoordinates = { i, j, l };
+
+							street.setOnMouseClicked(e -> {
+								vc.streetClick(streetCoordinates);
+							});
+
+							figures.add(street);
+						}
+					}
 					for (int k = 0; k < 2; k++) {
 						if (cornerCoordinates[i][j][k][0] > 0) {
 							Polygon village = drawVillage(cornerCoordinates[i][j][k]);
-							// set event listener
 							village.setOpacity(0);
+							village.getStyleClass().add("village");
 							corners[i][j][k] = village;
+
+							int[] villageCoordinates = { i, j, k };
+
+							village.setOnMouseClicked(e -> {
+								vc.villageClick(villageCoordinates);
+							});
+
 							figures.add(village);
 						}
-					}
-					for (int l = 0; l < 3; l++) {
-						Line street = drawStreet(edgeCoordinates[i][j][l]);
-						street.setOpacity(0);
-						streets[i][j][l] = street;
-						figures.add(street);
 					}
 				}
 			}
@@ -215,7 +238,7 @@ public class View implements ViewInterface {
 	@Override
 	public Line drawStreet(double[] coordinates) {
 		Line street = new Line(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
-		street.setStrokeWidth(4.0);
+		street.setStrokeWidth(6.0);
 
 		return street;
 	}
@@ -294,7 +317,7 @@ public class View implements ViewInterface {
 
 	@Override
 	public void setStreet(int u, int v, int dir, Color playerColor) {
-		Line street = streets[u+3][v+3][dir];
+		Line street = streets[u + 3][v + 3][dir];
 		street.setOpacity(1.0);
 		street.setStroke(playerColor);
 		System.out.println("Street set on " + u + "," + v + " Direction: " + dir);
@@ -311,8 +334,8 @@ public class View implements ViewInterface {
 
 	@Override
 	public void setBandit(int u, int v) {
-		bandit.setCenterX(fieldCoordinates[u+3][v+3][0]);
-		bandit.setCenterY(fieldCoordinates[u+3][v+3][1]);
+		bandit.setCenterX(fieldCoordinates[u + 3][v + 3][0]);
+		bandit.setCenterY(fieldCoordinates[u + 3][v + 3][1]);
 		bandit.setOpacity(1.0);
 		// TODO Auto-generated method stub
 
@@ -405,7 +428,7 @@ public class View implements ViewInterface {
 		double y2;
 		for (int u = 0; u < 7; u++) {
 			for (int v = 0; v < 7; v++) {
-				if(u == 3){
+				if (u == 3) {
 					System.out.println("");
 				}
 				x1 = fieldCoordinates[u][v][0];
