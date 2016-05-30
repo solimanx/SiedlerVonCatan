@@ -25,7 +25,6 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		gc = new GameController(primaryStage,1);
 		if (mode) {
 			server = new Server();
 			try {
@@ -35,6 +34,7 @@ public class Main extends Application {
 				e.printStackTrace();
 			}
 		} else {
+			gc = new GameController(primaryStage,1);
 			client = new Client();
 			client.start();			
 		}
