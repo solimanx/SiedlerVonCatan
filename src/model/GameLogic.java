@@ -29,12 +29,15 @@ public class GameLogic implements GameLogicInterface {
 		if (playerModels[playerId].getAmountVillages() <= 0) {
 			return false; // no Village left to build
 		}
-		int[] resources = getPlayerResources(playerId);
+		if (checkPlayerResources(playerId,settings.DefaultSettings.VILLAGE_BUILD_COST) == false){
+			return false;
+		}		
+		/*int[] resources = getPlayerResources(playerId);
 		for (int i = 0; i < 5; i++) {
 			if (resources[i] < settings.DefaultSettings.VILLAGE_BUILD_COST[i]) {
 				return false; // not enough resources
 			}
-		}
+		}*/
 		Corner c = board.getCornerAt(x, y, dir);
 		if (c != null){ //valid corner
 		if (c.getStatus() == enums.CornerStatus.EMPTY) { // is the Corner Empty?
@@ -67,13 +70,16 @@ public class GameLogic implements GameLogicInterface {
 			System.out.println("no cities left");
 			return false; // no Cities left to build
 		}
-		int[] resources = getPlayerResources(playerId);
+		if (checkPlayerResources(playerId,settings.DefaultSettings.CITY_BUILD_COST) == false){
+			return false;
+		}
+		/*int[] resources = getPlayerResources(playerId);
 		for (int i = 0; i < 5; i++) {
 			if (resources[i] < settings.DefaultSettings.CITY_BUILD_COST[i]) {
 				System.out.println("not enough resources");
 				return false; // not enough resources
 			}
-		}
+		} */
 		Corner c = board.getCornerAt(x, y, dir);
 		if (c != null){
 		if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnedByPlayer().getId() == playerId) { 
@@ -105,12 +111,15 @@ public class GameLogic implements GameLogicInterface {
 		if (playerModels[playerId].getAmountStreets() <= 0) { // has this Player a Street left to build?
 			return false;
 		}
-		int[] resources = getPlayerResources(playerId);
+		if (checkPlayerResources(playerId,settings.DefaultSettings.STREET_BUILD_COST) == false){
+			return false;
+		}
+		/*int[] resources = getPlayerResources(playerId);
 		for (int i = 0; i < 5; i++) {
 			if (resources[i] < settings.DefaultSettings.STREET_BUILD_COST[i]) {
 				return false;
 			}
-		}
+		}*/
 		Edge e = board.getEdgeAt(x,y,dir);
 		if (e != null){  //valid edge
 		if (e.isHasStreet() == false) {
@@ -143,6 +152,16 @@ public class GameLogic implements GameLogicInterface {
 		
 		return false;
 	}
+	
+	public boolean checkPlayerResources(int playerId,int[] resources){
+		int[] playerResources = getPlayerResources(playerId);
+		for (int i = 0; i < 5; i++) {
+			if (playerResources[i] < resources[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Gets an array which contains the player resources in form of
@@ -151,7 +170,7 @@ public class GameLogic implements GameLogicInterface {
 	 * @param playerId
 	 * @return resource Array
 	 */
-	private int[] getPlayerResources(int playerId) {
+	public int[] getPlayerResources(int playerId) {
 		int[] result = {0,0,0,0,0};
 		ArrayList<ResourceType> resList = playerModels[playerId].getResourceCards();	
 		if (resList == null){
@@ -230,6 +249,7 @@ public class GameLogic implements GameLogicInterface {
 	}	
 	@Override
 	public boolean canTrade() {
+		
 		// TODO Auto-generated method stub
 		return false;
 	}
