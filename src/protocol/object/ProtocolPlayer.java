@@ -2,6 +2,16 @@ package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * <b>4.5 Spieler</b>
+ * <p>
+ * Contains information about player: player ID, color, name , status, score,
+ * and resources.
+ * </p>
+ * 
+ * @version 0.1
+ * 
+ */
 public class ProtocolPlayer {
 
 	@SerializedName("id")
@@ -55,6 +65,5 @@ public class ProtocolPlayer {
 	public ProtocolResource getResources() {
 		return resources;
 	}
-
 
 }

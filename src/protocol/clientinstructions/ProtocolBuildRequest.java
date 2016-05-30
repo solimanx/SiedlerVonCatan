@@ -2,32 +2,34 @@ package protocol.clientinstructions;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * <b>8.2 Bauen </b>
+ * <p>
+ * Client sends server request to build building.
+ * </p>
+ * 
+ * @version 0.1
+ * 
+ */
 public class ProtocolBuildRequest {
 
-	@SerializedName("Bauen")
-	private String build;
 	@SerializedName("Typ")
-	private String building;
+	private String building_type;
+
 	@SerializedName("Ort")
-	private String location;
+	private String location_id;
 
-	public ProtocolBuildRequest(String sendMessage, String message) {
-
-		this.build = build;
-		this.building = building;
-		this.location = location;
-	}
-
-	public String getBuild() {
-		return build;
+	public ProtocolBuildRequest(String building_type, String location_id) {
+		this.building_type = building_type;
+		this.location_id = location_id;
 	}
 
 	public String getBuilding() {
-		return building;
+		return building_type;
 	}
 
 	public String getLocation() {
-		return location;
+		return location_id;
 	}
 
 }

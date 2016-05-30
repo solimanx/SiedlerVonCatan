@@ -2,6 +2,15 @@ package protocol.connection;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * <b>3: Verbindungsaufbau</b>
+ * <p>
+ * Version and protocol information.
+ * </p>
+ * 
+ * @version 0.1
+ * 
+ */
 public class ProtocolHello {
 
 	@SerializedName("Version")

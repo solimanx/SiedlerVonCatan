@@ -2,6 +2,15 @@ package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * <b>4.1 Felder</b>
+ * <p>
+ * Contains information about field: ID/location, land type and dice index.
+ * </p>
+ * 
+ * @version 0.1
+ * 
+ */
 public class ProtocolField {
 
 	@SerializedName("Ort")
@@ -13,7 +22,6 @@ public class ProtocolField {
 	@SerializedName("Zahl")
 	private int dice_index;
 
-
 	public ProtocolField(String field_id, String field_type, int dice_index) {
 		this.field_id = field_id;
 		this.field_type = field_type;
@@ -24,11 +32,11 @@ public class ProtocolField {
 		return field_id;
 	}
 
-	public String getFieldType()  {
+	public String getFieldType() {
 		return field_type;
 	}
 
-	public int getDiceIndex()  {
+	public int getDiceIndex() {
 		return dice_index;
 	}
 

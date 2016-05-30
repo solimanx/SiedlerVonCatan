@@ -2,8 +2,16 @@ package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
 
-import model.Field;
-
+/**
+ * <b>4.4 Karte</b>
+ * <p>
+ * Contains information about board: fields-, buildings-, harbours-list and
+ * robber's location.
+ * </p>
+ * 
+ * @version 0.1
+ * 
+ */
 public class ProtocolBoard {
 
 	@SerializedName("Felder")

@@ -2,24 +2,26 @@ package protocol.messaging;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * <b>5.1 Bestätigungen und Fehler</b>
+ * <p>
+ * Server confirmation of client's actions.
+ * </p>
+ * 
+ * @version 0.1
+ * 
+ */
 public class ProtocolServerConfirmation {
 
-	@SerializedName("Name")
-	private String name;
-	@SerializedName("Farbe")
-	private String color;
+	@SerializedName("Serverantwort")
+	private String server_response;
 
-	public ProtocolServerConfirmation(String name, String color) {
-
-		this.name = name;
-		this.color = color;
+	public ProtocolServerConfirmation(String server_response) {
+		this.server_response = server_response;
 	}
 
-	public String getName() {
-		return name;
+	public String getServer_response() {
+		return server_response;
 	}
 
-	public String getColor() {
-		return color;
-	}
 }

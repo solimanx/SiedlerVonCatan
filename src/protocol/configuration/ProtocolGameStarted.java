@@ -2,21 +2,28 @@ package protocol.configuration;
 
 import com.google.gson.annotations.SerializedName;
 
-import protocol.object.ProtocolResource;
+import protocol.object.ProtocolBoard;
 
+/**
+ * <b>6 Konfiguration und Spielstart</b>
+ * <p>
+ * Confirmation, if ProtocolClientReady goes through.
+ * </p>
+ * 
+ * @version 0.1
+ * 
+ */
 public class ProtocolGameStarted {
 
 	@SerializedName("Karte")
-	private ProtocolResource resources;
+	private ProtocolBoard board;
 
-	public ProtocolGameStarted() {
-
-		this.resources = resources;
-
+	public ProtocolGameStarted(ProtocolBoard board) {
+		this.board = board;
 	}
 
-	public ProtocolResource getResources() {
-		return resources;
+	public ProtocolBoard getBoard() {
+		return board;
 	}
 
 }

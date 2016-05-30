@@ -2,6 +2,15 @@ package protocol.configuration;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * <b>6 Konfiguration und Spielstart</b>
+ * <p>
+ * Setting up name and color for each player.
+ * </p>
+ * 
+ * @version 0.1
+ * 
+ */
 public class ProtocolPlayerProfile {
 
 	@SerializedName("Name")
@@ -13,7 +22,7 @@ public class ProtocolPlayerProfile {
 
 		this.name = name;
 		this.color = color;
-		
+
 	}
 
 	public String getName() {
