@@ -3,6 +3,9 @@ package server.controller;
 import server.server.InputHandler;
 import server.server.OutputHandler;
 import server.server.Server;
+
+import java.io.IOException;
+
 import server.controller.GameController;
 
 public class NetworkController {
@@ -15,7 +18,12 @@ public class NetworkController {
 	public NetworkController(GameController gc){
 		this.gameController = gc;
 		this.server = new Server();
-		server.start();
+		try {
+			server.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.outputHandler = new OutputHandler(this,server);
 		this.inputHandler = new InputHandler(this);
 	}
