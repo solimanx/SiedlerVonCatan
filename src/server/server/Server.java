@@ -7,14 +7,17 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import client.client.InputHandler;
 
 public class Server {
 
 	private InputHandler inputHandler;
-	private static ArrayList<Thread> clients = new ArrayList<Thread>(settings.DefaultSettings.maxClients);
+	// HashMap PlayerID => Thread
+	private static HashMap<Integer, Thread> clients = new HashMap<Integer, Thread>(4);
 	static int maxClients = settings.DefaultSettings.maxClients;
+	static int clientCounter = 1;
 
 	public void start() throws IOException {
 		ServerSocket serverSocket = new ServerSocket(8080);
@@ -33,16 +36,18 @@ public class Server {
 		Thread thread = new Thread() {
 			OutputStreamWriter writer;
 			BufferedReader reader;
+			public int threadID = clientCounter;
 
 			@Override
 			public void run() {
+				
 				try {
 					writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 					reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
 
 					String line = reader.readLine();
-					// inputHandler.sendToParser(line);
+					// inputHandler.sendToParser(line, id);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
@@ -65,7 +70,8 @@ public class Server {
 		};
 
 		thread.start();
-		clients.add(thread);
+		clients.put(clientCounter, thread);
+		clientCounter++;
 	}
 
 }
