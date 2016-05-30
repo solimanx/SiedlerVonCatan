@@ -14,7 +14,7 @@ import client.client.InputHandler;
 public class Server {
     
     private InputHandler inputHandler;
-    private static ArrayList<Thread> clients = new ArrayList<Thread>(4);
+    private static ArrayList<Thread> clients = new ArrayList<Thread>(settings.DefaultSettings.maxClients);
     static int maxClients = settings.DefaultSettings.maxClients;
     
 	public static void main(String[] args) throws IOException {

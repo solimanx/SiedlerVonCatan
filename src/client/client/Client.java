@@ -61,7 +61,6 @@ public class Client extends Thread {
 	}
 
 	private void stopClient() {
-
 		try {
 			socket.close();
 			connectionActive = false;
