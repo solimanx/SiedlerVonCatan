@@ -17,9 +17,7 @@ import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
-/*
- * Ich bekomm das mit den Generics nicht hin beim Parser, er matcht hier immer nur auf handle(Object o) das sollte nicht sein.
- */
+
 public class InputHandler {
 private Parser parser;	
     
@@ -28,11 +26,84 @@ private Parser parser;
    }
 	
 	public void sendToParser(String s){
-		Object object = parser.parseString(s);
+		Object object = parser.parseString(s); 
 		System.out.println(object.getClass());
 		handle(object);
+		//handle(object.getClass().cast(object));
 	}
 	
+	private void handle(Object o){
+		Class cl = o.getClass();
+
+		if(cl.equals(ProtocolHello.class)){
+			ProtocolHello ph = (ProtocolHello) o;
+			handle(ph);
+		}
+		else if(cl.equals(ProtocolWelcome.class)){
+			ProtocolWelcome pw = (ProtocolWelcome) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolClientReady.class)){
+			ProtocolClientReady pw = (ProtocolClientReady) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolGameStarted.class)){
+			ProtocolGameStarted pw = (ProtocolGameStarted) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolError.class)){
+			ProtocolError pw = (ProtocolError) o;
+			handle(pw);			
+		}	
+		else if(cl.equals(ProtocolPlayerProfile.class)){
+			ProtocolPlayerProfile pw = (ProtocolPlayerProfile) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolChatReceiveMessage.class)){
+			ProtocolChatReceiveMessage pw = (ProtocolChatReceiveMessage) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolChatSendMessage.class)){
+			ProtocolChatSendMessage pw = (ProtocolChatSendMessage) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolServerConfirmation.class)){
+			ProtocolServerConfirmation pw = (ProtocolServerConfirmation) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolBuild.class)){
+			ProtocolBuild pw = (ProtocolBuild) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolDiceRollResult.class)){
+			ProtocolDiceRollResult pw = (ProtocolDiceRollResult) o;
+			handle(pw);			
+		}	
+		else if(cl.equals(ProtocolResourceObtain.class)){
+			ProtocolResourceObtain pw = (ProtocolResourceObtain) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolStatusUpdate.class)){
+			ProtocolStatusUpdate pw = (ProtocolStatusUpdate) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolDiceRollResult.class)){
+			ProtocolDiceRollResult pw = (ProtocolDiceRollResult) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolBuildRequest.class)){
+			ProtocolBuildRequest pw = (ProtocolBuildRequest) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolDiceRollRequest.class)){
+			ProtocolDiceRollRequest pw = (ProtocolDiceRollRequest) o;
+			handle(pw);			
+		}
+		else if(cl.equals(ProtocolEndTurn.class)){
+			ProtocolEndTurn pw = (ProtocolEndTurn) o;
+			handle(pw);			
+		}		
+	}
 	private void handle(ProtocolHello hello){
 		System.out.println("Hello gelesen!");
 	}
@@ -91,8 +162,6 @@ private Parser parser;
 	private void handle(ProtocolEndTurn endTurn){
 		
 	}	
-	private void handle (Object o){
-		System.out.println("This should not happen");
-	}
+
 	
 }
