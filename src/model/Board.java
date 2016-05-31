@@ -730,7 +730,7 @@ public class Board implements BoardInterface {
 				for (int i = 0; i < r; i++) {
 					switch (j) {
 					case 0:
-						if (fieldMatchesRing(plannedNextField, r + 1)) {
+						if (getRing(length).contains(plannedNextField)) {
 							nextField = plannedNextField;
 							result.add(nextField);
 							coord[0] = getFieldCoordinates(nextField)[0];
@@ -779,41 +779,20 @@ public class Board implements BoardInterface {
 		return result;
 	}
 
-	public boolean fieldMatchesRing(Field f, int r) {
-		ArrayList<Field> fieldArray = new ArrayList<Field>();
-		fieldArray = getRing(getFieldAt(r, 0), 0, r);
-		for (int i = 0; i < fieldArray.size(); i++) {
-			if (f == fieldArray.get(i)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
+	
 	public int nextDir(int dir, int i) {
 		int nextDir = (dir + i) % 6;
-		int result = nextDir;
-		switch (nextDir) {
-		case 0:
-			result = 1;
-			break;
-		case 1:
-			result = 2;
-			break;
-		case 2:
-			result = 3;
-			break;
-		case 3:
-			result = 4;
-			break;
-		case 4:
-			result = 5;
-			break;
-		case 5:
-			result = 0;
-			break;
+		switch(nextDir){
+		case 0: return 1;
+		case 1: return 2;
+		case 2: return 3;
+		case 3: return 4;
+		case 4: return 5;
+		case 5: return 0;
+		default:
+			System.out.println("Error in board.nextDir.");
+			return 0;
 		}
-		return result;
 	}
 
 	public int getDirektion(Field f) {
@@ -822,40 +801,38 @@ public class Board implements BoardInterface {
 		int y = getFieldCoordinates(f)[1];
 		int sum = x + y;
 		if (x < 0 && y <= 0 && sum < 0) {
-			dir = 0;
+			return 0;
 		}
 		if (x >= 0 && y < 0 && sum < 0) {
-			dir = 1;
+			return 1;
 		}
-		if (x <= 0 && y < 0 && sum >= 0) {
-			dir = 2;
+		if (x > 0 && y < 0 && sum >= 0) {
+			return 2;
 		}
 		if (x > 0 && y >= 0 && sum > 0) {
-			dir = 3;
+			return 3;
 		}
 		if (x <= 0 && y > 0 && sum > 0) {
-			dir = 4;
+			return 4;
 		}
 		if (x < 0 && y > 0 && sum <= 0) {
-			dir = 5;
+			return 5;
 		}
-
+		
+		System.out.println("Error in Board.getDirektion");
 		return dir;
 	}
 
-	public ArrayList<Field> getRing(Field f, int dir, int rad) {
-		ArrayList<Field> result = new ArrayList<Field>();// = new Field[rad*6];
-		Field aktField = f;
-		int m;
+	public ArrayList<Field> getRing(int rad) {
+		ArrayList<Field> result = new ArrayList<Field>();
 		int[] coord = new int[2];
-		for (int i = 0; i < 6; i++) {
-			m = (6 + dir + 2 + i) % 6;
-			for (int j = 0; j < rad; j++) {
-				// result[j+i*6] = aktField;
-				result.add(aktField);
-				coord[0] = getFieldCoordinates(aktField)[0];
-				coord[1] = getFieldCoordinates(aktField)[1];
-				aktField = getNextField(coord[0], coord[1], m);
+		Field nextField = getFieldAt(-2, 1);
+		for(int i = 0; i<6 ; i++){
+			for (int j = 0; j< rad ; j++){
+				result.add(nextField);
+				coord[0] = getFieldCoordinates(nextField)[0];
+				coord[1] = getFieldCoordinates(nextField)[1];
+				nextField = getNextField(coord[0], coord[1], nextDir(getDirektion(nextField), j));
 			}
 		}
 		return result;
