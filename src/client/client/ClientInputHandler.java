@@ -1,6 +1,6 @@
 package client.client;
 
-import client.controller.NetworkController;
+import client.controller.ClientNetworkController;
 import parsing.Parser;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -19,11 +19,11 @@ import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 
-public class InputHandler {
+public class ClientInputHandler {
 	private Parser parser;
-	private NetworkController networkController;
+	private ClientNetworkController networkController;
 
-	public InputHandler(NetworkController nc) {
+	public ClientInputHandler(ClientNetworkController nc) {
 		this.networkController = nc;
 		this.parser = new Parser();
 	}

@@ -3,7 +3,7 @@ package parsing;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import client.client.InputHandler;
+import client.client.ClientInputHandler;
 import protocol.connection.ProtocolHello;
 
 public class Testerererer {
@@ -11,7 +11,7 @@ public class Testerererer {
 
 		String jsonstring = "{ \"Hallo\" : { \"Version\" : \"JavaFXClient 0.1 (RuhendeRebellionen)\" } }";
 		System.out.println(jsonstring);
-		InputHandler handler = new InputHandler(null);
+		ClientInputHandler handler = new ClientInputHandler(null);
 		handler.sendToParser(jsonstring);
 		/*
 		 * Parser p = new Parser(); Object o = p.parseString(jsonstring);

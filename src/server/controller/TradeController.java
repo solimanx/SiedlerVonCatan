@@ -11,14 +11,14 @@ import model.PlayerModel;
 public class TradeController {
 
 	private Board board;
-	private NetworkController networkController;
+	private ServerNetworkController networkController;
 	private PlayerModel[] playerModels;
 	private GameLogic gameLogic;
 	private int currentOffer_Player;
 	private int[] currentOffer_Get;
 	private int[] currentOffer_Give;
 
-	public TradeController(Board board, NetworkController nc, GameLogic logic) {
+	public TradeController(Board board, ServerNetworkController nc, GameLogic logic) {
 		this.board = board;
 		this.networkController = nc;
 		this.playerModels = board.getPlayerModels();

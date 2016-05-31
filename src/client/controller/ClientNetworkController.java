@@ -1,30 +1,30 @@
 package client.controller;
 
 import client.client.Client;
-import client.client.InputHandler;
-import client.client.OutputHandler;
+import client.client.ClientInputHandler;
+import client.client.ClientOutputHandler;
 import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
 
-public class NetworkController {
+public class ClientNetworkController {
 
 	private FlowController flowController;
-	private OutputHandler outputHandler;
-	private InputHandler inputHandler;
+	private ClientOutputHandler outputHandler;
+	private ClientInputHandler inputHandler;
 	private Client client;
 	private Object playerModels;
 	private Board board;
 	private int playerId;
 
-	public NetworkController(FlowController fc, Board board) {
+	public ClientNetworkController(FlowController fc, Board board) {
 		this.flowController = fc;
 		this.board = board;
 		this.client = new Client();
 		client.start();
-		this.outputHandler = new OutputHandler(this, client);
-		this.inputHandler = new InputHandler(this);
+		this.outputHandler = new ClientOutputHandler(this, client);
+		this.inputHandler = new ClientInputHandler(this);
 		this.playerModels = flowController.board.getPlayerModels();
 	}
 
