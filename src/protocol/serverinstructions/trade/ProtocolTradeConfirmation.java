@@ -1,4 +1,4 @@
-package protocol.serverinstructions;
+package protocol.serverinstructions.trade;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
