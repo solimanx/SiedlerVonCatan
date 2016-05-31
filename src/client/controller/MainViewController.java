@@ -55,8 +55,7 @@ public class MainViewController {
 	}
 
 	public void receiveChatMessage(String line) {
-		//view.messages.appendText(line +"\n");
-		System.out.println(line);
+		view.messages.appendText(line +"\n");
 	}
 
 

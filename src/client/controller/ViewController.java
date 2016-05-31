@@ -21,7 +21,7 @@ public class ViewController implements ViewControllerInterface {
 	private MainViewController mainVC;
 	public Client client;
 
-	public ViewController(Stage primaryStage, Board board, GameController gc, Client client) {
+	public ViewController(Stage primaryStage, Board board, GameController gc) {
 		this.gc = gc;
 		this.board = board;
 		view = new View(board, primaryStage, mainVC);
@@ -39,6 +39,9 @@ public class ViewController implements ViewControllerInterface {
 	}
 
 	private void init() {
+		client = new Client(mainVC);
+		client.start();
+		
 		fieldColors.put(ResourceType.CLAY, Color.TAN);
 		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
 		fieldColors.put(ResourceType.NOTHING, Color.WHITE);

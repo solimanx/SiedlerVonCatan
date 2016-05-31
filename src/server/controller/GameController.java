@@ -30,12 +30,12 @@ public class GameController implements GameControllerInterface {
 	Field[][] fields;
 	ViewController viewController;
 
-	public GameController(Stage primaryStage, int amountPlayers, Client client) {
+	public GameController(Stage primaryStage, int amountPlayers) {
 		this.board = Board.getInstance(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		viewController = new ViewController(primaryStage, board, this, client); // DEBUG
+		viewController = new ViewController(primaryStage, board, this); // DEBUG
 																		// ONLY!!
 		init();
 	}

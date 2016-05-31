@@ -33,9 +33,7 @@ public class Main extends Application {
 				e.printStackTrace();
 			}
 		} else {
-			client = new Client();
-			gc = new GameController(primaryStage, 1, client);
-			client.start();
+			gc = new GameController(primaryStage, 1);
 		}
 
 	}

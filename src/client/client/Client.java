@@ -19,6 +19,10 @@ public class Client extends Thread {
 	boolean connectionActive = false;
 	protected MainViewController mainViewController;
 	
+	public Client(MainViewController mainViewController) {
+		super();
+		this.mainViewController = mainViewController;
+	}
 	
 	public void setPort(int port) {
 		this.port = port;
@@ -56,6 +60,7 @@ public class Client extends Thread {
 		while (connectionActive) {
 			String line = reader.readLine();
 			System.out.println("Received from Server: " + line);
+			mainViewController.receiveChatMessage(line);
 		}
 	}
 
