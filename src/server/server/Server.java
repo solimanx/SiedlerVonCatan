@@ -7,17 +7,16 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 
 import client.client.InputHandler;
 
 public class Server {
-
 	private InputHandler inputHandler;
 	// HashMap PlayerID => Thread
-	private static HashMap<Integer, Thread> clients = new HashMap<Integer, Thread>(4);
-	static int maxClients = settings.DefaultSettings.maxClients;
-	static int clientCounter = 1;
+	private ArrayList<ClientThread> clients = new ArrayList<ClientThread>(4);
+	int maxClients = settings.DefaultSettings.maxClients;
+	int clientCounter = 1;
 
 	public void start() throws IOException {
 		ServerSocket serverSocket = new ServerSocket(8080);
@@ -32,46 +31,57 @@ public class Server {
 		}
 	}
 
-	private static void startHandler(Socket socket) throws IOException {
-		Thread thread = new Thread() {
-			OutputStreamWriter writer;
-			BufferedReader reader;
-			public int threadID = clientCounter;
+	private class ClientThread extends Thread {
+		public OutputStreamWriter writer;
+		public BufferedReader reader;
+		public Socket socket;
+		public int threadID = clientCounter;
 
-			@Override
-			public void run() {
-				
-				try {
-					writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-					reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-					System.out.println("Client connected! " + socket.getRemoteSocketAddress());
-					while (true) {
-						String line = reader.readLine();
-						// inputHandler.sendToParser(line, id);						
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				} finally {
-					closeSocket();
+		public ClientThread(Socket socket) {
+			this.socket = socket;
+		}
+
+		@Override
+		public void run() {
+
+			try {
+				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+				System.out.println("Client connected! " + socket.getRemoteSocketAddress());
+				socket.setTcpNoDelay(true);
+				while (true) {
+					String line = reader.readLine();
+					// inputHandler.sendToParser(line, id);
 				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				closeSocket();
 			}
-		};
+		}
+	}
+
+	private void startHandler(Socket socket) throws IOException {
+		ClientThread thread = new ClientThread(socket);
 		thread.start();
-		clients.put(clientCounter, thread);
+		clients.add(thread);
 		clientCounter++;
 	}
-	
+
 	public void write(String s) throws IOException {
-//		writer.write(s + "\n");
-//		writer.flush();
+		for (ClientThread clientThread : clients) {
+			clientThread.writer.write(s + "\n");
+			clientThread.writer.flush();
+		}
 	}
 
-	public static void closeSocket() {
-//		try {
-////			socket.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+	public void closeSocket() {
+		for ( ClientThread clientThread : clients ){
+		try {
+			clientThread.socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

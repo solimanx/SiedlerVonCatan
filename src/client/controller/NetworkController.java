@@ -18,7 +18,7 @@ public class NetworkController {
 	private Board board;
 	private int playerId;
 
-	public NetworkController(FlowController fc,Board board) {
+	public NetworkController(FlowController fc, Board board) {
 		this.flowController = fc;
 		this.board = board;
 		this.client = new Client();
@@ -31,20 +31,20 @@ public class NetworkController {
 	// Bauen
 	// 9.4
 	public void requestBuildStreet(int x, int y, int dir) {
-		outputHandler.handleBuildRequest(x,y,dir,this.playerId,"Street");
+		outputHandler.handleBuildRequest(x, y, dir, this.playerId, "Street");
 
 	}
 
 	// 9.4
 	public void requestBuildVillage(int x, int y, int dir) {
-		outputHandler.handleBuildRequest(x,y,dir,this.playerId,"Village");
+		outputHandler.handleBuildRequest(x, y, dir, this.playerId, "Village");
 		// int playerID = flowController.getPlayerID();
 		// outputHandler.handleBuildRequest(x,y,dir, enum.VILLAGE,playerID);
 	}
 
 	// 9.4
 	public void requestBuildCity(int x, int y, int dir) {
-		outputHandler.handleBuildRequest(x,y,dir,this.playerId,"City");
+		outputHandler.handleBuildRequest(x, y, dir, this.playerId, "City");
 		// int playerID = flowController.getPlayerID();
 		// outputHandler.handleBuildRequest(x,y,dir, enum.CITY,playerID);
 	}
@@ -53,18 +53,18 @@ public class NetworkController {
 
 	// 8.6
 	public void buildStreet(int x, int y, int dir, int playerId) {
-		flowController.buildStreet(x, y, dir,playerId);
+		flowController.buildStreet(x, y, dir, playerId);
 
 	}
 
 	// 8.6
 	public void buildVillage(int x, int y, int dir, int playerId) {
-		flowController.buildVillage(x,y,dir,playerId);
+		flowController.buildVillage(x, y, dir, playerId);
 	}
 
 	// 8.6
 	public void buildCity(int x, int y, int dir, int playerId) {
-		flowController.buildCity(x, y, dir,playerId);
+		flowController.buildCity(x, y, dir, playerId);
 
 	}
 
@@ -86,7 +86,7 @@ public class NetworkController {
 
 	// 7.4
 	public void gameStarted(Field[] fields, Edge[] edges, Corner[] corners, Field bandit) {
-		flowController.initBoard(fields,edges,corners,bandit);
+		flowController.initBoard(fields, edges, corners, bandit);
 
 	}
 

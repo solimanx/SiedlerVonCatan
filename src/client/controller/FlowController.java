@@ -25,7 +25,7 @@ public class FlowController {
 	private Field[][] fields;
 
 	public void init(Stage primaryStage) {
-		this.viewController = new ViewController(primaryStage,this);
+		this.viewController = new ViewController(primaryStage, this);
 
 		// TODO Auto-generated method stub
 
@@ -49,31 +49,32 @@ public class FlowController {
 		// TODO Auto-generated method stub
 
 	}
-	
-	public void initBoard(int amountPlayers,Field[][] serverFields,Edge[][][] edges,Corner[][][] corners,Field bandit){
-		
+
+	public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
+			Field bandit) {
+
 		this.board = Board.getInstance(amountPlayers);
 		this.fields = board.getFields();
-		for (int i = 0;i< fields.length;i++){
-			for (int j = 0;j <fields[i].length;j++){
+		for (int i = 0; i < fields.length; i++) {
+			for (int j = 0; j < fields[i].length; j++) {
 				fields[i][j].setResourceType(serverFields[i][j].getResourceType());
 				fields[i][j].setDiceIndex(serverFields[i][j].getDiceIndex());
 			}
 		}
 		Edge[][][] ownEdges = board.getEdges();
-		for (int i = 0;i < edges.length;i++){
-			for (int j = 0;j < edges[i].length;j++){
+		for (int i = 0; i < edges.length; i++) {
+			for (int j = 0; j < edges[i].length; j++) {
 				ownEdges[i][j][0].setHasStreet(edges[i][j][0].isHasStreet());
 				ownEdges[i][j][0].setOwnedByPlayer(edges[i][j][0].getOwnedByPlayer());
-				
+
 				ownEdges[i][j][1].setHasStreet(edges[i][j][1].isHasStreet());
 				ownEdges[i][j][1].setOwnedByPlayer(edges[i][j][1].getOwnedByPlayer());
 			}
 		}
-		
+
 		Corner[][][] ownCorners = board.getCorners();
-		for (int i = 0;i < corners.length;i++){
-			for (int j = 0; j <corners[i].length;j++){
+		for (int i = 0; i < corners.length; i++) {
+			for (int j = 0; j < corners[i].length; j++) {
 				ownCorners[i][j][0].setHarbourStatus(corners[i][j][0].getHarbourStatus());
 				ownCorners[i][j][0].setOwnedByPlayer(corners[i][j][0].getOwnedByPlayer());
 				ownCorners[i][j][0].setStatus(corners[i][j][0].getStatus());
@@ -84,17 +85,17 @@ public class FlowController {
 
 				ownCorners[i][j][2].setHarbourStatus(corners[i][j][2].getHarbourStatus());
 				ownCorners[i][j][2].setOwnedByPlayer(corners[i][j][2].getOwnedByPlayer());
-				ownCorners[i][j][2].setStatus(corners[i][j][2].getStatus());				
+				ownCorners[i][j][2].setStatus(corners[i][j][2].getStatus());
 			}
 		}
 		int[] banditCoordinates = board.getFieldCoordinates(bandit);
 		board.setBandit(board.getFieldAt(banditCoordinates[0], banditCoordinates[1]));
-		
+
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
-		
+
 		this.mainViewController = new MainViewController(board, this);
-		
+
 	}
 
 	public void requestBuildVillage(int x, int y, int dir) {
@@ -116,16 +117,16 @@ public class FlowController {
 			networkController.requestBuildCity(x, y, dir, ownPlayerId);
 		}
 	}
-	
-	public void buildStreet(int x, int y,int dir, int playerId){
+
+	public void buildStreet(int x, int y, int dir, int playerId) {
 		Edge e = board.getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(playerModels[playerId]);
-		
+
 		mainViewController.setStreet(x, y, dir, playerId);
 	}
 
-	public void buildVillage(int x, int y,int dir, int playerId){
+	public void buildVillage(int x, int y, int dir, int playerId) {
 		Corner c = board.getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.VILLAGE);
 		c.setOwnedByPlayer(playerModels[playerId]);
@@ -135,15 +136,15 @@ public class FlowController {
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 			}
 		}
-		
+
 		mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
-	}	
-	
-	public void buildCity(int x, int y,int dir, int playerId){
+	}
+
+	public void buildCity(int x, int y, int dir, int playerId) {
 		Corner c = board.getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.CITY);
 		c.setOwnedByPlayer(playerModels[playerId]);
-		
+
 		mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
 	}
 
