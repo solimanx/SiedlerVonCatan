@@ -2,6 +2,7 @@ package client.controller;
 
 import java.util.ArrayList;
 
+import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
 import javafx.stage.Stage;
@@ -23,9 +24,11 @@ public class FlowController {
 	int ownPlayerId;
 	private ViewController viewController;
 	private Field[][] fields;
+	private ClientNetworkController networkController;
 
 	public void init(Stage primaryStage) {
 		this.viewController = new ViewController(primaryStage, this);
+		this.networkController = new ClientNetworkController(this);
 
 		// TODO Auto-generated method stub
 
@@ -50,7 +53,7 @@ public class FlowController {
 
 	}
 
-	public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
+	public Board initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
 			Field bandit) {
 
 		this.board = Board.getInstance(amountPlayers);
@@ -95,6 +98,8 @@ public class FlowController {
 		this.playerModels = board.getPlayerModels();
 
 		this.mainViewController = new MainViewController(board, this);
+		
+		return board;
 
 	}
 	
@@ -104,21 +109,21 @@ public class FlowController {
 
 	public void requestBuildVillage(int x, int y, int dir) {
 		if (gameLogic.checkBuildVillage(x, y, dir, ownPlayerId)) {
-			networkController.requestBuildVillage(x, y, dir, ownPlayerId);
+			networkController.requestBuildVillage(x, y, dir);
 		}
 
 	}
 
 	public void requestBuildStreet(int x, int y, int dir) {
 		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)) {
-			networkController.requestBuildStreet(x, y, dir, ownPlayerId);
+			networkController.requestBuildStreet(x, y, dir);
 		}
 
 	}
 
 	public void requestBuildCity(int x, int y, int dir) {
 		if (gameLogic.checkBuildCity(x, y, dir, ownPlayerId)) {
-			networkController.requestBuildCity(x, y, dir, ownPlayerId);
+			networkController.requestBuildCity(x, y, dir);
 		}
 	}
 
@@ -152,11 +157,56 @@ public class FlowController {
 		mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
 	}
 
-	public void setBandit(int x, int y) {
+	public void setBandit(int x, int y,int playerId) {
 		if (gameLogic.checkSetBandit(x, y)) {
-			// networkController.setBandit(x,y);
+			networkController.requestSetBandit(x,y,playerId);
 		}
 
+	}
+
+	public void addToPlayersResource(int playerId, int[] resources) {
+		ArrayList<ResourceType> resourceCards = playerModels[playerId].getResourceCards();
+		for (int i = 0;i < resources.length;i++){
+			for (int j = 0;j < resources[i];j++){
+				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
+			}
+		}
+		playerModels[playerId].setResourceCards(resourceCards);
+		
+	}
+	
+	public void setPlayerResources(int playerId, int[] resources) {
+		ArrayList<ResourceType> resourceCards = new ArrayList<ResourceType>();
+		for (int i = 0;i < resources.length;i++){
+			for (int j = 0;j < resources[i];j++){
+				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
+			}
+		}
+		playerModels[playerId].setResourceCards(resourceCards);
+		
+	}	
+	
+	public void setPlayerColor(int modelPlayerId, Color color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setPlayerName(int modelPlayerId, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setPlayerVictoryPoints(int playerId, int victoryPoints) {
+		playerModels[playerId].setVictoryPoints(victoryPoints);		
+	}		
+
+	public void diceRollResult(int playerModelId, int result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setOwnPlayerId(int ownPlayerId) {
+		this.ownPlayerId = ownPlayerId;		
 	}
 
 }
