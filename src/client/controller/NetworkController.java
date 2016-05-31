@@ -3,6 +3,7 @@ package client.controller;
 import client.client.Client;
 import client.client.InputHandler;
 import client.client.OutputHandler;
+import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
@@ -13,29 +14,37 @@ public class NetworkController {
 	private OutputHandler outputHandler;
 	private InputHandler inputHandler;
 	private Client client;
+	private Object playerModels;
+	private Board board;
+	private int playerId;
 
-	public NetworkController(FlowController fc) {
+	public NetworkController(FlowController fc,Board board) {
 		this.flowController = fc;
+		this.board = board;
 		this.client = new Client();
 		client.start();
 		this.outputHandler = new OutputHandler(this, client);
 		this.inputHandler = new InputHandler(this);
+		this.playerModels = flowController.board.getPlayerModels();
 	}
 
 	// Bauen
 	// 9.4
 	public void requestBuildStreet(int x, int y, int dir) {
+		outputHandler.handleBuildRequest(x,y,dir,this.playerId,"Street");
 
 	}
 
 	// 9.4
 	public void requestBuildVillage(int x, int y, int dir) {
+		outputHandler.handleBuildRequest(x,y,dir,this.playerId,"Village");
 		// int playerID = flowController.getPlayerID();
 		// outputHandler.handleBuildRequest(x,y,dir, enum.VILLAGE,playerID);
 	}
 
 	// 9.4
 	public void requestBuildCity(int x, int y, int dir) {
+		outputHandler.handleBuildRequest(x,y,dir,this.playerId,"City");
 		// int playerID = flowController.getPlayerID();
 		// outputHandler.handleBuildRequest(x,y,dir, enum.CITY,playerID);
 	}
@@ -44,16 +53,18 @@ public class NetworkController {
 
 	// 8.6
 	public void buildStreet(int x, int y, int dir, int playerId) {
+		flowController.buildStreet(x, y, dir,playerId);
 
 	}
 
 	// 8.6
 	public void buildVillage(int x, int y, int dir, int playerId) {
-		// flowController.buildVillage(x,y,dir,playerId);
+		flowController.buildVillage(x,y,dir,playerId);
 	}
 
 	// 8.6
 	public void buildCity(int x, int y, int dir, int playerId) {
+		flowController.buildCity(x, y, dir,playerId);
 
 	}
 
@@ -64,6 +75,7 @@ public class NetworkController {
 
 	// 4.2
 	public void welcome(int id) {
+		this.playerId = id;
 
 	}
 
@@ -74,6 +86,7 @@ public class NetworkController {
 
 	// 7.4
 	public void gameStarted(Field[] fields, Edge[] edges, Corner[] corners, Field bandit) {
+		flowController.initBoard(fields,edges,corners,bandit);
 
 	}
 
