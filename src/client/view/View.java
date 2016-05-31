@@ -13,11 +13,14 @@ import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
@@ -65,6 +68,9 @@ public class View implements ViewInterface {
 	public Button button2;
 	public Button button3;
 	public Button button4;
+	
+	public TextArea messages = new TextArea();
+	public TextField chatInput = new TextField();
 
 	public List<Shape> figures = new LinkedList<Shape>();
 	private MainViewController vc;
@@ -77,10 +83,12 @@ public class View implements ViewInterface {
 		this.primaryStage = stage;
 		this.vc = vc;
 		try {
-			rootPane = new BorderPane();
-			Scene scene = new Scene(rootPane, 400, 400);
-			primaryStage.setMaximized(true);
+			rootPane = new BorderPane();		
+			
+			Scene scene = new Scene(rootPane);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+			primaryStage.setMaximized(true);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
@@ -111,11 +119,17 @@ public class View implements ViewInterface {
 		HBox buttons = new HBox(button, button2, button3, button4);
 		rootPane.setTop(buttons);
 		// end Test Buttons
-
+		
+		
 		centerPane = new Pane();
 		centerPane.getChildren().addAll(0, figures);
-
+		
+		messages.setPrefHeight(200);
+		messages.setEditable(false);
+		VBox chatPane = new VBox(10, messages, chatInput);
+		
 		rootPane.setCenter(centerPane);
+		rootPane.setBottom(chatPane);
 
 		return true;
 	}
