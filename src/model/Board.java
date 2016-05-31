@@ -832,7 +832,7 @@ public class Board implements BoardInterface {
 				result.add(nextField);
 				coord[0] = getFieldCoordinates(nextField)[0];
 				coord[1] = getFieldCoordinates(nextField)[1];
-				nextField = getNextField(coord[0], coord[1], nextDir(getDirektion(nextField), j));
+				nextField = getNextField(coord[0], coord[1], getDirektion(nextField));
 			}
 		}
 		return result;
