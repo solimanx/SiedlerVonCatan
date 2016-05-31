@@ -1,16 +1,17 @@
 package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>4.1 Felder</b>
+ * <b>Felder (Fields)</b>
  * <p>
  * Contains information about field: ID/location, land type and dice index.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolField {
 
 	@SerializedName("Ort")

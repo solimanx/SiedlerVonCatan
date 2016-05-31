@@ -1,16 +1,17 @@
 package protocol.clientinstructions;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>8.2 Bauen </b>
+ * <b>Bauen (Build request)</b>
  * <p>
  * Client sends server request to build building.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolBuildRequest {
 
 	@SerializedName("Typ")

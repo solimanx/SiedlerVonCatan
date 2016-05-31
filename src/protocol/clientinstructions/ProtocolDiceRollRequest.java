@@ -1,15 +1,19 @@
 package protocol.clientinstructions;
 
+import com.google.gson.annotations.Since;
+
 /**
- * <b>8.1 Würfeln </b>
+ * <b>Würfeln (Roll Dice)</b>
  * <p>
  * Client sends server request to roll dice.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolDiceRollRequest {
 
-	// leere Nachricht
+	public ProtocolDiceRollRequest() {
+
+	}
 }

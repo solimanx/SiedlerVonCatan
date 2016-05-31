@@ -1,18 +1,20 @@
 package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 import protocol.object.ProtocolResource;
 
 /**
- * <b>7.3 Ertrag </b>
+ * <b>Ertrag (Resource Gain) </b>
  * <p>
- * Server sends to client the resources obtained.
+ * Server sends to client the resources obtained. (Increase resources)
  * </p>
  * 
- * @version 0.1
- * 
+ * @see protocol.serverinstructions.ProtocolCosts
  */
+
+@Since(0.1)
 public class ProtocolResourceObtain {
 
 	@SerializedName("Spieler")
@@ -22,7 +24,6 @@ public class ProtocolResourceObtain {
 	private ProtocolResource resource;
 
 	public ProtocolResourceObtain(int player_id, ProtocolResource resource) {
-
 		this.player_id = player_id;
 		this.resource = resource;
 	}

@@ -1,16 +1,17 @@
 package protocol.messaging;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>5.2 Chat senden</b>
+ * <b>Chat senden (Send message)</b>
  * <p>
  * Sending a message to other players.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolChatSendMessage {
 
 	@SerializedName("Nachricht")

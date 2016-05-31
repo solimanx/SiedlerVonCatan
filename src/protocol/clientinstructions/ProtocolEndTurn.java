@@ -1,16 +1,19 @@
 package protocol.clientinstructions;
 
+import com.google.gson.annotations.Since;
+
 /**
- * <b>8.3 Zug beenden </b>
+ * <b>Zug beenden (End turn)</b>
  * <p>
  * Client sends server request to end turn.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolEndTurn {
 
-	// keine Nachricht
+	public ProtocolEndTurn() {
 
+	}
 }

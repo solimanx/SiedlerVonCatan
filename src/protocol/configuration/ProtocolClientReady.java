@@ -1,16 +1,20 @@
 package protocol.configuration;
 
+import com.google.gson.annotations.Since;
+
 /**
- * <b>6 Konfiguration und Spielstart</b>
+ * <b>Konfiguration und Spielstart (Client Ready)</b>
  * <p>
  * Client communicates to server that it's ready.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolClientReady {
 
-	// leere Nachricht
+	public ProtocolClientReady() {
+
+	}
 
 }

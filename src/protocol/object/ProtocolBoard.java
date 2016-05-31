@@ -1,30 +1,31 @@
 package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>4.4 Karte</b>
+ * <b>Karte (Board)</b>
  * <p>
  * Contains information about board: fields-, buildings-, harbours-list and
  * robber's location.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolBoard {
 
 	@SerializedName("Felder")
-	ProtocolField[] fields;
+	private ProtocolField[] fields;
 
 	@SerializedName("Gebäude")
-	ProtocolBuilding[] buildings;
+	private ProtocolBuilding[] buildings;
 
 	@SerializedName("Häfen")
-	ProtocolHarbour[] harbours;
+	private ProtocolHarbour[] harbours;
 
 	@SerializedName("Räuber")
-	String robber_location;
+	private String robber_location;
 
 	public ProtocolBoard(ProtocolField[] fields, ProtocolBuilding[] buildings, ProtocolHarbour[] harbours,
 			String robber_location) {

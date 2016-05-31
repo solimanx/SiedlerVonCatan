@@ -1,18 +1,19 @@
 package protocol.configuration;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 import protocol.object.ProtocolBoard;
 
 /**
- * <b>6 Konfiguration und Spielstart</b>
+ * <b>Konfiguration und Spielstart (Game Can Start)</b>
  * <p>
  * Confirmation, if ProtocolClientReady goes through.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolGameStarted {
 
 	@SerializedName("Karte")

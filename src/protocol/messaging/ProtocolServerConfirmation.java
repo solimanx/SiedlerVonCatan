@@ -1,16 +1,17 @@
 package protocol.messaging;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>5.1 Bestätigungen und Fehler</b>
+ * <b>Bestätigungen und Fehler (Confirmations and Errors)</b>
  * <p>
  * Server confirmation of client's actions.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolServerConfirmation {
 
 	@SerializedName("Serverantwort")

@@ -1,34 +1,36 @@
 package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>4.6 Rohstoffe</b>
+ * <b>Rohstoffe (Resources)</b>
  * <p>
  * Contains amount of resources.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolResource {
+
 	@SerializedName("Holz")
-	int wood;
+	private int wood;
 
 	@SerializedName("Lehm")
-	int clay;
+	private int clay;
 
 	@SerializedName("Wolle")
-	int wool;
+	private int wool;
 
 	@SerializedName("Getreide")
-	int corn;
+	private int corn;
 
 	@SerializedName("Erz")
-	int ore;
+	private int ore;
 
 	@SerializedName("Unbekannt")
-	int unknown;
+	private int unknown;
 
 	public ProtocolResource(int wood, int clay, int wool, int corn, int ore, int unknown) {
 		this.wood = wood;

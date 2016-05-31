@@ -1,16 +1,17 @@
 package protocol.connection;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>3: Verbindungsaufbau</b>
+ * <b>Verbindungsaufbau (Logging in : Hello)</b>
  * <p>
  * Version and protocol information.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolHello {
 
 	@SerializedName("Version")

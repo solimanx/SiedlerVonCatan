@@ -1,16 +1,17 @@
 package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>7.2 Würfeln </b>
+ * <b>Würfeln (Dice Roll Result) </b>
  * <p>
  * Server sends to client the dice roll result.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolDiceRollResult {
 
 	@SerializedName("Spieler")

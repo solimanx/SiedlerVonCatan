@@ -1,18 +1,20 @@
 package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 import protocol.object.ProtocolPlayer;
 
 /**
- * <b>7.1 Statusupdate eines Spielers </b>
+ * 
+ * <b>Statusupdate eines Spielers (Player's status update)</b>
  * <p>
  * After status of player changes.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolStatusUpdate {
 
 	@SerializedName("Spieler")

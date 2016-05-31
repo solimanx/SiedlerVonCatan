@@ -1,23 +1,24 @@
 package protocol.object;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Since;
 
 /**
- * <b>4.3 Häfen</b>
+ * <b>Häfen (Harbours)</b>
  * <p>
  * Contains information about harbour: ID/location, and harbour type.
  * </p>
  * 
- * @version 0.1
- * 
  */
+
+@Since(0.1)
 public class ProtocolHarbour {
 
 	@SerializedName("Ort")
-	String location_id;
+	private String location_id;
 
 	@SerializedName("Typ")
-	String harbour_type;
+	private String harbour_type;
 
 	public ProtocolHarbour(String location_id, String harbour_type) {
 		this.location_id = location_id;
