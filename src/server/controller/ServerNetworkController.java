@@ -28,3 +28,6 @@ public class ServerNetworkController {
 		this.inputHandler = new ServerInputHandler(this);
 	}
 }
+
+
+//outputHandler.clientHello("JavaFXClient "+settings.DefaultSettings.CLIENT_VERSION+" (Niedliche Pixel)",settings.DefaultSettings.PROTOCOL_VERSION);

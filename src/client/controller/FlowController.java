@@ -97,6 +97,10 @@ public class FlowController {
 		this.mainViewController = new MainViewController(board, this);
 
 	}
+	
+	public void createNewPlayer(enums.Color color,String name){
+		
+	}
 
 	public void requestBuildVillage(int x, int y, int dir) {
 		if (gameLogic.checkBuildVillage(x, y, dir, ownPlayerId)) {

@@ -69,7 +69,7 @@ public class Client extends Thread {
 		writer.flush();
 	}
 
-	private void stopClient() {
+	public void stopClient() {
 		try {
 			socket.close();
 			connectionActive = false;

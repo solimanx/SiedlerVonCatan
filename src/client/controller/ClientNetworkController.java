@@ -17,6 +17,8 @@ public class ClientNetworkController {
 	private Object playerModels;
 	private Board board;
 	private int playerId;
+	private int amountPlayers;
+	private int[] playerIds;
 
 	public ClientNetworkController(FlowController fc, Board board) {
 		this.flowController = fc;
@@ -26,6 +28,7 @@ public class ClientNetworkController {
 		this.outputHandler = new ClientOutputHandler(this, client);
 		this.inputHandler = new ClientInputHandler(this);
 		this.playerModels = flowController.board.getPlayerModels();
+		this.amountPlayers = 1;
 	}
 
 	// Bauen
@@ -69,8 +72,17 @@ public class ClientNetworkController {
 	}
 
 	// 4.1
-	public void hello() {
+	public void clientHello() {
+		outputHandler.clientHello(settings.DefaultSettings.CLIENT_VERSION);
 
+	}
+	
+	public void serverHello(String serverVersion,int protocolVersion){
+		if(protocolVersion != settings.DefaultSettings.PROTOCOL_VERSION){
+			client.stopClient();
+			System.out.println("Invalid Protocol Version; Disconnected"); 
+		}
+			
 	}
 
 	// 4.2
@@ -81,27 +93,33 @@ public class ClientNetworkController {
 
 	// 7.2
 	public void clientReady() {
+		outputHandler.clientReady();
 
 	}
 
 	// 7.4
-	public void gameStarted(Field[] fields, Edge[] edges, Corner[] corners, Field bandit) {
-		flowController.initBoard(fields, edges, corners, bandit);
+	public void gameStarted(Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
+		flowController.initBoard(amountPlayers, fields, edges, corners, bandit);
 
 	}
 
 	// 7.3
 	public void error(String s) {
+		System.out.println(s);
 
 	}
 
 	// 7.1
 	public void playerProfile(enums.Color color, String name) {
+		playerIds[amountPlayers] = 
+		flowController.createNewPlayer(color,name);
+		amountPlayers++;
 
 	}
 
 	// 6.2
 	public void chatSendMessage(String s) {
+		outputHandler.chatSendMessage(s);
 
 	}
 
@@ -117,6 +135,7 @@ public class ClientNetworkController {
 
 	// 9.1
 	public void diceRollRequest() {
+		outputHandler.diceRollRequest();
 
 	}
 
@@ -138,6 +157,7 @@ public class ClientNetworkController {
 
 	// 9.7
 	public void endTurn() {
+		outputHandler.endTurn();
 
 	}
 
@@ -145,6 +165,7 @@ public class ClientNetworkController {
 
 	// 9.3
 	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
+		outputHandler.requestSetBandit(x,y,stealFromPlayerId);
 
 	}
 
