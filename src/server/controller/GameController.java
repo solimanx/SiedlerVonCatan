@@ -3,6 +3,7 @@ package server.controller;
 import java.util.ArrayList;
 import java.util.Random;
 
+import client.client.Client;
 import client.controller.ViewController;
 import enums.PlayerState;
 import enums.ResourceType;
@@ -29,12 +30,12 @@ public class GameController implements GameControllerInterface {
 	Field[][] fields;
 	ViewController viewController;
 
-	public GameController(Stage primaryStage, int amountPlayers) {
+	public GameController(Stage primaryStage, int amountPlayers, Client client) {
 		this.board = Board.getInstance(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		viewController = new ViewController(primaryStage, board, this); // DEBUG
+		viewController = new ViewController(primaryStage, board, this, client); // DEBUG
 																		// ONLY!!
 		init();
 	}

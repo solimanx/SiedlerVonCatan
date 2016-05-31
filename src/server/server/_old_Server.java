@@ -9,18 +9,20 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Server {
+import client.client.InputHandler;
 
+public class _old_Server {
+	private InputHandler inputHandler;
 	// HashMap PlayerID => Thread
 	private ArrayList<ClientThread> clients = new ArrayList<ClientThread>(4);
-
+	int maxClients = settings.DefaultSettings.maxClients;
 	int clientCounter = 1;
 
 	public void start() throws IOException {
-		ServerSocket serverSocket = new ServerSocket(8080, 150);
+		ServerSocket serverSocket = new ServerSocket(8080);
 		System.out.println("Server Running!");
 		try {
-			while (clients.size() < 4) {
+			while (clients.size() < maxClients) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket);
 			}
@@ -46,11 +48,10 @@ public class Server {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				System.out.println("Client connected! " + socket.getRemoteSocketAddress());
-				//socket.setTcpNoDelay(true);
+				socket.setTcpNoDelay(true);
 				while (true) {
 					String line = reader.readLine();
-					System.out.println("Server got message: " + line);
-					broadcast("Client " + threadID + " says: " + line);
+					// inputHandler.sendToParser(line, id);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -62,14 +63,12 @@ public class Server {
 
 	private void startHandler(Socket socket) throws IOException {
 		ClientThread thread = new ClientThread(socket);
-		thread.threadID = clientCounter;
 		thread.start();
 		clients.add(thread);
 		clientCounter++;
-		System.out.println("The Next Client gets Number " + clientCounter);
 	}
 
-	public void broadcast(String s) throws IOException {
+	public void write(String s) throws IOException {
 		for (ClientThread clientThread : clients) {
 			clientThread.writer.write(s + "\n");
 			clientThread.writer.flush();
@@ -77,13 +76,12 @@ public class Server {
 	}
 
 	public void closeSocket() {
-		for (ClientThread clientThread : clients) {
-			try {
-				clientThread.socket.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		for ( ClientThread clientThread : clients ){
+		try {
+			clientThread.socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
 	}
+
 }

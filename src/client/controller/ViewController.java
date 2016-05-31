@@ -1,13 +1,12 @@
 package client.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
+import client.client.Client;
 import client.view.View;
 import enums.CornerStatus;
 import enums.ResourceType;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import model.Board;
 import server.controller.GameController;
@@ -20,13 +19,14 @@ public class ViewController implements ViewControllerInterface {
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	private GameController gc;
 	private MainViewController mainVC;
+	public Client client;
 
-	public ViewController(Stage primaryStage, Board board, GameController gc) {
+	public ViewController(Stage primaryStage, Board board, GameController gc, Client client) {
 		this.gc = gc;
 		this.board = board;
 		view = new View(board, primaryStage, mainVC);
+		this.client = client;
 		this.mainVC = new MainViewController(view, this);
-
 		init();
 	}
 

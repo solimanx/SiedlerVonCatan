@@ -109,7 +109,7 @@ public class ClientInputHandler {
 	}
 
 	private void handle(ProtocolWelcome welcome) {
-
+		
 	}
 
 	private void handle(ProtocolClientReady clientReady) {
@@ -131,7 +131,9 @@ public class ClientInputHandler {
 	//
 
 	private void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
-
+		String s = chatReceiveMessage.getMessage();
+		int playerId = chatReceiveMessage.getSender();
+		networkController.chatReceiveMessage(playerId, s);
 	}
 
 	private void handle(ProtocolChatSendMessage chatSendMessage) {

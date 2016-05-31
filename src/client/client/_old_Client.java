@@ -6,10 +6,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-import client.controller.MainViewController;
-import javafx.application.Platform;
+import com.google.gson.Gson;
 
-public class Client extends Thread {
+public class _old_Client extends Thread {
 	static int connectionTry = 0;
 	Socket socket = null;
 	OutputStreamWriter writer = null;
@@ -17,9 +16,7 @@ public class Client extends Thread {
 	int port = 8080;
 	boolean scanning = true;
 	boolean connectionActive = false;
-	protected MainViewController mainViewController;
-	
-	
+
 	public void setPort(int port) {
 		this.port = port;
 	}
@@ -32,7 +29,6 @@ public class Client extends Thread {
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 			scanning = false;
 			connectionActive = true;
-			System.out.println("Client: Client connected to Server");
 			runClient();
 		} catch (IOException e) {
 			System.out.println("Connection failed");
@@ -55,7 +51,7 @@ public class Client extends Thread {
 	private void runClient() throws IOException {
 		while (connectionActive) {
 			String line = reader.readLine();
-			System.out.println("Received from Server: " + line);
+			System.out.println("Received from Server:\n" + line);
 		}
 	}
 
