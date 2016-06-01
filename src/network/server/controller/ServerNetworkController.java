@@ -194,6 +194,10 @@ public class ServerNetworkController {
 		}
 		return 0;
 	}
+	
+	private int getThreadID(int playerModelID) {
+		return playerIds[playerModelID];
+	}
 
 	// 9.7
 	public void endTurn(int playerId) {
