@@ -134,7 +134,7 @@ public class ClientNetworkController {
 
 	// 6.3
 	public void chatReceiveMessage(int playerId, String s) {
-
+		flowController.chatReceiveMessage(playerId, s);
 	}
 
 	// 6.1
