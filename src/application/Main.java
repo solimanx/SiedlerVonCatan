@@ -11,6 +11,10 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import server.controller.GameController;
 import server.server.Server;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class Main extends Application {
 	private static Logger logger = LogManager.getLogger(Main.class.getName());
@@ -24,6 +28,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		
 		if (mode) {
 			server = new Server();
 			try {
