@@ -19,12 +19,12 @@ public class Client extends Thread {
 	boolean scanning = true;
 	boolean connectionActive = false;
 	protected ClientInputHandler inputHandler;
-	
+
 	public Client(ClientInputHandler inputHandler) {
 		super();
 		this.inputHandler = inputHandler;
 	}
-	
+
 	public void setPort(int port) {
 		this.port = port;
 	}
@@ -61,6 +61,7 @@ public class Client extends Thread {
 		while (connectionActive) {
 			String line = reader.readLine();
 			System.out.println("Received from Server: " + line);
+			inputHandler.sendToParser(line);
 			// redirect line to Networkcontroller
 		}
 	}

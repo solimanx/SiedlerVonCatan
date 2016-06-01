@@ -31,7 +31,7 @@ public class ClientInputHandler {
 	/**
 	 * sends JSON formatted string to parser and initiates handling of parsed
 	 * object
-	 * 
+	 *
 	 * @param s
 	 */
 	public void sendToParser(String s) {
@@ -44,7 +44,7 @@ public class ClientInputHandler {
 	/**
 	 * takes parsed object and redirects to its proper method depending on
 	 * objects "real" class. ( object will be casted to "real" class )
-	 * 
+	 *
 	 * @param o
 	 */
 	private void handle(Object o) {
@@ -106,10 +106,11 @@ public class ClientInputHandler {
 
 	private void handle(ProtocolHello hello) {
 		System.out.println("Hello gelesen!");
+		networkController.serverHello(hello.getVersion(),hello.getProtocol());
 	}
 
 	private void handle(ProtocolWelcome welcome) {
-		
+
 	}
 
 	private void handle(ProtocolClientReady clientReady) {

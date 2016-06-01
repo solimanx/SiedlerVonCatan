@@ -35,10 +35,10 @@ public final class DefaultSettings {
 	public final static int[] DICE_NUMBERS = { 2, 5, 10, 8, 4, 11, 12, 9, 10, 8, 3, 6, 4, 9, 11, 3, 6, 5 };
 
 	public final static int maxClients = 4;
-	
-	public final static double PROTOCOL_VERSION = 0.1;
-	
-	public final static double CLIENT_VERSION = 0.1;
 
-	public static final double SERVER_VERSION = 0.1;
+	public final static String PROTOCOL_VERSION = "0.1";
+
+	public final static String CLIENT_VERSION = "0.1";
+
+	public static final String SERVER_VERSION = "0.1";
 }

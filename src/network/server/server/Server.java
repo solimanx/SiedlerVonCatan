@@ -17,7 +17,7 @@ public class Server {
 	int clientCounter = 1;
 
 	private ServerInputHandler inputHandler;
-	
+
 	public Server(ServerInputHandler handler){
 		this.inputHandler = handler;
 	}

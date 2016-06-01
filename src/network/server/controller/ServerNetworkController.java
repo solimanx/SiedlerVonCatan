@@ -32,15 +32,15 @@ public class ServerNetworkController {
 			e.printStackTrace();
 		}
 		this.outputHandler = new ServerOutputHandler(server);
-	
+
 		this.amountPlayers = 1;
 		this.playerIds = new int[5];
 	}
-	
+
 public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
 		Field bandit){
 	//outputHandler
-	
+
 }
 
 public void statusUpdate(int playerId, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
@@ -94,19 +94,14 @@ public void buildCity(int x, int y, int dir, int playerId) {
 }
 
 // 4.1
-public void clientHello(int playerId,double version) {
-	if (version != settings.DefaultSettings.PROTOCOL_VERSION){
-		error(playerId,"Different Protocol Versions; Disconnecting!");
-		//server.client[playerId].close();
-	} else{
+public void clientHello(int playerId,String version) {
 		welcome(playerId);
-	}
 
 }
 
 public void serverHello(){
 	outputHandler.hello(settings.DefaultSettings.SERVER_VERSION,settings.DefaultSettings.PROTOCOL_VERSION);
-		
+
 }
 
 // 4.2
