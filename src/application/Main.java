@@ -13,7 +13,7 @@ import server.controller.GameController;
 import server.server.Server;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import java.util.logging.SimpleFormatter;
 
 public class Main extends Application {
@@ -28,18 +28,18 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		Logger logger = Logger.getLogger("MyLog");
-
-		FileHandler fileHandler = new FileHandler("Log.txt");
-		fileHandler = new FileHandler("MyLogFile.log", true);
-		
-		logger.addHandler(fileHandler);
-		logger.setLevel(Level.ALL);
-		
-		SimpleFormatter formatter = new SimpleFormatter();
-		fileHandler.setFormatter(formatter);
-		
-		logger.log(Level.INFO, "Our first log");
+//		Logger logger = Logger.getLogger("MyLog");
+//
+//		FileHandler fileHandler = new FileHandler("Log.txt");
+//		fileHandler = new FileHandler("MyLogFile.log", true);
+//		
+//		logger.addHandler(fileHandler);
+//		logger.setLevel(Level.ALL);
+//		
+//		SimpleFormatter formatter = new SimpleFormatter();
+//		fileHandler.setFormatter(formatter);
+//		
+//		logger.log(Level.INFO, "Our first log");
 		
 		if (mode) {
 			server = new Server();
@@ -48,7 +48,7 @@ public class Main extends Application {
 			} catch (IOException e) {
 				System.out.println("Couldn't instantiate Server unfortunately!");
 				e.printStackTrace();
-				logger.log(Level.SEVERE, "Couldn't instantiate Server unfortunately!", e);
+				//logger.log(Level.SEVERE, "Couldn't instantiate Server unfortunately!", e);
 
 			}
 		} else {

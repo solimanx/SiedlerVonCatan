@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import client.controller.ClientNetworkController;
 import client.controller.MainViewController;
 import javafx.application.Platform;
 
@@ -17,11 +18,11 @@ public class Client extends Thread {
 	int port = 8080;
 	boolean scanning = true;
 	boolean connectionActive = false;
-	protected MainViewController mainViewController;
+	protected ClientNetworkController clientNC;
 	
-	public Client(MainViewController mainViewController) {
+	public Client(ClientNetworkController clientNC) {
 		super();
-		this.mainViewController = mainViewController;
+		this.clientNC = clientNC;
 	}
 	
 	public void setPort(int port) {
@@ -60,7 +61,7 @@ public class Client extends Thread {
 		while (connectionActive) {
 			String line = reader.readLine();
 			System.out.println("Received from Server: " + line);
-			mainViewController.receiveChatMessage(line);
+			// redirect line to Networkcontroller
 		}
 	}
 

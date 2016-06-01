@@ -17,4 +17,34 @@ public class ClientOutputHandler {
 		
 	}
 
+	public void clientHello(double clientVersion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void clientReady() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void chatSendMessage(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void diceRollRequest() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void endTurn() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

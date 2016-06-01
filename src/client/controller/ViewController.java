@@ -11,22 +11,29 @@ import javafx.stage.Stage;
 import model.Board;
 import server.controller.GameController;
 
-public class ViewController implements ViewControllerInterface {
+public class ViewController {
 
-	private View view;
-	private Board board;
+	protected View view;
+	protected Board board;
 	private HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
-	private GameController gc;
-	private MainViewController mainVC;
-	public Client client;
+	protected GameController gameController; //DEBUG
+	protected FlowController flowController;
+	protected MainViewController mainViewController;
 
 	public ViewController(Stage primaryStage, Board board, GameController gc) {
-		this.gc = gc;
+		this.gameController = gc;
 		this.board = board;
-		view = new View(board, primaryStage, mainVC);
-		this.client = client;
-		this.mainVC = new MainViewController(view, this);
+		view = new View(board, primaryStage, mainViewController);
+		this.mainViewController = new MainViewController(view, this);
+		init();
+	}
+	
+	public ViewController(Stage primaryStage, Board board, FlowController fc) {
+		this.flowController = fc;
+		this.board = board;
+		view = new View(board, primaryStage, mainViewController);
+		this.mainViewController = new MainViewController(view, this);
 		init();
 	}
 
@@ -34,13 +41,7 @@ public class ViewController implements ViewControllerInterface {
 		return view;
 	}
 
-	public MainViewController getMainViewController() {
-		return mainVC;
-	}
-
 	private void init() {
-		client = new Client(mainVC);
-		client.start();
 		
 		fieldColors.put(ResourceType.CLAY, Color.TAN);
 		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
@@ -57,37 +58,37 @@ public class ViewController implements ViewControllerInterface {
 		view.button.setText("build initial village 2,-2,0");
 		view.button.setOnAction(e -> {
 			// setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
-			gc.buildInitialVillage(2, -2, 0, 1);
+			gameController.buildInitialVillage(2, -2, 0, 1);
 		});
 		view.button2.setText("build initial street 2,-2,1");
 		view.button2.setOnAction(e -> {
 			// setStreet(-1,-1,0,1);
-			gc.buildInitialStreet(2, -2, 1, 1);
-			gc.buildStreet(2, -2, 2, 1);
+			gameController.buildInitialStreet(2, -2, 1, 1);
+			gameController.buildStreet(2, -2, 2, 1);
 			// view.setFieldResourceType(-1, -1,
 			// fieldColors.get(ResourceType.SHEEP));
 		});
 		view.button3.setText("build city 2,-2,0");
 		view.button3.setOnAction(e -> {
 			// setCorner(0, -2, 1, CornerStatus.CITY, 1);
-			gc.buildCity(2, -2, 0, 1);
-			gc.buildVillage(2, -1, 0, 1);
-			gc.buildCity(2, -1, 0, 1);
+			gameController.buildCity(2, -2, 0, 1);
+			gameController.buildVillage(2, -1, 0, 1);
+			gameController.buildCity(2, -1, 0, 1);
 		});
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {
-			gc.setBandit(2, -2);
+			gameController.setBandit(2, -2);
 		});
 
 	}
 
-	@Override
+
 	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
 		view.setFieldResourceType(u, v, fieldColors.get(resourceType));
 		view.setFieldChip(u, v, diceIndex);
 	}
 
-	@Override
+
 	public void setCorner(int u, int v, int dir, CornerStatus cornerStatus, int playerID) {
 		Color playerColor = getPlayerColor(playerID);
 
@@ -103,19 +104,19 @@ public class ViewController implements ViewControllerInterface {
 
 	}
 
-	private Color getPlayerColor(int playerID) {
+	public Color getPlayerColor(int playerID) {
 		// TODO Auto-generated method stub
 		return Color.BLUEVIOLET;
 	}
 
-	@Override
+
 	public void setStreet(int u, int v, int dir, int playerID) {
 		view.setStreet(u, v, dir, getPlayerColor(playerID));
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+
 	public void setBandit(int u, int v) {
 		view.setBandit(u, v);
 		// TODO Auto-generated method stub

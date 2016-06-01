@@ -127,9 +127,9 @@ public class View implements ViewInterface {
 		messages.setPrefHeight(200);
 		messages.setEditable(false);
 		VBox chatPane = new VBox(10, messages, chatInput);
-		
+		chatPane.setMaxWidth(500.0);
 		rootPane.setCenter(centerPane);
-		rootPane.setBottom(chatPane);
+		rootPane.setTop(chatPane);
 
 		return true;
 	}

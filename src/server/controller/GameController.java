@@ -35,9 +35,9 @@ public class GameController implements GameControllerInterface {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		viewController = new ViewController(primaryStage, board, this); // DEBUG
-																		// ONLY!!
 		init();
+																		// ONLY!!
+		viewController = new ViewController(primaryStage, board, this); // DEBUG
 	}
 
 	@Override

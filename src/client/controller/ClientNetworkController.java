@@ -14,7 +14,7 @@ public class ClientNetworkController {
 	private FlowController flowController;
 	private ClientOutputHandler outputHandler;
 	private ClientInputHandler inputHandler;
-	private Client client;
+	protected Client client;
 	private PlayerModel[] playerModels;
 	private Board board;
 	private int ownPlayerId;
@@ -23,7 +23,7 @@ public class ClientNetworkController {
 
 	public ClientNetworkController(FlowController fc) {
 		this.flowController = fc;
-		this.client = new Client();
+		this.client = new Client(this);
 		client.start();
 		this.outputHandler = new ClientOutputHandler(this, client);
 		this.inputHandler = new ClientInputHandler(this);
@@ -72,21 +72,21 @@ public class ClientNetworkController {
 		outputHandler.clientHello(settings.DefaultSettings.CLIENT_VERSION);
 
 	}
-	
-	public void serverHello(String serverVersion,int protocolVersion){
-		if(protocolVersion != settings.DefaultSettings.PROTOCOL_VERSION){
+
+	public void serverHello(String serverVersion, int protocolVersion) {
+		if (protocolVersion != settings.DefaultSettings.PROTOCOL_VERSION) {
 			client.stopClient();
-			System.out.println("Invalid Protocol Version; Disconnected"); 
+			System.out.println("Invalid Protocol Version; Disconnected");
 		}
-			
+
 	}
 
 	// 4.2
 	public void welcome(int id) {
-	    playerIds[amountPlayers] = id;			
+		playerIds[amountPlayers] = id;
 		this.ownPlayerId = amountPlayers;
 		flowController.setOwnPlayerId(ownPlayerId);
-        amountPlayers++;
+		amountPlayers++;
 	}
 
 	// 7.2
@@ -108,12 +108,13 @@ public class ClientNetworkController {
 	}
 
 	// 7.1
-	/*public void playerProfile(enums.Color color, String name) {
-		playerIds[amountPlayers] = 
-		flowController.createNewPlayer(color,name);
-		amountPlayers++;
-
-	}*/
+	/*
+	 * public void playerProfile(enums.Color color, String name) {
+	 * playerIds[amountPlayers] = flowController.createNewPlayer(color,name);
+	 * amountPlayers++;
+	 * 
+	 * }
+	 */
 
 	// 6.2
 	public void chatSendMessage(String s) {
@@ -139,13 +140,13 @@ public class ClientNetworkController {
 
 	// 8.2
 	public void diceRollResult(int playerId, int result) {
-		flowController.diceRollResult(getPlayerModelId(playerId),result);
+		flowController.diceRollResult(getPlayerModelId(playerId), result);
 
 	}
 
 	// 8.3
 	public void resourceObtain(int playerId, int[] resources) {
-		flowController.addToPlayersResource(getPlayerModelId(playerId),resources);
+		flowController.addToPlayersResource(getPlayerModelId(playerId), resources);
 
 	}
 
@@ -153,23 +154,23 @@ public class ClientNetworkController {
 	public void statusUpdate(int playerId, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
 		int modelPlayerId = getPlayerModelId(playerId);
-		if (modelPlayerId == 0){ //first Time id received
+		if (modelPlayerId == 0) { // first Time id received
 			playerIds[amountPlayers] = playerId;
 			modelPlayerId = amountPlayers;
-			flowController.setPlayerColor(modelPlayerId,color);
-			flowController.setPlayerName(modelPlayerId,name);
+			flowController.setPlayerColor(modelPlayerId, color);
+			flowController.setPlayerName(modelPlayerId, name);
 			amountPlayers++;
 		}
 		flowController.setPlayerState(modelPlayerId, status);
-		flowController.setPlayerVictoryPoints(modelPlayerId,victoryPoints);
-		//playerModels[modelPlayerId].setVictoryPoints(victoryPoints);
-		flowController.setPlayerResources(modelPlayerId,resources);
+		flowController.setPlayerVictoryPoints(modelPlayerId, victoryPoints);
+		// playerModels[modelPlayerId].setVictoryPoints(victoryPoints);
+		flowController.setPlayerResources(modelPlayerId, resources);
 
 	}
-	
-	private int getPlayerModelId(int playerId){
-		for (int i = 0;i <playerIds.length;i++){
-			if (playerIds[i] == playerId){
+
+	private int getPlayerModelId(int playerId) {
+		for (int i = 0; i < playerIds.length; i++) {
+			if (playerIds[i] == playerId) {
 				return i;
 			}
 		}
@@ -186,7 +187,7 @@ public class ClientNetworkController {
 
 	// 9.3
 	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
-		outputHandler.requestSetBandit(x,y,stealFromPlayerId);
+		outputHandler.requestSetBandit(x, y, stealFromPlayerId);
 
 	}
 

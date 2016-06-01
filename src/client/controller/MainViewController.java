@@ -1,14 +1,15 @@
 package client.controller;
 
 import client.view.View;
+import enums.CornerStatus;
 
 public class MainViewController {
 	private View view;
-	private ViewController vc;
+	private ViewController viewController;
 
 	public MainViewController(View view, ViewController vc) {
 		super();
-		this.vc = vc;
+		this.viewController = vc;
 		this.view = view;
 		init();
 	}
@@ -17,15 +18,29 @@ public class MainViewController {
 		view.chatInput.setOnAction(event -> {
 			String message = view.chatInput.getText();
 			view.chatInput.clear();
-//			vc.chatMessageSent(message);
+			// vc.chatMessageSent(message);
 			try {
-				vc.client.write(message);
+				viewController.flowController.networkController.client.write(message);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			view.messages.appendText(message + "\n");
-		});			
+			// view.messages.appendText(message + "\n");
+		});
+	}
+
+	private void setChat() {
+		view.chatInput.setOnAction(event -> {
+			String message = view.chatInput.getText();
+			view.chatInput.clear();
+			// vc.chatMessageSent(message);
+			try {
+				viewController.flowController.networkController.client.write(message);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
 
 	public View getView() {
@@ -41,6 +56,8 @@ public class MainViewController {
 	public void streetClick(int[] streetCoordinates) {
 		System.out.println("Clicked on Street " + streetCoordinates[0] + " , " + streetCoordinates[1] + " , "
 				+ streetCoordinates[2]);
+		viewController.flowController.requestBuildStreet(streetCoordinates[0], streetCoordinates[1],
+				streetCoordinates[2]);
 
 	}
 
@@ -49,14 +66,30 @@ public class MainViewController {
 				"Clicked on " + fieldCoordinates[0] + " , " + fieldCoordinates[1] + " , " + fieldCoordinates[2]);
 
 	}
-	
-	public void chatMessageSent(String message){
+
+	public void chatMessageSent(String message) {
 		System.out.println("trying to send message: " + message);
 	}
 
 	public void receiveChatMessage(String line) {
-		view.messages.appendText(line +"\n");
+		view.messages.appendText(line + "\n");
 	}
 
+	public void setStreet(int u, int v, int dir, int playerID) {
+		view.setStreet(u, v, dir, viewController.getPlayerColor(playerID));
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setBandit(int u, int v) {
+		view.setBandit(u, v);
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setCorner(int x, int y, int dir, CornerStatus village, int playerId) {
+		// TODO Auto-generated method stub
+
+	}
 
 }

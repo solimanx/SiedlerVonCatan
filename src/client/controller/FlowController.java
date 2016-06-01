@@ -22,12 +22,23 @@ public class FlowController {
 	GameLogic gameLogic;
 	PlayerModel[] playerModels;
 	int ownPlayerId;
-	private ViewController viewController;
-	private Field[][] fields;
-	private ClientNetworkController networkController;
-
+	protected ViewController viewController;
+	protected Field[][] fields;
+	protected ClientNetworkController networkController;
+	
+	
+	public void FlowController(Stage primaryStage, int amountPlayers){
+		this.board = Board.getInstance(amountPlayers);
+		this.gameLogic = new GameLogic(board);
+		this.playerModels = board.getPlayerModels();
+		this.fields = board.getFields();
+		this.networkController = new ClientNetworkController(this);
+		this.viewController = new ViewController(primaryStage, board, this);
+	}
+	
+	
 	public void init(Stage primaryStage) {
-		this.viewController = new ViewController(primaryStage, this);
+		this.viewController = new ViewController(primaryStage, board, this);
 		this.networkController = new ClientNetworkController(this);
 
 		// TODO Auto-generated method stub
@@ -96,8 +107,6 @@ public class FlowController {
 
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
-
-		this.mainViewController = new MainViewController(board, this);
 		
 		return board;
 
@@ -132,7 +141,7 @@ public class FlowController {
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(playerModels[playerId]);
 
-		mainViewController.setStreet(x, y, dir, playerId);
+		viewController.mainViewController.setStreet(x, y, dir, playerId);
 	}
 
 	public void buildVillage(int x, int y, int dir, int playerId) {
@@ -146,7 +155,7 @@ public class FlowController {
 			}
 		}
 
-		mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
+		viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
 	}
 
 	public void buildCity(int x, int y, int dir, int playerId) {
@@ -154,7 +163,7 @@ public class FlowController {
 		c.setStatus(enums.CornerStatus.CITY);
 		c.setOwnedByPlayer(playerModels[playerId]);
 
-		mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
+		viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
 	}
 
 	public void setBandit(int x, int y,int playerId) {
