@@ -67,6 +67,7 @@ public class Client extends Thread {
 	}
 
 	public void write(String s) throws IOException {
+		System.out.println("Client sends to Server: " + s);
 		writer.write(s + "\n");
 		writer.flush();
 	}

@@ -8,7 +8,7 @@ import protocol.connection.ProtocolHello;
 public class Parser {
 	public <T> T parseString(String string) {
 
-		Gson gson = new GsonBuilder().serializeNulls().create();
+		Gson gson = new GsonBuilder().create();
 		Response response = gson.fromJson(string, Response.class);
 
 		if (response.pHello != null) {

@@ -28,7 +28,7 @@ public class Server {
 		try {
 			while (clientCounter <= clients.length) {
 				Socket socket = serverSocket.accept();
-				startHandler(socket);
+				startHandler(socket, inputHandler);
 			}
 		} finally {
 			serverSocket.close();
@@ -40,9 +40,12 @@ public class Server {
 		public BufferedReader reader;
 		public Socket socket;
 		public int threadID = clientCounter;
+		public ServerInputHandler inputHandler;
 
-		public ClientThread(Socket socket) {
+		public ClientThread(Socket socket, ServerInputHandler inputHandler) {
 			this.socket = socket;
+			this.inputHandler = inputHandler;
+			
 		}
 
 		@Override
@@ -56,7 +59,7 @@ public class Server {
 				while (true) {
 					String line = reader.readLine();
 					System.out.println("Server got message: " + line);
-					broadcast("Client " + threadID + " says: " + line);
+					inputHandler.sendToParser(line, threadID);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -66,8 +69,8 @@ public class Server {
 		}
 	}
 
-	private void startHandler(Socket socket) throws IOException {
-		ClientThread thread = new ClientThread(socket);
+	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
+		ClientThread thread = new ClientThread(socket, inputHandler);
 		thread.threadID = clientCounter;
 		thread.start();
 		clients[clientCounter] = thread;
