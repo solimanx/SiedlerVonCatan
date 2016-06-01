@@ -46,7 +46,7 @@ public class ClientOutputHandler {
 		Response r = new Response();
 		r.pChatSend = pcsm;
 		try {
-			client.write(parser.createString(r.pChatSend));
+			client.write(parser.createString(r));
 		} catch (IOException e) {
 			// TODO logging
 			e.printStackTrace();
