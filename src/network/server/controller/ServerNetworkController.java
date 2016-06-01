@@ -18,7 +18,7 @@ public class ServerNetworkController {
 	private ServerInputHandler inputHandler;
 	private Server server;
 	int amountPlayers;
-	int[] playerIds;
+	int[] playerIDs;
 	private int IdCounter = 0;
 
 	public ServerNetworkController(GameController gc) {
@@ -34,7 +34,7 @@ public class ServerNetworkController {
 		this.outputHandler = new ServerOutputHandler(server);
 
 		this.amountPlayers = 1;
-		this.playerIds = new int[5];
+		this.playerIDs = new int[5];
 	}
 
 	public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
@@ -43,60 +43,60 @@ public class ServerNetworkController {
 
 	}
 
-	public void statusUpdate(int playerId, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
+	public void statusUpdate(int playerID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
-		outputHandler.statusUpdate(playerId, color, name, status, victoryPoints, resources);
+		outputHandler.statusUpdate(playerID, color, name, status, victoryPoints, resources);
 	}
 
-	public void statusUpdate(enums.Color color, String name, int playerId) {
+	public void statusUpdate(enums.Color color, String name, int playerID) {
 		if (gameController.checkColor(color)) {
-			gameController.setPlayerColor(playerId, color);
-			gameController.setPlayerName(playerId, name);
+			gameController.setPlayerColor(playerID, color);
+			gameController.setPlayerName(playerID, name);
 		} else {
-			error(playerId, "Farbe bereits vergeben!");
+			error(playerID, "Farbe bereits vergeben!");
 		}
 	}
 
 	// Bauen
 	// 9.4
-	public void requestBuildStreet(int x, int y, int dir, int playerId) {
-		gameController.buildStreet(x, y, dir, getPlayerModelId(playerId));
+	public void requestBuildStreet(int x, int y, int dir, int playerID) {
+		gameController.buildStreet(x, y, dir, getPlayerModelId(playerID));
 
 	}
 
 	// 9.4
-	public void requestBuildVillage(int x, int y, int dir, int playerId) {
-		gameController.buildVillage(x, y, dir, getPlayerModelId(playerId));
+	public void requestBuildVillage(int x, int y, int dir, int playerID) {
+		gameController.buildVillage(x, y, dir, getPlayerModelId(playerID));
 	}
 
 	// 9.4
-	public void requestBuildCity(int x, int y, int dir, int playerId) {
-		gameController.buildCity(x, y, dir, getPlayerModelId(playerId));
+	public void requestBuildCity(int x, int y, int dir, int playerID) {
+		gameController.buildCity(x, y, dir, getPlayerModelId(playerID));
 	}
 
 	// Bauvorgang
 
 	// 8.6
-	public void buildStreet(int x, int y, int dir, int playerId) {
-		outputHandler.buildBuilding(x, y, dir, playerIds[playerId], "Street");
+	public void buildStreet(int x, int y, int dir, int playerID) {
+		outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "Street");
 
 	}
 
 	// 8.6
-	public void buildVillage(int x, int y, int dir, int playerId) {
-		outputHandler.buildBuilding(x, y, dir, playerIds[playerId], "Village");
+	public void buildVillage(int x, int y, int dir, int playerID) {
+		outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "Village");
 	}
 
 	// 8.6
-	public void buildCity(int x, int y, int dir, int playerId) {
-		outputHandler.buildBuilding(x, y, dir, playerIds[playerId], "City");
+	public void buildCity(int x, int y, int dir, int playerID) {
+		outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "City");
 
 	}
 
 	// 4.1
 	// useless? can be deleted since it's never used
-	public void clientHello(int playerId, String version) {
-		welcome(playerId);
+	public void clientHello(int playerID, String version) {
+		welcome(playerID);
 
 	}
 
@@ -109,8 +109,8 @@ public class ServerNetworkController {
 	}
 
 	// 4.2
-	public void welcome(int playerId) {
-		outputHandler.welcome(playerId);
+	public void welcome(int playerID) {
+		outputHandler.welcome(playerID);
 	}
 
 	private int getNewId() {
@@ -122,13 +122,13 @@ public class ServerNetworkController {
 	 * checks if all clients are Ready (PlayerState.WAITING) if yes then
 	 * gameController initializes the Board
 	 * 
-	 * @param playerId
+	 * @param playerID
 	 */
-	public void clientReady(int playerId) {
-		gameController.setPlayerState(playerId, enums.PlayerState.WAITING);
+	public void clientReady(int playerID) {
+		gameController.setPlayerState(playerID, enums.PlayerState.WAITING);
 		boolean allPlayersReady = true;
 		for (int i = 1; i <= amountPlayers; i++) {
-			if (gameController.getPlayerState(playerId) != enums.PlayerState.WAITING) {
+			if (gameController.getPlayerState(playerID) != enums.PlayerState.WAITING) {
 				allPlayersReady = false;
 			}
 		}
@@ -144,22 +144,22 @@ public class ServerNetworkController {
 	}
 
 	// 7.3
-	public void error(int playerId, String s) {
-		outputHandler.error(playerId, s);
+	public void error(int playerID, String s) {
+		outputHandler.error(playerID, s);
 		// System.out.println(s);
 
 	}
 
 	// 6.2
-	public void chatSendMessage(String s, int playerId) {
-		for (int i = 1; i <= playerIds.length; i++) {
-			chatReceiveMessage(getPlayerModelId(playerId), s);
+	public void chatSendMessage(String s, int playerID) {
+		for (int i = 1; i <= playerIDs.length; i++) {
+			chatReceiveMessage(getPlayerModelId(playerID), s);
 		}
 	}
 
 	// 6.3
-	public void chatReceiveMessage(int playerId, String s) {
-		outputHandler.chatReceiveMessage(playerIds[playerId], s);
+	public void chatReceiveMessage(int playerID, String s) {
+		outputHandler.chatReceiveMessage(playerIDs[playerID], s);
 
 	}
 
@@ -169,26 +169,26 @@ public class ServerNetworkController {
 	}
 
 	// 9.1
-	public void diceRollRequest(int playerId) {
-		gameController.diceRollRequest(getPlayerModelId(playerId));
+	public void diceRollRequest(int playerID) {
+		gameController.diceRollRequest(getPlayerModelId(playerID));
 
 	}
 
 	// 8.2
-	public void diceRollResult(int playerId, int result) {
-		outputHandler.diceRollResult(playerIds[playerId], result);
+	public void diceRollResult(int playerID, int result) {
+		outputHandler.diceRollResult(playerIDs[playerID], result);
 
 	}
 
 	// 8.3
-	public void resourceObtain(int playerId, int[] resources) {
-		outputHandler.resourceObtain(playerIds[playerId], resources);
+	public void resourceObtain(int playerID, int[] resources) {
+		outputHandler.resourceObtain(playerIDs[playerID], resources);
 
 	}
 
-	private int getPlayerModelId(int playerId) {
-		for (int i = 0; i < playerIds.length; i++) {
-			if (playerIds[i] == playerId) {
+	private int getPlayerModelId(int playerID) {
+		for (int i = 0; i < playerIDs.length; i++) {
+			if (playerIDs[i] == playerID) {
 				return i;
 			}
 		}
@@ -196,25 +196,25 @@ public class ServerNetworkController {
 	}
 	
 	private int getThreadID(int playerModelID) {
-		return playerIds[playerModelID];
+		return playerIDs[playerModelID];
 	}
 
 	// 9.7
-	public void endTurn(int playerId) {
-		gameController.endTurn(getPlayerModelId(playerId));
+	public void endTurn(int playerID) {
+		gameController.endTurn(getPlayerModelId(playerID));
 
 	}
 
 	// Bandit
 
 	// 9.3
-	public void requestSetBandit(int x, int y, int stealFromPlayerId, int playerId) {
-		gameController.requestSetBandit(x, y, stealFromPlayerId, playerId);
+	public void requestSetBandit(int x, int y, int stealFromPlayerID, int playerID) {
+		gameController.requestSetBandit(x, y, stealFromPlayerID, playerID);
 
 	}
 
 	// 8.5
-	public void setBandit(int stealingPlayerId, int x, int y, int stealFromPlayerId) {
+	public void setBandit(int stealingPlayerID, int x, int y, int stealFromPlayerID) {
 		// outputHandler.
 
 	}
