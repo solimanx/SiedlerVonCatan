@@ -70,7 +70,7 @@ public class Server {
 		ClientThread thread = new ClientThread(socket);
 		thread.threadID = clientCounter;
 		thread.start();
-		clients.add(thread);
+		clients.add(clientCounter, thread);
 		clientCounter++;
 		System.out.println("The Next Client gets Number " + clientCounter);
 	}
@@ -82,7 +82,7 @@ public class Server {
 		}
 	}
 	
-	public void send(String s, int threadID) throws IOException {
+	public void sendToClient(String s, int threadID) throws IOException {
 		ClientThread thread = clients.get(threadID);
 		thread.writer.write(s + "\n");
 		thread.writer.flush();
