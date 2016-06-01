@@ -9,6 +9,8 @@ import model.Edge;
 import model.Field;
 import parsing.Parser;
 import protocol.connection.ProtocolHello;
+import protocol.messaging.ProtocolChatReceiveMessage;
+import protocol.messaging.ProtocolChatSendMessage;
 
 public class ServerOutputHandler {
 	private Server server;
@@ -39,13 +41,24 @@ public class ServerOutputHandler {
 	public void hello(String serverVersion, String protocolVersion, int thread_id) {
 		ProtocolHello ph = new ProtocolHello(serverVersion, protocolVersion);
 		try {
-			server.sendToClient(parser.createString(ph),thread_id);
+			server.sendToClient(parser.createString(ph), thread_id);
 		} catch (IOException e) {
 			// TODO logging
 			e.printStackTrace();
 		}
 
 	}
+
+	public void chatRecieveMessage(String message, int threadID){
+			ProtocolChatReceiveMessage pcrm = new ProtocolChatReceiveMessage(threadID, message);
+			try {
+				server.broadcast((parser.createString(pcrm)));
+			} catch (IOException e) {
+				// TODO logging
+				e.printStackTrace();
+			}
+
+		}
 
 	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
 		// TODO Auto-generated method stub

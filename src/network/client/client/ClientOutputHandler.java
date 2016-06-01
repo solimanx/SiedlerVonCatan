@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import parsing.Parser;
 import protocol.connection.ProtocolHello;
+import protocol.messaging.ProtocolChatSendMessage;
 
 public class ClientOutputHandler {
 
@@ -40,7 +41,13 @@ public class ClientOutputHandler {
 	}
 
 	public void chatSendMessage(String s) {
-		// TODO Auto-generated method stub
+		ProtocolChatSendMessage pcsm = new ProtocolChatSendMessage(s);
+		try {
+			client.write(parser.createString(pcsm));
+		} catch (IOException e) {
+			// TODO logging
+			e.printStackTrace();
+		}
 
 	}
 
