@@ -48,6 +48,8 @@ public class Main extends Application {
 			} catch (IOException e) {
 				System.out.println("Couldn't instantiate Server unfortunately!");
 				e.printStackTrace();
+				logger.log(Level.SEVERE, "Couldn't instantiate Server unfortunately!", e);
+
 			}
 		} else {
 			gc = new GameController(primaryStage, 1);
