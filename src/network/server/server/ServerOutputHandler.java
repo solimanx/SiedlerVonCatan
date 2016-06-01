@@ -49,7 +49,7 @@ public class ServerOutputHandler {
 
 	}
 
-	public void chatRecieveMessage(int threadID, String message){
+	public void chatReceiveMessage(int threadID, String message){
 			ProtocolChatReceiveMessage pcrm = new ProtocolChatReceiveMessage(threadID, message);
 			try {
 				server.broadcast((parser.createString(pcrm)));
