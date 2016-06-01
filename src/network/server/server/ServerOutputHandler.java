@@ -49,7 +49,7 @@ public class ServerOutputHandler {
 
 	}
 
-	public void chatRecieveMessage(String message, int threadID){
+	public void chatRecieveMessage(int threadID, String message){
 			ProtocolChatReceiveMessage pcrm = new ProtocolChatReceiveMessage(threadID, message);
 			try {
 				server.broadcast((parser.createString(pcrm)));
@@ -66,11 +66,6 @@ public class ServerOutputHandler {
 	}
 
 	public void error(int playerId, String s) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void chatReceiveMessage(int i, String s) {
 		// TODO Auto-generated method stub
 
 	}
