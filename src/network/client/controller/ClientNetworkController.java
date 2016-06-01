@@ -27,8 +27,6 @@ public class ClientNetworkController {
 		this.client = new Client(inputHandler);
 		client.start();
 		this.outputHandler = new ClientOutputHandler(client);
-
-		this.playerModels = flowController.board.getPlayerModels();
 		this.amountPlayers = 1;
 	}
 

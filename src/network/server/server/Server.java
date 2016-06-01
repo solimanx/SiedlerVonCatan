@@ -12,13 +12,13 @@ import java.util.Iterator;
 public class Server {
 
 	// HashMap PlayerID => Thread
-	private ArrayList<ClientThread> clients = new ArrayList<ClientThread>(100);
+	private ClientThread[] clients = new ClientThread[5];
 
 	int clientCounter = 1;
 
 	private ServerInputHandler inputHandler;
 
-	public Server(ServerInputHandler handler){
+	public Server(ServerInputHandler handler) {
 		this.inputHandler = handler;
 	}
 
@@ -26,7 +26,7 @@ public class Server {
 		ServerSocket serverSocket = new ServerSocket(8080, 150);
 		System.out.println("Server Running!");
 		try {
-			while (clients.size() < 4) {
+			while (clientCounter <= clients.length) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket);
 			}
@@ -52,7 +52,7 @@ public class Server {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				System.out.println("Client connected! " + socket.getRemoteSocketAddress());
-				//socket.setTcpNoDelay(true);
+				// socket.setTcpNoDelay(true);
 				while (true) {
 					String line = reader.readLine();
 					System.out.println("Server got message: " + line);
@@ -70,20 +70,22 @@ public class Server {
 		ClientThread thread = new ClientThread(socket);
 		thread.threadID = clientCounter;
 		thread.start();
-		clients.add(clientCounter, thread);
+		clients[clientCounter] = thread;
 		clientCounter++;
 		System.out.println("The Next Client gets Number " + clientCounter);
 	}
 
 	public void broadcast(String s) throws IOException {
 		for (ClientThread clientThread : clients) {
-			clientThread.writer.write(s + "\n");
-			clientThread.writer.flush();
+			while (clientThread != null) {
+				clientThread.writer.write(s + "\n");
+				clientThread.writer.flush();
+			}
 		}
 	}
-	
+
 	public void sendToClient(String s, int threadID) throws IOException {
-		ClientThread thread = clients.get(threadID);
+		ClientThread thread = clients[threadID];
 		thread.writer.write(s + "\n");
 		thread.writer.flush();
 	}
