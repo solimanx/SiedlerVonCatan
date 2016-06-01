@@ -25,28 +25,28 @@ public class TradeController {
 		this.gameLogic = logic;
 	}
 
-	public void offerToAllPlayers(int offeringPlayerId, int[] resourcesToGet, int[] resourcesToGive) {
-		if (playerModels[offeringPlayerId].getPlayerState() != PlayerState.TRADING) {
-			// networkController.sendErrorMessageToPlayer(offeringPlayerId,"Offering
+	public void offerToAllPlayers(int offeringPlayerID, int[] resourcesToGet, int[] resourcesToGive) {
+		if (playerModels[offeringPlayerID].getPlayerState() != PlayerState.TRADING) {
+			// networkController.sendErrorMessageToPlayer(offeringPlayerID,"Offering
 			// not allowed");
 		} else {
-			if (gameLogic.checkPlayerResources(offeringPlayerId, resourcesToGive)) {
-				currentOffer_Player = offeringPlayerId;
+			if (gameLogic.checkPlayerResources(offeringPlayerID, resourcesToGive)) {
+				currentOffer_Player = offeringPlayerID;
 				currentOffer_Get = resourcesToGet;
 				currentOffer_Give = resourcesToGive;
 				// networkController.sendTradeOffer(...);
 			} else {
-				// networkController.sendErrorMessageToPlayer(offeringPlayerId,"not
+				// networkController.sendErrorMessageToPlayer(offeringPlayerID,"not
 				// enough Resources");
 			}
 
 		}
 	}
 
-	public void offerToPlayingPlayer(int offeringPlayerId, int receivingPlayerId, int[] resourcesToGet,
+	public void offerToPlayingPlayer(int offeringPlayerID, int receivingPlayerID, int[] resourcesToGet,
 			int[] resourcesToGive) {
-		if (playerModels[receivingPlayerId].getPlayerState() != PlayerState.TRADING) {
-			// networkController.sendErrorMessageToPlayer(offeringPlayerId,"Offering
+		if (playerModels[receivingPlayerID].getPlayerState() != PlayerState.TRADING) {
+			// networkController.sendErrorMessageToPlayer(offeringPlayerID,"Offering
 			// not allowed");
 		} else {
 

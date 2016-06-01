@@ -175,12 +175,12 @@ public class GameController implements GameControllerInterface {
 	 * int, int)
 	 */
 	@Override
-	public void buildVillage(int x, int y, int dir, int playerId) {
-		if (gameLogic.checkBuildVillage(x, y, dir, playerId)) {
+	public void buildVillage(int x, int y, int dir, int playerID) {
+		if (gameLogic.checkBuildVillage(x, y, dir, playerID)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnedByPlayer(playerModels[playerId]);
-			playerModels[playerId].decreaseAmountVillages();
+			c.setOwnedByPlayer(playerModels[playerID]);
+			playerModels[playerID].decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
 				if (neighbors[i] != null) {
@@ -188,87 +188,87 @@ public class GameController implements GameControllerInterface {
 				}
 			}
 
-			subFromPlayersResources(playerId, settings.DefaultSettings.VILLAGE_BUILD_COST);
+			subFromPlayersResources(playerID, settings.DefaultSettings.VILLAGE_BUILD_COST);
 
-			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
+			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
 		}
 
 	}
 
 	@Override
-	public void buildStreet(int x, int y, int dir, int playerId) {
-		if (gameLogic.checkBuildStreet(x, y, dir, playerId)) {
+	public void buildStreet(int x, int y, int dir, int playerID) {
+		if (gameLogic.checkBuildStreet(x, y, dir, playerID)) {
 			Edge e = board.getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(playerModels[playerId]);
-			playerModels[playerId].decreaseAmountStreets();
+			e.setOwnedByPlayer(playerModels[playerID]);
+			playerModels[playerID].decreaseAmountStreets();
 
-			subFromPlayersResources(playerId, settings.DefaultSettings.STREET_BUILD_COST);
+			subFromPlayersResources(playerID, settings.DefaultSettings.STREET_BUILD_COST);
 
-			viewController.mainViewController.setStreet(x, y, dir, playerId);
+			viewController.mainViewController.setStreet(x, y, dir, playerID);
 		}
 
 	}
 
 	@Override
-	public void buildCity(int x, int y, int dir, int playerId) {
-		if (gameLogic.checkBuildCity(x, y, dir, playerId)) {
+	public void buildCity(int x, int y, int dir, int playerID) {
+		if (gameLogic.checkBuildCity(x, y, dir, playerID)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.CITY);
-			c.setOwnedByPlayer(playerModels[playerId]);
-			playerModels[playerId].increaseAmountVillages();
-			playerModels[playerId].decreaseAmountCities();
+			c.setOwnedByPlayer(playerModels[playerID]);
+			playerModels[playerID].increaseAmountVillages();
+			playerModels[playerID].decreaseAmountCities();
 
-			subFromPlayersResources(playerId, settings.DefaultSettings.CITY_BUILD_COST);
+			subFromPlayersResources(playerID, settings.DefaultSettings.CITY_BUILD_COST);
 
-			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
+			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
 		}
 
 	}
 
-	public void buildInitialStreet(int x, int y, int dir, int playerId) {
-		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerId)) {
+	public void buildInitialStreet(int x, int y, int dir, int playerID) {
+		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerID)) {
 			Edge e = board.getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(playerModels[playerId]);
-			playerModels[playerId].decreaseAmountStreets();
+			e.setOwnedByPlayer(playerModels[playerID]);
+			playerModels[playerID].decreaseAmountStreets();
 
-			viewController.mainViewController.setStreet(x, y, dir, playerId);
+			viewController.mainViewController.setStreet(x, y, dir, playerID);
 		}
 	}
 
-	public void buildInitialVillage(int x, int y, int dir, int playerId) {
+	public void buildInitialVillage(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnedByPlayer(playerModels[playerId]);
-			playerModels[playerId].decreaseAmountVillages();
+			c.setOwnedByPlayer(playerModels[playerID]);
+			playerModels[playerID].decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
 				if (neighbors[i] != null) {
 					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
-			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
+			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
 		}
 	}
 
-	private void addToPlayersResource(int playerId, ResourceType resType, int amount) {
-		ArrayList<ResourceType> resourceCards = playerModels[playerId].getResourceCards();
+	private void addToPlayersResource(int playerID, ResourceType resType, int amount) {
+		ArrayList<ResourceType> resourceCards = playerModels[playerID].getResourceCards();
 		for (int i = 0; i < amount; i++) {
 			resourceCards.add(resType);
 		}
-		playerModels[playerId].setResourceCards(resourceCards);
+		playerModels[playerID].setResourceCards(resourceCards);
 	}
 
-	private void subFromPlayersResources(int playerId, int[] costsparam) {
+	private void subFromPlayersResources(int playerID, int[] costsparam) {
 		int[] costs = new int[5];
 		for (int i = 0; i < costsparam.length; i++) {
 			costs[i] = costsparam[i];
 		}
 		ResourceType currResType;
 		ArrayList<ResourceType> list = new ArrayList<ResourceType>();
-		list = playerModels[playerId].getResourceCards();
+		list = playerModels[playerID].getResourceCards();
 		for (int i = 0; i < costs.length; i++) {
 			for (int j = list.size() - 1; j >= 0; j--) { // umkehren wegen
 															// remove
@@ -311,12 +311,12 @@ public class GameController implements GameControllerInterface {
 			}
 
 		}
-		playerModels[playerId].setResourceCards(list);
+		playerModels[playerID].setResourceCards(list);
 	}
 
 	@Override
-	public void setBandit(int x, int y,int playerId) {
-		if (gameLogic.checkSetBandit(x, y,playerId)) {
+	public void setBandit(int x, int y,int playerID) {
+		if (gameLogic.checkSetBandit(x, y,playerID)) {
 			board.setBandit(board.getFieldAt(x, y));
 
 			viewController.mainViewController.setBandit(x, y); // Debug
@@ -328,15 +328,15 @@ public class GameController implements GameControllerInterface {
 	 * basic method for switching the player states updates all clients via
 	 * networkController
 	 *
-	 * @param playerId
+	 * @param playerID
 	 * @param state
 	 */
 	@Override
-	public void setPlayerState(int playerId, PlayerState state) {
+	public void setPlayerState(int playerID, PlayerState state) {
 		switch (state) {
 		case TRADING: // set all other players to offering
 			for (int i = 1; i < playerModels.length; i++) {
-				if (i == playerId) {
+				if (i == playerID) {
 					playerModels[i].setPlayerState(state);
 				} else {
 					playerModels[i].setPlayerState(PlayerState.OFFERING);
@@ -344,18 +344,18 @@ public class GameController implements GameControllerInterface {
 			}
 		case PLAYING: // set all other players waiting
 			for (int i = 1; i < playerModels.length; i++) {
-				if (i == playerId) {
+				if (i == playerID) {
 					playerModels[i].setPlayerState(state);
 				} else {
 					playerModels[i].setPlayerState(PlayerState.WAITING);
 				}
 			}
-		default: // else set only player state of playerId
-			playerModels[playerId].setPlayerState(state);
+		default: // else set only player state of playerID
+			playerModels[playerID].setPlayerState(state);
 		}
 
 		// DEBUG ONLY!
-		// viewController.setPlayerState(playerId);
+		// viewController.setPlayerState(playerID);
 		/*
 		 * for (int i = 1;i < playerModels.length;i++){
 		 * networkController.setPlayerState(i,playerModels[i].getPlayerState());
@@ -370,17 +370,17 @@ public class GameController implements GameControllerInterface {
 
 	}
 
-	public PlayerState getPlayerState(int playerId) {
+	public PlayerState getPlayerState(int playerID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void diceRollRequest(int playerModelId) {
+	public void diceRollRequest(int playerModelID) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void endTurn(int playerModelId) {
+	public void endTurn(int playerModelID) {
 		// TODO Auto-generated method stub
 
 	}
@@ -390,17 +390,17 @@ public class GameController implements GameControllerInterface {
 		return false;
 	}
 
-	public void setPlayerColor(int playerId, Color color) {
+	public void setPlayerColor(int playerID, Color color) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void setPlayerName(int playerId, String name) {
+	public void setPlayerName(int playerID, String name) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void requestSetBandit(int x, int y, int stealFromPlayerId, int playerId) {
+	public void requestSetBandit(int x, int y, int stealFromPlayerID, int playerID) {
 		// TODO Auto-generated method stub
 
 	}
