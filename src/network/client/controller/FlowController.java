@@ -208,4 +208,12 @@ public class FlowController {
 	public void setOwnPlayerId(int ownPlayerId) {
 		this.ownPlayerId = ownPlayerId;
 	}
+	
+	public void chatSendMessage(String s){
+		networkController.chatSendMessage(s);
+	}
+	
+	public void chatReceiveMessage(int playerId,String s){
+		viewController.mainViewController.receiveChatMessage("Spieler "+playerId+": "+s);
+	}
 }
