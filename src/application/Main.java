@@ -28,6 +28,18 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		Logger logger = Logger.getLogger("MyLog");
+
+		FileHandler fileHandler = new FileHandler("Log.txt");
+		fileHandler = new FileHandler("MyLogFile.log", true);
+		
+		logger.addHandler(fileHandler);
+		logger.setLevel(Level.ALL);
+		
+		SimpleFormatter formatter = new SimpleFormatter();
+		fileHandler.setFormatter(formatter);
+		
+		logger.log(Level.INFO, "Our first log");
 		
 		if (mode) {
 			server = new Server();
