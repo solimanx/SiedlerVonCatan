@@ -30,20 +30,22 @@ public class GameController implements GameControllerInterface {
 	PlayerModel[] playerModels;
 	Field[][] fields;
 	ViewController viewController;
+	private ServerNetworkController networkController;
 
-	public GameController(Stage primaryStage, int amountPlayers) {
+	public GameController(Stage primaryStage) {
+		this.networkController = new ServerNetworkController(this);
+
+	}
+
+	@Override
+	public void init(int amountPlayers) {
 		this.board = Board.getInstance(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
 																		// ONLY!!
-		viewController = new ViewController(primaryStage, board, this); // DEBUG
+		//viewController = new ViewController(primaryStage, board, this); // DEBUG
 		init();
-	}
-
-	@Override
-	public void init() {
-
 		generateBoard(fields[2][2], false);
 		/*
 		 * for (int i = 1; i <= amountPlayers;i++){
@@ -313,8 +315,8 @@ public class GameController implements GameControllerInterface {
 	}
 
 	@Override
-	public void setBandit(int x, int y) {
-		if (gameLogic.checkSetBandit(x, y)) {
+	public void setBandit(int x, int y,int playerId) {
+		if (gameLogic.checkSetBandit(x, y,playerId)) {
 			board.setBandit(board.getFieldAt(x, y));
 
 			viewController.mainViewController.setBandit(x, y); // Debug
@@ -397,6 +399,11 @@ public class GameController implements GameControllerInterface {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void requestSetBandit(int x, int y, int stealFromPlayerId, int playerId) {
+		// TODO Auto-generated method stub
+		
+	}	
 
 
 }

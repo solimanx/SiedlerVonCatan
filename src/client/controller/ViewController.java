@@ -86,7 +86,7 @@ public class ViewController {
 		});
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {
-			gameController.setBandit(2, -2);
+			//gameController.setBandit(2, -2);
 		});
 
 	}
@@ -95,6 +95,24 @@ public class ViewController {
 	public Color getPlayerColor(int playerID) {
 		// TODO Auto-generated method stub
 		return Color.BLUEVIOLET;
+	}
+
+
+	public void setPlayerColor(int playerId, enums.Color color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setPlayerName(int playerId, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setDiceRollResult(int playerId, int result) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

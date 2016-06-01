@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import client.client.Client;
+import client.controller.FlowController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import server.controller.GameController;
@@ -20,6 +21,7 @@ public class Main extends Application {
 	private static Logger logger = LogManager.getLogger(Main.class.getName());
 
 	private GameController gc;
+	private FlowController fc;
 	private Client client;
 	private Server server;
 
@@ -42,17 +44,10 @@ public class Main extends Application {
 //		logger.log(Level.INFO, "Our first log");
 		
 		if (mode) {
-			server = new Server();
-			try {
-				server.start();
-			} catch (IOException e) {
-				System.out.println("Couldn't instantiate Server unfortunately!");
-				e.printStackTrace();
-				//logger.log(Level.SEVERE, "Couldn't instantiate Server unfortunately!", e);
-
-			}
+			//server = new Server();
+			gc = new GameController(primaryStage);
 		} else {
-			gc = new GameController(primaryStage, 1);
+			fc = new FlowController(primaryStage);
 		}
 
 	}

@@ -100,7 +100,7 @@ public void clientHello(int playerId,double version) {
 		error(playerId,"Different Protocol Versions; Disconnecting!");
 		//server.client[playerId].close();
 	} else{
-		welcome();
+		welcome(playerId);
 	}
 
 }
@@ -111,9 +111,8 @@ public void serverHello(){
 }
 
 // 4.2
-public void welcome() {
-    playerIds[amountPlayers] = getNewId();			
-    amountPlayers++;
+public void welcome(int playerId) {
+    outputHandler.welcome(playerId);
 }
 
 private int getNewId(){
@@ -208,13 +207,14 @@ public void endTurn(int playerId) {
 // Bandit
 
 // 9.3
-public void requestSetBandit(int x, int y, int stealFromPlayerId) {
-	outputHandler.requestSetBandit(x,y,stealFromPlayerId);
+public void requestSetBandit(int x, int y, int stealFromPlayerId,int playerId) {
+	gameController.requestSetBandit(x,y,stealFromPlayerId,playerId);
 
 }
 
 // 8.5
 public void setBandit(int stealingPlayerId, int x, int y, int stealFromPlayerId) {
+	//outputHandler.
 
 }
 

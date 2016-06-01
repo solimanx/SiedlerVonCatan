@@ -28,25 +28,10 @@ public class FlowController {
 	private Object mainViewController;
 	
 	
-	public FlowController(Stage primaryStage, int amountPlayers){
+	public FlowController(Stage primaryStage){
 		this.networkController = new ClientNetworkController(this);
-		
-		this.viewController = new ViewController(primaryStage, board, this);
-		
-		// hier muss das Board über Netzwerk erhalten werden
-		this.board = Board.getInstance(amountPlayers);
-		this.gameLogic = new GameLogic(board);
-		this.playerModels = board.getPlayerModels();
-		this.fields = board.getFields();
-	}
-	
-	
-	public void init(Stage primaryStage) {
-		this.viewController = new ViewController(primaryStage, this);
 		this.mainViewController = viewController.getMainViewController();
-		this.networkController = new ClientNetworkController(this);		
-		//this.viewController = new ViewController(primaryStage, board, this);
-		//this.networkController = new ClientNetworkController(this);
+		this.viewController = new ViewController(primaryStage, board, this);
 
 	}
 

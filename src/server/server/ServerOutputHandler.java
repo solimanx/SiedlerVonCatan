@@ -54,9 +54,10 @@ public class ServerOutputHandler {
 		
 	}
 
-	public void hello(double serverVersion, double protocolVersion) {
+	public void welcome(int playerId) {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
