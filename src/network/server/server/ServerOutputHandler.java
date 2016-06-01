@@ -36,10 +36,10 @@ public class ServerOutputHandler {
 	 * @param serverVersion
 	 * @param protocolVersion
 	 */
-	public void hello(String serverVersion, String protocolVersion) {
+	public void hello(String serverVersion, String protocolVersion, int thread_id) {
 		ProtocolHello ph = new ProtocolHello(serverVersion, protocolVersion);
 		try {
-			server.broadcast(parser.createString(ph));
+			server.sendToClient(parser.createString(ph),thread_id);
 		} catch (IOException e) {
 			// TODO logging
 			e.printStackTrace();

@@ -103,8 +103,8 @@ public class ServerNetworkController {
 	/**
 	 * Server sends Hello message to ServerOutputHandler
 	 */
-	public void serverHello() {
-		outputHandler.hello(settings.DefaultSettings.SERVER_VERSION, settings.DefaultSettings.PROTOCOL_VERSION);
+	public void serverHello(int playerID) {
+		outputHandler.hello(settings.DefaultSettings.SERVER_VERSION, settings.DefaultSettings.PROTOCOL_VERSION,getPlayerModelId(playerID));
 
 	}
 
