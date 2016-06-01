@@ -81,6 +81,12 @@ public class Server {
 			clientThread.writer.flush();
 		}
 	}
+	
+	public void send(String s, int threadID) throws IOException {
+		ClientThread thread = clients.get(threadID);
+		thread.writer.write(s + "\n");
+		thread.writer.flush();
+	}
 
 	public void closeSocket() {
 		for (ClientThread clientThread : clients) {
