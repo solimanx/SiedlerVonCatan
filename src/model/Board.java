@@ -720,63 +720,74 @@ public class Board implements BoardInterface {
 		Field firstField = f;
 		Field nextField = f;
 		Field plannedNextField = f;
-		int r = (DefaultSettings.BOARD_SIZE - 1) / 2;
+		int r = ((DefaultSettings.BOARD_SIZE - 1) / 2)-1;
 		ArrayList<Field> result = new ArrayList<Field>();
 		int dir = getDirektion(f);
 		int[] coord = new int[2];
 
-		for (int length = r; length > 1; length--) {
+		for (int length = r; length > 0; length--) {
 			for (int j = 0; j < 7; j++) {
-				for (int i = 0; i < r; i++) {
-					switch (j) {
-					case 0:
-						if (getRing(length).contains(plannedNextField)) {
-							nextField = plannedNextField;
-							result.add(nextField);
-							coord[0] = getFieldCoordinates(nextField)[0];
-							coord[1] = getFieldCoordinates(nextField)[1];
-							plannedNextField = getNextField(coord[0], coord[1], nextDir(dir, j));
-						} else {
-							i = r;
-						}
-						break;
-					case 6:
-						if (plannedNextField != firstField) {
-							nextField = plannedNextField;
-							result.add(nextField);
-							coord[0] = getFieldCoordinates(nextField)[0];
-							coord[1] = getFieldCoordinates(nextField)[1];
-							plannedNextField = getNextField(coord[0], coord[1], nextDir(dir, j));
-						} else {
-							coord[0] = getFieldCoordinates(nextField)[0];
-							coord[1] = getFieldCoordinates(nextField)[1];
-							i = r;
-							j = 7;
-							plannedNextField = getNextField(coord[0], coord[1], nextDir(dir, j + 1));
-							if (result.contains(plannedNextField)) {
-								plannedNextField = getNextField(coord[0], coord[1], nextDir(dir, j + 2));
+				for (int i = 0; i < length; i++) {
+					if(nextField != null){
+						switch (j) {
+						case 0:
+							if (getRing(length).contains(plannedNextField)) {
+								nextField = plannedNextField;
+								result.add(nextField);
+								//sysoutArrayList(result); //debug
+								coord[0] = getFieldCoordinates(nextField)[0];
+								coord[1] = getFieldCoordinates(nextField)[1];
+								plannedNextField = getNextField(coord[0], coord[1], getDirektion(nextField));
+							} else {
+								i = r;
 							}
+							break;
+						case 6:
+							if (plannedNextField != firstField) {
+								nextField = plannedNextField;
+								result.add(nextField);
+								//sysoutArrayList(result); //debug
+								coord[0] = getFieldCoordinates(nextField)[0];
+								coord[1] = getFieldCoordinates(nextField)[1];
+								plannedNextField = getNextField(coord[0], coord[1], getDirektion(nextField));
+							} else {
+								coord[0] = getFieldCoordinates(nextField)[0];
+								coord[1] = getFieldCoordinates(nextField)[1];
+								i = r;
+								j = 7;
+								plannedNextField = getNextField(coord[0], coord[1], nextDir(getDirektion(nextField), 0));
+								if (result.contains(plannedNextField)) {
+									plannedNextField = getNextField(coord[0], coord[1], nextDir(getDirektion(nextField), 1));
+								}
+							}
+							break;
+						default:
+							nextField = plannedNextField;
+							result.add(nextField);
+							//sysoutArrayList(result); //debug
+							coord[0] = getFieldCoordinates(nextField)[0];
+							coord[1] = getFieldCoordinates(nextField)[1];
+							plannedNextField = getNextField(coord[0], coord[1], getDirektion(nextField));
+							break;
 						}
-						break;
-					default:
-						nextField = plannedNextField;
-						result.add(nextField);
-						coord[0] = getFieldCoordinates(nextField)[0];
-						coord[1] = getFieldCoordinates(nextField)[1];
-						plannedNextField = getNextField(coord[0], coord[1], nextDir(dir, j));
-						break;
 					}
 				}
-				firstField = nextField;
+				
 			}
+			firstField = nextField;
 		}
-
-		for (int a = 0; a < 6; a++) {
-
-		}
-
 		result.add(getFieldAt(0, 0));
 		return result;
+	}
+	
+	
+	// TODO remove debug Method
+	public void sysoutArrayList(ArrayList<Field> a){
+		String s = "";
+		for(int i = 0; i<a.size(); i++){
+			s = s + a.get(i).getFieldID();
+		}
+		System.out.println(s);
 	}
 
 	
