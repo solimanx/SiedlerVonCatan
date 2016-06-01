@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class Server {
 
 	// HashMap PlayerID => Thread
-	private ArrayList<ClientThread> clients = new ArrayList<ClientThread>(4);
+	private ArrayList<ClientThread> clients = new ArrayList<ClientThread>(100);
 
 	int clientCounter = 1;
 
