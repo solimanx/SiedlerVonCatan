@@ -5,6 +5,7 @@ import java.util.Random;
 
 import client.client.Client;
 import client.controller.ViewController;
+import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
 import javafx.stage.Stage;
@@ -366,5 +367,36 @@ public class GameController implements GameControllerInterface {
 		// TODO Auto-generated method stub
 
 	}
+
+	public PlayerState getPlayerState(int playerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void diceRollRequest(int playerModelId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void endTurn(int playerModelId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean checkColor(Color color) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setPlayerColor(int playerId, Color color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setPlayerName(int playerId, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

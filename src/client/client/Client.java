@@ -18,11 +18,11 @@ public class Client extends Thread {
 	int port = 8080;
 	boolean scanning = true;
 	boolean connectionActive = false;
-	protected ClientNetworkController clientNC;
+	protected ClientInputHandler inputHandler;
 	
-	public Client(ClientNetworkController clientNC) {
+	public Client(ClientInputHandler inputHandler) {
 		super();
-		this.clientNC = clientNC;
+		this.inputHandler = inputHandler;
 	}
 	
 	public void setPort(int port) {

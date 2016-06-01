@@ -24,16 +24,16 @@ public class ServerNetworkController {
 
 	public ServerNetworkController(GameController gc) {
 		this.gameController = gc;
-		this.server = new Server();
+		this.inputHandler = new ServerInputHandler(this);
+		this.server = new Server(inputHandler);
 		try {
 			server.start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.outputHandler = new ServerOutputHandler(this, server);
-		this.inputHandler = new ServerInputHandler(this);
-		
+		this.outputHandler = new ServerOutputHandler(server);
+	
 		this.amountPlayers = 1;
 		this.playerIds = new int[5];
 	}
@@ -54,43 +54,43 @@ public void statusUpdate(enums.Color color,String name,int playerId){
 		gameController.setPlayerColor(playerId,color);
 		gameController.setPlayerName(playerId,name);
 	} else {
-		error("Farbe bereits vergeben!");
+		error(playerId,"Farbe bereits vergeben!");
 	}
 }
 
 // Bauen
 // 9.4
 public void requestBuildStreet(int x, int y, int dir,int playerId) {
-	gameController.buildStreet(x, y, dir, getModelPlayerId(playerId));
+	gameController.buildStreet(x, y, dir, getPlayerModelId(playerId));
 
 }
 
 // 9.4
 public void requestBuildVillage(int x, int y, int dir,int playerId) {
-	gameController.buildVillage(x, y, dir, getModelPlayerId(playerId));
+	gameController.buildVillage(x, y, dir, getPlayerModelId(playerId));
 }
 
 // 9.4
 public void requestBuildCity(int x, int y, int dir,int playerId) {
-	gameController.buildCity(x, y, dir, getModelPlayerId(playerId));
+	gameController.buildCity(x, y, dir, getPlayerModelId(playerId));
 }
 
 // Bauvorgang
 
 // 8.6
 public void buildStreet(int x, int y, int dir, int playerId) {
-	outputHandler.buildStreet(x, y, dir, playerIds[playerId]);
+	outputHandler.buildBuilding(x, y, dir, playerIds[playerId],"Street");
 
 }
 
 // 8.6
 public void buildVillage(int x, int y, int dir, int playerId) {
-	outputHandler.buildVillage(x, y, dir, playerIds[playerId]);
+	outputHandler.buildBuilding(x, y, dir, playerIds[playerId],"Village");
 }
 
 // 8.6
 public void buildCity(int x, int y, int dir, int playerId) {
-	outputHandler.buildCity(x, y, dir, playerIds[playerId]);
+	outputHandler.buildBuilding(x, y, dir, playerIds[playerId],"City");
 
 }
 
@@ -154,13 +154,15 @@ public void error(int playerId,String s) {
 
 
 // 6.2
-public void chatSendMessage(String s) {
-	outputHandler.chatSendMessage(s);
-
+public void chatSendMessage(String s,int playerId) {
+	for (int i = 1;i<= playerIds.length;i++){
+		chatReceiveMessage(getPlayerModelId(playerId),s);
+	}
 }
 
 // 6.3
 public void chatReceiveMessage(int playerId, String s) {
+	outputHandler.chatReceiveMessage(playerIds[playerId],s);
 
 }
 
@@ -183,7 +185,7 @@ public void diceRollResult(int playerId, int result) {
 
 // 8.3
 public void resourceObtain(int playerId, int[] resources) {
-	outputHandler.addToPlayersResource(playerIds[playerId],resources);
+	outputHandler.resourceObtain(playerIds[playerId],resources);
 
 }
 
@@ -198,8 +200,8 @@ private int getPlayerModelId(int playerId){
 }
 
 // 9.7
-public void endTurn() {
-	outputHandler.endTurn();
+public void endTurn(int playerId) {
+	gameController.endTurn(getPlayerModelId(playerId));
 
 }
 

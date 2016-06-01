@@ -1,14 +1,10 @@
 package client.client;
 
-import client.controller.ClientNetworkController;
-
 public class ClientOutputHandler {
 
-	private ClientNetworkController networkController;
 	private Client client;
 
-	public ClientOutputHandler(ClientNetworkController nc, Client client) {
-		this.networkController = nc;
+	public ClientOutputHandler(Client client) {
 		this.client = client;
 	}
 

@@ -16,6 +16,12 @@ public class Server {
 
 	int clientCounter = 1;
 
+	private ServerInputHandler inputHandler;
+	
+	public Server(ServerInputHandler handler){
+		this.inputHandler = handler;
+	}
+
 	public void start() throws IOException {
 		ServerSocket serverSocket = new ServerSocket(8080, 150);
 		System.out.println("Server Running!");

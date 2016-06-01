@@ -25,9 +25,10 @@ public class FlowController {
 	protected ViewController viewController;
 	protected Field[][] fields;
 	protected ClientNetworkController networkController;
+	private Object mainViewController;
 	
 	
-	public void FlowController(Stage primaryStage, int amountPlayers){
+	public FlowController(Stage primaryStage, int amountPlayers){
 		this.networkController = new ClientNetworkController(this);
 		
 		this.viewController = new ViewController(primaryStage, board, this);
@@ -41,10 +42,11 @@ public class FlowController {
 	
 	
 	public void init(Stage primaryStage) {
-		this.viewController = new ViewController(primaryStage, board, this);
-		this.networkController = new ClientNetworkController(this);
-
-		// TODO Auto-generated method stub
+		this.viewController = new ViewController(primaryStage, this);
+		this.mainViewController = viewController.getMainViewController();
+		this.networkController = new ClientNetworkController(this);		
+		//this.viewController = new ViewController(primaryStage, board, this);
+		//this.networkController = new ClientNetworkController(this);
 
 	}
 
@@ -111,6 +113,8 @@ public class FlowController {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		
+		//viewController.mainViewController.init(board);
+		
 		return board;
 
 	}
@@ -170,7 +174,7 @@ public class FlowController {
 	}
 
 	public void setBandit(int x, int y,int playerId) {
-		if (gameLogic.checkSetBandit(x, y)) {
+		if (gameLogic.checkSetBandit(x, y,playerId)) {
 			networkController.requestSetBandit(x,y,playerId);
 		}
 
@@ -198,13 +202,13 @@ public class FlowController {
 		
 	}	
 	
-	public void setPlayerColor(int modelPlayerId, Color color) {
-		// TODO Auto-generated method stub
+	public void setPlayerColor(int playerId, Color color) {
+		viewController.setPlayerColor(playerId,color);
 		
 	}
 
-	public void setPlayerName(int modelPlayerId, String name) {
-		// TODO Auto-generated method stub
+	public void setPlayerName(int playerId, String name) {
+		viewController.setPlayerName(playerId,name);
 		
 	}
 
@@ -212,13 +216,11 @@ public class FlowController {
 		playerModels[playerId].setVictoryPoints(victoryPoints);		
 	}		
 
-	public void diceRollResult(int playerModelId, int result) {
-		// TODO Auto-generated method stub
-		
+	public void diceRollResult(int playerId, int result) {
+		viewController.setDiceRollResult(playerId,result);		
 	}
 
 	public void setOwnPlayerId(int ownPlayerId) {
 		this.ownPlayerId = ownPlayerId;		
 	}
-
 }
