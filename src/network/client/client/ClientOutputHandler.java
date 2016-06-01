@@ -3,6 +3,7 @@ package network.client.client;
 import java.io.IOException;
 
 import parsing.Parser;
+import parsing.Response;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 
@@ -42,8 +43,10 @@ public class ClientOutputHandler {
 
 	public void chatSendMessage(String s) {
 		ProtocolChatSendMessage pcsm = new ProtocolChatSendMessage(s);
+		Response r = new Response();
+		r.pChatSend = pcsm;
 		try {
-			client.write(parser.createString(pcsm));
+			client.write(parser.createString(r.pChatSend));
 		} catch (IOException e) {
 			// TODO logging
 			e.printStackTrace();
