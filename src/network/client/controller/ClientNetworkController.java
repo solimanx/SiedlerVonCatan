@@ -74,6 +74,13 @@ public class ClientNetworkController {
 
 	}
 
+	/**
+	 * Check if versions match and act accordingly; if they match begin sending
+	 * confirmation from client otherwise disconnect
+	 * 
+	 * @param serverVersion
+	 * @param protocolVersion
+	 */
 	public void serverHello(String serverVersion, String protocolVersion) {
 		if (!protocolVersion.equals(settings.DefaultSettings.PROTOCOL_VERSION)) {
 			client.stopClient();

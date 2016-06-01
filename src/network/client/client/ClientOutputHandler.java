@@ -1,5 +1,7 @@
 package network.client.client;
 
+import java.io.IOException;
+
 import parsing.Parser;
 import protocol.connection.ProtocolHello;
 
@@ -17,10 +19,18 @@ public class ClientOutputHandler {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	/**
+	 * If the connection can be established, send "Hello" back to server.
+	 */
 	public void clientHello(String clientVersion) {
 		ProtocolHello ph = new ProtocolHello(clientVersion,null);
-		parser.createString(ph);
+		try {
+			client.write(parser.createString(ph));
+		} catch (IOException e) {
+			// TODO logging
+			e.printStackTrace();
+		}
 
 	}
 

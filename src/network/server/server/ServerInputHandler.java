@@ -27,7 +27,7 @@ public class ServerInputHandler {
 		this.networkController = nc;
 		this.parser = new Parser();
 	}
-	
+
 	/**
 	 * sends JSON formatted string to parser and initiates handling of parsed
 	 * object
@@ -40,6 +40,7 @@ public class ServerInputHandler {
 		handle(object);
 		// handle(object.getClass().cast(object));
 	}
+
 	/**
 	 * takes parsed object and redirects to its proper method depending on
 	 * objects "real" class. ( object will be casted to "real" class )
@@ -103,12 +104,13 @@ public class ServerInputHandler {
 		}
 	}
 
+	//useless? not needed
 	private void handle(ProtocolHello hello) {
 		System.out.println("Hello gelesen!");
 	}
 
 	private void handle(ProtocolWelcome welcome) {
-		
+
 	}
 
 	private void handle(ProtocolClientReady clientReady) {

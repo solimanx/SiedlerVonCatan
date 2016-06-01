@@ -30,15 +30,20 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Create ProtocolHello JSON and broadcast it as a String through server
+	 * 
+	 * @param serverVersion
+	 * @param protocolVersion
+	 */
 	public void hello(String serverVersion, String protocolVersion) {
-		ProtocolHello ph = new ProtocolHello(serverVersion,protocolVersion);
+		ProtocolHello ph = new ProtocolHello(serverVersion, protocolVersion);
 		try {
 			server.broadcast(parser.createString(ph));
 		} catch (IOException e) {
 			// TODO logging
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -71,6 +76,5 @@ public class ServerOutputHandler {
 		// TODO Auto-generated method stub
 
 	}
-
 
 }
