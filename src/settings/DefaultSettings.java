@@ -39,4 +39,6 @@ public final class DefaultSettings {
 	public final static double PROTOCOL_VERSION = 0.1;
 	
 	public final static double CLIENT_VERSION = 0.1;
+
+	public static final double SERVER_VERSION = 0.1;
 }

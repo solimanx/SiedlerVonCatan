@@ -157,13 +157,24 @@ public class GameLogic implements GameLogicInterface {
 	 * 
 	 * @param x
 	 * @param y
+	 * @param playerId 
 	 * @return true/false
 	 */
-	public boolean checkSetBandit(int x, int y) {
+	public boolean checkSetBandit(int x, int y, int playerId) {
 		Field f = board.getFieldAt(x, y);
 		if (f != null && f != board.getBandit()) { // valid position and not the
 													// same as before
-			return true;
+			if(playerId == 0){ //check if specified player has a corner at this field
+				return true;
+			} else{
+				Corner[] corners = board.getSurroundingCorners(x, y);
+				for (Corner c : corners){
+					if (c.getOwnedByPlayer() == playerModels[playerId]){
+						return true;
+					}
+				}
+			    return false;
+			}
 		}
 
 		return false;
