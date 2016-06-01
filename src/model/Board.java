@@ -807,7 +807,6 @@ public class Board implements BoardInterface {
 	}
 
 	public int getDirektion(Field f) {
-		int dir = 0;
 		int x = getFieldCoordinates(f)[0];
 		int y = getFieldCoordinates(f)[1];
 		int sum = x + y;
@@ -831,7 +830,7 @@ public class Board implements BoardInterface {
 		}
 		
 		System.out.println("Error in Board.getDirektion");
-		return dir;
+		return 0;
 	}
 
 	public ArrayList<Field> getRing(int rad) {
