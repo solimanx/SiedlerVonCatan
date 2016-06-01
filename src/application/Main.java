@@ -6,12 +6,13 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import client.client.Client;
-import client.controller.FlowController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import server.controller.GameController;
-import server.server.Server;
+import network.client.client.Client;
+import network.client.controller.FlowController;
+import network.server.controller.GameController;
+import network.server.server.Server;
+
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 

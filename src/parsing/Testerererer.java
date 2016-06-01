@@ -3,7 +3,7 @@ package parsing;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import client.client.ClientInputHandler;
+import network.client.client.ClientInputHandler;
 import protocol.connection.ProtocolHello;
 
 public class Testerererer {
