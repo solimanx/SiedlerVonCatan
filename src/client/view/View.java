@@ -10,6 +10,7 @@ import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -124,12 +125,14 @@ public class View implements ViewInterface {
 		centerPane = new Pane();
 		centerPane.getChildren().addAll(0, figures);
 		
-		messages.setPrefHeight(200);
+		messages.setPrefHeight(100);
 		messages.setEditable(false);
 		VBox chatPane = new VBox(10, messages, chatInput);
 		chatPane.setMaxWidth(500.0);
+
 		rootPane.setCenter(centerPane);
 		rootPane.setTop(chatPane);
+		rootPane.setAlignment(chatPane, Pos.TOP_CENTER);
 
 		return true;
 	}
