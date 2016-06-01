@@ -35,9 +35,9 @@ public class GameController implements GameControllerInterface {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		init();
 																		// ONLY!!
 		viewController = new ViewController(primaryStage, board, this); // DEBUG
+		init();
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class GameController implements GameControllerInterface {
 		int[] viewCoord = new int[2];
 		for (int i = 0; i < fields.size(); i++) {
 			viewCoord = board.getFieldCoordinates(fields.get(i));
-			viewController.setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
+			viewController.mainViewController.setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
 					fields.get(i).getDiceIndex());
 		}
 	}
@@ -187,7 +187,7 @@ public class GameController implements GameControllerInterface {
 
 			subFromPlayersResources(playerId, settings.DefaultSettings.VILLAGE_BUILD_COST);
 
-			viewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
+			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
 		}
 
 	}
@@ -202,7 +202,7 @@ public class GameController implements GameControllerInterface {
 
 			subFromPlayersResources(playerId, settings.DefaultSettings.STREET_BUILD_COST);
 
-			viewController.setStreet(x, y, dir, playerId);
+			viewController.mainViewController.setStreet(x, y, dir, playerId);
 		}
 
 	}
@@ -218,7 +218,7 @@ public class GameController implements GameControllerInterface {
 
 			subFromPlayersResources(playerId, settings.DefaultSettings.CITY_BUILD_COST);
 
-			viewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
+			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
 		}
 
 	}
@@ -230,7 +230,7 @@ public class GameController implements GameControllerInterface {
 			e.setOwnedByPlayer(playerModels[playerId]);
 			playerModels[playerId].decreaseAmountStreets();
 
-			viewController.setStreet(x, y, dir, playerId);
+			viewController.mainViewController.setStreet(x, y, dir, playerId);
 		}
 	}
 
@@ -246,7 +246,7 @@ public class GameController implements GameControllerInterface {
 					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
-			viewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
+			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
 		}
 	}
 
@@ -316,7 +316,7 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkSetBandit(x, y)) {
 			board.setBandit(board.getFieldAt(x, y));
 
-			viewController.setBandit(x, y); // Debug
+			viewController.mainViewController.setBandit(x, y); // Debug
 		}
 
 	}

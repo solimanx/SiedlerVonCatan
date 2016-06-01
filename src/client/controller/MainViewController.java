@@ -2,6 +2,7 @@ package client.controller;
 
 import client.view.View;
 import enums.CornerStatus;
+import enums.ResourceType;
 
 public class MainViewController {
 	private View view;
@@ -90,6 +91,11 @@ public class MainViewController {
 	public void setCorner(int x, int y, int dir, CornerStatus village, int playerId) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
+		view.setFieldResourceType(u, v, viewController.fieldColors.get(resourceType));
+		view.setFieldChip(u, v, diceIndex);
 	}
 
 }

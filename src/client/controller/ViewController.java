@@ -15,28 +15,37 @@ public class ViewController {
 
 	protected View view;
 	protected Board board;
-	private HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
-	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
+	protected HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
+	protected HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	protected GameController gameController; //DEBUG
 	protected FlowController flowController;
-	protected MainViewController mainViewController;
+	public MainViewController mainViewController;
 
 	public ViewController(Stage primaryStage, Board board, GameController gc) {
 		this.gameController = gc;
 		this.board = board;
-		view = new View(board, primaryStage, mainViewController);
-		this.mainViewController = new MainViewController(view, this);
+		startMainView(primaryStage, board);
 		init();
 	}
+
 	
 	public ViewController(Stage primaryStage, Board board, FlowController fc) {
 		this.flowController = fc;
 		this.board = board;
-		view = new View(board, primaryStage, mainViewController);
-		this.mainViewController = new MainViewController(view, this);
+		startMainView(primaryStage, board);
 		init();
 	}
 
+	/**
+	 * starts MainView and MainViewController
+	 * @param primaryStage
+	 * @param board
+	 */
+	private void startMainView(Stage primaryStage, Board board) {
+		view = new View(board, primaryStage, mainViewController);
+		this.mainViewController = new MainViewController(view, this);
+	}
+	
 	public View getView() {
 		return view;
 	}
@@ -83,44 +92,9 @@ public class ViewController {
 	}
 
 
-	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
-		view.setFieldResourceType(u, v, fieldColors.get(resourceType));
-		view.setFieldChip(u, v, diceIndex);
-	}
-
-
-	public void setCorner(int u, int v, int dir, CornerStatus cornerStatus, int playerID) {
-		Color playerColor = getPlayerColor(playerID);
-
-		switch (cornerStatus) {
-		case VILLAGE:
-			view.setVillage(u, v, dir, playerColor);
-			break;
-		case CITY:
-			view.setCity(u, v, dir, playerColor);
-		default:
-			break;
-		}
-
-	}
-
 	public Color getPlayerColor(int playerID) {
 		// TODO Auto-generated method stub
 		return Color.BLUEVIOLET;
-	}
-
-
-	public void setStreet(int u, int v, int dir, int playerID) {
-		view.setStreet(u, v, dir, getPlayerColor(playerID));
-		// TODO Auto-generated method stub
-
-	}
-
-
-	public void setBandit(int u, int v) {
-		view.setBandit(u, v);
-		// TODO Auto-generated method stub
-
 	}
 
 }
