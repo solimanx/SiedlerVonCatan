@@ -36,7 +36,7 @@ public class MainViewController {
 			view.chatInput.clear();
 			// vc.chatMessageSent(message);
 			try {
-				viewController.flowController.networkController.client.write(message);
+				viewController.flowController.chatSendMessage(message);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -66,10 +66,6 @@ public class MainViewController {
 		System.out.println(
 				"Clicked on " + fieldCoordinates[0] + " , " + fieldCoordinates[1] + " , " + fieldCoordinates[2]);
 
-	}
-
-	public void chatMessageSent(String message) {
-		System.out.println("trying to send message: " + message);
 	}
 
 	public void receiveChatMessage(String line) {
