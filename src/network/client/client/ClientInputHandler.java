@@ -51,10 +51,21 @@ public class ClientInputHandler {
 		switch(o.getClass().getSimpleName()){
 		case "ProtocolHello":handle((ProtocolHello) o);break;
 		case "ProtocolWelcome":handle((ProtocolWelcome) o );break;
-		//usw.
-		case "ProtocolChatSendMessage":handle((ProtocolChatSendMessage) o);break;
+		case "ProtocolClientReady":handle((ProtocolClientReady) o );break;
+		case "ProtocolError":handle((ProtocolError) o );break;
+		case "ProtocolGameStarted":handle((ProtocolGameStarted) o );break;
+		case "ProtocolPlayerProfile":handle ((ProtocolPlayerProfile) o );break;
 		case "ProtocolChatReceiveMessage":handle((ProtocolChatReceiveMessage) o);break;
-		//usw.
+        case "ProtocolChatSendMessage":handle((ProtocolChatSendMessage) o);break;
+        case "ProtocolServerConfirmation":handle((ProtocolServerConfirmation) o );break;
+        case "ProtocolBuild":handle((ProtocolBuild) o );break;
+        case "ProtocolDiceRollResult":handle((ProtocolDiceRollResult) o );break;
+        case "ProtocolResourceObtain":handle ((ProtocolResourceObtain) o );break;
+        case "ProtocolStatusUpdate":handle ((ProtocolStatusUpdate) o );break;
+        case "ProtocolBuildRequest":handle ((ProtocolBuildRequest) o );break;
+        case "ProtocolDiceRollRequest":handle ((ProtocolDiceRollRequest) o );break;
+        case "ProtocolEndTurn":handle ((ProtocolEndTurn) o );break;
+        case "ProtocolChatReceiveMessage":handle((ProtocolChatReceiveMessage) o);break;
 		default: System.out.println("Class not found");
 		}
 		/*
