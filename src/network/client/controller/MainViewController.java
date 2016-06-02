@@ -9,6 +9,7 @@ public class MainViewController {
 	private ViewController viewController;
 
 	public MainViewController(View view, ViewController vc) {
+		//hier noch Board übergeben und dann View starten mit Board!
 		super();
 		this.viewController = vc;
 		this.view = view;
@@ -89,7 +90,7 @@ public class MainViewController {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
 		view.setFieldResourceType(u, v, viewController.fieldColors.get(resourceType));
 		view.setFieldChip(u, v, diceIndex);

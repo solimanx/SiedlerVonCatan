@@ -69,12 +69,12 @@ public class View implements ViewInterface {
 	public Button button2;
 	public Button button3;
 	public Button button4;
-	
+
 	public TextArea messages = new TextArea();
 	public TextField chatInput = new TextField();
 
 	public List<Shape> figures = new LinkedList<Shape>();
-	private MainViewController vc;
+	private MainViewController mainViewController;
 
 	/**
 	 * @param board
@@ -82,10 +82,10 @@ public class View implements ViewInterface {
 	 */
 	public View(Board board, Stage stage, MainViewController vc) {
 		this.primaryStage = stage;
-		this.vc = vc;
+		this.mainViewController = vc;
 		try {
-			rootPane = new BorderPane();		
-			
+			rootPane = new BorderPane();
+
 			Scene scene = new Scene(rootPane);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
@@ -120,11 +120,11 @@ public class View implements ViewInterface {
 		HBox buttons = new HBox(button, button2, button3, button4);
 		rootPane.setTop(buttons);
 		// end Test Buttons
-		
-		
+
+
 		centerPane = new Pane();
 		centerPane.getChildren().addAll(0, figures);
-		
+
 		messages.setPrefHeight(100);
 		messages.setEditable(false);
 		VBox chatPane = new VBox(10, messages, chatInput);
@@ -159,7 +159,7 @@ public class View implements ViewInterface {
 							int[] streetCoordinates = { i, j, l };
 
 							street.setOnMouseClicked(e -> {
-								vc.streetClick(streetCoordinates);
+								mainViewController.streetClick(streetCoordinates);
 							});
 
 							figures.add(street);
@@ -175,7 +175,7 @@ public class View implements ViewInterface {
 							int[] villageCoordinates = { i, j, k };
 
 							village.setOnMouseClicked(e -> {
-								vc.villageClick(villageCoordinates);
+								mainViewController.villageClick(villageCoordinates);
 							});
 
 							figures.add(village);

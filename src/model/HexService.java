@@ -4,12 +4,11 @@ import java.util.Random;
 
 import settings.DefaultSettings;
 
-public class HexService implements HexServiceInterface {
+public class HexService {
 	final static int[][] DIRECTIONS = { { 1, -1 }, { 1, 0 }, { 0, 1 }, { -1, 1 }, { -1, 0 }, { 0, -1 } };
 	Board board;
 
-	@Override
-	public int[] getFieldCoordinates(String field_id) {
+	public static int[] getFieldCoordinates(String field_id) {
 		// filter bad input
 		if (field_id.length() == 1) {
 			// water coordinates
@@ -102,19 +101,19 @@ public class HexService implements HexServiceInterface {
 
 	}
 
-	@Override
+
 	public int[] getCornerCoordinates(String field_ids) {
 		// TODO write
 		return null;
 	}
 
-	@Override
+
 	public int[] getEdgeCoordinates(String field_ids) {
 		// TODO write
 		return null;
 	}
 
-	@Override
+
 	public String getSpiral(String starting_point_id) {
 		// Starting point;
 		int x = 0;
@@ -197,13 +196,13 @@ public class HexService implements HexServiceInterface {
 		return Math.abs(temp[0]) + Math.abs(temp[1]) + Math.abs(temp[2]);
 	}
 
-	@Override
+
 	public int[] convertAxialToCube(int[] a) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+
 	public int[] convertCubeToAxial(int[] c) {
 		// TODO Auto-generated method stub
 		return null;
