@@ -83,13 +83,9 @@ public class ServerOutputHandler {
 
 	}
 
-	public void welcome(int player_id, int thread_id) {
-		ProtocolWelcome pw= new ProtocolWelcome(player_id);
-		try{
-			server.sendToClient(parser.createString(pw), thread_id);
-			} catch (IOException e) {
-			//	logger.log(Level.WARNING, "Input/Output Exception",e);
-				e.printStackTrace();
-			}
+	public void welcome(int playerId) {
+		// TODO Auto-generated method stub
+
+	}
 
 }
