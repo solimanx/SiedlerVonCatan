@@ -118,7 +118,7 @@ public class ServerInputHandler {
 	}
 
 	private void handle(ProtocolWelcome welcome) {
-
+        System.out.println("Welcome gelesen!");
 	}
 
 	private void handle(ProtocolClientReady clientReady) {
