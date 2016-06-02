@@ -16,18 +16,19 @@ public class MainViewController {
 	}
 
 	private void init() {
-		view.chatInput.setOnAction(event -> {
-			String message = view.chatInput.getText();
-			view.chatInput.clear();
-			// vc.chatMessageSent(message);
-			try {
-				viewController.flowController.networkController.client.write(message);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			// view.messages.appendText(message + "\n");
-		});
+		setChat();
+//		view.chatInput.setOnAction(event -> {
+//			String message = view.chatInput.getText();
+//			view.chatInput.clear();
+//			// vc.chatMessageSent(message);
+//			try {
+//				viewController.flowController.networkController.client.write(message);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			// view.messages.appendText(message + "\n");
+//		});
 	}
 
 	private void setChat() {

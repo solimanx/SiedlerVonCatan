@@ -5,6 +5,7 @@ import parsing.Parser;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
+import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
@@ -32,14 +33,14 @@ public class ServerInputHandler {
 	/**
 	 * sends JSON formatted string to parser and initiates handling of parsed
 	 * object
-	 * 
+	 *
 	 * @param s
 	 */
 	public void sendToParser(String s, int threadID) {
 		// speichert die threadID, falls sie in handle(Protocol...) gebraucht wird.
 		this.currentThreadID = threadID;
 		Object object = parser.parseString(s);
-		
+
 		System.out.println(object.getClass());
 		handle(object);
 		// handle(object.getClass().cast(object));
@@ -48,7 +49,7 @@ public class ServerInputHandler {
 	/**
 	 * takes parsed object and redirects to its proper method depending on
 	 * objects "real" class. ( object will be casted to "real" class )
-	 * 
+	 *
 	 * @param o
 	 */
 	private void handle(Object o) {
@@ -104,6 +105,9 @@ public class ServerInputHandler {
 			handle(pw);
 		} else if (cl.equals(ProtocolEndTurn.class)) {
 			ProtocolEndTurn pw = (ProtocolEndTurn) o;
+			handle(pw);
+		} else if (cl.equals(ProtocolRobberMovementRequest.class)) {
+			ProtocolRobberMovementRequest pw = (ProtocolRobberMovementRequest) o;
 			handle(pw);
 		}
 	}
@@ -180,6 +184,10 @@ public class ServerInputHandler {
 
 	private void handle(ProtocolEndTurn endTurn) {
 
+	}
+
+	private void handle(ProtocolRobberMovementRequest robberMovementRequest){
+		
 	}
 
 }

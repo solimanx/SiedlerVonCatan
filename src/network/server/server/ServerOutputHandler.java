@@ -8,6 +8,7 @@ import model.Corner;
 import model.Edge;
 import model.Field;
 import parsing.Parser;
+import parsing.Response;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
@@ -34,7 +35,7 @@ public class ServerOutputHandler {
 
 	/**
 	 * Create ProtocolHello JSON and broadcast it as a String through server
-	 * 
+	 *
 	 * @param serverVersion
 	 * @param protocolVersion
 	 */
@@ -51,8 +52,10 @@ public class ServerOutputHandler {
 
 	public void chatReceiveMessage(int threadID, String message){
 			ProtocolChatReceiveMessage pcrm = new ProtocolChatReceiveMessage(threadID, message);
+			Response r = new Response();
+			r.pChatReceive = pcrm;
 			try {
-				server.broadcast((parser.createString(pcrm)));
+				server.broadcast((parser.createString(r)));
 			} catch (IOException e) {
 				// TODO logging
 				e.printStackTrace();

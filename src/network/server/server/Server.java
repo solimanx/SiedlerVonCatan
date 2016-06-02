@@ -65,6 +65,7 @@ public class Server {
 			} catch (IOException e) {
 				e.printStackTrace();
 				closeSocket();
+				// TODO server beendet sich momentan noch vollständig, wenn Client abbricht
 			} finally {
 			}
 		}
@@ -80,7 +81,7 @@ public class Server {
 
 	public void broadcast(String s) throws IOException {
 		for (ClientThread clientThread : clients) {
-			while (clientThread != null) {
+			if (clientThread != null) {
 				clientThread.writer.write(s + "\n");
 				clientThread.writer.flush();
 			}

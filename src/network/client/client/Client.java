@@ -58,8 +58,8 @@ public class Client extends Thread {
 	}
 
 	private void runClient() throws IOException {
-		while (connectionActive) {
-			String line = reader.readLine();
+		String line;
+		while ((line = reader.readLine()) != null) {
 			System.out.println("Received from Server: " + line);
 			inputHandler.sendToParser(line);
 			// redirect line to Networkcontroller

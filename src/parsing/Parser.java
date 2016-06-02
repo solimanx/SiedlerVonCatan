@@ -88,7 +88,7 @@ public class Parser {
 	}
 
 	public String createString(Object fromObject) {
-		Gson gson = new GsonBuilder().serializeNulls().create();
+		Gson gson = new GsonBuilder().create();
 		String response = gson.toJson(fromObject, fromObject.getClass());
 		return response;
 	}
