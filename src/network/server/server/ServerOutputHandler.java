@@ -83,7 +83,7 @@ public class ServerOutputHandler {
 
 	}
 
-	public void welcome(int playerId, int thread_id) {
+	public void welcome(int player_id, int thread_id) {
 		ProtocolWelcome pw= new ProtocolWelcome(player_id);
 		try{
 			server.sendToClient(parser.createString(pw), thread_id);
