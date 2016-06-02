@@ -113,7 +113,8 @@ public class ClientInputHandler {
 	}
 
 	private void handle(ProtocolWelcome welcome) {
-
+     System.out.println("Willkommen gelesen!");
+     ServerNetworkController.welcome(welcome.getPlayer_id());
 	}
 
 	private void handle(ProtocolClientReady clientReady) {
