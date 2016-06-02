@@ -34,10 +34,32 @@ public class Parser {
 
 	private void refreshMap() {
 		map.put("ProtocolHello", response.pHello);
-		//and so on
-		map.put("ChatSend", response.pChatSend);
-		map.put("ChatReceive", response.pChatReceive);
-		//and so on
+		map.put("ProtocolWelcome", response.pWelcome);
+		map.put("ProtocolClientReady", response.pClientReady);
+		map.put("ProtocolError", response.pError);
+		map.put("ProtocolGameStarted", response.pGameStarted);
+		map.put("ProtocolPlayerProfile", response.pPlayerProfile);
+		map.put("ProtocolVictory", response.pVictory);
+		map.put("ProtocolBuild", response.pBuild);
+		map.put("ProtocolDiceRollResult", response.pDRResult);
+		map.put("ProtocolResourceObtain", response.pRObtain);
+		map.put("Protocolstatusupdate", response.pSUpdate);
+		map.put("ProtocolCosts",response.pCosts);
+		map.put("ProtocolRobberMovement", response.pRobberMovement);
+		map.put("ProtocolChatReceiveMessage", response.pChatReceive);
+		map.put("ProtocolChatSendMessage", response.pChatSend);
+		map.put("ProtocolServerConfirmation", response.pServerConfirmation);
+		map.put("ProtocolBuildRequest", response.pBuildRequest);
+		map.put("ProtocolDiceRollRequest", response.pDiceRollRequest);
+		map.put("ProtocolEndTurn", response.pEndTurn);
+		map.put("ProtocolRobberLoss", response.pRobberLoss);
+		map.put("ProtocolRobberMovementRequest", response.pRobberMoveRequest);
+		map.put("ProtocolHarbourRequest", response.pHarbourRequest);
+		map.put("ProtocolTradeRequest", response.pTradeRequest);
+		map.put("ProtocolTradePreview",response.pTradePreview);
+		map.put("ProtocolTradeAccept", response.pTradeAccept);
+		map.put("ProtocolTradeConfirm", response.pTradeConfirm);
+
 	}
 
 	public String createString(Object fromObject) {
