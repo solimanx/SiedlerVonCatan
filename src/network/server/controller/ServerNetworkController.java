@@ -151,15 +151,14 @@ public class ServerNetworkController {
 	}
 
 	// 6.2
-	public void chatSendMessage(String s, int playerID) {
-		for (int i = 1; i <= playerIDs.length; i++) {
-			chatReceiveMessage(getPlayerModelId(playerID), s);
-		}
+	public void chatSendMessage(String s, int threadID) {
+		chatReceiveMessage(getPlayerModelId(threadID), s);
+		
 	}
 
 	// 6.3
 	public void chatReceiveMessage(int playerID, String s) {
-		outputHandler.chatReceiveMessage(playerIDs[playerID], s);
+		outputHandler.chatReceiveMessage(playerID, s);
 
 	}
 
