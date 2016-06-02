@@ -103,18 +103,21 @@ public class ClientInputHandler {
 			handle(pw);
 		}
 	}
+
 	/**
-	 * Acknowledge the JSON object and pass it through the network controller for checks
+	 * Acknowledge the JSON object and pass it through the network controller
+	 * for checks
+	 * 
 	 * @param hello
 	 */
 	private void handle(ProtocolHello hello) {
 		System.out.println("Hello gelesen!");
-		networkController.serverHello(hello.getVersion(),hello.getProtocol());
+		networkController.serverHello(hello.getVersion(), hello.getProtocol());
 	}
 
 	private void handle(ProtocolWelcome welcome) {
-     System.out.println("Willkommen gelesen!");
-     ServerNetworkController.welcome(welcome.getPlayer_id());
+		System.out.println("Willkommen gelesen!");
+		networkController.welcome(welcome.getPlayer_id());
 	}
 
 	private void handle(ProtocolClientReady clientReady) {
