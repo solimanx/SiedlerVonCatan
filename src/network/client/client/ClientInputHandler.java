@@ -48,8 +48,17 @@ public class ClientInputHandler {
 	 * @param o
 	 */
 	private void handle(Object o) {
-		Class cl = o.getClass();
-
+		switch(o.getClass().getSimpleName()){
+		case "ProtocolHello":handle((ProtocolHello) o);break;
+		case "ProtocolWelcome":handle((ProtocolWelcome) o );break;
+		//usw.
+		case "ProtocolChatSendMessage":handle((ProtocolChatSendMessage) o);break;
+		case "ProtocolChatReceiveMessage":handle((ProtocolChatReceiveMessage) o);break;
+		//usw.
+		default: System.out.println("Class not found");
+		}
+		/*
+		 Class cl = o.getClass();
 		if (cl.equals(ProtocolHello.class)) {
 			ProtocolHello ph = (ProtocolHello) o;
 			handle(ph);
@@ -101,7 +110,7 @@ public class ClientInputHandler {
 		} else if (cl.equals(ProtocolEndTurn.class)) {
 			ProtocolEndTurn pw = (ProtocolEndTurn) o;
 			handle(pw);
-		}
+		}*/
 	}
 
 	/**
