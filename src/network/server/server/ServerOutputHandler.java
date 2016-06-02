@@ -50,18 +50,18 @@ public class ServerOutputHandler {
 
 	}
 
-	public void chatReceiveMessage(int threadID, String message){
-			ProtocolChatReceiveMessage pcrm = new ProtocolChatReceiveMessage(threadID, message);
-			Response r = new Response();
-			r.pChatReceive = pcrm;
-			try {
-				server.broadcast((parser.createString(r)));
-			} catch (IOException e) {
-				// TODO logging
-				e.printStackTrace();
-			}
-
+	public void chatReceiveMessage(int threadID, String message) {
+		ProtocolChatReceiveMessage pcrm = new ProtocolChatReceiveMessage(threadID, message);
+		Response r = new Response();
+		r.pChatReceive = pcrm;
+		try {
+			server.broadcast((parser.createString(r)));
+		} catch (IOException e) {
+			// TODO logging
+			e.printStackTrace();
 		}
+
+	}
 
 	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
 		// TODO Auto-generated method stub
@@ -83,9 +83,13 @@ public class ServerOutputHandler {
 
 	}
 
-	public void welcome(int playerId) {
-		// TODO Auto-generated method stub
-
-	}
+	public void welcome(int playerId, int thread_id) {
+		ProtocolWelcome pw= new ProtocolWelcome(playerId);
+		try{
+			server.sendToClient(parser.createString(pw), thread_id);
+			} catch (IOException e) {
+			//	logger.log(Level.WARNING, "Input/Output Exception",e);
+				e.printStackTrace();
+			}
 
 }
