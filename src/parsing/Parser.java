@@ -20,6 +20,7 @@ public class Parser {
 
 		response = gson.fromJson(string, Response.class);
 
+		//TODO perhaps reference to values so it doesn't have to refresh
 		refreshMap();
 	 
 		for ( Map.Entry<String, Object> entry : map.entrySet() ) {
