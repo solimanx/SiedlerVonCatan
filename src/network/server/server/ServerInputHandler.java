@@ -22,6 +22,7 @@ import protocol.serverinstructions.ProtocolStatusUpdate;
 public class ServerInputHandler {
 	private Parser parser;
 	private ServerNetworkController networkController;
+	private int currentThreadID;
 
 	public ServerInputHandler(ServerNetworkController nc) {
 		this.networkController = nc;
@@ -34,8 +35,11 @@ public class ServerInputHandler {
 	 * 
 	 * @param s
 	 */
-	public void sendToParser(String s) {
+	public void sendToParser(String s, int threadID) {
+		// speichert die threadID, falls sie in handle(Protocol...) gebraucht wird.
+		this.currentThreadID = threadID;
 		Object object = parser.parseString(s);
+		
 		System.out.println(object.getClass());
 		handle(object);
 		// handle(object.getClass().cast(object));
@@ -138,7 +142,8 @@ public class ServerInputHandler {
 	}
 
 	private void handle(ProtocolChatSendMessage chatSendMessage) {
-
+		String s = chatSendMessage.getMessage();
+		networkController.chatSendMessage(s, this.currentThreadID);
 	}
 
 	private void handle(ProtocolServerConfirmation serverConfirmation) {
