@@ -45,7 +45,7 @@ public class Server {
 		public ClientThread(Socket socket, ServerInputHandler inputHandler) {
 			this.socket = socket;
 			this.inputHandler = inputHandler;
-			
+
 		}
 
 		@Override
@@ -63,8 +63,8 @@ public class Server {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
 				closeSocket();
+			} finally {
 			}
 		}
 	}

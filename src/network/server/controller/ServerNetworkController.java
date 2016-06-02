@@ -25,16 +25,16 @@ public class ServerNetworkController {
 		this.gameController = gc;
 		this.inputHandler = new ServerInputHandler(this);
 		this.server = new Server(inputHandler);
+		this.outputHandler = new ServerOutputHandler(server);
+		this.playerIDs = new int[5];
 		try {
 			server.start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.outputHandler = new ServerOutputHandler(server);
 
 		this.amountPlayers = 1;
-		this.playerIDs = new int[5];
 	}
 
 	public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
@@ -104,7 +104,8 @@ public class ServerNetworkController {
 	 * Server sends Hello message to ServerOutputHandler
 	 */
 	public void serverHello(int playerID) {
-		outputHandler.hello(settings.DefaultSettings.SERVER_VERSION, settings.DefaultSettings.PROTOCOL_VERSION,getPlayerModelId(playerID));
+		outputHandler.hello(settings.DefaultSettings.SERVER_VERSION, settings.DefaultSettings.PROTOCOL_VERSION,
+				getPlayerModelId(playerID));
 
 	}
 
@@ -121,7 +122,7 @@ public class ServerNetworkController {
 	/**
 	 * checks if all clients are Ready (PlayerState.WAITING) if yes then
 	 * gameController initializes the Board
-	 * 
+	 *
 	 * @param playerID
 	 */
 	public void clientReady(int playerID) {
@@ -153,7 +154,7 @@ public class ServerNetworkController {
 	// 6.2
 	public void chatSendMessage(String s, int threadID) {
 		chatReceiveMessage(getPlayerModelId(threadID), s);
-		
+
 	}
 
 	// 6.3
@@ -193,7 +194,7 @@ public class ServerNetworkController {
 		}
 		return 0;
 	}
-	
+
 	private int getThreadID(int playerModelID) {
 		return playerIDs[playerModelID];
 	}
