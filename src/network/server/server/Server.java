@@ -12,9 +12,9 @@ import java.util.Iterator;
 public class Server {
 
 	// HashMap PlayerID => Thread
-	private ClientThread[] clients = new ClientThread[5];
+	public ClientThread[] clients = new ClientThread[4];
 
-	int clientCounter = 1;
+	int clientCounter = 0;
 
 	private ServerInputHandler inputHandler;
 
@@ -35,16 +35,17 @@ public class Server {
 		}
 	}
 
-	private class ClientThread extends Thread {
+	public class ClientThread extends Thread {
 		public OutputStreamWriter writer;
 		public BufferedReader reader;
 		public Socket socket;
-		public int threadID = clientCounter;
+		public int threadID;
 		public ServerInputHandler inputHandler;
 
-		public ClientThread(Socket socket, ServerInputHandler inputHandler) {
+		public ClientThread(Socket socket, ServerInputHandler inputHandler, int threadID) {
 			this.socket = socket;
 			this.inputHandler = inputHandler;
+			this.threadID = threadID;
 
 		}
 
@@ -70,8 +71,7 @@ public class Server {
 	}
 
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
-		ClientThread thread = new ClientThread(socket, inputHandler);
-		thread.threadID = clientCounter;
+		ClientThread thread = new ClientThread(socket, inputHandler, clientCounter);
 		thread.start();
 		clients[clientCounter] = thread;
 		clientCounter++;

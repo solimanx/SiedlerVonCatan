@@ -186,17 +186,18 @@ public class ServerNetworkController {
 
 	}
 
-	private int getPlayerModelId(int playerID) {
-		for (int i = 0; i < playerIDs.length; i++) {
-			if (playerIDs[i] == playerID) {
-				return i;
+	private int getPlayerModelId(int threadID) {
+		for (int i = 0; i < server.clients.length; i++) {
+			if (server.clients[i].threadID == threadID) {
+				return i + 1;
 			}
 		}
 		return 0;
 	}
 
 	private int getThreadID(int playerModelID) {
-		return playerIDs[playerModelID];
+		return server.clients[playerModelID - 1].threadID;
+		// playerIDs[playerModelID];
 	}
 
 	// 9.7
