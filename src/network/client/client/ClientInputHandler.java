@@ -65,7 +65,6 @@ public class ClientInputHandler {
         case "ProtocolBuildRequest":handle ((ProtocolBuildRequest) o );break;
         case "ProtocolDiceRollRequest":handle ((ProtocolDiceRollRequest) o );break;
         case "ProtocolEndTurn":handle ((ProtocolEndTurn) o );break;
-        case "ProtocolChatReceiveMessage":handle((ProtocolChatReceiveMessage) o);break;
 		default: System.out.println("Class not found");
 		}
 		/*
