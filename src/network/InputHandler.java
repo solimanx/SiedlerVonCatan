@@ -84,7 +84,7 @@ public abstract class InputHandler {
 		case "ProtocolEndTurn":
 			handle((ProtocolEndTurn) o);
 			break;
-		case "ProtocolRobberMovement":
+		case "ProtocolRobberMovement": // 0.2
 			handle((ProtocolRobberMovement) o);
 		default:
 			System.out.println("Class not found");
