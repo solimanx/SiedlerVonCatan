@@ -43,7 +43,7 @@ public class ServerOutputHandler {
 	 */
 	public void hello(String serverVersion, String protocolVersion, int thread_id) {
 		ProtocolHello ph = new ProtocolHello(serverVersion, protocolVersion);
-		 log.info;
+		 
 		try {
 			server.sendToClient(parser.createString(ph), thread_id);
 		} catch (IOException e) {
