@@ -1,6 +1,7 @@
 package network.server.server;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 import com.sun.javafx.logging.Logger;
 import enums.Color;
@@ -11,13 +12,15 @@ import model.Field;
 import parsing.Parser;
 import parsing.Response;
 import protocol.connection.ProtocolHello;
+import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
+
+import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
 public class ServerOutputHandler {
 	private Server server;
 	private Parser parser;
-	
 
 	public ServerOutputHandler(Server server) {
 		this.server = server;
@@ -25,7 +28,7 @@ public class ServerOutputHandler {
 	}
 
 	public void statusUpdate(int playerId, Color color, String name, PlayerState status, int victoryPoints,
-			int[] resources) {
+							 int[] resources) {
 		// TODO Auto-generated method stub
 
 	}
@@ -43,11 +46,11 @@ public class ServerOutputHandler {
 	 */
 	public void hello(String serverVersion, String protocolVersion, int thread_id) {
 		ProtocolHello ph = new ProtocolHello(serverVersion, protocolVersion);
-		 
+
 		try {
 			server.sendToClient(parser.createString(ph), thread_id);
 		} catch (IOException e) {
-			// TODO logging
+
 			e.printStackTrace();
 		}
 
@@ -86,9 +89,18 @@ public class ServerOutputHandler {
 
 	}
 
-	public void welcome(int playerId) {
-		// TODO Auto-generated method stub
+
+	public void welcome(int player_id) {
+		ProtocolWelcome pw = new ProtocolWelcome(player_id);
+
+		Response r = new Response();
+		r.pWelcome = pw;
+		try {
+			server.broadcast((parser.createString(r)));
+		} catch (IOException e) {
+			// TODO logging
+			e.printStackTrace();
+		}
 
 	}
-
 }
