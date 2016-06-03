@@ -12,5 +12,6 @@ public final class ModelToProtocol {
 
 	public static ProtocolResource getResources(int[] resources){
 		//TODO
+		return null;
 	}
 }

@@ -9,19 +9,23 @@ public final class ProtocolToModel {
 		return HexService.getFieldCoordinates(field_id);
 	}
 
-	public static int getPlayerId(int thredId) {
-		// TODO
+	@Deprecated
+	public static int getThreadID(int playerID) {
+		// refer to servernetworkcontroller
+		return 0;
 	}
 
 	public static int[] getCornerCoordinates(String location) {
 		// TODO
 		// return [x][y][dir]
+		return null;
 
 	}
 
 	public static int[] getEdgeCoordinates(String location) {
 		// TODO
 		// return [x][y][dir]
+		return null;
 
 	}
 
