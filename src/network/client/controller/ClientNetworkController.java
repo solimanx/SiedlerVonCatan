@@ -30,6 +30,7 @@ public class ClientNetworkController {
 
 	public void connectToServer(String serverHost, int port){
 		this.client = new Client(inputHandler, serverHost, port);
+		client.start();
 	}
 
 	// Bauen
