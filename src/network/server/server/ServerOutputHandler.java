@@ -9,14 +9,18 @@ import enums.PlayerState;
 import model.Corner;
 import model.Edge;
 import model.Field;
+import network.ModelToProtocol;
 import parsing.Parser;
 import parsing.Response;
+import protocol.configuration.ProtocolError;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
+import protocol.serverinstructions.ProtocolDiceRollResult;
+import protocol.serverinstructions.ProtocolResourceObtain;
 
-import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
+//import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
 public class ServerOutputHandler {
 	private Server server;
@@ -70,23 +74,40 @@ public class ServerOutputHandler {
 	}
 
 	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
-		// TODO Auto-generated method stub
-
+		//TODO
 	}
 
-	public void error(int playerId, String s) {
-		// TODO Auto-generated method stub
-
+	public void error(String s) {
+		ProtocolError pe = new ProtocolError(s);
+		Response r = new Response();
+		r.pError = pe;
+		try {
+			server.broadcast(parser.createString(r));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void diceRollResult(int i, int result) {
-		// TODO Auto-generated method stub
-
+	public void diceRollResult(int playerID, int result) {
+		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(ModelToProtocol.getPlayerId(playerID), result);
+		Response r = new Response();
+		r.pDRResult = dr;
+		try {
+			server.broadcast(parser.createString(r));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void resourceObtain(int i, int[] resources) {
-		// TODO Auto-generated method stub
-
+	public void resourceObtain(int playerID, int[] resources) {
+		ProtocolResourceObtain po = new ProtocolResourceObtain(playerID, ModelToProtocol.getResources(resources));
+		Response r = new Response();
+		r.pRObtain = po;
+		try {
+			server.broadcast(parser.createString(r));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 
