@@ -3,6 +3,7 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+import enums.Color;
 /**
  * <b>Spieler (Player)</b>
  * <p>
@@ -19,7 +20,7 @@ public class ProtocolPlayer {
 	private int player_id;
 
 	@SerializedName("Farbe")
-	private String color;
+	private Color color;
 
 	@SerializedName("Name")
 	private String name;
@@ -33,7 +34,7 @@ public class ProtocolPlayer {
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resources;
 
-	public ProtocolPlayer(int player_id, String color, String name, String status, int victory_points,
+	public ProtocolPlayer(int player_id, Color color, String name, String status, int victory_points,
 			ProtocolResource resources) {
 		this.player_id = player_id;
 		this.color = color;
@@ -47,7 +48,7 @@ public class ProtocolPlayer {
 		return player_id;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 

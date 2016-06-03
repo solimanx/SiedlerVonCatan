@@ -1,6 +1,14 @@
 package enums;
 
+import com.google.gson.annotations.SerializedName;
+
 public enum Color {
-	RED, ORANGE, BLUE, WHITE
+	@SerializedName("Rot") RED,
+
+	@SerializedName("Orange") ORANGE,
+
+	@SerializedName("Blau") BLUE,
+
+	@SerializedName("Weiß") WHITE
 
 }
