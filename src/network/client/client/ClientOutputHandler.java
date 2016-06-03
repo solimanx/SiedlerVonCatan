@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import parsing.Parser;
 import parsing.Response;
+import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
 import protocol.configuration.ProtocolClientReady;
 import protocol.connection.ProtocolHello;
@@ -70,10 +71,17 @@ public class ClientOutputHandler {
 	}
 
 	public void diceRollRequest() {
-		// TODO Auto-generated method stub
+		ProtocolDiceRollRequest pdrr = new ProtocolDiceRollRequest();
+		Response r = new Response();
+		r.pDiceRollRequest = pdrr;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO logging
+			e.printStackTrace();
 
+		}
 	}
-
 	public void endTurn() {
 
 		ProtocolEndTurn pcet = new ProtocolEndTurn();
