@@ -98,7 +98,7 @@ public class ClientNetworkController {
 	public void welcome(int playerID) {
 		this.ownPlayerId = playerID;
 		flowController.setOwnPlayerId(ownPlayerId);
-		flowController.setPlayerState(playerID, enums.PlayerState.WAITING_FOR_GAMESTART);
+		// TODO flowController.setPlayerState(playerID, enums.PlayerState.WAITING_FOR_GAMESTART);
 		System.out.println("Handshake finished!");
 	}
 
