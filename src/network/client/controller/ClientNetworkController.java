@@ -100,6 +100,7 @@ public class ClientNetworkController {
 		flowController.setOwnPlayerId(ownPlayerId);
 		// TODO flowController.setPlayerState(playerID, enums.PlayerState.WAITING_FOR_GAMESTART);
 		System.out.println("Handshake finished!");
+		flowController.viewController.lobbyController.enableChat();
 	}
 
 	private void addToPlayerIDs(int playerID) {

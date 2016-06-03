@@ -214,6 +214,7 @@ public class FlowController {
 	}
 
 	public void chatReceiveMessage(int playerId,String s){
-		viewController.mainViewController.receiveChatMessage("Spieler "+playerId+": "+s);
+		//viewController.mainViewController.receiveChatMessage("Spieler "+playerId+": "+s);
+		//viewController.lobbyController.receiveChatMessage("Spieler "+playerId+": "+s);
 	}
 }
