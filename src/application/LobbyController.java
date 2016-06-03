@@ -21,17 +21,6 @@ public class LobbyController {
 	Button connectButton;
 
 	@FXML
-	public void handleOne(){
-		myButton.setText("Clicked");
-	}
-
-	@FXML
-	public void handleTOne(){
-		myButton.setText("AnotherClass was here!");
-
-	}
-
-	@FXML
 	public void handleConnectButton(){
 		String server = serverIPTextField.getText();
 		int port = Integer.parseInt(portTextField.getText());

@@ -10,14 +10,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LobbyController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LobbyController">
    <children>
-      <HBox alignment="CENTER" layoutX="200.0" layoutY="300.0" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label text="Mitte" />
-            <Button mnemonicParsing="false" text="Button" />
-         </children>
-      </HBox>
       <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="240.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0">
          <children>
             <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">

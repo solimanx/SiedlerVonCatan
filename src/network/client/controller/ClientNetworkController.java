@@ -24,12 +24,12 @@ public class ClientNetworkController {
 	public ClientNetworkController(FlowController fc) {
 		this.flowController = fc;
 		this.inputHandler = new ClientInputHandler(this);
-		this.outputHandler = new ClientOutputHandler(client);
 		this.amountPlayers = 1;
 	}
 
 	public void connectToServer(String serverHost, int port){
 		this.client = new Client(inputHandler, serverHost, port);
+		this.outputHandler = new ClientOutputHandler(client);
 		client.start();
 	}
 

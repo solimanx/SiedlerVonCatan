@@ -50,9 +50,10 @@ public class ServerOutputHandler {
 	 */
 	public void hello(String serverVersion, String protocolVersion, int thread_id) {
 		ProtocolHello ph = new ProtocolHello(serverVersion, protocolVersion);
-
+		Response r = new Response();
+		r.pHello = ph;
 		try {
-			server.sendToClient(parser.createString(ph), thread_id);
+			server.sendToClient(parser.createString(r), thread_id);
 		} catch (IOException e) {
 
 			e.printStackTrace();

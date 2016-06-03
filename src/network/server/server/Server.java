@@ -69,6 +69,7 @@ public class Server {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				System.out.println("Client connected! " + socket.getRemoteSocketAddress());
+				
 				outputHandler.hello(serverVersion, protocolVersion, threadID);
 				System.out.println("Hello sent to " + threadID + " Thread");
 				//socket.setTcpNoDelay(true);
