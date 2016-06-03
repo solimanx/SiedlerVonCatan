@@ -1,6 +1,7 @@
 package parsing;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -9,10 +10,10 @@ import com.google.gson.GsonBuilder;
 public class Parser {
 	Response response;
 	Gson gson = new GsonBuilder().create();
-	Map<String,Object> map;
+	Hashtable<String,Object> map;
 
 	public Parser() {
-		map = new HashMap<String, Object>();
+		map = new Hashtable	<String, Object>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -20,7 +21,7 @@ public class Parser {
 
 		response = gson.fromJson(string, Response.class);
 
-		//TODO perhaps reference to values so it doesn't have to refresh
+		//TODO perhaps reference to variables so it doesn't have to refresh map everytime
 		refreshMap();
 	 
 		for ( Map.Entry<String, Object> entry : map.entrySet() ) {
