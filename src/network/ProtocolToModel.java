@@ -53,11 +53,50 @@ public final class ProtocolToModel {
 		}
 	}
 
-	public static int[] getResources(ProtocolResource resources){
+	public static enums.ResourceType[] getResources(ProtocolResource resources){
 		//TODO
 		int wood = resources.getWood();
-		int clay
-		int
+		int clay = resources.getClay();
+		int wool = resources.getWool();
+		int corn = resources.getCorn();
+		int ore = resources.getOre();
+		int unknown = resources.getUnknown();
+		int amount = wood + clay + wool + corn + ore + unknown;
+		enums.ResourceType[] result = new enums.ResourceType[amount];
+		for(int i = 0; i<amount; i++){
+			if(wood!=0){
+				result[i] = enums.ResourceType.WOOD;
+				wood--;
+				continue;
+			}
+			if(clay != 0){
+				result[i] = enums.ResourceType.CLAY;
+				clay--;
+				continue;
+
+			}
+			if(wool != 0){
+				result[i] = enums.ResourceType.SHEEP;
+				wool--;
+				continue;
+			}
+			if(corn != 0){
+				result[i] = enums.ResourceType.CORN;
+				corn--;
+				continue;
+			}
+			if(ore != 0){
+				result[i] = enums.ResourceType.ORE;
+				ore--;
+				continue;
+			}
+			if(unknown != 0){
+				result[i] = enums.ResourceType.UNKNOWN;
+				unknown--;
+				continue;
+			}
+		}
+		return result;
 	}
 
 }
