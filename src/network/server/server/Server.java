@@ -9,6 +9,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import network.ModelToProtocol;
+import network.server.controller.ServerNetworkController;
+
 public class Server {
 
 	// HashMap PlayerID => Thread
@@ -17,12 +20,20 @@ public class Server {
 	int clientCounter = 0;
 
 	private ServerInputHandler inputHandler;
+	private ServerOutputHandler outputHandler;
+	private ServerNetworkController networkController;
 
-	public Server(ServerInputHandler handler) {
-		this.inputHandler = handler;
+	String serverVersion = "0.1";
+	String protocolVersion = "0.2";
+
+	public Server(ServerInputHandler inputHandler, ServerNetworkController serverNetworkController) {
+		this.inputHandler = inputHandler;
+		this.networkController = serverNetworkController;
 	}
 
 	public void start() throws IOException {
+		this.outputHandler = networkController.getOutputHandler();
+
 		ServerSocket serverSocket = new ServerSocket(8080, 150);
 		System.out.println("Server Running!");
 		try {
@@ -41,10 +52,12 @@ public class Server {
 		public Socket socket;
 		public int threadID;
 		public ServerInputHandler inputHandler;
+		public ServerOutputHandler outputHandler;
 
-		public ClientThread(Socket socket, ServerInputHandler inputHandler, int threadID) {
+		public ClientThread(Socket socket, ServerInputHandler inputHandler, ServerOutputHandler outputHandler, int threadID) {
 			this.socket = socket;
 			this.inputHandler = inputHandler;
+			this.outputHandler = outputHandler;
 			this.threadID = threadID;
 
 		}
@@ -56,7 +69,9 @@ public class Server {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				System.out.println("Client connected! " + socket.getRemoteSocketAddress());
-				// socket.setTcpNoDelay(true);
+				outputHandler.hello(serverVersion, protocolVersion, threadID);
+				System.out.println("Hello sent to " + threadID + " Thread");
+				//socket.setTcpNoDelay(true);
 				while (true) {
 					String line = reader.readLine();
 					System.out.println("Server got message: " + line);
@@ -72,7 +87,7 @@ public class Server {
 	}
 
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
-		ClientThread thread = new ClientThread(socket, inputHandler, clientCounter);
+		ClientThread thread = new ClientThread(socket, inputHandler, outputHandler, clientCounter);
 		thread.start();
 		clients[clientCounter] = thread;
 		clientCounter++;

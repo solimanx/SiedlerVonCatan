@@ -24,7 +24,7 @@ public class ServerNetworkController {
 	public ServerNetworkController(GameController gc) {
 		this.gameController = gc;
 		this.inputHandler = new ServerInputHandler(this);
-		this.server = new Server(inputHandler);
+		this.server = new Server(inputHandler, this);
 		this.outputHandler = new ServerOutputHandler(server);
 		this.playerIDs = new int[5];
 		try {
@@ -35,6 +35,22 @@ public class ServerNetworkController {
 		}
 
 		this.amountPlayers = 1;
+	}
+
+	public ServerOutputHandler getOutputHandler() {
+		return outputHandler;
+	}
+
+	public void setOutputHandler(ServerOutputHandler outputHandler) {
+		this.outputHandler = outputHandler;
+	}
+
+	public ServerInputHandler getInputHandler() {
+		return inputHandler;
+	}
+
+	public void setInputHandler(ServerInputHandler inputHandler) {
+		this.inputHandler = inputHandler;
 	}
 
 	public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
