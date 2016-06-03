@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import parsing.Parser;
 import parsing.Response;
+import protocol.clientinstructions.ProtocolEndTurn;
 import protocol.configuration.ProtocolClientReady;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
@@ -22,7 +23,7 @@ public class ClientOutputHandler {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	/**
 	 * If the connection can be established, send "Hello" back to server.
 	 */
@@ -44,11 +45,11 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e){
-			
+
 			e.printStackTrace();
 		}
-		
-	
+
+
 
 	}
 
@@ -71,7 +72,16 @@ public class ClientOutputHandler {
 	}
 
 	public void endTurn() {
-		// TODO Auto-generated method stub
+
+		ProtocolEndTurn pcet = new ProtocolEndTurn();
+		Response r = new Response();
+		r.pEndTurn = pcet;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO logging
+			e.printStackTrace();
+		}
 
 	}
 
