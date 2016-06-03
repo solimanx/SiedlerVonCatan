@@ -29,8 +29,11 @@ public class ClientOutputHandler {
 	 */
 	public void clientHello(String clientVersion) {
 		ProtocolHello ph = new ProtocolHello(clientVersion,null);
+		Response r = new Response();
+		r.pHello = ph;
 		try {
-			client.write(parser.createString(ph));
+			System.out.println("CLIENT HELLO OUTPUT: " + parser.createString(r));
+			client.write(parser.createString(r));
 		} catch (IOException e) {
 			// TODO logging
 			e.printStackTrace();

@@ -82,6 +82,7 @@ public class Parser {
 			return (T) response.pEndTurn;
 		}
 
+		System.out.println("CANNOT READ INPUT");
 		return null;
 
 	}

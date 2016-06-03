@@ -19,15 +19,14 @@ public class ClientNetworkController {
 	private Board board;
 	private int ownPlayerId;
 	private int amountPlayers;
-	private int[] playerIds;
 
 	public ClientNetworkController(FlowController fc) {
 		this.flowController = fc;
 		this.inputHandler = new ClientInputHandler(this);
-		this.amountPlayers = 1;
+		// this.amountPlayers = 1;
 	}
 
-	public void connectToServer(String serverHost, int port){
+	public void connectToServer(String serverHost, int port) {
 		this.client = new Client(inputHandler, serverHost, port);
 		this.outputHandler = new ClientOutputHandler(client);
 		client.start();
@@ -36,36 +35,39 @@ public class ClientNetworkController {
 	// Bauen
 	// 9.4
 	public void requestBuildStreet(int x, int y, int dir) {
-		outputHandler.handleBuildRequest(x, y, dir, playerIds[this.ownPlayerId], "Street");
+		// outputHandler.handleBuildRequest(x, y, dir, playerIDs = new
+		// int[4][this.ownPlayerId], "Street");
 
 	}
 
 	// 9.4
 	public void requestBuildVillage(int x, int y, int dir) {
-		outputHandler.handleBuildRequest(x, y, dir, playerIds[this.ownPlayerId], "Village");
+		// outputHandler.handleBuildRequest(x, y, dir, playerIDs = new
+		// int[4][this.ownPlayerId], "Village");
 	}
 
 	// 9.4
 	public void requestBuildCity(int x, int y, int dir) {
-		outputHandler.handleBuildRequest(x, y, dir, playerIds[this.ownPlayerId], "City");
+		// outputHandler.handleBuildRequest(x, y, dir, playerIDs = new
+		// int[4][this.ownPlayerId], "City");
 	}
 
 	// Bauvorgang
 
 	// 8.6
 	public void buildStreet(int x, int y, int dir, int playerId) {
-		flowController.buildStreet(x, y, dir, getPlayerModelId(playerId));
+		//flowController.buildStreet(x, y, dir, getPlayerModelId(playerId));
 
 	}
 
 	// 8.6
 	public void buildVillage(int x, int y, int dir, int playerId) {
-		flowController.buildVillage(x, y, dir, getPlayerModelId(playerId));
+		//flowController.buildVillage(x, y, dir, getPlayerModelId(playerId));
 	}
 
 	// 8.6
 	public void buildCity(int x, int y, int dir, int playerId) {
-		flowController.buildCity(x, y, dir, getPlayerModelId(playerId));
+		//flowController.buildCity(x, y, dir, getPlayerModelId(playerId));
 
 	}
 
@@ -93,11 +95,15 @@ public class ClientNetworkController {
 	}
 
 	// 4.2
-	public void welcome(int id) {
-		playerIds[amountPlayers] = id;
-		this.ownPlayerId = amountPlayers;
+	public void welcome(int playerID) {
+		this.ownPlayerId = playerID;
 		flowController.setOwnPlayerId(ownPlayerId);
-		amountPlayers++;
+		flowController.setPlayerState(playerID, enums.PlayerState.WAITING_FOR_GAMESTART);
+		System.out.println("Handshake finished!");
+	}
+
+	private void addToPlayerIDs(int playerID) {
+
 	}
 
 	// 7.2
@@ -151,41 +157,40 @@ public class ClientNetworkController {
 
 	// 8.2
 	public void diceRollResult(int playerId, int result) {
-		flowController.diceRollResult(getPlayerModelId(playerId), result);
+		//flowController.diceRollResult(getPlayerModelId(playerId), result);
 
 	}
 
 	// 8.3
 	public void resourceObtain(int playerId, int[] resources) {
-		flowController.addToPlayersResource(getPlayerModelId(playerId), resources);
+		//flowController.addToPlayersResource(getPlayerModelId(playerId), resources);
 
 	}
 
 	// 8.1
 	public void statusUpdate(int playerId, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
-		int modelPlayerId = getPlayerModelId(playerId);
-		if (modelPlayerId == 0) { // first Time id received
-			playerIds[amountPlayers] = playerId;
-			modelPlayerId = amountPlayers;
-			flowController.setPlayerColor(modelPlayerId, color);
-			flowController.setPlayerName(modelPlayerId, name);
-			amountPlayers++;
-		}
-		flowController.setPlayerState(modelPlayerId, status);
-		flowController.setPlayerVictoryPoints(modelPlayerId, victoryPoints);
-		flowController.setPlayerResources(modelPlayerId, resources);
+		// //int modelPlayerId = getPlayerModelId(playerId);
+		// //if (modelPlayerId == 0) { // first Time id received
+		// modelPlayerId = amountPlayers;
+		// flowController.setPlayerColor(modelPlayerId, color);
+		// flowController.setPlayerName(modelPlayerId, name);
+		// amountPlayers++;
+		// }
+		// flowController.setPlayerState(modelPlayerId, status);
+		// flowController.setPlayerVictoryPoints(modelPlayerId, victoryPoints);
+		// flowController.setPlayerResources(modelPlayerId, resources);
 
 	}
 
-	private int getPlayerModelId(int playerId) {
-		for (int i = 0; i < playerIds.length; i++) {
-			if (playerIds[i] == playerId) {
-				return i;
-			}
-		}
-		return 0;
-	}
+	// private int getPlayerModelId(int playerId) {
+	// for (int i = 0; i < playerIDs = new int[4].length; i++) {
+	// if (playerIDs = new int[4][i] == playerId) {
+	// return i;
+	// }
+	// }
+	// return 0;
+	// }
 
 	// 9.7
 	public void endTurn() {

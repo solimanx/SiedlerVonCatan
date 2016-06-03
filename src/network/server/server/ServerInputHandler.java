@@ -1,8 +1,10 @@
 package network.server.server;
 
 import network.InputHandler;
+import network.ModelToProtocol;
 import network.ProtocolToModel;
 import network.server.controller.ServerNetworkController;
+import parsing.Response;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
@@ -48,7 +50,9 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolHello hello) {
-		System.out.println("Hello gelesen!");
+		System.out.println("SERVER: Hello gelesen!");
+		networkController.welcome(networkController.getPlayerModelId(currentThreadID));
+
 	}
 
 	@Override
@@ -109,13 +113,13 @@ public class ServerInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
 		//TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void handle(ProtocolResourceObtain resourceObtain) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -145,13 +149,13 @@ public class ServerInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
 		networkController.diceRollRequest(ProtocolToModel.getPlayerId(this.currentThreadID));
-		
+
 	}
 
 	@Override
 	protected void handle(ProtocolEndTurn endTurn) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

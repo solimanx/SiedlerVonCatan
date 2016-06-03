@@ -18,14 +18,14 @@ public class ServerNetworkController {
 	private ServerInputHandler inputHandler;
 	private Server server;
 	int amountPlayers;
-	int[] playerIDs;
+	public int[] playerIDs;
 	private int IdCounter = 0;
 
 	public ServerNetworkController(GameController gc) {
 		this.gameController = gc;
 		this.inputHandler = new ServerInputHandler(this);
 		this.server = new Server(inputHandler, this);
-		this.outputHandler = new ServerOutputHandler(server);
+		this.outputHandler = new ServerOutputHandler(server, this);
 		this.playerIDs = new int[5];
 		try {
 			server.start();
@@ -202,7 +202,7 @@ public class ServerNetworkController {
 
 	}
 
-	private int getPlayerModelId(int threadID) {
+	public int getPlayerModelId(int threadID) {
 		for (int i = 0; i < server.clients.length; i++) {
 			if (server.clients[i].threadID == threadID) {
 				return i + 1;
@@ -211,7 +211,7 @@ public class ServerNetworkController {
 		return 0;
 	}
 
-	private int getThreadID(int playerModelID) {
+	public int getThreadID(int playerModelID) {
 		return server.clients[playerModelID - 1].threadID;
 		// playerIDs[playerModelID];
 	}

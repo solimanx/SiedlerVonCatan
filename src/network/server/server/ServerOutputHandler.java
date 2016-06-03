@@ -10,6 +10,7 @@ import model.Corner;
 import model.Edge;
 import model.Field;
 import network.ModelToProtocol;
+import network.server.controller.ServerNetworkController;
 import parsing.Parser;
 import parsing.Response;
 import protocol.configuration.ProtocolError;
@@ -25,9 +26,11 @@ import protocol.serverinstructions.ProtocolResourceObtain;
 public class ServerOutputHandler {
 	private Server server;
 	private Parser parser;
+	private ServerNetworkController networkController;
 
-	public ServerOutputHandler(Server server) {
+	public ServerOutputHandler(Server server, ServerNetworkController serverNetworkController) {
 		this.server = server;
+		this.networkController = serverNetworkController;
 		this.parser = new Parser();
 	}
 
@@ -118,7 +121,7 @@ public class ServerOutputHandler {
 		Response r = new Response();
 		r.pWelcome = pw;
 		try {
-			server.broadcast((parser.createString(r)));
+			server.sendToClient(parser.createString(r), networkController.getThreadID(player_id));
 		} catch (IOException e) {
 			// TODO logging
 			e.printStackTrace();
