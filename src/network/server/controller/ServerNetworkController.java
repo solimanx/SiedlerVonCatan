@@ -69,7 +69,7 @@ public class ServerNetworkController {
 			gameController.setPlayerColor(playerID, color);
 			gameController.setPlayerName(playerID, name);
 		} else {
-			error(playerID, "Farbe bereits vergeben!");
+			//error(playerID, "Farbe bereits vergeben!");
 		}
 	}
 
@@ -161,8 +161,8 @@ public class ServerNetworkController {
 	}
 
 	// 7.3
-	public void error(int playerID, String s) {
-		outputHandler.error(playerID, s);
+	public void error(String s) {
+		outputHandler.error(s);
 		// System.out.println(s);
 
 	}
