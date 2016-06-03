@@ -23,8 +23,8 @@ public class Server {
 	private ServerOutputHandler outputHandler;
 	private ServerNetworkController networkController;
 
-	String serverVersion = "0.1";
-	String protocolVersion = "0.2";
+	String serverVersion = settings.DefaultSettings.SERVER_VERSION;
+	String protocolVersion = settings.DefaultSettings.PROTOCOL_VERSION;
 
 	public Server(ServerInputHandler inputHandler, ServerNetworkController serverNetworkController) {
 		this.inputHandler = inputHandler;
