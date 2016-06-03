@@ -10,10 +10,10 @@ import com.google.gson.GsonBuilder;
 public class Parser {
 	Response response;
 	Gson gson = new GsonBuilder().create();
-	Hashtable<String,Object> map;
+	HashMap<String,Object> map;
 
 	public Parser() {
-		map = new Hashtable	<String, Object>();
+		map = new HashMap<String, Object>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -24,7 +24,7 @@ public class Parser {
 		//TODO perhaps reference to variables so it doesn't have to refresh map everytime
 		refreshMap();
 	 
-		for ( Map.Entry<String, Object> entry : map.entrySet() ) {
+		for ( HashMap.Entry<String, Object> entry : map.entrySet() ) {
 			if(entry.getValue()!=null){
 				return (T) entry.getValue();
 			}

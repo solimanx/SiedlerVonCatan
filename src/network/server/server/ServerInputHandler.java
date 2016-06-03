@@ -1,11 +1,10 @@
 package network.server.server;
 
+import network.InputHandler;
 import network.server.controller.ServerNetworkController;
-import parsing.Parser;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
-import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
@@ -20,14 +19,13 @@ import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 
-public class ServerInputHandler {
-	private Parser parser;
+public class ServerInputHandler extends InputHandler {
 	private ServerNetworkController networkController;
 	private int currentThreadID;
 
 	public ServerInputHandler(ServerNetworkController nc) {
+		super();
 		this.networkController = nc;
-		this.parser = new Parser();
 	}
 
 	/**
@@ -37,7 +35,8 @@ public class ServerInputHandler {
 	 * @param s
 	 */
 	public void sendToParser(String s, int threadID) {
-		// speichert die threadID, falls sie in handle(Protocol...) gebraucht wird.
+		// speichert die threadID, falls sie in handle(Protocol...) gebraucht
+		// wird.
 		this.currentThreadID = threadID;
 		Object object = parser.parseString(s);
 
@@ -46,148 +45,102 @@ public class ServerInputHandler {
 		// handle(object.getClass().cast(object));
 	}
 
-	/**
-	 * takes parsed object and redirects to its proper method depending on
-	 * objects "real" class. ( object will be casted to "real" class )
-	 *
-	 * @param o
-	 */
-	private void handle(Object o) {
-		Class cl = o.getClass();
-
-		if (cl.equals(ProtocolHello.class)) {
-			ProtocolHello ph = (ProtocolHello) o;
-			handle(ph);
-		} else if (cl.equals(ProtocolWelcome.class)) {
-			ProtocolWelcome pw = (ProtocolWelcome) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolClientReady.class)) {
-			ProtocolClientReady pw = (ProtocolClientReady) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolGameStarted.class)) {
-			ProtocolGameStarted pw = (ProtocolGameStarted) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolError.class)) {
-			ProtocolError pw = (ProtocolError) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolPlayerProfile.class)) {
-			ProtocolPlayerProfile pw = (ProtocolPlayerProfile) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolChatReceiveMessage.class)) {
-			ProtocolChatReceiveMessage pw = (ProtocolChatReceiveMessage) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolChatSendMessage.class)) {
-			ProtocolChatSendMessage pw = (ProtocolChatSendMessage) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolServerConfirmation.class)) {
-			ProtocolServerConfirmation pw = (ProtocolServerConfirmation) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolBuild.class)) {
-			ProtocolBuild pw = (ProtocolBuild) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolDiceRollResult.class)) {
-			ProtocolDiceRollResult pw = (ProtocolDiceRollResult) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolResourceObtain.class)) {
-			ProtocolResourceObtain pw = (ProtocolResourceObtain) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolStatusUpdate.class)) {
-			ProtocolStatusUpdate pw = (ProtocolStatusUpdate) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolDiceRollResult.class)) {
-			ProtocolDiceRollResult pw = (ProtocolDiceRollResult) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolBuildRequest.class)) {
-			ProtocolBuildRequest pw = (ProtocolBuildRequest) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolDiceRollRequest.class)) {
-			ProtocolDiceRollRequest pw = (ProtocolDiceRollRequest) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolEndTurn.class)) {
-			ProtocolEndTurn pw = (ProtocolEndTurn) o;
-			handle(pw);
-		} else if (cl.equals(ProtocolRobberMovementRequest.class)) {
-			ProtocolRobberMovementRequest pw = (ProtocolRobberMovementRequest) o;
-			handle(pw);
-		}
-	}
-
-	//useless? not needed
-	private void handle(ProtocolHello hello) {
+	@Override
+	protected void handle(ProtocolHello hello) {
 		System.out.println("Hello gelesen!");
 	}
 
-	private void handle(ProtocolWelcome welcome) {
-        System.out.println("Welcome gelesen!");
+	@Override
+	protected void handle(ProtocolWelcome welcome) {
+		System.out.println("Welcome gelesen!");
 	}
 
-	private void handle(ProtocolClientReady clientReady) {
-
-	}
-
-	private void handle(ProtocolGameStarted gameStarted) {
-
-	}
-
-	private void handle(ProtocolError error) {
+	@Override
+	protected void handle(ProtocolClientReady clientReady) {
+		// TODO Auto-generated method stub
 
 	}
 
-	private void handle(ProtocolPlayerProfile playerProfile) {
+	@Override
+	protected void handle(ProtocolGameStarted gameStarted) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolError error) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolPlayerProfile playerProfile) {
+		// TODO Auto-generated method stub
 
 	}
 
 	//
-
-	private void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
+	@Override
+	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		String s = chatReceiveMessage.getMessage();
 		int playerId = chatReceiveMessage.getSender();
 		networkController.chatReceiveMessage(playerId, s);
 	}
 
-	private void handle(ProtocolChatSendMessage chatSendMessage) {
+	protected void handle(ProtocolChatSendMessage chatSendMessage) {
 		String s = chatSendMessage.getMessage();
 		networkController.chatSendMessage(s, this.currentThreadID);
 	}
 
-	private void handle(ProtocolServerConfirmation serverConfirmation) {
+	@Override
+	protected void handle(ProtocolServerConfirmation serverConfirmation) {
+		// TODO Auto-generated method stub
+
+	}
+
+	//
+	@Override
+	protected void handle(ProtocolBuild build) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolDiceRollResult diceRollResult) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolResourceObtain resourceObtain) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolStatusUpdate statusUpdate) {
+		// TODO Auto-generated method stub
 
 	}
 
 	//
 
-	private void handle(ProtocolBuild build) {
+	@Override
+	protected void handle(ProtocolBuildRequest buildRequest) {
+		// TODO Auto-generated method stub
 
 	}
 
-	private void handle(ProtocolDiceRollResult diceRollResult) {
+	@Override
+	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
+		// TODO Auto-generated method stub
 
 	}
 
-	private void handle(ProtocolResourceObtain resourceObtain) {
+	@Override
+	protected void handle(ProtocolEndTurn endTurn) {
+		// TODO Auto-generated method stub
 
-	}
-
-	private void handle(ProtocolStatusUpdate statusUpdate) {
-
-	}
-
-	//
-
-	private void handle(ProtocolBuildRequest buildRequest) {
-
-	}
-
-	private void handle(ProtocolDiceRollRequest diceRollRequest) {
-
-	}
-
-	private void handle(ProtocolEndTurn endTurn) {
-
-	}
-
-	private void handle(ProtocolRobberMovementRequest robberMovementRequest){
-		
 	}
 
 }
