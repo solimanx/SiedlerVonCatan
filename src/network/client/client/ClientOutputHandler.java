@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import parsing.Parser;
 import parsing.Response;
+import protocol.configuration.ProtocolClientReady;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 
@@ -21,17 +22,14 @@ public class ClientOutputHandler {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	/**
 	 * If the connection can be established, send "Hello" back to server.
 	 */
 	public void clientHello(String clientVersion) {
 		ProtocolHello ph = new ProtocolHello(clientVersion,null);
-		Response r = new Response();
-		r.pHello = ph;
 		try {
-			System.out.println("CLIENT HELLO OUTPUT: " + parser.createString(r));
-			client.write(parser.createString(r));
+			client.write(parser.createString(ph));
 		} catch (IOException e) {
 			// TODO logging
 			e.printStackTrace();
@@ -40,7 +38,17 @@ public class ClientOutputHandler {
 	}
 
 	public void clientReady() {
-		// TODO Auto-generated method stub
+		ProtocolClientReady pcr = new ProtocolClientReady();
+		Response r = new Response();
+		r.pClientReady = pcr;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e){
+			
+			e.printStackTrace();
+		}
+		
+	
 
 	}
 
