@@ -1,13 +1,15 @@
 package network.client.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 
-import enums.CornerStatus;
 import enums.ResourceType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Board;
-import network.client.client.Client;
 import network.client.view.View;
 import network.server.controller.GameController;
 
@@ -21,20 +23,37 @@ public class ViewController {
 	protected FlowController flowController;
 	public MainViewController mainViewController;
 
-	public ViewController(Stage primaryStage, Board board, GameController gc) {
-		this.gameController = gc;
-		this.board = board;
-		startMainView(primaryStage, board);
-		init();
+
+	public ViewController(Stage primaryStage, FlowController fc){
+		this.flowController = fc;
+
+		try {
+			startLobbyView(primaryStage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+		//this.board = board;
+		//startMainView(primaryStage, board);
+		//init();
 	}
 
-	
-	public ViewController(Stage primaryStage, Board board, FlowController fc) {
-		this.flowController = fc;
-		this.board = board;
-		startMainView(primaryStage, board);
-		init();
+
+
+	private void startLobbyView(Stage primaryStage) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		Parent root = loader.load(getClass().getResource("/application/lobby.fxml").openStream());
+		Scene scene = new Scene(root);
+
+		primaryStage.setScene(scene);
+		primaryStage.sizeToScene();
+		primaryStage.show();
 	}
+
+
 
 	/**
 	 * starts MainView and MainViewController
@@ -45,13 +64,13 @@ public class ViewController {
 		view = new View(board, primaryStage, mainViewController);
 		this.mainViewController = new MainViewController(view, this);
 	}
-	
+
 	public View getView() {
 		return view;
 	}
 
 	private void init() {
-		
+
 		fieldColors.put(ResourceType.CLAY, Color.TAN);
 		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
 		fieldColors.put(ResourceType.NOTHING, Color.WHITE);
@@ -100,19 +119,23 @@ public class ViewController {
 
 	public void setPlayerColor(int playerId, enums.Color color) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
 	public void setPlayerName(int playerId, String name) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
 	public void setDiceRollResult(int playerId, int result) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public void setBoard(Board board){
+		this.board = board;
 	}
 
 }

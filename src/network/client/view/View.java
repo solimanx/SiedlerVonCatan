@@ -89,7 +89,8 @@ public class View implements ViewInterface {
 			Scene scene = new Scene(rootPane);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-			primaryStage.setMaximized(true);
+			primaryStage.setFullScreen(true);
+			//primaryStage.setMaximized(true);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {

@@ -31,7 +31,7 @@ public class FlowController {
 	public FlowController(Stage primaryStage){
 		this.networkController = new ClientNetworkController(this);
 		//this.mainViewController = viewController.getMainViewController();
-		this.viewController = new ViewController(primaryStage, board, this);
+		this.viewController = new ViewController(primaryStage, this);
 
 	}
 
@@ -208,11 +208,11 @@ public class FlowController {
 	public void setOwnPlayerId(int ownPlayerId) {
 		this.ownPlayerId = ownPlayerId;
 	}
-	
+
 	public void chatSendMessage(String s){
 		networkController.chatSendMessage(s);
 	}
-	
+
 	public void chatReceiveMessage(int playerId,String s){
 		viewController.mainViewController.receiveChatMessage("Spieler "+playerId+": "+s);
 	}
