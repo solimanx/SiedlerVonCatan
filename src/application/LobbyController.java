@@ -59,6 +59,7 @@ public class LobbyController implements Initializable{
 	@FXML
 	public void sendChatMessage() {
 		String message = chatInput.getText();
+		chatInput.clear();
 		viewController.flowController.networkController.chatSendMessage(message);
 	}
 
