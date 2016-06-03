@@ -53,6 +53,8 @@ public class ViewController {
 		lobbyController.setViewController(this);
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
+		primaryStage.setTitle("Settlers of Catan : Lobby");
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 

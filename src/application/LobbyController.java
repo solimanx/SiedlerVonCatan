@@ -1,6 +1,9 @@
 package application;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -14,6 +17,8 @@ public class LobbyController implements Initializable{
 
 	ViewController viewController;
 
+	DateTimeFormatter dateFormat;
+	
 	@FXML
 	Button myButton;
 
@@ -35,6 +40,7 @@ public class LobbyController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		chatInput.setDisable(true);
+		dateFormat = DateTimeFormatter.ofPattern("hh:mm:ss");
 
 	}
 
@@ -54,7 +60,9 @@ public class LobbyController implements Initializable{
 
 	public void enableChat() {
 		chatInput.setDisable(false);
+		messages.appendText(currentTime()+"Connected to lobby chat.\n");
 	}
+
 
 	@FXML
 	public void sendChatMessage() {
@@ -63,11 +71,19 @@ public class LobbyController implements Initializable{
 		viewController.flowController.networkController.chatSendMessage(message);
 	}
 
-	@FXML
 	public void receiveChatMessage(String string) {
-		messages.appendText(string + "\n");
+		messages.appendText(currentTime()+string + "\n");
 
 	}
+	
+	public void disconnect(){
+		messages.appendText(currentTime()+"Disconnected.\n");
+		chatInput.setDisable(true);
+	}
+	private String currentTime() {
+		return "["+LocalTime.now().format(dateFormat)+"] ";
+	}
+	
 
 
 }
