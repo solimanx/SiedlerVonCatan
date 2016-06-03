@@ -1,24 +1,26 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import network.client.controller.ViewController;
 
-public class LobbyController implements Initializable{
+public class LobbyController implements Initializable {
 
 	ViewController viewController;
 
 	DateTimeFormatter dateFormat;
-	
+
 	@FXML
 	Button myButton;
 
@@ -45,24 +47,13 @@ public class LobbyController implements Initializable{
 	}
 
 	@FXML
-	public void handleConnectButton(){
+	public void handleConnectButton() {
 		String server = serverIPTextField.getText();
 		int port = Integer.parseInt(portTextField.getText());
-		viewController.flowController.networkController.connectToServer(server,port);
+		viewController.flowController.networkController.connectToServer(server, port);
 		System.out.println("handled");
 
-
 	}
-
-	public void setViewController(ViewController viewController){
-		this.viewController = viewController;
-	}
-
-	public void enableChat() {
-		chatInput.setDisable(false);
-		messages.appendText(currentTime()+"Connected to lobby chat.\n");
-	}
-
 
 	@FXML
 	public void sendChatMessage() {
@@ -72,18 +63,28 @@ public class LobbyController implements Initializable{
 	}
 
 	public void receiveChatMessage(String string) {
-		messages.appendText(currentTime()+string + "\n");
+		messages.appendText(currentTime() + string + "\n");
 
 	}
 	
-	public void disconnect(){
-		messages.appendText(currentTime()+"Disconnected.\n");
+
+	public void enableChat() {
+		chatInput.setDisable(false);
+		messages.appendText(currentTime() + "Connected to lobby chat.\n");
+		//viewController.openChooseNameMenu();
+	}
+
+	public void disconnect() {
+		messages.appendText(currentTime() + "Disconnected.\n");
 		chatInput.setDisable(true);
 	}
-	private String currentTime() {
-		return "["+LocalTime.now().format(dateFormat)+"] ";
-	}
-	
 
+	private String currentTime() {
+		return "[" + LocalTime.now().format(dateFormat) + "] ";
+	}
+
+	public void setViewController(ViewController viewController) {
+		this.viewController = viewController;
+	}
 
 }

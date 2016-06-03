@@ -10,12 +10,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Board;
 import network.client.view.View;
 import network.server.controller.GameController;
 
 public class ViewController {
 
+	FXMLLoader loader;
 	protected View view;
 	protected Board board;
 	protected HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
@@ -28,6 +30,7 @@ public class ViewController {
 
 	public ViewController(Stage primaryStage, FlowController fc){
 		this.flowController = fc;
+		loader = new FXMLLoader();
 
 		try {
 			startLobbyView(primaryStage);
@@ -42,19 +45,34 @@ public class ViewController {
 		//startMainView(primaryStage, board);
 		//init();
 	}
-
+//	public void openChooseNameMenu(){
+//		Parent root;
+//		try{
+//			root = loader.load(getClass().getClassLoader().getResourceAsStream("/application/lobby.fxml"));
+//			 Stage stage = new Stage();
+//	            stage.setTitle("My New Stage Title");
+//	            stage.setScene(new Scene(root, 450, 450));
+//	            stage.show();
+//		}
+//		catch(IOException e){
+//			e.printStackTrace();
+//		}
+//	}
 
 
 	private void startLobbyView(Stage primaryStage) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
+		
 		Parent root = loader.load(getClass().getResource("/application/lobby.fxml").openStream());
 		Scene scene = new Scene(root);
 		lobbyController = (LobbyController) loader.getController();
 		lobbyController.setViewController(this);
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
+		//
 		primaryStage.setTitle("Settlers of Catan : Lobby");
 		primaryStage.setResizable(false);
+		//primaryStage.initStyle(StageStyle.UTILITY);
+		//
 		primaryStage.show();
 	}
 
