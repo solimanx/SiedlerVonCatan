@@ -24,10 +24,13 @@ public class ClientNetworkController {
 	public ClientNetworkController(FlowController fc) {
 		this.flowController = fc;
 		this.inputHandler = new ClientInputHandler(this);
-		this.client = new Client(inputHandler);
 		client.start();
 		this.outputHandler = new ClientOutputHandler(client);
 		this.amountPlayers = 1;
+	}
+
+	public void connectToServer(String serverHost, int port){
+		this.client = new Client(inputHandler, serverHost, port);
 	}
 
 	// Bauen
@@ -75,7 +78,7 @@ public class ClientNetworkController {
 	/**
 	 * Check if versions match and act accordingly; if they match begin sending
 	 * confirmation from client otherwise disconnect
-	 * 
+	 *
 	 * @param serverVersion
 	 * @param protocolVersion
 	 */

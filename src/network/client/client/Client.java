@@ -16,12 +16,14 @@ public class Client extends Thread {
 	OutputStreamWriter writer = null;
 	BufferedReader reader = null;
 	int port = 8080;
+	String serverHost = "localhost";
 	boolean scanning = true;
 	boolean connectionActive = false;
 	protected ClientInputHandler inputHandler;
 
-	public Client(ClientInputHandler inputHandler) {
-		super();
+	public Client(ClientInputHandler inputHandler, String serverHost, int port){
+		this.port = port;
+		this.serverHost = serverHost;
 		this.inputHandler = inputHandler;
 	}
 
@@ -32,7 +34,7 @@ public class Client extends Thread {
 	@Override
 	public void run() {
 		try {
-			socket = new Socket("localhost", port);
+			socket = new Socket(serverHost, port);
 			writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 			scanning = false;
