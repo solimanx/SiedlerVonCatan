@@ -1,6 +1,7 @@
 package network.client.client;
 
 import network.InputHandler;
+import network.ProtocolToModel;
 import network.client.controller.ClientNetworkController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -117,7 +118,14 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolStatusUpdate statusUpdate) {
 		// TODO Auto-generated method stub
-
+		int playerId = ProtocolToModel.getPlayerId(statusUpdate.getPlayer().getPlayer_id());
+		enums.Color color = statusUpdate.getPlayer().getColor();
+		String name = statusUpdate.getPlayer().getName();
+		enums.PlayerState status = ProtocolToModel.getPlayerState(statusUpdate.getPlayer().getStatus());
+		int victoryPoints = statusUpdate.getPlayer().getVictory_points();
+		int[] resources = ProtocolToModel.getResources(statusUpdate.getPlayer().getResources());
+		networkController.statusUpdate(playerId, color, name, status, victoryPoints, resources);
+		
 	}
 
 	//

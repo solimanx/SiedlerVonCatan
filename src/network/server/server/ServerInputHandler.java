@@ -1,6 +1,7 @@
 package network.server.server;
 
 import network.InputHandler;
+import network.ProtocolToModel;
 import network.server.controller.ServerNetworkController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -107,14 +108,14 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
-		// TODO Auto-generated method stub
-
+		//TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void handle(ProtocolResourceObtain resourceObtain) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -127,20 +128,30 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolBuildRequest buildRequest) {
-		// TODO Auto-generated method stub
-
+		if(buildRequest.getBuilding() == "Straße"){
+			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
+			networkController.requestBuildStreet(loc[0], loc[1], loc[2], ProtocolToModel.getPlayerId(this.currentThreadID));
+		}
+		if(buildRequest.getBuilding() == "Dorf"){
+			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
+			networkController.requestBuildVillage(loc[0], loc[1], loc[2], ProtocolToModel.getPlayerId(this.currentThreadID));
+		}
+		if(buildRequest.getBuilding() == "Stadt"){
+			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
+			networkController.requestBuildCity(loc[0], loc[1], loc[2], ProtocolToModel.getPlayerId(this.currentThreadID));
+		}
 	}
 
 	@Override
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-		// TODO Auto-generated method stub
-
+		networkController.diceRollRequest(ProtocolToModel.getPlayerId(this.currentThreadID));
+		
 	}
 
 	@Override
 	protected void handle(ProtocolEndTurn endTurn) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
