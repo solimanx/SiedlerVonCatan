@@ -2,6 +2,7 @@ package network.server.server;
 
 import java.io.IOException;
 
+import com.sun.javafx.logging.Logger;
 import enums.Color;
 import enums.PlayerState;
 import model.Corner;
@@ -16,6 +17,7 @@ import protocol.messaging.ProtocolChatSendMessage;
 public class ServerOutputHandler {
 	private Server server;
 	private Parser parser;
+	
 
 	public ServerOutputHandler(Server server) {
 		this.server = server;
@@ -41,6 +43,7 @@ public class ServerOutputHandler {
 	 */
 	public void hello(String serverVersion, String protocolVersion, int thread_id) {
 		ProtocolHello ph = new ProtocolHello(serverVersion, protocolVersion);
+		 log.info;
 		try {
 			server.sendToClient(parser.createString(ph), thread_id);
 		} catch (IOException e) {
