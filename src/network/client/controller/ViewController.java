@@ -3,6 +3,7 @@ package network.client.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import application.LobbyController;
 import enums.ResourceType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,8 +21,9 @@ public class ViewController {
 	protected HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
 	protected HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	protected GameController gameController; //DEBUG
-	protected FlowController flowController;
+	public FlowController flowController;
 	public MainViewController mainViewController;
+	public LobbyController lobbyController;
 
 
 	public ViewController(Stage primaryStage, FlowController fc){
@@ -47,7 +49,8 @@ public class ViewController {
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("/application/lobby.fxml").openStream());
 		Scene scene = new Scene(root);
-
+		lobbyController = (LobbyController) loader.getController();
+		lobbyController.setViewController(this);
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
 		primaryStage.show();

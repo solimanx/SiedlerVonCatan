@@ -24,7 +24,7 @@ public class FlowController {
 	int ownPlayerId;
 	protected ViewController viewController;
 	protected Field[][] fields;
-	protected ClientNetworkController networkController;
+	public ClientNetworkController networkController;
 	private Object mainViewController;
 
 
