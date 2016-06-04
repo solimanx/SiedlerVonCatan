@@ -5,9 +5,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import enums.Color;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import network.client.controller.ViewController;
@@ -35,6 +37,17 @@ public class LobbyController implements Initializable {
 
 	@FXML
 	private TextArea messages;
+	
+	
+	// NameSelectDialog
+	@FXML
+	private TextField playerName;
+	
+	@FXML
+	private ChoiceBox<enums.Color> colorSelect;
+	
+	@FXML
+	private Button startGameButton;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -49,7 +62,6 @@ public class LobbyController implements Initializable {
 		int port = Integer.parseInt(portTextField.getText());
 		viewController.getFlowController().getNetworkController().connectToServer(server, port);
 		System.out.println("handled");
-
 	}
 
 	@FXML
@@ -82,5 +94,12 @@ public class LobbyController implements Initializable {
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
+	
+	public void startGame(){
+		Color playerColor = colorSelect.getValue();
+		String name = playerName.getText();
+		//viewcontroller.flowcontroller.startGame();
+	}
+	
 
 }

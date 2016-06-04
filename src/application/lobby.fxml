@@ -20,7 +20,7 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" prefHeight="50.0" prefWidth="274.0">
                            <children>
-                              <Label alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="40.0" text="Server:">
+                              <Label alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="73.0" text="Server:">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
@@ -41,16 +41,22 @@
                               <TextField fx:id="portTextField" alignment="CENTER_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="120.0" text="8080" />
                            </children>
                         </HBox>
-                        <VBox alignment="CENTER_RIGHT">
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
-                        </VBox>
                         <Button fx:id="connectButton" mnemonicParsing="false" onAction="#handleConnectButton" text="Connect">
                            <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                        <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="274.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="161.0" text="Click to start the Game:">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button mnemonicParsing="false" text="Start" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
