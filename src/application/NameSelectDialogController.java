@@ -47,7 +47,7 @@ public class NameSelectDialogController implements Initializable {
 	private void handleSendButton() {
 		Color chosenColor = playerColor.getValue();
 		String name = playerName.getText();
-		//TODO viewController.getFlowController().sendPlayerProfile(name, chosenColor);
+		viewController.getFlowController().sendPlayerProfile(name, chosenColor);
 		System.out.println("chosen: " + name + " " + chosenColor);
 		readyButton.setDisable(false);
 	}

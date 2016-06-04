@@ -229,7 +229,7 @@ public class FlowController {
 	}
 	
 	public void sendReady(){
-		System.out.println("try to send READY for game start");
+		networkController.clientReady();
 	}
 
 	public ClientNetworkController getNetworkController() {
