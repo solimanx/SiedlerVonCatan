@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 import settings.DefaultSettings;
 
@@ -101,8 +102,36 @@ public class HexService {
 
 	}
 
-	public int[] getCornerCoordinates(String field_ids) {
-		// TODO write
+	public int[] getCornerCoordinates(int x1, int y1, int x2, int y2, int x3, int y3) {
+		Corner[] a = board.getSurroundingCorners(x1,y1);
+		Corner[] b = board.getSurroundingCorners(x1,y1);
+		Corner[] c = board.getSurroundingCorners(x1,y1);
+		ArrayList<Corner> lista = new ArrayList<Corner>();
+		ArrayList<Corner> listb = new ArrayList<Corner>();
+		ArrayList<Corner> lastCorner = new ArrayList<Corner>();
+		for(int i = 0; i < a.length; i++){
+			lista.add(a[i]);
+		}
+		for(int i= 0; i < lista.size(); i++){
+			if(lista.contains(b[i])){
+				listb.add(b[i]);
+			}
+		}
+		for(int i= 0; i < listb.size(); i++){
+			if(listb.contains(c[i])){
+				lastCorner.add(c[i]);
+			}
+		}
+		if(board.getCornerAt(x1, y1, 1) == lastCorner.get(0)){
+			int[] result = {x1, y1, 1};
+			return result;
+		}
+		if (board.getCornerAt(x3, y3, 0) == lastCorner.get(0)){
+			int[] result = {x3, y3, 0};
+			return result;
+		}
+
+
 		return null;
 	}
 

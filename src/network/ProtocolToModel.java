@@ -4,6 +4,7 @@ import model.HexService;
 import protocol.object.ProtocolResource;
 
 public final class ProtocolToModel {
+	static HexService HS;
 
 	public static int[] getFieldCoordinates(String field_id) {
 		return HexService.getFieldCoordinates(field_id);
@@ -11,9 +12,10 @@ public final class ProtocolToModel {
 
 
 	public static int[] getCornerCoordinates(String location) {
-		// TODO
-		// return [x][y][dir]
-		return null;
+		int[] a = HexService.getFieldCoordinates(location.substring(0, 1));
+		int[] b = HexService.getFieldCoordinates(location.substring(2, 2));
+		int[] c = HexService.getFieldCoordinates(location.substring(2, 3));
+		return HS.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
 
 	}
 
