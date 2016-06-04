@@ -32,7 +32,7 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
@@ -116,7 +116,7 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
