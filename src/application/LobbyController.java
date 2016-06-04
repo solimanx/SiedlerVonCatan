@@ -102,31 +102,14 @@ public class LobbyController implements Initializable {
 		this.viewController = viewController;
 	}
 
+	@FXML
 	public void startGame() {
-		// Color playerColor = colorSelect.getValue();
-		// String name = playerName.getText();
 		try {
 			viewController.openChooseNameMenu();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	@FXML
-	public void startGame2() {
-		try {
-			System.out.println("Start");
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("nameselect.fxml"));
-			Parent root1 = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-			stage.setTitle("ABC");
-			stage.setScene(new Scene(root1));
-			stage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Here!");
 	}
 
 }

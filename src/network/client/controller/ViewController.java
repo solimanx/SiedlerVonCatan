@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import application.LobbyController;
+import application.NameSelectDialogController;
 import enums.ResourceType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,6 +27,7 @@ public class ViewController {
 	private FlowController flowController;
 	private MainViewController mainViewController;
 	private LobbyController lobbyController;
+	private NameSelectDialogController nameSelectDialogController;
 	private Stage primaryStage;
 
 	public ViewController(Stage primaryStage, FlowController fc) {
@@ -166,9 +168,18 @@ public class ViewController {
 	}
 
 	public void openChooseNameMenu() throws IOException {
-		// TODO
-
-
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/nameselect.fxml"));
+			Parent root1 = (Parent) fxmlLoader.load();
+			nameSelectDialogController = fxmlLoader.getController();
+			Stage stage = new Stage();
+			stage.setTitle("ABC");
+			stage.setScene(new Scene(root1));
+			stage.show();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
