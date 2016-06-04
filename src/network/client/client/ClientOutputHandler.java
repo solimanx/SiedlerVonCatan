@@ -1,11 +1,12 @@
 package network.client.client;
 
 import java.io.IOException;
-
 import parsing.Parser;
 import parsing.Response;
+import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
+import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
@@ -21,7 +22,19 @@ public class ClientOutputHandler {
 	}
 
 	public void handleBuildRequest(int x, int y, int dir, int playerId, String string) {
-		// TODO Auto-generated method stub
+	    String location = x + "," + y + "," + dir;
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest(string, location);
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			//TODO logging
+			e.printStackTrace();
+		}
+		
+		
+		
 
 	}
 
@@ -49,7 +62,7 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e){
-
+            // TODO logging
 			e.printStackTrace();
 		}
 
@@ -96,8 +109,21 @@ public class ClientOutputHandler {
 
 	}
 
-	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
-		// TODO Auto-generated method stub
+	public void requestSetBandit(int playerid, int x, int y, int victim_id) {
+		String location = x + "," + y;
+		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(playerid, location, victim_id);
+		Response r = new Response();
+		r.pRobberMoveRequest = prmr;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO logging
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 
 	}
 
