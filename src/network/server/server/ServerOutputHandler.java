@@ -107,7 +107,7 @@ public class ServerOutputHandler {
 
 	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
 		
-		ProtocolGameStarted pgs = new ProtocolGameStarted(board)
+		// TODO Auto-generated method stub
 	}
 
 	public void error(String s) {
