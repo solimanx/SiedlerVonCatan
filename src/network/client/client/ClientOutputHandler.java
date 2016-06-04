@@ -122,7 +122,7 @@ public class ClientOutputHandler {
 		}
 
 	}
-	public void sendPlayerProfile(String name, String color){
+	public void sendPlayerProfile(String name, enums.Color color){
 
 		ProtocolPlayerProfile pcr=new ProtocolPlayerProfile(name, color);
 		Response r=new Response();
@@ -135,5 +135,7 @@ public class ClientOutputHandler {
 		}
 
 	}
+
+
 
 }

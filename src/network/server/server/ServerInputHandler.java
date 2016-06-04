@@ -157,6 +157,7 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolEndTurn endTurn) {
+
 		// TODO Auto-generated method stub
 
 	}

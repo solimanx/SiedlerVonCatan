@@ -2,6 +2,7 @@ package protocol.configuration;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
+import enums.Color;
 
 /**
  * <b>Konfiguration und Spielstart (Profile)</b>
@@ -18,9 +19,9 @@ public class ProtocolPlayerProfile {
 	private String name;
 
 	@SerializedName("Farbe")
-	private String color;
+	private Color color;
 
-	public ProtocolPlayerProfile(String name, String color) {
+	public ProtocolPlayerProfile(String name, enums.Color color) {
 
 		this.name = name;
 		this.color = color;
@@ -31,7 +32,7 @@ public class ProtocolPlayerProfile {
 		return name;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
