@@ -53,6 +53,7 @@ public class PlayerProfileController implements Initializable {
 			System.out.println("No color selected.");
 		} else {
 			viewController.getFlowController().sendPlayerProfile(name, chosenColor);
+			//TODO receive confirmation from server that color isnt taken
 			System.out.println("Profile: " + name + " " + chosenColor);
 			readyButton.setDisable(false);
 		}
@@ -63,8 +64,8 @@ public class PlayerProfileController implements Initializable {
 		viewController.getFlowController().sendReady();
 	}
 
-	@FXML
-	public void setServerColorText(String s) {
-		serverColorAnswer.setText(s);
-	}
+//	@FXML
+//	public void setServerColorText(String s) {
+//		serverColorAnswer.setText(s);
+//	}
 }
