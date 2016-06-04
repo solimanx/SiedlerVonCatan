@@ -68,7 +68,8 @@ public class ClientInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolError error) {
-		// TODO Auto-generated method stub
+		System.out.println("Meldung wird geschickt");
+		networkController.error(error.getNotice());
 
 	}
 
