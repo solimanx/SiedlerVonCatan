@@ -14,6 +14,7 @@ import network.server.controller.ServerNetworkController;
 import parsing.Parser;
 import parsing.Response;
 import protocol.configuration.ProtocolError;
+import protocol.configuration.ProtocolGameStarted;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
@@ -78,7 +79,8 @@ public class ServerOutputHandler {
 	}
 
 	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
-		// TODO
+		
+		ProtocolGameStarted pgs = new ProtocolGameStarted(board)
 	}
 
 	public void error(String s) {

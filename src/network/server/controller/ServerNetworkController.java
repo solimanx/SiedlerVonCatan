@@ -150,7 +150,7 @@ public class ServerNetworkController {
 			}
 		}
 		if (allPlayersReady) {
-			gameController.init();
+			gameController.init(amountPlayers);
 		}
 	}
 

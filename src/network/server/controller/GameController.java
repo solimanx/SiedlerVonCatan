@@ -6,6 +6,7 @@ import java.util.Random;
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
+import javafx.scene.AmbientLight;
 import javafx.stage.Stage;
 import model.Board;
 import model.Corner;
@@ -37,16 +38,16 @@ public class GameController implements GameControllerInterface {
 
 	}
 
-	// @Override
+	/**
+	 * Inits
+	 * @param amountPlayers
+	 */
+	@Override
 	public void init(int amountPlayers) {
-		//TODO fix this.board = Board.getInstance(amountPlayers);
+		board = new Board(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-		// ONLY!!
-		// viewController = new ViewController(primaryStage, board, this); //
-		// DEBUG
-		init();
 		generateBoard(fields[2][2], false);
 		/*
 		 * for (int i = 1; i <= amountPlayers;i++){
@@ -58,7 +59,8 @@ public class GameController implements GameControllerInterface {
 		addToPlayersResource(1, ResourceType.SHEEP, 3);
 		addToPlayersResource(1, ResourceType.CORN, 3);
 		setPlayerState(1, PlayerState.PLAYING); // player 1 begins
-
+		
+		networkController.gameStarted(board.getFields(), board.getEdges(), board.getCorners(), board.getBandit());
 	}
 
 	/**
@@ -71,57 +73,57 @@ public class GameController implements GameControllerInterface {
 	 * @param randomDesert
 	 */
 	private void generateBoard(Field initialField, boolean randomDesert) {
-//		//ArrayList<Field> fields = board.getAllFields(); // spiral implementieren
-//		System.out.println("Size" + fields.size());
-//		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
-//		int currNum;
-//		if (randomDesert) {
-//			int diceInd = 0;
-//			for (int i = 0; i < fields.size(); i++) {
-//
-//				Random r = new Random();
-//				boolean notFound = true;
-//				do {
-//					currNum = r.nextInt(6); // desert allowed
-//					if (cards[currNum] > 0) {
-//						notFound = false;
-//					}
-//				} while (notFound);
-//				cards[currNum]--;
-//				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
-//				if (currNum != 5) {
-//					fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
-//					diceInd++;
-//				} else {
-//					fields.get(i).setDiceIndex(0);
-//				}
-//			}
-//		} else {
-//			for (int i = 0; i < fields.size() - 1; i++) {
-//				Random r = new Random();
-//				boolean notFound = true;
-//				do {
-//					currNum = r.nextInt(5);
-//					if (cards[currNum] > 0) {
-//						notFound = false;
-//					}
-//				} while (notFound);
-//				cards[currNum]--;
-//				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
-//				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[i]);
-//			}
-//			fields.get(fields.size() - 1).setResourceType(ResourceType.NOTHING); // inner
-//																					// field
-//																					// =
-//																					// desert;
-//			fields.get(fields.size() - 1).setDiceIndex(0);
-//		}
-//		int[] viewCoord = new int[2];
-//		for (int i = 0; i < fields.size(); i++) {
-//			viewCoord = board.getFieldCoordinates(fields.get(i));
-//			viewController.getMainViewController().setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
-//					fields.get(i).getDiceIndex());
-//		}
+		ArrayList<Field> fields = board.getAllFields(); // spiral implementieren
+		System.out.println("Size" + fields.size());
+		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
+		int currNum;
+		if (randomDesert) {
+			int diceInd = 0;
+			for (int i = 0; i < fields.size(); i++) {
+
+				Random r = new Random();
+				boolean notFound = true;
+				do {
+					currNum = r.nextInt(6); // desert allowed
+					if (cards[currNum] > 0) {
+						notFound = false;
+					}
+				} while (notFound);
+				cards[currNum]--;
+				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+				if (currNum != 5) {
+					fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
+					diceInd++;
+				} else {
+					fields.get(i).setDiceIndex(0);
+				}
+			}
+		} else {
+			for (int i = 0; i < fields.size() - 1; i++) {
+				Random r = new Random();
+				boolean notFound = true;
+				do {
+					currNum = r.nextInt(5);
+					if (cards[currNum] > 0) {
+						notFound = false;
+					}
+				} while (notFound);
+				cards[currNum]--;
+				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[i]);
+			}
+			fields.get(fields.size() - 1).setResourceType(ResourceType.NOTHING); // inner
+																					// field
+																					// =
+																					// desert;
+			fields.get(fields.size() - 1).setDiceIndex(0);
+		}
+		int[] viewCoord = new int[2];
+		for (int i = 0; i < fields.size(); i++) {
+			viewCoord = board.getFieldCoordinates(fields.get(i));
+			viewController.getMainViewController().setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
+					fields.get(i).getDiceIndex());
+		}
 	}
 
 	/*
@@ -403,13 +405,6 @@ public class GameController implements GameControllerInterface {
 
 	public void requestSetBandit(int x, int y, int stealFromPlayerID, int playerID) {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void init() {
-		board = new Board();
-		generateBoard(initialField, randomDesert);
 
 	}
 
