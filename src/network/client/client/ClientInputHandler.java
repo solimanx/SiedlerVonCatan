@@ -148,7 +148,8 @@ public class ClientInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolEndTurn endTurn) {
-		// TODO Auto-generated method stub
+		System.out.println("Der Zug wurde beendet");
+		networkController.endTurn();
 
 	}
 
