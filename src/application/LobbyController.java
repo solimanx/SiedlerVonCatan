@@ -105,7 +105,7 @@ public class LobbyController implements Initializable {
 	@FXML
 	public void startGame() {
 		try {
-			viewController.openChooseNameMenu();
+			viewController.startChooseView();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

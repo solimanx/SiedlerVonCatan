@@ -100,9 +100,9 @@ public class FlowController {
 
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
-
-		// viewController.mainViewController.init(board);
-
+		
+		viewController.startMainView();
+		
 		return board;
 
 	}

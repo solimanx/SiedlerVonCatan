@@ -3,6 +3,7 @@ package network.client.client;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.client.controller.ClientNetworkController;
+import network.client.controller.FlowController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
@@ -61,7 +62,7 @@ public class ClientInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
-		// TODO Auto-generated method stub
+		// TODO networkController.gameStarted(fields, edges, corners, bandit);
 
 	}
 

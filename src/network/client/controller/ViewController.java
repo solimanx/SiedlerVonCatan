@@ -29,6 +29,8 @@ public class ViewController {
 	private LobbyController lobbyController;
 	private NameSelectDialogController nameSelectDialogController;
 	private Stage primaryStage;
+	private Stage choosingStage;
+	private Stage mainViewStage;
 
 	public ViewController(Stage primaryStage, FlowController fc) {
 		this.primaryStage = primaryStage;
@@ -47,6 +49,11 @@ public class ViewController {
 		// init();
 	}
 
+	/**
+	 * Starts the lobby view, which provides connecting to server and chat
+	 * @param primaryStage
+	 * @throws IOException
+	 */
 	private void startLobbyView(Stage primaryStage) throws IOException {
 
 		Parent root = loader.load(getClass().getResource("/application/lobby.fxml").openStream());
@@ -62,16 +69,36 @@ public class ViewController {
 		//
 		primaryStage.show();
 	}
+	
+	/**
+	 * starts the View for choosing Player name and Player Color
+	 * view also offers Button for setting Player ready for game to start
+	 * @throws IOException
+	 */
+	public void startChooseView() throws IOException {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/nameselect.fxml"));
+			Parent root1 = (Parent) fxmlLoader.load();
+			nameSelectDialogController = fxmlLoader.getController();
+			nameSelectDialogController.setViewController(this);
+			choosingStage = new Stage();
+			choosingStage.setTitle("Choose Name and Color");
+			choosingStage.setScene(new Scene(root1));
+			choosingStage.show();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * starts MainView and MainViewController
-	 *
-	 * @param primaryStage
-	 * @param board
 	 */
-	private void startMainView(Stage primaryStage, Board board) {
-		view = new View(board, primaryStage, mainViewController);
-		this.mainViewController = new MainViewController(view, this);
+	void startMainView() {
+		primaryStage.close();
+		choosingStage.close();
+		mainViewStage = new Stage();
+		this.mainViewController = new MainViewController(this, board, mainViewStage);
 	}
 
 	public View getView() {
@@ -167,20 +194,6 @@ public class ViewController {
 		this.lobbyController = lobbyController;
 	}
 
-	public void openChooseNameMenu() throws IOException {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/nameselect.fxml"));
-			Parent root1 = (Parent) fxmlLoader.load();
-			nameSelectDialogController = fxmlLoader.getController();
-			nameSelectDialogController.setViewController(this);
-			Stage stage = new Stage();
-			stage.setTitle("ABC");
-			stage.setScene(new Scene(root1));
-			stage.show();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 }

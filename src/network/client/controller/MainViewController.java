@@ -2,17 +2,17 @@ package network.client.controller;
 
 import enums.CornerStatus;
 import enums.ResourceType;
+import javafx.stage.Stage;
+import model.Board;
 import network.client.view.View;
 
 public class MainViewController {
 	private View view;
 	private ViewController viewController;
 
-	public MainViewController(View view, ViewController vc) {
-		// hier noch Board übergeben und dann View starten mit Board!
-		super();
+	public MainViewController(ViewController vc, Board board, Stage mainViewStage) {
 		this.viewController = vc;
-		this.view = view;
+		view = new View(board, mainViewStage, this);
 		init();
 	}
 
