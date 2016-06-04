@@ -227,6 +227,10 @@ public class FlowController {
 		// "+playerId+": "+s);
 		viewController.getLobbyController().receiveChatMessage("Spieler " + playerId + ": " + s);
 	}
+	
+	public void sendReady(){
+		System.out.println("try to send READY for game start");
+	}
 
 	public ClientNetworkController getNetworkController() {
 		return networkController;

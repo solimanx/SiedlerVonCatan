@@ -21,7 +21,10 @@ public class NameSelectDialogController implements Initializable {
 	private TextField playerName;
 
 	@FXML
-	private Button startGame;
+	private Button sendNameAndColor;
+	
+	@FXML
+	private Button readyButton;
 
 	@FXML
 	private ChoiceBox<enums.Color> playerColor;
@@ -33,6 +36,7 @@ public class NameSelectDialogController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		playerName.setPromptText("Name in Game (required)");
 		playerColor.getItems().addAll(enums.Color.BLUE, enums.Color.ORANGE, enums.Color.RED, enums.Color.WHITE);
+		readyButton.setDisable(true);
 	}
 
 	public void setViewController(ViewController viewController) {
@@ -40,12 +44,17 @@ public class NameSelectDialogController implements Initializable {
 	}
 
 	@FXML
-	private void handleStartButton() {
+	private void handleSendButton() {
 		Color chosenColor = playerColor.getValue();
 		String name = playerName.getText();
-		viewController.getFlowController().sendPlayerProfile(name, chosenColor);
+		//TODO viewController.getFlowController().sendPlayerProfile(name, chosenColor);
 		System.out.println("chosen: " + name + " " + chosenColor);
-		// viewController.flowController.startGame();
+		readyButton.setDisable(false);
+	}
+
+	@FXML
+	private void handleReadyButton() {
+		viewController.getFlowController().sendReady();
 	}
 
 	@FXML

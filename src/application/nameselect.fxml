@@ -33,7 +33,12 @@
                   <Insets bottom="20.0" left="125.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="startGame" mnemonicParsing="false" onAction="#handleStartButton" text="Start the Game" />
+            <Button fx:id="startGame" mnemonicParsing="false" onAction="#handleSendButton" text="Set Name and Color" />
+            <Button fx:id="readyButton" mnemonicParsing="false" onAction="#handleReadyButton" text="Ready to start Game">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>

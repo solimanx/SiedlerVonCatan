@@ -172,6 +172,7 @@ public class ViewController {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/nameselect.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
 			nameSelectDialogController = fxmlLoader.getController();
+			nameSelectDialogController.setViewController(this);
 			Stage stage = new Stage();
 			stage.setTitle("ABC");
 			stage.setScene(new Scene(root1));
