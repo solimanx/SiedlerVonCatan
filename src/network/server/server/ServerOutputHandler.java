@@ -86,7 +86,7 @@ public class ServerOutputHandler {
 		try {
 			server.sendToClient(parser.createString(r), thread_id);
 		} catch (IOException e) {
-
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
@@ -99,7 +99,7 @@ public class ServerOutputHandler {
 		try {
 			server.broadcast((parser.createString(r)));
 		} catch (IOException e) {
-			// TODO logging
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
@@ -117,6 +117,7 @@ public class ServerOutputHandler {
 		try {
 			server.broadcast(parser.createString(r));
 		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 	}
@@ -128,6 +129,7 @@ public class ServerOutputHandler {
 		try {
 			server.broadcast(parser.createString(r));
 		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 	}
@@ -139,6 +141,7 @@ public class ServerOutputHandler {
 		try {
 			server.broadcast(parser.createString(r));
 		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 	}
@@ -151,7 +154,7 @@ public class ServerOutputHandler {
 		try {
 			server.sendToClient(parser.createString(r), networkController.getThreadID(player_id));
 		} catch (IOException e) {
-			// TODO logging
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
