@@ -28,27 +28,27 @@ import settings.DefaultSettings;
 public class GameController implements GameControllerInterface {
 	private Board board;
 	private GameLogic gameLogic;
-	private PlayerModel[] playerModels;
-	private Field[][] fields;
 	private ViewController viewController;
 	private ServerNetworkController networkController;
+	private ArrayList<PlayerModel> tempPlayers = new ArrayList<PlayerModel>();
+	private int amountPlayers = 0;
 
 	public GameController(Stage primaryStage) {
 		this.networkController = new ServerNetworkController(this);
 
 	}
 
+
 	/**
 	 * Inits
 	 * @param amountPlayers
 	 */
-	@Override
-	public void init(int amountPlayers) {
-		board = new Board(amountPlayers);
+	public void init() {
+		board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
-		this.playerModels = board.getPlayerModels();
-		this.fields = board.getFields();
-		generateBoard(fields[2][2], false);
+		//this.playerModels = board.getPlayerModels();
+		//this.fields = board.getFields();
+		generateBoard(board.getFields()[2][2], false);
 		/*
 		 * for (int i = 1; i <= amountPlayers;i++){
 		 * networkController.initClients(i,board)... end
@@ -59,7 +59,7 @@ public class GameController implements GameControllerInterface {
 		addToPlayersResource(1, ResourceType.SHEEP, 3);
 		addToPlayersResource(1, ResourceType.CORN, 3);
 		setPlayerState(1, PlayerState.PLAYING); // player 1 begins
-		
+
 		networkController.gameStarted(board.getFields(), board.getEdges(), board.getCorners(), board.getBandit());
 	}
 
@@ -133,11 +133,11 @@ public class GameController implements GameControllerInterface {
 	 */
 	public void gainBoardResources(int diceNum) {
 		ArrayList<model.Field> correspondingFields = new ArrayList<model.Field>();
-		for (int i = 0; i < fields.length; i++) {
-			for (int j = 0; j < fields[i].length; j++) {
-				if (fields[i][j] != null) {
-					if (fields[i][j].getDiceIndex() == diceNum) {
-						correspondingFields.add(fields[i][j]);
+		for (int i = 0; i < board.getFields().length; i++) {
+			for (int j = 0; j < board.getFields()[i].length; j++) {
+				if (board.getFields()[i][j] != null) {
+					if (board.getFields()[i][j].getDiceIndex() == diceNum) {
+						correspondingFields.add(board.getFields()[i][j]);
 					}
 				}
 			}
@@ -182,8 +182,8 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildVillage(x, y, dir, playerID)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnedByPlayer(playerModels[playerID]);
-			playerModels[playerID].decreaseAmountVillages();
+			c.setOwnedByPlayer(board.getPlayerModels()[playerID]);
+			board.getPlayerModels()[playerID].decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
 				if (neighbors[i] != null) {
@@ -203,8 +203,8 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildStreet(x, y, dir, playerID)) {
 			Edge e = board.getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(playerModels[playerID]);
-			playerModels[playerID].decreaseAmountStreets();
+			e.setOwnedByPlayer(board.getPlayerModels()[playerID]);
+			board.getPlayerModels()[playerID].decreaseAmountStreets();
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.STREET_BUILD_COST);
 
@@ -218,9 +218,9 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildCity(x, y, dir, playerID)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.CITY);
-			c.setOwnedByPlayer(playerModels[playerID]);
-			playerModels[playerID].increaseAmountVillages();
-			playerModels[playerID].decreaseAmountCities();
+			c.setOwnedByPlayer(board.getPlayerModels()[playerID]);
+			board.getPlayerModels()[playerID].increaseAmountVillages();
+			board.getPlayerModels()[playerID].decreaseAmountCities();
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.CITY_BUILD_COST);
 
@@ -233,8 +233,8 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerID)) {
 			Edge e = board.getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(playerModels[playerID]);
-			playerModels[playerID].decreaseAmountStreets();
+			e.setOwnedByPlayer(board.getPlayerModels()[playerID]);
+			board.getPlayerModels()[playerID].decreaseAmountStreets();
 
 			viewController.getMainViewController().setStreet(x, y, dir, playerID);
 		}
@@ -244,8 +244,8 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnedByPlayer(playerModels[playerID]);
-			playerModels[playerID].decreaseAmountVillages();
+			c.setOwnedByPlayer(board.getPlayerModels()[playerID]);
+			board.getPlayerModels()[playerID].decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
 				if (neighbors[i] != null) {
@@ -257,11 +257,11 @@ public class GameController implements GameControllerInterface {
 	}
 
 	private void addToPlayersResource(int playerID, ResourceType resType, int amount) {
-		ArrayList<ResourceType> resourceCards = playerModels[playerID].getResourceCards();
+		ArrayList<ResourceType> resourceCards = board.getPlayerModels()[playerID].getResourceCards();
 		for (int i = 0; i < amount; i++) {
 			resourceCards.add(resType);
 		}
-		playerModels[playerID].setResourceCards(resourceCards);
+		board.getPlayerModels()[playerID].setResourceCards(resourceCards);
 	}
 
 	private void subFromPlayersResources(int playerID, int[] costsparam) {
@@ -271,7 +271,7 @@ public class GameController implements GameControllerInterface {
 		}
 		ResourceType currResType;
 		ArrayList<ResourceType> list = new ArrayList<ResourceType>();
-		list = playerModels[playerID].getResourceCards();
+		list = board.getPlayerModels()[playerID].getResourceCards();
 		for (int i = 0; i < costs.length; i++) {
 			for (int j = list.size() - 1; j >= 0; j--) { // umkehren wegen
 															// remove
@@ -314,7 +314,7 @@ public class GameController implements GameControllerInterface {
 			}
 
 		}
-		playerModels[playerID].setResourceCards(list);
+		board.getPlayerModels()[playerID].setResourceCards(list);
 	}
 
 	@Override
@@ -338,23 +338,23 @@ public class GameController implements GameControllerInterface {
 	public void setPlayerState(int playerID, PlayerState state) {
 		switch (state) {
 		case TRADING: // set all other players to offering
-			for (int i = 1; i < playerModels.length; i++) {
+			for (int i = 1; i < board.getPlayerModels().length; i++) {
 				if (i == playerID) {
-					playerModels[i].setPlayerState(state);
+					board.getPlayerModels()[i].setPlayerState(state);
 				} else {
-					playerModels[i].setPlayerState(PlayerState.OFFERING);
+					board.getPlayerModels()[i].setPlayerState(PlayerState.OFFERING);
 				}
 			}
 		case PLAYING: // set all other players waiting
-			for (int i = 1; i < playerModels.length; i++) {
+			for (int i = 1; i < board.getPlayerModels().length; i++) {
 				if (i == playerID) {
-					playerModels[i].setPlayerState(state);
+					board.getPlayerModels()[i].setPlayerState(state);
 				} else {
-					playerModels[i].setPlayerState(PlayerState.WAITING);
+					board.getPlayerModels()[i].setPlayerState(PlayerState.WAITING);
 				}
 			}
 		default: // else set only player state of playerID
-			playerModels[playerID].setPlayerState(state);
+			board.getPlayerModels()[playerID].setPlayerState(state);
 		}
 
 		// DEBUG ONLY!
@@ -407,5 +407,23 @@ public class GameController implements GameControllerInterface {
 		// TODO Auto-generated method stub
 
 	}
+
+	public void addPlayerToArray(PlayerModel player){
+//		if (tempPlayers.size() >= DefaultSettings.MAXIMUM_PLAYERS_AMOUNT){
+//			networkController.error("Server voll!");
+//		} else if (tempPlayers.size() == DefaultSettings.MAXIMUM_PLAYERS_AMOUNT - 1) {
+//			tempPlayers.add(player);
+//			amountPlayers++;
+//			init(amountPlayers);
+//		} else {
+//			tempPlayers.add(player);
+//			amountPlayers++;
+//		}
+		tempPlayers.add(player); // DEBUG ONLY
+		amountPlayers++; // DEBUG ONLY
+		init(); // DEBUG ONLY
+	}
+
+
 
 }

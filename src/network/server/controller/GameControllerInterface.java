@@ -6,7 +6,7 @@ public interface GameControllerInterface {
 	/**
 	 * inserts Fields with DiceIndex and ResourceType sets Bandit
 	 */
-	public void init(int amountPlayers);
+	//public void init(int amountPlayers);
 
 	/**
 	 * @param state
@@ -24,7 +24,7 @@ public interface GameControllerInterface {
 	/**
 	 * asks the Game Logic if build is allowed and sets a village at the
 	 * specified position
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -35,7 +35,7 @@ public interface GameControllerInterface {
 	/**
 	 * asks the Game Logic if build is allowed and sets a street at the
 	 * specified position
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir

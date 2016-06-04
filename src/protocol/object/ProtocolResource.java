@@ -8,31 +8,31 @@ import com.google.gson.annotations.Since;
  * <p>
  * Contains amount of resources.
  * </p>
- * 
+ *
  */
 
 @Since(0.1)
 public class ProtocolResource {
 
 	@SerializedName("Holz")
-	private int wood;
+	private Integer wood;
 
 	@SerializedName("Lehm")
-	private int clay;
+	private Integer clay;
 
 	@SerializedName("Wolle")
-	private int wool;
+	private Integer wool;
 
 	@SerializedName("Getreide")
-	private int corn;
+	private Integer corn;
 
 	@SerializedName("Erz")
-	private int ore;
+	private Integer ore;
 
 	@SerializedName("Unbekannt")
-	private int unknown;
+	private Integer unknown;
 
-	public ProtocolResource(int wood, int clay, int wool, int corn, int ore, int unknown) {
+	public ProtocolResource(Integer wood, Integer clay, Integer wool, Integer corn, Integer ore, Integer unknown) {
 		this.wood = wood;
 		this.clay = clay;
 		this.wool = wool;
@@ -41,27 +41,27 @@ public class ProtocolResource {
 		this.unknown = unknown;
 	}
 
-	public int getWood() {
+	public Integer getWood() {
 		return wood;
 	}
 
-	public int getClay() {
+	public Integer getClay() {
 		return clay;
 	}
 
-	public int getWool() {
+	public Integer getWool() {
 		return wool;
 	}
 
-	public int getCorn() {
+	public Integer getCorn() {
 		return corn;
 	}
 
-	public int getOre() {
+	public Integer getOre() {
 		return ore;
 	}
 
-	public int getUnknown() {
+	public Integer getUnknown() {
 		return unknown;
 	}
 	// TODO special adapter

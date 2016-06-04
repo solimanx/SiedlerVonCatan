@@ -20,12 +20,9 @@ import settings.DefaultSettings;
 public class FlowController {
 	private Board board;
 	private GameLogic gameLogic;
-	private PlayerModel[] playerModels;
 	private int ownPlayerId;
 	protected ViewController viewController;
-	protected Field[][] fields;
 	private ClientNetworkController networkController;
-	private Object mainViewController;
 
 	public FlowController(Stage primaryStage) {
 		this.setNetworkController(new ClientNetworkController(this));
@@ -45,7 +42,7 @@ public class FlowController {
 	 * @param state
 	 */
 	public void setPlayerState(int playerId, PlayerState state) {
-		playerModels[playerId].setPlayerState(state);
+		board.getPlayerModels()[playerId].setPlayerState(state);
 		if (playerId == ownPlayerId) {
 			// update GUI
 			// viewController.setPlayerState(state);
@@ -61,11 +58,10 @@ public class FlowController {
 			Field bandit) {
 
 		// TODO fix this.board = Board.getInstance(amountPlayers);
-		this.fields = board.getFields();
-		for (int i = 0; i < fields.length; i++) {
-			for (int j = 0; j < fields[i].length; j++) {
-				fields[i][j].setResourceType(serverFields[i][j].getResourceType());
-				fields[i][j].setDiceIndex(serverFields[i][j].getDiceIndex());
+		for (int i = 0; i < board.getFields().length; i++) {
+			for (int j = 0; j < board.getFields()[i].length; j++) {
+				board.getFields()[i][j].setResourceType(serverFields[i][j].getResourceType());
+				board.getFields()[i][j].setDiceIndex(serverFields[i][j].getDiceIndex());
 			}
 		}
 		Edge[][][] ownEdges = board.getEdges();
@@ -99,10 +95,9 @@ public class FlowController {
 		//board.setBandit(board.getFieldAt(banditCoordinates[0], banditCoordinates[1]));
 
 		this.gameLogic = new GameLogic(board);
-		this.playerModels = board.getPlayerModels();
-		
+
 		viewController.startMainView();
-		
+
 		return board;
 
 	}
@@ -134,7 +129,7 @@ public class FlowController {
 	public void buildStreet(int x, int y, int dir, int playerId) {
 		Edge e = board.getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
-		e.setOwnedByPlayer(playerModels[playerId]);
+		e.setOwnedByPlayer(board.getPlayerModels()[playerId]);
 
 		viewController.getMainViewController().setStreet(x, y, dir, playerId);
 	}
@@ -142,7 +137,7 @@ public class FlowController {
 	public void buildVillage(int x, int y, int dir, int playerId) {
 		Corner c = board.getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.VILLAGE);
-		c.setOwnedByPlayer(playerModels[playerId]);
+		c.setOwnedByPlayer(board.getPlayerModels()[playerId]);
 		Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 		for (int i = 0; i < neighbors.length; i++) {
 			if (neighbors[i] != null) {
@@ -156,7 +151,7 @@ public class FlowController {
 	public void buildCity(int x, int y, int dir, int playerId) {
 		Corner c = board.getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.CITY);
-		c.setOwnedByPlayer(playerModels[playerId]);
+		c.setOwnedByPlayer(board.getPlayerModels()[playerId]);
 
 		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
 	}
@@ -169,13 +164,13 @@ public class FlowController {
 	}
 
 	public void addToPlayersResource(int playerID, int[] resources) {
-		ArrayList<ResourceType> resourceCards = playerModels[playerID].getResourceCards();
+		ArrayList<ResourceType> resourceCards = board.getPlayerModels()[playerID].getResourceCards();
 		for (int i = 0; i < resources.length; i++) {
 			for (int j = 0; j < resources[i]; j++) {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
-		playerModels[playerID].setResourceCards(resourceCards);
+		board.getPlayerModels()[playerID].setResourceCards(resourceCards);
 
 	}
 
@@ -186,7 +181,7 @@ public class FlowController {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
-		playerModels[playerId].setResourceCards(resourceCards);
+		board.getPlayerModels()[playerId].setResourceCards(resourceCards);
 
 	}
 
@@ -207,7 +202,7 @@ public class FlowController {
 	}
 
 	public void setPlayerVictoryPoints(int playerId, int victoryPoints) {
-		playerModels[playerId].setVictoryPoints(victoryPoints);
+		board.getPlayerModels()[playerId].setVictoryPoints(victoryPoints);
 	}
 
 	public void diceRollResult(int playerId, int result) {

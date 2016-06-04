@@ -66,8 +66,8 @@ public class ServerInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolClientReady clientReady) {
 		networkController.clientReady(networkController.getPlayerModelId(currentThreadID));
-		
-		
+
+
 
 	}
 

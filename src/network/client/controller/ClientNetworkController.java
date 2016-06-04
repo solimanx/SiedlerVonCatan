@@ -15,7 +15,6 @@ public class ClientNetworkController {
 	private ClientOutputHandler outputHandler;
 	private ClientInputHandler inputHandler;
 	protected Client client;
-	private PlayerModel[] playerModels;
 	private Board board;
 	private int ownPlayerId;
 	private int amountPlayers;

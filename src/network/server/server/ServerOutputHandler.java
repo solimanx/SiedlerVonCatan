@@ -24,6 +24,7 @@ import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolBuilding;
 import protocol.object.ProtocolPlayer;
+import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
@@ -44,18 +45,7 @@ public class ServerOutputHandler {
 
 	private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getName());
 
-	public void statusUpdate(ProtocolPlayer player) {
-		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(player);
-		Response r = new Response();
-		r.pSUpdate = ps;
-		try {
-			server.broadcast((parser.createString(r)));
-		} catch (IOException e) {
-			logger.error("Threw a Input/Output Exception ", e);
-			e.printStackTrace();
-		}
 
-	}
 
 	public void buildBuilding(ProtocolBuilding building) {
 		ProtocolBuild pb = new ProtocolBuild(building);
@@ -178,6 +168,25 @@ public class ServerOutputHandler {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
+
+	}
+
+	public void statusUpdate(int playerID, Color color, String name, PlayerState status, int victoryPoints,
+			int[] resources) {
+		// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
+//
+		//ProtocolResource pResourceToPlayer = new ProtocolResource(resources[0], resources[1], resources[3], resources[4], resources[2], null);
+		//ProtocolPlayer player = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResourceToPlayer);
+		//ProtocolStatusUpdate ps = new ProtocolStatusUpdate(player);
+//		Response r = new Response();
+//		r.pSUpdate = ps;
+//		try {
+//			server.broadcast((parser.createString(r)));
+//		} catch (IOException e) {
+//			logger.error("Threw a Input/Output Exception ", e);
+//			e.printStackTrace();
+//		}
+//
 
 	}
 }

@@ -6,6 +6,7 @@ import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
+import model.PlayerModel;
 import network.server.controller.GameController;
 import network.server.server.Server;
 import network.server.server.ServerInputHandler;
@@ -17,16 +18,12 @@ public class ServerNetworkController {
 	private ServerOutputHandler outputHandler;
 	private ServerInputHandler inputHandler;
 	private Server server;
-	private int amountPlayers;
-	private int[] playerIDs;
-	private int IdCounter = 0;
 
 	public ServerNetworkController(GameController gc) {
 		this.gameController = gc;
 		this.inputHandler = new ServerInputHandler(this);
 		this.server = new Server(inputHandler, this);
 		this.outputHandler = new ServerOutputHandler(server, this);
-		this.playerIDs = new int[5];
 		try {
 			server.start();
 		} catch (IOException e) {
@@ -34,7 +31,6 @@ public class ServerNetworkController {
 			e.printStackTrace();
 		}
 
-		this.amountPlayers = 1;
 	}
 
 	public ServerOutputHandler getOutputHandler() {
@@ -142,16 +138,18 @@ public class ServerNetworkController {
 	 * @param playerID
 	 */
 	public void clientReady(int playerID) {
-		gameController.setPlayerState(playerID, enums.PlayerState.WAITING_FOR_GAMESTART);
-		boolean allPlayersReady = true;
-		for (int i = 1; i <= amountPlayers; i++) {
-			if (gameController.getPlayerState(playerID) != enums.PlayerState.WAITING_FOR_GAMESTART) {
-				// TODO allPlayersReady = false;
-			}
-		}
-		if (allPlayersReady) {
-			gameController.init(amountPlayers);
-		}
+		PlayerModel player = new PlayerModel(playerID);
+		//gameController.addPlayerToArray(player);
+//		gameController.setPlayerState(playerID, enums.PlayerState.WAITING); //TODO WaintingforGamestart
+//		boolean allPlayersReady = true;
+//		for (int i = 1; i <= amountPlayers; i++) {
+//			if (gameController.getPlayerState(playerID) != enums.PlayerState.WAITING) { //TODO WaintingforGamestart
+//				// allPlayersReady = false;
+//			}
+//		}
+//		if (allPlayersReady) {
+		gameController.addPlayerToArray(player);
+//		}
 	}
 
 	// 7.4

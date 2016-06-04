@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import network.ModelToProtocol;
 import network.client.client.Client;
 import network.client.controller.FlowController;
 import network.server.controller.GameController;
@@ -43,7 +44,7 @@ public class Main extends Application {
 		// fileHandler.setFormatter(formatter);
 		//
 		// logger.log(Level.INFO, "Our first log");
-
+		ModelToProtocol.initModelToProtocol();
 		if (mode) {
 			// server = new Server();
 			gc = new GameController(primaryStage);

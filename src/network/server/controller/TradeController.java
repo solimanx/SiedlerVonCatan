@@ -12,7 +12,6 @@ public class TradeController {
 
 	private Board board;
 	private ServerNetworkController networkController;
-	private PlayerModel[] playerModels;
 	private GameLogic gameLogic;
 	private int currentOffer_Player;
 	private int[] currentOffer_Get;
@@ -21,12 +20,11 @@ public class TradeController {
 	public TradeController(Board board, ServerNetworkController nc, GameLogic logic) {
 		this.board = board;
 		this.networkController = nc;
-		this.playerModels = board.getPlayerModels();
 		this.gameLogic = logic;
 	}
 
 	public void offerToAllPlayers(int offeringPlayerID, int[] resourcesToGet, int[] resourcesToGive) {
-		if (playerModels[offeringPlayerID].getPlayerState() != PlayerState.TRADING) {
+		if (board.getPlayerModels()[offeringPlayerID].getPlayerState() != PlayerState.TRADING) {
 			// networkController.sendErrorMessageToPlayer(offeringPlayerID,"Offering
 			// not allowed");
 		} else {
@@ -45,7 +43,7 @@ public class TradeController {
 
 	public void offerToPlayingPlayer(int offeringPlayerID, int receivingPlayerID, int[] resourcesToGet,
 			int[] resourcesToGive) {
-		if (playerModels[receivingPlayerID].getPlayerState() != PlayerState.TRADING) {
+		if (board.getPlayerModels()[receivingPlayerID].getPlayerState() != PlayerState.TRADING) {
 			// networkController.sendErrorMessageToPlayer(offeringPlayerID,"Offering
 			// not allowed");
 		} else {

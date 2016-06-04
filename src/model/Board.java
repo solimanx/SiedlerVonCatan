@@ -8,8 +8,7 @@ import java.util.ArrayList;
  *
  * @author Adam
  */
-public class Board{
-	private static Board instance;
+public class Board {
 	private Field[][] fields;
 	private Corner[][][] corners;
 	private Edge[][][] edges;
@@ -17,7 +16,7 @@ public class Board{
 	private Field bandit;
 	// TODO private DevDeck devDeck;
 
-	public Board(int amountPlayers) {
+	public Board(ArrayList<PlayerModel> tempPlayers) {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
 		initializeFields(fields);
@@ -25,31 +24,18 @@ public class Board{
 		initializeCorners(corners);
 		edges = new Edge[r][r][3];
 		initializeEdges(edges);
-		players = new PlayerModel[amountPlayers + 1]; // 0 = noPlayer; 1 =
+		players = new PlayerModel[tempPlayers.size()]; // 0 = noPlayer; 1 =
 														// player1...
-		initializePlayers(players);
+		initializePlayers(tempPlayers);
 		// TODO players
 		// TODO bandit
 	}
 
-	public static synchronized Board getInstance(int amountPlayers) {
-		if (Board.instance == null) {
-			Board.instance = new Board(amountPlayers);
+	private void initializePlayers(ArrayList<PlayerModel> tempPlayers) {
+		for (int i = 0; i < tempPlayers.size(); i++) {
+			players[i] = tempPlayers.get(i);
 		}
-		return Board.instance;
-	}
 
-	private void initializePlayers(PlayerModel[] playerModels) { // keine Ahnung
-																	// ob das
-																	// richtig
-																	// ist so;
-																	// wenn
-																	// nicht
-																	// einfach
-																	// überschreiben
-		for (int i = 1; i < playerModels.length; i++) {
-			playerModels[i] = new PlayerModel(i);
-		}
 	}
 
 	/**
@@ -620,7 +606,6 @@ public class Board{
 		}
 		return linkedEdges;
 	}
-
 
 	public int[] getFieldCoordinates(Field f) {
 		String field_id = f.getFieldID();
