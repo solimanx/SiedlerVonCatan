@@ -1,7 +1,9 @@
 package model;
 
-import settings.DefaultSettings;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import settings.DefaultSettings;
 
 /**
  * Contains all Board methods, retrieving fields, edges and corners.
@@ -14,42 +16,33 @@ public class Board implements BoardInterface {
 	private Corner[][][] corners;
 	private Edge[][][] edges;
 	private PlayerModel[] players;
-	private Field bandit;
+	private Field bandit; // <- bad
+	private HashMap<Field, String> fieldIDMap;
 	// TODO private DevDeck devDeck;
 
-	public Board(int amountPlayers) {
+	public Board() {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
-		initializeFields(fields);
+		initializeFields();
+		initializeIDMap();
 		corners = new Corner[r][r][2];
-		initializeCorners(corners);
+		initializeCorners();
 		edges = new Edge[r][r][3];
-		initializeEdges(edges);
-		players = new PlayerModel[amountPlayers + 1]; // 0 = noPlayer; 1 =
-														// player1...
-		initializePlayers(players);
+		initializeEdges();
+		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
+		initializePlayers();
+		initializeBandit();
 		// TODO players
 		// TODO bandit
 	}
 
-	public static synchronized Board getInstance(int amountPlayers) {
+
+
+	public static synchronized Board getInstance() {
 		if (Board.instance == null) {
-			Board.instance = new Board(amountPlayers);
+			Board.instance = new Board();
 		}
 		return Board.instance;
-	}
-
-	private void initializePlayers(PlayerModel[] playerModels) { // keine Ahnung
-																	// ob das
-																	// richtig
-																	// ist so;
-																	// wenn
-																	// nicht
-																	// einfach
-																	// überschreiben
-		for (int i = 1; i < playerModels.length; i++) {
-			playerModels[i] = new PlayerModel(i);
-		}
 	}
 
 	/**
@@ -57,7 +50,7 @@ public class Board implements BoardInterface {
 	 *
 	 * @param fields
 	 */
-	private void initializeFields(Field[][] fields) {
+	private void initializeFields() {
 		int aX; // axial x coordinate
 		int aY; // axial y coordinate
 		int absoluteValue;
@@ -98,12 +91,16 @@ public class Board implements BoardInterface {
 
 	}
 
+	private void initializeIDMap() {
+		// TODO Auto-generated method stub
+		
+	}
 	/**
 	 * Initialize the corners.
 	 *
 	 * @param corners
 	 */
-	private void initializeCorners(Corner[][][] corners) {
+	private void initializeCorners() {
 		for (int x = 0; x < fields.length; x++) {
 			for (int y = 0; y < fields[0].length; y++) {
 				if (fields[x][y] != null) {
@@ -114,6 +111,34 @@ public class Board implements BoardInterface {
 			// TODO: better solution
 			filterUnusedCorners();
 		}
+	}
+
+	/**
+	 * Initialize the edges.
+	 *
+	 * @param edges
+	 */
+	private void initializeEdges() {
+		for (int x = 0; x < fields.length; x++) {
+			for (int y = 0; y < fields[0].length; y++) {
+				if (fields[x][y] != null) {
+					edges[x][y][0] = new Edge(); // Northwest
+					edges[x][y][1] = new Edge(); // Northeast
+					edges[x][y][2] = new Edge(); // East
+				}
+			}
+		}
+		// TODO: better solution
+		filterUnusedEdges();
+	}
+
+	private void initializePlayers() {
+		// TODO
+	}
+
+	private void initializeBandit() {
+		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -152,25 +177,6 @@ public class Board implements BoardInterface {
 		corners[1][6][1] = null;
 		corners[2][6][1] = null;
 		corners[3][6][1] = null;
-	}
-
-	/**
-	 * Initialize the edges.
-	 *
-	 * @param edges
-	 */
-	private void initializeEdges(Edge[][][] edges) {
-		for (int x = 0; x < fields.length; x++) {
-			for (int y = 0; y < fields[0].length; y++) {
-				if (fields[x][y] != null) {
-					edges[x][y][0] = new Edge(); // Northwest
-					edges[x][y][1] = new Edge(); // Northeast
-					edges[x][y][2] = new Edge(); // East
-				}
-			}
-		}
-		// TODO: better solution
-		filterUnusedEdges();
 	}
 
 	/**
@@ -980,5 +986,13 @@ public class Board implements BoardInterface {
 		this.bandit = f;
 
 	}
+
+	/**
+	 * @return the fieldIDMap
+	 */
+	public HashMap<Field, String> getFieldIDMap() {
+		return fieldIDMap;
+	}
+
 
 }

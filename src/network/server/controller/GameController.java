@@ -39,7 +39,7 @@ public class GameController implements GameControllerInterface {
 
 	// @Override
 	public void init(int amountPlayers) {
-		this.board = Board.getInstance(amountPlayers);
+		//TODO fix this.board = Board.getInstance(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();

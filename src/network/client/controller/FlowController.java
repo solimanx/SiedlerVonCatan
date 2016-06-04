@@ -56,7 +56,7 @@ public class FlowController {
 	public Board initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
 			Field bandit) {
 
-		this.board = Board.getInstance(amountPlayers);
+		// TODO fix this.board = Board.getInstance(amountPlayers);
 		this.fields = board.getFields();
 		for (int i = 0; i < fields.length; i++) {
 			for (int j = 0; j < fields[i].length; j++) {
