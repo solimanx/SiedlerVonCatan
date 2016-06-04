@@ -71,57 +71,57 @@ public class GameController implements GameControllerInterface {
 	 * @param randomDesert
 	 */
 	private void generateBoard(Field initialField, boolean randomDesert) {
-		ArrayList<Field> fields = board.getAllFields(); // spiral implementieren
-		System.out.println("Size" + fields.size());
-		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
-		int currNum;
-		if (randomDesert) {
-			int diceInd = 0;
-			for (int i = 0; i < fields.size(); i++) {
-
-				Random r = new Random();
-				boolean notFound = true;
-				do {
-					currNum = r.nextInt(6); // desert allowed
-					if (cards[currNum] > 0) {
-						notFound = false;
-					}
-				} while (notFound);
-				cards[currNum]--;
-				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
-				if (currNum != 5) {
-					fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
-					diceInd++;
-				} else {
-					fields.get(i).setDiceIndex(0);
-				}
-			}
-		} else {
-			for (int i = 0; i < fields.size() - 1; i++) {
-				Random r = new Random();
-				boolean notFound = true;
-				do {
-					currNum = r.nextInt(5);
-					if (cards[currNum] > 0) {
-						notFound = false;
-					}
-				} while (notFound);
-				cards[currNum]--;
-				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
-				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[i]);
-			}
-			fields.get(fields.size() - 1).setResourceType(ResourceType.NOTHING); // inner
-																					// field
-																					// =
-																					// desert;
-			fields.get(fields.size() - 1).setDiceIndex(0);
-		}
-		int[] viewCoord = new int[2];
-		for (int i = 0; i < fields.size(); i++) {
-			viewCoord = board.getFieldCoordinates(fields.get(i));
-			viewController.getMainViewController().setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
-					fields.get(i).getDiceIndex());
-		}
+//		//ArrayList<Field> fields = board.getAllFields(); // spiral implementieren
+//		System.out.println("Size" + fields.size());
+//		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
+//		int currNum;
+//		if (randomDesert) {
+//			int diceInd = 0;
+//			for (int i = 0; i < fields.size(); i++) {
+//
+//				Random r = new Random();
+//				boolean notFound = true;
+//				do {
+//					currNum = r.nextInt(6); // desert allowed
+//					if (cards[currNum] > 0) {
+//						notFound = false;
+//					}
+//				} while (notFound);
+//				cards[currNum]--;
+//				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+//				if (currNum != 5) {
+//					fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
+//					diceInd++;
+//				} else {
+//					fields.get(i).setDiceIndex(0);
+//				}
+//			}
+//		} else {
+//			for (int i = 0; i < fields.size() - 1; i++) {
+//				Random r = new Random();
+//				boolean notFound = true;
+//				do {
+//					currNum = r.nextInt(5);
+//					if (cards[currNum] > 0) {
+//						notFound = false;
+//					}
+//				} while (notFound);
+//				cards[currNum]--;
+//				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+//				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[i]);
+//			}
+//			fields.get(fields.size() - 1).setResourceType(ResourceType.NOTHING); // inner
+//																					// field
+//																					// =
+//																					// desert;
+//			fields.get(fields.size() - 1).setDiceIndex(0);
+//		}
+//		int[] viewCoord = new int[2];
+//		for (int i = 0; i < fields.size(); i++) {
+//			viewCoord = board.getFieldCoordinates(fields.get(i));
+//			viewController.getMainViewController().setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
+//					fields.get(i).getDiceIndex());
+//		}
 	}
 
 	/*
@@ -145,27 +145,27 @@ public class GameController implements GameControllerInterface {
 		enums.CornerStatus status;
 		enums.ResourceType resType;
 		Field bandit = board.getBandit();
-		int[] fieldCoordinates = new int[2];
-		for (Field p : correspondingFields) {
-			if (p != bandit) {
-				fieldCoordinates = board.getFieldCoordinates(p);
-				neighborCorners = board.getSurroundingCorners(fieldCoordinates[0], fieldCoordinates[1]);
-				resType = p.getResourceType();
-				for (Corner o : neighborCorners) {
-					status = o.getStatus();
-					switch (status) {
-					case VILLAGE:
-						addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 1);
-						break;
-					case CITY:
-						addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 2);
-						break;
-					default:
-						break;
-					}
-				}
-			}
-		}
+//		int[] fieldCoordinates = new int[2];
+//		for (Field p : correspondingFields) {
+//			if (p != bandit) {
+//				fieldCoordinates = board.getFieldCoordinates(p);
+//				neighborCorners = board.getSurroundingCorners(fieldCoordinates[0], fieldCoordinates[1]);
+//				resType = p.getResourceType();
+//				for (Corner o : neighborCorners) {
+//					status = o.getStatus();
+//					switch (status) {
+//					case VILLAGE:
+//						addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 1);
+//						break;
+//					case CITY:
+//						addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 2);
+//						break;
+//					default:
+//						break;
+//					}
+//				}
+//			}
+//		}
 
 	}
 

@@ -111,96 +111,114 @@ public class HexService {
 		return null;
 	}
 
-	public String getSpiral(String starting_point_id) {
-		// Starting point;
-		int x = 0;
-		int y = 0;
-		int radius = DefaultSettings.BOARD_SIZE / 2;
-		String spiral_sequence = board.getFieldAt(x, y).getFieldID();
+//	public String getSpiral(String starting_point_id) {
+//		// Starting point;
+//		int x = 0;
+//		int y = 0;
+//		int radius = DefaultSettings.BOARD_SIZE / 2;
+//		String spiral_sequence = board.getFieldAt(x, y).getFieldID();
+//
+//		// Random direction between 0 and 5;
+//		int random = new Random().nextInt(6);
+//		int[] rd = DIRECTIONS[random];
+//		x += rd[0];
+//		y += rd[1];
+//		int starting_x;
+//		int starting_y;
+//		// from 0 to radius-1
+//		for (int i = 0; i < radius; i++) {
+//			x += rd[0];
+//			y += rd[1];
+//			starting_x = x;
+//			starting_y = y;
+//
+//			rd = DIRECTIONS[random];
+//			// insert ID of new block to beginning of string
+//			spiral_sequence = board.getFieldAt(x, y).getFieldID() + spiral_sequence;
+//			do {
+//				if (x - radius == 0) {
+//					if (y - radius > 0) {
+//						x += DIRECTIONS[0][0];
+//						y += DIRECTIONS[0][1];
+//					} else if (y - radius < 0) {
+//						x += DIRECTIONS[3][0];
+//						y += DIRECTIONS[3][1];
+//					}
+//				} else if (x - radius > 0) {
+//					if (y - radius > 0) {
+//						x += DIRECTIONS[4][0];
+//						y += DIRECTIONS[4][1];
+//					} else if (y - radius < 0) {
+//						x += DIRECTIONS[1][0];
+//						y += DIRECTIONS[1][1];
+//					} else if (y - radius == 0) {
+//						x += DIRECTIONS[5][0];
+//						y += DIRECTIONS[5][1];
+//					}
+//				} else if (x - radius < 0) {
+//					if (y - radius == 0) {
+//						x += DIRECTIONS[2][0];
+//						y += DIRECTIONS[2][1];
+//					}
+//
+//				} else {
+//					// for testing purposes
+//				}
+//				spiral_sequence = board.getFieldAt(x, y).getFieldID() + spiral_sequence;
+//				// get next direction
+//
+//			} while (x != starting_x && y != starting_y);
+//			random = random == 5 ? 0 : random + 1;
+//		}
+//
+//		return spiral_sequence;
+//
+//	}
 
-		// Random direction between 0 and 5;
-		int random = new Random().nextInt(6);
-		int[] rd = DIRECTIONS[random];
-		x += rd[0];
-		y += rd[1];
-		int starting_x;
-		int starting_y;
-		// from 0 to radius-1
-		for (int i = 0; i < radius; i++) {
-			x += rd[0];
-			y += rd[1];
-			starting_x = x;
-			starting_y = y;
 
-			rd = DIRECTIONS[random];
-			// insert ID of new block to beginning of string
-			spiral_sequence = board.getFieldAt(x, y).getFieldID() + spiral_sequence;
-			do {
-				if (x - radius == 0) {
-					if (y - radius > 0) {
-						x += DIRECTIONS[0][0];
-						y += DIRECTIONS[0][1];
-					} else if (y - radius < 0) {
-						x += DIRECTIONS[3][0];
-						y += DIRECTIONS[3][1];
-					}
-				} else if (x - radius > 0) {
-					if (y - radius > 0) {
-						x += DIRECTIONS[4][0];
-						y += DIRECTIONS[4][1];
-					} else if (y - radius < 0) {
-						x += DIRECTIONS[1][0];
-						y += DIRECTIONS[1][1];
-					} else if (y - radius == 0) {
-						x += DIRECTIONS[5][0];
-						y += DIRECTIONS[5][1];
-					}
-				} else if (x - radius < 0) {
-					if (y - radius == 0) {
-						x += DIRECTIONS[2][0];
-						y += DIRECTIONS[2][1];
-					}
-
-				} else {
-					// for testing purposes
-				}
-				spiral_sequence = board.getFieldAt(x, y).getFieldID() + spiral_sequence;
-				// get next direction
-
-			} while (x != starting_x && y != starting_y);
-			random = random == 5 ? 0 : random + 1;
-		}
-
-		return spiral_sequence;
-
-	}
-
-	public String getRing(int radius) {
-		int check;
-		String ring = null;
-		for (int i = -radius; i <= radius; i++) {
-			for (int j = -radius; j <= radius; j++) {
-				check = sumAbsoluteValues(convertAxialToCube(new int[] { i, j }));
-				if (check == radius * 2) {
-					ring += board.getFieldAt(i, j).getFieldID();
-				}
-			}
-		}
-		return ring;
-	}
-
-	private int sumAbsoluteValues(int[] temp) {
+	public static int sumAbsoluteValues(int[] temp) {
 		return Math.abs(temp[0]) + Math.abs(temp[1]) + Math.abs(temp[2]);
 	}
 
-	public int[] convertAxialToCube(int[] a) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Converts Axial (x,y) to Cube (x,y,z)
+	 *
+	 * @param a
+	 *            (x,y)
+	 */
+	public static int[] convertAxialToCube(int[] a) {
+
+		if (a.length != 2) {
+			// TODO: logging
+			System.out.println("Unable to convert: " + a.toString() + " to cube.");
+			return null;
+
+		} else {
+
+			int x = a[0];
+			int z = a[1];
+			int y = -x - z;
+
+			return new int[] { x, y, z };
+		}
 	}
 
-	public int[] convertCubeToAxial(int[] c) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Converts Cube (x,y,z) to Axial (x,y)
+	 *
+	 * @param c
+	 *            (x,y,z)
+	 */
+	public static int[] convertCubeToAxial(int[] c) {
+		if (c.length != 3) {
+			// TODO: logging
+			System.out.println("Unable to convert: " + c.toString() + " to axial.");
+			return null;
+		} else {
+			int x = c[0];
+			int y = c[2];
+			return new int[] { x, y };
+		}
 	}
 
 }
