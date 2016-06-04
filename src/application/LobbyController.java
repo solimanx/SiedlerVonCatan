@@ -6,13 +6,18 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import enums.Color;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import network.client.controller.ViewController;
 
 public class LobbyController implements Initializable {
@@ -38,18 +43,17 @@ public class LobbyController implements Initializable {
 
 	@FXML
 	private TextArea messages;
-	
+
 	@FXML
 	private Button startButton;
-	
-	
+
 	// NameSelectDialog
 	@FXML
 	private TextField playerName;
-	
+
 	@FXML
 	private ChoiceBox<enums.Color> colorSelect;
-	
+
 	@FXML
 	private Button startGameButton;
 
@@ -97,10 +101,10 @@ public class LobbyController implements Initializable {
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
-	
-	public void startGame(){
-		//Color playerColor = colorSelect.getValue();
-		//String name = playerName.getText();
+
+	public void startGame() {
+		// Color playerColor = colorSelect.getValue();
+		// String name = playerName.getText();
 		try {
 			viewController.openChooseNameMenu();
 		} catch (IOException e) {
@@ -108,6 +112,21 @@ public class LobbyController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	@FXML
+	public void startGame2() {
+		try {
+			System.out.println("Start");
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("nameselect.fxml"));
+			Parent root1 = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setTitle("ABC");
+			stage.setScene(new Scene(root1));
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Here!");
+	}
 
 }

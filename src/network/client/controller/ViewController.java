@@ -8,9 +8,9 @@ import enums.ResourceType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import model.Board;
 import network.client.view.View;
 import network.server.controller.GameController;
@@ -63,7 +63,7 @@ public class ViewController {
 
 	/**
 	 * starts MainView and MainViewController
-	 * 
+	 *
 	 * @param primaryStage
 	 * @param board
 	 */
@@ -167,8 +167,8 @@ public class ViewController {
 
 	public void openChooseNameMenu() throws IOException {
 		// TODO
-		System.out.println("start NameChooseDialog");
-		
+
+
 	}
 
 }

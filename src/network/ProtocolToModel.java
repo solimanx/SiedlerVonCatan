@@ -9,11 +9,6 @@ public final class ProtocolToModel {
 		return HexService.getFieldCoordinates(field_id);
 	}
 
-	@Deprecated
-	public static int getThreadID(int playerID) {
-		// refer to servernetworkcontroller
-		return 0;
-	}
 
 	public static int[] getCornerCoordinates(String location) {
 		// TODO
