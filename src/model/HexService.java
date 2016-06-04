@@ -170,6 +170,7 @@ public class HexService {
 		Edge[] surroundingEdges = { n, ne, se, s, sw, nw };
 		return surroundingEdges;
 	}
+	
 
 //	public String getSpiral(String starting_point_id) {
 //		// Starting point;
@@ -279,6 +280,10 @@ public class HexService {
 			int y = c[2];
 			return new int[] { x, y };
 		}
+	}
+	
+	public static int sumOfCubeXY(int[] subarray){
+		return subarray[0]+subarray[1];
 	}
 
 }
