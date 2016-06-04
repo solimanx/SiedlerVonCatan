@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -37,6 +38,9 @@ public class LobbyController implements Initializable {
 
 	@FXML
 	private TextArea messages;
+	
+	@FXML
+	private Button startButton;
 	
 	
 	// NameSelectDialog
@@ -79,7 +83,6 @@ public class LobbyController implements Initializable {
 	public void enableChat() {
 		chatInput.setDisable(false);
 		messages.appendText(currentTime() + "Connected to lobby chat.\n");
-		// viewController.openChooseNameMenu();
 	}
 
 	public void disconnect() {
@@ -96,9 +99,14 @@ public class LobbyController implements Initializable {
 	}
 	
 	public void startGame(){
-		Color playerColor = colorSelect.getValue();
-		String name = playerName.getText();
-		//viewcontroller.flowcontroller.startGame();
+		//Color playerColor = colorSelect.getValue();
+		//String name = playerName.getText();
+		try {
+			viewController.openChooseNameMenu();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

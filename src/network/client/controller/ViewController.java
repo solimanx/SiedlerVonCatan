@@ -26,8 +26,10 @@ public class ViewController {
 	private FlowController flowController;
 	private MainViewController mainViewController;
 	private LobbyController lobbyController;
+	private Stage primaryStage;
 
 	public ViewController(Stage primaryStage, FlowController fc) {
+		this.primaryStage = primaryStage;
 		this.flowController = fc;
 		loader = new FXMLLoader();
 
@@ -175,6 +177,12 @@ public class ViewController {
 
 	public void setLobbyController(LobbyController lobbyController) {
 		this.lobbyController = lobbyController;
+	}
+
+	public void openChooseNameMenu() throws IOException {
+		// TODO
+		System.out.println("start NameChooseDialog");
+		
 	}
 
 }
