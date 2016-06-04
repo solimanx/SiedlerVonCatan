@@ -38,9 +38,7 @@ public class ClientInputHandler extends InputHandler {
      */
     public void sendToParser(String s) {
         Object object = parser.parseString(s);
-        System.out.println(object.getClass());
         handle(object);
-        // handle(object.getClass().cast(object));
     }
 
     @Override

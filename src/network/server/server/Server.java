@@ -35,7 +35,7 @@ public class Server {
 		this.outputHandler = networkController.getOutputHandler();
 
 		ServerSocket serverSocket = new ServerSocket(8080, 150);
-		System.out.println("Server Running!");
+		System.out.println("Server running.");
 		try {
 			while (clientCounter <= getClients().length) {
 				Socket socket = serverSocket.accept();

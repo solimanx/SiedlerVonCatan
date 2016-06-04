@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Parser {
+	@SuppressWarnings("unchecked")
 	public <T> T parseString(String string) {
 
 		Gson gson = new GsonBuilder().create();
@@ -80,7 +81,8 @@ public class Parser {
 		if (response.pEndTurn != null) {
 			return (T) response.pEndTurn;
 		}
-
+		
+		//TODO logging
 		System.out.println("CANNOT READ INPUT");
 		return null;
 

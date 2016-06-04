@@ -1,4 +1,4 @@
-package application;
+package application.lobby;
 
 import java.io.IOException;
 import java.net.URL;
@@ -7,17 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import network.client.controller.ViewController;
 
 public class LobbyController implements Initializable {
@@ -69,7 +63,16 @@ public class LobbyController implements Initializable {
 		String server = serverIPTextField.getText();
 		int port = Integer.parseInt(portTextField.getText());
 		viewController.getFlowController().getNetworkController().connectToServer(server, port);
-		System.out.println("handled");
+	}
+
+	@FXML
+	public void startGame() {
+		try {
+			viewController.startChooseView();
+		} catch (IOException e) {
+			// TODO Logging
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -81,12 +84,12 @@ public class LobbyController implements Initializable {
 
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
-
 	}
 
 	public void enableChat() {
-		chatInput.setDisable(false);
 		messages.appendText(currentTime() + "Connected to lobby chat.\n");
+		chatInput.setDisable(false);
+		startButton.setDisable(false);
 	}
 
 	public void disconnect() {
@@ -100,16 +103,6 @@ public class LobbyController implements Initializable {
 
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
-	}
-
-	@FXML
-	public void startGame() {
-		try {
-			viewController.startChooseView();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }

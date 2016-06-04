@@ -46,9 +46,7 @@ public class ServerInputHandler extends InputHandler {
 		this.currentThreadID = threadID;
 		Object object = parser.parseString(s);
 
-		System.out.println(object.getClass());
 		handle(object);
-		// handle(object.getClass().cast(object));
 	}
 
 	@Override

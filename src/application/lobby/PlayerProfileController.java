@@ -1,6 +1,5 @@
-package application;
+package application.lobby;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import network.client.controller.ViewController;
 
-public class NameSelectDialogController implements Initializable {
+public class PlayerProfileController implements Initializable {
 
 	private ViewController viewController;
 
@@ -22,7 +21,7 @@ public class NameSelectDialogController implements Initializable {
 
 	@FXML
 	private Button sendNameAndColor;
-	
+
 	@FXML
 	private Button readyButton;
 
@@ -47,9 +46,16 @@ public class NameSelectDialogController implements Initializable {
 	private void handleSendButton() {
 		Color chosenColor = playerColor.getValue();
 		String name = playerName.getText();
-		viewController.getFlowController().sendPlayerProfile(name, chosenColor);
-		System.out.println("chosen: " + name + " " + chosenColor);
-		readyButton.setDisable(false);
+	
+		if (name.equals("")) {
+			System.out.println("No name given.");
+		} else if (chosenColor == null) {
+			System.out.println("No color selected.");
+		} else {
+			viewController.getFlowController().sendPlayerProfile(name, chosenColor);
+			System.out.println("Profile: " + name + " " + chosenColor);
+			readyButton.setDisable(false);
+		}
 	}
 
 	@FXML

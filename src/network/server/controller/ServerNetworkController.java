@@ -90,18 +90,21 @@ public class ServerNetworkController {
 
 	// 8.6
 	public void buildStreet(int x, int y, int dir, int playerID) {
-		outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "Street");
+		//TODO
+		//outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "Street");
 
 	}
 
 	// 8.6
 	public void buildVillage(int x, int y, int dir, int playerID) {
-		outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "Village");
+		//TODO
+		//outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "Village");
 	}
 
 	// 8.6
 	public void buildCity(int x, int y, int dir, int playerID) {
-		outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "City");
+		//TODO
+		//outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "City");
 
 	}
 
@@ -127,7 +130,8 @@ public class ServerNetworkController {
 	}
 
 	private int getNewId() {
-		return IdCounter++;
+		//TODO return IdCounter++;
+		return 0;
 	}
 
 	// 7.2
@@ -154,7 +158,8 @@ public class ServerNetworkController {
 
 	// 7.4
 	public void gameStarted(Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
-		outputHandler.initBoard(amountPlayers, fields, edges, corners, bandit);
+		//TODO 
+		//outputHandler.initBoard(amountPlayers, fields, edges, corners, bandit);
 
 	}
 
@@ -190,13 +195,15 @@ public class ServerNetworkController {
 
 	// 8.2
 	public void diceRollResult(int playerID, int result) {
-		outputHandler.diceRollResult(playerIDs[playerID], result);
+		//TODO
+		//outputHandler.diceRollResult(playerIDs[playerID], result);
 
 	}
 
 	// 8.3
 	public void resourceObtain(int playerID, int[] resources) {
-		outputHandler.resourceObtain(playerIDs[playerID], resources);
+		//TODO
+		//outputHandler.resourceObtain(playerIDs[playerID], resources);
 
 	}
 

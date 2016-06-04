@@ -3,8 +3,8 @@ package network.client.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
-import application.LobbyController;
-import application.NameSelectDialogController;
+import application.lobby.LobbyController;
+import application.lobby.PlayerProfileController;
 import enums.ResourceType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +27,7 @@ public class ViewController {
 	private FlowController flowController;
 	private MainViewController mainViewController;
 	private LobbyController lobbyController;
-	private NameSelectDialogController nameSelectDialogController;
+	private PlayerProfileController nameSelectDialogController;
 	private Stage primaryStage;
 	private Stage choosingStage;
 	private Stage mainViewStage;
@@ -56,7 +56,7 @@ public class ViewController {
 	 */
 	private void startLobbyView(Stage primaryStage) throws IOException {
 
-		Parent root = loader.load(getClass().getResource("/application/lobby.fxml").openStream());
+		Parent root = loader.load(getClass().getResource("/application/lobby/LobbyFXML.fxml").openStream());
 		Scene scene = new Scene(root);
 		lobbyController = (LobbyController) loader.getController();
 		lobbyController.setViewController(this);
@@ -77,7 +77,7 @@ public class ViewController {
 	 */
 	public void startChooseView() throws IOException {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/nameselect.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
 			nameSelectDialogController = fxmlLoader.getController();
 			nameSelectDialogController.setViewController(this);
