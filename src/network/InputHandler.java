@@ -22,12 +22,12 @@ import protocol.serverinstructions.ProtocolStatusUpdate;
 public abstract class InputHandler {
 	protected Parser parser;
 
-	public InputHandler(){
+	public InputHandler() {
 		parser = new Parser();
 	}
-	
-	//public void sendToParser();
-	
+
+	// public void sendToParser();
+
 	/**
 	 * takes parsed object and redirects to its proper method depending on
 	 * objects "real" class. ( object will be casted to "real" class )
@@ -93,21 +93,35 @@ public abstract class InputHandler {
 	}
 
 	protected abstract void handle(ProtocolHello hello);
+
 	protected abstract void handle(ProtocolWelcome welcome);
+
 	protected abstract void handle(ProtocolClientReady clientReady);
+
 	protected abstract void handle(ProtocolGameStarted gameStarted);
+
 	protected abstract void handle(ProtocolError error);
+
 	protected abstract void handle(ProtocolPlayerProfile playerProfile);
+
 	protected abstract void handle(ProtocolChatReceiveMessage chatReceiveMessage);
+
 	protected abstract void handle(ProtocolChatSendMessage chatSendMessage);
+
 	protected abstract void handle(ProtocolServerConfirmation serverConfirmation);
+
 	protected abstract void handle(ProtocolBuild build);
+
 	protected abstract void handle(ProtocolDiceRollResult diceRollResult);
-	protected abstract void handle(ProtocolResourceObtain resourceObtain );
+
+	protected abstract void handle(ProtocolResourceObtain resourceObtain);
+
 	protected abstract void handle(ProtocolStatusUpdate statusUpdate);
+
 	protected abstract void handle(ProtocolBuildRequest buildRequest);
+
 	protected abstract void handle(ProtocolDiceRollRequest diceRollRequest);
+
 	protected abstract void handle(ProtocolEndTurn endTurn);
-	
-	
+
 }

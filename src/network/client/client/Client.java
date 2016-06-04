@@ -12,16 +12,16 @@ import network.client.controller.MainViewController;
 
 public class Client extends Thread {
 	static int connectionTry = 0;
-	Socket socket = null;
-	OutputStreamWriter writer = null;
-	BufferedReader reader = null;
-	int port = 8080;
-	String serverHost = "localhost";
+	private Socket socket = null;
+	private OutputStreamWriter writer = null;
+	private BufferedReader reader = null;
+	private int port = 8080;
+	private String serverHost = "localhost";
 	boolean scanning = true;
 	boolean connectionActive = false;
 	protected ClientInputHandler inputHandler;
 
-	public Client(ClientInputHandler inputHandler, String serverHost, int port){
+	public Client(ClientInputHandler inputHandler, String serverHost, int port) {
 		this.port = port;
 		this.serverHost = serverHost;
 		this.inputHandler = inputHandler;

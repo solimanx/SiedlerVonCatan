@@ -15,10 +15,10 @@ import protocol.object.ProtocolResource;
 
 @Since(0.2)
 public class ProtocolTradeRequest {
-	
+
 	@SerializedName("Angebot")
 	private ProtocolResource offer;
-	
+
 	@SerializedName("Nachfrage")
 	private ProtocolResource withdrawal;
 

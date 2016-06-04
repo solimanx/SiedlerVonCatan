@@ -17,18 +17,17 @@ import network.server.controller.GameController;
 
 public class ViewController {
 
-	FXMLLoader loader;
+	private FXMLLoader loader;
 	protected View view;
 	protected Board board;
 	protected HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
 	protected HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
-	protected GameController gameController; //DEBUG
-	public FlowController flowController;
-	public MainViewController mainViewController;
-	public LobbyController lobbyController;
+	protected GameController gameController; // DEBUG
+	private FlowController flowController;
+	private MainViewController mainViewController;
+	private LobbyController lobbyController;
 
-
-	public ViewController(Stage primaryStage, FlowController fc){
+	public ViewController(Stage primaryStage, FlowController fc) {
 		this.flowController = fc;
 		loader = new FXMLLoader();
 
@@ -39,29 +38,27 @@ public class ViewController {
 			e.printStackTrace();
 		}
 
-
-
-		//this.board = board;
-		//startMainView(primaryStage, board);
-		//init();
+		// this.board = board;
+		// startMainView(primaryStage, board);
+		// init();
 	}
-//	public void openChooseNameMenu(){
-//		Parent root;
-//		try{
-//			root = loader.load(getClass().getClassLoader().getResourceAsStream("/application/lobby.fxml"));
-//			 Stage stage = new Stage();
-//	            stage.setTitle("My New Stage Title");
-//	            stage.setScene(new Scene(root, 450, 450));
-//	            stage.show();
-//		}
-//		catch(IOException e){
-//			e.printStackTrace();
-//		}
-//	}
-
+	// public void openChooseNameMenu(){
+	// Parent root;
+	// try{
+	// root =
+	// loader.load(getClass().getClassLoader().getResourceAsStream("/application/lobby.fxml"));
+	// Stage stage = new Stage();
+	// stage.setTitle("My New Stage Title");
+	// stage.setScene(new Scene(root, 450, 450));
+	// stage.show();
+	// }
+	// catch(IOException e){
+	// e.printStackTrace();
+	// }
+	// }
 
 	private void startLobbyView(Stage primaryStage) throws IOException {
-		
+
 		Parent root = loader.load(getClass().getResource("/application/lobby.fxml").openStream());
 		Scene scene = new Scene(root);
 		lobbyController = (LobbyController) loader.getController();
@@ -71,15 +68,14 @@ public class ViewController {
 		//
 		primaryStage.setTitle("Settlers of Catan : Lobby");
 		primaryStage.setResizable(false);
-		//primaryStage.initStyle(StageStyle.UTILITY);
+		// primaryStage.initStyle(StageStyle.UTILITY);
 		//
 		primaryStage.show();
 	}
 
-
-
 	/**
 	 * starts MainView and MainViewController
+	 * 
 	 * @param primaryStage
 	 * @param board
 	 */
@@ -128,37 +124,57 @@ public class ViewController {
 		});
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {
-			//gameController.setBandit(2, -2);
+			// gameController.setBandit(2, -2);
 		});
 
 	}
-
 
 	public Color getPlayerColor(int playerID) {
 		// TODO Auto-generated method stub
 		return Color.BLUEVIOLET;
 	}
 
-
 	public void setPlayerColor(int playerId, enums.Color color) {
 		// TODO Auto-generated method stub
 
 	}
-
 
 	public void setPlayerName(int playerId, String name) {
 		// TODO Auto-generated method stub
 
 	}
 
-
 	public void setDiceRollResult(int playerId, int result) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void setBoard(Board board){
+	public void setBoard(Board board) {
 		this.board = board;
+	}
+
+	public FlowController getFlowController() {
+		return flowController;
+	}
+
+	public MainViewController getMainViewController() {
+		return mainViewController;
+	}
+
+	public LobbyController getLobbyController() {
+		return lobbyController;
+	}
+
+	public void setFlowController(FlowController flowController) {
+		this.flowController = flowController;
+	}
+
+	public void setMainViewController(MainViewController mainViewController) {
+		this.mainViewController = mainViewController;
+	}
+
+	public void setLobbyController(LobbyController lobbyController) {
+		this.lobbyController = lobbyController;
 	}
 
 }

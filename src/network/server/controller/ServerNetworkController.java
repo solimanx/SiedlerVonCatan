@@ -17,8 +17,8 @@ public class ServerNetworkController {
 	private ServerOutputHandler outputHandler;
 	private ServerInputHandler inputHandler;
 	private Server server;
-	int amountPlayers;
-	public int[] playerIDs;
+	private int amountPlayers;
+	private int[] playerIDs;
 	private int IdCounter = 0;
 
 	public ServerNetworkController(GameController gc) {
@@ -69,7 +69,7 @@ public class ServerNetworkController {
 			gameController.setPlayerColor(playerID, color);
 			gameController.setPlayerName(playerID, name);
 		} else {
-			//error(playerID, "Farbe bereits vergeben!");
+			// error(playerID, "Farbe bereits vergeben!");
 		}
 	}
 
@@ -203,8 +203,8 @@ public class ServerNetworkController {
 	}
 
 	public int getPlayerModelId(int threadID) {
-		for (int i = 0; i < server.clients.length; i++) {
-			if (server.clients[i].threadID == threadID) {
+		for (int i = 0; i < server.getClients().length; i++) {
+			if (server.getClients()[i].threadID == threadID) {
 				return i + 1;
 			}
 		}
@@ -212,7 +212,7 @@ public class ServerNetworkController {
 	}
 
 	public int getThreadID(int playerModelID) {
-		return server.clients[playerModelID - 1].threadID;
+		return server.getClients()[playerModelID - 1].threadID;
 		// playerIDs[playerModelID];
 	}
 

@@ -15,9 +15,9 @@ import network.server.controller.ServerNetworkController;
 public class Server {
 
 	// HashMap PlayerID => Thread
-	public ClientThread[] clients = new ClientThread[4];
+	private ClientThread[] clients = new ClientThread[4];
 
-	int clientCounter = 0;
+	private int clientCounter = 0;
 
 	private ServerInputHandler inputHandler;
 	private ServerOutputHandler outputHandler;
@@ -37,7 +37,7 @@ public class Server {
 		ServerSocket serverSocket = new ServerSocket(8080, 150);
 		System.out.println("Server Running!");
 		try {
-			while (clientCounter <= clients.length) {
+			while (clientCounter <= getClients().length) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket, inputHandler);
 			}
@@ -54,7 +54,8 @@ public class Server {
 		public ServerInputHandler inputHandler;
 		public ServerOutputHandler outputHandler;
 
-		public ClientThread(Socket socket, ServerInputHandler inputHandler, ServerOutputHandler outputHandler, int threadID) {
+		public ClientThread(Socket socket, ServerInputHandler inputHandler, ServerOutputHandler outputHandler,
+				int threadID) {
 			this.socket = socket;
 			this.inputHandler = inputHandler;
 			this.outputHandler = outputHandler;
@@ -69,10 +70,10 @@ public class Server {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				System.out.println("Client connected! " + socket.getRemoteSocketAddress());
-				
+
 				outputHandler.hello(serverVersion, protocolVersion, threadID);
 				System.out.println("Hello sent to " + threadID + " Thread");
-				//socket.setTcpNoDelay(true);
+				// socket.setTcpNoDelay(true);
 				while (true) {
 					String line = reader.readLine();
 					System.out.println("Server got message: " + line);
@@ -81,7 +82,8 @@ public class Server {
 			} catch (IOException e) {
 				e.printStackTrace();
 				closeSocket();
-				// TODO server beendet sich momentan noch vollständig, wenn Client abbricht
+				// TODO server beendet sich momentan noch vollständig, wenn
+				// Client abbricht
 			} finally {
 			}
 		}
@@ -90,13 +92,13 @@ public class Server {
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
 		ClientThread thread = new ClientThread(socket, inputHandler, outputHandler, clientCounter);
 		thread.start();
-		clients[clientCounter] = thread;
+		getClients()[clientCounter] = thread;
 		clientCounter++;
 		System.out.println("The Next Client gets Number " + clientCounter);
 	}
 
 	public void broadcast(String s) throws IOException {
-		for (ClientThread clientThread : clients) {
+		for (ClientThread clientThread : getClients()) {
 			if (clientThread != null) {
 				clientThread.writer.write(s + "\n");
 				clientThread.writer.flush();
@@ -105,13 +107,13 @@ public class Server {
 	}
 
 	public void sendToClient(String s, int threadID) throws IOException {
-		ClientThread thread = clients[threadID];
+		ClientThread thread = getClients()[threadID];
 		thread.writer.write(s + "\n");
 		thread.writer.flush();
 	}
 
 	public void closeSocket() {
-		for (ClientThread clientThread : clients) {
+		for (ClientThread clientThread : getClients()) {
 			try {
 				clientThread.socket.close();
 			} catch (IOException e) {
@@ -119,5 +121,13 @@ public class Server {
 			}
 		}
 
+	}
+
+	public ClientThread[] getClients() {
+		return clients;
+	}
+
+	public void setClients(ClientThread[] clients) {
+		this.clients = clients;
 	}
 }

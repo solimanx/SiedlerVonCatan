@@ -56,18 +56,18 @@ public class ClientNetworkController {
 
 	// 8.6
 	public void buildStreet(int x, int y, int dir, int playerId) {
-		//flowController.buildStreet(x, y, dir, getPlayerModelId(playerId));
+		// flowController.buildStreet(x, y, dir, getPlayerModelId(playerId));
 
 	}
 
 	// 8.6
 	public void buildVillage(int x, int y, int dir, int playerId) {
-		//flowController.buildVillage(x, y, dir, getPlayerModelId(playerId));
+		// flowController.buildVillage(x, y, dir, getPlayerModelId(playerId));
 	}
 
 	// 8.6
 	public void buildCity(int x, int y, int dir, int playerId) {
-		//flowController.buildCity(x, y, dir, getPlayerModelId(playerId));
+		// flowController.buildCity(x, y, dir, getPlayerModelId(playerId));
 
 	}
 
@@ -98,9 +98,10 @@ public class ClientNetworkController {
 	public void welcome(int playerID) {
 		this.ownPlayerId = playerID;
 		flowController.setOwnPlayerId(ownPlayerId);
-		// TODO flowController.setPlayerState(playerID, enums.PlayerState.WAITING_FOR_GAMESTART);
+		// TODO flowController.setPlayerState(playerID,
+		// enums.PlayerState.WAITING_FOR_GAMESTART);
 		System.out.println("Handshake finished!");
-		flowController.viewController.lobbyController.enableChat();
+		flowController.viewController.getLobbyController().enableChat();
 	}
 
 	private void addToPlayerIDs(int playerID) {
@@ -158,13 +159,14 @@ public class ClientNetworkController {
 
 	// 8.2
 	public void diceRollResult(int playerId, int result) {
-		//flowController.diceRollResult(getPlayerModelId(playerId), result);
+		// flowController.diceRollResult(getPlayerModelId(playerId), result);
 
 	}
 
 	// 8.3
 	public void resourceObtain(int playerId, int[] resources) {
-		//flowController.addToPlayersResource(getPlayerModelId(playerId), resources);
+		// flowController.addToPlayersResource(getPlayerModelId(playerId),
+		// resources);
 
 	}
 
@@ -203,8 +205,8 @@ public class ClientNetworkController {
 
 	// 9.3
 	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
-		//TODO fix
-		//outputHandler.requestSetBandit(x, y, stealFromPlayerId);
+		// TODO fix
+		// outputHandler.requestSetBandit(x, y, stealFromPlayerId);
 
 	}
 

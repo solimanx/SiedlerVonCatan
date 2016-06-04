@@ -25,11 +25,11 @@ import settings.DefaultSettings;
  *
  */
 public class GameController implements GameControllerInterface {
-	Board board;
-	GameLogic gameLogic;
-	PlayerModel[] playerModels;
-	Field[][] fields;
-	ViewController viewController;
+	private Board board;
+	private GameLogic gameLogic;
+	private PlayerModel[] playerModels;
+	private Field[][] fields;
+	private ViewController viewController;
 	private ServerNetworkController networkController;
 
 	public GameController(Stage primaryStage) {
@@ -37,14 +37,15 @@ public class GameController implements GameControllerInterface {
 
 	}
 
-	//@Override
+	// @Override
 	public void init(int amountPlayers) {
 		this.board = Board.getInstance(amountPlayers);
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 		this.fields = board.getFields();
-																		// ONLY!!
-		//viewController = new ViewController(primaryStage, board, this); // DEBUG
+		// ONLY!!
+		// viewController = new ViewController(primaryStage, board, this); //
+		// DEBUG
 		init();
 		generateBoard(fields[2][2], false);
 		/*
@@ -118,7 +119,7 @@ public class GameController implements GameControllerInterface {
 		int[] viewCoord = new int[2];
 		for (int i = 0; i < fields.size(); i++) {
 			viewCoord = board.getFieldCoordinates(fields.get(i));
-			viewController.mainViewController.setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
+			viewController.getMainViewController().setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
 					fields.get(i).getDiceIndex());
 		}
 	}
@@ -190,7 +191,7 @@ public class GameController implements GameControllerInterface {
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.VILLAGE_BUILD_COST);
 
-			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
+			viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
 		}
 
 	}
@@ -205,7 +206,7 @@ public class GameController implements GameControllerInterface {
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.STREET_BUILD_COST);
 
-			viewController.mainViewController.setStreet(x, y, dir, playerID);
+			viewController.getMainViewController().setStreet(x, y, dir, playerID);
 		}
 
 	}
@@ -221,7 +222,7 @@ public class GameController implements GameControllerInterface {
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.CITY_BUILD_COST);
 
-			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
+			viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
 		}
 
 	}
@@ -233,7 +234,7 @@ public class GameController implements GameControllerInterface {
 			e.setOwnedByPlayer(playerModels[playerID]);
 			playerModels[playerID].decreaseAmountStreets();
 
-			viewController.mainViewController.setStreet(x, y, dir, playerID);
+			viewController.getMainViewController().setStreet(x, y, dir, playerID);
 		}
 	}
 
@@ -249,7 +250,7 @@ public class GameController implements GameControllerInterface {
 					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
-			viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
+			viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
 		}
 	}
 
@@ -315,11 +316,11 @@ public class GameController implements GameControllerInterface {
 	}
 
 	@Override
-	public void setBandit(int x, int y,int playerID) {
-		if (gameLogic.checkSetBandit(x, y,playerID)) {
+	public void setBandit(int x, int y, int playerID) {
+		if (gameLogic.checkSetBandit(x, y, playerID)) {
 			board.setBandit(board.getFieldAt(x, y));
 
-			viewController.mainViewController.setBandit(x, y); // Debug
+			viewController.getMainViewController().setBandit(x, y); // Debug
 		}
 
 	}
@@ -410,6 +411,5 @@ public class GameController implements GameControllerInterface {
 		// TODO Auto-generated method stub
 
 	}
-
 
 }

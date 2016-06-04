@@ -90,7 +90,7 @@ public class View implements ViewInterface {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			primaryStage.setFullScreen(true);
-			//primaryStage.setMaximized(true);
+			// primaryStage.setMaximized(true);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
@@ -121,7 +121,6 @@ public class View implements ViewInterface {
 		HBox buttons = new HBox(button, button2, button3, button4);
 		rootPane.setTop(buttons);
 		// end Test Buttons
-
 
 		centerPane = new Pane();
 		centerPane.getChildren().addAll(0, figures);

@@ -112,7 +112,7 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 
 	}
 
@@ -132,23 +132,26 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolBuildRequest buildRequest) {
-		if(buildRequest.getBuilding() == "Straße"){
+		if (buildRequest.getBuilding() == "Straße") {
 			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
-			networkController.requestBuildStreet(loc[0], loc[1], loc[2], networkController.getPlayerModelId(this.currentThreadID));
+			networkController.requestBuildStreet(loc[0], loc[1], loc[2],
+					networkController.getPlayerModelId(this.currentThreadID));
 		}
-		if(buildRequest.getBuilding() == "Dorf"){
+		if (buildRequest.getBuilding() == "Dorf") {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			networkController.requestBuildVillage(loc[0], loc[1], loc[2],  networkController.getPlayerModelId(this.currentThreadID));
+			networkController.requestBuildVillage(loc[0], loc[1], loc[2],
+					networkController.getPlayerModelId(this.currentThreadID));
 		}
-		if(buildRequest.getBuilding() == "Stadt"){
+		if (buildRequest.getBuilding() == "Stadt") {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			networkController.requestBuildCity(loc[0], loc[1], loc[2],  networkController.getPlayerModelId(this.currentThreadID));
+			networkController.requestBuildCity(loc[0], loc[1], loc[2],
+					networkController.getPlayerModelId(this.currentThreadID));
 		}
 	}
 
 	@Override
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-		networkController.diceRollRequest( networkController.getPlayerModelId(this.currentThreadID));
+		networkController.diceRollRequest(networkController.getPlayerModelId(this.currentThreadID));
 
 	}
 

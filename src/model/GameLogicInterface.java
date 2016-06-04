@@ -7,7 +7,7 @@ public interface GameLogicInterface {
 
 	public boolean checkBuildStreet(int x, int y, int dir, int playerId);
 
-	public boolean checkSetBandit(int x, int y,int playerId);
+	public boolean checkSetBandit(int x, int y, int playerId);
 
 	public boolean canTrade();
 

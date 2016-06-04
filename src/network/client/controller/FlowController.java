@@ -18,19 +18,18 @@ import settings.DefaultSettings;
  * @author NiedlichePixel Controls the game flow.
  */
 public class FlowController {
-	Board board;
-	GameLogic gameLogic;
-	PlayerModel[] playerModels;
-	int ownPlayerId;
+	private Board board;
+	private GameLogic gameLogic;
+	private PlayerModel[] playerModels;
+	private int ownPlayerId;
 	protected ViewController viewController;
 	protected Field[][] fields;
-	public ClientNetworkController networkController;
+	private ClientNetworkController networkController;
 	private Object mainViewController;
 
-
-	public FlowController(Stage primaryStage){
-		this.networkController = new ClientNetworkController(this);
-		//this.mainViewController = viewController.getMainViewController();
+	public FlowController(Stage primaryStage) {
+		this.setNetworkController(new ClientNetworkController(this));
+		// this.mainViewController = viewController.getMainViewController();
 		this.viewController = new ViewController(primaryStage, this);
 
 	}
@@ -98,33 +97,33 @@ public class FlowController {
 		this.gameLogic = new GameLogic(board);
 		this.playerModels = board.getPlayerModels();
 
-		//viewController.mainViewController.init(board);
+		// viewController.mainViewController.init(board);
 
 		return board;
 
 	}
 
-	public void createNewPlayer(enums.Color color,String name){
+	public void createNewPlayer(enums.Color color, String name) {
 
 	}
 
 	public void requestBuildVillage(int x, int y, int dir) {
 		if (gameLogic.checkBuildVillage(x, y, dir, ownPlayerId)) {
-			networkController.requestBuildVillage(x, y, dir);
+			getNetworkController().requestBuildVillage(x, y, dir);
 		}
 
 	}
 
 	public void requestBuildStreet(int x, int y, int dir) {
 		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)) {
-			networkController.requestBuildStreet(x, y, dir);
+			getNetworkController().requestBuildStreet(x, y, dir);
 		}
 
 	}
 
 	public void requestBuildCity(int x, int y, int dir) {
 		if (gameLogic.checkBuildCity(x, y, dir, ownPlayerId)) {
-			networkController.requestBuildCity(x, y, dir);
+			getNetworkController().requestBuildCity(x, y, dir);
 		}
 	}
 
@@ -133,7 +132,7 @@ public class FlowController {
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(playerModels[playerId]);
 
-		viewController.mainViewController.setStreet(x, y, dir, playerId);
+		viewController.getMainViewController().setStreet(x, y, dir, playerId);
 	}
 
 	public void buildVillage(int x, int y, int dir, int playerId) {
@@ -147,7 +146,7 @@ public class FlowController {
 			}
 		}
 
-		viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
+		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
 	}
 
 	public void buildCity(int x, int y, int dir, int playerId) {
@@ -155,20 +154,20 @@ public class FlowController {
 		c.setStatus(enums.CornerStatus.CITY);
 		c.setOwnedByPlayer(playerModels[playerId]);
 
-		viewController.mainViewController.setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
+		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
 	}
 
-	public void setBandit(int x, int y,int playerId) {
-		if (gameLogic.checkSetBandit(x, y,playerId)) {
-			networkController.requestSetBandit(x,y,playerId);
+	public void setBandit(int x, int y, int playerId) {
+		if (gameLogic.checkSetBandit(x, y, playerId)) {
+			getNetworkController().requestSetBandit(x, y, playerId);
 		}
 
 	}
 
 	public void addToPlayersResource(int playerId, int[] resources) {
 		ArrayList<ResourceType> resourceCards = playerModels[playerId].getResourceCards();
-		for (int i = 0;i < resources.length;i++){
-			for (int j = 0;j < resources[i];j++){
+		for (int i = 0; i < resources.length; i++) {
+			for (int j = 0; j < resources[i]; j++) {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
@@ -178,8 +177,8 @@ public class FlowController {
 
 	public void setPlayerResources(int playerId, int[] resources) {
 		ArrayList<ResourceType> resourceCards = new ArrayList<ResourceType>();
-		for (int i = 0;i < resources.length;i++){
-			for (int j = 0;j < resources[i];j++){
+		for (int i = 0; i < resources.length; i++) {
+			for (int j = 0; j < resources[i]; j++) {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
@@ -188,12 +187,12 @@ public class FlowController {
 	}
 
 	public void setPlayerColor(int playerId, Color color) {
-		viewController.setPlayerColor(playerId,color);
+		viewController.setPlayerColor(playerId, color);
 
 	}
 
 	public void setPlayerName(int playerId, String name) {
-		viewController.setPlayerName(playerId,name);
+		viewController.setPlayerName(playerId, name);
 
 	}
 
@@ -202,19 +201,28 @@ public class FlowController {
 	}
 
 	public void diceRollResult(int playerId, int result) {
-		viewController.setDiceRollResult(playerId,result);
+		viewController.setDiceRollResult(playerId, result);
 	}
 
 	public void setOwnPlayerId(int ownPlayerId) {
 		this.ownPlayerId = ownPlayerId;
 	}
 
-	public void chatSendMessage(String s){
-		networkController.chatSendMessage(s);
+	public void chatSendMessage(String s) {
+		getNetworkController().chatSendMessage(s);
 	}
 
-	public void chatReceiveMessage(int playerId,String s){
-		//viewController.mainViewController.receiveChatMessage("Spieler "+playerId+": "+s);
-		viewController.lobbyController.receiveChatMessage("Spieler "+playerId+": "+s);
+	public void chatReceiveMessage(int playerId, String s) {
+		// viewController.mainViewController.receiveChatMessage("Spieler
+		// "+playerId+": "+s);
+		viewController.getLobbyController().receiveChatMessage("Spieler " + playerId + ": " + s);
+	}
+
+	public ClientNetworkController getNetworkController() {
+		return networkController;
+	}
+
+	public void setNetworkController(ClientNetworkController networkController) {
+		this.networkController = networkController;
 	}
 }

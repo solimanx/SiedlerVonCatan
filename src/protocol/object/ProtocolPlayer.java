@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 import enums.Color;
+
 /**
  * <b>Spieler (Player)</b>
  * <p>

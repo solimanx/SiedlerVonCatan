@@ -101,18 +101,15 @@ public class HexService {
 
 	}
 
-
 	public int[] getCornerCoordinates(String field_ids) {
 		// TODO write
 		return null;
 	}
 
-
 	public int[] getEdgeCoordinates(String field_ids) {
 		// TODO write
 		return null;
 	}
-
 
 	public String getSpiral(String starting_point_id) {
 		// Starting point;
@@ -196,12 +193,10 @@ public class HexService {
 		return Math.abs(temp[0]) + Math.abs(temp[1]) + Math.abs(temp[2]);
 	}
 
-
 	public int[] convertAxialToCube(int[] a) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	public int[] convertCubeToAxial(int[] c) {
 		// TODO Auto-generated method stub

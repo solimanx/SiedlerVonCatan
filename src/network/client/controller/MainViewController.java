@@ -9,7 +9,7 @@ public class MainViewController {
 	private ViewController viewController;
 
 	public MainViewController(View view, ViewController vc) {
-		//hier noch Board übergeben und dann View starten mit Board!
+		// hier noch Board übergeben und dann View starten mit Board!
 		super();
 		this.viewController = vc;
 		this.view = view;
@@ -18,18 +18,18 @@ public class MainViewController {
 
 	private void init() {
 		setChat();
-//		view.chatInput.setOnAction(event -> {
-//			String message = view.chatInput.getText();
-//			view.chatInput.clear();
-//			// vc.chatMessageSent(message);
-//			try {
-//				viewController.flowController.networkController.client.write(message);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			// view.messages.appendText(message + "\n");
-//		});
+		// view.chatInput.setOnAction(event -> {
+		// String message = view.chatInput.getText();
+		// view.chatInput.clear();
+		// // vc.chatMessageSent(message);
+		// try {
+		// viewController.flowController.networkController.client.write(message);
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// // view.messages.appendText(message + "\n");
+		// });
 	}
 
 	private void setChat() {
@@ -38,7 +38,7 @@ public class MainViewController {
 			view.chatInput.clear();
 			// vc.chatMessageSent(message);
 			try {
-				viewController.flowController.chatSendMessage(message);
+				viewController.getFlowController().chatSendMessage(message);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -59,7 +59,7 @@ public class MainViewController {
 	public void streetClick(int[] streetCoordinates) {
 		System.out.println("Clicked on Street " + streetCoordinates[0] + " , " + streetCoordinates[1] + " , "
 				+ streetCoordinates[2]);
-		viewController.flowController.requestBuildStreet(streetCoordinates[0], streetCoordinates[1],
+		viewController.getFlowController().requestBuildStreet(streetCoordinates[0], streetCoordinates[1],
 				streetCoordinates[2]);
 
 	}

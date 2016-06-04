@@ -45,5 +45,5 @@ public interface GameControllerInterface {
 
 	public void buildCity(int x, int y, int dir, int playerId);
 
-	public void setBandit(int x, int y,int playerId);
+	public void setBandit(int x, int y, int playerId);
 }

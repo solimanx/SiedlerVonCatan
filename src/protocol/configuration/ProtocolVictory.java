@@ -16,7 +16,7 @@ public class ProtocolVictory {
 
 	@SerializedName("Nachricht")
 	private String message;
-	
+
 	@SerializedName("Sieger")
 	private int winner_id;
 

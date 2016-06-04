@@ -1,15 +1,12 @@
 package application;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -17,27 +14,27 @@ import network.client.controller.ViewController;
 
 public class LobbyController implements Initializable {
 
-	ViewController viewController;
+	private ViewController viewController;
 
-	DateTimeFormatter dateFormat;
-
-	@FXML
-	Button myButton;
+	private DateTimeFormatter dateFormat;
 
 	@FXML
-	TextField serverIPTextField;
+	private Button myButton;
 
 	@FXML
-	TextField portTextField;
+	private TextField serverIPTextField;
 
 	@FXML
-	Button connectButton;
+	private TextField portTextField;
 
 	@FXML
-	TextField chatInput;
+	private Button connectButton;
 
 	@FXML
-	TextArea messages;
+	private TextField chatInput;
+
+	@FXML
+	private TextArea messages;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -50,7 +47,7 @@ public class LobbyController implements Initializable {
 	public void handleConnectButton() {
 		String server = serverIPTextField.getText();
 		int port = Integer.parseInt(portTextField.getText());
-		viewController.flowController.networkController.connectToServer(server, port);
+		viewController.getFlowController().getNetworkController().connectToServer(server, port);
 		System.out.println("handled");
 
 	}
@@ -59,19 +56,18 @@ public class LobbyController implements Initializable {
 	public void sendChatMessage() {
 		String message = chatInput.getText();
 		chatInput.clear();
-		viewController.flowController.networkController.chatSendMessage(message);
+		viewController.getFlowController().getNetworkController().chatSendMessage(message);
 	}
 
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
 
 	}
-	
 
 	public void enableChat() {
 		chatInput.setDisable(false);
 		messages.appendText(currentTime() + "Connected to lobby chat.\n");
-		//viewController.openChooseNameMenu();
+		// viewController.openChooseNameMenu();
 	}
 
 	public void disconnect() {

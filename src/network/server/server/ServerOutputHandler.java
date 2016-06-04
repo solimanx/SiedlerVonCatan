@@ -35,7 +35,7 @@ public class ServerOutputHandler {
 	}
 
 	public void statusUpdate(int playerId, Color color, String name, PlayerState status, int victoryPoints,
-							 int[] resources) {
+			int[] resources) {
 		// TODO Auto-generated method stub
 
 	}
@@ -78,7 +78,7 @@ public class ServerOutputHandler {
 	}
 
 	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
-		//TODO
+		// TODO
 	}
 
 	public void error(String s) {
@@ -113,7 +113,6 @@ public class ServerOutputHandler {
 			e.printStackTrace();
 		}
 	}
-
 
 	public void welcome(int player_id) {
 		ProtocolWelcome pw = new ProtocolWelcome(player_id);
