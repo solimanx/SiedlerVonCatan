@@ -17,7 +17,7 @@ public class Board implements BoardInterface {
 	private Edge[][][] edges;
 	private PlayerModel[] players;
 	private Field bandit; // <- bad
-	private HashMap<Field, String> fieldIDMap;
+	private HashMap<String, Field> fieldIDMap;
 	// TODO private DevDeck devDeck;
 
 	public Board() {
@@ -990,7 +990,7 @@ public class Board implements BoardInterface {
 	/**
 	 * @return the fieldIDMap
 	 */
-	public HashMap<Field, String> getFieldIDMap() {
+	public HashMap<String, Field> getFieldIDMap() {
 		return fieldIDMap;
 	}
 
