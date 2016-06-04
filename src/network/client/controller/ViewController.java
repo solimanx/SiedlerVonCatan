@@ -44,20 +44,6 @@ public class ViewController {
 		// startMainView(primaryStage, board);
 		// init();
 	}
-	// public void openChooseNameMenu(){
-	// Parent root;
-	// try{
-	// root =
-	// loader.load(getClass().getClassLoader().getResourceAsStream("/application/lobby.fxml"));
-	// Stage stage = new Stage();
-	// stage.setTitle("My New Stage Title");
-	// stage.setScene(new Scene(root, 450, 450));
-	// stage.show();
-	// }
-	// catch(IOException e){
-	// e.printStackTrace();
-	// }
-	// }
 
 	private void startLobbyView(Stage primaryStage) throws IOException {
 
