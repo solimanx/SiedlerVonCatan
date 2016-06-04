@@ -122,7 +122,7 @@ public class ClientOutputHandler {
 		}
 
 	}
-	public void sendPLayerProfile(String name, String color){
+	public void sendPlayerProfile(String name, String color){
 
 		ProtocolPlayerProfile pcr=new ProtocolPlayerProfile(name, color);
 		Response r=new Response();
