@@ -34,6 +34,10 @@ public class FlowController {
 
 	}
 
+	public int getOwnPlayerId() {
+		return ownPlayerId;
+	}
+
 	/**
 	 * sets player state in own client model; is called by network controller
 	 * after server has changed a player state
@@ -164,14 +168,14 @@ public class FlowController {
 
 	}
 
-	public void addToPlayersResource(int playerId, int[] resources) {
-		ArrayList<ResourceType> resourceCards = playerModels[playerId].getResourceCards();
+	public void addToPlayersResource(int playerID, int[] resources) {
+		ArrayList<ResourceType> resourceCards = playerModels[playerID].getResourceCards();
 		for (int i = 0; i < resources.length; i++) {
 			for (int j = 0; j < resources[i]; j++) {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
-		playerModels[playerId].setResourceCards(resourceCards);
+		playerModels[playerID].setResourceCards(resourceCards);
 
 	}
 
@@ -194,6 +198,12 @@ public class FlowController {
 	public void setPlayerName(int playerId, String name) {
 		viewController.setPlayerName(playerId, name);
 
+	}
+	
+	public void sendPlayerProfile(String name, Color color){
+		networkController.sendPlayerProfile(color, name);
+		setPlayerColor(ownPlayerId, color);
+		setPlayerName(ownPlayerId, name);
 	}
 
 	public void setPlayerVictoryPoints(int playerId, int victoryPoints) {

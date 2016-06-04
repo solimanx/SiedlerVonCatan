@@ -43,12 +43,13 @@ public class NameSelectDialogController implements Initializable {
 	private void handleStartButton() {
 		Color chosenColor = playerColor.getValue();
 		String name = playerName.getText();
+		viewController.getFlowController().sendPlayerProfile(name, chosenColor);
 		System.out.println("chosen: " + name + " " + chosenColor);
 		// viewController.flowController.startGame();
 	}
-	
+
 	@FXML
-	public void setServerColorText(String s){
+	public void setServerColorText(String s) {
 		serverColorAnswer.setText(s);
 	}
 }

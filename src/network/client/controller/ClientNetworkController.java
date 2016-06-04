@@ -127,13 +127,12 @@ public class ClientNetworkController {
 	}
 
 	// 7.1
-	/*
-	 * public void playerProfile(enums.Color color, String name) {
-	 * playerIds[amountPlayers] = flowController.createNewPlayer(color,name);
-	 * amountPlayers++;
-	 *
-	 * }
-	 */
+//
+	public void sendPlayerProfile(enums.Color color, String name) {
+		outputHandler.sendPlayerProfile(name, color);
+
+	}
+
 
 	// 6.2
 	public void chatSendMessage(String s) {
