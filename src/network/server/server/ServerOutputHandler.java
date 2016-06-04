@@ -1,8 +1,6 @@
 package network.server.server;
 
 import java.io.IOException;
-import java.util.logging.Level;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import enums.Color;
@@ -20,7 +18,10 @@ import protocol.configuration.ProtocolGameStarted;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
-import protocol.messaging.ProtocolChatSendMessage;
+import protocol.object.ProtocolBoard;
+import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolField;
+import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolBuilding;
 import protocol.object.ProtocolPlayer;
 import protocol.serverinstructions.ProtocolBuild;
@@ -40,10 +41,10 @@ public class ServerOutputHandler {
 		this.networkController = serverNetworkController;
 		this.parser = new Parser();
 	}
-	
-    private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getName());
 
-	public void statusUpdate(ProtocolPlayer player ) {
+	private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getName());
+
+	public void statusUpdate(ProtocolPlayer player) {
 		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(player);
 		Response r = new Response();
 		r.pSUpdate = ps;
@@ -53,12 +54,10 @@ public class ServerOutputHandler {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
-		
-		
 
 	}
 
-	public void buildBuilding( ProtocolBuilding building) {
+	public void buildBuilding(ProtocolBuilding building) {
 		ProtocolBuild pb = new ProtocolBuild(building);
 		Response r = new Response();
 		r.pBuild = pb;
@@ -68,8 +67,6 @@ public class ServerOutputHandler {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
-		
-		
 
 	}
 
@@ -106,8 +103,32 @@ public class ServerOutputHandler {
 	}
 
 	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
-		
-		// TODO Auto-generated method stub
+
+		ProtocolField[] pfArray = new ProtocolField[fields.length * fields[0].length];
+		// ModelToProtocol.resourceToString.get
+		int counter = 0;
+		for (int i = 0; i < fields.length; i++) {
+			for (int j = 0; j < fields[0].length; j++) {
+				Field f = fields[i][j];
+				pfArray[counter] = new ProtocolField(f.getFieldID(),
+						ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
+				counter++;
+
+			}
+		}
+		ProtocolBuilding[] pBuildingsArray = null;
+		ProtocolHarbour[] pHarbourArray = null;
+		String banditLocation = bandit.getFieldID();
+		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray, banditLocation);
+		ProtocolGameStarted pgs = new ProtocolGameStarted(pb);
+		Response r = new Response();
+		r.pGameStarted = pgs;
+		try {
+			server.broadcast(parser.createString(r));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public void error(String s) {
