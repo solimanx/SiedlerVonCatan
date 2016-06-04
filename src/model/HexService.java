@@ -7,7 +7,7 @@ import settings.DefaultSettings;
 
 public class HexService {
 	final static int[][] DIRECTIONS = { { 1, -1 }, { 1, 0 }, { 0, 1 }, { -1, 1 }, { -1, 0 }, { 0, -1 } };
-	Board board;
+	BoardNew board;
 
 	public static int[] getFieldCoordinates(String field_id) {
 		// filter bad input
@@ -112,12 +112,12 @@ public class HexService {
 		for(int i = 0; i < a.length; i++){
 			lista.add(a[i]);
 		}
-		for(int i= 0; i < lista.size(); i++){
+		for(int i= 0; i < b.length; i++){
 			if(lista.contains(b[i])){
 				listb.add(b[i]);
 			}
 		}
-		for(int i= 0; i < listb.size(); i++){
+		for(int i= 0; i < c.length; i++){
 			if(listb.contains(c[i])){
 				lastCorner.add(c[i]);
 			}
@@ -130,14 +130,45 @@ public class HexService {
 			int[] result = {x3, y3, 0};
 			return result;
 		}
-
-
 		return null;
 	}
 
-	public int[] getEdgeCoordinates(String field_ids) {
-		// TODO write
+	public int[] getEdgeCoordinates(int x1, int y1, int x2, int y2) {
+		ArrayList<Edge> array = new ArrayList<>();
+		Edge[] a = getSurroundingEdges(x1, x2);
+		Edge[] b = getSurroundingEdges(x2, y2);
+		ArrayList<Edge> firstList = new ArrayList<Edge>();
+		ArrayList<Edge> resultList = new ArrayList<Edge>();
+		for(int i = 0; i < a.length; i++){
+			firstList.add(a[i]);
+		}
+		for(int j = 0; j<b.length; j++){
+			if(firstList.contains(b[j])){
+				resultList.add(b[j]);
+			}
+		}
+		for(int i = 0; i<3; i++){
+			if(board.getEdgeAt(x1, y1, i) == resultList.get(0)){
+				int[] result = {x1, y1, i};
+				return result;
+			}
+			if(board.getEdgeAt(x2, y2, i) == resultList.get(0)){
+				int[] result = {x2, y2, i};
+				return result;
+			}
+		}
 		return null;
+	}
+	
+	public Edge[] getSurroundingEdges(int aX, int aY){
+		Edge n = board.getEdgeAt(aX, aY, 0);
+		Edge ne = board.getEdgeAt(aX + 1, aY - 1, 1);
+		Edge se = board.getEdgeAt(aX, aY + 1, 0);
+		Edge s = board.getEdgeAt(aX, aY, 1);
+		Edge sw = board.getEdgeAt(aX - 1, aY + 1, 0);
+		Edge nw = board.getEdgeAt(aX, aY - 1, 1);
+		Edge[] surroundingEdges = { n, ne, se, s, sw, nw };
+		return surroundingEdges;
 	}
 
 //	public String getSpiral(String starting_point_id) {
