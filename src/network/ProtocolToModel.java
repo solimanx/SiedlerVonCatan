@@ -13,17 +13,17 @@ public final class ProtocolToModel {
 
 	public static int[] getCornerCoordinates(String location) {
 		int[] a = HexService.getFieldCoordinates(location.substring(0, 1));
-		int[] b = HexService.getFieldCoordinates(location.substring(2, 2));
+		int[] b = HexService.getFieldCoordinates(location.substring(1, 2));
 		int[] c = HexService.getFieldCoordinates(location.substring(2, 3));
-		return HS.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
-
+		int[] result = HS.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
+		return result;
 	}
 
 	public static int[] getEdgeCoordinates(String location) {
-		// TODO
-		// return [x][y][dir]
-		return null;
-
+		int[] a = HexService.getFieldCoordinates(location.substring(0, 1));
+		int[] b = HexService.getFieldCoordinates(location.substring(1, 2));
+		int[] result = HS.getEdgeCoordinates(a[0], a[1], b[0], b[1]);
+		return result;
 	}
 
 	public static enums.PlayerState getPlayerState(String state) {
