@@ -1,8 +1,11 @@
 package network.server.server;
 
+import enums.Color;
 import network.InputHandler;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
+import network.client.client.Client;
+import network.client.controller.ClientNetworkController;
 import network.server.controller.ServerNetworkController;
 import parsing.Response;
 import protocol.clientinstructions.ProtocolBuildRequest;
@@ -82,7 +85,10 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolPlayerProfile playerProfile) {
-		// TODO Auto-generated method stub
+		String name= playerProfile.getName();
+		Color color=playerProfile.getColor();
+	//ClientNetworkController.sendPlayerProfile(name,color);
+
 
 	}
 
