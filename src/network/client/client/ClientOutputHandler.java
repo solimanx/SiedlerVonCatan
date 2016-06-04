@@ -22,6 +22,7 @@ public class ClientOutputHandler {
 	}
 
 	public void handleBuildRequest(int x, int y, int dir, int playerId, String string) {
+		//TODO fix
 	    String location = x + "," + y + "," + dir;
 		ProtocolBuildRequest pbr = new ProtocolBuildRequest(string, location);
 		Response r = new Response();
@@ -110,6 +111,7 @@ public class ClientOutputHandler {
 	}
 
 	public void requestSetBandit(int playerid, int x, int y, int victim_id) {
+		//TODO fix
 		String location = x + "," + y;
 		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(playerid, location, victim_id);
 		Response r = new Response();

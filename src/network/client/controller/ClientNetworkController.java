@@ -203,7 +203,8 @@ public class ClientNetworkController {
 
 	// 9.3
 	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
-		outputHandler.requestSetBandit(x, y, stealFromPlayerId);
+		//TODO fix
+		//outputHandler.requestSetBandit(x, y, stealFromPlayerId);
 
 	}
 
