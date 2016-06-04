@@ -24,16 +24,15 @@ public class ClientOutputHandler {
 		this.parser = new Parser();
 	}
 	private static Logger logger = LogManager.getLogger(ClientOutputHandler.class.getName());
-	public void handleBuildRequest(int x, int y, int dir, int playerId, String string) {
-		// TODO fix
-		String location = x + "," + y + "," + dir;
-		ProtocolBuildRequest pbr = new ProtocolBuildRequest(string, location);
+
+	public void handleBuildRequest(String building_type, String location_id) {
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest(building_type,location_id);
 		Response r = new Response();
 		r.pBuildRequest = pbr;
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			//logger.error("Threw a Input/Output Exception ", e);
+
 			e.printStackTrace();
 		}
 
@@ -109,16 +108,15 @@ public class ClientOutputHandler {
 
 	}
 
-	public void requestSetBandit( int playerid, int x, int y, int victim_id) {
-		// TODO fix
-		String location = x + "," + y;
-		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(playerid, location, victim_id);
+	public void requestSetBandit(int  player_Id,String location_id, int victim_id) {
+
+		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(player_Id,location_id,victim_id);
 		Response r = new Response();
 		r.pRobberMoveRequest = prmr;
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			logger.error("Threw a Input/Output Exception ", e);
+
 			e.printStackTrace();
 		}
 
