@@ -99,14 +99,15 @@ public class ViewController {
 		choosingStage.close();
 		mainViewStage = new Stage();
 		this.mainViewController = new MainViewController(this, board, mainViewStage);
+		init();
 	}
 
 	public View getView() {
-		return view;
+		return mainViewController.getView();
 	}
 
 	private void init() {
-
+		view = getView();
 		fieldColors.put(ResourceType.CLAY, Color.TAN);
 		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
 		fieldColors.put(ResourceType.NOTHING, Color.WHITE);

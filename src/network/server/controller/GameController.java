@@ -408,7 +408,8 @@ public class GameController implements GameControllerInterface {
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
+		board = new Board();
+		generateBoard(initialField, randomDesert);
 
 	}
 

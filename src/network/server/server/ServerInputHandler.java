@@ -62,7 +62,9 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolClientReady clientReady) {
-		// TODO Auto-generated method stub
+		networkController.clientReady(networkController.getPlayerModelId(currentThreadID));
+		
+		
 
 	}
 

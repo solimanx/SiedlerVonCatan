@@ -142,11 +142,11 @@ public class ServerNetworkController {
 	 * @param playerID
 	 */
 	public void clientReady(int playerID) {
-		gameController.setPlayerState(playerID, enums.PlayerState.WAITING);
+		gameController.setPlayerState(playerID, enums.PlayerState.WAITING_FOR_GAMESTART);
 		boolean allPlayersReady = true;
 		for (int i = 1; i <= amountPlayers; i++) {
-			if (gameController.getPlayerState(playerID) != enums.PlayerState.WAITING) {
-				allPlayersReady = false;
+			if (gameController.getPlayerState(playerID) != enums.PlayerState.WAITING_FOR_GAMESTART) {
+				// TODO allPlayersReady = false;
 			}
 		}
 		if (allPlayersReady) {
