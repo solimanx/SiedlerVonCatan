@@ -1,6 +1,9 @@
 package network.client.client;
 
 import java.io.IOException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import parsing.Parser;
 import parsing.Response;
 import protocol.clientinstructions.ProtocolBuildRequest;
@@ -20,7 +23,7 @@ public class ClientOutputHandler {
 		this.client = client;
 		this.parser = new Parser();
 	}
-
+	private static Logger logger = LogManager.getLogger(ClientOutputHandler.class.getName());
 	public void handleBuildRequest(int x, int y, int dir, int playerId, String string) {
 		// TODO fix
 		String location = x + "," + y + "," + dir;
@@ -30,7 +33,7 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO logging
+			//logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
@@ -47,7 +50,7 @@ public class ClientOutputHandler {
 			System.out.println("CLIENT HELLO OUTPUT: " + parser.createString(r));
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO logging
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
@@ -60,7 +63,7 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO logging
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
@@ -73,7 +76,7 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO logging
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
@@ -86,7 +89,7 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO logging
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 
 		}
@@ -100,13 +103,13 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO logging
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
 	}
 
-	public void requestSetBandit(int playerid, int x, int y, int victim_id) {
+	public void requestSetBandit( int playerid, int x, int y, int victim_id) {
 		// TODO fix
 		String location = x + "," + y;
 		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(playerid, location, victim_id);
@@ -115,7 +118,7 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO logging
+			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
 
