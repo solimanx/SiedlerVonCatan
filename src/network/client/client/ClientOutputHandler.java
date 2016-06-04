@@ -11,6 +11,7 @@ import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
 import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.configuration.ProtocolClientReady;
+import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 
@@ -113,6 +114,19 @@ public class ClientOutputHandler {
 		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(player_Id,location_id,victim_id);
 		Response r = new Response();
 		r.pRobberMoveRequest = prmr;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
+
+	}
+	public void sendPLayerProfile(String name, String color){
+
+		ProtocolPlayerProfile pcr=new ProtocolPlayerProfile(name, color);
+		Response r=new Response();
+		r.pPlayerProfile=pcr;
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
