@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,23 +8,16 @@ import org.apache.logging.log4j.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import network.ModelToProtocol;
-import network.client.client.Client;
 import network.client.controller.FlowController;
 import network.server.controller.GameController;
-import network.server.server.Server;
-
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-
-import java.util.logging.SimpleFormatter;
 
 public class Main extends Application {
+
+	@SuppressWarnings("unused")
 	private static Logger logger = LogManager.getLogger(Main.class.getName());
 
 	private GameController gc;
 	private FlowController fc;
-	private Client client;
-	private Server server;
 
 	// true for server, false for client
 	private boolean mode = false;
@@ -47,9 +39,9 @@ public class Main extends Application {
 		ModelToProtocol.initModelToProtocol();
 		if (mode) {
 			// server = new Server();
-			gc = new GameController(primaryStage);
+			setGameController(new GameController(primaryStage));
 		} else {
-			fc = new FlowController(primaryStage);
+			setFlowController(new FlowController(primaryStage));
 		}
 
 	}
@@ -69,5 +61,35 @@ public class Main extends Application {
 
 		launch(args);
 
+	}
+
+	/**
+	 * @return the gc
+	 */
+	public GameController getGameController() {
+		return gc;
+	}
+
+	/**
+	 * @param gc
+	 *            the gc to set
+	 */
+	public void setGameController(GameController gc) {
+		this.gc = gc;
+	}
+
+	/**
+	 * @return the fc
+	 */
+	public FlowController getFlowController() {
+		return fc;
+	}
+
+	/**
+	 * @param fc
+	 *            the fc to set
+	 */
+	public void setFlowController(FlowController fc) {
+		this.fc = fc;
 	}
 }

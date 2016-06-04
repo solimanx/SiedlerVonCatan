@@ -54,6 +54,7 @@ public class PlayerProfileController implements Initializable {
 		} else {
 			viewController.getFlowController().sendPlayerProfile(name, chosenColor);
 			//TODO receive confirmation from server that color isnt taken
+			//FOR DEBUG ONLY ASSUME SERVER CONFIRMED
 			System.out.println("Profile: " + name + " " + chosenColor);
 			readyButton.setDisable(false);
 		}
