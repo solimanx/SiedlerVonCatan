@@ -3,13 +3,15 @@ package network.server.server;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import com.sun.javafx.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import enums.Color;
 import enums.PlayerState;
 import model.Corner;
 import model.Edge;
 import model.Field;
 import network.ModelToProtocol;
+import network.client.client.ClientOutputHandler;
 import network.server.controller.ServerNetworkController;
 import parsing.Parser;
 import parsing.Response;
@@ -19,8 +21,12 @@ import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
+import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolPlayer;
+import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
+import protocol.serverinstructions.ProtocolStatusUpdate;
 
 //import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
@@ -34,15 +40,36 @@ public class ServerOutputHandler {
 		this.networkController = serverNetworkController;
 		this.parser = new Parser();
 	}
+	
+    private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getName());
 
-	public void statusUpdate(int playerId, Color color, String name, PlayerState status, int victoryPoints,
-			int[] resources) {
-		// TODO Auto-generated method stub
+	public void statusUpdate(ProtocolPlayer player ) {
+		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(player);
+		Response r = new Response();
+		r.pSUpdate = ps;
+		try {
+			server.broadcast((parser.createString(r)));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
+		
+		
 
 	}
 
-	public void buildBuilding(int x, int y, int dir, int playerId, String string) {
-		// TODO Auto-generated method stub
+	public void buildBuilding( ProtocolBuilding building) {
+		ProtocolBuild pb = new ProtocolBuild(building);
+		Response r = new Response();
+		r.pBuild = pb;
+		try {
+			server.broadcast((parser.createString(r)));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
+		
+		
 
 	}
 
