@@ -133,7 +133,7 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolStatusUpdate statusUpdate) {
-        // TODO Auto-generated method stub
+        // unnecessary Method in ServerInputHandler
 
     }
 
