@@ -113,7 +113,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolResourceObtain resourceObtain) {
-
+//        TODO
 
     }
 
@@ -142,7 +142,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-        // TODO Auto-generated method stub
+        // unnecessary Method in ClientInputHandler
 
     }
 
@@ -150,7 +150,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolEndTurn endTurn) {
         System.out.println("Der Zug wurde beendet");
         networkController.endTurn();
-
+        //unnecessary Method in ClientInputHandler
     }
 
 }
