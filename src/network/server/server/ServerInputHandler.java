@@ -72,13 +72,13 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolGameStarted gameStarted) {
-        // TODO Auto-generated method stub
+        // unnecessary Method in ServerInputHandler
 
     }
 
     @Override
     protected void handle(ProtocolError error) {
-        // TODO Auto-generated method stub
+        // unnecessary Method in ServerInputHandler
 
     }
 
