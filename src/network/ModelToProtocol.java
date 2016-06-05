@@ -36,7 +36,7 @@ public final class ModelToProtocol {
 		Integer wool = 0;
 		Integer corn = 0;
 		Integer ore = 0;
-		Integer unknown = null; // TODO
+		Integer unknown;
 		for (int i = 0; i < resources.length; i++) {
 			if (resources[i] == 0) {
 				wood++;
@@ -59,20 +59,7 @@ public final class ModelToProtocol {
 				continue;
 			}
 		}
-		// int amount = wood + clay + wool + corn + ore;
-		// if(amount != 0){
-		// unknown = null;
-		// }
-		// else{
-		// wood = null;
-		// clay = null;
-		// wool = null;
-		// corn = null;
-		// ore = null;
-		// unknown = amount;
-		// }
-		// TODO handle unknown (darf der spieler die ressourcen wissen oder
-		// nicht)
+		unknown = wood + clay + wool + corn + ore;
 		ProtocolResource pr = new ProtocolResource(wood, clay, wool, corn, ore, unknown);
 		return pr;
 	}
