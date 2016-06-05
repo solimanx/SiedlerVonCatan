@@ -62,8 +62,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolGameStarted gameStarted) {
-
-      //  networkController.gameStarted(fields, edges, corners, bandit);
+        //  networkController.gameStarted(fields, edges, corners, bandit);
 
     }
 
@@ -76,7 +75,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolPlayerProfile playerProfile) {
-    //  unnecessary Method in ClientInputHandler
+        //  unnecessary Method in ClientInputHandler
 
     }
 
@@ -96,19 +95,15 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolServerConfirmation serverConfirmation) {
-        String server_response=serverConfirmation.getServer_response();
+        String server_response = serverConfirmation.getServer_response();
         networkController.serverConfirmation(server_response);
     }
-    
-    @Override
-    protected void handle(String string){
-    	networkController.serverConfirmation(string);
-    }
+
 
     //
     @Override
     protected void handle(ProtocolBuild build) {
-        ProtocolBuilding building=build.getBuilding();
+        ProtocolBuilding building = build.getBuilding();
         //networkController.build(building);
 
     }
@@ -122,7 +117,9 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolResourceObtain resourceObtain) {
-//        TODO
+        //  int playerID= ProtocolToModel.getPlayerID(resourceObtain.getPlayer().getPlayer_id());
+        //  int[] resources=ProtocolToModel.getResources(resourceObtain.getPlayer().getResources());
+        //networkController.resoruceObtain(playerId, resources);
 
     }
 
