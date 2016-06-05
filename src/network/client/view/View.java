@@ -406,6 +406,7 @@ public class View implements ViewInterface {
 
 	/**
 	 * sets x-coordinate of unused corners to 0
+	 * fields with x-coordinate 0 are sea 
 	 */
 	private void filterUnusedCorners() {
 
@@ -436,6 +437,78 @@ public class View implements ViewInterface {
 		cornerCoordinates[1][6][1][0] = 0;
 		cornerCoordinates[2][6][1][0] = 0;
 		cornerCoordinates[3][6][1][0] = 0;
+	}
+	
+	
+	/**
+	 * sets x-coordinate of unused edges to 0;
+	 * edges with x-coordinate 0 won't be initialized 
+	 */
+	private void filterUnusedEdges() {
+		// row 0
+		edgeCoordinates[3][0][0][0] = 0;
+		edgeCoordinates[3][0][1][0] = 0;
+		edgeCoordinates[3][0][2][0] = 0;
+
+		edgeCoordinates[4][0][0][0] = 0;
+		edgeCoordinates[4][0][1][0] = 0;
+		edgeCoordinates[4][0][2][0] = 0;
+
+		edgeCoordinates[5][0][0][0] = 0;
+		edgeCoordinates[5][0][1][0] = 0;
+		edgeCoordinates[5][0][2][0] = 0;
+
+		edgeCoordinates[6][0][0][0] = 0;
+		edgeCoordinates[6][0][1][0] = 0;
+		edgeCoordinates[6][0][2][0] = 0;
+
+		// row 1
+		edgeCoordinates[2][1][0][0] = 0;
+		edgeCoordinates[2][1][1][0] = 0;
+
+		edgeCoordinates[6][1][0][0] = 0;
+		edgeCoordinates[6][1][1][0] = 0;
+		edgeCoordinates[6][1][2][0] = 0;
+
+		// row 2
+		edgeCoordinates[1][2][0][0] = 0;
+		edgeCoordinates[1][2][1][0] = 0;
+
+		edgeCoordinates[6][2][0][0] = 0;
+		edgeCoordinates[6][2][1][0] = 0;
+		edgeCoordinates[6][2][2][0] = 0;
+
+		// row 3
+		edgeCoordinates[0][3][0][0] = 0;
+		edgeCoordinates[0][3][1][0] = 0;
+
+		edgeCoordinates[6][3][0][0] = 0;
+		edgeCoordinates[6][3][1][0] = 0;
+		edgeCoordinates[6][3][2][0] = 0;
+
+		// row 4
+		edgeCoordinates[0][4][0][0] = 0;
+
+		edgeCoordinates[5][4][1][0] = 0;
+		edgeCoordinates[5][4][2][0] = 0;
+
+		// row 5
+		edgeCoordinates[0][5][0][0] = 0;
+
+		edgeCoordinates[4][5][1][0] = 0;
+		edgeCoordinates[4][5][2][0] = 0;
+
+		// row 6
+		edgeCoordinates[0][6][0][0] = 0;
+		edgeCoordinates[0][6][2][0] = 0;
+
+		edgeCoordinates[1][6][2][0] = 0;
+
+		edgeCoordinates[2][6][2][0] = 0;
+
+		edgeCoordinates[3][6][1][0] = 0;
+		edgeCoordinates[3][6][2][0] = 0;
+
 	}
 
 	private void calculateEdgeCorners() {
@@ -475,6 +548,7 @@ public class View implements ViewInterface {
 			}
 
 		}
+		filterUnusedEdges();
 
 	}
 
