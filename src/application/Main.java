@@ -39,7 +39,7 @@ public class Main extends Application {
 		ModelToProtocol.initModelToProtocol();
 		if (mode) {
 			// server = new Server();
-			setGameController(new GameController(primaryStage));
+			setGameController(new GameController());
 		} else {
 			setFlowController(new FlowController(primaryStage));
 		}

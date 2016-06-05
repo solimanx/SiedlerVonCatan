@@ -94,7 +94,6 @@ public class ServerOutputHandler {
 
 		ProtocolField[] pfArray = new ProtocolField[board.getStringToCoordMap().size()];
 		int counter = 0;
-		// ModelToProtocol.resourceToString.get
 
 		for (String key : board.getStringToCoordMap().keySet()) {
 			int coords[] = board.getStringToCoordMap().get(key);
@@ -102,6 +101,7 @@ public class ServerOutputHandler {
 			pfArray[counter] = new ProtocolField(f.getFieldID(),
 					ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
 			counter++;
+
 		}
 
 		ProtocolBuilding[] pBuildingsArray = null;
@@ -122,6 +122,7 @@ public class ServerOutputHandler {
 		ProtocolError pe = new ProtocolError(s);
 		Response r = new Response();
 		r.pError = pe;
+
 		try {
 			server.broadcast(parser.createString(r));
 		} catch (IOException e) {

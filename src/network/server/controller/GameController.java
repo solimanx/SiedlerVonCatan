@@ -31,9 +31,14 @@ public class GameController implements GameControllerInterface {
 	private ArrayList<PlayerModel> tempPlayers = new ArrayList<PlayerModel>();
 	private int amountPlayers = 0;
 
-	public GameController(Stage primaryStage) {
-		this.serverNetworkController = new ServerNetworkController(this);
+	public GameController() {
+		this.setServerNetworkController(new ServerNetworkController(this));
+	}
 
+
+	public void setServerNetworkController(ServerNetworkController sNC) {
+		this.serverNetworkController = sNC;
+		
 	}
 
 	/**
@@ -54,11 +59,15 @@ public class GameController implements GameControllerInterface {
 		 * for (int i = 1; i <= amountPlayers;i++){
 		 * networkController.initClients(i,board)... end
 		 */
-		// addToPlayersResource(0, ResourceType.WOOD, 3); // All DEBUG!!
-		// addToPlayersResource(0, ResourceType.CLAY, 3);
-		// addToPlayersResource(0, ResourceType.ORE, 3);
-		// addToPlayersResource(0, ResourceType.SHEEP, 3);
-		// addToPlayersResource(0, ResourceType.CORN, 3);
+
+//		addToPlayersResource(1, ResourceType.WOOD, 3); // All DEBUG!!
+//		addToPlayersResource(1, ResourceType.CLAY, 3);
+//		addToPlayersResource(1, ResourceType.ORE, 3);
+//		addToPlayersResource(1, ResourceType.SHEEP, 3);
+//		addToPlayersResource(1, ResourceType.CORN, 3);
+//		setPlayerState(1, PlayerState.PLAYING); // player 1 begins
+
+		serverNetworkController.gameStarted(board);
 	}
 
 	public Board getBoard() {
@@ -126,6 +135,7 @@ public class GameController implements GameControllerInterface {
 																					// =
 																					// desert;
 			fields.get(fields.size() - 1).setDiceIndex(0);
+
 		} // Testing if generating works
 		for (int i = 0; i < fields.size(); i++) {
 			System.out.println(i + " |Field id: " + fields.get(i).getFieldID() + ", Dice Index: "

@@ -24,6 +24,7 @@ public class ServerNetworkController {
 		this.serverInputHandler = new ServerInputHandler(this);
 		this.server = new Server(serverInputHandler); 
 		this.serverOutputHandler = new ServerOutputHandler(server);
+		gameController.setServerNetworkController(this);
 		try {
 			server.start();
 		} catch (IOException e) {
@@ -160,6 +161,7 @@ public class ServerNetworkController {
 	public void gameStarted(Board board) {
 		//TODO 
 		serverOutputHandler.initBoard(gameController.getAmountPlayers(), board);
+
 	}
 
 	// 7.3

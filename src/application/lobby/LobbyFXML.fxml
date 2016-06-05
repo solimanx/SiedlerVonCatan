@@ -47,16 +47,16 @@
                            </VBox.margin>
                         </Button>
                         <HBox prefHeight="100.0" prefWidth="200.0" />
-                        <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="274.0">
+                        <VBox alignment="TOP_RIGHT">
                            <children>
-                              <Label alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="203.0" text="Enter your name and select a color:">
-                                 <HBox.margin>
-                                    <Insets right="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Button fx:id="startButton" disable="true" mnemonicParsing="false" onAction="#startGame" text="Start" />
+                              <Label alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="258.0" text="Press Start to choose name and color:" />
+                              <Button fx:id="startButton" disable="true" mnemonicParsing="false" onAction="#startGame" text="Start">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
-                        </HBox>
+                        </VBox>
                      </children>
                   </VBox>
                </children>
