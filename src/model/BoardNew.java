@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import settings.DefaultSettings;
 
@@ -18,15 +17,15 @@ public class BoardNew {
 	private Edge[][][] edges;
 	private PlayerModel[] players;
 	private Field bandit; // <- bad
-	private Map<String, int[]> fieldIDMap;
-	private Map<int[], String> fieldCoordMap;
+	private Map<String, int[]> stringToCoordMap;
+	private Map<int[], String> coordToStringMap;
 	// TODO private DevDeck devDeck;
 
 	public BoardNew() {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
 		initializeFields();
-		initializeIDMap();
+		initializeHashMaps();
 		corners = new Corner[r][r][2];
 		initializeCorners();
 		edges = new Edge[r][r][3];
@@ -59,27 +58,41 @@ public class BoardNew {
 		}
 	}
 
-	private void initializeIDMap() {
-		// TODO Auto-generated method stub
-		fieldIDMap = new HashMap<String, int[]>();
-		fieldCoordMap = new HashMap<int[], String>();
+	/**
+	 * Initialize String-to-axial coordinate HashMap and it's reverse, and
+	 * systematically assigns IDs to each field by it's coordinate
+	 */
+	/*
+	 * Warning: Works as intended ONLY if amount of inner fields is not greater
+	 * than 26 fields!
+	 * 
+	 */
+	private void initializeHashMaps() {
+		// initialize HashMaps
+		stringToCoordMap = new HashMap<String, int[]>();
+		coordToStringMap = new HashMap<int[], String>();
+		// temp to make code look clearer
+		int radius = DefaultSettings.BOARD_RADIUS;
 
+		// Starting indices.
 		char outerFieldsBegin = 'a';
 		char innerFieldsBegin = 'A';
 
-		for (int j = -DefaultSettings.BOARD_RADIUS; j <= DefaultSettings.BOARD_RADIUS; j++) {
-			for (int i = -DefaultSettings.BOARD_RADIUS; i <= DefaultSettings.BOARD_RADIUS; i++) {
+		// iterate through all fields row by row from top to bottom
+		for (int j = -radius; j <= radius; j++) {
+			for (int i = -radius; i <= radius; i++) {
+				// to skip null/undefined fields
 				if (getFieldAt(i, j) != null) {
-					if (HexService.sumAbsoluteValues(
-							HexService.convertAxialToCube(new int[] { i, j })) == DefaultSettings.BOARD_RADIUS * 2) { // TODO
-																														// doublecheck
-						fieldIDMap.put(String.valueOf(outerFieldsBegin), new int[] { i, j });
-						fieldCoordMap.put(new int[] { i, j }, String.valueOf(outerFieldsBegin));
+					if (HexService.sumAbsCubeXYZ(HexService.convertAxialToCube(new int[] { i, j })) == radius * 2) {
+						stringToCoordMap.put(String.valueOf(outerFieldsBegin), new int[] { i, j });
+						coordToStringMap.put(new int[] { i, j }, String.valueOf(outerFieldsBegin));
+						// go to next char : a->b->c->...
 						outerFieldsBegin++;
-					} else if (HexService.sumAbsoluteValues(
-							HexService.convertAxialToCube(new int[] { i, j })) < DefaultSettings.BOARD_RADIUS * 2) {
-						fieldIDMap.put(String.valueOf(innerFieldsBegin), new int[] { i, j });
-						fieldCoordMap.put(new int[] { i, j }, String.valueOf(innerFieldsBegin));
+					} else if (HexService.sumAbsCubeXYZ(HexService.convertAxialToCube(new int[] { i, j })) < radius
+							* 2) {
+						stringToCoordMap.put(String.valueOf(innerFieldsBegin), new int[] { i, j });
+						coordToStringMap.put(new int[] { i, j }, String.valueOf(innerFieldsBegin));
+						// go to next char : A->B->C->...
 						innerFieldsBegin++;
 					}
 				}
@@ -88,40 +101,92 @@ public class BoardNew {
 	}
 
 	/**
-	 * Initialize the corners.
+	 * Initialize the corners systematically
 	 *
 	 * @param corners
 	 */
 	private void initializeCorners() {
-		for (int x = 0; x < fields.length; x++) {
-			for (int y = 0; y < fields[0].length; y++) {
-				if (fields[x][y] != null) {
-					corners[x][y][0] = new Corner(); // North
-					corners[x][y][1] = new Corner(); // South
+		// temporary variables to make code appear clearer
+		int[] temp;
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// Go through HashMap<String,int[]>
+		for (String key : stringToCoordMap.keySet()) {
+			// entry of key
+			temp = stringToCoordMap.get(key);
+			// lowercase keys only (outer ring)
+			if (key.matches("[a-z]")) {
+				// North only will be set
+				if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) < 0) {
+					// convert axial back to array coords
+					corners[temp[0] + radius][temp[1] + radius][0] = new Corner();
+				}
+				// south only will be set
+				else if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) > 0) {
+					// convert axial back to array coords
+					corners[temp[0] + radius][temp[1] + radius][1] = new Corner();
 				}
 			}
-			// TODO: better solution
-			filterUnusedCorners();
+			// outercase keys only (inner rings/fields)
+			else {
+				// North and south are set
+				corners[temp[0] + radius][temp[1] + radius][0] = new Corner();
+				corners[temp[0] + radius][temp[1] + radius][1] = new Corner();
+			}
+
 		}
 	}
 
 	/**
-	 * Initialize the edges.
+	 * Initialize the edges systematically;
 	 *
 	 * @param edges
 	 */
+	/*
+	 * NW = north west, NE = north east, E = east
+	 */
 	private void initializeEdges() {
-		for (int x = 0; x < fields.length; x++) {
-			for (int y = 0; y < fields[0].length; y++) {
-				if (fields[x][y] != null) {
-					edges[x][y][0] = new Edge(); // Northwest
-					edges[x][y][1] = new Edge(); // Northeast
-					edges[x][y][2] = new Edge(); // East
+		// temporary variables to make code appear clearer
+		int[] temp;
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// Go through HashMap<String,int[]>
+		for (String key : stringToCoordMap.keySet()) {
+			// entry of key
+			temp = stringToCoordMap.get(key);
+			// lowercase keys only (outer ring)
+			if (key.matches("[a-z]")) {
+				// NW only is defined
+				if (temp[0] >= 0 && temp[1] > 0) {
+					edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
+				}
+				// NE only is defined
+				else if (temp[0] == -radius && temp[1] == radius) {
+					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
+				}
+
+				// E only is defined
+				else if (temp[0] < 0 && temp[1] <= 0) {
+					edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
+				}
+				// only NW + NE are defined
+				else if (temp[0] > -radius && temp[0] < 0 && temp[1] == radius) {
+					edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
+					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
+				}
+				// only NE + E are defined
+				else if (temp[0] == -radius && temp[1] < radius && temp[1] > 0) {
+					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
+					edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
 				}
 			}
+			// outercase keys only (inner rings/fields)
+			else {
+				// NE, NW, E are set
+				edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
+				edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
+				edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
+			}
+
 		}
-		// TODO: better solution
-		filterUnusedEdges();
 	}
 
 	private void initializePlayers() {
@@ -130,114 +195,6 @@ public class BoardNew {
 
 	private void initializeBandit() {
 		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Set unused corners to null
-	 */
-	private void filterUnusedCorners() {
-
-		for (int i = 0; i < DefaultSettings.BOARD_SIZE; i++) {
-
-		}
-
-		// row 0
-		corners[3][0][0] = null;
-		corners[4][0][0] = null;
-		corners[5][0][0] = null;
-		corners[6][0][0] = null;
-		// row 1
-		corners[2][1][0] = null;
-		corners[6][1][0] = null;
-		// row 2
-		corners[1][2][0] = null;
-		corners[6][2][0] = null;
-		// row 3
-		corners[0][3][0] = null;
-		corners[0][3][1] = null;
-		corners[6][3][0] = null;
-		corners[6][3][1] = null;
-		// row 4
-		corners[0][4][1] = null;
-		corners[5][4][1] = null;
-		// row 5
-		corners[0][5][1] = null;
-		corners[4][5][1] = null;
-		// row 6
-		corners[0][6][1] = null;
-		corners[1][6][1] = null;
-		corners[2][6][1] = null;
-		corners[3][6][1] = null;
-	}
-
-	/**
-	 * Set unused edges to null.
-	 */
-	private void filterUnusedEdges() {
-		// row 0
-		edges[3][0][0] = null;
-		edges[3][0][1] = null;
-		edges[3][0][2] = null;
-
-		edges[4][0][0] = null;
-		edges[4][0][1] = null;
-		edges[4][0][2] = null;
-
-		edges[5][0][0] = null;
-		edges[5][0][1] = null;
-		edges[5][0][2] = null;
-
-		edges[6][0][0] = null;
-		edges[6][0][1] = null;
-		edges[6][0][2] = null;
-
-		// row 1
-		edges[2][1][0] = null;
-		edges[2][1][1] = null;
-
-		edges[6][1][0] = null;
-		edges[6][1][1] = null;
-		edges[6][1][2] = null;
-
-		// row 2
-		edges[1][2][0] = null;
-		edges[1][2][1] = null;
-
-		edges[6][2][0] = null;
-		edges[6][2][1] = null;
-		edges[6][2][2] = null;
-
-		// row 3
-		edges[0][3][0] = null;
-		edges[0][3][1] = null;
-
-		edges[6][3][0] = null;
-		edges[6][3][1] = null;
-		edges[6][3][2] = null;
-
-		// row 4
-		edges[0][4][0] = null;
-
-		edges[5][4][1] = null;
-		edges[5][4][2] = null;
-
-		// row 5
-		edges[0][5][0] = null;
-
-		edges[4][5][1] = null;
-		edges[4][5][2] = null;
-
-		// row 6
-		edges[0][6][0] = null;
-		edges[0][6][2] = null;
-
-		edges[1][6][2] = null;
-
-		edges[2][6][2] = null;
-
-		edges[3][6][1] = null;
-		edges[3][6][2] = null;
 
 	}
 
@@ -251,11 +208,13 @@ public class BoardNew {
 	 */
 
 	public Field getFieldAt(int aX, int aY) {
-		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
-				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aY > DefaultSettings.BOARD_SIZE / 2) {
+		// temp to make code clearer
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// if out of range
+		if (aX < -radius || aX > radius || aY < -radius || aY > radius) {
 			return null;
 		} else {
-			return this.fields[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2];
+			return this.fields[aX + radius][aY + radius];
 		}
 	}
 
@@ -272,11 +231,13 @@ public class BoardNew {
 	 */
 
 	public Corner getCornerAt(int aX, int aY, int dir) {
-		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
-				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || dir < 0 || dir > 1) {
+		// temp to make code clearer
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// if out of range
+		if (aX < -radius || aX > radius || aY < -radius || aY > radius || dir < 0 || dir > 1) {
 			return null;
 		} else {
-			return this.corners[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][dir];
+			return this.corners[aX + radius][aY + radius][dir];
 		}
 	}
 
@@ -293,11 +254,13 @@ public class BoardNew {
 	 */
 
 	public Edge getEdgeAt(int aX, int aY, int dir) {
-		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
-				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || dir < 0 || dir > 2) {
+		// temp to make code clearer
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// if out of range
+		if (aX < -radius || aX > radius || aY < -radius || aY > radius || dir < 0 || dir > 2) {
 			return null;
 		} else {
-			return this.edges[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][dir];
+			return this.edges[aX + radius][aY + radius][dir];
 		}
 	}
 
@@ -623,7 +586,7 @@ public class BoardNew {
 
 		// filter bad input
 		if (f.length() == 1) {
-			return fieldIDMap.get(f);
+			return stringToCoordMap.get(f);
 		}
 		// wrong id
 		return null;
@@ -767,15 +730,16 @@ public class BoardNew {
 			return null;
 		}
 	}
+
 	// TODO kill
 	public ArrayList<Field> getAllFields() {
 		ArrayList<Field> result = new ArrayList<Field>();
 		for (int i = 0; i < fields.length; i++) {
 			for (int j = 0; j < fields[i].length; j++) {
 				if (fields[i][j] != null) {
-//					if (fields[i][j].getFieldID() != null) {
-//						result.add(fields[i][j]);
-//					}
+					// if (fields[i][j].getFieldID() != null) {
+					// result.add(fields[i][j]);
+					// }
 				}
 			}
 		}
@@ -787,7 +751,7 @@ public class BoardNew {
 	 */
 	public String getOuterRing() {
 		String result = "";
-		for (String key : fieldIDMap.keySet()) {
+		for (String key : stringToCoordMap.keySet()) {
 			if (key.matches("[a-z]")) {
 				result += key;
 			}
@@ -797,7 +761,7 @@ public class BoardNew {
 
 	public String getInnerFields() {
 		String result = "";
-		for (String key : fieldIDMap.keySet()) {
+		for (String key : stringToCoordMap.keySet()) {
 			if (key.matches("[A-Z]")) {
 				result += key;
 			}
@@ -858,12 +822,12 @@ public class BoardNew {
 	/**
 	 * @return the fieldIDMap
 	 */
-	public Map<String, int[]> getFieldIDMap() {
-		return fieldIDMap;
+	public Map<String, int[]> getStringToCoordMap() {
+		return stringToCoordMap;
 	}
 
-	public Map<int[], String> getFieldCoordinatesMap() {
-		return fieldCoordMap;
+	public Map<int[], String> getCoordToStringMap() {
+		return coordToStringMap;
 	}
 
 }

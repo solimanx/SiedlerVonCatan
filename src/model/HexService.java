@@ -237,7 +237,7 @@ public class HexService {
 //	}
 
 
-	public static int sumAbsoluteValues(int[] temp) {
+	public static int sumAbsCubeXYZ(int[] temp) {
 		return Math.abs(temp[0]) + Math.abs(temp[1]) + Math.abs(temp[2]);
 	}
 
