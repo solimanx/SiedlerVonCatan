@@ -36,29 +36,42 @@ public class GameController implements GameControllerInterface {
 
 	}
 
-
 	/**
 	 * Inits
+	 * 
 	 * @param amountPlayers
 	 */
-	public void init() {
+	public void initializeBoard() {
 		board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
-		//this.playerModels = board.getPlayerModels();
-		//this.fields = board.getFields();
-		generateBoard(board.getFields()[2][2], false);
+		// this.playerModels = board.getPlayerModels();
+		// this.fields = board.getFields();
+
+		// generateBoard(board.getFields()[2][2], false);
+		generateDebuggingBoard();
+
 		/*
 		 * for (int i = 1; i <= amountPlayers;i++){
 		 * networkController.initClients(i,board)... end
 		 */
-		addToPlayersResource(1, ResourceType.WOOD, 3); // All DEBUG!!
-		addToPlayersResource(1, ResourceType.CLAY, 3);
-		addToPlayersResource(1, ResourceType.ORE, 3);
-		addToPlayersResource(1, ResourceType.SHEEP, 3);
-		addToPlayersResource(1, ResourceType.CORN, 3);
-		setPlayerState(1, PlayerState.PLAYING); // player 1 begins
+		addToPlayersResource(0, ResourceType.WOOD, 3); // All DEBUG!!
+		addToPlayersResource(0, ResourceType.CLAY, 3);
+		addToPlayersResource(0, ResourceType.ORE, 3);
+		addToPlayersResource(0, ResourceType.SHEEP, 3);
+		addToPlayersResource(0, ResourceType.CORN, 3);
+		setPlayerState(0, PlayerState.PLAYING); // player 1 begins
+	}
 
-		serverNetworkController.gameStarted(board.getFields(), board.getEdges(), board.getCorners(), board.getBandit());
+	public Board getBoard() {
+		return board;
+	}
+
+	public int getAmountPlayers() {
+		return amountPlayers;
+	}
+
+	public void setAmountPlayers(int amountPlayers) {
+		this.amountPlayers = amountPlayers;
 	}
 
 	/**
@@ -72,7 +85,6 @@ public class GameController implements GameControllerInterface {
 	 */
 	private void generateBoard(Field initialField, boolean randomDesert) {
 		ArrayList<Field> fields = board.getAllFields(); // spiral implementieren
-		System.out.println("Size" + fields.size());
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
 		int currNum;
 		if (randomDesert) {
@@ -115,13 +127,27 @@ public class GameController implements GameControllerInterface {
 																					// =
 																					// desert;
 			fields.get(fields.size() - 1).setDiceIndex(0);
-		}
-		int[] viewCoord = new int[2];
+		} // Testing if generating works
 		for (int i = 0; i < fields.size(); i++) {
-			viewCoord = board.getFieldCoordinates(fields.get(i));
-			viewController.getMainViewController().setField(viewCoord[0], viewCoord[1], fields.get(i).getResourceType(),
-					fields.get(i).getDiceIndex());
+			System.out.println(i + " |Field id: " + fields.get(i).getFieldID() + ", Dice Index: "
+					+ fields.get(i).getDiceIndex() + ", ResourceType: " + fields.get(i).getResourceType());
 		}
+	}
+
+	// DEBUGGING ONLY
+	public void generateDebuggingBoard() {
+		for (int i = -3; i <= 3; i++) {
+			for (int j = -3; j <= 3; j++) {
+				if (board.getFieldAt(j, i) != null) {
+					board.getFieldAt(j, i).setFieldID("A");
+					board.getFieldAt(j, i).setDiceIndex(0);
+					board.getFieldAt(j, i).setResourceType(ResourceType.CORN);
+
+				}
+			}
+		}
+		board.setBandit("J");
+
 	}
 
 	/*
@@ -144,28 +170,29 @@ public class GameController implements GameControllerInterface {
 		Corner[] neighborCorners;
 		enums.CornerStatus status;
 		enums.ResourceType resType;
-		Field bandit = board.getBandit();
-//		int[] fieldCoordinates = new int[2];
-//		for (Field p : correspondingFields) {
-//			if (p != bandit) {
-//				fieldCoordinates = board.getFieldCoordinates(p);
-//				neighborCorners = board.getSurroundingCorners(fieldCoordinates[0], fieldCoordinates[1]);
-//				resType = p.getResourceType();
-//				for (Corner o : neighborCorners) {
-//					status = o.getStatus();
-//					switch (status) {
-//					case VILLAGE:
-//						addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 1);
-//						break;
-//					case CITY:
-//						addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 2);
-//						break;
-//					default:
-//						break;
-//					}
-//				}
-//			}
-//		}
+		String bandit = board.getBandit();
+		// int[] fieldCoordinates = new int[2];
+		// for (Field p : correspondingFields) {
+		// if (p != bandit) {
+		// fieldCoordinates = board.getFieldCoordinates(p);
+		// neighborCorners = board.getSurroundingCorners(fieldCoordinates[0],
+		// fieldCoordinates[1]);
+		// resType = p.getResourceType();
+		// for (Corner o : neighborCorners) {
+		// status = o.getStatus();
+		// switch (status) {
+		// case VILLAGE:
+		// addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 1);
+		// break;
+		// case CITY:
+		// addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 2);
+		// break;
+		// default:
+		// break;
+		// }
+		// }
+		// }
+		// }
 
 	}
 
@@ -318,7 +345,7 @@ public class GameController implements GameControllerInterface {
 	@Override
 	public void setBandit(int x, int y, int playerID) {
 		if (gameLogic.checkSetBandit(x, y, playerID)) {
-			board.setBandit(board.getFieldAt(x, y));
+			//board.setBandit(board.getFieldAt(x, y));
 
 			viewController.getMainViewController().setBandit(x, y); // Debug
 		}
@@ -406,22 +433,21 @@ public class GameController implements GameControllerInterface {
 
 	}
 
-	public void addPlayerToArray(PlayerModel player){
-//		if (tempPlayers.size() >= DefaultSettings.MAXIMUM_PLAYERS_AMOUNT){
-//			networkController.error("Server voll!");
-//		} else if (tempPlayers.size() == DefaultSettings.MAXIMUM_PLAYERS_AMOUNT - 1) {
-//			tempPlayers.add(player);
-//			amountPlayers++;
-//			init(amountPlayers);
-//		} else {
-//			tempPlayers.add(player);
-//			amountPlayers++;
-//		}
+	public void addPlayerToArray(PlayerModel player) {
+		// if (tempPlayers.size() >= DefaultSettings.MAXIMUM_PLAYERS_AMOUNT){
+		// networkController.error("Server voll!");
+		// } else if (tempPlayers.size() ==
+		// DefaultSettings.MAXIMUM_PLAYERS_AMOUNT - 1) {
+		// tempPlayers.add(player);
+		// amountPlayers++;
+		// init(amountPlayers);
+		// } else {
+		// tempPlayers.add(player);
+		// amountPlayers++;
+		// }
 		tempPlayers.add(player); // DEBUG ONLY
 		amountPlayers++; // DEBUG ONLY
-		init(); // DEBUG ONLY
+		initializeBoard(); // DEBUG ONLY
 	}
-
-
 
 }

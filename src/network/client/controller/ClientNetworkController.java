@@ -1,10 +1,8 @@
 package network.client.controller;
 
-import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
-import model.PlayerModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
@@ -15,8 +13,6 @@ public class ClientNetworkController {
 	private ClientOutputHandler outputHandler;
 	private ClientInputHandler inputHandler;
 	protected Client client;
-	private Board board;
-	private int ownPlayerId;
 	private int amountPlayers;
 
 	public ClientNetworkController(FlowController fc) {
@@ -95,8 +91,7 @@ public class ClientNetworkController {
 
 	// 4.2
 	public void welcome(int playerID) {
-		this.ownPlayerId = playerID;
-		flowController.setOwnPlayerId(ownPlayerId);
+		flowController.setOwnPlayerId(playerID);
 		// TODO flowController.setPlayerState(playerID,
 		// enums.PlayerState.WAITING_FOR_GAMESTART);
 		System.out.println("Handshake finished!");
@@ -115,7 +110,7 @@ public class ClientNetworkController {
 
 	// 7.4
 	public void gameStarted(Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
-		this.board = flowController.initBoard(amountPlayers, fields, edges, corners, bandit);
+		flowController.initBoard(amountPlayers, fields, edges, corners, bandit);
 
 	}
 

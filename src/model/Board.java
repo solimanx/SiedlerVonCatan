@@ -13,7 +13,7 @@ public class Board {
 	private Corner[][][] corners;
 	private Edge[][][] edges;
 	private PlayerModel[] players;
-	private Field bandit;
+	private String bandit;
 	// TODO private DevDeck devDeck;
 
 	public Board(ArrayList<PlayerModel> tempPlayers) {
@@ -953,7 +953,7 @@ public class Board {
 	 * Returns bandit.
 	 */
 
-	public Field getBandit() {
+	public String getBandit() {
 		return this.bandit;
 	}
 
@@ -961,7 +961,7 @@ public class Board {
 	 * Sets bandit
 	 */
 
-	public void setBandit(Field f) {
+	public void setBandit(String f) {
 		this.bandit = f;
 
 	}

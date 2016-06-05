@@ -22,13 +22,17 @@ public class FlowController {
 	private GameLogic gameLogic;
 	private int ownPlayerId;
 	protected ViewController viewController;
-	private ClientNetworkController networkController;
+	private ClientNetworkController clientNetworkController;
 
 	public FlowController(Stage primaryStage) {
-		this.setNetworkController(new ClientNetworkController(this));
+		this.setClientNetworkController(new ClientNetworkController(this));
 		// this.mainViewController = viewController.getMainViewController();
 		this.viewController = new ViewController(primaryStage, this);
 
+	}
+
+	public Board getBoard() {
+		return board;
 	}
 
 	public int getOwnPlayerId() {
@@ -54,6 +58,9 @@ public class FlowController {
 
 	}
 
+	/*
+	 * 
+	 */
 	public Board initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
 			Field bandit) {
 
@@ -108,21 +115,21 @@ public class FlowController {
 
 	public void requestBuildVillage(int x, int y, int dir) {
 		if (gameLogic.checkBuildVillage(x, y, dir, ownPlayerId)) {
-			getNetworkController().requestBuildVillage(x, y, dir);
+			getClientNetworkController().requestBuildVillage(x, y, dir);
 		}
 
 	}
 
 	public void requestBuildStreet(int x, int y, int dir) {
 		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)) {
-			getNetworkController().requestBuildStreet(x, y, dir);
+			getClientNetworkController().requestBuildStreet(x, y, dir);
 		}
 
 	}
 
 	public void requestBuildCity(int x, int y, int dir) {
 		if (gameLogic.checkBuildCity(x, y, dir, ownPlayerId)) {
-			getNetworkController().requestBuildCity(x, y, dir);
+			getClientNetworkController().requestBuildCity(x, y, dir);
 		}
 	}
 
@@ -158,7 +165,7 @@ public class FlowController {
 
 	public void setBandit(int x, int y, int playerId) {
 		if (gameLogic.checkSetBandit(x, y, playerId)) {
-			getNetworkController().requestSetBandit(x, y, playerId);
+			getClientNetworkController().requestSetBandit(x, y, playerId);
 		}
 
 	}
@@ -196,7 +203,7 @@ public class FlowController {
 	}
 
 	public void sendPlayerProfile(String name, Color color){
-		networkController.sendPlayerProfile(color, name);
+		clientNetworkController.sendPlayerProfile(color, name);
 		setPlayerColor(ownPlayerId, color);
 		setPlayerName(ownPlayerId, name);
 	}
@@ -214,7 +221,7 @@ public class FlowController {
 	}
 
 	public void chatSendMessage(String s) {
-		getNetworkController().chatSendMessage(s);
+		getClientNetworkController().chatSendMessage(s);
 	}
 
 	public void chatReceiveMessage(int playerId, String s) {
@@ -224,14 +231,14 @@ public class FlowController {
 	}
 
 	public void sendReady(){
-		networkController.clientReady();
+		clientNetworkController.clientReady();
 	}
 
-	public ClientNetworkController getNetworkController() {
-		return networkController;
+	public ClientNetworkController getClientNetworkController() {
+		return clientNetworkController;
 	}
 
-	public void setNetworkController(ClientNetworkController networkController) {
-		this.networkController = networkController;
+	public void setClientNetworkController(ClientNetworkController networkController) {
+		this.clientNetworkController = networkController;
 	}
 }

@@ -49,8 +49,8 @@ public class ServerNetworkController {
 	}
 
 	public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
-			Field bandit) {
-		// outputHandler
+			String bandit) {
+		serverOutputHandler.initBoard(amountPlayers, serverFields, edges, corners, bandit);
 
 	}
 
@@ -153,13 +153,13 @@ public class ServerNetworkController {
 //		if (allPlayersReady) {
 		gameController.addPlayerToArray(player);
 //		}
+		gameStarted(gameController.getBoard().getFields(), gameController.getBoard().getEdges(), gameController.getBoard().getCorners(), gameController.getBoard().getBandit());
 	}
 
 	// 7.4
-	public void gameStarted(Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
+	public void gameStarted(Field[][] fields, Edge[][][] edges, Corner[][][] corners, String bandit) {
 		//TODO 
-		//outputHandler.initBoard(amountPlayers, fields, edges, corners, bandit);
-
+		serverOutputHandler.initBoard(gameController.getAmountPlayers(), fields, edges, corners, bandit);
 	}
 
 	// 7.3

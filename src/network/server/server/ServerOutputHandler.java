@@ -44,8 +44,6 @@ public class ServerOutputHandler {
 
 	private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getName());
 
-
-
 	public void buildBuilding(ProtocolBuilding building) {
 		ProtocolBuild pb = new ProtocolBuild(building);
 		Response r = new Response();
@@ -91,23 +89,24 @@ public class ServerOutputHandler {
 
 	}
 
-	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
+	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, String banditLocation) {
 
 		ProtocolField[] pfArray = new ProtocolField[fields.length * fields[0].length];
 		// ModelToProtocol.resourceToString.get
 		int counter = 0;
 		for (int i = 0; i < fields.length; i++) {
 			for (int j = 0; j < fields[0].length; j++) {
-				Field f = fields[i][j];
-				pfArray[counter] = new ProtocolField(f.getFieldID(),
-						ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
-				counter++;
+				if (fields[i][j] != null) {
+					Field f = fields[i][j];
+					pfArray[counter] = new ProtocolField(f.getFieldID(),
+							ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
+					counter++;
+				}
 
 			}
 		}
 		ProtocolBuilding[] pBuildingsArray = null;
 		ProtocolHarbour[] pHarbourArray = null;
-		String banditLocation = bandit.getFieldID();
 		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray, banditLocation);
 		ProtocolGameStarted pgs = new ProtocolGameStarted(pb);
 		Response r = new Response();
@@ -173,19 +172,22 @@ public class ServerOutputHandler {
 	public void statusUpdate(int playerID, Color color, String name, PlayerState status, int victoryPoints,
 			int[] resources) {
 		// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
-//
-		//ProtocolResource pResourceToPlayer = new ProtocolResource(resources[0], resources[1], resources[3], resources[4], resources[2], null);
-		//ProtocolPlayer player = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResourceToPlayer);
-		//ProtocolStatusUpdate ps = new ProtocolStatusUpdate(player);
-//		Response r = new Response();
-//		r.pSUpdate = ps;
-//		try {
-//			server.broadcast((parser.createString(r)));
-//		} catch (IOException e) {
-//			logger.error("Threw a Input/Output Exception ", e);
-//			e.printStackTrace();
-//		}
-//
+		//
+		// ProtocolResource pResourceToPlayer = new
+		// ProtocolResource(resources[0], resources[1], resources[3],
+		// resources[4], resources[2], null);
+		// ProtocolPlayer player = new ProtocolPlayer(playerID, color, name,
+		// status, victoryPoints, pResourceToPlayer);
+		// ProtocolStatusUpdate ps = new ProtocolStatusUpdate(player);
+		// Response r = new Response();
+		// r.pSUpdate = ps;
+		// try {
+		// server.broadcast((parser.createString(r)));
+		// } catch (IOException e) {
+		// logger.error("Threw a Input/Output Exception ", e);
+		// e.printStackTrace();
+		// }
+		//
 
 	}
 }

@@ -20,7 +20,6 @@ public class ViewController {
 
 	private FXMLLoader loader;
 	protected View view;
-	protected Board board;
 	protected HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
 	protected HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	protected GameController gameController; // DEBUG
@@ -31,6 +30,7 @@ public class ViewController {
 	private Stage primaryStage;
 	private Stage choosingStage;
 	private Stage mainViewStage;
+
 
 	public ViewController(Stage primaryStage, FlowController fc) {
 		this.primaryStage = primaryStage;
@@ -98,7 +98,7 @@ public class ViewController {
 		primaryStage.close();
 		choosingStage.close();
 		mainViewStage = new Stage();
-		this.mainViewController = new MainViewController(this, board, mainViewStage);
+		this.mainViewController = new MainViewController(this, flowController.getBoard(), mainViewStage);
 		init();
 	}
 
@@ -165,10 +165,6 @@ public class ViewController {
 	public void setDiceRollResult(int playerId, int result) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public void setBoard(Board board) {
-		this.board = board;
 	}
 
 	public FlowController getFlowController() {
