@@ -160,4 +160,9 @@ public class ClientInputHandler extends InputHandler {
         //unnecessary Method in ClientInputHandler
     }
 
+    @Override
+    protected void handle(String string){
+    	networkController.serverConfirmation(string);
+    }
+
 }
