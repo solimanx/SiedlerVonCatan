@@ -76,7 +76,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolPlayerProfile playerProfile) {
-//  unnecessary Method in ClientInputHandler
+    //  unnecessary Method in ClientInputHandler
 
     }
 
@@ -96,7 +96,8 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolServerConfirmation serverConfirmation) {
-        // TODO Auto-generated method stub
+        String server_response=serverConfirmation.getServer_response();
+        networkController.serverConfirmation(server_response);
     }
 
     //
