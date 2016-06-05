@@ -28,6 +28,10 @@ public abstract class InputHandler {
 
 	// public void sendToParser();
 
+	public Parser getParser() {
+		return parser;
+	}
+
 	/**
 	 * takes parsed object and redirects to its proper method depending on
 	 * objects "real" class. ( object will be casted to "real" class )

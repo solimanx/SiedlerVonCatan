@@ -9,7 +9,6 @@ import model.Corner;
 import model.Edge;
 import model.Field;
 import network.ModelToProtocol;
-import network.client.client.ClientOutputHandler;
 import network.server.controller.ServerNetworkController;
 import parsing.Parser;
 import parsing.Response;
@@ -40,7 +39,7 @@ public class ServerOutputHandler {
 	public ServerOutputHandler(Server server) {
 		this.server = server;
 		this.networkController = server.getServerInputHandler().getServerNetworkController();
-		this.parser = new Parser();
+		this.parser = server.getServerInputHandler().getParser();
 	}
 
 	private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getName());
