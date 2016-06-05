@@ -17,6 +17,7 @@ import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerConfirmation;
+import protocol.object.ProtocolBuilding;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
@@ -61,7 +62,8 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolGameStarted gameStarted) {
-        // TODO networkController.gameStarted(fields, edges, corners, bandit);
+
+      //  networkController.gameStarted(fields, edges, corners, bandit);
 
     }
 
@@ -100,7 +102,8 @@ public class ClientInputHandler extends InputHandler {
     //
     @Override
     protected void handle(ProtocolBuild build) {
-        // TODO Auto-generated method stub
+        ProtocolBuilding building=build.getBuilding();
+        //networkController.build(building);
 
     }
 
