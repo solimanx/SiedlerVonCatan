@@ -62,6 +62,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolGameStarted gameStarted) {
+    	//+
         //  networkController.gameStarted(fields, edges, corners, bandit);
 
     }
@@ -117,9 +118,9 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolResourceObtain resourceObtain) {
-        //int playerID= ProtocolToModel.getPlayerID(resourceObtain.getPlayer().getPlayer_id());
-        // int[] resources=ProtocolToModel.getResources(resourceObtain.getPlayer().getResources());
-        //networkController.resourceObtain(playerId, resources);
+       //int playerID = ProtocolResourceObtain.getPlayer();
+       //int[] resources=ProtocolToModel.getResources(resourceObtain.getPlayer().getResources());
+       //networkController.resourceObtain(playerID, resources);
 
     }
 
