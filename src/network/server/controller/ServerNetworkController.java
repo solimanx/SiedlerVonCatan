@@ -2,6 +2,7 @@ package network.server.controller;
 
 import java.io.IOException;
 
+import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
@@ -48,9 +49,8 @@ public class ServerNetworkController {
 		this.serverInputHandler = serverInputHandler;
 	}
 
-	public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
-			String bandit) {
-		serverOutputHandler.initBoard(amountPlayers, serverFields, edges, corners, bandit);
+	public void initBoard(int amountPlayers, Board board) {
+		serverOutputHandler.initBoard(amountPlayers, board);
 
 	}
 
@@ -153,13 +153,13 @@ public class ServerNetworkController {
 //		if (allPlayersReady) {
 		gameController.addPlayerToArray(player);
 //		}
-		gameStarted(gameController.getBoard().getFields(), gameController.getBoard().getEdges(), gameController.getBoard().getCorners(), gameController.getBoard().getBandit());
-	}
+		gameStarted(gameController.getBoard());
+		}
 
 	// 7.4
-	public void gameStarted(Field[][] fields, Edge[][][] edges, Corner[][][] corners, String bandit) {
+	public void gameStarted(Board board) {
 		//TODO 
-		serverOutputHandler.initBoard(gameController.getAmountPlayers(), fields, edges, corners, bandit);
+		serverOutputHandler.initBoard(gameController.getAmountPlayers(), board);
 	}
 
 	// 7.3

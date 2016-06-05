@@ -1,22 +1,19 @@
 package model;
 
-import com.google.gson.annotations.SerializedName;
 
 import enums.ResourceType;
 
 public class Field {
 
-	@SerializedName("Ort")
 	private String id;
 
-	@SerializedName("Typ")
 	private ResourceType resourceType;
 
-	@SerializedName("Zahl")
-	private int diceIndex;
+	private Integer diceIndex;
 
 	public Field() {
-		resourceType = ResourceType.NOTHING; // TODO Constructor
+		resourceType = ResourceType.NOTHING;
+		diceIndex = null;
 	}
 
 	public String getFieldID() {
@@ -35,11 +32,11 @@ public class Field {
 		this.resourceType = resourceType;
 	}
 
-	public int getDiceIndex() {
+	public Integer getDiceIndex() {
 		return diceIndex;
 	}
 
-	public void setDiceIndex(int diceIndex) {
+	public void setDiceIndex(Integer diceIndex) {
 		this.diceIndex = diceIndex;
 	}
 

@@ -1,7 +1,10 @@
 package model;
 
-import settings.DefaultSettings;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import settings.DefaultSettings;
 
 /**
  * Contains all Board methods, retrieving fields, edges and corners.
@@ -13,29 +16,23 @@ public class Board {
 	private Corner[][][] corners;
 	private Edge[][][] edges;
 	private PlayerModel[] players;
-	private String bandit;
+	private String banditLocation; // <- bad
+	private Map<String, int[]> stringToCoordMap;
+	private Map<int[], String> coordToStringMap;
 	// TODO private DevDeck devDeck;
 
 	public Board(ArrayList<PlayerModel> tempPlayers) {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
-		initializeFields(fields);
+		initializeFields();
+		initializeHashMaps();
 		corners = new Corner[r][r][2];
-		initializeCorners(corners);
+		initializeCorners();
 		edges = new Edge[r][r][3];
-		initializeEdges(edges);
-		players = new PlayerModel[tempPlayers.size()]; // 0 = noPlayer; 1 =
-														// player1...
+		initializeEdges();
+		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
 		initializePlayers(tempPlayers);
-		// TODO players
-		// TODO bandit
-	}
-
-	private void initializePlayers(ArrayList<PlayerModel> tempPlayers) {
-		for (int i = 0; i < tempPlayers.size(); i++) {
-			players[i] = tempPlayers.get(i);
-		}
-
+		initializeBandit();
 	}
 
 	/**
@@ -43,189 +40,162 @@ public class Board {
 	 *
 	 * @param fields
 	 */
-	private void initializeFields(Field[][] fields) {
+	private void initializeFields() {
 		int aX; // axial x coordinate
 		int aY; // axial y coordinate
 		int absoluteValue;
+		int radius = DefaultSettings.BOARD_RADIUS;
 		for (int x = 0; x < fields.length; x++) {
 			for (int y = 0; y < fields[0].length; y++) {
-				aX = x - DefaultSettings.BOARD_SIZE / 2;
-				aY = y - DefaultSettings.BOARD_SIZE / 2;
+				aX = x - radius;
+				aY = y - radius;
 				absoluteValue = Math.abs(aX + aY);
-				if (absoluteValue <= DefaultSettings.BOARD_SIZE / 2) {
+				if (absoluteValue <= radius) {
 					fields[x][y] = new Field();
 				}
 			}
 		}
-
-		// TODO: better solution
-
-		getFieldAt(0, -2).setFieldID("A");
-		getFieldAt(1, -2).setFieldID("B");
-		getFieldAt(2, -2).setFieldID("C");
-		getFieldAt(-1, -1).setFieldID("D");
-		getFieldAt(0, -1).setFieldID("E");
-		getFieldAt(1, -1).setFieldID("F");
-		getFieldAt(2, -1).setFieldID("G");
-		getFieldAt(-2, 0).setFieldID("H");
-		getFieldAt(-1, 0).setFieldID("I");
-		getFieldAt(0, 0).setFieldID("J");
-		getFieldAt(1, 0).setFieldID("K");
-		getFieldAt(2, 0).setFieldID("L");
-		getFieldAt(-2, 1).setFieldID("M");
-		getFieldAt(-1, 1).setFieldID("N");
-		getFieldAt(0, 1).setFieldID("O");
-		getFieldAt(1, 1).setFieldID("P");
-		getFieldAt(-2, 2).setFieldID("Q");
-		getFieldAt(-1, 2).setFieldID("R");
-		getFieldAt(0, 2).setFieldID("S");
-
-		// water
-
 	}
 
 	/**
-	 * Initialize the corners.
+	 * Initialize String-to-axial coordinate HashMap and it's reverse, and
+	 * systematically assigns IDs to each field by it's coordinate
+	 */
+	/*
+	 * Warning: Works as intended ONLY if amount of inner fields is not greater
+	 * than 26 fields!
+	 * 
+	 */
+	private void initializeHashMaps() {
+		// initialize HashMaps
+		stringToCoordMap = new HashMap<String, int[]>();
+		coordToStringMap = new HashMap<int[], String>();
+		// temp to make code look clearer
+		int radius = DefaultSettings.BOARD_RADIUS;
+
+		// Starting indices.
+		char outerFieldsBegin = 'a';
+		char innerFieldsBegin = 'A';
+
+		// iterate through all fields row by row from top to bottom
+		for (int j = -radius; j <= radius; j++) {
+			for (int i = -radius; i <= radius; i++) {
+				// to skip null/undefined fields
+				if (getFieldAt(i, j) != null) {
+					if (HexService.sumAbsCubeXYZ(HexService.convertAxialToCube(new int[] { i, j })) == radius * 2) {
+						stringToCoordMap.put(String.valueOf(outerFieldsBegin), new int[] { i, j });
+						coordToStringMap.put(new int[] { i, j }, String.valueOf(outerFieldsBegin));
+						// go to next char : a->b->c->...
+						outerFieldsBegin++;
+					} else if (HexService.sumAbsCubeXYZ(HexService.convertAxialToCube(new int[] { i, j })) < radius
+							* 2) {
+						stringToCoordMap.put(String.valueOf(innerFieldsBegin), new int[] { i, j });
+						coordToStringMap.put(new int[] { i, j }, String.valueOf(innerFieldsBegin));
+						// go to next char : A->B->C->...
+						innerFieldsBegin++;
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Initialize the corners systematically
 	 *
 	 * @param corners
 	 */
-	private void initializeCorners(Corner[][][] corners) {
-		for (int x = 0; x < fields.length; x++) {
-			for (int y = 0; y < fields[0].length; y++) {
-				if (fields[x][y] != null) {
-					corners[x][y][0] = new Corner(); // North
-					corners[x][y][1] = new Corner(); // South
+	private void initializeCorners() {
+		// temporary variables to make code appear clearer
+		int[] temp;
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// Go through HashMap<String,int[]>
+		for (String key : stringToCoordMap.keySet()) {
+			// entry of key
+			temp = stringToCoordMap.get(key);
+			// lowercase keys only (outer ring)
+			if (key.matches("[a-z]")) {
+				// North only will be set
+				if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) < 0) {
+					// convert axial back to array coords
+					corners[temp[0] + radius][temp[1] + radius][0] = new Corner();
+				}
+				// south only will be set
+				else if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) > 0) {
+					// convert axial back to array coords
+					corners[temp[0] + radius][temp[1] + radius][1] = new Corner();
 				}
 			}
-			// TODO: better solution
-			filterUnusedCorners();
+			// outercase keys only (inner rings/fields)
+			else {
+				// North and south are set
+				corners[temp[0] + radius][temp[1] + radius][0] = new Corner();
+				corners[temp[0] + radius][temp[1] + radius][1] = new Corner();
+			}
+
 		}
 	}
 
 	/**
-	 * Set unused corners to null
-	 */
-	private void filterUnusedCorners() {
-
-		for (int i = 0; i < DefaultSettings.BOARD_SIZE; i++) {
-
-		}
-
-		// row 0
-		corners[3][0][0] = null;
-		corners[4][0][0] = null;
-		corners[5][0][0] = null;
-		corners[6][0][0] = null;
-		// row 1
-		corners[2][1][0] = null;
-		corners[6][1][0] = null;
-		// row 2
-		corners[1][2][0] = null;
-		corners[6][2][0] = null;
-		// row 3
-		corners[0][3][0] = null;
-		corners[0][3][1] = null;
-		corners[6][3][0] = null;
-		corners[6][3][1] = null;
-		// row 4
-		corners[0][4][1] = null;
-		corners[5][4][1] = null;
-		// row 5
-		corners[0][5][1] = null;
-		corners[4][5][1] = null;
-		// row 6
-		corners[0][6][1] = null;
-		corners[1][6][1] = null;
-		corners[2][6][1] = null;
-		corners[3][6][1] = null;
-	}
-
-	/**
-	 * Initialize the edges.
+	 * Initialize the edges systematically;
 	 *
 	 * @param edges
 	 */
-	private void initializeEdges(Edge[][][] edges) {
-		for (int x = 0; x < fields.length; x++) {
-			for (int y = 0; y < fields[0].length; y++) {
-				if (fields[x][y] != null) {
-					edges[x][y][0] = new Edge(); // Northwest
-					edges[x][y][1] = new Edge(); // Northeast
-					edges[x][y][2] = new Edge(); // East
+	/*
+	 * NW = north west, NE = north east, E = east
+	 */
+	private void initializeEdges() {
+		// temporary variables to make code appear clearer
+		int[] temp;
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// Go through HashMap<String,int[]>
+		for (String key : stringToCoordMap.keySet()) {
+			// entry of key
+			temp = stringToCoordMap.get(key);
+			// lowercase keys only (outer ring)
+			if (key.matches("[a-z]")) {
+				// NW only is defined
+				if (temp[0] >= 0 && temp[1] > 0) {
+					edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
+				}
+				// NE only is defined
+				else if (temp[0] == -radius && temp[1] == radius) {
+					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
+				}
+
+				// E only is defined
+				else if (temp[0] < 0 && temp[1] <= 0) {
+					edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
+				}
+				// only NW + NE are defined
+				else if (temp[0] > -radius && temp[0] < 0 && temp[1] == radius) {
+					edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
+					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
+				}
+				// only NE + E are defined
+				else if (temp[0] == -radius && temp[1] < radius && temp[1] > 0) {
+					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
+					edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
 				}
 			}
+			// outercase keys only (inner rings/fields)
+			else {
+				// NE, NW, E are set
+				edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
+				edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
+				edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
+			}
+
 		}
-		// TODO: better solution
-		filterUnusedEdges();
 	}
 
-	/**
-	 * Set unused edges to null.
-	 */
-	private void filterUnusedEdges() {
-		// row 0
-		edges[3][0][0] = null;
-		edges[3][0][1] = null;
-		edges[3][0][2] = null;
+	private void initializePlayers(ArrayList<PlayerModel> tempPlayers) {
+		for (int i = 0; i < tempPlayers.size(); i++) {
+			players[i] = tempPlayers.get(i);
+		}
+	}
 
-		edges[4][0][0] = null;
-		edges[4][0][1] = null;
-		edges[4][0][2] = null;
-
-		edges[5][0][0] = null;
-		edges[5][0][1] = null;
-		edges[5][0][2] = null;
-
-		edges[6][0][0] = null;
-		edges[6][0][1] = null;
-		edges[6][0][2] = null;
-
-		// row 1
-		edges[2][1][0] = null;
-		edges[2][1][1] = null;
-
-		edges[6][1][0] = null;
-		edges[6][1][1] = null;
-		edges[6][1][2] = null;
-
-		// row 2
-		edges[1][2][0] = null;
-		edges[1][2][1] = null;
-
-		edges[6][2][0] = null;
-		edges[6][2][1] = null;
-		edges[6][2][2] = null;
-
-		// row 3
-		edges[0][3][0] = null;
-		edges[0][3][1] = null;
-
-		edges[6][3][0] = null;
-		edges[6][3][1] = null;
-		edges[6][3][2] = null;
-
-		// row 4
-		edges[0][4][0] = null;
-
-		edges[5][4][1] = null;
-		edges[5][4][2] = null;
-
-		// row 5
-		edges[0][5][0] = null;
-
-		edges[4][5][1] = null;
-		edges[4][5][2] = null;
-
-		// row 6
-		edges[0][6][0] = null;
-		edges[0][6][2] = null;
-
-		edges[1][6][2] = null;
-
-		edges[2][6][2] = null;
-
-		edges[3][6][1] = null;
-		edges[3][6][2] = null;
+	private void initializeBandit() {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -239,11 +209,13 @@ public class Board {
 	 */
 
 	public Field getFieldAt(int aX, int aY) {
-		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
-				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aY > DefaultSettings.BOARD_SIZE / 2) {
+		// temp to make code clearer
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// if out of range
+		if (aX < -radius || aX > radius || aY < -radius || aY > radius) {
 			return null;
 		} else {
-			return this.fields[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2];
+			return this.fields[aX + radius][aY + radius];
 		}
 	}
 
@@ -260,11 +232,13 @@ public class Board {
 	 */
 
 	public Corner getCornerAt(int aX, int aY, int dir) {
-		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
-				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || dir < 0 || dir > 1) {
+		// temp to make code clearer
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// if out of range
+		if (aX < -radius || aX > radius || aY < -radius || aY > radius || dir < 0 || dir > 1) {
 			return null;
 		} else {
-			return this.corners[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][dir];
+			return this.corners[aX + radius][aY + radius][dir];
 		}
 	}
 
@@ -281,11 +255,13 @@ public class Board {
 	 */
 
 	public Edge getEdgeAt(int aX, int aY, int dir) {
-		if (aX < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2
-				|| aY < -DefaultSettings.BOARD_SIZE / 2 || aX > DefaultSettings.BOARD_SIZE / 2 || dir < 0 || dir > 2) {
+		// temp to make code clearer
+		int radius = DefaultSettings.BOARD_RADIUS;
+		// if out of range
+		if (aX < -radius || aX > radius || aY < -radius || aY > radius || dir < 0 || dir > 2) {
 			return null;
 		} else {
-			return this.edges[aX + DefaultSettings.BOARD_SIZE / 2][aY + DefaultSettings.BOARD_SIZE / 2][dir];
+			return this.edges[aX + radius][aY + radius][dir];
 		}
 	}
 
@@ -607,197 +583,108 @@ public class Board {
 		return linkedEdges;
 	}
 
-	public int[] getFieldCoordinates(Field f) {
-		String field_id = f.getFieldID();
+	public int[] getFieldCoordinates(String f) {
 
 		// filter bad input
-		if (field_id.length() == 1) {
-			// water coordinates
-			if (field_id.matches("[a-r]")) {
-				switch (field_id) {
-				case "a":
-					return new int[] { 0, -3 };
-				case "b":
-					return new int[] { 1, -3 };
-				case "c":
-					return new int[] { 2, -3 };
-				case "d":
-					return new int[] { 3, -3 };
-				case "e":
-					return new int[] { -1, -2 };
-				case "f":
-					return new int[] { 3, -2 };
-				case "g":
-					return new int[] { -2, -1 };
-				case "h":
-					return new int[] { 3, -1 };
-				case "i":
-					return new int[] { -3, 0 };
-				case "j":
-					return new int[] { 3, 0 };
-				case "k":
-					return new int[] { -3, 1 };
-				case "l":
-					return new int[] { 2, 1 };
-				case "m":
-					return new int[] { -3, 2 };
-				case "n":
-					return new int[] { 1, 2 };
-				case "o":
-					return new int[] { -3, 3 };
-				case "p":
-					return new int[] { -2, 3 };
-				case "q":
-					return new int[] { -1, 3 };
-				case "r":
-					return new int[] { 0, 3 };
-				}
-			}
-			// field coordinates
-			else if (field_id.matches("[A-S]")) {
-				switch (field_id) {
-				case "A":
-					return new int[] { 0, -2 };
-				case "B":
-					return new int[] { 1, -2 };
-				case "C":
-					return new int[] { 2, -2 };
-				case "D":
-					return new int[] { -1, -1 };
-				case "E":
-					return new int[] { 0, -1 };
-				case "F":
-					return new int[] { 1, -1 };
-				case "G":
-					return new int[] { 2, -1 };
-				case "H":
-					return new int[] { -2, 0 };
-				case "I":
-					return new int[] { -1, 0 };
-				case "J":
-					return new int[] { 0, 0 };
-				case "K":
-					return new int[] { 1, 0 };
-				case "L":
-					return new int[] { 2, 0 };
-				case "M":
-					return new int[] { -2, 1 };
-				case "N":
-					return new int[] { -1, 1 };
-				case "O":
-					return new int[] { 0, 1 };
-				case "P":
-					return new int[] { 1, 1 };
-				case "Q":
-					return new int[] { -2, 2 };
-				case "R":
-					return new int[] { -1, 2 };
-				case "S":
-					return new int[] { 0, 2 };
-				}
-			}
+		if (f.length() == 1) {
+			return stringToCoordMap.get(f);
 		}
 		// wrong id
 		return null;
 	}
 
-	public ArrayList<Field> getSpiral(Field f) {
-		Field firstField = f;
-		Field nextField = f;
-		Field plannedNextField = f;
-		int r = ((DefaultSettings.BOARD_SIZE - 1) / 2) - 1;
-		ArrayList<Field> result = new ArrayList<Field>();
-		int dir = getDirektion(f);
-		int[] coord = new int[2];
+	// public ArrayList<Field> getSpiral(Field f) {
+	// Field firstField = f;
+	// Field nextField = f;
+	// Field plannedNextField = f;
+	// int r = ((DefaultSettings.BOARD_SIZE - 1) / 2) - 1;
+	// ArrayList<Field> result = new ArrayList<Field>();
+	// int dir = getDirection(f);
+	// int[] coord = new int[2];
+	//
+	// for (int length = r; length > 0; length--) {
+	// for (int j = 0; j < 7; j++) {
+	// for (int i = 0; i < length; i++) {
+	// if (nextField != null) {
+	// switch (j) {
+	// case 0:
+	// if (getRing(length).contains(plannedNextField)) {
+	// nextField = plannedNextField;
+	// result.add(nextField);
+	// // sysoutArrayList(result); //debug
+	// coord[0] = getFieldCoordinates(nextField)[0];
+	// coord[1] = getFieldCoordinates(nextField)[1];
+	// plannedNextField = getNextField(coord[0], coord[1],
+	// getDirection(nextField));
+	// } else {
+	// i = r;
+	// }
+	// break;
+	// case 6:
+	// if (plannedNextField != firstField) {
+	// nextField = plannedNextField;
+	// result.add(nextField);
+	// // sysoutArrayList(result); //debug
+	// coord[0] = getFieldCoordinates(nextField)[0];
+	// coord[1] = getFieldCoordinates(nextField)[1];
+	// plannedNextField = getNextField(coord[0], coord[1],
+	// getDirection(nextField));
+	// } else {
+	// coord[0] = getFieldCoordinates(nextField)[0];
+	// coord[1] = getFieldCoordinates(nextField)[1];
+	// i = r;
+	// j = 7;
+	// plannedNextField = getNextField(coord[0], coord[1],
+	// nextDir(getDirection(nextField), 0));
+	// if (result.contains(plannedNextField)) {
+	// plannedNextField = getNextField(coord[0], coord[1],
+	// nextDir(getDirection(nextField), 1));
+	// }
+	// }
+	// break;
+	// default:
+	// nextField = plannedNextField;
+	// result.add(nextField);
+	// // sysoutArrayList(result); //debug
+	// coord[0] = getFieldCoordinates(nextField)[0];
+	// coord[1] = getFieldCoordinates(nextField)[1];
+	// plannedNextField = getNextField(coord[0], coord[1],
+	// getDirection(nextField));
+	// break;
+	// }
+	// }
+	// }
+	//
+	// }
+	// firstField = nextField;
+	// }
+	// result.add(getFieldAt(0, 0));
+	// return result;
+	// }
+	//
+	// public int nextDir(int dir, int i) {
+	// int nextDir = (dir + i) % 6;
+	// switch (nextDir) {
+	// case 0:
+	// return 1;
+	// case 1:
+	// return 2;
+	// case 2:
+	// return 3;
+	// case 3:
+	// return 4;
+	// case 4:
+	// return 5;
+	// case 5:
+	// return 0;
+	// default:
+	// System.out.println("Error in board.nextDir.");
+	// return 0;
+	// }
+	// }
 
-		for (int length = r; length > 0; length--) {
-			for (int j = 0; j < 7; j++) {
-				for (int i = 0; i < length; i++) {
-					if (nextField != null) {
-						switch (j) {
-						case 0:
-							if (getRing(length).contains(plannedNextField)) {
-								nextField = plannedNextField;
-								result.add(nextField);
-								// sysoutArrayList(result); //debug
-								coord[0] = getFieldCoordinates(nextField)[0];
-								coord[1] = getFieldCoordinates(nextField)[1];
-								plannedNextField = getNextField(coord[0], coord[1], getDirektion(nextField));
-							} else {
-								i = r;
-							}
-							break;
-						case 6:
-							if (plannedNextField != firstField) {
-								nextField = plannedNextField;
-								result.add(nextField);
-								// sysoutArrayList(result); //debug
-								coord[0] = getFieldCoordinates(nextField)[0];
-								coord[1] = getFieldCoordinates(nextField)[1];
-								plannedNextField = getNextField(coord[0], coord[1], getDirektion(nextField));
-							} else {
-								coord[0] = getFieldCoordinates(nextField)[0];
-								coord[1] = getFieldCoordinates(nextField)[1];
-								i = r;
-								j = 7;
-								plannedNextField = getNextField(coord[0], coord[1],
-										nextDir(getDirektion(nextField), 0));
-								if (result.contains(plannedNextField)) {
-									plannedNextField = getNextField(coord[0], coord[1],
-											nextDir(getDirektion(nextField), 1));
-								}
-							}
-							break;
-						default:
-							nextField = plannedNextField;
-							result.add(nextField);
-							// sysoutArrayList(result); //debug
-							coord[0] = getFieldCoordinates(nextField)[0];
-							coord[1] = getFieldCoordinates(nextField)[1];
-							plannedNextField = getNextField(coord[0], coord[1], getDirektion(nextField));
-							break;
-						}
-					}
-				}
+	public int getDirection(String f) {
 
-			}
-			firstField = nextField;
-		}
-		result.add(getFieldAt(0, 0));
-		return result;
-	}
-
-	// TODO remove debug Method
-	public void sysoutArrayList(ArrayList<Field> a) {
-		String s = "";
-		for (int i = 0; i < a.size(); i++) {
-			s = s + a.get(i).getFieldID();
-		}
-		System.out.println(s);
-	}
-
-	public int nextDir(int dir, int i) {
-		int nextDir = (dir + i) % 6;
-		switch (nextDir) {
-		case 0:
-			return 1;
-		case 1:
-			return 2;
-		case 2:
-			return 3;
-		case 3:
-			return 4;
-		case 4:
-			return 5;
-		case 5:
-			return 0;
-		default:
-			System.out.println("Error in board.nextDir.");
-			return 0;
-		}
-	}
-
-	public int getDirektion(Field f) {
 		int x = getFieldCoordinates(f)[0];
 		int y = getFieldCoordinates(f)[1];
 		int sum = x + y;
@@ -824,21 +711,6 @@ public class Board {
 		return 0;
 	}
 
-	public ArrayList<Field> getRing(int rad) {
-		ArrayList<Field> result = new ArrayList<Field>();
-		int[] coord = new int[2];
-		Field nextField = getFieldAt(-2, 1);
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < rad; j++) {
-				result.add(nextField);
-				coord[0] = getFieldCoordinates(nextField)[0];
-				coord[1] = getFieldCoordinates(nextField)[1];
-				nextField = getNextField(coord[0], coord[1], getDirektion(nextField));
-			}
-		}
-		return result;
-	}
-
 	public Field getNextField(int aX, int aY, int dir) {
 		Field[] result = getNeighbouringFields(aX, aY); // To Do field to
 														// coordinates
@@ -860,14 +732,15 @@ public class Board {
 		}
 	}
 
+	// TODO FOR DEBUGGING ONLY
 	public ArrayList<Field> getAllFields() {
 		ArrayList<Field> result = new ArrayList<Field>();
 		for (int i = 0; i < fields.length; i++) {
 			for (int j = 0; j < fields[i].length; j++) {
 				if (fields[i][j] != null) {
-					if (fields[i][j].getFieldID() != null) {
-						result.add(fields[i][j]);
-					}
+					// if (fields[i][j].getFieldID() != null) {
+					// result.add(fields[i][j]);
+					// }
 				}
 			}
 		}
@@ -875,46 +748,27 @@ public class Board {
 	}
 
 	/**
-	 * Converts Axial (x,y) to Cube (x,y,z)
-	 *
-	 * @param a
-	 *            (x,y)
+	 * Get outer ring
 	 */
-
-	public int[] convertAxialToCube(int[] a) {
-
-		if (a.length != 2) {
-			// TODO: logging
-			System.out.println("Unable to convert: " + a.toString() + " to cube.");
-			return null;
-
-		} else {
-
-			int x = a[0];
-			int z = a[1];
-			int y = -x - z;
-
-			return new int[] { x, y, z };
+	public String getOuterRing() {
+		String result = "";
+		for (String key : stringToCoordMap.keySet()) {
+			if (key.matches("[a-z]")) {
+				result += key;
+			}
 		}
+		return result;
 	}
 
-	/**
-	 * Converts Cube (x,y,z) to Axial (x,y)
-	 *
-	 * @param c
-	 *            (x,y,z)
-	 */
-
-	public int[] convertCubeToAxial(int[] c) {
-		if (c.length != 3) {
-			// TODO: logging
-			System.out.println("Unable to convert: " + c.toString() + " to axial.");
-			return null;
-		} else {
-			int x = c[0];
-			int y = c[2];
-			return new int[] { x, y };
+	public String getInnerFields() {
+		String result = "";
+		for (String key : stringToCoordMap.keySet()) {
+			if (key.matches("[A-Z]")) {
+				result += key;
+			}
 		}
+		return result;
+
 	}
 
 	/**
@@ -954,16 +808,27 @@ public class Board {
 	 */
 
 	public String getBandit() {
-		return this.bandit;
+		return this.banditLocation;
 	}
 
 	/**
 	 * Sets bandit
 	 */
 
-	public void setBandit(String f) {
-		this.bandit = f;
+	public void setBandit(String banditLocation) {
+		this.banditLocation = banditLocation;
 
+	}
+
+	/**
+	 * @return the fieldIDMap
+	 */
+	public Map<String, int[]> getStringToCoordMap() {
+		return stringToCoordMap;
+	}
+
+	public Map<int[], String> getCoordToStringMap() {
+		return coordToStringMap;
 	}
 
 }

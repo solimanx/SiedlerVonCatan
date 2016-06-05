@@ -7,7 +7,7 @@ import settings.DefaultSettings;
 
 public class HexService {
 	final static int[][] DIRECTIONS = { { 1, -1 }, { 1, 0 }, { 0, 1 }, { -1, 1 }, { -1, 0 }, { 0, -1 } };
-	BoardNew board;
+	Board board;
 
 	public static int[] getFieldCoordinates(String field_id) {
 		// filter bad input

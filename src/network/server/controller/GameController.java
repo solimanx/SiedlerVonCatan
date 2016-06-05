@@ -54,12 +54,11 @@ public class GameController implements GameControllerInterface {
 		 * for (int i = 1; i <= amountPlayers;i++){
 		 * networkController.initClients(i,board)... end
 		 */
-		addToPlayersResource(0, ResourceType.WOOD, 3); // All DEBUG!!
-		addToPlayersResource(0, ResourceType.CLAY, 3);
-		addToPlayersResource(0, ResourceType.ORE, 3);
-		addToPlayersResource(0, ResourceType.SHEEP, 3);
-		addToPlayersResource(0, ResourceType.CORN, 3);
-		setPlayerState(0, PlayerState.PLAYING); // player 1 begins
+		// addToPlayersResource(0, ResourceType.WOOD, 3); // All DEBUG!!
+		// addToPlayersResource(0, ResourceType.CLAY, 3);
+		// addToPlayersResource(0, ResourceType.ORE, 3);
+		// addToPlayersResource(0, ResourceType.SHEEP, 3);
+		// addToPlayersResource(0, ResourceType.CORN, 3);
 	}
 
 	public Board getBoard() {
@@ -136,16 +135,22 @@ public class GameController implements GameControllerInterface {
 
 	// DEBUGGING ONLY
 	public void generateDebuggingBoard() {
-		for (int i = -3; i <= 3; i++) {
-			for (int j = -3; j <= 3; j++) {
-				if (board.getFieldAt(j, i) != null) {
-					board.getFieldAt(j, i).setFieldID("A");
-					board.getFieldAt(j, i).setDiceIndex(0);
-					board.getFieldAt(j, i).setResourceType(ResourceType.CORN);
 
-				}
+		for (String key : board.getStringToCoordMap().keySet()) {
+			int coords[] = board.getStringToCoordMap().get(key);
+			board.getFieldAt(coords[0], coords[1]).setFieldID(key);
+			// DEBUG assume all resourcetype is corn
+			if (key.matches("[a-z]")) {
+				board.getFieldAt(coords[0], coords[1]).setResourceType(ResourceType.SEA);
+				board.getFieldAt(coords[0], coords[1]).setDiceIndex(null);
+			} else {
+				board.getFieldAt(coords[0], coords[1]).setResourceType(ResourceType.CORN);
+				// DEBUG assume all dice index is 3
+				board.getFieldAt(coords[0], coords[1]).setDiceIndex(3);
+				
 			}
 		}
+
 		board.setBandit("J");
 
 	}
@@ -345,7 +350,7 @@ public class GameController implements GameControllerInterface {
 	@Override
 	public void setBandit(int x, int y, int playerID) {
 		if (gameLogic.checkSetBandit(x, y, playerID)) {
-			//board.setBandit(board.getFieldAt(x, y));
+			// board.setBandit(board.getFieldAt(x, y));
 
 			viewController.getMainViewController().setBandit(x, y); // Debug
 		}
@@ -363,7 +368,7 @@ public class GameController implements GameControllerInterface {
 	public void setPlayerState(int playerID, PlayerState state) {
 		switch (state) {
 		case TRADING: // set all other players to offering
-			for (int i = 1; i < board.getPlayerModels().length; i++) {
+			for (int i = 0; i < board.getPlayerModels().length; i++) {
 				if (i == playerID) {
 					board.getPlayerModels()[i].setPlayerState(state);
 				} else {
@@ -371,7 +376,7 @@ public class GameController implements GameControllerInterface {
 				}
 			}
 		case PLAYING: // set all other players waiting
-			for (int i = 1; i < board.getPlayerModels().length; i++) {
+			for (int i = 0; i < board.getPlayerModels().length; i++) {
 				if (i == playerID) {
 					board.getPlayerModels()[i].setPlayerState(state);
 				} else {

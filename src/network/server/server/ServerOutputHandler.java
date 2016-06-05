@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import enums.Color;
 import enums.PlayerState;
+import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
@@ -89,25 +90,23 @@ public class ServerOutputHandler {
 
 	}
 
-	public void initBoard(int amountPlayers, Field[][] fields, Edge[][][] edges, Corner[][][] corners, String banditLocation) {
+	public void initBoard(int amountPlayers, Board board) {
 
-		ProtocolField[] pfArray = new ProtocolField[fields.length * fields[0].length];
-		// ModelToProtocol.resourceToString.get
+		ProtocolField[] pfArray = new ProtocolField[board.getStringToCoordMap().size()];
 		int counter = 0;
-		for (int i = 0; i < fields.length; i++) {
-			for (int j = 0; j < fields[0].length; j++) {
-				if (fields[i][j] != null) {
-					Field f = fields[i][j];
-					pfArray[counter] = new ProtocolField(f.getFieldID(),
-							ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
-					counter++;
-				}
+		// ModelToProtocol.resourceToString.get
 
-			}
+		for (String key : board.getStringToCoordMap().keySet()) {
+			int coords[] = board.getStringToCoordMap().get(key);
+			Field f = board.getFieldAt(coords[0], coords[1]);
+			pfArray[counter] = new ProtocolField(f.getFieldID(),
+					ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
+			counter++;
 		}
+
 		ProtocolBuilding[] pBuildingsArray = null;
 		ProtocolHarbour[] pHarbourArray = null;
-		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray, banditLocation);
+		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray, board.getBandit());
 		ProtocolGameStarted pgs = new ProtocolGameStarted(pb);
 		Response r = new Response();
 		r.pGameStarted = pgs;

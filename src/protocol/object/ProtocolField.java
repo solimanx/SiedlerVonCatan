@@ -21,9 +21,9 @@ public class ProtocolField {
 	private String field_type;
 
 	@SerializedName("Zahl")
-	private int dice_index;
+	private Integer dice_index;
 
-	public ProtocolField(String field_id, String field_type, int dice_index) {
+	public ProtocolField(String field_id, String field_type, Integer dice_index) {
 		this.field_id = field_id;
 		this.field_type = field_type;
 		this.dice_index = dice_index;
@@ -37,7 +37,7 @@ public class ProtocolField {
 		return field_type;
 	}
 
-	public int getDiceIndex() {
+	public Integer getDiceIndex() {
 		return dice_index;
 	}
 
