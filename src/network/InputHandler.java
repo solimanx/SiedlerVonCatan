@@ -90,8 +90,12 @@ public abstract class InputHandler {
 			break;
 		case "ProtocolRobberMovement": // 0.2
 			handle((ProtocolRobberMovement) o);
+			break;
+		case "String":
+			handle((String) o);
+			break;
 		default:
-			System.out.println("Class not found or Server sent OK"); //TODO logging
+			System.out.println("Class not found"); //TODO logging
 		}
 
 	}
@@ -113,6 +117,8 @@ public abstract class InputHandler {
 	protected abstract void handle(ProtocolChatSendMessage chatSendMessage);
 
 	protected abstract void handle(ProtocolServerConfirmation serverConfirmation);
+	
+	protected abstract void handle(String string);
 
 	protected abstract void handle(ProtocolBuild build);
 

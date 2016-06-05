@@ -99,6 +99,11 @@ public class ClientInputHandler extends InputHandler {
         String server_response=serverConfirmation.getServer_response();
         networkController.serverConfirmation(server_response);
     }
+    
+    @Override
+    protected void handle(String string){
+    	networkController.serverConfirmation(string);
+    }
 
     //
     @Override

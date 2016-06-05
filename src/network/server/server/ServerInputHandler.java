@@ -170,5 +170,11 @@ public class ServerInputHandler extends InputHandler {
 
     }
 
+	@Override
+	protected void handle(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
