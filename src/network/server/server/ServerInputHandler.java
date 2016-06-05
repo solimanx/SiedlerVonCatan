@@ -127,8 +127,7 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolResourceObtain resourceObtain) {
-        // TODO Auto-generated method stub
-
+        //unnecessary Method in ServerInputHandler
     }
 
     @Override
