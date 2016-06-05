@@ -190,4 +190,8 @@ public class ServerOutputHandler {
 		//
 
 	}
+	protected void handle(ProtocolGameStarted gameStarted) {
+		//TODO
+	}
+
 }
