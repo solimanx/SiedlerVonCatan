@@ -32,6 +32,48 @@ public final class ModelToProtocol {
 
 	public static ProtocolResource getResources(int[] resources) {
 		// TODO
-		return null;
+		Integer wood = 0;
+		Integer clay = 0;
+		Integer wool = 0;
+		Integer corn = 0;
+		Integer ore = 0;
+		Integer unknown = null; //TODO
+		for(int i = 0; i < resources.length; i++){
+			if(resources[i] == 0){
+				wood++;
+				continue;
+			}
+			if(resources[i] == 1){
+				clay++;
+				continue;
+			}
+			if(resources[i] == 2){
+				ore++;
+				continue;
+			}
+			if(resources[i] == 3){
+				wool++;
+				continue;
+			}
+			if(resources[i] == 4){
+				corn++;
+				continue;
+			}
+		}
+//		int amount = wood + clay + wool + corn + ore;
+//		if(amount != 0){
+//			unknown = null;
+//		}
+//		else{
+//			wood = null;
+//			clay = null;
+//			wool = null;
+//			corn = null;
+//			ore = null;
+//			unknown = amount;
+//		}
+		//TODO handle unknown (darf der spieler die ressourcen wissen oder nicht)
+		ProtocolResource pr = new ProtocolResource(wood, clay, wool, corn, ore, unknown);
+		return pr;
 	}
 }

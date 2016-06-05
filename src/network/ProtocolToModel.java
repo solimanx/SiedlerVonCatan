@@ -49,7 +49,7 @@ public final class ProtocolToModel {
 		case "Verbindung verloren":
 			return enums.PlayerState.CONNECTION_LOST;
 		default:
-			System.out.println("Error in ProtocolToModel.getPlayerState");
+			System.out.println("Error in ProtocolToModel.getPlayerState"); //TODO Logging
 			return null;
 		}
 	}
