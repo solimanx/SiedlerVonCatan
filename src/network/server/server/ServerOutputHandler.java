@@ -194,4 +194,8 @@ public class ServerOutputHandler {
 		//TODO
 	}
 
+	protected void handle(ProtocolBuild build) {
+		//TODO
+	}
+
 }
