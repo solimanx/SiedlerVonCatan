@@ -35,10 +35,9 @@ public class GameController implements GameControllerInterface {
 		this.setServerNetworkController(new ServerNetworkController(this));
 	}
 
-
 	public void setServerNetworkController(ServerNetworkController sNC) {
 		this.serverNetworkController = sNC;
-		
+
 	}
 
 	/**
@@ -60,12 +59,12 @@ public class GameController implements GameControllerInterface {
 		 * networkController.initClients(i,board)... end
 		 */
 
-//		addToPlayersResource(1, ResourceType.WOOD, 3); // All DEBUG!!
-//		addToPlayersResource(1, ResourceType.CLAY, 3);
-//		addToPlayersResource(1, ResourceType.ORE, 3);
-//		addToPlayersResource(1, ResourceType.SHEEP, 3);
-//		addToPlayersResource(1, ResourceType.CORN, 3);
-//		setPlayerState(1, PlayerState.PLAYING); // player 1 begins
+		// addToPlayersResource(1, ResourceType.WOOD, 3); // All DEBUG!!
+		// addToPlayersResource(1, ResourceType.CLAY, 3);
+		// addToPlayersResource(1, ResourceType.ORE, 3);
+		// addToPlayersResource(1, ResourceType.SHEEP, 3);
+		// addToPlayersResource(1, ResourceType.CORN, 3);
+		// setPlayerState(1, PlayerState.PLAYING); // player 1 begins
 
 		serverNetworkController.gameStarted(board);
 	}
@@ -157,7 +156,7 @@ public class GameController implements GameControllerInterface {
 				board.getFieldAt(coords[0], coords[1]).setResourceType(ResourceType.CORN);
 				// DEBUG assume all dice index is 3
 				board.getFieldAt(coords[0], coords[1]).setDiceIndex(3);
-				
+
 			}
 		}
 

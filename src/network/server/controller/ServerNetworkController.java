@@ -22,7 +22,7 @@ public class ServerNetworkController {
 	public ServerNetworkController(GameController gc) {
 		this.gameController = gc;
 		this.serverInputHandler = new ServerInputHandler(this);
-		this.server = new Server(serverInputHandler); 
+		this.server = new Server(serverInputHandler);
 		this.serverOutputHandler = new ServerOutputHandler(server);
 		gameController.setServerNetworkController(this);
 		try {
@@ -90,21 +90,23 @@ public class ServerNetworkController {
 
 	// 8.6
 	public void buildStreet(int x, int y, int dir, int playerID) {
-		//TODO
-		//outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "Street");
+		// TODO
+		// outputHandler.buildBuilding(x, y, dir, playerIDs[playerID],
+		// "Street");
 
 	}
 
 	// 8.6
 	public void buildVillage(int x, int y, int dir, int playerID) {
-		//TODO
-		//outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "Village");
+		// TODO
+		// outputHandler.buildBuilding(x, y, dir, playerIDs[playerID],
+		// "Village");
 	}
 
 	// 8.6
 	public void buildCity(int x, int y, int dir, int playerID) {
-		//TODO
-		//outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "City");
+		// TODO
+		// outputHandler.buildBuilding(x, y, dir, playerIDs[playerID], "City");
 
 	}
 
@@ -129,10 +131,10 @@ public class ServerNetworkController {
 		serverOutputHandler.welcome(playerID);
 	}
 
-//	private int getNewId() {
-//		//TODO return IdCounter++;
-//		return 0;
-//	}
+	// private int getNewId() {
+	// //TODO return IdCounter++;
+	// return 0;
+	// }
 
 	// 7.2
 	/**
@@ -143,23 +145,25 @@ public class ServerNetworkController {
 	 */
 	public void clientReady(int playerID) {
 		PlayerModel player = new PlayerModel(playerID);
-		//gameController.addPlayerToArray(player);
-//		gameController.setPlayerState(playerID, enums.PlayerState.WAITING); //TODO WaintingforGamestart
-//		boolean allPlayersReady = true;
-//		for (int i = 1; i <= amountPlayers; i++) {
-//			if (gameController.getPlayerState(playerID) != enums.PlayerState.WAITING) { //TODO WaintingforGamestart
-//				// allPlayersReady = false;
-//			}
-//		}
-//		if (allPlayersReady) {
+		// gameController.addPlayerToArray(player);
+		// gameController.setPlayerState(playerID, enums.PlayerState.WAITING);
+		// //TODO WaintingforGamestart
+		// boolean allPlayersReady = true;
+		// for (int i = 1; i <= amountPlayers; i++) {
+		// if (gameController.getPlayerState(playerID) !=
+		// enums.PlayerState.WAITING) { //TODO WaintingforGamestart
+		// // allPlayersReady = false;
+		// }
+		// }
+		// if (allPlayersReady) {
 		gameController.addPlayerToArray(player);
-//		}
+		// }
 		gameStarted(gameController.getBoard());
-		}
+	}
 
 	// 7.4
 	public void gameStarted(Board board) {
-		//TODO 
+		// TODO
 		serverOutputHandler.initBoard(gameController.getAmountPlayers(), board);
 
 	}
@@ -196,15 +200,15 @@ public class ServerNetworkController {
 
 	// 8.2
 	public void diceRollResult(int playerID, int result) {
-		//TODO
-		//outputHandler.diceRollResult(playerIDs[playerID], result);
+		// TODO
+		// outputHandler.diceRollResult(playerIDs[playerID], result);
 
 	}
 
 	// 8.3
 	public void resourceObtain(int playerID, int[] resources) {
-		//TODO
-		//outputHandler.resourceObtain(playerIDs[playerID], resources);
+		// TODO
+		// outputHandler.resourceObtain(playerIDs[playerID], resources);
 
 	}
 

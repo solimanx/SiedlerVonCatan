@@ -98,8 +98,9 @@ public class FlowController {
 				ownCorners[i][j][2].setStatus(corners[i][j][2].getStatus());
 			}
 		}
-		//int[] banditCoordinates = board.getFieldCoordinates(bandit);
-		//board.setBandit(board.getFieldAt(banditCoordinates[0], banditCoordinates[1]));
+		// int[] banditCoordinates = board.getFieldCoordinates(bandit);
+		// board.setBandit(board.getFieldAt(banditCoordinates[0],
+		// banditCoordinates[1]));
 
 		this.gameLogic = new GameLogic(board);
 
@@ -202,7 +203,7 @@ public class FlowController {
 
 	}
 
-	public void sendPlayerProfile(String name, Color color){
+	public void sendPlayerProfile(String name, Color color) {
 		clientNetworkController.sendPlayerProfile(color, name);
 		setPlayerColor(ownPlayerId, color);
 		setPlayerName(ownPlayerId, name);
@@ -230,7 +231,7 @@ public class FlowController {
 		viewController.getLobbyController().receiveChatMessage("Spieler " + playerId + ": " + s);
 	}
 
-	public void sendReady(){
+	public void sendReady() {
 		clientNetworkController.clientReady();
 	}
 

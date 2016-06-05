@@ -162,8 +162,10 @@ public class GameLogic implements GameLogicInterface {
 	 */
 	public boolean checkSetBandit(int x, int y, int playerId) {
 		Field f = board.getFieldAt(x, y);
-		if (f != null && f.getFieldID() != board.getBandit()) { // valid position and not the
-													// same as before
+		if (f != null && f.getFieldID() != board.getBandit()) { // valid
+																// position and
+																// not the
+			// same as before
 			if (playerId == 0) { // check if specified player has a corner at
 									// this field
 				return true;

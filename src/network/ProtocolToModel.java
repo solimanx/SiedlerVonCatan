@@ -10,7 +10,6 @@ public final class ProtocolToModel {
 		return HexService.getFieldCoordinates(field_id);
 	}
 
-
 	public static int[] getCornerCoordinates(String location) {
 		int[] a = HexService.getFieldCoordinates(location.substring(0, 1));
 		int[] b = HexService.getFieldCoordinates(location.substring(1, 2));
@@ -49,7 +48,8 @@ public final class ProtocolToModel {
 		case "Verbindung verloren":
 			return enums.PlayerState.CONNECTION_LOST;
 		default:
-			System.out.println("Error in ProtocolToModel.getPlayerState"); //TODO Logging
+			System.out.println("Error in ProtocolToModel.getPlayerState"); // TODO
+																			// Logging
 			return null;
 		}
 	}

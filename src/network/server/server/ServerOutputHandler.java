@@ -190,10 +190,11 @@ public class ServerOutputHandler {
 		//
 
 	}
-	public void gameStarted(ProtocolBoard board){
+
+	public void gameStarted(ProtocolBoard board) {
 		ProtocolGameStarted pb = new ProtocolGameStarted(board);
 		Response r = new Response();
-		r.pGameStarted=pb;
+		r.pGameStarted = pb;
 		try {
 			server.broadcast(parser.createString(r));
 		} catch (IOException e) {
@@ -203,7 +204,7 @@ public class ServerOutputHandler {
 	}
 
 	public void build(ProtocolBuilding building) {
-		ProtocolBuild pb = new ProtocolBuild( building);
+		ProtocolBuild pb = new ProtocolBuild(building);
 		Response r = new Response();
 		r.pBuild = pb;
 		try {

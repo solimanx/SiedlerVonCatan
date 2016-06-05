@@ -1,6 +1,5 @@
 package model;
 
-
 import enums.ResourceType;
 
 public class Field {

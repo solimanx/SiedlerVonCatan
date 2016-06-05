@@ -31,7 +31,6 @@ public class ViewController {
 	private Stage choosingStage;
 	private Stage mainViewStage;
 
-
 	public ViewController(Stage primaryStage, FlowController fc) {
 		this.primaryStage = primaryStage;
 		this.flowController = fc;
@@ -51,6 +50,7 @@ public class ViewController {
 
 	/**
 	 * Starts the lobby view, which provides connecting to server and chat
+	 * 
 	 * @param primaryStage
 	 * @throws IOException
 	 */
@@ -69,10 +69,11 @@ public class ViewController {
 		//
 		primaryStage.show();
 	}
-	
+
 	/**
-	 * starts the View for choosing Player name and Player Color
-	 * view also offers Button for setting Player ready for game to start
+	 * starts the View for choosing Player name and Player Color view also
+	 * offers Button for setting Player ready for game to start
+	 * 
 	 * @throws IOException
 	 */
 	public void startChooseView() throws IOException {
@@ -85,7 +86,7 @@ public class ViewController {
 			choosingStage.setTitle("Choose Name and Color");
 			choosingStage.setScene(new Scene(root1));
 			choosingStage.show();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -190,7 +191,5 @@ public class ViewController {
 	public void setLobbyController(LobbyController lobbyController) {
 		this.lobbyController = lobbyController;
 	}
-
-	
 
 }

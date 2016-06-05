@@ -121,12 +121,11 @@ public class ClientNetworkController {
 	}
 
 	// 7.1
-//
+	//
 	public void sendPlayerProfile(enums.Color color, String name) {
 		outputHandler.sendPlayerProfile(name, color);
 
 	}
-
 
 	// 6.2
 	public void chatSendMessage(String s) {

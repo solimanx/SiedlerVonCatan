@@ -81,8 +81,8 @@ public class Parser {
 		if (response.pEndTurn != null) {
 			return (T) response.pEndTurn;
 		}
-		
-		//TODO logging
+
+		// TODO logging
 		System.out.println("CANNOT READ INPUT");
 		return null;
 
