@@ -86,7 +86,7 @@ public class ServerInputHandler extends InputHandler {
     protected void handle(ProtocolPlayerProfile playerProfile) {
         String name = playerProfile.getName();
         Color color = playerProfile.getColor();
-        // ClientNetworkController.sendPlayerProfile(name,color);
+        //ClientNetworkController.sendPlayerProfile(name,color);
         //TODO
 
     }
@@ -108,7 +108,8 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolServerConfirmation serverConfirmation) {
-        // TODO Auto-generated method stub
+        String server_response=serverConfirmation.getServer_response();
+        serverNetworkController.serverConfirmation(server_response);
 
     }
 
