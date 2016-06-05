@@ -121,7 +121,7 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolDiceRollResult diceRollResult) {
-        // TODO Auto-generated method stub
+        // unnecessary Method in ServerInputHandler
 
     }
 
