@@ -8,6 +8,7 @@ import network.server.controller.ServerNetworkController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
+import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
@@ -97,7 +98,7 @@ public class ServerInputHandler extends InputHandler {
         int playerId = chatReceiveMessage.getSender();
         serverNetworkController.chatReceiveMessage(playerId, s);
         /*
-		 * ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be
+         * ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be
 		 * handled only in ServerOutputHandler and in ClientInputHandler.
 		 * unnecessary Method in ServerInputHandler
 		 */
@@ -175,6 +176,14 @@ public class ServerInputHandler extends InputHandler {
     @Override
     protected void handle(String string) {
         // TODO Auto-generated method stub
+
+    }
+
+    protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
+        Integer player_id = robberMovementRequest.getPlayer_id();
+        String location_id = robberMovementRequest.getLocation_id();
+        int victim_id = robberMovementRequest.getVictim_id();
+        // serverNetworkController.robberMovementRequest(player_id,location_id,victim_id);
 
     }
 
