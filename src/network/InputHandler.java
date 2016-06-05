@@ -91,7 +91,7 @@ public abstract class InputHandler {
 		case "ProtocolRobberMovement": // 0.2
 			handle((ProtocolRobberMovement) o);
 		default:
-			System.out.println("Class not found"); //TODO logging
+			System.out.println("Class not found or Server sent OK"); //TODO logging
 		}
 
 	}

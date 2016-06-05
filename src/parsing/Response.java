@@ -83,7 +83,7 @@ public class Response {
 	public ProtocolChatSendMessage pChatSend;
 
 	@SerializedName("Serverantwort")
-	public ProtocolServerConfirmation pServerConfirmation;
+	public String pServerConfirmation;
 
 	// Client Instructions
 

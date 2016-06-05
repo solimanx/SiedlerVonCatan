@@ -141,7 +141,7 @@ public class ClientNetworkController {
 
 	// 6.1
 	public void serverConfirmation(String s) {
-
+		System.out.println("Sever said OK");
 	}
 
 	// 9.1
