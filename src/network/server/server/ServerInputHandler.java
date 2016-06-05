@@ -3,6 +3,7 @@ package network.server.server;
 import enums.Color;
 import network.InputHandler;
 import network.ProtocolToModel;
+import network.client.controller.ClientNetworkController;
 import network.server.controller.ServerNetworkController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -85,17 +86,19 @@ public class ServerInputHandler extends InputHandler {
     protected void handle(ProtocolPlayerProfile playerProfile) {
         String name = playerProfile.getName();
         Color color = playerProfile.getColor();
-        //ClientNetworkController.sendPlayerProfile(name,color);
-
+        // ClientNetworkController.sendPlayerProfile(name,color);
+        //TODO
 
     }
 
-    //
     @Override
     protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
         String s = chatReceiveMessage.getMessage();
         int playerId = chatReceiveMessage.getSender();
         serverNetworkController.chatReceiveMessage(playerId, s);
+        /*ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be handled only in ServerOutputHandler and
+        in ClientInputHandler. unnecessary Method in ServerInputHandler
+         */
     }
 
     protected void handle(ProtocolChatSendMessage chatSendMessage) {
@@ -166,5 +169,6 @@ public class ServerInputHandler extends InputHandler {
         System.out.println("Der Zug wurde beendet");
 
     }
+
 
 }

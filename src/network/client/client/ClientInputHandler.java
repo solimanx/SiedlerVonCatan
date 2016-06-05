@@ -55,7 +55,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolClientReady clientReady) {
-        // TODO Auto-generated method stub
+        // unnecessary Method in ClientInputHandler
 
     }
 
@@ -74,10 +74,11 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolPlayerProfile playerProfile) {
+//  unnecessary Method in ClientInputHandler
 
     }
 
-    //
+
     @Override
     protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
         String s = chatReceiveMessage.getMessage();
@@ -87,7 +88,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolChatSendMessage chatSendMessage) {
-        // Unneeded
+        // unnecessary Method in ClientInputHandler
 
     }
 
@@ -105,9 +106,9 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolDiceRollResult diceRollResult) {
-        int playerID =diceRollResult.getPlayer();
-        int result=diceRollResult.getRoll();
-       networkController.diceRollResult(playerID,result);
+        int playerID = diceRollResult.getPlayer();
+        int result = diceRollResult.getRoll();
+        networkController.diceRollResult(playerID, result);
     }
 
     @Override
