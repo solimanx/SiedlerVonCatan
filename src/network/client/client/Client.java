@@ -9,6 +9,8 @@ import java.net.Socket;
 import javafx.application.Platform;
 import network.client.controller.ClientNetworkController;
 import network.client.controller.MainViewController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Client extends Thread {
 	static int connectionTry = 0;
@@ -20,7 +22,7 @@ public class Client extends Thread {
 	boolean scanning = true;
 	boolean connectionActive = false;
 	protected ClientInputHandler inputHandler;
-
+	private static Logger logger = LogManager.getLogger(Client.class.getName());
 	public Client(ClientInputHandler inputHandler, String serverHost, int port) {
 		this.port = port;
 		this.serverHost = serverHost;
@@ -80,6 +82,7 @@ public class Client extends Thread {
 			connectionActive = false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			logger.warn("Input/Output Exception",e);
 			e.printStackTrace();
 		}
 	}
