@@ -190,8 +190,16 @@ public class ServerOutputHandler {
 		//
 
 	}
-	public void gameStarted(){
-		//TODO
+	public void gameStarted(ProtocolBoard board){
+		ProtocolGameStarted pb = new ProtocolGameStarted(board);
+		Response r = new Response();
+		r.pGameStarted=pb;
+		try {
+			server.broadcast(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
 	}
 
 	public void build(ProtocolBuilding building) {
