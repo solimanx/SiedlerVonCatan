@@ -16,7 +16,7 @@ public class Board {
 	private Corner[][][] corners;
 	private Edge[][][] edges;
 	private PlayerModel[] players;
-	private String banditLocation; // <- bad
+	private String banditLocation;
 	private Map<String, int[]> stringToCoordMap;
 	private Map<int[], String> coordToStringMap;
 	// TODO private DevDeck devDeck;
