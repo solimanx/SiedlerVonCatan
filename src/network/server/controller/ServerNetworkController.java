@@ -2,7 +2,6 @@ package network.server.controller;
 
 import java.io.IOException;
 
-import model.Board;
 import model.Corner;
 import model.Edge;
 import model.Field;
@@ -15,38 +14,38 @@ import network.server.server.ServerOutputHandler;
 public class ServerNetworkController {
 
 	private GameController gameController;
-	private ServerOutputHandler outputHandler;
-	private ServerInputHandler inputHandler;
+	private ServerOutputHandler serverOutputHandler;
+	private ServerInputHandler serverInputHandler;
 	private Server server;
 
 	public ServerNetworkController(GameController gc) {
 		this.gameController = gc;
-		this.inputHandler = new ServerInputHandler(this);
-		this.server = new Server(inputHandler, this);
-		this.outputHandler = new ServerOutputHandler(server, this);
+		this.serverInputHandler = new ServerInputHandler(this);
+		this.server = new Server(serverInputHandler); 
+		this.serverOutputHandler = new ServerOutputHandler(server);
 		try {
 			server.start();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Logging
 			e.printStackTrace();
 		}
 
 	}
 
-	public ServerOutputHandler getOutputHandler() {
-		return outputHandler;
+	public ServerOutputHandler getServerOutputHandler() {
+		return serverOutputHandler;
 	}
 
-	public void setOutputHandler(ServerOutputHandler outputHandler) {
-		this.outputHandler = outputHandler;
+	public void setOutputHandler(ServerOutputHandler serverOutputHandler) {
+		this.serverOutputHandler = serverOutputHandler;
 	}
 
-	public ServerInputHandler getInputHandler() {
-		return inputHandler;
+	public ServerInputHandler getServerInputHandler() {
+		return serverInputHandler;
 	}
 
-	public void setInputHandler(ServerInputHandler inputHandler) {
-		this.inputHandler = inputHandler;
+	public void setServerInputHandler(ServerInputHandler serverInputHandler) {
+		this.serverInputHandler = serverInputHandler;
 	}
 
 	public void initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
@@ -57,7 +56,7 @@ public class ServerNetworkController {
 
 	public void statusUpdate(int playerID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
-		outputHandler.statusUpdate(playerID, color, name, status, victoryPoints, resources);
+		serverOutputHandler.statusUpdate(playerID, color, name, status, victoryPoints, resources);
 	}
 
 	public void statusUpdate(enums.Color color, String name, int playerID) {
@@ -119,20 +118,20 @@ public class ServerNetworkController {
 	 * Server sends Hello message to ServerOutputHandler
 	 */
 	public void serverHello(int playerID) {
-		outputHandler.hello(settings.DefaultSettings.SERVER_VERSION, settings.DefaultSettings.PROTOCOL_VERSION,
+		serverOutputHandler.hello(settings.DefaultSettings.SERVER_VERSION, settings.DefaultSettings.PROTOCOL_VERSION,
 				getPlayerModelId(playerID));
 
 	}
 
 	// 4.2
 	public void welcome(int playerID) {
-		outputHandler.welcome(playerID);
+		serverOutputHandler.welcome(playerID);
 	}
 
-	private int getNewId() {
-		//TODO return IdCounter++;
-		return 0;
-	}
+//	private int getNewId() {
+//		//TODO return IdCounter++;
+//		return 0;
+//	}
 
 	// 7.2
 	/**
@@ -165,7 +164,7 @@ public class ServerNetworkController {
 
 	// 7.3
 	public void error(String s) {
-		outputHandler.error(s);
+		serverOutputHandler.error(s);
 		// System.out.println(s);
 
 	}
@@ -178,7 +177,7 @@ public class ServerNetworkController {
 
 	// 6.3
 	public void chatReceiveMessage(int playerID, String s) {
-		outputHandler.chatReceiveMessage(playerID, s);
+		serverOutputHandler.chatReceiveMessage(playerID, s);
 
 	}
 

@@ -19,27 +19,27 @@ public class Server {
 
 	private int clientCounter = 0;
 
-	private ServerInputHandler inputHandler;
-	private ServerOutputHandler outputHandler;
-	private ServerNetworkController networkController;
+	private ServerInputHandler serverInputHandler;
+	private ServerOutputHandler serverOutputHandler;
+	private ServerNetworkController serverNetworkHandler;
 
 	String serverVersion = settings.DefaultSettings.SERVER_VERSION;
 	String protocolVersion = settings.DefaultSettings.PROTOCOL_VERSION;
 
-	public Server(ServerInputHandler inputHandler, ServerNetworkController serverNetworkController) {
-		this.inputHandler = inputHandler;
-		this.networkController = serverNetworkController;
+	public Server(ServerInputHandler inputHandler) {
+		this.serverInputHandler = inputHandler;
+		this.serverNetworkHandler = inputHandler.getServerNetworkController();
 	}
 
 	public void start() throws IOException {
-		this.outputHandler = networkController.getOutputHandler();
+		this.serverOutputHandler = serverNetworkHandler.getServerOutputHandler();
 
 		ServerSocket serverSocket = new ServerSocket(8080, 150);
 		System.out.println("Server running.");
 		try {
 			while (clientCounter <= getClients().length) {
 				Socket socket = serverSocket.accept();
-				startHandler(socket, inputHandler);
+				startHandler(socket, serverInputHandler);
 			}
 		} finally {
 			serverSocket.close();
@@ -90,7 +90,7 @@ public class Server {
 	}
 
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
-		ClientThread thread = new ClientThread(socket, inputHandler, outputHandler, clientCounter);
+		ClientThread thread = new ClientThread(socket, inputHandler, serverOutputHandler, clientCounter);
 		thread.start();
 		getClients()[clientCounter] = thread;
 		clientCounter++;
@@ -121,6 +121,10 @@ public class Server {
 			}
 		}
 
+	}
+
+	public ServerInputHandler getServerInputHandler() {
+		return serverInputHandler;
 	}
 
 	public ClientThread[] getClients() {

@@ -37,9 +37,9 @@ public class ServerOutputHandler {
 	private Parser parser;
 	private ServerNetworkController networkController;
 
-	public ServerOutputHandler(Server server, ServerNetworkController serverNetworkController) {
+	public ServerOutputHandler(Server server) {
 		this.server = server;
-		this.networkController = serverNetworkController;
+		this.networkController = server.getServerInputHandler().getServerNetworkController();
 		this.parser = new Parser();
 	}
 

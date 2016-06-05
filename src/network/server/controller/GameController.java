@@ -6,7 +6,6 @@ import java.util.Random;
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
-import javafx.scene.AmbientLight;
 import javafx.stage.Stage;
 import model.Board;
 import model.Corner;
@@ -14,7 +13,6 @@ import model.Edge;
 import model.Field;
 import model.GameLogic;
 import model.PlayerModel;
-import network.client.client.Client;
 import network.client.controller.ViewController;
 import settings.DefaultSettings;
 
@@ -29,12 +27,12 @@ public class GameController implements GameControllerInterface {
 	private Board board;
 	private GameLogic gameLogic;
 	private ViewController viewController;
-	private ServerNetworkController networkController;
+	private ServerNetworkController serverNetworkController;
 	private ArrayList<PlayerModel> tempPlayers = new ArrayList<PlayerModel>();
 	private int amountPlayers = 0;
 
 	public GameController(Stage primaryStage) {
-		this.networkController = new ServerNetworkController(this);
+		this.serverNetworkController = new ServerNetworkController(this);
 
 	}
 
@@ -60,7 +58,7 @@ public class GameController implements GameControllerInterface {
 		addToPlayersResource(1, ResourceType.CORN, 3);
 		setPlayerState(1, PlayerState.PLAYING); // player 1 begins
 
-		networkController.gameStarted(board.getFields(), board.getEdges(), board.getCorners(), board.getBandit());
+		serverNetworkController.gameStarted(board.getFields(), board.getEdges(), board.getCorners(), board.getBandit());
 	}
 
 	/**
