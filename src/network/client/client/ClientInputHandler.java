@@ -117,9 +117,9 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolResourceObtain resourceObtain) {
-        //  int playerID= ProtocolToModel.getPlayerID(resourceObtain.getPlayer().getPlayer_id());
-        //  int[] resources=ProtocolToModel.getResources(resourceObtain.getPlayer().getResources());
-        //networkController.resoruceObtain(playerId, resources);
+        //int playerID= ProtocolToModel.getPlayerID(resourceObtain.getPlayer().getPlayer_id());
+        // int[] resources=ProtocolToModel.getResources(resourceObtain.getPlayer().getResources());
+        //networkController.resourceObtain(playerId, resources);
 
     }
 
