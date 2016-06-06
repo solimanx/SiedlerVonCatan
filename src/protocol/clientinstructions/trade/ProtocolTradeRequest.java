@@ -10,29 +10,32 @@ import protocol.object.ProtocolResource;
  * <p>
  * Client sends server the requested resources to trade.
  * </p>
- * 
  */
 
 @Since(0.2)
 public class ProtocolTradeRequest {
 
-	@SerializedName("Angebot")
-	private ProtocolResource offer;
+    @SerializedName("Angebot")
+    private ProtocolResource offer;
 
-	@SerializedName("Nachfrage")
-	private ProtocolResource withdrawal;
+    @SerializedName("Nachfrage")
+    private ProtocolResource withdrawal;
 
-	public ProtocolResource getOffer() {
-		return offer;
-	}
 
-	public ProtocolResource getWithdrawal() {
-		return withdrawal;
-	}
+    public ProtocolTradeRequest(ProtocolResource offer, ProtocolResource withdrawal) {
 
-	public ProtocolTradeRequest(ProtocolResource offer, ProtocolResource withdrawal) {
-		this.offer = offer;
-		this.withdrawal = withdrawal;
-	}
+        this.offer = offer;
+        this.withdrawal = withdrawal;
+    }
+
+    public ProtocolResource getOffer() {
+
+        return offer;
+    }
+
+    public ProtocolResource getWithdrawal() {
+
+        return withdrawal;
+    }
 
 }
