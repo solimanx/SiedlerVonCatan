@@ -20,6 +20,7 @@ public class ProtocolTradeIsAccepted {
     private int trade_id;
 
     public int getPlayer_id() {
+
         return player_id;
     }
 
