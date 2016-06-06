@@ -8,6 +8,7 @@ import network.server.controller.ServerNetworkController;
 import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.clientinstructions.trade.ProtocolTradeCancel;
+import protocol.clientinstructions.trade.ProtocolTradeComplete;
 import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
@@ -214,6 +215,14 @@ public class ServerInputHandler extends InputHandler {
 
         int trade_id = tradeCancel.getTrade_id();
         //    serverNetworkController.tradeCancel(trade_id);
+    }
+
+    protected void handle(ProtocolTradeComplete tradeComplete) {
+
+        int trade_id = tradeComplete.getTrade_id();
+        int tradePartner_id = tradeComplete.getTradePartner_id();
+        //  serverNetworkController.tradeComplete(trade_id,tradePartner_id;)
+
     }
 
 }
