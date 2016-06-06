@@ -275,3 +275,5 @@ java.net.SocketException: Socket closed
 	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:387) [jfxrt.jar:?]
 	at com.sun.glass.ui.View.handleMouseEvent(View.java:555) [jfxrt.jar:?]
 	at com.sun.glass.ui.View.notifyMouse(View.java:937) [jfxrt.jar:?]
+2016-06-06 15:40:36,472 [Thread-6] 89   evel 89ogger - CANNOT READ INPUT
+2016-06-06 15:40:36,478 [Thread-6] 89   evel 89ogger - CANNOT READ INPUT

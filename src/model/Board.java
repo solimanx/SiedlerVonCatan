@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import enums.CornerStatus;
+import enums.HarbourStatus;
+import enums.ResourceType;
 import settings.DefaultSettings;
 
 /**
@@ -829,6 +832,21 @@ public class Board {
 
 	public Map<int[], String> getCoordToStringMap() {
 		return coordToStringMap;
+	}
+
+	public void setField(int i, int j, ResourceType resourceType, Integer diceIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEdge(int i, int j, int k, boolean hasStreet, int ownedByPlayer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCorner(int i, int j, int k, CornerStatus status, HarbourStatus hstatus, int ownedByPlayer) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

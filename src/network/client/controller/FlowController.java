@@ -3,6 +3,7 @@ package network.client.controller;
 import java.util.ArrayList;
 
 import enums.Color;
+import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
 import javafx.stage.Stage;
@@ -67,9 +68,20 @@ public class FlowController {
 		// TODO fix this.board = Board.getInstance(amountPlayers);
 		for (int i = 0; i < board.getFields().length; i++) {
 			for (int j = 0; j < board.getFields()[i].length; j++) {
-				
+				enums.ResourceType resourceType;
+				Integer diceIndex;
 				// TODO board.setField....
 				// diese Methoden bekommen KOpien der Felder und setzen in den Kopien!!!!
+				//solche Methoden brauchen wir im Board:
+				board.setField(i,j,resourceType,diceIndex);
+				boolean hasStreet;
+				int ownedByPlayer;
+				int k;
+				board.setEdge(i,j,k, hasStreet, ownedByPlayer);
+				enums.CornerStatus status;
+				enums.HarbourStatus hstatus;
+				board.setCorner(i,j,k, status, hstatus, ownedByPlayer);
+			
 				board.getFields()[i][j].setResourceType(serverFields[i][j].getResourceType());
 				board.getFields()[i][j].setDiceIndex(serverFields[i][j].getDiceIndex());
 			}
