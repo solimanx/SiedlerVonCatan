@@ -5,10 +5,7 @@ import network.InputHandler;
 import network.ProtocolToModel;
 import network.client.controller.ClientNetworkController;
 import network.server.controller.ServerNetworkController;
-import protocol.clientinstructions.ProtocolBuildRequest;
-import protocol.clientinstructions.ProtocolDiceRollRequest;
-import protocol.clientinstructions.ProtocolEndTurn;
-import protocol.clientinstructions.ProtocolRobberMovementRequest;
+import protocol.clientinstructions.*;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
@@ -18,6 +15,7 @@ import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerConfirmation;
+import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
@@ -185,6 +183,12 @@ public class ServerInputHandler extends InputHandler {
         int victim_id = robberMovementRequest.getVictim_id();
         // serverNetworkController.robberMovementRequest(player_id,location_id,victim_id);
 
+    }
+
+    protected void handle(ProtocolHarbourRequest harbourRequest) {
+        ProtocolResource offer = harbourRequest.getOffer();
+        ProtocolResource withdrawal = harbourRequest.getWithdrawal();
+        // serverNetworkController.harbourRequest(offer,withdrawal);
     }
 
 }
