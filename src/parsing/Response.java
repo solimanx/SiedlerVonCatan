@@ -110,25 +110,26 @@ public class Response {
     @SerializedName("Handel anbieten")
     public ProtocolTradeRequest pTradeRequest; // new in 0.2
 
+    @SerializedName("Handelsangebot")
+    public ProtocolTradeIsRequested pTradeIsRequested;//new in 0.2
+
     @SerializedName("Handel annehmen")
     public ProtocolTradeAccept pTradeAccept; // new in 0.2
 
     @SerializedName("Handelsangebot angenommen")
     public ProtocolTradeConfirmation pTradeConfirm; // new in 0.2
 
-    @SerializedName("Handel abbrechen")
-    public ProtocolTradeCancel pTradeCancel;//new in 0.2
-
     @SerializedName("Handel abschließen")
     public ProtocolTradeComplete pTradeComplete;//new in 0.2
 
-    @SerializedName("Handelsangebot")
-    public ProtocolTradeIsRequested pTradeIsRequested;//new in 0.2
+    @SerializedName("Handel ausgeführt")
+    public ProtocolTradeIsCompleted pTradeIsCompleted;//new in 0.2
+
+    @SerializedName("Handel abbrechen")
+    public ProtocolTradeCancel pTradeCancel;//new in 0.2
 
     @SerializedName("Handelsangebot abgebrochen")
     public ProtocolTradeIsCanceled pTradeIsCanceled;//new in 0.2
 
-    @SerializedName("Handel ausgeführt")
-    public ProtocolTradeIsCompleted pTradeIsCompleted;//new in 0.2
 
 }
