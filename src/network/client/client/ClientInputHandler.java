@@ -26,6 +26,8 @@ import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
+import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
+import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
 
 public class ClientInputHandler extends InputHandler {
@@ -159,6 +161,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolEndTurn endTurn) {
+
         System.out.println("Der Zug wurde beendet");
         networkController.endTurn();
         // unnecessary Method in ClientInputHandler
@@ -175,6 +178,7 @@ public class ClientInputHandler extends InputHandler {
     }
 
     protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
+
         int player_id = tradeIsRequested.getPlayer_id();
         int trade_id = tradeIsRequested.getTrade_id();
         ProtocolResource offer = tradeIsRequested.getOffer();
@@ -182,10 +186,24 @@ public class ClientInputHandler extends InputHandler {
         //networkController.tradeIsRequested(player_id,trade_id,offer,withdrawal);
     }
 
-    protected void handle(ProtocolTradeConfirmation tradeConfirmation){
-        int player_id= tradeConfirmation.getPlayer_id();
-        int trade_id=tradeConfirmation.getTrade_id();
-       // networkController.tradeConfirmation(player_id,trade_id);
+    protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
+
+        int player_id = tradeConfirmation.getPlayer_id();
+        int trade_id = tradeConfirmation.getTrade_id();
+        // networkController.tradeConfirmation(player_id,trade_id);
     }
 
+    protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
+
+        int player_id = tradeIsCanceled.getPlayer_id();
+        int trade_id = tradeIsCanceled.getTrade_id();
+        // networkController.tradeIsCanceled(player_id,trade_id);
+    }
+
+    protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
+
+        int player_id = tradeIsCompleted.getPlayer_id();
+        int tradePartner_id = tradeIsCompleted.getTradePartner_id();
+        //  networkController.tradeIsCompleted(player_id,tradePartner_id);
+    }
 }

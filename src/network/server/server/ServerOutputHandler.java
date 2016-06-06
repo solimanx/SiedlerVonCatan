@@ -252,8 +252,8 @@ public class ServerOutputHandler {
         }
     }
 
-    public void tradeIsCompleted(int player_id, int trade_id) {
-        ProtocolTradeIsCompleted ptico = new ProtocolTradeIsCompleted(player_id, trade_id);
+    public void tradeIsCompleted(int player_id, int tradePartner_id) {
+        ProtocolTradeIsCompleted ptico = new ProtocolTradeIsCompleted(player_id, tradePartner_id);
         Response r = new Response();
         r.pTradeIsCompleted = ptico;
         try {
