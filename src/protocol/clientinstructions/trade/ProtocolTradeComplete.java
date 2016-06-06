@@ -5,25 +5,25 @@ import com.google.gson.annotations.Since;
 
 @Since(0.2)
 public class ProtocolTradeComplete {
-    @SerializedName("Handel abschließen")
+
+
+    @SerializedName("Handel id")
+
     private int trade_id;
 
-    private int tradingPlayer_id;
+    @SerializedName("Mitspieler")
+    private int tradePartner_id;
 
-    public ProtocolTradeComplete(int trade_id, int tradingPlayer_id) {
+    public ProtocolTradeComplete(int trade_id, int tradePartner_id) {
         this.trade_id = trade_id;
-        this.tradingPlayer_id = tradingPlayer_id;
+        this.tradePartner_id = tradePartner_id;
     }
 
     public int getTrade_id() {
-
         return trade_id;
     }
 
-    public int getTradingPlayer_id() {
-
-        return tradingPlayer_id;
+    public int getTradePartner_id() {
+        return tradePartner_id;
     }
 }
-
-
