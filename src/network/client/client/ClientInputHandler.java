@@ -73,9 +73,10 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolGameStarted gameStarted) {
         ProtocolBoard board = gameStarted.getBoard();
         ProtocolField[] pFields = board.getFields();
-        Field[] fields = new Field[pFields.length];
+        Field[][] fields = new Field[settings.DefaultSettings.BOARD_RADIUS][settings.DefaultSettings.BOARD_RADIUS];
         for (int i = 0; i < pFields.length; i++) {
-			fields[i] = new Field(pFields[i].getFieldID(), ProtocolToModel.getResourceType(pFields[i].getFieldType()), (Integer) pFields[i].getDiceIndex());
+        	int[] axCoordinates = ProtocolToModel.getFieldCoordinates(pFields[i].getFieldID());
+			fields[axCoordinates[0]][axCoordinates[1]] = new Field(pFields[i].getFieldID(), ProtocolToModel.getResourceType(pFields[i].getFieldType()), (Integer) pFields[i].getDiceIndex());
 		}
         // TODO: Board Constructor, der Array von Fields nimmt.
         //networkController.gameStarted(board);

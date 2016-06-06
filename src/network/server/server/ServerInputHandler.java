@@ -88,8 +88,7 @@ public class ServerInputHandler extends InputHandler {
     protected void handle(ProtocolPlayerProfile playerProfile) {
         String name = playerProfile.getName();
         Color color = playerProfile.getColor();
-        ClientNetworkController clientNetworkController = new ClientNetworkController();
-        clientNetworkController.sendPlayerProfile(color, name);
+        serverNetworkController.statusUpdate(color, name, currentThreadID);
 
 
     }
