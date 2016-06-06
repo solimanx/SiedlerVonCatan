@@ -2,6 +2,7 @@ package parsing;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.apache.logging.log4j.core.net.Protocol;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
@@ -9,6 +10,7 @@ import protocol.clientinstructions.ProtocolHarbourRequest;
 import protocol.clientinstructions.ProtocolRobberLoss;
 import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
+import protocol.clientinstructions.trade.ProtocolTradeCancel;
 import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
@@ -119,4 +121,6 @@ public class Response {
 	@SerializedName("Handelsangebot angenommen")
 	public ProtocolTradeConfirmation pTradeConfirm; // new in 0.2
 
+	@SerializedName("Handel abbreche")
+	public ProtocolTradeCancel pTradeCancel;
 }

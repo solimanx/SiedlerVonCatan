@@ -11,6 +11,7 @@ import network.server.controller.GameController;
 import network.server.server.Server;
 import network.server.server.ServerInputHandler;
 import network.server.server.ServerOutputHandler;
+import protocol.object.ProtocolResource;
 
 public class ServerNetworkController {
 
@@ -137,6 +138,7 @@ public class ServerNetworkController {
 	// }
 
 	// 7.2
+
 	/**
 	 * checks if all clients are Ready (PlayerState.WAITING) if yes then
 	 * gameController initializes the Board
@@ -144,21 +146,7 @@ public class ServerNetworkController {
 	 * @param playerID
 	 */
 	public void clientReady(int playerID) {
-		PlayerModel player = new PlayerModel(playerID);
-		// gameController.addPlayerToArray(player);
-		// gameController.setPlayerState(playerID, enums.PlayerState.WAITING);
-		// //TODO WaintingforGamestart
-		// boolean allPlayersReady = true;
-		// for (int i = 1; i <= amountPlayers; i++) {
-		// if (gameController.getPlayerState(playerID) !=
-		// enums.PlayerState.WAITING) { //TODO WaintingforGamestart
-		// // allPlayersReady = false;
-		// }
-		// }
-		// if (allPlayersReady) {
-		gameController.addPlayerToArray(player);
-		// }
-		gameStarted(gameController.getBoard());
+
 	}
 
 	// 7.4
@@ -246,6 +234,8 @@ public class ServerNetworkController {
 
 	}
 
+	public void harbourRequest(ProtocolResource offer, ProtocolResource withdrawal) {
+	}
 }
 
 // outputHandler.clientHello("JavaFXClient

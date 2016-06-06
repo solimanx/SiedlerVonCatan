@@ -14,7 +14,7 @@ import com.google.gson.annotations.Since;
 @Since(0.2)
 public class ProtocolTradeCancel {
 
-    @SerializedName("Handel abbrechen")
+    @SerializedName("Handel id")
     private int trade_id;
 
     public ProtocolTradeCancel(int trade_id) {
