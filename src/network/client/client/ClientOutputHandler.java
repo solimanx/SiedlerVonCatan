@@ -9,6 +9,7 @@ import parsing.Response;
 import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.clientinstructions.trade.ProtocolTradeCancel;
+import protocol.clientinstructions.trade.ProtocolTradeComplete;
 import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
@@ -151,11 +152,11 @@ public class ClientOutputHandler {
         }
 
     }
-    
-    public void handleTradeAccept (int trade_id) {
-    	ProtocolTradeAccept pta = new ProtocolTradeAccept(trade_id);
-    	Response r = new Response();
-    	r.pTradeAccept = pta;
+
+    public void handleTradeAccept(int trade_id) {
+        ProtocolTradeAccept pta = new ProtocolTradeAccept(trade_id);
+        Response r = new Response();
+        r.pTradeAccept = pta;
         try {
             client.write(parser.createString(r));
         } catch (IOException e) {
@@ -163,8 +164,8 @@ public class ClientOutputHandler {
             e.printStackTrace();
         }
     }
-    
-    public void handleTradeRequest (ProtocolResource offer, ProtocolResource withdrawal) {
+
+    public void handleTradeRequest(ProtocolResource offer, ProtocolResource withdrawal) {
         ProtocolTradeRequest ptr = new ProtocolTradeRequest(offer, withdrawal);
         Response r = new Response();
         r.pTradeRequest = ptr;
@@ -176,18 +177,31 @@ public class ClientOutputHandler {
         }
     }
 
-        public void handleTradeCancel(int trade_id){
-            ProtocolTradeCancel ptc = new ProtocolTradeCancel(trade_id);
-            Response r = new Response();
-            r.pTradeCancel= ptc;
-            try {
-                client.write(parser.createString(r));
-            } catch (IOException e) {
-                logger.error("Threw a Input/Output Exception ", e);
-                e.printStackTrace();
+    public void handleTradeCancel(int trade_id) {
+        ProtocolTradeCancel ptc = new ProtocolTradeCancel(trade_id);
+        Response r = new Response();
+        r.pTradeCancel = ptc;
+        try {
+            client.write(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+
+        }
+
 
     }
-    	
-    	
+
+    public void handleTradeComplete(int trade_id, int tradePartner_id) {
+        ProtocolTradeComplete ptco = new ProtocolTradeComplete(trade_id, tradePartner_id);
+        Response r = new Response();
+        r.pTradeComplete = ptco;
+        try {
+            client.write(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+
+        }
     }
-    }
+}

@@ -11,6 +11,7 @@ import protocol.clientinstructions.ProtocolRobberLoss;
 import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.clientinstructions.trade.ProtocolTradeCancel;
+import protocol.clientinstructions.trade.ProtocolTradeComplete;
 import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
@@ -123,4 +124,7 @@ public class Response {
 
 	@SerializedName("Handel abbreche")
 	public ProtocolTradeCancel pTradeCancel;
+
+	@SerializedName("Handel abschließen")
+	public ProtocolTradeComplete pTradeComplete;
 }
