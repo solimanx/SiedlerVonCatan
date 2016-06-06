@@ -6,12 +6,16 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import network.client.client.ClientOutputHandler;
 import network.client.controller.ViewController;
 
 public class LobbyController implements Initializable {
@@ -50,6 +54,8 @@ public class LobbyController implements Initializable {
 
 	@FXML
 	private Button startGameButton;
+	
+	private static Logger logger = LogManager.getLogger(LobbyController.class.getName());
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -70,7 +76,7 @@ public class LobbyController implements Initializable {
 		try {
 			viewController.startChooseView();
 		} catch (IOException e) {
-			// TODO Logging
+            logger.error(e);
 			e.printStackTrace();
 		}
 	}
