@@ -1,10 +1,11 @@
 package network.client.client;
 
-import enums.Color;
+import org.apache.logging.log4j.core.net.Protocol;
+
+import model.Field;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.client.controller.ClientNetworkController;
-import network.client.controller.FlowController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
@@ -20,6 +21,7 @@ import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerConfirmation;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolField;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolDiceRollResult;
@@ -70,6 +72,12 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolGameStarted gameStarted) {
         ProtocolBoard board = gameStarted.getBoard();
+        ProtocolField[] pFields = board.getFields();
+        Field[] fields = new Field[pFields.length];
+        for (int i = 0; i < pFields.length; i++) {
+			fields[i] = new Field(pFields[i].getFieldID(), ProtocolToModel.getResourceType(pFields[i].getFieldType()), (Integer) pFields[i].getDiceIndex());
+		}
+        // TODO: Board Constructor, der Array von Fields nimmt.
         //networkController.gameStarted(board);
 
     }

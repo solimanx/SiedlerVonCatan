@@ -14,6 +14,12 @@ public class Field {
 		resourceType = ResourceType.NOTHING;
 		diceIndex = null;
 	}
+	
+	public Field(String id, ResourceType resourceType, Integer diceIndex) {
+		this.id = id;
+		this.resourceType = resourceType;
+		this.diceIndex = diceIndex;
+	}
 
 	public String getFieldID() {
 		return id;
