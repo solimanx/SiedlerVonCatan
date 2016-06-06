@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * <b>Handel abbrechen(Cancel trade request)</b>
+ * <b>Handel abschließen(Complete trading)</b>
  * <p>
- * Player send Messade to Server, in order to cancel trade request
+ *Player can choose, which trade he wants to complete.
  * </p>
  */
 
