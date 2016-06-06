@@ -6,6 +6,9 @@ import network.ProtocolToModel;
 import network.client.controller.ClientNetworkController;
 import network.server.controller.ServerNetworkController;
 import protocol.clientinstructions.*;
+import protocol.clientinstructions.trade.ProtocolTradeAccept;
+import protocol.clientinstructions.trade.ProtocolTradeCancel;
+import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
@@ -178,6 +181,7 @@ public class ServerInputHandler extends InputHandler {
     }
 
     protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
+
         Integer player_id = robberMovementRequest.getPlayer_id();
         String location_id = robberMovementRequest.getLocation_id();
         int victim_id = robberMovementRequest.getVictim_id();
@@ -186,9 +190,30 @@ public class ServerInputHandler extends InputHandler {
     }
 
     protected void handle(ProtocolHarbourRequest harbourRequest) {
+
         ProtocolResource offer = harbourRequest.getOffer();
         ProtocolResource withdrawal = harbourRequest.getWithdrawal();
         // serverNetworkController.harbourRequest(offer,withdrawal);
+    }
+
+    protected void handle(ProtocolTradeAccept tradeAccept) {
+
+        int trade_id = tradeAccept.getTrade_id();
+        // serverNetworkController.tradeAccept(trade_id);
+    }
+
+    protected void handle(ProtocolTradeRequest tradeRequest) {
+
+        ProtocolResource offer = tradeRequest.getOffer();
+        ProtocolResource withdrawal = tradeRequest.getWithdrawal();
+        // serverNetworkController.tradeRequest(offer,withdrawal);
+
+    }
+
+    protected void handle(ProtocolTradeCancel tradeCancel) {
+
+        int trade_id = tradeCancel.getTrade_id();
+        //    serverNetworkController.tradeCancel(trade_id);
     }
 
 }
