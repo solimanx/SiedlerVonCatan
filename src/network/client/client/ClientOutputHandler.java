@@ -205,17 +205,6 @@ public class ClientOutputHandler {
         }
     }
 
-    public void handleRobberMovementRequest(int player_id, String location_id, int victim_id) {
-        ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(player_id, location_id, victim_id);
-        Response r = new Response();
-        r.pRobberMoveRequest = prmr;
-        try {
-            client.write(parser.createString(r));
-        } catch (IOException e) {
-            logger.error("Threw a Input/Output Exception ", e);
-            e.printStackTrace();
 
-        }
-    }
 
 }
