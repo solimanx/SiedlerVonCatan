@@ -2,6 +2,8 @@ package network.client.client;
 
 import org.apache.logging.log4j.core.net.Protocol;
 
+import model.Corner;
+import model.Edge;
 import model.Field;
 import network.InputHandler;
 import network.ProtocolToModel;
@@ -71,15 +73,15 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolGameStarted gameStarted) {
-        ProtocolBoard board = gameStarted.getBoard();
-        ProtocolField[] pFields = board.getFields();
+        ProtocolBoard pBoard = gameStarted.getBoard();
+        ProtocolField[] pFields = pBoard.getFields();
         Field[][] fields = new Field[settings.DefaultSettings.BOARD_RADIUS][settings.DefaultSettings.BOARD_RADIUS];
         for (int i = 0; i < pFields.length; i++) {
         	int[] axCoordinates = ProtocolToModel.getFieldCoordinates(pFields[i].getFieldID());
 			fields[axCoordinates[0]][axCoordinates[1]] = new Field(pFields[i].getFieldID(), ProtocolToModel.getResourceType(pFields[i].getFieldType()), (Integer) pFields[i].getDiceIndex());
 		}
-        // TODO: Board Constructor, der Array von Fields nimmt.
-        //networkController.gameStarted(board);
+        // TODO: 
+        //networkController.flowController.initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,Field bandit)
 
     }
 
