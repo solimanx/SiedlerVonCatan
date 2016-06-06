@@ -8,6 +8,7 @@ import parsing.Parser;
 import parsing.Response;
 import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
+import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
@@ -160,6 +161,20 @@ public class ClientOutputHandler {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
         }
+    }
+    
+    public void handleTradeRequest (ProtocolResource offer, ProtocolResource withdrawal){
+    	ProtocolTradeRequest ptr = new ProtocolTradeRequest(offer, withdrawal);
+    	Response r = new Response();
+    	r.pTradeRequest = ptr;
+        try {
+            client.write(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+    	
+    	
     	
     }
 }
