@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import parsing.Parser;
 import parsing.Response;
 import protocol.clientinstructions.*;
+import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
@@ -147,5 +148,18 @@ public class ClientOutputHandler {
             e.printStackTrace();
         }
 
+    }
+    
+    public void handleTradeAccept (int trade_id) {
+    	ProtocolTradeAccept pta = new ProtocolTradeAccept(trade_id);
+    	Response r = new Response();
+    	r.pTradeAccept = pta;
+        try {
+            client.write(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+    	
     }
 }
