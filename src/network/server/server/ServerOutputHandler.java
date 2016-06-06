@@ -15,6 +15,7 @@ import network.server.controller.ServerNetworkController;
 import parsing.Parser;
 import parsing.Response;
 import protocol.clientinstructions.trade.ProtocolTradeIsCanceled;
+import protocol.clientinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.clientinstructions.trade.ProtocolTradeIsRequested;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
@@ -254,6 +255,20 @@ public class ServerOutputHandler {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
         }
+    }
+
+    public void tradeIsCompleted(int player_id, int trade_id){
+        ProtocolTradeIsCompleted ptico=new ProtocolTradeIsCompleted(player_id,trade_id);
+        Response r=new Response();
+        r.pTradeIsCompleted=ptico;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+
+
     }
 
 
