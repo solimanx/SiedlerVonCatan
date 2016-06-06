@@ -7,7 +7,7 @@ import protocol.object.ProtocolResource;
 /**
  * <b>Handelsangebot(Request trade/offer is sent )</b>
  * <p>
- * Server sends request trade/offer to Players. They can decide to accept the request or reject it.
+ * Server sends request trade/offer to Players. They can decide to accept the request or to reject it.
  * </p>
  */
 
