@@ -67,6 +67,9 @@ public class FlowController {
 		// TODO fix this.board = Board.getInstance(amountPlayers);
 		for (int i = 0; i < board.getFields().length; i++) {
 			for (int j = 0; j < board.getFields()[i].length; j++) {
+				
+				// TODO board.setField....
+				// diese Methoden bekommen KOpien der Felder und setzen in den Kopien!!!!
 				board.getFields()[i][j].setResourceType(serverFields[i][j].getResourceType());
 				board.getFields()[i][j].setDiceIndex(serverFields[i][j].getDiceIndex());
 			}
