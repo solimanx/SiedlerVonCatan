@@ -29,6 +29,7 @@ import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
+import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
 //import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
@@ -219,7 +220,7 @@ public class ServerOutputHandler {
 	public void tradePreview(int player_id, int trade_id, ProtocolResource offer, ProtocolResource withdrawal){
 		ProtocolTradePreview pt = new ProtocolTradePreview(player_id, trade_id, offer, withdrawal);
 		Response r = new Response();
-		r.pTradePreview = pt;
+		r.pBuild = pb;
 		try {
 			server.broadcast(parser.createString(r));
 		} catch (IOException e) {
@@ -227,6 +228,18 @@ public class ServerOutputHandler {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void tradeConfirmation(int player_id, int trade_id){
+		ProtocolTradeConfirmation pc = new ProtocolTradeConfirmation(player_id, trade_id);
+		Response r = new Response();
+		r.pTradeConfirm = pc;
+		try {
+			server.broadcast(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
 	}
 	
 
