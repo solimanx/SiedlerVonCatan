@@ -8,6 +8,7 @@ import network.client.controller.FlowController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
+import protocol.clientinstructions.ProtocolRobberLoss;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
@@ -64,7 +65,7 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
 		ProtocolBoard board=gameStarted.getBoard();
-		//networkController.gameStarted(board);
+		networkController.gameStarted(board);
 
 	}
 
@@ -164,5 +165,11 @@ public class ClientInputHandler extends InputHandler {
 	protected void handle(String string) {
 		networkController.serverConfirmation(string);
 	}
+	
+	protected void handle(ProtocolRobberLoss losses) {
+		//TODO 
+		
+	}
+
 
 }
