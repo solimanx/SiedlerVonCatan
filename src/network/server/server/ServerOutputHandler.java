@@ -14,6 +14,7 @@ import network.ModelToProtocol;
 import network.server.controller.ServerNetworkController;
 import parsing.Parser;
 import parsing.Response;
+import protocol.clientinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.clientinstructions.trade.ProtocolTradeIsRequested;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
@@ -236,6 +237,17 @@ public class ServerOutputHandler {
         ProtocolTradeConfirmation pc = new ProtocolTradeConfirmation(player_id, trade_id);
         Response r = new Response();
         r.pTradeConfirm = pc;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+    }
+    public void tradeIsCanceled(int player_id,int trade_id){
+        ProtocolTradeIsCanceled ptic = new ProtocolTradeIsCanceled(player_id, trade_id);
+        Response r = new Response();
+        r.pTradeIsCanceled = ptic;
         try {
             server.broadcast(parser.createString(r));
         } catch (IOException e) {

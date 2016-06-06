@@ -125,4 +125,7 @@ public class Response {
     @SerializedName("Handelsangebot")
     public ProtocolTradeIsRequested pTradeIsRequested;//new in 0.2
 
+    @SerializedName("Handelsangebot abgebrochen")
+    public ProtocolTradeIsCanceled pTradeIsCanceled;//new in 0.2
+
 }
