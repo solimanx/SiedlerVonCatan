@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
@@ -16,20 +17,23 @@
         <items>
           <AnchorPane minHeight="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <VBox alignment="TOP_RIGHT" layoutX="75.0" prefHeight="222.0" prefWidth="191.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <VBox alignment="TOP_RIGHT" layoutX="75.0" prefHeight="248.0" prefWidth="278.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" prefHeight="50.0" prefWidth="274.0">
                            <children>
-                              <Label alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="73.0" text="Server:">
+                              <Label alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="73.0" text="Hostname:">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="serverIPTextField" alignment="CENTER_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="120.0" text="localhost" />
+                              <ComboBox fx:id="serverComboBox" editable="true" prefWidth="150.0" />
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" layoutX="30.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
                            <children>
@@ -38,8 +42,11 @@
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="portTextField" alignment="CENTER_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="120.0" text="8080" />
+                              <ComboBox fx:id="portComboBox" editable="true" prefWidth="150.0" />
                            </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
                         </HBox>
                         <Button fx:id="connectButton" mnemonicParsing="false" onAction="#handleConnectButton" text="Connect">
                            <VBox.margin>

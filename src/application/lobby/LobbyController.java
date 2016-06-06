@@ -13,9 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import network.client.client.ClientOutputHandler;
 import network.client.controller.ViewController;
 
 public class LobbyController implements Initializable {
@@ -25,13 +25,11 @@ public class LobbyController implements Initializable {
 	private DateTimeFormatter dateFormat;
 
 	@FXML
-	private Button myButton;
+	private ComboBox<String> serverComboBox;
 
 	@FXML
-	private TextField serverIPTextField;
 
-	@FXML
-	private TextField portTextField;
+	private ComboBox<String> portComboBox;
 
 	@FXML
 	private Button connectButton;
@@ -54,7 +52,7 @@ public class LobbyController implements Initializable {
 
 	@FXML
 	private Button startGameButton;
-	
+
 	private static Logger logger = LogManager.getLogger(LobbyController.class.getName());
 
 	@Override
@@ -62,12 +60,37 @@ public class LobbyController implements Initializable {
 		chatInput.setDisable(true);
 		dateFormat = DateTimeFormatter.ofPattern("hh:mm:ss");
 
+		// Debug only
+		addServers();
+		// Debug only
+		addPorts();
+
+	}
+
+	// Debug only
+	private void addServers() {
+		serverComboBox.getItems().add("localhost");
+		serverComboBox.getItems().add("aruba.dbs.ifi.lmu.de");
+
+		// First item that was added is the first item shown.
+		serverComboBox.setValue(serverComboBox.getItems().get(0));
+
+	}
+
+	// Debug only
+	private void addPorts() {
+		portComboBox.getItems().add("8080");
+		portComboBox.getItems().add("10000");
+		portComboBox.getItems().add("10001");
+
+		// First item that was added is the first item shown.
+		portComboBox.setValue(portComboBox.getItems().get(0));
 	}
 
 	@FXML
 	public void handleConnectButton() {
-		String server = serverIPTextField.getText();
-		int port = Integer.parseInt(portTextField.getText());
+		String server = serverComboBox.getValue();
+		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getFlowController().getClientNetworkController().connectToServer(server, port);
 	}
 
@@ -76,7 +99,7 @@ public class LobbyController implements Initializable {
 		try {
 			viewController.startChooseView();
 		} catch (IOException e) {
-            logger.error(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 	}
