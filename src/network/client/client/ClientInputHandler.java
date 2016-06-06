@@ -65,7 +65,7 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
 		ProtocolBoard board=gameStarted.getBoard();
-		networkController.gameStarted(board);
+		//networkController.gameStarted(board);
 
 	}
 
