@@ -3,6 +3,7 @@ package model.objects;
 import java.util.ArrayList;
 
 import enums.ResourceType;
+import enums.Color;
 //TODO import DevelopmentCard enum
 import enums.PlayerState;
 import settings.DefaultSettings;
@@ -19,8 +20,26 @@ public class PlayerModel {
 	boolean hasLargestArmy;
 	PlayerState playerState;
 	int playerID;
+	Color color;
+	String name;
 
-	// every Player gets own id (1..4)
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	// every Player gets own id (0..3)
 	public PlayerModel(int id) {
 		this.playerID = id;
 		this.resourceCards = new ArrayList<ResourceType>();
@@ -109,5 +128,6 @@ public class PlayerModel {
 	public void setAmountStreets(int amountStreets) {
 		this.amountStreets = amountStreets;
 	}
+
 
 }

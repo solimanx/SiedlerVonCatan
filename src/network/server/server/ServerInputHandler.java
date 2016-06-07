@@ -32,6 +32,7 @@ import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.severinstructions.ProtocolBiggestKnightProwess;
+import protocol3.severinstructions.ProtocolInventionCardInfo;
 import protocol3.severinstructions.ProtocolLongestRoad;
 import protocol3.severinstructions.ProtocolMonopolyCardInfo;
 import protocol3.severinstructions.ProtocolPlayKnightCard;
@@ -68,16 +69,10 @@ public class ServerInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolHello hello) {
 		System.out.println("SERVER: Hello gelesen!");
-		serverController.welcome(currentThreadID);
+		serverController.receiveHello(currentThreadID);
 
 	}
 
-	@Override
-	protected void handle(ProtocolWelcome welcome) {
-		System.out.println("Welcome gelesen!");
-	}
-
-	// unnecessary Method in ServerInputHandler
 	@Override
 	protected void handle(ProtocolClientReady clientReady) {
 		serverController.clientReady(currentThreadID);
@@ -118,7 +113,7 @@ public class ServerInputHandler extends InputHandler {
 
 	protected void handle(ProtocolChatSendMessage chatSendMessage) {
 		String s = chatSendMessage.getMessage();
-		serverController.chatSendMessage(s, this.currentThreadID);
+		serverController.chatSendMessage(s, currentThreadID);
 	}
 
 	@Override
@@ -158,15 +153,15 @@ public class ServerInputHandler extends InputHandler {
 	protected void handle(ProtocolBuildRequest buildRequest) {
 		if (buildRequest.getBuilding().equals("Straße")) {
 			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
-			serverController.requestBuildStreet(loc[0], loc[1], loc[2],this.currentThreadID );
+			serverController.requestBuildStreet(loc[0], loc[1], loc[2],  currentThreadID );
 		}
 		if (buildRequest.getBuilding().equals("Dorf")) {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			serverController.requestBuildVillage(loc[0], loc[1], loc[2],this.currentThreadID);
+			serverController.requestBuildVillage(loc[0], loc[1], loc[2], currentThreadID);
 		}
 		if (buildRequest.getBuilding().equals("Stadt")) {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			serverController.requestBuildCity(loc[0], loc[1], loc[2], this.currentThreadID);
+			serverController.requestBuildCity(loc[0], loc[1], loc[2], currentThreadID);
 		}
 	}
 
@@ -286,7 +281,7 @@ public class ServerInputHandler extends InputHandler {
 
 	}
 
-	@Override
+	//@Override
 	protected void handle(ProtocolInventionCard inventionCard) {
 		// TODO Auto-generated method stub
 
@@ -318,6 +313,22 @@ public class ServerInputHandler extends InputHandler {
 
 	public ServerController getServerController(){
 		return this.serverController;
+	}
+
+	public void hello(int threadID) {
+		serverController.hello(threadID);		
+	}
+
+	@Override
+	protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolWelcome welcome) {
+		// Unnecessary Methods
+		
 	}
 
 }

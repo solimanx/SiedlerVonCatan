@@ -126,7 +126,7 @@ public class ViewController {
 		playerColors.put(enums.Color.RED, Color.RED);
 		playerColors.put(enums.Color.WHITE, Color.WHITE);
 
-		view.button.setText("build initial village 2,-2,0");
+		/*view.button.setText("build initial village 2,-2,0");
 		view.button.setOnAction(e -> {
 			// setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
 			serverController.buildInitialVillage(2, -2, 0, 1);
@@ -149,7 +149,7 @@ public class ViewController {
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {
 			// gameController.setBandit(2, -2);
-		});
+		});*/
 
 	}
 
