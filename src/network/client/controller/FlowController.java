@@ -68,18 +68,18 @@ public class FlowController {
 		// TODO fix this.board = Board.getInstance(amountPlayers);
 		for (int i = 0; i < board.getFields().length; i++) {
 			for (int j = 0; j < board.getFields()[i].length; j++) {
-				enums.ResourceType resourceType;
-				Integer diceIndex;
+				enums.ResourceType resourceType = null;
+				Integer diceIndex = null;
 				// TODO board.setField....
 				// diese Methoden bekommen KOpien der Felder und setzen in den Kopien!!!!
 				//solche Methoden brauchen wir im Board:
 				board.setField(i,j,resourceType,diceIndex);
-				boolean hasStreet;
-				int ownedByPlayer;
-				int k;
+				boolean hasStreet = false;
+				int ownedByPlayer = 0;
+				int k = 0;
 				board.setEdge(i,j,k, hasStreet, ownedByPlayer);
-				enums.CornerStatus status;
-				enums.HarbourStatus hstatus;
+				enums.CornerStatus status = null;
+				enums.HarbourStatus hstatus = null;
 				board.setCorner(i,j,k, status, hstatus, ownedByPlayer);
 			
 				board.getFields()[i][j].setResourceType(serverFields[i][j].getResourceType());

@@ -50,7 +50,6 @@ public class ClientOutputHandler {
         Response r = new Response();
         r.pHello = ph;
         try {
-            System.out.println("CLIENT HELLO OUTPUT: " + parser.createString(r));
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
