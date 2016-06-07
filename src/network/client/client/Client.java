@@ -7,7 +7,6 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 import javafx.application.Platform;
-import network.client.controller.ClientNetworkController;
 import network.client.controller.MainViewController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
