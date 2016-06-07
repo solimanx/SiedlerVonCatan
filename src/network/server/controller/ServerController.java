@@ -499,8 +499,9 @@ public class ServerController {
 
 	}
 
-	public void welcome(int currentThreadID) {
-		// TODO Auto-generated method stub
+	// 4.2
+	public void welcome(int playerID) {
+		serverOutputHandler.welcome(playerID);
 
 	}
 
