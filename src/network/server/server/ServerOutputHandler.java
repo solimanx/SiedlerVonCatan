@@ -9,7 +9,6 @@ import enums.PlayerState;
 import model.Board;
 import model.objects.Field;
 import network.ModelToProtocol;
-import network.server.controller.ServerNetworkController;
 import parsing.Parser;
 import parsing.Response;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
@@ -35,11 +34,9 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 public class ServerOutputHandler {
 	private Server server;
 	private Parser parser;
-	private ServerNetworkController networkController;
 
 	public ServerOutputHandler(Server server) {
 		this.server = server;
-		this.networkController = server.getServerInputHandler().getServerNetworkController();
 		this.parser = server.getServerInputHandler().getParser();
 	}
 
@@ -161,7 +158,7 @@ public class ServerOutputHandler {
 		Response r = new Response();
 		r.pWelcome = pw;
 		try {
-			server.sendToClient(parser.createString(r), networkController.getThreadID(player_id));
+			server.sendToClient(parser.createString(r), player_id);
 		} catch (IOException e) {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
@@ -191,8 +188,10 @@ public class ServerOutputHandler {
 
 	}
 
-	public void gameStarted(ProtocolBoard board) {
-		ProtocolGameStarted pb = new ProtocolGameStarted(board);
+	public void gameStarted(Board board) {
+		//TODO: Board in ProtocolBoard umwandeln
+		
+		/*ProtocolGameStarted pb = new ProtocolGameStarted(board);
 		Response r = new Response();
 		r.pGameStarted = pb;
 		try {
@@ -200,7 +199,7 @@ public class ServerOutputHandler {
 		} catch (IOException e) {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	public void build(ProtocolBuilding building) {
@@ -264,6 +263,21 @@ public class ServerOutputHandler {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void buildVillage(int x, int y, int dir, int playerID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void buildStreet(int x, int y, int dir, int playerID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void buildCity(int x, int y, int dir, int playerID) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

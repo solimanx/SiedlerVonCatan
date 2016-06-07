@@ -3,7 +3,6 @@ package network.server.server;
 import enums.Color;
 import network.InputHandler;
 import network.ProtocolToModel;
-import network.client.controller.ClientNetworkController;
 import network.server.controller.ServerController;
 import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
@@ -56,7 +55,7 @@ public class ServerInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolHello hello) {
 		System.out.println("SERVER: Hello gelesen!");
-		serverController.welcome(serverController.getPlayerModelId(currentThreadID));
+		serverController.welcome(currentThreadID);
 
 	}
 
@@ -68,7 +67,7 @@ public class ServerInputHandler extends InputHandler {
 	// unnecessary Method in ServerInputHandler
 	@Override
 	protected void handle(ProtocolClientReady clientReady) {
-		serverController.clientReady(serverController.getPlayerModelId(currentThreadID));
+		serverController.clientReady(currentThreadID);
 
 	}
 
@@ -88,7 +87,7 @@ public class ServerInputHandler extends InputHandler {
 	protected void handle(ProtocolPlayerProfile playerProfile) {
 		String name = playerProfile.getName();
 		Color color = playerProfile.getColor();
-		serverController.statusUpdate(color, name, currentThreadID);
+		serverController.playerProfileUpdate(color, name, currentThreadID);
 
 	}
 
@@ -144,26 +143,23 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolBuildRequest buildRequest) {
-		if (buildRequest.getBuilding() == "Straße") {
+		if (buildRequest.getBuilding().equals("Straße")) {
 			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
-			serverController.requestBuildStreet(loc[0], loc[1], loc[2],
-					serverController.getPlayerModelId(this.currentThreadID));
+			serverController.requestBuildStreet(loc[0], loc[1], loc[2],this.currentThreadID );
 		}
-		if (buildRequest.getBuilding() == "Dorf") {
+		if (buildRequest.getBuilding().equals("Dorf")) {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			serverController.requestBuildVillage(loc[0], loc[1], loc[2],
-					serverController.getPlayerModelId(this.currentThreadID));
+			serverController.requestBuildVillage(loc[0], loc[1], loc[2],this.currentThreadID);
 		}
-		if (buildRequest.getBuilding() == "Stadt") {
+		if (buildRequest.getBuilding().equals("Stadt")) {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			serverController.requestBuildCity(loc[0], loc[1], loc[2],
-					serverController.getPlayerModelId(this.currentThreadID));
+			serverController.requestBuildCity(loc[0], loc[1], loc[2], this.currentThreadID);
 		}
 	}
 
 	@Override
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-		serverController.diceRollRequest(serverController.getPlayerModelId(this.currentThreadID));
+		serverController.diceRollRequest(this.currentThreadID);
 
 	}
 

@@ -60,25 +60,8 @@ public class ServerController {
 	 * @param amountPlayers
 	 */
 	public void initializeBoard() {
-		Board board = new Board(tempPlayers);
-		this.gameLogic = new GameLogic(board);
-		// this.playerModels = board.getPlayerModels();
-		// this.fields = board.getFields();
-
-		// generateBoard(board.getFields()[2][2], false);
+		//gameLogic.getBoard().initBoard(tempPlayers);
 		generateDebuggingBoard();
-
-		/*
-		 * for (int i = 1; i <= amountPlayers;i++){
-		 * networkController.initClients(i,board)... end
-		 */
-
-		// addToPlayersResource(1, ResourceType.WOOD, 3); // All DEBUG!!
-		// addToPlayersResource(1, ResourceType.CLAY, 3);
-		// addToPlayersResource(1, ResourceType.ORE, 3);
-		// addToPlayersResource(1, ResourceType.SHEEP, 3);
-		// addToPlayersResource(1, ResourceType.CORN, 3);
-		// setPlayerState(1, PlayerState.PLAYING); // player 1 begins
 
 		serverOutputHandler.gameStarted(gameLogic.getBoard());
 	}
@@ -241,6 +224,7 @@ public class ServerController {
 			subFromPlayersResources(playerID, settings.DefaultSettings.VILLAGE_BUILD_COST);
 
 		    serverOutputHandler.buildVillage(x, y, dir, playerID);
+		    //serverOutputHandler.statusUpdate(playerID, color, name, status, victoryPoints, resources);
 		}
 
 	}
@@ -256,6 +240,7 @@ public class ServerController {
 			subFromPlayersResources(playerID, settings.DefaultSettings.STREET_BUILD_COST);
 
 		    serverOutputHandler.buildStreet(x, y, dir, playerID);
+		   // serverOutputHandler.statusUpdate(playerID, color, name, status, victoryPoints, resources);
 		}
 
 	}
@@ -272,6 +257,7 @@ public class ServerController {
 			subFromPlayersResources(playerID, settings.DefaultSettings.CITY_BUILD_COST);
 
 		    serverOutputHandler.buildCity(x, y, dir, playerID);
+		   // serverOutputHandler.statusUpdate
 		}
 
 	}
@@ -283,7 +269,7 @@ public class ServerController {
 			e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
 			gameLogic.getBoard().getPlayer(playerID).decreaseAmountStreets();
 
-			//viewController.getMainViewController().setStreet(x, y, dir, playerID);
+			serverOutputHandler.buildStreet(x,y,dir,playerID);
 		}
 	}
 
@@ -299,6 +285,7 @@ public class ServerController {
 					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
+			serverOutputHandler.buildVillage(x,y,dir,playerID);
 			//viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
 		}
 	}
@@ -470,6 +457,51 @@ public class ServerController {
 		tempPlayers.add(player); // DEBUG ONLY
 		amountPlayers++; // DEBUG ONLY
 		initializeBoard(); // DEBUG ONLY
+	}
+
+	public void chatReceiveMessage(int playerId, String s) {
+		serverOutputHandler.chatReceiveMessage(playerId, s);
+		
+	}
+
+	public void chatSendMessage(String s, int currentThreadID) {
+		chatReceiveMessage(currentThreadID,s);
+		
+	}
+
+	public void serverConfirmation(String server_response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void requestBuildVillage(int i, int j, int k, int currentThreadID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void requestBuildStreet(int i, int j, int k, int currentThreadID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void requestBuildCity(int i, int j, int k, int currentThreadID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void clientReady(int currentThreadID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void welcome(int currentThreadID) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

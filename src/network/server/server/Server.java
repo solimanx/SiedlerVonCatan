@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import network.ModelToProtocol;
-import network.server.controller.ServerNetworkController;
 
 public class Server {
 
@@ -21,18 +20,15 @@ public class Server {
 
 	private ServerInputHandler serverInputHandler;
 	private ServerOutputHandler serverOutputHandler;
-	private ServerNetworkController serverNetworkHandler;
 
 	String serverVersion = settings.DefaultSettings.SERVER_VERSION;
 	String protocolVersion = settings.DefaultSettings.PROTOCOL_VERSION;
 
 	public Server(ServerInputHandler inputHandler) {
 		this.serverInputHandler = inputHandler;
-		this.serverNetworkHandler = inputHandler.getServerNetworkController();
 	}
 
 	public void start() throws IOException {
-		this.serverOutputHandler = serverNetworkHandler.getServerOutputHandler();
 
 		ServerSocket serverSocket = new ServerSocket(8080, 150);
 		System.out.println("Server running.");
