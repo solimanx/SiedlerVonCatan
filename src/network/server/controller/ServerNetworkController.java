@@ -3,10 +3,10 @@ package network.server.controller;
 import java.io.IOException;
 
 import model.Board;
-import model.Corner;
-import model.Edge;
-import model.Field;
-import model.PlayerModel;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
+import model.objects.PlayerModel;
 import network.server.controller.GameController;
 import network.server.server.Server;
 import network.server.server.ServerInputHandler;

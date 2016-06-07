@@ -3,7 +3,7 @@ package network.server.controller;
 import enums.PlayerState;
 import model.Board;
 import model.GameLogic;
-import model.PlayerModel;
+import model.objects.PlayerModel;
 
 /**
  * @author Controls trading between players

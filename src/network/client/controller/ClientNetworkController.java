@@ -1,8 +1,8 @@
 package network.client.controller;
 
-import model.Corner;
-import model.Edge;
-import model.Field;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;

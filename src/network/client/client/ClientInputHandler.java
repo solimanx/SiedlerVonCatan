@@ -2,9 +2,9 @@ package network.client.client;
 
 import org.apache.logging.log4j.core.net.Protocol;
 
-import model.Corner;
-import model.Edge;
-import model.Field;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.client.controller.ClientNetworkController;

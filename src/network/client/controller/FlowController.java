@@ -8,11 +8,11 @@ import enums.PlayerState;
 import enums.ResourceType;
 import javafx.stage.Stage;
 import model.Board;
-import model.Corner;
-import model.Edge;
-import model.Field;
 import model.GameLogic;
-import model.PlayerModel;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
+import model.objects.PlayerModel;
 import settings.DefaultSettings;
 
 /**

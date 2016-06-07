@@ -8,11 +8,11 @@ import enums.PlayerState;
 import enums.ResourceType;
 import javafx.stage.Stage;
 import model.Board;
-import model.Corner;
-import model.Edge;
-import model.Field;
 import model.GameLogic;
-import model.PlayerModel;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
+import model.objects.PlayerModel;
 import network.client.controller.ViewController;
 import settings.DefaultSettings;
 
@@ -23,8 +23,7 @@ import settings.DefaultSettings;
  *
  *
  */
-public class GameController implements GameControllerInterface {
-	private Board board;
+public class GameController {
 	private GameLogic gameLogic;
 	private ViewController viewController;
 	private ServerNetworkController serverNetworkController;
@@ -46,7 +45,7 @@ public class GameController implements GameControllerInterface {
 	 * @param amountPlayers
 	 */
 	public void initializeBoard() {
-		board = new Board(tempPlayers);
+		Board board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
 		// this.playerModels = board.getPlayerModels();
 		// this.fields = board.getFields();
@@ -66,12 +65,9 @@ public class GameController implements GameControllerInterface {
 		// addToPlayersResource(1, ResourceType.CORN, 3);
 		// setPlayerState(1, PlayerState.PLAYING); // player 1 begins
 
-		serverNetworkController.gameStarted(board);
+		serverNetworkController.gameStarted(gameLogic.getBoard());
 	}
 
-	public Board getBoard() {
-		return board;
-	}
 
 	public int getAmountPlayers() {
 		return amountPlayers;
@@ -88,10 +84,10 @@ public class GameController implements GameControllerInterface {
 	 * middle
 	 *
 	 * @param initialField
-	 * @param randomDesert
+	 gameLogic.getBoard()ram randomDesert
 	 */
 	private void generateBoard(Field initialField, boolean randomDesert) {
-		ArrayList<Field> fields = board.getAllFields(); // spiral implementieren
+		ArrayList<Field> fields = gameLogic.getBoard().getAllFields(); // spiral implementieren
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
 		int currNum;
 		if (randomDesert) {
@@ -141,22 +137,22 @@ public class GameController implements GameControllerInterface {
 	// DEBUGGING ONLY
 	public void generateDebuggingBoard() {
 
-		for (String key : board.getStringToCoordMap().keySet()) {
-			int coords[] = board.getStringToCoordMap().get(key);
-			board.getFieldAt(coords[0], coords[1]).setFieldID(key);
+		for (String key : gameLogic.getBoard().getStringToCoordMap().keySet()) {
+			int coords[] = gameLogic.getBoard().getStringToCoordMap().get(key);
+			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(key);
 			// DEBUG assume all resourcetype is corn
 			if (key.matches("[a-z]")) {
-				board.getFieldAt(coords[0], coords[1]).setResourceType(ResourceType.SEA);
-				board.getFieldAt(coords[0], coords[1]).setDiceIndex(null);
+				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setResourceType(ResourceType.SEA);
+				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setDiceIndex(null);
 			} else {
-				board.getFieldAt(coords[0], coords[1]).setResourceType(ResourceType.CORN);
+				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setResourceType(ResourceType.CORN);
 				// DEBUG assume all dice index is 3
-				board.getFieldAt(coords[0], coords[1]).setDiceIndex(3);
+				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setDiceIndex(3);
 
 			}
 		}
 
-		board.setBandit("J");
+		gameLogic.getBoard().setBandit("J");
 
 	}
 
@@ -167,12 +163,12 @@ public class GameController implements GameControllerInterface {
 	 */
 	public void gainBoardResources(int diceNum) {
 		int board_size = DefaultSettings.BOARD_SIZE;
-		ArrayList<model.Field> correspondingFields = new ArrayList<model.Field>();
+		ArrayList<model.objects.Field> correspondingFields = new ArrayList<model.objects.Field>();
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-				if (board.getField(i, j) != null) {
-					if (board.getField(i, j).getDiceIndex() == diceNum) {
-						correspondingFields.add(board.getField(i, j));
+				if (gameLogic.getBoard().getField(i, j) != null) {
+					if (gameLogic.getBoard().getField(i, j).getDiceIndex() == diceNum) {
+						correspondingFields.add(gameLogic.getBoard().getField(i, j));
 					}
 				}
 			}
@@ -181,7 +177,7 @@ public class GameController implements GameControllerInterface {
 		Corner[] neighborCorners;
 		enums.CornerStatus status;
 		enums.ResourceType resType;
-		String bandit = board.getBandit();
+		String bandit = gameLogic.getBoard().getBandit();
 		// int[] fieldCoordinates = new int[2];
 		// for (Field p : correspondingFields) {
 		// if (p != bandit) {
@@ -213,14 +209,14 @@ public class GameController implements GameControllerInterface {
 	 * @see server.controller.GameControllerInterface#buildVillage(int, int,
 	 * int, int)
 	 */
-	@Override
+	
 	public void buildVillage(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildVillage(x, y, dir, playerID)) {
-			Corner c = board.getCornerAt(x, y, dir);
+			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
 			c.setOwnerID(playerID);
-			board.getPlayer(playerID).decreaseAmountVillages();
-			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
+			gameLogic.getBoard().getPlayer(playerID).decreaseAmountVillages();
+			Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
 				if (neighbors[i] != null) {
 					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
@@ -234,13 +230,13 @@ public class GameController implements GameControllerInterface {
 
 	}
 
-	@Override
+	
 	public void buildStreet(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildStreet(x, y, dir, playerID)) {
-			Edge e = board.getEdgeAt(x, y, dir);
+			Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(board.getPlayer(playerID).getID());
-			board.getPlayer(playerID).decreaseAmountStreets();
+			e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
+			gameLogic.getBoard().getPlayer(playerID).decreaseAmountStreets();
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.STREET_BUILD_COST);
 
@@ -249,14 +245,14 @@ public class GameController implements GameControllerInterface {
 
 	}
 
-	@Override
+	
 	public void buildCity(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildCity(x, y, dir, playerID)) {
-			Corner c = board.getCornerAt(x, y, dir);
+			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.CITY);
 			c.setOwnerID(playerID);
-			board.getPlayer(playerID).increaseAmountVillages();
-			board.getPlayer(playerID).decreaseAmountCities();
+			gameLogic.getBoard().getPlayer(playerID).increaseAmountVillages();
+			gameLogic.getBoard().getPlayer(playerID).decreaseAmountCities();
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.CITY_BUILD_COST);
 
@@ -267,10 +263,10 @@ public class GameController implements GameControllerInterface {
 
 	public void buildInitialStreet(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerID)) {
-			Edge e = board.getEdgeAt(x, y, dir);
+			Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(board.getPlayer(playerID).getID());
-			board.getPlayer(playerID).decreaseAmountStreets();
+			e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
+			gameLogic.getBoard().getPlayer(playerID).decreaseAmountStreets();
 
 			viewController.getMainViewController().setStreet(x, y, dir, playerID);
 		}
@@ -278,11 +274,11 @@ public class GameController implements GameControllerInterface {
 
 	public void buildInitialVillage(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
-			Corner c = board.getCornerAt(x, y, dir);
+			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
 			c.setOwnerID(playerID);
-			board.getPlayer(playerID).decreaseAmountVillages();
-			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
+			gameLogic.getBoard().getPlayer(playerID).decreaseAmountVillages();
+			Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
 				if (neighbors[i] != null) {
 					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
@@ -293,11 +289,11 @@ public class GameController implements GameControllerInterface {
 	}
 
 	private void addToPlayersResource(int playerID, ResourceType resType, int amount) {
-		ArrayList<ResourceType> resourceCards = board.getPlayer(playerID).getResourceCards();
+		ArrayList<ResourceType> resourceCards = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
 		for (int i = 0; i < amount; i++) {
 			resourceCards.add(resType);
 		}
-		board.getPlayer(playerID).setResourceCards(resourceCards);
+		gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
 	}
 
 	private void subFromPlayersResources(int playerID, int[] costsparam) {
@@ -307,7 +303,7 @@ public class GameController implements GameControllerInterface {
 		}
 		ResourceType currResType;
 		ArrayList<ResourceType> list = new ArrayList<ResourceType>();
-		list = board.getPlayer(playerID).getResourceCards();
+		list = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
 		for (int i = 0; i < costs.length; i++) {
 			for (int j = list.size() - 1; j >= 0; j--) { // umkehren wegen
 															// remove
@@ -350,10 +346,10 @@ public class GameController implements GameControllerInterface {
 			}
 
 		}
-		board.getPlayer(playerID).setResourceCards(list);
+		gameLogic.getBoard().getPlayer(playerID).setResourceCards(list);
 	}
 
-	@Override
+	
 	public void setBandit(int x, int y, int playerID) {
 		if (gameLogic.checkSetBandit(x, y, playerID)) {
 			// board.setBandit(board.getFieldAt(x, y));
@@ -370,27 +366,27 @@ public class GameController implements GameControllerInterface {
 	 * @param playerID
 	 * @param state
 	 */
-	@Override
+	
 	public void setPlayerState(int playerID, PlayerState state) {
 		switch (state) {
 		case TRADING: // set all other players to offering
-			for (int i = 0; i < board.getAmountPlayers(); i++) {
+			for (int i = 0; i < gameLogic.getBoard().getAmountPlayers(); i++) {
 				if (i == playerID) {
-					board.getPlayer(i).setPlayerState(state);
+					gameLogic.getBoard().getPlayer(i).setPlayerState(state);
 				} else {
-					board.getPlayer(i).setPlayerState(PlayerState.OFFERING);
+					gameLogic.getBoard().getPlayer(i).setPlayerState(PlayerState.OFFERING);
 				}
 			}
 		case PLAYING: // set all other players waiting
-			for (int i = 0; i < board.getAmountPlayers(); i++) {
+			for (int i = 0; i < gameLogic.getBoard().getAmountPlayers(); i++) {
 				if (i == playerID) {
-					board.getPlayer(i).setPlayerState(state);
+					gameLogic.getBoard().getPlayer(i).setPlayerState(state);
 				} else {
-					board.getPlayer(i).setPlayerState(PlayerState.WAITING);
+					gameLogic.getBoard().getPlayer(i).setPlayerState(PlayerState.WAITING);
 				}
 			}
 		default: // else set only player state of playerID
-			board.getPlayer(playerID).setPlayerState(state);
+			gameLogic.getBoard().getPlayer(playerID).setPlayerState(state);
 		}
 
 		// DEBUG ONLY!
@@ -403,7 +399,7 @@ public class GameController implements GameControllerInterface {
 
 	}
 
-	@Override
+	
 	public void setGameState() {
 		// TODO Auto-generated method stub
 

@@ -7,6 +7,10 @@ import java.util.Map;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.ResourceType;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
+import model.objects.PlayerModel;
 import settings.DefaultSettings;
 
 /**

@@ -3,12 +3,15 @@ package model;
 import java.util.ArrayList;
 
 import enums.ResourceType;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
 
 /**
  * @author Implements rules of the game
  */
-public class GameLogic implements GameLogicInterface {
-	Board board;
+public class GameLogic {
+	private Board board;
 
 	public GameLogic(Board b) {
 		this.board = b;
@@ -268,17 +271,21 @@ public class GameLogic implements GameLogicInterface {
 		return false;
 	}
 
-	@Override
+	
 	public boolean canTrade() {
 
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public boolean canPlayCard() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public Board getBoard(){
+		return board;
 	}
 
 }

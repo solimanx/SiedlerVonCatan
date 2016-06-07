@@ -1,6 +1,10 @@
 package model;
 
 import java.util.Random;
+
+import model.objects.Corner;
+import model.objects.Edge;
+
 import java.util.ArrayList;
 
 import settings.DefaultSettings;

@@ -37,7 +37,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Board;
-import model.Field;
+import model.objects.Field;
 import network.client.controller.MainViewController;
 
 public class View implements ViewInterface {

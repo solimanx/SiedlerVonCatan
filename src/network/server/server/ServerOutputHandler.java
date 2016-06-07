@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import enums.Color;
 import enums.PlayerState;
 import model.Board;
-import model.Field;
+import model.objects.Field;
 import network.ModelToProtocol;
 import network.server.controller.ServerNetworkController;
 import parsing.Parser;

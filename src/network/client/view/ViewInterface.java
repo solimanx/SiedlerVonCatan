@@ -8,9 +8,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import model.Corner;
-import model.Edge;
-import model.Field;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
 
 public interface ViewInterface {
 	public boolean initialize();
