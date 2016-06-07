@@ -28,6 +28,8 @@ public class FlowController {
 	public FlowController(Stage primaryStage) {
 		this.setClientNetworkController(new ClientNetworkController(this));
 		// this.mainViewController = viewController.getMainViewController();
+		this.board = new Board();
+		this.gameLogic = new GameLogic(board);
 		this.viewController = new ViewController(primaryStage, this);
 
 	}

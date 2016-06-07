@@ -37,6 +37,19 @@ public class Board {
 		initializePlayers(tempPlayers);
 		initializeBandit();
 	}
+	
+	public Board (){
+		int r = DefaultSettings.BOARD_SIZE;
+		fields = new Field[r][r];
+		initializeFields();
+		initializeHashMaps();
+		corners = new Corner[r][r][2];
+		initializeCorners();
+		edges = new Edge[r][r][3];
+		initializeEdges();
+		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
+		initializeBandit();		
+	}
 
 	/**
 	 * Initialize used cells axial in the 2d array, unused cells remain null.

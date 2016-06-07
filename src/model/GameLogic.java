@@ -148,7 +148,7 @@ public class GameLogic implements GameLogicInterface {
 	 */
 	public boolean checkSetBandit(int x, int y, int playerID) {
 		Field f = board.getFieldAt(x, y);
-		if (f != null && f.getFieldID() != board.getBandit()) { // valid
+		if (f != null && !f.getFieldID().equals(board.getBandit())) { // valid
 																// position and
 																// not the
 			// same as before

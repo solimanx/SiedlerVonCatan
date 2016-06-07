@@ -215,7 +215,7 @@ public class ServerOutputHandler {
 		}
 	}
 
-	public void ProtocolTradeIsRequested(int player_id, int trade_id, ProtocolResource offer,
+	public void protocolTradeIsRequested(int player_id, int trade_id, ProtocolResource offer,
 			ProtocolResource withdrawal) {
 		ProtocolTradeIsRequested ptis = new ProtocolTradeIsRequested(player_id, trade_id, offer, withdrawal);
 		Response r = new Response();
