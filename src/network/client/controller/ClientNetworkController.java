@@ -144,7 +144,7 @@ public class ClientNetworkController {
     // 6.1
     public void serverConfirmation(String s) {
         // Observable einbauen für View?
-        System.out.println("Server: OK");
+        System.out.println("Server: " + s);
     }
 
     // 9.1
