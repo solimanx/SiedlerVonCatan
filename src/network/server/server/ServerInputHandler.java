@@ -3,39 +3,27 @@ package network.server.server;
 import enums.Color;
 import network.InputHandler;
 import network.ProtocolToModel;
+import network.client.controller.ClientNetworkController;
 import network.server.controller.ServerController;
 import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.clientinstructions.trade.ProtocolTradeCancel;
 import protocol.clientinstructions.trade.ProtocolTradeComplete;
 import protocol.clientinstructions.trade.ProtocolTradeRequest;
-import protocol.configuration.ProtocolClientReady;
-import protocol.configuration.ProtocolError;
-import protocol.configuration.ProtocolGameStarted;
-import protocol.configuration.ProtocolPlayerProfile;
-import protocol.configuration.ProtocolVictory;
+import protocol.configuration.*;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerConfirmation;
 import protocol.object.ProtocolResource;
-import protocol.serverinstructions.ProtocolBuild;
-import protocol.serverinstructions.ProtocolCosts;
-import protocol.serverinstructions.ProtocolDiceRollResult;
-import protocol.serverinstructions.ProtocolResourceObtain;
-import protocol.serverinstructions.ProtocolRobberMovement;
-import protocol.serverinstructions.ProtocolStatusUpdate;
+import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
 import protocol3.object.ProtocolInventionCard;
-import protocol3.severinstructions.ProtocolBiggestKnightProwess;
-import protocol3.severinstructions.ProtocolLongestRoad;
-import protocol3.severinstructions.ProtocolMonopolyCardInfo;
-import protocol3.severinstructions.ProtocolPlayKnightCard;
-import protocol3.severinstructions.ProtocolRoadBuildingCardInfo;
+import protocol3.severinstructions.*;
 
 public class ServerInputHandler extends InputHandler {
 	private ServerController serverController;
@@ -68,7 +56,7 @@ public class ServerInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolHello hello) {
 		System.out.println("SERVER: Hello gelesen!");
-		serverController.welcome(currentThreadID);
+		serverController.welcome(serverController.getPlayerModelId(currentThreadID));
 
 	}
 
@@ -80,7 +68,7 @@ public class ServerInputHandler extends InputHandler {
 	// unnecessary Method in ServerInputHandler
 	@Override
 	protected void handle(ProtocolClientReady clientReady) {
-		serverController.clientReady(currentThreadID);
+		serverController.clientReady(serverController.getPlayerModelId(currentThreadID));
 
 	}
 
@@ -100,7 +88,7 @@ public class ServerInputHandler extends InputHandler {
 	protected void handle(ProtocolPlayerProfile playerProfile) {
 		String name = playerProfile.getName();
 		Color color = playerProfile.getColor();
-		serverController.playerProfileUpdate(color, name, currentThreadID);
+		serverController.statusUpdate(color, name, currentThreadID);
 
 	}
 
@@ -156,29 +144,52 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolBuildRequest buildRequest) {
-		if (buildRequest.getBuilding().equals("Straße")) {
+		if (buildRequest.getBuilding() == "Straße") {
 			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
-			serverController.requestBuildStreet(loc[0], loc[1], loc[2],this.currentThreadID );
+			serverController.requestBuildStreet(loc[0], loc[1], loc[2],
+					serverController.getPlayerModelId(this.currentThreadID));
 		}
-		if (buildRequest.getBuilding().equals("Dorf")) {
+		if (buildRequest.getBuilding() == "Dorf") {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			serverController.requestBuildVillage(loc[0], loc[1], loc[2],this.currentThreadID);
+			serverController.requestBuildVillage(loc[0], loc[1], loc[2],
+					serverController.getPlayerModelId(this.currentThreadID));
 		}
-		if (buildRequest.getBuilding().equals("Stadt")) {
+		if (buildRequest.getBuilding() == "Stadt") {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			serverController.requestBuildCity(loc[0], loc[1], loc[2], this.currentThreadID);
+			serverController.requestBuildCity(loc[0], loc[1], loc[2],
+					serverController.getPlayerModelId(this.currentThreadID));
 		}
 	}
 
 	@Override
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-		serverController.diceRollRequest(this.currentThreadID);
+		serverController.diceRollRequest(serverController.getPlayerModelId(this.currentThreadID));
 
 	}
 
 	@Override
 	protected void handle(ProtocolEndTurn endTurn) {
 		System.out.println("Der Zug wurde beendet");
+
+	}
+
+	@Override
+	protected void handle(ProtocolVictory victory) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolCosts costs) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolRobberMovement robberMovement) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolRobberLoss robberLoss) {
 
 	}
 
@@ -210,6 +221,11 @@ public class ServerInputHandler extends InputHandler {
 		// gameController.tradeAccept(trade_id);
 	}
 
+	@Override
+	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
+
+	}
+
 	protected void handle(ProtocolTradeRequest tradeRequest) {
 
 		ProtocolResource offer = tradeRequest.getOffer();
@@ -218,10 +234,50 @@ public class ServerInputHandler extends InputHandler {
 
 	}
 
+	@Override
+	protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
+
+	}
+
 	protected void handle(ProtocolTradeCancel tradeCancel) {
 
 		int trade_id = tradeCancel.getTrade_id();
 		// gameController.tradeCancel(trade_id);
+	}
+
+	@Override
+	protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolInventionCard inventionCard) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolLongestRoad longestRoad) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolMonopolyCardInfo protocolMonopolyCardInfo) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolPlayKnightCard protocolPlayKnightCard) {
+
+	}
+
+	@Override
+	protected void handle(ProtocolRoadBuildingCardInfo protocolRoadBuildingCardInfo) {
+
 	}
 
 	protected void handle(ProtocolTradeComplete tradeComplete) {
@@ -233,87 +289,8 @@ public class ServerInputHandler extends InputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolVictory victory) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolCosts costs) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolRobberMovement robberMovement) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolRobberLoss robberLoss) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolInventionCard inventionCard) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolLongestRoad longestRoad) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolMonopolyCardInfo protocolMonopolyCardInfo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolPlayKnightCard protocolPlayKnightCard) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void handle(ProtocolRoadBuildingCardInfo protocolRoadBuildingCardInfo) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
