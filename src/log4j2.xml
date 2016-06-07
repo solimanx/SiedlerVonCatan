@@ -5,10 +5,10 @@
 	<appenders>
 
 		<Console name="Console" target="System_Out">
-			<PatternLayout pattern="%d [%t] %-5Level %Logger{36} - %msg%n" />
+			<PatternLayout pattern="[%p] %d [%t] %x %c %M - %m%n" />
 		</Console>
 		<File name="File" fileName="log/test.log">
-			<PatternLayout pattern="%d [%t] %-5Level %Logger{36} - %msg%n" />
+			<PatternLayout pattern="[%p] %d [%t] %x %c %M - %m%n" ></PatternLayout>
 		</File>
 
 	</appenders>
