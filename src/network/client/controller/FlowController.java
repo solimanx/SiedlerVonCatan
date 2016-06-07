@@ -62,7 +62,7 @@ public class FlowController {
 	/*
 	 * 
 	 */
-	public Board initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
+	public Board initBoard(int amountPlayers, Field[][] serverFields, Corner[][][] corners,
 			Field bandit) {
 
 		int board_size = DefaultSettings.BOARD_SIZE;
@@ -70,15 +70,6 @@ public class FlowController {
 			for (int j = 0; j < board_size; j++) {
 				board.getField(i, j).setResourceType(serverFields[i][j].getResourceType());
 				board.getField(i, j).setDiceIndex(serverFields[i][j].getDiceIndex());
-			}
-		}
-		for (int i = 0; i < board_size; i++) {
-			for (int j = 0; j < board_size; j++) {
-				for (int k = 0; j < 3; k++) {
-					board.getEdge(i, j, k).setHasStreet(edges[i][j][k].isHasStreet());
-					board.getEdge(i, j, k).setOwnedByPlayer(edges[i][j][k].getOwnerID());
-
-				}
 			}
 		}
 		for (int i = 0; i < corners.length; i++) {

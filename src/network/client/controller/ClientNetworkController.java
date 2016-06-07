@@ -112,8 +112,8 @@ public class ClientNetworkController {
 	}
 
 	// 7.4
-	public void gameStarted(Field[][] fields, Edge[][][] edges, Corner[][][] corners, Field bandit) {
-		flowController.initBoard(amountPlayers, fields, edges, corners, bandit);
+	public void gameStarted(Field[][] fields, Corner[][][] corners, Field bandit) {
+		flowController.initBoard(amountPlayers, fields, corners, bandit);
 
 	}
 
