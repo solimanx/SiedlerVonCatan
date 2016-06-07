@@ -754,23 +754,23 @@ public class Board {
 	 * Get outer ring
 	 */
 	public String getOuterRing() {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		for (String key : stringToCoordMap.keySet()) {
 			if (key.matches("[a-z]")) {
-				result += key;
+				result.append(key);
 			}
 		}
-		return result;
+		return result.toString();
 	}
 
 	public String getInnerFields() {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		for (String key : stringToCoordMap.keySet()) {
 			if (key.matches("[A-Z]")) {
-				result += key;
+				result.append(key);
 			}
 		}
-		return result;
+		return result.toString();
 
 	}
 
