@@ -20,14 +20,18 @@ public class ViewController {
 
 	private FXMLLoader loader;
 	protected View view;
-	protected HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
-	protected HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
+	public HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
+	public HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	protected ServerController serverController; // DEBUG
 	private ClientController clientController;
 	private MainViewController mainViewController;
 	private LobbyController lobbyController;
 	private PlayerProfileController nameSelectDialogController;
 	private Stage primaryStage;
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
 	private Stage choosingStage;
 	private Stage mainViewStage;
 
@@ -98,6 +102,7 @@ public class ViewController {
 	void startMainView() {
 		primaryStage.close();
 		choosingStage.close();
+
 		mainViewStage = new Stage();
 		this.mainViewController = new MainViewController(this, clientController.getGameLogic().getBoard(), mainViewStage);
 		init();

@@ -1,21 +1,17 @@
 package network.client.view;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -27,7 +23,6 @@ import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -37,7 +32,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Board;
-import model.objects.Field;
 import network.client.controller.MainViewController;
 
 public class View implements ViewInterface {
@@ -92,11 +86,11 @@ public class View implements ViewInterface {
 			primaryStage.setFullScreen(true);
 			// primaryStage.setMaximized(true);
 			primaryStage.setScene(scene);
-			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		initialize();
+		primaryStage.show();
 	}
 
 	@Override
@@ -114,13 +108,13 @@ public class View implements ViewInterface {
 		// drawDices();
 
 		// Test Buttons
-		button = new Button("Do Something!");
-		button2 = new Button();
-		button3 = new Button();
-		button4 = new Button();
-		HBox buttons = new HBox(button, button2, button3, button4);
-		rootPane.setTop(buttons);
-		// end Test Buttons
+//		button = new Button("Do Something!");
+//		button2 = new Button();
+//		button3 = new Button();
+//		button4 = new Button();
+//		HBox buttons = new HBox(button, button2, button3, button4);
+//		rootPane.setTop(buttons);
+//		// end Test Buttons
 
 		centerPane = new Pane();
 		centerPane.getChildren().addAll(0, figures);

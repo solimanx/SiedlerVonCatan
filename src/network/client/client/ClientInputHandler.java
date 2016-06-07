@@ -81,17 +81,18 @@ public class ClientInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
+		int size = DefaultSettings.BOARD_SIZE;
+		int radius = DefaultSettings.BOARD_RADIUS;
 		ProtocolBoard pBoard = gameStarted.getBoard();
-		Field[][] fields = new Field[DefaultSettings.BOARD_SIZE][DefaultSettings.BOARD_SIZE];
+		Field[][] fields = new Field[size][size];
 		for (int i = 0; i < pBoard.getAmountFields(); i++) {
-			int[] axCoordinates = ProtocolToModel.getFieldCoordinates(pBoard.getProtocolField(i).getFieldID());
-			fields[axCoordinates[0] + DefaultSettings.BOARD_RADIUS][axCoordinates[1]
-					+ DefaultSettings.BOARD_RADIUS] = new Field(pBoard.getProtocolField(i).getFieldID(),
-							ProtocolToModel.getResourceType(pBoard.getProtocolField(i).getFieldType()),
-							pBoard.getProtocolField(i).getDiceIndex());
+			ProtocolField pField = pBoard.getProtocolField(i);
+			int[] axCoord = ProtocolToModel.getFieldCoordinates(pField.getFieldID());
+			fields[axCoord[0] + radius][axCoord[1] + radius] = new Field(pField.getFieldID(),
+					ProtocolToModel.getResourceType(pField.getFieldType()), pField.getDiceIndex());
 		}
 		// TODO:
-		// networkController.flowController.initBoard(int amountPlayers,
+		// networkController.initBoard(int amountPlayers,
 		// Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,Field
 		// bandit)
 
