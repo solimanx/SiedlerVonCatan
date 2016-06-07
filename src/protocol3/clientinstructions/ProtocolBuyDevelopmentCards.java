@@ -5,4 +5,11 @@ package protocol3.clientinstructions;
  */
 
 public class ProtocolBuyDevelopmentCards {
+	
+	public ProtocolBuyDevelopmentCards(){
+		
+		
+	}
+	
+	
 }
