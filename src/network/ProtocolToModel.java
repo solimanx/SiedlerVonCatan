@@ -49,9 +49,9 @@ public final class ProtocolToModel {
 	
 	public static enums.PlayerState getPlayerState(String state) {
 		switch (state) {
-		case "Spiel startet":
+		case "Spiel starten":
 			return enums.PlayerState.GAME_SARTING;
-		case "Warte auf Spilebeginn":
+		case "Warte auf Spielbeginn":
 			return enums.PlayerState.WAITING_FOR_GAMESTART;
 		case "Dorf bauen":
 			return enums.PlayerState.BUILDING_VILLAGE;
@@ -61,7 +61,7 @@ public final class ProtocolToModel {
 			return enums.PlayerState.DICEROLLING;
 		case "Karte wegen Räuber abgeben":
 			return enums.PlayerState.DISPENDE_CARDS_ROBBER_LOSS;
-		case "Räuber versezen":
+		case "Räuber versetzen":
 			return enums.PlayerState.MOVE_ROBBER;
 		case "Handeln oder Bauen":
 			return enums.PlayerState.TRADING_OR_BUILDING;
