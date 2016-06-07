@@ -7,11 +7,17 @@ import network.client.controller.ClientController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
+import protocol.clientinstructions.ProtocolHarbourRequest;
 import protocol.clientinstructions.ProtocolRobberLoss;
+import protocol.clientinstructions.trade.ProtocolTradeAccept;
+import protocol.clientinstructions.trade.ProtocolTradeCancel;
+import protocol.clientinstructions.trade.ProtocolTradeComplete;
+import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
 import protocol.configuration.ProtocolPlayerProfile;
+import protocol.configuration.ProtocolVictory;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
@@ -21,13 +27,21 @@ import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
+import protocol.serverinstructions.ProtocolCosts;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
+import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol3.object.ProtocolInventionCard;
+import protocol3.severinstructions.ProtocolBiggestKnightProwess;
+import protocol3.severinstructions.ProtocolLongestRoad;
+import protocol3.severinstructions.ProtocolMonopolyCardInfo;
+import protocol3.severinstructions.ProtocolPlayKnightCard;
+import protocol3.severinstructions.ProtocolRoadBuildingCardInfo;
 import settings.DefaultSettings;
 
 public class ClientInputHandler extends InputHandler {
@@ -214,5 +228,89 @@ public class ClientInputHandler extends InputHandler {
 		int player_id = tradeIsCompleted.getPlayer_id();
 		int tradePartner_id = tradeIsCompleted.getTradePartner_id();
 		// networkController.tradeIsCompleted(player_id,tradePartner_id);
+	}
+
+	@Override
+	protected void handle(ProtocolVictory victory) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolCosts costs) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolRobberMovement robberMovement) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolHarbourRequest harbourRequest) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolTradeRequest tradeRequest) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolTradeAccept tradeAccept) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolTradeComplete tradeComplete) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolTradeCancel tradeCancel) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolInventionCard inventionCard) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolLongestRoad longestRoad) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolMonopolyCardInfo protocolMonopolyCardInfo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolPlayKnightCard protocolPlayKnightCard) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void handle(ProtocolRoadBuildingCardInfo protocolRoadBuildingCardInfo) {
+		// TODO Auto-generated method stub
+
 	}
 }
