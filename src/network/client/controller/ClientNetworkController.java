@@ -97,7 +97,7 @@ public class ClientNetworkController {
         flowController.setOwnPlayerId(playerID);
         // TODO flowController.setPlayerState(playerID,
         // enums.PlayerState.WAITING_FOR_GAMESTART);
-        System.out.println("Handshake finished!");
+        System.out.println("Handshake complete!");
         flowController.viewController.getLobbyController().enableChat();
     }
 

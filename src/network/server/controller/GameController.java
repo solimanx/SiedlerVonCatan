@@ -135,10 +135,6 @@ public class GameController implements GameControllerInterface {
 																					// desert;
 			fields.get(fields.size() - 1).setDiceIndex(0);
 
-		} // Testing if generating works
-		for (int i = 0; i < fields.size(); i++) {
-			System.out.println(i + " |Field id: " + fields.get(i).getFieldID() + ", Dice Index: "
-					+ fields.get(i).getDiceIndex() + ", ResourceType: " + fields.get(i).getResourceType());
 		}
 	}
 

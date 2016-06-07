@@ -249,7 +249,7 @@ public class HexService {
 
 		if (a.length != 2) {
 			// TODO: logging
-			System.out.println("Unable to convert: " + a.toString() + " to cube.");
+			System.out.println("Error in HexService.convertAxialToCube");
 			return null;
 
 		} else {
@@ -271,7 +271,7 @@ public class HexService {
 	public static int[] convertCubeToAxial(int[] c) {
 		if (c.length != 3) {
 			// TODO: logging
-			System.out.println("Unable to convert: " + c.toString() + " to axial.");
+			System.out.println("Error in HexService.convertCubeToAxial");
 			return null;
 		} else {
 			int x = c[0];

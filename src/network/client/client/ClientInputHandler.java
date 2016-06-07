@@ -55,13 +55,11 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolHello hello) {
-        System.out.println("Hello gelesen!");
         networkController.serverHello(hello.getVersion(), hello.getProtocol());
     }
 
     @Override
     protected void handle(ProtocolWelcome welcome) {
-        System.out.println("Willkommen gelesen!");
         networkController.welcome(welcome.getPlayer_id());
     }
 

@@ -42,10 +42,10 @@ public class Client extends Thread {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
             scanning = false;
             connectionActive = true;
-            System.out.println("Client: Client connected to Server");
+            System.out.println("Client connected to server.");
             runClient();
         } catch (IOException e) {
-            System.out.println("Connection failed");
+            System.out.println("Connection to server failed.");
             scanning = true;
             try {
                 Thread.sleep(2000);
