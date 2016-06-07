@@ -13,6 +13,7 @@ import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
 import protocol.configuration.ProtocolPlayerProfile;
+import protocol.configuration.ProtocolVictory;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
@@ -20,9 +21,21 @@ import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerConfirmation;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
+import protocol.serverinstructions.ProtocolCosts;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
+import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
+import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
+import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
+import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
+import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol3.object.ProtocolInventionCard;
+import protocol3.severinstructions.ProtocolBiggestKnightProwess;
+import protocol3.severinstructions.ProtocolLongestRoad;
+import protocol3.severinstructions.ProtocolMonopolyCardInfo;
+import protocol3.severinstructions.ProtocolPlayKnightCard;
+import protocol3.severinstructions.ProtocolRoadBuildingCardInfo;
 
 public class ServerInputHandler extends InputHandler {
 	private ServerController serverController;
@@ -217,6 +230,90 @@ public class ServerInputHandler extends InputHandler {
 		int tradePartner_id = tradeComplete.getTradePartner_id();
 		// gameController.tradeComplete(trade_id,tradePartner_id;)
 
+	}
+
+	@Override
+	protected void handle(ProtocolVictory victory) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolCosts costs) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolRobberMovement robberMovement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolRobberLoss robberLoss) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolInventionCard inventionCard) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolLongestRoad longestRoad) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolMonopolyCardInfo protocolMonopolyCardInfo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolPlayKnightCard protocolPlayKnightCard) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolRoadBuildingCardInfo protocolRoadBuildingCardInfo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
