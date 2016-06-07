@@ -33,6 +33,7 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import settings.DefaultSettings;
 
 public class ClientInputHandler extends InputHandler {
 	private ClientNetworkController networkController;
@@ -72,11 +73,11 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
 		ProtocolBoard pBoard = gameStarted.getBoard();
-		Field[][] fields = new Field[settings.DefaultSettings.BOARD_SIZE][settings.DefaultSettings.BOARD_SIZE];
+		Field[][] fields = new Field[DefaultSettings.BOARD_SIZE][DefaultSettings.BOARD_SIZE];
 		for (int i = 0; i < pBoard.getAmountFields(); i++) {
 			int[] axCoordinates = ProtocolToModel.getFieldCoordinates(pBoard.getProtocolField(i).getFieldID());
-			fields[axCoordinates[0] + settings.DefaultSettings.BOARD_RADIUS][axCoordinates[1]
-					+ settings.DefaultSettings.BOARD_RADIUS] = new Field(pBoard.getProtocolField(i).getFieldID(),
+			fields[axCoordinates[0] + DefaultSettings.BOARD_RADIUS][axCoordinates[1]
+					+ DefaultSettings.BOARD_RADIUS] = new Field(pBoard.getProtocolField(i).getFieldID(),
 							ProtocolToModel.getResourceType(pBoard.getProtocolField(i).getFieldType()),
 							pBoard.getProtocolField(i).getDiceIndex());
 		}
