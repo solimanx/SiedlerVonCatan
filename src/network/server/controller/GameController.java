@@ -1,5 +1,6 @@
 package network.server.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,6 +15,9 @@ import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
 import network.client.controller.ViewController;
+import network.server.server.Server;
+import network.server.server.ServerInputHandler;
+import network.server.server.ServerOutputHandler;
 import settings.DefaultSettings;
 
 /**
@@ -25,17 +29,28 @@ import settings.DefaultSettings;
  */
 public class GameController {
 	private GameLogic gameLogic;
-	private ViewController viewController;
-	private ServerNetworkController serverNetworkController;
+	private ServerOutputHandler serverOutputHandler;
 	private ArrayList<PlayerModel> tempPlayers = new ArrayList<PlayerModel>();
 	private int amountPlayers = 0;
+	private Server server;
+	private ServerInputHandler serverInputHandler;	
 
 	public GameController() {
-		this.setServerNetworkController(new ServerNetworkController(this));
+		Board board = new Board();
+		this.gameLogic = new GameLogic(board);
+		this.serverInputHandler = new ServerInputHandler(this);
+		this.server = new Server(serverInputHandler);
+		this.serverOutputHandler = new ServerOutputHandler(server);
+		try {
+			server.start();
+		} catch (IOException e) {
+			// TODO Logging
+			e.printStackTrace();
+		}
 	}
 
-	public void setServerNetworkController(ServerNetworkController sNC) {
-		this.serverNetworkController = sNC;
+	public void setServerOutputHandler(ServerOutputHandler sNC) {
+		this.serverOutputHandler = sNC;
 
 	}
 
@@ -65,7 +80,7 @@ public class GameController {
 		// addToPlayersResource(1, ResourceType.CORN, 3);
 		// setPlayerState(1, PlayerState.PLAYING); // player 1 begins
 
-		serverNetworkController.gameStarted(gameLogic.getBoard());
+		serverOutputHandler.gameStarted(gameLogic.getBoard());
 	}
 
 
@@ -225,7 +240,7 @@ public class GameController {
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.VILLAGE_BUILD_COST);
 
-			viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
+		    serverOutputHandler.buildVillage(x, y, dir, playerID);
 		}
 
 	}
@@ -240,7 +255,7 @@ public class GameController {
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.STREET_BUILD_COST);
 
-			viewController.getMainViewController().setStreet(x, y, dir, playerID);
+		    serverOutputHandler.buildStreet(x, y, dir, playerID);
 		}
 
 	}
@@ -256,7 +271,7 @@ public class GameController {
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.CITY_BUILD_COST);
 
-			viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
+		    serverOutputHandler.buildCity(x, y, dir, playerID);
 		}
 
 	}
@@ -268,7 +283,7 @@ public class GameController {
 			e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
 			gameLogic.getBoard().getPlayer(playerID).decreaseAmountStreets();
 
-			viewController.getMainViewController().setStreet(x, y, dir, playerID);
+			//viewController.getMainViewController().setStreet(x, y, dir, playerID);
 		}
 	}
 
@@ -284,7 +299,7 @@ public class GameController {
 					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 				}
 			}
-			viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
+			//viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
 		}
 	}
 
@@ -354,7 +369,7 @@ public class GameController {
 		if (gameLogic.checkSetBandit(x, y, playerID)) {
 			// board.setBandit(board.getFieldAt(x, y));
 
-			viewController.getMainViewController().setBandit(x, y); // Debug
+			//viewController.getMainViewController().setBandit(x, y); // Debug
 		}
 
 	}
