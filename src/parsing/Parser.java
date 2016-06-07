@@ -102,7 +102,44 @@ public class Parser {
             return (T) response.pRobberLoss;
 
         }
+        if (response.pHarbourRequest != null) {
+            return (T) response.pHarbourRequest;
 
+        }
+        if (response.pTradeRequest != null) {
+            return (T) response.pTradeRequest;
+
+        }
+        if (response.pTradeIsRequested != null) {
+            return (T) response.pTradeIsRequested;
+
+        }
+        if (response.pTradeAccept != null) {
+            return (T) response.pTradeAccept;
+
+        }
+
+        if (response.pTradeConfirm != null) {
+            return (T) response.pTradeConfirm;
+
+        }
+        if (response.pTradeComplete != null) {
+            return (T) response.pTradeComplete;
+
+        }
+        if (response.pTradeIsCompleted != null) {
+            return (T) response.pTradeIsCompleted;
+
+        }
+        if (response.pTradeCancel != null) {
+            return (T) response.pTradeCancel;
+
+        }
+
+        if (response.pTradeIsCanceled != null) {
+            return (T) response.pTradeIsCanceled;
+
+        }
         //in Protocol 0.3
         if (response.pBiggestKnightProwess != null) {
             return (T) response.pBiggestKnightProwess;
