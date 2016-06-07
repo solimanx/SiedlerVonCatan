@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import network.ModelToProtocol;
+import settings.DefaultSettings;
 
 public class Server {
 
 	// HashMap PlayerID => Thread
-	private ClientThread[] clients = new ClientThread[4];
+	private ClientThread[] clients = new ClientThread[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
 
 	private int clientCounter = 0;
 
@@ -33,7 +34,7 @@ public class Server {
 		ServerSocket serverSocket = new ServerSocket(8080, 150);
 		System.out.println("Server running.");
 		try {
-			while (clientCounter <= getClients().length) {
+			while (clientCounter < getClients().length) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket, serverInputHandler);
 			}
