@@ -66,24 +66,8 @@ public class FlowController {
 			Field bandit) {
 
 		int board_size = DefaultSettings.BOARD_SIZE;
-		// TODO fix this.board = Board.getInstance(amountPlayers);
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-				enums.ResourceType resourceType = null;
-				Integer diceIndex = null;
-				// TODO board.setField....
-				// diese Methoden bekommen KOpien der Felder und setzen in den
-				// Kopien!!!!
-				// solche Methoden brauchen wir im Board:
-				board.setField(i, j, resourceType, diceIndex);
-				boolean hasStreet = false;
-				int ownedByPlayer = 0;
-				int k = 0;
-				board.setEdge(i, j, k, hasStreet, ownedByPlayer);
-				enums.CornerStatus status = null;
-				enums.HarbourStatus hstatus = null;
-				board.setCorner(i, j, k, status, hstatus, ownedByPlayer);
-
 				board.getField(i, j).setResourceType(serverFields[i][j].getResourceType());
 				board.getField(i, j).setDiceIndex(serverFields[i][j].getDiceIndex());
 			}
