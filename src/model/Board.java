@@ -764,8 +764,10 @@ public class Board {
 
 	}
 
-	public void setCorner(int i, int j, int k, CornerStatus status, HarbourStatus hstatus, int ownedByPlayer) {
-		// TODO Auto-generated method stub
+	public void setCorner(int i, int j, int k, CornerStatus status, HarbourStatus hstatus, int ownerID) {
+		corners[i][j][k].setHarbourStatus(hstatus);
+		corners[i][j][k].setStatus(status);
+		corners[i][j][k].setOwnerID(ownerID);
 
 	}
 
