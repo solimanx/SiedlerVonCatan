@@ -46,13 +46,12 @@ public class ProtocolBoard {
 	public ProtocolHarbour getHarbours(int i) {
 		return harbours[i] != null ? harbours[i] : null;
 	}
-	
 
 	public String getRobber_location() {
 		return robber_location;
 	}
-	
-	public int getAmountFields(){
+
+	public int getAmountFields() {
 		return fields.length;
 	}
 

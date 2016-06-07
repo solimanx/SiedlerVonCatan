@@ -15,27 +15,26 @@ import protocol.object.ProtocolResource;
 @Since(0.2)
 public class ProtocolTradeRequest {
 
-    @SerializedName("Angebot")
-    private ProtocolResource offer;
+	@SerializedName("Angebot")
+	private ProtocolResource offer;
 
-    @SerializedName("Nachfrage")
-    private ProtocolResource withdrawal;
+	@SerializedName("Nachfrage")
+	private ProtocolResource withdrawal;
 
+	public ProtocolTradeRequest(ProtocolResource offer, ProtocolResource withdrawal) {
 
-    public ProtocolTradeRequest(ProtocolResource offer, ProtocolResource withdrawal) {
+		this.offer = offer;
+		this.withdrawal = withdrawal;
+	}
 
-        this.offer = offer;
-        this.withdrawal = withdrawal;
-    }
+	public ProtocolResource getOffer() {
 
-    public ProtocolResource getOffer() {
+		return offer;
+	}
 
-        return offer;
-    }
+	public ProtocolResource getWithdrawal() {
 
-    public ProtocolResource getWithdrawal() {
-
-        return withdrawal;
-    }
+		return withdrawal;
+	}
 
 }

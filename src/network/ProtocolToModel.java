@@ -26,7 +26,7 @@ public final class ProtocolToModel {
 		return result;
 	}
 
-	public static enums.ResourceType getResourceType(String resourceString){
+	public static enums.ResourceType getResourceType(String resourceString) {
 		switch (resourceString) {
 		case "Weideland":
 			return ResourceType.SHEEP;
@@ -46,7 +46,7 @@ public final class ProtocolToModel {
 			return ResourceType.UNKNOWN;
 		}
 	}
-	
+
 	public static enums.PlayerState getPlayerState(String state) {
 		switch (state) {
 		case "Spiel starten":

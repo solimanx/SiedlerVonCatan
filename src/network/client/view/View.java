@@ -405,8 +405,8 @@ public class View implements ViewInterface {
 	}
 
 	/**
-	 * sets x-coordinate of unused corners to 0
-	 * fields with x-coordinate 0 are sea 
+	 * sets x-coordinate of unused corners to 0 fields with x-coordinate 0 are
+	 * sea
 	 */
 	private void filterUnusedCorners() {
 
@@ -438,11 +438,10 @@ public class View implements ViewInterface {
 		cornerCoordinates[2][6][1][0] = 0;
 		cornerCoordinates[3][6][1][0] = 0;
 	}
-	
-	
+
 	/**
-	 * sets x-coordinate of unused edges to 0;
-	 * edges with x-coordinate 0 won't be initialized 
+	 * sets x-coordinate of unused edges to 0; edges with x-coordinate 0 won't
+	 * be initialized
 	 */
 	private void filterUnusedEdges() {
 		// row 0

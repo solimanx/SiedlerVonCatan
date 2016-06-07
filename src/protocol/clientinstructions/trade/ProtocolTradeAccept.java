@@ -13,16 +13,16 @@ import com.google.gson.annotations.Since;
 @Since(0.2)
 public class ProtocolTradeAccept {
 
-    @SerializedName("Handel id")
-    private int trade_id;
+	@SerializedName("Handel id")
+	private int trade_id;
 
-    public ProtocolTradeAccept(int trade_id) {
+	public ProtocolTradeAccept(int trade_id) {
 
-        this.trade_id = trade_id;
-    }
+		this.trade_id = trade_id;
+	}
 
-    public int getTrade_id() {
+	public int getTrade_id() {
 
-        return trade_id;
-    }
+		return trade_id;
+	}
 }

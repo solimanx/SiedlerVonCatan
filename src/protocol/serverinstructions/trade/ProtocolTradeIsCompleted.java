@@ -7,33 +7,32 @@ import com.google.gson.annotations.Since;
  * <b>Handel ausgeführt (trade was completed)</b>
  * <p>
  * Server confirms that trade was completed and sends information to players
- *<p/>
+ * <p/>
  */
 
 @Since(0.2)
 public class ProtocolTradeIsCompleted {
 
-    @SerializedName("Spieler")
-    private int player_id;
+	@SerializedName("Spieler")
+	private int player_id;
 
-    @SerializedName("Mitspieler")
-    private int tradePartner_id;
+	@SerializedName("Mitspieler")
+	private int tradePartner_id;
 
+	public ProtocolTradeIsCompleted(int player_id, int tradePartner_id) {
 
-    public ProtocolTradeIsCompleted(int player_id, int tradePartner_id) {
+		this.player_id = player_id;
+		this.tradePartner_id = tradePartner_id;
 
-        this.player_id = player_id;
-        this.tradePartner_id = tradePartner_id;
+	}
 
-    }
+	public int getPlayer_id() {
 
-    public int getPlayer_id() {
+		return player_id;
+	}
 
-        return player_id;
-    }
+	public int getTradePartner_id() {
 
-    public int getTradePartner_id() {
-
-        return tradePartner_id;
-    }
+		return tradePartner_id;
+	}
 }

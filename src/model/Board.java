@@ -761,7 +761,6 @@ public class Board {
 		edges[i][j][k].setHasStreet(hasStreet);
 		edges[i][j][k].setOwnedByPlayer(ownedByPlayer);
 
-
 	}
 
 	public void setCorner(int i, int j, int k, CornerStatus status, HarbourStatus hstatus, int ownerID) {

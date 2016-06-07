@@ -26,202 +26,201 @@ import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 
 public class ServerInputHandler extends InputHandler {
-    private ServerNetworkController serverNetworkController;
-    private int currentThreadID;
+	private ServerNetworkController serverNetworkController;
+	private int currentThreadID;
 
-    public ServerInputHandler(ServerNetworkController nc) {
-        super();
-        this.serverNetworkController = nc;
-    }
+	public ServerInputHandler(ServerNetworkController nc) {
+		super();
+		this.serverNetworkController = nc;
+	}
 
-    public ServerNetworkController getServerNetworkController() {
-        return serverNetworkController;
-    }
+	public ServerNetworkController getServerNetworkController() {
+		return serverNetworkController;
+	}
 
-    /**
-     * sends JSON formatted string to parser and initiates handling of parsed
-     * object
-     *
-     * @param s
-     */
-    public void sendToParser(String s, int threadID) {
-        // speichert die threadID, falls sie in handle(Protocol...) gebraucht
-        // wird.
-        this.currentThreadID = threadID;
-        Object object = parser.parseString(s);
+	/**
+	 * sends JSON formatted string to parser and initiates handling of parsed
+	 * object
+	 *
+	 * @param s
+	 */
+	public void sendToParser(String s, int threadID) {
+		// speichert die threadID, falls sie in handle(Protocol...) gebraucht
+		// wird.
+		this.currentThreadID = threadID;
+		Object object = parser.parseString(s);
 
-        handle(object);
-    }
+		handle(object);
+	}
 
-    @Override
-    protected void handle(ProtocolHello hello) {
-        System.out.println("SERVER: Hello gelesen!");
-        serverNetworkController.welcome(serverNetworkController.getPlayerModelId(currentThreadID));
+	@Override
+	protected void handle(ProtocolHello hello) {
+		System.out.println("SERVER: Hello gelesen!");
+		serverNetworkController.welcome(serverNetworkController.getPlayerModelId(currentThreadID));
 
-    }
+	}
 
-    @Override
-    protected void handle(ProtocolWelcome welcome) {
-        System.out.println("Welcome gelesen!");
-    }
+	@Override
+	protected void handle(ProtocolWelcome welcome) {
+		System.out.println("Welcome gelesen!");
+	}
 
-    // unnecessary Method in ServerInputHandler
-    @Override
-    protected void handle(ProtocolClientReady clientReady) {
-        serverNetworkController.clientReady(serverNetworkController.getPlayerModelId(currentThreadID));
+	// unnecessary Method in ServerInputHandler
+	@Override
+	protected void handle(ProtocolClientReady clientReady) {
+		serverNetworkController.clientReady(serverNetworkController.getPlayerModelId(currentThreadID));
 
-    }
+	}
 
-    @Override
-    protected void handle(ProtocolGameStarted gameStarted) {
-        // unnecessary Method in ServerInputHandler
+	@Override
+	protected void handle(ProtocolGameStarted gameStarted) {
+		// unnecessary Method in ServerInputHandler
 
-    }
+	}
 
-    @Override
-    protected void handle(ProtocolError error) {
-        // unnecessary Method in ServerInputHandler
+	@Override
+	protected void handle(ProtocolError error) {
+		// unnecessary Method in ServerInputHandler
 
-    }
+	}
 
-    @Override
-    protected void handle(ProtocolPlayerProfile playerProfile) {
-        String name = playerProfile.getName();
-        Color color = playerProfile.getColor();
-        serverNetworkController.statusUpdate(color, name, currentThreadID);
+	@Override
+	protected void handle(ProtocolPlayerProfile playerProfile) {
+		String name = playerProfile.getName();
+		Color color = playerProfile.getColor();
+		serverNetworkController.statusUpdate(color, name, currentThreadID);
 
+	}
 
-    }
-
-    @Override
-    protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
-        String s = chatReceiveMessage.getMessage();
-        int playerId = chatReceiveMessage.getSender();
-        serverNetworkController.chatReceiveMessage(playerId, s);
-        /*
-         * ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be
+	@Override
+	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
+		String s = chatReceiveMessage.getMessage();
+		int playerId = chatReceiveMessage.getSender();
+		serverNetworkController.chatReceiveMessage(playerId, s);
+		/*
+		 * ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be
 		 * handled only in ServerOutputHandler and in ClientInputHandler.
 		 * unnecessary Method in ServerInputHandler
 		 */
-    }
+	}
 
-    protected void handle(ProtocolChatSendMessage chatSendMessage) {
-        String s = chatSendMessage.getMessage();
-        serverNetworkController.chatSendMessage(s, this.currentThreadID);
-    }
+	protected void handle(ProtocolChatSendMessage chatSendMessage) {
+		String s = chatSendMessage.getMessage();
+		serverNetworkController.chatSendMessage(s, this.currentThreadID);
+	}
 
-    @Override
-    protected void handle(ProtocolServerConfirmation serverConfirmation) {
-        String server_response = serverConfirmation.getServer_response();
-        serverNetworkController.serverConfirmation(server_response);
-        // Unnecessary Method in ServerInputHadler
-    }
+	@Override
+	protected void handle(ProtocolServerConfirmation serverConfirmation) {
+		String server_response = serverConfirmation.getServer_response();
+		serverNetworkController.serverConfirmation(server_response);
+		// Unnecessary Method in ServerInputHadler
+	}
 
-    //
-    @Override
-    protected void handle(ProtocolBuild build) {
-        // unnecessary Method in ServerInputHandler
+	//
+	@Override
+	protected void handle(ProtocolBuild build) {
+		// unnecessary Method in ServerInputHandler
 
-    }
+	}
 
-    @Override
-    protected void handle(ProtocolDiceRollResult diceRollResult) {
-        // unnecessary Method in ServerInputHandler
+	@Override
+	protected void handle(ProtocolDiceRollResult diceRollResult) {
+		// unnecessary Method in ServerInputHandler
 
-    }
+	}
 
-    @Override
-    protected void handle(ProtocolResourceObtain resourceObtain) {
-        // unnecessary Method in ServerInputHandler
-    }
+	@Override
+	protected void handle(ProtocolResourceObtain resourceObtain) {
+		// unnecessary Method in ServerInputHandler
+	}
 
-    @Override
-    protected void handle(ProtocolStatusUpdate statusUpdate) {
-        // unnecessary Method in ServerInputHandler
+	@Override
+	protected void handle(ProtocolStatusUpdate statusUpdate) {
+		// unnecessary Method in ServerInputHandler
 
-    }
+	}
 
-    //
+	//
 
-    @Override
-    protected void handle(ProtocolBuildRequest buildRequest) {
-        if (buildRequest.getBuilding() == "Straße") {
-            int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
-            serverNetworkController.requestBuildStreet(loc[0], loc[1], loc[2],
-                    serverNetworkController.getPlayerModelId(this.currentThreadID));
-        }
-        if (buildRequest.getBuilding() == "Dorf") {
-            int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-            serverNetworkController.requestBuildVillage(loc[0], loc[1], loc[2],
-                    serverNetworkController.getPlayerModelId(this.currentThreadID));
-        }
-        if (buildRequest.getBuilding() == "Stadt") {
-            int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-            serverNetworkController.requestBuildCity(loc[0], loc[1], loc[2],
-                    serverNetworkController.getPlayerModelId(this.currentThreadID));
-        }
-    }
+	@Override
+	protected void handle(ProtocolBuildRequest buildRequest) {
+		if (buildRequest.getBuilding() == "Straße") {
+			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
+			serverNetworkController.requestBuildStreet(loc[0], loc[1], loc[2],
+					serverNetworkController.getPlayerModelId(this.currentThreadID));
+		}
+		if (buildRequest.getBuilding() == "Dorf") {
+			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
+			serverNetworkController.requestBuildVillage(loc[0], loc[1], loc[2],
+					serverNetworkController.getPlayerModelId(this.currentThreadID));
+		}
+		if (buildRequest.getBuilding() == "Stadt") {
+			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
+			serverNetworkController.requestBuildCity(loc[0], loc[1], loc[2],
+					serverNetworkController.getPlayerModelId(this.currentThreadID));
+		}
+	}
 
-    @Override
-    protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-        serverNetworkController.diceRollRequest(serverNetworkController.getPlayerModelId(this.currentThreadID));
+	@Override
+	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
+		serverNetworkController.diceRollRequest(serverNetworkController.getPlayerModelId(this.currentThreadID));
 
-    }
+	}
 
-    @Override
-    protected void handle(ProtocolEndTurn endTurn) {
-        System.out.println("Der Zug wurde beendet");
+	@Override
+	protected void handle(ProtocolEndTurn endTurn) {
+		System.out.println("Der Zug wurde beendet");
 
-    }
+	}
 
-    @Override
-    protected void handle(String string) {
-        // TODO Auto-generated method stub
+	@Override
+	protected void handle(String string) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
+	protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
 
-        Integer player_id = robberMovementRequest.getPlayer_id();
-        String location_id = robberMovementRequest.getLocation_id();
-        int victim_id = robberMovementRequest.getVictim_id();
-        // serverNetworkController.robberMovementRequest(player_id,location_id,victim_id);
+		Integer player_id = robberMovementRequest.getPlayer_id();
+		String location_id = robberMovementRequest.getLocation_id();
+		int victim_id = robberMovementRequest.getVictim_id();
+		// serverNetworkController.robberMovementRequest(player_id,location_id,victim_id);
 
-    }
+	}
 
-    protected void handle(ProtocolHarbourRequest harbourRequest) {
+	protected void handle(ProtocolHarbourRequest harbourRequest) {
 
-        ProtocolResource offer = harbourRequest.getOffer();
-        ProtocolResource withdrawal = harbourRequest.getWithdrawal();
-        // serverNetworkController.harbourRequest(offer,withdrawal);
-    }
+		ProtocolResource offer = harbourRequest.getOffer();
+		ProtocolResource withdrawal = harbourRequest.getWithdrawal();
+		// serverNetworkController.harbourRequest(offer,withdrawal);
+	}
 
-    protected void handle(ProtocolTradeAccept tradeAccept) {
+	protected void handle(ProtocolTradeAccept tradeAccept) {
 
-        int trade_id = tradeAccept.getTrade_id();
-        // serverNetworkController.tradeAccept(trade_id);
-    }
+		int trade_id = tradeAccept.getTrade_id();
+		// serverNetworkController.tradeAccept(trade_id);
+	}
 
-    protected void handle(ProtocolTradeRequest tradeRequest) {
+	protected void handle(ProtocolTradeRequest tradeRequest) {
 
-        ProtocolResource offer = tradeRequest.getOffer();
-        ProtocolResource withdrawal = tradeRequest.getWithdrawal();
-        // serverNetworkController.tradeRequest(offer,withdrawal);
+		ProtocolResource offer = tradeRequest.getOffer();
+		ProtocolResource withdrawal = tradeRequest.getWithdrawal();
+		// serverNetworkController.tradeRequest(offer,withdrawal);
 
-    }
+	}
 
-    protected void handle(ProtocolTradeCancel tradeCancel) {
+	protected void handle(ProtocolTradeCancel tradeCancel) {
 
-        int trade_id = tradeCancel.getTrade_id();
-        //    serverNetworkController.tradeCancel(trade_id);
-    }
+		int trade_id = tradeCancel.getTrade_id();
+		// serverNetworkController.tradeCancel(trade_id);
+	}
 
-    protected void handle(ProtocolTradeComplete tradeComplete) {
+	protected void handle(ProtocolTradeComplete tradeComplete) {
 
-        int trade_id = tradeComplete.getTrade_id();
-        int tradePartner_id = tradeComplete.getTradePartner_id();
-        //  serverNetworkController.tradeComplete(trade_id,tradePartner_id;)
+		int trade_id = tradeComplete.getTrade_id();
+		int tradePartner_id = tradeComplete.getTradePartner_id();
+		// serverNetworkController.tradeComplete(trade_id,tradePartner_id;)
 
-    }
+	}
 
 }
