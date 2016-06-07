@@ -112,11 +112,11 @@ public class Board {
 		int[] temp;
 		int radius = DefaultSettings.BOARD_RADIUS;
 		// Go through HashMap<String,int[]>
-		for (String key : stringToCoordMap.keySet()) {
+		for (Map.Entry<String, int[]> entry : stringToCoordMap.entrySet()) {
 			// entry of key
-			temp = stringToCoordMap.get(key);
+			temp = entry.getValue();
 			// lowercase keys only (outer ring)
-			if (key.matches("[a-z]")) {
+			if (entry.getKey().matches("[a-z]")) {
 				// North only will be set
 				if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) < 0) {
 					// convert axial back to array coords
@@ -151,11 +151,11 @@ public class Board {
 		int[] temp;
 		int radius = DefaultSettings.BOARD_RADIUS;
 		// Go through HashMap<String,int[]>
-		for (String key : stringToCoordMap.keySet()) {
+		for (Map.Entry<String, int[]> entry : stringToCoordMap.entrySet()) {
 			// entry of key
-			temp = stringToCoordMap.get(key);
+			temp = entry.getValue();
 			// lowercase keys only (outer ring)
-			if (key.matches("[a-z]")) {
+			if (entry.getKey().matches("[a-z]")) {
 				// NW only is defined
 				if (temp[0] >= 0 && temp[1] > 0) {
 					edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
