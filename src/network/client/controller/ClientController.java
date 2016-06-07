@@ -18,14 +18,14 @@ import settings.DefaultSettings;
 /**
  * @author NiedlichePixel Controls the game flow.
  */
-public class FlowController {
+public class ClientController {
 	private Board board;
 	private GameLogic gameLogic;
 	private int ownPlayerId;
 	protected ViewController viewController;
 	private ClientNetworkController clientNetworkController;
 
-	public FlowController(Stage primaryStage) {
+	public ClientController(Stage primaryStage) {
 		this.setClientNetworkController(new ClientNetworkController(this));
 		// this.mainViewController = viewController.getMainViewController();
 		this.board = new Board();

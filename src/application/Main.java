@@ -8,16 +8,16 @@ import org.apache.logging.log4j.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import network.ModelToProtocol;
-import network.client.controller.FlowController;
-import network.server.controller.GameController;
+import network.client.controller.ClientController;
+import network.server.controller.ServerController;
 
 public class Main extends Application {
 
 	@SuppressWarnings("unused")
 	private static Logger logger = LogManager.getLogger(Main.class.getName());
 
-	private GameController gc;
-	private FlowController fc;
+	private ServerController gc;
+	private ClientController fc;
 
 	// true for server, false for client
 	private boolean mode = false;
@@ -39,9 +39,9 @@ public class Main extends Application {
 		ModelToProtocol.initModelToProtocol();
 		if (mode) {
 			// server = new Server();
-			setGameController(new GameController());
+			setGameController(new ServerController());
 		} else {
-			setFlowController(new FlowController(primaryStage));
+			setFlowController(new ClientController(primaryStage));
 		}
 
 	}
@@ -66,7 +66,7 @@ public class Main extends Application {
 	/**
 	 * @return the gc
 	 */
-	public GameController getGameController() {
+	public ServerController getGameController() {
 		return gc;
 	}
 
@@ -74,14 +74,14 @@ public class Main extends Application {
 	 * @param gc
 	 *            the gc to set
 	 */
-	public void setGameController(GameController gc) {
+	public void setGameController(ServerController gc) {
 		this.gc = gc;
 	}
 
 	/**
 	 * @return the fc
 	 */
-	public FlowController getFlowController() {
+	public ClientController getFlowController() {
 		return fc;
 	}
 
@@ -89,7 +89,7 @@ public class Main extends Application {
 	 * @param fc
 	 *            the fc to set
 	 */
-	public void setFlowController(FlowController fc) {
+	public void setFlowController(ClientController fc) {
 		this.fc = fc;
 	}
 }

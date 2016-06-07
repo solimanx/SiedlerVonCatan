@@ -27,7 +27,7 @@ import settings.DefaultSettings;
  *
  *
  */
-public class GameController {
+public class ServerController {
 	private GameLogic gameLogic;
 	private ServerOutputHandler serverOutputHandler;
 	private ArrayList<PlayerModel> tempPlayers = new ArrayList<PlayerModel>();
@@ -35,7 +35,7 @@ public class GameController {
 	private Server server;
 	private ServerInputHandler serverInputHandler;	
 
-	public GameController() {
+	public ServerController() {
 		Board board = new Board();
 		this.gameLogic = new GameLogic(board);
 		this.serverInputHandler = new ServerInputHandler(this);

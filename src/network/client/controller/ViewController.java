@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Board;
 import network.client.view.View;
-import network.server.controller.GameController;
+import network.server.controller.ServerController;
 
 public class ViewController {
 
@@ -22,8 +22,8 @@ public class ViewController {
 	protected View view;
 	protected HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
 	protected HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
-	protected GameController gameController; // DEBUG
-	private FlowController flowController;
+	protected ServerController serverController; // DEBUG
+	private ClientController clientController;
 	private MainViewController mainViewController;
 	private LobbyController lobbyController;
 	private PlayerProfileController nameSelectDialogController;
@@ -31,9 +31,9 @@ public class ViewController {
 	private Stage choosingStage;
 	private Stage mainViewStage;
 
-	public ViewController(Stage primaryStage, FlowController fc) {
+	public ViewController(Stage primaryStage, ClientController fc) {
 		this.primaryStage = primaryStage;
-		this.flowController = fc;
+		this.clientController = fc;
 		loader = new FXMLLoader();
 
 		try {
@@ -99,7 +99,7 @@ public class ViewController {
 		primaryStage.close();
 		choosingStage.close();
 		mainViewStage = new Stage();
-		this.mainViewController = new MainViewController(this, flowController.getBoard(), mainViewStage);
+		this.mainViewController = new MainViewController(this, clientController.getBoard(), mainViewStage);
 		init();
 	}
 
@@ -124,22 +124,22 @@ public class ViewController {
 		view.button.setText("build initial village 2,-2,0");
 		view.button.setOnAction(e -> {
 			// setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
-			gameController.buildInitialVillage(2, -2, 0, 1);
+			serverController.buildInitialVillage(2, -2, 0, 1);
 		});
 		view.button2.setText("build initial street 2,-2,1");
 		view.button2.setOnAction(e -> {
 			// setStreet(-1,-1,0,1);
-			gameController.buildInitialStreet(2, -2, 1, 1);
-			gameController.buildStreet(2, -2, 2, 1);
+			serverController.buildInitialStreet(2, -2, 1, 1);
+			serverController.buildStreet(2, -2, 2, 1);
 			// view.setFieldResourceType(-1, -1,
 			// fieldColors.get(ResourceType.SHEEP));
 		});
 		view.button3.setText("build city 2,-2,0");
 		view.button3.setOnAction(e -> {
 			// setCorner(0, -2, 1, CornerStatus.CITY, 1);
-			gameController.buildCity(2, -2, 0, 1);
-			gameController.buildVillage(2, -1, 0, 1);
-			gameController.buildCity(2, -1, 0, 1);
+			serverController.buildCity(2, -2, 0, 1);
+			serverController.buildVillage(2, -1, 0, 1);
+			serverController.buildCity(2, -1, 0, 1);
 		});
 		view.button4.setText("set bandit 2,-2");
 		view.button4.setOnAction(e -> {
@@ -168,8 +168,8 @@ public class ViewController {
 
 	}
 
-	public FlowController getFlowController() {
-		return flowController;
+	public ClientController getFlowController() {
+		return clientController;
 	}
 
 	public MainViewController getMainViewController() {
@@ -180,8 +180,8 @@ public class ViewController {
 		return lobbyController;
 	}
 
-	public void setFlowController(FlowController flowController) {
-		this.flowController = flowController;
+	public void setFlowController(ClientController clientController) {
+		this.clientController = clientController;
 	}
 
 	public void setMainViewController(MainViewController mainViewController) {

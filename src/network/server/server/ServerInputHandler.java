@@ -4,7 +4,7 @@ import enums.Color;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.client.controller.ClientNetworkController;
-import network.server.controller.GameController;
+import network.server.controller.ServerController;
 import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.clientinstructions.trade.ProtocolTradeCancel;
@@ -26,16 +26,16 @@ import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 
 public class ServerInputHandler extends InputHandler {
-	private GameController gameController;
+	private ServerController serverController;
 	private int currentThreadID;
 
-	public ServerInputHandler(GameController gameController) {
+	public ServerInputHandler(ServerController serverController) {
 		super();
-		this.gameController = gameController;
+		this.serverController = serverController;
 	}
 
-	public GameController getGameController() {
-		return gameController;
+	public ServerController getGameController() {
+		return serverController;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class ServerInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolHello hello) {
 		System.out.println("SERVER: Hello gelesen!");
-		gameController.welcome(gameController.getPlayerModelId(currentThreadID));
+		serverController.welcome(serverController.getPlayerModelId(currentThreadID));
 
 	}
 
@@ -68,7 +68,7 @@ public class ServerInputHandler extends InputHandler {
 	// unnecessary Method in ServerInputHandler
 	@Override
 	protected void handle(ProtocolClientReady clientReady) {
-		gameController.clientReady(gameController.getPlayerModelId(currentThreadID));
+		serverController.clientReady(serverController.getPlayerModelId(currentThreadID));
 
 	}
 
@@ -88,7 +88,7 @@ public class ServerInputHandler extends InputHandler {
 	protected void handle(ProtocolPlayerProfile playerProfile) {
 		String name = playerProfile.getName();
 		Color color = playerProfile.getColor();
-		gameController.statusUpdate(color, name, currentThreadID);
+		serverController.statusUpdate(color, name, currentThreadID);
 
 	}
 
@@ -96,7 +96,7 @@ public class ServerInputHandler extends InputHandler {
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		String s = chatReceiveMessage.getMessage();
 		int playerId = chatReceiveMessage.getSender();
-		gameController.chatReceiveMessage(playerId, s);
+		serverController.chatReceiveMessage(playerId, s);
 		/*
 		 * ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be
 		 * handled only in ServerOutputHandler and in ClientInputHandler.
@@ -106,13 +106,13 @@ public class ServerInputHandler extends InputHandler {
 
 	protected void handle(ProtocolChatSendMessage chatSendMessage) {
 		String s = chatSendMessage.getMessage();
-		gameController.chatSendMessage(s, this.currentThreadID);
+		serverController.chatSendMessage(s, this.currentThreadID);
 	}
 
 	@Override
 	protected void handle(ProtocolServerConfirmation serverConfirmation) {
 		String server_response = serverConfirmation.getServer_response();
-		gameController.serverConfirmation(server_response);
+		serverController.serverConfirmation(server_response);
 		// Unnecessary Method in ServerInputHadler
 	}
 
@@ -146,24 +146,24 @@ public class ServerInputHandler extends InputHandler {
 	protected void handle(ProtocolBuildRequest buildRequest) {
 		if (buildRequest.getBuilding() == "Straße") {
 			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
-			gameController.requestBuildStreet(loc[0], loc[1], loc[2],
-					gameController.getPlayerModelId(this.currentThreadID));
+			serverController.requestBuildStreet(loc[0], loc[1], loc[2],
+					serverController.getPlayerModelId(this.currentThreadID));
 		}
 		if (buildRequest.getBuilding() == "Dorf") {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			gameController.requestBuildVillage(loc[0], loc[1], loc[2],
-					gameController.getPlayerModelId(this.currentThreadID));
+			serverController.requestBuildVillage(loc[0], loc[1], loc[2],
+					serverController.getPlayerModelId(this.currentThreadID));
 		}
 		if (buildRequest.getBuilding() == "Stadt") {
 			int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
-			gameController.requestBuildCity(loc[0], loc[1], loc[2],
-					gameController.getPlayerModelId(this.currentThreadID));
+			serverController.requestBuildCity(loc[0], loc[1], loc[2],
+					serverController.getPlayerModelId(this.currentThreadID));
 		}
 	}
 
 	@Override
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-		gameController.diceRollRequest(gameController.getPlayerModelId(this.currentThreadID));
+		serverController.diceRollRequest(serverController.getPlayerModelId(this.currentThreadID));
 
 	}
 
