@@ -574,5 +574,12 @@ public class ServerController {
 		return serverInputHandler;
 	}
 
+	public void robberMovementRequest(int x, int y, int victim_id, int currentThreadID){
+		if (gameLogic.checkSetBandit(x, y, victim_id)){
+			
+		}
+		
+	}
+
 
 }

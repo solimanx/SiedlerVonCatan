@@ -63,4 +63,19 @@ public final class ModelToProtocol {
 		ProtocolResource pr = new ProtocolResource(wood, clay, wool, corn, ore, unknown);
 		return pr;
 	}
+
+	public static String getCornerID(int x, int y, int dir) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static String getEdgeID(int x, int y, int dir) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static String getFieldID(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

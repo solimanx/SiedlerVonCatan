@@ -287,15 +287,14 @@ public class ClientController {
 
 	// 9.3
 	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
-		// TODO fix
-		// outputHandler.requestSetBandit(x, y, stealFromPlayerId);
+		clientOutputHandler.requestSetBandit(x, y, stealFromPlayerId);
 
 	}
 
 	// 9.4
 	public void requestBuildVillage(int x, int y, int dir) {
 		if (gameLogic.checkBuildVillage(x, y, dir, ownPlayerId)) {
-			// clientOutputHandler.requestBuildVillage(x, y, dir);
+			clientOutputHandler.requestBuildVillage(x, y, dir);
 		}
 
 	}
@@ -303,7 +302,7 @@ public class ClientController {
 	// 9.4
 	public void requestBuildStreet(int x, int y, int dir) {
 		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)) {
-			// clientOutputHandler.requestBuildStreet(x, y, dir);
+			clientOutputHandler.requestBuildStreet(x, y, dir);
 		}
 
 	}
@@ -311,7 +310,7 @@ public class ClientController {
 	// 9.4
 	public void requestBuildCity(int x, int y, int dir) {
 		if (gameLogic.checkBuildCity(x, y, dir, ownPlayerId)) {
-			// clientOutputHandler.requestBuildCity(x, y, dir);
+			clientOutputHandler.requestBuildCity(x, y, dir);
 		}
 	}
 

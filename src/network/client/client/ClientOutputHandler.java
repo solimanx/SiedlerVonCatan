@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import network.ModelToProtocol;
 import parsing.Parser;
 import parsing.Response;
 import protocol.clientinstructions.*;
@@ -28,19 +30,6 @@ public class ClientOutputHandler {
 	}
 
 	private static Logger logger = LogManager.getLogger(ClientOutputHandler.class.getName());
-
-	public void handleBuildRequest(String building_type, String location_id) {
-		ProtocolBuildRequest pbr = new ProtocolBuildRequest(building_type, location_id);
-		Response r = new Response();
-		r.pBuildRequest = pbr;
-		try {
-			client.write(parser.createString(r));
-		} catch (IOException e) {
-			logger.error("Threw a Input/Output Exception ", e);
-			e.printStackTrace();
-		}
-
-	}
 
 	/**
 	 * If the connection can be established, send "Hello" back to server.
@@ -111,9 +100,10 @@ public class ClientOutputHandler {
 
 	}
 
-	public void requestSetBandit(int player_Id, String location_id, int victim_id) {
+	public void requestSetBandit(int x, int y, int victim_id) {
+		String location = ModelToProtocol.getFieldID(x,y);
 
-		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(player_Id, location_id, victim_id);
+		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(location, victim_id);
 		Response r = new Response();
 		r.pRobberMoveRequest = prmr;
 		try {
@@ -201,6 +191,51 @@ public class ClientOutputHandler {
 			e.printStackTrace();
 
 		}
+	}
+
+	public void requestBuildVillage(int x, int y, int dir) {
+		String location = ModelToProtocol.getCornerID(x,y,dir);
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Dorf", location);
+		
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void requestBuildStreet(int x, int y, int dir) {
+		String location = ModelToProtocol.getEdgeID(x,y,dir);
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", location);
+		
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void requestBuildCity(int x, int y, int dir) {
+		String location = ModelToProtocol.getCornerID(x,y,dir);
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Stadt", location);
+		
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
+		
 	}
 
 }

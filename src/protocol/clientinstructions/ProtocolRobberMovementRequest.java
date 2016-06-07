@@ -14,24 +14,17 @@ import com.google.gson.annotations.Since;
 @Since(0.2)
 public class ProtocolRobberMovementRequest {
 
-	// optional
-	@SerializedName("Spieler")
-	Integer player_id;
 
 	@SerializedName("Ort")
 	String location_id;
-
+    
+	//optional
 	@SerializedName("Ziel")
 	int victim_id;
 
-	public ProtocolRobberMovementRequest(Integer player_id, String location_id, int victim_id) {
-		this.player_id = player_id;
+	public ProtocolRobberMovementRequest(String location_id, int victim_id) {
 		this.location_id = location_id;
 		this.victim_id = victim_id;
-	}
-
-	public Integer getPlayer_id() {
-		return player_id;
 	}
 
 	public String getLocation_id() {

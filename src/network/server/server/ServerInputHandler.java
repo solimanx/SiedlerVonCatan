@@ -167,7 +167,7 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-		serverController.diceRollRequest(this.currentThreadID);
+		serverController.diceRollRequest(currentThreadID);
 
 	}
 
@@ -185,10 +185,12 @@ public class ServerInputHandler extends InputHandler {
 
 	protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
 
-		Integer player_id = robberMovementRequest.getPlayer_id();
 		String location_id = robberMovementRequest.getLocation_id();
+		int[] coords = ProtocolToModel.getFieldCoordinates(location_id);
 		int victim_id = robberMovementRequest.getVictim_id();
-		// gameController.robberMovementRequest(player_id,location_id,victim_id);
+		//TODO: Was wenn victim_id nicht vorhanden?
+	    serverController.robberMovementRequest(coords[0],coords[1],victim_id,currentThreadID);
+		
 
 	}
 
