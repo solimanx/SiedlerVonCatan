@@ -25,6 +25,7 @@ import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerConfirmation;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolField;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolCosts;
