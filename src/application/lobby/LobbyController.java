@@ -28,7 +28,6 @@ public class LobbyController implements Initializable {
 	private ComboBox<String> serverComboBox;
 
 	@FXML
-
 	private ComboBox<String> portComboBox;
 
 	@FXML
