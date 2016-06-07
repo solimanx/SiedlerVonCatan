@@ -44,15 +44,14 @@ public class GameLogic implements GameLogicInterface {
 				Edge[] e = board.getProjectingEdges(x, y, dir);
 				for (int i = 0; i < e.length; i++) {
 					if (e[i] != null) {
-						if (e[i].getOwnedByPlayer() != null) {
-							if (e[i].getOwnedByPlayer().getId() == playerID) { // is
-																				// there
-																				// an
-																				// adjusting
-																				// street
-								// with correct player
-								return true;
-							}
+						if (e[i].getOwnerID() == playerID) { // is
+																// there
+																// an
+																// adjusting
+																// street
+							// with correct player
+							return true;
+
 						}
 					}
 				}
@@ -78,35 +77,23 @@ public class GameLogic implements GameLogicInterface {
 		if (checkPlayerResources(playerID, settings.DefaultSettings.CITY_BUILD_COST) == false) {
 			return false;
 		}
-		/*
-		 * int[] resources = getPlayerResources(playerId); for (int i = 0; i <
-		 * 5; i++) { if (resources[i] <
-		 * settings.DefaultSettings.CITY_BUILD_COST[i]) { System.out.println(
-		 * "not enough resources"); return false; // not enough resources } }
-		 */
+
 		Corner c = board.getCornerAt(x, y, dir);
 		if (c != null) {
-			if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnedByPlayer().getId() == playerID) {
+			if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnerID() == playerID) {
 				Edge[] e = board.getProjectingEdges(x, y, dir);
 				for (int i = 0; i < e.length; i++) {
 					if (e[i] != null) {
-						if (e[i].getOwnedByPlayer() != null) {
-							if (e[i].getOwnedByPlayer().getId() == playerID) { // is
-																				// there
-																				// an
-																				// adjusting
-																				// streetof
-																				// this
-																				// player?
-								return true;
-							}
+						if (e[i].getOwnerID() == playerID) {
+							return true;
 						}
 					}
 				}
+
 			}
 		}
-		System.out.println("no adjusting street");
 		return false;
+
 	}
 
 	/**
@@ -119,9 +106,11 @@ public class GameLogic implements GameLogicInterface {
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildStreet(int x, int y, int dir, int playerID) {
-		if (board.getPlayer(playerID).getAmountStreets() <= 0) { // has this Player
-																// a Street left
-																// to build?
+		if (board.getPlayer(playerID).getAmountStreets() <= 0) { // has this
+																	// Player
+																	// a Street
+																	// left
+																	// to build?
 			return false;
 		}
 		if (checkPlayerResources(playerID, settings.DefaultSettings.STREET_BUILD_COST) == false) {
@@ -138,10 +127,9 @@ public class GameLogic implements GameLogicInterface {
 				Edge[] neighbors = board.getLinkedEdges(x, y, dir);
 				for (int i = 0; i < neighbors.length; i++) {
 					if (neighbors[i] != null) {
-						if (neighbors[i].getOwnedByPlayer() != null) {
-							if (neighbors[i].getOwnedByPlayer().getId() == playerID) {
-								return true;
-							}
+						if (neighbors[i].getOwnerID() == playerID) {
+							return true;
+
 						}
 					}
 				}
@@ -158,19 +146,19 @@ public class GameLogic implements GameLogicInterface {
 	 * @param playerId
 	 * @return true/false
 	 */
-	public boolean checkSetBandit(int x, int y, int playerId) {
+	public boolean checkSetBandit(int x, int y, int playerID) {
 		Field f = board.getFieldAt(x, y);
 		if (f != null && f.getFieldID() != board.getBandit()) { // valid
 																// position and
 																// not the
 			// same as before
-			if (playerId == 0) { // check if specified player has a corner at
+			if (playerID == 0) { // check if specified player has a corner at
 									// this field
 				return true;
 			} else {
 				Corner[] corners = board.getSurroundingCorners(x, y);
 				for (Corner c : corners) {
-					if (c.getOwnedByPlayer() == board.getPlayer(playerId)) {
+					if (c.getOwnerID() == playerID) {
 						return true;
 					}
 				}
@@ -181,8 +169,8 @@ public class GameLogic implements GameLogicInterface {
 		return false;
 	}
 
-	public boolean checkPlayerResources(int playerId, int[] resources) {
-		int[] playerResources = getPlayerResources(playerId);
+	public boolean checkPlayerResources(int playerID, int[] resources) {
+		int[] playerResources = getPlayerResources(playerID);
 		for (int i = 0; i < 5; i++) {
 			if (playerResources[i] < resources[i]) {
 				return false;
@@ -195,12 +183,12 @@ public class GameLogic implements GameLogicInterface {
 	 * Gets an array which contains the player resources in form of
 	 * (AmountWood,AmountClay...)
 	 * 
-	 * @param playerId
+	 * @param playerID
 	 * @return resource Array
 	 */
-	public int[] getPlayerResources(int playerId) {
+	public int[] getPlayerResources(int playerID) {
 		int[] result = { 0, 0, 0, 0, 0 };
-		ArrayList<ResourceType> resList = board.getPlayer(playerId).getResourceCards();
+		ArrayList<ResourceType> resList = board.getPlayer(playerID).getResourceCards();
 		if (resList == null) {
 			return result;
 		} else {
@@ -239,26 +227,26 @@ public class GameLogic implements GameLogicInterface {
 	 * @param x
 	 * @param y
 	 * @param dir
-	 * @param playerId
+	 * @param playerID
 	 * @return boolean true/false
 	 */
-	public boolean checkBuildInitialStreet(int x, int y, int dir, int playerId) {
+	public boolean checkBuildInitialStreet(int x, int y, int dir, int playerID) {
 		Edge e = board.getEdgeAt(x, y, dir);
 		if (e != null) { // valid edge
 			if (e.isHasStreet() == false) {
 				Corner[] neighbors = board.getAttachedCorners(x, y, dir);
 				for (int i = 0; i < neighbors.length; i++) {
 					if (neighbors[i] != null) {
-						if (neighbors[i].getOwnedByPlayer() != null) {
-							if (neighbors[i].getOwnedByPlayer().getId() == playerId) {
-								return true;
-							}
+						if (neighbors[i].getOwnerID() == playerID) {
+							return true;
+
 						}
 					}
 				}
 			}
 		}
 		return false;
+
 	}
 
 	/**

@@ -596,7 +596,6 @@ public class Board {
 		return null;
 	}
 
-
 	public int getDirection(String f) {
 
 		int x = getFieldCoordinates(f)[0];
@@ -714,12 +713,13 @@ public class Board {
 	 */
 
 	public PlayerModel getPlayer(int i) {
-		return this.players[i]!=null ? this.players[i]: null;
+		return this.players[i] != null ? this.players[i] : null;
 	}
+
 	/**
 	 * Returns the amount of players
 	 */
-	public int getAmountPlayers(){
+	public int getAmountPlayers() {
 		return this.players.length;
 	}
 
@@ -752,18 +752,21 @@ public class Board {
 	}
 
 	public void setField(int i, int j, ResourceType resourceType, Integer diceIndex) {
-		// TODO Auto-generated method stub
-		
+		fields[i][j].setResourceType(resourceType);
+		fields[i][j].setDiceIndex(diceIndex);
+
 	}
 
 	public void setEdge(int i, int j, int k, boolean hasStreet, int ownedByPlayer) {
-		// TODO Auto-generated method stub
-		
+		edges[i][j][k].setHasStreet(hasStreet);
+		edges[i][j][k].setOwnedByPlayer(ownedByPlayer);
+
+
 	}
 
 	public void setCorner(int i, int j, int k, CornerStatus status, HarbourStatus hstatus, int ownedByPlayer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

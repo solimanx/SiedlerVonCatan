@@ -18,16 +18,16 @@ public class PlayerModel {
 	boolean hasLongestRoad;
 	boolean hasLargestArmy;
 	PlayerState playerState;
-	int id;
+	int playerID;
 
 	// every Player gets own id (1..4)
 	public PlayerModel(int id) {
-		this.id = id;
+		this.playerID = id;
 		this.resourceCards = new ArrayList<ResourceType>();
 	}
 
-	public int getId() {
-		return id;
+	public int getID() {
+		return playerID;
 	}
 
 	public int getAmountStreets() {

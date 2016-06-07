@@ -3,7 +3,7 @@ package model;
 public class Edge {
 
 	private boolean hasStreet;
-	private PlayerModel ownedByPlayer;
+	private int ownerID;
 
 	public Edge() {
 		hasStreet = false; // TODO constructor
@@ -13,15 +13,15 @@ public class Edge {
 		return hasStreet;
 	}
 
-	public PlayerModel getOwnedByPlayer() {
-		return ownedByPlayer;
+	public int getOwnerID() {
+		return ownerID;
 	}
 
 	public void setHasStreet(boolean hasStreet) {
 		this.hasStreet = hasStreet;
 	}
 
-	public void setOwnedByPlayer(PlayerModel ownedByPlayer) {
-		this.ownedByPlayer = ownedByPlayer;
+	public void setOwnedByPlayer(int ownerID) {
+		this.ownerID = ownerID;
 	}
 }

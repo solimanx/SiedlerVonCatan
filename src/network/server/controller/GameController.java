@@ -218,7 +218,7 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildVillage(x, y, dir, playerID)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnedByPlayer(board.getPlayer(playerID));
+			c.setOwnerID(playerID);
 			board.getPlayer(playerID).decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {
@@ -239,7 +239,7 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildStreet(x, y, dir, playerID)) {
 			Edge e = board.getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(board.getPlayer(playerID));
+			e.setOwnedByPlayer(board.getPlayer(playerID).getID());
 			board.getPlayer(playerID).decreaseAmountStreets();
 
 			subFromPlayersResources(playerID, settings.DefaultSettings.STREET_BUILD_COST);
@@ -254,7 +254,7 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildCity(x, y, dir, playerID)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.CITY);
-			c.setOwnedByPlayer(board.getPlayer(playerID));
+			c.setOwnerID(playerID);
 			board.getPlayer(playerID).increaseAmountVillages();
 			board.getPlayer(playerID).decreaseAmountCities();
 
@@ -269,7 +269,7 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerID)) {
 			Edge e = board.getEdgeAt(x, y, dir);
 			e.setHasStreet(true);
-			e.setOwnedByPlayer(board.getPlayer(playerID));
+			e.setOwnedByPlayer(board.getPlayer(playerID).getID());
 			board.getPlayer(playerID).decreaseAmountStreets();
 
 			viewController.getMainViewController().setStreet(x, y, dir, playerID);
@@ -280,7 +280,7 @@ public class GameController implements GameControllerInterface {
 		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
 			Corner c = board.getCornerAt(x, y, dir);
 			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnedByPlayer(board.getPlayer(playerID));
+			c.setOwnerID(playerID);
 			board.getPlayer(playerID).decreaseAmountVillages();
 			Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 			for (int i = 0; i < neighbors.length; i++) {

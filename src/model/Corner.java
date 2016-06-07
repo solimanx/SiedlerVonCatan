@@ -7,7 +7,7 @@ public class Corner {
 
 	private CornerStatus status;
 	private HarbourStatus harbourStatus;
-	private PlayerModel ownedByPlayer;
+	private int ownerID;
 
 	public Corner() { // TODO Constructor
 		status = CornerStatus.EMPTY;
@@ -22,8 +22,8 @@ public class Corner {
 		return harbourStatus;
 	}
 
-	public PlayerModel getOwnedByPlayer() {
-		return ownedByPlayer;
+	public int getOwnerID() {
+		return ownerID;
 	}
 
 	public void setStatus(CornerStatus status) {
@@ -34,8 +34,8 @@ public class Corner {
 		this.harbourStatus = harbourStatus;
 	}
 
-	public void setOwnedByPlayer(PlayerModel ownedByPlayer) {
-		this.ownedByPlayer = ownedByPlayer;
+	public void setOwnerID(int ownerID) {
+		this.ownerID = ownerID;
 	}
 
 }

@@ -92,7 +92,7 @@ public class FlowController {
 			for (int j = 0; j < board_size; j++) {
 				for (int k = 0; j < 3; k++) {
 					board.getEdge(i, j, k).setHasStreet(edges[i][j][k].isHasStreet());
-					board.getEdge(i, j, k).setOwnedByPlayer(edges[i][j][k].getOwnedByPlayer());
+					board.getEdge(i, j, k).setOwnedByPlayer(edges[i][j][k].getOwnerID());
 
 				}
 			}
@@ -101,7 +101,7 @@ public class FlowController {
 			for (int j = 0; j < corners[i].length; j++) {
 				for (int k = 0; k < 2; k++) {
 					board.getCorner(i, j, k).setHarbourStatus(corners[i][j][k].getHarbourStatus());
-					board.getCorner(i, j, k).setOwnedByPlayer(corners[i][j][k].getOwnedByPlayer());
+					board.getCorner(i, j, k).setOwnerID(corners[i][j][k].getOwnerID());
 					board.getCorner(i, j, k).setStatus(corners[i][j][k].getStatus());
 				}
 			}
@@ -145,7 +145,7 @@ public class FlowController {
 	public void buildStreet(int x, int y, int dir, int playerID) {
 		Edge e = board.getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
-		e.setOwnedByPlayer(board.getPlayer(playerID));
+		e.setOwnedByPlayer(board.getPlayer(playerID).getID());
 
 		viewController.getMainViewController().setStreet(x, y, dir, playerID);
 	}
@@ -153,7 +153,7 @@ public class FlowController {
 	public void buildVillage(int x, int y, int dir, int playerID) {
 		Corner c = board.getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.VILLAGE);
-		c.setOwnedByPlayer(board.getPlayer(playerID));
+		c.setOwnerID(playerID);
 		Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 		for (int i = 0; i < neighbors.length; i++) {
 			if (neighbors[i] != null) {
@@ -167,7 +167,7 @@ public class FlowController {
 	public void buildCity(int x, int y, int dir, int playerID) {
 		Corner c = board.getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.CITY);
-		c.setOwnedByPlayer(board.getPlayer(playerID));
+		c.setOwnerID(playerID);
 
 		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
 	}
