@@ -26,7 +26,7 @@ public class Server {
 
 	public Server(ServerInputHandler inputHandler) {
 		this.serverInputHandler = inputHandler;
-	}
+		}
 
 	public void start() throws IOException {
 
@@ -54,7 +54,7 @@ public class Server {
 				int threadID) {
 			this.socket = socket;
 			this.inputHandler = inputHandler;
-			this.outputHandler = outputHandler;
+			this.outputHandler = inputHandler.getGameController().getServerOutputHandler();
 			this.threadID = threadID;
 
 		}

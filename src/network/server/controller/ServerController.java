@@ -33,7 +33,7 @@ public class ServerController {
 	private ArrayList<PlayerModel> tempPlayers = new ArrayList<PlayerModel>();
 	private int amountPlayers = 0;
 	private Server server;
-	private ServerInputHandler serverInputHandler;	
+	private ServerInputHandler serverInputHandler;
 
 	public ServerController() {
 		Board board = new Board();
@@ -56,7 +56,7 @@ public class ServerController {
 
 	/**
 	 * Inits
-	 * 
+	 *
 	 * @param amountPlayers
 	 */
 	public void initializeBoard() {
@@ -207,7 +207,7 @@ public class ServerController {
 	 * @see server.controller.GameControllerInterface#buildVillage(int, int,
 	 * int, int)
 	 */
-	
+
 	public void buildVillage(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildVillage(x, y, dir, playerID)) {
 			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
@@ -229,7 +229,7 @@ public class ServerController {
 
 	}
 
-	
+
 	public void buildStreet(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildStreet(x, y, dir, playerID)) {
 			Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
@@ -245,7 +245,7 @@ public class ServerController {
 
 	}
 
-	
+
 	public void buildCity(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildCity(x, y, dir, playerID)) {
 			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
@@ -351,7 +351,7 @@ public class ServerController {
 		gameLogic.getBoard().getPlayer(playerID).setResourceCards(list);
 	}
 
-	
+
 	public void setBandit(int x, int y, int playerID) {
 		if (gameLogic.checkSetBandit(x, y, playerID)) {
 			// board.setBandit(board.getFieldAt(x, y));
@@ -368,7 +368,7 @@ public class ServerController {
 	 * @param playerID
 	 * @param state
 	 */
-	
+
 	public void setPlayerState(int playerID, PlayerState state) {
 		switch (state) {
 		case TRADING: // set all other players to offering
@@ -401,7 +401,7 @@ public class ServerController {
 
 	}
 
-	
+
 	public void setGameState() {
 		// TODO Auto-generated method stub
 
@@ -461,47 +461,56 @@ public class ServerController {
 
 	public void chatReceiveMessage(int playerId, String s) {
 		serverOutputHandler.chatReceiveMessage(playerId, s);
-		
+
 	}
 
 	public void chatSendMessage(String s, int currentThreadID) {
 		chatReceiveMessage(currentThreadID,s);
-		
+
 	}
 
 	public void serverConfirmation(String server_response) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void requestBuildVillage(int i, int j, int k, int currentThreadID) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void requestBuildStreet(int i, int j, int k, int currentThreadID) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void requestBuildCity(int i, int j, int k, int currentThreadID) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void clientReady(int currentThreadID) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void welcome(int currentThreadID) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
+	public ServerOutputHandler getServerOutputHandler() {
+		return serverOutputHandler;
+	}
+
+	public ServerInputHandler getServerInputHandler() {
+		return serverInputHandler;
+	}
+
 
 }
