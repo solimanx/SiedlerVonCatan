@@ -35,28 +35,23 @@ public class Client extends Thread {
 
 	@Override
 	public void run() {
-		try {
-			socket = new Socket(serverHost, port);
-			writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-			reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-			scanning = false;
-			connectionActive = true;
-			System.out.println("Client connected to server.");
-			runClient();
-		} catch (IOException e) {
-			System.out.println("Connection to server failed.");
-			scanning = true;
+		while (scanning && connectionTry < 10) {
 			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException ie) {
-				ie.printStackTrace();
-			}
-		} finally {
-			try {
-				socket.close();
+				socket = new Socket(serverHost, port);
+				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+				scanning = false;
+				connectionActive = true;
+				System.out.println("Client connected to server.");
+				runClient();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Connection to server failed." + " Attempt:" + connectionTry+1);
+				connectionTry ++;
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException ie) {
+					ie.printStackTrace();
+				}
 			}
 		}
 	}
