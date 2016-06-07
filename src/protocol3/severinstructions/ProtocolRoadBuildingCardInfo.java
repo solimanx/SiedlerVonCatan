@@ -25,11 +25,12 @@ public class ProtocolRoadBuildingCardInfo {
         this.player_id = player_id;
     }
 
-    public String getRoad1() {
+    public String getRoad1_id() {
+
         return road1_id;
     }
 
-    public String getRoad2() {
+    public String getRoad2_id() {
         return road2_id;
     }
 
