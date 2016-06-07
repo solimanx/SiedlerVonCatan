@@ -4,8 +4,13 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * Created  on 06.06.2016.
+ * <b>Größte Rittermacht(biggest knight prowess) </b>
+ * <p>
+ * Server sends to client the Message about the Player who has the biggest knight prowess.
+ * </p>
+ * Created on 06.06.2016.
  */
+
 @Since(0.3)
 public class ProtocolBiggestKnightProwess {
 
@@ -14,6 +19,7 @@ public class ProtocolBiggestKnightProwess {
     int player_id;
 
     public ProtocolBiggestKnightProwess(int player_id) {
+
         this.player_id = player_id;
     }
 

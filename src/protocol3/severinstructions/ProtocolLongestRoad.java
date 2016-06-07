@@ -4,6 +4,10 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
+ * <b>Längste Handelsstraße(longest road </b>
+ * <p>
+ * Server sends to client the message about the Player who has the longest road.
+ * </p>
  * Created on 06.06.2016.
  */
 
