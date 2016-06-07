@@ -51,7 +51,7 @@ public final class ProtocolToModel {
 		switch (state) {
 		case "Spiel starten":
 			return enums.PlayerState.GAME_SARTING;
-		case "Warte auf Spielbeginn":
+		case "Wartet auf Spielbeginn":
 			return enums.PlayerState.WAITING_FOR_GAMESTART;
 		case "Dorf bauen":
 			return enums.PlayerState.BUILDING_VILLAGE;
