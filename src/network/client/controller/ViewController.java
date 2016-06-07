@@ -50,7 +50,7 @@ public class ViewController {
 
 	/**
 	 * Starts the lobby view, which provides connecting to server and chat
-	 * 
+	 *
 	 * @param primaryStage
 	 * @throws IOException
 	 */
@@ -73,7 +73,7 @@ public class ViewController {
 	/**
 	 * starts the View for choosing Player name and Player Color view also
 	 * offers Button for setting Player ready for game to start
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void startChooseView() throws IOException {
@@ -99,7 +99,7 @@ public class ViewController {
 		primaryStage.close();
 		choosingStage.close();
 		mainViewStage = new Stage();
-		this.mainViewController = new MainViewController(this, clientController.getBoard(), mainViewStage);
+		this.mainViewController = new MainViewController(this, clientController.getGameLogic().getBoard(), mainViewStage);
 		init();
 	}
 

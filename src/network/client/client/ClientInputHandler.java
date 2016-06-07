@@ -1,13 +1,9 @@
 package network.client.client;
 
-import org.apache.logging.log4j.core.net.Protocol;
-
-import model.objects.Corner;
-import model.objects.Edge;
 import model.objects.Field;
 import network.InputHandler;
 import network.ProtocolToModel;
-import network.client.controller.ClientNetworkController;
+import network.client.controller.ClientController;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
@@ -23,7 +19,6 @@ import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerConfirmation;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
-import protocol.object.ProtocolField;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolDiceRollResult;
@@ -36,11 +31,11 @@ import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
 import settings.DefaultSettings;
 
 public class ClientInputHandler extends InputHandler {
-	private ClientNetworkController networkController;
+	private ClientController clientController;
 
-	public ClientInputHandler(ClientNetworkController nc) {
+	public ClientInputHandler(ClientController clientController) {
 		super();
-		this.networkController = nc;
+		this.clientController = clientController;
 	}
 
 	/**
@@ -56,12 +51,12 @@ public class ClientInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolHello hello) {
-		networkController.serverHello(hello.getVersion(), hello.getProtocol());
+		clientController.serverHello(hello.getVersion(), hello.getProtocol());
 	}
 
 	@Override
 	protected void handle(ProtocolWelcome welcome) {
-		networkController.welcome(welcome.getPlayer_id());
+		clientController.welcome(welcome.getPlayer_id());
 	}
 
 	@Override
@@ -91,7 +86,7 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolError error) {
 		System.out.println("Meldung wird geschickt");
-		networkController.error(error.getNotice());
+		clientController.error(error.getNotice());
 
 	}
 
@@ -105,7 +100,7 @@ public class ClientInputHandler extends InputHandler {
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		String s = chatReceiveMessage.getMessage();
 		int playerId = chatReceiveMessage.getSender();
-		networkController.chatReceiveMessage(playerId, s);
+		clientController.chatReceiveMessage(playerId, s);
 	}
 
 	@Override
@@ -117,7 +112,7 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolServerConfirmation serverConfirmation) {
 		String server_response = serverConfirmation.getServer_response();
-		networkController.serverConfirmation(server_response);
+		clientController.serverConfirmation(server_response);
 	}
 
 	//
@@ -132,7 +127,7 @@ public class ClientInputHandler extends InputHandler {
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
 		int playerID = diceRollResult.getPlayer();
 		int result = diceRollResult.getRoll();
-		networkController.diceRollResult(playerID, result);
+		clientController.diceRollResult(playerID, result);
 	}
 
 	@Override
@@ -177,13 +172,13 @@ public class ClientInputHandler extends InputHandler {
 	protected void handle(ProtocolEndTurn endTurn) {
 
 		System.out.println("Der Zug wurde beendet");
-		networkController.endTurn();
+		clientController.endTurn();
 		// unnecessary Method in ClientInputHandler
 	}
 
 	@Override
 	protected void handle(String string) {
-		networkController.serverConfirmation(string);
+		clientController.serverConfirmation(string);
 	}
 
 	protected void handle(ProtocolRobberLoss losses) {
