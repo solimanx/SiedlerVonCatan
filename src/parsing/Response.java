@@ -28,6 +28,10 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol3.object.ProtocolInventionCard;
+import protocol3.object.ProtocolMonopolyCard;
+import protocol3.object.ProtocolRoadBuildingCard;
+import protocol3.severinstructions.*;
 
 public class Response {
 
@@ -131,5 +135,27 @@ public class Response {
     @SerializedName("Handelsangebot abgebrochen")
     public ProtocolTradeIsCanceled pTradeIsCanceled;//new in 0.2
 
+    //serverinstructions in Protocol3
+
+    @SerializedName("Größte Rittermacht")
+    public ProtocolBiggestKnightProwess pBiggestKnightProwess;//new in 0.3
+
+    @SerializedName("Erfindung")
+    public ProtocolInventionCard pInventionCard;//new in 0.3
+
+    @SerializedName("Längste Handelsstraße")
+    public ProtocolLongestRoad pLongestRoad;//new in 0.3
+
+    @SerializedName("Monopol")
+    public ProtocolMonopolyCardInfo pMonopolyCardInfo;//new in 0.3
+
+    @SerializedName("Ritter ausspielen")
+    public ProtocolPlayKnightCard pplayKnightCard;//new in 0.3
+
+    @SerializedName("Straßenbaukarte ausspielen")
+    public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
+
+    @SerializedName("Längste Handelsstraße")
+    public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;//new in 0,3
 
 }
