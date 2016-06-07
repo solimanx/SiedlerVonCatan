@@ -145,8 +145,8 @@ public class Parser {
             return (T) response.pBiggestKnightProwess;
         }
 
-        if (response.pInventionCard != null) {
-            return (T) response.pInventionCard;
+        if (response.pInventionCardInfo != null) {
+            return (T) response.pInventionCardInfo;
         }
 
         if (response.pLongestRoad != null) {

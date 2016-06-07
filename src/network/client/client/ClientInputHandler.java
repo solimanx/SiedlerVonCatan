@@ -38,11 +38,7 @@ import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
 import protocol3.object.ProtocolInventionCard;
-import protocol3.severinstructions.ProtocolBiggestKnightProwess;
-import protocol3.severinstructions.ProtocolLongestRoad;
-import protocol3.severinstructions.ProtocolMonopolyCardInfo;
-import protocol3.severinstructions.ProtocolPlayKnightCard;
-import protocol3.severinstructions.ProtocolRoadBuildingCardInfo;
+import protocol3.severinstructions.*;
 import settings.DefaultSettings;
 
 public class ClientInputHandler extends InputHandler {
@@ -287,7 +283,7 @@ public class ClientInputHandler extends InputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolInventionCard inventionCard) {
+	protected void handle(ProtocolInventionCardInfo inventionCard) {
 		// TODO Auto-generated method stub
 
 	}

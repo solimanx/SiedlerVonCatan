@@ -28,6 +28,8 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
+import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
@@ -35,128 +37,129 @@ import protocol3.severinstructions.*;
 
 public class Response {
 
-	// connection
-	@SerializedName("Hallo")
-	public ProtocolHello pHello;
+    // connection
+    @SerializedName("Hallo")
+    public ProtocolHello pHello;
 
-	@SerializedName("Willkommen")
-	public ProtocolWelcome pWelcome;
+    @SerializedName("Willkommen")
+    public ProtocolWelcome pWelcome;
 
-	// configuration
-	@SerializedName("Spiel starten")
-	public ProtocolClientReady pClientReady;
+    // configuration
+    @SerializedName("Spiel starten")
+    public ProtocolClientReady pClientReady;
 
-	@SerializedName("Fehler")
-	public ProtocolError pError;
+    @SerializedName("Fehler")
+    public ProtocolError pError;
 
-	@SerializedName("Spiel gestartet")
-	public ProtocolGameStarted pGameStarted;
+    @SerializedName("Spiel gestartet")
+    public ProtocolGameStarted pGameStarted;
 
-	@SerializedName("Spieler")
-	public ProtocolPlayerProfile pPlayerProfile;
+    @SerializedName("Spieler")
+    public ProtocolPlayerProfile pPlayerProfile;
 
-	@SerializedName("Spiel beendet")
-	public ProtocolVictory pVictory; // new in 0.2
+    @SerializedName("Spiel beendet")
+    public ProtocolVictory pVictory; // new in 0.2
 
-	// server instructions
+    // server instructions
 
-	@SerializedName("Bauvorgang")
-	public ProtocolBuild pBuild;
+    @SerializedName("Bauvorgang")
+    public ProtocolBuild pBuild;
 
-	@SerializedName("Würfelwurf")
-	public ProtocolDiceRollResult pDRResult;
+    @SerializedName("Würfelwurf")
+    public ProtocolDiceRollResult pDRResult;
 
-	@SerializedName("Ertrag")
-	public ProtocolResourceObtain pRObtain;
+    @SerializedName("Ertrag")
+    public ProtocolResourceObtain pRObtain;
 
-	@SerializedName("Statusupdate")
-	public ProtocolStatusUpdate pSUpdate;
+    @SerializedName("Statusupdate")
+    public ProtocolStatusUpdate pSUpdate;
 
-	@SerializedName("Kosten")
-	public ProtocolCosts pCosts; // new in 0.2
+    @SerializedName("Kosten")
+    public ProtocolCosts pCosts; // new in 0.2
 
-	@SerializedName("Räuber versetzt")
-	public ProtocolRobberMovement pRobberMovement; // new in 0.2
+    @SerializedName("Räuber versetzt")
+    public ProtocolRobberMovement pRobberMovement; // new in 0.2
 
-	// messaging
+    // messaging
 
-	@SerializedName("Chatnachricht")
-	public ProtocolChatReceiveMessage pChatReceive;
+    @SerializedName("Chatnachricht")
+    public ProtocolChatReceiveMessage pChatReceive;
 
-	@SerializedName("Chatnachricht senden")
-	public ProtocolChatSendMessage pChatSend;
+    @SerializedName("Chatnachricht senden")
+    public ProtocolChatSendMessage pChatSend;
 
-	@SerializedName("Serverantwort")
-	public String pServerConfirmation;
+    @SerializedName("Serverantwort")
+    public String pServerConfirmation;
 
-	// Client Instructions
+    // Client Instructions
 
-	@SerializedName("Bauen")
-	public ProtocolBuildRequest pBuildRequest;
+    @SerializedName("Bauen")
+    public ProtocolBuildRequest pBuildRequest;
 
-	@SerializedName("Würfeln")
-	public ProtocolDiceRollRequest pDiceRollRequest;
+    @SerializedName("Würfeln")
+    public ProtocolDiceRollRequest pDiceRollRequest;
 
-	@SerializedName("Zug beenden")
-	public ProtocolEndTurn pEndTurn;
+    @SerializedName("Zug beenden")
+    public ProtocolEndTurn pEndTurn;
 
-	@SerializedName("Karte abgeben")
-	public ProtocolRobberLoss pRobberLoss; // new in 0.2
+    @SerializedName("Karte abgeben")
+    public ProtocolRobberLoss pRobberLoss; // new in 0.2
 
-	@SerializedName("Räuber versetzen")
-	public ProtocolRobberMovementRequest pRobberMoveRequest; // new in 0.2
+    @SerializedName("Räuber versetzen")
+    public ProtocolRobberMovementRequest pRobberMoveRequest; // new in 0.2
 
-	@SerializedName("Seehandel")
-	public ProtocolHarbourRequest pHarbourRequest; // new in 0.2
+    @SerializedName("Seehandel")
+    public ProtocolHarbourRequest pHarbourRequest; // new in 0.2
 
-	// Trade Instructions
+    // Trade Instructions
 
-	@SerializedName("Handel anbieten")
-	public ProtocolTradeRequest pTradeRequest; // new in 0.2
+    @SerializedName("Handel anbieten")
+    public ProtocolTradeRequest pTradeRequest; // new in 0.2
 
-	@SerializedName("Handelsangebot")
-	public ProtocolTradeIsRequested pTradeIsRequested;// new in 0.2
+    @SerializedName("Handelsangebot")
+    public ProtocolTradeIsRequested pTradeIsRequested;// new in 0.2
 
-	@SerializedName("Handel annehmen")
-	public ProtocolTradeAccept pTradeAccept; // new in 0.2
+    @SerializedName("Handel annehmen")
+    public ProtocolTradeAccept pTradeAccept; // new in 0.2
 
-	@SerializedName("Handelsangebot angenommen")
-	public ProtocolTradeConfirmation pTradeConfirm; // new in 0.2
+    @SerializedName("Handelsangebot angenommen")
+    public ProtocolTradeConfirmation pTradeConfirm; // new in 0.2
 
-	@SerializedName("Handel abschließen")
-	public ProtocolTradeComplete pTradeComplete;// new in 0.2
+    @SerializedName("Handel abschließen")
+    public ProtocolTradeComplete pTradeComplete;// new in 0.2
 
-	@SerializedName("Handel ausgeführt")
-	public ProtocolTradeIsCompleted pTradeIsCompleted;// new in 0.2
+    @SerializedName("Handel ausgeführt")
+    public ProtocolTradeIsCompleted pTradeIsCompleted;// new in 0.2
 
-	@SerializedName("Handel abbrechen")
-	public ProtocolTradeCancel pTradeCancel;// new in 0.2
+    @SerializedName("Handel abbrechen")
+    public ProtocolTradeCancel pTradeCancel;// new in 0.2
 
-	@SerializedName("Handelsangebot abgebrochen")
-	public ProtocolTradeIsCanceled pTradeIsCanceled;// new in 0.2
+    @SerializedName("Handelsangebot abgebrochen")
+    public ProtocolTradeIsCanceled pTradeIsCanceled;// new in 0.2
 
-	// serverinstructions in Protocol3
+    // serverinstructions in Protoco0.3
 
-	@SerializedName("Größte Rittermacht")
-	public ProtocolBiggestKnightProwess pBiggestKnightProwess;// new in 0.3
+    //Object
+    @SerializedName("Größte Rittermacht")
+    public ProtocolBiggestKnightProwess pBiggestKnightProwess;// new in 0.3
 
-	@SerializedName("Erfindung")
-	public ProtocolInventionCard pInventionCard;// new in 0.3
+    @SerializedName("Erfindung")
+    public ProtocolInventionCardInfo pInventionCardInfo;// new in 0.3
 
-	@SerializedName("Längste Handelsstraße")
-	public ProtocolLongestRoad pLongestRoad;// new in 0.3
+    @SerializedName("Längste Handelsstraße")
+    public ProtocolLongestRoad pLongestRoad;// new in 0.3
 
-	@SerializedName("Monopol")
-	public ProtocolMonopolyCardInfo pMonopolyCardInfo;// new in 0.3
+    @SerializedName("Monopol")
+    public ProtocolMonopolyCardInfo pMonopolyCardInfo;// new in 0.3
 
-	@SerializedName("Ritter ausspielen")
-	public ProtocolPlayKnightCard pplayKnightCard;// new in 0.3
+    @SerializedName("Ritter ausspielen")
+    public ProtocolPlayKnightCard pplayKnightCard;// new in 0.3
 
-	@SerializedName("Straßenbaukarte ausspielen")
-	public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
+    @SerializedName("Straßenbaukarte ausspielen")
+    public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
 
-	// @SerializedName("Längste Handelsstraße")
-	// public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;//new in
-	// 0,3
+    // @SerializedName("Längste Handelsstraße")
+    // public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;//new in
+    // 0,3
 
 }

@@ -16,20 +16,20 @@ import com.google.gson.annotations.Since;
 public class ProtocolPlayKnightCard {
 
 	@SerializedName("Straße 1")
-	String field_id;
+	String road1_id;
 
 	@SerializedName("Ziel")
 	int target;
 
-	public ProtocolPlayKnightCard(String field_id, int target) {
+	public ProtocolPlayKnightCard(String road1_id, int target) {
 
-		this.field_id = field_id;
+		this.road1_id = road1_id;
 		this.target = target;
 	}
 
-	public String getField_id() {
+	public String getRoad1_id() {
 
-		return field_id;
+		return road1_id;
 	}
 
 	public int getTarget() {

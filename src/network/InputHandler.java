@@ -138,8 +138,8 @@ public abstract class InputHandler {
             case "ProtocolBiggestKnightProwess":
                 handle((ProtocolBiggestKnightProwess) o);
                 break;
-            case "ProtocolInventionCard":
-                handle((ProtocolInventionCard) o);
+            case "ProtocolInventionCardInfo":
+                handle((ProtocolInventionCardInfo) o);
                 break;
             case "ProtocolLongestRoad":
                 handle((ProtocolLongestRoad) o);
@@ -223,7 +223,7 @@ public abstract class InputHandler {
 
     protected abstract void handle(ProtocolBiggestKnightProwess biggestKnightProwess);
 
-    protected abstract void handle(ProtocolInventionCard inventionCard);
+    protected abstract void handle(ProtocolInventionCardInfo inventionCardInfo);
 
     protected abstract void handle(ProtocolLongestRoad longestRoad);
 
