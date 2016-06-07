@@ -90,7 +90,7 @@ public class LobbyController implements Initializable {
 	public void handleConnectButton() {
 		String server = serverComboBox.getValue();
 		int port = Integer.parseInt(portComboBox.getValue());
-		viewController.getFlowController().getClientNetworkController().connectToServer(server, port);
+		viewController.getClientController().connectToServer(server, port);
 	}
 
 	@FXML
@@ -107,7 +107,7 @@ public class LobbyController implements Initializable {
 	public void sendChatMessage() {
 		String message = chatInput.getText();
 		chatInput.clear();
-		viewController.getFlowController().getClientNetworkController().chatSendMessage(message);
+		viewController.getClientController().chatSendMessage(message);
 	}
 
 	public void receiveChatMessage(String string) {

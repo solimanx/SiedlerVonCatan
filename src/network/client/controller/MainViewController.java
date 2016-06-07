@@ -38,7 +38,7 @@ public class MainViewController {
 			view.chatInput.clear();
 			// vc.chatMessageSent(message);
 			try {
-				viewController.getFlowController().chatSendMessage(message);
+				viewController.getClientController().chatSendMessage(message);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -59,7 +59,7 @@ public class MainViewController {
 	public void streetClick(int[] streetCoordinates) {
 		System.out.println("Clicked on Street " + streetCoordinates[0] + " , " + streetCoordinates[1] + " , "
 				+ streetCoordinates[2]);
-		viewController.getFlowController().requestBuildStreet(streetCoordinates[0], streetCoordinates[1],
+		viewController.getClientController().requestBuildStreet(streetCoordinates[0], streetCoordinates[1],
 				streetCoordinates[2]);
 
 	}

@@ -168,7 +168,7 @@ public class ViewController {
 
 	}
 
-	public ClientController getFlowController() {
+	public ClientController getClientController() {
 		return clientController;
 	}
 

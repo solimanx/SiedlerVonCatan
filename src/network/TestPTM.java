@@ -2,7 +2,6 @@ package network;
 
 import model.Board;
 import model.HexService;
-import network.server.controller.ServerNetworkController;
 import network.server.server.Server;
 
 public class TestPTM {
