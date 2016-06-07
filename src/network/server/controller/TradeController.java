@@ -24,7 +24,7 @@ public class TradeController {
 	}
 
 	public void offerToAllPlayers(int offeringPlayerID, int[] resourcesToGet, int[] resourcesToGive) {
-		if (board.getPlayerModels()[offeringPlayerID].getPlayerState() != PlayerState.TRADING) {
+		if (board.getPlayer(offeringPlayerID).getPlayerState() != PlayerState.TRADING) {
 			// networkController.sendErrorMessageToPlayer(offeringPlayerID,"Offering
 			// not allowed");
 		} else {
@@ -43,7 +43,7 @@ public class TradeController {
 
 	public void offerToPlayingPlayer(int offeringPlayerID, int receivingPlayerID, int[] resourcesToGet,
 			int[] resourcesToGive) {
-		if (board.getPlayerModels()[receivingPlayerID].getPlayerState() != PlayerState.TRADING) {
+		if (board.getPlayer(receivingPlayerID).getPlayerState() != PlayerState.TRADING) {
 			// networkController.sendErrorMessageToPlayer(offeringPlayerID,"Offering
 			// not allowed");
 		} else {

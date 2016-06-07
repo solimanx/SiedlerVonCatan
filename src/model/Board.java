@@ -596,95 +596,6 @@ public class Board {
 		return null;
 	}
 
-	// public ArrayList<Field> getSpiral(Field f) {
-	// Field firstField = f;
-	// Field nextField = f;
-	// Field plannedNextField = f;
-	// int r = ((DefaultSettings.BOARD_SIZE - 1) / 2) - 1;
-	// ArrayList<Field> result = new ArrayList<Field>();
-	// int dir = getDirection(f);
-	// int[] coord = new int[2];
-	//
-	// for (int length = r; length > 0; length--) {
-	// for (int j = 0; j < 7; j++) {
-	// for (int i = 0; i < length; i++) {
-	// if (nextField != null) {
-	// switch (j) {
-	// case 0:
-	// if (getRing(length).contains(plannedNextField)) {
-	// nextField = plannedNextField;
-	// result.add(nextField);
-	// // sysoutArrayList(result); //debug
-	// coord[0] = getFieldCoordinates(nextField)[0];
-	// coord[1] = getFieldCoordinates(nextField)[1];
-	// plannedNextField = getNextField(coord[0], coord[1],
-	// getDirection(nextField));
-	// } else {
-	// i = r;
-	// }
-	// break;
-	// case 6:
-	// if (plannedNextField != firstField) {
-	// nextField = plannedNextField;
-	// result.add(nextField);
-	// // sysoutArrayList(result); //debug
-	// coord[0] = getFieldCoordinates(nextField)[0];
-	// coord[1] = getFieldCoordinates(nextField)[1];
-	// plannedNextField = getNextField(coord[0], coord[1],
-	// getDirection(nextField));
-	// } else {
-	// coord[0] = getFieldCoordinates(nextField)[0];
-	// coord[1] = getFieldCoordinates(nextField)[1];
-	// i = r;
-	// j = 7;
-	// plannedNextField = getNextField(coord[0], coord[1],
-	// nextDir(getDirection(nextField), 0));
-	// if (result.contains(plannedNextField)) {
-	// plannedNextField = getNextField(coord[0], coord[1],
-	// nextDir(getDirection(nextField), 1));
-	// }
-	// }
-	// break;
-	// default:
-	// nextField = plannedNextField;
-	// result.add(nextField);
-	// // sysoutArrayList(result); //debug
-	// coord[0] = getFieldCoordinates(nextField)[0];
-	// coord[1] = getFieldCoordinates(nextField)[1];
-	// plannedNextField = getNextField(coord[0], coord[1],
-	// getDirection(nextField));
-	// break;
-	// }
-	// }
-	// }
-	//
-	// }
-	// firstField = nextField;
-	// }
-	// result.add(getFieldAt(0, 0));
-	// return result;
-	// }
-	//
-	// public int nextDir(int dir, int i) {
-	// int nextDir = (dir + i) % 6;
-	// switch (nextDir) {
-	// case 0:
-	// return 1;
-	// case 1:
-	// return 2;
-	// case 2:
-	// return 3;
-	// case 3:
-	// return 4;
-	// case 4:
-	// return 5;
-	// case 5:
-	// return 0;
-	// default:
-	// System.out.println("Error in board.nextDir.");
-	// return 0;
-	// }
-	// }
 
 	public int getDirection(String f) {
 
@@ -775,35 +686,41 @@ public class Board {
 	}
 
 	/**
-	 * Returns fields array
+	 * Returns fields by normal array index
 	 */
 
-	public Field[][] getFields() {
-		return this.fields;
+	public Field getField(int x, int y) {
+		return this.fields[x][y];
 	}
 
 	/**
-	 * Returns corners array
+	 * Returns corners by normal array index and direction
 	 */
 
-	public Corner[][][] getCorners() {
-		return this.corners;
+	public Corner getCorner(int x, int y, int dir) {
+		return this.corners[x][y][dir];
 	}
 
 	/**
-	 * Returns edges array
+	 * Returns edges array by normal array index and direction
 	 */
 
-	public Edge[][][] getEdges() {
-		return this.edges;
+	public Edge getEdge(int x, int y, int dir) {
+		return this.edges[x][y][dir];
 	}
 
 	/**
-	 * Returns PlayerModel array
+	 * Returns a Player object
 	 */
 
-	public PlayerModel[] getPlayerModels() {
-		return this.players;
+	public PlayerModel getPlayer(int i) {
+		return this.players[i]!=null ? this.players[i]: null;
+	}
+	/**
+	 * Returns the amount of players
+	 */
+	public int getAmountPlayers(){
+		return this.players.length;
 	}
 
 	/**

@@ -47,7 +47,7 @@ public class FlowController {
 	 * @param state
 	 */
 	public void setPlayerState(int playerId, PlayerState state) {
-		board.getPlayerModels()[playerId].setPlayerState(state);
+		board.getPlayer(playerId).setPlayerState(state);
 		if (playerId == ownPlayerId) {
 			// update GUI
 			// viewController.setPlayerState(state);
@@ -65,52 +65,45 @@ public class FlowController {
 	public Board initBoard(int amountPlayers, Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,
 			Field bandit) {
 
+		int board_size = DefaultSettings.BOARD_SIZE;
 		// TODO fix this.board = Board.getInstance(amountPlayers);
-		for (int i = 0; i < board.getFields().length; i++) {
-			for (int j = 0; j < board.getFields()[i].length; j++) {
+		for (int i = 0; i < board_size; i++) {
+			for (int j = 0; j < board_size; j++) {
 				enums.ResourceType resourceType = null;
 				Integer diceIndex = null;
 				// TODO board.setField....
-				// diese Methoden bekommen KOpien der Felder und setzen in den Kopien!!!!
-				//solche Methoden brauchen wir im Board:
-				board.setField(i,j,resourceType,diceIndex);
+				// diese Methoden bekommen KOpien der Felder und setzen in den
+				// Kopien!!!!
+				// solche Methoden brauchen wir im Board:
+				board.setField(i, j, resourceType, diceIndex);
 				boolean hasStreet = false;
 				int ownedByPlayer = 0;
 				int k = 0;
-				board.setEdge(i,j,k, hasStreet, ownedByPlayer);
+				board.setEdge(i, j, k, hasStreet, ownedByPlayer);
 				enums.CornerStatus status = null;
 				enums.HarbourStatus hstatus = null;
-				board.setCorner(i,j,k, status, hstatus, ownedByPlayer);
-			
-				board.getFields()[i][j].setResourceType(serverFields[i][j].getResourceType());
-				board.getFields()[i][j].setDiceIndex(serverFields[i][j].getDiceIndex());
+				board.setCorner(i, j, k, status, hstatus, ownedByPlayer);
+
+				board.getField(i, j).setResourceType(serverFields[i][j].getResourceType());
+				board.getField(i, j).setDiceIndex(serverFields[i][j].getDiceIndex());
 			}
 		}
-		Edge[][][] ownEdges = board.getEdges();
-		for (int i = 0; i < edges.length; i++) {
-			for (int j = 0; j < edges[i].length; j++) {
-				ownEdges[i][j][0].setHasStreet(edges[i][j][0].isHasStreet());
-				ownEdges[i][j][0].setOwnedByPlayer(edges[i][j][0].getOwnedByPlayer());
+		for (int i = 0; i < board_size; i++) {
+			for (int j = 0; j < board_size; j++) {
+				for (int k = 0; j < 3; k++) {
+					board.getEdge(i, j, k).setHasStreet(edges[i][j][k].isHasStreet());
+					board.getEdge(i, j, k).setOwnedByPlayer(edges[i][j][k].getOwnedByPlayer());
 
-				ownEdges[i][j][1].setHasStreet(edges[i][j][1].isHasStreet());
-				ownEdges[i][j][1].setOwnedByPlayer(edges[i][j][1].getOwnedByPlayer());
+				}
 			}
 		}
-
-		Corner[][][] ownCorners = board.getCorners();
 		for (int i = 0; i < corners.length; i++) {
 			for (int j = 0; j < corners[i].length; j++) {
-				ownCorners[i][j][0].setHarbourStatus(corners[i][j][0].getHarbourStatus());
-				ownCorners[i][j][0].setOwnedByPlayer(corners[i][j][0].getOwnedByPlayer());
-				ownCorners[i][j][0].setStatus(corners[i][j][0].getStatus());
-
-				ownCorners[i][j][1].setHarbourStatus(corners[i][j][1].getHarbourStatus());
-				ownCorners[i][j][1].setOwnedByPlayer(corners[i][j][1].getOwnedByPlayer());
-				ownCorners[i][j][1].setStatus(corners[i][j][1].getStatus());
-
-				ownCorners[i][j][2].setHarbourStatus(corners[i][j][2].getHarbourStatus());
-				ownCorners[i][j][2].setOwnedByPlayer(corners[i][j][2].getOwnedByPlayer());
-				ownCorners[i][j][2].setStatus(corners[i][j][2].getStatus());
+				for (int k = 0; k < 2; k++) {
+					board.getCorner(i, j, k).setHarbourStatus(corners[i][j][k].getHarbourStatus());
+					board.getCorner(i, j, k).setOwnedByPlayer(corners[i][j][k].getOwnedByPlayer());
+					board.getCorner(i, j, k).setStatus(corners[i][j][k].getStatus());
+				}
 			}
 		}
 		// int[] banditCoordinates = board.getFieldCoordinates(bandit);
@@ -149,18 +142,18 @@ public class FlowController {
 		}
 	}
 
-	public void buildStreet(int x, int y, int dir, int playerId) {
+	public void buildStreet(int x, int y, int dir, int playerID) {
 		Edge e = board.getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
-		e.setOwnedByPlayer(board.getPlayerModels()[playerId]);
+		e.setOwnedByPlayer(board.getPlayer(playerID));
 
-		viewController.getMainViewController().setStreet(x, y, dir, playerId);
+		viewController.getMainViewController().setStreet(x, y, dir, playerID);
 	}
 
-	public void buildVillage(int x, int y, int dir, int playerId) {
+	public void buildVillage(int x, int y, int dir, int playerID) {
 		Corner c = board.getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.VILLAGE);
-		c.setOwnedByPlayer(board.getPlayerModels()[playerId]);
+		c.setOwnedByPlayer(board.getPlayer(playerID));
 		Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
 		for (int i = 0; i < neighbors.length; i++) {
 			if (neighbors[i] != null) {
@@ -168,15 +161,15 @@ public class FlowController {
 			}
 		}
 
-		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerId);
+		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
 	}
 
-	public void buildCity(int x, int y, int dir, int playerId) {
+	public void buildCity(int x, int y, int dir, int playerID) {
 		Corner c = board.getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.CITY);
-		c.setOwnedByPlayer(board.getPlayerModels()[playerId]);
+		c.setOwnedByPlayer(board.getPlayer(playerID));
 
-		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerId);
+		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
 	}
 
 	public void setBandit(int x, int y, int playerId) {
@@ -187,13 +180,13 @@ public class FlowController {
 	}
 
 	public void addToPlayersResource(int playerID, int[] resources) {
-		ArrayList<ResourceType> resourceCards = board.getPlayerModels()[playerID].getResourceCards();
+		ArrayList<ResourceType> resourceCards = board.getPlayer(playerID).getResourceCards();
 		for (int i = 0; i < resources.length; i++) {
 			for (int j = 0; j < resources[i]; j++) {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
-		board.getPlayerModels()[playerID].setResourceCards(resourceCards);
+		board.getPlayer(playerID).setResourceCards(resourceCards);
 
 	}
 
@@ -204,7 +197,7 @@ public class FlowController {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
-		board.getPlayerModels()[playerId].setResourceCards(resourceCards);
+		board.getPlayer(playerId).setResourceCards(resourceCards);
 
 	}
 
@@ -225,7 +218,7 @@ public class FlowController {
 	}
 
 	public void setPlayerVictoryPoints(int playerId, int victoryPoints) {
-		board.getPlayerModels()[playerId].setVictoryPoints(victoryPoints);
+		board.getPlayer(playerId).setVictoryPoints(victoryPoints);
 	}
 
 	public void diceRollResult(int playerId, int result) {

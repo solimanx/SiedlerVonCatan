@@ -35,20 +35,25 @@ public class ProtocolBoard {
 		this.robber_location = robber_location;
 	}
 
-	public ProtocolField[] getFields() {
-		return fields;
+	public ProtocolField getProtocolField(int i) {
+		return fields[i] != null ? fields[i] : null;
 	}
 
-	public ProtocolBuilding[] getBuildings() {
-		return buildings;
+	public ProtocolBuilding getProtocolBuilding(int i) {
+		return buildings[i] != null ? buildings[i] : null;
 	}
 
-	public ProtocolHarbour[] getHarbours() {
-		return harbours;
+	public ProtocolHarbour getHarbours(int i) {
+		return harbours[i] != null ? harbours[i] : null;
 	}
+	
 
 	public String getRobber_location() {
 		return robber_location;
+	}
+	
+	public int getAmountFields(){
+		return fields.length;
 	}
 
 }
