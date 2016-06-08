@@ -156,7 +156,8 @@ public class ServerController {
 	public void initializeBoard() {
 		Board board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
-		generateDebuggingBoard();
+		generateBoard(board.getFieldAt(2,2),true);
+		//generateDebuggingBoard();
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 		
 		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
@@ -403,6 +404,7 @@ public class ServerController {
 			fields.get(fields.size() - 1).setDiceIndex(0);
 
 		}
+		gameLogic.getBoard().setBandit("J");
 	}
 
 	// DEBUGGING ONLY
