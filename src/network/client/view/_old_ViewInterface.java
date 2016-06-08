@@ -12,7 +12,7 @@ import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 
-public interface ViewInterface {
+public interface _old_ViewInterface {
 	public boolean initialize();
 
 	public double[] createHexagon(double x, double y);

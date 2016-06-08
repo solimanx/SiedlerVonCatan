@@ -9,18 +9,14 @@ import enums.ResourceType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.Board;
 import network.client.view.GameViewController;
-import network.client.view.View;
 import network.server.controller.ServerController;
 
 public class ViewController {
 
 	private FXMLLoader loader;
-	protected View view;
 	public HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
 	public HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	protected ServerController serverController; // DEBUG

@@ -32,9 +32,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Board;
-import network.client.controller.MainViewController;
 
-public class View implements ViewInterface {
+public class _old_View implements _old_ViewInterface {
 
 	private Stage primaryStage;
 	private BorderPane rootPane;
@@ -68,15 +67,13 @@ public class View implements ViewInterface {
 	public TextField chatInput = new TextField();
 
 	public List<Shape> figures = new LinkedList<Shape>();
-	private MainViewController mainViewController;
 
 	/**
 	 * @param board
 	 * @param stage
 	 */
-	public View(Board board, Stage stage, MainViewController vc) {
+	public _old_View(Board board, Stage stage ) {
 		this.primaryStage = stage;
-		this.mainViewController = vc;
 		try {
 			rootPane = new BorderPane();
 
@@ -152,9 +149,9 @@ public class View implements ViewInterface {
 
 							int[] streetCoordinates = { i, j, l };
 
-							street.setOnMouseClicked(e -> {
-								mainViewController.streetClick(streetCoordinates);
-							});
+//							street.setOnMouseClicked(e -> {
+//								mainViewController.streetClick(streetCoordinates);
+//							});
 
 							figures.add(street);
 						}
@@ -168,9 +165,9 @@ public class View implements ViewInterface {
 
 							int[] villageCoordinates = { i, j, k };
 
-							village.setOnMouseClicked(e -> {
-								mainViewController.villageClick(villageCoordinates);
-							});
+//							village.setOnMouseClicked(e -> {
+//								mainViewController.villageClick(villageCoordinates);
+//							});
 
 							figures.add(village);
 						}
