@@ -38,6 +38,8 @@ public class ServerController {
 	private Map<Integer, Integer> modelPlayerIdMap;
 	private Map<Integer, Integer> threadPlayerIdMap;
 	private ServerInputHandler serverInputHandler;
+	private int InitialStreetCounter;
+	private ArrayList<Corner> initialVillages;
 
 	public ServerController() {
 		modelPlayerIdMap = new HashMap<Integer, Integer>();
@@ -60,6 +62,92 @@ public class ServerController {
 
 	}
 
+	public void hello(int currentThreadID){
+		serverOutputHandler.hello(DefaultSettings.SERVER_VERSION, DefaultSettings.PROTOCOL_VERSION, currentThreadID);
+	}
+
+	public void receiveHello(int currentThreadID){
+		threadPlayerIdMap.put(currentThreadID, amountPlayers);
+		modelPlayerIdMap.put(amountPlayers,currentThreadID);
+		amountPlayers++;
+		welcome(currentThreadID);
+	}
+
+	public void welcome(int currentThreadID) {
+		serverOutputHandler.welcome(currentThreadID);		
+	}
+
+	public void clientReady(int currentThreadID) {
+		int playerID = threadPlayerIdMap.get(currentThreadID);
+		for (int i = 0;i< tempPlayers.size();i++){
+			if (tempPlayers.get(i).getID() == playerID){
+				tempPlayers.get(i).setPlayerState(PlayerState.WAITING_FOR_GAMESTART);
+			}
+		}
+	
+		if (tempPlayers.size() >= 3){
+			boolean allReady = true;
+			for (int i = 0;i< tempPlayers.size();i++){
+				if (tempPlayers.get(i).getPlayerState() != PlayerState.WAITING_FOR_GAMESTART){
+					allReady = false;
+					break;
+				}
+			}
+			if (allReady){
+				initializeBoard();
+			}
+		}
+		
+	}
+
+	public void serverConfirmation(String server_response) {
+		//serverOutputHandler.confirmation
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void error(String string) {
+		serverOutputHandler.error(string);
+		
+	}
+
+	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
+		int playerID = threadPlayerIdMap.get(currentThreadID);
+		PlayerModel playerModel = new PlayerModel(playerID);
+		boolean colorAvailable = true;
+		for (int i = 0;i< tempPlayers.size();i++){
+			if (tempPlayers.get(i).getColor().equals(color)){
+				colorAvailable = false;
+				break;
+			}
+		}
+		if (colorAvailable){			
+		playerModel.setColor(color);
+		playerModel.setName(name);
+		playerModel.setPlayerState(PlayerState.GAME_SARTING);
+		tempPlayers.add(playerModel);
+		serverConfirmation("OK");
+		serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_SARTING, 0, new int[5]);
+		} else {
+			error("Farbe bereits vergeben!");
+		}		
+	}
+
+	public void chatReceiveMessage(int playerId, String s) {
+		serverOutputHandler.chatReceiveMessage(playerId, s);
+		
+	}
+
+	public void chatSendMessage(String s, int currentThreadID) {
+		chatReceiveMessage(currentThreadID,s);
+		
+	}
+
+	public void statusUpdate(int playerModelID){
+		PlayerModel pM = gameLogic.getBoard().getPlayer(playerModelID);
+	    serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(), pM.getPlayerState(), pM.getVictoryPoints(), getPlayerResources(playerModelID));
+	}
+
 	/**
 	 * Inits
 	 * 
@@ -70,16 +158,194 @@ public class ServerController {
 		this.gameLogic = new GameLogic(board);
 		generateDebuggingBoard();
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
+		
+		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
+		InitialStreetCounter = 0;
 
 	}
 
 
-	public int getAmountPlayers() {
-		return amountPlayers;
+	public void diceRollRequest(int playerID) {
+		Random rand = new Random();
+		int firstDice = 1 + rand.nextInt(5);
+		int secondDice = 1 + rand.nextInt(5);
+		int[] result = {firstDice, secondDice};
+		serverOutputHandler.diceRollResult(playerID, result);
+		
+		int modelID = threadPlayerIdMap.get(playerID);
+		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+		if (firstDice + secondDice == 7){
+			PlayerModel currPM;
+			boolean hasToWait = false;
+			for (int i = 0;i<amountPlayers;i++){
+				currPM = gameLogic.getBoard().getPlayer(i);
+				if (currPM.getResourceCards().size() > 7){
+					currPM.setPlayerState(PlayerState.DISPENDE_CARDS_ROBBER_LOSS);
+					hasToWait = true;
+				}
+			}
+			if (!hasToWait){
+				pM.setPlayerState(PlayerState.MOVE_ROBBER);
+			}
+			
+		} else {
+			gainBoardResources(firstDice + secondDice);
+			pM.setPlayerState(PlayerState.TRADING_OR_BUILDING);
+		}
+		//TODO: statusupdate to all
 	}
 
-	public void setAmountPlayers(int amountPlayers) {
-		this.amountPlayers = amountPlayers;
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see server.controller.GameControllerInterface#buildVillage(int, int,
+	 * int, int)
+	 */
+	
+	public void requestBuildVillage(int x, int y, int dir, int playerID) {
+		if (InitialStreetCounter < amountPlayers*2){
+			requestBuildInitialVillage(x,y,dir,playerID);
+		} else {
+			int modelPID = threadPlayerIdMap.get(playerID);
+		if (gameLogic.checkBuildVillage(x, y, dir, modelPID)) {
+			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
+			c.setStatus(enums.CornerStatus.VILLAGE);
+			c.setOwnerID(modelPID);
+			gameLogic.getBoard().getPlayer(modelPID).decreaseAmountVillages();
+			Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
+			for (int i = 0; i < neighbors.length; i++) {
+				if (neighbors[i] != null) {
+					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+				}
+			}
+	
+			subFromPlayersResources(modelPID, DefaultSettings.VILLAGE_BUILD_COST);
+	
+		    serverOutputHandler.buildVillage(x, y, dir, playerID);
+		    serverOutputHandler.costs(playerID, DefaultSettings.VILLAGE_BUILD_COST);
+		    statusUpdate(modelPID);
+		}
+		}
+	
+	}
+
+	public void requestBuildStreet(int x, int y, int dir, int playerID) {
+		if (InitialStreetCounter < amountPlayers*2){
+			requestBuildInitialStreet(x,y,dir,playerID);
+		} else {		
+			int modelPID = threadPlayerIdMap.get(playerID);
+		if (gameLogic.checkBuildStreet(x, y, dir, modelPID)) {
+			Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
+			e.setHasStreet(true);
+			e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(modelPID).getID());
+			gameLogic.getBoard().getPlayer(modelPID).decreaseAmountStreets();
+	
+			subFromPlayersResources(modelPID, DefaultSettings.STREET_BUILD_COST);
+	
+		    serverOutputHandler.buildStreet(x, y, dir, playerID);
+		    serverOutputHandler.costs(playerID, DefaultSettings.STREET_BUILD_COST);
+		    statusUpdate(modelPID);
+		} else {
+			serverOutputHandler.error("Kein Straßenbau möglich");
+		}
+		}
+	
+	}
+
+	public void requestBuildCity(int x, int y, int dir, int playerID) {
+		int modelPID = threadPlayerIdMap.get(playerID);
+		if (gameLogic.checkBuildCity(x, y, dir, modelPID)) {
+			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
+			c.setStatus(enums.CornerStatus.CITY);
+			c.setOwnerID(modelPID);
+			gameLogic.getBoard().getPlayer(modelPID).increaseAmountVillages();
+			gameLogic.getBoard().getPlayer(modelPID).decreaseAmountCities();
+	
+			subFromPlayersResources(modelPID, settings.DefaultSettings.CITY_BUILD_COST);
+	
+		    serverOutputHandler.buildCity(x, y, dir, playerID);
+		    serverOutputHandler.costs(playerID, DefaultSettings.CITY_BUILD_COST);
+		    statusUpdate(modelPID);
+		}
+	
+	}
+
+	public void requestBuildInitialStreet(int x, int y, int dir, int playerID) {
+		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerID)) {
+			int modelPlayerID = threadPlayerIdMap.get(playerID);
+			Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
+			e.setHasStreet(true);
+			e.setOwnedByPlayer(modelPlayerID);
+			gameLogic.getBoard().getPlayer(modelPlayerID).decreaseAmountStreets();
+	
+			serverOutputHandler.buildStreet(x,y,dir,playerID);
+			InitialStreetCounter++;
+			if (InitialStreetCounter >= amountPlayers*2){
+				gainFirstBoardResources();
+			} else{
+				gameLogic.getBoard().getPlayer(modelPlayerID).setPlayerState(PlayerState.WAITING);
+			    statusUpdate(modelPlayerID);
+			    
+				int nextPlayer = getNextPlayer(modelPlayerID);
+				gameLogic.getBoard().getPlayer(nextPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
+				statusUpdate(nextPlayer);
+			}
+			
+			
+		}
+	}
+
+	public void requestBuildInitialVillage(int x, int y, int dir, int playerID) {
+		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
+			int modelPlayerID = threadPlayerIdMap.get(playerID);
+			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
+			c.setStatus(enums.CornerStatus.VILLAGE);
+			c.setOwnerID(modelPlayerID);
+			gameLogic.getBoard().getPlayer(modelPlayerID).decreaseAmountVillages();
+			Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
+			for (int i = 0; i < neighbors.length; i++) {
+				if (neighbors[i] != null) {
+					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+				}
+			}
+			initialVillages.add(c);
+			serverOutputHandler.buildVillage(x,y,dir,playerID);
+			gameLogic.getBoard().getPlayer(modelPlayerID).setPlayerState(PlayerState.BUILDING_STREET);
+			statusUpdate(modelPlayerID);
+		}
+	}
+
+	public void requestSetBandit(int x, int y, int stealFromPlayerID, int playerID) {
+		// TODO Auto-generated method stub
+	
+	}
+
+	public void robberMovementRequest(int x, int y, int victim_id, int currentThreadID){
+		if (gameLogic.checkSetBandit(x, y, victim_id)){
+			
+		}
+		
+	}
+
+	public void setBandit(int x, int y, int playerID) {
+		if (gameLogic.checkSetBandit(x, y, playerID)) {
+			// board.setBandit(board.getFieldAt(x, y));
+	
+			//viewController.getMainViewController().setBandit(x, y); // Debug
+		}
+	
+	}
+
+	public void endTurn(int playerID) {
+		int modelID = threadPlayerIdMap.get(playerID);
+		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+		pM.setPlayerState(PlayerState.WAITING);
+		statusUpdate(modelID);
+		
+		int nextPlayer = getNextPlayer(modelID); //next players turn
+		gameLogic.getBoard().getPlayer(nextPlayer).setPlayerState(PlayerState.DICEROLLING); 
+		statusUpdate(nextPlayer);
+	
 	}
 
 	/**
@@ -215,93 +481,21 @@ public class ServerController {
 	 * int, int)
 	 */
 	
-	public void requestBuildVillage(int x, int y, int dir, int playerID) {
-		if (gameLogic.checkBuildVillage(x, y, dir, playerID)) {
-			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
-			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnerID(playerID);
-			gameLogic.getBoard().getPlayer(playerID).decreaseAmountVillages();
-			Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
-			for (int i = 0; i < neighbors.length; i++) {
-				if (neighbors[i] != null) {
-					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
-				}
-			}
-
-			subFromPlayersResources(playerID, DefaultSettings.VILLAGE_BUILD_COST);
-
-		    serverOutputHandler.buildVillage(x, y, dir, playerID);
-		    serverOutputHandler.costs(playerID, DefaultSettings.VILLAGE_BUILD_COST);
-		    statusUpdate(playerID);
+	private void gainFirstBoardResources() {
+		for (int i = 4; i < 8;i++){
+			//initialVillages.get(i) TODO
 		}
-
+		
 	}
 
-	
-	public void requestBuildStreet(int x, int y, int dir, int playerID) {
-		if (gameLogic.checkBuildStreet(x, y, dir, playerID)) {
-			Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
-			e.setHasStreet(true);
-			e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
-			gameLogic.getBoard().getPlayer(playerID).decreaseAmountStreets();
-
-			subFromPlayersResources(playerID, DefaultSettings.STREET_BUILD_COST);
-
-		    serverOutputHandler.buildStreet(x, y, dir, playerID);
-		    serverOutputHandler.costs(playerID, DefaultSettings.STREET_BUILD_COST);
-		    statusUpdate(playerID);
+	private int getNextPlayer(int modelPlayerID){
+		if (modelPlayerID - 1 >= amountPlayers){
+			return 0;
 		} else {
-			serverOutputHandler.error("Kein Straßenbau möglich");
-		}
-
-	}
-
-	
-	public void requestBuildCity(int x, int y, int dir, int playerID) {
-		if (gameLogic.checkBuildCity(x, y, dir, playerID)) {
-			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
-			c.setStatus(enums.CornerStatus.CITY);
-			c.setOwnerID(playerID);
-			gameLogic.getBoard().getPlayer(playerID).increaseAmountVillages();
-			gameLogic.getBoard().getPlayer(playerID).decreaseAmountCities();
-
-			subFromPlayersResources(playerID, settings.DefaultSettings.CITY_BUILD_COST);
-
-		    serverOutputHandler.buildCity(x, y, dir, playerID);
-		    serverOutputHandler.costs(playerID, DefaultSettings.CITY_BUILD_COST);
-		    statusUpdate(playerID);
-		}
-
-	}
-
-	public void requestBuildInitialStreet(int x, int y, int dir, int playerID) {
-		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerID)) {
-			Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
-			e.setHasStreet(true);
-			e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
-			gameLogic.getBoard().getPlayer(playerID).decreaseAmountStreets();
-
-			serverOutputHandler.buildStreet(x,y,dir,playerID);
-			statusUpdate(playerID);
+			return modelPlayerID + 1;
 		}
 	}
 
-	public void requestBuildInitialVillage(int x, int y, int dir, int playerID) {
-		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
-			Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
-			c.setStatus(enums.CornerStatus.VILLAGE);
-			c.setOwnerID(playerID);
-			gameLogic.getBoard().getPlayer(playerID).decreaseAmountVillages();
-			Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
-			for (int i = 0; i < neighbors.length; i++) {
-				if (neighbors[i] != null) {
-					neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
-				}
-			}
-			serverOutputHandler.buildVillage(x,y,dir,playerID);
-			statusUpdate(playerID);
-		}
-	}
 	
 	private int[] getPlayerResources(int playerID){
 		ArrayList<ResourceType> resources = tempPlayers.get(playerID).getResourceCards();
@@ -384,19 +578,25 @@ public class ServerController {
 					break;
 				}
 			}
-
+	
 		}
 		gameLogic.getBoard().getPlayer(playerID).setResourceCards(list);
 	}
 
-	
-	public void setBandit(int x, int y, int playerID) {
-		if (gameLogic.checkSetBandit(x, y, playerID)) {
-			// board.setBandit(board.getFieldAt(x, y));
+	public int getAmountPlayers() {
+		return amountPlayers;
+	}
 
-			//viewController.getMainViewController().setBandit(x, y); // Debug
-		}
+	public void setAmountPlayers(int amountPlayers) {
+		this.amountPlayers = amountPlayers;
+	}
 
+	public ServerOutputHandler getServerOutputHandler() {
+		return serverOutputHandler;
+	}
+
+	public ServerInputHandler getServerInputHandler() {
+		return serverInputHandler;
 	}
 
 	/**
@@ -448,145 +648,6 @@ public class ServerController {
 	public PlayerState getPlayerState(int playerID) {
 		// überflüssig?
 		return null;
-	}
-
-	public void diceRollRequest(int playerID) {
-		Random rand = new Random();
-		int firstDice = 1 + rand.nextInt(5);
-		int secondDice = 1 + rand.nextInt(5);
-		int[] result = {firstDice, secondDice};
-		serverOutputHandler.diceRollResult(playerID, result);
-	}
-
-	public void endTurn(int playerModelID) {
-		PlayerModel pM = gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerModelID));
-		pM.setPlayerState(PlayerState.WAITING);
-		// TODO Auto-generated method stub
-
-	}
-
-	public void requestSetBandit(int x, int y, int stealFromPlayerID, int playerID) {
-		// TODO Auto-generated method stub
-
-	}
-    //überflüssig?
-	public void addPlayerToArray(PlayerModel player) {
-		// if (tempPlayers.size() >= DefaultSettings.MAXIMUM_PLAYERS_AMOUNT){
-		// networkController.error("Server voll!");
-		// } else if (tempPlayers.size() ==
-		// DefaultSettings.MAXIMUM_PLAYERS_AMOUNT - 1) {
-		// tempPlayers.add(player);
-		// amountPlayers++;
-		// init(amountPlayers);
-		// } else {
-		// tempPlayers.add(player);
-		// amountPlayers++;
-		// }
-		tempPlayers.add(player); // DEBUG ONLY
-		amountPlayers++; // DEBUG ONLY
-		initializeBoard(); // DEBUG ONLY
-	}
-
-	public void chatReceiveMessage(int playerId, String s) {
-		serverOutputHandler.chatReceiveMessage(playerId, s);
-		
-	}
-
-	public void chatSendMessage(String s, int currentThreadID) {
-		chatReceiveMessage(currentThreadID,s);
-		
-	}
-
-	public void serverConfirmation(String server_response) {
-		//serverOutputHandler.confirmation
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
-		int playerID = threadPlayerIdMap.get(currentThreadID);
-		PlayerModel playerModel = new PlayerModel(playerID);
-		boolean colorAvailable = true;
-		for (int i = 0;i< tempPlayers.size();i++){
-			if (tempPlayers.get(i).getColor().equals(color)){
-				colorAvailable = false;
-				break;
-			}
-		}
-		if (colorAvailable){			
-		playerModel.setColor(color);
-		playerModel.setName(name);
-		playerModel.setPlayerState(PlayerState.GAME_SARTING);
-		tempPlayers.add(playerModel);
-		serverConfirmation("OK");
-		serverOutputHandler.statusUpdate(playerID, color, name, PlayerState.GAME_SARTING, 0, new int[5]);
-		} else {
-			error("Farbe bereits vergeben!");
-		}		
-	}
-	
-	public void statusUpdate(int playerID){
-		PlayerModel pM = gameLogic.getBoard().getPlayer(playerID);
-	    serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerID), pM.getColor(), pM.getName(), pM.getPlayerState(), pM.getVictoryPoints(), getPlayerResources(playerID));
-	}
-
-
-	private void error(String string) {
-		serverOutputHandler.error(string);
-		
-	}
-
-	public void clientReady(int currentThreadID) {
-		int playerID = threadPlayerIdMap.get(currentThreadID);
-		for (int i = 0;i< tempPlayers.size();i++){
-			if (tempPlayers.get(i).getID() == playerID){
-				tempPlayers.get(i).setPlayerState(PlayerState.WAITING_FOR_GAMESTART);
-			}
-		}
-	
-		if (tempPlayers.size() >= 3){
-			boolean allReady = true;
-			for (int i = 0;i< tempPlayers.size();i++){
-				if (tempPlayers.get(i).getPlayerState() != PlayerState.WAITING_FOR_GAMESTART){
-					allReady = false;
-					break;
-				}
-			}
-			if (allReady){
-				initializeBoard();
-			}
-		}
-		
-	}
-	
-	public void hello(int currentThreadID){
-		serverOutputHandler.hello(DefaultSettings.SERVER_VERSION, DefaultSettings.PROTOCOL_VERSION, currentThreadID);
-	}
-	
-	public void receiveHello(int currentThreadID){
-		threadPlayerIdMap.put(currentThreadID, amountPlayers);
-		modelPlayerIdMap.put(amountPlayers,currentThreadID);
-		amountPlayers++;
-		welcome(currentThreadID);
-	}
-
-	public void welcome(int currentThreadID) {
-		serverOutputHandler.welcome(currentThreadID);		
-	}
-
-	public ServerOutputHandler getServerOutputHandler() {
-		return serverOutputHandler;
-	}
-
-	public ServerInputHandler getServerInputHandler() {
-		return serverInputHandler;
-	}
-
-	public void robberMovementRequest(int x, int y, int victim_id, int currentThreadID){
-		if (gameLogic.checkSetBandit(x, y, victim_id)){
-			
-		}
-		
 	}
 
 
