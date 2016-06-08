@@ -219,27 +219,40 @@ public class ServerOutputHandler {
         }
     }
 
-    public void costs(int playerID,int[] costs) {
-    	ProtocolResource pr;
-    	if (costs.length > 1){
-    	    pr = new ProtocolResource(costs[0],costs[1],costs[2],costs[3],costs[4],0);
-    	} else {
-    		pr = new ProtocolResource(0,0,0,0,0,costs[0]);
-    	}
-        ProtocolCosts pc = new ProtocolCosts(playerID,pr);
+    public void costs(int playerID, int[] costs) {
+        ProtocolResource pr;
+        if (costs.length > 1) {
+            pr = new ProtocolResource(costs[0], costs[1], costs[2], costs[3], costs[4], 0);
+        } else {
+            pr = new ProtocolResource(0, 0, 0, 0, 0, costs[0]);
+        }
+        ProtocolCosts pc = new ProtocolCosts(playerID, pr);
         Response r = new Response();
         r.pCosts = pc;
         try {
-            server.sendToClient(parser.createString(r),playerID);
+            server.sendToClient(parser.createString(r), playerID);
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
-        }        
+        }
     }
 
-    public void protocolTradeIsRequested(int player_id, int trade_id, ProtocolResource offer,
-                                         ProtocolResource withdrawal) {
-        ProtocolTradeIsRequested ptis = new ProtocolTradeIsRequested(player_id, trade_id, offer, withdrawal);
+    public void protocolTradeIsRequested(int player_id, int trade_id, int[] offer,
+                                         int[] withdrawal) {
+        ProtocolResource proff;
+        if (offer.length > 1) {
+            proff = new ProtocolResource(offer[0], offer[1], offer[3], offer[4], offer[5], 0);
+        } else {
+            proff = new ProtocolResource(0, 0, 0, 0, 0, offer[0]);
+        }
+        ProtocolResource prw;
+        if (withdrawal.length > 1) {
+            prw = new ProtocolResource(withdrawal[0], withdrawal[1], withdrawal[2], withdrawal[3], withdrawal[4], 0);
+        } else {
+            prw = new ProtocolResource(0, 0, 0, 0, 0, withdrawal[0]);
+        }
+
+        ProtocolTradeIsRequested ptis = new ProtocolTradeIsRequested(player_id, trade_id, proff, prw);
         Response r = new Response();
         r.pTradeIsRequested = ptis;
         try {
@@ -289,9 +302,9 @@ public class ServerOutputHandler {
     }
 
     public void buildVillage(int x, int y, int dir, int playerID) {
-    	String location = ModelToProtocol.getCornerID(x, y, dir);
-    	ProtocolBuilding pb = new ProtocolBuilding(playerID,"Dorf",location);
-    	ProtocolBuild pbu = new ProtocolBuild(pb);
+        String location = ModelToProtocol.getCornerID(x, y, dir);
+        ProtocolBuilding pb = new ProtocolBuilding(playerID, "Dorf", location);
+        ProtocolBuild pbu = new ProtocolBuild(pb);
         Response r = new Response();
         r.pBuild = pbu;
         try {
@@ -299,14 +312,14 @@ public class ServerOutputHandler {
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
-        }   	
+        }
 
     }
 
     public void buildStreet(int x, int y, int dir, int playerID) {
-    	String location = ModelToProtocol.getEdgeID(x, y, dir);
-    	ProtocolBuilding pb = new ProtocolBuilding(playerID,"Straße",location);
-    	ProtocolBuild pbu = new ProtocolBuild(pb);
+        String location = ModelToProtocol.getEdgeID(x, y, dir);
+        ProtocolBuilding pb = new ProtocolBuilding(playerID, "Straße", location);
+        ProtocolBuild pbu = new ProtocolBuild(pb);
         Response r = new Response();
         r.pBuild = pbu;
         try {
@@ -319,9 +332,9 @@ public class ServerOutputHandler {
     }
 
     public void buildCity(int x, int y, int dir, int playerID) {
-    	String location = ModelToProtocol.getCornerID(x, y, dir);
-    	ProtocolBuilding pb = new ProtocolBuilding(playerID,"Stadt",location);
-    	ProtocolBuild pbu = new ProtocolBuild(pb);
+        String location = ModelToProtocol.getCornerID(x, y, dir);
+        ProtocolBuilding pb = new ProtocolBuilding(playerID, "Stadt", location);
+        ProtocolBuild pbu = new ProtocolBuild(pb);
         Response r = new Response();
         r.pBuild = pbu;
         try {
@@ -408,7 +421,7 @@ public class ServerOutputHandler {
     public void specialCaseLongestRoad() {
         //ProtocolSpecialCaseLongestRoad psclr = new ProtocolSpecialCaseLongestRoad();
         //   Response r = new Response();
-         //r.pSpecialCaseLongestRoad=psclr;
+        //r.pSpecialCaseLongestRoad=psclr;
         // try {
         //   server.broadcast(parser.createString(r));
         //} catch (IOException e) {

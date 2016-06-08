@@ -199,12 +199,11 @@ public class ClientInputHandler extends InputHandler {
     }
 
     protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
-
         int player_id = tradeIsRequested.getPlayer_id();
         int trade_id = tradeIsRequested.getTrade_id();
-        ProtocolResource offer = tradeIsRequested.getOffer();
-        ProtocolResource withdrawal = tradeIsRequested.getWithdrawal();
-        // networkController.tradeIsRequested(player_id,trade_id,offer,withdrawal);
+        ProtocolResource proff = tradeIsRequested.getOffer();
+        ProtocolResource prw = tradeIsRequested.getWithdrawal();
+        // networkController.tradeIsRequested((player_id, trade_id, proff, prw));
     }
 
     protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
@@ -236,9 +235,12 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolCosts costs) {
-        // TODO Auto-generated method stub
-
+        int playerID = costs.getPlayer();
+        ProtocolResource pr = costs.getResource();
+        //networkController.costs(playerID,pr)
     }
+
+
 
     @Override
     protected void handle(ProtocolRobberMovement robberMovement) {
@@ -315,7 +317,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
-     //  String road1_id = roadBuildingCardInfo.getRoad1_id();
+        //  String road1_id = roadBuildingCardInfo.getRoad1_id();
         //    String road2_id = roadBuildingCardInfo.getRoad2_id();
         //    int player_id = roadBuildingCardInfo.getPlayer_id();
 //networkController.roadBuildingCardInfo(road1_id)
