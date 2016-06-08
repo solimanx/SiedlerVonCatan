@@ -323,13 +323,19 @@ public class ServerInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-		// TODO Auto-generated method stub
+		// Unnecessary Method
 		
 	}
 
 	@Override
 	protected void handle(ProtocolWelcome welcome) {
-		// Unnecessary Methods
+		// Unnecessary Method
+		
+	}
+	
+	protected void handleRoadBuild (String road1_id, String road2_id, int player_id) {
+		// TODO Auto-generated method stub
+		
 		
 	}
 
