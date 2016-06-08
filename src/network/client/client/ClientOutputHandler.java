@@ -19,7 +19,11 @@ import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
+import protocol3.clientinstructions.ProtocolDevelopmentCards;
+import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
+import protocol3.object.ProtocolRoadBuildingCard;
+import protocol3.severinstructions.ProtocolPlayKnightCard;
 
 public class ClientOutputHandler {
 
@@ -265,6 +269,20 @@ public class ClientOutputHandler {
 			e.printStackTrace();
 		}
 		
+		
+	}
+	
+	public void playDevelopmentCard(ProtocolPlayKnightCard knight, ProtocolRoadBuildingCard roadbuild,
+			ProtocolMonopolyCard monopoly, ProtocolInventionCard invention) {
+		ProtocolDevelopmentCards pdc = new ProtocolDevelopmentCards(knight, roadbuild, monopoly, invention);
+		Response r = new Response();
+		r.pDevelopmentCard = pdc;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
 		
 	}
 
