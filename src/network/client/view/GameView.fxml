@@ -29,7 +29,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="selfWood" prefHeight="26.0" prefWidth="29.0" />
+                        <TextField fx:id="selfWood" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
@@ -39,7 +39,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="selfClay" prefHeight="26.0" prefWidth="29.0" />
+                        <TextField fx:id="selfClay" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
@@ -49,7 +49,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="selfSheep" prefHeight="26.0" prefWidth="29.0" />
+                        <TextField fx:id="selfSheep" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
@@ -59,7 +59,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="selfCorn" prefHeight="26.0" prefWidth="29.0" />
+                        <TextField fx:id="selfCorn" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
@@ -69,7 +69,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="selfOre" prefHeight="26.0" prefWidth="29.0" />
+                        <TextField fx:id="selfOre" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
                   <VBox alignment="CENTER_RIGHT">
@@ -118,7 +118,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="playerTwoCards" prefHeight="26.0" prefWidth="29.0" />
+                        <TextField fx:id="playerTwoCards" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
                </children>
@@ -144,7 +144,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="playerThreeCards" prefHeight="26.0" prefWidth="29.0" />
+                        <TextField fx:id="playerThreeCards" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
                </children>
@@ -170,7 +170,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="playerFourCards" prefHeight="26.0" prefWidth="29.0" />
+                        <TextField fx:id="playerFourCards" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
                </children>
@@ -182,7 +182,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="63.0" layoutY="50.0" prefHeight="87.0" prefWidth="898.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <TextArea fx:id="messages" prefHeight="200.0" prefWidth="300.0" />
+            <TextArea fx:id="messages" editable="false" prefHeight="200.0" prefWidth="300.0" />
             <TextField fx:id="messageInput" maxWidth="-Infinity" onAction="#sendMessage" prefWidth="300.0" promptText="Enter Chat Message and press Enter" />
          </children>
       </VBox>
@@ -191,8 +191,8 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Würfel: " />
-                  <TextField prefHeight="26.0" prefWidth="21.0" />
-                  <TextField layoutX="62.0" layoutY="10.0" prefHeight="26.0" prefWidth="21.0" />
+                  <TextField editable="false" prefHeight="26.0" prefWidth="21.0" />
+                  <TextField editable="false" layoutX="62.0" layoutY="10.0" prefHeight="26.0" prefWidth="21.0" />
                </children>
             </HBox>
          </children>
