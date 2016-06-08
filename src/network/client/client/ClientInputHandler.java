@@ -44,7 +44,7 @@ import settings.DefaultSettings;
 public class ClientInputHandler extends InputHandler {
     private ClientController clientController;
 
-    public ClientInputHandler(ClientController clientController){
+    public ClientInputHandler(ClientController clientController) {
         super();
         this.clientController = clientController;
     }
@@ -211,7 +211,7 @@ public class ClientInputHandler extends InputHandler {
 
         int player_id = tradeConfirmation.getPlayer_id();
         int trade_id = tradeConfirmation.getTrade_id();
-        // networkController.tradeConfirmation(player_id,trade_id);
+        //   networkController.tradeConfirmation(player_id,trade_id);
     }
 
     protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
@@ -248,31 +248,31 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolHarbourRequest harbourRequest) {
-        // TODO Auto-generated method stub
+        // unnecessary Method
 
     }
 
     @Override
     protected void handle(ProtocolTradeRequest tradeRequest) {
-        // TODO Auto-generated method stub
+        // unnecessary Method
 
     }
 
     @Override
     protected void handle(ProtocolTradeAccept tradeAccept) {
-        // TODO Auto-generated method stub
+        // unnecessary Method
 
     }
 
     @Override
     protected void handle(ProtocolTradeComplete tradeComplete) {
-        // TODO Auto-generated method stub
+        // unnecessary Method
 
     }
 
     @Override
     protected void handle(ProtocolTradeCancel tradeCancel) {
-        // TODO Auto-generated method stub
+        // unnecessary Method
 
     }
 
@@ -286,14 +286,11 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-    //    ProtocolResource resource = inventionCardInfo.getResource();
-    //    int player_id = inventionCardInfo.getPlayer_id();
-    //    // networkController.inventionCardInfo(resource,player_id);
+        //    ProtocolResource resource = inventionCardInfo.getResource();
+        //    int player_id = inventionCardInfo.getPlayer_id();
+        //    // networkController.inventionCardInfo(resource,player_id);
     }
-   
 
-
-    
 
     @Override
     protected void handle(ProtocolLongestRoad longestRoad) {
@@ -318,12 +315,12 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
-    //    String road1_id = roadBuildingCardInfo.getRoad1_id();
-    //    String road2_id = roadBuildingCardInfo.getRoad2_id();
-    //    int player_id = roadBuildingCardInfo.getPlayer_id();
+     //  String road1_id = roadBuildingCardInfo.getRoad1_id();
+        //    String road2_id = roadBuildingCardInfo.getRoad2_id();
+        //    int player_id = roadBuildingCardInfo.getPlayer_id();
 //networkController.roadBuildingCardInfo(road1_id)
     }
-    
+
 }
     
 
