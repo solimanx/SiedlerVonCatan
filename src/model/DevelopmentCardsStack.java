@@ -12,10 +12,28 @@ public class DevelopmentCardsStack {
 	public DevelopmentCardsStack(){
 		devFactory = new DevCardFactory();
 		devCardStack = new DevelopmentCard[25];
-		//TODO insert all card types, random order
-		for(int i = 0; i<25; i++){
-			devCardStack[i] = devFactory.createDevelopmentCard("knightCard");
-		}
+		//TODO random order
+		int i = 0;
+			for(int j = 0; j< 14; j++){
+				devCardStack[i] = devFactory.createDevelopmentCard("knightCard");
+				i++;
+			}
+			for(int j = 0; j< 5; j++){
+				devCardStack[i] = devFactory.createDevelopmentCard("victoryCard");
+				i++;
+			}
+			for(int j = 0; j< 2; j++){
+				devCardStack[i] = devFactory.createDevelopmentCard("monopolyCard");
+				i++;
+			}
+			for(int j = 0; j< 2; j++){
+				devCardStack[i] = devFactory.createDevelopmentCard("streetBuilding");
+				i++;
+			}
+			for(int j = 0; j< 2; j++){
+				devCardStack[i] = devFactory.createDevelopmentCard("inventionCard");
+				i++;
+			}
 	}
 	
 	public DevelopmentCard[] getCardStack(){
@@ -24,12 +42,9 @@ public class DevelopmentCardsStack {
 	
 	public DevelopmentCard getNextCard(){
 		if(nextCard < 25){
+			nextCard++;
 			return devCardStack[nextCard];
 		}
-		//TODO generate new DevCardStack and get first Card
-//		else{
-//			newStack().getNextCard;
-//		}
 		return null;
 	}
 	
