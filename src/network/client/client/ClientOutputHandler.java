@@ -19,6 +19,7 @@ import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
+import protocol3.object.ProtocolMonopolyCard;
 
 public class ClientOutputHandler {
 
@@ -250,6 +251,20 @@ public class ClientOutputHandler {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void handleMonopoly(ProtocolResource resource) {
+		ProtocolMonopolyCard pmc = new ProtocolMonopolyCard(resource);
+		Response r = new Response();
+		r.pMonopolyCard = pmc;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
+		
 		
 	}
 
