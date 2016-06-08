@@ -18,6 +18,7 @@ import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
+import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
 
 public class ClientOutputHandler {
 
@@ -190,6 +191,20 @@ public class ClientOutputHandler {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 
+		}
+	}
+	
+	public void handleBuyDevelopmentCards() {
+		ProtocolBuyDevelopmentCards pbdc = new ProtocolBuyDevelopmentCards();
+		Response r = new Response();
+		r.pBuyDevCards = pbdc;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+
+		
 		}
 	}
 
