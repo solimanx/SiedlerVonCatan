@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Board;
+import network.client.view.GameViewController;
 import network.client.view.View;
 import network.server.controller.ServerController;
 
@@ -24,7 +25,7 @@ public class ViewController {
 	public HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	protected ServerController serverController; // DEBUG
 	private ClientController clientController;
-	private MainViewController mainViewController;
+	private GameViewController gameViewController;
 	private LobbyController lobbyController;
 	private PlayerProfileController nameSelectDialogController;
 	private Stage primaryStage;
@@ -33,7 +34,7 @@ public class ViewController {
 	}
 
 	private Stage choosingStage;
-	private Stage mainViewStage;
+	private Stage gameViewStage;
 
 	public ViewController(Stage primaryStage, ClientController fc) {
 		this.primaryStage = primaryStage;
@@ -97,23 +98,40 @@ public class ViewController {
 	}
 
 	/**
-	 * starts MainView and MainViewController
+	 * starts GameView and GameViewController
 	 */
-	void startMainView() {
+	void startGameView() {
 		primaryStage.close();
 		choosingStage.close();
 
-		mainViewStage = new Stage();
-		this.mainViewController = new MainViewController(this, clientController.getGameLogic().getBoard(), mainViewStage);
-		init();
-	}
+		gameViewStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Parent root;
+		try {
+			root = loader.load(getClass().getResource("/network/client/view/GameView.fxml").openStream());
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			gameViewStage.setScene(scene);
+			gameViewStage.setMaximized(true);
+			gameViewController = (GameViewController) loader.getController();
+			gameViewStage.show();
+			gameViewController.startScene(primaryStage);
 
-	public View getView() {
-		return mainViewController.getView();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+//		this.GameViewController = new GameViewController(gameViewStage);
+//		this.mainViewController = new MainViewController(this, clientController.getGameLogic().getBoard(), gameViewStage);
+//		init();
+//	}
+//
+//	public View getView() {
+//		return mainViewController.getView();
+//	}
 
 	private void init() {
-		view = getView();
+//		view = getView();
 		fieldColors.put(ResourceType.CLAY, Color.TAN);
 		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
 		fieldColors.put(ResourceType.NOTHING, Color.WHITE);
@@ -177,8 +195,8 @@ public class ViewController {
 		return clientController;
 	}
 
-	public MainViewController getMainViewController() {
-		return mainViewController;
+	public GameViewController getGameViewController() {
+		return gameViewController;
 	}
 
 	public LobbyController getLobbyController() {
@@ -189,8 +207,8 @@ public class ViewController {
 		this.clientController = clientController;
 	}
 
-	public void setMainViewController(MainViewController mainViewController) {
-		this.mainViewController = mainViewController;
+	public void setMainViewController(GameViewController gameViewController) {
+		this.gameViewController = gameViewController;
 	}
 
 	public void setLobbyController(LobbyController lobbyController) {

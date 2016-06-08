@@ -84,7 +84,7 @@ public class ClientController {
 
 		this.gameLogic = new GameLogic(board);
 
-		viewController.startMainView();
+		viewController.startGameView();
 
 		return board;
 
@@ -253,7 +253,7 @@ public class ClientController {
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(board.getPlayer(playerID).getID());
 
-		viewController.getMainViewController().setStreet(x, y, dir, playerID);
+		viewController.getGameViewController().setStreet(x, y, dir, playerID);
 	}
 
 	// 8.6
@@ -268,7 +268,7 @@ public class ClientController {
 			}
 		}
 
-		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
+		viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
 	}
 
 	// 8.6
@@ -277,7 +277,7 @@ public class ClientController {
 		c.setStatus(enums.CornerStatus.CITY);
 		c.setOwnerID(playerID);
 
-		viewController.getMainViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
+		viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
 	}
 
 	// 9.1

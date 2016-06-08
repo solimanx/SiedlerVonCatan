@@ -12,7 +12,6 @@ import enums.ResourceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -26,7 +25,6 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
 
@@ -76,7 +74,6 @@ public class GameViewController implements Initializable {
 
 	private ViewController viewController;
 
-
 	// jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
 	// für Edge 2 Koordinaten (4 Punkte), weil Anfangs- und Endpunkt
 	public double[][][] fieldCoordinates = new double[7][7][2]; // [6][6][2]
@@ -89,7 +86,7 @@ public class GameViewController implements Initializable {
 
 	// Constant values for calculations
 	public static double radius = 50.0;
-	public double[] windowCenter = new double[2];
+	public double[] boardCenter = new double[2];
 	public double[] screenCenter = new double[2];// [2]
 	public static double sin60 = Math.sqrt(3) / 2;
 	public static double rad60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
@@ -97,7 +94,7 @@ public class GameViewController implements Initializable {
 
 	private ArrayList<Color> playerColors = new ArrayList<Color>(4);
 	public HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
-
+	private ViewBoardFactory factory;
 
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
@@ -112,9 +109,18 @@ public class GameViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPlayerColors();
-		ViewBoardFactory factory = new ViewBoardFactory();
-		board = factory.getViewBoard(viewController.getPrimaryStage());
+		factory = new ViewBoardFactory();
+		System.out.println("initialize method called");
 
+	}
+
+	/**
+	 * draws and shows the board Pane with game board
+	 *
+	 * @param stage
+	 */
+	public void startScene(Stage stage) {
+		board.getChildren().addAll(factory.getViewBoard(stage));
 	}
 
 	private void initPlayerColors() {
@@ -215,7 +221,6 @@ public class GameViewController implements Initializable {
 		board.getChildren().add(city);
 	}
 
-
 	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
 		fields[u + 3][v + 3].setFill(fieldColors.get(resourceType));
 		Text text = new Text("" + diceIndex);
@@ -230,7 +235,6 @@ public class GameViewController implements Initializable {
 		board.getChildren().add(chip);
 	}
 
-
 	public Polygon drawCity(double[] center) {
 		Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
 				center[1] - 20, center[0] + 10, center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10,
@@ -238,36 +242,76 @@ public class GameViewController implements Initializable {
 		return city;
 	}
 
-
 	private class ViewBoardFactory {
 		private Pane boardPane;
 		private List<Shape> figures = new LinkedList<Shape>();
 
-
-		public Pane getViewBoard(Stage stage){
+		public List<Shape> getViewBoard(Stage stage) {
 			boardPane = new Pane();
-			//windowCenter[0] = stage.getWidth() / 2;
-			//windowCenter[1] = stage.getHeight() / 2;
-			Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-			windowCenter[1] = screenBounds.getHeight() / 2;
-			windowCenter[0] = screenBounds.getWidth() / 2;
+			boardCenter[0] = board.getWidth() / 2;
+			boardCenter[1] = board.getHeight() / 2;
 
-			calculateFieldCenters(windowCenter);
+			calculateFieldCenters(boardCenter);
 			calculateCornerCenters();
 			calculateEdgeCorners();
 			initBoard();
 
 			boardPane.getChildren().addAll(0, figures);
 
-			return boardPane;
+			return figures;
 		}
-
 
 		private void initBoard() {
-			// TODO Auto-generated method stub
+			for (int i = 0; i < 7; i++) {
+				for (int j = 0; j < 7; j++) {
+					if (fieldCoordinates[i][j][0] > 0) {
+						Polygon hexagon = drawHexagon(
+								createHexagon(fieldCoordinates[i][j][0], fieldCoordinates[i][j][1]));
+						hexagon.setVisible(true);
+						figures.add(0, hexagon);
+						fields[i][j] = hexagon;
+						for (int l = 0; l < 3; l++) {
+							if (edgeCoordinates[i][j][l][0] > 0) {
+								Line street = drawStreet(edgeCoordinates[i][j][l]);
+								street.setOpacity(0);
+								street.setStroke(Color.WHITE);
+								street.getStyleClass().add("street");
+								streets[i][j][l] = street;
+
+								int[] streetCoordinates = { i, j, l };
+
+								street.setOnMouseClicked(e -> {
+									System.out.println(streetCoordinates);
+								});
+
+								figures.add(street);
+							}
+						}
+						for (int k = 0; k < 2; k++) {
+							if (cornerCoordinates[i][j][k][0] > 0) {
+								Polygon village = drawVillage(cornerCoordinates[i][j][k]);
+								village.setOpacity(0);
+								village.getStyleClass().add("village");
+								corners[i][j][k] = village;
+
+								int[] villageCoordinates = { i, j, k };
+
+								village.setOnMouseClicked(e -> {
+									System.out.println(villageCoordinates);
+								});
+
+								figures.add(village);
+							}
+						}
+					}
+				}
+			}
+			bandit = drawBandit();
+			bandit.setOpacity(0);
+			bandit.toFront();
+			figures.add(bandit);
 
 		}
-
 
 		public void initCorners() {
 			for (int i = 0; i < fieldCoordinates.length; i++) {
@@ -281,7 +325,8 @@ public class GameViewController implements Initializable {
 		/**
 		 * @param centerCoordinates
 		 * @return double array of coordinates of 6 Points (12 double values)
-		 *         calculates coordinates of Hexagon from given center coordinates
+		 *         calculates coordinates of Hexagon from given center
+		 *         coordinates
 		 */
 		public double[] createHexagon(double x, double y) {
 			double[] points = new double[12];
@@ -301,9 +346,7 @@ public class GameViewController implements Initializable {
 				village = drawVillage(center);
 				village.setVisible(false);
 				// village.setOnMouseClicked(e -> gc.buildVillage()); // TODO
-				// Methodensignatur
-				// im gc
-				// unvollständig
+
 				return village;
 			} else {
 				double[] center = { fieldCoordinates[i][j][0], fieldCoordinates[i][j][1] + radius };
@@ -312,7 +355,6 @@ public class GameViewController implements Initializable {
 				return village;
 			}
 		}
-
 
 		/**
 		 * draws a Circle with diceIndex
@@ -343,7 +385,6 @@ public class GameViewController implements Initializable {
 			return hexagon;
 		}
 
-
 		/**
 		 * takes pair of coordinates as center point and draws a village
 		 *
@@ -367,11 +408,10 @@ public class GameViewController implements Initializable {
 		public Circle drawBandit() {
 			Circle bandit = new Circle(25.0);
 			bandit.setFill(Color.BLACK);
-			bandit.setCenterX(windowCenter[0]);
-			bandit.setCenterY(windowCenter[1]);
+			bandit.setCenterX(boardCenter[0]);
+			bandit.setCenterY(boardCenter[1]);
 			return bandit;
 		}
-
 
 		/**
 		 * auxiliary method calculating center coordinates of every field.
@@ -445,7 +485,7 @@ public class GameViewController implements Initializable {
 						y = fieldCoordinates[u + 3][v + 3][1] - radius;
 						cornerCoordinates[u + 3][v + 3][0][0] = x;
 						cornerCoordinates[u + 3][v + 3][0][1] = y;
-						// x = fieldCoordinates[u][v][0];
+						// x = fieldCoordinates[u + 3][v + 3][0];
 						y = fieldCoordinates[u + 3][v + 3][1] + radius;
 						cornerCoordinates[u + 3][v + 3][1][0] = x;
 						cornerCoordinates[u + 3][v + 3][1][1] = y;
@@ -457,8 +497,8 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * sets x-coordinate of unused corners to 0 fields with x-coordinate 0 are
-		 * sea
+		 * sets x-coordinate of unused corners to 0 fields with x-coordinate 0
+		 * are sea
 		 */
 		private void filterUnusedCorners() {
 
@@ -492,8 +532,8 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * sets x-coordinate of unused edges to 0; edges with x-coordinate 0 won't
-		 * be initialized
+		 * sets x-coordinate of unused edges to 0; edges with x-coordinate 0
+		 * won't be initialized
 		 */
 		private void filterUnusedEdges() {
 			// row 0
