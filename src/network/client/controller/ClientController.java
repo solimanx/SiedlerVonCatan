@@ -92,6 +92,7 @@ public class ClientController {
     }
 
     public void createNewPlayer(enums.Color color, String name) {
+		this.board = new Board();
 
     }
 

@@ -1,6 +1,7 @@
 package network;
 
 import enums.ResourceType;
+import model.Board;
 import model.HexService;
 import protocol.object.ProtocolResource;
 
@@ -8,20 +9,20 @@ public final class ProtocolToModel {
 	static HexService HS;
 
 	public static int[] getFieldCoordinates(String field_id) {
-		return HexService.getFieldCoordinates(field_id);
+		return Board.getStringToCoordMap().get(field_id);
 	}
 
 	public static int[] getCornerCoordinates(String location) {
-		int[] a = HexService.getFieldCoordinates(location.substring(0, 1));
-		int[] b = HexService.getFieldCoordinates(location.substring(1, 2));
-		int[] c = HexService.getFieldCoordinates(location.substring(2, 3));
+		int[] a = Board.getStringToCoordMap().get(location.substring(0, 1));
+		int[] b = Board.getStringToCoordMap().get(location.substring(1, 2));
+		int[] c = Board.getStringToCoordMap().get(location.substring(2, 3));
 		int[] result = HS.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
 		return result;
 	}
 
 	public static int[] getEdgeCoordinates(String location) {
-		int[] a = HexService.getFieldCoordinates(location.substring(0, 1));
-		int[] b = HexService.getFieldCoordinates(location.substring(1, 2));
+		int[] a = Board.getStringToCoordMap().get(location.substring(0, 1));
+		int[] b = Board.getStringToCoordMap().get(location.substring(1, 2));
 		int[] result = HS.getEdgeCoordinates(a[0], a[1], b[0], b[1]);
 		return result;
 	}

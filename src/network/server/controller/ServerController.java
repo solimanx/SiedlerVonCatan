@@ -160,6 +160,7 @@ public class ServerController {
 		Board board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
 		generateBoard(board.getFieldAt(2,2),true);
+		System.out.println(board.getFieldAt(0, 0).getDiceIndex()+board.getFieldAt(0, 0).getResourceType().toString()+board.getFieldAt(0,0).getFieldID());
 		//generateDebuggingBoard();
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 		
@@ -407,6 +408,9 @@ public class ServerController {
 			fields.get(fields.size() - 1).setDiceIndex(0);
 
 		}
+		/*for (int i = 0; i< fields.size();i++){
+			gameLogic.getBoard().setField(i, j, resourceType, diceIndex);
+		}*/
 		gameLogic.getBoard().setBandit("J");
 	}
 

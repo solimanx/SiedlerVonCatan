@@ -24,8 +24,8 @@ public class Board {
 	private Edge[][][] edges;
 	private PlayerModel[] players;
 	private String banditLocation;
-	private Map<String, int[]> stringToCoordMap;
-	private Map<int[], String> coordToStringMap;
+	private static Map<String, int[]> stringToCoordMap;
+	private static Map<int[], String> coordToStringMap;
 	// TODO private DevDeck devDeck;
 
 	public Board(ArrayList<PlayerModel> tempPlayers) {
@@ -668,9 +668,9 @@ public class Board {
 		for (int i = 0; i < fields.length; i++) {
 			for (int j = 0; j < fields[i].length; j++) {
 				if (fields[i][j] != null) {
-					// if (fields[i][j].getFieldID() != null) {
-					// result.add(fields[i][j]);
-					// }
+					 if (fields[i][j].getFieldID() != null) {
+					 result.add(fields[i][j]);
+					 }
 				}
 			}
 		}
@@ -760,11 +760,11 @@ public class Board {
 	/**
 	 * @return the fieldIDMap
 	 */
-	public Map<String, int[]> getStringToCoordMap() {
+	public static Map<String, int[]> getStringToCoordMap() {
 		return stringToCoordMap;
 	}
 
-	public Map<int[], String> getCoordToStringMap() {
+	public static Map<int[], String> getCoordToStringMap() {
 		return coordToStringMap;
 	}
 
