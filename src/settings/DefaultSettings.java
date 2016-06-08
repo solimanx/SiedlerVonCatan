@@ -17,6 +17,9 @@ public final class DefaultSettings {
 	public final static int AMOUNT_KNIGHT_CARDS = 14;
 	public final static int AMOUNT_VICTORY_CARDS = 5;
 	public final static int AMOUNT_DEVELOPMENT_CARDS = 6;
+	public final static int AMOUNT_INVENTION_CARDS = 2;
+	public final static int AMOUNT_MONOPOLY_CARDS = 2;
+	public final static int AMOUNT_STREETBUILDING_CARDS = 2;
 
 	// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
 	public final static int[] VILLAGE_BUILD_COST = { 1, 1, 0, 1, 1 };
