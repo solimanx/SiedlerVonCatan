@@ -42,7 +42,10 @@ public class ServerController {
 	private ArrayList<Corner> initialVillages;
 
 	public ServerController() {
+		// ModelPlayerID => threadID
 		modelPlayerIdMap = new HashMap<Integer, Integer>();
+		
+		// threadID => ModelPlayerID
 		threadPlayerIdMap = new HashMap<Integer, Integer>();		
 		
 		ServerInputHandler serverInputHandler = new ServerInputHandler(this);
