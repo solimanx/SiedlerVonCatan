@@ -44,7 +44,7 @@ import settings.DefaultSettings;
 public class ClientInputHandler extends InputHandler {
     private ClientController clientController;
 
-    public ClientInputHandler(ClientController clientController) {
+    public ClientInputHandler(ClientController clientController){
         super();
         this.clientController = clientController;
     }
@@ -286,12 +286,14 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-        ProtocolResource resource = inventionCardInfo.getResource();
-        int player_id = inventionCardInfo.getPlayer_id();
-        // networkController.inventionCardInfo(resource,player_id);
-
-
+    //    ProtocolResource resource = inventionCardInfo.getResource();
+    //    int player_id = inventionCardInfo.getPlayer_id();
+    //    // networkController.inventionCardInfo(resource,player_id);
     }
+   
+
+
+    
 
     @Override
     protected void handle(ProtocolLongestRoad longestRoad) {
@@ -316,9 +318,12 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
-        String road1_id = roadBuildingCardInfo.getRoad1_id();
-        String road2_id = roadBuildingCardInfo.getRoad2_id();
-        int player_id = roadBuildingCardInfo.getPlayer_id();
+    //    String road1_id = roadBuildingCardInfo.getRoad1_id();
+    //    String road2_id = roadBuildingCardInfo.getRoad2_id();
+    //    int player_id = roadBuildingCardInfo.getPlayer_id();
 //networkController.roadBuildingCardInfo(road1_id)
     }
+    
 }
+    
+
