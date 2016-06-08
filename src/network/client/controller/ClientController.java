@@ -229,8 +229,9 @@ public class ClientController {
 	}
 
 	// 8.2
-	public void diceRollResult(int playerId, int result) {
-		viewController.setDiceRollResult(playerId, result);
+	public void diceRollResult(int playerId, int[] result) {
+		int res = result[0]+result[1];
+		viewController.setDiceRollResult(playerId, res);
 		// output
 	}
 

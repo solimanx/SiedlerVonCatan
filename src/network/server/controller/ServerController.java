@@ -228,9 +228,10 @@ public class ServerController {
 				}
 			}
 
-			subFromPlayersResources(playerID, settings.DefaultSettings.VILLAGE_BUILD_COST);
+			subFromPlayersResources(playerID, DefaultSettings.VILLAGE_BUILD_COST);
 
 		    serverOutputHandler.buildVillage(x, y, dir, playerID);
+		    serverOutputHandler.costs(playerID, DefaultSettings.VILLAGE_BUILD_COST);
 		    statusUpdate(playerID);
 		}
 
@@ -244,9 +245,10 @@ public class ServerController {
 			e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
 			gameLogic.getBoard().getPlayer(playerID).decreaseAmountStreets();
 
-			subFromPlayersResources(playerID, settings.DefaultSettings.STREET_BUILD_COST);
+			subFromPlayersResources(playerID, DefaultSettings.STREET_BUILD_COST);
 
 		    serverOutputHandler.buildStreet(x, y, dir, playerID);
+		    serverOutputHandler.costs(playerID, DefaultSettings.STREET_BUILD_COST);
 		    statusUpdate(playerID);
 		} else {
 			serverOutputHandler.error("Kein Straßenbau möglich");
@@ -266,6 +268,7 @@ public class ServerController {
 			subFromPlayersResources(playerID, settings.DefaultSettings.CITY_BUILD_COST);
 
 		    serverOutputHandler.buildCity(x, y, dir, playerID);
+		    serverOutputHandler.costs(playerID, DefaultSettings.CITY_BUILD_COST);
 		    statusUpdate(playerID);
 		}
 
@@ -447,12 +450,17 @@ public class ServerController {
 		return null;
 	}
 
-	public void diceRollRequest(int playerModelID) {
-		// TODO Auto-generated method stub
-
+	public void diceRollRequest(int playerID) {
+		Random rand = new Random();
+		int firstDice = 1 + rand.nextInt(5);
+		int secondDice = 1 + rand.nextInt(5);
+		int[] result = {firstDice, secondDice};
+		serverOutputHandler.diceRollResult(playerID, result);
 	}
 
 	public void endTurn(int playerModelID) {
+		PlayerModel pM = gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerModelID));
+		pM.setPlayerState(PlayerState.WAITING);
 		// TODO Auto-generated method stub
 
 	}

@@ -138,7 +138,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolDiceRollResult diceRollResult) {
         int playerID = diceRollResult.getPlayer();
-        int result = diceRollResult.getRoll();
+        int[] result = diceRollResult.getRoll();
         clientController.diceRollResult(playerID, result);
     }
 

@@ -133,8 +133,8 @@ public class ServerOutputHandler {
         }
     }
 
-    public void diceRollResult(int playerID, int result) {
-        ProtocolDiceRollResult dr = new ProtocolDiceRollResult(ModelToProtocol.getPlayerId(playerID), result);
+    public void diceRollResult(int playerID, int[] result) {
+        ProtocolDiceRollResult dr = new ProtocolDiceRollResult(playerID, result);
         Response r = new Response();
         r.pDRResult = dr;
         try {
@@ -219,8 +219,22 @@ public class ServerOutputHandler {
         }
     }
 
-    public void costs(ProtocolCosts costs) {
-        //TODO
+    public void costs(int playerID,int[] costs) {
+    	ProtocolResource pr;
+    	if (costs.length > 1){
+    	    pr = new ProtocolResource(costs[0],costs[1],costs[2],costs[3],costs[4],0);
+    	} else {
+    		pr = new ProtocolResource(0,0,0,0,0,costs[0]);
+    	}
+        ProtocolCosts pc = new ProtocolCosts(playerID,pr);
+        Response r = new Response();
+        r.pCosts = pc;
+        try {
+            server.sendToClient(parser.createString(r),playerID);
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }        
     }
 
     public void protocolTradeIsRequested(int player_id, int trade_id, ProtocolResource offer,
@@ -275,17 +289,47 @@ public class ServerOutputHandler {
     }
 
     public void buildVillage(int x, int y, int dir, int playerID) {
-        // TODO Auto-generated method stub
+    	String location = ModelToProtocol.getCornerID(x, y, dir);
+    	ProtocolBuilding pb = new ProtocolBuilding(playerID,"Dorf",location);
+    	ProtocolBuild pbu = new ProtocolBuild(pb);
+        Response r = new Response();
+        r.pBuild = pbu;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }   	
 
     }
 
     public void buildStreet(int x, int y, int dir, int playerID) {
-        // TODO Auto-generated method stub
+    	String location = ModelToProtocol.getEdgeID(x, y, dir);
+    	ProtocolBuilding pb = new ProtocolBuilding(playerID,"Straße",location);
+    	ProtocolBuild pbu = new ProtocolBuild(pb);
+        Response r = new Response();
+        r.pBuild = pbu;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
 
     }
 
     public void buildCity(int x, int y, int dir, int playerID) {
-        // TODO Auto-generated method stub
+    	String location = ModelToProtocol.getCornerID(x, y, dir);
+    	ProtocolBuilding pb = new ProtocolBuilding(playerID,"Stadt",location);
+    	ProtocolBuild pbu = new ProtocolBuild(pb);
+        Response r = new Response();
+        r.pBuild = pbu;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
 
     }
 

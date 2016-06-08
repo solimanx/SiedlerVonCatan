@@ -18,18 +18,18 @@ public class ProtocolDiceRollResult {
 	private int player_id;
 
 	@SerializedName("Wurf")
-	private int roll;
+	private int[] roll;
 
-	public ProtocolDiceRollResult(int player, int roll) {
+	public ProtocolDiceRollResult(int player, int[] result) {
 		this.player_id = player;
-		this.roll = roll;
+		this.roll = result;
 	}
 
 	public int getPlayer() {
 		return player_id;
 	}
 
-	public int getRoll() {
+	public int[] getRoll() {
 		return roll;
 	}
 }
