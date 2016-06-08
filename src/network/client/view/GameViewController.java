@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import enums.CornerStatus;
+import enums.HarbourStatus;
+import enums.PlayerState;
 import enums.ResourceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -91,9 +94,14 @@ public class GameViewController implements Initializable {
 	public static double sin60 = Math.sqrt(3) / 2;
 	public static double rad60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
 	private static double halfWidth = sin60 * radius;
-
+	
+	private HashMap<Integer, Integer> playerIDtoViewPosition = new HashMap<Integer, Integer>(4);
 	private ArrayList<Color> playerColors = new ArrayList<Color>(4);
-	public HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
+	// fieldColors kann weg
+	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
+	private HashMap<ResourceType, ImagePattern> resourceImages = new HashMap<ResourceType, ImagePattern>(6);
+	private HashMap<HarbourStatus, ImagePattern> harbourImages = new HashMap<HarbourStatus, ImagePattern>(6);
+	
 	private ViewBoardFactory factory;
 
 	public void setViewController(ViewController viewController) {
@@ -145,12 +153,13 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	void handleRollDiceButton(ActionEvent event) {
-
+		viewController.getClientController().diceRollRequest();
 	}
 
 	@FXML
 	void handleStartTradingButton(ActionEvent event) {
-
+		//new TradeStage
+		viewController.newTradeView();
 	}
 
 	@FXML
@@ -159,8 +168,28 @@ public class GameViewController implements Initializable {
 		messageInput.clear();
 		viewController.getClientController().chatSendMessage(message);
 	}
+	
+	public void setPlayerStatus(int playerID, PlayerState state){
+		switch (playerID) {
+		case 1:
+			//self
+			break;
+		case 2:
+			//playerPosition2
+			break;
+		case 3:
+			//playerPosition3
+			break;
+		case 4:
+			//playerPosition4
+			break;
+		default:
+			break;
+		}
+	}
 
 	public void villageClick(int[] villageCoordinates) {
+		viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1], villageCoordinates[2]);
 		System.out.println("Clicked on Village " + villageCoordinates[0] + " , " + villageCoordinates[1] + " , "
 				+ villageCoordinates[2]);
 
@@ -175,6 +204,8 @@ public class GameViewController implements Initializable {
 	}
 
 	public void fieldClick(int[] fieldCoordinates) {
+		// TODO stealFromPlayer???
+		viewController.getClientController().requestSetBandit(fieldCoordinates[0], fieldCoordinates[1], 1);
 		System.out.println(
 				"Clicked on " + fieldCoordinates[0] + " , " + fieldCoordinates[1] + " , " + fieldCoordinates[2]);
 
@@ -183,6 +214,8 @@ public class GameViewController implements Initializable {
 	public void receiveChatMessage(String line) {
 		messages.appendText(line + "\n");
 	}
+	
+	
 
 	public void setStreet(int u, int v, int dir, int playerID) {
 		Line street = streets[u + 3][v + 3][dir];
@@ -234,6 +267,10 @@ public class GameViewController implements Initializable {
 		chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 15.0);
 		board.getChildren().add(chip);
 	}
+	
+	public void setHarbour(int u, int v, HarbourStatus harbourStatus) {
+		// TODO 
+	}
 
 	public Polygon drawCity(double[] center) {
 		Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
@@ -281,7 +318,8 @@ public class GameViewController implements Initializable {
 								int[] streetCoordinates = { i, j, l };
 
 								street.setOnMouseClicked(e -> {
-									System.out.println(streetCoordinates);
+									streetClick(streetCoordinates);
+									System.out.println("Street clicked!");
 								});
 
 								figures.add(street);
@@ -297,7 +335,8 @@ public class GameViewController implements Initializable {
 								int[] villageCoordinates = { i, j, k };
 
 								village.setOnMouseClicked(e -> {
-									System.out.println(villageCoordinates);
+									villageClick(villageCoordinates);
+									System.out.println("Street clicked!");
 								});
 
 								figures.add(village);
@@ -313,6 +352,10 @@ public class GameViewController implements Initializable {
 
 		}
 
+		
+		/**
+		 * TODO perhaps unnecessary
+		 */
 		public void initCorners() {
 			for (int i = 0; i < fieldCoordinates.length; i++) {
 				for (int j = 0; j < fieldCoordinates.length; j++) {
@@ -345,8 +388,6 @@ public class GameViewController implements Initializable {
 				double[] center = { fieldCoordinates[i][j][0], fieldCoordinates[i][j][1] - radius };
 				village = drawVillage(center);
 				village.setVisible(false);
-				// village.setOnMouseClicked(e -> gc.buildVillage()); // TODO
-
 				return village;
 			} else {
 				double[] center = { fieldCoordinates[i][j][0], fieldCoordinates[i][j][1] + radius };

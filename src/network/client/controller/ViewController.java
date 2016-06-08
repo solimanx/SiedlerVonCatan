@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import application.lobby.LobbyController;
 import application.lobby.PlayerProfileController;
-import enums.ResourceType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,12 +17,12 @@ public class ViewController {
 
 	private FXMLLoader loader;
 	public HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
-	public HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	protected ServerController serverController; // DEBUG
 	private ClientController clientController;
 	private GameViewController gameViewController;
 	private LobbyController lobbyController;
 	private PlayerProfileController nameSelectDialogController;
+	private TradeController tradeController;
 	private Stage primaryStage;
 	public Stage getPrimaryStage() {
 		return primaryStage;
@@ -31,6 +30,7 @@ public class ViewController {
 
 	private Stage choosingStage;
 	private Stage gameViewStage;
+	private boolean gameView = false;
 
 	public ViewController(Stage primaryStage, ClientController fc) {
 		this.primaryStage = primaryStage;
@@ -99,7 +99,7 @@ public class ViewController {
 	void startGameView() {
 		primaryStage.close();
 		choosingStage.close();
-
+		gameView = true;
 		gameViewStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
@@ -127,13 +127,7 @@ public class ViewController {
 //	}
 
 	private void init() {
-//		view = getView();
-		fieldColors.put(ResourceType.CLAY, Color.TAN);
-		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
-		fieldColors.put(ResourceType.NOTHING, Color.WHITE);
-		fieldColors.put(ResourceType.ORE, Color.DARKGRAY);
-		fieldColors.put(ResourceType.SHEEP, Color.LIGHTGREEN);
-		fieldColors.put(ResourceType.WOOD, Color.FORESTGREEN);
+
 
 		playerColors.put(enums.Color.BLUE, Color.BLUE);
 		playerColors.put(enums.Color.ORANGE, Color.ORANGE);
@@ -210,5 +204,29 @@ public class ViewController {
 	public void setLobbyController(LobbyController lobbyController) {
 		this.lobbyController = lobbyController;
 	}
+	
+	public void messageReceive(String s){
+		if (gameView) {
+			gameViewController.receiveChatMessage(s);
+		} else {
+			lobbyController.receiveChatMessage(s);
+		}
+	}
 
+	public void newTradeView() {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/network/client/view/tradeview/tradeView.fxml"));
+			Parent root2 = (Parent) fxmlLoader.load();
+			tradeController = fxmlLoader.getController();
+			tradeController.setViewController(this);
+			Stage tradeStage = new Stage();
+			tradeStage.setTitle("Choose Name and Color");
+			tradeStage.setScene(new Scene(root2));
+			tradeStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

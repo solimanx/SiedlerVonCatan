@@ -1,3 +1,4 @@
+package network.client.controller;
 //package network.client.controller;
 //
 //import enums.CornerStatus;
