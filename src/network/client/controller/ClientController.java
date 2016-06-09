@@ -102,7 +102,8 @@ public class ClientController {
 	// 7.1
 	public void sendPlayerProfile(String name, Color color) {
 	    clientOutputHandler.sendPlayerProfile(name, color);
-	    viewController.getGameViewController().initSelf(getOwnPlayerId(), name, color);
+	    //TODO later
+	    //viewController.getGameViewController().initSelf(getOwnPlayerId(), name, color);
 	}
 
 	// 7.2
@@ -169,14 +170,14 @@ public class ClientController {
 			bCorner.setCornerID(location);
 			bCorner.setHarbourStatus(c.getHarbourStatus());
 		}
-		
+
 		board.setBandit(banditLocation);
-		
+
 		this.gameLogic = new GameLogic(board);
 
 		viewController.startGameView();
 
-		
+
 
 	}
 
@@ -201,7 +202,7 @@ public class ClientController {
 		board.getPlayer(playerId).setResourceCards(resourceCards);
 
 	}
-	
+
 	public GameLogic getGameLogic() {
 		return gameLogic;
 	}
