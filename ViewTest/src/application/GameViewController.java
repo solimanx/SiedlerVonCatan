@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +14,11 @@ import enums.PlayerState;
 import enums.ResourceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -28,7 +32,9 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import tradeview.TradeViewController;
 //import network.client.controller.ViewController;
 
 public class GameViewController implements Initializable {
@@ -74,6 +80,18 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Pane board;
+	
+	@FXML
+	private Label playerStatusOne;
+	
+	@FXML
+	private Label playerStatusTwo;
+	
+	@FXML
+	private Label playerStatusThree;
+	
+	@FXML
+	private Label playerStatusFour;
 
 //	private ViewController viewController;
 
@@ -104,6 +122,8 @@ public class GameViewController implements Initializable {
 
 	private ViewBoardFactory factory;
 
+	private Stage stage;
+
 //	public void setViewController(ViewController viewController) {
 //		this.viewController = viewController;
 //	}
@@ -128,7 +148,9 @@ public class GameViewController implements Initializable {
 	 * @param stage
 	 */
 	public void startScene(Stage stage) {
+		this.stage = stage;
 		board.getChildren().addAll(factory.getViewBoard(stage));
+		board.toBack();
 	}
 
 	private void initPlayerColors() {
@@ -157,8 +179,22 @@ public class GameViewController implements Initializable {
 	}
 
 	@FXML
-	void handleStartTradingButton(ActionEvent event) {
+	void handleStartTradingButton(ActionEvent event) throws IOException {
 		//new TradeStage
+		System.out.println("Trading button clicked");
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/tradeview/tradeView.fxml").openStream());
+		Scene scene = new Scene(root);
+		Stage tradeStage = new Stage();
+		tradeStage.setScene(scene);
+		
+		tradeStage.initModality(Modality.WINDOW_MODAL);
+		tradeStage.initOwner(stage);
+		TradeViewController controller = (TradeViewController) loader.getController();
+		tradeStage.show();
+		
+		// test
+		playerStatusOne.setText(PlayerState.TRADING.toString());
 //		viewController.newTradeView();
 	}
 
@@ -170,18 +206,18 @@ public class GameViewController implements Initializable {
 	}
 
 	public void setPlayerStatus(int playerID, PlayerState state){
-		switch (playerID) {
+		switch (playerIDtoViewPosition.get(playerID)) {
 		case 1:
-			//self
+			playerStatusOne.setText(state.toString());
 			break;
 		case 2:
-			//playerPosition2
+			playerStatusTwo.setText(state.toString());
 			break;
 		case 3:
-			//playerPosition3
+			playerStatusThree.setText(state.toString());
 			break;
 		case 4:
-			//playerPosition4
+			playerStatusFour.setText(state.toString());
 			break;
 		default:
 			break;
@@ -338,7 +374,7 @@ public class GameViewController implements Initializable {
 									villageClick(villageCoordinates);
 									System.out.println("Street clicked!");
 								});
-
+								village.toFront();
 								figures.add(village);
 							}
 						}
@@ -410,7 +446,7 @@ public class GameViewController implements Initializable {
 			chip.toFront();
 			chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0] - 15.0);
 			chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 15.0);
-			boardPane.getChildren().add(chip);
+			board.getChildren().add(chip);
 		}
 
 		/**
