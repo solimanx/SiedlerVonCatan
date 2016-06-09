@@ -365,7 +365,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
         int playerID = boughtDevelopmentCard.getPlayer_id();
-        ProtocolDevelopmentCards developmentCards = boughtDevelopmentCard.getDevelopmentCards();
+        ProtocolDevelopmentCards prdevelop = boughtDevelopmentCard.getDevelopmentCards();
         //networkController.boughtDevelopmentCard(playerID,developmentCards;
 
     }
