@@ -114,7 +114,7 @@ public class ServerController {
 			}
 		}
 	
-		if (tempPlayers.size() >= 3){
+		if (tempPlayers.size() >= 3 && tempPlayers.size() == server.getClientCounter()){
 			boolean allReady = true;
 			for (int i = 0;i< tempPlayers.size();i++){
 				if (tempPlayers.get(i).getPlayerState() != PlayerState.WAITING_FOR_GAMESTART){
@@ -126,7 +126,15 @@ public class ServerController {
 				initializeBoard();
 			}
 		}
-		//TODO statusupdate(playerstate from spiel starten to wartet auf spielbeginn)
+		for (int i = 0;i< tempPlayers.size();i++){
+			if ( i == playerID){
+				int[] resources = {0,0,0,0,0};
+				serverOutputHandler.statusUpdate(currentThreadID, null, null, PlayerState.WAITING_FOR_GAMESTART, 0, resources,i);
+			} else {
+				int [] resources = {0};
+				serverOutputHandler.statusUpdate(currentThreadID, null, null, PlayerState.WAITING_FOR_GAMESTART, 0, resources,i);
+			}
+		}
 		
 		
 	}
@@ -144,10 +152,14 @@ public class ServerController {
 	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
 
 		boolean colorAvailable = true;
+		Color currColor;
 		for (int i = 0;i< tempPlayers.size();i++){
-			if (tempPlayers.get(i).getColor().equals(color)){
+			currColor = tempPlayers.get(i).getColor();
+			if (currColor != null){
+				if(currColor.equals(color)){
 				colorAvailable = false;
-				break;
+				break;					
+			    }
 			}
 		}
 		if (colorAvailable){
@@ -161,8 +173,16 @@ public class ServerController {
 			}
 
 		serverConfirmation("OK");
-		statusUpdate(playerModelID);
-		//serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_STARTING, 0, new int[5]);
+
+		for (int i = 0;i< tempPlayers.size();i++){
+			if ( i == playerModelID){
+				int[] resources = {0,0,0,0,0};
+				serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_STARTING, 0, resources,i);
+			} else {
+				int [] resources = {0};
+				serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_STARTING, 0, resources,i);
+			}
+		}
 		} else {
 			error("Farbe bereits vergeben!");
 		}		
@@ -182,8 +202,6 @@ public class ServerController {
 		for (int i = 0;i<amountPlayers;i++){
 			statusUpdateToPlayer(i,playerModelID);
 		}
-		//PlayerModel pM = gameLogic.getBoard().getPlayer(playerModelID);
-	    //serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(), pM.getPlayerState(), pM.getVictoryPoints(), getPlayerResources(playerModelID),null);
 	}
 
 	public void statusUpdateToPlayer(int sendToPlayer, int playerModelID) {
@@ -207,12 +225,13 @@ public class ServerController {
 	public void initializeBoard() {
 		Board board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
-		generateBoard(board.getFieldAt(2,2),true);
+		//generateBoard(board.getFieldAt(2,2),true);
 		System.out.println(board.getFieldAt(0, 0).getDiceIndex()+board.getFieldAt(0, 0).getResourceType().toString()+board.getFieldAt(0,0).getFieldID());
-		//generateDebuggingBoard();
+		generateDebuggingBoard();
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 		
 		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
+		statusUpdate(0); //firstPlayers turn
 		InitialStreetCounter = 0;
 
 	}

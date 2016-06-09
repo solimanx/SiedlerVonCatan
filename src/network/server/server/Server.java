@@ -132,4 +132,8 @@ public class Server {
 	public void setClients(ClientThread[] clients) {
 		this.clients = clients;
 	}
+	
+	public int getClientCounter() {
+		return clientCounter;
+	}
 }
