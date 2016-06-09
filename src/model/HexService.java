@@ -2,6 +2,8 @@ package model;
 
 import java.util.Random;
 
+import javax.swing.InternalFrameFocusTraversalPolicy;
+
 import model.objects.*;
 
 import java.io.IOException;
@@ -10,7 +12,6 @@ import java.util.ArrayList;
 import settings.DefaultSettings;
 
 public class HexService {
-	final static int[][] DIRECTIONS = { { 1, -1 }, { 1, 0 }, { 0, 1 }, { -1, 1 }, { -1, 0 }, { 0, -1 } };
 	Board board;
 
 	public int[] getCornerCoordinates(int x1, int y1, int x2, int y2, int x3, int y3) {
@@ -82,69 +83,142 @@ public class HexService {
 		return surroundingEdges;
 	}
 
-	// public String getSpiral(String starting_point_id) {
-	// // Starting point;
-	// int x = 0;
-	// int y = 0;
-	// int radius = DefaultSettings.BOARD_SIZE / 2;
-	// String spiral_sequence = board.getFieldAt(x, y).getFieldID();
-	//
-	// // Random direction between 0 and 5;
-	// int random = new Random().nextInt(6);
-	// int[] rd = DIRECTIONS[random];
-	// x += rd[0];
-	// y += rd[1];
-	// int starting_x;
-	// int starting_y;
-	// // from 0 to radius-1
-	// for (int i = 0; i < radius; i++) {
-	// x += rd[0];
-	// y += rd[1];
-	// starting_x = x;
-	// starting_y = y;
-	//
-	// rd = DIRECTIONS[random];
-	// // insert ID of new block to beginning of string
-	// spiral_sequence = board.getFieldAt(x, y).getFieldID() + spiral_sequence;
-	// do {
-	// if (x - radius == 0) {
-	// if (y - radius > 0) {
-	// x += DIRECTIONS[0][0];
-	// y += DIRECTIONS[0][1];
-	// } else if (y - radius < 0) {
-	// x += DIRECTIONS[3][0];
-	// y += DIRECTIONS[3][1];
-	// }
-	// } else if (x - radius > 0) {
-	// if (y - radius > 0) {
-	// x += DIRECTIONS[4][0];
-	// y += DIRECTIONS[4][1];
-	// } else if (y - radius < 0) {
-	// x += DIRECTIONS[1][0];
-	// y += DIRECTIONS[1][1];
-	// } else if (y - radius == 0) {
-	// x += DIRECTIONS[5][0];
-	// y += DIRECTIONS[5][1];
-	// }
-	// } else if (x - radius < 0) {
-	// if (y - radius == 0) {
-	// x += DIRECTIONS[2][0];
-	// y += DIRECTIONS[2][1];
-	// }
-	//
-	// } else {
-	// // for testing purposes
-	// }
-	// spiral_sequence = board.getFieldAt(x, y).getFieldID() + spiral_sequence;
-	// // get next direction
-	//
-	// } while (x != starting_x && y != starting_y);
-	// random = random == 5 ? 0 : random + 1;
-	// }
-	//
-	// return spiral_sequence;
-	//
-	// }
+
+	public ArrayList<Field> getSpiral(Field f){
+		ArrayList<Field> result = new ArrayList<Field>();
+		Field nextField = f;
+		Field plannedNextField = f;
+		int radius = getDistanceFromMid(f);
+		int[] coord = new int [2];
+
+		for(int i = radius; i>0; i--){
+			for(int j = 0; j<7; j++){
+				for(int k = 0; k<i; k++){
+					switch(j){
+					case 0:
+						if(i == radius){
+							if(getRing(nextField).contains(plannedNextField)){
+								nextField = plannedNextField;
+								result.add(nextField);
+								coord = board.getFieldCoordinates(nextField.getFieldID());
+								plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
+								break;
+							}else{
+								continue;
+							}
+						}
+						else{
+							if(result.contains(plannedNextField)){
+								continue;
+							}else{
+								nextField = plannedNextField;
+								result.add(nextField);
+								coord = board.getFieldCoordinates(nextField.getFieldID());
+								plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
+								break;
+							}
+						}
+					case 6:
+						if(result.contains(plannedNextField)){
+							k=i;
+							break;
+						}
+						else{
+							nextField = plannedNextField;
+							result.add(nextField);
+							coord = board.getFieldCoordinates(nextField.getFieldID());
+							plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
+							break;
+						}
+					default:
+						nextField = plannedNextField;
+						result.add(nextField);
+						coord = board.getFieldCoordinates(nextField.getFieldID());
+						plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
+						break;
+					}
+				}
+			}
+			plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField)+1);
+		}
+		result.add(board.getField(0, 0));
+		return null;
+	}
+
+	public int getDistanceFromMid(Field f){
+		Field nextField = f;
+		int result = 0;
+		int [] coord = new int[2];
+		while(nextField != board.getField(0, 0)){
+			coord = board.getFieldCoordinates(f.getFieldID());
+			nextField = getNextField(coord[0], coord[1], getDirection(nextField)+1);
+			result++;
+		}
+		return result;
+	}
+
+
+	public ArrayList<Field> getRing(Field f){
+		ArrayList<Field> result = new ArrayList<Field>();
+		int radius = getDistanceFromMid(f);
+		Field nextField = board.getField(-radius, radius);
+		int[] coord = new int[2];
+		for(int i = 0; i< 6; i++){
+			for(int j = 0; j< radius; j++){
+				result.add(nextField);
+				coord = board.getFieldCoordinates(nextField.getFieldID());
+				nextField = getNextField(coord[0], coord[1], getDirection(nextField));
+			}
+		}
+		return result;
+	}
+
+
+
+	public int getDirection(Field f) {
+		int x = board.getFieldCoordinates(f.getFieldID())[0];
+		int y = board.getFieldCoordinates(f.getFieldID())[1];
+		int sum = x + y;
+		if (x < 0 && y <= 0 && sum < 0) {
+			return 0;
+		}
+		if (x >= 0 && y < 0 && sum < 0) {
+			return 1;
+		}
+		if (x > 0 && y < 0 && sum >= 0) {
+			return 2;
+		}
+		if (x > 0 && y >= 0 && sum > 0) {
+			return 3;
+		}
+		if (x <= 0 && y > 0 && sum > 0) {
+			return 4;
+		}
+		if (x < 0 && y > 0 && sum <= 0) {
+			return 5;
+		}
+		throw new IllegalArgumentException("illegal Argument in HexService.getDirection()");
+	}
+
+	public Field getNextField(int aX, int aY, int dir) {
+		Field[] result = board.getNeighbouringFields(aX, aY);
+		switch (dir) {
+		case 0:
+			return result[0];
+		case 1:
+			return result[1];
+		case 2:
+			return result[2];
+		case 3:
+			return result[3];
+		case 4:
+			return result[4];
+		case 5:
+			return result[5];
+		default:
+			return null;
+		}
+	}
 
 	public static int sumAbsCubeXYZ(int[] temp) {
 		return Math.abs(temp[0]) + Math.abs(temp[1]) + Math.abs(temp[2]);
@@ -209,4 +283,26 @@ public class HexService {
 		}
 		return null;
 	}
+
+	public String[] getCornerFromEdge(String s){
+		int[] a = Board.getStringToCoordMap().get(s.substring(0, 1));
+		int[] b = Board.getStringToCoordMap().get(s.substring(1, 2));
+		Field[] fields1 = board.getNeighbouringFields(a[0],a[1]);
+		Field[] fields2 = board.getNeighbouringFields(b[0],b[1]);
+		ArrayList<Field> intersect = new ArrayList<Field>();
+		for(int j = 0; j< 6; j++){
+			for(int i = 0; i < 6; i++){
+				if(fields1[i] == fields2[j]){
+					intersect.add(fields1[i]);
+				}
+			}
+		}
+		String [] result = new String [2];
+		result[0] = s.substring(0, 1) + s.substring(1, 2) + intersect.get(0);
+		result[1] = s.substring(0, 1) + s.substring(1, 2) + intersect.get(1);
+		return result;
+	}
+
+
+
 }
