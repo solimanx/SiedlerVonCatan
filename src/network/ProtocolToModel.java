@@ -1,6 +1,7 @@
 package network;
 
 import enums.CornerStatus;
+import enums.HarbourStatus;
 import enums.ResourceType;
 import model.Board;
 import model.HexService;
@@ -134,6 +135,25 @@ public final class ProtocolToModel {
 		default:
 			System.out.println("Error in ProtocolToModel.getCornerType");
 			return null;
+		}
+	}
+
+	public static HarbourStatus getHarbourType(String pHarbourType) {
+		switch(pHarbourType){
+		case "Holz Hafen":
+			return HarbourStatus.WOOD;
+		case "Lehm Hafen":
+			return HarbourStatus.CLAY;
+		case "Erz Hafen":
+			return HarbourStatus.ORE;
+		case "Wolle Hafen":
+			return HarbourStatus.SHEEP;
+		case "Getreide Hafen":
+			return HarbourStatus.CORN;
+		case "Hafen":
+			return HarbourStatus.THREE_TO_ONE;
+		default:
+			throw new IllegalArgumentException("Wrong Harbour Types");
 		}
 	}
 

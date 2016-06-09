@@ -1,5 +1,10 @@
 package network.client.client;
 
+import java.util.ArrayList;
+
+import model.objects.Edge;
+
+import model.objects.Corner;
 import model.objects.Field;
 import network.InputHandler;
 import network.ProtocolToModel;
@@ -22,6 +27,7 @@ import protocol.messaging.ProtocolServerConfirmation;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
 import protocol.object.ProtocolField;
+import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolCosts;
@@ -87,17 +93,49 @@ public class ClientInputHandler extends InputHandler {
         int size = DefaultSettings.BOARD_SIZE;
         int radius = DefaultSettings.BOARD_RADIUS;
         ProtocolBoard pBoard = gameStarted.getBoard();
-        Field[][] fields = new Field[size][size];
-        for (int i = 0; i < pBoard.getAmountFields(); i++) {
-            ProtocolField pField = pBoard.getProtocolField(i);
-            int[] axCoord = ProtocolToModel.getFieldCoordinates(pField.getFieldID());
-            fields[axCoord[0] + radius][axCoord[1] + radius] = new Field(pField.getFieldID(),
-                    ProtocolToModel.getResourceType(pField.getFieldType()), pField.getDiceIndex());
+        Field[] fields = new Field[pBoard.getAmountFields()];
+        for (int i = 0;i< pBoard.getAmountFields();i++){
+        	ProtocolField pField = pBoard.getProtocolField(i);
+        	fields[i] = new Field();
+        	fields[i].setDiceIndex(pField.getDiceIndex());
+        	fields[i].setFieldID(pField.getFieldID());
+        	fields[i].setResourceType(ProtocolToModel.getResourceType(pField.getFieldType()));
         }
-        // TODO:
-        // networkController.initBoard(int amountPlayers,
-        // Field[][] serverFields, Edge[][][] edges, Corner[][][] corners,Field
-        // bandit)
+        ArrayList<Edge> streets = new ArrayList<Edge>();
+        Corner[] corners = new Corner[pBoard.getAmountBuildings()];
+        for (int i = 0;i<corners.length;i++){
+        	ProtocolBuilding pBuild = pBoard.getProtocolBuilding(i);
+        	if (!pBuild.getBuilding().equals("Straße")){
+        	    corners[i] = new Corner();
+        	    corners[i].setCornerID(pBuild.getId());
+        	    corners[i].setOwnerID(pBuild.getPlayer_id());
+        	    corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getBuilding()));        		
+        	} else{
+        		Edge e = new Edge();
+        		streets.add(e);
+        		e.setEdgeID(pBuild.getId());
+        		e.setOwnedByPlayer(pBuild.getPlayer_id());
+        		e.setHasStreet(true);
+        	}
+
+        }
+        
+        Corner[] harbourCorners = new Corner[pBoard.getAmountHarbours()*2]; //*2 wegen Harbours
+        for (int i = 0;i<pBoard.getAmountHarbours();i++){
+        	ProtocolHarbour pHarb = pBoard.getHarbours(i);
+        	Corner c1 = new Corner();
+        	Corner c2 = new Corner();
+        	harbourCorners[2*i] = c1;
+        	harbourCorners[2*i +1] = c2;
+        	String[] coords = ProtocolToModel.getCornerFromEdge(pHarb.getID());
+        	c1.setCornerID(coords[0]);
+        	c2.setCornerID(coords[1]);
+        	
+            c1.setHarbourStatus(ProtocolToModel.getHarbourType(pHarb.getType()));
+            c2.setHarbourStatus(ProtocolToModel.getHarbourType(pHarb.getType()));
+        }
+        String banditLocation = pBoard.getRobber_location();
+        clientController.initBoard(fields, corners, streets,harbourCorners, banditLocation);
 
     }
 

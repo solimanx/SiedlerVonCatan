@@ -55,4 +55,12 @@ public class ProtocolBoard {
 		return fields.length;
 	}
 
+	public int getAmountBuildings() {
+		return buildings.length;
+	}
+
+	public int getAmountHarbours() {
+		return harbours.length;
+	}	
+	
 }
