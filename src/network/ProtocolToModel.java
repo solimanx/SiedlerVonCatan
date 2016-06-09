@@ -1,5 +1,6 @@
 package network;
 
+import enums.CornerStatus;
 import enums.ResourceType;
 import model.Board;
 import model.HexService;
@@ -49,7 +50,7 @@ public final class ProtocolToModel {
 	}
 
 	@Deprecated
-	//ENUMS ARE ALREADY SERIALIZED....
+	// ENUMS ARE ALREADY SERIALIZED....
 	public static enums.PlayerState getPlayerState(String state) {
 		switch (state) {
 		case "Spiel starten":
@@ -122,6 +123,18 @@ public final class ProtocolToModel {
 			}
 		}
 		return result;
+	}
+
+	public static enums.CornerStatus getCornerType(String pBuildingType) {
+		switch (pBuildingType) {
+		case "Dorf":
+			return CornerStatus.VILLAGE;
+		case "Stadt":
+			return CornerStatus.CITY;
+		default:
+			System.out.println("Error in ProtocolToModel.getCornerType");
+			return null;
+		}
 	}
 
 }
