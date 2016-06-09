@@ -102,6 +102,9 @@ public class Parser {
             return (T) response.pRobberLoss;
 
         }
+        if (response.pRobberMoveRequest != null) {
+            return (T) response.pRobberMoveRequest;
+        }
         if (response.pHarbourRequest != null) {
             return (T) response.pHarbourRequest;
 
@@ -177,7 +180,7 @@ public class Parser {
         if (response.pRoadBuildingCardInfo != null) {
             return (T) response.pRoadBuildingCardInfo;
         }
-        if(response.pBoughtDevelopmentCard!=null){
+        if (response.pBoughtDevelopmentCard != null) {
             return (T) response.pBoughtDevelopmentCard;
         }
 
