@@ -101,9 +101,8 @@ public class ClientController {
 
 	// 7.1
 	public void sendPlayerProfile(String name, Color color) {
-		clientOutputHandler.sendPlayerProfile(name, color);
-		setPlayerName(ownPlayerId, name);
-		setPlayerColor(ownPlayerId, color);
+	    clientOutputHandler.sendPlayerProfile(name, color);
+	    viewController.getGameViewController().initSelf(getOwnPlayerId(), name, color);
 	}
 
 	// 7.2
@@ -129,8 +128,7 @@ public class ClientController {
 		if (pM.getColor() == null) {
 			pM.setColor(color);
 			pM.setName(name);
-			viewController.setPlayerColor(modelID, color);
-			viewController.setPlayerName(modelID, name);
+			viewController.getGameViewController().initPlayer(modelID, name, color);
 		}
 		pM.setPlayerState(status);
 		pM.setVictoryPoints(victoryPoints);
@@ -203,21 +201,7 @@ public class ClientController {
 		board.getPlayer(playerId).setResourceCards(resourceCards);
 
 	}
-
-	public void setPlayerColor(int playerId, Color color) {
-		viewController.setPlayerColor(playerId, color);
-
-	}
-
-	public void setPlayerName(int playerId, String name) {
-		viewController.setPlayerName(playerId, name);
-
-	}
-
-	public void setPlayerVictoryPoints(int playerId, int victoryPoints) {
-		board.getPlayer(playerId).setVictoryPoints(victoryPoints);
-	}
-
+	
 	public GameLogic getGameLogic() {
 		return gameLogic;
 	}
@@ -238,17 +222,18 @@ public class ClientController {
 		this.amountPlayers = amountPlayers;
 	}
 
-	// 8.2
-	public void diceRollResult(int playerId, int[] result) {
-		int res = result[0] + result[1];
-		viewController.setDiceRollResult(playerId, res);
-		// output
-	}
+    // 8.2
+    public void diceRollResult(int playerId, int[] result) {
+        int res = result[0] + result[1];
+        viewController.getGameViewController().setDiceRollResult(res);
+        // output
+    }
 
 	// 8.3
 	public void resourceObtain(int playerId, int[] resources) {
 		// flowController.addToPlayersResource(getPlayerModelId(playerId),
 		// resources);
+
 
 	}
 
