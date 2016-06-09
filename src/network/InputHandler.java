@@ -99,6 +99,10 @@ public abstract class InputHandler {
             case "ProtocolRobberMovement": // 0.2
                 handle((ProtocolRobberMovement) o);
                 break;
+            case "ProtocolRobberMovementRequest": // 0.2
+                handle((ProtocolRobberMovementRequest) o);
+                break;
+
             case "String":
                 handle((String) o);
                 break;
@@ -223,6 +227,8 @@ public abstract class InputHandler {
     protected abstract void handle(ProtocolRobberMovement robberMovement);
 
     protected abstract void handle(ProtocolRobberLoss robberLoss);
+
+    protected abstract void handle(ProtocolRobberMovementRequest robberMovementRequest);
 
     protected abstract void handle(ProtocolHarbourRequest harbourRequest);
 

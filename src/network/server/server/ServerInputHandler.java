@@ -243,10 +243,7 @@ public class ServerInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolRobberMovement robberMovement) {
 
-            int playerID = robberMovement.getPlayer_id();
-            String locationID = robberMovement.getLocation_id();
-            int victimID = robberMovement.getVictim_id();
-            // networkController.robberMovement(playerID,locationID,victimID);
+        //unnecessary Method
 
         }
 

@@ -154,18 +154,22 @@ public class ClientOutputHandler {
         }
 
     }
+    public void robberMovementRequest(String location_id, int victim_id){
+        //String locationID= robberMovementRequest.getLocation_id;
+        // int victimID=robberMovementRequest.getVictim_id;
+        //ProtocolRobberMovementRequest prmr= new ProtocolRobberMovementRequest(prmr);
+        //Response r = new Response();
+        //r.pRobberMovement = prmr;
+        //try {
+          //  client.write(parser.createString(r));
+        //} catch (IOException e) {
+          //  logger.error("Threw a Input/Output Exception ", e);
+            //e.printStackTrace();
+        //}
 
-    public void robberMovement(int player_id, String location_id, int victim_id) {
-        ProtocolRobberMovement prm = new ProtocolRobberMovement(player_id, location_id, victim_id);
-        Response r = new Response();
-        r.pRobberMovement = prm;
-        try {
-            client.write(parser.createString(r));
-        } catch (IOException e) {
-            logger.error("Threw a Input/Output Exception ", e);
-            e.printStackTrace();
-        }
     }
+
+
 
     public void handleHarbourRequest(int[] offer, int[] withdrawal) {
         ProtocolResource proff;

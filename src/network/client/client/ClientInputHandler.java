@@ -4,11 +4,7 @@ import model.objects.Field;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
-import protocol.clientinstructions.ProtocolBuildRequest;
-import protocol.clientinstructions.ProtocolDiceRollRequest;
-import protocol.clientinstructions.ProtocolEndTurn;
-import protocol.clientinstructions.ProtocolHarbourRequest;
-import protocol.clientinstructions.ProtocolRobberLoss;
+import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.clientinstructions.trade.ProtocolTradeCancel;
 import protocol.clientinstructions.trade.ProtocolTradeComplete;
@@ -209,6 +205,11 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    @Override
+    protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
+        //Unnecessary Method
+    }
+
     protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
         int player_id = tradeIsRequested.getPlayer_id();
         int trade_id = tradeIsRequested.getTrade_id();
@@ -277,9 +278,14 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRobberMovement robberMovement) {
-       //unnecessary
+
+        int playerID = robberMovement.getPlayer_id();
+        String locationID = robberMovement.getLocation_id();
+        int victimID = robberMovement.getVictim_id();
+        // networkController.robberMovement(playerID,locationID,victimID);
 
     }
+
 
     @Override
     protected void handle(ProtocolHarbourRequest harbourRequest) {
@@ -321,8 +327,8 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-           //ProtocolResource resource = inventionCardInfo.getResource();
-           // int player_id = inventionCardInfo.getPlayer_id();
+        //ProtocolResource resource = inventionCardInfo.getResource();
+        // int player_id = inventionCardInfo.getPlayer_id();
         //    // networkController.inventionCardInfo(resource,player_id);
     }
 
@@ -363,7 +369,6 @@ public class ClientInputHandler extends InputHandler {
         //networkController.boughtDevelopmentCard(playerID,developmentCards;
 
     }
-
 
 
 }
