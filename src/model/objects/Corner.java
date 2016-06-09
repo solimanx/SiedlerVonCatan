@@ -43,7 +43,7 @@ public class Corner {
 		return this.cornerID;
 	}
 
-	public void setEdgeID(String cornerID) {
+	public void setCornerID(String cornerID) {
 		this.cornerID = cornerID;
 	}
 
