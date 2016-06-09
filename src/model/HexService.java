@@ -175,7 +175,7 @@ public class HexService {
 		String end = Board.getCoordToStringMap().get(new Index(0, 0));
 		while(!nextField.equals(end)){
 			coord = Board.getStringToCoordMap().get(nextField);
-			nextField = getNextField(coord[0], coord[1], getDirection(nextField)+1);
+			nextField = getNextField(coord[0], coord[1], nextDirection(getDirection(nextField),1));
 			result++;
 		}
 		return result;
@@ -277,10 +277,29 @@ public class HexService {
 			a = a + result[5];
 			break;
 		default:
+			if(dir<0||dir>5){
+				throw new IllegalArgumentException("undefined direction");
+			}
 			a = null;
 			break;
 		}
 		return a;
+	}
+	
+	
+	/**
+	 * calculates a legal value of direction
+	 * 
+	 * @param dir
+	 * 		original direction
+	 * @param i
+	 * 		value of increment
+	 * @return
+	 * 		legal direction
+	 */
+	public static int nextDirection(int dir, int i){
+		int result = (dir + i)%6;
+		return result;
 	}
 	
 
