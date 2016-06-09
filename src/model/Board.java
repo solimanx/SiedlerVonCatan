@@ -297,7 +297,7 @@ public class Board {
 	 *
 	 */
 
-	public String getNeighbouringFields(int aX, int aY) {
+	public static String getNeighbouringFields(int aX, int aY) {
 		Index ne = new Index(aX + 1, aY - 1);
 		Index e = new Index(aX + 1, aY);
 		Index se = new Index(aX, aY + 1);

@@ -285,22 +285,25 @@ public class HexService {
 	}
 
 
-	public String[] getCornerFromEdge(String s){
+	public static String[] getCornerFromEdge(String s){
 		int[] a = Board.getStringToCoordMap().get(s.substring(0, 1));
 		int[] b = Board.getStringToCoordMap().get(s.substring(1, 2));
-		String fields1 = board.getNeighbouringFields(a[0],a[1]);
-		String fields2 = board.getNeighbouringFields(b[0],b[1]);
-		ArrayList<Field> intersect = new ArrayList<Field>();
-//		for(int j = 0; j< 6; j++){
-//			for(int i = 0; i < 6; i++){
-//				if(fields1[i] == fields2[j]){
-//					intersect.add(fields1[i]);
-//				}
-//			}
-//		}
+		String fields1 = Board.getNeighbouringFields(a[0],a[1]);
+		String fields2 = Board.getNeighbouringFields(b[0],b[1]);
+
+		String common = "";
+
+		for(int i=0;i<fields1.length();i++){
+		    for(int j=0;j<fields2.length();j++){
+		        if(fields1.charAt(i)==fields2.charAt(j)){
+		            common += fields1.charAt(i);
+		            break;
+		        }
+		    }
+		}
 		String [] result = new String [2];
-		result[0] = s.substring(0, 1) + s.substring(1, 2) + intersect.get(0);
-		result[1] = s.substring(0, 1) + s.substring(1, 2) + intersect.get(1);
+		result[0] = s.substring(0, 1) + s.substring(1, 2) + common.substring(0, 1);
+		result[1] = s.substring(0, 1) + s.substring(1, 2) + common.substring(1, 2);
 		return result;
 	}
 
