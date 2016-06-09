@@ -17,18 +17,22 @@ import protocol3.object.ProtocolInventionCard;
 @Since(0.3)
 public class ProtocolInventionCardInfo {
 
-	@SerializedName("Rohstoffe")
-	private ProtocolInventionCard invention;
-	
-	
+    @SerializedName("Rohstoffe")
+    private ProtocolInventionCard invention;
 
-	public ProtocolInventionCardInfo(ProtocolInventionCard invention) {
-		this.invention = invention;
-		
-	}
+    @SerializedName("Spieler")
+    private int player_id;
 
-	public ProtocolInventionCard getInventionCard() {
-		return invention;
-	}
+    public ProtocolInventionCardInfo(ProtocolInventionCard invention, int player_id) {
+        this.invention = invention;
+        this.player_id = player_id;
+    }
 
+    public ProtocolInventionCard getInvention() {
+        return invention;
+    }
+
+    public int getPlayer_id() {
+        return player_id;
+    }
 }
