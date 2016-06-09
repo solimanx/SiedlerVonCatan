@@ -49,6 +49,7 @@ public class ClientController {
 
 		this.clientInputHandler = new ClientInputHandler(this);
 		this.viewController = new ViewController(primaryStage, this);
+		this.board = new Board();
 
 	}
 
@@ -128,8 +129,7 @@ public class ClientController {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 		if (pM.getColor() == null) {
 			pM.setColor(color);
-			pM.setName(name);
-			viewController.getGameViewController().initPlayer(modelID, name, color);
+			pM.setName(name);		
 		}
 		pM.setPlayerState(status);
 		pM.setVictoryPoints(victoryPoints);
@@ -176,6 +176,12 @@ public class ClientController {
 		this.gameLogic = new GameLogic(board);
 
 		viewController.startGameView();
+		for (int i = 0;i<amountPlayers;i++){
+			viewController.getGameViewController().initPlayer(i, board.getPlayer(i).getName(), board.getPlayer(i).getColor());
+			viewController.getGameViewController().setResourceCards(i, getPlayerResources(i));
+			viewController.getGameViewController().setVictoryPoints(i, board.getPlayer(i).getVictoryPoints());
+			viewController.getGameViewController().setPlayerStatus(i, board.getPlayer(i).getPlayerState());
+		}
 
 
 
@@ -386,6 +392,31 @@ public class ClientController {
 			// update GUI
 			// viewController.setPlayerState(state);
 		}
+	}
+	
+	private int[] getPlayerResources(int playerID){
+		ArrayList<ResourceType> resources = board.getPlayer(playerID).getResourceCards();
+		int[] result = new int[5];
+		for (ResourceType r : resources){
+			switch (r) {
+			case WOOD:
+				result[0]++;
+				break;
+			case CLAY:
+				result[1]++;
+				break;
+			case ORE:
+				result[2]++;
+			case SHEEP:
+				result[3]++;
+			case CORN:
+				result[4]++;
+			default:
+				break;
+			}
+
+			}
+		return result;
 	}
 
 }
