@@ -19,7 +19,10 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
+import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
+import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
 import protocol3.severinstructions.*;
 
@@ -132,8 +135,23 @@ public abstract class InputHandler {
             case "ProtocolTradeCancel":
                 handle((ProtocolTradeCancel) o);
                 break;
-            case "ProtocolTraseIsCanceled":
+            case "ProtocolTradeIsCanceled":
                 handle((ProtocolTradeIsCanceled) o);
+                break;
+            case "Entwicklungskarte kaufen":
+                handle((ProtocolBuyDevelopmentCards) o);
+                break;
+            case "Entwicklungskarte":
+                handle((ProtocolDevelopmentCards) o);
+                break;
+            case "Erfindungskarte":
+                handle((ProtocolInventionCard) o);
+                break;
+            case "Monopolkarte":
+                handle((ProtocolMonopolyCard) o);
+                break;
+            case "Strassenbaukarte":
+                handle((ProtocolRoadBuildingCard) o);
                 break;
             case "ProtocolBiggestKnightProwess":
                 handle((ProtocolBiggestKnightProwess) o);
@@ -220,6 +238,16 @@ public abstract class InputHandler {
     protected abstract void handle(ProtocolTradeCancel tradeCancel);
 
     protected abstract void handle(ProtocolTradeIsCanceled tradeIsCanceled);
+
+    protected abstract void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards);
+
+    protected abstract void handle(ProtocolDevelopmentCards developmentCards);
+
+    protected abstract void handle(ProtocolInventionCard inventionCard);
+
+    protected abstract void handle(ProtocolMonopolyCard monopolyCard);
+
+    protected abstract void handle(ProtocolRoadBuildingCard roadBuildingCard);
 
     protected abstract void handle(ProtocolBiggestKnightProwess biggestKnightProwess);
 

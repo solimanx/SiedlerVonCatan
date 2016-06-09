@@ -37,7 +37,11 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
+import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
+import protocol3.object.ProtocolMonopolyCard;
+import protocol3.object.ProtocolRoadBuildingCard;
 import protocol3.severinstructions.*;
 import settings.DefaultSettings;
 
@@ -170,7 +174,7 @@ public class ClientInputHandler extends InputHandler {
     //
     @Override
     protected void handle(ProtocolBuildRequest buildRequest) {
-        // unnecessary Method in CLientInputHaendler
+        // unnecessary Method in ClientInputHandler
 
     }
 
@@ -190,11 +194,12 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(String string) {
+
         clientController.serverConfirmation(string);
     }
 
     protected void handle(ProtocolRobberLoss losses) {
-        // TODO
+        // Unnecessary Method
 
     }
 
@@ -220,6 +225,31 @@ public class ClientInputHandler extends InputHandler {
         // networkController.tradeIsCanceled(player_id,trade_id);
     }
 
+    @Override
+    protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
+
+    }
+
+    @Override
+    protected void handle(ProtocolDevelopmentCards developmentCards) {
+
+    }
+
+    @Override
+    protected void handle(ProtocolInventionCard inventionCard) {
+
+    }
+
+    @Override
+    protected void handle(ProtocolMonopolyCard monopolyCard) {
+
+    }
+
+    @Override
+    protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
+
+    }
+
     protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
 
         int player_id = tradeIsCompleted.getPlayer_id();
@@ -239,7 +269,6 @@ public class ClientInputHandler extends InputHandler {
         ProtocolResource pr = costs.getResource();
         //networkController.costs(playerID,pr)
     }
-
 
 
     @Override

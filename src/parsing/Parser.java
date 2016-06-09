@@ -141,10 +141,24 @@ public class Parser {
 
         }
         //in Protocol 0.3
-        if (response.pBiggestKnightProwess != null) {
-            return (T) response.pBiggestKnightProwess;
+        if (response.pBuyDevCards != null) {
+            return (T) response.pBuyDevCards;
         }
-
+        if (response.pDevelopmentCard != null) {
+            return (T) response.pDevelopmentCard;
+        }
+        if (response.pBuyDevCards != null) {
+            return (T) response.pBuyDevCards;
+        }
+        if (response.pInvention != null) {
+            return (T) response.pInvention;
+        }
+        if (response.pMonopolyCard != null) {
+            return (T) response.pMonopolyCard;
+        }
+        if (response.pRoadBuildCard != null) {
+            return (T) response.pRoadBuildCard;
+        }
         if (response.pInventionCardInfo != null) {
             return (T) response.pInventionCardInfo;
         }

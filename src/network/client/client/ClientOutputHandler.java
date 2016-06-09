@@ -135,6 +135,25 @@ public class ClientOutputHandler {
 
     }
 
+    public void robberLoss(int[] losses) {
+        ProtocolResource prl;
+        if (losses.length > 1) {
+            prl = new ProtocolResource(losses[0], losses[1], losses[3], losses[4], losses[5], 0);
+        } else {
+            prl = new ProtocolResource(0, 0, 0, 0, 0, losses[0]);
+        }
+        ProtocolRobberLoss prlosses = new ProtocolRobberLoss(prl);
+        Response r = new Response();
+        r.pRobberLoss = prlosses;
+        try {
+            client.write(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+
+    }
+
     public void handleHarbourRequest(int[] offer, int[] withdrawal) {
         ProtocolResource proff;
         if (offer.length > 1) {
