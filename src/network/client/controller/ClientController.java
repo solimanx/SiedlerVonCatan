@@ -373,5 +373,8 @@ public class ClientController {
     public void playKnightCard(String road1_id, String road2_id, int player_id) {
         //TODO
     }
+    public void boughtPlayerCard(){
+        //TODO
+    }
 
 }
