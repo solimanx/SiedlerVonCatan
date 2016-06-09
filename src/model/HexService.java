@@ -2,9 +2,9 @@ package model;
 
 import java.util.Random;
 
-import model.objects.Corner;
-import model.objects.Edge;
+import model.objects.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import settings.DefaultSettings;
@@ -195,4 +195,18 @@ public class HexService {
 		return subarray[0] + subarray[1];
 	}
 
+
+
+	public Field getHarbourSeaField(int u, int v, int x, int y){
+		if(board.getField(u, v).getResourceType() == enums.ResourceType.SEA && board.getField(x, y).getResourceType() == enums.ResourceType.SEA){
+			throw new IllegalArgumentException("Both Fields are are see Fields");
+		}
+		if(board.getField(u, v).getResourceType() == enums.ResourceType.SEA){
+			return board.getField(u, v);
+		}
+		if(board.getField(x, y).getResourceType() == enums.ResourceType.SEA){
+			return board.getField(x, y);
+		}
+		return null;
+	}
 }
