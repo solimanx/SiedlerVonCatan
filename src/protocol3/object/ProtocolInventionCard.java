@@ -9,12 +9,8 @@ import protocol.object.ProtocolResource;
 public class ProtocolInventionCard {
 	@SerializedName("Rohstoffe")
 	ProtocolResource resource;
-	
-	@SerializedName("Rohstoffe")
-	ProtocolResource resource2;
 
-
-	public ProtocolInventionCard (ProtocolResource resource) {
+	public ProtocolInventionCard(ProtocolResource resource) {
 		this.resource = resource;
 	}
 
