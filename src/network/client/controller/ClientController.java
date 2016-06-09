@@ -179,10 +179,8 @@ public class ClientController {
     }
 
     // 6.1
-    public void serverConfirmation(String server_response) {
-        // Observable einbauen für View?
-        System.out.println("Server: " + server_response);
-
+    public void receiveServerConfirmation(String server_response) {
+    	//TODO client confirm in later protocols
     }
 
     // 6.2

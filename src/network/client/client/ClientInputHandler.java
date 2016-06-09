@@ -42,7 +42,13 @@ import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.severinstructions.*;
+import protocol3.severinstructions.ProtocolBiggestKnightProwess;
+import protocol3.severinstructions.ProtocolBoughtDevelopmentCard;
+import protocol3.severinstructions.ProtocolInventionCardInfo;
+import protocol3.severinstructions.ProtocolLongestRoad;
+import protocol3.severinstructions.ProtocolMonopolyCardInfo;
+import protocol3.severinstructions.ProtocolPlayKnightCard;
+import protocol3.severinstructions.ProtocolRoadBuildingCardInfo;
 import settings.DefaultSettings;
 
 public class ClientInputHandler extends InputHandler {
@@ -128,7 +134,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolServerConfirmation serverConfirmation) {
         String server_response = serverConfirmation.getServer_response();
-        clientController.serverConfirmation(server_response);
+        clientController.receiveServerConfirmation(server_response);
     }
 
     //
@@ -162,6 +168,7 @@ public class ClientInputHandler extends InputHandler {
         // ProtocolToModel.getPlayerId(statusUpdate.getPlayer().getPlayer_id());
         enums.Color color = statusUpdate.getPlayer().getColor();
         String name = statusUpdate.getPlayer().getName();
+        //enums.PlayerState status = ProtocolToModel.getPlayerState(statusUpdate.getPlayer().getStatus());
         int victoryPoints = statusUpdate.getPlayer().getVictoryPoints();
         // int[] resources =
         // ProtocolToModel.getResources(statusUpdate.getPlayer().getResources());
@@ -194,7 +201,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(String string) {
 
-        clientController.serverConfirmation(string);
+        clientController.receiveServerConfirmation(string);
     }
 
     protected void handle(ProtocolRobberLoss losses) {
@@ -347,7 +354,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
         //  String road1_id = roadBuildingCardInfo.getRoad1_id();
-        //    String road2_id = roadBuildingCardInfo.getRoad2_id();
+        //    String road2_idx	 = roadBuildingCardInfo.getRoad2_id();
         //    int player_id = roadBuildingCardInfo.getPlayer_id();
 //networkController.roadBuildingCardInfo(road1_id)
     }
@@ -359,6 +366,8 @@ public class ClientInputHandler extends InputHandler {
         //networkController.boughtDevelopmentCard(playerID,developmentCards;
 
     }
+
+
 
 }
     

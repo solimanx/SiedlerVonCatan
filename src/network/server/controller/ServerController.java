@@ -20,6 +20,7 @@ import network.client.controller.ViewController;
 import network.server.server.Server;
 import network.server.server.ServerInputHandler;
 import network.server.server.ServerOutputHandler;
+import protocol.messaging.ProtocolServerConfirmation;
 import settings.DefaultSettings;
 
 /**
@@ -74,6 +75,7 @@ public class ServerController {
 		modelPlayerIdMap.put(amountPlayers,currentThreadID);
 		amountPlayers++;
 		welcome(currentThreadID);
+		//TODO Status update of player(currentThreadID) send to ALL? clients
 	}
 
 	public void welcome(int currentThreadID) {
@@ -100,12 +102,13 @@ public class ServerController {
 				initializeBoard();
 			}
 		}
+		//TODO statusupdate(playerstate from spiel starten to wartet auf spielbeginn)
+		
 		
 	}
 
 	public void serverConfirmation(String server_response) {
-		//serverOutputHandler.confirmation
-		// TODO Auto-generated method stub
+		serverOutputHandler.serverConfirm(server_response);
 		
 	}
 
@@ -128,7 +131,9 @@ public class ServerController {
 		playerModel.setColor(color);
 		playerModel.setName(name);
 		playerModel.setPlayerState(PlayerState.GAME_STARTING);
+		//TODO playerobject is added to tempplayers on welcome NOT on profileupdate
 		tempPlayers.add(playerModel);
+		//TODO statusupdate print of player
 		serverConfirmation("OK");
 		serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_STARTING, 0, new int[5]);
 		} else {
