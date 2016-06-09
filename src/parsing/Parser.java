@@ -177,6 +177,9 @@ public class Parser {
         if (response.pRoadBuildingCardInfo != null) {
             return (T) response.pRoadBuildingCardInfo;
         }
+        if(response.pBoughtDevelopmentCard!=null){
+            return (T) response.pBoughtDevelopmentCard;
+        }
 
         logger.info("CANNOT READ INPUT");
         System.out.println("CANNOT READ INPUT");

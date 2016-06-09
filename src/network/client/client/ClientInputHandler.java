@@ -226,17 +226,15 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
-
+        //  unnecessary Method
     }
 
     @Override
     protected void handle(ProtocolDevelopmentCards developmentCards) {
-
     }
 
     @Override
     protected void handle(ProtocolInventionCard inventionCard) {
-
     }
 
     @Override
@@ -246,7 +244,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
-
+        //TODO
     }
 
     protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
@@ -272,7 +270,10 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRobberMovement robberMovement) {
-        // TODO Auto-generated method stub
+        int playerID = robberMovement.getPlayer_id();
+        String locationID = robberMovement.getLocation_id();
+        int victimID = robberMovement.getVictim_id();
+        // networkController.robberMovement(playerID,locationID,victimID);
 
     }
 
@@ -330,7 +331,7 @@ public class ClientInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolMonopolyCardInfo protocolMonopolyCardInfo) {
+    protected void handle(ProtocolMonopolyCardInfo monopolyCardInfo) {
         // TODO Auto-generated method stub
 
     }
@@ -349,6 +350,14 @@ public class ClientInputHandler extends InputHandler {
         //    String road2_id = roadBuildingCardInfo.getRoad2_id();
         //    int player_id = roadBuildingCardInfo.getPlayer_id();
 //networkController.roadBuildingCardInfo(road1_id)
+    }
+
+    @Override
+    protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
+        int playerID = boughtDevelopmentCard.getPlayer_id();
+        ProtocolDevelopmentCards developmentCards = boughtDevelopmentCard.getDevelopmentCards();
+        //networkController.boughtDevelopmentCard(playerID,developmentCards;
+
     }
 
 }

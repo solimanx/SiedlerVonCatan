@@ -11,7 +11,7 @@ import model.objects.Field;
 import network.ModelToProtocol;
 import parsing.Parser;
 import parsing.Response;
-import protocol.serverinstructions.ProtocolCosts;
+import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
 import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
@@ -25,10 +25,8 @@ import protocol.object.ProtocolBuilding;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolResource;
-import protocol.serverinstructions.ProtocolBuild;
-import protocol.serverinstructions.ProtocolDiceRollResult;
-import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
+import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
@@ -346,6 +344,19 @@ public class ServerOutputHandler {
 
     }
 
+    public void robberMovement(int player_id, String location_id, int victim_id) {
+        ProtocolRobberMovement prm = new ProtocolRobberMovement(player_id, location_id, victim_id);
+        Response r = new Response();
+        r.pRobberMovement = prm;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+
+    }
+
     public void biggestKnightProwess(int player_id) {
         ProtocolBiggestKnightProwess pbkp = new ProtocolBiggestKnightProwess(player_id);
         Response r = new Response();
@@ -429,5 +440,18 @@ public class ServerOutputHandler {
         //  e.printStackTrace();
         //}
         //}
+    }
+
+    public void boughtDevelopmentCard(int player_id, ProtocolDevelopmentCards developmentCards) {
+
+        ProtocolBoughtDevelopmentCard pbdc = new ProtocolBoughtDevelopmentCard(player_id, developmentCards);
+        Response r = new Response();
+        r.pBoughtDevelopmentCard = pbdc;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
     }
 }

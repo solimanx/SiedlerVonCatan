@@ -180,4 +180,7 @@ public class Response {
 	@SerializedName("Strassenbaukarte")
 	public ProtocolRoadBuildingCard pRoadBuildCard; // new in 0.3
 
+	@SerializedName("Entwicklungskarte gekauft")
+	public  ProtocolBoughtDevelopmentCard pBoughtDevelopmentCard;//new in 0.3
+
 }

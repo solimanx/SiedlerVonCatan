@@ -323,6 +323,7 @@ public class ClientOutputHandler {
 
     public void playDevelopmentCard(ProtocolPlayKnightCard knight, ProtocolRoadBuildingCard roadbuild,
                                     ProtocolMonopolyCard monopoly, ProtocolInventionCard invention) {
+
         ProtocolDevelopmentCards pdc = new ProtocolDevelopmentCards(knight, roadbuild, monopoly, invention);
         Response r = new Response();
         r.pDevelopmentCard = pdc;
