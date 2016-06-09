@@ -48,10 +48,12 @@ public final class ProtocolToModel {
 		}
 	}
 
+	@Deprecated
+	//ENUMS ARE ALREADY SERIALIZED....
 	public static enums.PlayerState getPlayerState(String state) {
 		switch (state) {
 		case "Spiel starten":
-			return enums.PlayerState.GAME_SARTING;
+			return enums.PlayerState.GAME_STARTING;
 		case "Wartet auf Spielbeginn":
 			return enums.PlayerState.WAITING_FOR_GAMESTART;
 		case "Dorf bauen":
@@ -61,7 +63,7 @@ public final class ProtocolToModel {
 		case "Würfeln":
 			return enums.PlayerState.DICEROLLING;
 		case "Karte wegen Räuber abgeben":
-			return enums.PlayerState.DISPENDE_CARDS_ROBBER_LOSS;
+			return enums.PlayerState.DISPENSE_CARDS_ROBBER_LOSS;
 		case "Räuber versetzen":
 			return enums.PlayerState.MOVE_ROBBER;
 		case "Handeln oder Bauen":
@@ -71,8 +73,7 @@ public final class ProtocolToModel {
 		case "Verbindung verloren":
 			return enums.PlayerState.CONNECTION_LOST;
 		default:
-			System.out.println("Error in ProtocolToModel.getPlayerState"); // TODO
-																			// Logging
+			System.out.println("Error in ProtocolToModel.getPlayerState");
 			return null;
 		}
 	}

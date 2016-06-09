@@ -127,10 +127,10 @@ public class ServerController {
 		if (colorAvailable){			
 		playerModel.setColor(color);
 		playerModel.setName(name);
-		playerModel.setPlayerState(PlayerState.GAME_SARTING);
+		playerModel.setPlayerState(PlayerState.GAME_STARTING);
 		tempPlayers.add(playerModel);
 		serverConfirmation("OK");
-		serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_SARTING, 0, new int[5]);
+		serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_STARTING, 0, new int[5]);
 		} else {
 			error("Farbe bereits vergeben!");
 		}		
@@ -185,7 +185,7 @@ public class ServerController {
 			for (int i = 0;i<amountPlayers;i++){
 				currPM = gameLogic.getBoard().getPlayer(i);
 				if (currPM.getResourceCards().size() > 7){
-					currPM.setPlayerState(PlayerState.DISPENDE_CARDS_ROBBER_LOSS);
+					currPM.setPlayerState(PlayerState.DISPENSE_CARDS_ROBBER_LOSS);
 					hasToWait = true;
 				}
 			}

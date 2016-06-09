@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 import enums.Color;
+import enums.PlayerState;
 
 /**
  * <b>Spieler (Player)</b>
@@ -18,7 +19,7 @@ import enums.Color;
 public class ProtocolPlayer {
 
 	@SerializedName("id")
-	private int player_id;
+	private int playerID;
 
 	@SerializedName("Farbe")
 	private Color color;
@@ -27,26 +28,26 @@ public class ProtocolPlayer {
 	private String name;
 
 	@SerializedName("Status")
-	private String status;
+	private PlayerState status;
 
 	@SerializedName("Siegpunkte")
-	private int victory_points;
+	private int victoryPoints;
 
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resources;
 
-	public ProtocolPlayer(int player_id, Color color, String name, String status, int victory_points,
+	public ProtocolPlayer(int playerID, Color color, String name, PlayerState status, int victoryPoints,
 			ProtocolResource resources) {
-		this.player_id = player_id;
+		this.playerID = playerID;
 		this.color = color;
 		this.name = name;
 		this.status = status;
-		this.victory_points = victory_points;
+		this.victoryPoints = victoryPoints;
 		this.resources = resources;
 	}
 
-	public int getPlayer_id() {
-		return player_id;
+	public int getPlayerID() {
+		return playerID;
 	}
 
 	public Color getColor() {
@@ -57,12 +58,12 @@ public class ProtocolPlayer {
 		return name;
 	}
 
-	public String getStatus() {
+	public PlayerState getStatus() {
 		return status;
 	}
 
-	public int getVictory_points() {
-		return victory_points;
+	public int getVictoryPoints() {
+		return victoryPoints;
 	}
 
 	public ProtocolResource getResources() {

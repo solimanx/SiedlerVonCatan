@@ -162,8 +162,7 @@ public class ClientInputHandler extends InputHandler {
         // ProtocolToModel.getPlayerId(statusUpdate.getPlayer().getPlayer_id());
         enums.Color color = statusUpdate.getPlayer().getColor();
         String name = statusUpdate.getPlayer().getName();
-        enums.PlayerState status = ProtocolToModel.getPlayerState(statusUpdate.getPlayer().getStatus());
-        int victoryPoints = statusUpdate.getPlayer().getVictory_points();
+        int victoryPoints = statusUpdate.getPlayer().getVictoryPoints();
         // int[] resources =
         // ProtocolToModel.getResources(statusUpdate.getPlayer().getResources());
         // networkController.statusUpdate(playerId, color, name, status,
