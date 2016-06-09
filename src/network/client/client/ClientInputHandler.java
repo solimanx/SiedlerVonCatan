@@ -277,10 +277,7 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRobberMovement robberMovement) {
-        int playerID = robberMovement.getPlayer_id();
-        String locationID = robberMovement.getLocation_id();
-        int victimID = robberMovement.getVictim_id();
-        // networkController.robberMovement(playerID,locationID,victimID);
+       //unnecessary
 
     }
 
@@ -324,16 +321,16 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-        //    ProtocolResource resource = inventionCardInfo.getResource();
-        //    int player_id = inventionCardInfo.getPlayer_id();
+           //ProtocolResource resource = inventionCardInfo.getResource();
+           // int player_id = inventionCardInfo.getPlayer_id();
         //    // networkController.inventionCardInfo(resource,player_id);
     }
 
 
     @Override
     protected void handle(ProtocolLongestRoad longestRoad) {
-        int player_id = longestRoad.getPlayer_id();
-        //networkController.longestRoad(player_id)
+        int playerID = longestRoad.getPlayer_id();
+        //networkController.longestRoad(playerID);
 
     }
 

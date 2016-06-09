@@ -102,7 +102,7 @@ public class Response {
 	@SerializedName("Zug beenden")
 	public ProtocolEndTurn pEndTurn;
 
-	@SerializedName("Karte abgeben")
+	@SerializedName("Karten abgeben")
 	public ProtocolRobberLoss pRobberLoss; // new in 0.2
 
 	@SerializedName("Räuber versetzen")
@@ -157,8 +157,8 @@ public class Response {
 	@SerializedName("Straßenbaukarte ausspielen")
 	public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
 
-	// @SerializedName("Längste Handelsstraße")
-	// public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;//new in
+	@SerializedName("Längste Handelsstraße")
+	public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;//new in
 	// 0,3
 
 	// Clientinstructions in Protocol 0.3

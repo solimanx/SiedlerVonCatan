@@ -18,6 +18,7 @@ import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
+import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
@@ -152,6 +153,18 @@ public class ClientOutputHandler {
             e.printStackTrace();
         }
 
+    }
+
+    public void robberMovement(int player_id, String location_id, int victim_id) {
+        ProtocolRobberMovement prm = new ProtocolRobberMovement(player_id, location_id, victim_id);
+        Response r = new Response();
+        r.pRobberMovement = prm;
+        try {
+            client.write(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
     }
 
     public void handleHarbourRequest(int[] offer, int[] withdrawal) {
