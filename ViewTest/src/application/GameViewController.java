@@ -23,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -35,7 +36,6 @@ import javafx.scene.text.TextBoundsType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tradeview.TradeViewController;
-//import network.client.controller.ViewController;
 
 public class GameViewController implements Initializable {
 
@@ -92,6 +92,9 @@ public class GameViewController implements Initializable {
 	
 	@FXML
 	private Label playerStatusFour;
+	
+	@FXML
+	private VBox playerButtons;
 
 //	private ViewController viewController;
 
@@ -116,7 +119,7 @@ public class GameViewController implements Initializable {
 	private HashMap<Integer, Integer> playerIDtoViewPosition = new HashMap<Integer, Integer>(4);
 	private ArrayList<Color> playerColors = new ArrayList<Color>(4);
 	// fieldColors kann weg
-	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
+	private HashMap<ResourceType, Color> fieldColors = new HashMap<ResourceType, Color>(6);
 	private HashMap<ResourceType, ImagePattern> resourceImages = new HashMap<ResourceType, ImagePattern>(6);
 	private HashMap<HarbourStatus, ImagePattern> harbourImages = new HashMap<HarbourStatus, ImagePattern>(6);
 
@@ -170,7 +173,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	void handleEndTurnButton(ActionEvent event) {
-
+		playerButtons.setDisable(true);
 	}
 
 	@FXML
@@ -304,8 +307,15 @@ public class GameViewController implements Initializable {
 		board.getChildren().add(chip);
 	}
 
-	public void setHarbour(int u, int v, HarbourStatus harbourStatus) {
-		// TODO
+	public void setHarbour(int u, int v, HarbourStatus harbourType) {
+		Circle circle = new Circle(30.0);
+		circle.setFill(Color.LIGHTGRAY);
+		Text text = new Text(harbourType.toString());
+		StackPane chip = new StackPane(circle, text);
+		chip.toFront();
+		chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0] - 30.0);
+		chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 30.0);
+		board.getChildren().add(chip);
 	}
 
 	public Polygon drawCity(double[] center) {
@@ -431,22 +441,6 @@ public class GameViewController implements Initializable {
 				village.setVisible(false);
 				return village;
 			}
-		}
-
-		/**
-		 * draws a Circle with diceIndex
-		 */
-		public void setFieldChip(int u, int v, int diceIndex) {
-			Text text = new Text("" + diceIndex);
-			text.setBoundsType(TextBoundsType.VISUAL);
-			text.setTextAlignment(TextAlignment.CENTER);
-			Circle circle = new Circle(15.0);
-			circle.setFill(Color.WHITE);
-			StackPane chip = new StackPane(circle, text);
-			chip.toFront();
-			chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0] - 15.0);
-			chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 15.0);
-			board.getChildren().add(chip);
 		}
 
 		/**

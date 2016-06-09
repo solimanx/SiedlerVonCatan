@@ -30,7 +30,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
                      <children>
-                        <Label text="Holz">
+                        <Label text="Wood">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -40,7 +40,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
                      <children>
-                        <Label text="Lehm">
+                        <Label text="Clay">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -50,7 +50,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
                      <children>
-                        <Label text="Wolle">
+                        <Label text="Wool">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -60,7 +60,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
                      <children>
-                        <Label text="Getreide">
+                        <Label text="Corn">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -70,7 +70,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
                      <children>
-                        <Label text="Erz">
+                        <Label text="Ore">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -78,7 +78,7 @@
                         <TextField fx:id="selfOre" editable="false" prefHeight="26.0" prefWidth="29.0" />
                      </children>
                   </HBox>
-                  <VBox alignment="CENTER_RIGHT">
+                  <VBox fx:id="playerButtons" alignment="CENTER_RIGHT">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -105,6 +105,11 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </VBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label />
+               </children>
+            </HBox>
          </children>
       </VBox>
       <Pane fx:id="board" layoutX="300.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0" />
@@ -125,7 +130,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
                      <children>
-                        <Label text="Karten">
+                        <Label text="Cards">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -157,7 +162,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
                      <children>
-                        <Label text="Karten">
+                        <Label text="Cards">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -189,7 +194,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
                      <children>
-                        <Label text="Karten">
+                        <Label text="Cards">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>

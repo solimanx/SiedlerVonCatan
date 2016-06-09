@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import enums.HarbourStatus;
 import enums.ResourceType;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ public class Main extends Application {
 			
 			//testing
 			controller.setField(2, 0, ResourceType.CLAY, 10);
+			controller.setHarbour(1, 2, HarbourStatus.CORN);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
