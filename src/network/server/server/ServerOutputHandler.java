@@ -372,16 +372,23 @@ public class ServerOutputHandler {
 
     }
 
-    public void inventionCardInfo(ProtocolInventionCard invention, int player_id) {
-//		ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(invention, player_id);
-//		Response r = new Response();
-//		r.pInventionCardInfo = pici;
-//		try {
-//			server.broadcast(parser.createString(r));
-//		} catch (IOException e) {
-//			logger.error("Threw a Input/Output Exception ", e);
-//			e.printStackTrace();
-//		}
+    public void inventionCardInfo(int[] resource, int player_id) {
+        ProtocolResource pr;
+        if (resource.length > 1) {
+            pr = new ProtocolResource(resource[0], resource[1], resource[2], resource[3], resource[4], 0);
+        } else {
+            pr = new ProtocolResource(0, 0, 0, 0, 0, resource[0]);
+        }
+        ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(pr, player_id);
+        Response r = new Response();
+        r.pInventionCardInfo = pici;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+
     }
 
     public void longestRoad(int player_id) {
