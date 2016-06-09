@@ -3,7 +3,7 @@ package network.client.client;
 import java.util.ArrayList;
 
 import model.objects.Edge;
-
+import model.HexService;
 import model.objects.Corner;
 import model.objects.Field;
 import network.InputHandler;
@@ -109,7 +109,7 @@ public class ClientInputHandler extends InputHandler {
         	    corners[i] = new Corner();
         	    corners[i].setCornerID(pBuild.getId());
         	    corners[i].setOwnerID(pBuild.getPlayer_id());
-        	    corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getBuilding()));        		
+        	    corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getBuilding()));
         	} else{
         		Edge e = new Edge();
         		streets.add(e);
@@ -119,7 +119,7 @@ public class ClientInputHandler extends InputHandler {
         	}
 
         }
-        
+
         Corner[] harbourCorners = new Corner[pBoard.getAmountHarbours()*2]; //*2 wegen Harbours
         for (int i = 0;i<pBoard.getAmountHarbours();i++){
         	ProtocolHarbour pHarb = pBoard.getHarbours(i);
@@ -127,10 +127,10 @@ public class ClientInputHandler extends InputHandler {
         	Corner c2 = new Corner();
         	harbourCorners[2*i] = c1;
         	harbourCorners[2*i +1] = c2;
-        	String[] coords = ProtocolToModel.getCornerFromEdge(pHarb.getID());
+        	String[] coords = HexService.getCornerFromEdge(pHarb.getID());
         	c1.setCornerID(coords[0]);
         	c2.setCornerID(coords[1]);
-        	
+
             c1.setHarbourStatus(ProtocolToModel.getHarbourType(pHarb.getType()));
             c2.setHarbourStatus(ProtocolToModel.getHarbourType(pHarb.getType()));
         }
@@ -412,5 +412,5 @@ public class ClientInputHandler extends InputHandler {
 
 
 }
-    
+
 
