@@ -350,7 +350,9 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolPlayKnightCard playKnightCard) {
         String road1_id = playKnightCard.getRoad1_id();
         int target = playKnightCard.getTarget();
-        //networkController.playKnightCard(road1_id,target)
+        int player_id;
+
+        //networkController.playKnightCard(road1_id,target,player_id)
 
     }
 
