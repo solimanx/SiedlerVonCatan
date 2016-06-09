@@ -419,8 +419,8 @@ public class ServerOutputHandler {
         }
     }
 
-    public void roadBuildingCardInfo(ProtocolRoadBuildingCard road) {
-        ProtocolRoadBuildingCardInfo prbci = new ProtocolRoadBuildingCardInfo(road);
+    public void roadBuildingCardInfo(String road1_id, String road2_id, int player_id) {
+        ProtocolRoadBuildingCardInfo prbci = new ProtocolRoadBuildingCardInfo(road1_id, road2_id, player_id);
         Response r = new Response();
         r.pRoadBuildingCardInfo = prbci;
         try {
