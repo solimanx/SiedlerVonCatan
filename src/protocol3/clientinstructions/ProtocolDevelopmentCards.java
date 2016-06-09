@@ -15,39 +15,38 @@ import protocol3.severinstructions.ProtocolPlayKnightCard;
 public class ProtocolDevelopmentCards {
 
 	@SerializedName("Ritter")
-	private ProtocolPlayKnightCard knight;
+	private Integer knight;
 
 	@SerializedName("Stra�enbau")
-	private ProtocolRoadBuildingCard roadbuild;
+	private Integer roadbuild;
 
 	@SerializedName("Monopol")
-	private ProtocolMonopolyCard monopoly;
+	private Integer monopoly;
 
 	@SerializedName("Erfindung")
-	private ProtocolInventionCard invention;
+	private Integer invention;
 
-	public ProtocolDevelopmentCards(ProtocolPlayKnightCard knight, ProtocolRoadBuildingCard roadbuild,
-			ProtocolMonopolyCard monopoly, ProtocolInventionCard invention) {
-
+	public ProtocolDevelopmentCards(Integer knight, Integer roadbuild, Integer monopoly, Integer invention) {
 		this.knight = knight;
 		this.roadbuild = roadbuild;
 		this.monopoly = monopoly;
 		this.invention = invention;
+
 	}
 
-	public ProtocolPlayKnightCard getKnight() {
+	public Integer getKnight() {
 		return knight;
 	}
 
-	public ProtocolRoadBuildingCard getRoadbuild() {
+	public Integer getRoadbuild() {
 		return roadbuild;
 	}
 
-	public ProtocolMonopolyCard getMonopoly() {
+	public Integer getMonopoly() {
 		return monopoly;
 	}
 
-	public ProtocolInventionCard getInvention() {
+	public Integer getInvention() {
 		return invention;
 	}
 
