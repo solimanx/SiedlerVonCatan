@@ -155,17 +155,16 @@ public class ClientOutputHandler {
 
     }
     public void robberMovementRequest(String location_id, int victim_id){
-        //String locationID= robberMovementRequest.getLocation_id;
-        // int victimID=robberMovementRequest.getVictim_id;
-        //ProtocolRobberMovementRequest prmr= new ProtocolRobberMovementRequest(prmr);
-        //Response r = new Response();
-        //r.pRobberMovement = prmr;
-        //try {
-          //  client.write(parser.createString(r));
-        //} catch (IOException e) {
-          //  logger.error("Threw a Input/Output Exception ", e);
-            //e.printStackTrace();
-        //}
+        ProtocolRobberMovementRequest prmr= new ProtocolRobberMovementRequest(location_id,victim_id);
+        Response r = new Response();
+        r.pRobberMoveRequest = prmr;
+        try {
+            client.write(parser.createString(r));
+
+        } catch (IOException e) {
+           logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
 
     }
 
