@@ -104,6 +104,12 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Label playerFourVPoints;
+	
+	@FXML
+	private Label selfName;
+	
+	@FXML
+	private TextField diceResult;
 
 	private ViewController viewController;
 
@@ -150,8 +156,6 @@ public class GameViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPlayerColors();
 		factory = new ViewBoardFactory();
-		System.out.println("initialize method called");
-
 	}
 
 	/**
@@ -163,6 +167,10 @@ public class GameViewController implements Initializable {
 		this.stage = stage;
 		board.getChildren().addAll(factory.getViewBoard(stage));
 		board.toBack();
+	}
+
+	public void initPlayer(int playerID, String playerName, enums.Color playerColor) {
+		// TODO
 	}
 
 	private void initPlayerColors() {
@@ -203,8 +211,7 @@ public class GameViewController implements Initializable {
 	 */
 	@FXML
 	void handleStartTradingButton(ActionEvent event) throws IOException {
-		// new TradeStage
-		System.out.println("Trading button clicked");
+
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/tradeview/tradeView.fxml").openStream());
 		Scene scene = new Scene(root);
@@ -256,20 +263,13 @@ public class GameViewController implements Initializable {
 	public void villageClick(int[] villageCoordinates) {
 		viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
 				villageCoordinates[2]);
-		System.out.println("Clicked on Village " + villageCoordinates[0] + " , " + villageCoordinates[1] + " , "
-				+ villageCoordinates[2]);
-
 	}
 
 	/**
 	 * @param streetCoordinates
 	 */
-	public void streetClick(int[] streetCoordinates) {
-		System.out.println("Clicked on Street " + streetCoordinates[0] + " , " + streetCoordinates[1] + " , "
-				+ streetCoordinates[2]);
-		viewController.getClientController().requestBuildStreet(streetCoordinates[0], streetCoordinates[1],
-				streetCoordinates[2]);
-
+	public void streetClick(int[] streetCoord) {
+		viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
 	}
 
 	/**
@@ -278,8 +278,6 @@ public class GameViewController implements Initializable {
 	public void fieldClick(int[] fieldCoordinates) {
 		// TODO stealFromPlayer???
 		viewController.getClientController().requestSetBandit(fieldCoordinates[0], fieldCoordinates[1], 1);
-		System.out.println(
-				"Clicked on " + fieldCoordinates[0] + " , " + fieldCoordinates[1] + " , " + fieldCoordinates[2]);
 
 	}
 
@@ -300,8 +298,6 @@ public class GameViewController implements Initializable {
 		Line street = streets[u + 3][v + 3][dir];
 		street.setOpacity(1.0);
 		street.setStroke(playerColors.get(playerID));
-		System.out.println("Street set on " + u + "," + v + " Direction: " + dir);
-
 	}
 
 	/**
@@ -340,7 +336,6 @@ public class GameViewController implements Initializable {
 		Polygon village = corners[u + 3][v + 3][dir];
 		village.setFill(playerColor);
 		village.setOpacity(1.0);
-		System.out.println("Village set on " + u + "," + v + " Direction: " + dir);
 	}
 
 	/**
@@ -418,6 +413,10 @@ public class GameViewController implements Initializable {
 		}
 	}
 
+	public void setDiceRollResult(int result) {
+		diceResult.setText("" + result);
+	}
+
 	public void setVictoryPoints(int playerID, int victoryPoints) {
 		String victoryString = victoryPoints + " Victory Points";
 		switch (playerIDtoViewPosition.get(playerID)) {
@@ -485,7 +484,6 @@ public class GameViewController implements Initializable {
 
 								street.setOnMouseClicked(e -> {
 									streetClick(streetCoordinates);
-									System.out.println("Street clicked!");
 								});
 
 								figures.add(street);
@@ -502,7 +500,6 @@ public class GameViewController implements Initializable {
 
 								village.setOnMouseClicked(e -> {
 									villageClick(villageCoordinates);
-									System.out.println("Street clicked!");
 								});
 								village.toFront();
 								figures.add(village);
@@ -808,5 +805,12 @@ public class GameViewController implements Initializable {
 
 		}
 
+	}
+
+	public void initSelf(int ownPlayerId, String name, enums.Color color) {
+		playerIDtoViewPosition.put(ownPlayerId, 0);
+		playerColors.add(0, viewController.playerColors.get(color));
+		selfName.setText(name);
+		
 	}
 }

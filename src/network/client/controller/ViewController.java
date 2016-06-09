@@ -161,24 +161,9 @@ public class ViewController {
 
 	}
 
-	public Color getPlayerColor(int playerID) {
+	public Color getPlayerColor(enums.Color color) {
 		// TODO Auto-generated method stub
-		return Color.BLUEVIOLET;
-	}
-
-	public void setPlayerColor(int playerId, enums.Color color) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setPlayerName(int playerId, String name) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setDiceRollResult(int playerId, int result) {
-		// TODO Auto-generated method stub
-
+		return playerColors.get(color);
 	}
 
 	public ClientController getClientController() {

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="768.0" minWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.GameViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.GameViewController">
    <children>
       <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="140.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -235,8 +235,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Würfel: " />
-                  <TextField editable="false" prefHeight="26.0" prefWidth="21.0" />
-                  <TextField editable="false" layoutX="62.0" layoutY="10.0" prefHeight="26.0" prefWidth="21.0" />
+                  <TextField fx:id="diceResult" editable="false" prefHeight="27.0" prefWidth="34.0" />
                </children>
             </HBox>
          </children>
