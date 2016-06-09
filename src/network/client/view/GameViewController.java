@@ -94,15 +94,17 @@ public class GameViewController implements Initializable {
 	public static double sin60 = Math.sqrt(3) / 2;
 	public static double rad60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
 	private static double halfWidth = sin60 * radius;
-	
+
 	private HashMap<Integer, Integer> playerIDtoViewPosition = new HashMap<Integer, Integer>(4);
 	private ArrayList<Color> playerColors = new ArrayList<Color>(4);
 	// fieldColors kann weg
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	private HashMap<ResourceType, ImagePattern> resourceImages = new HashMap<ResourceType, ImagePattern>(6);
 	private HashMap<HarbourStatus, ImagePattern> harbourImages = new HashMap<HarbourStatus, ImagePattern>(6);
-	
+
 	private ViewBoardFactory factory;
+
+	private Stage stage;
 
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
@@ -128,6 +130,7 @@ public class GameViewController implements Initializable {
 	 * @param stage
 	 */
 	public void startScene(Stage stage) {
+		this.stage = stage;
 		board.getChildren().addAll(factory.getViewBoard(stage));
 	}
 
@@ -168,7 +171,7 @@ public class GameViewController implements Initializable {
 		messageInput.clear();
 		viewController.getClientController().chatSendMessage(message);
 	}
-	
+
 	public void setPlayerStatus(int playerID, PlayerState state){
 		switch (playerID) {
 		case 1:
@@ -214,8 +217,8 @@ public class GameViewController implements Initializable {
 	public void receiveChatMessage(String line) {
 		messages.appendText(line + "\n");
 	}
-	
-	
+
+
 
 	public void setStreet(int u, int v, int dir, int playerID) {
 		Line street = streets[u + 3][v + 3][dir];
@@ -267,9 +270,9 @@ public class GameViewController implements Initializable {
 		chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 15.0);
 		board.getChildren().add(chip);
 	}
-	
+
 	public void setHarbour(int u, int v, HarbourStatus harbourStatus) {
-		// TODO 
+		// TODO
 	}
 
 	public Polygon drawCity(double[] center) {
@@ -352,7 +355,7 @@ public class GameViewController implements Initializable {
 
 		}
 
-		
+
 		/**
 		 * TODO perhaps unnecessary
 		 */
