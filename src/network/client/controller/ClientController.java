@@ -1,6 +1,8 @@
 package network.client.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import enums.Color;
 import enums.PlayerState;
@@ -11,6 +13,7 @@ import model.GameLogic;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
+import model.objects.PlayerModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
@@ -31,10 +34,19 @@ public class ClientController {
 
     private ClientOutputHandler clientOutputHandler;
     private ClientInputHandler clientInputHandler;
+    
+	private Map<Integer, Integer> modelPlayerIdMap;
+	private Map<Integer, Integer> threadPlayerIdMap; 
+	
     protected Client client;
 
     public ClientController(Stage primaryStage) {
-        // this.mainViewController = viewController.getMainViewController();
+		// ModelPlayerID => threadID
+		modelPlayerIdMap = new HashMap<Integer, Integer>();
+		
+		// threadID => ModelPlayerID
+		threadPlayerIdMap = new HashMap<Integer, Integer>();
+		
         this.clientInputHandler = new ClientInputHandler(this);
         this.viewController = new ViewController(primaryStage, this);
 
@@ -47,20 +59,86 @@ public class ClientController {
     }
 
     /**
-     * sets player state in own client model; is called by network controller
-     * after server has changed a player state
-     *
-     * @param state
-     */
-    public void setPlayerState(int playerId, PlayerState state) {
-        board.getPlayer(playerId).setPlayerState(state);
-        if (playerId == ownPlayerId) {
-            // update GUI
-            // viewController.setPlayerState(state);
-        }
-    }
+	 * Check if versions match and act accordingly; if they match begin sending
+	 * confirmation from client otherwise disconnect
+	 *
+	 * @param serverVersion
+	 * @param protocolVersion
+	 */
+	public void serverHello(String serverVersion, String protocolVersion) {
+	    if (!protocolVersion.equals(settings.DefaultSettings.PROTOCOL_VERSION)) {
+	        client.stopClient();
+	        System.out.println("Invalid Protocol Version; Disconnected");
+	    } else {
+	        clientOutputHandler.clientHello(DefaultSettings.CLIENT_VERSION);
+	    }
+	
+	}
 
-    // 7.4
+	// 4.2
+	public void welcome(int playerID) {
+	    setOwnPlayerID(playerID);
+	    System.out.println("Handshake complete!");
+	    viewController.getLobbyController().enableChat();
+	}
+
+	// 6.1
+	public void receiveServerConfirmation(String server_response) {
+		//TODO client confirm in later protocols
+	}
+
+	// 6.2
+	public void chatSendMessage(String s) {
+	    clientOutputHandler.chatSendMessage(s);
+	}
+
+	// 6.3
+	public void chatReceiveMessage(int playerId, String s) {
+	    // viewController.mainViewController.receiveChatMessage("Spieler
+	    // "+playerId+": "+s);
+	    viewController.getLobbyController().receiveChatMessage("Spieler " + playerId + ": " + s);
+	}
+
+	// 7.1
+	public void sendPlayerProfile(String name, Color color) {
+	    clientOutputHandler.sendPlayerProfile(name, color);
+	    setPlayerName(ownPlayerId, name);
+	    setPlayerColor(ownPlayerId, color);
+	}
+
+	// 7.2
+	public void sendReady() {
+	    clientOutputHandler.clientReady();
+	}
+
+	// 7.3
+	public void error(String notice) {
+	    System.out.println(notice);
+	}
+
+	// 8.1
+	public void statusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
+	                         int[] resources) {
+		Integer modelID = threadPlayerIdMap.get(threadID);
+		if (modelID == null){
+			threadPlayerIdMap.put(threadID, amountPlayers);
+			modelPlayerIdMap.put(amountPlayers, threadID);
+			amountPlayers++;
+		}
+		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+		if (pM.getColor() == null){
+			pM.setColor(color);
+			pM.setName(name);
+			viewController.setPlayerColor(modelID, color);
+			viewController.setPlayerName(modelID, name);
+		} 
+		pM.setPlayerState(status);
+		pM.setVictoryPoints(victoryPoints);
+		addToPlayersResource(modelID,resources);
+	
+	}
+
+	// 7.4
     public Board initBoard(int amountPlayers, Field[][] serverFields, Corner[][][] corners, Field bandit) {
 
         int board_size = DefaultSettings.BOARD_SIZE;
@@ -88,11 +166,6 @@ public class ClientController {
         viewController.startGameView();
 
         return board;
-
-    }
-
-    public void createNewPlayer(enums.Color color, String name) {
-		this.board = new Board();
 
     }
 
@@ -150,82 +223,6 @@ public class ClientController {
 
     public void setAmountPlayers(int amountPlayers) {
         this.amountPlayers = amountPlayers;
-    }
-
-    /**
-     * Check if versions match and act accordingly; if they match begin sending
-     * confirmation from client otherwise disconnect
-     *
-     * @param serverVersion
-     * @param protocolVersion
-     */
-    public void serverHello(String serverVersion, String protocolVersion) {
-        if (!protocolVersion.equals(settings.DefaultSettings.PROTOCOL_VERSION)) {
-            client.stopClient();
-            System.out.println("Invalid Protocol Version; Disconnected");
-        } else {
-            clientOutputHandler.clientHello(DefaultSettings.CLIENT_VERSION);
-        }
-
-    }
-
-    // 4.2
-    public void welcome(int playerID) {
-        setOwnPlayerID(playerID);
-        // TODO flowController.setPlayerState(playerID,
-        // enums.PlayerState.WAITING_FOR_GAMESTART);
-        System.out.println("Handshake complete!");
-        viewController.getLobbyController().enableChat();
-    }
-
-    // 6.1
-    public void receiveServerConfirmation(String server_response) {
-    	//TODO client confirm in later protocols
-    }
-
-    // 6.2
-    public void chatSendMessage(String s) {
-        clientOutputHandler.chatSendMessage(s);
-    }
-
-    // 6.3
-    public void chatReceiveMessage(int playerId, String s) {
-        // viewController.mainViewController.receiveChatMessage("Spieler
-        // "+playerId+": "+s);
-        viewController.getLobbyController().receiveChatMessage("Spieler " + playerId + ": " + s);
-    }
-
-    // 7.1
-    public void sendPlayerProfile(String name, Color color) {
-        clientOutputHandler.sendPlayerProfile(name, color);
-        setPlayerName(ownPlayerId, name);
-        setPlayerColor(ownPlayerId, color);
-    }
-
-    // 7.2
-    public void sendReady() {
-        clientOutputHandler.clientReady();
-    }
-
-    // 7.3
-    public void error(String notice) {
-        System.out.println(notice);
-    }
-
-    // 8.1
-    public void statusUpdate(int playerId, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
-                             int[] resources) {
-        // //int modelPlayerId = getPlayerModelId(playerId);
-        // //if (modelPlayerId == 0) { // first Time id received
-        // modelPlayerId = amountPlayers;
-        // flowController.setPlayerColor(modelPlayerId, color);
-        // flowController.setPlayerName(modelPlayerId, name);
-        // amountPlayers++;
-        // }
-        // flowController.setPlayerState(modelPlayerId, status);
-        // flowController.setPlayerVictoryPoints(modelPlayerId, victoryPoints);
-        // flowController.setPlayerResources(modelPlayerId, resources);
-
     }
 
     // 8.2
@@ -376,5 +373,19 @@ public class ClientController {
     public void boughtPlayerCard(){
         //TODO
     }
+
+	/**
+	 * sets player state in own client model; is called by network controller
+	 * after server has changed a player state
+	 *
+	 * @param state
+	 */
+	public void setPlayerState(int playerId, PlayerState state) {
+	    board.getPlayer(playerId).setPlayerState(state);
+	    if (playerId == ownPlayerId) {
+	        // update GUI
+	        // viewController.setPlayerState(state);
+	    }
+	}
 
 }
