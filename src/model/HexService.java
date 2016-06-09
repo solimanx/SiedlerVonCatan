@@ -46,7 +46,6 @@ public class HexService {
 	}
 
 	public int[] getEdgeCoordinates(int x1, int y1, int x2, int y2) {
-		ArrayList<Edge> array = new ArrayList<>();
 		Edge[] a = getSurroundingEdges(x1, x2);
 		Edge[] b = getSurroundingEdges(x2, y2);
 		ArrayList<Edge> firstList = new ArrayList<Edge>();
@@ -83,11 +82,18 @@ public class HexService {
 		return surroundingEdges;
 	}
 
-
-	public ArrayList<Field> getSpiral(Field f){
-		ArrayList<Field> result = new ArrayList<Field>();
-		Field nextField = f;
-		Field plannedNextField = f;
+	/**
+	 * returns all fieldIDs in the order of a spiral, beginning with the inputID and ending in the middle of the field.
+	 * example: input: "N"
+	 * 			output: "NIEFKOJ"
+	 * 
+	 * does not work with water
+	 */
+	//TODO water
+	public static String getSpiral(String f){
+		String result = "";
+		String nextField = f;
+		String plannedNextField = f;
 		int radius = getDistanceFromMid(f);
 		int[] coord = new int [2];
 
@@ -99,8 +105,8 @@ public class HexService {
 						if(i == radius){
 							if(getRing(nextField).contains(plannedNextField)){
 								nextField = plannedNextField;
-								result.add(nextField);
-								coord = board.getFieldCoordinates(nextField.getFieldID());
+								result = result + nextField;
+								coord = Board.getStringToCoordMap().get(nextField);
 								plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
 								break;
 							}else{
@@ -112,8 +118,8 @@ public class HexService {
 								continue;
 							}else{
 								nextField = plannedNextField;
-								result.add(nextField);
-								coord = board.getFieldCoordinates(nextField.getFieldID());
+								result = result + nextField;
+								coord = Board.getStringToCoordMap().get(nextField);
 								plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
 								break;
 							}
@@ -125,15 +131,15 @@ public class HexService {
 						}
 						else{
 							nextField = plannedNextField;
-							result.add(nextField);
-							coord = board.getFieldCoordinates(nextField.getFieldID());
+							result = result + nextField;
+							coord = Board.getStringToCoordMap().get(nextField);
 							plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
 							break;
 						}
 					default:
 						nextField = plannedNextField;
-						result.add(nextField);
-						coord = board.getFieldCoordinates(nextField.getFieldID());
+						result = result + nextField;
+						coord = Board.getStringToCoordMap().get(nextField);
 						plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
 						break;
 					}
@@ -141,32 +147,41 @@ public class HexService {
 			}
 			plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField)+1);
 		}
-		result.add(board.getField(0, 0));
-		return null;
+		result = result + Board.getCoordToStringMap().get(new Index(0,0));
+		return result;
 	}
 
-	public int getDistanceFromMid(Field f){
-		Field nextField = f;
+	public static int getDistanceFromMid(String f){
+		String nextField = f;
 		int result = 0;
 		int [] coord = new int[2];
-		while(nextField != board.getField(0, 0)){
-			coord = board.getFieldCoordinates(f.getFieldID());
+		String end = Board.getCoordToStringMap().get(new Index(0, 0));
+		while(!nextField.equals(end)){
+			coord = Board.getStringToCoordMap().get(nextField);
 			nextField = getNextField(coord[0], coord[1], getDirection(nextField)+1);
 			result++;
 		}
 		return result;
 	}
 
-
-	public ArrayList<Field> getRing(Field f){
-		ArrayList<Field> result = new ArrayList<Field>();
+	/**
+	 * returns all fieldIDs, which are one the same ring as the inputID.
+	 * example: input: "E"
+	 * 			output: "NIEFKO"
+	 * @param f
+	 * 		Field ID
+	 * @return
+	 * 		Field ID's
+	 */
+	public static String getRing(String f){
+		String result = "";
 		int radius = getDistanceFromMid(f);
-		Field nextField = board.getField(-radius, radius);
+		String nextField = Board.getCoordToStringMap().get(new Index(-radius, radius));
 		int[] coord = new int[2];
 		for(int i = 0; i< 6; i++){
 			for(int j = 0; j< radius; j++){
-				result.add(nextField);
-				coord = board.getFieldCoordinates(nextField.getFieldID());
+				result = result + nextField;
+				coord = Board.getStringToCoordMap().get(nextField);
 				nextField = getNextField(coord[0], coord[1], getDirection(nextField));
 			}
 		}
@@ -174,10 +189,17 @@ public class HexService {
 	}
 
 
-
-	public int getDirection(Field f) {
-		int x = board.getFieldCoordinates(f.getFieldID())[0];
-		int y = board.getFieldCoordinates(f.getFieldID())[1];
+	/**
+	 * calculates clockwise the direction of the next field
+	 * 
+	 * @param f
+	 * 		Field ID
+	 * @return
+	 * 		Edge Direction
+	 */
+	public static int getDirection(String f) {
+		int x = Board.getStringToCoordMap().get((f))[0];
+		int y = Board.getStringToCoordMap().get((f))[1];
 		int sum = x + y;
 		if (x < 0 && y <= 0 && sum < 0) {
 			return 0;
@@ -199,26 +221,48 @@ public class HexService {
 		}
 		throw new IllegalArgumentException("illegal Argument in HexService.getDirection()");
 	}
-
-	public Field getNextField(int aX, int aY, int dir) {
-//		Field[] result = board.getNeighbouringFields(aX, aY);
-//		switch (dir) {
-//		case 0:
-//			return result[0];
-//		case 1:
-//			return result[1];
-//		case 2:
-//			return result[2];
-//		case 3:
-//			return result[3];
-//		case 4:
-//			return result[4];
-//		case 5:
-//			return result[5];
-//		default:
-			return null;
-//		}
+	
+	/**
+	 * calculates a field in the searched direction
+	 * 
+	 * @param aX
+	 * 		Field x-coordinate
+	 * @param aY
+	 * 		Field y-coordinate
+	 * @param dir
+	 * 		direction of the searched field
+	 * @return
+	 */
+	public static String getNextField(int aX, int aY, int dir) {
+		String neighbours = Board.getNeighbouringFields(aX, aY);
+		char[] result = neighbours.toCharArray();
+		String a = "";
+		switch (dir) {
+		case 0:
+			a = a + result[0];
+			break;
+		case 1:
+			a = a + result[1];
+			break;
+		case 2:
+			a = a + result[2];
+			break;
+		case 3:
+			a = a + result[3];
+			break;
+		case 4:
+			a = a + result[4];
+			break;
+		case 5:
+			a = a + result[5];
+			break;
+		default:
+			a = null;
+			break;
+		}
+		return a;
 	}
+	
 
 	public static int sumAbsCubeXYZ(int[] temp) {
 		return Math.abs(temp[0]) + Math.abs(temp[1]) + Math.abs(temp[2]);

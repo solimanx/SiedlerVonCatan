@@ -235,7 +235,7 @@ public class Board {
 		if (aX < -radius || aX > radius || aY < -radius || aY > radius) {
 			return null;
 		} else {
-			return this.fields[aX + radius][aY + radius];
+			return fields[aX + radius][aY + radius];
 		}
 	}
 
