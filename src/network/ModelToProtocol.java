@@ -1,10 +1,10 @@
 package network;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.HashMap;
-import model.Board;
 
 import enums.ResourceType;
+import model.Board;
+import model.Index;
 import protocol.object.ProtocolResource;
 
 public final class ModelToProtocol {
@@ -89,17 +89,21 @@ public final class ModelToProtocol {
 		case 0:
 			result = result + getFieldID(x, y-1);
 			result = result + getFieldID(x, y);
+			return result;
 		case 1:
 			result = result + getFieldID(x+1, y-1);
 			result = result + getFieldID(x, y);
+			return result;
 		case 2:
 			result = result + getFieldID(x, y);
 			result = result + getFieldID(x+1, y);
+			return result;
 		default: throw new IllegalArgumentException("Illegal dir in getEdgeID");
 		}
 	}
 
 	public static String getFieldID(int x, int y) {
-		return Board.getCoordToStringMap().get(new int[]{x,y});
+		Index index = new Index(x,y);
+		return Board.getCoordToStringMap().get(index);
 	}
 }

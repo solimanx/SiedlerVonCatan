@@ -25,14 +25,14 @@ public class Board {
 	private PlayerModel[] players;
 	private String banditLocation;
 	private static Map<String, int[]> stringToCoordMap;
-	private static Map<int[], String> coordToStringMap;
+	private static Map<Index, String> coordToStringMap;
 	// TODO private DevDeck devDeck;
 
 	public Board(ArrayList<PlayerModel> tempPlayers) {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
-		initializeFields();
 		initializeHashMaps();
+		initializeFields();
 		corners = new Corner[r][r][2];
 		initializeCorners();
 		edges = new Edge[r][r][3];
@@ -41,8 +41,8 @@ public class Board {
 		initializePlayers(tempPlayers);
 		initializeBandit();
 	}
-	
-	public Board (){
+
+	public Board() {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
 		initializeFields();
@@ -52,7 +52,7 @@ public class Board {
 		edges = new Edge[r][r][3];
 		initializeEdges();
 		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
-		initializeBandit();		
+		initializeBandit();
 	}
 
 	/**
@@ -84,12 +84,12 @@ public class Board {
 	/*
 	 * Warning: Works as intended ONLY if amount of inner fields is not greater
 	 * than 26 fields!
-	 * 
+	 *
 	 */
 	private void initializeHashMaps() {
 		// initialize HashMaps
 		stringToCoordMap = new HashMap<String, int[]>();
-		coordToStringMap = new HashMap<int[], String>();
+		coordToStringMap = new HashMap<Index, String>();
 		// temp to make code look clearer
 		int radius = DefaultSettings.BOARD_RADIUS;
 
@@ -104,13 +104,13 @@ public class Board {
 				if (getFieldAt(i, j) != null) {
 					if (HexService.sumAbsCubeXYZ(HexService.convertAxialToCube(new int[] { i, j })) == radius * 2) {
 						stringToCoordMap.put(String.valueOf(outerFieldsBegin), new int[] { i, j });
-						coordToStringMap.put(new int[] { i, j }, String.valueOf(outerFieldsBegin));
+						coordToStringMap.put(new Index(i, j), String.valueOf(outerFieldsBegin));
 						// go to next char : a->b->c->...
 						outerFieldsBegin++;
 					} else if (HexService.sumAbsCubeXYZ(HexService.convertAxialToCube(new int[] { i, j })) < radius
 							* 2) {
 						stringToCoordMap.put(String.valueOf(innerFieldsBegin), new int[] { i, j });
-						coordToStringMap.put(new int[] { i, j }, String.valueOf(innerFieldsBegin));
+						coordToStringMap.put(new Index(i, j), String.valueOf(innerFieldsBegin));
 						// go to next char : A->B->C->...
 						innerFieldsBegin++;
 					}
@@ -668,9 +668,9 @@ public class Board {
 		for (int i = 0; i < fields.length; i++) {
 			for (int j = 0; j < fields[i].length; j++) {
 				if (fields[i][j] != null) {
-					 if (fields[i][j].getFieldID() != null) {
-					 result.add(fields[i][j]);
-					 }
+					if (fields[i][j].getFieldID() != null) {
+						result.add(fields[i][j]);
+					}
 				}
 			}
 		}
@@ -764,7 +764,7 @@ public class Board {
 		return stringToCoordMap;
 	}
 
-	public static Map<int[], String> getCoordToStringMap() {
+	public static Map<Index, String> getCoordToStringMap() {
 		return coordToStringMap;
 	}
 
