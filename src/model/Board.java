@@ -297,14 +297,24 @@ public class Board {
 	 *
 	 */
 
-	public Field[] getNeighbouringFields(int aX, int aY) {
-		Field ne = getFieldAt(aX + 1, aY - 1);
-		Field e = getFieldAt(aX + 1, aY);
-		Field se = getFieldAt(aX, aY + 1);
-		Field sw = getFieldAt(aX - 1, aY + 1);
-		Field w = getFieldAt(aX - 1, aY);
-		Field nw = getFieldAt(aX, aY - 1);
-		Field[] neighbours = { ne, e, se, sw, w, nw };
+	public String getNeighbouringFields(int aX, int aY) {
+		Index ne = new Index(aX + 1, aY - 1);
+		Index e = new Index(aX + 1, aY);
+		Index se = new Index(aX, aY + 1);
+		Index sw = new Index(aX - 1, aY + 1);
+		Index w = new Index(aX - 1, aY);
+		Index nw = new Index(aX, aY - 1);
+//		Field[] neighbours = { ne, e, se, sw, w, nw };
+
+		String northEast = getCoordToStringMap().get(ne);
+		String east = getCoordToStringMap().get(e);
+		String southEast = getCoordToStringMap().get(se);
+		String southWest = getCoordToStringMap().get(sw);
+		String west = getCoordToStringMap().get(w);
+		String northWest = getCoordToStringMap().get(nw);
+
+
+		String neighbours = northEast+east+southEast+southWest+west+northWest;
 		return neighbours;
 	}
 
@@ -641,26 +651,26 @@ public class Board {
 		return 0;
 	}
 
-	public Field getNextField(int aX, int aY, int dir) {
-		Field[] result = getNeighbouringFields(aX, aY); // To Do field to
-														// coordinates
-		switch (dir) {
-		case 0:
-			return result[0];
-		case 1:
-			return result[1];
-		case 2:
-			return result[2];
-		case 3:
-			return result[3];
-		case 4:
-			return result[4];
-		case 5:
-			return result[5];
-		default:
-			return null;
-		}
-	}
+//	public String getNextField(int aX, int aY, int dir) {
+//		char[] result = getNeighbouringFields(aX, aY).toCharArray(); // To Do field to
+//														// coordinates
+//		switch (dir) {
+//		case 0:
+//			return result[0];
+//		case 1:
+//			return result[1];
+//		case 2:
+//			return result[2];
+//		case 3:
+//			return result[3];
+//		case 4:
+//			return result[4];
+//		case 5:
+//			return result[5];
+//		default:
+//			return null;
+//		}
+//	}
 
 	// TODO FOR DEBUGGING ONLY
 	public ArrayList<Field> getAllFields() {

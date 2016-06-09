@@ -201,23 +201,23 @@ public class HexService {
 	}
 
 	public Field getNextField(int aX, int aY, int dir) {
-		Field[] result = board.getNeighbouringFields(aX, aY);
-		switch (dir) {
-		case 0:
-			return result[0];
-		case 1:
-			return result[1];
-		case 2:
-			return result[2];
-		case 3:
-			return result[3];
-		case 4:
-			return result[4];
-		case 5:
-			return result[5];
-		default:
+//		Field[] result = board.getNeighbouringFields(aX, aY);
+//		switch (dir) {
+//		case 0:
+//			return result[0];
+//		case 1:
+//			return result[1];
+//		case 2:
+//			return result[2];
+//		case 3:
+//			return result[3];
+//		case 4:
+//			return result[4];
+//		case 5:
+//			return result[5];
+//		default:
 			return null;
-		}
+//		}
 	}
 
 	public static int sumAbsCubeXYZ(int[] temp) {
@@ -284,19 +284,20 @@ public class HexService {
 		return null;
 	}
 
+
 	public String[] getCornerFromEdge(String s){
 		int[] a = Board.getStringToCoordMap().get(s.substring(0, 1));
 		int[] b = Board.getStringToCoordMap().get(s.substring(1, 2));
-		Field[] fields1 = board.getNeighbouringFields(a[0],a[1]);
-		Field[] fields2 = board.getNeighbouringFields(b[0],b[1]);
+		String fields1 = board.getNeighbouringFields(a[0],a[1]);
+		String fields2 = board.getNeighbouringFields(b[0],b[1]);
 		ArrayList<Field> intersect = new ArrayList<Field>();
-		for(int j = 0; j< 6; j++){
-			for(int i = 0; i < 6; i++){
-				if(fields1[i] == fields2[j]){
-					intersect.add(fields1[i]);
-				}
-			}
-		}
+//		for(int j = 0; j< 6; j++){
+//			for(int i = 0; i < 6; i++){
+//				if(fields1[i] == fields2[j]){
+//					intersect.add(fields1[i]);
+//				}
+//			}
+//		}
 		String [] result = new String [2];
 		result[0] = s.substring(0, 1) + s.substring(1, 2) + intersect.get(0);
 		result[1] = s.substring(0, 1) + s.substring(1, 2) + intersect.get(1);
