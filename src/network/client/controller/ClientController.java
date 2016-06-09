@@ -165,7 +165,9 @@ public class ClientController {
 		}
 		for (Corner c : harbourCorners){
 			String location = c.getCornerID();
-			int coords[] = Board.getStringToCoordMap().get(location);
+			int[] coord1 = Board.getStringToCoordMap().get(location);
+			Corner[] coords = board.getSurroundingCorners(coord1[0], coord1[1]);
+			//TODO: getCornerCoordinates
 			Corner bCorner = board.getCornerAt(coords[0], coords[1], coords[2]);
 			bCorner.setCornerID(location);
 			bCorner.setHarbourStatus(c.getHarbourStatus());
