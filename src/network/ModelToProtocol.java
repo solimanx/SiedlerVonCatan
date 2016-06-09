@@ -1,6 +1,8 @@
 package network;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.HashMap;
+import model.Board;
 
 import enums.ResourceType;
 import protocol.object.ProtocolResource;
@@ -98,6 +100,6 @@ public final class ModelToProtocol {
 	}
 
 	public static String getFieldID(int x, int y) {
-		return getFieldID(x, y);
+		return Board.getCoordToStringMap().get(new int[]{x,y});
 	}
 }
