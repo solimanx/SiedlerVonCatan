@@ -4,6 +4,7 @@ public class Edge {
 
 	private boolean hasStreet;
 	private int ownerID;
+	private String edgeID;
 
 	public Edge() {
 		hasStreet = false; // TODO constructor
@@ -23,5 +24,13 @@ public class Edge {
 
 	public void setOwnedByPlayer(int ownerID) {
 		this.ownerID = ownerID;
+	}
+
+	public String getEdgeID() {
+		return edgeID;
+	}
+
+	public void setEdgeID(String edgeID) {
+		this.edgeID = edgeID;
 	}
 }

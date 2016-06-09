@@ -8,6 +8,7 @@ public class Corner {
 	private CornerStatus status;
 	private HarbourStatus harbourStatus;
 	private int ownerID;
+	private String cornerID;
 
 	public Corner() { // TODO Constructor
 		status = CornerStatus.EMPTY;
@@ -36,6 +37,14 @@ public class Corner {
 
 	public void setOwnerID(int ownerID) {
 		this.ownerID = ownerID;
+	}
+
+	public String getCornerID() {
+		return this.cornerID;
+	}
+
+	public void setEdgeID(String cornerID) {
+		this.cornerID = cornerID;
 	}
 
 }
