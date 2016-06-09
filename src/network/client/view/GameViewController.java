@@ -235,29 +235,6 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param playerID
-	 * @param state
-	 */
-	public void setPlayerStatus(int playerID, PlayerState state) {
-		switch (playerIDtoViewPosition.get(playerID)) {
-		case 1:
-			playerStatusOne.setText(state.toString());
-			break;
-		case 2:
-			playerStatusTwo.setText(state.toString());
-			break;
-		case 3:
-			playerStatusThree.setText(state.toString());
-			break;
-		case 4:
-			playerStatusFour.setText(state.toString());
-			break;
-		default:
-			break;
-		}
-	}
-
-	/**
 	 * @param villageCoordinates
 	 */
 	public void villageClick(int[] villageCoordinates) {
@@ -431,6 +408,29 @@ public class GameViewController implements Initializable {
 			break;
 		case 3:
 			playerFourVPoints.setText(victoryString);
+			break;
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * @param playerID
+	 * @param state
+	 */
+	public void setPlayerStatus(int playerID, PlayerState state) {
+		switch (playerIDtoViewPosition.get(playerID)) {
+		case 1:
+			playerStatusOne.setText(state.toString());
+			break;
+		case 2:
+			playerStatusTwo.setText(state.toString());
+			break;
+		case 3:
+			playerStatusThree.setText(state.toString());
+			break;
+		case 4:
+			playerStatusFour.setText(state.toString());
 			break;
 		default:
 			break;
