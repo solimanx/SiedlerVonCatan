@@ -370,6 +370,7 @@ public class ServerController {
 	private void generateBoard(Field initialField, boolean randomDesert) {
 		ArrayList<Field> fields = gameLogic.getBoard().getAllFields(); // spiral implementieren
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
+		char currID = 'A';
 		int currNum;
 		if (randomDesert) {
 			int diceInd = 0;
@@ -384,6 +385,8 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
+				fields.get(i).setFieldID(Character.toString(currID));
+				currID ++;
 				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
 				if (currNum != 5) {
 					fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
@@ -403,6 +406,8 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
+				fields.get(i).setFieldID(Character.toString(currID));
+				currID ++;
 				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
 				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[i]);
 			}
@@ -413,9 +418,11 @@ public class ServerController {
 			fields.get(fields.size() - 1).setDiceIndex(0);
 
 		}
-		/*for (int i = 0; i< fields.size();i++){
-			gameLogic.getBoard().setField(i, j, resourceType, diceIndex);
-		}*/
+		for (int i = 0; i< fields.size();i++){
+			int[] coords = gameLogic.getBoard().getFieldCoordinates(fields.get(i).getFieldID());
+			gameLogic.getBoard().setField(coords[0], coords[1], fields.get(i).getResourceType()
+				 ,fields.get(i).getDiceIndex());
+		}
 		gameLogic.getBoard().setBandit("J");
 	}
 

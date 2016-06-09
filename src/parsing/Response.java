@@ -156,8 +156,8 @@ public class Response {
 
 	@SerializedName("Straßenbaukarte ausspielen")
 	public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
-
-	@SerializedName("Längste Handelsstraße")
+    
+	//Duplicate; Removed SerializeName
 	public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;//new in
 	// 0,3
 
