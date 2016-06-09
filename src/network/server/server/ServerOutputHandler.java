@@ -183,14 +183,14 @@ public class ServerOutputHandler {
 
 	public void statusUpdate(int playerID, Color color, String name, PlayerState status, int victoryPoints,
 			int[] resources,Integer sendToPlayerID) {
-		
+
 		// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
 		ProtocolResource pResource;
 		if (resources.length == 1){
 			pResource = new ProtocolResource(null,null,null,null,null,resources[0]);
 		} else {
 			pResource = new ProtocolResource(resources[0],resources[1],resources[2],resources[3],resources[4],null);
-		}	
+		}
 		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource);
 		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(pPlayer);
 		Response r = new Response();
@@ -200,12 +200,12 @@ public class ServerOutputHandler {
 				server.sendToClient(parser.createString(r), sendToPlayerID);
 			} else {
 				server.broadcast((parser.createString(r)));
-			} 
+			}
 		} catch (IOException e) {
 		 logger.error("Threw a Input/Output Exception ", e);
 		 e.printStackTrace();
 		 }
-	
+
 
 	}
 
@@ -373,15 +373,15 @@ public class ServerOutputHandler {
 	}
 
 	public void inventionCardInfo(ProtocolInventionCard invention, int player_id) {
-		ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(invention, player_id);
-		Response r = new Response();
-		r.pInventionCardInfo = pici;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error("Threw a Input/Output Exception ", e);
-			e.printStackTrace();
-		}
+//		ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(invention, player_id);
+//		Response r = new Response();
+//		r.pInventionCardInfo = pici;
+//		try {
+//			server.broadcast(parser.createString(r));
+//		} catch (IOException e) {
+//			logger.error("Threw a Input/Output Exception ", e);
+//			e.printStackTrace();
+//		}
 	}
 
 	public void longestRoad(int player_id) {
@@ -398,15 +398,15 @@ public class ServerOutputHandler {
 	}
 
 	public void monopolyCardInfo(ProtocolMonopolyCard monopoly) {
-		
-		
+
+
 	}
 
 	public void playKnight() {
-	
+
 	}
-	
-	public void play
+
+
 
 	public void playKnightCard(String road1_id, int target) {
 		ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(road1_id, target);

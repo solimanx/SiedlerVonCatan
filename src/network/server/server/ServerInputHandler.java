@@ -76,6 +76,7 @@ public class ServerInputHandler extends InputHandler {
     protected void handle(ProtocolClientReady clientReady) {
         serverController.clientReady(currentThreadID);
 
+
     }
 
     @Override
@@ -118,7 +119,7 @@ public class ServerInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolServerConfirmation serverConfirmation) {
         String server_response = serverConfirmation.getServer_response();
-        serverController.serverConfirmation(server_response);
+        serverController.serverResponse(server_response);
         // Unnecessary Method in ServerInputHadler
     }
 
