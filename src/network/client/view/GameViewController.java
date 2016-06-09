@@ -93,6 +93,18 @@ public class GameViewController implements Initializable {
 	@FXML
 	private Label playerStatusFour;
 
+	@FXML
+	private Label selfVictoryPoints;
+
+	@FXML
+	private Label playerTwoVPoints;
+
+	@FXML
+	private Label playerThreeVPoints;
+
+	@FXML
+	private Label playerFourVPoints;
+
 	private ViewController viewController;
 
 	// jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
@@ -168,16 +180,27 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 */
 	@FXML
 	void handleEndTurnButton(ActionEvent event) {
-
+		viewController.getClientController().endTurn();
+		endTurnButton.setDisable(true);
 	}
 
+	/**
+	 * @param event
+	 */
 	@FXML
 	void handleRollDiceButton(ActionEvent event) {
 		viewController.getClientController().diceRollRequest();
 	}
 
+	/**
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void handleStartTradingButton(ActionEvent event) throws IOException {
 		// new TradeStage
@@ -194,6 +217,9 @@ public class GameViewController implements Initializable {
 		tradeStage.show();
 	}
 
+	/**
+	 * @param event
+	 */
 	@FXML
 	void sendMessage(ActionEvent event) {
 		String message = messageInput.getText();
@@ -201,6 +227,10 @@ public class GameViewController implements Initializable {
 		viewController.getClientController().chatSendMessage(message);
 	}
 
+	/**
+	 * @param playerID
+	 * @param state
+	 */
 	public void setPlayerStatus(int playerID, PlayerState state) {
 		switch (playerIDtoViewPosition.get(playerID)) {
 		case 1:
@@ -220,6 +250,9 @@ public class GameViewController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param villageCoordinates
+	 */
 	public void villageClick(int[] villageCoordinates) {
 		viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
 				villageCoordinates[2]);
@@ -228,6 +261,9 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * @param streetCoordinates
+	 */
 	public void streetClick(int[] streetCoordinates) {
 		System.out.println("Clicked on Street " + streetCoordinates[0] + " , " + streetCoordinates[1] + " , "
 				+ streetCoordinates[2]);
@@ -236,6 +272,9 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * @param fieldCoordinates
+	 */
 	public void fieldClick(int[] fieldCoordinates) {
 		// TODO stealFromPlayer???
 		viewController.getClientController().requestSetBandit(fieldCoordinates[0], fieldCoordinates[1], 1);
@@ -244,10 +283,19 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * @param line
+	 */
 	public void receiveChatMessage(String line) {
 		messages.appendText(line + "\n");
 	}
 
+	/**
+	 * @param u
+	 * @param v
+	 * @param dir
+	 * @param playerID
+	 */
 	public void setStreet(int u, int v, int dir, int playerID) {
 		Line street = streets[u + 3][v + 3][dir];
 		street.setOpacity(1.0);
@@ -256,6 +304,10 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * @param u
+	 * @param v
+	 */
 	public void setBandit(int u, int v) {
 		bandit.setCenterX(fieldCoordinates[u + 3][v + 3][0]);
 		bandit.setCenterY(fieldCoordinates[u + 3][v + 3][1]);
@@ -263,6 +315,13 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * @param u
+	 * @param v
+	 * @param dir
+	 * @param buildType
+	 * @param playerId
+	 */
 	public void setCorner(int u, int v, int dir, CornerStatus buildType, int playerId) {
 		if (buildType == enums.CornerStatus.VILLAGE) {
 			setVillage(u, v, dir, playerColors.get(playerId));
@@ -271,6 +330,12 @@ public class GameViewController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param u
+	 * @param v
+	 * @param dir
+	 * @param playerColor
+	 */
 	public void setVillage(int u, int v, int dir, Color playerColor) {
 		Polygon village = corners[u + 3][v + 3][dir];
 		village.setFill(playerColor);
@@ -278,6 +343,12 @@ public class GameViewController implements Initializable {
 		System.out.println("Village set on " + u + "," + v + " Direction: " + dir);
 	}
 
+	/**
+	 * @param u
+	 * @param v
+	 * @param dir
+	 * @param playerColor
+	 */
 	public void setCity(int u, int v, int dir, Color playerColor) {
 		Polygon city = drawCity(cornerCoordinates[u + 3][v + 3][dir]);
 		city.setFill(playerColor);
@@ -285,6 +356,12 @@ public class GameViewController implements Initializable {
 		board.getChildren().add(city);
 	}
 
+	/**
+	 * @param u
+	 * @param v
+	 * @param resourceType
+	 * @param diceIndex
+	 */
 	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
 		fields[u + 3][v + 3].setFill(fieldColors.get(resourceType));
 		Text text = new Text("" + diceIndex);
@@ -299,8 +376,66 @@ public class GameViewController implements Initializable {
 		board.getChildren().add(chip);
 	}
 
-	public void setHarbour(int u, int v, HarbourStatus harbourStatus) {
-		// TODO
+	/**
+	 * sets Harbour on a Field(u,v)
+	 * 
+	 * @param u
+	 * @param v
+	 * @param harbourType
+	 */
+	public void setHarbour(int u, int v, HarbourStatus harbourType) {
+		Circle circle = new Circle(30.0);
+		circle.setFill(Color.LIGHTGRAY);
+		Text text = new Text(harbourType.toString());
+		StackPane chip = new StackPane(circle, text);
+		chip.toFront();
+		chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0] - 30.0);
+		chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 30.0);
+		board.getChildren().add(chip);
+	}
+
+	public void setResourceCards(int playerID, int[] resources) {
+		if (resources.length == 1) {
+			switch (playerIDtoViewPosition.get(playerID)) {
+			case 1:
+				playerTwoCards.setText(Integer.toString(resources[0]));
+				break;
+			case 2:
+				playerTwoCards.setText(Integer.toString(resources[0]));
+				break;
+			case 3:
+				playerTwoCards.setText(Integer.toString(resources[0]));
+				break;
+			default:
+				break;
+			}
+		} else {
+			selfWood.setText(Integer.toString(resources[0]));
+			selfClay.setText(Integer.toString(resources[1]));
+			selfSheep.setText(Integer.toString(resources[2]));
+			selfCorn.setText(Integer.toString(resources[3]));
+			selfOre.setText(Integer.toString(resources[4]));
+		}
+	}
+
+	public void setVictoryPoints(int playerID, int victoryPoints) {
+		String victoryString = victoryPoints + " Victory Points";
+		switch (playerIDtoViewPosition.get(playerID)) {
+		case 0:
+			selfVictoryPoints.setText(victoryString);
+			break;
+		case 1:
+			playerTwoVPoints.setText(victoryString);
+			break;
+		case 2:
+			playerThreeVPoints.setText(victoryString);
+			break;
+		case 3:
+			playerFourVPoints.setText(victoryString);
+			break;
+		default:
+			break;
+		}
 	}
 
 	public Polygon drawCity(double[] center) {
