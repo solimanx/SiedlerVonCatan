@@ -414,8 +414,8 @@ public class ServerOutputHandler {
     }
 
 
-    public void playKnightCard(String road1_id, int target) {
-        ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(road1_id, target);
+    public void playKnightCard(String road1_id, int target, int player_id) {
+        ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(road1_id, target, player_id);
         Response r = new Response();
         r.pplayKnightCard = ppkc;
         try {
@@ -481,5 +481,6 @@ public class ServerOutputHandler {
             e.printStackTrace();
         }
     }
+
 
 }
