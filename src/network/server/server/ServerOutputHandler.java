@@ -372,8 +372,8 @@ public class ServerOutputHandler {
 
 	}
 
-	public void inventionCardInfo(ProtocolInventionCard invention) {
-		ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(invention);
+	public void inventionCardInfo(ProtocolInventionCard invention, int player_id) {
+		ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(invention, player_id);
 		Response r = new Response();
 		r.pInventionCardInfo = pici;
 		try {
@@ -398,12 +398,15 @@ public class ServerOutputHandler {
 	}
 
 	public void monopolyCardInfo(ProtocolMonopolyCard monopoly) {
-		// TODO
+		
+		
 	}
 
-	public void playDevelopmentCards() {
-		// TODO
+	public void playKnight() {
+	
 	}
+	
+	public void play
 
 	public void playKnightCard(String road1_id, int target) {
 		ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(road1_id, target);
