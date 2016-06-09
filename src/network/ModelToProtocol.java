@@ -65,17 +65,39 @@ public final class ModelToProtocol {
 	}
 
 	public static String getCornerID(int x, int y, int dir) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "";
+		switch (dir){
+		case 0:
+			result = result + getFieldID(x, y-1);
+			result = result + getFieldID(x+1, y-1);
+			result = result + getFieldID(x, y);
+			return result;
+		case 1:
+			result = result + getFieldID(x, y);
+			result = result + getFieldID(x-1, y+1);
+			result = result + getFieldID(x, y+1);
+			return result;
+		default: throw new IllegalArgumentException("Illegal dir in getCornerID");
+		}
 	}
 
 	public static String getEdgeID(int x, int y, int dir) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "";
+		switch (dir){
+		case 0:
+			result = result + getFieldID(x, y-1);
+			result = result + getFieldID(x, y);
+		case 1:
+			result = result + getFieldID(x+1, y-1);
+			result = result + getFieldID(x, y);
+		case 2:
+			result = result + getFieldID(x, y);
+			result = result + getFieldID(x+1, y);
+		default: throw new IllegalArgumentException("Illegal dir in getEdgeID");
+		}
 	}
 
 	public static String getFieldID(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
+		return getFieldID(x, y);
 	}
 }
