@@ -44,7 +44,9 @@ public class HexService {
 		}
 		return null;
 	}
-
+	
+	
+	
 	public int[] getEdgeCoordinates(int x1, int y1, int x2, int y2) {
 		Edge[] a = getSurroundingEdges(x1, x2);
 		Edge[] b = getSurroundingEdges(x2, y2);
@@ -70,7 +72,9 @@ public class HexService {
 		}
 		return null;
 	}
-
+	
+	
+	
 	public Edge[] getSurroundingEdges(int aX, int aY) {
 		Edge n = board.getEdgeAt(aX, aY, 0);
 		Edge ne = board.getEdgeAt(aX + 1, aY - 1, 1);
@@ -81,7 +85,9 @@ public class HexService {
 		Edge[] surroundingEdges = { n, ne, se, s, sw, nw };
 		return surroundingEdges;
 	}
-
+	
+	
+	
 	/**
 	 * returns all fieldIDs in the order of a spiral, beginning with the inputID and ending in the middle of the field.
 	 * example: input: "N"
@@ -96,7 +102,6 @@ public class HexService {
 		String plannedNextField = f;
 		int radius = getDistanceFromMid(f);
 		int[] coord = new int [2];
-
 		for(int i = radius; i>0; i--){
 			for(int j = 0; j<7; j++){
 				for(int k = 0; k<i; k++){
@@ -150,7 +155,19 @@ public class HexService {
 		result = result + Board.getCoordToStringMap().get(new Index(0,0));
 		return result;
 	}
-
+	
+	
+	
+	/**
+	 * calculates the distance to center
+	 * example: (0,0) -> 0
+	 * 			(-2,2) -> 2
+	 * 
+	 * @param f
+	 * 		Field ID
+	 * @return
+	 * 		distance to mid or radius
+	 */
 	public static int getDistanceFromMid(String f){
 		String nextField = f;
 		int result = 0;
@@ -163,7 +180,8 @@ public class HexService {
 		}
 		return result;
 	}
-
+	
+	
 	/**
 	 * returns all fieldIDs, which are one the same ring as the inputID.
 	 * example: input: "E"
@@ -232,6 +250,8 @@ public class HexService {
 	 * @param dir
 	 * 		direction of the searched field
 	 * @return
+	 * 		Field ID of the next Field
+	 * 
 	 */
 	public static String getNextField(int aX, int aY, int dir) {
 		String neighbours = Board.getNeighbouringFields(aX, aY);
@@ -314,22 +334,44 @@ public class HexService {
 	}
 
 
-
+	/**
+	 * 
+	 * @param u
+	 * 		Field 1 x-coordinate
+	 * @param v
+	 * 		Field 1 y-coordinate
+	 * @param x
+	 * 		Field 2 x-coordinate
+	 * @param y
+	 * 		Field 2 y-coordinate
+	 * @return
+	 * 		the water Field
+	 * 		
+	 */
 	public Field getHarbourSeaField(int u, int v, int x, int y){
-		if(board.getField(u, v).getResourceType() == enums.ResourceType.SEA && board.getField(x, y).getResourceType() == enums.ResourceType.SEA){
-			throw new IllegalArgumentException("Both Fields are are see Fields");
-		}
 		if(board.getField(u, v).getResourceType() == enums.ResourceType.SEA){
 			return board.getField(u, v);
 		}
 		if(board.getField(x, y).getResourceType() == enums.ResourceType.SEA){
 			return board.getField(x, y);
 		}
-		return null;
+		if(board.getField(u, v).getResourceType() == enums.ResourceType.SEA && board.getField(x, y).getResourceType() == enums.ResourceType.SEA){
+			throw new IllegalArgumentException("Both Fields are sea Fields");
+		}
+		throw new IllegalArgumentException("None of both Fields is a sea Fields");
 	}
 
-
+	/**
+	 * returns both adjacent corners of an edge
+	 * @param s
+	 * 		Field ID of two Fields defining the edge
+	 * @return
+	 * 		two Strings of 3 characters defining the upper and lower corner
+	 */
 	public static String[] getCornerFromEdge(String s){
+		if(s.length()!= 2){
+			throw new IllegalArgumentException("Too many or too few Fields as input in HexService.getCornerFromEdge");
+		}
 		int[] a = Board.getStringToCoordMap().get(s.substring(0, 1));
 		int[] b = Board.getStringToCoordMap().get(s.substring(1, 2));
 		String fields1 = Board.getNeighbouringFields(a[0],a[1]);
