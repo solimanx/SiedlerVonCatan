@@ -74,12 +74,36 @@ public class ServerController {
 		threadPlayerIdMap.put(currentThreadID, amountPlayers);
 		modelPlayerIdMap.put(amountPlayers,currentThreadID);
 		amountPlayers++;
-		welcome(currentThreadID);
-		//TODO Status update of player(currentThreadID) send to ALL? clients
+		
+		int playerID = threadPlayerIdMap.get(currentThreadID);
+		PlayerModel playerModel = new PlayerModel(playerID);
+		playerModel.setPlayerState(PlayerState.GAME_STARTING);
+		tempPlayers.add(playerModel);
+		
+		welcome(playerID);
+		for (int i = 0;i< tempPlayers.size();i++){
+			if ( i == playerID){
+				int[] resources = {0,0,0,0,0};
+				serverOutputHandler.statusUpdate(currentThreadID, null, null, PlayerState.GAME_STARTING, 0, resources,i);
+			} else {
+				int [] resources = {0};
+				serverOutputHandler.statusUpdate(currentThreadID, null, null, PlayerState.GAME_STARTING, 0, resources,i);
+			}
+		}
+		for (int i = 0;i<tempPlayers.size();i++){
+			PlayerModel currPM;
+			if (i != playerID){
+				currPM = tempPlayers.get(i);
+				int[] resources = {currPM.getResourceCards().size()};
+				serverOutputHandler.statusUpdate(modelPlayerIdMap.get(i), currPM.getColor(), currPM.getName(), currPM.getPlayerState(), 0, resources, currentThreadID);
+			}
+			
+		}		
+		
 	}
 
-	public void welcome(int currentThreadID) {
-		serverOutputHandler.welcome(currentThreadID);		
+	public void welcome(int modelPlayerID) {
+		serverOutputHandler.welcome(modelPlayerIdMap.get(modelPlayerID));		
 	}
 
 	public void clientReady(int currentThreadID) {
@@ -118,8 +142,7 @@ public class ServerController {
 	}
 
 	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
-		int playerID = threadPlayerIdMap.get(currentThreadID);
-		PlayerModel playerModel = new PlayerModel(playerID);
+
 		boolean colorAvailable = true;
 		for (int i = 0;i< tempPlayers.size();i++){
 			if (tempPlayers.get(i).getColor().equals(color)){
@@ -127,15 +150,19 @@ public class ServerController {
 				break;
 			}
 		}
-		if (colorAvailable){			
-		playerModel.setColor(color);
-		playerModel.setName(name);
-		playerModel.setPlayerState(PlayerState.GAME_STARTING);
-		//TODO playerobject is added to tempplayers on welcome NOT on profileupdate
-		tempPlayers.add(playerModel);
-		//TODO statusupdate print of player
+		if (colorAvailable){
+			int playerModelID = threadPlayerIdMap.get(currentThreadID);
+			for (int i = 0;i <tempPlayers.size();i++){
+				if (tempPlayers.get(i).getID() == playerModelID){
+					tempPlayers.get(i).setColor(color);
+					tempPlayers.get(i).setName(name);
+					tempPlayers.get(i).setPlayerState(PlayerState.GAME_STARTING);
+				}
+			}
+
 		serverConfirmation("OK");
-		serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_STARTING, 0, new int[5]);
+		statusUpdate(playerModelID);
+		//serverOutputHandler.statusUpdate(currentThreadID, color, name, PlayerState.GAME_STARTING, 0, new int[5]);
 		} else {
 			error("Farbe bereits vergeben!");
 		}		
@@ -152,8 +179,24 @@ public class ServerController {
 	}
 
 	public void statusUpdate(int playerModelID){
+		for (int i = 0;i<amountPlayers;i++){
+			statusUpdateToPlayer(i,playerModelID);
+		}
+		//PlayerModel pM = gameLogic.getBoard().getPlayer(playerModelID);
+	    //serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(), pM.getPlayerState(), pM.getVictoryPoints(), getPlayerResources(playerModelID),null);
+	}
+
+	public void statusUpdateToPlayer(int sendToPlayer, int playerModelID) {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(playerModelID);
-	    serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(), pM.getPlayerState(), pM.getVictoryPoints(), getPlayerResources(playerModelID));
+
+		if ( sendToPlayer == playerModelID){
+			int[] resources = getPlayerResources(playerModelID);
+			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(), pM.getPlayerState(), pM.getVictoryPoints(), resources,modelPlayerIdMap.get(playerModelID));
+		} else {
+			int [] resources = {gameLogic.getBoard().getPlayer(playerModelID).getResourceCards().size()};
+			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(), pM.getPlayerState(), pM.getVictoryPoints(), resources,modelPlayerIdMap.get(playerModelID));
+		}
+		
 	}
 
 	/**
