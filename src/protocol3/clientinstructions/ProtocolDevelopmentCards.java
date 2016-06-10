@@ -9,6 +9,9 @@ import protocol3.object.ProtocolRoadBuildingCard;
 import protocol3.severinstructions.ProtocolPlayKnightCard;
 
 /**
+ * <b>Entwicklungskarte Objekte( development cards)</b>
+ * <p>
+ * </p>
  * Created on 06.06.2016.
  */
 @Since(0.3)
