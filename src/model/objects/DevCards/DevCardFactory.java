@@ -34,7 +34,7 @@ public class DevCardFactory {
 	
 	public int decrementArgument(int a){
 		if (a > 0){
-			return a--;
+			return --a;
 		} else {
 			throw new IllegalArgumentException("Too many cards of this type");
 		}
