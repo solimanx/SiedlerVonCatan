@@ -24,11 +24,7 @@ import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolPlayer;
 import protocol.object.ProtocolResource;
-import protocol.serverinstructions.ProtocolBuild;
-import protocol.serverinstructions.ProtocolCosts;
-import protocol.serverinstructions.ProtocolDiceRollResult;
-import protocol.serverinstructions.ProtocolResourceObtain;
-import protocol.serverinstructions.ProtocolStatusUpdate;
+import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
@@ -249,6 +245,19 @@ public class ServerOutputHandler {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();
 		}
+	}
+	public void robberMovement(int player_id, String location_id, int victim_id){
+		ProtocolRobberMovement pm = new ProtocolRobberMovement(player_id,location_id,victim_id);
+
+		Response r = new Response();
+		r.pRobberMovement= pm;
+		try {
+			server.sendToClient(parser.createString(r), player_id);
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
+
 	}
 
 	public void protocolTradeIsRequested(int player_id, int trade_id, int[] offer, int[] withdrawal) {
