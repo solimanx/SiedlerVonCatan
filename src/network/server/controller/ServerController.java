@@ -12,6 +12,7 @@ import enums.ResourceType;
 import javafx.stage.Stage;
 import model.Board;
 import model.GameLogic;
+import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
@@ -232,10 +233,10 @@ public class ServerController {
 	public void initializeBoard() {
 		Board board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
-		// generateBoard(board.getFieldAt(2,2),true);
+		generateBoard("A",true);
 		System.out.println(board.getFieldAt(0, 0).getDiceIndex() + board.getFieldAt(0, 0).getResourceType().toString()
 				+ board.getFieldAt(0, 0).getFieldID());
-		generateDebuggingBoard();
+		//generateDebuggingBoard();
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 
 		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
@@ -433,17 +434,15 @@ public class ServerController {
 	 * middle
 	 *
 	 * @param initialField
-	 *            gameLogic.getBoard()ram randomDesert
+	 gameLogic.getBoard()ram randomDesert
 	 */
-	private void generateBoard(Field initialField, boolean randomDesert) {
-		ArrayList<Field> fields = gameLogic.getBoard().getAllFields(); // spiral
-																		// implementieren
+	private void generateBoard(String initialField, boolean randomDesert) {
+		String fields = HexService.getSpiral(initialField);
 		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
-		char currID = 'A';
 		int currNum;
 		if (randomDesert) {
 			int diceInd = 0;
-			for (int i = 0; i < fields.size(); i++) {
+			for (int i = 0; i < fields.length(); i++) {
 
 				Random r = new Random();
 				boolean notFound = true;
@@ -454,18 +453,16 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				fields.get(i).setFieldID(Character.toString(currID));
-				currID++;
-				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
+				int[] coords = Board.getStringToCoordMap().get(fields.charAt(i));				
 				if (currNum != 5) {
-					fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[diceInd]);
+					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[diceInd]);
 					diceInd++;
 				} else {
-					fields.get(i).setDiceIndex(0);
+					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], 0);
 				}
 			}
 		} else {
-			for (int i = 0; i < fields.size() - 1; i++) {
+			for (int i = 0; i < fields.length() - 1; i++) {
 				Random r = new Random();
 				boolean notFound = true;
 				do {
@@ -475,22 +472,12 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				fields.get(i).setFieldID(Character.toString(currID));
-				currID++;
-				fields.get(i).setResourceType(DefaultSettings.RESOURCE_ORDER[currNum]);
-				fields.get(i).setDiceIndex(DefaultSettings.DICE_NUMBERS[i]);
+				int[] coords = Board.getStringToCoordMap().get(fields.charAt(i));
+				gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[i]);
 			}
-			fields.get(fields.size() - 1).setResourceType(ResourceType.NOTHING); // inner
-																					// field
-																					// =
-																					// desert;
-			fields.get(fields.size() - 1).setDiceIndex(0);
+			int[] coords = Board.getStringToCoordMap().get(fields.charAt(fields.length()-1));
+			gameLogic.getBoard().setFieldAt(coords[0], coords[1], ResourceType.NOTHING, 0);
 
-		}
-		for (int i = 0; i < fields.size(); i++) {
-			int[] coords = gameLogic.getBoard().getFieldCoordinates(fields.get(i).getFieldID());
-			gameLogic.getBoard().setField(coords[0], coords[1], fields.get(i).getResourceType(),
-					fields.get(i).getDiceIndex());
 		}
 		gameLogic.getBoard().setBandit("J");
 	}
