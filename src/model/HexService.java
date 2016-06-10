@@ -180,10 +180,11 @@ public class HexService {
 	 * @return distance to mid or radius
 	 */
 	public static int getDistanceFromMid(String f) {
+		Board useless = new Board();
 		String nextField = f;
 		int result = 0;
 		int[] coord;
-		String end = Board.getCoordToStringMap().get(new Index(0, 0));
+		String end = "J";//Board.getCoordToStringMap().get(new Index(0, 0));
 		while (!nextField.equals(end)) {
 			coord = Board.getStringToCoordMap().get(nextField);
 			nextField = getNextField(coord[0], coord[1], nextDirection(getDirection(nextField), 1));
