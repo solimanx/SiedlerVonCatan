@@ -13,12 +13,12 @@ import protocol3.object.ProtocolMonopolyCard;
 public class ProtocolMonopolyCardInfo {
 
     @SerializedName("Rohstoff")
-    private ProtocolResource resource;
+    private int [] resource;
 
     @SerializedName("Spieler")
     private Integer player_id;
 
-    public ProtocolResource getResource() {
+    public int [] getResource() {
         return resource;
     }
 
@@ -27,12 +27,12 @@ public class ProtocolMonopolyCardInfo {
     }
 
     //Client to Server
-    public ProtocolMonopolyCardInfo(ProtocolResource resource) {
+    public ProtocolMonopolyCardInfo(int [] resource) {
         this.resource = resource;
     }
 
     //Server to Client
-    public ProtocolMonopolyCardInfo(ProtocolResource resource, Integer player_id) {
+    public ProtocolMonopolyCardInfo(int [] resource, Integer player_id) {
 
         this.resource = resource;
         this.player_id = player_id;
