@@ -15,17 +15,17 @@ import com.google.gson.annotations.Since;
 @Since(0.3)
 public class ProtocolBiggestKnightProwess {
 
-	@SerializedName("Spieler")
+    @SerializedName("Spieler")
 
-	int player_id;
+    int player_id;
 
-	public ProtocolBiggestKnightProwess(int player_id) {
+    public ProtocolBiggestKnightProwess(int player_id) {
 
-		this.player_id = player_id;
-	}
+        this.player_id = player_id;
+    }
 
-	public int getPlayer_id() {
+    public int getPlayer_id() {
 
-		return player_id;
-	}
+        return player_id;
+    }
 }

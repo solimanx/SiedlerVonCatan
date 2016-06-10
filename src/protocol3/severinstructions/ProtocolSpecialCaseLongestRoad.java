@@ -14,7 +14,7 @@ import com.google.gson.annotations.Since;
 @Since(0.3)
 public class ProtocolSpecialCaseLongestRoad {
 
-	public ProtocolSpecialCaseLongestRoad() {
+    public ProtocolSpecialCaseLongestRoad() {
 
-	}
+    }
 }

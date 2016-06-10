@@ -7,14 +7,14 @@ import protocol.object.ProtocolResource;
 
 @Since(0.3)
 public class ProtocolInventionCard {
-	@SerializedName("Rohstoffe")
-	ProtocolResource resource;
+    @SerializedName("Rohstoffe")
+    ProtocolResource resource;
 
-	public ProtocolInventionCard(ProtocolResource resource) {
-		this.resource = resource;
-	}
+    public ProtocolInventionCard(ProtocolResource resource) {
+        this.resource = resource;
+    }
 
-	public ProtocolResource getResource() {
-		return resource;
-	}
+    public ProtocolResource getResource() {
+        return resource;
+    }
 }

@@ -11,16 +11,16 @@ import protocol.object.ProtocolResource;
 @Since(0.3)
 public class ProtocolMonopolyCard {
 
-	@SerializedName("Rohstoffe")
-	ProtocolResource resource;
+    @SerializedName("Rohstoffe")
+    ProtocolResource resource;
 
-	public ProtocolMonopolyCard(ProtocolResource resource) {
-		this.resource = resource;
+    public ProtocolMonopolyCard(ProtocolResource resource) {
+        this.resource = resource;
 
-	}
+    }
 
-	public ProtocolResource getResource() {
-		return resource;
+    public ProtocolResource getResource() {
+        return resource;
 
-	}
+    }
 }

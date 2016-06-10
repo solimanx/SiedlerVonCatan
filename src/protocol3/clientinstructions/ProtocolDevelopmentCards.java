@@ -14,49 +14,49 @@ import protocol3.severinstructions.ProtocolPlayKnightCard;
 @Since(0.3)
 public class ProtocolDevelopmentCards {
 
-	@SerializedName("Ritter")
-	private Integer knight;
+    @SerializedName("Ritter")
+    private Integer knight;
 
-	@SerializedName("Stra�enbau")
-	private Integer roadbuild;
+    @SerializedName("Straßenbau")
+    private Integer roadbuild;
 
-	@SerializedName("Monopol")
-	private Integer monopoly;
+    @SerializedName("Monopol")
+    private Integer monopoly;
 
-	@SerializedName("Erfindung")
-	private Integer invention;
+    @SerializedName("Erfindung")
+    private Integer invention;
 
-	@SerializedName("Unbekannt")
-	private Integer unknown;
+    @SerializedName("Unbekannt")
+    private Integer unknown;
 
-	public ProtocolDevelopmentCards(Integer knight, Integer roadbuild, Integer monopoly, Integer invention,
-			Integer unknown) {
-		this.knight = knight;
-		this.roadbuild = roadbuild;
-		this.monopoly = monopoly;
-		this.invention = invention;
-		this.unknown = unknown;
+    public ProtocolDevelopmentCards(Integer knight, Integer roadbuild, Integer monopoly, Integer invention,
+                                    Integer unknown) {
+        this.knight = knight;
+        this.roadbuild = roadbuild;
+        this.monopoly = monopoly;
+        this.invention = invention;
+        this.unknown = unknown;
 
-	}
+    }
 
-	public Integer getKnight() {
-		return knight;
-	}
+    public Integer getKnight() {
+        return knight;
+    }
 
-	public Integer getRoadbuild() {
-		return roadbuild;
-	}
+    public Integer getRoadbuild() {
+        return roadbuild;
+    }
 
-	public Integer getMonopoly() {
-		return monopoly;
-	}
+    public Integer getMonopoly() {
+        return monopoly;
+    }
 
-	public Integer getInvention() {
-		return invention;
-	}
+    public Integer getInvention() {
+        return invention;
+    }
 
-	public Integer getUnknown() {
-		return unknown;
-	}
+    public Integer getUnknown() {
+        return unknown;
+    }
 
 }

@@ -2,6 +2,7 @@ package protocol3.severinstructions;
 
 import com.google.gson.annotations.SerializedName;
 
+import protocol.object.ProtocolResource;
 import protocol3.object.ProtocolMonopolyCard;
 
 /**
@@ -9,16 +10,23 @@ import protocol3.object.ProtocolMonopolyCard;
  */
 public class ProtocolMonopolyCardInfo {
 
-	@SerializedName("Monopol")
-	private ProtocolMonopolyCard monopoly;
+    @SerializedName("Rohstoff")
+    private ProtocolResource resource;
 
-	public ProtocolMonopolyCardInfo(ProtocolMonopolyCard monopoly) {
+    @SerializedName("Spielr")
+    private int player_id;
 
-		this.monopoly = monopoly;
-	}
+    public ProtocolResource getResource() {
+        return resource;
+    }
 
-	public ProtocolMonopolyCard getMonopolyCard() {
-		return monopoly;
-	}
+    public int getPlayer_id() {
+        return player_id;
+    }
 
+    public ProtocolMonopolyCardInfo(ProtocolResource resource, int player_id) {
+
+        this.resource = resource;
+        this.player_id = player_id;
+    }
 }

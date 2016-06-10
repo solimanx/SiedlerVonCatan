@@ -16,30 +16,30 @@ import protocol3.object.ProtocolRoadBuildingCard;
 @Since(0.3)
 public class ProtocolRoadBuildingCardInfo {
 
-	@SerializedName("Straße 1")
-	private String road1_id;
+    @SerializedName("Straße 1")
+    private String road1_id;
 
-	@SerializedName("Straße 2")
-	private String road2_id;
+    @SerializedName("Straße 2")
+    private String road2_id;
 
-	@SerializedName("Spieler")
-	private int player_id;
+    @SerializedName("Spieler")
+    private int player_id;
 
-	public ProtocolRoadBuildingCardInfo(String road1_id, String road2_id, int player_id) {
-		this.road1_id = road1_id;
-		this.road2_id = road2_id;
-		this.player_id = player_id;
-	}
+    public ProtocolRoadBuildingCardInfo(String road1_id, String road2_id, int player_id) {
+        this.road1_id = road1_id;
+        this.road2_id = road2_id;
+        this.player_id = player_id;
+    }
 
-	public String getRoad1_id() {
-		return road1_id;
-	}
+    public String getRoad1_id() {
+        return road1_id;
+    }
 
-	public String getRoad2_id() {
-		return road2_id;
-	}
+    public String getRoad2_id() {
+        return road2_id;
+    }
 
-	public int getPlayer_id() {
-		return player_id;
-	}
+    public int getPlayer_id() {
+        return player_id;
+    }
 }
