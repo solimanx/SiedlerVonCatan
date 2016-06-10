@@ -1,8 +1,7 @@
 package model.objects.DevCards;
 
-
 public class VictoryPointCard implements DevelopmentCard {
-	
+
 	String name = "Victory Card";
 	String text = "";
 	int victoryPoints = 1;
@@ -18,8 +17,8 @@ public class VictoryPointCard implements DevelopmentCard {
 		// TODO Auto-generated method stub
 		return text;
 	}
-	
-	public int getVictorypoints(){
+
+	public int getVictorypoints() {
 		return victoryPoints;
 	}
 

@@ -42,11 +42,10 @@ public final class ViewBoardFactory {
 	public List<Shape> figures = new LinkedList<Shape>();
 	private Pane boardPane;
 
-
-	public Pane getViewBoard(Stage stage){
+	public Pane getViewBoard(Stage stage) {
 		boardPane = new Pane();
-		//windowCenter[0] = stage.getWidth() / 2;
-		//windowCenter[1] = stage.getHeight() / 2;
+		// windowCenter[0] = stage.getWidth() / 2;
+		// windowCenter[1] = stage.getHeight() / 2;
 		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 		windowCenter[1] = screenBounds.getHeight() / 2;
 		windowCenter[0] = screenBounds.getWidth() / 2;
@@ -61,12 +60,10 @@ public final class ViewBoardFactory {
 		return boardPane;
 	}
 
-
 	private void initBoard() {
 		// TODO Auto-generated method stub
 
 	}
-
 
 	public void initCorners() {
 		for (int i = 0; i < fieldCoordinates.length; i++) {
@@ -112,7 +109,6 @@ public final class ViewBoardFactory {
 		}
 	}
 
-
 	/**
 	 * draws a Circle with diceIndex
 	 */
@@ -142,7 +138,6 @@ public final class ViewBoardFactory {
 		return hexagon;
 	}
 
-
 	/**
 	 * takes pair of coordinates as center point and draws a village
 	 *
@@ -170,8 +165,6 @@ public final class ViewBoardFactory {
 		return city;
 	}
 
-
-
 	public Circle drawBandit() {
 		Circle bandit = new Circle(25.0);
 		bandit.setFill(Color.BLACK);
@@ -179,7 +172,6 @@ public final class ViewBoardFactory {
 		bandit.setCenterY(windowCenter[1]);
 		return bandit;
 	}
-
 
 	/**
 	 * auxiliary method calculating center coordinates of every field.
@@ -377,8 +369,5 @@ public final class ViewBoardFactory {
 	public int convertToRect(int x) {
 		return x + 3;
 	}
-
-
-
 
 }

@@ -104,10 +104,10 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Label playerFourVPoints;
-	
+
 	@FXML
 	private Label selfName;
-	
+
 	@FXML
 	private TextField diceResult;
 
@@ -811,6 +811,6 @@ public class GameViewController implements Initializable {
 		playerIDtoViewPosition.put(ownPlayerId, 0);
 		playerColors.add(0, viewController.playerColors.get(color));
 		selfName.setText(name);
-		
+
 	}
 }

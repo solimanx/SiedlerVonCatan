@@ -90,7 +90,7 @@ public class ClientInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
-		//ProtocolBoard object retrieved (Karte: ...}
+		// ProtocolBoard object retrieved (Karte: ...}
 		ProtocolBoard pBoard = gameStarted.getBoard();
 		Field[] fields = new Field[pBoard.getAmountFields()];
 		for (int i = 0; i < pBoard.getAmountFields(); i++) {

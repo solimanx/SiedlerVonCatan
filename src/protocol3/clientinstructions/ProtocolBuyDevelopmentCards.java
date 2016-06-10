@@ -7,12 +7,9 @@ import com.google.gson.annotations.Since;
  */
 @Since(0.3)
 public class ProtocolBuyDevelopmentCards {
-	
-	public ProtocolBuyDevelopmentCards(){
-		
-		
-		
+
+	public ProtocolBuyDevelopmentCards() {
+
 	}
-	
-	
+
 }

@@ -7,7 +7,7 @@ public class TradeController {
 
 	public void setViewController(ViewController viewController) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

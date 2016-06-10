@@ -4,8 +4,7 @@ public class MonopolyCard implements DevelopmentCard {
 
 	String name = "Monoploy Card";
 	String text = "";
-	
-	
+
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub

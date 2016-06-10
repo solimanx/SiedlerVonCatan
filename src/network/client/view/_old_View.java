@@ -72,7 +72,7 @@ public class _old_View implements _old_ViewInterface {
 	 * @param board
 	 * @param stage
 	 */
-	public _old_View(Board board, Stage stage ) {
+	public _old_View(Board board, Stage stage) {
 		this.primaryStage = stage;
 		try {
 			rootPane = new BorderPane();
@@ -105,13 +105,13 @@ public class _old_View implements _old_ViewInterface {
 		// drawDices();
 
 		// Test Buttons
-//		button = new Button("Do Something!");
-//		button2 = new Button();
-//		button3 = new Button();
-//		button4 = new Button();
-//		HBox buttons = new HBox(button, button2, button3, button4);
-//		rootPane.setTop(buttons);
-//		// end Test Buttons
+		// button = new Button("Do Something!");
+		// button2 = new Button();
+		// button3 = new Button();
+		// button4 = new Button();
+		// HBox buttons = new HBox(button, button2, button3, button4);
+		// rootPane.setTop(buttons);
+		// // end Test Buttons
 
 		centerPane = new Pane();
 		centerPane.getChildren().addAll(0, figures);
@@ -149,9 +149,9 @@ public class _old_View implements _old_ViewInterface {
 
 							int[] streetCoordinates = { i, j, l };
 
-//							street.setOnMouseClicked(e -> {
-//								mainViewController.streetClick(streetCoordinates);
-//							});
+							// street.setOnMouseClicked(e -> {
+							// mainViewController.streetClick(streetCoordinates);
+							// });
 
 							figures.add(street);
 						}
@@ -165,9 +165,9 @@ public class _old_View implements _old_ViewInterface {
 
 							int[] villageCoordinates = { i, j, k };
 
-//							village.setOnMouseClicked(e -> {
-//								mainViewController.villageClick(villageCoordinates);
-//							});
+							// village.setOnMouseClicked(e -> {
+							// mainViewController.villageClick(villageCoordinates);
+							// });
 
 							figures.add(village);
 						}

@@ -156,9 +156,9 @@ public class Response {
 
 	@SerializedName("Straßenbaukarte ausspielen")
 	public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
-    
-	//Duplicate; Removed SerializeName
-	public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;//new in
+
+	// Duplicate; Removed SerializeName
+	public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;// new in
 	// 0,3
 
 	// Clientinstructions in Protocol 0.3
@@ -181,6 +181,6 @@ public class Response {
 	public ProtocolRoadBuildingCard pRoadBuildCard; // new in 0.3
 
 	@SerializedName("Entwicklungskarte gekauft")
-	public  ProtocolBoughtDevelopmentCard pBoughtDevelopmentCard;//new in 0.3
+	public ProtocolBoughtDevelopmentCard pBoughtDevelopmentCard;// new in 0.3
 
 }

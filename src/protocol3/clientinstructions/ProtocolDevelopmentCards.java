@@ -25,11 +25,12 @@ public class ProtocolDevelopmentCards {
 
 	@SerializedName("Erfindung")
 	private Integer invention;
-	
+
 	@SerializedName("Unbekannt")
 	private Integer unknown;
 
-	public ProtocolDevelopmentCards(Integer knight, Integer roadbuild, Integer monopoly, Integer invention, Integer unknown) {
+	public ProtocolDevelopmentCards(Integer knight, Integer roadbuild, Integer monopoly, Integer invention,
+			Integer unknown) {
 		this.knight = knight;
 		this.roadbuild = roadbuild;
 		this.monopoly = monopoly;
@@ -53,7 +54,7 @@ public class ProtocolDevelopmentCards {
 	public Integer getInvention() {
 		return invention;
 	}
-	
+
 	public Integer getUnknown() {
 		return unknown;
 	}

@@ -1,7 +1,7 @@
 package model.objects.DevCards;
 
 public class StreetBuildingCard implements DevelopmentCard {
-	
+
 	String name = "Street Building Card";
 	String text = "";
 

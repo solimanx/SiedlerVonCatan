@@ -68,42 +68,44 @@ public final class ModelToProtocol {
 
 	public static String getCornerID(int x, int y, int dir) {
 		String result = "";
-		switch (dir){
+		switch (dir) {
 		case 0:
-			result = result + getFieldID(x, y-1);
-			result = result + getFieldID(x+1, y-1);
+			result = result + getFieldID(x, y - 1);
+			result = result + getFieldID(x + 1, y - 1);
 			result = result + getFieldID(x, y);
 			return result;
 		case 1:
 			result = result + getFieldID(x, y);
-			result = result + getFieldID(x-1, y+1);
-			result = result + getFieldID(x, y+1);
+			result = result + getFieldID(x - 1, y + 1);
+			result = result + getFieldID(x, y + 1);
 			return result;
-		default: throw new IllegalArgumentException("Illegal dir in getCornerID");
+		default:
+			throw new IllegalArgumentException("Illegal dir in getCornerID");
 		}
 	}
 
 	public static String getEdgeID(int x, int y, int dir) {
 		String result = "";
-		switch (dir){
+		switch (dir) {
 		case 0:
-			result = result + getFieldID(x, y-1);
+			result = result + getFieldID(x, y - 1);
 			result = result + getFieldID(x, y);
 			return result;
 		case 1:
-			result = result + getFieldID(x+1, y-1);
+			result = result + getFieldID(x + 1, y - 1);
 			result = result + getFieldID(x, y);
 			return result;
 		case 2:
 			result = result + getFieldID(x, y);
-			result = result + getFieldID(x+1, y);
+			result = result + getFieldID(x + 1, y);
 			return result;
-		default: throw new IllegalArgumentException("Illegal dir in getEdgeID");
+		default:
+			throw new IllegalArgumentException("Illegal dir in getEdgeID");
 		}
 	}
 
 	public static String getFieldID(int x, int y) {
-		Index index = new Index(x,y);
+		Index index = new Index(x, y);
 		return Board.getCoordToStringMap().get(index);
 	}
 }

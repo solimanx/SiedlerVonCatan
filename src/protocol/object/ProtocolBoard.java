@@ -61,6 +61,6 @@ public class ProtocolBoard {
 
 	public int getAmountHarbours() {
 		return harbours.length;
-	}	
-	
+	}
+
 }

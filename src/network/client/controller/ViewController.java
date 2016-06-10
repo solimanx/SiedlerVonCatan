@@ -24,6 +24,7 @@ public class ViewController {
 	private PlayerProfileController nameSelectDialogController;
 	private TradeController tradeController;
 	private Stage primaryStage;
+
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
@@ -117,47 +118,40 @@ public class ViewController {
 			e.printStackTrace();
 		}
 	}
-//		this.GameViewController = new GameViewController(gameViewStage);
-//		this.mainViewController = new MainViewController(this, clientController.getGameLogic().getBoard(), gameViewStage);
-//		init();
-//	}
-//
-//	public View getView() {
-//		return mainViewController.getView();
-//	}
+	// this.GameViewController = new GameViewController(gameViewStage);
+	// this.mainViewController = new MainViewController(this,
+	// clientController.getGameLogic().getBoard(), gameViewStage);
+	// init();
+	// }
+	//
+	// public View getView() {
+	// return mainViewController.getView();
+	// }
 
 	private void init() {
-
 
 		playerColors.put(enums.Color.BLUE, Color.BLUE);
 		playerColors.put(enums.Color.ORANGE, Color.ORANGE);
 		playerColors.put(enums.Color.RED, Color.RED);
 		playerColors.put(enums.Color.WHITE, Color.WHITE);
 
-		/*view.button.setText("build initial village 2,-2,0");
-		view.button.setOnAction(e -> {
-			// setCorner(2, -2, 0, CornerStatus.VILLAGE, 23);
-			serverController.buildInitialVillage(2, -2, 0, 1);
-		});
-		view.button2.setText("build initial street 2,-2,1");
-		view.button2.setOnAction(e -> {
-			// setStreet(-1,-1,0,1);
-			serverController.buildInitialStreet(2, -2, 1, 1);
-			serverController.buildStreet(2, -2, 2, 1);
-			// view.setFieldResourceType(-1, -1,
-			// fieldColors.get(ResourceType.SHEEP));
-		});
-		view.button3.setText("build city 2,-2,0");
-		view.button3.setOnAction(e -> {
-			// setCorner(0, -2, 1, CornerStatus.CITY, 1);
-			serverController.buildCity(2, -2, 0, 1);
-			serverController.buildVillage(2, -1, 0, 1);
-			serverController.buildCity(2, -1, 0, 1);
-		});
-		view.button4.setText("set bandit 2,-2");
-		view.button4.setOnAction(e -> {
-			// gameController.setBandit(2, -2);
-		});*/
+		/*
+		 * view.button.setText("build initial village 2,-2,0");
+		 * view.button.setOnAction(e -> { // setCorner(2, -2, 0,
+		 * CornerStatus.VILLAGE, 23); serverController.buildInitialVillage(2,
+		 * -2, 0, 1); }); view.button2.setText("build initial street 2,-2,1");
+		 * view.button2.setOnAction(e -> { // setStreet(-1,-1,0,1);
+		 * serverController.buildInitialStreet(2, -2, 1, 1);
+		 * serverController.buildStreet(2, -2, 2, 1); //
+		 * view.setFieldResourceType(-1, -1, //
+		 * fieldColors.get(ResourceType.SHEEP)); }); view.button3.setText(
+		 * "build city 2,-2,0"); view.button3.setOnAction(e -> { // setCorner(0,
+		 * -2, 1, CornerStatus.CITY, 1); serverController.buildCity(2, -2, 0,
+		 * 1); serverController.buildVillage(2, -1, 0, 1);
+		 * serverController.buildCity(2, -1, 0, 1); }); view.button4.setText(
+		 * "set bandit 2,-2"); view.button4.setOnAction(e -> { //
+		 * gameController.setBandit(2, -2); });
+		 */
 
 	}
 
@@ -189,8 +183,8 @@ public class ViewController {
 	public void setLobbyController(LobbyController lobbyController) {
 		this.lobbyController = lobbyController;
 	}
-	
-	public void messageReceive(String s){
+
+	public void messageReceive(String s) {
 		if (gameView) {
 			gameViewController.receiveChatMessage(s);
 		} else {
@@ -200,7 +194,8 @@ public class ViewController {
 
 	public void newTradeView() {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/network/client/view/tradeview/tradeView.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(
+					getClass().getResource("/application/network/client/view/tradeview/tradeView.fxml"));
 			Parent root2 = (Parent) fxmlLoader.load();
 			tradeController = fxmlLoader.getController();
 			tradeController.setViewController(this);
@@ -212,6 +207,6 @@ public class ViewController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

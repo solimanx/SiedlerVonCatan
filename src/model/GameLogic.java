@@ -152,8 +152,8 @@ public class GameLogic {
 	public boolean checkSetBandit(int x, int y, int playerID) {
 		Field f = board.getFieldAt(x, y);
 		if (f != null && !f.getFieldID().equals(board.getBandit())) { // valid
-																// position and
-																// not the
+			// position and
+			// not the
 			// same as before
 			if (playerID == 0) { // check if specified player has a corner at
 									// this field
@@ -271,20 +271,18 @@ public class GameLogic {
 		return false;
 	}
 
-	
 	public boolean canTrade() {
 
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	
 	public boolean canPlayCard() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	public Board getBoard(){
+
+	public Board getBoard() {
 		return board;
 	}
 

@@ -43,8 +43,8 @@ public class Client extends Thread {
 				System.out.println("Client connected to server.");
 				runClient();
 			} catch (IOException e) {
-				System.out.println("Connection to server failed." + " Attempt:" + connectionTry+1);
-				connectionTry ++;
+				System.out.println("Connection to server failed." + " Attempt:" + connectionTry + 1);
+				connectionTry++;
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException ie) {

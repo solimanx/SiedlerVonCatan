@@ -129,5 +129,4 @@ public class PlayerModel {
 		this.amountStreets = amountStreets;
 	}
 
-
 }

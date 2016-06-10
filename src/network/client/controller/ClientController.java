@@ -103,9 +103,10 @@ public class ClientController {
 
 	// 7.1
 	public void sendPlayerProfile(String name, Color color) {
-	    clientOutputHandler.sendPlayerProfile(name, color);
-	    //TODO later
-	    //viewController.getGameViewController().initSelf(getOwnPlayerId(), name, color);
+		clientOutputHandler.sendPlayerProfile(name, color);
+		// TODO later
+		// viewController.getGameViewController().initSelf(getOwnPlayerId(),
+		// name, color);
 	}
 
 	// 7.2
@@ -130,7 +131,7 @@ public class ClientController {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 		if (pM.getColor() == null) {
 			pM.setColor(color);
-			pM.setName(name);		
+			pM.setName(name);
 		}
 		pM.setPlayerState(status);
 		pM.setVictoryPoints(victoryPoints);
@@ -139,16 +140,18 @@ public class ClientController {
 	}
 
 	// 7.4
-	public void initBoard(Field[] serverFields, Corner[] corners,ArrayList<Edge> streets, Corner[] harbourCorners, String banditLocation) {
-		for(Field f : serverFields){
+	public void initBoard(Field[] serverFields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
+			String banditLocation) {
+		for (Field f : serverFields) {
 			String location = f.getFieldID();
 			int[] coords = ProtocolToModel.getFieldCoordinates(location);
 			Field bField = board.getFieldAt(coords[0], coords[1]);
 			bField.setFieldID(location);
-			bField.setDiceIndex(f.getDiceIndex());;
+			bField.setDiceIndex(f.getDiceIndex());
+			;
 			bField.setResourceType(f.getResourceType());
 		}
-		for (Corner c : corners){
+		for (Corner c : corners) {
 			String location = c.getCornerID();
 			int coords[] = ProtocolToModel.getCornerCoordinates(location);
 			Corner bCorner = board.getCornerAt(coords[0], coords[1], coords[2]);
@@ -156,7 +159,7 @@ public class ClientController {
 			bCorner.setOwnerID(c.getOwnerID());
 			bCorner.setStatus(c.getStatus());
 		}
-		for (Edge s : streets){
+		for (Edge s : streets) {
 			String location = s.getEdgeID();
 			int coords[] = ProtocolToModel.getEdgeCoordinates(location);
 			Edge bEdge = board.getEdgeAt(coords[0], coords[1], coords[2]);
@@ -164,10 +167,10 @@ public class ClientController {
 			bEdge.setHasStreet(s.isHasStreet());
 			bEdge.setOwnedByPlayer(s.getOwnerID());
 		}
-		for (Corner c : harbourCorners){
+		for (Corner c : harbourCorners) {
 			String location = c.getCornerID();
 			int[] coords = ProtocolToModel.getCornerCoordinates(location);
-			//TODO change
+			// TODO change
 			Corner bCorner = board.getCornerAt(coords[0], coords[1], coords[2]);
 			bCorner.setCornerID(location); // WRONG, harbour is 2-char-string
 			bCorner.setHarbourStatus(c.getHarbourStatus());
@@ -178,14 +181,13 @@ public class ClientController {
 		this.gameLogic = new GameLogic(board);
 
 		viewController.startGameView();
-		for (int i = 0;i<amountPlayers;i++){
-			viewController.getGameViewController().initPlayer(i, board.getPlayer(i).getName(), board.getPlayer(i).getColor());
+		for (int i = 0; i < amountPlayers; i++) {
+			viewController.getGameViewController().initPlayer(i, board.getPlayer(i).getName(),
+					board.getPlayer(i).getColor());
 			viewController.getGameViewController().setResourceCards(i, getPlayerResources(i));
 			viewController.getGameViewController().setVictoryPoints(i, board.getPlayer(i).getVictoryPoints());
 			viewController.getGameViewController().setPlayerStatus(i, board.getPlayer(i).getPlayerState());
 		}
-
-
 
 	}
 
@@ -231,18 +233,17 @@ public class ClientController {
 		this.amountPlayers = amountPlayers;
 	}
 
-    // 8.2
-    public void diceRollResult(int playerId, int[] result) {
-        int res = result[0] + result[1];
-        viewController.getGameViewController().setDiceRollResult(res);
-        // output
-    }
+	// 8.2
+	public void diceRollResult(int playerId, int[] result) {
+		int res = result[0] + result[1];
+		viewController.getGameViewController().setDiceRollResult(res);
+		// output
+	}
 
 	// 8.3
 	public void resourceObtain(int playerId, int[] resources) {
 		// flowController.addToPlayersResource(getPlayerModelId(playerId),
 		// resources);
-
 
 	}
 
@@ -395,11 +396,11 @@ public class ClientController {
 			// viewController.setPlayerState(state);
 		}
 	}
-	
-	private int[] getPlayerResources(int playerID){
+
+	private int[] getPlayerResources(int playerID) {
 		ArrayList<ResourceType> resources = board.getPlayer(playerID).getResourceCards();
 		int[] result = new int[5];
-		for (ResourceType r : resources){
+		for (ResourceType r : resources) {
 			switch (r) {
 			case WOOD:
 				result[0]++;
@@ -417,7 +418,7 @@ public class ClientController {
 				break;
 			}
 
-			}
+		}
 		return result;
 	}
 

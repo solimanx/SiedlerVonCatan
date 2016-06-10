@@ -22,12 +22,9 @@ public class Server {
 	private ServerInputHandler serverInputHandler;
 	private ServerOutputHandler serverOutputHandler;
 
-	String serverVersion = settings.DefaultSettings.SERVER_VERSION;
-	String protocolVersion = settings.DefaultSettings.PROTOCOL_VERSION;
-
 	public Server(ServerInputHandler inputHandler) {
 		this.serverInputHandler = inputHandler;
-		}
+	}
 
 	public void start() throws IOException {
 
@@ -68,7 +65,8 @@ public class Server {
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				System.out.println("Client connected! " + socket.getRemoteSocketAddress());
 
-				//outputHandler.hello(serverVersion, protocolVersion, threadID);
+				// outputHandler.hello(serverVersion, protocolVersion,
+				// threadID);
 				inputHandler.hello(threadID);
 				System.out.println("Hello sent to " + threadID + " Thread");
 				// socket.setTcpNoDelay(true);
@@ -132,7 +130,7 @@ public class Server {
 	public void setClients(ClientThread[] clients) {
 		this.clients = clients;
 	}
-	
+
 	public int getClientCounter() {
 		return clientCounter;
 	}

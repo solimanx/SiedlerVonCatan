@@ -6,12 +6,11 @@ import model.objects.Field;
 
 public class TestSpiral {
 
-
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		Board board = new Board();
 		String result = "";
 		result = HexService.getSpiral("N");
-		for(int i = 0; i< result.length(); i++){
+		for (int i = 0; i < result.length(); i++) {
 			System.out.println(result.charAt(i));
 		}
 	}
