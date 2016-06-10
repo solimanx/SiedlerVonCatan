@@ -105,7 +105,7 @@ public class ViewController {
 		try {
 			root = loader.load(getClass().getResource("/network/client/view/GameView.fxml").openStream());
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setMaximized(true);
 			gameViewController = (GameViewController) loader.getController();

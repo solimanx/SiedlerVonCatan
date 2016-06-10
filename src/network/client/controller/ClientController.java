@@ -185,6 +185,7 @@ public class ClientController {
 			
 			@Override
 			public void run() {
+				System.out.println("STARTING GAME VIEW IN Platform.runLater");
 				// TODO vielleicht ein fix?
 				viewController.startGameView();
 				
@@ -245,7 +246,7 @@ public class ClientController {
 	// 8.2
 	public void diceRollResult(int playerId, int[] result) {
 		int res = result[0] + result[1];
-		viewController.getGameViewController().setDiceRollResult(res);
+		//viewController.getGameViewController().setDiceRollResult(res);
 		// output
 	}
 
