@@ -17,6 +17,7 @@ import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
+import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.server.server.Server;
 import network.server.server.ServerInputHandler;
@@ -453,7 +454,7 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				int[] coords = Board.getStringToCoordMap().get(fields.charAt(i));				
+				int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(i));				
 				if (currNum != 5) {
 					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[diceInd]);
 					diceInd++;
@@ -472,10 +473,10 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				int[] coords = Board.getStringToCoordMap().get(fields.charAt(i));
+				int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(i));
 				gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[i]);
 			}
-			int[] coords = Board.getStringToCoordMap().get(fields.charAt(fields.length()-1));
+			int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(fields.length()-1));
 			gameLogic.getBoard().setFieldAt(coords[0], coords[1], ResourceType.NOTHING, 0);
 
 		}
