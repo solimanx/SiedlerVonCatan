@@ -39,7 +39,7 @@ public class ClientController {
 
 	// e.g. 0 -> 45
 	private Map<Integer, Integer> modelPlayerIdMap;
-	
+
 	// e.g. 45 -> 0
 	private Map<Integer, Integer> threadPlayerIdMap;
 
@@ -101,7 +101,8 @@ public class ClientController {
 
 	// 6.3
 	public void chatReceiveMessage(int playerId, String s) {
-		viewController.messageReceive("Spieler " + board.getPlayer(threadPlayerIdMap.get(playerId)).getName() + ": " + s);
+		viewController.messageReceive(
+				"Spieler " + gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerId)).getName() + ": " + s);
 	}
 
 	// 7.1
@@ -146,10 +147,11 @@ public class ClientController {
 	// 7.4
 	public void initBoard(Field[] serverFields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
 			String banditLocation) {
+
 		for (Field f : serverFields) {
 			String location = f.getFieldID();
 			int[] coords = ProtocolToModel.getFieldCoordinates(location);
-			Field bField = board.getFieldAt(coords[0], coords[1]);
+			Field bField = gameLogic.getBoard().getFieldAt(coords[0], coords[1]);
 			bField.setFieldID(location);
 			bField.setDiceIndex(f.getDiceIndex());
 			;
@@ -158,7 +160,7 @@ public class ClientController {
 		for (Corner c : corners) {
 			String location = c.getCornerID();
 			int coords[] = ProtocolToModel.getCornerCoordinates(location);
-			Corner bCorner = board.getCornerAt(coords[0], coords[1], coords[2]);
+			Corner bCorner = gameLogic.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
 			bCorner.setCornerID(location);
 			bCorner.setOwnerID(c.getOwnerID());
 			bCorner.setStatus(c.getStatus());
@@ -166,7 +168,7 @@ public class ClientController {
 		for (Edge s : streets) {
 			String location = s.getEdgeID();
 			int coords[] = ProtocolToModel.getEdgeCoordinates(location);
-			Edge bEdge = board.getEdgeAt(coords[0], coords[1], coords[2]);
+			Edge bEdge = gameLogic.getBoard().getEdgeAt(coords[0], coords[1], coords[2]);
 			bEdge.setEdgeID(location);
 			bEdge.setHasStreet(s.isHasStreet());
 			bEdge.setOwnedByPlayer(s.getOwnerID());
@@ -175,41 +177,46 @@ public class ClientController {
 			String location = c.getCornerID();
 			int[] coords = ProtocolToModel.getCornerCoordinates(location);
 			// TODO change
-			Corner bCorner = board.getCornerAt(coords[0], coords[1], coords[2]);
+			Corner bCorner = gameLogic.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
 			bCorner.setCornerID(location);
 			bCorner.setHarbourStatus(c.getHarbourStatus());
 		}
 
-		board.setBandit(banditLocation);
-
+		gameLogic.getBoard().setBandit(banditLocation);
 		Platform.runLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				System.out.println("STARTING GAME VIEW IN Platform.runLater");
 				// TODO vielleicht ein fix?
 				viewController.startGameView();
-				
+
 			}
 		});
+	}
+
+	public void initializeGUI() {
+
 		for (int i = 0; i < amountPlayers; i++) {
-			viewController.getGameViewController().initPlayer(i, board.getPlayer(i).getName(),
-					board.getPlayer(i).getColor());
+			viewController.getGameViewController().initPlayer(i, gameLogic.getBoard().getPlayer(i).getName(),
+					gameLogic.getBoard().getPlayer(i).getColor());
 			viewController.getGameViewController().setResourceCards(i, getPlayerResources(i));
-			viewController.getGameViewController().setVictoryPoints(i, board.getPlayer(i).getVictoryPoints());
-			viewController.getGameViewController().setPlayerStatus(i, board.getPlayer(i).getPlayerState());
+			viewController.getGameViewController().setVictoryPoints(i,
+					gameLogic.getBoard().getPlayer(i).getVictoryPoints());
+			viewController.getGameViewController().setPlayerStatus(i,
+					gameLogic.getBoard().getPlayer(i).getPlayerState());
 		}
 
 	}
 
 	public void addToPlayersResource(int playerID, int[] resources) {
-		ArrayList<ResourceType> resourceCards = board.getPlayer(playerID).getResourceCards();
+		ArrayList<ResourceType> resourceCards = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
 		for (int i = 0; i < resources.length; i++) {
 			for (int j = 0; j < resources[i]; j++) {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
-		board.getPlayer(playerID).setResourceCards(resourceCards);
+		gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
 
 	}
 
@@ -220,7 +227,7 @@ public class ClientController {
 				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
-		board.getPlayer(playerId).setResourceCards(resourceCards);
+		gameLogic.getBoard().getPlayer(playerId).setResourceCards(resourceCards);
 
 	}
 
@@ -247,7 +254,7 @@ public class ClientController {
 	// 8.2
 	public void diceRollResult(int playerId, int[] result) {
 		int res = result[0] + result[1];
-		//viewController.getGameViewController().setDiceRollResult(res);
+		// viewController.getGameViewController().setDiceRollResult(res);
 		// output
 	}
 
@@ -265,19 +272,19 @@ public class ClientController {
 
 	// 8.6
 	public void buildStreet(int x, int y, int dir, int playerID) {
-		Edge e = board.getEdgeAt(x, y, dir);
+		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
-		e.setOwnedByPlayer(board.getPlayer(playerID).getID());
+		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
 
 		viewController.getGameViewController().setStreet(x, y, dir, playerID);
 	}
 
 	// 8.6
 	public void buildVillage(int x, int y, int dir, int playerID) {
-		Corner c = board.getCornerAt(x, y, dir);
+		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.VILLAGE);
 		c.setOwnerID(playerID);
-		Corner[] neighbors = board.getAdjacentCorners(x, y, dir);
+		Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
 		for (int i = 0; i < neighbors.length; i++) {
 			if (neighbors[i] != null) {
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
@@ -289,7 +296,7 @@ public class ClientController {
 
 	// 8.6
 	public void buildCity(int x, int y, int dir, int playerID) {
-		Corner c = board.getCornerAt(x, y, dir);
+		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.CITY);
 		c.setOwnerID(playerID);
 
@@ -401,7 +408,7 @@ public class ClientController {
 	 * @param state
 	 */
 	public void setPlayerState(int playerId, PlayerState state) {
-		board.getPlayer(playerId).setPlayerState(state);
+		gameLogic.getBoard().getPlayer(playerId).setPlayerState(state);
 		if (playerId == ownPlayerId) {
 			// update GUI
 			// viewController.setPlayerState(state);
@@ -409,7 +416,7 @@ public class ClientController {
 	}
 
 	private int[] getPlayerResources(int playerID) {
-		ArrayList<ResourceType> resources = board.getPlayer(playerID).getResourceCards();
+		ArrayList<ResourceType> resources = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
 		int[] result = new int[5];
 		for (ResourceType r : resources) {
 			switch (r) {

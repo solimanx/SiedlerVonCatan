@@ -142,6 +142,8 @@ public class GameViewController implements Initializable {
 
 	private Stage stage;
 
+	private int playerCounter;
+
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
@@ -167,10 +169,13 @@ public class GameViewController implements Initializable {
 		this.stage = stage;
 		board.getChildren().addAll(factory.getViewBoard(stage));
 		board.toBack();
+		viewController.getClientController().initializeGUI();
 	}
 
 	public void initPlayer(int playerID, String playerName, enums.Color playerColor) {
-		// TODO
+		playerCounter++;
+		playerIDtoViewPosition.put(playerID, playerCounter);
+		playerColors.add(viewController.getPlayerColor(playerColor));
 	}
 
 	private void initPlayerColors() {
@@ -350,7 +355,7 @@ public class GameViewController implements Initializable {
 
 	/**
 	 * sets Harbour on a Field(u,v)
-	 * 
+	 *
 	 * @param u
 	 * @param v
 	 * @param harbourType
