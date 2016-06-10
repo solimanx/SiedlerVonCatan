@@ -108,8 +108,8 @@ public class ServerOutputHandler {
 
         }
 
-        ProtocolBuilding[] pBuildingsArray = null;
-        ProtocolHarbour[] pHarbourArray = null;
+        ProtocolBuilding[] pBuildingsArray = {};
+        ProtocolHarbour[] pHarbourArray = {};
         ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray, board.getBandit());
         ProtocolGameStarted pgs = new ProtocolGameStarted(pb);
         Response r = new Response();

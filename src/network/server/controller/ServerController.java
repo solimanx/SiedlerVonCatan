@@ -454,7 +454,8 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(i));				
+				int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(i));		
+				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+fields.charAt(i));
 				if (currNum != 5) {
 					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[diceInd]);
 					diceInd++;
@@ -474,11 +475,19 @@ public class ServerController {
 				} while (notFound);
 				cards[currNum]--;
 				int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(i));
+				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+fields.charAt(i));
 				gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[i]);
 			}
 			int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(fields.length()-1));
+			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+fields.charAt(fields.length()-1));
 			gameLogic.getBoard().setFieldAt(coords[0], coords[1], ResourceType.NOTHING, 0);
 
+		}
+		String outerRing = gameLogic.getBoard().getOuterRing();
+		for (int i = 0;i < outerRing.length();i++){
+			int[] coords = ProtocolToModel.getFieldCoordinates(""+outerRing.charAt(i));
+			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+outerRing.charAt(i));
+			gameLogic.getBoard().setFieldAt(coords[0], coords[1], ResourceType.SEA, null);
 		}
 		gameLogic.getBoard().setBandit("J");
 	}
