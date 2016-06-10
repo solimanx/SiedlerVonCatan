@@ -97,9 +97,7 @@ public class ClientController {
 
 	// 6.3
 	public void chatReceiveMessage(int playerId, String s) {
-		// viewController.mainViewController.receiveChatMessage("Spieler
-		// "+playerId+": "+s);
-		viewController.getLobbyController().receiveChatMessage("Spieler " + playerId + ": " + s);
+		viewController.messageReceive("Spieler " + board.getPlayer(playerId).getName() + ": " + s);
 	}
 
 	// 7.1

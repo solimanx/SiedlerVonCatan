@@ -22,8 +22,7 @@
             </Label>
             <HBox prefHeight="27.0" prefWidth="140.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="53.0" text="Status: " />
-                  <Label fx:id="playerStatusOne" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="99.0" />
+                  <Label fx:id="playerStatusOne" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
@@ -122,8 +121,7 @@
             </Label>
             <HBox prefHeight="27.0" prefWidth="140.0">
                <children>
-                  <Label text="Status: " />
-                  <Label fx:id="playerStatusFour" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="91.0" />
+                  <Label fx:id="playerStatusFour" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
@@ -159,8 +157,7 @@
             </Label>
             <HBox prefHeight="27.0" prefWidth="140.0">
                <children>
-                  <Label text="Status: " />
-                  <Label fx:id="playerStatusTwo" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="91.0" />
+                  <Label fx:id="playerStatusTwo" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
@@ -196,8 +193,7 @@
             </Label>
             <HBox prefHeight="27.0" prefWidth="140.0">
                <children>
-                  <Label text="Status: " />
-                  <Label fx:id="playerStatusThree" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="91.0" />
+                  <Label fx:id="playerStatusThree" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="141.0" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
