@@ -37,7 +37,10 @@ public class ClientController {
 	private ClientOutputHandler clientOutputHandler;
 	private ClientInputHandler clientInputHandler;
 
+	// e.g. 0 -> 45
 	private Map<Integer, Integer> modelPlayerIdMap;
+	
+	// e.g. 45 -> 0
 	private Map<Integer, Integer> threadPlayerIdMap;
 
 	protected Client client;
@@ -97,7 +100,7 @@ public class ClientController {
 
 	// 6.3
 	public void chatReceiveMessage(int playerId, String s) {
-		viewController.messageReceive("Spieler " + board.getPlayer(playerId).getName() + ": " + s);
+		viewController.messageReceive("Spieler " + board.getPlayer(threadPlayerIdMap.get(playerId)).getName() + ": " + s);
 	}
 
 	// 7.1

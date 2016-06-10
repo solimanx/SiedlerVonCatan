@@ -42,7 +42,7 @@ public final class DefaultSettings {
 
 	public final static String PROTOCOL_VERSION = "0.3";
 
-	public final static String CLIENT_VERSION = "JavaFXClient 0.2 (NiedlichePixel)";
+	public final static String CLIENT_VERSION = "JavaFXClient 0.3 (NiedlichePixel)";
 
 	public static final String SERVER_VERSION = "0.3";
 }
