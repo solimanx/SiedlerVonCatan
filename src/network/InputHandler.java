@@ -178,6 +178,9 @@ public abstract class InputHandler {
 		case "ProtocolBoughtDevelopmentCard":
 			handle((ProtocolBoughtDevelopmentCard) o);
 			break;
+		case "ProtocolSpecialCaseLongestRoad":
+			handle((ProtocolSpecialCaseLongestRoad)o);
+			break;
 
 		default:
 			System.out.println("Class not found");
@@ -271,5 +274,7 @@ public abstract class InputHandler {
 	protected abstract void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo);
 
 	protected abstract void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard);
+
+	protected abstract void handle(ProtocolSpecialCaseLongestRoad specialCaseLongestRoad);
 
 }

@@ -34,12 +34,7 @@ import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.severinstructions.ProtocolBiggestKnightProwess;
-import protocol3.severinstructions.ProtocolBoughtDevelopmentCard;
-import protocol3.severinstructions.ProtocolInventionCardInfo;
-import protocol3.severinstructions.ProtocolLongestRoad;
-import protocol3.severinstructions.ProtocolPlayKnightCard;
-import protocol3.severinstructions.ProtocolRoadBuildingCardInfo;
+import protocol3.severinstructions.*;
 
 //import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
@@ -462,17 +457,16 @@ public class ServerOutputHandler {
     }
 
     public void specialCaseLongestRoad() {
-        // ProtocolSpecialCaseLongestRoad psclr = new
-        // ProtocolSpecialCaseLongestRoad();
-        // Response r = new Response();
-        // r.pSpecialCaseLongestRoad=psclr;
-        // try {
-        // server.broadcast(parser.createString(r));
-        // } catch (IOException e) {
-        // logger.error("Threw a Input/Output Exception ", e);
-        // e.printStackTrace();
-        // }
-        // }
+        ProtocolSpecialCaseLongestRoad psclr = new ProtocolSpecialCaseLongestRoad();
+        Response r = new Response();
+        r.pSpecialCaseLongestRoad = psclr;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+
     }
 
     public void serverConfirm(String server_response) {

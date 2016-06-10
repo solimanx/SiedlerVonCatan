@@ -183,6 +183,9 @@ public class Parser {
 		if (response.pBoughtDevelopmentCard != null) {
 			return (T) response.pBoughtDevelopmentCard;
 		}
+		if(response.pSpecialCaseLongestRoad!=null){
+			return (T) response.pSpecialCaseLongestRoad;
+		}
 
 		logger.info("CANNOT READ INPUT");
 		System.out.println("CANNOT READ INPUT");

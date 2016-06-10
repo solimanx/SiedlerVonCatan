@@ -5,6 +5,7 @@ import com.google.gson.annotations.Since;
 
 import enums.Color;
 import enums.PlayerState;
+import protocol3.severinstructions.ProtocolPlayKnightCard;
 
 /**
  * <b>Spieler (Player)</b>
@@ -35,6 +36,12 @@ public class ProtocolPlayer {
 
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resources;
+
+	//@SerializedName("Rittermacht")
+	//private ProtocolPlayKnightCard playKnightCard;
+
+	//@SerializedName("Entwicklungskarten")
+	//private ProtcolDevelopmentCards developmentCards;
 
 	public ProtocolPlayer(int playerID, Color color, String name, PlayerState status, int victoryPoints,
 			ProtocolResource resources) {
