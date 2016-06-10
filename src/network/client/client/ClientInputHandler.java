@@ -2,6 +2,7 @@ package network.client.client;
 
 import java.util.ArrayList;
 
+import enums.ResourceType;
 import model.objects.Edge;
 import model.HexService;
 import model.objects.Corner;
@@ -28,6 +29,7 @@ import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
+import protocol.object.ProtocolPlayer;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolCosts;
@@ -192,19 +194,21 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolStatusUpdate statusUpdate) {
-        // TODO Auto-generated method stub
-        // int playerId =
-        // ProtocolToModel.getPlayerId(statusUpdate.getPlayer().getPlayer_id());
-        enums.Color color = statusUpdate.getPlayer().getColor();
-        String name = statusUpdate.getPlayer().getName();
-        // enums.PlayerState status =
-        // ProtocolToModel.getPlayerState(statusUpdate.getPlayer().getStatus());
-        int victoryPoints = statusUpdate.getPlayer().getVictoryPoints();
-        // int[] resources =
-        // ProtocolToModel.getResources(statusUpdate.getPlayer().getResources());
-        // networkController.statusUpdate(playerId, color, name, status,
-        // victoryPoints, resources);
+        ProtocolPlayer pPlayer = statusUpdate.getPlayer();
+        int threadID =  pPlayer.getPlayerID();
+        enums.Color color = pPlayer.getColor();
+        String name = pPlayer.getName();
+        enums.PlayerState status = pPlayer.getStatus();
+        int victoryPoints = pPlayer.getVictoryPoints();
+        ProtocolResource pRes = pPlayer.getResources();
+        if (pRes.getUnknown() > 0){
+        	int[] resources = {pRes.getUnknown()};
+        	clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
 
+        } else{
+        	int[] resources = {pRes.getWood(),pRes.getClay(),pRes.getOre(),pRes.getWool(),pRes.getCorn()};
+        	clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
+        }
     }
 
     //
