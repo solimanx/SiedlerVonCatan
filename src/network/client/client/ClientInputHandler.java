@@ -306,7 +306,9 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolVictory victory) {
-        // TODO Auto-generated method stub
+        String message = victory.getMessage();
+        int winner_id = victory.getWinner_id();
+        //networkController.victory(message,winner_id);
 
     }
 
