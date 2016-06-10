@@ -206,6 +206,13 @@ public class ClientController {
 			viewController.getGameViewController().setPlayerStatus(i,
 					gameLogic.getBoard().getPlayer(i).getPlayerState());
 		}
+		for (Map.Entry<String, int[]> entry : this.board.getStringToCoordMap().entrySet()) {
+			int[] coord = entry.getValue();
+			Field f = gameLogic.getBoard().getFieldAt(coord[0], coord[1]);
+			viewController.getGameViewController().setField(coord[0], coord[1], f.getResourceType(), f.getDiceIndex());
+		}
+		int[] banditCorners = gameLogic.getBoard().getStringToCoordMap().get(gameLogic.getBoard().getBandit());
+		viewController.getGameViewController().setBandit(banditCorners[0], banditCorners[1]);
 
 	}
 

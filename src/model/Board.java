@@ -308,6 +308,7 @@ public class Board {
 	 * Returns fields by normal array index
 	 */
 
+	@Deprecated
 	public Field getField(int x, int y) {
 		return this.fields[x][y];
 	}
