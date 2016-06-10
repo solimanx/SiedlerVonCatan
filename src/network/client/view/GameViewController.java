@@ -810,12 +810,12 @@ public class GameViewController implements Initializable {
 
 		}
 
-	}
+		public void initSelf(int ownPlayerId, String name, enums.Color color) {
+			playerIDtoViewPosition.put(ownPlayerId, 0);
+			playerColors.add(0, viewController.playerColors.get(color));
+			selfName.setText(name);
 
-	public void initSelf(int ownPlayerId, String name, enums.Color color) {
-		playerIDtoViewPosition.put(ownPlayerId, 0);
-		playerColors.add(0, viewController.playerColors.get(color));
-		selfName.setText(name);
+		}
 
 	}
 }
