@@ -55,6 +55,7 @@ public class ClientController {
 		this.clientInputHandler = new ClientInputHandler(this);
 		this.viewController = new ViewController(primaryStage, this);
 		this.board = new Board();
+		this.gameLogic = new GameLogic(board);
 
 	}
 
@@ -180,8 +181,6 @@ public class ClientController {
 		}
 
 		board.setBandit(banditLocation);
-
-		this.gameLogic = new GameLogic(board);
 
 		Platform.runLater(new Runnable() {
 			
