@@ -109,6 +109,7 @@ public class ViewController {
 			primaryStage.setScene(scene);
 			primaryStage.setMaximized(true);
 			gameViewController = (GameViewController) loader.getController();
+			gameViewController.setViewController(this);
 			primaryStage.show();
 			gameViewController.startScene(primaryStage);
 
