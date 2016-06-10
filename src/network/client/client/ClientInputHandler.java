@@ -201,7 +201,7 @@ public class ClientInputHandler extends InputHandler {
         enums.PlayerState status = pPlayer.getStatus();
         int victoryPoints = pPlayer.getVictoryPoints();
         ProtocolResource pRes = pPlayer.getResources();
-        if (pRes.getUnknown() > 0){
+        if (pRes.getUnknown() != null){
         	int[] resources = {pRes.getUnknown()};
         	clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
 
