@@ -106,7 +106,7 @@ public class HexService {
 	 */
 	// TODO water
 	public static String getSpiral(String f) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		String nextField = f;
 		String plannedNextField = f;
 		int radius = getDistanceFromMid(f);
@@ -119,7 +119,7 @@ public class HexService {
 						if (i == radius) {
 							if (getRing(nextField).contains(plannedNextField)) {
 								nextField = plannedNextField;
-								result = result + nextField;
+								result.append(nextField);
 								coord = Board.getStringToCoordMap().get(nextField);
 								plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
 								break;
@@ -127,30 +127,30 @@ public class HexService {
 								continue;
 							}
 						} else {
-							if (result.contains(plannedNextField)) {
+							if (result.toString().contains(plannedNextField)) {
 								continue;
 							} else {
 								nextField = plannedNextField;
-								result = result + nextField;
+								result.append(nextField);
 								coord = Board.getStringToCoordMap().get(nextField);
 								plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
 								break;
 							}
 						}
 					case 6:
-						if (result.contains(plannedNextField)) {
+						if (result.toString().contains(plannedNextField)) {
 							k = i;
 							break;
 						} else {
 							nextField = plannedNextField;
-							result = result + nextField;
+							result.append(nextField);
 							coord = Board.getStringToCoordMap().get(nextField);
 							plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
 							break;
 						}
 					default:
 						nextField = plannedNextField;
-						result = result + nextField;
+						result.append(nextField);
 						coord = Board.getStringToCoordMap().get(nextField);
 						plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
 						break;
@@ -159,8 +159,8 @@ public class HexService {
 			}
 			plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField) + 1);
 		}
-		result = result + Board.getCoordToStringMap().get(new Index(0, 0));
-		return result;
+		result.append(Board.getCoordToStringMap().get(new Index(0, 0)));
+		return result.toString();
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class HexService {
 	public static int getDistanceFromMid(String f) {
 		String nextField = f;
 		int result = 0;
-		int[] coord = new int[2];
+		int[] coord;
 		String end = Board.getCoordToStringMap().get(new Index(0, 0));
 		while (!nextField.equals(end)) {
 			coord = Board.getStringToCoordMap().get(nextField);
@@ -192,18 +192,18 @@ public class HexService {
 	 * @return Field ID's
 	 */
 	public static String getRing(String f) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		int radius = getDistanceFromMid(f);
 		String nextField = Board.getCoordToStringMap().get(new Index(-radius, radius));
-		int[] coord = new int[2];
+		int[] coord;
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < radius; j++) {
-				result = result + nextField;
+				result.append(nextField);
 				coord = Board.getStringToCoordMap().get(nextField);
 				nextField = getNextField(coord[0], coord[1], getDirection(nextField));
 			}
 		}
-		return result;
+		return result.toString();
 	}
 
 	/**
@@ -408,12 +408,12 @@ public class HexService {
 		String fields1 = getNeighboursID(a[0], a[1]);
 		String fields2 = getNeighboursID(b[0], b[1]);
 
-		String common = "";
+		StringBuffer common = new StringBuffer();
 
 		for (int i = 0; i < fields1.length(); i++) {
 			for (int j = 0; j < fields2.length(); j++) {
 				if (fields1.charAt(i) == fields2.charAt(j)) {
-					common += fields1.charAt(i);
+					common.append(fields1.charAt(i));
 					break;
 				}
 			}
