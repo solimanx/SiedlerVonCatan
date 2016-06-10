@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * <b>Längste Handelsstraße(longest road </b>
+ * <b>9.10Längste Handelsstraße(longest road </b>
  * <p>
  * Server sends to client the message about the Player who has the longest road.
  * </p>
@@ -21,6 +21,7 @@ public class ProtocolLongestRoad {
         this.player_id = player_id;
     }
 
+    //Special Case
     public ProtocolLongestRoad() {
     }
 

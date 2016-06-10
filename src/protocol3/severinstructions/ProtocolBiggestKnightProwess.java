@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * <b>Größte Rittermacht(biggest knight prowess) </b>
+ * <b>9.10Größte Rittermacht(biggest knight prowess) </b>
  * <p>
  * Server sends to client the Message about the Player who has the biggest
  * knight prowess.

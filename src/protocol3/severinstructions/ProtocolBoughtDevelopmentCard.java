@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
 
-/**
+/**9.7
  * Created on 09.06.2016.
  */
 @Since(0.3)
