@@ -310,6 +310,14 @@ public class ServerController {
 
 	}
 
+	/**
+	 * builds a street
+	 * is called by the server controller
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerID
+	 */
 	public void requestBuildStreet(int x, int y, int dir, int playerID) {
 		if (InitialStreetCounter < amountPlayers * 2) {
 			requestBuildInitialStreet(x, y, dir, playerID);
@@ -333,6 +341,14 @@ public class ServerController {
 
 	}
 
+	/**
+	 * is called by the serverController after a build request from a client
+	 * builds a city
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerID
+	 */
 	public void requestBuildCity(int x, int y, int dir, int playerID) {
 		int modelPID = threadPlayerIdMap.get(playerID);
 		if (gameLogic.checkBuildCity(x, y, dir, modelPID)) {
@@ -351,6 +367,13 @@ public class ServerController {
 
 	}
 
+	/**
+	 * Is called by serverController when there is a street build request during the initial phase
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerID
+	 */
 	public void requestBuildInitialStreet(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildInitialStreet(x, y, dir, playerID)) {
 			int modelPlayerID = threadPlayerIdMap.get(playerID);
@@ -375,6 +398,13 @@ public class ServerController {
 		}
 	}
 
+	/**
+	 * is called by serverController when there is a Building Request during the initial Phase
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerID
+	 */
 	public void requestBuildInitialVillage(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
 			int modelPlayerID = threadPlayerIdMap.get(playerID);
@@ -400,6 +430,13 @@ public class ServerController {
 
 	}
 
+	/**
+	 * Sends a robberMovementRequest to server
+	 * @param x
+	 * @param y
+	 * @param victim_id
+	 * @param currentThreadID
+	 */
 	public void robberMovementRequest(int x, int y, int victim_id, int currentThreadID) {
 		if (gameLogic.checkSetBandit(x, y, victim_id)) {
 
@@ -416,6 +453,10 @@ public class ServerController {
 
 	}
 
+	/**
+	 * Is called by View when ownPlayer has finished his turn
+	 * @param playerID
+	 */
 	public void endTurn(int playerID) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
