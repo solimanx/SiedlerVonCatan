@@ -350,7 +350,7 @@ public class Board {
 
 	/**
 	 * Sets bandit location
-	 * 
+	 *
 	 * @param banditLocation
 	 */
 
@@ -360,7 +360,7 @@ public class Board {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param i
 	 * @param j
 	 * @param resourceType
@@ -374,8 +374,28 @@ public class Board {
 	}
 
 	/**
+	 *
+	 * @param i
+	 *            axial X
+	 * @param j
+	 *            axial Y
+	 * @param resourceType
+	 * @param diceIndex
+	 */
+	public void setFieldAt(int i, int j, ResourceType resourceType, Integer diceIndex) {
+		int radius = DefaultSettings.BOARD_RADIUS;
+		if (fields[i + radius][j + radius] != null) {
+			fields[i + radius][j + radius].setResourceType(resourceType);
+			fields[i + radius][j + radius].setDiceIndex(diceIndex);
+		}
+		else
+			throw new IllegalArgumentException("Field doesn't exist");
+
+	}
+
+	/**
 	 * Sets corner
-	 * 
+	 *
 	 * @param i
 	 *            corner axial x
 	 * @param j
@@ -399,7 +419,7 @@ public class Board {
 
 	/**
 	 * Sets edge.
-	 * 
+	 *
 	 * @param i
 	 *            edge axial x
 	 * @param j
@@ -420,7 +440,7 @@ public class Board {
 
 	/**
 	 * Return ID to Coordinate map
-	 * 
+	 *
 	 * @return the stringToCoordMap
 	 */
 	public static Map<String, int[]> getStringToCoordMap() {
@@ -429,7 +449,7 @@ public class Board {
 
 	/**
 	 * Return Coordinate to ID map
-	 * 
+	 *
 	 * @return the coordToStringMap
 	 */
 	public static Map<Index, String> getCoordToStringMap() {
@@ -782,7 +802,7 @@ public class Board {
 
 	/**
 	 * Get sequence of sea field ID's
-	 * 
+	 *
 	 * @return "ABCDEFGHIJKLMNOPQR"
 	 */
 	public String getOuterRing() {
@@ -797,7 +817,7 @@ public class Board {
 
 	/**
 	 * Get sequence of non-sea field IDs
-	 * 
+	 *
 	 * @return "ABCDEFGHIJKLMNOPQRS"
 	 */
 	public String getInnerFields() {
@@ -861,7 +881,7 @@ public class Board {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param u
 	 *            Field 1 x-coordinate
 	 * @param v
@@ -871,7 +891,7 @@ public class Board {
 	 * @param y
 	 *            Field 2 y-coordinate
 	 * @return the water Field
-	 * 
+	 *
 	 */
 	// TODO Axial or array field?
 	public Field getHarbourSeaField(int u, int v, int x, int y) {
