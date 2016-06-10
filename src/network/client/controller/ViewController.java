@@ -98,20 +98,18 @@ public class ViewController {
 	 * starts GameView and GameViewController
 	 */
 	void startGameView() {
-		primaryStage.close();
-		choosingStage.close();
+		choosingStage.hide();
 		gameView = true;
-		gameViewStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
 		try {
 			root = loader.load(getClass().getResource("/network/client/view/GameView.fxml").openStream());
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			gameViewStage.setScene(scene);
-			gameViewStage.setMaximized(true);
+			primaryStage.setScene(scene);
+			primaryStage.setMaximized(true);
 			gameViewController = (GameViewController) loader.getController();
-			gameViewStage.show();
+			primaryStage.show();
 			gameViewController.startScene(primaryStage);
 
 		} catch (IOException e) {

@@ -7,6 +7,7 @@ import java.util.Map;
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import model.Board;
 import model.GameLogic;
@@ -180,7 +181,15 @@ public class ClientController {
 
 		this.gameLogic = new GameLogic(board);
 
-		viewController.startGameView();
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO vielleicht ein fix?
+				viewController.startGameView();
+				
+			}
+		});
 		for (int i = 0; i < amountPlayers; i++) {
 			viewController.getGameViewController().initPlayer(i, board.getPlayer(i).getName(),
 					board.getPlayer(i).getColor());
