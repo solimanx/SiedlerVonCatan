@@ -157,7 +157,7 @@ public class Response {
 	@SerializedName("Straßenbaukarte ausspielen")
 	public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
 
-	@SerializedName("Straßenbaukarte ausspielen")// Kein Duplikat, sondern verliert ein Spieler die längste Handelsstraße
+	// Kein Duplikat, sondern verliert ein Spieler die längste Handelsstraße
 	// ohne dass ein anderer Spieler sie bekommt  so versendet der Server die
 	//gleiche Nachricht, aber mit einem leeren Objekt
 
