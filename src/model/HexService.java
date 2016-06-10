@@ -69,7 +69,7 @@ public class HexService {
 	 */
 	public static int[] getEdgeCoordinates(int x1, int y1, int x2, int y2) {
 		Board board = new Board();
-		Edge[] a = board.getBorderingEdges(x1, x2);
+		Edge[] a = board.getBorderingEdges(x1, y1);
 		Edge[] b = board.getBorderingEdges(x2, y2);
 		ArrayList<Edge> firstList = new ArrayList<Edge>();
 		ArrayList<Edge> resultList = new ArrayList<Edge>();
