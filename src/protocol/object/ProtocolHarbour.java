@@ -3,6 +3,8 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+import enums.HarbourStatus;
+
 /**
  * <b>Häfen (Harbours)</b>
  * <p>
@@ -18,9 +20,9 @@ public class ProtocolHarbour {
 	private String location_id;
 
 	@SerializedName("Typ")
-	private String harbour_type;
+	private HarbourStatus harbour_type;
 
-	public ProtocolHarbour(String location_id, String harbour_type) {
+	public ProtocolHarbour(String location_id, HarbourStatus harbour_type) {
 		this.location_id = location_id;
 		this.harbour_type = harbour_type;
 	}
@@ -29,7 +31,7 @@ public class ProtocolHarbour {
 		return location_id;
 	}
 
-	public String getType() {
+	public HarbourStatus getType() {
 		return harbour_type;
 	}
 

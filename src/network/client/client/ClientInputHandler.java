@@ -131,8 +131,8 @@ public class ClientInputHandler extends InputHandler {
         	c1.setCornerID(coords[0]);
         	c2.setCornerID(coords[1]);
 
-            c1.setHarbourStatus(ProtocolToModel.getHarbourType(pHarb.getType()));
-            c2.setHarbourStatus(ProtocolToModel.getHarbourType(pHarb.getType()));
+            c1.setHarbourStatus(pHarb.getType());
+            c2.setHarbourStatus(pHarb.getType());
         }
         String banditLocation = pBoard.getRobber_location();
         clientController.initBoard(fields, corners, streets,harbourCorners, banditLocation);

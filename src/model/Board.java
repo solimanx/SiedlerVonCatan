@@ -19,6 +19,10 @@ import settings.DefaultSettings;
  * @author Adam
  */
 public class Board {
+	// ================================================================================
+	// CLASS FIELDS
+	// ================================================================================
+
 	private Field[][] fields;
 	private Corner[][][] corners;
 	private Edge[][][] edges;
@@ -27,6 +31,10 @@ public class Board {
 	private static Map<String, int[]> stringToCoordMap;
 	private static Map<Index, String> coordToStringMap;
 	// TODO private DevDeck devDeck;
+
+	// ================================================================================
+	// CONSTRUCTORS
+	// ================================================================================
 
 	public Board(ArrayList<PlayerModel> tempPlayers) {
 		int r = DefaultSettings.BOARD_SIZE;
@@ -54,6 +62,10 @@ public class Board {
 		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
 		initializeBandit();
 	}
+
+	// ================================================================================
+	// CLASS FIELDS INITIALIZATION
+	// ================================================================================
 
 	/**
 	 * Initialize used cells axial in the 2d array, unused cells remain null.
@@ -219,6 +231,10 @@ public class Board {
 
 	}
 
+	// ================================================================================
+	// PRIMITIVE GETTERS AND SETTERS
+	// ================================================================================
+
 	/**
 	 * Returns field given axial coordinates, if field doesn't exist then null
 	 *
@@ -286,6 +302,145 @@ public class Board {
 	}
 
 	/**
+	 * Returns fields by normal array index
+	 */
+
+	public Field getField(int x, int y) {
+		return this.fields[x][y];
+	}
+
+	/**
+	 * Returns corners by normal array index and direction
+	 */
+
+	public Corner getCorner(int x, int y, int dir) {
+		return this.corners[x][y][dir];
+	}
+
+	/**
+	 * Returns edges array by normal array index and direction
+	 */
+
+	public Edge getEdge(int x, int y, int dir) {
+		return this.edges[x][y][dir];
+	}
+
+	/**
+	 * Returns a Player object
+	 */
+
+	public PlayerModel getPlayer(int i) {
+		return this.players[i] != null ? this.players[i] : null;
+	}
+
+	/**
+	 * Returns the amount of players
+	 */
+	public int getAmountPlayers() {
+		return this.players.length;
+	}
+
+	/**
+	 * Returns bandit.
+	 */
+
+	public String getBandit() {
+		return this.banditLocation;
+	}
+
+	/**
+	 * Sets bandit location
+	 * 
+	 * @param banditLocation
+	 */
+
+	public void setBandit(String banditLocation) {
+		this.banditLocation = banditLocation;
+
+	}
+
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @param resourceType
+	 * @param diceIndex
+	 */
+	@Deprecated
+	public void setField(int i, int j, ResourceType resourceType, Integer diceIndex) {
+		fields[i][j].setResourceType(resourceType);
+		fields[i][j].setDiceIndex(diceIndex);
+
+	}
+
+	/**
+	 * Sets corner
+	 * 
+	 * @param i
+	 *            corner axial x
+	 * @param j
+	 *            corner axial y
+	 * @param k
+	 *            corner direction
+	 * @param status
+	 *            corner status
+	 * @param hstatus
+	 *            corner harbourstatus
+	 * @param ownerID
+	 *            corner owner
+	 */
+	@Deprecated
+	public void setCorner(int i, int j, int k, CornerStatus status, HarbourStatus hstatus, int ownerID) {
+		corners[i][j][k].setHarbourStatus(hstatus);
+		corners[i][j][k].setStatus(status);
+		corners[i][j][k].setOwnerID(ownerID);
+
+	}
+
+	/**
+	 * Sets edge.
+	 * 
+	 * @param i
+	 *            edge axial x
+	 * @param j
+	 *            edge axial y
+	 * @param k
+	 *            edge direction
+	 * @param hasStreet
+	 *            if edge has street
+	 * @param ownedByPlayer
+	 *            edge owner
+	 */
+	@Deprecated
+	public void setEdge(int i, int j, int k, boolean hasStreet, int ownedByPlayer) {
+		edges[i][j][k].setHasStreet(hasStreet);
+		edges[i][j][k].setOwnedByPlayer(ownedByPlayer);
+
+	}
+
+	/**
+	 * Return ID to Coordinate map
+	 * 
+	 * @return the stringToCoordMap
+	 */
+	public static Map<String, int[]> getStringToCoordMap() {
+		return stringToCoordMap;
+	}
+
+	/**
+	 * Return Coordinate to ID map
+	 * 
+	 * @return the coordToStringMap
+	 */
+	public static Map<Index, String> getCoordToStringMap() {
+		return coordToStringMap;
+	}
+
+	// ================================================================================
+	// HEXAGONAL RELATIONS (TO FIELD)
+	// ================================================================================
+
+	/**
 	 * Get neighbouring fields of the specified field with the following order:
 	 * <p>
 	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}
@@ -297,24 +452,14 @@ public class Board {
 	 *
 	 */
 
-	public static String getNeighbouringFields(int aX, int aY) {
-		Index ne = new Index(aX + 1, aY - 1);
-		Index e = new Index(aX + 1, aY);
-		Index se = new Index(aX, aY + 1);
-		Index sw = new Index(aX - 1, aY + 1);
-		Index w = new Index(aX - 1, aY);
-		Index nw = new Index(aX, aY - 1);
-//		Field[] neighbours = { ne, e, se, sw, w, nw };
-
-		String northEast = getCoordToStringMap().get(ne);
-		String east = getCoordToStringMap().get(e);
-		String southEast = getCoordToStringMap().get(se);
-		String southWest = getCoordToStringMap().get(sw);
-		String west = getCoordToStringMap().get(w);
-		String northWest = getCoordToStringMap().get(nw);
-
-
-		String neighbours = northEast+east+southEast+southWest+west+northWest;
+	public Field[] getNeighbouringFields(int aX, int aY) {
+		Field ne = getFieldAt(aX + 1, aY - 1);
+		Field e = getFieldAt(aX + 1, aY);
+		Field se = getFieldAt(aX, aY + 1);
+		Field sw = getFieldAt(aX - 1, aY + 1);
+		Field w = getFieldAt(aX - 1, aY);
+		Field nw = getFieldAt(aX, aY - 1);
+		Field[] neighbours = { ne, e, se, sw, w, nw };
 		return neighbours;
 	}
 
@@ -390,6 +535,10 @@ public class Board {
 		}
 		return connectedFields;
 	}
+
+	// ================================================================================
+	// HEXAGONAL RELATIONS (TO CORNER)
+	// ================================================================================
 
 	/**
 	 * Get all surrounding corners of a field with the following order:
@@ -511,6 +660,10 @@ public class Board {
 		return attachedCorners;
 	}
 
+	// ================================================================================
+	// HEXAGONAL RELATIONS (TO EDGE)
+	// ================================================================================
+
 	/**
 	 * Get bordering edges of a field with the following order:
 	 *
@@ -613,6 +766,10 @@ public class Board {
 		return linkedEdges;
 	}
 
+	// ================================================================================
+	// HASHMAP RELATED
+	// ================================================================================
+
 	public int[] getFieldCoordinates(String f) {
 
 		// filter bad input
@@ -623,6 +780,39 @@ public class Board {
 		return null;
 	}
 
+	/**
+	 * Get sequence of sea field ID's
+	 * 
+	 * @return "ABCDEFGHIJKLMNOPQR"
+	 */
+	public String getOuterRing() {
+		StringBuffer result = new StringBuffer();
+		for (String key : stringToCoordMap.keySet()) {
+			if (key.matches("[a-z]")) {
+				result.append(key);
+			}
+		}
+		return result.toString();
+	}
+
+	/**
+	 * Get sequence of non-sea field IDs
+	 * 
+	 * @return "ABCDEFGHIJKLMNOPQRS"
+	 */
+	public String getInnerFields() {
+		StringBuffer result = new StringBuffer();
+		for (String key : stringToCoordMap.keySet()) {
+			if (key.matches("[A-Z]")) {
+				result.append(key);
+			}
+		}
+		return result.toString();
+
+	}
+
+	@Deprecated
+	// MOVED TO HEXSERVICE
 	public int getDirection(String f) {
 
 		int x = getFieldCoordinates(f)[0];
@@ -651,26 +841,9 @@ public class Board {
 		return 0;
 	}
 
-//	public String getNextField(int aX, int aY, int dir) {
-//		char[] result = getNeighbouringFields(aX, aY).toCharArray(); // To Do field to
-//														// coordinates
-//		switch (dir) {
-//		case 0:
-//			return result[0];
-//		case 1:
-//			return result[1];
-//		case 2:
-//			return result[2];
-//		case 3:
-//			return result[3];
-//		case 4:
-//			return result[4];
-//		case 5:
-//			return result[5];
-//		default:
-//			return null;
-//		}
-//	}
+	// ================================================================================
+	// ???????
+	// ================================================================================
 
 	// TODO FOR DEBUGGING ONLY
 	public ArrayList<Field> getAllFields() {
@@ -688,113 +861,31 @@ public class Board {
 	}
 
 	/**
-	 * Get outer ring
+	 * 
+	 * @param u
+	 *            Field 1 x-coordinate
+	 * @param v
+	 *            Field 1 y-coordinate
+	 * @param x
+	 *            Field 2 x-coordinate
+	 * @param y
+	 *            Field 2 y-coordinate
+	 * @return the water Field
+	 * 
 	 */
-	public String getOuterRing() {
-		StringBuffer result = new StringBuffer();
-		for (String key : stringToCoordMap.keySet()) {
-			if (key.matches("[a-z]")) {
-				result.append(key);
-			}
+	// TODO Axial or array field?
+	public Field getHarbourSeaField(int u, int v, int x, int y) {
+		if (getField(u, v).getResourceType() == enums.ResourceType.SEA) {
+			return getField(u, v);
 		}
-		return result.toString();
-	}
-
-	public String getInnerFields() {
-		StringBuffer result = new StringBuffer();
-		for (String key : stringToCoordMap.keySet()) {
-			if (key.matches("[A-Z]")) {
-				result.append(key);
-			}
+		if (getField(x, y).getResourceType() == enums.ResourceType.SEA) {
+			return getField(x, y);
 		}
-		return result.toString();
-
-	}
-
-	/**
-	 * Returns fields by normal array index
-	 */
-
-	public Field getField(int x, int y) {
-		return this.fields[x][y];
-	}
-
-	/**
-	 * Returns corners by normal array index and direction
-	 */
-
-	public Corner getCorner(int x, int y, int dir) {
-		return this.corners[x][y][dir];
-	}
-
-	/**
-	 * Returns edges array by normal array index and direction
-	 */
-
-	public Edge getEdge(int x, int y, int dir) {
-		return this.edges[x][y][dir];
-	}
-
-	/**
-	 * Returns a Player object
-	 */
-
-	public PlayerModel getPlayer(int i) {
-		return this.players[i] != null ? this.players[i] : null;
-	}
-
-	/**
-	 * Returns the amount of players
-	 */
-	public int getAmountPlayers() {
-		return this.players.length;
-	}
-
-	/**
-	 * Returns bandit.
-	 */
-
-	public String getBandit() {
-		return this.banditLocation;
-	}
-
-	/**
-	 * Sets bandit
-	 */
-
-	public void setBandit(String banditLocation) {
-		this.banditLocation = banditLocation;
-
-	}
-
-	/**
-	 * @return the fieldIDMap
-	 */
-	public static Map<String, int[]> getStringToCoordMap() {
-		return stringToCoordMap;
-	}
-
-	public static Map<Index, String> getCoordToStringMap() {
-		return coordToStringMap;
-	}
-
-	public void setField(int i, int j, ResourceType resourceType, Integer diceIndex) {
-		fields[i][j].setResourceType(resourceType);
-		fields[i][j].setDiceIndex(diceIndex);
-
-	}
-
-	public void setEdge(int i, int j, int k, boolean hasStreet, int ownedByPlayer) {
-		edges[i][j][k].setHasStreet(hasStreet);
-		edges[i][j][k].setOwnedByPlayer(ownedByPlayer);
-
-	}
-
-	public void setCorner(int i, int j, int k, CornerStatus status, HarbourStatus hstatus, int ownerID) {
-		corners[i][j][k].setHarbourStatus(hstatus);
-		corners[i][j][k].setStatus(status);
-		corners[i][j][k].setOwnerID(ownerID);
-
+		if (getField(u, v).getResourceType() == enums.ResourceType.SEA
+				&& getField(x, y).getResourceType() == enums.ResourceType.SEA) {
+			throw new IllegalArgumentException("Both Fields are sea Fields");
+		}
+		throw new IllegalArgumentException("None of both Fields is a sea Fields");
 	}
 
 }

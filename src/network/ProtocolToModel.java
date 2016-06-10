@@ -8,27 +8,66 @@ import model.HexService;
 import protocol.object.ProtocolResource;
 
 public final class ProtocolToModel {
-	static HexService HS;
-
+	
+	/**
+	 * Get Field axial coordinates through a one character ID
+	 * <p>
+	 * Example J -> (0,0)
+	 * </p>
+	 * 
+	 * @param field_id
+	 * @return
+	 */
 	public static int[] getFieldCoordinates(String field_id) {
+		// Get the field ID through the Board's HashMap
 		return Board.getStringToCoordMap().get(field_id);
 	}
 
+	/**
+	 * Get Corner axial coordinates + direction through a three-character ID
+	 * <p>
+	 * Example EFJ -> (0,0,0)
+	 * </p>
+	 * 
+	 * @param location
+	 *            3-character-string
+	 * @return
+	 */
 	public static int[] getCornerCoordinates(String location) {
-		int[] a = Board.getStringToCoordMap().get(location.substring(0, 1));
-		int[] b = Board.getStringToCoordMap().get(location.substring(1, 2));
-		int[] c = Board.getStringToCoordMap().get(location.substring(2, 3));
-		int[] result = HS.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
+		// Get each individual Field coordinate
+		int[] a = getFieldCoordinates(location.substring(0, 1));
+		int[] b = getFieldCoordinates(location.substring(1, 2));
+		int[] c = getFieldCoordinates(location.substring(2, 3));
+		// Calculate their common corner through HexService
+		int[] result = HexService.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
 		return result;
 	}
 
+	/**
+	 * Get Corner axial coordinates + direction through a 2-character ID
+	 * <p>
+	 * Example EJ -> (0,0,0)
+	 * </p>
+	 * 
+	 * @param location
+	 *            3-character-string
+	 * @return
+	 */
 	public static int[] getEdgeCoordinates(String location) {
-		int[] a = Board.getStringToCoordMap().get(location.substring(0, 1));
-		int[] b = Board.getStringToCoordMap().get(location.substring(1, 2));
-		int[] result = HS.getEdgeCoordinates(a[0], a[1], b[0], b[1]);
+		// Get each individual Field coordinate
+		int[] a = getFieldCoordinates(location.substring(0, 1));
+		int[] b = getFieldCoordinates(location.substring(1, 2));
+		// Calculate their common edge through HexService
+		int[] result = HexService.getEdgeCoordinates(a[0], a[1], b[0], b[1]);
 		return result;
 	}
 
+	/**
+	 * Convert a land type to enum.ResourceType
+	 * 
+	 * @param resourceString
+	 * @return Resource Type
+	 */
 	public static enums.ResourceType getResourceType(String resourceString) {
 		switch (resourceString) {
 		case "Weideland":
@@ -80,6 +119,12 @@ public final class ProtocolToModel {
 		}
 	}
 
+	/**
+	 * Convert protocol resource to own resource array.
+	 * 
+	 * @param resources
+	 * @return ResourceArray
+	 */
 	public static enums.ResourceType[] getResources(ProtocolResource resources) {
 		// TODO
 		int wood = resources.getWood();
@@ -126,6 +171,15 @@ public final class ProtocolToModel {
 		return result;
 	}
 
+	/**
+	 * Convert Building type to match CornerStatus
+	 * 
+	 * @param pBuildingType
+	 * @return
+	 */
+	/*
+	 * Warning: Works only for Village and City
+	 */
 	public static enums.CornerStatus getCornerType(String pBuildingType) {
 		switch (pBuildingType) {
 		case "Dorf":
@@ -138,8 +192,10 @@ public final class ProtocolToModel {
 		}
 	}
 
+	@Deprecated
+	// ENUMS ARE ALREADY SERIALIZED....
 	public static HarbourStatus getHarbourType(String pHarbourType) {
-		switch(pHarbourType){
+		switch (pHarbourType) {
 		case "Holz Hafen":
 			return HarbourStatus.WOOD;
 		case "Lehm Hafen":
