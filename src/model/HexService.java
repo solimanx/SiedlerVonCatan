@@ -43,15 +43,24 @@ public class HexService {
 				lastCorner.add(c[i]);
 			}
 		}
-		if (board.getCornerAt(x1, y1, 1) == lastCorner.get(0)) {
-			int[] result = { x1, y1, 1 };
-			return result;
+
+		int[] result = null;
+		
+		if (board.getCornerAt(x1, y1, 0) == lastCorner.get(0)) {
+			result = new int[] { x1, y1, 0 };
+		} else if (board.getCornerAt(x1, y1, 1) == lastCorner.get(0)) {
+			result = new int[] { x1, y1, 1 };
+		} else if (board.getCornerAt(x2, y2, 0) == lastCorner.get(0)) {
+			result = new int[] { x2, y2, 0 };
+		} else if (board.getCornerAt(x2, y2, 1) == lastCorner.get(0)) {
+			result = new int[] { x2, y2, 1 };
+		} else if (board.getCornerAt(x3, y3, 0) == lastCorner.get(0)) {
+			result = new int[] { x3, y3, 0 };
+		} else if (board.getCornerAt(x3, y3, 1) == lastCorner.get(0)) {
+			result = new int[] { x3, y3, 1 };
 		}
-		if (board.getCornerAt(x3, y3, 0) == lastCorner.get(0)) {
-			int[] result = { x3, y3, 0 };
-			return result;
-		}
-		return null;
+
+		return result;
 	}
 
 	/**
