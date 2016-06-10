@@ -128,6 +128,7 @@ public class ClientController {
 		if (modelID == null) {
 			threadPlayerIdMap.put(threadID, amountPlayers);
 			modelPlayerIdMap.put(amountPlayers, threadID);
+			modelID = amountPlayers;
 			amountPlayers++;
 		}
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
