@@ -60,6 +60,9 @@ public class Board {
 		edges = new Edge[r][r][3];
 		initializeEdges();
 		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
+		for (int i = 0; i < DefaultSettings.MAXIMUM_PLAYERS_AMOUNT; i++) {
+			players[i] = new PlayerModel(i);
+		}
 		initializeBandit();
 	}
 
