@@ -23,6 +23,13 @@ public class ProtocolPlayKnightCard {
     @SerializedName("Spieler")
     private int player_id;
 
+    //Client to Server
+    public ProtocolPlayKnightCard(String road1_id, int target) {
+        this.road1_id = road1_id;
+        this.target = target;
+    }
+
+    //Server to Client
     public ProtocolPlayKnightCard(String road1_id, int target, int player_id) {
         this.road1_id = road1_id;
         this.target = target;

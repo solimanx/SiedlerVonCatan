@@ -23,6 +23,12 @@ public class ProtocolInventionCardInfo {
     @SerializedName("Spieler")
     private int player_id;
 
+    //Client to Sever
+    public ProtocolInventionCardInfo(ProtocolResource resource) {
+        this.resource = resource;
+    }
+
+    //Server to Cliet
     public ProtocolInventionCardInfo(ProtocolResource resource, int player_id) {
 
         this.resource = resource;

@@ -13,7 +13,7 @@ public class ProtocolMonopolyCardInfo {
     @SerializedName("Rohstoff")
     private ProtocolResource resource;
 
-    @SerializedName("Spielr")
+    @SerializedName("Spieler")
     private int player_id;
 
     public ProtocolResource getResource() {
@@ -24,6 +24,12 @@ public class ProtocolMonopolyCardInfo {
         return player_id;
     }
 
+    //Client to Server
+    public ProtocolMonopolyCardInfo(ProtocolResource resource) {
+        this.resource = resource;
+    }
+
+    //Server to Client
     public ProtocolMonopolyCardInfo(ProtocolResource resource, int player_id) {
 
         this.resource = resource;

@@ -25,6 +25,13 @@ public class ProtocolRoadBuildingCardInfo {
     @SerializedName("Spieler")
     private int player_id;
 
+    //Client to Server
+    public ProtocolRoadBuildingCardInfo(String road1_id, String road2_id) {
+        this.road1_id = road1_id;
+        this.road2_id = road2_id;
+    }
+
+    //Server to Client
     public ProtocolRoadBuildingCardInfo(String road1_id, String road2_id, int player_id) {
         this.road1_id = road1_id;
         this.road2_id = road2_id;

@@ -15,14 +15,18 @@ import com.google.gson.annotations.Since;
 public class ProtocolLongestRoad {
 
     @SerializedName("Spieler")
-    int player_id;
+    Integer player_id;
 
-    public ProtocolLongestRoad(int player_id) {
+    public ProtocolLongestRoad(Integer player_id) {
         this.player_id = player_id;
+    }
+
+    public ProtocolLongestRoad() {
     }
 
     public int getPlayer_id() {
 
         return player_id;
     }
+
 }
