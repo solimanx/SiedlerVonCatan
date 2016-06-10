@@ -25,8 +25,8 @@ public class HexService {
 	public static int[] getCornerCoordinates(int x1, int y1, int x2, int y2, int x3, int y3) {
 		Board board = new Board();
 		Corner[] a = board.getSurroundingCorners(x1, y1);
-		Corner[] b = board.getSurroundingCorners(x1, y1);
-		Corner[] c = board.getSurroundingCorners(x1, y1);
+		Corner[] b = board.getSurroundingCorners(x2, y2);
+		Corner[] c = board.getSurroundingCorners(x3, y3);
 		ArrayList<Corner> lista = new ArrayList<Corner>();
 		ArrayList<Corner> listb = new ArrayList<Corner>();
 		ArrayList<Corner> lastCorner = new ArrayList<Corner>();
