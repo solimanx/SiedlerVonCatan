@@ -45,18 +45,18 @@ public class HexService {
 		}
 
 		int[] result = null;
-		
-		if (board.getCornerAt(x1, y1, 0) == lastCorner.get(0)) {
+
+		if (board.getCornerAt(x1, y1, 0) != null && board.getCornerAt(x1, y1, 0) == lastCorner.get(0)) {
 			result = new int[] { x1, y1, 0 };
-		} else if (board.getCornerAt(x1, y1, 1) == lastCorner.get(0)) {
+		} else if (board.getCornerAt(x1, y1, 1) != null && board.getCornerAt(x1, y1, 1) == lastCorner.get(0)) {
 			result = new int[] { x1, y1, 1 };
-		} else if (board.getCornerAt(x2, y2, 0) == lastCorner.get(0)) {
+		} else if (board.getCornerAt(x2, y2, 0) != null && board.getCornerAt(x2, y2, 0) == lastCorner.get(0)) {
 			result = new int[] { x2, y2, 0 };
-		} else if (board.getCornerAt(x2, y2, 1) == lastCorner.get(0)) {
+		} else if (board.getCornerAt(x2, y2, 1) != null && board.getCornerAt(x2, y2, 1) == lastCorner.get(0)) {
 			result = new int[] { x2, y2, 1 };
-		} else if (board.getCornerAt(x3, y3, 0) == lastCorner.get(0)) {
+		} else if (board.getCornerAt(x3, y3, 0) != null && board.getCornerAt(x3, y3, 0) == lastCorner.get(0)) {
 			result = new int[] { x3, y3, 0 };
-		} else if (board.getCornerAt(x3, y3, 1) == lastCorner.get(0)) {
+		} else if (board.getCornerAt(x3, y3, 1) != null && board.getCornerAt(x3, y3, 1) == lastCorner.get(0)) {
 			result = new int[] { x3, y3, 1 };
 		}
 
@@ -304,12 +304,12 @@ public class HexService {
 		Index sw = new Index(aX - 1, aY + 1);
 		Index w = new Index(aX - 1, aY);
 		Index nw = new Index(aX, aY - 1);
-		String northEast = Board.getCoordToStringMap().get(ne);
-		String east = Board.getCoordToStringMap().get(e);
-		String southEast = Board.getCoordToStringMap().get(se);
-		String southWest = Board.getCoordToStringMap().get(sw);
-		String west = Board.getCoordToStringMap().get(w);
-		String northWest = Board.getCoordToStringMap().get(nw);
+		String northEast = Board.getCoordToStringMap().get(ne) != null ? Board.getCoordToStringMap().get(ne) : "";
+		String east = Board.getCoordToStringMap().get(e) != null ? Board.getCoordToStringMap().get(e) : "";
+		String southEast = Board.getCoordToStringMap().get(se) != null ? Board.getCoordToStringMap().get(se) : "";
+		String southWest = Board.getCoordToStringMap().get(sw) != null ? Board.getCoordToStringMap().get(sw) : "";
+		String west = Board.getCoordToStringMap().get(w) != null ? Board.getCoordToStringMap().get(w) : "";
+		String northWest = Board.getCoordToStringMap().get(nw) != null ? Board.getCoordToStringMap().get(nw) : "";
 
 		String neighbours = northEast + east + southEast + southWest + west + northWest;
 

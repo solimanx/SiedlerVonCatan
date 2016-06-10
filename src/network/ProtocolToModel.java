@@ -8,7 +8,7 @@ import model.HexService;
 import protocol.object.ProtocolResource;
 
 public final class ProtocolToModel {
-	
+
 	/**
 	 * Get Field axial coordinates through a one character ID
 	 * <p>
@@ -34,13 +34,17 @@ public final class ProtocolToModel {
 	 * @return
 	 */
 	public static int[] getCornerCoordinates(String location) {
-		// Get each individual Field coordinate
-		int[] a = getFieldCoordinates(location.substring(0, 1));
-		int[] b = getFieldCoordinates(location.substring(1, 2));
-		int[] c = getFieldCoordinates(location.substring(2, 3));
-		// Calculate their common corner through HexService
-		int[] result = HexService.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
-		return result;
+		if (location.length() != 3)
+			throw new IllegalArgumentException("CornerID has to be 3 characters");
+		else {
+			// Get each individual Field coordinate
+			int[] a = getFieldCoordinates(location.substring(0, 1));
+			int[] b = getFieldCoordinates(location.substring(1, 2));
+			int[] c = getFieldCoordinates(location.substring(2, 3));
+			// Calculate their common corner through HexService
+			int[] result = HexService.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
+			return result;
+		}
 	}
 
 	/**
@@ -54,12 +58,17 @@ public final class ProtocolToModel {
 	 * @return
 	 */
 	public static int[] getEdgeCoordinates(String location) {
-		// Get each individual Field coordinate
-		int[] a = getFieldCoordinates(location.substring(0, 1));
-		int[] b = getFieldCoordinates(location.substring(1, 2));
-		// Calculate their common edge through HexService
-		int[] result = HexService.getEdgeCoordinates(a[0], a[1], b[0], b[1]);
-		return result;
+		if (location.length() != 2)
+			throw new IllegalArgumentException("EdgeID has to be 2 characters");
+
+		else {
+			// Get each individual Field coordinate
+			int[] a = getFieldCoordinates(location.substring(0, 1));
+			int[] b = getFieldCoordinates(location.substring(1, 2));
+			// Calculate their common edge through HexService
+			int[] result = HexService.getEdgeCoordinates(a[0], a[1], b[0], b[1]);
+			return result;
+		}
 	}
 
 	/**

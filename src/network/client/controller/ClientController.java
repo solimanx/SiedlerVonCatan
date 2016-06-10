@@ -169,7 +169,7 @@ public class ClientController {
 			int[] coords = ProtocolToModel.getCornerCoordinates(location);
 			//TODO change
 			Corner bCorner = board.getCornerAt(coords[0], coords[1], coords[2]);
-			bCorner.setCornerID(location);
+			bCorner.setCornerID(location); // WRONG, harbour is 2-char-string
 			bCorner.setHarbourStatus(c.getHarbourStatus());
 		}
 
