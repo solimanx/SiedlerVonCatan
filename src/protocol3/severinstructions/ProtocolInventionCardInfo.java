@@ -6,7 +6,7 @@ import protocol.object.ProtocolResource;
 import protocol3.object.ProtocolInventionCard;
 
 /**
- * <b>Erfindung(invention card) </b>
+ * <b>Erfindung(invention card)12.4 </b>
  * <p>
  * Server sends to all clients the information, in order to make the process
  * understandable. (player can get two different resource types)
@@ -21,7 +21,7 @@ public class ProtocolInventionCardInfo {
     private ProtocolResource resource;
 
     @SerializedName("Spieler")
-    private int player_id;
+    private Integer player_id;
 
     //Client to Sever
     public ProtocolInventionCardInfo(ProtocolResource resource) {
@@ -29,7 +29,7 @@ public class ProtocolInventionCardInfo {
     }
 
     //Server to Cliet
-    public ProtocolInventionCardInfo(ProtocolResource resource, int player_id) {
+    public ProtocolInventionCardInfo(ProtocolResource resource, Integer player_id) {
 
         this.resource = resource;
         this.player_id = player_id;
@@ -39,7 +39,7 @@ public class ProtocolInventionCardInfo {
         return resource;
     }
 
-    public int getPlayer_id() {
+    public Integer getPlayer_id() {
         return player_id;
     }
 }

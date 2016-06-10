@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * <b>Ritter ausspielen(play the knight card)</b>
+ * <b>Ritter ausspielen(play the knight card)12.1</b>
  * <p>
  * Server sends to all the clients, the message about the Player who played this
  * card.
@@ -21,7 +21,7 @@ public class ProtocolPlayKnightCard {
     @SerializedName("Ziel")
     private int target;
     @SerializedName("Spieler")
-    private int player_id;
+    private Integer player_id;
 
     //Client to Server
     public ProtocolPlayKnightCard(String road1_id, int target) {
@@ -30,7 +30,7 @@ public class ProtocolPlayKnightCard {
     }
 
     //Server to Client
-    public ProtocolPlayKnightCard(String road1_id, int target, int player_id) {
+    public ProtocolPlayKnightCard(String road1_id, int target, Integer player_id) {
         this.road1_id = road1_id;
         this.target = target;
         this.player_id = player_id;

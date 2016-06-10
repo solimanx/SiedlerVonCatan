@@ -6,7 +6,7 @@ import com.google.gson.annotations.Since;
 import protocol3.object.ProtocolRoadBuildingCard;
 
 /**
- * <b>Straßenbaukarte ausspielen(play the knight card)</b>
+ * <b>Straßenbaukarte ausspielen(play the knight card) 12.2</b>
  * <p>
  * Server sends to all the clients, the message about the Player who played this
  * card.
@@ -23,7 +23,7 @@ public class ProtocolRoadBuildingCardInfo {
     private String road2_id;
 
     @SerializedName("Spieler")
-    private int player_id;
+    private Integer player_id;
 
     //Client to Server
     public ProtocolRoadBuildingCardInfo(String road1_id, String road2_id) {
@@ -32,7 +32,7 @@ public class ProtocolRoadBuildingCardInfo {
     }
 
     //Server to Client
-    public ProtocolRoadBuildingCardInfo(String road1_id, String road2_id, int player_id) {
+    public ProtocolRoadBuildingCardInfo(String road1_id, String road2_id, Integer player_id) {
         this.road1_id = road1_id;
         this.road2_id = road2_id;
         this.player_id = player_id;
