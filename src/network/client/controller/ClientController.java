@@ -14,6 +14,7 @@ import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
+import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
@@ -141,7 +142,7 @@ public class ClientController {
 	public void initBoard(Field[] serverFields, Corner[] corners,ArrayList<Edge> streets, Corner[] harbourCorners, String banditLocation) {
 		for(Field f : serverFields){
 			String location = f.getFieldID();
-			int[] coords = Board.getStringToCoordMap().get(location);
+			int[] coords = ProtocolToModel.getFieldCoordinates(location);
 			Field bField = board.getFieldAt(coords[0], coords[1]);
 			bField.setFieldID(location);
 			bField.setDiceIndex(f.getDiceIndex());;
@@ -149,7 +150,7 @@ public class ClientController {
 		}
 		for (Corner c : corners){
 			String location = c.getCornerID();
-			int coords[] = Board.getStringToCoordMap().get(location);
+			int coords[] = ProtocolToModel.getCornerCoordinates(location);
 			Corner bCorner = board.getCornerAt(coords[0], coords[1], coords[2]);
 			bCorner.setCornerID(location);
 			bCorner.setOwnerID(c.getOwnerID());
@@ -157,7 +158,7 @@ public class ClientController {
 		}
 		for (Edge s : streets){
 			String location = s.getEdgeID();
-			int coords[] = Board.getStringToCoordMap().get(location);
+			int coords[] = ProtocolToModel.getEdgeCoordinates(location);
 			Edge bEdge = board.getEdgeAt(coords[0], coords[1], coords[2]);
 			bEdge.setEdgeID(location);
 			bEdge.setHasStreet(s.isHasStreet());
