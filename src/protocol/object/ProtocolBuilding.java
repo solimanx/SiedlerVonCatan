@@ -18,30 +18,30 @@ import com.google.gson.annotations.Since;
 public class ProtocolBuilding {
 
 	@SerializedName("Eigentümer")
-	private int player_id;
+	private int playerID;
 
 	@SerializedName("Typ")
 	private String building;
 
 	@SerializedName("Ort")
-	private String location_id;
+	private String locationID;
 
-	public ProtocolBuilding(int player_id, String building, String location_id) {
-		this.player_id = player_id;
+	public ProtocolBuilding(int playerID, String building, String locationID) {
+		this.playerID = playerID;
 		this.building = building;
-		this.location_id = location_id;
+		this.locationID = locationID;
 	}
 
-	public int getPlayer_id() {
-		return player_id;
+	public int getPlayerID() {
+		return playerID;
 	}
 
-	public String getBuilding() {
+	public String getType() {
 		return building;
 	}
 
-	public String getId() {
-		return location_id;
+	public String getID() {
+		return locationID;
 	}
 
 }

@@ -100,16 +100,16 @@ public class ClientInputHandler extends InputHandler {
 		Corner[] corners = new Corner[pBoard.getAmountBuildings()];
 		for (int i = 0; i < corners.length; i++) {
 			ProtocolBuilding pBuild = pBoard.getProtocolBuilding(i);
-			if (!pBuild.getBuilding().equals("Straße")) {
+			if (!pBuild.getType().equals("Straße")) {
 				corners[i] = new Corner();
-				corners[i].setCornerID(pBuild.getId());
-				corners[i].setOwnerID(pBuild.getPlayer_id());
-				corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getBuilding()));
+				corners[i].setCornerID(pBuild.getID());
+				corners[i].setOwnerID(pBuild.getPlayerID());
+				corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getType()));
 			} else {
 				Edge e = new Edge();
 				streets.add(e);
-				e.setEdgeID(pBuild.getId());
-				e.setOwnedByPlayer(pBuild.getPlayer_id());
+				e.setEdgeID(pBuild.getID());
+				e.setOwnedByPlayer(pBuild.getPlayerID());
 				e.setHasStreet(true);
 			}
 
@@ -172,10 +172,23 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolBuild build) {
 		ProtocolBuilding building = build.getBuilding();
-		int[] coords = ProtocolToModel.getCornerCoordinates(building.getId());
-		int id = building.getPlayer_id();
-		System.out.println(coords[0]+" "+coords[1]+" "+coords[2]+" .."+id);
-		clientController.buildVillage(coords[0], coords[1], coords[2], id);
+		int playerID = building.getPlayerID();
+		int[] coords;
+		if(building.getType().equals("Dorf")){
+			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			clientController.buildVillage(coords[0], coords[1], coords[2], playerID);
+		}
+		else if (building.getType().equals("Straße")){
+			coords = ProtocolToModel.getEdgeCoordinates(building.getID());
+			clientController.buildStreet(coords[0], coords[1], coords[2], playerID);
+			
+		}
+		else if (building.getType().equals("Stadt")){
+			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			clientController.buildCity(coords[0], coords[1], coords[2], playerID);			
+		}
+		else
+			throw new IllegalArgumentException("Building type not defined");
 
 	}
 
