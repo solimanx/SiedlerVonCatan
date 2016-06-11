@@ -470,6 +470,8 @@ public class GameViewController implements Initializable {
 			playerStatusOne.setText(state.toString());
 			if (state != PlayerState.WAITING) {
 				playerVBoxOne.setDisable(false);
+			} else {
+				playerVBoxOne.setDisable(true);
 			}
 			break;
 		case 2:

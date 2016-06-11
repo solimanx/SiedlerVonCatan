@@ -68,7 +68,7 @@ public class ViewController {
 		//
 		primaryStage.setTitle("Settlers of Catan : Lobby");
 		primaryStage.setResizable(false);
-		primaryStage.setOnCloseRequest(e -> Platform.exit());
+		primaryStage.setOnCloseRequest(e -> System.exit(0));
 		// primaryStage.initStyle(StageStyle.UTILITY);
 		//
 		primaryStage.show();
