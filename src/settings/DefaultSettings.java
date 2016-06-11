@@ -1,5 +1,8 @@
 package settings;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import enums.ResourceType;
 
 public final class DefaultSettings {
@@ -47,4 +50,9 @@ public final class DefaultSettings {
 	public final static String AI_VERSION = "PrimitiveAI (KI)";
 
 	public static final String SERVER_VERSION = "0.3";
+	
+	//Get current time as string
+	public static String getCurrentTime(){
+		return "[" + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")) + "] ";
+	}
 }
