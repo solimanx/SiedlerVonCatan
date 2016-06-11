@@ -19,7 +19,10 @@ public class PrimitiveAI {
 	// USELESS GAMELOGIC/BOARD ONLY TO SEE CODE
 	GameLogic gl;
 	ClientController cc;
-
+	
+	public PrimitiveAI(){
+		System.out.println("Entered AI");
+	}
 	/**
 	 * Builds a village at the first legal empty location, then attaches a
 	 * roads to it, then repeats it.

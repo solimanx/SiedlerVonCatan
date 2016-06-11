@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ai.PrimitiveAI;
+import debugging.DebugClient;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import network.ModelToProtocol;
@@ -18,9 +20,11 @@ public class Main extends Application {
 
 	private ServerController gc;
 	private ClientController fc;
+	private DebugClient dc;
+	private PrimitiveAI pa;
 
-	// true for server, false for client
-	private boolean mode = false;
+	// 0 for client, 1 for server , 2 for AI, 3 for debug/test mode
+	private int mode = 0;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -37,12 +41,18 @@ public class Main extends Application {
 		//
 		// logger.log(Level.INFO, "Our first log");
 		ModelToProtocol.initModelToProtocol();
-		if (mode) {
-			// server = new Server();
-			setGameController(new ServerController());
-		} else {
-			setFlowController(new ClientController(primaryStage));
+		switch(mode){
+		case 0: setFlowController(new ClientController(primaryStage));break;
+		case 1: setGameController(new ServerController()); break;
+		case 2: pa = new PrimitiveAI();break;
+		case 3: dc = new DebugClient();break;
 		}
+//		if (mode) {
+//			// server = new Server();
+//			setGameController(new ServerController());
+//		} else {
+//			setFlowController(new ClientController(primaryStage));
+//		}
 
 	}
 
@@ -52,7 +62,13 @@ public class Main extends Application {
 		List<String> raw = p.getRaw();
 		for (String string : raw) {
 			if (string.equals("server")) {
-				mode = true;
+				mode = 1;
+			}
+			else if (string.equals("ai")){
+				mode = 2;
+			}
+			else if (string.equals("debug")){
+				mode = 3;
 			}
 		}
 	}
