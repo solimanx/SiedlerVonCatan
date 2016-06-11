@@ -356,6 +356,7 @@ public class GameViewController implements Initializable {
 		Polygon village = corners[u + 3][v + 3][dir];
 		village.setFill(playerColor);
 		village.setOpacity(1.0);
+		village.getStyleClass().remove("village");
 	}
 
 	/**
