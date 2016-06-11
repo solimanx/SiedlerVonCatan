@@ -200,10 +200,10 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolResourceObtain resourceObtain) {
-        // int playerID = ProtocolResourceObtain.getPlayer();
-        // int[]
-        // resources=ProtocolToModel.getResources(resourceObtain.getPlayer().getResources());
-        // networkController.resourceObtain(playerID, resources);
+        int playerID = resourceObtain.getPlayer();
+        ProtocolResource pr = resourceObtain.getResource();
+        int[] result = ProtocolToModel.convertResources(pr.getWood(), pr.getClay(), pr.getOre(), pr.getWool(), pr.getCorn());
+        clientController.resourceObtain(playerID, result);
 
     }
 
@@ -225,7 +225,8 @@ public class ClientInputHandler extends InputHandler {
                 clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
 
             } else {
-                int[] resources = ProtocolToModel.convertResoruces(pRes.getWood(), pRes.getClay(), pRes.getOre(), pRes.getWool(), pRes.getCorn());
+            	
+                int[] resources = ProtocolToModel.convertResources(pRes.getWood(), pRes.getClay(), pRes.getOre(), pRes.getWool(), pRes.getCorn());
                 clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
             }
         }
