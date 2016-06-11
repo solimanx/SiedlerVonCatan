@@ -326,7 +326,9 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolPlayKnightCard playKnightCard) {
-        //Amina
+        String road1_id = playKnightCard.getRoad1_id();
+        int target = playKnightCard.getTarget();
+        //networkController.playKnightCard
 
     }
 

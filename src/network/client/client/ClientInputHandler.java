@@ -1,6 +1,7 @@
 package network.client.client;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import enums.CardType;
 import enums.ResourceType;
@@ -409,7 +410,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolPlayKnightCard playKnightCard) {
         String road1_id = playKnightCard.getRoad1_id();
         int target = playKnightCard.getTarget();
-        int player_id = playKnightCard.getPlayer_id();
+       Integer player_id = playKnightCard.getPlayer_id();
 
         // networkController.playKnightCard(road1_id,target,player_id)
 

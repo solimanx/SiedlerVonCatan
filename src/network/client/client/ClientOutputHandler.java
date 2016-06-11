@@ -384,4 +384,16 @@ public class ClientOutputHandler {
 
     }
 
+    public void playKnightCard(String road1_id, int target) {
+        ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(road1_id, target);
+        Response r = new Response();
+        r.pplayKnightCard = ppkc;
+        try {
+            client.write(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+    }
+
 }
