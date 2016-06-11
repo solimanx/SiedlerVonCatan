@@ -6,9 +6,15 @@ import enums.CardType;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
 
 /**
- * 9.7
- * Created on 09.06.2016.
+ * <b>9,7 Entwicklungskarte gekauft (bought development card) </b>
+ * <p>
+ * If player buys a development card, Server sends messade to Client
+ * (it does not distinguish between Knight cards and development cards)
+ * The "development card" has to be hidden for other players as Unknown.
+ * </p>
+ * Created on 06.06.2016.
  */
+
 @Since(0.3)
 public class ProtocolBoughtDevelopmentCard {
     @SerializedName("Spieler")

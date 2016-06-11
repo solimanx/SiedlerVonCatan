@@ -297,22 +297,22 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolDevelopmentCards developmentCards) {
-        // TODO
+        // unnecessary Method
     }
 
     @Override
     protected void handle(ProtocolInventionCard inventionCard) {
-        // TODO
+        // unnecessary Method
     }
 
     @Override
     protected void handle(ProtocolMonopolyCard monopolyCard) {
-        // TODO
+        // unnecessary Method
     }
 
     @Override
     protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
-        // TODO
+        // unnecessary Method
     }
 
     protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {

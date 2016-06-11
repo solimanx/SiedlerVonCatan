@@ -7,7 +7,13 @@ import enums.ResourceType;
 import protocol.object.ProtocolResource;
 import protocol3.object.ProtocolMonopolyCard;
 
-/**12.3
+
+/**
+ * <b>12.3 Monopol (monopoly card ) </b>
+ * <p>
+ * only one resource should be specified while playing the monopoly card(client sends to server)
+ * Server sends to client Information, which player played the card.
+ * </p>
  * Created on 06.06.2016.
  */
 @Since(0.3)

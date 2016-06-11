@@ -285,6 +285,7 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolDevelopmentCards developmentCards) {
+        // unnecessary Method
 
     }
 
@@ -294,11 +295,11 @@ public class ServerInputHandler extends InputHandler {
 
     }
 
-    // @Override
+    @Override
     protected void handle(ProtocolInventionCard inventionCard) {
         ProtocolResource resource = inventionCard.getResource();
         //gameController.inventionCard(invention);
-
+        //   unnecessary Method
     }
 
     @Override
@@ -308,7 +309,7 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
-        // TODO
+        // unnecessary Method
     }
 
     @Override
