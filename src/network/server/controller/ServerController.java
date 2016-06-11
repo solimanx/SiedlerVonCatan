@@ -23,7 +23,7 @@ import network.client.controller.ViewController;
 import network.server.server.Server;
 import network.server.server.ServerInputHandler;
 import network.server.server.ServerOutputHandler;
-import protocol.messaging.ProtocolServerConfirmation;
+import protocol.messaging.ProtocolServerResponse;
 import settings.DefaultSettings;
 
 /**

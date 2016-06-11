@@ -12,17 +12,17 @@ import com.google.gson.annotations.Since;
  */
 
 @Since(0.1)
-public class ProtocolServerConfirmation {
+public class ProtocolServerResponse {
 
 	@SerializedName("Serverantwort")
-	private String server_response;
+	private String serverResponse;
 
-	public ProtocolServerConfirmation(String server_response) {
-		this.server_response = server_response;
+	public ProtocolServerResponse(String serverResponse) {
+		this.serverResponse = serverResponse;
 	}
 
-	public String getServer_response() {
-		return server_response;
+	public String getServerResponse() {
+		return serverResponse;
 	}
 
 }

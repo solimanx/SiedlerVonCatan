@@ -1,13 +1,23 @@
 package ai;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
+import enums.PlayerState;
+import model.HexService;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
 import network.InputHandler;
+import network.ProtocolToModel;
 import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.*;
 import protocol.configuration.*;
 import protocol.connection.*;
 import protocol.messaging.*;
+import protocol.object.ProtocolBoard;
+import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolField;
+import protocol.object.ProtocolHarbour;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.*;
 import protocol3.clientinstructions.*;
@@ -19,6 +29,7 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	public PrimitiveAIInputHandler(PrimitiveAI primitiveAI) {
 		ai = primitiveAI;
+		
 	}
 
 	public void sendToParser(String line) {
@@ -47,27 +58,69 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	protected void handle(ProtocolWelcome welcome) {
 		ai.setID(welcome.getPlayer_id());
 		ai.getOutput().respondProfile(ai.getColorCounter());
-		//ai.getOutput().respondStartGame();
+		// ai.getOutput().respondStartGame();
 
 	}
 
 	@Override
+	@Deprecated
 	protected void handle(ProtocolClientReady clientReady) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
-		// TODO Auto-generated method stub
+        // ProtocolBoard object retrieved (Karte: ...}
+        ProtocolBoard pBoard = gameStarted.getBoard();
+        Field[] fields = new Field[pBoard.getAmountFields()];
+        for (int i = 0; i < pBoard.getAmountFields(); i++) {
+            ProtocolField pField = pBoard.getProtocolField(i);
+            fields[i] = new Field();
+            fields[i].setDiceIndex(pField.getDiceIndex());
+            fields[i].setFieldID(pField.getFieldID());
+            fields[i].setResourceType(ProtocolToModel.getResourceType(pField.getFieldType()));
+        }
+        ArrayList<Edge> streets = new ArrayList<Edge>();
+        Corner[] corners = new Corner[pBoard.getAmountBuildings()];
+        for (int i = 0; i < corners.length; i++) {
+            ProtocolBuilding pBuild = pBoard.getProtocolBuilding(i);
+            if (!pBuild.getType().equals("Straße")) {
+                corners[i] = new Corner();
+                corners[i].setCornerID(pBuild.getID());
+                corners[i].setOwnerID(pBuild.getPlayerID());
+                corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getType()));
+            } else {
+                Edge e = new Edge();
+                streets.add(e);
+                e.setEdgeID(pBuild.getID());
+                e.setOwnedByPlayer(pBuild.getPlayerID());
+                e.setHasStreet(true);
+            }
+
+        }
+
+        //Times 2 for each harbour there are two corners.
+        Corner[] harbourCorners = new Corner[pBoard.getAmountHarbours() * 2];
+        for (int i = 0; i < pBoard.getAmountHarbours(); i++) {
+            ProtocolHarbour pHarb = pBoard.getHarbours(i);
+            Corner c1 = new Corner();
+            Corner c2 = new Corner();
+            harbourCorners[2 * i] = c1;
+            harbourCorners[2 * i + 1] = c2;
+            String[] coords = HexService.getCornerFromEdge(pHarb.getID());
+            c1.setCornerID(coords[0]);
+            c2.setCornerID(coords[1]);
+
+            c1.setHarbourStatus(pHarb.getType());
+            c2.setHarbourStatus(pHarb.getType());
+        }
+        String banditLocation = pBoard.getRobber_location();
+        ai.initBoard(fields, corners, streets, harbourCorners, banditLocation);
 
 	}
 
 	@Override
 	protected void handle(ProtocolError error) {
-		ai.setColorCounter(ai.getColorCounter()+1);
-		ai.getOutput().respondProfile(ai.getColorCounter());
-
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -89,14 +142,21 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolServerConfirmation serverConfirmation) {
-		// TODO Auto-generated method stub
+	protected void handle(ProtocolServerResponse serverResponse) {
+		// if game hasn't started, start it
+		if (serverResponse.getServerResponse().equals("OK") && !ai.isStarted()) {
+			ai.getOutput().respondStartGame();
+		}
+		// if color taken, try other colors
+		else if (serverResponse.getServerResponse().equals("Farbe bereits vergeben")) {
+			ai.setColorCounter(ai.getColorCounter() + 1);
+			ai.getOutput().respondProfile(ai.getColorCounter());
+		}
 
 	}
 
 	@Override
 	protected void handle(String string) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -120,7 +180,17 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolStatusUpdate statusUpdate) {
-		// TODO Auto-generated method stub
+		// if it's me and i'm waiting for game to start
+		if (statusUpdate.getPlayer().getPlayerID() == ai.getID()) {
+			if (statusUpdate.getPlayer().getStatus().equals(PlayerState.WAITING_FOR_GAMESTART)) {
+				ai.setStarted(true);
+			}
+			// if it's me and i have to build a village
+			else if (statusUpdate.getPlayer().getStatus().equals(PlayerState.BUILDING_VILLAGE)) {
+				// TODO TO BE CONTINUED
+			}
+
+		}
 
 	}
 

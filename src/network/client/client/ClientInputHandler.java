@@ -26,7 +26,7 @@ import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
-import protocol.messaging.ProtocolServerConfirmation;
+import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
 import protocol.object.ProtocolField;
@@ -80,6 +80,7 @@ public class ClientInputHandler extends InputHandler {
         clientController.welcome(welcome.getPlayer_id());
     }
 
+    @Deprecated
     @Override
     protected void handle(ProtocolClientReady clientReady) {
         // unnecessary Method in ClientInputHandler
@@ -165,8 +166,8 @@ public class ClientInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolServerConfirmation serverConfirmation) {
-        String server_response = serverConfirmation.getServer_response();
+    protected void handle(ProtocolServerResponse serverConfirmation) {
+        String server_response = serverConfirmation.getServerResponse();
         clientController.receiveServerConfirmation(server_response);
     }
 

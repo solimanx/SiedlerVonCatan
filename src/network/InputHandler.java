@@ -13,7 +13,7 @@ import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
-import protocol.messaging.ProtocolServerConfirmation;
+import protocol.messaging.ProtocolServerResponse;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
@@ -72,8 +72,8 @@ public abstract class InputHandler {
             case "ProtocolChatSendMessage":
                 handle((ProtocolChatSendMessage) o);
                 break;
-            case "ProtocolServerConfirmation":
-                handle((ProtocolServerConfirmation) o);
+            case "ProtocolServerResponse":
+                handle((ProtocolServerResponse) o);
                 break;
             case "ProtocolBuild":
                 handle((ProtocolBuild) o);
@@ -102,9 +102,8 @@ public abstract class InputHandler {
             case "ProtocolRobberMovementRequest": // 0.2
                 handle((ProtocolRobberMovementRequest) o);
                 break;
-
             case "String":
-                handle((String) o);
+                handle(new ProtocolServerResponse((String)o));
                 break;
             case "ProtocolVictory":
                 handle((ProtocolVictory) o);
@@ -203,7 +202,7 @@ public abstract class InputHandler {
 
     protected abstract void handle(ProtocolChatSendMessage chatSendMessage);
 
-    protected abstract void handle(ProtocolServerConfirmation serverConfirmation);
+    protected abstract void handle(ProtocolServerResponse serverConfirmation);
 
     protected abstract void handle(String string);
 

@@ -19,7 +19,7 @@ import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
-import protocol.messaging.ProtocolServerConfirmation;
+import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolCosts;
@@ -119,7 +119,7 @@ public class ServerInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolServerConfirmation serverConfirmation) {
+    protected void handle(ProtocolServerResponse serverConfirmation) {
         // Unnecessary Method in ServerInputHadler
     }
 

@@ -20,7 +20,7 @@ import protocol.configuration.ProtocolVictory;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
 import protocol.messaging.ProtocolChatReceiveMessage;
-import protocol.messaging.ProtocolServerConfirmation;
+import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
 import protocol.object.ProtocolField;
@@ -471,7 +471,7 @@ public class ServerOutputHandler {
     }
 
     public void serverConfirm(String server_response, int threadPlayerID) {
-        ProtocolServerConfirmation psc = new ProtocolServerConfirmation(server_response);
+        ProtocolServerResponse psc = new ProtocolServerResponse(server_response);
         try {
             server.sendToClient(parser.createString(psc), threadPlayerID);
         } catch (IOException e) {

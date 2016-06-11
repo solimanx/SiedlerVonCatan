@@ -5,11 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javafx.application.Platform;
+import model.Board;
 import model.GameLogic;
+import model.objects.Corner;
+import model.objects.Edge;
+import model.objects.Field;
+import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.controller.ClientController;
@@ -24,17 +31,17 @@ public class PrimitiveAI extends Thread {
 	private int[] firstVillageLocation;
 	private int[] secondVillageLocation;
 	// 3-part edge coordinate (e.g (0,1,0)
+	@SuppressWarnings("unused")
 	private int[] firstRoadLocation;
+	@SuppressWarnings("unused")
 	private int[] secondRoadLocation;
 
 	private boolean scanning = true;
-	private boolean connectionActive = false;
 	private static int connectionTry = 0;
 
 	private Socket socket;
 	private final String PROTOCOL = "0.3";
 	private final String VERSION = "NiedlichePixel 0.3 (KI)";
-
 
 	private final String SERVERHOST = "aruba.dbs.ifi.lmu.de";
 	private final int PORT = 10000;
@@ -43,10 +50,12 @@ public class PrimitiveAI extends Thread {
 	private BufferedReader reader;
 
 	// own ID in server
+	@SuppressWarnings("unused")
 	private int ID;
-	
 
 	private int colorCounter = 0;
+
+	private boolean started = false;
 
 	// Handlers
 
@@ -55,10 +64,14 @@ public class PrimitiveAI extends Thread {
 
 	// USELESS GAMELOGIC/BOARD ONLY TO SEE CODE
 	private GameLogic gl;
+	@SuppressWarnings("unused")
 	private ClientController cc;
+	private Board board;
 
 	public PrimitiveAI() {
 		System.out.println("AI started.");
+		this.board = new Board();
+		this.gl = new GameLogic(board);
 		this.start();
 
 	}
@@ -71,7 +84,6 @@ public class PrimitiveAI extends Thread {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				scanning = false;
-				connectionActive = true;
 				System.out.println("Client connected to server.");
 				read();
 			} catch (IOException e) {
@@ -89,13 +101,13 @@ public class PrimitiveAI extends Thread {
 	private void read() throws IOException {
 		String line;
 		while ((line = reader.readLine()) != null) {
-			System.out.println(DefaultSettings.getCurrentTime()+" Server: " + line);
+			System.out.println(DefaultSettings.getCurrentTime() + " Server: " + line);
 			pI.sendToParser(line);
 		}
 	}
 
 	public void write(String json) throws IOException {
-		System.out.println(DefaultSettings.getCurrentTime()+ "Client:" + json);
+		System.out.println(DefaultSettings.getCurrentTime() + " Client:" + json);
 		writer.write(json + "\n");
 		writer.flush();
 	}
@@ -212,17 +224,68 @@ public class PrimitiveAI extends Thread {
 		return PROTOCOL;
 	}
 
+	public int getID() {
+		return ID;
+	}
+
 	public void setID(int player_id) {
 		ID = player_id;
 
 	}
-	
+
 	public int getColorCounter() {
 		return colorCounter;
 	}
 
 	public void setColorCounter(int colorCounter) {
 		this.colorCounter = colorCounter;
+	}
+
+	public boolean isStarted() {
+		return started;
+	}
+
+	public void setStarted(boolean started) {
+		this.started = started;
+	}
+
+	public void initBoard(Field[] fields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
+			String banditLocation) {
+		for (Field f : fields) {
+			String location = f.getFieldID();
+			int[] coords = ProtocolToModel.getFieldCoordinates(location);
+			Field bField = gl.getBoard().getFieldAt(coords[0], coords[1]);
+			bField.setFieldID(location);
+			bField.setDiceIndex(f.getDiceIndex());
+			;
+			bField.setResourceType(f.getResourceType());
+		}
+		for (Corner c : corners) {
+			String location = c.getCornerID();
+			int coords[] = ProtocolToModel.getCornerCoordinates(location);
+			Corner bCorner = gl.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
+			bCorner.setCornerID(location);
+			bCorner.setOwnerID(c.getOwnerID());
+			bCorner.setStatus(c.getStatus());
+		}
+		for (Edge s : streets) {
+			String location = s.getEdgeID();
+			int coords[] = ProtocolToModel.getEdgeCoordinates(location);
+			Edge bEdge = gl.getBoard().getEdgeAt(coords[0], coords[1], coords[2]);
+			bEdge.setEdgeID(location);
+			bEdge.setHasStreet(s.isHasStreet());
+			bEdge.setOwnedByPlayer(s.getOwnerID());
+		}
+		for (Corner c : harbourCorners) {
+			String location = c.getCornerID();
+			int[] coords = ProtocolToModel.getCornerCoordinates(location);
+			Corner bCorner = gl.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
+			bCorner.setCornerID(location);
+			bCorner.setHarbourStatus(c.getHarbourStatus());
+		}
+
+		gl.getBoard().setBandit(banditLocation);
+		System.out.println("Test");
 	}
 
 }
