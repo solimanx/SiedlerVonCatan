@@ -287,11 +287,11 @@ public class GameLogic {
 		return board;
 	}
 
-	public boolean checkIfActionIsAllowed(int playerID,int currentPlayer,PlayerState state){
+	public boolean isActionForbidden(int playerID,int currentPlayer,PlayerState state){
 		if (playerID != currentPlayer || board.getPlayer(currentPlayer).getPlayerState() != state){
-			return false;
+			return true;
 		} else {
-			return true;			
+			return false;			
 		}		
 	}
 
