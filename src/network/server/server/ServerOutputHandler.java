@@ -2,6 +2,7 @@ package network.server.server;
 
 import java.io.IOException;
 
+import enums.CardType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -190,7 +191,7 @@ public class ServerOutputHandler {
         r.pSUpdate = ps;
         try {
             if (sendToPlayerID != null) {
-            	System.out.println("Send "+status+" to "+sendToPlayerID);
+                System.out.println("Send " + status + " to " + sendToPlayerID);
                 server.sendToClient(parser.createString(r), sendToPlayerID);
             } else {
                 server.broadcast((parser.createString(r)));
@@ -424,17 +425,17 @@ public class ServerOutputHandler {
 
     }
 
-    public void monopolyCardInfo(int [] resource, int player_id) {
-     	ProtocolResource pm;
+    public void monopolyCardInfo(int[] resource, int player_id) {
+        ProtocolResource pm;
         if (resource.length > 1) {
             pm = new ProtocolResource(resource[0], resource[1], resource[2], resource[3], resource[4], 0);
         } else {
             pm = new ProtocolResource(0, 0, 0, 0, 0, resource[0]);
         }
-    	ProtocolMonopolyCardInfo pmci = new ProtocolMonopolyCardInfo(pm, player_id);
-    	Response r = new Response();
-    	r.pMonopolyCardInfo = pmci;
-    	try {
+        ProtocolMonopolyCardInfo pmci = new ProtocolMonopolyCardInfo(pm, player_id);
+        Response r = new Response();
+        r.pMonopolyCardInfo = pmci;
+        try {
             server.broadcast(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
@@ -495,16 +496,9 @@ public class ServerOutputHandler {
         }
     }
 
-    public void boughtDevelopmentCard(int player_id, int[] developmentCards) {
-        ProtocolDevelopmentCards prdevelop;
+    public void boughtDevelopmentCard(int player_id, CardType developmentCard) {
 
-        if (developmentCards.length > 1) {
-            prdevelop = new ProtocolDevelopmentCards(developmentCards[0], developmentCards[1], developmentCards[2],
-                    developmentCards[3], developmentCards[4]);
-        } else {
-            prdevelop = new ProtocolDevelopmentCards(0, 0, 0, 0, developmentCards[0]);
-        }
-        ProtocolBoughtDevelopmentCard pbdc = new ProtocolBoughtDevelopmentCard(player_id, prdevelop);
+        ProtocolBoughtDevelopmentCard pbdc = new ProtocolBoughtDevelopmentCard(player_id, developmentCard);
         Response r = new Response();
         r.pBoughtDevelopmentCard = pbdc;
         try {
