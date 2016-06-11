@@ -80,16 +80,16 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Pane board;
-	
+
 	@FXML
 	private Label playerNameOne;
-	
+
 	@FXML
 	private Label playerNameTwo;
-	
+
 	@FXML
 	private Label playerNameThree;
-	
+
 	@FXML
 	private Label playerNameFour;
 
@@ -192,7 +192,7 @@ public class GameViewController implements Initializable {
 			playerCounter++;
 		}
 		playerColors.add(viewController.getPlayerColor(playerColor));
-		switch (playerCounter) {
+		switch (playerIDtoViewPosition.get(playerID)) {
 		case 1:
 			playerNameOne.setText(playerName);
 			break;
@@ -206,7 +206,7 @@ public class GameViewController implements Initializable {
 			playerNameFour.setText(playerName);
 			break;
 		}
-		
+
 	}
 
 	private void initPlayerColors() {
