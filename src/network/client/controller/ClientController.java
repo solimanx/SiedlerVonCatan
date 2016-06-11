@@ -49,6 +49,9 @@ public class ClientController {
 	protected Client client;
 	private int initialRoundCount = 0;
 
+	/**
+	 * @param primaryStage
+	 */
 	public ClientController(Stage primaryStage) {
 		// ModelPlayerID => threadID
 		modelPlayerIdMap = new HashMap<Integer, Integer>();
@@ -63,6 +66,10 @@ public class ClientController {
 
 	}
 
+	/**
+	 * @param serverHost
+	 * @param port
+	 */
 	public void connectToServer(String serverHost, int port) {
 		this.client = new Client(clientInputHandler, serverHost, port);
 		this.clientOutputHandler = new ClientOutputHandler(client);
@@ -73,6 +80,10 @@ public class ClientController {
 	 * Check if versions match and act accordingly; if they match begin sending
 	 * confirmation from client otherwise disconnect
 	 *
+	 * @param serverVersion
+	 * @param protocolVersion
+	 */
+	/**
 	 * @param serverVersion
 	 * @param protocolVersion
 	 */
@@ -87,6 +98,9 @@ public class ClientController {
 	}
 
 	// 4.2
+	/**
+	 * @param playerID
+	 */
 	public void welcome(int playerID) {
 		setOwnPlayerID(playerID);
 		System.out.println("Handshake complete!");
@@ -94,22 +108,36 @@ public class ClientController {
 	}
 
 	// 6.1
+	/**
+	 * @param server_response
+	 */
 	public void receiveServerConfirmation(String server_response) {
 		// TODO client confirm in later protocols
 	}
 
 	// 6.2
+	/**
+	 * @param s
+	 */
 	public void chatSendMessage(String s) {
 		clientOutputHandler.chatSendMessage(s);
 	}
 
 	// 6.3
+	/**
+	 * @param playerId
+	 * @param s
+	 */
 	public void chatReceiveMessage(int playerId, String s) {
 		viewController.messageReceive(
 				"Spieler " + gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerId)).getName() + ": " + s);
 	}
 
 	// 7.1
+	/**
+	 * @param name
+	 * @param color
+	 */
 	public void sendPlayerProfile(String name, Color color) {
 		clientOutputHandler.sendPlayerProfile(name, color);
 		// TODO later
@@ -118,16 +146,30 @@ public class ClientController {
 	}
 
 	// 7.2
+	/**
+	 * 
+	 */
 	public void sendReady() {
 		clientOutputHandler.clientReady();
 	}
 
 	// 7.3
+	/**
+	 * @param notice
+	 */
 	public void error(String notice) {
 		System.out.println(notice);
 	}
 
 	// 8.1
+	/**
+	 * @param threadID
+	 * @param color
+	 * @param name
+	 * @param status
+	 * @param victoryPoints
+	 * @param resources
+	 */
 	public void statusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
@@ -167,6 +209,13 @@ public class ClientController {
 	}
 
 	// 7.4
+	/**
+	 * @param serverFields
+	 * @param corners
+	 * @param streets
+	 * @param harbourCorners
+	 * @param banditLocation
+	 */
 	public void initBoard(Field[] serverFields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
 			String banditLocation) {
 
@@ -221,6 +270,9 @@ public class ClientController {
 		});
 	}
 
+	/**
+	 * 
+	 */
 	public void initializeGUI() {
 
 		for (int i = 0; i < amountPlayers; i++) {
@@ -242,6 +294,10 @@ public class ClientController {
 
 	}
 
+	/**
+	 * @param playerID
+	 * @param resources
+	 */
 	public void addToPlayersResource(int playerID, int[] resources) {
 		ArrayList<ResourceType> resourceCards = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
 		for (int i = 0; i < resources.length; i++) {
@@ -253,6 +309,10 @@ public class ClientController {
 
 	}
 
+	/**
+	 * @param playerId
+	 * @param resources
+	 */
 	public void setPlayerResources(int playerId, int[] resources) {
 		ArrayList<ResourceType> resourceCards = new ArrayList<ResourceType>();
 		for (int i = 0; i < resources.length; i++) {
@@ -264,27 +324,46 @@ public class ClientController {
 
 	}
 
+	/**
+	 * @return
+	 */
 	public GameLogic getGameLogic() {
 		return gameLogic;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getOwnPlayerId() {
 		return ownPlayerId;
 	}
 
+	/**
+	 * @param ownPlayerId
+	 */
 	public void setOwnPlayerID(int ownPlayerId) {
 		this.ownPlayerId = ownPlayerId;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getAmountPlayers() {
 		return amountPlayers;
 	}
 
+	/**
+	 * @param amountPlayers
+	 */
 	public void setAmountPlayers(int amountPlayers) {
 		this.amountPlayers = amountPlayers;
 	}
 
 	// 8.2
+	/**
+	 * @param playerId
+	 * @param result
+	 */
 	public void diceRollResult(int playerId, int[] result) {
 		//WARNING, PLAYERID NOTHING GETS DONE WITH IT
 		if(viewController.getGameViewController() != null)
@@ -296,6 +375,10 @@ public class ClientController {
 	}
 
 	// 8.3
+	/**
+	 * @param playerID
+	 * @param resources
+	 */
 	public void resourceObtain(int playerID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		viewController.getGameViewController().setResourceCards(modelID, resources);
@@ -303,11 +386,23 @@ public class ClientController {
 	}
 
 	// 8.5
+	/**
+	 * @param stealingPlayerId
+	 * @param x
+	 * @param y
+	 * @param stealFromPlayerId
+	 */
 	public void setBandit(int stealingPlayerId, int x, int y, int stealFromPlayerId) {
 
 	}
 
 	// 8.6
+	/**
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerID
+	 */
 	public void buildStreet(int x, int y, int dir, int playerID) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
@@ -318,6 +413,12 @@ public class ClientController {
 	}
 
 	// 8.6
+	/**
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerID
+	 */
 	public void buildVillage(int x, int y, int dir, int playerID) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
@@ -334,6 +435,12 @@ public class ClientController {
 	}
 
 	// 8.6
+	/**
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param playerID
+	 */
 	public void buildCity(int x, int y, int dir, int playerID) {
 		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.CITY);
@@ -343,18 +450,31 @@ public class ClientController {
 	}
 
 	// 9.1
+	/**
+	 * 
+	 */
 	public void diceRollRequest() {
 		clientOutputHandler.diceRollRequest();
 
 	}
 
 	// 9.3
+	/**
+	 * @param x
+	 * @param y
+	 * @param stealFromPlayerId
+	 */
 	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
 		clientOutputHandler.requestSetBandit(x, y, stealFromPlayerId);
 
 	}
 
 	// 9.4
+	/**
+	 * @param x
+	 * @param y
+	 * @param dir
+	 */
 	public void requestBuildVillage(int x, int y, int dir) {
 		// view saves coordinates from 0 to 7 system
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -370,6 +490,11 @@ public class ClientController {
 
 	}
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param dir
+	 */
 	public void requestBuildInitialVillage(int x, int y, int dir) {
 		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
 			clientOutputHandler.requestBuildVillage(x, y, dir);
@@ -377,6 +502,11 @@ public class ClientController {
 	}
 
 	// 9.4
+	/**
+	 * @param x
+	 * @param y
+	 * @param dir
+	 */
 	public void requestBuildStreet(int x, int y, int dir) {
 		int radius = DefaultSettings.BOARD_RADIUS;
 		if (initialRoundCount < 2) {
@@ -389,6 +519,11 @@ public class ClientController {
 
 	}
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param dir
+	 */
 	public void requestBuildInitialStreet(int x, int y, int dir) {
 		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildStreet(x, y, dir);
@@ -397,6 +532,11 @@ public class ClientController {
 	}
 
 	// 9.4
+	/**
+	 * @param x
+	 * @param y
+	 * @param dir
+	 */
 	public void requestBuildCity(int x, int y, int dir) {
 		if (gameLogic.checkBuildCity(x, y, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildCity(x, y, dir);
@@ -404,64 +544,118 @@ public class ClientController {
 	}
 
 	// 9.7
+	/**
+	 * 
+	 */
 	public void endTurn() {
 		clientOutputHandler.endTurn();
 	}
 
 	// Protocol 0.2
+	/**
+	 * 
+	 */
 	public void robberMovement() {
 		// TODO
 	}
 
+	/**
+	 * @param result
+	 */
 	public void robberLoss(int[] result) {
 		// TODO
 	}
 	// Protocol 0.3
 
+	/**
+	 * @param player_id
+	 * @param trade_id
+	 * @param offer
+	 * @param withdrawal
+	 */
 	public void tradeIsRequested(int player_id, int trade_id, ProtocolResource offer, ProtocolResource withdrawal) {
 		// TODO
 	}
 
+	/**
+	 * @param player_id
+	 * @param trade_id
+	 */
 	public void tradeConfirmation(int player_id, int trade_id) {
 		// TODO
 	}
 
+	/**
+	 * @param player_id
+	 * @param trade_id
+	 */
 	public void tradeIsCanceled(int player_id, int trade_id) {
 		// TODO
 	}
 
+	/**
+	 * @param player_id
+	 * @param tradePartner_id
+	 */
 	public void tradeIsCompleted(int player_id, int tradePartner_id) {
 		// TODO
 	}
 
+	/**
+	 * 
+	 */
 	public void victory() {
 		// TODO
 	}
 
+	/**
+	 * 
+	 */
 	public void costs() {
 		// TODO
 	}
 
+	/**
+	 * @param player_id
+	 */
 	public void biggestKnightProwess(int player_id) {
 		// TODO
 	}
 
+	/**
+	 * @param resource
+	 * @param player_id
+	 */
 	public void inventionCardInfo(ProtocolResource resource, int player_id) {
 		// TODO
 	}
 
+	/**
+	 * @param player_id
+	 */
 	public void longestRoad(int player_id) {
 		// TODO
 	}
 
+	/**
+	 * 
+	 */
 	public void monopolyCardInfo() {
 		// TODO
 	}
 
+	/**
+	 * @param road1_id
+	 * @param road2_id
+	 * @param player_id
+	 */
 	public void playKnightCard(String road1_id, String road2_id, int player_id) {
 		// TODO
 	}
 
+	/**
+	 * 
+	 */
 	public void boughtDevelopmentCard() {
 		// TODO
 	}
@@ -472,6 +666,10 @@ public class ClientController {
 	 *
 	 * @param state
 	 */
+	/**
+	 * @param playerId
+	 * @param state
+	 */
 	public void setPlayerState(int playerId, PlayerState state) {
 		gameLogic.getBoard().getPlayer(playerId).setPlayerState(state);
 		if (playerId == ownPlayerId) {
@@ -480,6 +678,10 @@ public class ClientController {
 		}
 	}
 
+	/**
+	 * @param playerID
+	 * @return
+	 */
 	private int[] getPlayerResources(int playerID) {
 		ArrayList<ResourceType> resources = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
 		int[] result = new int[5];

@@ -5,6 +5,9 @@ package network.client.controller;
  */
 public class TradeController {
 
+	/**
+	 * @param viewController
+	 */
 	public void setViewController(ViewController viewController) {
 		// TODO Auto-generated method stub
 

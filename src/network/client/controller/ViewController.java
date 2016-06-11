@@ -24,6 +24,9 @@ public class ViewController {
 	private TradeController tradeController;
 	private Stage primaryStage;
 
+	/**
+	 * @return
+	 */
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
@@ -31,6 +34,10 @@ public class ViewController {
 	private Stage choosingStage;
 	private boolean gameView = false;
 
+	/**
+	 * @param primaryStage
+	 * @param fc
+	 */
 	public ViewController(Stage primaryStage, ClientController fc) {
 		this.primaryStage = primaryStage;
 		this.clientController = fc;
@@ -48,6 +55,10 @@ public class ViewController {
 	/**
 	 * Starts the lobby view, which provides connecting to server and chat
 	 *
+	 * @param primaryStage
+	 * @throws IOException
+	 */
+	/**
 	 * @param primaryStage
 	 * @throws IOException
 	 */
@@ -74,6 +85,9 @@ public class ViewController {
 	 *
 	 * @throws IOException
 	 */
+	/**
+	 * @throws IOException
+	 */
 	public void startChooseView() throws IOException {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
@@ -92,6 +106,9 @@ public class ViewController {
 
 	/**
 	 * starts GameView and GameViewController
+	 */
+	/**
+	 * 
 	 */
 	void startGameView() {
 		choosingStage.hide();
@@ -128,6 +145,9 @@ public class ViewController {
 	// return mainViewController.getView();
 	// }
 
+	/**
+	 * 
+	 */
 	private void init() {
 
 		/*
@@ -150,30 +170,51 @@ public class ViewController {
 
 	}
 
+	/**
+	 * @return
+	 */
 	public ClientController getClientController() {
 		return clientController;
 	}
 
+	/**
+	 * @return
+	 */
 	public GameViewController getGameViewController() {
 		return gameViewController;
 	}
 
+	/**
+	 * @return
+	 */
 	public LobbyController getLobbyController() {
 		return lobbyController;
 	}
 
+	/**
+	 * @param clientController
+	 */
 	public void setFlowController(ClientController clientController) {
 		this.clientController = clientController;
 	}
 
+	/**
+	 * @param gameViewController
+	 */
 	public void setMainViewController(GameViewController gameViewController) {
 		this.gameViewController = gameViewController;
 	}
 
+	/**
+	 * @param lobbyController
+	 */
 	public void setLobbyController(LobbyController lobbyController) {
 		this.lobbyController = lobbyController;
 	}
 
+	/**
+	 * @param s
+	 */
 	public void messageReceive(String s) {
 		if (gameView) {
 			gameViewController.receiveChatMessage(s);
@@ -182,6 +223,9 @@ public class ViewController {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void newTradeView() {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(
