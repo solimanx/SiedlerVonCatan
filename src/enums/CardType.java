@@ -12,6 +12,8 @@ public enum CardType {
 
 	@SerializedName("Monopol") MONOPOLY,
 
-	@SerializedName("Siegpunkt") VICTORYPOINT
+	@SerializedName("Siegpunkt") VICTORYPOINT,
+
+	@SerializedName("Unbekannt") UNKNOWN
 
 }
