@@ -154,7 +154,7 @@ public class GameViewController implements Initializable {
 
 	private Stage stage;
 
-	private int playerCounter;
+	private int playerCounter = 2;
 
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
@@ -185,8 +185,12 @@ public class GameViewController implements Initializable {
 	}
 
 	public void initPlayer(int playerID, String playerName, enums.Color playerColor) {
-		playerCounter++;
-		playerIDtoViewPosition.put(playerID, playerCounter);
+		if (playerID == viewController.getClientController().getOwnPlayerId()) {
+			playerIDtoViewPosition.put(playerID, 1);
+		} else {
+			playerIDtoViewPosition.put(playerID, playerCounter);
+			playerCounter++;
+		}
 		playerColors.add(viewController.getPlayerColor(playerColor));
 		switch (playerCounter) {
 		case 1:
@@ -212,7 +216,7 @@ public class GameViewController implements Initializable {
 		fieldColors.put(ResourceType.ORE, Color.DARKGRAY);
 		fieldColors.put(ResourceType.SHEEP, Color.LIGHTGREEN);
 		fieldColors.put(ResourceType.WOOD, Color.FORESTGREEN);
-		fieldColors.put(ResourceType.SEA, Color.AQUA);
+		fieldColors.put(ResourceType.SEA, Color.LIGHTSKYBLUE);
 
 		playerColors.add(0, Color.BLUE);
 		playerColors.add(1, Color.ORANGE);
