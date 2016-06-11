@@ -263,6 +263,9 @@ public class HexService {
 	public static String getNextField(int aX, int aY, int dir) {
 		String neighbours = getNeighboursID(aX, aY);
 		char[] result = neighbours.toCharArray();
+		if(result.length != 6){
+			throw new IllegalArgumentException("getNextField dont works with this input");
+		}
 		String a = "";
 		switch (dir) {
 		case 0:
