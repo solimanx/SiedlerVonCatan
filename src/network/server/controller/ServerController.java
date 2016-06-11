@@ -611,7 +611,7 @@ public class ServerController {
 	 */
 
 	private void gainFirstBoardResources() {
-		for (int i = amountPlayers; i < amountPlayers * 2; i++) {
+		for (int i = 0; i < amountPlayers * 2; i++) {
 			int[] coords = ProtocolToModel.getCornerCoordinates(initialVillages.get(i).getCornerID());
 			Field[] connFields = gameLogic.getBoard().getConnectedFields(coords[0], coords[1], coords[2]);
 			for (int j = 0; j < connFields.length; j++) {
