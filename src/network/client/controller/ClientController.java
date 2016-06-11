@@ -87,7 +87,7 @@ public class ClientController {
 
 	// 4.2
 	public void welcome(int playerID) {
-		setOwnPlayerID(playerID);
+		setOwnPlayerID(amountPlayers);
 		System.out.println("Handshake complete!");
 		viewController.getLobbyController().enableChat();
 	}

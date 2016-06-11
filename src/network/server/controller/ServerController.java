@@ -236,9 +236,6 @@ public class ServerController {
 		Board board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
 		generateBoard("A",true);
-		System.out.println(board.getFieldAt(0, 0).getDiceIndex() + board.getFieldAt(0, 0).getResourceType().toString()
-				+ board.getFieldAt(0, 0).getFieldID());
-		//generateDebuggingBoard();
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 
 		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
