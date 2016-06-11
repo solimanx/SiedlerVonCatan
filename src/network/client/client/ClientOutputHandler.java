@@ -28,6 +28,7 @@ import protocol3.object.ProtocolRoadBuildingCard;
 import protocol3.severinstructions.ProtocolInventionCardInfo;
 import protocol3.severinstructions.ProtocolMonopolyCardInfo;
 import protocol3.severinstructions.ProtocolPlayKnightCard;
+import protocol3.severinstructions.ProtocolRoadBuildingCardInfo;
 
 public class ClientOutputHandler {
 
@@ -355,11 +356,25 @@ public class ClientOutputHandler {
         }*/
 
     }
-    public void monopolyCardInfo(ResourceType resource){
 
-        ProtocolMonopolyCardInfo pmci=new ProtocolMonopolyCardInfo(resource);
+    public void monopolyCardInfo(ResourceType resource) {
+
+        ProtocolMonopolyCardInfo pmci = new ProtocolMonopolyCardInfo(resource);
         Response r = new Response();
         r.pMonopolyCardInfo = pmci;
+        try {
+            client.write(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+
+    }
+
+    public void roadBuildingCardInfo(String road1_id, String road2_id) {
+        ProtocolRoadBuildingCardInfo prbci = new ProtocolRoadBuildingCardInfo(road1_id, road2_id);
+        Response r = new Response();
+        r.pRoadBuildingCardInfo = prbci;
         try {
             client.write(parser.createString(r));
         } catch (IOException e) {

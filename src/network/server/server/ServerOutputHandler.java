@@ -130,7 +130,7 @@ public class ServerOutputHandler {
         r.pError = pe;
 
         try {
-            server.sendToClient(parser.createString(r),threadPlayerID);
+            server.sendToClient(parser.createString(r), threadPlayerID);
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
@@ -409,7 +409,8 @@ public class ServerOutputHandler {
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
-     } */  }
+     } */
+    }
 
 
     public void longestRoad(int player_id) {
@@ -440,7 +441,7 @@ public class ServerOutputHandler {
     }
 
     public void playKnight() {
-
+        // This should be deleted
     }
 
     public void playKnightCard(String road1_id, int target, int player_id) {
@@ -455,7 +456,7 @@ public class ServerOutputHandler {
         }
     }
 
-    public void roadBuildingCardInfo(String road1_id, String road2_id, int player_id) {
+    public void roadBuildingCardInfo(String road1_id, String road2_id, Integer player_id) {
         ProtocolRoadBuildingCardInfo prbci = new ProtocolRoadBuildingCardInfo(road1_id, road2_id, player_id);
         Response r = new Response();
         r.pRoadBuildingCardInfo = prbci;
@@ -466,25 +467,13 @@ public class ServerOutputHandler {
             e.printStackTrace();
         }
 
-    }
-
-    public void specialCaseLongestRoad() {
-        ProtocolSpecialCaseLongestRoad psclr = new ProtocolSpecialCaseLongestRoad();
-        Response r = new Response();
-        r.pSpecialCaseLongestRoad = psclr;
-        try {
-            server.broadcast(parser.createString(r));
-        } catch (IOException e) {
-            logger.error("Threw a Input/Output Exception ", e);
-            e.printStackTrace();
-        }
 
     }
 
     public void serverConfirm(String server_response, int threadPlayerID) {
         ProtocolServerConfirmation psc = new ProtocolServerConfirmation(server_response);
         try {
-            server.sendToClient(parser.createString(psc),threadPlayerID);
+            server.sendToClient(parser.createString(psc), threadPlayerID);
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();

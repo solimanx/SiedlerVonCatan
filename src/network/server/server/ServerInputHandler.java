@@ -285,7 +285,7 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolDevelopmentCards developmentCards) {
-        
+
     }
 
     @Override
@@ -296,7 +296,7 @@ public class ServerInputHandler extends InputHandler {
 
     // @Override
     protected void handle(ProtocolInventionCard inventionCard) {
-        ProtocolResource invention= inventionCard.getResource();
+        ProtocolResource invention = inventionCard.getResource();
         //gameController.inventionCard(invention);
 
     }
@@ -332,7 +332,9 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
-        // AMINA
+        String road1_id = roadBuildingCardInfo.getRoad1_id();
+        String road2_id = roadBuildingCardInfo.getRoad2_id();
+        //networkController.roadBuildingCardInfo(road1_id,road2_id)
 
     }
 
@@ -368,7 +370,6 @@ public class ServerInputHandler extends InputHandler {
         // Unnecessary Method
 
     }
-
 
 
 }

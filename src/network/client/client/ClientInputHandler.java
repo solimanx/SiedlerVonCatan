@@ -419,7 +419,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
         String road1_id = roadBuildingCardInfo.getRoad1_id();
         String road2_idx = roadBuildingCardInfo.getRoad2_id();
-        int player_id = roadBuildingCardInfo.getPlayer_id();
+       Integer player_id = roadBuildingCardInfo.getPlayer_id();
         // networkController.roadBuildingCardInfo(road1_id,road2_id,player_id)
     }
 
@@ -431,7 +431,7 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
-    @Override
+    @Override//Should be deleted
     protected void handle(ProtocolSpecialCaseLongestRoad specialCaseLongestRoad) {
         // networController.specialCaseLongestRoad();
     }
