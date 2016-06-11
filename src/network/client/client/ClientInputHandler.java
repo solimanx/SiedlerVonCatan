@@ -172,7 +172,10 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolBuild build) {
 		ProtocolBuilding building = build.getBuilding();
-		// networkController.build(building);
+		int[] coords = ProtocolToModel.getCornerCoordinates(building.getId());
+		int id = building.getPlayer_id();
+		System.out.println(coords[0]+" "+coords[1]+" "+coords[2]+" .."+id);
+		clientController.buildVillage(coords[0], coords[1], coords[2], id);
 
 	}
 
