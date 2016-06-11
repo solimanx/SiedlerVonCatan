@@ -36,12 +36,8 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button contentDisplay="RIGHT" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" text="Profile">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Button>
                   <Label text="Label" />
+                  <Button layoutX="14.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Button" />
                </children>
             </AnchorPane>
         </items>
