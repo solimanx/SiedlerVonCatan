@@ -54,6 +54,9 @@ import settings.DefaultSettings;
 public class ClientInputHandler extends InputHandler {
     private ClientController clientController;
 
+    /**
+     * @param clientController
+     */
     public ClientInputHandler(ClientController clientController) {
         super();
         this.clientController = clientController;
@@ -65,21 +68,33 @@ public class ClientInputHandler extends InputHandler {
      *
      * @param s
      */
+    /**
+     * @param s
+     */
     public void sendToParser(String s) {
         Object object = parser.parseString(s);
         handle(object);
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.connection.ProtocolHello)
+     */
     @Override
     protected void handle(ProtocolHello hello) {
         clientController.serverHello(hello.getVersion(), hello.getProtocol());
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.connection.ProtocolWelcome)
+     */
     @Override
     protected void handle(ProtocolWelcome welcome) {
         clientController.welcome(welcome.getPlayer_id());
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.configuration.ProtocolClientReady)
+     */
     @Deprecated
     @Override
     protected void handle(ProtocolClientReady clientReady) {
@@ -87,6 +102,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.configuration.ProtocolGameStarted)
+     */
     @Override
     protected void handle(ProtocolGameStarted gameStarted) {
         // ProtocolBoard object retrieved (Karte: ...}
@@ -139,6 +157,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.configuration.ProtocolError)
+     */
     @Override
     protected void handle(ProtocolError error) {
         System.out.println("Meldung wird geschickt");
@@ -146,12 +167,18 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.configuration.ProtocolPlayerProfile)
+     */
     @Override
     protected void handle(ProtocolPlayerProfile playerProfile) {
         // unnecessary Method in ClientInputHandler
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.messaging.ProtocolChatReceiveMessage)
+     */
     @Override
     protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
         String s = chatReceiveMessage.getMessage();
@@ -159,12 +186,18 @@ public class ClientInputHandler extends InputHandler {
         clientController.chatReceiveMessage(playerId, s);
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.messaging.ProtocolChatSendMessage)
+     */
     @Override
     protected void handle(ProtocolChatSendMessage chatSendMessage) {
         // unnecessary Method in ClientInputHandler
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.messaging.ProtocolServerResponse)
+     */
     @Override
     protected void handle(ProtocolServerResponse serverConfirmation) {
         String server_response = serverConfirmation.getServerResponse();
@@ -172,6 +205,9 @@ public class ClientInputHandler extends InputHandler {
     }
 
     //
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.ProtocolBuild)
+     */
     @Override
     protected void handle(ProtocolBuild build) {
         ProtocolBuilding building = build.getBuilding();
@@ -192,6 +228,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.ProtocolDiceRollResult)
+     */
     @Override
     protected void handle(ProtocolDiceRollResult diceRollResult) {
         int playerID = diceRollResult.getPlayer();
@@ -199,6 +238,9 @@ public class ClientInputHandler extends InputHandler {
         clientController.diceRollResult(playerID, result);
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.ProtocolResourceObtain)
+     */
     @Override
     protected void handle(ProtocolResourceObtain resourceObtain) {
         int playerID = resourceObtain.getPlayer();
@@ -209,6 +251,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.ProtocolStatusUpdate)
+     */
     @Override
     protected void handle(ProtocolStatusUpdate statusUpdate) {
         ProtocolPlayer pPlayer = statusUpdate.getPlayer();
@@ -235,18 +280,27 @@ public class ClientInputHandler extends InputHandler {
     }
 
     //
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.ProtocolBuildRequest)
+     */
     @Override
     protected void handle(ProtocolBuildRequest buildRequest) {
         // unnecessary Method in ClientInputHandler
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.ProtocolDiceRollRequest)
+     */
     @Override
     protected void handle(ProtocolDiceRollRequest diceRollRequest) {
         // unnecessary Method in ClientInputHandler
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.ProtocolEndTurn)
+     */
     @Override
     protected void handle(ProtocolEndTurn endTurn) {
 
@@ -255,22 +309,34 @@ public class ClientInputHandler extends InputHandler {
         // unnecessary Method in ClientInputHandler
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(java.lang.String)
+     */
     @Override
     protected void handle(String string) {
 
         clientController.receiveServerConfirmation(string);
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.ProtocolRobberLoss)
+     */
     protected void handle(ProtocolRobberLoss losses) {
         // Unnecessary Method
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.ProtocolRobberMovementRequest)
+     */
     @Override
     protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
         // Unnecessary Method
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeIsRequested)
+     */
     protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
         int player_id = tradeIsRequested.getPlayer_id();
         int trade_id = tradeIsRequested.getTrade_id();
@@ -279,6 +345,9 @@ public class ClientInputHandler extends InputHandler {
         // networkController.tradeIsRequested((player_id, trade_id, proff,prw));
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeConfirmation)
+     */
     protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
 
         int player_id = tradeConfirmation.getPlayer_id();
@@ -286,6 +355,9 @@ public class ClientInputHandler extends InputHandler {
         // networkController.tradeConfirmation(player_id,trade_id);
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeIsCanceled)
+     */
     protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
 
         int player_id = tradeIsCanceled.getPlayer_id();
@@ -293,31 +365,49 @@ public class ClientInputHandler extends InputHandler {
         // networkController.tradeIsCanceled(player_id,trade_id);
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.clientinstructions.ProtocolBuyDevelopmentCards)
+     */
     @Override
     protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
         // unnecessary Method
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.clientinstructions.ProtocolDevelopmentCards)
+     */
     @Override
     protected void handle(ProtocolDevelopmentCards developmentCards) {
         // unnecessary Method
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.object.ProtocolInventionCard)
+     */
     @Override
     protected void handle(ProtocolInventionCard inventionCard) {
         // unnecessary Method
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.object.ProtocolMonopolyCard)
+     */
     @Override
     protected void handle(ProtocolMonopolyCard monopolyCard) {
         // unnecessary Method
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.object.ProtocolRoadBuildingCard)
+     */
     @Override
     protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
         // unnecessary Method
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeIsCompleted)
+     */
     protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
 
         int player_id = tradeIsCompleted.getPlayer_id();
@@ -325,6 +415,9 @@ public class ClientInputHandler extends InputHandler {
         // networkController.tradeIsCompleted(player_id,tradePartner_id);
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.configuration.ProtocolVictory)
+     */
     @Override
     protected void handle(ProtocolVictory victory) {
         String message = victory.getMessage();
@@ -333,6 +426,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.ProtocolCosts)
+     */
     @Override
     protected void handle(ProtocolCosts costs) {
         int playerID = costs.getPlayer();
@@ -340,6 +436,9 @@ public class ClientInputHandler extends InputHandler {
         // networkController.costs(playerID,pr)
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.serverinstructions.ProtocolRobberMovement)
+     */
     @Override
     protected void handle(ProtocolRobberMovement robberMovement) {
 
@@ -350,36 +449,54 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.ProtocolHarbourRequest)
+     */
     @Override
     protected void handle(ProtocolHarbourRequest harbourRequest) {
         // unnecessary Method
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.trade.ProtocolTradeRequest)
+     */
     @Override
     protected void handle(ProtocolTradeRequest tradeRequest) {
         // unnecessary Method
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.trade.ProtocolTradeAccept)
+     */
     @Override
     protected void handle(ProtocolTradeAccept tradeAccept) {
         // unnecessary Method
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.trade.ProtocolTradeComplete)
+     */
     @Override
     protected void handle(ProtocolTradeComplete tradeComplete) {
         // unnecessary Method
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol.clientinstructions.trade.ProtocolTradeCancel)
+     */
     @Override
     protected void handle(ProtocolTradeCancel tradeCancel) {
         // unnecessary Method
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.severinstructions.ProtocolBiggestKnightProwess)
+     */
     @Override
     protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
         int player_id = biggestKnightProwess.getPlayer_id();
@@ -387,6 +504,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.severinstructions.ProtocolInventionCardInfo)
+     */
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
         ProtocolResource resource = inventionCardInfo.getResource();
@@ -394,6 +514,9 @@ public class ClientInputHandler extends InputHandler {
         // networkController.inventionCardInfo(resource,player_id);
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.severinstructions.ProtocolLongestRoad)
+     */
     @Override
     protected void handle(ProtocolLongestRoad longestRoad) {
         int player_id = longestRoad.getPlayer_id();
@@ -401,6 +524,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.severinstructions.ProtocolMonopolyCardInfo)
+     */
     @Override
     protected void handle(ProtocolMonopolyCardInfo monopolyCardInfo) {
         ResourceType resourceType = monopolyCardInfo.getResourceType();
@@ -409,6 +535,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.severinstructions.ProtocolPlayKnightCard)
+     */
     @Override
     protected void handle(ProtocolPlayKnightCard playKnightCard) {
         String road1_id = playKnightCard.getRoad1_id();
@@ -419,6 +548,9 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.severinstructions.ProtocolRoadBuildingCardInfo)
+     */
     @Override
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
         String road1_id = roadBuildingCardInfo.getRoad1_id();
@@ -427,6 +559,9 @@ public class ClientInputHandler extends InputHandler {
         // networkController.roadBuildingCardInfo(road1_id,road2_id,player_id)
     }
 
+    /* (non-Javadoc)
+     * @see network.InputHandler#handle(protocol3.severinstructions.ProtocolBoughtDevelopmentCard)
+     */
     @Override
     protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
         int playerID = boughtDevelopmentCard.getPlayer_id();

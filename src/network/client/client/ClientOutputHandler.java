@@ -35,6 +35,9 @@ public class ClientOutputHandler {
     private Client client;
     private Parser parser;
 
+    /**
+     * @param client
+     */
     public ClientOutputHandler(Client client) {
         this.client = client;
         this.parser = new Parser();
@@ -44,6 +47,9 @@ public class ClientOutputHandler {
 
     /**
      * If the connection can be established, send "Hello" back to server.
+     */
+    /**
+     * @param clientVersion
      */
     public void clientHello(String clientVersion) {
         ProtocolHello ph = new ProtocolHello(clientVersion, null);
@@ -58,6 +64,9 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * 
+     */
     public void clientReady() {
         ProtocolClientReady pcr = new ProtocolClientReady();
         Response r = new Response();
@@ -71,6 +80,9 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param s
+     */
     public void chatSendMessage(String s) {
         ProtocolChatSendMessage pcsm = new ProtocolChatSendMessage(s);
         Response r = new Response();
@@ -84,6 +96,9 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * 
+     */
     public void diceRollRequest() {
         ProtocolDiceRollRequest pdrr = new ProtocolDiceRollRequest();
         Response r = new Response();
@@ -97,6 +112,9 @@ public class ClientOutputHandler {
         }
     }
 
+    /**
+     * 
+     */
     public void endTurn() {
 
         ProtocolEndTurn pcet = new ProtocolEndTurn();
@@ -111,6 +129,11 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param x
+     * @param y
+     * @param victim_id
+     */
     public void requestSetBandit(int x, int y, int victim_id) {
         String location = ModelToProtocol.getFieldID(x, y);
 
@@ -126,6 +149,10 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param name
+     * @param color
+     */
     public void sendPlayerProfile(String name, enums.Color color) {
 
         ProtocolPlayerProfile pcr = new ProtocolPlayerProfile(name, color);
@@ -140,6 +167,9 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param losses
+     */
     public void robberLoss(int[] losses) {
         ProtocolResource prl;
         if (losses.length > 1) {
@@ -159,6 +189,10 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param location_id
+     * @param victim_id
+     */
     public void robberMovementRequest(String location_id, int victim_id) {
         ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(location_id, victim_id);
         Response r = new Response();
@@ -173,6 +207,10 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param offer
+     * @param withdrawal
+     */
     public void handleHarbourRequest(int[] offer, int[] withdrawal) {
         ProtocolResource proff;
         if (offer.length > 1) {
@@ -198,6 +236,9 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param trade_id
+     */
     public void handleTradeAccept(int trade_id) {
         ProtocolTradeAccept pta = new ProtocolTradeAccept(trade_id);
         Response r = new Response();
@@ -210,6 +251,10 @@ public class ClientOutputHandler {
         }
     }
 
+    /**
+     * @param offer
+     * @param withdrawal
+     */
     public void handleTradeRequest(int[] offer, int[] withdrawal) {
         ProtocolResource proff;
         if (offer.length > 1) {
@@ -234,6 +279,9 @@ public class ClientOutputHandler {
         }
     }
 
+    /**
+     * @param trade_id
+     */
     public void handleTradeCancel(int trade_id) {
         ProtocolTradeCancel ptc = new ProtocolTradeCancel(trade_id);
         Response r = new Response();
@@ -248,6 +296,10 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param trade_id
+     * @param tradePartner_id
+     */
     public void handleTradeComplete(int trade_id, int tradePartner_id) {
         ProtocolTradeComplete ptco = new ProtocolTradeComplete(trade_id, tradePartner_id);
         Response r = new Response();
@@ -261,6 +313,9 @@ public class ClientOutputHandler {
         }
     }
 
+    /**
+     * 
+     */
     public void handleBuyDevelopmentCards() {
         ProtocolBuyDevelopmentCards pbdc = new ProtocolBuyDevelopmentCards();
         Response r = new Response();
@@ -274,6 +329,11 @@ public class ClientOutputHandler {
         }
     }
 
+    /**
+     * @param x
+     * @param y
+     * @param dir
+     */
     public void requestBuildVillage(int x, int y, int dir) {
         String location = ModelToProtocol.getCornerID(x, y, dir);
         ProtocolBuildRequest pbr = new ProtocolBuildRequest("Dorf", location);
@@ -289,6 +349,11 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param x
+     * @param y
+     * @param dir
+     */
     public void requestBuildStreet(int x, int y, int dir) {
         String location = ModelToProtocol.getEdgeID(x, y, dir);
         ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", location);
@@ -304,6 +369,11 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param x
+     * @param y
+     * @param dir
+     */
     public void requestBuildCity(int x, int y, int dir) {
         String location = ModelToProtocol.getCornerID(x, y, dir);
         ProtocolBuildRequest pbr = new ProtocolBuildRequest("Stadt", location);
@@ -319,6 +389,9 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param resource
+     */
     public void handleMonopoly(int[] resource) {
         ProtocolResource pr;
         if (resource.length > 0) {
@@ -338,6 +411,9 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param resource
+     */
     public void inventionCardInfo(int[] resource) {
         ProtocolResource pr;
         if (resource.length > 0) {
@@ -357,6 +433,9 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param resource
+     */
     public void monopolyCardInfo(ResourceType resource) {
 
         ProtocolMonopolyCardInfo pmci = new ProtocolMonopolyCardInfo(resource);
@@ -371,6 +450,10 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param road1_id
+     * @param road2_id
+     */
     public void roadBuildingCardInfo(String road1_id, String road2_id) {
         ProtocolRoadBuildingCardInfo prbci = new ProtocolRoadBuildingCardInfo(road1_id, road2_id);
         Response r = new Response();
@@ -384,6 +467,10 @@ public class ClientOutputHandler {
 
     }
 
+    /**
+     * @param road1_id
+     * @param target
+     */
     public void playKnightCard(String road1_id, int target) {
         ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(road1_id, target);
         Response r = new Response();
