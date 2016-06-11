@@ -189,7 +189,6 @@ public class GameViewController implements Initializable {
 	}
 
 	public void initPlayer(int playerID, String playerName, enums.Color playerColor) {
-		System.out.println(viewController.getClientController().getOwnPlayerId());
 		if (playerID == viewController.getClientController().getOwnPlayerId()) {
 			playerIDtoViewPosition.put(playerID, 1);
 
