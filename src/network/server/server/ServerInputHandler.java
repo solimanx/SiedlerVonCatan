@@ -277,12 +277,12 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
-        // TODO
+        //gameController.buyDevelopmentCards();
     }
 
     @Override
     protected void handle(ProtocolDevelopmentCards developmentCards) {
-        // TODO
+        
     }
 
     @Override
@@ -293,7 +293,8 @@ public class ServerInputHandler extends InputHandler {
 
     // @Override
     protected void handle(ProtocolInventionCard inventionCard) {
-        // TODO Auto-generated method stub
+        ProtocolResource invention= inventionCard.getResource();
+        //gameController.inventionCard(invention);
 
     }
 
@@ -363,9 +364,6 @@ public class ServerInputHandler extends InputHandler {
 
     }
 
-    protected void handleRoadBuild(String road1_id, String road2_id, int player_id) {
-        // TODO Auto-generated method stub
 
-    }
 
 }
