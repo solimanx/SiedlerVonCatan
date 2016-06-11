@@ -292,9 +292,10 @@ public class ClientController {
 
 	// 8.6
 	public void buildVillage(int x, int y, int dir, int playerID) {
+		int modelID = threadPlayerIdMap.get(playerID);
 		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.VILLAGE);
-		c.setOwnerID(playerID);
+		c.setOwnerID(modelID);
 		Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
 		for (int i = 0; i < neighbors.length; i++) {
 			if (neighbors[i] != null) {
@@ -302,7 +303,7 @@ public class ClientController {
 			}
 		}
 
-		viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, playerID);
+		viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, modelID);
 	}
 
 	// 8.6
