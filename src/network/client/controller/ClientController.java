@@ -305,11 +305,11 @@ public class ClientController {
 
 	// 8.6
 	public void buildStreet(int x, int y, int dir, int playerID) {
+		int modelID = threadPlayerIdMap.get(playerID);
 		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
-		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
+		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(modelID).getID());
 
-		int modelID = threadPlayerIdMap.get(playerID);
 		viewController.getGameViewController().setStreet(x, y, dir, modelID);
 	}
 
