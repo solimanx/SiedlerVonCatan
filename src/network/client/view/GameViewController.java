@@ -613,6 +613,9 @@ public class GameViewController implements Initializable {
 
 		/**
 		 * draws a Circle with diceIndex
+		 * @param u
+		 * @param v
+		 * @param diceIndex
 		 */
 		public void setFieldChip(int u, int v, int diceIndex) {
 			Text text = new Text("" + diceIndex);

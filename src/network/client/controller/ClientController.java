@@ -48,7 +48,6 @@ public class ClientController {
 
 	protected Client client;
 	private int initialRoundCount = 0;
-	
 
 	public ClientController(Stage primaryStage) {
 		// ModelPlayerID => threadID
@@ -131,26 +130,40 @@ public class ClientController {
 	// 8.1
 	public void statusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
-		final int runID = 0;
 		Integer modelID = threadPlayerIdMap.get(threadID);
-		if (modelID == null) {
-			threadPlayerIdMap.put(threadID, amountPlayers);
-			modelPlayerIdMap.put(amountPlayers, threadID);
-			modelID = amountPlayers;
-			amountPlayers++;
-		}
-		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-		if (pM.getColor() == null) {
-			pM.setColor(color);
-			pM.setName(name);
-		}
-		pM.setPlayerState(status);
-		pM.setVictoryPoints(victoryPoints);
-		addToPlayersResource(modelID, resources);
-		if (viewController.getGameViewController() != null) {
-			Platform.runLater(new PlayerStatusGUIUpdate(modelID, viewController.getGameViewController(), victoryPoints, status, resources));
-		}
 
+		switch (status) {
+		case CONNECTION_LOST:
+			if (modelID != null) {
+				threadPlayerIdMap.remove(modelID);
+				modelPlayerIdMap.remove(threadID);
+			}
+			// if player exists, delete from array
+			break;
+		case GAME_STARTING:
+			break;
+		case WAITING_FOR_GAMESTART:
+			if (modelID == null) {
+				threadPlayerIdMap.put(threadID, amountPlayers);
+				modelPlayerIdMap.put(amountPlayers, threadID);
+				modelID = amountPlayers;
+				amountPlayers++;
+			}
+		default:
+			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+			if (pM.getColor() == null) {
+				pM.setColor(color);
+				pM.setName(name);
+			}
+			pM.setPlayerState(status);
+			pM.setVictoryPoints(victoryPoints);
+			addToPlayersResource(modelID, resources);
+			if (viewController.getGameViewController() != null) {
+				Platform.runLater(new PlayerStatusGUIUpdate(modelID, viewController.getGameViewController(),
+						victoryPoints, status, resources));
+			}
+		}
+		// Hier get bei Break weiter
 	}
 
 	// 7.4
@@ -295,7 +308,7 @@ public class ClientController {
 		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
-		
+
 		int modelID = threadPlayerIdMap.get(playerID);
 		viewController.getGameViewController().setStreet(x, y, dir, modelID);
 	}
@@ -344,7 +357,7 @@ public class ClientController {
 		if (initialRoundCount < 2) {
 			System.out.println("Building Initial Village");
 			requestBuildInitialVillage(x - radius, y - radius, dir);
-			
+
 		}
 		if (gameLogic.checkBuildVillage(x - radius, y - radius, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildVillage(x - radius, y - radius, dir);
@@ -364,10 +377,10 @@ public class ClientController {
 		int radius = DefaultSettings.BOARD_RADIUS;
 		if (initialRoundCount < 2) {
 			System.out.println("Building Initial Village");
-			requestBuildInitialStreet(x-radius, y-radius, dir);
+			requestBuildInitialStreet(x - radius, y - radius, dir);
 		}
-		if (gameLogic.checkBuildStreet(x-radius, y-radius, dir, ownPlayerId)) {
-			clientOutputHandler.requestBuildStreet(x-radius, y-radius, dir);
+		if (gameLogic.checkBuildStreet(x - radius, y - radius, dir, ownPlayerId)) {
+			clientOutputHandler.requestBuildStreet(x - radius, y - radius, dir);
 		}
 
 	}
