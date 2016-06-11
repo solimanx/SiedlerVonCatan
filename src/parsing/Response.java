@@ -37,155 +37,147 @@ import protocol3.severinstructions.*;
 
 public class Response {
 
-	// connection
-	@SerializedName("Hallo")
-	public ProtocolHello pHello;
+    // connection
+    @SerializedName("Hallo")
+    public ProtocolHello pHello;
 
-	@SerializedName("Willkommen")
-	public ProtocolWelcome pWelcome;
+    @SerializedName("Willkommen")
+    public ProtocolWelcome pWelcome;
 
-	// configuration
-	@SerializedName("Spiel starten")
-	public ProtocolClientReady pClientReady;
+    // configuration
+    @SerializedName("Spiel starten")
+    public ProtocolClientReady pClientReady;
 
-	@SerializedName("Fehler")
-	public ProtocolError pError;
+    @SerializedName("Fehler")
+    public ProtocolError pError;
 
-	@SerializedName("Spiel gestartet")
-	public ProtocolGameStarted pGameStarted;
+    @SerializedName("Spiel gestartet")
+    public ProtocolGameStarted pGameStarted;
 
-	@SerializedName("Spieler")
-	public ProtocolPlayerProfile pPlayerProfile;
+    @SerializedName("Spieler")
+    public ProtocolPlayerProfile pPlayerProfile;
 
-	@SerializedName("Spiel beendet")
-	public ProtocolVictory pVictory; // new in 0.2
+    @SerializedName("Spiel beendet")
+    public ProtocolVictory pVictory; // new in 0.2
 
-	// server instructions
+    // server instructions
 
-	@SerializedName("Bauvorgang")
-	public ProtocolBuild pBuild;
+    @SerializedName("Bauvorgang")
+    public ProtocolBuild pBuild;
 
-	@SerializedName("Würfelwurf")
-	public ProtocolDiceRollResult pDRResult;
+    @SerializedName("Würfelwurf")
+    public ProtocolDiceRollResult pDRResult;
 
-	@SerializedName("Ertrag")
-	public ProtocolResourceObtain pRObtain;
+    @SerializedName("Ertrag")
+    public ProtocolResourceObtain pRObtain;
 
-	@SerializedName("Statusupdate")
-	public ProtocolStatusUpdate pSUpdate;
+    @SerializedName("Statusupdate")
+    public ProtocolStatusUpdate pSUpdate;
 
-	@SerializedName("Kosten")
-	public ProtocolCosts pCosts; // new in 0.2
+    @SerializedName("Kosten")
+    public ProtocolCosts pCosts; // new in 0.2
 
-	@SerializedName("Räuber versetzt")
-	public ProtocolRobberMovement pRobberMovement; // new in 0.2
+    @SerializedName("Räuber versetzt")
+    public ProtocolRobberMovement pRobberMovement; // new in 0.2
 
-	// messaging
+    // messaging
 
-	@SerializedName("Chatnachricht")
-	public ProtocolChatReceiveMessage pChatReceive;
+    @SerializedName("Chatnachricht")
+    public ProtocolChatReceiveMessage pChatReceive;
 
-	@SerializedName("Chatnachricht senden")
-	public ProtocolChatSendMessage pChatSend;
+    @SerializedName("Chatnachricht senden")
+    public ProtocolChatSendMessage pChatSend;
 
-	@SerializedName("Serverantwort")
-	public String pServerConfirmation;
+    @SerializedName("Serverantwort")
+    public String pServerConfirmation;
 
-	// Client Instructions
+    // Client Instructions
 
-	@SerializedName("Bauen")
-	public ProtocolBuildRequest pBuildRequest;
+    @SerializedName("Bauen")
+    public ProtocolBuildRequest pBuildRequest;
 
-	@SerializedName("Würfeln")
-	public ProtocolDiceRollRequest pDiceRollRequest;
+    @SerializedName("Würfeln")
+    public ProtocolDiceRollRequest pDiceRollRequest;
 
-	@SerializedName("Zug beenden")
-	public ProtocolEndTurn pEndTurn;
+    @SerializedName("Zug beenden")
+    public ProtocolEndTurn pEndTurn;
 
-	@SerializedName("Karten abgeben")
-	public ProtocolRobberLoss pRobberLoss; // new in 0.2
+    @SerializedName("Karten abgeben")
+    public ProtocolRobberLoss pRobberLoss; // new in 0.2
 
-	@SerializedName("Räuber versetzen")
-	public ProtocolRobberMovementRequest pRobberMoveRequest; // new in 0.2
+    @SerializedName("Räuber versetzen")
+    public ProtocolRobberMovementRequest pRobberMoveRequest; // new in 0.2
 
-	@SerializedName("Seehandel")
-	public ProtocolHarbourRequest pHarbourRequest; // new in 0.2
+    @SerializedName("Seehandel")
+    public ProtocolHarbourRequest pHarbourRequest; // new in 0.2
 
-	// Trade Instructions
+    // Trade Instructions
 
-	@SerializedName("Handel anbieten")
-	public ProtocolTradeRequest pTradeRequest; // new in 0.2
+    @SerializedName("Handel anbieten")
+    public ProtocolTradeRequest pTradeRequest; // new in 0.2
 
-	@SerializedName("Handelsangebot")
-	public ProtocolTradeIsRequested pTradeIsRequested;// new in 0.2
+    @SerializedName("Handelsangebot")
+    public ProtocolTradeIsRequested pTradeIsRequested;// new in 0.2
 
-	@SerializedName("Handel annehmen")
-	public ProtocolTradeAccept pTradeAccept; // new in 0.2
+    @SerializedName("Handel annehmen")
+    public ProtocolTradeAccept pTradeAccept; // new in 0.2
 
-	@SerializedName("Handelsangebot angenommen")
-	public ProtocolTradeConfirmation pTradeConfirm; // new in 0.2
+    @SerializedName("Handelsangebot angenommen")
+    public ProtocolTradeConfirmation pTradeConfirm; // new in 0.2
 
-	@SerializedName("Handel abschließen")
-	public ProtocolTradeComplete pTradeComplete;// new in 0.2
+    @SerializedName("Handel abschließen")
+    public ProtocolTradeComplete pTradeComplete;// new in 0.2
 
-	@SerializedName("Handel ausgeführt")
-	public ProtocolTradeIsCompleted pTradeIsCompleted;// new in 0.2
+    @SerializedName("Handel ausgeführt")
+    public ProtocolTradeIsCompleted pTradeIsCompleted;// new in 0.2
 
-	@SerializedName("Handel abbrechen")
-	public ProtocolTradeCancel pTradeCancel;// new in 0.2
+    @SerializedName("Handel abbrechen")
+    public ProtocolTradeCancel pTradeCancel;// new in 0.2
 
-	@SerializedName("Handelsangebot abgebrochen")
-	public ProtocolTradeIsCanceled pTradeIsCanceled;// new in 0.2
+    @SerializedName("Handelsangebot abgebrochen")
+    public ProtocolTradeIsCanceled pTradeIsCanceled;// new in 0.2
 
-	// Serverinstructions in Protocol 0.3
+    // Serverinstructions in Protocol 0.3
 
-	@SerializedName("Größte Rittermacht")
-	public ProtocolBiggestKnightProwess pBiggestKnightProwess;// new in 0.3
+    @SerializedName("Größte Rittermacht")
+    public ProtocolBiggestKnightProwess pBiggestKnightProwess;// new in 0.3
 
-	@SerializedName("Erfindung")
-	public ProtocolInventionCardInfo pInventionCardInfo;// new in 0.3
+    @SerializedName("Erfindung")
+    public ProtocolInventionCardInfo pInventionCardInfo;// new in 0.3
 
-	@SerializedName("Längste Handelsstraße")
-	public ProtocolLongestRoad pLongestRoad;// new in 0.3
+    @SerializedName("Längste Handelsstraße")
+    public ProtocolLongestRoad pLongestRoad;// new in 0.3
 
-	@SerializedName("Monopol")
-	public ProtocolMonopolyCardInfo pMonopolyCardInfo;// new in 0.3
+    @SerializedName("Monopol")
+    public ProtocolMonopolyCardInfo pMonopolyCardInfo;// new in 0.3
 
-	@SerializedName("Ritter ausspielen")
-	public ProtocolPlayKnightCard pplayKnightCard;// new in 0.3
+    @SerializedName("Ritter ausspielen")
+    public ProtocolPlayKnightCard pplayKnightCard;// new in 0.3
 
-	@SerializedName("Straßenbaukarte ausspielen")
-	public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
+    @SerializedName("Straßenbaukarte ausspielen")
+    public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
 
-	// Kein Duplikat, sondern verliert ein Spieler die längste Handelsstraße
-	// ohne dass ein anderer Spieler sie bekommt  so versendet der Server die
-	//gleiche Nachricht, aber mit einem leeren Objekt
+    // Clientinstructions in Protocol 0.3
 
-	public ProtocolSpecialCaseLongestRoad pSpecialCaseLongestRoad;// new in
-	// 0,3
+    @SerializedName("Entwicklungskarte kaufen")
+    public ProtocolBuyDevelopmentCards pBuyDevCards; // new in 0.3
 
-	// Clientinstructions in Protocol 0.3
+    @SerializedName("Entwicklungskarte")
+    public ProtocolDevelopmentCards pDevelopmentCard; // new in 0.3
 
-	@SerializedName("Entwicklungskarte kaufen")
-	public ProtocolBuyDevelopmentCards pBuyDevCards; // new in 0.3
+    // Object in Protocol 0.3
 
-	@SerializedName("Entwicklungskarte")
-	public ProtocolDevelopmentCards pDevelopmentCard; // new in 0.3
+    @SerializedName("Erfindungskarte")
+    public ProtocolInventionCard pInvention; // new in 0.3
 
-	// Object in Protocol 0.3
+    @SerializedName("Monopolkarte")
+    public ProtocolMonopolyCard pMonopolyCard; // new in 0.3
 
-	@SerializedName("Erfindungskarte")
-	public ProtocolInventionCard pInvention; // new in 0.3
+    @SerializedName("Strassenbaukarte")
+    public ProtocolRoadBuildingCard pRoadBuildCard; // new in 0.3
 
-	@SerializedName("Monopolkarte")
-	public ProtocolMonopolyCard pMonopolyCard; // new in 0.3
-
-	@SerializedName("Strassenbaukarte")
-	public ProtocolRoadBuildingCard pRoadBuildCard; // new in 0.3
-
-	@SerializedName("Entwicklungskarte gekauft")
-	public ProtocolBoughtDevelopmentCard pBoughtDevelopmentCard;// new in 0.3
-
+    @SerializedName("Entwicklungskarte gekauft")
+    public ProtocolBoughtDevelopmentCard pBoughtDevelopmentCard;// new in 0.3
 
 
 }

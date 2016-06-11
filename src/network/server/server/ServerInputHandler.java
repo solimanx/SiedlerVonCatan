@@ -345,10 +345,6 @@ public class ServerInputHandler extends InputHandler {
         //Unnecessary Method
     }
 
-    @Override
-    protected void handle(ProtocolSpecialCaseLongestRoad specialCaseLongestRoad) {
-        //Unnecessary Method
-    }
 
     public ServerController getServerController() {
 

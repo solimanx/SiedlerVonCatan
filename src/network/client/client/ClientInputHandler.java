@@ -432,9 +432,6 @@ public class ClientInputHandler extends InputHandler {
 
     }
 
-    @Override//Should be deleted
-    protected void handle(ProtocolSpecialCaseLongestRoad specialCaseLongestRoad) {
-        // networController.specialCaseLongestRoad();
-    }
+
 
 }
