@@ -339,18 +339,21 @@ public class GameViewController implements Initializable {
 	 * @param resourceType
 	 * @param diceIndex
 	 */
-	public void setField(int u, int v, ResourceType resourceType, int diceIndex) {
+	public void setField(int u, int v, ResourceType resourceType, Integer diceIndex) {
 		fields[u + 3][v + 3].setFill(fieldColors.get(resourceType));
-		Text text = new Text("" + diceIndex);
-		text.setBoundsType(TextBoundsType.VISUAL);
-		text.setTextAlignment(TextAlignment.CENTER);
-		Circle circle = new Circle(15.0);
-		circle.setFill(Color.WHITE);
-		StackPane chip = new StackPane(circle, text);
-		chip.toFront();
-		chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0] - 15.0);
-		chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 15.0);
-		board.getChildren().add(chip);
+		if (diceIndex != null) {
+			Text text = new Text("" + diceIndex);
+			text.setBoundsType(TextBoundsType.VISUAL);
+			text.setTextAlignment(TextAlignment.CENTER);
+			Circle circle = new Circle(15.0);
+			circle.setFill(Color.WHITE);
+			StackPane chip = new StackPane(circle, text);
+			chip.toFront();
+			chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0] - 15.0);
+			chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 15.0);
+			board.getChildren().add(chip);
+		}
+
 	}
 
 	/**

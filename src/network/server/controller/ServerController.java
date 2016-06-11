@@ -217,11 +217,11 @@ public class ServerController {
 		if (sendToPlayer == playerModelID) {
 			int[] resources = getPlayerResources(playerModelID);
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
-					pM.getPlayerState(), pM.getVictoryPoints(), resources, modelPlayerIdMap.get(playerModelID));
+					pM.getPlayerState(), pM.getVictoryPoints(), resources, modelPlayerIdMap.get(sendToPlayer));
 		} else {
 			int[] resources = { gameLogic.getBoard().getPlayer(playerModelID).getResourceCards().size() };
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
-					pM.getPlayerState(), pM.getVictoryPoints(), resources, modelPlayerIdMap.get(playerModelID));
+					pM.getPlayerState(), pM.getVictoryPoints(), resources, modelPlayerIdMap.get(sendToPlayer));
 		}
 
 	}
@@ -242,6 +242,10 @@ public class ServerController {
 
 		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
 		statusUpdate(0); // firstPlayers turn
+		for (int i = 1;i <amountPlayers;i++){
+			gameLogic.getBoard().getPlayer(i).setPlayerState(PlayerState.WAITING);
+			statusUpdate(i);
+		}		
 		InitialStreetCounter = 0;
 
 	}
@@ -501,7 +505,7 @@ public class ServerController {
 					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[diceInd]);
 					diceInd++;
 				} else {
-					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], 0);
+					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], null);
 				}
 			}
 		} else {
@@ -521,7 +525,7 @@ public class ServerController {
 			}
 			int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(fields.length()-1));
 			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+fields.charAt(fields.length()-1));
-			gameLogic.getBoard().setFieldAt(coords[0], coords[1], ResourceType.NOTHING, 0);
+			gameLogic.getBoard().setFieldAt(coords[0], coords[1], ResourceType.NOTHING, null);
 
 		}
 		String outerRing = gameLogic.getBoard().getOuterRing();

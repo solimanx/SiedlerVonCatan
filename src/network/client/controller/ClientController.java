@@ -44,6 +44,7 @@ public class ClientController {
 	private Map<Integer, Integer> threadPlayerIdMap;
 
 	protected Client client;
+	private int InitialStreetCounter = 0;
 
 	public ClientController(Stage primaryStage) {
 		// ModelPlayerID => threadID
@@ -324,18 +325,37 @@ public class ClientController {
 
 	// 9.4
 	public void requestBuildVillage(int x, int y, int dir) {
+		if (InitialStreetCounter  < amountPlayers){
+			requestBuildInitialVillage(x,y,dir);
+		}
 		if (gameLogic.checkBuildVillage(x, y, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildVillage(x, y, dir);
 		}
 
 	}
 
+	public void requestBuildInitialVillage(int x, int y, int dir) {
+		if (gameLogic.checkBuildInitialVillage(x, y, dir)){
+			clientOutputHandler.requestBuildVillage(x, y, dir);
+		}		
+	}
+
 	// 9.4
 	public void requestBuildStreet(int x, int y, int dir) {
+		if (InitialStreetCounter  < amountPlayers){
+			requestBuildInitialStreet(x,y,dir);
+		}		
 		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildStreet(x, y, dir);
 		}
 
+	}
+
+	public void requestBuildInitialStreet(int x, int y, int dir) {
+		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownPlayerId)){
+			clientOutputHandler.requestBuildStreet(x, y, dir);
+			InitialStreetCounter++; //TODO: this should happen after server OK
+		}		
 	}
 
 	// 9.4

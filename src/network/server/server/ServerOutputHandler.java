@@ -190,6 +190,7 @@ public class ServerOutputHandler {
         r.pSUpdate = ps;
         try {
             if (sendToPlayerID != null) {
+            	System.out.println("Send "+status+" to "+sendToPlayerID);
                 server.sendToClient(parser.createString(r), sendToPlayerID);
             } else {
                 server.broadcast((parser.createString(r)));
