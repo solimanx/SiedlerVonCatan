@@ -295,8 +295,9 @@ public class ClientController {
 		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(playerID).getID());
-
-		viewController.getGameViewController().setStreet(x, y, dir, playerID);
+		
+		int modelID = threadPlayerIdMap.get(playerID);
+		viewController.getGameViewController().setStreet(x, y, dir, modelID);
 	}
 
 	// 8.6
@@ -320,8 +321,8 @@ public class ClientController {
 		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.CITY);
 		c.setOwnerID(playerID);
-
-		viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, playerID);
+		int modelID = threadPlayerIdMap.get(playerID);
+		viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, modelID);
 	}
 
 	// 9.1

@@ -172,7 +172,7 @@ public class GameViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		initPlayerColors();
+		initFieldColors();
 		factory = new ViewBoardFactory();
 	}
 
@@ -214,7 +214,7 @@ public class GameViewController implements Initializable {
 
 	}
 
-	private void initPlayerColors() {
+	private void initFieldColors() {
 		fieldColors.put(ResourceType.CLAY, Color.TAN);
 		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
 		fieldColors.put(ResourceType.NOTHING, Color.WHITE);
