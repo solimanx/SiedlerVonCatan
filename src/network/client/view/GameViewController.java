@@ -23,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -80,6 +81,9 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Pane board;
+
+	@FXML
+	private VBox playerVBoxOne;
 
 	@FXML
 	private Label playerNameOne;
@@ -464,6 +468,9 @@ public class GameViewController implements Initializable {
 		switch (playerIDtoViewPosition.get(playerID)) {
 		case 1:
 			playerStatusOne.setText(state.toString());
+			if (state != PlayerState.WAITING) {
+				playerVBoxOne.setDisable(false);
+			}
 			break;
 		case 2:
 			playerStatusTwo.setText(state.toString());

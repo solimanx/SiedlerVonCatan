@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import application.lobby.LobbyController;
 import application.lobby.PlayerProfileController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -67,6 +68,7 @@ public class ViewController {
 		//
 		primaryStage.setTitle("Settlers of Catan : Lobby");
 		primaryStage.setResizable(false);
+		primaryStage.setOnCloseRequest(e -> Platform.exit());
 		// primaryStage.initStyle(StageStyle.UTILITY);
 		//
 		primaryStage.show();
