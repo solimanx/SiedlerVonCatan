@@ -197,7 +197,7 @@ public class GameViewController implements Initializable {
 			playerIDtoViewPosition.put(playerID, playerCounter);
 			playerCounter++;
 		}
-		playerColors.add(viewController.getPlayerColor(playerColor));
+		playerColors.add(playerID, playerColor.getValue());
 		switch (playerIDtoViewPosition.get(playerID)) {
 		case 1:
 			playerNameOne.setText(playerName);
@@ -237,7 +237,7 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleEndTurnButton(ActionEvent event) {
 		viewController.getClientController().endTurn();
-		endTurnButton.setDisable(true);
+		playerVBoxOne.setDisable(true);
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class GameViewController implements Initializable {
 	void handleStartTradingButton(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/tradeview/tradeView.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
 		Scene scene = new Scene(root);
 		Stage tradeStage = new Stage();
 		tradeStage.setScene(scene);
@@ -858,7 +858,7 @@ public class GameViewController implements Initializable {
 
 		public void initSelf(int ownPlayerId, String name, enums.Color color) {
 			playerIDtoViewPosition.put(ownPlayerId, 0);
-			playerColors.add(0, viewController.playerColors.get(color));
+			playerColors.add(0, color.getValue());
 			selfName.setText(name);
 
 		}

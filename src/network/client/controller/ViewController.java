@@ -17,7 +17,6 @@ import network.server.controller.ServerController;
 public class ViewController {
 
 	private FXMLLoader loader;
-	public HashMap<enums.Color, Color> playerColors = new HashMap<enums.Color, Color>(4);
 	protected ServerController serverController; // DEBUG
 	private ClientController clientController;
 	private GameViewController gameViewController;
@@ -131,11 +130,6 @@ public class ViewController {
 
 	private void init() {
 
-		playerColors.put(enums.Color.BLUE, Color.BLUE);
-		playerColors.put(enums.Color.ORANGE, Color.ORANGE);
-		playerColors.put(enums.Color.RED, Color.RED);
-		playerColors.put(enums.Color.WHITE, Color.WHITE);
-
 		/*
 		 * view.button.setText("build initial village 2,-2,0");
 		 * view.button.setOnAction(e -> { // setCorner(2, -2, 0,
@@ -154,11 +148,6 @@ public class ViewController {
 		 * gameController.setBandit(2, -2); });
 		 */
 
-	}
-
-	public Color getPlayerColor(enums.Color color) {
-		// TODO Auto-generated method stub
-		return playerColors.get(color);
 	}
 
 	public ClientController getClientController() {
