@@ -1,7 +1,6 @@
 package network.client.view;
 
 import enums.PlayerState;
-import network.client.controller.ViewController;
 
 public class PlayerStatusGUIUpdate implements Runnable {
 	

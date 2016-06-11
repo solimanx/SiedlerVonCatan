@@ -500,8 +500,8 @@ public class GameViewController implements Initializable {
 
 		public List<Shape> getViewBoard(Stage stage) {
 			boardPane = new Pane();
-			boardCenter[0] = board.getWidth() / 2;
-			boardCenter[1] = board.getHeight() / 2;
+			boardCenter[0] = stage.getWidth() / 2;
+			boardCenter[1] = stage.getHeight() / 2;
 
 			calculateFieldCenters(boardCenter);
 			calculateCornerCenters();
