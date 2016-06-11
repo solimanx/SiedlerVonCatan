@@ -44,6 +44,7 @@ public class ServerController {
 	private int InitialStreetCounter;
 	private ArrayList<Corner> initialVillages;
 	private int currentPlayer;
+	private boolean GameStarted;
 
 	public ServerController() {
 		// ModelPlayerID => threadID
@@ -252,6 +253,7 @@ public class ServerController {
 			gameLogic.getBoard().getPlayer(i).setPlayerState(PlayerState.WAITING);
 			statusUpdate(i);
 		}
+		GameStarted = true;
 		InitialStreetCounter = 0;
 
 	}
@@ -260,15 +262,12 @@ public class ServerController {
 		if (gameLogic.checkIfActionIsAllowed(threadPlayerIdMap.get(playerID), currentPlayer, PlayerState.DICEROLLING)) {
 			serverResponse(playerID, "Unzulässige Aktion");
 		} else {
-			Random rand = new Random();
-			int firstDice = 1 + rand.nextInt(5);
-			int secondDice = 1 + rand.nextInt(5);
-			int[] result = { firstDice, secondDice };
+			int[] result = rollDice();
 			serverOutputHandler.diceRollResult(playerID, result);
 
 			int modelID = threadPlayerIdMap.get(playerID);
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-			if (firstDice + secondDice == 7) {
+			if (result[0] + result[1] == 7) {
 				PlayerModel currPM;
 				boolean hasToWait = false;
 				for (int i = 0; i < amountPlayers; i++) {
@@ -285,7 +284,7 @@ public class ServerController {
 				}
 
 			} else {
-				gainBoardResources(firstDice + secondDice);
+				gainBoardResources(result[0] + result[1]);
 				pM.setPlayerState(PlayerState.TRADING_OR_BUILDING);
 				statusUpdate(modelID);
 			}
@@ -298,6 +297,14 @@ public class ServerController {
 	 * @see server.controller.GameControllerInterface#buildVillage(int, int,
 	 * int, int)
 	 */
+
+	private int[] rollDice() {
+		Random rand = new Random();
+		int firstDice = 1 + rand.nextInt(5);
+		int secondDice = 1 + rand.nextInt(5);
+		int[] result = {firstDice,secondDice};
+		return result;
+	}
 
 	public void requestBuildVillage(int x, int y, int dir, int playerID) {
 		if (gameLogic.checkIfActionIsAllowed(threadPlayerIdMap.get(playerID), currentPlayer,
@@ -666,8 +673,13 @@ public class ServerController {
 		}
 	}
 
-	private int[] getPlayerResources(int playerID) {
-		ArrayList<ResourceType> resources = tempPlayers.get(playerID).getResourceCards();
+	private int[] getPlayerResources(int modelPlayerID) {
+		ArrayList<ResourceType> resources;
+		if (GameStarted){
+			resources = gameLogic.getBoard().getPlayer(modelPlayerID).getResourceCards();
+		} else {
+			resources = tempPlayers.get(modelPlayerID).getResourceCards();
+		}
 		int[] result = new int[5];
 		for (ResourceType r : resources) {
 			switch (r) {
