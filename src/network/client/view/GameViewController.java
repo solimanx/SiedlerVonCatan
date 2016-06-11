@@ -439,6 +439,7 @@ public class GameViewController implements Initializable {
 				break;
 			}
 		} else {
+			// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 			selfWood.setText(Integer.toString(resources[0]));
 			selfClay.setText(Integer.toString(resources[1]));
 			selfSheep.setText(Integer.toString(resources[3]));

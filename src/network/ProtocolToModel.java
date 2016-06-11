@@ -222,6 +222,7 @@ public final class ProtocolToModel {
 		}
 	}
 
+	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
 	public static int[] convertResources(Integer wood, Integer clay, Integer ore, Integer wool, Integer corn) {
 		int result[] = new int[5];
 		result[0] = wood == null ? 0 : wood.intValue();

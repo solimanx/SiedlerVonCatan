@@ -202,6 +202,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolResourceObtain resourceObtain) {
         int playerID = resourceObtain.getPlayer();
         ProtocolResource pr = resourceObtain.getResource();
+     // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
         int[] result = ProtocolToModel.convertResources(pr.getWood(), pr.getClay(), pr.getOre(), pr.getWool(), pr.getCorn());
         clientController.resourceObtain(playerID, result);
 
