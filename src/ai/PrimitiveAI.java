@@ -69,7 +69,7 @@ public class PrimitiveAI extends Thread {
 	private Board board;
 
 	public PrimitiveAI() {
-		System.out.println("AI started.");
+		System.out.println(DefaultSettings.getCurrentTime()+" AI started.");
 		this.board = new Board();
 		this.gl = new GameLogic(board);
 		this.start();
@@ -84,7 +84,7 @@ public class PrimitiveAI extends Thread {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				scanning = false;
-				System.out.println("Client connected to server.");
+				System.out.println(DefaultSettings.getCurrentTime()+" AI connected to server.");
 				read();
 			} catch (IOException e) {
 				System.out.println("Connection to server failed." + " Attempt:" + connectionTry + 1);
@@ -285,7 +285,6 @@ public class PrimitiveAI extends Thread {
 		}
 
 		gl.getBoard().setBandit(banditLocation);
-		System.out.println("Test");
 	}
 
 }

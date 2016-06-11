@@ -29,7 +29,7 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	public PrimitiveAIInputHandler(PrimitiveAI primitiveAI) {
 		ai = primitiveAI;
-		
+
 	}
 
 	public void sendToParser(String line) {
@@ -43,8 +43,6 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	 */
 	@Override
 	protected void handle(ProtocolHello hello) {
-		System.out.println(ai.getPROTOCOL().equals(hello.getProtocol()));
-
 		if (ai.getPROTOCOL().equals(hello.getProtocol())) {
 			ai.getOutput().respondHello(ai.getVERSION());
 
@@ -69,52 +67,52 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
-        // ProtocolBoard object retrieved (Karte: ...}
-        ProtocolBoard pBoard = gameStarted.getBoard();
-        Field[] fields = new Field[pBoard.getAmountFields()];
-        for (int i = 0; i < pBoard.getAmountFields(); i++) {
-            ProtocolField pField = pBoard.getProtocolField(i);
-            fields[i] = new Field();
-            fields[i].setDiceIndex(pField.getDiceIndex());
-            fields[i].setFieldID(pField.getFieldID());
-            fields[i].setResourceType(ProtocolToModel.getResourceType(pField.getFieldType()));
-        }
-        ArrayList<Edge> streets = new ArrayList<Edge>();
-        Corner[] corners = new Corner[pBoard.getAmountBuildings()];
-        for (int i = 0; i < corners.length; i++) {
-            ProtocolBuilding pBuild = pBoard.getProtocolBuilding(i);
-            if (!pBuild.getType().equals("Straße")) {
-                corners[i] = new Corner();
-                corners[i].setCornerID(pBuild.getID());
-                corners[i].setOwnerID(pBuild.getPlayerID());
-                corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getType()));
-            } else {
-                Edge e = new Edge();
-                streets.add(e);
-                e.setEdgeID(pBuild.getID());
-                e.setOwnedByPlayer(pBuild.getPlayerID());
-                e.setHasStreet(true);
-            }
+		// ProtocolBoard object retrieved (Karte: ...}
+		ProtocolBoard pBoard = gameStarted.getBoard();
+		Field[] fields = new Field[pBoard.getAmountFields()];
+		for (int i = 0; i < pBoard.getAmountFields(); i++) {
+			ProtocolField pField = pBoard.getProtocolField(i);
+			fields[i] = new Field();
+			fields[i].setDiceIndex(pField.getDiceIndex());
+			fields[i].setFieldID(pField.getFieldID());
+			fields[i].setResourceType(ProtocolToModel.getResourceType(pField.getFieldType()));
+		}
+		ArrayList<Edge> streets = new ArrayList<Edge>();
+		Corner[] corners = new Corner[pBoard.getAmountBuildings()];
+		for (int i = 0; i < corners.length; i++) {
+			ProtocolBuilding pBuild = pBoard.getProtocolBuilding(i);
+			if (!pBuild.getType().equals("Straße")) {
+				corners[i] = new Corner();
+				corners[i].setCornerID(pBuild.getID());
+				corners[i].setOwnerID(pBuild.getPlayerID());
+				corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getType()));
+			} else {
+				Edge e = new Edge();
+				streets.add(e);
+				e.setEdgeID(pBuild.getID());
+				e.setOwnedByPlayer(pBuild.getPlayerID());
+				e.setHasStreet(true);
+			}
 
-        }
+		}
 
-        //Times 2 for each harbour there are two corners.
-        Corner[] harbourCorners = new Corner[pBoard.getAmountHarbours() * 2];
-        for (int i = 0; i < pBoard.getAmountHarbours(); i++) {
-            ProtocolHarbour pHarb = pBoard.getHarbours(i);
-            Corner c1 = new Corner();
-            Corner c2 = new Corner();
-            harbourCorners[2 * i] = c1;
-            harbourCorners[2 * i + 1] = c2;
-            String[] coords = HexService.getCornerFromEdge(pHarb.getID());
-            c1.setCornerID(coords[0]);
-            c2.setCornerID(coords[1]);
+		// Times 2 for each harbour there are two corners.
+		Corner[] harbourCorners = new Corner[pBoard.getAmountHarbours() * 2];
+		for (int i = 0; i < pBoard.getAmountHarbours(); i++) {
+			ProtocolHarbour pHarb = pBoard.getHarbours(i);
+			Corner c1 = new Corner();
+			Corner c2 = new Corner();
+			harbourCorners[2 * i] = c1;
+			harbourCorners[2 * i + 1] = c2;
+			String[] coords = HexService.getCornerFromEdge(pHarb.getID());
+			c1.setCornerID(coords[0]);
+			c2.setCornerID(coords[1]);
 
-            c1.setHarbourStatus(pHarb.getType());
-            c2.setHarbourStatus(pHarb.getType());
-        }
-        String banditLocation = pBoard.getRobber_location();
-        ai.initBoard(fields, corners, streets, harbourCorners, banditLocation);
+			c1.setHarbourStatus(pHarb.getType());
+			c2.setHarbourStatus(pHarb.getType());
+		}
+		String banditLocation = pBoard.getRobber_location();
+		ai.initBoard(fields, corners, streets, harbourCorners, banditLocation);
 
 	}
 
