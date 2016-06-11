@@ -2,7 +2,6 @@ package network.client.view;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -160,6 +160,8 @@ public class GameViewController implements Initializable {
 
 	private int playerCounter = 2;
 
+	private DropShadow shadow;
+
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
@@ -186,6 +188,10 @@ public class GameViewController implements Initializable {
 		board.getChildren().addAll(factory.getViewBoard(stage));
 		board.toBack();
 		viewController.getClientController().initializeGUI();
+		
+		shadow = new DropShadow();
+        shadow.setRadius(4);
+        shadow.setColor(Color.GRAY);
 	}
 
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
@@ -318,6 +324,8 @@ public class GameViewController implements Initializable {
 		Line street = streets[u + 3][v + 3][dir];
 		street.setOpacity(1.0);
 		street.setStroke(playerColors.get(modelID));
+		street.getStyleClass().remove("street");
+		street.setEffect(shadow);
 	}
 
 	/**
@@ -356,6 +364,7 @@ public class GameViewController implements Initializable {
 		Polygon village = corners[u + 3][v + 3][dir];
 		village.setFill(playerColor);
 		village.setOpacity(1.0);
+		village.setEffect(shadow);
 		village.getStyleClass().remove("village");
 	}
 
@@ -369,6 +378,7 @@ public class GameViewController implements Initializable {
 		Polygon city = drawCity(cornerCoordinates[u + 3][v + 3][dir]);
 		city.setFill(playerColor);
 		city.setVisible(true);
+		city.setEffect(shadow);
 		board.getChildren().add(city);
 	}
 
@@ -420,10 +430,10 @@ public class GameViewController implements Initializable {
 				playerTwoCards.setText(Integer.toString(resources[0]));
 				break;
 			case 2:
-				playerTwoCards.setText(Integer.toString(resources[0]));
+				playerThreeCards.setText(Integer.toString(resources[0]));
 				break;
 			case 3:
-				playerTwoCards.setText(Integer.toString(resources[0]));
+				playerFourCards.setText(Integer.toString(resources[0]));
 				break;
 			default:
 				break;
@@ -431,9 +441,9 @@ public class GameViewController implements Initializable {
 		} else {
 			selfWood.setText(Integer.toString(resources[0]));
 			selfClay.setText(Integer.toString(resources[1]));
-			selfSheep.setText(Integer.toString(resources[2]));
-			selfCorn.setText(Integer.toString(resources[3]));
-			selfOre.setText(Integer.toString(resources[4]));
+			selfSheep.setText(Integer.toString(resources[3]));
+			selfCorn.setText(Integer.toString(resources[4]));
+			selfOre.setText(Integer.toString(resources[2]));
 		}
 	}
 
@@ -516,6 +526,7 @@ public class GameViewController implements Initializable {
 		}
 
 		private void initBoard() {
+			
 			for (int i = 0; i < 7; i++) {
 				for (int j = 0; j < 7; j++) {
 					if (fieldCoordinates[i][j][0] > 0) {
@@ -659,6 +670,7 @@ public class GameViewController implements Initializable {
 		public Line drawStreet(double[] coordinates) {
 			Line street = new Line(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
 			street.setStrokeWidth(6.0);
+			
 
 			return street;
 		}
