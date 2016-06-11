@@ -360,11 +360,13 @@ public class ClientController {
 
 	// 9.4
 	public void requestBuildStreet(int x, int y, int dir) {
+		int radius = DefaultSettings.BOARD_RADIUS;
 		if (initialRoundCount < 2) {
-			requestBuildInitialStreet(x, y, dir);
+			System.out.println("Building Initial Village");
+			requestBuildInitialStreet(x-radius, y-radius, dir);
 		}
-		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)) {
-			clientOutputHandler.requestBuildStreet(x, y, dir);
+		if (gameLogic.checkBuildStreet(x-radius, y-radius, dir, ownPlayerId)) {
+			clientOutputHandler.requestBuildStreet(x-radius, y-radius, dir);
 		}
 
 	}
