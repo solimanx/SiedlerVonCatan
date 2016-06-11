@@ -308,9 +308,10 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param u
-	 * @param v
-	 * @param dir
+	 * sets Street on coordinates u,v,dir to Player Color of Player with ID modelID
+	 * @param u axial coordinate (e.g. -3)
+	 * @param v axial coordinate (e.g. -3)
+	 * @param dir coordinate (e.g. 1 | 2 | 0)
 	 * @param modelID
 	 */
 	public void setStreet(int u, int v, int dir, int modelID) {
