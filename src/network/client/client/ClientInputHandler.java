@@ -2,6 +2,7 @@ package network.client.client;
 
 import java.util.ArrayList;
 
+import enums.CardType;
 import enums.ResourceType;
 import model.objects.Edge;
 import model.HexService;
@@ -426,7 +427,7 @@ public class ClientInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
 		int playerID = boughtDevelopmentCard.getPlayer_id();
-		ProtocolDevelopmentCards developmentCards = boughtDevelopmentCard.getDevelopmentCards();
+		CardType developmentCard = boughtDevelopmentCard.getDevelopmentCard();
 		// networkController.boughtDevelopmentCard(playerID,developmentCards;
 
 	}
