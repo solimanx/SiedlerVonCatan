@@ -12,6 +12,9 @@ public class DevelopmentCardsStack {
 	private DevelopmentCard[] devCardStack;
 	private int nextCard;
 
+	/**
+	 * constructor sets standard values creates a stack of DevelopmentCards
+	 */
 	public DevelopmentCardsStack() {
 		devFactory = new DevCardFactory();
 		devCardStack = new DevelopmentCard[25];
@@ -39,30 +42,41 @@ public class DevelopmentCardsStack {
 			arrayPosition++;
 		}
 		shuffleArray(devCardStack);
-	    for (int i = 0; i < devCardStack.length; i++)
-	    {
-	      System.out.println(devCardStack[i].getName() + " ");
-	    }
 	}
-	
-	
-	public DevelopmentCard[] shuffleArray(DevelopmentCard[] stack){
-	    Random rnd = ThreadLocalRandom.current();
-	    for (int i = stack.length - 1; i > 0; i--)
-	    {
-	      int index = rnd.nextInt(i + 1);
-	      // Simple swap
-	      DevelopmentCard a = stack[index];
-	      stack[index] = stack[i];
-	      stack[i] = a;
-	    }
+
+	/**
+	 * randomizes the order of the DevelopmentCards in the array
+	 * 
+	 * @param stack
+	 *            Array of DevelopmentCards
+	 * @return the same array with randomized order
+	 */
+	public DevelopmentCard[] shuffleArray(DevelopmentCard[] stack) {
+		Random rnd = ThreadLocalRandom.current();
+		for (int i = stack.length - 1; i > 0; i--) {
+			int index = rnd.nextInt(i + 1);
+			DevelopmentCard a = stack[index];
+			stack[index] = stack[i];
+			stack[i] = a;
+		}
 		return stack;
 	}
 
+	/**
+	 * getter
+	 * 
+	 * @return returns the whole DevelopmentCardStack, as if there was no card
+	 *         drawn
+	 */
 	public DevelopmentCard[] getCardStack() {
 		return devCardStack;
 	}
 
+	/**
+	 * returns the next DevelopmentCard from the stack
+	 * 
+	 * @return next card from the stack null if empty
+	 */
 	public DevelopmentCard getNextCard() {
 		if (nextCard < 25) {
 			DevelopmentCard result = devCardStack[nextCard];
