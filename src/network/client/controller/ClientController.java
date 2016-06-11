@@ -144,6 +144,9 @@ public class ClientController {
 		pM.setPlayerState(status);
 		pM.setVictoryPoints(victoryPoints);
 		addToPlayersResource(modelID, resources);
+		viewController.getGameViewController().setVictoryPoints(modelID, victoryPoints);
+		viewController.getGameViewController().setResourceCards(modelID, resources);
+		viewController.getGameViewController().setPlayerStatus(modelID, status);
 
 	}
 
