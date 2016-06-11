@@ -87,7 +87,7 @@ public class ClientController {
 
 	// 4.2
 	public void welcome(int playerID) {
-		setOwnPlayerID(amountPlayers);
+		setOwnPlayerID(playerID);
 		System.out.println("Handshake complete!");
 		viewController.getLobbyController().enableChat();
 	}
@@ -186,6 +186,7 @@ public class ClientController {
 		}
 
 		gameLogic.getBoard().setBandit(banditLocation);
+		setOwnPlayerID(threadPlayerIdMap.get(getOwnPlayerId())); //change ownPlayerId to modelID
 		Platform.runLater(new Runnable() {
 
 			@Override
