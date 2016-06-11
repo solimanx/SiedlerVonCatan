@@ -362,7 +362,7 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-        //ProtocolResource resource = inventionCardInfo.getResource();
+        ProtocolResource resource = inventionCardInfo.getResource();
         // networkController.inventionCardInfo(resource);
 
     }
