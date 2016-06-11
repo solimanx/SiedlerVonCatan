@@ -40,8 +40,8 @@ public class Board {
 	public Board(ArrayList<PlayerModel> tempPlayers) {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
-		initializeHashMaps();
 		initializeFields();
+		initializeHashMaps();
 		corners = new Corner[r][r][2];
 		initializeCorners();
 		edges = new Edge[r][r][3];
@@ -54,8 +54,8 @@ public class Board {
 	public Board() {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
-		initializeHashMaps();
 		initializeFields();
+		initializeHashMaps();
 		corners = new Corner[r][r][2];
 		initializeCorners();
 		edges = new Edge[r][r][3];
@@ -65,6 +65,7 @@ public class Board {
 			players[i] = new PlayerModel(i);
 		}
 		initializeBandit();
+		System.out.println("Board complete");
 	}
 
 	// ================================================================================
@@ -88,10 +89,6 @@ public class Board {
 				absoluteValue = Math.abs(aX + aY);
 				if (absoluteValue <= radius) {
 					fields[x][y] = new Field();
-					// get ID from hashmap
-					Index index = new Index(aX, aY);
-					String ID = getCoordToStringMap().get(index);
-					fields[x][y].setFieldID(ID);
 				}
 			}
 		}
@@ -125,12 +122,14 @@ public class Board {
 					if (HexService.sumAbsCubeXYZ(HexService.convertAxialToCube(new int[] { i, j })) == radius * 2) {
 						stringToCoordMap.put(String.valueOf(outerFieldsBegin), new int[] { i, j });
 						coordToStringMap.put(new Index(i, j), String.valueOf(outerFieldsBegin));
+						getFieldAt(i, j).setFieldID(String.valueOf(outerFieldsBegin));
 						// go to next char : a->b->c->...
 						outerFieldsBegin++;
 					} else if (HexService.sumAbsCubeXYZ(HexService.convertAxialToCube(new int[] { i, j })) < radius
 							* 2) {
 						stringToCoordMap.put(String.valueOf(innerFieldsBegin), new int[] { i, j });
 						coordToStringMap.put(new Index(i, j), String.valueOf(innerFieldsBegin));
+						getFieldAt(i, j).setFieldID(String.valueOf(innerFieldsBegin));
 						// go to next char : A->B->C->...
 						innerFieldsBegin++;
 					}
