@@ -413,7 +413,7 @@ public class ClientController {
 		// TODO
 	}
 
-	public void robberLoss() {
+	public void robberLoss(int[] result) {
 		// TODO
 	}
 	// Protocol 0.3

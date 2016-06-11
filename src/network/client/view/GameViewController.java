@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.sun.javafx.scene.control.skin.ChoiceBoxSkin;
-
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.PlayerState;
@@ -19,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
@@ -42,6 +41,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import network.client.controller.ViewController;
+import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
 
 public class GameViewController implements Initializable {
@@ -174,6 +174,8 @@ public class GameViewController implements Initializable {
 
 	private PlayerState selfState;
 
+	private int[] selfResources;
+
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
@@ -206,6 +208,11 @@ public class GameViewController implements Initializable {
 		shadow.setColor(Color.SLATEGRAY);
 	}
 
+	/**
+	 * @param modelID
+	 * @param playerName
+	 * @param playerColor
+	 */
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
 		if (modelID == viewController.getClientController().getOwnPlayerId()) {
 			playerIDtoViewPosition.put(modelID, 1);
@@ -233,6 +240,9 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * Auxiliary method filling field color hashmap
+	 */
 	private void initFieldColors() {
 		fieldColors.put(ResourceType.CLAY, Color.TAN);
 		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
@@ -275,13 +285,15 @@ public class GameViewController implements Initializable {
 
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
+		TradeViewController controller = (TradeViewController) loader.getController();
 		Scene scene = new Scene(root);
 		Stage tradeStage = new Stage();
 		tradeStage.setScene(scene);
+		
+		controller.init(selfResources);
 
 		tradeStage.initModality(Modality.WINDOW_MODAL);
 		tradeStage.initOwner(stage);
-		TradeViewController controller = (TradeViewController) loader.getController();
 		tradeStage.show();
 	}
 
@@ -338,7 +350,7 @@ public class GameViewController implements Initializable {
 				} else if (string.equals(player4)) {
 					resultID = 4;
 				}
-				viewController.getClientController().requestSetBandit(fieldCoordinates[0], fieldCoordinates[1],
+				viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3, fieldCoordinates[1] - 3,
 						viewPositiontoPlayerID.get(resultID));
 			}
 		}
@@ -467,9 +479,22 @@ public class GameViewController implements Initializable {
 		board.getChildren().add(chip);
 	}
 
-	public void setResourceCards(int modelID, int[] resources) {
-		if (resources.length == 1) {
+	/**
+	 * sets the amount of recource cards of self and other players
+	 * @param modelID
+	 * @param resources
+	 */
+	public void setResourceCards(int modelID, int[] resources) {	
 			switch (playerIDtoViewPosition.get(modelID)) {
+			case 1:
+				// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
+				selfResources = resources;
+				selfWood.setText(Integer.toString(resources[0]));
+				selfClay.setText(Integer.toString(resources[1]));
+				selfSheep.setText(Integer.toString(resources[3]));
+				selfCorn.setText(Integer.toString(resources[4]));
+				selfOre.setText(Integer.toString(resources[2]));
+				break;
 			case 2:
 				playerTwoCards.setText(Integer.toString(resources[0]));
 				break;
@@ -482,21 +507,21 @@ public class GameViewController implements Initializable {
 			default:
 				break;
 			}
-		} else {
-
-			// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
-			selfWood.setText(Integer.toString(resources[0]));
-			selfClay.setText(Integer.toString(resources[1]));
-			selfSheep.setText(Integer.toString(resources[3]));
-			selfCorn.setText(Integer.toString(resources[4]));
-			selfOre.setText(Integer.toString(resources[2]));
-		}
 	}
 
+	/**
+	 * shows result of dice roll on game view
+	 * @param result
+	 */
 	public void setDiceRollResult(int result) {
 		diceResult.setText("" + result);
 	}
 
+	/**
+	 * sets the victory points in the game view to corresponding player
+	 * @param modelID
+	 * @param victoryPoints
+	 */
 	public void setVictoryPoints(int modelID, int victoryPoints) {
 		String victoryString = victoryPoints + " Victory Points";
 		switch (playerIDtoViewPosition.get(modelID)) {
@@ -526,6 +551,14 @@ public class GameViewController implements Initializable {
 		case 1:
 			playerStatusOne.setText(state.toString());
 			selfState = state;
+			switch (state) {
+			case DISPENSE_CARDS_ROBBER_LOSS:
+				setRobberLossState();
+				break;
+
+			default:
+				break;
+			}
 			if (state != PlayerState.WAITING) {
 				playerVBoxOne.setDisable(false);
 			} else {
@@ -545,14 +578,56 @@ public class GameViewController implements Initializable {
 			break;
 		}
 	}
+	
+	/**
+	 * Auxiliary methode showing Robber Loss window
+	 */
+	private void setRobberLossState() {
+		FXMLLoader loader = new FXMLLoader();
+		Parent root;
+		try {
+			root = loader.load(getClass().getResource("/application/network/client/view/robberView/GiveResources.fxml").openStream());
+			Scene scene = new Scene(root);
+			Stage robberStage = new Stage();
+			robberStage.setScene(scene);
+		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		RobberViewController robberController = (RobberViewController) loader.getController();
+		robberController.init(this);
+		robberController.createSpinner(selfResources);
+		robberStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
-	public Polygon drawCity(double[] center) {
+	/**
+	 * @param result
+	 */
+	public void robberLoss(int[] result){
+		viewController.getClientController().robberLoss(result);
+	}
+
+	/**
+	 * Auxiliary method drawing cities
+	 * @param center
+	 * @return Polygon city
+	 */
+	private Polygon drawCity(double[] center) {
 		Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
 				center[1] - 20, center[0] + 10, center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10,
 				center[1] - 20, center[0] - 5, center[1] - 20, center[0] - 5, center[1] - 10);
 		return city;
 	}
 
+	
+	
+	/**
+	 * Inner Class for constructing the board. Instantiated at initial phase of Game
+	 * @author mattmoos
+	 *
+	 */
 	private class ViewBoardFactory {
 		private Pane boardPane;
 		private List<Shape> figures = new LinkedList<Shape>();
