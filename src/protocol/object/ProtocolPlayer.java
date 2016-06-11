@@ -3,8 +3,10 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+import enums.CardType;
 import enums.Color;
 import enums.PlayerState;
+import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.severinstructions.ProtocolPlayKnightCard;
 
 /**
@@ -39,18 +41,20 @@ public class ProtocolPlayer {
 
 	//@SerializedName("Rittermacht")
 	//private ProtocolPlayKnightCard playKnightCard;
+	//nur ausgespielte Rittter Karten
 
-	//@SerializedName("Entwicklungskarten")
-	//private ProtcolDevelopmentCards developmentCards;
+	@SerializedName("Entwicklungskarten")
+	private ProtocolDevelopmentCards developmentCards;
 
 	public ProtocolPlayer(int playerID, Color color, String name, PlayerState status, int victoryPoints,
-			ProtocolResource resources) {
+			ProtocolResource resources,ProtocolDevelopmentCards developmentCards) {
 		this.playerID = playerID;
 		this.color = color;
 		this.name = name;
 		this.status = status;
 		this.victoryPoints = victoryPoints;
 		this.resources = resources;
+		this.developmentCards=developmentCards;
 	}
 
 	public int getPlayerID() {
@@ -77,4 +81,7 @@ public class ProtocolPlayer {
 		return resources;
 	}
 
+	public ProtocolDevelopmentCards getDevelopmentCards() {
+		return developmentCards;
+	}
 }
