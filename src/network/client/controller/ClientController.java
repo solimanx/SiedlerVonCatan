@@ -144,9 +144,11 @@ public class ClientController {
 		pM.setPlayerState(status);
 		pM.setVictoryPoints(victoryPoints);
 		addToPlayersResource(modelID, resources);
-		viewController.getGameViewController().setVictoryPoints(modelID, victoryPoints);
-		viewController.getGameViewController().setResourceCards(modelID, resources);
-		viewController.getGameViewController().setPlayerStatus(modelID, status);
+		if (viewController.getGameViewController() != null) {
+			viewController.getGameViewController().setVictoryPoints(modelID, victoryPoints);
+			viewController.getGameViewController().setResourceCards(modelID, resources);
+			viewController.getGameViewController().setPlayerStatus(modelID, status);
+		}
 
 	}
 
@@ -189,7 +191,10 @@ public class ClientController {
 		}
 
 		gameLogic.getBoard().setBandit(banditLocation);
-		setOwnPlayerID(threadPlayerIdMap.get(getOwnPlayerId())); //change ownPlayerId to modelID
+		setOwnPlayerID(threadPlayerIdMap.get(getOwnPlayerId())); // change
+																	// ownPlayerId
+																	// to
+																	// modelID
 		Platform.runLater(new Runnable() {
 
 			@Override
@@ -332,31 +337,31 @@ public class ClientController {
 
 	// 9.4
 	public void requestBuildVillage(int x, int y, int dir) {
-		//view saves coordinates from 0 to 7 system
+		// view saves coordinates from 0 to 7 system
 		int radius = DefaultSettings.BOARD_RADIUS;
-		if (initialVillageCounter  < 2){
+		if (initialVillageCounter < 2) {
 			System.out.println("Building Initial Village");
-			requestBuildInitialVillage(x-radius,y-radius,dir);			
+			requestBuildInitialVillage(x - radius, y - radius, dir);
 			initialVillageCounter++;
 		}
-		if (gameLogic.checkBuildVillage(x-radius, y-radius, dir, ownPlayerId)) {
-			clientOutputHandler.requestBuildVillage(x-radius, y-radius, dir);
-			
+		if (gameLogic.checkBuildVillage(x - radius, y - radius, dir, ownPlayerId)) {
+			clientOutputHandler.requestBuildVillage(x - radius, y - radius, dir);
+
 		}
 
 	}
 
 	public void requestBuildInitialVillage(int x, int y, int dir) {
-		if (gameLogic.checkBuildInitialVillage(x, y, dir)){
+		if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
 			clientOutputHandler.requestBuildVillage(x, y, dir);
-		}		
+		}
 	}
 
 	// 9.4
 	public void requestBuildStreet(int x, int y, int dir) {
-		if (initialVillageCounter  < amountPlayers){
-			requestBuildInitialStreet(x,y,dir);
-		}		
+		if (initialVillageCounter < amountPlayers) {
+			requestBuildInitialStreet(x, y, dir);
+		}
 		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildStreet(x, y, dir);
 		}
@@ -364,10 +369,10 @@ public class ClientController {
 	}
 
 	public void requestBuildInitialStreet(int x, int y, int dir) {
-		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownPlayerId)){
+		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildStreet(x, y, dir);
-			initialVillageCounter++; //TODO: this should happen after server OK
-		}		
+			initialVillageCounter++; // TODO: this should happen after server OK
+		}
 	}
 
 	// 9.4
