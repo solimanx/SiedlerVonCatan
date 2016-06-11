@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
+ * not used Protocol
  * <b>Handelsangebot angenommen(Trade request was accepted)</b>
  * <p>
  * Server sends action information to players.

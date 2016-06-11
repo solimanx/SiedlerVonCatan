@@ -5,6 +5,7 @@ import com.google.gson.annotations.Since;
 import protocol.object.ProtocolResource;
 
 /**
+ * used Protocol
  * <b>Handelsangebot(Request trade/offer is sent )</b>
  * <p>
  * Server sends request trade/offer to Players. They can decide to accept the

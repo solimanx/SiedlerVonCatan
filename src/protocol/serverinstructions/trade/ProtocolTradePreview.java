@@ -6,7 +6,7 @@ import com.google.gson.annotations.Since;
 import protocol.object.ProtocolResource;
 
 /**
- * 
+ * not used Protocol
  * <b>Handel angenommen (Trade Confirmation)</b>
  * <p>
  * Server previews the detail of the offered trade.

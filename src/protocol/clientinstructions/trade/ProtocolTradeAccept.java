@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
+ * used Protocol
  * <b>Handelsangebot annehmen (Accept trade offered)</b>
  * <p>
  * When client accepts the terms of the given trade.

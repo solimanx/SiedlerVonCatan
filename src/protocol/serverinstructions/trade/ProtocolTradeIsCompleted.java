@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
+ * used Protocol
  * <b>Handel ausgeführt (trade was completed)</b>
  * <p>
  * Server confirms that trade was completed and sends information to players

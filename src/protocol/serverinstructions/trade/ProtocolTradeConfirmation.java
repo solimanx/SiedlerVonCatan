@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * 
+ * used this Protocol
  * <b>Handelsangebot angenommen (Trade Confirmation)</b>
  * <p>
  * Server shows completion of trade.

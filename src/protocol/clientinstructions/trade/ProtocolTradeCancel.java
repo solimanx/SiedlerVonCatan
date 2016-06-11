@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
+ * used Protocol
  * <b>Handel abbrechen(Cancel trade request)</b>
  * <p>
  * Player send Messade to Server, in order to cancel trade request.

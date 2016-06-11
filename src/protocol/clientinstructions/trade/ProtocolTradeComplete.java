@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
+ * used Protocol
  * <b>Handel abschließen(Complete trading)</b>
  * <p>
  * Player can choose, which trade he wants to complete.
