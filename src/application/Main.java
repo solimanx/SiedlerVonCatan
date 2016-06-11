@@ -42,8 +42,8 @@ public class Main extends Application {
 		// logger.log(Level.INFO, "Our first log");
 		ModelToProtocol.initModelToProtocol();
 		switch(mode){
-		case 0: setFlowController(new ClientController(primaryStage));break;
-		case 1: setGameController(new ServerController()); break;
+		case 0: setClientController(new ClientController(primaryStage));break;
+		case 1: setServerController(new ServerController()); break;
 		case 2: pa = new PrimitiveAI();break;
 		case 3: dc = new DebugClient();break;
 		}
@@ -90,7 +90,7 @@ public class Main extends Application {
 	 * @param gc
 	 *            the gc to set
 	 */
-	public void setGameController(ServerController gc) {
+	public void setServerController(ServerController gc) {
 		this.gc = gc;
 	}
 
@@ -105,7 +105,7 @@ public class Main extends Application {
 	 * @param fc
 	 *            the fc to set
 	 */
-	public void setFlowController(ClientController fc) {
+	public void setClientController(ClientController fc) {
 		this.fc = fc;
 	}
 }
