@@ -44,7 +44,7 @@ public class ProtocolPlayKnightCard {
         return target;
     }
 
-    public int getPlayer_id() {
+    public Integer getPlayer_id() {
         return player_id;
     }
 }
