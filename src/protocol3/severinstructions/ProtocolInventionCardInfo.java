@@ -2,6 +2,7 @@ package protocol3.severinstructions;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
+import enums.ResourceType;
 import protocol.object.ProtocolResource;
 import protocol3.object.ProtocolInventionCard;
 
@@ -18,25 +19,25 @@ import protocol3.object.ProtocolInventionCard;
 public class ProtocolInventionCardInfo {
 
     @SerializedName("Rohstoffe")
-    private ProtocolResource resource;
+    private ResourceType resourceType;
 
     @SerializedName("Spieler")
     private Integer player_id;
 
     //Client to Sever
-    public ProtocolInventionCardInfo(ProtocolResource resource) {
-        this.resource = resource;
+    public ProtocolInventionCardInfo(ResourceType resourceType) {
+        this.resourceType = resourceType;
     }
 
     //Server to Cliet
-    public ProtocolInventionCardInfo(ProtocolResource resource, Integer player_id) {
+    public ProtocolInventionCardInfo(ResourceType resourceType, Integer player_id) {
 
-        this.resource = resource;
+        this.resourceType = resourceType;
         this.player_id = player_id;
     }
 
-    public ProtocolResource getResource() {
-        return resource;
+    public ResourceType getResourceType() {
+        return resourceType;
     }
 
     public Integer getPlayer_id() {

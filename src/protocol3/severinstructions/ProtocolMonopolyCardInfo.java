@@ -3,6 +3,7 @@ package protocol3.severinstructions;
 import com.google.gson.annotations.SerializedName;
 
 import com.google.gson.annotations.Since;
+import enums.ResourceType;
 import protocol.object.ProtocolResource;
 import protocol3.object.ProtocolMonopolyCard;
 
@@ -13,13 +14,13 @@ import protocol3.object.ProtocolMonopolyCard;
 public class ProtocolMonopolyCardInfo {
 
     @SerializedName("Rohstoff")
-    private ProtocolResource resource;
+    private ResourceType resourceType;
 
     @SerializedName("Spieler")
     private Integer player_id;
 
-    public ProtocolResource getResource() {
-        return resource;
+    public ResourceType getResourceType() {
+        return resourceType;
     }
 
     public Integer getPlayer_id() {
@@ -27,14 +28,14 @@ public class ProtocolMonopolyCardInfo {
     }
 
     //Client to Server
-    public ProtocolMonopolyCardInfo(ProtocolResource resource) {
-        this.resource = resource;
+    public ProtocolMonopolyCardInfo(ResourceType resourceType) {
+        this.resourceType = resourceType;
     }
 
     //Server to Client
-    public ProtocolMonopolyCardInfo(ProtocolResource resource, Integer player_id) {
+    public ProtocolMonopolyCardInfo(ResourceType resourceType, Integer player_id) {
 
-        this.resource = resource;
+        this.resourceType = resourceType;
         this.player_id = player_id;
     }
 }

@@ -3,6 +3,7 @@ package network.server.server;
 import java.io.IOException;
 
 import enums.CardType;
+import enums.ResourceType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -394,7 +395,7 @@ public class ServerOutputHandler {
     }
 
     public void inventionCardInfo(int[] resource, int player_id) {
-        ProtocolResource pr;
+     /*   ProtocolResource pr;
         if (resource.length > 1) {
             pr = new ProtocolResource(resource[0], resource[1], resource[2], resource[3], resource[4], 0);
         } else {
@@ -408,9 +409,8 @@ public class ServerOutputHandler {
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
-        }
+     } */  }
 
-    }
 
     public void longestRoad(int player_id) {
         ProtocolLongestRoad plr = new ProtocolLongestRoad(player_id);
@@ -425,14 +425,9 @@ public class ServerOutputHandler {
 
     }
 
-    public void monopolyCardInfo(int[] resource, int player_id) {
-        ProtocolResource pm;
-        if (resource.length > 1) {
-            pm = new ProtocolResource(resource[0], resource[1], resource[2], resource[3], resource[4], 0);
-        } else {
-            pm = new ProtocolResource(0, 0, 0, 0, 0, resource[0]);
-        }
-        ProtocolMonopolyCardInfo pmci = new ProtocolMonopolyCardInfo(pm, player_id);
+    public void monopolyCardInfo(ResourceType resourceType, int player_id) {
+
+        ProtocolMonopolyCardInfo pmci = new ProtocolMonopolyCardInfo(resourceType, player_id);
         Response r = new Response();
         r.pMonopolyCardInfo = pmci;
         try {

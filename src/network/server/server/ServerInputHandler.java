@@ -1,6 +1,7 @@
 package network.server.server;
 
 import enums.Color;
+import enums.ResourceType;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.server.controller.ServerController;
@@ -36,6 +37,8 @@ import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
 import protocol3.severinstructions.*;
+
+import javax.annotation.Resource;
 
 public class ServerInputHandler extends InputHandler {
     private ServerController serverController;
@@ -316,19 +319,20 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolMonopolyCardInfo monopolyCardInfo) {
-        // Unnecessary Method
+        ResourceType resourceType = monopolyCardInfo.getResourceType();
+        //networkController.monopolyCardInfo(resourceType)
 
     }
 
     @Override
     protected void handle(ProtocolPlayKnightCard playKnightCard) {
-        // Unnecessary Method
+        //Amina
 
     }
 
     @Override
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
-        // Unnecessary Method
+        // AMINA
 
     }
 
@@ -354,7 +358,8 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-        // Unnecessary Method
+        //ProtocolResource resource = inventionCardInfo.getResource();
+        // networkController.inventionCardInfo(resource);
 
     }
 
