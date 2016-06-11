@@ -222,4 +222,14 @@ public final class ProtocolToModel {
 		}
 	}
 
+	public static int[] convertResoruces(Integer wood, Integer clay, Integer ore, Integer wool, Integer corn) {
+		int result[] = new int[5];
+		result[0] = wood == null ? 0 : wood.intValue();
+		result[1] = clay == null ? 0 : clay.intValue();
+		result[2] = ore == null ? 0 : ore.intValue();
+		result[3] = wool == null ? 0 : wool.intValue();
+		result[4] = corn == null ? 0 : corn.intValue();
+		return result;
+	}
+
 }

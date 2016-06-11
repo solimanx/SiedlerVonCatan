@@ -225,7 +225,7 @@ public class ClientInputHandler extends InputHandler {
                 clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
 
             } else {
-                int[] resources = {pRes.getWood(), pRes.getClay(), pRes.getOre(), pRes.getWool(), pRes.getCorn()};
+                int[] resources = ProtocolToModel.convertResoruces(pRes.getWood(), pRes.getClay(), pRes.getOre(), pRes.getWool(), pRes.getCorn());
                 clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
             }
         }
