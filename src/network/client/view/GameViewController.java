@@ -224,10 +224,10 @@ public class GameViewController implements Initializable {
 		fieldColors.put(ResourceType.WOOD, Color.FORESTGREEN);
 		fieldColors.put(ResourceType.SEA, Color.LIGHTSKYBLUE);
 
-		playerColors.add(0, Color.BLUE);
-		playerColors.add(1, Color.ORANGE);
-		playerColors.add(2, Color.RED);
-		playerColors.add(3, Color.WHITE);
+//		playerColors.add(0, Color.BLUE);
+//		playerColors.add(1, Color.ORANGE);
+//		playerColors.add(2, Color.RED);
+//		playerColors.add(3, Color.WHITE);
 
 	}
 

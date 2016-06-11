@@ -1,15 +1,14 @@
 package network.client.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import application.lobby.LobbyController;
 import application.lobby.PlayerProfileController;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import network.client.view.GameViewController;
 import network.server.controller.ServerController;
@@ -108,7 +107,12 @@ public class ViewController {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.setFullScreen(true);
+			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+	        primaryStage.setX(primaryScreenBounds.getMinX());
+	        primaryStage.setY(primaryScreenBounds.getMinY());
+	        primaryStage.setWidth(primaryScreenBounds.getWidth());
+	        primaryStage.setHeight(primaryScreenBounds.getHeight());
+			//primaryStage.setFullScreen(false);
 			gameViewController = (GameViewController) loader.getController();
 			gameViewController.setViewController(this);
 			primaryStage.show();
