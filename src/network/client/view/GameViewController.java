@@ -191,7 +191,7 @@ public class GameViewController implements Initializable {
 		
 		shadow = new DropShadow();
         shadow.setRadius(4);
-        shadow.setColor(Color.GRAY);
+        shadow.setColor(Color.SLATEGRAY);
 	}
 
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
