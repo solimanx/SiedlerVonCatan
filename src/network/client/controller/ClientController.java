@@ -287,7 +287,7 @@ public class ClientController {
 	// 8.2
 	public void diceRollResult(int playerId, int[] result) {
 		//WARNING, PLAYERID NOTHING GETS DONE WITH IT
-		if(viewController!=null)
+		if(viewController.getGameViewController() != null)
 		{
 			int res = result[0] + result[1];
 			viewController.getGameViewController().setDiceRollResult(res);
