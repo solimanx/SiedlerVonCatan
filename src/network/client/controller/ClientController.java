@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sun.media.jfxmedia.logging.Logger;
+
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
@@ -327,9 +329,11 @@ public class ClientController {
 	public void requestBuildVillage(int x, int y, int dir) {
 		if (InitialStreetCounter  < amountPlayers){
 			requestBuildInitialVillage(x,y,dir);
+			System.out.println("Building Initial Village");
 		}
 		if (gameLogic.checkBuildVillage(x, y, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildVillage(x, y, dir);
+			
 		}
 
 	}

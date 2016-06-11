@@ -118,7 +118,19 @@ public class ServerController {
 				tempPlayers.get(i).setPlayerState(PlayerState.WAITING_FOR_GAMESTART);
 			}
 		}
-
+		
+		for (int i = 0; i < tempPlayers.size(); i++) {
+			if (i == playerID) {
+				int[] resources = { 0, 0, 0, 0, 0 };
+				serverOutputHandler.statusUpdate(currentThreadID, null, null, PlayerState.WAITING_FOR_GAMESTART, 0,
+						resources, i);
+			} else {
+				int[] resources = { 0 };
+				serverOutputHandler.statusUpdate(currentThreadID, null, null, PlayerState.WAITING_FOR_GAMESTART, 0,
+						resources, i);
+			}
+		}
+		
 		if (tempPlayers.size() >= 3 && tempPlayers.size() == server.getClientCounter()) {
 			boolean allReady = true;
 			for (int i = 0; i < tempPlayers.size(); i++) {
@@ -129,17 +141,6 @@ public class ServerController {
 			}
 			if (allReady) {
 				initializeBoard();
-			}
-		}
-		for (int i = 0; i < tempPlayers.size(); i++) {
-			if (i == playerID) {
-				int[] resources = { 0, 0, 0, 0, 0 };
-				serverOutputHandler.statusUpdate(currentThreadID, null, null, PlayerState.WAITING_FOR_GAMESTART, 0,
-						resources, i);
-			} else {
-				int[] resources = { 0 };
-				serverOutputHandler.statusUpdate(currentThreadID, null, null, PlayerState.WAITING_FOR_GAMESTART, 0,
-						resources, i);
 			}
 		}
 
