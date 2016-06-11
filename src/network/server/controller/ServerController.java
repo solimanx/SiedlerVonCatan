@@ -43,6 +43,7 @@ public class ServerController {
 	private ServerInputHandler serverInputHandler;
 	private int InitialStreetCounter;
 	private ArrayList<Corner> initialVillages;
+	private int currentPlayer;
 
 	public ServerController() {
 		// ModelPlayerID => threadID
@@ -118,7 +119,7 @@ public class ServerController {
 				tempPlayers.get(i).setPlayerState(PlayerState.WAITING_FOR_GAMESTART);
 			}
 		}
-		
+
 		for (int i = 0; i < tempPlayers.size(); i++) {
 			if (i == playerID) {
 				int[] resources = { 0, 0, 0, 0, 0 };
@@ -130,7 +131,7 @@ public class ServerController {
 						resources, i);
 			}
 		}
-		
+
 		if (tempPlayers.size() >= 3 && tempPlayers.size() == server.getClientCounter()) {
 			boolean allReady = true;
 			for (int i = 0; i < tempPlayers.size(); i++) {
@@ -205,6 +206,12 @@ public class ServerController {
 		chatReceiveMessage(currentThreadID, s);
 
 	}
+	
+	public void statusUpdateForAllPlayers(){
+		for (int i = 0; i < amountPlayers;i++){
+			statusUpdate(i);
+		}
+	}
 
 	public void statusUpdate(int playerModelID) {
 		for (int i = 0; i < amountPlayers; i++) {
@@ -235,15 +242,16 @@ public class ServerController {
 	public void initializeBoard() {
 		Board board = new Board(tempPlayers);
 		this.gameLogic = new GameLogic(board);
-		generateBoard("A",true);
+		generateBoard("A", true);
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 
 		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
 		statusUpdate(0); // firstPlayers turn
-		for (int i = 1;i <amountPlayers;i++){
+		currentPlayer = 0;
+		for (int i = 1; i < amountPlayers; i++) {
 			gameLogic.getBoard().getPlayer(i).setPlayerState(PlayerState.WAITING);
 			statusUpdate(i);
-		}		
+		}
 		InitialStreetCounter = 0;
 
 	}
@@ -264,18 +272,20 @@ public class ServerController {
 				currPM = gameLogic.getBoard().getPlayer(i);
 				if (currPM.getResourceCards().size() > 7) {
 					currPM.setPlayerState(PlayerState.DISPENSE_CARDS_ROBBER_LOSS);
+					statusUpdate(i);
 					hasToWait = true;
 				}
 			}
 			if (!hasToWait) {
 				pM.setPlayerState(PlayerState.MOVE_ROBBER);
+				statusUpdate(modelID);
 			}
 
 		} else {
 			gainBoardResources(firstDice + secondDice);
 			pM.setPlayerState(PlayerState.TRADING_OR_BUILDING);
+			statusUpdate(modelID);
 		}
-		// TODO: statusupdate to all
 	}
 
 	/*
@@ -313,8 +323,8 @@ public class ServerController {
 	}
 
 	/**
-	 * builds a street
-	 * is called by the server controller
+	 * builds a street is called by the server controller
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -346,6 +356,7 @@ public class ServerController {
 	/**
 	 * is called by the serverController after a build request from a client
 	 * builds a city
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -370,7 +381,9 @@ public class ServerController {
 	}
 
 	/**
-	 * Is called by serverController when there is a street build request during the initial phase
+	 * Is called by serverController when there is a street build request during
+	 * the initial phase
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -401,7 +414,9 @@ public class ServerController {
 	}
 
 	/**
-	 * is called by serverController when there is a Building Request during the initial Phase
+	 * is called by serverController when there is a Building Request during the
+	 * initial Phase
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -434,6 +449,7 @@ public class ServerController {
 
 	/**
 	 * Sends a robberMovementRequest to server
+	 * 
 	 * @param x
 	 * @param y
 	 * @param victim_id
@@ -457,6 +473,7 @@ public class ServerController {
 
 	/**
 	 * Is called by View when ownPlayer has finished his turn
+	 * 
 	 * @param playerID
 	 */
 	public void endTurn(int playerID) {
@@ -465,9 +482,9 @@ public class ServerController {
 		pM.setPlayerState(PlayerState.WAITING);
 		statusUpdate(modelID);
 
-		int nextPlayer = getNextPlayer(modelID); // next players turn
-		gameLogic.getBoard().getPlayer(nextPlayer).setPlayerState(PlayerState.DICEROLLING);
-		statusUpdate(nextPlayer);
+		currentPlayer = getNextPlayer(modelID); // next players turn
+		gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
+		statusUpdate(currentPlayer);
 
 	}
 
@@ -478,7 +495,7 @@ public class ServerController {
 	 * middle
 	 *
 	 * @param initialField
-	 gameLogic.getBoard()ram randomDesert
+	 *            gameLogic.getBoard()ram randomDesert
 	 */
 	private void generateBoard(String initialField, boolean randomDesert) {
 		String fields = HexService.getSpiral(initialField);
@@ -497,13 +514,15 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(i));		
-				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+fields.charAt(i));
+				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
+				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(i));
 				if (currNum != 5) {
-					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[diceInd]);
+					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
+							DefaultSettings.DICE_NUMBERS[diceInd]);
 					diceInd++;
 				} else {
-					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], null);
+					gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
+							null);
 				}
 			}
 		} else {
@@ -517,19 +536,20 @@ public class ServerController {
 					}
 				} while (notFound);
 				cards[currNum]--;
-				int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(i));
-				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+fields.charAt(i));
-				gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], DefaultSettings.DICE_NUMBERS[i]);
+				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
+				gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(i));
+				gameLogic.getBoard().setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
+						DefaultSettings.DICE_NUMBERS[i]);
 			}
-			int[] coords = ProtocolToModel.getFieldCoordinates(""+fields.charAt(fields.length()-1));
-			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+fields.charAt(fields.length()-1));
+			int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(fields.length() - 1));
+			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(fields.length() - 1));
 			gameLogic.getBoard().setFieldAt(coords[0], coords[1], ResourceType.NOTHING, null);
 
 		}
 		String outerRing = gameLogic.getBoard().getOuterRing();
-		for (int i = 0;i < outerRing.length();i++){
-			int[] coords = ProtocolToModel.getFieldCoordinates(""+outerRing.charAt(i));
-			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(""+outerRing.charAt(i));
+		for (int i = 0; i < outerRing.length(); i++) {
+			int[] coords = ProtocolToModel.getFieldCoordinates("" + outerRing.charAt(i));
+			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID("" + outerRing.charAt(i));
 			gameLogic.getBoard().setFieldAt(coords[0], coords[1], ResourceType.SEA, null);
 		}
 		gameLogic.getBoard().setBandit("J");
@@ -563,45 +583,33 @@ public class ServerController {
 	 * @see server.controller.GameControllerInterface#gainBoardResources(int)
 	 */
 	public void gainBoardResources(int diceNum) {
-		int board_size = DefaultSettings.BOARD_SIZE;
-		ArrayList<model.objects.Field> correspondingFields = new ArrayList<model.objects.Field>();
-		for (int i = 0; i < board_size; i++) {
-			for (int j = 0; j < board_size; j++) {
-				if (gameLogic.getBoard().getField(i, j) != null) {
-					if (gameLogic.getBoard().getField(i, j).getDiceIndex() == diceNum) {
-						correspondingFields.add(gameLogic.getBoard().getField(i, j));
+		ArrayList<Field> diceFields = new ArrayList<Field>();
+		for (Map.Entry<String, int[]> entry : gameLogic.getBoard().getStringToCoordMap().entrySet()) {
+			int[] coord = entry.getValue();
+			Field f = gameLogic.getBoard().getFieldAt(coord[0], coord[1]);
+			if (f.getDiceIndex() == diceNum) {
+				diceFields.add(f);
+			}
+		}
+
+		for (Field f : diceFields) {
+			if (f.getFieldID() != gameLogic.getBoard().getBandit()) {
+				int[] coords = gameLogic.getBoard().getFieldCoordinates(f.getFieldID());
+				Corner[] neighbors = gameLogic.getBoard().getSurroundingCorners(coords[0], coords[1]);
+				for (int i = 0; i < neighbors.length; i++) {
+					switch (neighbors[i].getStatus()) {
+					case VILLAGE:
+						addToPlayersResource(neighbors[i].getOwnerID(), f.getResourceType(), 1);
+						break;
+					case CITY:
+						addToPlayersResource(neighbors[i].getOwnerID(), f.getResourceType(), 2);
+						break;
+					default:
 					}
 				}
 			}
 		}
-
-		Corner[] neighborCorners;
-		enums.CornerStatus status;
-		enums.ResourceType resType;
-		String bandit = gameLogic.getBoard().getBandit();
-		// int[] fieldCoordinates = new int[2];
-		// for (Field p : correspondingFields) {
-		// if (p != bandit) {
-		// fieldCoordinates = board.getFieldCoordinates(p);
-		// neighborCorners = board.getSurroundingCorners(fieldCoordinates[0],
-		// fieldCoordinates[1]);
-		// resType = p.getResourceType();
-		// for (Corner o : neighborCorners) {
-		// status = o.getStatus();
-		// switch (status) {
-		// case VILLAGE:
-		// addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 1);
-		// break;
-		// case CITY:
-		// addToPlayersResource(o.getOwnedByPlayer().getId(), resType, 2);
-		// break;
-		// default:
-		// break;
-		// }
-		// }
-		// }
-		// }
-
+		statusUpdateForAllPlayers();
 	}
 
 	/*
@@ -612,10 +620,14 @@ public class ServerController {
 	 */
 
 	private void gainFirstBoardResources() {
-		for (int i = 4; i < 8; i++) {
-			// initialVillages.get(i) TODO
+		for (int i = amountPlayers; i < amountPlayers*2; i++) {
+			int[] coords = ProtocolToModel.getCornerCoordinates(initialVillages.get(i).getCornerID());
+			Field[] connFields = gameLogic.getBoard().getConnectedFields(coords[0],coords[1], coords[2]);
+			for (int j = 0; j < connFields.length; j++) {
+				addToPlayersResource(initialVillages.get(i).getOwnerID(),connFields[j].getResourceType(),1);
+			}
 		}
-
+		statusUpdateForAllPlayers();
 	}
 
 	private int getNextPlayer(int modelPlayerID) {
@@ -726,46 +738,6 @@ public class ServerController {
 
 	public ServerInputHandler getServerInputHandler() {
 		return serverInputHandler;
-	}
-
-	/**
-	 * basic method for switching the player states updates all clients via
-	 * networkController
-	 *
-	 * @param playerID
-	 * @param state
-	 */
-
-	public void setPlayerState(int playerID, PlayerState state) {
-		switch (state) {
-		case TRADING: // set all other players to offering
-			for (int i = 0; i < gameLogic.getBoard().getAmountPlayers(); i++) {
-				if (i == playerID) {
-					gameLogic.getBoard().getPlayer(i).setPlayerState(state);
-				} else {
-					gameLogic.getBoard().getPlayer(i).setPlayerState(PlayerState.OFFERING);
-				}
-			}
-		case PLAYING: // set all other players waiting
-			for (int i = 0; i < gameLogic.getBoard().getAmountPlayers(); i++) {
-				if (i == playerID) {
-					gameLogic.getBoard().getPlayer(i).setPlayerState(state);
-				} else {
-					gameLogic.getBoard().getPlayer(i).setPlayerState(PlayerState.WAITING);
-				}
-			}
-		default: // else set only player state of playerID
-			gameLogic.getBoard().getPlayer(playerID).setPlayerState(state);
-		}
-
-		// DEBUG ONLY!
-		// viewController.setPlayerState(playerID);
-		/*
-		 * for (int i = 1;i < playerModels.length;i++){
-		 * networkController.setPlayerState(i,playerModels[i].getPlayerState());
-		 * }
-		 */
-
 	}
 
 	public void setGameState() {
