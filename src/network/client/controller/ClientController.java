@@ -47,7 +47,7 @@ public class ClientController {
 	private Map<Integer, Integer> threadPlayerIdMap;
 
 	protected Client client;
-	private int initialVillageCounter = 0;
+	private int initialRoundCount = 0;
 	
 
 	public ClientController(Stage primaryStage) {
@@ -340,10 +340,10 @@ public class ClientController {
 	public void requestBuildVillage(int x, int y, int dir) {
 		// view saves coordinates from 0 to 7 system
 		int radius = DefaultSettings.BOARD_RADIUS;
-		if (initialVillageCounter < 2) {
+		if (initialRoundCount < 2) {
 			System.out.println("Building Initial Village");
 			requestBuildInitialVillage(x - radius, y - radius, dir);
-			initialVillageCounter++;
+			
 		}
 		if (gameLogic.checkBuildVillage(x - radius, y - radius, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildVillage(x - radius, y - radius, dir);
@@ -360,7 +360,7 @@ public class ClientController {
 
 	// 9.4
 	public void requestBuildStreet(int x, int y, int dir) {
-		if (initialVillageCounter < amountPlayers) {
+		if (initialRoundCount < 2) {
 			requestBuildInitialStreet(x, y, dir);
 		}
 		if (gameLogic.checkBuildStreet(x, y, dir, ownPlayerId)) {
@@ -372,7 +372,7 @@ public class ClientController {
 	public void requestBuildInitialStreet(int x, int y, int dir) {
 		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildStreet(x, y, dir);
-			initialVillageCounter++; // TODO: this should happen after server OK
+			initialRoundCount++; // TODO: this should happen after server OK
 		}
 	}
 
