@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import enums.PlayerState;
 import enums.ResourceType;
 import model.objects.Corner;
 import model.objects.Edge;
@@ -284,6 +285,14 @@ public class GameLogic {
 
 	public Board getBoard() {
 		return board;
+	}
+
+	public boolean checkIfActionIsAllowed(int playerID,int currentPlayer,PlayerState state){
+		if (playerID != currentPlayer || board.getPlayer(currentPlayer).getPlayerState() != state){
+			return false;
+		} else {
+			return true;			
+		}		
 	}
 
 }

@@ -117,8 +117,6 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolServerConfirmation serverConfirmation) {
-        String server_response = serverConfirmation.getServer_response();
-        serverController.serverResponse(server_response);
         // Unnecessary Method in ServerInputHadler
     }
 

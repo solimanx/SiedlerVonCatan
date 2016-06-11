@@ -123,13 +123,13 @@ public class ServerOutputHandler {
 
     }
 
-    public void error(String s) {
+    public void error(String s, int threadPlayerID) {
         ProtocolError pe = new ProtocolError(s);
         Response r = new Response();
         r.pError = pe;
 
         try {
-            server.broadcast(parser.createString(r));
+            server.sendToClient(parser.createString(r),threadPlayerID);
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
@@ -486,10 +486,10 @@ public class ServerOutputHandler {
 
     }
 
-    public void serverConfirm(String server_response) {
+    public void serverConfirm(String server_response, int threadPlayerID) {
         ProtocolServerConfirmation psc = new ProtocolServerConfirmation(server_response);
         try {
-            server.broadcast(parser.createString(psc));
+            server.sendToClient(parser.createString(psc),threadPlayerID);
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
