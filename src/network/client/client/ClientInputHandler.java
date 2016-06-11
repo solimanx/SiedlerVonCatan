@@ -386,8 +386,8 @@ public class ClientInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-      //  ProtocolResource resource = inventionCardInfo.getResource();
-    //    int player_id = inventionCardInfo.getPlayer_id();
+        ProtocolResource resource = inventionCardInfo.getResource();
+        int player_id = inventionCardInfo.getPlayer_id();
         // networkController.inventionCardInfo(resource,player_id);
     }
 
@@ -410,7 +410,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolPlayKnightCard playKnightCard) {
         String road1_id = playKnightCard.getRoad1_id();
         int target = playKnightCard.getTarget();
-       Integer player_id = playKnightCard.getPlayer_id();
+        Integer player_id = playKnightCard.getPlayer_id();
 
         // networkController.playKnightCard(road1_id,target,player_id)
 
@@ -420,7 +420,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
         String road1_id = roadBuildingCardInfo.getRoad1_id();
         String road2_idx = roadBuildingCardInfo.getRoad2_id();
-       Integer player_id = roadBuildingCardInfo.getPlayer_id();
+        Integer player_id = roadBuildingCardInfo.getPlayer_id();
         // networkController.roadBuildingCardInfo(road1_id,road2_id,player_id)
     }
 

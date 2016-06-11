@@ -296,7 +296,7 @@ public class ServerInputHandler extends InputHandler {
 
     // @Override
     protected void handle(ProtocolInventionCard inventionCard) {
-        ProtocolResource invention = inventionCard.getResource();
+        ProtocolResource resource = inventionCard.getResource();
         //gameController.inventionCard(invention);
 
     }

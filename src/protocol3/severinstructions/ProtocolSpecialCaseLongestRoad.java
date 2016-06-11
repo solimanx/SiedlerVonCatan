@@ -2,7 +2,7 @@ package protocol3.severinstructions;
 
 import com.google.gson.annotations.Since;
 
-/**
+/**CAN BE DELETED
  * <b>Längste Handelsstraße(longest road in special case)</b>
  * <p>
  * If a player loses the longest roads without another player getting it the

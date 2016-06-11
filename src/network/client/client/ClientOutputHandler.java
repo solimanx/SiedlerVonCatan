@@ -339,7 +339,7 @@ public class ClientOutputHandler {
     }
 
     public void inventionCardInfo(int[] resource) {
-       /* ProtocolResource pr;
+        ProtocolResource pr;
         if (resource.length > 0) {
             pr = new ProtocolResource(resource[0], resource[1], resource[3], resource[4], resource[5], 0);
         } else {
@@ -353,7 +353,7 @@ public class ClientOutputHandler {
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
-        }*/
+        }
 
     }
 

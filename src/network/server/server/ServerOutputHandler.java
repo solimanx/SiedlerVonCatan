@@ -394,8 +394,8 @@ public class ServerOutputHandler {
 
     }
 
-    public void inventionCardInfo(int[] resource, int player_id) {
-     /*   ProtocolResource pr;
+    public void inventionCardInfo(int[] resource, Integer player_id) {
+        ProtocolResource pr;
         if (resource.length > 1) {
             pr = new ProtocolResource(resource[0], resource[1], resource[2], resource[3], resource[4], 0);
         } else {
@@ -409,7 +409,7 @@ public class ServerOutputHandler {
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
-     } */
+        }
     }
 
 
@@ -426,7 +426,7 @@ public class ServerOutputHandler {
 
     }
 
-    public void monopolyCardInfo(ResourceType resourceType, int player_id) {
+    public void monopolyCardInfo(ResourceType resourceType, Integer player_id) {
 
         ProtocolMonopolyCardInfo pmci = new ProtocolMonopolyCardInfo(resourceType, player_id);
         Response r = new Response();
@@ -444,7 +444,7 @@ public class ServerOutputHandler {
         // This should be deleted
     }
 
-    public void playKnightCard(String road1_id, int target, int player_id) {
+    public void playKnightCard(String road1_id, int target, Integer player_id) {
         ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(road1_id, target, player_id);
         Response r = new Response();
         r.pplayKnightCard = ppkc;

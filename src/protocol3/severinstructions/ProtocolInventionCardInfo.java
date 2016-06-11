@@ -19,25 +19,24 @@ import protocol3.object.ProtocolInventionCard;
 public class ProtocolInventionCardInfo {
 
     @SerializedName("Rohstoffe")
-    private ResourceType resourceType;
+    private ProtocolResource resource;
 
     @SerializedName("Spieler")
     private Integer player_id;
 
-    //Client to Sever
-    public ProtocolInventionCardInfo(ResourceType resourceType) {
-        this.resourceType = resourceType;
+    //Client to Server
+    public ProtocolInventionCardInfo(ProtocolResource resource) {
+        this.resource = resource;
     }
 
     //Server to Cliet
-    public ProtocolInventionCardInfo(ResourceType resourceType, Integer player_id) {
-
-        this.resourceType = resourceType;
+    public ProtocolInventionCardInfo(ProtocolResource resource, Integer player_id) {
+        this.resource = resource;
         this.player_id = player_id;
     }
 
-    public ResourceType getResourceType() {
-        return resourceType;
+    public ProtocolResource getResource() {
+        return resource;
     }
 
     public Integer getPlayer_id() {

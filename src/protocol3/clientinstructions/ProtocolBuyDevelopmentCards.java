@@ -3,7 +3,7 @@ package protocol3.clientinstructions;
 import com.google.gson.annotations.Since;
 
 /**
- * <b>Entwicklungskarte kaufen(buy development cards)</b>
+ * <b> 10.5 Entwicklungskarte kaufen(buy development cards)</b>
  * <p>
  * In order to buy a development card,
  * Client sends to Sever a message,with an empty object.
