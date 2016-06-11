@@ -150,13 +150,13 @@ public class GameLogic {
 	 * @param playerId
 	 * @return true/false
 	 */
-	public boolean checkSetBandit(int x, int y, int playerID) {
+	public boolean checkSetBandit(int x, int y, Integer playerID) {
 		Field f = board.getFieldAt(x, y);
 		if (f != null && !f.getFieldID().equals(board.getBandit())) { // valid
 			// position and
 			// not the
 			// same as before
-			if (playerID == 0) { // check if specified player has a corner at
+			if (playerID == null) { // check if specified player has a corner at
 									// this field
 				return true;
 			} else {

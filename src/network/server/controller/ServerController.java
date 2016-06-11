@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import model.Board;
 import model.GameLogic;
 import model.HexService;
+import model.Index;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
@@ -43,6 +44,7 @@ public class ServerController {
 	private int InitialStreetCounter;
 	private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
 	private int currentPlayer;
+	private int robberLossCounter;
 
 	public ServerController() {
 		Board board = new Board();
@@ -223,16 +225,18 @@ public class ServerController {
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 			if (result[0] + result[1] == 7) {
 				PlayerModel currPM;
-				boolean hasToWait = false;
 				for (int i = 0; i < amountPlayers; i++) {
 					currPM = gameLogic.getBoard().getPlayer(i);
 					if (currPM.getResourceCards().size() > 7) {
 						currPM.setPlayerState(PlayerState.DISPENSE_CARDS_ROBBER_LOSS);
 						statusUpdate(i);
-						hasToWait = true;
+						robberLossCounter++;
 					}
 				}
-				if (!hasToWait) {
+				if (robberLossCounter > 0) { //continue only if no robber losses
+					pM.setPlayerState(PlayerState.WAITING);
+					statusUpdate(modelID);
+				} else {
 					pM.setPlayerState(PlayerState.MOVE_ROBBER);
 					statusUpdate(modelID);
 				}
@@ -439,21 +443,6 @@ public class ServerController {
 
 	}
 
-	/**
-	 * Sends a robberMovementRequest to server
-	 * 
-	 * @param x
-	 * @param y
-	 * @param victim_id
-	 * @param currentThreadID
-	 */
-	public void robberMovementRequest(int x, int y, int victimThreadID, int currentThreadID) {
-		int victimModelID = threadPlayerIdMap.get(victimThreadID);
-		if (gameLogic.checkSetBandit(x, y, victimModelID)) {
-
-		}
-
-	}
 
 	public void setBandit(int x, int y, int playerID) {
 		if (gameLogic.checkSetBandit(x, y, playerID)) {
@@ -480,6 +469,72 @@ public class ServerController {
 		statusUpdate(currentPlayer);
 
 	}
+	
+	public void robberLoss(int threadID,int[] resources){
+		int modelID = threadPlayerIdMap.get(threadID);
+		int[] playerRes = getPlayerResources(modelID);
+		int newSize = 0;
+		if (gameLogic.checkPlayerResources(modelID, resources)){
+		    for (int i = 0;i <playerRes.length;i++){
+		    	playerRes[i] = playerRes[i] - resources[i];
+		    	newSize = newSize + playerRes[i];
+		    }
+		    if (newSize <= 7){
+		    	robberLossCounter--;
+		    	subFromPlayersResources(modelID,resources);
+		    	serverOutputHandler.costs(threadID, playerRes);
+		    	if (modelID == currentPlayer && robberLossCounter == 0){
+		    		gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.MOVE_ROBBER);
+		    	} else {
+		    		gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
+		    	}
+		    	statusUpdate(modelID);
+		    }else{
+		    	error(modelID,"You haven't specified enough resources");
+		    }
+		} else{
+			error(modelID,"You haven't the specified resources");
+		}
+
+		
+	}
+	
+	/**
+	 * Sends a robberMovementRequest to all clients
+	 * 
+	 * @param x
+	 * @param y
+	 * @param victim_id
+	 * @param currentThreadID
+	 */
+	public void robberMovementRequest(int x, int y, Integer victimThreadID, int currentThreadID) {
+		int victimModelID = threadPlayerIdMap.get(victimThreadID);		
+		if (gameLogic.checkSetBandit(x, y, victimModelID)) {
+			if (victimThreadID == null){
+				String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x,y));
+				gameLogic.getBoard().setBandit(location);
+				serverOutputHandler.robberMovement(currentThreadID, location, null);
+			} else {
+				ArrayList<ResourceType> victimResources = gameLogic.getBoard().getPlayer(victimModelID).getResourceCards();
+				if (victimResources != null){ //steal a random card
+			        Random rand = new Random();
+				    int stealResource = rand.nextInt(victimResources.size() - 1);
+				    ResourceType gainedResource = victimResources.get(stealResource);
+				    victimResources.remove(stealResource);
+				    //serverOutputHandler.costs(victimThreadID, costs);
+				    int modelID = threadPlayerIdMap.get(currentThreadID);
+				    addToPlayersResource(modelID,gainedResource,1);
+				    //serverOutputHandler.resourceObtain(currentThreadID, obtain);
+				    String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x,y));
+					gameLogic.getBoard().setBandit(location);
+				    serverOutputHandler.robberMovement(currentThreadID,location,victimThreadID);
+				}
+			}
+
+		}
+
+	}
+	
 
 	/**
 	 * Generates the resource and the dice index of each field calls gui via
@@ -652,6 +707,16 @@ public class ServerController {
 
 		}
 		return result;
+	}
+	
+	private void setPlayersResource(int modelID,int[] resources){
+		ArrayList<ResourceType> resourceCards = new ArrayList<ResourceType>();
+		for (int i = 0; i<resources.length;i++){
+			for (int j = 0;j <resources[i];j++){
+				resourceCards.add(DefaultSettings.RESOURCE_ORDER[i]);
+			}
+		}
+		gameLogic.getBoard().getPlayer(modelID).setResourceCards(resourceCards);
 	}
 
 	private void addToPlayersResource(int playerID, ResourceType resType, int amount) {

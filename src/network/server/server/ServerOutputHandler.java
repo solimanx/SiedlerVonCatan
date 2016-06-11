@@ -259,7 +259,7 @@ public class ServerOutputHandler {
 
     }
 
-    public void robberMovement(int player_id, String location_id, int victim_id) {
+    public void robberMovement(int player_id, String location_id, Integer victim_id) {
         ProtocolRobberMovement pm = new ProtocolRobberMovement(player_id, location_id, victim_id);
 
         Response r = new Response();
