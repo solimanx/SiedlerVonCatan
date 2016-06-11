@@ -36,6 +36,7 @@ public class Board {
 	// CONSTRUCTORS
 	// ================================================================================
 
+	@Deprecated
 	public Board(ArrayList<PlayerModel> tempPlayers) {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
@@ -53,8 +54,8 @@ public class Board {
 	public Board() {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
-		initializeFields();
 		initializeHashMaps();
+		initializeFields();
 		corners = new Corner[r][r][2];
 		initializeCorners();
 		edges = new Edge[r][r][3];
@@ -87,6 +88,10 @@ public class Board {
 				absoluteValue = Math.abs(aX + aY);
 				if (absoluteValue <= radius) {
 					fields[x][y] = new Field();
+					//get ID from hashmap
+					Index index = new Index(aX, aY);
+					String ID = getCoordToStringMap().get(index);
+					fields[x][y].setFieldID(ID);
 				}
 			}
 		}
@@ -153,11 +158,21 @@ public class Board {
 				if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) < 0) {
 					// convert axial back to array coords
 					corners[temp[0] + radius][temp[1] + radius][0] = new Corner();
+					// get surrounding fields of the corner
+					Field[] tf = getTouchingFields(temp[0] + radius, temp[1] + radius, 0);
+					// combine their id
+					String cornerID = tf[0].getFieldID()+tf[1].getFieldID()+tf[2].getFieldID();
+					corners[temp[0] + radius][temp[1] + radius][0].setCornerID(cornerID);
 				}
 				// south only will be set
 				else if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) > 0) {
 					// convert axial back to array coords
 					corners[temp[0] + radius][temp[1] + radius][1] = new Corner();
+					// get surrounding fields of the corner
+					Field[] tf = getTouchingFields(temp[0] + radius, temp[1] + radius, 1);
+					// combine their id
+					String cornerID = tf[0].getFieldID()+tf[1].getFieldID()+tf[2].getFieldID();
+					corners[temp[0] + radius][temp[1] + radius][1].setCornerID(cornerID);
 				}
 			}
 			// outercase keys only (inner rings/fields)
@@ -225,6 +240,7 @@ public class Board {
 
 	/**
 	 * Add players to the player model
+	 * 
 	 * @param tempPlayers
 	 */
 	private void initializePlayers(ArrayList<PlayerModel> tempPlayers) {
@@ -396,8 +412,7 @@ public class Board {
 		if (fields[i + radius][j + radius] != null) {
 			fields[i + radius][j + radius].setResourceType(resourceType);
 			fields[i + radius][j + radius].setDiceIndex(diceIndex);
-		}
-		else
+		} else
 			throw new IllegalArgumentException("Field doesn't exist");
 
 	}
