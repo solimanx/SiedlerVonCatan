@@ -43,18 +43,18 @@ public class ProtocolPlayer {
 	//private ProtocolPlayKnightCard playKnightCard;
 	//nur ausgespielte Rittter Karten
 
-	@SerializedName("Entwicklungskarten")
-	private ProtocolDevelopmentCards developmentCards;
+	//@SerializedName("Entwicklungskarten")
+	//private ProtocolDevelopmentCards developmentCards;
 
 	public ProtocolPlayer(int playerID, Color color, String name, PlayerState status, int victoryPoints,
-			ProtocolResource resources,ProtocolDevelopmentCards developmentCards) {
+			ProtocolResource resources) {
 		this.playerID = playerID;
 		this.color = color;
 		this.name = name;
 		this.status = status;
 		this.victoryPoints = victoryPoints;
 		this.resources = resources;
-		this.developmentCards=developmentCards;
+	//	this.developmentCards=developmentCards;
 	}
 
 	public int getPlayerID() {
@@ -81,7 +81,7 @@ public class ProtocolPlayer {
 		return resources;
 	}
 
-	public ProtocolDevelopmentCards getDevelopmentCards() {
-		return developmentCards;
-	}
+	//public ProtocolDevelopmentCards getDevelopmentCards() {
+	//	return developmentCards;
+	//}
 }
