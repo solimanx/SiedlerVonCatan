@@ -223,12 +223,17 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Add players to the player model
+	 * @param tempPlayers
+	 */
 	private void initializePlayers(ArrayList<PlayerModel> tempPlayers) {
 		for (int i = 0; i < tempPlayers.size(); i++) {
 			players[i] = tempPlayers.get(i);
 		}
 	}
 
+	@Deprecated
 	private void initializeBandit() {
 		// TODO Auto-generated method stub
 
