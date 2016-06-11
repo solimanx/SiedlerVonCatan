@@ -2,10 +2,14 @@ package network.client.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import com.sun.javafx.scene.control.skin.ChoiceBoxSkin;
 
 import enums.CornerStatus;
 import enums.HarbourStatus;
@@ -17,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -35,6 +40,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import network.client.controller.ViewController;
 import network.client.view.tradeview.TradeViewController;
 
@@ -147,7 +153,11 @@ public class GameViewController implements Initializable {
 	public static double rad60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
 	private static double halfWidth = sin60 * radius;
 
+	/**
+	 * modelID => ViewPosition (1, 2, 3, 4)
+	 */
 	private HashMap<Integer, Integer> playerIDtoViewPosition = new HashMap<Integer, Integer>(4);
+	private HashMap<Integer, Integer> viewPositiontoPlayerID = new HashMap<Integer, Integer>(4);
 	private HashMap<Integer, Color> playerColors = new HashMap<Integer, Color>(4);
 	// fieldColors kann weg
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
@@ -161,6 +171,8 @@ public class GameViewController implements Initializable {
 	private int playerCounter = 2;
 
 	private DropShadow shadow;
+
+	private PlayerState selfState;
 
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
@@ -188,10 +200,10 @@ public class GameViewController implements Initializable {
 		board.getChildren().addAll(factory.getViewBoard(stage));
 		board.toBack();
 		viewController.getClientController().initializeGUI();
-		
+
 		shadow = new DropShadow();
-        shadow.setRadius(4);
-        shadow.setColor(Color.SLATEGRAY);
+		shadow.setRadius(4);
+		shadow.setColor(Color.SLATEGRAY);
 	}
 
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
@@ -200,6 +212,7 @@ public class GameViewController implements Initializable {
 
 		} else {
 			playerIDtoViewPosition.put(modelID, playerCounter);
+			viewPositiontoPlayerID.put(playerCounter, modelID);
 			playerCounter++;
 		}
 		playerColors.put(modelID, playerColor.getValue());
@@ -229,10 +242,10 @@ public class GameViewController implements Initializable {
 		fieldColors.put(ResourceType.WOOD, Color.FORESTGREEN);
 		fieldColors.put(ResourceType.SEA, Color.LIGHTSKYBLUE);
 
-//		playerColors.add(0, Color.BLUE);
-//		playerColors.add(1, Color.ORANGE);
-//		playerColors.add(2, Color.RED);
-//		playerColors.add(3, Color.WHITE);
+		// playerColors.add(0, Color.BLUE);
+		// playerColors.add(1, Color.ORANGE);
+		// playerColors.add(2, Color.RED);
+		// playerColors.add(3, Color.WHITE);
 
 	}
 
@@ -301,8 +314,34 @@ public class GameViewController implements Initializable {
 	 * @param fieldCoordinates
 	 */
 	public void fieldClick(int[] fieldCoordinates) {
-		// TODO stealFromPlayer???
-		viewController.getClientController().requestSetBandit(fieldCoordinates[0], fieldCoordinates[1], 1);
+		if (selfState == PlayerState.MOVE_ROBBER) {
+			List<String> choices = new ArrayList<>();
+			String player2 = playerNameTwo.getText();
+			choices.add(player2);
+			String player3 = playerNameThree.getText();
+			choices.add(player3);
+			String player4 = playerNameFour.getText();
+			choices.add(player4);
+
+			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
+			dialog.initStyle(StageStyle.UTILITY);
+			dialog.setTitle("Stealing from...");
+			dialog.setHeaderText("Choose Player from whom you want to steal");
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()) {
+				int resultID = 0;
+				String string = result.get();
+				if (string.equals(player2)) {
+					resultID = 2;
+				} else if (string.equals(player3)) {
+					resultID = 3;
+				} else if (string.equals(player4)) {
+					resultID = 4;
+				}
+				viewController.getClientController().requestSetBandit(fieldCoordinates[0], fieldCoordinates[1],
+						viewPositiontoPlayerID.get(resultID));
+			}
+		}
 
 	}
 
@@ -314,10 +353,15 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * sets Street on coordinates u,v,dir to Player Color of Player with ID modelID
-	 * @param u axial coordinate (e.g. -3)
-	 * @param v axial coordinate (e.g. -3)
-	 * @param dir coordinate (e.g. 1 | 2 | 0)
+	 * sets Street on coordinates u,v,dir to Player Color of Player with ID
+	 * modelID
+	 * 
+	 * @param u
+	 *            axial coordinate (e.g. -3)
+	 * @param v
+	 *            axial coordinate (e.g. -3)
+	 * @param dir
+	 *            coordinate (e.g. 1 | 2 | 0)
 	 * @param modelID
 	 */
 	public void setStreet(int u, int v, int dir, int modelID) {
@@ -426,19 +470,20 @@ public class GameViewController implements Initializable {
 	public void setResourceCards(int modelID, int[] resources) {
 		if (resources.length == 1) {
 			switch (playerIDtoViewPosition.get(modelID)) {
-			case 1:
+			case 2:
 				playerTwoCards.setText(Integer.toString(resources[0]));
 				break;
-			case 2:
+			case 3:
 				playerThreeCards.setText(Integer.toString(resources[0]));
 				break;
-			case 3:
+			case 4:
 				playerFourCards.setText(Integer.toString(resources[0]));
 				break;
 			default:
 				break;
 			}
 		} else {
+
 			// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 			selfWood.setText(Integer.toString(resources[0]));
 			selfClay.setText(Integer.toString(resources[1]));
@@ -455,16 +500,16 @@ public class GameViewController implements Initializable {
 	public void setVictoryPoints(int modelID, int victoryPoints) {
 		String victoryString = victoryPoints + " Victory Points";
 		switch (playerIDtoViewPosition.get(modelID)) {
-		case 0:
+		case 1:
 			selfVictoryPoints.setText(victoryString);
 			break;
-		case 1:
+		case 2:
 			playerTwoVPoints.setText(victoryString);
 			break;
-		case 2:
+		case 3:
 			playerThreeVPoints.setText(victoryString);
 			break;
-		case 3:
+		case 4:
 			playerFourVPoints.setText(victoryString);
 			break;
 		default:
@@ -480,6 +525,7 @@ public class GameViewController implements Initializable {
 		switch (playerIDtoViewPosition.get(modelID)) {
 		case 1:
 			playerStatusOne.setText(state.toString());
+			selfState = state;
 			if (state != PlayerState.WAITING) {
 				playerVBoxOne.setDisable(false);
 			} else {
@@ -527,13 +573,17 @@ public class GameViewController implements Initializable {
 		}
 
 		private void initBoard() {
-			
+
 			for (int i = 0; i < 7; i++) {
 				for (int j = 0; j < 7; j++) {
 					if (fieldCoordinates[i][j][0] > 0) {
 						Polygon hexagon = drawHexagon(
 								createHexagon(fieldCoordinates[i][j][0], fieldCoordinates[i][j][1]));
 						hexagon.setVisible(true);
+						int[] resourceCoordinates = { i,j };
+						hexagon.setOnMouseClicked(e -> {
+							fieldClick(resourceCoordinates);
+						});
 						figures.add(0, hexagon);
 						fields[i][j] = hexagon;
 						for (int l = 0; l < 3; l++) {
@@ -625,6 +675,7 @@ public class GameViewController implements Initializable {
 
 		/**
 		 * draws a Circle with diceIndex
+		 * 
 		 * @param u
 		 * @param v
 		 * @param diceIndex
@@ -671,7 +722,6 @@ public class GameViewController implements Initializable {
 		public Line drawStreet(double[] coordinates) {
 			Line street = new Line(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
 			street.setStrokeWidth(6.0);
-			
 
 			return street;
 		}
