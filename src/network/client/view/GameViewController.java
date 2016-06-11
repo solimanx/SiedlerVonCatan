@@ -148,7 +148,7 @@ public class GameViewController implements Initializable {
 	private static double halfWidth = sin60 * radius;
 
 	private HashMap<Integer, Integer> playerIDtoViewPosition = new HashMap<Integer, Integer>(4);
-	private ArrayList<Color> playerColors = new ArrayList<Color>(4);
+	private HashMap<Integer, Color> playerColors = new HashMap<Integer, Color>(4);
 	// fieldColors kann weg
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	private HashMap<ResourceType, ImagePattern> resourceImages = new HashMap<ResourceType, ImagePattern>(6);
@@ -188,16 +188,16 @@ public class GameViewController implements Initializable {
 		viewController.getClientController().initializeGUI();
 	}
 
-	public void initPlayer(int playerID, String playerName, enums.Color playerColor) {
-		if (playerID == viewController.getClientController().getOwnPlayerId()) {
-			playerIDtoViewPosition.put(playerID, 1);
+	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
+		if (modelID == viewController.getClientController().getOwnPlayerId()) {
+			playerIDtoViewPosition.put(modelID, 1);
 
 		} else {
-			playerIDtoViewPosition.put(playerID, playerCounter);
+			playerIDtoViewPosition.put(modelID, playerCounter);
 			playerCounter++;
 		}
-		playerColors.add(playerID, playerColor.getValue());
-		switch (playerIDtoViewPosition.get(playerID)) {
+		playerColors.put(modelID, playerColor.getValue());
+		switch (playerIDtoViewPosition.get(modelID)) {
 		case 1:
 			playerNameOne.setText(playerName);
 			break;
@@ -311,12 +311,12 @@ public class GameViewController implements Initializable {
 	 * @param u
 	 * @param v
 	 * @param dir
-	 * @param playerID
+	 * @param modelID
 	 */
-	public void setStreet(int u, int v, int dir, int playerID) {
+	public void setStreet(int u, int v, int dir, int modelID) {
 		Line street = streets[u + 3][v + 3][dir];
 		street.setOpacity(1.0);
-		street.setStroke(playerColors.get(playerID));
+		street.setStroke(playerColors.get(modelID));
 	}
 
 	/**
@@ -335,13 +335,13 @@ public class GameViewController implements Initializable {
 	 * @param v
 	 * @param dir
 	 * @param buildType
-	 * @param playerId
+	 * @param modelID
 	 */
-	public void setCorner(int u, int v, int dir, CornerStatus buildType, int playerId) {
+	public void setCorner(int u, int v, int dir, CornerStatus buildType, int modelID) {
 		if (buildType == enums.CornerStatus.VILLAGE) {
-			setVillage(u, v, dir, playerColors.get(playerId));
+			setVillage(u, v, dir, playerColors.get(modelID));
 		} else {
-			setCity(u, v, dir, playerColors.get(playerId));
+			setCity(u, v, dir, playerColors.get(modelID));
 		}
 	}
 
@@ -411,9 +411,9 @@ public class GameViewController implements Initializable {
 		board.getChildren().add(chip);
 	}
 
-	public void setResourceCards(int playerID, int[] resources) {
+	public void setResourceCards(int modelID, int[] resources) {
 		if (resources.length == 1) {
-			switch (playerIDtoViewPosition.get(playerID)) {
+			switch (playerIDtoViewPosition.get(modelID)) {
 			case 1:
 				playerTwoCards.setText(Integer.toString(resources[0]));
 				break;
@@ -439,9 +439,9 @@ public class GameViewController implements Initializable {
 		diceResult.setText("" + result);
 	}
 
-	public void setVictoryPoints(int playerID, int victoryPoints) {
+	public void setVictoryPoints(int modelID, int victoryPoints) {
 		String victoryString = victoryPoints + " Victory Points";
-		switch (playerIDtoViewPosition.get(playerID)) {
+		switch (playerIDtoViewPosition.get(modelID)) {
 		case 0:
 			selfVictoryPoints.setText(victoryString);
 			break;
@@ -460,11 +460,11 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param playerID
+	 * @param modelID
 	 * @param state
 	 */
-	public void setPlayerStatus(int playerID, PlayerState state) {
-		switch (playerIDtoViewPosition.get(playerID)) {
+	public void setPlayerStatus(int modelID, PlayerState state) {
+		switch (playerIDtoViewPosition.get(modelID)) {
 		case 1:
 			playerStatusOne.setText(state.toString());
 			if (state != PlayerState.WAITING) {
@@ -857,7 +857,7 @@ public class GameViewController implements Initializable {
 
 		public void initSelf(int ownPlayerId, String name, enums.Color color) {
 			playerIDtoViewPosition.put(ownPlayerId, 0);
-			playerColors.add(0, color.getValue());
+			playerColors.put(0, color.getValue());
 			selfName.setText(name);
 
 		}
