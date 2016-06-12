@@ -33,17 +33,21 @@ public class ClientController {
 	private GameLogic gameLogic;
 
 	private int ownPlayerId;
-	private int amountPlayers;
+	private int amountPlayers = 1;
 
 	protected ViewController viewController;
 
 	private ClientOutputHandler clientOutputHandler;
 	private ClientInputHandler clientInputHandler;
 
-	// e.g. 0 -> 45
+	/**
+	 * e.g. (0 -> 45), (1, -> 32) etc.
+	 */
 	private Map<Integer, Integer> modelPlayerIdMap;
 
-	// e.g. 45 -> 0
+	/**
+	 * e.g. (45-> 0), (32, -> 1) etc.
+	 */
 	private Map<Integer, Integer> threadPlayerIdMap;
 
 	protected Client client;
@@ -102,7 +106,11 @@ public class ClientController {
 	 * @param playerID
 	 */
 	public void welcome(int playerID) {
+		// playerID is 42,35, etc.
 		setOwnPlayerID(playerID);
+		//add myself to hashmap
+		threadPlayerIdMap.put(playerID, 0);
+		modelPlayerIdMap.put(0, playerID);
 		System.out.println("Handshake complete!");
 		viewController.getLobbyController().enableChat();
 	}
@@ -173,22 +181,26 @@ public class ClientController {
 	public void statusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
-
+		System.out.println(modelID+"MODEL ID");
 		switch (status) {
 		case CONNECTION_LOST:
 			if (modelID != null) {
 				threadPlayerIdMap.remove(modelID);
 				modelPlayerIdMap.remove(threadID);
+				// TODO remove from playermodel[] of board
 			}
-			// if player exists, delete from array
 			break;
 		case GAME_STARTING:
 			break;
 		case WAITING_FOR_GAMESTART:
+			// if player wasn't saved in list
 			if (modelID == null) {
+				// e.g. (42 -> 0), (13 -> 1) etc.
 				threadPlayerIdMap.put(threadID, amountPlayers);
+				// e.g. (0 -> 42), (1 -> 13) etc.
 				modelPlayerIdMap.put(amountPlayers, threadID);
 				modelID = amountPlayers;
+				System.out.println(modelID+"MODEL ID"+threadID);
 				amountPlayers++;
 			}
 		default:
@@ -199,9 +211,12 @@ public class ClientController {
 			}
 			pM.setPlayerState(status);
 			pM.setVictoryPoints(victoryPoints);
+			//TODO trace this modelID = 0,1,2,3
 			addToPlayersResource(modelID, resources);
-			
+
 			if (viewController.getGameViewController() != null) {
+				// and here..
+				// modelID = 0,1,2,3
 				Platform.runLater(new PlayerStatusGUIUpdate(modelID, viewController.getGameViewController(),
 						victoryPoints, status, resources));
 			}
@@ -297,16 +312,46 @@ public class ClientController {
 
 	/**
 	 * @param playerID
-	 * @param resources
+	 * @param resourcesGained
 	 */
-	public void addToPlayersResource(int playerID, int[] resources) {
-		ArrayList<ResourceType> resourceCards = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
-		for (int i = 0; i < resources.length; i++) {
-			for (int j = 0; j < resources[i]; j++) {
-				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
+	public void addToPlayersResource(int playerID, int[] resourcesGained) {
+		// playerID = 0,1,2,3
+		// if (playerID != getOwnPlayerId()) {
+		// ArrayList<ResourceType> resourceCards =
+		// gameLogic.getBoard().getPlayer(playerID).getResourceCards();
+		// for (int i = 0; i < resources.length; i++) {
+		// for (int j = 0; j < resources[i]; j++) {
+		// resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
+		// }
+		// }
+		// gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
+		// }
+		// else{
+		// gameLogic.getBoard().getPlayer(playerID)
+		// }
+		// if it's self
+		System.out.println(playerID+ "HER HER HER");
+		if (playerID == 0) {
+			// safety check
+			if (resourcesGained.length == 5) {
+					//playerID := 0,1,2,3
+					gameLogic.getBoard().getPlayer(playerID).incrementResources(resourcesGained);
+				
+			} else {
+				throw new IllegalArgumentException("Error at adding player resources to player");
+			}
+
+		}
+		// other players
+		else {
+			System.out.println(playerID+" "+modelPlayerIdMap.get(playerID)+" "+resourcesGained.length);
+			// safety check
+			if (resourcesGained.length == 1) {
+				gameLogic.getBoard().getPlayer(playerID).setHiddenResources(resourcesGained[0]);
+			} else {
+				throw new IllegalArgumentException("Error at adding player resources to player");
 			}
 		}
-		gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
 
 	}
 
@@ -366,13 +411,12 @@ public class ClientController {
 	 * @param result
 	 */
 	public void diceRollResult(int playerId, int[] result) {
-		//WARNING, PLAYERID NOTHING GETS DONE WITH IT
-		if(viewController.getGameViewController() != null)
-		{
+		// WARNING, PLAYERID NOTHING GETS DONE WITH IT
+		if (viewController.getGameViewController() != null) {
 			int res = result[0] + result[1];
 			viewController.getGameViewController().setDiceRollResult(res);
 		}
-	
+
 	}
 
 	// 8.3
@@ -382,9 +426,11 @@ public class ClientController {
 	 */
 	public void resourceObtain(int playerID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		
-		//TODO Do not call setResourceCards here! (this would _set_ the resource cards of player, not add!)
-		//viewController.getGameViewController().setResourceCards(modelID, resources);
+
+		// TODO Do not call setResourceCards here! (this would _set_ the
+		// resource cards of player, not add!)
+		// viewController.getGameViewController().setResourceCards(modelID,
+		// resources);
 
 	}
 
@@ -686,28 +732,8 @@ public class ClientController {
 	 * @return
 	 */
 	private int[] getPlayerResources(int playerID) {
-		ArrayList<ResourceType> resources = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
-		int[] result = new int[5];
-		for (ResourceType r : resources) {
-			switch (r) {
-			case WOOD:
-				result[0]++;
-				break;
-			case CLAY:
-				result[1]++;
-				break;
-			case ORE:
-				result[2]++;
-			case SHEEP:
-				result[3]++;
-			case CORN:
-				result[4]++;
-			default:
-				break;
-			}
-
-		}
-		return result;
+		int[] resources = gameLogic.getBoard().getPlayer(playerID).getResources();
+		return resources;
 	}
 
 }

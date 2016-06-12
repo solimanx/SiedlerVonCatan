@@ -12,22 +12,30 @@ public class PlayerModel {
 	// moved to line 30: private int[] resources
 	// ArrayList<ResourceType> resourceCards;
 	// TODO ArrayList<DevelopmentCard> developmentCards;
-	int victoryPoints = 0;
+	private int victoryPoints = 0;
 
 	// TODO int hiddenVictoryPoints
-	int amountVillages = DefaultSettings.START_AMOUNT_VILLAGES;
-	int amountCities = DefaultSettings.START_AMOUNT_CITIES;
-	int amountStreets = DefaultSettings.START_AMOUNT_STREETS;
-	boolean hasLongestRoad;
-	boolean hasLargestArmy;
-	PlayerState playerState;
-	int playerID;
-	Color color;
-	String name;
+	private int amountVillages = DefaultSettings.START_AMOUNT_VILLAGES;
+	private int amountCities = DefaultSettings.START_AMOUNT_CITIES;
+	private int amountStreets = DefaultSettings.START_AMOUNT_STREETS;
+	private boolean hasLongestRoad;
+	private boolean hasLargestArmy;
+	private PlayerState playerState;
+	private int playerID;
+	private Color color;
+	private String name;
 
-	
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
+	// is hidden to other players
 	private int[] resources = { 0, 0, 0, 0, 0 };
+
+	// is null for self, but non null for other players
+	private Integer hiddenResources;
+
+	public PlayerModel(int id) {
+		this.playerID = id;
+		// this.resourceCards = new ArrayList<ResourceType>();
+	}
 
 	public Color getColor() {
 		return color;
@@ -46,10 +54,6 @@ public class PlayerModel {
 	}
 
 	// every Player gets own id (0..3)
-	public PlayerModel(int id) {
-		this.playerID = id;
-		//this.resourceCards = new ArrayList<ResourceType>();
-	}
 
 	public int getID() {
 		return playerID;
@@ -78,7 +82,7 @@ public class PlayerModel {
 	@Deprecated
 	public ArrayList<ResourceType> getResourceCards() {
 		return null;
-		//return resourceCards;
+		// return resourceCards;
 	}
 
 	public int getAmountCities() {
@@ -123,7 +127,7 @@ public class PlayerModel {
 
 	@Deprecated
 	public void setResourceCards(ArrayList<ResourceType> resourceCards) {
-		//this.resourceCards = resourceCards;
+		// this.resourceCards = resourceCards;
 	}
 
 	public void setAmountVillages(int amountVillages) {
@@ -165,7 +169,7 @@ public class PlayerModel {
 	}
 
 	/**
-	 * Get all resources
+	 * Get specific resource
 	 * 
 	 * @return
 	 */
@@ -177,6 +181,30 @@ public class PlayerModel {
 	public void decrementResourceAt(int i) {
 		resources[i] -= 1;
 
+	}
+
+	/**
+	 * Get all resources
+	 * 
+	 * @return
+	 */
+	public int[] getResources() {
+		// TODO Auto-generated method stub
+		return resources;
+	}
+
+	/**
+	 * @return the hiddenResources
+	 */
+	public Integer getHiddenResources() {
+		return hiddenResources;
+	}
+
+	/**
+	 * @param hiddenResources the hiddenResources to set
+	 */
+	public void setHiddenResources(Integer hiddenResources) {
+		this.hiddenResources = hiddenResources;
 	}
 
 }

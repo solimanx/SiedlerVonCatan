@@ -223,6 +223,7 @@ public final class ProtocolToModel {
 	}
 
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
+	@Deprecated
 	public static int[] convertResources(Integer wood, Integer clay, Integer ore, Integer wool, Integer corn) {
 		int result[] = new int[5];
 		result[0] = wood == null ? 0 : wood.intValue();
@@ -241,11 +242,15 @@ public final class ProtocolToModel {
 			result[2] = resource.getOre() == null ? 0 : resource.getOre().intValue();
 			result[3] = resource.getWool() == null ? 0 : resource.getWool().intValue();
 			result[4] = resource.getCorn() == null ? 0 : resource.getCorn().intValue();
-			
+			//Array of length 5
 			return result;
 		}
+		else if (resource.getUnknown() != null){
+			//array of length 1 (hiddenResource)
+			return new int[]{resource.getUnknown().intValue()};
+		}
 		else{
-			throw new IllegalArgumentException("Error at convertResources, not intended for unknown resources");
+			throw new IllegalArgumentException("Error at convertResources");
 		}
 	}
 

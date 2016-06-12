@@ -256,27 +256,35 @@ public class ClientInputHandler extends InputHandler {
      */
     @Override
     protected void handle(ProtocolStatusUpdate statusUpdate) {
+    	//get player object
         ProtocolPlayer pPlayer = statusUpdate.getPlayer();
+        //get ID which is "32" or "42" etc.
         int threadID = pPlayer.getPlayerID();
+        //get color
         enums.Color color = pPlayer.getColor();
+        // get name
         String name = pPlayer.getName();
+        // status
         enums.PlayerState status = pPlayer.getStatus();
+        // victory points
         int victoryPoints = pPlayer.getVictoryPoints();
+        // and resources
         ProtocolResource pRes = pPlayer.getResources();
-        if (pRes.getUnknown() == null && pRes.getClay() == null) {
-            int[] empty = {0, 0, 0, 0, 0};
-            clientController.statusUpdate(threadID, color, name, status, victoryPoints, empty);
-        } else {
-            if (pRes.getUnknown() != null) {
-                int[] resources = {pRes.getUnknown()};
+        // check if it's self or another will be done in clientcontroller not handler
+//        if (pRes.getUnknown() == null && pRes.getClay() == null) {
+//            int[] empty = {0, 0, 0, 0, 0};
+//            clientController.statusUpdate(threadID, color, name, status, victoryPoints, empty);
+//        } else {
+//            if (pRes.getUnknown() != null) {
+//                int[] resources = {pRes.getUnknown()};
+//                clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
+//
+//            } else {
+            	//will be length 5 or 1
+                int[] resources = ProtocolToModel.convertResources(pRes);
                 clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
-
-            } else {
-            	
-                int[] resources = ProtocolToModel.convertResources(pRes.getWood(), pRes.getClay(), pRes.getOre(), pRes.getWool(), pRes.getCorn());
-                clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
-            }
-        }
+		// }
+		// }
     }
 
     //

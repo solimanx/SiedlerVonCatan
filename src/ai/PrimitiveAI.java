@@ -15,7 +15,6 @@ import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
 import network.ProtocolToModel;
-import network.client.controller.ClientController;
 import settings.DefaultSettings;
 
 /**
@@ -57,10 +56,7 @@ public class PrimitiveAI extends Thread {
 	private PrimitiveAIInputHandler pI = new PrimitiveAIInputHandler(this);
 	private PrimitiveAIOutputHandler pO = new PrimitiveAIOutputHandler(this);
 
-	// USELESS GAMELOGIC/BOARD ONLY TO SEE CODE
 	private GameLogic gl;
-	@SuppressWarnings("unused")
-	private ClientController cc;
 	private Board board;
 
 	public PrimitiveAI() {
@@ -348,8 +344,8 @@ public class PrimitiveAI extends Thread {
 		do {
 			newRobber = alphabet.charAt(new Random().nextInt(n)) + "";
 		} while (newRobber.equals(robber));
-		
-		//send to output
+
+		// send to output
 		pO.respondMoveRobber(newRobber);
 
 	}
@@ -363,7 +359,7 @@ public class PrimitiveAI extends Thread {
 
 		for (int i = 0; i < 5; i++)
 			sum += getMe().getResourceAmountOf(i);
-		System.out.println(sum+" SUM SUM SUM IS WORKING");
+		System.out.println(sum + " SUM SUM SUM IS WORKING");
 		// loss is half of sum
 		int loss = sum / 2;
 		// losses array
@@ -399,7 +395,7 @@ public class PrimitiveAI extends Thread {
 
 	public void repositionRobber(String location_id) {
 		gl.getBoard().setBandit(location_id);
-		
+
 	}
 
 }
