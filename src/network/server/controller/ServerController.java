@@ -204,6 +204,16 @@ public class ServerController {
 	public void initializeBoard() {
 		generateBoard("A", true);
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
+		int[] firstDiceResults = new int[amountPlayers];
+		int[] currDiceRollResult;
+		for (int i = 0;i <amountPlayers;i++){
+			currDiceRollResult = rollDice();
+			serverOutputHandler.diceRollResult(modelPlayerIdMap.get(i), currDiceRollResult);
+			firstDiceResults[i] = currDiceRollResult[0] + currDiceRollResult[1];
+		}
+		for (int i = 0;i <firstDiceResults.length;i++){
+			//TODO: Sort Array and check for Duplicates
+		}
 
 		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
 		statusUpdate(0); // firstPlayers turn
@@ -727,23 +737,8 @@ public class ServerController {
 		ArrayList<ResourceType> resources = gameLogic.getBoard().getPlayer(modelPlayerID).getResourceCards();
 		int[] result = new int[5];
 		for (ResourceType r : resources) {
-			switch (r) {
-			case WOOD:
-				result[0]++;
-				break;
-			case CLAY:
-				result[1]++;
-				break;
-			case ORE:
-				result[2]++;
-			case SHEEP:
-				result[3]++;
-			case CORN:
-				result[4]++;
-			default:
-				break;
-			}
-
+			int resIndex = DefaultSettings.RESOURCE_VALUES.get(r);
+			result[resIndex]++;
 		}
 		return result;
 	}
@@ -758,17 +753,30 @@ public class ServerController {
 		gameLogic.getBoard().getPlayer(modelID).setResourceCards(resourceCards);
 	}
 
-	private void addToPlayersResource(int playerID, ResourceType resType, int amount) {
+	public void addToPlayersResource(int playerID, ResourceType resType, int amount) {
 		ArrayList<ResourceType> resourceCards = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
 		for (int i = 0; i < amount; i++) {
 			resourceCards.add(resType);
 		}
 		gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
 	}
+	
+	public void addToPlayersResource(int playerID, int[] resources) {
+		ArrayList<ResourceType> resourceCards = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
+	    ResourceType currResType;
+		for (int i = 0; i < resources.length; i++) {
+			currResType = DefaultSettings.RESOURCE_ORDER[i];
+			for (int j = 0;j < resources[i];j++){
+				resourceCards.add(currResType);
+			}
+			
+		}
+		gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
+	}	
 
-	private void subFromPlayersResources(int playerID, int[] costsparam) {
+	public void subFromPlayersResources(int playerID, int[] costsparam) {
 		int[] costs = new int[5];
-		for (int i = 0; i < costsparam.length; i++) {
+		for (int i = 0; i < costsparam.length; i++) { //copy array
 			costs[i] = costsparam[i];
 		}
 		ResourceType currResType;
@@ -778,40 +786,10 @@ public class ServerController {
 			for (int j = list.size() - 1; j >= 0; j--) { // umkehren wegen
 															// remove
 				currResType = list.get(j);
-				switch (currResType) {
-				// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
-				case WOOD:
-					if (costs[0] > 0) {
-						list.remove(j);
-						costs[0]--;
-					}
-					break;
-				case CLAY:
-					if (costs[1] > 0) {
-						list.remove(j);
-						costs[1]--;
-					}
-					break;
-				case ORE:
-					if (costs[2] > 0) {
-						list.remove(j);
-						costs[2]--;
-					}
-					break;
-				case SHEEP:
-					if (costs[3] > 0) {
-						list.remove(j);
-						costs[3]--;
-					}
-					break;
-				case CORN:
-					if (costs[4] > 0) {
-						list.remove(j);
-						costs[4]--;
-					}
-					break;
-				default:
-					break;
+				int resIndex = DefaultSettings.RESOURCE_VALUES.get(currResType);
+				if (costs[resIndex] > 0){
+					list.remove(j);
+					costs[resIndex]--;
 				}
 			}
 

@@ -43,12 +43,12 @@ public final class DefaultSettings {
 	
 	public final static Map<ResourceType,Integer> RESOURCE_VALUES = new HashMap<ResourceType,Integer>(){
 		{
-			put(ResourceType.WOOD,1);
-			put(ResourceType.CLAY,2);
-			put(ResourceType.ORE,3);
-			put(ResourceType.SHEEP,4);
-			put(ResourceType.CORN,5);
-			put(ResourceType.NOTHING,6);
+			put(ResourceType.WOOD,0);
+			put(ResourceType.CLAY,1);
+			put(ResourceType.ORE,2);
+			put(ResourceType.SHEEP,3);
+			put(ResourceType.CORN,4);
+			put(ResourceType.NOTHING,5);
 		}
 	};
 

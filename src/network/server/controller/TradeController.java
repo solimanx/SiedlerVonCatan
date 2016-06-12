@@ -41,19 +41,35 @@ public class TradeController {
 				if (notFound){
 					serverController.serverResponse(modelID, "This player hasn't accepted your supply");
 				} else {
-					//TODO: Rohstoffverteilung programmieren
+					serverController.subFromPlayersResources(modelID,tOf.getSupply());
+					serverController.subFromPlayersResources(partnerModelID, tOf.getDemand());
+					
+					serverController.addToPlayersResource(modelID,tOf.getDemand());
+					serverController.subFromPlayersResources(partnerModelID, tOf.getSupply());
+					
+					serverController.statusUpdate(modelID);
+					serverController.statusUpdate(partnerModelID);
+					
 					tradeOffers.remove(i);
+					
 					serverController.tradeFulfilled(modelID, partnerModelID);
 				}
 				break;
 			}
 		}	
-		// TODO Auto-generated method stub
 		
 	}
 
-	public void cancelTrade(Integer integer, int tradingID) {
-		// TODO Auto-generated method stub
+	public void cancelTrade(int modelID, int tradingID) {
+		TradeOffer currOf;
+		for (int i = 0;i<tradeOffers.size();i++){
+			currOf = tradeOffers.get(i);
+			if (currOf.getTradingID() == tradingID && currOf.getOwnerID() == modelID){
+				tradeOffers.remove(i);
+				serverController.tradeCancelled(modelID, tradingID);
+				break;
+			}
+		}
 		
 	}
 
