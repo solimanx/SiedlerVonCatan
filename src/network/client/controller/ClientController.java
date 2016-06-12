@@ -468,7 +468,7 @@ public class ClientController {
 	 * @param stealFromPlayerId
 	 */
 	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
-		clientOutputHandler.requestSetBandit(x, y, stealFromPlayerId);
+		clientOutputHandler.requestSetBandit(x, y, modelPlayerIdMap.get(stealFromPlayerId));
 
 	}
 
