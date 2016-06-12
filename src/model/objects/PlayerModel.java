@@ -12,7 +12,6 @@ public class PlayerModel {
 	ArrayList<ResourceType> resourceCards;
 	// TODO ArrayList<DevelopmentCard> developmentCards;
 	int victoryPoints = 0;
-	
 
 	// TODO int hiddenVictoryPoints
 	int amountVillages = DefaultSettings.START_AMOUNT_VILLAGES;
@@ -24,10 +23,10 @@ public class PlayerModel {
 	int playerID;
 	Color color;
 	String name;
-	
-	//AI TESTING
+
+	// AI TESTING
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
-	private int[] resources = {0,0,0,0,0};
+	private int[] resources = { 0, 0, 0, 0, 0 };
 
 	public Color getColor() {
 		return color;
@@ -136,45 +135,44 @@ public class PlayerModel {
 	}
 
 	// AI DEBUGGING
-	
+
 	/**
 	 * @return the resources
 	 */
 	public void decrementResources(int[] resources) {
-		if (resources.length==5){
-			for(int i=0; i<5; i++)
-			this.resources[i]-=resources[i];
-		}
-		else
+		if (resources.length == 5) {
+			for (int i = 0; i < 5; i++)
+				this.resources[i] -= resources[i];
+		} else
 			throw new IllegalArgumentException("Invalid resources object");
-		this.resources = resources;
 	}
 
 	/**
-	 * @param resources the resources to set
+	 * @param resources
+	 *            the resources to set
 	 */
 	public void incrementResources(int[] resources) {
-		if (resources.length==5){
-			for(int i=0; i<5; i++)
-			this.resources[i]+=resources[i];
-		}
-		else
+		if (resources.length == 5) {
+			for (int i = 0; i < 5; i++)
+				this.resources[i] += resources[i];
+		} else
 			throw new IllegalArgumentException("Invalid resources object");
-		this.resources = resources;
+
 	}
 
 	/**
 	 * Get all resources
+	 * 
 	 * @return
 	 */
 	public int getResourceAmountOf(int i) {
-		//0=WOOD, 1=CLAY, 2=ORE, 3=SHEEP, 4=CORN
+		// 0=WOOD, 1=CLAY, 2=ORE, 3=SHEEP, 4=CORN
 		return resources[i];
 	}
 
 	public void decrementResourceAt(int i) {
-		resources[i]-=1;
-		
+		resources[i] -= 1;
+
 	}
 
 }
