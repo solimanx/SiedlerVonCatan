@@ -2,6 +2,7 @@ package network.server.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Map;
@@ -189,7 +190,7 @@ public class ServerController {
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
 					pM.getPlayerState(), pM.getVictoryPoints(), resources, modelPlayerIdMap.get(sendToPlayer));
 		} else {
-			int[] resources = { gameLogic.getBoard().getPlayer(playerModelID).getResourceCards().size() };
+			int[] resources = { gameLogic.getBoard().getPlayer(playerModelID).sumResources() };
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
 					pM.getPlayerState(), pM.getVictoryPoints(), resources, modelPlayerIdMap.get(sendToPlayer));
 		}
@@ -207,30 +208,37 @@ public class ServerController {
 		int[] firstDiceResults = new int[amountPlayers];
 		int[] currDiceRollResult;
 		boolean noDuplicates = true;
-		do {
+		ArrayList<Integer> diceRollResults;
+		//untauglich; wird wann anders weitergemacht
+		/*do { 
 			for (int i = 0; i < amountPlayers; i++) {
 				currDiceRollResult = rollDice();
 				serverOutputHandler.diceRollResult(modelPlayerIdMap.get(i), currDiceRollResult);
 				firstDiceResults[i] = currDiceRollResult[0] + currDiceRollResult[1];
 			}
-			// simple insertion sort
-			for (int i = 0; i < firstDiceResults.length; i++) {
-				for (int j = i; j < firstDiceResults.length; j++) {
-					if (firstDiceResults[i] == firstDiceResults[j]) {
+			diceRollResults = new ArrayList<Integer>();
+			for (int i = 0;i < firstDiceResults.length;i++){
+				diceRollResults.add(firstDiceResults[i]);
+			}
+			//check for duplicates
+			for (int i = 0;i<diceRollResults.size();i++){
+				for (int j = i+1;j < diceRollResults.size();j++){
+					if (diceRollResults.get(i).equals(diceRollResults.get(j))){
 						noDuplicates = false;
 						break;
-					} else if (firstDiceResults[i] > firstDiceResults[j]) {
-						int temp = firstDiceResults[j];
-						firstDiceResults[j] = firstDiceResults[i];
-						firstDiceResults[i] = temp;
 					}
 				}
-				if (!noDuplicates) {
-					break;
-				}
 			}
-		} while (!noDuplicates);
 
+		} while (!noDuplicates);
+			Collections.sort(diceRollResults);
+			for (int i = 0;i < firstDiceResults.length;i++){
+				for (int j = 0;j <diceRollResults.size();j++){
+					if (firstDiceResults[i] == diceRollResults.get(j)){
+						playerOrder[i] = firstDiceResults[j]
+					}
+				}
+			}*/
 		this.playerOrder = firstDiceResults;
 
 		gameLogic.getBoard().getPlayer(playerOrder[0]).setPlayerState(PlayerState.BUILDING_VILLAGE);
@@ -242,6 +250,20 @@ public class ServerController {
 		}
 		InitialStreetCounter = 0;
 
+	}
+	
+	private static int[] insertionSort(int[] sortieren) {
+		int temp;
+		for (int i = 1; i < sortieren.length; i++) {
+			temp = sortieren[i];
+			int j = i;
+			while (j > 0 && sortieren[j - 1] > temp) {
+				sortieren[j] = sortieren[j - 1];
+				j--;
+			}
+			sortieren[j] = temp;
+		}
+		return sortieren;
 	}
 
 	public void diceRollRequest(int threadID) {
@@ -257,7 +279,7 @@ public class ServerController {
 				PlayerModel currPM;
 				for (int i = 0; i < amountPlayers; i++) {
 					currPM = gameLogic.getBoard().getPlayer(i);
-					if (currPM.getResourceCards().size() > 7) {
+					if (currPM.sumResources() > 7) {
 						currPM.setPlayerState(PlayerState.DISPENSE_CARDS_ROBBER_LOSS);
 						statusUpdate(i);
 						robberLossCounter++;
@@ -546,22 +568,29 @@ public class ServerController {
 				gameLogic.getBoard().setBandit(location);
 				serverOutputHandler.robberMovement(currentThreadID, location, null);
 			} else {
-				ArrayList<ResourceType> victimResources = gameLogic.getBoard().getPlayer(victimModelID)
-						.getResourceCards();
-				if (victimResources != null) { // steal a random card
-					Random rand = new Random();
-					int stealResource = rand.nextInt(victimResources.size() - 1);
-					ResourceType gainedResource = victimResources.get(stealResource);
-					victimResources.remove(stealResource);
+				PlayerModel victimPM = gameLogic.getBoard().getPlayer(victimModelID);
+				if (victimPM.sumResources() != 0) { // steal a random card
+					int[] victimResources = getPlayerResources(victimModelID);
+					Random rand = new Random();	
+					int stealResource;
+					do {
+						stealResource = rand.nextInt(4); //random resource
+						// while no resource of this type
+					} while (victimResources[stealResource] == 0); 
+					
 					int[] costs = { 0, 0, 0, 0, 0 };
-					costs[DefaultSettings.RESOURCE_VALUES.get(gainedResource)] = 1;
+					costs[stealResource] = 1;
+					subFromPlayersResources(victimModelID,costs);
 					serverOutputHandler.costs(victimThreadID, costs);
+					
 					int modelID = threadPlayerIdMap.get(currentThreadID);
-					addToPlayersResource(modelID, gainedResource, 1);
+					addToPlayersResource(modelID, costs);
 					serverOutputHandler.resourceObtain(currentThreadID, costs);
+					
 					String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
 					gameLogic.getBoard().setBandit(location);
 					serverOutputHandler.robberMovement(currentThreadID, location, victimThreadID);
+					
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
 					statusUpdate(modelID);
 				}
@@ -810,44 +839,29 @@ public class ServerController {
 	}
 
 	private int[] getPlayerResources(int modelPlayerID) {
-		ArrayList<ResourceType> resources = gameLogic.getBoard().getPlayer(modelPlayerID).getResourceCards();
-		int[] result = new int[5];
-		for (ResourceType r : resources) {
-			int resIndex = DefaultSettings.RESOURCE_VALUES.get(r);
-			result[resIndex]++;
-		}
-		return result;
+		return gameLogic.getBoard().getPlayer(modelPlayerID).getResources();
 	}
 
-	private void setPlayersResource(int modelID, int[] resources) {
-		ArrayList<ResourceType> resourceCards = new ArrayList<ResourceType>();
-		for (int i = 0; i < resources.length; i++) {
-			for (int j = 0; j < resources[i]; j++) {
-				resourceCards.add(DefaultSettings.RESOURCE_ORDER[i]);
-			}
-		}
-		gameLogic.getBoard().getPlayer(modelID).setResourceCards(resourceCards);
+	private void setPlayerResources(int modelID, int[] resources) {
+		gameLogic.getBoard().getPlayer(modelID).setResources(resources);
 	}
 
 	public void addToPlayersResource(int playerID, ResourceType resType, int amount) {
-		ArrayList<ResourceType> resourceCards = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
+		int[] resources = getPlayerResources(playerID);
 		for (int i = 0; i < amount; i++) {
-			resourceCards.add(resType);
+			resources[DefaultSettings.RESOURCE_VALUES.get(resType)]++;
 		}
-		gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
+		gameLogic.getBoard().getPlayer(playerID).setResources(resources);
 	}
 
-	public void addToPlayersResource(int playerID, int[] resources) {
-		ArrayList<ResourceType> resourceCards = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
-		ResourceType currResType;
-		for (int i = 0; i < resources.length; i++) {
-			currResType = DefaultSettings.RESOURCE_ORDER[i];
-			for (int j = 0; j < resources[i]; j++) {
-				resourceCards.add(currResType);
+	public void addToPlayersResource(int playerID, int[] resourcesToAdd) {
+		int[] resources = getPlayerResources(playerID);
+		for (int i = 0; i < resourcesToAdd.length; i++) {
+			for (int j = 0; j < resourcesToAdd[i]; j++) {
+				resources[i]++;
 			}
-
 		}
-		gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
+		gameLogic.getBoard().getPlayer(playerID).setResources(resources);
 	}
 
 	public void subFromPlayersResources(int playerID, int[] costsparam) {
@@ -855,22 +869,12 @@ public class ServerController {
 		for (int i = 0; i < costsparam.length; i++) { // copy array
 			costs[i] = costsparam[i];
 		}
-		ResourceType currResType;
-		ArrayList<ResourceType> list = new ArrayList<ResourceType>();
-		list = gameLogic.getBoard().getPlayer(playerID).getResourceCards();
+		int[] pResources = getPlayerResources(playerID);
 		for (int i = 0; i < costs.length; i++) {
-			for (int j = list.size() - 1; j >= 0; j--) { // umkehren wegen
-															// remove
-				currResType = list.get(j);
-				int resIndex = DefaultSettings.RESOURCE_VALUES.get(currResType);
-				if (costs[resIndex] > 0) {
-					list.remove(j);
-					costs[resIndex]--;
-				}
-			}
+			pResources[i] = pResources[i] - costs[i];
 
 		}
-		gameLogic.getBoard().getPlayer(playerID).setResourceCards(list);
+		gameLogic.getBoard().getPlayer(playerID).setResources(pResources);
 	}
 
 	public int getAmountPlayers() {
