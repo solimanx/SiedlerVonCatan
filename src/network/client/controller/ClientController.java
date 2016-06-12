@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
+
 import com.sun.media.jfxmedia.logging.Logger;
 
 import enums.Color;
@@ -21,6 +23,7 @@ import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
+import network.client.view.GameViewController;
 import network.client.view.PlayerStatusGUIUpdate;
 import protocol.object.ProtocolResource;
 import settings.DefaultSettings;
@@ -108,7 +111,7 @@ public class ClientController {
 	public void welcome(int playerID) {
 		// playerID is 42,35, etc.
 		setOwnPlayerID(playerID);
-		//add myself to hashmap
+		// add myself to hashmap
 		threadPlayerIdMap.put(playerID, 0);
 		modelPlayerIdMap.put(0, playerID);
 		System.out.println("Handshake complete!");
@@ -209,7 +212,7 @@ public class ClientController {
 			}
 			pM.setPlayerState(status);
 			pM.setVictoryPoints(victoryPoints);
-			//TODO trace this modelID = 0,1,2,3
+			// TODO this should be done ONCE
 			addToPlayersResource(modelID, resources);
 
 			if (viewController.getGameViewController() != null) {
@@ -331,9 +334,9 @@ public class ClientController {
 		if (playerID == 0) {
 			// safety check
 			if (resourcesGained.length == 5) {
-					//playerID := 0,1,2,3
-					gameLogic.getBoard().getPlayer(playerID).incrementResources(resourcesGained);
-				
+				// playerID := 0,1,2,3
+				gameLogic.getBoard().getPlayer(playerID).incrementResources(resourcesGained);
+
 			} else {
 				throw new IllegalArgumentException("Error at adding player resources to player");
 			}
@@ -341,7 +344,7 @@ public class ClientController {
 		}
 		// other players
 		else {
-		
+
 			// safety check
 			if (resourcesGained.length == 1) {
 				gameLogic.getBoard().getPlayer(playerID).setHiddenResources(resourcesGained[0]);
@@ -423,11 +426,15 @@ public class ClientController {
 	 */
 	public void resourceObtain(int playerID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(playerID);
-
-		// TODO Do not call setResourceCards here! (this would _set_ the
-		// resource cards of player, not add!)
-		// viewController.getGameViewController().setResourceCards(modelID,
-		// resources);
+		// if self
+		if(modelID==0){
+			gameLogic.getBoard().getPlayer(modelID).incrementResources(resources);
+		}
+		else{
+			gameLogic.getBoard().getPlayer(modelID).incrementResources(resources);
+		}
+		//Happens in status update
+		//viewController.getGameViewController().setResourceCards(modelID, resources);
 
 	}
 

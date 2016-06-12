@@ -206,5 +206,13 @@ public class PlayerModel {
 	public void setHiddenResources(Integer hiddenResources) {
 		this.hiddenResources = hiddenResources;
 	}
+	
+	public void incrementHiddenResources(int increment){
+		this.hiddenResources+=increment;
+	}
+	
+	public void decrementHiddenResources(int decrement){
+		this.hiddenResources-=decrement;
+	}
 
 }
