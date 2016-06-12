@@ -199,7 +199,9 @@ public class GameViewController implements Initializable {
 	 */
 	public void startScene(Stage stage) {
 		this.stage = stage;
-		board.getChildren().addAll(factory.getViewBoard(stage));
+		//board.getChildren().addAll(factory.getViewBoard(stage));
+		board.getChildren().add(factory.getViewBoard(stage));
+		//board = factory.getViewBoard(stage);
 		board.toBack();
 		viewController.getClientController().initializeGUI();
 
@@ -630,9 +632,11 @@ public class GameViewController implements Initializable {
 	 */
 	private class ViewBoardFactory {
 		private Pane boardPane;
-		private List<Shape> figures = new LinkedList<Shape>();
+		private List<Shape> streetFigures = new LinkedList<Shape>();
+		private List<Shape> fieldFigures = new LinkedList<Shape>();
+		private List<Shape> villageFigures = new LinkedList<Shape>();
 
-		public List<Shape> getViewBoard(Stage stage) {
+		public Pane getViewBoard(Stage stage) {
 			boardPane = new Pane();
 			boardCenter[0] = stage.getWidth() / 2;
 			boardCenter[1] = stage.getHeight() / 2;
@@ -642,9 +646,11 @@ public class GameViewController implements Initializable {
 			calculateEdgeCorners();
 			initBoard();
 
-			boardPane.getChildren().addAll(0, figures);
+			boardPane.getChildren().addAll(0, villageFigures);
+			boardPane.getChildren().addAll(0, streetFigures);
+			boardPane.getChildren().addAll(0, fieldFigures);
 
-			return figures;
+			return boardPane;
 		}
 
 		private void initBoard() {
@@ -659,7 +665,7 @@ public class GameViewController implements Initializable {
 						hexagon.setOnMouseClicked(e -> {
 							fieldClick(resourceCoordinates);
 						});
-						figures.add(0, hexagon);
+						fieldFigures.add(0, hexagon);
 						fields[i][j] = hexagon;
 						for (int l = 0; l < 3; l++) {
 							if (edgeCoordinates[i][j][l][0] > 0) {
@@ -675,7 +681,7 @@ public class GameViewController implements Initializable {
 									streetClick(streetCoordinates);
 								});
 
-								figures.add(street);
+								streetFigures.add(street);
 							}
 						}
 						for (int k = 0; k < 2; k++) {
@@ -691,7 +697,7 @@ public class GameViewController implements Initializable {
 									villageClick(villageCoordinates);
 								});
 								village.toFront();
-								figures.add(village);
+								villageFigures.add(village);
 							}
 						}
 					}
@@ -700,7 +706,7 @@ public class GameViewController implements Initializable {
 			bandit = drawBandit();
 			bandit.setOpacity(0);
 			bandit.toFront();
-			figures.add(bandit);
+			fieldFigures.add(bandit);
 
 		}
 
