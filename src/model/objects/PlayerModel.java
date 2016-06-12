@@ -9,7 +9,8 @@ import enums.PlayerState;
 import settings.DefaultSettings;
 
 public class PlayerModel {
-	ArrayList<ResourceType> resourceCards;
+	// moved to line 30: private int[] resources
+	// ArrayList<ResourceType> resourceCards;
 	// TODO ArrayList<DevelopmentCard> developmentCards;
 	int victoryPoints = 0;
 
@@ -24,7 +25,7 @@ public class PlayerModel {
 	Color color;
 	String name;
 
-	// AI TESTING
+	
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
 	private int[] resources = { 0, 0, 0, 0, 0 };
 
@@ -47,7 +48,7 @@ public class PlayerModel {
 	// every Player gets own id (0..3)
 	public PlayerModel(int id) {
 		this.playerID = id;
-		this.resourceCards = new ArrayList<ResourceType>();
+		//this.resourceCards = new ArrayList<ResourceType>();
 	}
 
 	public int getID() {
@@ -74,8 +75,10 @@ public class PlayerModel {
 		amountCities--;
 	}
 
+	@Deprecated
 	public ArrayList<ResourceType> getResourceCards() {
-		return resourceCards;
+		return null;
+		//return resourceCards;
 	}
 
 	public int getAmountCities() {
@@ -118,8 +121,9 @@ public class PlayerModel {
 		this.playerState = playerState;
 	}
 
+	@Deprecated
 	public void setResourceCards(ArrayList<ResourceType> resourceCards) {
-		this.resourceCards = resourceCards;
+		//this.resourceCards = resourceCards;
 	}
 
 	public void setAmountVillages(int amountVillages) {
