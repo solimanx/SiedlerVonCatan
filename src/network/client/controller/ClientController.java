@@ -201,7 +201,6 @@ public class ClientController {
 			pM.setVictoryPoints(victoryPoints);
 			addToPlayersResource(modelID, resources);
 			
-			//hier bekommt dann der Player doch gar nicht die ganzen Resourcen???
 			if (viewController.getGameViewController() != null) {
 				Platform.runLater(new PlayerStatusGUIUpdate(modelID, viewController.getGameViewController(),
 						victoryPoints, status, resources));
@@ -384,7 +383,7 @@ public class ClientController {
 	public void resourceObtain(int playerID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		
-		//TODO Do not call setResourceCards! (this would _set_ the resource cards of player, not add!)
+		//TODO Do not call setResourceCards here! (this would _set_ the resource cards of player, not add!)
 		//viewController.getGameViewController().setResourceCards(modelID, resources);
 
 	}

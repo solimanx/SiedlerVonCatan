@@ -586,7 +586,7 @@ public class GameViewController implements Initializable {
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
 		try {
-			root = loader.load(getClass().getResource("/application/network/client/view/robberview/GiveResources.fxml").openStream());
+			root = loader.load(getClass().getResource("/network/client/view/robberview/GiveResources.fxml").openStream());
 			Scene scene = new Scene(root);
 			Stage robberStage = new Stage();
 			robberStage.setScene(scene);
