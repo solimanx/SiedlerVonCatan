@@ -61,11 +61,6 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	}
 
 	@Override
-	@Deprecated
-	protected void handle(ProtocolClientReady clientReady) {
-	}
-
-	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
 		// ProtocolBoard object retrieved (Karte: ...}
 		ProtocolBoard pBoard = gameStarted.getBoard();
@@ -122,12 +117,6 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolPlayerProfile playerProfile) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		// TODO Auto-generated method stub
 
@@ -160,7 +149,22 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolBuild build) {
-		// TODO Auto-generated method stub
+		ProtocolBuilding building = build.getBuilding();
+		int playerID = building.getPlayerID();
+		int[] coords;
+		if (building.getType().equals("Dorf")) {
+			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			ai.buildVillage(coords[0], coords[1], coords[2], playerID);
+		} else if (building.getType().equals("Straße")) {
+			coords = ProtocolToModel.getEdgeCoordinates(building.getID());
+			ai.buildRoad(coords[0], coords[1], coords[2], playerID);
+
+		} else if (building.getType().equals("Stadt")) {
+			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			// clientController.buildCity(coords[0], coords[1], coords[2],
+			// playerID);
+		} else
+			throw new IllegalArgumentException("Building type not defined");
 
 	}
 
@@ -183,9 +187,16 @@ public class PrimitiveAIInputHandler extends InputHandler {
 			if (statusUpdate.getPlayer().getStatus().equals(PlayerState.WAITING_FOR_GAMESTART)) {
 				ai.setStarted(true);
 			}
-			// if it's me and i have to build a village
-			else if (statusUpdate.getPlayer().getStatus().equals(PlayerState.BUILDING_VILLAGE)) {
-				// TODO TO BE CONTINUED
+			// if it's me and i have to build initial villages
+			else if (statusUpdate.getPlayer().getStatus().equals(PlayerState.BUILDING_VILLAGE)
+					&& ai.getSecondVillageLocation() == null) {
+				ai.initialVillage();
+			}
+
+			// if it's me and i have to build initial roads
+			else if (statusUpdate.getPlayer().getStatus().equals(PlayerState.BUILDING_STREET)
+					&& ai.getSecondRoadLocation() == null) {
+				ai.initialRoad();
 			}
 
 		}
@@ -364,6 +375,18 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
 		// TODO Auto-generated method stub
 
+	}
+	// UNUSED
+
+	@Deprecated
+	@Override
+	protected void handle(ProtocolPlayerProfile playerProfile) {
+
+	}
+
+	@Override
+	@Deprecated
+	protected void handle(ProtocolClientReady clientReady) {
 	}
 
 }

@@ -3,11 +3,14 @@ package ai;
 import java.io.IOException;
 
 import enums.Color;
+import network.ModelToProtocol;
 import parsing.Parser;
 import parsing.Response;
+import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
+import protocol.serverinstructions.ProtocolBuild;
 
 public class PrimitiveAIOutputHandler {
 	// To get the first available color
@@ -72,6 +75,36 @@ public class PrimitiveAIOutputHandler {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void requestBuildInitialVillage(int j, int i, int k) {
+		String location = ModelToProtocol.getCornerID(j, i, k);
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Dorf", location);
+
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void requestBuildInitialRoad(int x, int y, int dir) {
+		String location = ModelToProtocol.getEdgeID(x, y, dir);
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", location);
+
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

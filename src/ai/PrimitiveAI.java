@@ -69,7 +69,7 @@ public class PrimitiveAI extends Thread {
 	private Board board;
 
 	public PrimitiveAI() {
-		System.out.println(DefaultSettings.getCurrentTime()+" AI started.");
+		System.out.println(DefaultSettings.getCurrentTime() + " AI started.");
 		this.board = new Board();
 		this.gl = new GameLogic(board);
 		this.start();
@@ -84,7 +84,7 @@ public class PrimitiveAI extends Thread {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				scanning = false;
-				System.out.println(DefaultSettings.getCurrentTime()+" AI connected to server.");
+				System.out.println(DefaultSettings.getCurrentTime() + " AI connected to server.");
 				read();
 			} catch (IOException e) {
 				System.out.println("Connection to server failed." + " Attempt:" + connectionTry + 1);
@@ -116,7 +116,7 @@ public class PrimitiveAI extends Thread {
 	 * Builds a village at the first legal empty location, then attaches a roads
 	 * to it, then repeats it.
 	 */
-	public void initialRound() {
+	public void initialVillage() {
 		int radius = DefaultSettings.BOARD_RADIUS;
 
 		// VILLAGE
@@ -133,14 +133,18 @@ public class PrimitiveAI extends Thread {
 						} else {
 							secondVillageLocation = new int[] { j, i, k };
 						}
-						// TODO cc.requestBuildInitialVillage(j, i, k);
+						pO.requestBuildInitialVillage(j, i, k);
+						System.out.println("Building at " + j + " " + i + " " + k);
 						break outerloop;
 
 					}
 				}
 			}
 		}
-		// Build road at first village location
+
+	}
+
+	public void initialRoad() {
 		int x, y, dir;
 		if (secondVillageLocation == null) {
 			x = firstVillageLocation[0];
@@ -149,28 +153,28 @@ public class PrimitiveAI extends Thread {
 
 			// find first non null road
 			if (dir == 0) {
-				if (gl.getBoard().getEdgeAt(x, y - 1, 2) != null) {
-					// TODO cc.requestBuildInitialRoad(x,y,dir);
+				if (gl.checkBuildInitialStreet(x, y - 1, 2, ID)) {
+					pO.requestBuildInitialRoad(x, y, dir);
 					firstRoadLocation = new int[] { x, y - 1, 2 };
-				} else if (gl.getBoard().getEdgeAt(x, y, 1) != null) {
-					// TODO cc.requestBuildInitialRoad(x,y,dir);
+				} else if (gl.checkBuildInitialStreet(x, y, 1, ID)) {
+					pO.requestBuildInitialRoad(x, y, dir);
 					firstRoadLocation = new int[] { x, y, 1 };
-				} else if (gl.getBoard().getEdgeAt(x, y, dir) != null) {
-					// TODO cc.requestBuildInitialRoad(x,y,dir);
+				} else if (gl.checkBuildInitialStreet(x, y, dir, ID)) {
+					pO.requestBuildInitialRoad(x, y, dir);
 					firstRoadLocation = new int[] { x, y, dir };
 				} else {
 					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
 				}
 			} else if (dir == 1) {
-				if (gl.getBoard().getEdgeAt(x, y + 1, 0) != null) {
-					// TODO cc.requestBuildInitialRoad(x,y+1,0);
-					secondRoadLocation = new int[] { x, y + 1, 0 };
-				} else if (gl.getBoard().getEdgeAt(x - 1, y - 1, 2) != null) {
-					// TODO cc.requestBuildInitialRoad(x-1,y-1,2);
-					secondRoadLocation = new int[] { x - 1, y - 1, 2 };
-				} else if (gl.getBoard().getEdgeAt(x - 1, y - 1, dir) != null) {
-					// TODO cc.requestBuildInitialRoad(x-1,y-1,dir);
-					secondRoadLocation = new int[] { x - 1, y - 1, dir };
+				if (gl.checkBuildInitialStreet(x, y + 1, 0, ID)) {
+					pO.requestBuildInitialRoad(x, y + 1, 0);
+					firstRoadLocation = new int[] { x, y + 1, 0 };
+				} else if (gl.checkBuildInitialStreet(x - 1, y - 1, 2, ID)) {
+					pO.requestBuildInitialRoad(x - 1, y - 1, 2);
+					firstRoadLocation = new int[] { x - 1, y - 1, 2 };
+				} else if (gl.checkBuildInitialStreet(x - 1, y - 1, dir, ID)) {
+					pO.requestBuildInitialRoad(x - 1, y - 1, dir);
+					firstRoadLocation = new int[] { x - 1, y - 1, dir };
 				} else {
 					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
 				}
@@ -179,31 +183,61 @@ public class PrimitiveAI extends Thread {
 				throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
 			}
 
-		}
+		} else {
+			x = secondVillageLocation[0];
+			y = secondVillageLocation[1];
+			dir = secondVillageLocation[2];
 
-		// // ROAD
-		// Boolean roadBuilt = false;
-		// Edge[] projectingEdges;
-		// if (secondVillageLocation == null) {
-		// projectingEdges =
-		// gl.getBoard().getProjectingEdges(firstVillageLocation[0],
-		// firstVillageLocation[1],
-		// firstVillageLocation[2]);
-		// } else {
-		// projectingEdges =
-		// gl.getBoard().getProjectingEdges(secondVillageLocation[0],
-		// secondVillageLocation[1],
-		// secondVillageLocation[2]);
-		// }
-		//
-		// if (projectingEdges != null) {
-		// for (int i = 0; i < projectingEdges.length; i++) {
-		// if (projectingEdges[i] != null && !roadBuilt) {
-		//
-		// }
-		//
-		// }
-		// }
+			// find first non null road
+			if (dir == 0) {
+				if (gl.checkBuildInitialStreet(x, y - 1, 2, ID)) {
+					secondRoadLocation = new int[] { x, y - 1, 2 };
+					pO.requestBuildInitialRoad(x, y, dir);
+				} else if (gl.checkBuildInitialStreet(x, y, 1, ID)) {
+					secondRoadLocation = new int[] { x, y, 1 };
+					pO.requestBuildInitialRoad(x, y, dir);
+				} else if (gl.checkBuildInitialStreet(x, y, dir, ID)) {
+					secondRoadLocation = new int[] { x, y, dir };
+					pO.requestBuildInitialRoad(x, y, dir);
+				} else {
+					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
+				}
+			} else if (dir == 1) {
+				if (gl.checkBuildInitialStreet(x, y + 1, 0, ID)) {
+					secondRoadLocation = new int[] { x, y + 1, 0 };
+					pO.requestBuildInitialRoad(x, y + 1, 0);
+				} else if (gl.checkBuildInitialStreet(x - 1, y - 1, 2, ID)) {
+					secondRoadLocation = new int[] { x - 1, y - 1, 2 };
+					pO.requestBuildInitialRoad(x - 1, y - 1, 2);
+				} else if (gl.checkBuildInitialStreet(x - 1, y - 1, dir, ID)) {
+					secondRoadLocation = new int[] { x - 1, y - 1, dir };
+					pO.requestBuildInitialRoad(x - 1, y - 1, dir);
+				} else {
+					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
+				}
+
+			} else {
+				throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
+			}
+		}
+	}
+
+	public void buildVillage(int x, int y, int dir, int playerID) {
+		Corner c = gl.getBoard().getCornerAt(x, y, dir);
+		c.setStatus(enums.CornerStatus.VILLAGE);
+		c.setOwnerID(playerID);
+		Corner[] neighbors = gl.getBoard().getAdjacentCorners(x, y, dir);
+		for (int i = 0; i < neighbors.length; i++) {
+			if (neighbors[i] != null) {
+				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+			}
+		}
+	}
+
+	public void buildRoad(int i, int j, int k, int playerID) {
+		Edge e = gl.getBoard().getEdgeAt(i, j, k);
+		e.setHasStreet(true);
+		e.setOwnedByPlayer(gl.getBoard().getPlayer(playerID).getID());
 
 	}
 
@@ -247,6 +281,22 @@ public class PrimitiveAI extends Thread {
 
 	public void setStarted(boolean started) {
 		this.started = started;
+	}
+
+	public int[] getFirstVillageLocation() {
+		return firstVillageLocation;
+	}
+
+	public int[] getSecondVillageLocation() {
+		return secondVillageLocation;
+	}
+
+	public int[] getFirstRoadLocation() {
+		return firstRoadLocation;
+	}
+
+	public int[] getSecondRoadLocation() {
+		return secondRoadLocation;
 	}
 
 	public void initBoard(Field[] fields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
