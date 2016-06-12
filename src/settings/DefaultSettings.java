@@ -2,6 +2,8 @@ package settings;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 import enums.ResourceType;
 
@@ -38,6 +40,17 @@ public final class DefaultSettings {
 
 	public final static ResourceType[] RESOURCE_ORDER = { ResourceType.WOOD, ResourceType.CLAY, ResourceType.ORE,
 			ResourceType.SHEEP, ResourceType.CORN, ResourceType.NOTHING };
+	
+	public final static Map<ResourceType,Integer> RESOURCE_VALUES = new HashMap<ResourceType,Integer>(){
+		{
+			put(ResourceType.WOOD,1);
+			put(ResourceType.CLAY,2);
+			put(ResourceType.ORE,3);
+			put(ResourceType.SHEEP,4);
+			put(ResourceType.CORN,5);
+			put(ResourceType.NOTHING,6);
+		}
+	};
 
 	public final static int[] DICE_NUMBERS = { 2, 5, 10, 8, 4, 11, 12, 9, 10, 8, 3, 6, 4, 9, 11, 3, 6, 5 };
 

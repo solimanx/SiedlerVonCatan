@@ -45,10 +45,12 @@ public class ServerController {
 	private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
 	private int currentPlayer;
 	private int robberLossCounter;
+	private TradeController tradeController;
 
 	public ServerController() {
 		Board board = new Board();
 		this.gameLogic = new GameLogic(board);
+		this.tradeController = new TradeController(this);
 		// ModelPlayerID => threadID
 		modelPlayerIdMap = new HashMap<Integer, Integer>();
 
@@ -330,12 +332,22 @@ public class ServerController {
 					serverOutputHandler.buildStreet(x, y, dir, threadID);
 					serverOutputHandler.costs(threadID, DefaultSettings.STREET_BUILD_COST);
 					statusUpdate(modelID);
+					checkLongestTradingRoute(modelID);
 				} else {
 					error(modelID, "Kein Straßenbau möglich");
 				}
 			}
 		}
 
+	}
+
+	/**
+	 * Checks if a player has longest Trading Route
+	 * @param modelID
+	 */
+	private void checkLongestTradingRoute(int modelID) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**
@@ -438,20 +450,6 @@ public class ServerController {
 		}
 	}
 
-	public void requestSetBandit(int x, int y, int stealFromPlayerID, int playerID) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	public void setBandit(int x, int y, int playerID) {
-		if (gameLogic.checkSetBandit(x, y, playerID)) {
-			// board.setBandit(board.getFieldAt(x, y));
-
-			// viewController.getMainViewController().setBandit(x, y); // Debug
-		}
-
-	}
 
 	/**
 	 * Is called by View when ownPlayer has finished his turn
@@ -521,18 +519,59 @@ public class ServerController {
 				    int stealResource = rand.nextInt(victimResources.size() - 1);
 				    ResourceType gainedResource = victimResources.get(stealResource);
 				    victimResources.remove(stealResource);
-				    //serverOutputHandler.costs(victimThreadID, costs);
+				    int[] costs = {0,0,0,0,0};
+				    costs[DefaultSettings.RESOURCE_VALUES.get(gainedResource)] = 1;
+				    serverOutputHandler.costs(victimThreadID, costs);
 				    int modelID = threadPlayerIdMap.get(currentThreadID);
 				    addToPlayersResource(modelID,gainedResource,1);
-				    //serverOutputHandler.resourceObtain(currentThreadID, obtain);
+				    serverOutputHandler.resourceObtain(currentThreadID, costs);
 				    String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x,y));
 					gameLogic.getBoard().setBandit(location);
 				    serverOutputHandler.robberMovement(currentThreadID,location,victimThreadID);
+				    gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
+				    statusUpdate(modelID);
 				}
 			}
 
 		}
 
+	}
+	
+	/**
+	 * 
+	 * Basic methods for trading
+	 */
+	
+	public void clientOffersTrade(int threadID,int[] supply,int[] demand){
+		tradeController.clientOffersTrade(threadPlayerIdMap.get(threadID),supply,demand);
+	}
+	
+	public void sendClientOffer(int modelID,int tradingID,int[] supply,int[] demand){
+		serverOutputHandler.protocolTradeIsRequested(modelPlayerIdMap.get(modelID), tradingID, supply, demand);
+	}
+	
+	public void acceptTrade(int threadID,int tradingID){
+		tradeController.acceptTrade(threadPlayerIdMap.get(threadID),tradingID);
+	}
+	
+	public void tradeAccepted(int modelID,int tradingID){
+		serverOutputHandler.tradeConfirmation(modelPlayerIdMap.get(modelID), tradingID);
+	}
+	
+	public void fulfillTrade(int threadID,int tradingID,int partnerThreadID){
+		tradeController.fulfillTrade(threadPlayerIdMap.get(threadID),tradingID,threadPlayerIdMap.get(partnerThreadID));
+	}
+	
+	public void tradeFulfilled(int modelID,int partnerModelID){
+		serverOutputHandler.tradeIsCompleted(modelPlayerIdMap.get(modelID), modelPlayerIdMap.get(partnerModelID));
+	}
+	
+	public void cancelTrade(int threadID,int tradingID){
+		tradeController.cancelTrade(threadPlayerIdMap.get(threadID),tradingID);
+	}
+	
+	public void tradeCancelled(int modelID,int tradingID){
+		serverOutputHandler.tradeIsCanceled(modelPlayerIdMap.get(modelID), tradingID);
 	}
 	
 
