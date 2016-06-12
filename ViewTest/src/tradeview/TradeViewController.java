@@ -3,66 +3,115 @@ package tradeview;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.TableView;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class TradeViewController {
 
     @FXML
-    private Spinner<?> getWood;
+    private Button placeOfferButton;
 
     @FXML
-    private Spinner<?> getClay;
+    private ListView<?> offerList;
 
     @FXML
-    private Spinner<?> getWool;
+    private Button tradeButton;
+    
+	private Spinner<Integer> giveWoodSpinner;
+	private Spinner<Integer> giveClaySpinner;
+	private Spinner<Integer> giveWoolSpinner;
+	private Spinner<Integer> giveCornSpinner;
+	private Spinner<Integer> giveOreSpinner;
+	private Spinner<Integer> getWoodSpinner;
+	private Spinner<Integer> getClaySpinner;
+	private Spinner<Integer> getWoolSpinner;
+	private Spinner<Integer> getCornSpinner;
+	private Spinner<Integer> getOreSpinner;
+	private Integer[][] result = new Integer[2][5];
 
-    @FXML
-    private Spinner<?> getCorn;
+	@FXML
+	private GridPane grid;
 
-    @FXML
-    private Spinner<?> getOre;
+	/**
+	 * Initializes the Trade window with spinners
+	 * @param resources
+	 */
+	public void init(int[] resources) {
+		giveWoodSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[0], 0));
+		giveClaySpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[1], 0));
+		giveWoolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[3], 0));
+		giveCornSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[4], 0));
+		giveOreSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[2], 0));
+		getWoodSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0, 0));
+		getClaySpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0, 0));
+		getWoolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0, 0));
+		getCornSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0, 0));
+		getOreSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0, 0));
 
-    @FXML
-    private Spinner<?> giveWood;
+		giveWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[0][0] = newVal;
+		});
 
-    @FXML
-    private Spinner<?> giveClay;
+		giveClaySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[0][1] = newVal;
+		});
 
-    @FXML
-    private Spinner<?> giveWool;
+		giveWoolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[0][3] = newVal;
+		});
 
-    @FXML
-    private Spinner<?> giveCorn;
+		giveCornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[0][4] = newVal;
+		});
 
-    @FXML
-    private Spinner<?> giveOre;
+		giveOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[0][2] = newVal;
+		});
+		
+		getWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[1][0] = newVal;
+		});
 
-    @FXML
-    private Button offerButton;
+		getClaySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[1][1] = newVal;
+		});
 
-    @FXML
-    private TableView<?> offerTable;
+		getWoolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[1][3] = newVal;
+		});
 
-    @FXML
-    private Button acceptButton;
+		getCornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[1][4] = newVal;
+		});
 
-    @FXML
-    private Button cancelButton;
+		getOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[1][2] = newVal;
+		});
 
+		grid.add(giveWoodSpinner, 1, 1);
+		grid.add(giveClaySpinner, 1, 2);
+		grid.add(giveWoolSpinner, 1, 3);
+		grid.add(giveCornSpinner, 1, 4);
+		grid.add(giveOreSpinner, 1, 5);
+		grid.add(getWoodSpinner, 2, 1);
+		grid.add(getClaySpinner, 2, 2);
+		grid.add(getWoolSpinner, 2, 3);
+		grid.add(getCornSpinner, 2, 4);
+		grid.add(getOreSpinner, 2, 5);
+	}
+	
     @FXML
-    void handleAcceptButton(ActionEvent event) {
+    void handlePlaceOfferButton(ActionEvent event) {
 
     }
 
     @FXML
-    void handleCancelButton(ActionEvent event) {
-
+    void handleTradeButton(ActionEvent event) {
+    	Stage stage = (Stage) tradeButton.getScene().getWindow();
+    	stage.close();
     }
-
-    @FXML
-    void handleOfferButton(ActionEvent event) {
-
-    }
-
+	
 }

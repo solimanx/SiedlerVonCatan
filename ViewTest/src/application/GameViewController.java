@@ -207,6 +207,10 @@ public class GameViewController implements Initializable {
 		messageInput.clear();
 //		viewController.getClientController().chatSendMessage(message);
 	}
+	
+	public void initPlayer(int playerID, String playerName, enums.Color playerColor){
+		
+	}
 
 	public void setPlayerStatus(int playerID, PlayerState state){
 		switch (playerIDtoViewPosition.get(playerID)) {

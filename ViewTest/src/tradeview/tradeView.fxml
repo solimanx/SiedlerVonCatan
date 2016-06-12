@@ -3,10 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -14,14 +12,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fillWidth="false" prefHeight="561.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tradeview.TradeViewController">
+<VBox xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tradeview.TradeViewController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
          <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Label text="Handeln">
+            <Label text="Trading">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -31,20 +29,11 @@
             <Insets />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" prefHeight="23.0" prefWidth="200.0">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <children>
-            <Label text="Handel anbieten:" />
-         </children>
-      </HBox>
-      <GridPane prefHeight="274.0" prefWidth="317.0">
+      <GridPane fx:id="grid">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.1061553955078" minWidth="0.0" prefWidth="70.22358703613281" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.179967880249" minWidth="0.0" prefWidth="87.77641296386719" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="530.1511993408203" minWidth="10.0" prefWidth="78.31367492675781" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="530.1511993408203" minWidth="10.0" prefWidth="73.64019775390625" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -56,80 +45,55 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Wood" GridPane.rowIndex="1" />
-            <Label layoutX="10.0" layoutY="38.0" text="Clay" GridPane.rowIndex="2" />
-            <Label layoutX="10.0" layoutY="62.0" text="Wool" GridPane.rowIndex="3" />
-            <Label layoutX="10.0" layoutY="86.0" text="Ore" GridPane.rowIndex="5" />
-            <Label layoutX="10.0" layoutY="14.0" text="Corn" GridPane.rowIndex="4" />
-            <Label layoutX="10.0" layoutY="38.0" text="Get" GridPane.columnIndex="1">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></Label>
-            <Label layoutX="108.0" layoutY="14.0" text="Give" GridPane.columnIndex="2" />
-            <Spinner fx:id="getWood" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Spinner fx:id="getClay" layoutX="108.0" layoutY="25.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Spinner fx:id="getWool" layoutX="108.0" layoutY="89.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Spinner fx:id="getCorn" layoutX="108.0" layoutY="126.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Spinner fx:id="getOre" layoutX="108.0" layoutY="163.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Spinner fx:id="giveWood" layoutX="108.0" layoutY="200.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Spinner fx:id="giveClay" layoutX="417.0" layoutY="52.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Spinner fx:id="giveWool" layoutX="417.0" layoutY="89.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Spinner fx:id="giveCorn" layoutX="417.0" layoutY="126.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Spinner fx:id="giveOre" layoutX="417.0" layoutY="163.0" prefHeight="20.0" prefWidth="56.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="309.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+            <Label text="Give" GridPane.columnIndex="1" />
+            <Label text="Get" GridPane.columnIndex="2" />
+            <Label text="Wood" GridPane.rowIndex="1">
                <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets right="10.0" />
                </padding>
-               <children>
-                  <Button fx:id="offerButton" mnemonicParsing="false" onAction="#handleOfferButton" text="Offer">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+            </Label>
+            <Label text="Clay" GridPane.rowIndex="2">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label text="Wool" GridPane.rowIndex="3">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label text="Corn" GridPane.rowIndex="4">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label text="Ore" GridPane.rowIndex="5">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
          </children>
-         <VBox.margin>
-            <Insets left="50.0" />
-         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+         </padding>
       </GridPane>
-      <Separator prefHeight="27.0" prefWidth="714.0" />
-      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="47.0" prefHeight="23.0" prefWidth="200.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="500.0" prefHeight="50.0" prefWidth="200.0">
          <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Label text="Handel annehmen:" />
+            <Button fx:id="placeOfferButton" mnemonicParsing="false" onAction="#handlePlaceOfferButton" text="Place offer" />
          </children>
       </HBox>
-      <TableView fx:id="offerTable" prefHeight="200.0" prefWidth="709.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="221.0" text="Spieler" />
-            <TableColumn prefWidth="185.0" text="Give" />
-            <TableColumn minWidth="0.0" prefWidth="162.0" text="Get" />
-        </columns>
-      </TableView>
-      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="311.0" prefHeight="23.0" prefWidth="200.0">
+      <Separator prefWidth="200.0" />
+      <ListView fx:id="offerList" prefHeight="200.0" prefWidth="200.0" />
+      <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0">
          <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="309.0" prefHeight="23.0" prefWidth="200.0">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#handleAcceptButton" text="Accept" />
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
+            <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Trade" />
          </children>
       </HBox>
    </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
 </VBox>
