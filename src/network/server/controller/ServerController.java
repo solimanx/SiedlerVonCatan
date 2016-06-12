@@ -46,6 +46,7 @@ public class ServerController {
 	private int currentPlayer;
 	private int robberLossCounter;
 	private TradeController tradeController;
+	private int[] playerOrder;
 
 	public ServerController() {
 		Board board = new Board();
@@ -206,21 +207,41 @@ public class ServerController {
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 		int[] firstDiceResults = new int[amountPlayers];
 		int[] currDiceRollResult;
+		boolean noDuplicates = true;
+		do {
 		for (int i = 0;i <amountPlayers;i++){
 			currDiceRollResult = rollDice();
 			serverOutputHandler.diceRollResult(modelPlayerIdMap.get(i), currDiceRollResult);
 			firstDiceResults[i] = currDiceRollResult[0] + currDiceRollResult[1];
 		}
+		//simple insertion sort
 		for (int i = 0;i <firstDiceResults.length;i++){
-			//TODO: Sort Array and check for Duplicates
+			for(int j = i;j<firstDiceResults.length;j++){
+				if (firstDiceResults[i] == firstDiceResults[j]){
+					noDuplicates = false;
+					break;
+				} 
+				else if (firstDiceResults[i] > firstDiceResults[j]){
+					int temp = firstDiceResults[j];
+					firstDiceResults[j] = firstDiceResults[i];
+					firstDiceResults[i] = temp;
+				}
+			}
+			if (! noDuplicates){
+				break;
+			}
 		}
+		}
+		while(!noDuplicates);
+		
+		this.playerOrder = firstDiceResults;
 
-		gameLogic.getBoard().getPlayer(0).setPlayerState(PlayerState.BUILDING_VILLAGE);
-		statusUpdate(0); // firstPlayers turn
-		currentPlayer = 0;
+		gameLogic.getBoard().getPlayer(playerOrder[0]).setPlayerState(PlayerState.BUILDING_VILLAGE);
+		statusUpdate(playerOrder[0]); // firstPlayers turn
+		currentPlayer = playerOrder[0];
 		for (int i = 1; i < amountPlayers; i++) {
-			gameLogic.getBoard().getPlayer(i).setPlayerState(PlayerState.WAITING);
-			statusUpdate(i);
+			gameLogic.getBoard().getPlayer(playerOrder[i]).setPlayerState(PlayerState.WAITING);
+			statusUpdate(playerOrder[i]);
 		}
 		InitialStreetCounter = 0;
 
@@ -726,11 +747,12 @@ public class ServerController {
 	}
 
 	private int getNextPlayer(int modelPlayerID) {
-		if (modelPlayerID + 1 >= amountPlayers) {
-			return 0;
-		} else {
-			return modelPlayerID + 1;
+		for (int i = 0; i < playerOrder.length -1;i++){
+			if (playerOrder[i] == modelPlayerID){
+				return playerOrder[i+1];
+			}
 		}
+		return playerOrder[0];
 	}
 
 	private int[] getPlayerResources(int modelPlayerID) {
