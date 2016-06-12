@@ -233,4 +233,20 @@ public final class ProtocolToModel {
 		return result;
 	}
 
+	public static int[] convertResources(ProtocolResource resource) {
+		if (resource.getUnknown() == null) {
+			int result[] = new int[5];
+			result[0] = resource.getWood() == null ? 0 : resource.getWood().intValue();
+			result[1] = resource.getClay() == null ? 0 : resource.getClay().intValue();
+			result[2] = resource.getOre() == null ? 0 : resource.getOre().intValue();
+			result[3] = resource.getWool() == null ? 0 : resource.getWool().intValue();
+			result[4] = resource.getCorn() == null ? 0 : resource.getCorn().intValue();
+			
+			return result;
+		}
+		else{
+			throw new IllegalArgumentException("Error at convertResources, not intended for unknown resources");
+		}
+	}
+
 }

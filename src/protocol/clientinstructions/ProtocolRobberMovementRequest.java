@@ -15,22 +15,27 @@ import com.google.gson.annotations.Since;
 public class ProtocolRobberMovementRequest {
 
 	@SerializedName("Ort")
-	String location_id;
+	String locationID;
 
 	// optional
 	@SerializedName("Ziel")
-	int victim_id;
+	Integer victimID;
 
-	public ProtocolRobberMovementRequest(String location_id, int victim_id) {
-		this.location_id = location_id;
-		this.victim_id = victim_id;
+	//the standard constructor
+	public ProtocolRobberMovementRequest(String locationID) {
+		this.locationID = locationID;
+	}
+	//the optional one
+	public ProtocolRobberMovementRequest(String locationID, Integer victimID) {
+		this.locationID = locationID;
+		this.victimID = victimID;
 	}
 
-	public String getLocation_id() {
-		return location_id;
+	public String getLocationID() {
+		return locationID;
 	}
 
-	public int getVictim_id() {
-		return victim_id;
+	public Integer getVictimID() {
+		return victimID;
 	}
 }

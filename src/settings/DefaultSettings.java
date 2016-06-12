@@ -60,7 +60,7 @@ public final class DefaultSettings {
 
 	public final static String CLIENT_VERSION = "JavaFXClient 0.3 (NiedlichePixel)";
 
-	public final static String AI_VERSION = "PrimitiveAI (KI)";
+	public final static String AI_VERSION = "NiedlichePixel (KI)";
 
 	public static final String SERVER_VERSION = "0.3";
 	

@@ -31,6 +31,7 @@ public final class ModelToProtocol {
 		return 0;
 	}
 
+	// TODO what ?
 	public static ProtocolResource getResources(int[] resources) {
 		// TODO
 		Integer wood = 0;
@@ -107,5 +108,22 @@ public final class ModelToProtocol {
 	public static String getFieldID(int x, int y) {
 		Index index = new Index(x, y);
 		return Board.getCoordToStringMap().get(index);
+	}
+
+	/**
+	 * CONVERTS NON UNKNOWN RESOURCE ARRAYS TO PROTOCOLRESOURCE
+	 * 
+	 * @param resources
+	 * @return
+	 */
+	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
+	public static ProtocolResource convertToProtocolResource(int[] resources) {
+		// CONVERTS NON UNKNOWN RESOURCE ARRAYS TO PROTOCOLRESOURCE
+		Integer wood = resources[0] == 0 ? null : resources[0];
+		Integer clay = resources[1] == 0 ? null : resources[1];
+		Integer ore = resources[2] == 0 ? null : resources[2];
+		Integer wool = resources[3] == 0 ? null : resources[3];
+		Integer corn = resources[4] == 0 ? null : resources[4];
+		return (new ProtocolResource(wood, clay, wool, corn, ore, null));
 	}
 }

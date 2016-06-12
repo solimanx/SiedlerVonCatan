@@ -147,11 +147,15 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	}
 
+	/**
+	 * After receiving a {"Bauvorgang":} JSON
+	 */
 	@Override
 	protected void handle(ProtocolBuild build) {
 		ProtocolBuilding building = build.getBuilding();
 		int playerID = building.getPlayerID();
 		int[] coords;
+
 		if (building.getType().equals("Dorf")) {
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
 			ai.buildVillage(coords[0], coords[1], coords[2], playerID);
@@ -161,8 +165,6 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 		} else if (building.getType().equals("Stadt")) {
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
-			// clientController.buildCity(coords[0], coords[1], coords[2],
-			// playerID);
 		} else
 			throw new IllegalArgumentException("Building type not defined");
 
@@ -174,47 +176,93 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	}
 
+	/**
+	 * After receiving a {"Ertrag": ...} JSON
+	 */
 	@Override
 	protected void handle(ProtocolResourceObtain resourceObtain) {
-		// TODO Auto-generated method stub
+		// Get ID and resources
+		int ID = resourceObtain.getPlayer();
+		int[] gain;
+
+		// if it's me
+		if (ID == ai.getID()) {
+			gain = ProtocolToModel.convertResources(resourceObtain.getResource());
+			ai.getMe().incrementResources(gain);
+		}
+		// if it isn't me //TODO
+		else {
+			// not yet implemented
+		}
 
 	}
 
+	/**
+	 * After receiving a {"Statusupdate": ...} JSON
+	 */
 	@Override
 	protected void handle(ProtocolStatusUpdate statusUpdate) {
-		// if it's me and i'm waiting for game to start
-		if (statusUpdate.getPlayer().getPlayerID() == ai.getID()) {
-			if (statusUpdate.getPlayer().getStatus().equals(PlayerState.WAITING_FOR_GAMESTART)) {
-				ai.setStarted(true);
-			}
-			// if it's me and i have to build initial villages
-			else if (statusUpdate.getPlayer().getStatus().equals(PlayerState.BUILDING_VILLAGE)
-					&& ai.getSecondVillageLocation() == null) {
-				ai.initialVillage();
-			}
+		// THE ID
+		int pID = statusUpdate.getPlayer().getPlayerID();
+		// THE STATUS
+		PlayerState ps = statusUpdate.getPlayer().getStatus();
 
+		// if it's me
+		if (pID == ai.getID()) {
+
+			switch (ps) {
+			// and i'm waiting for game to start
+			case WAITING_FOR_GAMESTART:
+				ai.setStarted(true);
+				break;
+			// if it's me and i have to build initial villages
+			case BUILDING_VILLAGE:
+				if (ai.getSecondVillageLocation() == null) {
+					ai.initialVillage();
+				}
+				break;
 			// if it's me and i have to build initial roads
-			else if (statusUpdate.getPlayer().getStatus().equals(PlayerState.BUILDING_STREET)
-					&& ai.getSecondRoadLocation() == null) {
-				ai.initialRoad();
+			case BUILDING_STREET:
+				if (ai.getSecondRoadLocation() == null) {
+					ai.initialRoad();
+				}
+				break;
+			// if it's me and i have to roll dice
+			case DICEROLLING:
+				ai.getOutput().respondDiceRoll();
+				break;
+			// if it's me and I have to move robber
+			case MOVE_ROBBER:
+				ai.moveRobber();
+				break;
+			case DISPENSE_CARDS_ROBBER_LOSS:
+				ai.loseToBandit();
+				break;
+			case TRADING_OR_BUILDING:
+				ai.getOutput().respondEndTurn();
+				break;
+			default:// do nothing
+
 			}
 
 		}
 
 	}
 
+	@Deprecated
 	@Override
 	protected void handle(ProtocolBuildRequest buildRequest) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Deprecated
 	@Override
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-		// TODO Auto-generated method stub
 
 	}
 
+	@Deprecated
 	@Override
 	protected void handle(ProtocolEndTurn endTurn) {
 		// TODO Auto-generated method stub
@@ -235,7 +283,7 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(ProtocolRobberMovement robberMovement) {
-		// TODO Auto-generated method stub
+		ai.repositionRobber(robberMovement.getLocation_id());
 
 	}
 

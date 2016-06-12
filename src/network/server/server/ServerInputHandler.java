@@ -185,9 +185,9 @@ public class ServerInputHandler extends InputHandler {
 
     protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
 
-        String location_id = robberMovementRequest.getLocation_id();
+        String location_id = robberMovementRequest.getLocationID();
         int[] coords = ProtocolToModel.getFieldCoordinates(location_id);
-        int victim_id = robberMovementRequest.getVictim_id();
+        int victim_id = robberMovementRequest.getVictimID();
         // TODO: Was wenn victim_id nicht vorhanden?
         serverController.robberMovementRequest(coords[0], coords[1], victim_id, currentThreadID);
 
