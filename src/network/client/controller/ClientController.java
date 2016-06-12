@@ -181,7 +181,6 @@ public class ClientController {
 	public void statusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
-		System.out.println(modelID+"MODEL ID");
 		switch (status) {
 		case CONNECTION_LOST:
 			if (modelID != null) {
@@ -200,7 +199,6 @@ public class ClientController {
 				// e.g. (0 -> 42), (1 -> 13) etc.
 				modelPlayerIdMap.put(amountPlayers, threadID);
 				modelID = amountPlayers;
-				System.out.println(modelID+"MODEL ID"+threadID);
 				amountPlayers++;
 			}
 		default:
@@ -330,7 +328,6 @@ public class ClientController {
 		// gameLogic.getBoard().getPlayer(playerID)
 		// }
 		// if it's self
-		System.out.println(playerID+ "HER HER HER");
 		if (playerID == 0) {
 			// safety check
 			if (resourcesGained.length == 5) {
@@ -344,7 +341,7 @@ public class ClientController {
 		}
 		// other players
 		else {
-			System.out.println(playerID+" "+modelPlayerIdMap.get(playerID)+" "+resourcesGained.length);
+		
 			// safety check
 			if (resourcesGained.length == 1) {
 				gameLogic.getBoard().getPlayer(playerID).setHiddenResources(resourcesGained[0]);

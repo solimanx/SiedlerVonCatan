@@ -359,7 +359,6 @@ public class PrimitiveAI extends Thread {
 
 		for (int i = 0; i < 5; i++)
 			sum += getMe().getResourceAmountOf(i);
-		System.out.println(sum + " SUM SUM SUM IS WORKING");
 		// loss is half of sum
 		int loss = sum / 2;
 		// losses array
