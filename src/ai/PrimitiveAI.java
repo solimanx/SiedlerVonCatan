@@ -150,20 +150,20 @@ public class PrimitiveAI extends Thread {
 			x = firstVillageLocation[0];
 			y = firstVillageLocation[1];
 			dir = firstVillageLocation[2];
-
+			System.out.println("MYCOORDS ARE: " + x + "-" + y + "-" + dir);
 			// find first non null road
 			if (dir == 0) {
 				if (gl.checkBuildInitialStreet(x, y - 1, 2, ID)) {
-					pO.requestBuildInitialRoad(x, y, dir);
+					pO.requestBuildInitialRoad(x, y-1, 2);
 					firstRoadLocation = new int[] { x, y - 1, 2 };
 				} else if (gl.checkBuildInitialStreet(x, y, 1, ID)) {
-					pO.requestBuildInitialRoad(x, y, dir);
+					pO.requestBuildInitialRoad(x, y, 1);
 					firstRoadLocation = new int[] { x, y, 1 };
 				} else if (gl.checkBuildInitialStreet(x, y, dir, ID)) {
 					pO.requestBuildInitialRoad(x, y, dir);
 					firstRoadLocation = new int[] { x, y, dir };
 				} else {
-					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
+					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()1");
 				}
 			} else if (dir == 1) {
 				if (gl.checkBuildInitialStreet(x, y + 1, 0, ID)) {
@@ -176,11 +176,11 @@ public class PrimitiveAI extends Thread {
 					pO.requestBuildInitialRoad(x - 1, y - 1, dir);
 					firstRoadLocation = new int[] { x - 1, y - 1, dir };
 				} else {
-					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
+					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()2");
 				}
 
 			} else {
-				throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
+				throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()3");
 			}
 
 		} else {
@@ -192,10 +192,10 @@ public class PrimitiveAI extends Thread {
 			if (dir == 0) {
 				if (gl.checkBuildInitialStreet(x, y - 1, 2, ID)) {
 					secondRoadLocation = new int[] { x, y - 1, 2 };
-					pO.requestBuildInitialRoad(x, y, dir);
+					pO.requestBuildInitialRoad(x, y - 1, 2);
 				} else if (gl.checkBuildInitialStreet(x, y, 1, ID)) {
 					secondRoadLocation = new int[] { x, y, 1 };
-					pO.requestBuildInitialRoad(x, y, dir);
+					pO.requestBuildInitialRoad(x, y, 1);
 				} else if (gl.checkBuildInitialStreet(x, y, dir, ID)) {
 					secondRoadLocation = new int[] { x, y, dir };
 					pO.requestBuildInitialRoad(x, y, dir);
@@ -205,14 +205,20 @@ public class PrimitiveAI extends Thread {
 			} else if (dir == 1) {
 				if (gl.checkBuildInitialStreet(x, y + 1, 0, ID)) {
 					secondRoadLocation = new int[] { x, y + 1, 0 };
+					System.out.println("x: " + x + ", y:" + y + 1 + ", dir: " + 0);
 					pO.requestBuildInitialRoad(x, y + 1, 0);
-				} else if (gl.checkBuildInitialStreet(x - 1, y - 1, 2, ID)) {
-					secondRoadLocation = new int[] { x - 1, y - 1, 2 };
-					pO.requestBuildInitialRoad(x - 1, y - 1, 2);
-				} else if (gl.checkBuildInitialStreet(x - 1, y - 1, dir, ID)) {
-					secondRoadLocation = new int[] { x - 1, y - 1, dir };
-					pO.requestBuildInitialRoad(x - 1, y - 1, dir);
+				} else if (gl.checkBuildInitialStreet(x - 1, y + 1, 2, ID)) {
+					secondRoadLocation = new int[] { x - 1, y + 1, 2 };
+					pO.requestBuildInitialRoad(x - 1, y + 1, 2);
+				} else if (gl.checkBuildInitialStreet(x - 1, y + 1, dir, ID)) {
+					secondRoadLocation = new int[] { x - 1, y + 1, dir };
+					pO.requestBuildInitialRoad(x - 1, y + 1, dir);
 				} else {
+					System.out.println("VILLAGE LOCATION: x: " + x + ", y:" + y + ", dir: " + dir + " " + ID);
+					
+					System.out.println("x: " + x + ", y:" + (y + 1) + ", dir: " + 0 + " " + ID);
+					System.out.println("x: " + (x - 1) + ", y:" + (y - 1) + ", dir: " + 2 + " " + ID);
+					System.out.println("x: " + (x - 1) + ", y:" + (y - 1) + ", dir: " + 1 + " " + ID);
 					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
 				}
 
@@ -237,7 +243,7 @@ public class PrimitiveAI extends Thread {
 	public void buildRoad(int i, int j, int k, int playerID) {
 		Edge e = gl.getBoard().getEdgeAt(i, j, k);
 		e.setHasStreet(true);
-		e.setOwnedByPlayer(gl.getBoard().getPlayer(playerID).getID());
+		e.setOwnedByPlayer(playerID);
 
 	}
 
