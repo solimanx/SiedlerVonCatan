@@ -125,6 +125,10 @@ public class PlayerModel {
 		this.playerState = playerState;
 	}
 
+	public void setResources(int[] resources) {
+		this.resources = resources;
+	}
+
 	@Deprecated
 	public void setResourceCards(ArrayList<ResourceType> resourceCards) {
 		// this.resourceCards = resourceCards;
@@ -177,6 +181,7 @@ public class PlayerModel {
 		// 0=WOOD, 1=CLAY, 2=ORE, 3=SHEEP, 4=CORN
 		return resources[i];
 	}
+	
 
 	public void decrementResourceAt(int i) {
 		resources[i] -= 1;
@@ -215,4 +220,10 @@ public class PlayerModel {
 		this.hiddenResources-=decrement;
 	}
 
+	//For server Only
+	//
+	
+	public int sumResources(){
+		return resources[0]+resources[1]+resources[2]+resources[3]+resources[4];
+	}
 }
