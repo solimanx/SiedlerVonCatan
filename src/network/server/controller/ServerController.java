@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.Map;
 
 import enums.Color;
@@ -77,10 +79,19 @@ public class ServerController {
 
 	}
 
+	/**
+	 * sends a hello message at server start
+	 * @param currentThreadID
+	 */
 	public void hello(int currentThreadID) {
 		serverOutputHandler.hello(DefaultSettings.SERVER_VERSION, DefaultSettings.PROTOCOL_VERSION, currentThreadID);
 	}
 
+	/**
+	 * is called when a client sends hello message
+	 * registers threadID and sends status update
+	 * @param currentThreadID
+	 */
 	public void receiveHello(int currentThreadID) {
 		threadPlayerIdMap.put(currentThreadID, amountPlayers);
 		modelPlayerIdMap.put(amountPlayers, currentThreadID);
@@ -99,10 +110,19 @@ public class ServerController {
 
 	}
 
+	/**
+	 * sends a welcome message to client
+	 * @param modelPlayerID
+	 */
 	public void welcome(int modelPlayerID) {
 		serverOutputHandler.welcome(modelPlayerIdMap.get(modelPlayerID));
 	}
 
+	/**
+	 * is called when a client is ready, 
+	 * if all clients are ready then start game
+	 * @param currentThreadID
+	 */
 	public void clientReady(int currentThreadID) {
 		int playerID = threadPlayerIdMap.get(currentThreadID);
 		gameLogic.getBoard().getPlayer(playerID).setPlayerState(PlayerState.WAITING_FOR_GAMESTART);
@@ -123,16 +143,32 @@ public class ServerController {
 
 	}
 
+	/**
+	 * sends server response to specified client
+	 * @param modelID
+	 * @param server_response
+	 */
 	public void serverResponse(int modelID, String server_response) {
 		serverOutputHandler.serverConfirm(server_response, modelPlayerIdMap.get(modelID));
 
 	}
 
+	/**
+	 * sends an error to specified client
+	 * @param modelID
+	 * @param string
+	 */
 	private void error(int modelID, String string) {
 		serverOutputHandler.error(string, modelPlayerIdMap.get(modelID));
 
 	}
 
+	/**
+	 * is called when client sets own name and color before gamestart
+	 * @param color
+	 * @param name
+	 * @param currentThreadID
+	 */
 	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
 
 		boolean colorAvailable = true;
@@ -160,28 +196,50 @@ public class ServerController {
 		}
 	}
 
+	/**
+	 * sends a received chat message to all clients
+	 * @param playerId
+	 * @param chatMessage
+	 */
 	public void chatReceiveMessage(int playerId, String s) {
 		serverOutputHandler.chatReceiveMessage(playerId, s);
 
 	}
 
+	/**
+	 * is called when client sends a chat message
+	 * @param chatMessage
+	 * @param currentThreadID
+	 */
 	public void chatSendMessage(String s, int currentThreadID) {
 		chatReceiveMessage(currentThreadID, s);
 
 	}
 
+	/**
+	 * sends status update of all players to all clients
+	 */
 	public void statusUpdateForAllPlayers() {
 		for (int i = 0; i < amountPlayers; i++) {
 			statusUpdate(i);
 		}
 	}
 
+	/**
+	 * sends status update of specified player to all clients
+	 * @param playerModelID
+	 */
 	public void statusUpdate(int playerModelID) {
 		for (int i = 0; i < amountPlayers; i++) {
 			statusUpdateToPlayer(i, playerModelID);
 		}
 	}
 
+	/**
+	 * sends status update of a player to specified client
+	 * @param sendToPlayer
+	 * @param playerModelID
+	 */
 	public void statusUpdateToPlayer(int sendToPlayer, int playerModelID) {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(playerModelID);
 
@@ -198,48 +256,38 @@ public class ServerController {
 	}
 
 	/**
-	 * Inits
-	 *
-	 * @param amountPlayers
+	 * starts the game:
+	 * generates the board
+	 * generates player order
+	 * sets first player to play
 	 */
 	public void initializeBoard() {
 		generateBoard("A", true);
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
-		int[] firstDiceResults = new int[amountPlayers];
 		int[] currDiceRollResult;
-		boolean noDuplicates = true;
-		ArrayList<Integer> diceRollResults;
-		//untauglich; wird wann anders weitergemacht
-		/*do { 
+		boolean noDuplicates;
+		Map<Integer, Integer> diceResults = new HashMap<Integer, Integer>();
+		this.playerOrder = new int[amountPlayers];
+		do {
+			noDuplicates = true;
 			for (int i = 0; i < amountPlayers; i++) {
 				currDiceRollResult = rollDice();
 				serverOutputHandler.diceRollResult(modelPlayerIdMap.get(i), currDiceRollResult);
-				firstDiceResults[i] = currDiceRollResult[0] + currDiceRollResult[1];
+				diceResults.put(currDiceRollResult[0] + currDiceRollResult[1], i);
 			}
-			diceRollResults = new ArrayList<Integer>();
-			for (int i = 0;i < firstDiceResults.length;i++){
-				diceRollResults.add(firstDiceResults[i]);
+			if (diceResults.size() != amountPlayers) {
+				diceResults.clear();
+				noDuplicates = false;
 			}
-			//check for duplicates
-			for (int i = 0;i<diceRollResults.size();i++){
-				for (int j = i+1;j < diceRollResults.size();j++){
-					if (diceRollResults.get(i).equals(diceRollResults.get(j))){
-						noDuplicates = false;
-						break;
-					}
-				}
-			}
-
+			;
 		} while (!noDuplicates);
-			Collections.sort(diceRollResults);
-			for (int i = 0;i < firstDiceResults.length;i++){
-				for (int j = 0;j <diceRollResults.size();j++){
-					if (firstDiceResults[i] == diceRollResults.get(j)){
-						playerOrder[i] = firstDiceResults[j]
-					}
-				}
-			}*/
-		this.playerOrder = firstDiceResults;
+		SortedSet<Integer> keys = new TreeSet<Integer>(diceResults.keySet());
+		int index = amountPlayers - 1;
+		for (Integer key : keys) {
+			Integer value = diceResults.get(key);
+			playerOrder[index] = value;
+			index--;
+		}
 
 		gameLogic.getBoard().getPlayer(playerOrder[0]).setPlayerState(PlayerState.BUILDING_VILLAGE);
 		statusUpdate(playerOrder[0]); // firstPlayers turn
@@ -251,21 +299,11 @@ public class ServerController {
 		InitialStreetCounter = 0;
 
 	}
-	
-	private static int[] insertionSort(int[] sortieren) {
-		int temp;
-		for (int i = 1; i < sortieren.length; i++) {
-			temp = sortieren[i];
-			int j = i;
-			while (j > 0 && sortieren[j - 1] > temp) {
-				sortieren[j] = sortieren[j - 1];
-				j--;
-			}
-			sortieren[j] = temp;
-		}
-		return sortieren;
-	}
 
+	/**
+	 * dice roll request from client
+	 * @param threadID
+	 */
 	public void diceRollRequest(int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.DICEROLLING)) {
@@ -302,13 +340,10 @@ public class ServerController {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see server.controller.GameControllerInterface#buildVillage(int, int,
-	 * int, int)
+	/**
+	 * generates a random dice result
+	 * @return integer array [2] values
 	 */
-
 	private int[] rollDice() {
 		Random rand = new Random();
 		int firstDice = 1 + rand.nextInt(5);
@@ -458,10 +493,25 @@ public class ServerController {
 				gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
 
 				serverOutputHandler.buildStreet(x, y, dir, threadID);
+				
+				
 				InitialStreetCounter++;
-				if (InitialStreetCounter >= amountPlayers * 2) {
+				if (InitialStreetCounter >= amountPlayers * 2) { //initial finished
 					gainFirstBoardResources();
-				} else {
+				}
+				else if(InitialStreetCounter == amountPlayers){ //no change
+					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
+					statusUpdate(currentPlayer);					
+				}
+				else if(InitialStreetCounter > amountPlayers){ //go backwards
+					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
+					statusUpdate(modelID);
+
+					currentPlayer = playerOrder[currentPlayer-1];
+					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
+					statusUpdate(currentPlayer);					
+				}
+				else { //go forward
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
 					statusUpdate(modelID);
 
@@ -523,6 +573,12 @@ public class ServerController {
 
 	}
 
+	/**
+	 * is called when client sends a robber loss message
+	 * checks if action is valid sends status updates
+	 * @param threadID
+	 * @param resources
+	 */
 	public void robberLoss(int threadID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		int[] playerRes = getPlayerResources(modelID);
@@ -571,26 +627,26 @@ public class ServerController {
 				PlayerModel victimPM = gameLogic.getBoard().getPlayer(victimModelID);
 				if (victimPM.sumResources() != 0) { // steal a random card
 					int[] victimResources = getPlayerResources(victimModelID);
-					Random rand = new Random();	
+					Random rand = new Random();
 					int stealResource;
 					do {
-						stealResource = rand.nextInt(4); //random resource
+						stealResource = rand.nextInt(4); // random resource
 						// while no resource of this type
-					} while (victimResources[stealResource] == 0); 
-					
+					} while (victimResources[stealResource] == 0);
+
 					int[] costs = { 0, 0, 0, 0, 0 };
 					costs[stealResource] = 1;
-					subFromPlayersResources(victimModelID,costs);
+					subFromPlayersResources(victimModelID, costs);
 					serverOutputHandler.costs(victimThreadID, costs);
-					
+
 					int modelID = threadPlayerIdMap.get(currentThreadID);
 					addToPlayersResource(modelID, costs);
 					serverOutputHandler.resourceObtain(currentThreadID, costs);
-					
+
 					String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
 					gameLogic.getBoard().setBandit(location);
 					serverOutputHandler.robberMovement(currentThreadID, location, victimThreadID);
-					
+
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
 					statusUpdate(modelID);
 				}
@@ -637,10 +693,10 @@ public class ServerController {
 	public void tradeCancelled(int modelID, int tradingID) {
 		serverOutputHandler.tradeIsCanceled(modelPlayerIdMap.get(modelID), tradingID);
 	}
-	
-	public void buyDevelopmentCard(int threadID){
+
+	public void buyDevelopmentCard(int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
-		subFromPlayersResources(modelID,DefaultSettings.DEVCARD_BUILD_COST);
+		subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
 		resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
 	}
 
@@ -733,10 +789,9 @@ public class ServerController {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see server.controller.GameControllerInterface#gainBoardResources(int)
+	/**
+	 * sets new player resources after dice roll
+	 * @param diceNum
 	 */
 	public void gainBoardResources(int diceNum) {
 		ArrayList<Field> diceFields = new ArrayList<Field>();
@@ -759,17 +814,17 @@ public class ServerController {
 					switch (neighbors[i].getStatus()) {
 					case VILLAGE:
 						currResType = f.getResourceType();
-						if (resourceStackDecrease(currResType)){
+						if (resourceStackDecrease(currResType)) {
 							addToPlayersResource(neighbors[i].getOwnerID(), currResType, 1);
-						}						
+						}
 						break;
 					case CITY:
 						currResType = f.getResourceType();
-						for (int j = 0;j < 2;j++){
-							if (resourceStackDecrease(currResType)){
+						for (int j = 0; j < 2; j++) {
+							if (resourceStackDecrease(currResType)) {
 								addToPlayersResource(neighbors[i].getOwnerID(), f.getResourceType(), 2);
 							}
-						}					
+						}
 						break;
 					default:
 					}
@@ -779,6 +834,11 @@ public class ServerController {
 		statusUpdateForAllPlayers();
 	}
 
+	/**
+	 * decreases the resource stack
+	 * @param resType
+	 * @return
+	 */
 	private boolean resourceStackDecrease(ResourceType resType) {
 		int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
 		if (resourceStack[resIndex] > 0) {
@@ -789,26 +849,31 @@ public class ServerController {
 		return true;
 	}
 
+	/**
+	 * increases the resource stack
+	 * @param resType
+	 */
 	private void resourceStackIncrease(ResourceType resType) {
 		int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
 		resourceStack[resIndex] = resourceStack[resIndex]++;
 	}
-	
-	private void resourceStackIncrease(int[] resources){
-		for (int i = 0;i < resources.length;i++){
+
+	/**
+	 * increases the resource stack with resource array
+	 * @param resources
+	 */
+	private void resourceStackIncrease(int[] resources) {
+		for (int i = 0; i < resources.length; i++) {
 			for (int j = 0; j < resources[i]; j++) {
 				resourceStackIncrease(DefaultSettings.RESOURCE_ORDER[i]);
 			}
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see server.controller.GameControllerInterface#buildVillage(int, int,
-	 * int, int)
+	/**
+	 * sets player resources after initial building phase
+	 * 
 	 */
-
 	private void gainFirstBoardResources() {
 		int[] coords; // wegen performance nur einmaliges Initialisieren
 		Field[] connFields;
@@ -829,6 +894,11 @@ public class ServerController {
 		statusUpdateForAllPlayers();
 	}
 
+	/**
+	 * gets next player in the player order
+	 * @param modelPlayerID
+	 * @return nextPlayerID
+	 */
 	private int getNextPlayer(int modelPlayerID) {
 		for (int i = 0; i < playerOrder.length - 1; i++) {
 			if (playerOrder[i] == modelPlayerID) {
@@ -838,14 +908,30 @@ public class ServerController {
 		return playerOrder[0];
 	}
 
+	/**
+	 * gets player resources
+	 * @param modelPlayerID
+	 * @return int[] resources
+	 */
 	private int[] getPlayerResources(int modelPlayerID) {
 		return gameLogic.getBoard().getPlayer(modelPlayerID).getResources();
 	}
 
+	/**
+	 * sets player resources
+	 * @param modelID
+	 * @param resources
+	 */
 	private void setPlayerResources(int modelID, int[] resources) {
 		gameLogic.getBoard().getPlayer(modelID).setResources(resources);
 	}
 
+	/**
+	 * adds a single resource to players resource
+	 * @param playerID
+	 * @param resType
+	 * @param amount
+	 */
 	public void addToPlayersResource(int playerID, ResourceType resType, int amount) {
 		int[] resources = getPlayerResources(playerID);
 		for (int i = 0; i < amount; i++) {
@@ -854,6 +940,11 @@ public class ServerController {
 		gameLogic.getBoard().getPlayer(playerID).setResources(resources);
 	}
 
+	/**
+	 * adds resources to player resource
+	 * @param playerID
+	 * @param resourcesToAdd
+	 */
 	public void addToPlayersResource(int playerID, int[] resourcesToAdd) {
 		int[] resources = getPlayerResources(playerID);
 		for (int i = 0; i < resourcesToAdd.length; i++) {
@@ -864,6 +955,11 @@ public class ServerController {
 		gameLogic.getBoard().getPlayer(playerID).setResources(resources);
 	}
 
+	/**
+	 * subtracts resources from players resource
+	 * @param playerID
+	 * @param costsparam
+	 */
 	public void subFromPlayersResources(int playerID, int[] costsparam) {
 		int[] costs = new int[5];
 		for (int i = 0; i < costsparam.length; i++) { // copy array
