@@ -507,7 +507,7 @@ public class ServerController {
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
 					statusUpdate(modelID);
 
-					currentPlayer = playerOrder[currentPlayer-1];
+					currentPlayer = playerOrder[playerOrder[currentPlayer]-1];
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
 					statusUpdate(currentPlayer);					
 				}
