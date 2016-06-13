@@ -13,9 +13,12 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import network.client.view.GameViewController;
 import network.server.controller.ServerController;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ViewController {
-
+	private static Logger logger = LogManager.getLogger(ViewController.class.getName());
 	private FXMLLoader loader;
 	protected ServerController serverController; // DEBUG
 	private ClientController clientController;
@@ -244,6 +247,7 @@ public class ViewController {
 			tradeStage.show();
 
 		} catch (IOException e) {
+			logger.catching(Level.DEBUG,e);
 			e.printStackTrace();
 		}
 
@@ -279,6 +283,7 @@ public class ViewController {
 			Platform.runLater(createSResponseProfileRunnable(server_response, playerProfileController));
 		} else {
 			System.out.println("Server response: " + server_response);
+			logger.debug("Server response: " , server_response);
 		}
 		
 		// TODO Auto-generated method stub
