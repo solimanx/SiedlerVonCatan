@@ -11,6 +11,7 @@ import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
+import network.ProtocolToModel;
 import settings.DefaultSettings;
 
 /**
@@ -60,10 +61,12 @@ public class Board {
 		initializeCorners();
 		edges = new Edge[r][r][3];
 		initializeEdges();
+		initializeID();
 		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
 		for (int i = 0; i < DefaultSettings.MAXIMUM_PLAYERS_AMOUNT; i++) {
 			players[i] = new PlayerModel(i);
 		}
+
 		initializeBandit();
 	}
 
@@ -154,29 +157,11 @@ public class Board {
 			if (entry.getKey().matches("[a-z]")) {
 				// North only will be set
 				if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) < 0) {
-					// convert axial back to array coords
-					corners[temp[0] + radius][temp[1] + radius][0] = new Corner();
-					// get surrounding fields of the corner
-					// Field[] tf = getTouchingFields(temp[0] + radius, temp[1]
-					// + radius, 0);
-					// // combine their id
-					// String cornerID = tf[0].getFieldID() + tf[1].getFieldID()
-					// + tf[2].getFieldID();
-					// corners[temp[0] + radius][temp[1] +
-					// radius][0].setCornerID(cornerID);
 				}
 				// south only will be set
 				else if (HexService.sumOfCubeXY(HexService.convertAxialToCube(temp)) > 0) {
 					// convert axial back to array coords
 					corners[temp[0] + radius][temp[1] + radius][1] = new Corner();
-					// get surrounding fields of the corner
-					// Field[] tf = getTouchingFields(temp[0] + radius, temp[1]
-					// + radius, 1);
-					// // combine their id
-					// String cornerID = tf[0].getFieldID() + tf[1].getFieldID()
-					// + tf[2].getFieldID();
-					// corners[temp[0] + radius][temp[1] +
-					// radius][1].setCornerID(cornerID);
 				}
 			}
 			// outercase keys only (inner rings/fields)
@@ -184,24 +169,8 @@ public class Board {
 				// North set
 				corners[temp[0] + radius][temp[1] + radius][0] = new Corner();
 
-				// ID
-				// Field[] tf = getTouchingFields(temp[0] + radius, temp[1] +
-				// radius, 0);
-				// String cornerID = tf[0].getFieldID() + tf[1].getFieldID() +
-				// tf[2].getFieldID();
-				// corners[temp[0] + radius][temp[1] +
-				// radius][0].setCornerID(cornerID);
-
-				// south set
 				corners[temp[0] + radius][temp[1] + radius][1] = new Corner();
 
-				// ID
-				// tf = getTouchingFields(temp[0] + radius, temp[1] + radius,
-				// 1);
-				// cornerID = tf[0].getFieldID() + tf[1].getFieldID() +
-				// tf[2].getFieldID();
-				// corners[temp[0] + radius][temp[1] +
-				// radius][1].setCornerID(cornerID);
 			}
 
 		}
@@ -219,8 +188,6 @@ public class Board {
 		// temporary variables to make code appear clearer
 		int[] temp;
 		int radius = DefaultSettings.BOARD_RADIUS;
-		Field[] cE;
-		String edgeID;
 		// Go through HashMap<String,int[]>
 		for (Map.Entry<String, int[]> entry : stringToCoordMap.entrySet()) {
 			// entry of key
@@ -230,77 +197,37 @@ public class Board {
 				// NW only is defined
 				if (temp[0] >= 0 && temp[1] > 0) {
 					edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
-					// ID
-//					cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 0);
-//					edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//					edges[temp[0] + radius][temp[1] + radius][0].setEdgeID(edgeID);
 				}
 				// NE only is defined
 				else if (temp[0] == -radius && temp[1] == radius) {
 					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
-					// ID
-//					cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 1);
-//					edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//					edges[temp[0] + radius][temp[1] + radius][1].setEdgeID(edgeID);
 				}
 
 				// E only is defined
 				else if (temp[0] < 0 && temp[1] <= 0) {
 					edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
-//					// ID
-//					cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 2);
-//					edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//					edges[temp[0] + radius][temp[1] + radius][2].setEdgeID(edgeID);
 				}
 				// only NW + NE are defined
 				else if (temp[0] > -radius && temp[0] < 0 && temp[1] == radius) {
 					edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
-					// ID
-//					cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 0);
-//					edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//					edges[temp[0] + radius][temp[1] + radius][0].setEdgeID(edgeID);
 
 					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
-					// ID
-//					cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 1);
-//					edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//					edges[temp[0] + radius][temp[1] + radius][1].setEdgeID(edgeID);
 				}
 				// only NE + E are defined
 				else if (temp[0] == -radius && temp[1] < radius && temp[1] > 0) {
 					edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
-					// ID
-//					cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 1);
-//					edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//					edges[temp[0] + radius][temp[1] + radius][1].setEdgeID(edgeID);
-
 					edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
-					// ID
-//					cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 2);
-//					edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//					edges[temp[0] + radius][temp[1] + radius][2].setEdgeID(edgeID);
+
 				}
 			}
 			// outercase keys only (inner rings/fields)
 			else {
 				// NE, NW, E are set
 				edges[temp[0] + radius][temp[1] + radius][0] = new Edge();
-				// ID
-//				cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 0);
-//				edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//				edges[temp[0] + radius][temp[1] + radius][0].setEdgeID(edgeID);
 
 				edges[temp[0] + radius][temp[1] + radius][1] = new Edge();
-				// ID
-//				cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 1);
-//				edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//				edges[temp[0] + radius][temp[1] + radius][1].setEdgeID(edgeID);
 
 				edges[temp[0] + radius][temp[1] + radius][2] = new Edge();
-				// ID
-//				cE = getConnectedFields(temp[0] + radius, temp[1] + radius, 2);
-//				edgeID = cE[0].getFieldID() + cE[1].getFieldID() + cE[2].getFieldID();
-//				edges[temp[0] + radius][temp[1] + radius][2].setEdgeID(edgeID);
 			}
 
 		}
@@ -308,13 +235,57 @@ public class Board {
 
 	/**
 	 * Add players to the player model
-	 * 
+	 *
 	 * @param tempPlayers
 	 */
 	private void initializePlayers(ArrayList<PlayerModel> tempPlayers) {
 		for (int i = 0; i < tempPlayers.size(); i++) {
 			players[i] = tempPlayers.get(i);
 		}
+	}
+
+	/**
+	 * Initialize ID for field, corners and edges.
+	 */
+	private void initializeID() {
+		// fields
+		int radius = DefaultSettings.BOARD_RADIUS;
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				if (getFieldAt(j, i) != null) {
+					Index index = new Index(j, i);
+					String ID = coordToStringMap.get(index);
+					getFieldAt(j, i).setFieldID(ID);
+				}
+			}
+		}
+
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				for (int k = 0; k < 3; k++) {
+					if (getCornerAt(j, i, k) != null) {
+						// touching fields
+						Field[] tF = getTouchingFields(j, i, k);
+						String ID1 = tF[0] == null ? "" : tF[0].getFieldID();
+						String ID2 = tF[1] == null ? "" : tF[1].getFieldID();
+						String ID3 = tF[1] == null ? "" : tF[2].getFieldID();
+						String ID = ID1 + ID2 + ID3;
+						getCornerAt(j,i,k).setCornerID(ID);
+					}
+
+					if (getEdgeAt(j, i, k) != null) {
+						//connected fields
+						Field[] cF = getConnectedFields(j, i, k);
+						String ID1 = cF[0] == null ? "" : cF[0].getFieldID();
+						String ID2 = cF[1] == null? "" : cF[1].getFieldID();
+						String ID = ID1 + ID2;
+						getEdgeAt(j,i,k).setEdgeID(ID);
+
+					}
+				}
+			}
+		}
+
 	}
 
 	@Deprecated
