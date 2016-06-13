@@ -29,6 +29,7 @@ public class Board {
 	private Edge[][][] edges;
 	private PlayerModel[] players;
 	private String banditLocation;
+	private DevelopmentCardsStack devCardStack;
 	private static Map<String, int[]> stringToCoordMap;
 	private static Map<Index, String> coordToStringMap;
 	// TODO private DevDeck devDeck;
@@ -50,6 +51,7 @@ public class Board {
 		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
 		initializePlayers(tempPlayers);
 		initializeBandit();
+		devCardStack = new DevelopmentCardsStack();
 	}
 
 	public Board() {
@@ -61,6 +63,7 @@ public class Board {
 		initializeCorners();
 		edges = new Edge[r][r][3];
 		initializeEdges();
+		devCardStack = new DevelopmentCardsStack();
 		initializeID();
 		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
 		for (int i = 0; i < DefaultSettings.MAXIMUM_PLAYERS_AMOUNT; i++) {
@@ -518,6 +521,15 @@ public class Board {
 	public static Map<Index, String> getCoordToStringMap() {
 		return coordToStringMap;
 	}
+
+	/**
+	 * @return
+	 * returns the DevelopmentCardStack
+	 */
+	public DevelopmentCardsStack getDevCardStack(){
+		return devCardStack;
+	}
+
 
 	// ================================================================================
 	// HEXAGONAL RELATIONS (TO FIELD)

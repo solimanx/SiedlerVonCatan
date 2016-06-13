@@ -3,6 +3,7 @@ package model.objects;
 import java.util.ArrayList;
 
 import enums.ResourceType;
+import model.objects.DevCards.DevelopmentCard;
 import enums.Color;
 //TODO import DevelopmentCard enum
 import enums.PlayerState;
@@ -25,6 +26,9 @@ public class PlayerModel {
 	private Color color;
 	private String name;
 
+	// {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}
+	private int[] playerDevCard = {0,0,0,0,0};
+
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
 	// is hidden to other players
 	private int[] resources = { 0, 0, 0, 0, 0 };
@@ -36,6 +40,95 @@ public class PlayerModel {
 		this.playerID = id;
 		// this.resourceCards = new ArrayList<ResourceType>();
 	}
+
+	/**
+	 * returns the actual amount of playerDevCards
+	 * {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}
+	 * @return
+	 */
+	public int[] getPlayerDevCards(){
+		return playerDevCard;
+	}
+
+	/**
+	 * sets the playerDevCards new
+	 * {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}
+	 * @param devCards
+	 */
+	public void setPlayerDevCards(int[] devCards){
+		if(devCards.length != 5){
+			throw new IllegalArgumentException("setPlayerDevCard Illegal Argument lenght");
+		}
+		playerDevCard = devCards;
+	}
+
+	/**
+	 * increments the amount of the card
+	 * @param devCard
+	 * 	DevelopmentCard
+	 */
+	public void incrementPlayerDevCard(DevelopmentCard devCard){
+		if(devCard.getName() == "Knight Card"){
+			playerDevCard[0] = playerDevCard[0] + 1;
+		}
+		if(devCard.getName() == "Victory Card"){
+			playerDevCard[1] = playerDevCard[1] + 1;
+		}
+		if(devCard.getName() == "Invention Card"){
+			playerDevCard[2] = playerDevCard[2] + 1;
+		}
+		if(devCard.getName() == "Monoploy Card"){
+			playerDevCard[3] = playerDevCard[3] + 1;
+		}
+		if(devCard.getName() == "Street Building Card"){
+			playerDevCard[4] = playerDevCard[4] + 1;
+		}
+	}
+
+	/**
+	 * decrements the specific playerDevCards by 1
+	 * @param devCard
+	 * specific DevelopmentCard
+	 */
+	public void decrementPlayerDevCard(DevelopmentCard devCard){
+		if(devCard.getName() == "Knight Card"){
+			if(playerDevCard[0] != 0){
+				playerDevCard[0] = playerDevCard[0] - 1;
+			} else {
+				throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
+			}
+		}
+		if(devCard.getName() == "Victory Card"){
+			if(playerDevCard[1] != 0){
+				playerDevCard[1] = playerDevCard[1] - 1;
+			} else {
+				throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
+			}
+		}
+		if(devCard.getName() == "Invention Card"){
+			if(playerDevCard[2] != 0){
+				playerDevCard[2] = playerDevCard[2] - 1;
+			} else {
+				throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
+			}
+		}
+		if(devCard.getName() == "Monoploy Card"){
+			if(playerDevCard[3] != 0){
+				playerDevCard[3] = playerDevCard[3] - 1;
+			} else {
+				throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
+			}
+		}
+		if(devCard.getName() == "Street Building Card"){
+			if(playerDevCard[4] != 0){
+				playerDevCard[4] = playerDevCard[4] - 1;
+			} else {
+				throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
+			}
+		}
+	}
+
+
 
 	public Color getColor() {
 		return color;
@@ -177,7 +270,7 @@ public class PlayerModel {
 
 	/**
 	 * Get specific resource
-	 * 
+	 *
 	 * @return
 	 */
 	public int getResourceAmountOf(int i) {
@@ -192,7 +285,7 @@ public class PlayerModel {
 
 	/**
 	 * Get all resources
-	 * 
+	 *
 	 * @return
 	 */
 	public int[] getResources() {

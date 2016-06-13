@@ -20,7 +20,7 @@ public class GameLogic {
 
 	/**
 	 * Checks if the player can build a city at the given position
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -66,7 +66,7 @@ public class GameLogic {
 
 	/**
 	 * Checks if the player can build a city at the given position
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -102,7 +102,7 @@ public class GameLogic {
 
 	/**
 	 * Checks if the player can build a Street at the given position
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -111,7 +111,7 @@ public class GameLogic {
 	 */
 	public boolean checkBuildStreet(int x, int y, int dir, int playerID) {
 		//enough streets
-		if (board.getPlayer(playerID).getAmountStreets() <= 0) { 
+		if (board.getPlayer(playerID).getAmountStreets() <= 0) {
 			return false;
 		}
 		//can he afford
@@ -124,7 +124,7 @@ public class GameLogic {
 		 * settings.DefaultSettings.STREET_BUILD_COST[i]) { return false; } }
 		 */
 		Edge e = board.getEdgeAt(x, y, dir);
-		
+
 		if (e != null) { // valid edge
 			//unoccupied
 			if (e.isHasStreet() == false) {
@@ -144,7 +144,7 @@ public class GameLogic {
 
 	/**
 	 * checks if bandit can be set at specified position
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param playerId
@@ -187,7 +187,7 @@ public class GameLogic {
 	/**
 	 * Gets an array which contains the player resources in form of
 	 * (AmountWood,AmountClay...)
-	 * 
+	 *
 	 * @param playerID
 	 * @return resource Array
 	 */
@@ -229,7 +229,7 @@ public class GameLogic {
 	/**
 	 * Checks if the player can build a Street at the given position at the
 	 * beginning of the game
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -258,7 +258,7 @@ public class GameLogic {
 	/**
 	 * Checks if the player can build a Street at the given position at the
 	 * beginning of the game
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -285,6 +285,24 @@ public class GameLogic {
 		return false;
 	}
 
+	/**
+	 *
+	 * @param playerID
+	 * ID of the player, who wants to buy a DevelopmentCard
+	 * @return
+	 * returns true, if it is possible for the player to buy a Developmentcard
+	 * else false
+	 */
+	public boolean checkBuyDevCard(int playerID){
+		if(!board.getDevCardStack().buyable()){
+			return false;
+		}
+		if(!checkPlayerResources(playerID, settings.DefaultSettings.DEVCARD_BUILD_COST)){
+			return false;
+		}
+		return true;
+	}
+
 	public Board getBoard() {
 		return board;
 	}
@@ -293,8 +311,8 @@ public class GameLogic {
 		if (playerID != currentPlayer || board.getPlayer(currentPlayer).getPlayerState() != state){
 			return true;
 		} else {
-			return false;			
-		}		
+			return false;
+		}
 	}
 
 }

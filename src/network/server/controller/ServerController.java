@@ -119,7 +119,7 @@ public class ServerController {
 	}
 
 	/**
-	 * is called when a client is ready, 
+	 * is called when a client is ready,
 	 * if all clients are ready then start game
 	 * @param currentThreadID
 	 */
@@ -355,7 +355,7 @@ public class ServerController {
 	/**
 	 * is called when client wants to build a village if initialBuildingPhase
 	 * then jumps to requestBuildInitialVillage
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -395,7 +395,7 @@ public class ServerController {
 
 	/**
 	 * builds a street is called by the server controller
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -432,7 +432,7 @@ public class ServerController {
 
 	/**
 	 * Checks if a player has longest Trading Route
-	 * 
+	 *
 	 * @param modelID
 	 */
 	private void checkLongestTradingRoute(int modelID) {
@@ -443,7 +443,7 @@ public class ServerController {
 	/**
 	 * is called by the serverController after a build request from a client
 	 * builds a city
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -472,10 +472,19 @@ public class ServerController {
 
 	}
 
+	public void requestBuyDevCard(int thredID){
+		int modelID = threadPlayerIdMap.get(thredID);
+		if(gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)){
+			if(gameLogic.checkBuyDevCard(modelID)){
+
+			}
+		}
+	}
+
 	/**
 	 * Is called by serverController when there is a street build request during
 	 * the initial phase
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -493,15 +502,15 @@ public class ServerController {
 				gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
 
 				serverOutputHandler.buildStreet(x, y, dir, threadID);
-				
-				
+
+
 				InitialStreetCounter++;
 				if (InitialStreetCounter >= amountPlayers * 2) { //initial finished
 					gainFirstBoardResources();
 				}
 				else if(InitialStreetCounter == amountPlayers){ //no change
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
-					statusUpdate(currentPlayer);					
+					statusUpdate(currentPlayer);
 				}
 				else if(InitialStreetCounter > amountPlayers){ //go backwards
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
@@ -509,7 +518,7 @@ public class ServerController {
 
 					currentPlayer = playerOrder[playerOrder[currentPlayer]-1];
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
-					statusUpdate(currentPlayer);					
+					statusUpdate(currentPlayer);
 				}
 				else { //go forward
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
@@ -526,7 +535,7 @@ public class ServerController {
 	/**
 	 * is called by serverController when there is a Build Request during the
 	 * initial Phase
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -558,7 +567,7 @@ public class ServerController {
 
 	/**
 	 * Is called by View when ownPlayer has finished his turn
-	 * 
+	 *
 	 * @param playerID
 	 */
 	public void endTurn(int playerID) {
@@ -610,7 +619,7 @@ public class ServerController {
 
 	/**
 	 * Sends a robberMovementRequest to all clients
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param victimID
@@ -657,7 +666,7 @@ public class ServerController {
 	}
 
 	/**
-	 * 
+	 *
 	 * Basic methods for trading
 	 */
 
@@ -873,7 +882,7 @@ public class ServerController {
 
 	/**
 	 * sets player resources after initial building phase
-	 * 
+	 *
 	 */
 	private void gainFirstBoardResources() {
 		int[] coords; // wegen performance nur einmaliges Initialisieren

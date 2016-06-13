@@ -46,7 +46,7 @@ public class DevelopmentCardsStack {
 
 	/**
 	 * randomizes the order of the DevelopmentCards in the array
-	 * 
+	 *
 	 * @param stack
 	 *            Array of DevelopmentCards
 	 * @return the same array with randomized order
@@ -64,7 +64,7 @@ public class DevelopmentCardsStack {
 
 	/**
 	 * getter
-	 * 
+	 *
 	 * @return returns the whole DevelopmentCardStack, as if there was no card
 	 *         drawn
 	 */
@@ -74,16 +74,23 @@ public class DevelopmentCardsStack {
 
 	/**
 	 * returns the next DevelopmentCard from the stack
-	 * 
+	 *
 	 * @return next card from the stack null if empty
 	 */
 	public DevelopmentCard getNextCard() {
-		if (nextCard < 25) {
+		if (buyable()) {
 			DevelopmentCard result = devCardStack[nextCard];
 			nextCard++;
 			return result;
 		}
 		return null;
+	}
+
+	public boolean buyable(){
+		if(nextCard < 25){
+			return true;
+		}
+		return false;
 	}
 
 }
