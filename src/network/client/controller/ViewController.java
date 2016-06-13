@@ -18,148 +18,148 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ViewController {
-	private static Logger logger = LogManager.getLogger(ViewController.class.getName());
-	private FXMLLoader loader;
-	protected ServerController serverController; // DEBUG
-	private ClientController clientController;
-	private GameViewController gameViewController;
-	private LobbyController lobbyController;
-	private PlayerProfileController playerProfileController;
-	private TradeController tradeController;
-	private Stage primaryStage;
+    private static Logger logger = LogManager.getLogger(ViewController.class.getName());
+    private FXMLLoader loader;
+    protected ServerController serverController; // DEBUG
+    private ClientController clientController;
+    private GameViewController gameViewController;
+    private LobbyController lobbyController;
+    private PlayerProfileController playerProfileController;
+    private TradeController tradeController;
+    private Stage primaryStage;
 
-	/**
-	 * @return
-	 */
-	public Stage getPrimaryStage() {
-		return primaryStage;
-	}
+    /**
+     * @return
+     */
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
 
-	private Stage choosingStage;
-	private boolean isGameView = false;
-	private boolean isChoosingStage = false;
+    private Stage choosingStage;
+    private boolean isGameView = false;
+    private boolean isChoosingStage = false;
 
-	/**
-	 * @param primaryStage
-	 * @param fc
-	 */
-	public ViewController(Stage primaryStage, ClientController fc) {
-		this.primaryStage = primaryStage;
-		this.clientController = fc;
-		loader = new FXMLLoader();
+    /**
+     * @param primaryStage
+     * @param fc
+     */
+    public ViewController(Stage primaryStage, ClientController fc) {
+        this.primaryStage = primaryStage;
+        this.clientController = fc;
+        loader = new FXMLLoader();
 
-		try {
-			startLobbyView(primaryStage);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            startLobbyView(primaryStage);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-	}
+    }
 
-	/**
-	 * Starts the lobby view, which provides connecting to server and chat
-	 *
-	 * @param primaryStage
-	 * @throws IOException
-	 */
-	/**
-	 * @param primaryStage
-	 * @throws IOException
-	 */
-	private void startLobbyView(Stage primaryStage) throws IOException {
+    /**
+     * Starts the lobby view, which provides connecting to server and chat
+     *
+     * @param primaryStage
+     * @throws IOException
+     */
+    /**
+     * @param primaryStage
+     * @throws IOException
+     */
+    private void startLobbyView(Stage primaryStage) throws IOException {
 
-		Parent root = loader.load(getClass().getResource("/application/lobby/LobbyFXML.fxml").openStream());
-		Scene scene = new Scene(root);
-		lobbyController = (LobbyController) loader.getController();
-		lobbyController.setViewController(this);
-		primaryStage.setScene(scene);
-		primaryStage.sizeToScene();
-		//
-		primaryStage.setTitle("Settlers of Catan : Lobby");
-		primaryStage.setResizable(false);
-		primaryStage.setOnCloseRequest(e -> System.exit(0));
-		// primaryStage.initStyle(StageStyle.UTILITY);
-		//
-		primaryStage.show();
-	}
+        Parent root = loader.load(getClass().getResource("/application/lobby/LobbyFXML.fxml").openStream());
+        Scene scene = new Scene(root);
+        lobbyController = (LobbyController) loader.getController();
+        lobbyController.setViewController(this);
+        primaryStage.setScene(scene);
+        primaryStage.sizeToScene();
+        //
+        primaryStage.setTitle("Settlers of Catan : Lobby");
+        primaryStage.setResizable(false);
+        primaryStage.setOnCloseRequest(e -> System.exit(0));
+        // primaryStage.initStyle(StageStyle.UTILITY);
+        //
+        primaryStage.show();
+    }
 
-	/**
-	 * starts the View for choosing Player name and Player Color view also
-	 * offers Button for setting Player ready for game to start
-	 *
-	 * @throws IOException
-	 */
-	/**
-	 * @throws IOException
-	 */
-	public void startChooseView() throws IOException {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
-			Parent root1 = (Parent) fxmlLoader.load();
-			playerProfileController = fxmlLoader.getController();
-			playerProfileController.setViewController(this);
-			choosingStage = new Stage();
-			choosingStage.setTitle("Choose Name and Color");
-			choosingStage.setScene(new Scene(root1));
-			isChoosingStage = true;
-			choosingStage.show();
-			
+    /**
+     * starts the View for choosing Player name and Player Color view also
+     * offers Button for setting Player ready for game to start
+     *
+     * @throws IOException
+     */
+    /**
+     * @throws IOException
+     */
+    public void startChooseView() throws IOException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            playerProfileController = fxmlLoader.getController();
+            playerProfileController.setViewController(this);
+            choosingStage = new Stage();
+            choosingStage.setTitle("Choose Name and Color");
+            choosingStage.setScene(new Scene(root1));
+            isChoosingStage = true;
+            choosingStage.show();
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * starts GameView and GameViewController
-	 */
-	/**
-	 * 
-	 */
-	void startGameView() {
-		choosingStage.hide();
-		isChoosingStage = false;
-		isGameView = true;
-		FXMLLoader loader = new FXMLLoader();
-		Parent root;
-		try {
-			root = loader.load(getClass().getResource("/network/client/view/GameView.fxml").openStream());
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
-			primaryStage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * starts GameView and GameViewController
+     */
+    /**
+     *
+     */
+    void startGameView() {
+        choosingStage.hide();
+        isChoosingStage = false;
+        isGameView = true;
+        FXMLLoader loader = new FXMLLoader();
+        Parent root;
+        try {
+            root = loader.load(getClass().getResource("/network/client/view/GameView.fxml").openStream());
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
+            primaryStage.setScene(scene);
 //			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 //	        primaryStage.setX(primaryScreenBounds.getMinX());
 //	        primaryStage.setY(primaryScreenBounds.getMinY());
 //	        primaryStage.setWidth(primaryScreenBounds.getWidth());
 //	        primaryStage.setHeight(primaryScreenBounds.getHeight());
-			//primaryStage.setFullScreen(false);
-			gameViewController = (GameViewController) loader.getController();
-			gameViewController.setViewController(this);
-			primaryStage.show();
-			gameViewController.startScene(primaryStage);
+            //primaryStage.setFullScreen(false);
+            gameViewController = (GameViewController) loader.getController();
+            gameViewController.setViewController(this);
+            primaryStage.show();
+            gameViewController.startScene(primaryStage);
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	// this.GameViewController = new GameViewController(gameViewStage);
-	// this.mainViewController = new MainViewController(this,
-	// clientController.getGameLogic().getBoard(), gameViewStage);
-	// init();
-	// }
-	//
-	// public View getView() {
-	// return mainViewController.getView();
-	// }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // this.GameViewController = new GameViewController(gameViewStage);
+    // this.mainViewController = new MainViewController(this,
+    // clientController.getGameLogic().getBoard(), gameViewStage);
+    // init();
+    // }
+    //
+    // public View getView() {
+    // return mainViewController.getView();
+    // }
 
-	/**
-	 * 
-	 */
-	private void init() {
+    /**
+     *
+     */
+    private void init() {
 
 		/*
-		 * view.button.setText("build initial village 2,-2,0");
+         * view.button.setText("build initial village 2,-2,0");
 		 * view.button.setOnAction(e -> { // setCorner(2, -2, 0,
 		 * CornerStatus.VILLAGE, 23); serverController.buildInitialVillage(2,
 		 * -2, 0, 1); }); view.button2.setText("build initial street 2,-2,1");
@@ -176,118 +176,118 @@ public class ViewController {
 		 * gameController.setBandit(2, -2); });
 		 */
 
-	}
+    }
 
-	/**
-	 * @return
-	 */
-	public ClientController getClientController() {
-		return clientController;
-	}
+    /**
+     * @return
+     */
+    public ClientController getClientController() {
+        return clientController;
+    }
 
-	/**
-	 * @return
-	 */
-	public GameViewController getGameViewController() {
-		return gameViewController;
-	}
+    /**
+     * @return
+     */
+    public GameViewController getGameViewController() {
+        return gameViewController;
+    }
 
-	/**
-	 * @return
-	 */
-	public LobbyController getLobbyController() {
-		return lobbyController;
-	}
+    /**
+     * @return
+     */
+    public LobbyController getLobbyController() {
+        return lobbyController;
+    }
 
-	/**
-	 * @param clientController
-	 */
-	public void setFlowController(ClientController clientController) {
-		this.clientController = clientController;
-	}
+    /**
+     * @param clientController
+     */
+    public void setFlowController(ClientController clientController) {
+        this.clientController = clientController;
+    }
 
-	/**
-	 * @param gameViewController
-	 */
-	public void setMainViewController(GameViewController gameViewController) {
-		this.gameViewController = gameViewController;
-	}
+    /**
+     * @param gameViewController
+     */
+    public void setMainViewController(GameViewController gameViewController) {
+        this.gameViewController = gameViewController;
+    }
 
-	/**
-	 * @param lobbyController
-	 */
-	public void setLobbyController(LobbyController lobbyController) {
-		this.lobbyController = lobbyController;
-	}
+    /**
+     * @param lobbyController
+     */
+    public void setLobbyController(LobbyController lobbyController) {
+        this.lobbyController = lobbyController;
+    }
 
-	/**
-	 * @param s
-	 */
-	public void messageReceive(String s) {
-		if (isGameView) {
-			gameViewController.receiveChatMessage(s);
-		} else {
-			lobbyController.receiveChatMessage(s);
-		}
-	}
+    /**
+     * @param s
+     */
+    public void messageReceive(String s) {
+        if (isGameView) {
+            gameViewController.receiveChatMessage(s);
+        } else {
+            lobbyController.receiveChatMessage(s);
+        }
+    }
 
-	/**
-	 * 
-	 */
-	public void newTradeView() {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(
-					getClass().getResource("/application/network/client/view/tradeview/tradeView.fxml"));
-			Parent root2 = (Parent) fxmlLoader.load();
-			tradeController = fxmlLoader.getController();
-			tradeController.setViewController(this);
-			Stage tradeStage = new Stage();
-			tradeStage.setTitle("Choose Name and Color");
-			tradeStage.setScene(new Scene(root2));
-			tradeStage.show();
+    /**
+     *
+     */
+    public void newTradeView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    getClass().getResource("/application/network/client/view/tradeview/tradeView.fxml"));
+            Parent root2 = (Parent) fxmlLoader.load();
+            tradeController = fxmlLoader.getController();
+            tradeController.setViewController(this);
+            Stage tradeStage = new Stage();
+            tradeStage.setTitle("Choose Name and Color");
+            tradeStage.setScene(new Scene(root2));
+            tradeStage.show();
 
-		} catch (IOException e) {
-			logger.catching(Level.DEBUG,e);
-			e.printStackTrace();
-		}
+        } catch (IOException e) {
+            logger.catching(Level.DEBUG, e);
+            e.printStackTrace();
+        }
 
-	}
+    }
 
-	public PlayerProfileController getPlayerProfileController() {
-		return playerProfileController;
-		
-	}
-	
-	private Runnable createSResponseProfileRunnable(final String paramStr, final PlayerProfileController c){
-	    Runnable aRunnable = new Runnable(){
-	        public void run(){
-	            c.setServerColorAnswer(paramStr);
-	        }
-	    };
-	    return aRunnable;
-	}
-	
-	private Runnable createSResponseRunnable(final String paramStr, final GameViewController c){
-		Runnable aRunnable = new Runnable(){
-			public void run(){
-				c.setServerResponse(paramStr);
-			}
-		};
-		return aRunnable;
-	}
+    public PlayerProfileController getPlayerProfileController() {
+        return playerProfileController;
 
-	public void setServerResponse(String server_response) {
-		if(isGameView){
-			Platform.runLater(createSResponseRunnable(server_response, gameViewController));
-		} else if (isChoosingStage) {
-			Platform.runLater(createSResponseProfileRunnable(server_response, playerProfileController));
-		} else {
-			System.out.println("Server response: " + server_response);
-			logger.debug("Server response: " , server_response);
-		}
-		
-		// TODO Auto-generated method stub
-		
-	}
-	
+    }
+
+    private Runnable createSResponseProfileRunnable(final String paramStr, final PlayerProfileController c) {
+        Runnable aRunnable = new Runnable() {
+            public void run() {
+                c.setServerColorAnswer(paramStr);
+            }
+        };
+        return aRunnable;
+    }
+
+    private Runnable createSResponseRunnable(final String paramStr, final GameViewController c) {
+        Runnable aRunnable = new Runnable() {
+            public void run() {
+                c.setServerResponse(paramStr);
+            }
+        };
+        return aRunnable;
+    }
+
+    public void setServerResponse(String server_response) {
+        if (isGameView) {
+            Platform.runLater(createSResponseRunnable(server_response, gameViewController));
+        } else if (isChoosingStage) {
+            Platform.runLater(createSResponseProfileRunnable(server_response, playerProfileController));
+        } else {
+            System.out.println("Server response: " + server_response);
+            logger.debug("Server response: ", server_response);
+        }
+
+        // TODO Auto-generated method stub
+
+    }
+
 }
