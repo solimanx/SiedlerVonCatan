@@ -237,7 +237,8 @@ public class ClientInputHandler extends InputHandler {
             coords = ProtocolToModel.getCornerCoordinates(building.getID());
             clientController.buildCity(coords[0], coords[1], coords[2], playerID);
         } else
-            throw new IllegalArgumentException("Building type not defined");
+            logger.warn("Throws new IllegalArgumentException,\"Building type not defined\" ");
+        throw new IllegalArgumentException("Building type not defined");
 
     }
 
@@ -258,7 +259,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolResourceObtain resourceObtain) {
         int playerID = resourceObtain.getPlayerID();
         ProtocolResource pr = resourceObtain.getResource();
-     // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
+        // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
         int[] result = ProtocolToModel.convertResources(pr);
         clientController.resourceObtain(playerID, result);
 
@@ -269,7 +270,7 @@ public class ClientInputHandler extends InputHandler {
      */
     @Override
     protected void handle(ProtocolStatusUpdate statusUpdate) {
-    	//get player object
+        //get player object
         ProtocolPlayer pPlayer = statusUpdate.getPlayer();
         //get ID which is "32" or "42" etc.
         int threadID = pPlayer.getPlayerID();
@@ -293,11 +294,11 @@ public class ClientInputHandler extends InputHandler {
 //                clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
 //
 //            } else {
-            	//will be length 5 or 1
-                int[] resources = ProtocolToModel.convertResources(pRes);
-                clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
-		// }
-		// }
+        //will be length 5 or 1
+        int[] resources = ProtocolToModel.convertResources(pRes);
+        clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
+        // }
+        // }
     }
 
     //
@@ -591,7 +592,6 @@ public class ClientInputHandler extends InputHandler {
         // networkController.boughtDevelopmentCard(playerID,developmentCards;
 
     }
-
 
 
 }
