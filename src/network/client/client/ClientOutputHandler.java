@@ -173,7 +173,7 @@ public class ClientOutputHandler {
     public void robberLoss(int[] losses) {
         ProtocolResource prl;
         if (losses.length > 1) {
-            prl = new ProtocolResource(losses[0], losses[1], losses[3], losses[4], losses[5], 0);
+            prl = new ProtocolResource(losses[0], losses[1], losses[2], losses[3], losses[4], 0);
         } else {
             prl = new ProtocolResource(0, 0, 0, 0, 0, losses[0]);
         }
