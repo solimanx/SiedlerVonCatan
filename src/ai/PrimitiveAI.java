@@ -122,6 +122,7 @@ public class PrimitiveAI extends Thread {
      * @throws IOException
      */
     private void read() throws IOException {
+        logger.warn("Reading input from the servers output(read()) throws IOException");
         String line;
         while ((line = reader.readLine()) != null) {
             System.out.println(DefaultSettings.getCurrentTime() + " Server: " + line);
@@ -136,6 +137,7 @@ public class PrimitiveAI extends Thread {
      * @throws IOException
      */
     public void write(String json) throws IOException {
+        logger.warn("Writing output to server, throws IOException");
         System.out.println(DefaultSettings.getCurrentTime() + "    A.I: " + json);
         logger.info(DefaultSettings.getCurrentTime(), "    A.I: ", json);
         writer.write(json + "\n");
@@ -202,6 +204,7 @@ public class PrimitiveAI extends Thread {
                     pO.requestBuildInitialRoad(x, y, dir);
                     firstRoadLocation = new int[]{x, y, dir};
                 } else {
+                    logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()1\" ");
                     throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()1");
                 }
             } else if (dir == 1) {
@@ -215,10 +218,12 @@ public class PrimitiveAI extends Thread {
                     pO.requestBuildInitialRoad(x - 1, y - 1, dir);
                     firstRoadLocation = new int[]{x - 1, y - 1, dir};
                 } else {
+                    logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()2\" ");
                     throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()2");
                 }
 
             } else {
+                logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()3\" ");
                 throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()3");
             }
 
@@ -240,6 +245,7 @@ public class PrimitiveAI extends Thread {
                     secondRoadLocation = new int[]{x, y, dir};
                     pO.requestBuildInitialRoad(x, y, dir);
                 } else {
+                    logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()\" ");
                     throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
                 }
             } else if (dir == 1) {
@@ -253,10 +259,12 @@ public class PrimitiveAI extends Thread {
                     secondRoadLocation = new int[]{x - 1, y + 1, dir};
                     pO.requestBuildInitialRoad(x - 1, y + 1, dir);
                 } else {
+                    logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()\" ");
                     throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
                 }
 
             } else {
+                logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()\" ");
                 throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
             }
         }
