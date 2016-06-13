@@ -57,6 +57,8 @@ public class ClientController {
 
 	protected Client client;
 	private int initialRoundCount = 0;
+	private String currentServerResponse;
+	private PlayerState currentState;
 
 	/**
 	 * @param primaryStage
@@ -126,6 +128,15 @@ public class ClientController {
 	 */
 	public void receiveServerConfirmation(String server_response) {
 		// TODO client confirm in later protocols
+		currentServerResponse = server_response;
+		switch (currentState) {
+		case GAME_STARTING:
+		case WAITING_FOR_GAMESTART:
+			break;
+
+		default:
+			viewController.messageReceive(server_response);
+		}
 	}
 
 	// 6.2
@@ -160,7 +171,7 @@ public class ClientController {
 
 	// 7.2
 	/**
-	 * 
+	 *
 	 */
 	public void sendReady() {
 		clientOutputHandler.clientReady();
@@ -186,6 +197,7 @@ public class ClientController {
 	public void statusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
 			int[] resources) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
+		currentState = status;
 		switch (status) {
 		case CONNECTION_LOST:
 			if (modelID != null) {
@@ -290,7 +302,7 @@ public class ClientController {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void initializeGUI() {
 
@@ -507,7 +519,7 @@ public class ClientController {
 
 	// 9.1
 	/**
-	 * 
+	 *
 	 */
 	public void diceRollRequest() {
 		clientOutputHandler.diceRollRequest();
@@ -601,7 +613,7 @@ public class ClientController {
 
 	// 9.7
 	/**
-	 * 
+	 *
 	 */
 	public void endTurn() {
 		clientOutputHandler.endTurn();
@@ -609,7 +621,7 @@ public class ClientController {
 
 	// Protocol 0.2
 	/**
-	 * 
+	 *
 	 */
 	public void robberMovement() {
 		// TODO
@@ -659,14 +671,14 @@ public class ClientController {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void victory() {
 		// TODO
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void costs() {
 		// TODO
@@ -695,7 +707,7 @@ public class ClientController {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void monopolyCardInfo() {
 		// TODO
@@ -711,7 +723,7 @@ public class ClientController {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void boughtDevelopmentCard() {
 		// TODO
