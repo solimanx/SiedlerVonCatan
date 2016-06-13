@@ -52,6 +52,8 @@ public class ViewController {
             startLobbyView(primaryStage);
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            logger.error("Input/Output Exception", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -93,7 +95,9 @@ public class ViewController {
     /**
      * @throws IOException
      */
+
     public void startChooseView() throws IOException {
+        logger.warn("startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException");
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -107,6 +111,8 @@ public class ViewController {
 
 
         } catch (IOException e) {
+            logger.error("Input/Output Exception,e");
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
     }
@@ -140,6 +146,8 @@ public class ViewController {
             gameViewController.startScene(primaryStage);
 
         } catch (IOException e) {
+            logger.error("Input/Output Exception", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
     }
@@ -247,7 +255,8 @@ public class ViewController {
             tradeStage.show();
 
         } catch (IOException e) {
-            logger.catching(Level.DEBUG, e);
+            logger.error("Input/Output Exception", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
