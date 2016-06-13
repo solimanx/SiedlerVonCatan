@@ -81,6 +81,7 @@ public class ServerController {
 
 	/**
 	 * sends a hello message at server start
+	 * 
 	 * @param currentThreadID
 	 */
 	public void hello(int currentThreadID) {
@@ -88,8 +89,9 @@ public class ServerController {
 	}
 
 	/**
-	 * is called when a client sends hello message
-	 * registers threadID and sends status update
+	 * is called when a client sends hello message registers threadID and sends
+	 * status update
+	 * 
 	 * @param currentThreadID
 	 */
 	public void receiveHello(int currentThreadID) {
@@ -112,6 +114,7 @@ public class ServerController {
 
 	/**
 	 * sends a welcome message to client
+	 * 
 	 * @param modelPlayerID
 	 */
 	public void welcome(int modelPlayerID) {
@@ -119,8 +122,9 @@ public class ServerController {
 	}
 
 	/**
-	 * is called when a client is ready,
-	 * if all clients are ready then start game
+	 * is called when a client is ready, if all clients are ready then start
+	 * game
+	 * 
 	 * @param currentThreadID
 	 */
 	public void clientReady(int currentThreadID) {
@@ -145,6 +149,7 @@ public class ServerController {
 
 	/**
 	 * sends server response to specified client
+	 * 
 	 * @param modelID
 	 * @param server_response
 	 */
@@ -155,6 +160,7 @@ public class ServerController {
 
 	/**
 	 * sends an error to specified client
+	 * 
 	 * @param modelID
 	 * @param string
 	 */
@@ -165,6 +171,7 @@ public class ServerController {
 
 	/**
 	 * is called when client sets own name and color before gamestart
+	 * 
 	 * @param color
 	 * @param name
 	 * @param currentThreadID
@@ -198,6 +205,7 @@ public class ServerController {
 
 	/**
 	 * sends a received chat message to all clients
+	 * 
 	 * @param playerId
 	 * @param chatMessage
 	 */
@@ -208,6 +216,7 @@ public class ServerController {
 
 	/**
 	 * is called when client sends a chat message
+	 * 
 	 * @param chatMessage
 	 * @param currentThreadID
 	 */
@@ -227,6 +236,7 @@ public class ServerController {
 
 	/**
 	 * sends status update of specified player to all clients
+	 * 
 	 * @param playerModelID
 	 */
 	public void statusUpdate(int playerModelID) {
@@ -237,6 +247,7 @@ public class ServerController {
 
 	/**
 	 * sends status update of a player to specified client
+	 * 
 	 * @param sendToPlayer
 	 * @param playerModelID
 	 */
@@ -256,10 +267,8 @@ public class ServerController {
 	}
 
 	/**
-	 * starts the game:
-	 * generates the board
-	 * generates player order
-	 * sets first player to play
+	 * starts the game: generates the board generates player order sets first
+	 * player to play
 	 */
 	public void initializeBoard() {
 		generateBoard("A", true);
@@ -302,6 +311,7 @@ public class ServerController {
 
 	/**
 	 * dice roll request from client
+	 * 
 	 * @param threadID
 	 */
 	public void diceRollRequest(int threadID) {
@@ -342,6 +352,7 @@ public class ServerController {
 
 	/**
 	 * generates a random dice result
+	 * 
 	 * @return integer array [2] values
 	 */
 	private int[] rollDice() {
@@ -355,7 +366,7 @@ public class ServerController {
 	/**
 	 * is called when client wants to build a village if initialBuildingPhase
 	 * then jumps to requestBuildInitialVillage
-	 *
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -395,7 +406,7 @@ public class ServerController {
 
 	/**
 	 * builds a street is called by the server controller
-	 *
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -432,7 +443,7 @@ public class ServerController {
 
 	/**
 	 * Checks if a player has longest Trading Route
-	 *
+	 * 
 	 * @param modelID
 	 */
 	private void checkLongestTradingRoute(int modelID) {
@@ -443,7 +454,7 @@ public class ServerController {
 	/**
 	 * is called by the serverController after a build request from a client
 	 * builds a city
-	 *
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -475,16 +486,16 @@ public class ServerController {
 	public void requestBuyDevCard(int thredID){
 		int modelID = threadPlayerIdMap.get(thredID);
 		if(gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)){
-			if(gameLogic.checkBuyDevCard(modelID)){
+			/*if(gameLogic.checkBuyDevCard(modelID)){
 
-			}
+			}*/
 		}
 	}
 
 	/**
 	 * Is called by serverController when there is a street build request during
 	 * the initial phase
-	 *
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -503,24 +514,22 @@ public class ServerController {
 
 				serverOutputHandler.buildStreet(x, y, dir, threadID);
 
-
 				InitialStreetCounter++;
-				if (InitialStreetCounter >= amountPlayers * 2) { //initial finished
+				if (InitialStreetCounter >= amountPlayers * 2) { // initial
+																	// finished
 					gainFirstBoardResources();
-				}
-				else if(InitialStreetCounter == amountPlayers){ //no change
+				} else if (InitialStreetCounter == amountPlayers) { // no change
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
 					statusUpdate(currentPlayer);
-				}
-				else if(InitialStreetCounter > amountPlayers){ //go backwards
+				} else if (InitialStreetCounter > amountPlayers) { // go
+																	// backwards
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
 					statusUpdate(modelID);
 
-					currentPlayer = playerOrder[playerOrder[currentPlayer]-1];
+					currentPlayer = playerOrder[playerOrder[currentPlayer] - 1];
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
 					statusUpdate(currentPlayer);
-				}
-				else { //go forward
+				} else { // go forward
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
 					statusUpdate(modelID);
 
@@ -535,7 +544,7 @@ public class ServerController {
 	/**
 	 * is called by serverController when there is a Build Request during the
 	 * initial Phase
-	 *
+	 * 
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -567,7 +576,7 @@ public class ServerController {
 
 	/**
 	 * Is called by View when ownPlayer has finished his turn
-	 *
+	 * 
 	 * @param playerID
 	 */
 	public void endTurn(int playerID) {
@@ -583,8 +592,9 @@ public class ServerController {
 	}
 
 	/**
-	 * is called when client sends a robber loss message
-	 * checks if action is valid sends status updates
+	 * is called when client sends a robber loss message checks if action is
+	 * valid sends status updates
+	 * 
 	 * @param threadID
 	 * @param resources
 	 */
@@ -619,7 +629,7 @@ public class ServerController {
 
 	/**
 	 * Sends a robberMovementRequest to all clients
-	 *
+	 * 
 	 * @param x
 	 * @param y
 	 * @param victimID
@@ -666,7 +676,7 @@ public class ServerController {
 	}
 
 	/**
-	 *
+	 * 
 	 * Basic methods for trading
 	 */
 
@@ -737,7 +747,8 @@ public class ServerController {
 				} while (notFound);
 				cards[currNum]--;
 				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
-				//currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(i));
+				// currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" +
+				// fields.charAt(i));
 				if (currNum != 5) {
 					currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
 							DefaultSettings.DICE_NUMBERS[diceInd]);
@@ -759,20 +770,23 @@ public class ServerController {
 				} while (notFound);
 				cards[currNum]--;
 				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
-				//currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(i));
+				// currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" +
+				// fields.charAt(i));
 				currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
 						DefaultSettings.DICE_NUMBERS[i]);
 			}
 			int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(fields.length() - 1));
-			//currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(fields.length() - 1));
+			// currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" +
+			// fields.charAt(fields.length() - 1));
 			currBoard.setFieldAt(coords[0], coords[1], ResourceType.NOTHING, null);
-			currBoard.setBandit(""+fields.charAt(fields.length() -1));
+			currBoard.setBandit("" + fields.charAt(fields.length() - 1));
 
 		}
 		String outerRing = currBoard.getOuterRing();
 		for (int i = 0; i < outerRing.length(); i++) {
 			int[] coords = ProtocolToModel.getFieldCoordinates("" + outerRing.charAt(i));
-			//currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + outerRing.charAt(i));
+			// currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" +
+			// outerRing.charAt(i));
 			currBoard.setFieldAt(coords[0], coords[1], ResourceType.SEA, null);
 		}
 	}
@@ -801,6 +815,7 @@ public class ServerController {
 
 	/**
 	 * sets new player resources after dice roll
+	 * 
 	 * @param diceNum
 	 */
 	public void gainBoardResources(int diceNum) {
@@ -846,6 +861,7 @@ public class ServerController {
 
 	/**
 	 * decreases the resource stack
+	 * 
 	 * @param resType
 	 * @return
 	 */
@@ -861,6 +877,7 @@ public class ServerController {
 
 	/**
 	 * increases the resource stack
+	 * 
 	 * @param resType
 	 */
 	private void resourceStackIncrease(ResourceType resType) {
@@ -870,6 +887,7 @@ public class ServerController {
 
 	/**
 	 * increases the resource stack with resource array
+	 * 
 	 * @param resources
 	 */
 	private void resourceStackIncrease(int[] resources) {
@@ -882,7 +900,7 @@ public class ServerController {
 
 	/**
 	 * sets player resources after initial building phase
-	 *
+	 * 
 	 */
 	private void gainFirstBoardResources() {
 		int[] coords; // wegen performance nur einmaliges Initialisieren
@@ -893,10 +911,12 @@ public class ServerController {
 			connFields = gameLogic.getBoard().getConnectedFields(coords[0], coords[1], coords[2]);
 			for (int j = 0; j < connFields.length; j++) {
 				currResType = connFields[j].getResourceType();
-				if (resourceStackDecrease(currResType)) {
-					addToPlayersResource(initialVillages.get(i).getOwnerID(), currResType, 1);
-				} else {
-					System.out.println("Stapel leer: " + currResType);
+				if (currResType != ResourceType.NOTHING && currResType != ResourceType.SEA) {
+					if (resourceStackDecrease(currResType)) {
+						addToPlayersResource(initialVillages.get(i).getOwnerID(), currResType, 1);
+					} else {
+						System.out.println("Stapel leer: " + currResType);
+					}
 				}
 
 			}
@@ -906,6 +926,7 @@ public class ServerController {
 
 	/**
 	 * gets next player in the player order
+	 * 
 	 * @param modelPlayerID
 	 * @return nextPlayerID
 	 */
@@ -920,6 +941,7 @@ public class ServerController {
 
 	/**
 	 * gets player resources
+	 * 
 	 * @param modelPlayerID
 	 * @return int[] resources
 	 */
@@ -929,6 +951,7 @@ public class ServerController {
 
 	/**
 	 * sets player resources
+	 * 
 	 * @param modelID
 	 * @param resources
 	 */
@@ -938,6 +961,7 @@ public class ServerController {
 
 	/**
 	 * adds a single resource to players resource
+	 * 
 	 * @param playerID
 	 * @param resType
 	 * @param amount
@@ -952,6 +976,7 @@ public class ServerController {
 
 	/**
 	 * adds resources to player resource
+	 * 
 	 * @param playerID
 	 * @param resourcesToAdd
 	 */
@@ -967,6 +992,7 @@ public class ServerController {
 
 	/**
 	 * subtracts resources from players resource
+	 * 
 	 * @param playerID
 	 * @param costsparam
 	 */
