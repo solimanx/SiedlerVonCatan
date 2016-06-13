@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import application.lobby.LobbyController;
 import application.lobby.PlayerProfileController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -98,6 +99,7 @@ public class ViewController {
 			choosingStage = new Stage();
 			choosingStage.setTitle("Choose Name and Color");
 			choosingStage.setScene(new Scene(root1));
+			isChoosingStage = true;
 			choosingStage.show();
 			
 
@@ -114,6 +116,7 @@ public class ViewController {
 	 */
 	void startGameView() {
 		choosingStage.hide();
+		isChoosingStage = false;
 		isGameView = true;
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
@@ -250,4 +253,36 @@ public class ViewController {
 		return playerProfileController;
 		
 	}
+	
+	private Runnable createSResponseProfileRunnable(final String paramStr, final PlayerProfileController c){
+	    Runnable aRunnable = new Runnable(){
+	        public void run(){
+	            c.setServerColorAnswer(paramStr);
+	        }
+	    };
+	    return aRunnable;
+	}
+	
+	private Runnable createSResponseRunnable(final String paramStr, final GameViewController c){
+		Runnable aRunnable = new Runnable(){
+			public void run(){
+				c.setServerResponse(paramStr);
+			}
+		};
+		return aRunnable;
+	}
+
+	public void setServerResponse(String server_response) {
+		if(isGameView){
+			Platform.runLater(createSResponseRunnable(server_response, gameViewController));
+		} else if (isChoosingStage) {
+			Platform.runLater(createSResponseProfileRunnable(server_response, playerProfileController));
+		} else {
+			System.out.println("Server response: " + server_response);
+		}
+		
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

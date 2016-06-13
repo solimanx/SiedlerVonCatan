@@ -233,6 +233,9 @@
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
             </Label>
          </children>
       </VBox>

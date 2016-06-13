@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 
 import com.sun.media.jfxmedia.logging.Logger;
 
+import application.lobby.PlayerProfileController;
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
@@ -128,15 +129,14 @@ public class ClientController {
 	 */
 	public void receiveServerConfirmation(String server_response) {
 		// TODO client confirm in later protocols
-		/*currentServerResponse = server_response;
+		currentServerResponse = server_response;
 		switch (currentState) {
 		case GAME_STARTING:
 		case WAITING_FOR_GAMESTART:
-			//viewController.getPlayerProfileController().setServerColorAnswer(server_response);
-
+			viewController.setServerResponse(server_response);
 		default:
-			viewController.getGameViewController().setServerResponse(server_response);
-		}*/
+			viewController.setServerResponse(server_response);
+		}
 	}
 
 	// 6.2

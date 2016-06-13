@@ -32,7 +32,7 @@ public class PlayerProfileController implements Initializable {
 	private Label serverColorAnswer;
 
 	public void setServerColorAnswer(String server_response) {
-		this.serverColorAnswer.setText(server_response);
+		serverColorAnswer.setText(server_response);
 	}
 
 	@Override
