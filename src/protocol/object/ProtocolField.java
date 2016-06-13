@@ -15,30 +15,30 @@ import com.google.gson.annotations.Since;
 public class ProtocolField {
 
 	@SerializedName("Ort")
-	private String field_id;
+	private String fieldID;
 
 	@SerializedName("Typ")
-	private String field_type;
+	private String fieldType;
 
 	@SerializedName("Zahl")
-	private Integer dice_index;
+	private Integer diceIndex;
 
-	public ProtocolField(String field_id, String field_type, Integer dice_index) {
-		this.field_id = field_id;
-		this.field_type = field_type;
-		this.dice_index = dice_index;
+	public ProtocolField(String fieldID, String fieldType, Integer diceIndex) {
+		this.fieldID = fieldID;
+		this.fieldType = fieldType;
+		this.diceIndex = diceIndex;
 	}
 
 	public String getFieldID() {
-		return field_id;
+		return fieldID;
 	}
 
 	public String getFieldType() {
-		return field_type;
+		return fieldType;
 	}
 
 	public Integer getDiceIndex() {
-		return dice_index;
+		return diceIndex;
 	}
 
 }

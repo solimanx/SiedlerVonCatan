@@ -18,19 +18,19 @@ public class ProtocolBuildRequest {
 	private String building_type;
 
 	@SerializedName("Ort")
-	private String location_id;
+	private String locationID;
 
-	public ProtocolBuildRequest(String building_type, String location_id) {
+	public ProtocolBuildRequest(String building_type, String locationID) {
 		this.building_type = building_type;
-		this.location_id = location_id;
+		this.locationID = locationID;
 	}
 
-	public String getBuilding() {
+	public String getBuildingType() {
 		return building_type;
 	}
 
-	public String getLocation() {
-		return location_id;
+	public String getLocationID() {
+		return locationID;
 	}
 
 }

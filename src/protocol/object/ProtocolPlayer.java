@@ -3,11 +3,10 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
-import enums.CardType;
 import enums.Color;
 import enums.PlayerState;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
-import protocol3.severinstructions.ProtocolPlayKnightCard;
+import protocol3.serverinstructions.ProtocolPlayKnightCard;
 
 /**
  * <b>Spieler (Player)</b>

@@ -402,8 +402,8 @@ public class PrimitiveAI extends Thread {
 
 	}
 
-	protected void updateRobber(String location_id) {
-		gl.getBoard().setBandit(location_id);
+	protected void updateRobber(String locationID) {
+		gl.getBoard().setBandit(locationID);
 
 	}
 
@@ -431,8 +431,8 @@ public class PrimitiveAI extends Thread {
 		return ID;
 	}
 
-	protected void setID(int player_id) {
-		ID = player_id;
+	protected void setID(int playerID) {
+		ID = playerID;
 
 	}
 

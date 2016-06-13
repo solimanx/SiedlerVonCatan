@@ -15,12 +15,12 @@ public final class ProtocolToModel {
 	 * Example J -> (0,0)
 	 * </p>
 	 * 
-	 * @param field_id
+	 * @param fieldID
 	 * @return
 	 */
-	public static int[] getFieldCoordinates(String field_id) {
+	public static int[] getFieldCoordinates(String fieldID) {
 		// Get the field ID through the Board's HashMap
-		return Board.getStringToCoordMap().get(field_id);
+		return Board.getStringToCoordMap().get(fieldID);
 	}
 
 	/**

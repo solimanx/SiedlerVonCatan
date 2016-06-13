@@ -18,13 +18,13 @@ import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
-import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol.serverinstructions.trade.ProtocolTradePreview;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.severinstructions.*;
+import protocol3.serverinstructions.*;
 
 public abstract class InputHandler {
     private static Logger logger = LogManager.getLogger(InputHandler.class.getName());
@@ -120,8 +120,8 @@ public abstract class InputHandler {
             case "ProtocolTradeRequest":
                 handle((ProtocolTradeRequest) o);
                 break;
-            case "ProtocolTradeIsRequested":
-                handle((ProtocolTradeIsRequested) o);
+            case "ProtocolTradePreview":
+                handle((ProtocolTradePreview) o);
                 break;
             case "ProtocolTradeAccept":
                 handle((ProtocolTradeAccept) o);
@@ -234,7 +234,7 @@ public abstract class InputHandler {
 
     protected abstract void handle(ProtocolTradeRequest tradeRequest);
 
-    protected abstract void handle(ProtocolTradeIsRequested tradeIsRequested);
+    protected abstract void handle(ProtocolTradePreview tradePreview);
 
     protected abstract void handle(ProtocolTradeAccept tradeAccept);
 

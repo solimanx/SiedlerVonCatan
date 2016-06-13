@@ -15,14 +15,14 @@ import com.google.gson.annotations.Since;
 public class ProtocolWelcome {
 
 	@SerializedName("id")
-	private int player_id;
+	private int playerID;
 
-	public ProtocolWelcome(int player_id) {
-		this.player_id = player_id;
+	public ProtocolWelcome(int playerID) {
+		this.playerID = playerID;
 	}
 
-	public int getPlayer_id() {
-		return player_id;
+	public int getPlayerID() {
+		return playerID;
 	}
 
 }

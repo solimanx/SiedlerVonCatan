@@ -6,7 +6,6 @@ import com.google.gson.annotations.Since;
 import protocol.object.ProtocolResource;
 
 /**
- * used Protocol
  * <b>Handel anbieten (Request trade/offer)</b>
  * <p>
  * Client sends server the requested resources to trade.

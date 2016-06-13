@@ -15,18 +15,18 @@ import com.google.gson.annotations.Since;
 public class ProtocolChatReceiveMessage {
 
 	@SerializedName("Absender")
-	private int sender_id;
+	private int senderID;
 
 	@SerializedName("Nachricht")
 	private String message;
 
-	public ProtocolChatReceiveMessage(int sender_id, String message) {
-		this.sender_id = sender_id;
+	public ProtocolChatReceiveMessage(int senderID, String message) {
+		this.senderID = senderID;
 		this.message = message;
 	}
 
 	public int getSender() {
-		return sender_id;
+		return senderID;
 	}
 
 	public String getMessage() {

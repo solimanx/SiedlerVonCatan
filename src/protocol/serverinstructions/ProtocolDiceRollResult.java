@@ -15,18 +15,18 @@ import com.google.gson.annotations.Since;
 public class ProtocolDiceRollResult {
 
 	@SerializedName("Spieler")
-	private int player_id;
+	private int playerID;
 
 	@SerializedName("Wurf")
 	private int[] roll;
 
-	public ProtocolDiceRollResult(int player, int[] result) {
-		this.player_id = player;
+	public ProtocolDiceRollResult(int playerID, int[] result) {
+		this.playerID = playerID;
 		this.roll = result;
 	}
 
-	public int getPlayer() {
-		return player_id;
+	public int getPlayerID() {
+		return playerID;
 	}
 
 	public int[] getRoll() {

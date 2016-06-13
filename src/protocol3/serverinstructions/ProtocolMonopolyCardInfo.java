@@ -1,4 +1,4 @@
-package protocol3.severinstructions;
+package protocol3.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -6,10 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Parser {
-    @SuppressWarnings("unchecked")
     private static Logger logger = LogManager.getLogger(Parser.class.getName());
 
-    public <T> T parseString(String string) {
+    @SuppressWarnings("unchecked")
+	public <T> T parseString(String string) {
 
         Gson gson = new GsonBuilder().create();
         Response response = gson.fromJson(string, Response.class);
@@ -113,8 +113,8 @@ public class Parser {
             return (T) response.pTradeRequest;
 
         }
-        if (response.pTradeIsRequested != null) {
-            return (T) response.pTradeIsRequested;
+        if (response.pTradePreview != null) {
+            return (T) response.pTradePreview;
 
         }
         if (response.pTradeAccept != null) {

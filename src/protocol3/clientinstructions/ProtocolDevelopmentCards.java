@@ -6,7 +6,7 @@ import com.google.gson.annotations.Since;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.severinstructions.ProtocolPlayKnightCard;
+import protocol3.serverinstructions.ProtocolPlayKnightCard;
 
 /**
  * <b> 6.7 Entwicklungskarte Objekte( development cards)</b>

@@ -2,13 +2,13 @@ package network.server.server;
 
 import java.io.IOException;
 
-import enums.CardType;
-import enums.ResourceType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import enums.CardType;
 import enums.Color;
 import enums.PlayerState;
+import enums.ResourceType;
 import model.Board;
 import model.objects.Field;
 import network.ModelToProtocol;
@@ -27,16 +27,23 @@ import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolPlayer;
 import protocol.object.ProtocolResource;
-import protocol.serverinstructions.*;
+import protocol.serverinstructions.ProtocolBuild;
+import protocol.serverinstructions.ProtocolCosts;
+import protocol.serverinstructions.ProtocolDiceRollResult;
+import protocol.serverinstructions.ProtocolResourceObtain;
+import protocol.serverinstructions.ProtocolRobberMovement;
+import protocol.serverinstructions.ProtocolStatusUpdate;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
-import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
-import protocol3.clientinstructions.ProtocolDevelopmentCards;
-import protocol3.object.ProtocolInventionCard;
-import protocol3.object.ProtocolMonopolyCard;
-import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.severinstructions.*;
+import protocol.serverinstructions.trade.ProtocolTradePreview;
+import protocol3.serverinstructions.ProtocolBiggestKnightProwess;
+import protocol3.serverinstructions.ProtocolBoughtDevelopmentCard;
+import protocol3.serverinstructions.ProtocolInventionCardInfo;
+import protocol3.serverinstructions.ProtocolLongestRoad;
+import protocol3.serverinstructions.ProtocolMonopolyCardInfo;
+import protocol3.serverinstructions.ProtocolPlayKnightCard;
+import protocol3.serverinstructions.ProtocolRoadBuildingCardInfo;
 
 //import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
@@ -273,7 +280,7 @@ public class ServerOutputHandler {
 
     }
 
-    public void protocolTradeIsRequested(int player_id, int trade_id, int[] offer, int[] withdrawal) {
+    public void tradePreview(int player_id, int trade_id, int[] offer, int[] withdrawal) {
         ProtocolResource proff;
         if (offer.length > 1) {
             proff = new ProtocolResource(offer[0], offer[1], offer[3], offer[4], offer[5], 0);
@@ -287,9 +294,9 @@ public class ServerOutputHandler {
             prw = new ProtocolResource(0, 0, 0, 0, 0, withdrawal[0]);
         }
 
-        ProtocolTradeIsRequested ptis = new ProtocolTradeIsRequested(player_id, trade_id, proff, prw);
+        ProtocolTradePreview ptp = new ProtocolTradePreview(player_id, trade_id, proff, prw);
         Response r = new Response();
-        r.pTradeIsRequested = ptis;
+        r.pTradePreview = ptp;
         try {
             server.broadcast(parser.createString(r));
         } catch (IOException e) {

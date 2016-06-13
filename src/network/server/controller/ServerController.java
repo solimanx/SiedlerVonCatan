@@ -613,7 +613,7 @@ public class ServerController {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param victim_id
+	 * @param victimID
 	 * @param currentThreadID
 	 */
 	public void robberMovementRequest(int x, int y, Integer victimThreadID, int currentThreadID) {
@@ -666,7 +666,7 @@ public class ServerController {
 	}
 
 	public void sendClientOffer(int modelID, int tradingID, int[] supply, int[] demand) {
-		serverOutputHandler.protocolTradeIsRequested(modelPlayerIdMap.get(modelID), tradingID, supply, demand);
+		serverOutputHandler.tradePreview(modelPlayerIdMap.get(modelID), tradingID, supply, demand);
 	}
 
 	public void acceptTrade(int threadID, int tradingID) {

@@ -6,8 +6,8 @@ import com.google.gson.annotations.Since;
 import protocol.object.ProtocolResource;
 
 /**
- * not used Protocol
- * <b>Handel angenommen (Trade Confirmation)</b>
+ * 
+ * <b>Handelsangebot (Trade Confirmation)</b>
  * <p>
  * Server previews the detail of the offered trade.
  * </p>
@@ -18,10 +18,10 @@ import protocol.object.ProtocolResource;
 public class ProtocolTradePreview {
 
 	@SerializedName("Spieler")
-	private int player_id;
+	private int playerID;
 
 	@SerializedName("Handel id")
-	private int trade_id;
+	private int tradeID;
 
 	@SerializedName("Angebot")
 	private ProtocolResource offer;
@@ -29,19 +29,19 @@ public class ProtocolTradePreview {
 	@SerializedName("Nachfrage")
 	private ProtocolResource withdrawal;
 
-	public ProtocolTradePreview(int player_id, int trade_id, ProtocolResource offer, ProtocolResource withdrawal) {
-		this.player_id = player_id;
-		this.trade_id = trade_id;
+	public ProtocolTradePreview(int playerID, int tradeID, ProtocolResource offer, ProtocolResource withdrawal) {
+		this.playerID = playerID;
+		this.tradeID = tradeID;
 		this.offer = offer;
 		this.withdrawal = withdrawal;
 	}
 
-	public int getPlayer_id() {
-		return player_id;
+	public int getPlayerID() {
+		return playerID;
 	}
 
-	public int getTrade_id() {
-		return trade_id;
+	public int getTradeID() {
+		return tradeID;
 	}
 
 	public ProtocolResource getOffer() {

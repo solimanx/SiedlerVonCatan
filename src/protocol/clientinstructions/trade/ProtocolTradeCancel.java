@@ -4,10 +4,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * used Protocol
  * <b>Handel abbrechen(Cancel trade request)</b>
  * <p>
- * Player send Messade to Server, in order to cancel trade request.
+ * Player sends message to Server, in order to cancel trade request.
  * </p>
  */
 
@@ -15,15 +14,15 @@ import com.google.gson.annotations.Since;
 public class ProtocolTradeCancel {
 
 	@SerializedName("Handel id")
-	private int trade_id;
+	private int tradeID;
 
-	public ProtocolTradeCancel(int trade_id) {
+	public ProtocolTradeCancel(int tradeID) {
 
-		this.trade_id = trade_id;
+		this.tradeID = tradeID;
 	}
 
-	public int getTrade_id() {
+	public int getTradeID() {
 
-		return trade_id;
+		return tradeID;
 	}
 }

@@ -16,8 +16,8 @@ import protocol.object.ProtocolResource;
 @Since(0.2)
 public class ProtocolCosts extends ProtocolResourceObtain {
 
-	public ProtocolCosts(int player_id, ProtocolResource resource) {
-		super(player_id, resource);
+	public ProtocolCosts(int playerID, ProtocolResource resource) {
+		super(playerID, resource);
 	}
 
 }

@@ -22,7 +22,7 @@ import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.*;
 import protocol3.clientinstructions.*;
 import protocol3.object.*;
-import protocol3.severinstructions.*;
+import protocol3.serverinstructions.*;
 
 /**
  * Handling all input for the AI
@@ -61,7 +61,7 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	 */
 	@Override
 	protected void handle(ProtocolWelcome welcome) {
-		ai.setID(welcome.getPlayer_id());
+		ai.setID(welcome.getPlayerID());
 		ai.getOutput().respondProfile(ai.getColorCounter());
 
 	}
@@ -181,7 +181,7 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolResourceObtain resourceObtain) {
 		// Get ID and resources
-		int ID = resourceObtain.getPlayer();
+		int ID = resourceObtain.getPlayerID();
 		int[] gain;
 
 		// if it's me
@@ -253,7 +253,7 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	 */
 	@Override
 	protected void handle(ProtocolRobberMovement robberMovement) {
-		ai.updateRobber(robberMovement.getLocation_id());
+		ai.updateRobber(robberMovement.getLocationID());
 
 	}
 
@@ -294,7 +294,7 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
+	protected void handle(ProtocolTradePreview tradePreview) {
 		// TODO Auto-generated method stub
 
 	}

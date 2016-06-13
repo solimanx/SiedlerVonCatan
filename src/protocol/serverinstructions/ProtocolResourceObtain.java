@@ -18,18 +18,18 @@ import protocol.object.ProtocolResource;
 public class ProtocolResourceObtain {
 
 	@SerializedName("Spieler")
-	private int player_id;
+	private int playerID;
 
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resource;
 
-	public ProtocolResourceObtain(int player_id, ProtocolResource resource) {
-		this.player_id = player_id;
+	public ProtocolResourceObtain(int playerID, ProtocolResource resource) {
+		this.playerID = playerID;
 		this.resource = resource;
 	}
 
-	public int getPlayer() {
-		return player_id;
+	public int getPlayerID() {
+		return playerID;
 	}
 
 	public ProtocolResource getResource() {

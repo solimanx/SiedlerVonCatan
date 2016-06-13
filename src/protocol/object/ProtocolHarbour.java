@@ -17,18 +17,18 @@ import enums.HarbourStatus;
 public class ProtocolHarbour {
 
 	@SerializedName("Ort")
-	private String location_id;
+	private String locationID;
 
 	@SerializedName("Typ")
 	private HarbourStatus harbour_type;
 
-	public ProtocolHarbour(String location_id, HarbourStatus harbour_type) {
-		this.location_id = location_id;
-		this.harbour_type = harbour_type;
+	public ProtocolHarbour(String locationID, HarbourStatus harbourType) {
+		this.locationID = locationID;
+		this.harbour_type = harbourType;
 	}
 
 	public String getID() {
-		return location_id;
+		return locationID;
 	}
 
 	public HarbourStatus getType() {

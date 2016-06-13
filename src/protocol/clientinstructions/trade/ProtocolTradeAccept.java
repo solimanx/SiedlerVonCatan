@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * used Protocol
  * <b>Handelsangebot annehmen (Accept trade offered)</b>
  * <p>
  * When client accepts the terms of the given trade.
@@ -15,15 +14,15 @@ import com.google.gson.annotations.Since;
 public class ProtocolTradeAccept {
 
 	@SerializedName("Handel id")
-	private int trade_id;
+	private int tradeID;
 
-	public ProtocolTradeAccept(int trade_id) {
+	public ProtocolTradeAccept(int tradeID) {
 
-		this.trade_id = trade_id;
+		this.tradeID = tradeID;
 	}
 
-	public int getTrade_id() {
+	public int getTradeID() {
 
-		return trade_id;
+		return tradeID;
 	}
 }

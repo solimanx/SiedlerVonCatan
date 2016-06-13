@@ -5,7 +5,12 @@ import enums.ResourceType;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.server.controller.ServerController;
-import protocol.clientinstructions.*;
+import protocol.clientinstructions.ProtocolBuildRequest;
+import protocol.clientinstructions.ProtocolDiceRollRequest;
+import protocol.clientinstructions.ProtocolEndTurn;
+import protocol.clientinstructions.ProtocolHarbourRequest;
+import protocol.clientinstructions.ProtocolRobberLoss;
+import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.clientinstructions.trade.ProtocolTradeCancel;
 import protocol.clientinstructions.trade.ProtocolTradeComplete;
@@ -30,15 +35,19 @@ import protocol.serverinstructions.ProtocolStatusUpdate;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
-import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol.serverinstructions.trade.ProtocolTradePreview;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.severinstructions.*;
-
-import javax.annotation.Resource;
+import protocol3.serverinstructions.ProtocolBiggestKnightProwess;
+import protocol3.serverinstructions.ProtocolBoughtDevelopmentCard;
+import protocol3.serverinstructions.ProtocolInventionCardInfo;
+import protocol3.serverinstructions.ProtocolLongestRoad;
+import protocol3.serverinstructions.ProtocolMonopolyCardInfo;
+import protocol3.serverinstructions.ProtocolPlayKnightCard;
+import protocol3.serverinstructions.ProtocolRoadBuildingCardInfo;
 
 public class ServerInputHandler extends InputHandler {
     private ServerController serverController;
@@ -151,16 +160,16 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolBuildRequest buildRequest) {
-        if (buildRequest.getBuilding().equals("Straße")) {
-            int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocation());
+        if (buildRequest.getBuildingType().equals("Straße")) {
+            int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocationID());
             serverController.requestBuildStreet(loc[0], loc[1], loc[2], currentThreadID);
         }
-        if (buildRequest.getBuilding().equals("Dorf")) {
-            int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
+        if (buildRequest.getBuildingType().equals("Dorf")) {
+            int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocationID());
             serverController.requestBuildVillage(loc[0], loc[1], loc[2], currentThreadID);
         }
-        if (buildRequest.getBuilding().equals("Stadt")) {
-            int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocation());
+        if (buildRequest.getBuildingType().equals("Stadt")) {
+            int[] loc = ProtocolToModel.getCornerCoordinates(buildRequest.getLocationID());
             serverController.requestBuildCity(loc[0], loc[1], loc[2], currentThreadID);
         }
     }
@@ -202,7 +211,7 @@ public class ServerInputHandler extends InputHandler {
 
     protected void handle(ProtocolTradeAccept tradeAccept) {
 
-        int trade_id = tradeAccept.getTrade_id();
+        int trade_id = tradeAccept.getTradeID();
         // gameController.tradeAccept(trade_id);
     }
 
@@ -216,14 +225,14 @@ public class ServerInputHandler extends InputHandler {
 
     protected void handle(ProtocolTradeCancel tradeCancel) {
 
-        int trade_id = tradeCancel.getTrade_id();
+        int trade_id = tradeCancel.getTradeID();
         // gameController.tradeCancel(trade_id);
     }
 
     protected void handle(ProtocolTradeComplete tradeComplete) {
 
-        int trade_id = tradeComplete.getTrade_id();
-        int tradePartner_id = tradeComplete.getTradePartner_id();
+        int trade_id = tradeComplete.getTradeID();
+        int tradePartner_id = tradeComplete.getTradePartnerID();
         // gameController.tradeComplete(trade_id,tradePartner_id;)
 
     }
@@ -255,7 +264,7 @@ public class ServerInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
+    protected void handle(ProtocolTradePreview tradePreview) {
         // Unnecessary Method
 
     }

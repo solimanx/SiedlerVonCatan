@@ -18,19 +18,19 @@ public class ProtocolVictory {
 	private String message;
 
 	@SerializedName("Sieger")
-	private int winner_id;
+	private int winnerID;
 
-	public ProtocolVictory(String message, int winner_id) {
+	public ProtocolVictory(String message, int winnerID) {
 		this.message = message;
-		this.winner_id = winner_id;
+		this.winnerID = winnerID;
 	}
 
 	public String getMessage() {
 		return message;
 	}
 
-	public int getWinner_id() {
-		return winner_id;
+	public int getWinnerID() {
+		return winnerID;
 	}
 
 }

@@ -1,18 +1,22 @@
 package network.client.client;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import enums.CardType;
 import enums.ResourceType;
-import model.objects.Edge;
 import model.HexService;
 import model.objects.Corner;
+import model.objects.Edge;
 import model.objects.Field;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
-import protocol.clientinstructions.*;
+import protocol.clientinstructions.ProtocolBuildRequest;
+import protocol.clientinstructions.ProtocolDiceRollRequest;
+import protocol.clientinstructions.ProtocolEndTurn;
+import protocol.clientinstructions.ProtocolHarbourRequest;
+import protocol.clientinstructions.ProtocolRobberLoss;
+import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.clientinstructions.trade.ProtocolTradeAccept;
 import protocol.clientinstructions.trade.ProtocolTradeCancel;
 import protocol.clientinstructions.trade.ProtocolTradeComplete;
@@ -42,14 +46,19 @@ import protocol.serverinstructions.ProtocolStatusUpdate;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
 import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
-import protocol.serverinstructions.trade.ProtocolTradeIsRequested;
+import protocol.serverinstructions.trade.ProtocolTradePreview;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.severinstructions.*;
-import settings.DefaultSettings;
+import protocol3.serverinstructions.ProtocolBiggestKnightProwess;
+import protocol3.serverinstructions.ProtocolBoughtDevelopmentCard;
+import protocol3.serverinstructions.ProtocolInventionCardInfo;
+import protocol3.serverinstructions.ProtocolLongestRoad;
+import protocol3.serverinstructions.ProtocolMonopolyCardInfo;
+import protocol3.serverinstructions.ProtocolPlayKnightCard;
+import protocol3.serverinstructions.ProtocolRoadBuildingCardInfo;
 
 public class ClientInputHandler extends InputHandler {
     private ClientController clientController;
@@ -89,7 +98,7 @@ public class ClientInputHandler extends InputHandler {
      */
     @Override
     protected void handle(ProtocolWelcome welcome) {
-        clientController.welcome(welcome.getPlayer_id());
+        clientController.welcome(welcome.getPlayerID());
     }
 
     /* (non-Javadoc)
@@ -233,7 +242,7 @@ public class ClientInputHandler extends InputHandler {
      */
     @Override
     protected void handle(ProtocolDiceRollResult diceRollResult) {
-        int playerID = diceRollResult.getPlayer();
+        int playerID = diceRollResult.getPlayerID();
         int[] result = diceRollResult.getRoll();
         clientController.diceRollResult(playerID, result);
     }
@@ -243,7 +252,7 @@ public class ClientInputHandler extends InputHandler {
      */
     @Override
     protected void handle(ProtocolResourceObtain resourceObtain) {
-        int playerID = resourceObtain.getPlayer();
+        int playerID = resourceObtain.getPlayerID();
         ProtocolResource pr = resourceObtain.getResource();
      // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
         int[] result = ProtocolToModel.convertResources(pr);
@@ -345,11 +354,11 @@ public class ClientInputHandler extends InputHandler {
     /* (non-Javadoc)
      * @see network.InputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeIsRequested)
      */
-    protected void handle(ProtocolTradeIsRequested tradeIsRequested) {
-        int player_id = tradeIsRequested.getPlayer_id();
-        int trade_id = tradeIsRequested.getTrade_id();
-        ProtocolResource proff = tradeIsRequested.getOffer();
-        ProtocolResource prw = tradeIsRequested.getWithdrawal();
+    protected void handle(ProtocolTradePreview tradePreview) {
+        int playerID = tradePreview.getPlayerID();
+        int trade_id = tradePreview.getTradeID();
+        ProtocolResource proff = tradePreview.getOffer();
+        ProtocolResource prw = tradePreview.getWithdrawal();
         // networkController.tradeIsRequested((player_id, trade_id, proff,prw));
     }
 
@@ -358,8 +367,8 @@ public class ClientInputHandler extends InputHandler {
      */
     protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
 
-        int player_id = tradeConfirmation.getPlayer_id();
-        int trade_id = tradeConfirmation.getTrade_id();
+        int playerID = tradeConfirmation.getPlayerID();
+        int trade_id = tradeConfirmation.getTradeID();
         // networkController.tradeConfirmation(player_id,trade_id);
     }
 
@@ -368,8 +377,8 @@ public class ClientInputHandler extends InputHandler {
      */
     protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
 
-        int player_id = tradeIsCanceled.getPlayer_id();
-        int trade_id = tradeIsCanceled.getTrade_id();
+        int playerID = tradeIsCanceled.getPlayerID();
+        int trade_id = tradeIsCanceled.getTradeID();
         // networkController.tradeIsCanceled(player_id,trade_id);
     }
 
@@ -418,8 +427,8 @@ public class ClientInputHandler extends InputHandler {
      */
     protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
 
-        int player_id = tradeIsCompleted.getPlayer_id();
-        int tradePartner_id = tradeIsCompleted.getTradePartner_id();
+        int playerID = tradeIsCompleted.getPlayerID();
+        int tradePartner_id = tradeIsCompleted.getTradePartnerID();
         // networkController.tradeIsCompleted(player_id,tradePartner_id);
     }
 
@@ -429,7 +438,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolVictory victory) {
         String message = victory.getMessage();
-        int winner_id = victory.getWinner_id();
+        int winner_id = victory.getWinnerID();
         // networkController.victory(message,winner_id);
 
     }
@@ -439,7 +448,7 @@ public class ClientInputHandler extends InputHandler {
      */
     @Override
     protected void handle(ProtocolCosts costs) {
-        int playerID = costs.getPlayer();
+        int playerID = costs.getPlayerID();
         ProtocolResource pr = costs.getResource();
         // networkController.costs(playerID,pr)
     }
@@ -450,9 +459,9 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolRobberMovement robberMovement) {
 
-        int playerID = robberMovement.getPlayer_id();
-        String locationID = robberMovement.getLocation_id();
-        int victimID = robberMovement.getVictim_id();
+        int playerID = robberMovement.getPlayerID();
+        String locationID = robberMovement.getLocationID();
+        int victimID = robberMovement.getVictimID();
         // networkController.robberMovement(playerID,locationID,victimID);
 
     }
@@ -507,7 +516,7 @@ public class ClientInputHandler extends InputHandler {
      */
     @Override
     protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
-        int player_id = biggestKnightProwess.getPlayer_id();
+        int playerID = biggestKnightProwess.getPlayer_id();
         // networkController.biggestKnightProwess(player_id);
 
     }
@@ -518,7 +527,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
         ProtocolResource resource = inventionCardInfo.getResource();
-        int player_id = inventionCardInfo.getPlayer_id();
+        int playerID = inventionCardInfo.getPlayer_id();
         // networkController.inventionCardInfo(resource,player_id);
     }
 
@@ -527,7 +536,7 @@ public class ClientInputHandler extends InputHandler {
      */
     @Override
     protected void handle(ProtocolLongestRoad longestRoad) {
-        int player_id = longestRoad.getPlayer_id();
+        int playerID = longestRoad.getPlayer_id();
         // networkController.longestRoad(player_id);
 
     }
@@ -538,7 +547,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolMonopolyCardInfo monopolyCardInfo) {
         ResourceType resourceType = monopolyCardInfo.getResourceType();
-        Integer player_id = monopolyCardInfo.getPlayer_id();
+        Integer playerID = monopolyCardInfo.getPlayer_id();
         //networkController.monopolyCardInfo(resourceType,player_id)
 
     }
@@ -550,7 +559,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolPlayKnightCard playKnightCard) {
         String road1_id = playKnightCard.getRoad1_id();
         int target = playKnightCard.getTarget();
-        Integer player_id = playKnightCard.getPlayer_id();
+        Integer playerID = playKnightCard.getPlayer_id();
 
         // networkController.playKnightCard(road1_id,target,player_id)
 
@@ -563,7 +572,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
         String road1_id = roadBuildingCardInfo.getRoad1_id();
         String road2_idx = roadBuildingCardInfo.getRoad2_id();
-        Integer player_id = roadBuildingCardInfo.getPlayer_id();
+        Integer playerID = roadBuildingCardInfo.getPlayer_id();
         // networkController.roadBuildingCardInfo(road1_id,road2_id,player_id)
     }
 

@@ -15,24 +15,24 @@ import com.google.gson.annotations.Since;
 public class ProtocolTradeIsCanceled {
 
 	@SerializedName("Spieler")
-	private int player_id;
+	private int playerID;
 
 	@SerializedName("Handel id")
-	private int trade_id;
+	private int tradeID;
 
-	public ProtocolTradeIsCanceled(int player_id, int trade_id) {
+	public ProtocolTradeIsCanceled(int playerID, int tradeID) {
 
-		this.player_id = player_id;
-		this.trade_id = trade_id;
+		this.playerID = playerID;
+		this.tradeID = tradeID;
 	}
 
-	public int getPlayer_id() {
+	public int getPlayerID() {
 
-		return player_id;
+		return playerID;
 	}
 
-	public int getTrade_id() {
+	public int getTradeID() {
 
-		return trade_id;
+		return tradeID;
 	}
 }

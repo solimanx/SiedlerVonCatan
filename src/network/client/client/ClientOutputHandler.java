@@ -25,10 +25,10 @@ import protocol3.clientinstructions.ProtocolDevelopmentCards;
 import protocol3.object.ProtocolInventionCard;
 import protocol3.object.ProtocolMonopolyCard;
 import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.severinstructions.ProtocolInventionCardInfo;
-import protocol3.severinstructions.ProtocolMonopolyCardInfo;
-import protocol3.severinstructions.ProtocolPlayKnightCard;
-import protocol3.severinstructions.ProtocolRoadBuildingCardInfo;
+import protocol3.serverinstructions.ProtocolInventionCardInfo;
+import protocol3.serverinstructions.ProtocolMonopolyCardInfo;
+import protocol3.serverinstructions.ProtocolPlayKnightCard;
+import protocol3.serverinstructions.ProtocolRoadBuildingCardInfo;
 
 public class ClientOutputHandler {
 
