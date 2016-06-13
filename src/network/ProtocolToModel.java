@@ -5,6 +5,8 @@ import enums.HarbourStatus;
 import enums.ResourceType;
 import model.Board;
 import model.HexService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import protocol.object.ProtocolResource;
 
 public final class ProtocolToModel {
@@ -18,6 +20,7 @@ public final class ProtocolToModel {
 	 * @param fieldID
 	 * @return
 	 */
+	private static Logger logger = LogManager.getLogger(ProtocolToModel.class.getName());
 	public static int[] getFieldCoordinates(String fieldID) {
 		// Get the field ID through the Board's HashMap
 		return Board.getStringToCoordMap().get(fieldID);
@@ -124,6 +127,7 @@ public final class ProtocolToModel {
 			return enums.PlayerState.CONNECTION_LOST;
 		default:
 			System.out.println("Error in ProtocolToModel.getPlayerState");
+			logger.error("Error in ProtocolToModel.getPlayerState");
 			return null;
 		}
 	}
@@ -197,6 +201,7 @@ public final class ProtocolToModel {
 			return CornerStatus.CITY;
 		default:
 			System.out.println("Error in ProtocolToModel.getCornerType");
+			logger.error("Error in ProtocolToModel.getCornerType");
 			return null;
 		}
 	}
