@@ -146,6 +146,7 @@ public class DebugClientController extends Thread {
         try {
             write(parser.createString(r));
         } catch (IOException e) {
+            logger.catching(Level.DEBUG,e);
             e.printStackTrace();
         }
     }
