@@ -187,8 +187,8 @@ public class Board {
      * <p>
      * //* @param edges
      */
-	/*
-	 * NW = north west, NE = north east, E = east
+    /*
+     * NW = north west, NE = north east, E = east
 	 */
     private void initializeEdges() {
         // temporary variables to make code appear clearer
@@ -921,8 +921,11 @@ public class Board {
         }
         if (getField(u, v).getResourceType() == enums.ResourceType.SEA
                 && getField(x, y).getResourceType() == enums.ResourceType.SEA) {
+            logger.warn("Throws new IllegalArgumentException, \"Both Fields are sea Fields\"");
             throw new IllegalArgumentException("Both Fields are sea Fields");
         }
+        logger.warn("Throws new IllegalArgumentException, \"None of both Fields is a sea Fields\"");
+
         throw new IllegalArgumentException("None of both Fields is a sea Fields");
     }
 
