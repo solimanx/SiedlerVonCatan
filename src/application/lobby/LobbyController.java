@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -98,7 +99,7 @@ public class LobbyController implements Initializable {
 		try {
 			viewController.startChooseView();
 		} catch (IOException e) {
-			logger.error(e);
+			logger.catching(Level.ERROR,e);
 			e.printStackTrace();
 		}
 	}
