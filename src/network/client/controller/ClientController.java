@@ -45,11 +45,13 @@ public class ClientController {
 
 	/**
 	 * e.g. (0 -> 45), (1, -> 32) etc.
+	 * HashMap mapping modelIDs to playerIDs
 	 */
 	private Map<Integer, Integer> modelPlayerIdMap;
 
 	/**
 	 * e.g. (45-> 0), (32, -> 1) etc.
+	 * HashMap mapping playerIDs to modelIDs
 	 */
 	private Map<Integer, Integer> threadPlayerIdMap;
 
@@ -617,6 +619,7 @@ public class ClientController {
 	 */
 	public void robberLoss(int[] result) {
 		// TODO
+		clientOutputHandler.robberLoss(result);
 	}
 	// Protocol 0.3
 

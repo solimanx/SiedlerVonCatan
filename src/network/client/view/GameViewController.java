@@ -166,7 +166,7 @@ public class GameViewController implements Initializable {
 
 	private ViewBoardFactory factory;
 
-	private Stage stage;
+	private Stage gameStage;
 
 	private int playerCounter = 2;
 
@@ -198,7 +198,7 @@ public class GameViewController implements Initializable {
 	 * @param stage
 	 */
 	public void startScene(Stage stage) {
-		this.stage = stage;
+		this.gameStage = stage;
 		//board.getChildren().addAll(factory.getViewBoard(stage));
 		board.getChildren().add(factory.getViewBoard(stage));
 		//board = factory.getViewBoard(stage);
@@ -295,7 +295,7 @@ public class GameViewController implements Initializable {
 		controller.init(selfResources);
 
 		tradeStage.initModality(Modality.WINDOW_MODAL);
-		tradeStage.initOwner(stage);
+		tradeStage.initOwner(gameStage);
 		tradeStage.show();
 	}
 
@@ -596,6 +596,8 @@ public class GameViewController implements Initializable {
 		RobberViewController robberController = (RobberViewController) loader.getController();
 		robberController.init(this);
 		robberController.createSpinner(selfResources);
+		robberStage.initModality(Modality.APPLICATION_MODAL);
+		robberStage.initOwner(gameStage);
 		robberStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
