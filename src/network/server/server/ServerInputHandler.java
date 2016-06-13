@@ -91,18 +91,6 @@ public class ServerInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolGameStarted gameStarted) {
-        // unnecessary Method in ServerInputHandler
-
-    }
-
-    @Override
-    protected void handle(ProtocolError error) {
-        // unnecessary Method in ServerInputHandler
-
-    }
-
-    @Override
     protected void handle(ProtocolPlayerProfile playerProfile) {
         String name = playerProfile.getName();
         Color color = playerProfile.getColor();
@@ -110,50 +98,9 @@ public class ServerInputHandler extends InputHandler {
 
     }
 
-    @Override
-    protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
-        String s = chatReceiveMessage.getMessage();
-        int playerId = chatReceiveMessage.getSender();
-        serverController.chatReceiveMessage(playerId, s);
-        /*
-         * ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be
-		 * handled only in ServerOutputHandler and in ClientInputHandler.
-		 * unnecessary Method in ServerInputHandler
-		 */
-    }
-
     protected void handle(ProtocolChatSendMessage chatSendMessage) {
         String s = chatSendMessage.getMessage();
         serverController.chatSendMessage(s, currentThreadID);
-    }
-
-    @Override
-    protected void handle(ProtocolServerResponse serverConfirmation) {
-        // Unnecessary Method in ServerInputHadler
-    }
-
-    //
-    @Override
-    protected void handle(ProtocolBuild build) {
-        // unnecessary Method in ServerInputHandler
-
-    }
-
-    @Override
-    protected void handle(ProtocolDiceRollResult diceRollResult) {
-        // unnecessary Method in ServerInputHandler
-
-    }
-
-    @Override
-    protected void handle(ProtocolResourceObtain resourceObtain) {
-        // unnecessary Method in ServerInputHandler
-    }
-
-    @Override
-    protected void handle(ProtocolStatusUpdate statusUpdate) {
-        // unnecessary Method in ServerInputHandler
-
     }
 
     //
@@ -182,22 +129,13 @@ public class ServerInputHandler extends InputHandler {
 
     @Override
     protected void handle(ProtocolEndTurn endTurn) {
-        System.out.println("Der Zug wurde beendet");
-
-    }
-
-    @Override
-    protected void handle(String string) {
-        // TODO Auto-generated method stub
-
+    	serverController.endTurn(currentThreadID);
     }
 
     protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
-
         String location_id = robberMovementRequest.getLocationID();
         int[] coords = ProtocolToModel.getFieldCoordinates(location_id);
-        int victim_id = robberMovementRequest.getVictimID();
-        // TODO: Was wenn victim_id nicht vorhanden?
+        Integer victim_id = robberMovementRequest.getVictimID();
         serverController.robberMovementRequest(coords[0], coords[1], victim_id, currentThreadID);
 
     }
@@ -210,121 +148,40 @@ public class ServerInputHandler extends InputHandler {
     }
 
     protected void handle(ProtocolTradeAccept tradeAccept) {
-
-        int trade_id = tradeAccept.getTradeID();
-        // gameController.tradeAccept(trade_id);
+        int tradeID = tradeAccept.getTradeID();
+        serverController.acceptTrade(currentThreadID, tradeID);
     }
 
     protected void handle(ProtocolTradeRequest tradeRequest) {
-
         ProtocolResource offer = tradeRequest.getOffer();
-        ProtocolResource withdrawal = tradeRequest.getWithdrawal();
-        // gameController.tradeRequest(offer,withdrawal);
-
+        ProtocolResource demand = tradeRequest.getDemand();
+        serverController.clientOffersTrade(currentThreadID, ProtocolToModel.convertResources(offer), ProtocolToModel.convertResources(demand));
     }
 
     protected void handle(ProtocolTradeCancel tradeCancel) {
-
-        int trade_id = tradeCancel.getTradeID();
-        // gameController.tradeCancel(trade_id);
+        int tradeID = tradeCancel.getTradeID();
+        serverController.cancelTrade(currentThreadID, tradeID);
     }
 
     protected void handle(ProtocolTradeComplete tradeComplete) {
-
-        int trade_id = tradeComplete.getTradeID();
-        int tradePartner_id = tradeComplete.getTradePartnerID();
-        // gameController.tradeComplete(trade_id,tradePartner_id;)
-
-    }
-
-    @Override
-    protected void handle(ProtocolVictory victory) {
-        // Unnecessary Method
-
-    }
-
-    @Override
-    protected void handle(ProtocolCosts costs) {
-        // Unnecessary Method
-
-    }
-
-    @Override
-    protected void handle(ProtocolRobberMovement robberMovement) {
-
-        // unnecessary Method
-
+        int tradeID = tradeComplete.getTradeID();
+        int tradePartnerID = tradeComplete.getTradePartnerID();
+        serverController.fulfillTrade(currentThreadID, tradeID, tradePartnerID);
     }
 
     @Override
     protected void handle(ProtocolRobberLoss robberLoss) {
         ProtocolResource prl = robberLoss.getLosses();
-        // networkController.robberLoss(prl);
-
+        serverController.robberLoss(currentThreadID, ProtocolToModel.convertResources(prl));
     }
 
-    @Override
-    protected void handle(ProtocolTradePreview tradePreview) {
-        // Unnecessary Method
 
-    }
-
-    @Override
-    protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
-        // Unnecessary Method
-
-    }
-
-    @Override
-    protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
-        // Unnecessary Method
-
-    }
-
-    @Override
-    protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
-        // Unnecessary Method
-
-    }
-
-    @Override
-    protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
-        //gameController.buyDevelopmentCards();
-    }
-
-    @Override
-    protected void handle(ProtocolDevelopmentCards developmentCards) {
-        // unnecessary Method
-
-    }
-
-    @Override
-    protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
-        // Unnecessary Method
-
-    }
 
     @Override
     protected void handle(ProtocolInventionCard inventionCard) {
         ProtocolResource resource = inventionCard.getResource();
         //gameController.inventionCard(invention);
         //   unnecessary Method
-    }
-
-    @Override
-    protected void handle(ProtocolMonopolyCard monopolyCard) {
-        // Unnecessary Method
-    }
-
-    @Override
-    protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
-        // unnecessary Method
-    }
-
-    @Override
-    protected void handle(ProtocolLongestRoad longestRoad) {
-        // Unnecessary Method
-
     }
 
     @Override
@@ -350,11 +207,6 @@ public class ServerInputHandler extends InputHandler {
 
     }
 
-    @Override
-    protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
-        //Unnecessary Method
-    }
-
 
     public ServerController getServerController() {
 
@@ -372,12 +224,151 @@ public class ServerInputHandler extends InputHandler {
         // networkController.inventionCardInfo(resource);
 
     }
+    
+    @Override
+    protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
+        //gameController.buyDevelopmentCards();
+    }
+    
+    
+    //Unnecessary Methods   
 
     @Override
     protected void handle(ProtocolWelcome welcome) {
         // Unnecessary Method
 
     }
+    
+    @Override
+    protected void handle(ProtocolServerResponse serverConfirmation) {
+        // Unnecessary Method in ServerInputHadler
+    }
 
+    //
+    @Override
+    protected void handle(ProtocolBuild build) {
+        // unnecessary Method in ServerInputHandler
+
+    }
+
+    @Override
+    protected void handle(ProtocolDiceRollResult diceRollResult) {
+        // unnecessary Method in ServerInputHandler
+
+    }
+
+    @Override
+    protected void handle(ProtocolResourceObtain resourceObtain) {
+        // unnecessary Method in ServerInputHandler
+    }
+
+    @Override
+    protected void handle(ProtocolStatusUpdate statusUpdate) {
+        // unnecessary Method in ServerInputHandler
+
+    }    
+    
+    @Override
+    protected void handle(ProtocolTradePreview tradePreview) {
+        // Unnecessary Method
+
+    }
+
+    @Override
+    protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
+        // Unnecessary Method
+
+    }
+
+    @Override
+    protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
+        // Unnecessary Method
+
+    }
+
+    @Override
+    protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
+        // Unnecessary Method
+
+    }
+
+    @Override
+    protected void handle(ProtocolDevelopmentCards developmentCards) {
+        // unnecessary Method
+
+    }
+
+    @Override
+    protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
+        // Unnecessary Method
+
+    }
+
+    @Override
+    protected void handle(ProtocolGameStarted gameStarted) {
+        // unnecessary Method in ServerInputHandler
+
+    }
+
+    @Override
+    protected void handle(ProtocolError error) {
+        // unnecessary Method in ServerInputHandler
+
+    }    
+    
+    @Override
+    protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
+        //Unnecessary Method
+    }
+    
+    @Override
+    protected void handle(ProtocolMonopolyCard monopolyCard) {
+        // Unnecessary Method
+    }
+
+    @Override
+    protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
+        // unnecessary Method
+    }
+
+    @Override
+    protected void handle(ProtocolLongestRoad longestRoad) {
+        // Unnecessary Method
+
+    }
+    
+    @Override
+    protected void handle(ProtocolVictory victory) {
+        // Unnecessary Method
+
+    }
+
+    @Override
+    protected void handle(ProtocolCosts costs) {
+        // Unnecessary Method
+
+    }
+
+    @Override
+    protected void handle(ProtocolRobberMovement robberMovement) {
+
+        // unnecessary Method
+
+    }
+    
+    @Override
+    protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
+        /*
+         * ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be
+		 * handled only in ServerOutputHandler and in ClientInputHandler.
+		 * unnecessary Method in ServerInputHandler
+		 */
+    }
+    
+    @Override
+    protected void handle(String string) {
+        // TODO Auto-generated method stub
+
+    }
 
 }

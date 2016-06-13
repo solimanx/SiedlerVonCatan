@@ -157,7 +157,14 @@ public class ServerOutputHandler {
     }
 
     public void resourceObtain(int playerID, int[] resources) {
-        ProtocolResourceObtain po = new ProtocolResourceObtain(playerID, ModelToProtocol.getResources(resources));
+    	ProtocolResource pResource;
+    	if (resources.length == 1){
+    		pResource = new ProtocolResource(null, null, null, null, null, resources[0]);
+    	} else {
+    		pResource = new ProtocolResource(resources[0], resources[1], resources[4], resources[2], resources[3],
+                null);
+    	}      
+        ProtocolResourceObtain po = new ProtocolResourceObtain(playerID, pResource);
         Response r = new Response();
         r.pRObtain = po;
         try {
@@ -190,7 +197,7 @@ public class ServerOutputHandler {
         if (resources.length == 1) {
             pResource = new ProtocolResource(null, null, null, null, null, resources[0]);
         } else {
-            pResource = new ProtocolResource(resources[0], resources[1], resources[2], resources[3], resources[4],
+            pResource = new ProtocolResource(resources[0], resources[1], resources[4], resources[2], resources[3],
                     null);
         }
         ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource);
@@ -209,18 +216,6 @@ public class ServerOutputHandler {
             e.printStackTrace();
         }
 
-    }
-
-    public void gameStarted(Board board) {
-        // TODO: Board in ProtocolBoard umwandeln
-
-		/*
-         * ProtocolGameStarted pb = new ProtocolGameStarted(board); Response r =
-		 * new Response(); r.pGameStarted = pb; try {
-		 * server.broadcast(parser.createString(r)); } catch (IOException e) {
-		 * logger.error("Threw a Input/Output Exception ", e);
-		 * e.printStackTrace(); }
-		 */
     }
 
     public void build(ProtocolBuilding building) {
