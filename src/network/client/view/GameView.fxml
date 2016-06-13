@@ -227,8 +227,13 @@
       </VBox>
       <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="63.0" layoutY="50.0" prefHeight="120.0" prefWidth="898.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
          <children>
-            <TextArea fx:id="messages" editable="false" focusTraversable="false" prefHeight="300.0" prefWidth="500.0" />
+            <TextArea fx:id="messages" editable="false" focusTraversable="false" prefHeight="72.0" prefWidth="500.0" />
             <TextField fx:id="messageInput" maxWidth="-Infinity" onAction="#sendMessage" prefWidth="500.0" promptText="Enter chat message and press Enter" />
+            <Label fx:id="serverResponse" prefHeight="17.0" prefWidth="346.0" text="Server Response">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
       <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="43.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

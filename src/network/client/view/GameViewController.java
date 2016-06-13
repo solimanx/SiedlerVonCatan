@@ -129,6 +129,9 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Label selfName;
+	
+	@FXML
+	private Label serverResponse;
 
 	@FXML
 	private TextField diceResult;
@@ -623,6 +626,10 @@ public class GameViewController implements Initializable {
 				center[1] - 20, center[0] + 10, center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10,
 				center[1] - 20, center[0] - 5, center[1] - 20, center[0] - 5, center[1] - 10);
 		return city;
+	}
+	
+	public void setServerResponse(String response){
+		serverResponse.setText(response);
 	}
 
 	

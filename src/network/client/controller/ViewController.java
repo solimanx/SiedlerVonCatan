@@ -20,7 +20,7 @@ public class ViewController {
 	private ClientController clientController;
 	private GameViewController gameViewController;
 	private LobbyController lobbyController;
-	private PlayerProfileController nameSelectDialogController;
+	private PlayerProfileController playerProfileController;
 	private TradeController tradeController;
 	private Stage primaryStage;
 
@@ -32,7 +32,8 @@ public class ViewController {
 	}
 
 	private Stage choosingStage;
-	private boolean gameView = false;
+	private boolean isGameView = false;
+	private boolean isChoosingStage = false;
 
 	/**
 	 * @param primaryStage
@@ -92,12 +93,13 @@ public class ViewController {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
-			nameSelectDialogController = fxmlLoader.getController();
-			nameSelectDialogController.setViewController(this);
+			playerProfileController = fxmlLoader.getController();
+			playerProfileController.setViewController(this);
 			choosingStage = new Stage();
 			choosingStage.setTitle("Choose Name and Color");
 			choosingStage.setScene(new Scene(root1));
 			choosingStage.show();
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -112,7 +114,7 @@ public class ViewController {
 	 */
 	void startGameView() {
 		choosingStage.hide();
-		gameView = true;
+		isGameView = true;
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
 		try {
@@ -216,7 +218,7 @@ public class ViewController {
 	 * @param s
 	 */
 	public void messageReceive(String s) {
-		if (gameView) {
+		if (isGameView) {
 			gameViewController.receiveChatMessage(s);
 		} else {
 			lobbyController.receiveChatMessage(s);
@@ -242,5 +244,10 @@ public class ViewController {
 			e.printStackTrace();
 		}
 
+	}
+
+	public PlayerProfileController getPlayerProfileController() {
+		return playerProfileController;
+		
 	}
 }

@@ -31,6 +31,10 @@ public class PlayerProfileController implements Initializable {
 	@FXML
 	private Label serverColorAnswer;
 
+	public void setServerColorAnswer(String server_response) {
+		this.serverColorAnswer.setText(server_response);
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		playerName.setPromptText("Name in Game (required)");
@@ -46,7 +50,7 @@ public class PlayerProfileController implements Initializable {
 	private void handleSendButton() {
 		Color chosenColor = playerColor.getValue();
 		String name = playerName.getText();
-
+		serverColorAnswer.setText("");
 		if (name.equals("")) {
 			System.out.println("No name given.");
 		} else if (chosenColor == null) {

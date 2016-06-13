@@ -132,10 +132,10 @@ public class ClientController {
 		switch (currentState) {
 		case GAME_STARTING:
 		case WAITING_FOR_GAMESTART:
-			break;
+			viewController.getPlayerProfileController().setServerColorAnswer(server_response);
 
 		default:
-			viewController.messageReceive(server_response);
+			viewController.getGameViewController().setServerResponse(server_response);
 		}
 	}
 
@@ -236,6 +236,7 @@ public class ClientController {
 						victoryPoints, status, resources));
 			}
 		}
+		
 		// Hier get bei Break weiter
 	}
 
