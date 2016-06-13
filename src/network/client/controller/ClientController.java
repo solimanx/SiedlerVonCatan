@@ -128,15 +128,15 @@ public class ClientController {
 	 */
 	public void receiveServerConfirmation(String server_response) {
 		// TODO client confirm in later protocols
-		currentServerResponse = server_response;
+		/*currentServerResponse = server_response;
 		switch (currentState) {
 		case GAME_STARTING:
 		case WAITING_FOR_GAMESTART:
-			viewController.getPlayerProfileController().setServerColorAnswer(server_response);
+			//viewController.getPlayerProfileController().setServerColorAnswer(server_response);
 
 		default:
 			viewController.getGameViewController().setServerResponse(server_response);
-		}
+		}*/
 	}
 
 	// 6.2
@@ -332,19 +332,6 @@ public class ClientController {
 	 */
 	public void addToPlayersResource(int playerID, int[] resourcesGained) {
 		// playerID = 0,1,2,3
-		// if (playerID != getOwnPlayerId()) {
-		// ArrayList<ResourceType> resourceCards =
-		// gameLogic.getBoard().getPlayer(playerID).getResourceCards();
-		// for (int i = 0; i < resources.length; i++) {
-		// for (int j = 0; j < resources[i]; j++) {
-		// resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
-		// }
-		// }
-		// gameLogic.getBoard().getPlayer(playerID).setResourceCards(resourceCards);
-		// }
-		// else{
-		// gameLogic.getBoard().getPlayer(playerID)
-		// }
 		// if it's self
 		if (playerID == 0) {
 			// safety check
@@ -447,7 +434,7 @@ public class ClientController {
 		}
 		else{
 			// decrement the hiddenresource not the resource
-			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources[0]);
+			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
 		}
 		//Happens in status update
 		//viewController.getGameViewController().setResourceCards(modelID, resources);

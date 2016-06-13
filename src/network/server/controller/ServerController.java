@@ -728,13 +728,14 @@ public class ServerController {
 				} while (notFound);
 				cards[currNum]--;
 				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
-				currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(i));
+				//currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(i));
 				if (currNum != 5) {
 					currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
 							DefaultSettings.DICE_NUMBERS[diceInd]);
 					diceInd++;
 				} else {
 					currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], null);
+					currBoard.setBandit("" + fields.charAt(i));
 				}
 			}
 		} else {
@@ -749,22 +750,22 @@ public class ServerController {
 				} while (notFound);
 				cards[currNum]--;
 				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
-				currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(i));
+				//currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(i));
 				currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
 						DefaultSettings.DICE_NUMBERS[i]);
 			}
 			int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(fields.length() - 1));
-			currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(fields.length() - 1));
+			//currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + fields.charAt(fields.length() - 1));
 			currBoard.setFieldAt(coords[0], coords[1], ResourceType.NOTHING, null);
+			currBoard.setBandit(""+fields.charAt(fields.length() -1));
 
 		}
 		String outerRing = currBoard.getOuterRing();
 		for (int i = 0; i < outerRing.length(); i++) {
 			int[] coords = ProtocolToModel.getFieldCoordinates("" + outerRing.charAt(i));
-			currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + outerRing.charAt(i));
+			//currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" + outerRing.charAt(i));
 			currBoard.setFieldAt(coords[0], coords[1], ResourceType.SEA, null);
 		}
-		currBoard.setBandit("J");
 	}
 
 	// DEBUGGING ONLY
