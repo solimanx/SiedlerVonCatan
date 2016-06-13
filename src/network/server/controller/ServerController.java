@@ -7,6 +7,11 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Map;
 
 import enums.Color;
@@ -51,6 +56,7 @@ public class ServerController {
 	private TradeController tradeController;
 	private int[] playerOrder;
 	public int[] resourceStack = { 19, 19, 19, 19, 19 };
+	private static Logger logger = LogManager.getLogger(ServerController.class.getName());
 
 	public ServerController() {
 		Board board = new Board();
@@ -68,7 +74,7 @@ public class ServerController {
 		try {
 			server.start();
 		} catch (IOException e) {
-			// TODO Logging
+			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
 
