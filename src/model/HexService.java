@@ -237,6 +237,7 @@ public class HexService {
         if (x < 0 && y > 0 && sum <= 0) {
             return 5;
         }
+        logger.warn("Throws new IllegalArgumentException,\"illegal Argument in HexService.getDirection()\" ");
         throw new IllegalArgumentException("illegal Argument in HexService.getDirection()");
     }
 
@@ -252,6 +253,7 @@ public class HexService {
         String neighbours = getNeighboursID(aX, aY);
         char[] result = neighbours.toCharArray();
         if (result.length != 6) {
+            logger.warn("Throws new IllegalArgumentException,\"getNextField dont works with this input\" ");
             throw new IllegalArgumentException("getNextField dont works with this input");
         }
         String a = "";
@@ -276,6 +278,7 @@ public class HexService {
                 break;
             default:
                 if (dir < 0 || dir > 5) {
+                    logger.warn("Throws new IllegalArgumentException,\"undefined direction\" ");
                     throw new IllegalArgumentException("undefined direction");
                 }
                 a = null;
@@ -396,6 +399,7 @@ public class HexService {
      */
     public static String[] getCornerFromEdge(String s) {
         if (s.length() != 2) {
+            logger.warn("Throws new IllegalArgumentException,\"Too many or too few Fields as input in HexService.getCornerFromEdge\" ");
             throw new IllegalArgumentException("Too many or too few Fields as input in HexService.getCornerFromEdge");
         }
         int[] a = Board.getStringToCoordMap().get(s.substring(0, 1));
