@@ -3,6 +3,7 @@ package network.client.client;
 import java.io.IOException;
 
 import enums.ResourceType;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -59,13 +60,14 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
     }
 
     /**
-     * 
+     *
      */
     public void clientReady() {
         ProtocolClientReady pcr = new ProtocolClientReady();
@@ -75,6 +77,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -91,13 +94,14 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
     }
 
     /**
-     * 
+     *
      */
     public void diceRollRequest() {
         ProtocolDiceRollRequest pdrr = new ProtocolDiceRollRequest();
@@ -107,13 +111,14 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
 
         }
     }
 
     /**
-     * 
+     *
      */
     public void endTurn() {
 
@@ -124,6 +129,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -144,6 +150,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -162,6 +169,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -184,6 +192,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -202,6 +211,7 @@ public class ClientOutputHandler {
 
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -231,6 +241,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -247,6 +258,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
     }
@@ -275,6 +287,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
     }
@@ -290,6 +303,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
 
         }
@@ -308,13 +322,14 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
 
         }
     }
 
     /**
-     * 
+     *
      */
     public void handleBuyDevelopmentCards() {
         ProtocolBuyDevelopmentCards pbdc = new ProtocolBuyDevelopmentCards();
@@ -324,6 +339,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
 
         }
@@ -344,6 +360,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -364,6 +381,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -384,6 +402,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -406,6 +425,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -428,6 +448,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -445,6 +466,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -462,6 +484,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -479,6 +502,7 @@ public class ClientOutputHandler {
             client.write(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
     }
