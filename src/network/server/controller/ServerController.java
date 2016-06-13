@@ -221,6 +221,7 @@ public class ServerController {
 	 * @param currentThreadID
 	 */
 	public void chatSendMessage(String s, int currentThreadID) {
+		serverOutputHandler.serverConfirm("OK", currentThreadID);
 		chatReceiveMessage(currentThreadID, s);
 
 	}
@@ -391,9 +392,12 @@ public class ServerController {
 							neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 						}
 					}
+					
+					serverResponse(modelID, "OK");
 
 					subFromPlayersResources(modelID, DefaultSettings.VILLAGE_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.VILLAGE_BUILD_COST);
+					increaseVictoryPoints(modelID);
 
 					serverOutputHandler.buildVillage(x, y, dir, threadID);
 					serverOutputHandler.costs(threadID, DefaultSettings.VILLAGE_BUILD_COST);
@@ -402,6 +406,19 @@ public class ServerController {
 			}
 		}
 
+	}
+
+	private void increaseVictoryPoints(int modelID) {
+		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
+		gameLogic.getBoard().getPlayer(modelID).setVictoryPoints(points + 1);
+		if (points + 1 == DefaultSettings.MAX_VICTORY_POINTS){
+			victory(modelID);
+		}
+	}
+
+	private void victory(int modelID) {
+		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+		serverOutputHandler.victory("Spieler "+pM.getName()+" hat das Spiel gewonnen.", modelPlayerIdMap.get(modelID));		
 	}
 
 	/**
@@ -426,6 +443,8 @@ public class ServerController {
 					e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(modelID).getID());
 					gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
 
+					serverResponse(modelID, "OK");
+					
 					subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.STREET_BUILD_COST);
 
@@ -450,6 +469,10 @@ public class ServerController {
 		// TODO Auto-generated method stub
 
 	}
+	
+	private void checkLargestArmy(int modelID){
+		//gameLogic.getBoard().getPlayer(modelID).getDevelopmentCards()
+	}
 
 	/**
 	 * is called by the serverController after a build request from a client
@@ -472,8 +495,11 @@ public class ServerController {
 				gameLogic.getBoard().getPlayer(modelID).increaseAmountVillages();
 				gameLogic.getBoard().getPlayer(modelID).decreaseAmountCities();
 
+				serverResponse(modelID, "OK");
+				
 				subFromPlayersResources(modelID, DefaultSettings.CITY_BUILD_COST);
 				resourceStackIncrease(DefaultSettings.CITY_BUILD_COST);
+				increaseVictoryPoints(modelID);
 
 				serverOutputHandler.buildCity(x, y, dir, threadID);
 				serverOutputHandler.costs(threadID, DefaultSettings.CITY_BUILD_COST);
@@ -513,6 +539,8 @@ public class ServerController {
 				gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
 
 				serverOutputHandler.buildStreet(x, y, dir, threadID);
+				
+				serverResponse(modelID, "OK");
 
 				InitialStreetCounter++;
 				if (InitialStreetCounter >= amountPlayers * 2) { // initial
@@ -567,6 +595,11 @@ public class ServerController {
 					}
 				}
 				initialVillages.add(c);
+				
+				serverResponse(modelID, "OK");
+				
+				gameLogic.getBoard().getPlayer(modelID).setVictoryPoints(gameLogic.getBoard().getPlayer(modelID).getVictoryPoints() + 1);
+				
 				serverOutputHandler.buildVillage(x, y, dir, threadID);
 				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.BUILDING_STREET);
 				statusUpdate(modelID);
@@ -575,7 +608,7 @@ public class ServerController {
 	}
 
 	/**
-	 * Is called by View when ownPlayer has finished his turn
+	 * is called when client has finished his turn
 	 * 
 	 * @param playerID
 	 */
@@ -747,8 +780,6 @@ public class ServerController {
 				} while (notFound);
 				cards[currNum]--;
 				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
-				// currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" +
-				// fields.charAt(i));
 				if (currNum != 5) {
 					currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
 							DefaultSettings.DICE_NUMBERS[diceInd]);
@@ -770,14 +801,10 @@ public class ServerController {
 				} while (notFound);
 				cards[currNum]--;
 				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
-				// currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" +
-				// fields.charAt(i));
 				currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
 						DefaultSettings.DICE_NUMBERS[i]);
 			}
 			int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(fields.length() - 1));
-			// currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" +
-			// fields.charAt(fields.length() - 1));
 			currBoard.setFieldAt(coords[0], coords[1], ResourceType.NOTHING, null);
 			currBoard.setBandit("" + fields.charAt(fields.length() - 1));
 
@@ -785,8 +812,6 @@ public class ServerController {
 		String outerRing = currBoard.getOuterRing();
 		for (int i = 0; i < outerRing.length(); i++) {
 			int[] coords = ProtocolToModel.getFieldCoordinates("" + outerRing.charAt(i));
-			// currBoard.getFieldAt(coords[0], coords[1]).setFieldID("" +
-			// outerRing.charAt(i));
 			currBoard.setFieldAt(coords[0], coords[1], ResourceType.SEA, null);
 		}
 	}
