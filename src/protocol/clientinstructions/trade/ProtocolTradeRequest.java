@@ -19,12 +19,12 @@ public class ProtocolTradeRequest {
 	private ProtocolResource offer;
 
 	@SerializedName("Nachfrage")
-	private ProtocolResource withdrawal;
+	private ProtocolResource demand;
 
-	public ProtocolTradeRequest(ProtocolResource offer, ProtocolResource withdrawal) {
+	public ProtocolTradeRequest(ProtocolResource offer, ProtocolResource demand) {
 
 		this.offer = offer;
-		this.withdrawal = withdrawal;
+		this.demand = demand;
 	}
 
 	public ProtocolResource getOffer() {
@@ -32,9 +32,9 @@ public class ProtocolTradeRequest {
 		return offer;
 	}
 
-	public ProtocolResource getWithdrawal() {
+	public ProtocolResource getDemand() {
 
-		return withdrawal;
+		return demand;
 	}
 
 }
