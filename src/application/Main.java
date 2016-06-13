@@ -45,7 +45,7 @@ public class Main extends Application {
 		case 0: setClientController(new ClientController(primaryStage));break;
 		case 1: setServerController(new ServerController()); break;
 		case 2: pa = new PrimitiveAI();break;
-		case 3: dc = new DebugClient();break;
+		case 3: dc = new DebugClient(primaryStage);break;
 		}
 //		if (mode) {
 //			// server = new Server();

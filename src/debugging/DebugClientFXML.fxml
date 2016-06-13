@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,9 +12,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="900.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="debugging.DebugClientController">
    <children>
-      <TextFlow fx:id="textFlow" layoutY="632.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <ButtonBar layoutX="14.0" layoutY="846.0" prefHeight="40.0" prefWidth="983.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <buttons>
             <ToggleButton fx:id="quickStartButton" mnemonicParsing="false" onAction="#quickStart" text="Quickstart 2 AI" />
@@ -176,5 +176,10 @@
          </font>
       </Button>
       <TextField fx:id="customJSON" layoutX="14.0" layoutY="425.0" />
+      <TextArea fx:id="textField" editable="false" layoutX="5.0" layoutY="484.0" prefHeight="362.0" prefWidth="980.0">
+         <font>
+            <Font name="Consolas" size="10.0" />
+         </font></TextArea>
+      <TextFlow fx:id="textFlow" layoutX="377.0" layoutY="92.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
