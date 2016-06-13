@@ -433,7 +433,8 @@ public class ClientController {
 			gameLogic.getBoard().getPlayer(modelID).incrementResources(resources);
 		}
 		else{
-			gameLogic.getBoard().getPlayer(modelID).incrementResources(resources);
+			// decrement the hiddenresource not the resource
+			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources[0]);
 		}
 		//Happens in status update
 		//viewController.getGameViewController().setResourceCards(modelID, resources);

@@ -167,8 +167,11 @@ public class PlayerModel {
 		if (resources.length == 5) {
 			for (int i = 0; i < 5; i++)
 				this.resources[i] += resources[i];
-		} else
+		} else {
+			System.out.println(resources.length);
 			throw new IllegalArgumentException("Invalid resources object");
+
+		}
 
 	}
 
@@ -181,7 +184,6 @@ public class PlayerModel {
 		// 0=WOOD, 1=CLAY, 2=ORE, 3=SHEEP, 4=CORN
 		return resources[i];
 	}
-	
 
 	public void decrementResourceAt(int i) {
 		resources[i] -= 1;
@@ -206,24 +208,25 @@ public class PlayerModel {
 	}
 
 	/**
-	 * @param hiddenResources the hiddenResources to set
+	 * @param hiddenResources
+	 *            the hiddenResources to set
 	 */
 	public void setHiddenResources(Integer hiddenResources) {
 		this.hiddenResources = hiddenResources;
 	}
-	
-	public void incrementHiddenResources(int increment){
-		this.hiddenResources+=increment;
-	}
-	
-	public void decrementHiddenResources(int decrement){
-		this.hiddenResources-=decrement;
+
+	public void incrementHiddenResources(int increment) {
+		this.hiddenResources += increment;
 	}
 
-	//For server Only
+	public void decrementHiddenResources(int decrement) {
+		this.hiddenResources -= decrement;
+	}
+
+	// For server Only
 	//
-	
-	public int sumResources(){
-		return resources[0]+resources[1]+resources[2]+resources[3]+resources[4];
+
+	public int sumResources() {
+		return resources[0] + resources[1] + resources[2] + resources[3] + resources[4];
 	}
 }

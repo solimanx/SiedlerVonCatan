@@ -110,13 +110,11 @@ public class GameLogic {
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildStreet(int x, int y, int dir, int playerID) {
-		if (board.getPlayer(playerID).getAmountStreets() <= 0) { // has this
-																	// Player
-																	// a Street
-																	// left
-																	// to build?
+		//enough streets
+		if (board.getPlayer(playerID).getAmountStreets() <= 0) { 
 			return false;
 		}
+		//can he afford
 		if (checkPlayerResources(playerID, settings.DefaultSettings.STREET_BUILD_COST) == false) {
 			return false;
 		}
@@ -126,7 +124,9 @@ public class GameLogic {
 		 * settings.DefaultSettings.STREET_BUILD_COST[i]) { return false; } }
 		 */
 		Edge e = board.getEdgeAt(x, y, dir);
+		
 		if (e != null) { // valid edge
+			//unoccupied
 			if (e.isHasStreet() == false) {
 				Edge[] neighbors = board.getLinkedEdges(x, y, dir);
 				for (int i = 0; i < neighbors.length; i++) {
@@ -173,10 +173,11 @@ public class GameLogic {
 		return false;
 	}
 
-	public boolean checkPlayerResources(int playerID, int[] resources) {
-		int[] playerResources = getPlayerResources(playerID);
+	public boolean checkPlayerResources(int playerID, int[] cost) {
+		//int[] playerResources = getPlayerResources(playerID);
+		int[] playerResources = board.getPlayer(playerID).getResources();
 		for (int i = 0; i < 5; i++) {
-			if (playerResources[i] < resources[i]) {
+			if (playerResources[i] < cost[i]) {
 				return false;
 			}
 		}
@@ -190,6 +191,7 @@ public class GameLogic {
 	 * @param playerID
 	 * @return resource Array
 	 */
+	@Deprecated //see PlayerModel.getResources()
 	public int[] getPlayerResources(int playerID) {
 		int[] result = { 0, 0, 0, 0, 0 };
 		ArrayList<ResourceType> resList = board.getPlayer(playerID).getResourceCards();
