@@ -24,10 +24,13 @@ import protocol3.clientinstructions.*;
 import protocol3.object.*;
 import protocol3.severinstructions.*;
 
+/**
+ * Handling all input for the AI
+ */
 public class PrimitiveAIInputHandler extends InputHandler {
 	PrimitiveAI ai;
 
-	public PrimitiveAIInputHandler(PrimitiveAI primitiveAI) {
+	protected PrimitiveAIInputHandler(PrimitiveAI primitiveAI) {
 		ai = primitiveAI;
 
 	}
@@ -43,8 +46,8 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	 */
 	@Override
 	protected void handle(ProtocolHello hello) {
-		if (ai.getPROTOCOL().equals(hello.getProtocol())) {
-			ai.getOutput().respondHello(ai.getVERSION());
+		if (ai.getProtocol().equals(hello.getProtocol())) {
+			ai.getOutput().respondHello(ai.getVersion());
 
 		} else {
 			throw new IllegalArgumentException("Protocol version mismatch");
@@ -52,14 +55,20 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	}
 
+	/**
+	 * Initializing ID after receiving welcome from server. Attempt to create a
+	 * profile.
+	 */
 	@Override
 	protected void handle(ProtocolWelcome welcome) {
 		ai.setID(welcome.getPlayer_id());
 		ai.getOutput().respondProfile(ai.getColorCounter());
-		// ai.getOutput().respondStartGame();
 
 	}
 
+	/**
+	 * Update board in the AI, after receiving the board json.
+	 */
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
 		// ProtocolBoard object retrieved (Karte: ...}
@@ -107,27 +116,19 @@ public class PrimitiveAIInputHandler extends InputHandler {
 			c2.setHarbourStatus(pHarb.getType());
 		}
 		String banditLocation = pBoard.getRobber_location();
-		ai.initBoard(fields, corners, streets, harbourCorners, banditLocation);
+		ai.updateBoard(fields, corners, streets, harbourCorners, banditLocation);
 
-	}
-
-	@Override
-	protected void handle(ProtocolError error) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
-		// TODO Auto-generated method stub
+		// TODO Chatbot?
 
 	}
 
-	@Override
-	protected void handle(ProtocolChatSendMessage chatSendMessage) {
-		// TODO Auto-generated method stub
-
-	}
-
+	/**
+	 * After receiving a {"Serverantwort":} JSON
+	 */
 	@Override
 	protected void handle(ProtocolServerResponse serverResponse) {
 		// if game hasn't started, start it
@@ -142,11 +143,6 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	}
 
-	@Override
-	protected void handle(String string) {
-
-	}
-
 	/**
 	 * After receiving a {"Bauvorgang":} JSON
 	 */
@@ -158,10 +154,10 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 		if (building.getType().equals("Dorf")) {
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
-			ai.buildVillage(coords[0], coords[1], coords[2], playerID);
+			ai.updateVillage(coords[0], coords[1], coords[2], playerID);
 		} else if (building.getType().equals("Straße")) {
 			coords = ProtocolToModel.getEdgeCoordinates(building.getID());
-			ai.buildRoad(coords[0], coords[1], coords[2], playerID);
+			ai.updateRoad(coords[0], coords[1], coords[2], playerID);
 
 		} else if (building.getType().equals("Stadt")) {
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
@@ -170,9 +166,12 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	}
 
+	/**
+	 * After receiving a {"Würfelwurf":...} JSON
+	 */
 	@Override
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
-		// TODO Auto-generated method stub
+		// TODO Store this.
 
 	}
 
@@ -190,9 +189,9 @@ public class PrimitiveAIInputHandler extends InputHandler {
 			gain = ProtocolToModel.convertResources(resourceObtain.getResource());
 			ai.getMe().incrementResources(gain);
 		}
-		// if it isn't me //TODO
+		// if it isn't me
 		else {
-			// not yet implemented
+			// TODO Store for strategy
 		}
 
 	}
@@ -249,23 +248,12 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
 	}
 
-	@Deprecated
+	/**
+	 * After receiving a {Räuber versetzt} JSON
+	 */
 	@Override
-	protected void handle(ProtocolBuildRequest buildRequest) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Deprecated
-	@Override
-	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-
-	}
-
-	@Deprecated
-	@Override
-	protected void handle(ProtocolEndTurn endTurn) {
-		// TODO Auto-generated method stub
+	protected void handle(ProtocolRobberMovement robberMovement) {
+		ai.updateRobber(robberMovement.getLocation_id());
 
 	}
 
@@ -278,12 +266,6 @@ public class PrimitiveAIInputHandler extends InputHandler {
 	@Override
 	protected void handle(ProtocolCosts costs) {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void handle(ProtocolRobberMovement robberMovement) {
-		ai.repositionRobber(robberMovement.getLocation_id());
 
 	}
 
@@ -424,17 +406,60 @@ public class PrimitiveAIInputHandler extends InputHandler {
 		// TODO Auto-generated method stub
 
 	}
-	// UNUSED
+
+	@Override
+	protected void handle(ProtocolError error) {
+		// Preferably the AI will try to avoid all errors, which makes this
+		// method useless.
+	}
 
 	@Deprecated
 	@Override
 	protected void handle(ProtocolPlayerProfile playerProfile) {
+		// Server doesn't output this JSON.
 
 	}
 
 	@Override
 	@Deprecated
 	protected void handle(ProtocolClientReady clientReady) {
+		// Server doesn't output this JSON.
+	}
+
+	// ================================================================================
+	// UNUSED/DEPRECATED
+	// ================================================================================
+
+	@Deprecated
+	@Override
+	protected void handle(ProtocolChatSendMessage chatSendMessage) {
+		// Server doesn't output this JSON.
+
+	}
+
+	@Deprecated
+	@Override
+	protected void handle(String string) {
+		// Was intended for server response
+	}
+
+	@Deprecated
+	@Override
+	protected void handle(ProtocolBuildRequest buildRequest) {
+		// Server doesn't output this JSON.
+	}
+
+	@Deprecated
+	@Override
+	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
+		// Server doesn't output this JSON.
+	}
+
+	@Deprecated
+	@Override
+	protected void handle(ProtocolEndTurn endTurn) {
+		// Server doesn't output this JSON.
+
 	}
 
 }

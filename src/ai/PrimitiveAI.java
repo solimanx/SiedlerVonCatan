@@ -22,6 +22,15 @@ import settings.DefaultSettings;
  * villages and two roadss.
  */
 public class PrimitiveAI extends Thread {
+
+	// ================================================================================
+	// CLASS FIELDS
+	// ================================================================================
+
+	// --------------------------------------------------------------------------------
+	// COORDINATES STORAGE
+	// --------------------------------------------------------------------------------
+
 	// 3-part corner coordinate (e.g (0,0,1)
 	private int[] firstVillageLocation;
 	private int[] secondVillageLocation;
@@ -29,9 +38,10 @@ public class PrimitiveAI extends Thread {
 	private int[] firstRoadLocation;
 	private int[] secondRoadLocation;
 
-	// CONNECTION RELATED
-	private boolean scanning = true;
-	private static int connectionTry = 0;
+	// --------------------------------------------------------------------------------
+	// CONNECTION FIELDS
+	// --------------------------------------------------------------------------------
+
 	private Socket socket;
 	private final String SERVERHOST = "aruba.dbs.ifi.lmu.de";
 	private final int PORT = 10000;
@@ -39,26 +49,30 @@ public class PrimitiveAI extends Thread {
 	private final String PROTOCOL = DefaultSettings.PROTOCOL_VERSION;
 	private final String VERSION = DefaultSettings.AI_VERSION;
 
+	// --------------------------------------------------------------------------------
+	// I/O FIELDS
+	// --------------------------------------------------------------------------------
 	private OutputStreamWriter writer;
 	private BufferedReader reader;
-
-	private PlayerModel me;
-
-	// own ID in server
-	private int ID;
-
-	private int colorCounter = 0;
-
-	private boolean started = false;
-
-	// Handlers
-
 	private PrimitiveAIInputHandler pI = new PrimitiveAIInputHandler(this);
 	private PrimitiveAIOutputHandler pO = new PrimitiveAIOutputHandler(this);
 
+	// --------------------------------------------------------------------------------
+	// PROFILE FIELDS
+	// --------------------------------------------------------------------------------
+	private PlayerModel me;
+	private int ID;
+	private int colorCounter = 0;
+	private boolean started = false;
 	private GameLogic gl;
 	private Board board;
 
+	// ================================================================================
+	// CONSTRUCTORS
+	// ================================================================================
+	/**
+	 * Creates a PrimitiveAI object, and forces it to connect to the 0.3 server.
+	 */
 	public PrimitiveAI() {
 		System.out.println(DefaultSettings.getCurrentTime() + " AI started.");
 		this.board = new Board();
@@ -67,28 +81,35 @@ public class PrimitiveAI extends Thread {
 
 	}
 
+	// ================================================================================
+	// CONNECTION METHODS
+	// ================================================================================
+	/**
+	 * Initializing socket, writer and reader, then attempt connection.
+	 */
 	@Override
 	public void run() {
-		while (scanning && connectionTry < 10) {
+		try {
+			socket = new Socket(SERVERHOST, PORT);
+			writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+			reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+			System.out.println(DefaultSettings.getCurrentTime() + " AI connected to server.");
+			read();
+		} catch (IOException e) {
+			System.out.println("Connection to server failed.");
 			try {
-				socket = new Socket(SERVERHOST, PORT);
-				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-				scanning = false;
-				System.out.println(DefaultSettings.getCurrentTime() + " AI connected to server.");
-				read();
-			} catch (IOException e) {
-				System.out.println("Connection to server failed." + " Attempt:" + connectionTry + 1);
-				connectionTry++;
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException ie) {
-					ie.printStackTrace();
-				}
+				Thread.sleep(2000);
+			} catch (InterruptedException ie) {
+				ie.printStackTrace();
 			}
 		}
 	}
 
+	/**
+	 * Reading input from the servers output.
+	 * 
+	 * @throws IOException
+	 */
 	private void read() throws IOException {
 		String line;
 		while ((line = reader.readLine()) != null) {
@@ -97,15 +118,23 @@ public class PrimitiveAI extends Thread {
 		}
 	}
 
+	/**
+	 * Output to server.
+	 * 
+	 * @throws IOException
+	 */
 	public void write(String json) throws IOException {
 		System.out.println(DefaultSettings.getCurrentTime() + "    A.I: " + json);
 		writer.write(json + "\n");
 		writer.flush();
 	}
 
+	// ================================================================================
+	// PRIMITIVE AI LOGIC
+	// ================================================================================
 	/**
-	 * Builds a village at the first legal empty location, then attaches a roads
-	 * to it, then repeats it.
+	 * Builds the initial (free) village at the first legal empty location. Used
+	 * for the first round (2 turns)
 	 */
 	public void initialVillage() {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -134,8 +163,14 @@ public class PrimitiveAI extends Thread {
 
 	}
 
+	/**
+	 * Builds the initial (free) road at the first legal empty location,
+	 * depending on the initial village location. Used for the first round (2
+	 * turns)
+	 */
 	public void initialRoad() {
 		int x, y, dir;
+		// First road
 		if (secondVillageLocation == null) {
 			x = firstVillageLocation[0];
 			y = firstVillageLocation[1];
@@ -172,7 +207,8 @@ public class PrimitiveAI extends Thread {
 				throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()3");
 			}
 
-		} else {
+		} // Second road
+		else {
 			x = secondVillageLocation[0];
 			y = secondVillageLocation[1];
 			dir = secondVillageLocation[2];
@@ -211,88 +247,79 @@ public class PrimitiveAI extends Thread {
 		}
 	}
 
-	public void buildVillage(int x, int y, int dir, int playerID) {
-		Corner c = gl.getBoard().getCornerAt(x, y, dir);
-		c.setStatus(enums.CornerStatus.VILLAGE);
-		c.setOwnerID(playerID);
-		Corner[] neighbors = gl.getBoard().getAdjacentCorners(x, y, dir);
-		for (int i = 0; i < neighbors.length; i++) {
-			if (neighbors[i] != null) {
-				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+	/**
+	 * Randomly moving robber position
+	 */
+	protected void moveRobber() {
+		String robber = gl.getBoard().getBandit();
+		// choose random character between A-S
+		String alphabet = "ABCDEFGHIJKLMNOPQRS";
+		int n = alphabet.length();
+		String newRobber = new String();
+		do {
+			newRobber = alphabet.charAt(new Random().nextInt(n)) + "";
+		} while (newRobber.equals(robber));
+
+		// send to output
+		pO.respondMoveRobber(newRobber);
+
+	}
+
+	/**
+	 * Giving up half of resources by order
+	 */
+	protected void loseToBandit() {
+		// Count all my resources
+		int sum = 0;
+
+		for (int i = 0; i < 5; i++)
+			sum += getMe().getResourceAmountOf(i);
+		// loss is half of sum
+		int loss = sum / 2;
+		// losses array
+		int[] losses = { 0, 0, 0, 0, 0 };
+
+		// until losses amount is reached
+		while (loss > 0) {
+			// scan every resource
+			for (int j = 0; j < 5; j++) {
+				// if there's some of it
+				if (getMe().getResourceAmountOf(j) > 0) {
+					// decrement it from your list
+					getMe().decrementResourceAt(j);
+					// increment it to losses array
+					losses[j]++;
+					loss -= 1;
+					// check if losses amount is reached
+					break;
+				}
+				// if there's none of it
+				else {
+					// check the next resource type
+					continue;
+				}
+
 			}
 		}
-	}
 
-	public void buildRoad(int i, int j, int k, int playerID) {
-		Edge e = gl.getBoard().getEdgeAt(i, j, k);
-		e.setHasStreet(true);
-		e.setOwnedByPlayer(playerID);
+		// send the losses to the output handler
+		pO.respondRobberLoss(losses);
 
 	}
 
-	protected PrimitiveAIOutputHandler getOutput() {
-		return this.pO;
-	}
-
-	protected PrimitiveAIInputHandler getInput() {
-		return this.pI;
-
-	}
-
-	public String getVERSION() {
-		return VERSION;
-	}
-
-	public String getPROTOCOL() {
-		return PROTOCOL;
-	}
-
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int player_id) {
-		ID = player_id;
-
-	}
-
-	public int getColorCounter() {
-		return colorCounter;
-	}
-
-	public void setColorCounter(int colorCounter) {
-		this.colorCounter = colorCounter;
-	}
-
-	public boolean isStarted() {
-		return started;
-	}
-
-	public void setStarted(boolean started) {
-		this.started = started;
-	}
-
-	public int[] getFirstVillageLocation() {
-		return firstVillageLocation;
-	}
-
-	public int[] getSecondVillageLocation() {
-		return secondVillageLocation;
-	}
-
-	public int[] getFirstRoadLocation() {
-		return firstRoadLocation;
-	}
-
-	public int[] getSecondRoadLocation() {
-		return secondRoadLocation;
-	}
-
-	protected PlayerModel getMe() {
-		return me;
-	}
-
-	public void initBoard(Field[] fields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
+	// ================================================================================
+	// BOARD UPDATES
+	// ================================================================================
+	/**
+	 * Initialize board.
+	 * 
+	 * @param fields
+	 * @param corners
+	 * @param streets
+	 * @param harbourCorners
+	 * @param banditLocation
+	 */
+	protected void updateBoard(Field[] fields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
 			String banditLocation) {
 
 		this.me = new PlayerModel(ID);
@@ -333,68 +360,116 @@ public class PrimitiveAI extends Thread {
 	}
 
 	/**
-	 * Randomly moving robber position
+	 * Updates a new village in the board.
+	 * 
+	 * @param x
+	 *            Axial-x corner coordinate
+	 * @param y
+	 *            Axial-y corner coordinate
+	 * @param dir
+	 *            corner direction
+	 * @param playerID
+	 *            owner
 	 */
-	public void moveRobber() {
-		String robber = gl.getBoard().getBandit();
-		// choose random character between A-S
-		String alphabet = "ABCDEFGHIJKLMNOPQRS";
-		int n = alphabet.length();
-		String newRobber = new String();
-		do {
-			newRobber = alphabet.charAt(new Random().nextInt(n)) + "";
-		} while (newRobber.equals(robber));
-
-		// send to output
-		pO.respondMoveRobber(newRobber);
-
+	protected void updateVillage(int x, int y, int dir, int playerID) {
+		Corner c = gl.getBoard().getCornerAt(x, y, dir);
+		c.setStatus(enums.CornerStatus.VILLAGE);
+		c.setOwnerID(playerID);
+		Corner[] neighbors = gl.getBoard().getAdjacentCorners(x, y, dir);
+		for (int i = 0; i < neighbors.length; i++) {
+			if (neighbors[i] != null) {
+				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+			}
+		}
 	}
 
 	/**
-	 * Giving up half of resources by order
+	 * Updates a new road in the board.
+	 * 
+	 * @param i
+	 *            Axial-x edge coordinate
+	 * @param j
+	 *            Axial-y edge coordinate
+	 * @param k
+	 *            edge direction
+	 * @param playerID
+	 *            owner
 	 */
-	public void loseToBandit() {
-		// Count all my resources
-		int sum = 0;
-
-		for (int i = 0; i < 5; i++)
-			sum += getMe().getResourceAmountOf(i);
-		// loss is half of sum
-		int loss = sum / 2;
-		// losses array
-		int[] losses = { 0, 0, 0, 0, 0 };
-
-		// until losses amount is reached
-		while (loss > 0) {
-			// scan every resource
-			for (int j = 0; j < 5; j++) {
-				// if there's some of it
-				if (getMe().getResourceAmountOf(j) > 0) {
-					// decrement it from your list
-					getMe().decrementResourceAt(j);
-					// increment it to losses array
-					losses[j]++;
-					loss -= 1;
-					// check if losses amount is reached
-					break;
-				}
-				// if there's none of it
-				else {
-					// check the next resource type
-					continue;
-				}
-
-			}
-		}
-
-		// send the losses to the output handler
-		pO.respondRobberLoss(losses);
+	protected void updateRoad(int i, int j, int k, int playerID) {
+		Edge e = gl.getBoard().getEdgeAt(i, j, k);
+		e.setHasStreet(true);
+		e.setOwnedByPlayer(playerID);
 
 	}
 
-	public void repositionRobber(String location_id) {
+	protected void updateRobber(String location_id) {
 		gl.getBoard().setBandit(location_id);
 
+	}
+
+	// ================================================================================
+	// GETTERS AND SETTERS
+	// ================================================================================
+	protected PrimitiveAIOutputHandler getOutput() {
+		return this.pO;
+	}
+
+	protected PrimitiveAIInputHandler getInput() {
+		return this.pI;
+
+	}
+
+	protected String getVersion() {
+		return VERSION;
+	}
+
+	protected String getProtocol() {
+		return PROTOCOL;
+	}
+
+	protected int getID() {
+		return ID;
+	}
+
+	protected void setID(int player_id) {
+		ID = player_id;
+
+	}
+
+	protected int getColorCounter() {
+		return colorCounter;
+	}
+
+	protected void setColorCounter(int colorCounter) {
+		this.colorCounter = colorCounter;
+	}
+
+	protected boolean isStarted() {
+		return started;
+	}
+
+	protected void setStarted(boolean started) {
+		this.started = started;
+	}
+
+	protected int[] getFirstVillageLocation() {
+		return firstVillageLocation;
+	}
+
+	protected int[] getSecondVillageLocation() {
+		return secondVillageLocation;
+	}
+
+	protected int[] getFirstRoadLocation() {
+		return firstRoadLocation;
+	}
+
+	protected int[] getSecondRoadLocation() {
+		return secondRoadLocation;
+	}
+
+	protected PlayerModel getMe() {
+		return me;
 	}
 
 }
