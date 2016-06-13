@@ -209,9 +209,9 @@ public class ClientOutputHandler {
 
     /**
      * @param offer
-     * @param withdrawal
+     * @param demand
      */
-    public void handleHarbourRequest(int[] offer, int[] withdrawal) {
+    public void handleHarbourRequest(int[] offer, int[] demand) {
         ProtocolResource proff;
         if (offer.length > 1) {
             proff = new ProtocolResource(offer[0], offer[1], offer[3], offer[4], offer[5], 0);
@@ -219,10 +219,10 @@ public class ClientOutputHandler {
             proff = new ProtocolResource(0, 0, 0, 0, 0, offer[0]);
         }
         ProtocolResource prw;
-        if (withdrawal.length > 1) {
-            prw = new ProtocolResource(withdrawal[0], withdrawal[1], withdrawal[2], withdrawal[3], withdrawal[4], 0);
+        if (demand.length > 1) {
+            prw = new ProtocolResource(demand[0], demand[1], demand[2], demand[3], demand[4], 0);
         } else {
-            prw = new ProtocolResource(0, 0, 0, 0, 0, withdrawal[0]);
+            prw = new ProtocolResource(0, 0, 0, 0, 0, demand[0]);
         }
         ProtocolHarbourRequest phr = new ProtocolHarbourRequest(proff, prw);
         Response r = new Response();
@@ -253,20 +253,20 @@ public class ClientOutputHandler {
 
     /**
      * @param offer
-     * @param withdrawal
+     * @param demand
      */
-    public void handleTradeRequest(int[] offer, int[] withdrawal) {
+    public void handleTradeRequest(int[] offer, int[] demand) {
         ProtocolResource proff;
         if (offer.length > 1) {
-            proff = new ProtocolResource(offer[0], offer[1], offer[3], offer[4], offer[5], 0);
+            proff = new ProtocolResource(offer[0], offer[1], offer[2], offer[3], offer[4], 0);
         } else {
             proff = new ProtocolResource(0, 0, 0, 0, 0, offer[0]);
         }
         ProtocolResource prw;
-        if (withdrawal.length > 1) {
-            prw = new ProtocolResource(withdrawal[0], withdrawal[1], withdrawal[2], withdrawal[3], withdrawal[4], 0);
+        if (demand.length > 1) {
+            prw = new ProtocolResource(demand[0], demand[1], demand[2], demand[3], demand[4], 0);
         } else {
-            prw = new ProtocolResource(0, 0, 0, 0, 0, withdrawal[0]);
+            prw = new ProtocolResource(0, 0, 0, 0, 0, demand[0]);
         }
         ProtocolTradeRequest ptr = new ProtocolTradeRequest(proff, prw);
         Response r = new Response();

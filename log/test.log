@@ -3669,6 +3669,17 @@ java.net.SocketException: Socket closed
 	at network.InputHandler.handle(InputHandler.java:58) [bin/:?]
 	at network.server.server.ServerInputHandler.sendToParser(ServerInputHandler.java:68) [bin/:?]
 	at network.server.server.Server$ClientThread.run(Server.java:76) [bin/:?]
+<<<<<<< .mine
+[DEBUG] 2016-06-13 23:02:28,870 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-13 23:02:39,148 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-13 23:03:01,033 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-13 23:05:16,997 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-13 23:05:34,551 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-13 23:05:47,356 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-13 23:08:22,774 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-13 23:08:36,058 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-13 23:08:51,069 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+=======
 [DEBUG] 2016-06-13 20:56:17,400 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
 [DEBUG] 2016-06-13 20:56:31,371 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
 [DEBUG] 2016-06-13 20:56:50,076 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
@@ -3687,3 +3698,4 @@ java.net.SocketException: Socket closed
 [DEBUG] 2016-06-13 22:34:03,556 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
 [DEBUG] 2016-06-13 22:34:10,388 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
 [DEBUG] 2016-06-13 22:34:19,188 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+>>>>>>> .r7472

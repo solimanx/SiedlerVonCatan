@@ -12,100 +12,143 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.tradeview.TradeViewController">
+<HBox prefHeight="528.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.tradeview.TradeViewController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
+      <VBox>
          <children>
-            <Label text="Trading">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" text="Accepting trade offers">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ListView fx:id="foreignTrades" prefHeight="402.0" prefWidth="400.0" />
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Accept Trade" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-      </HBox>
-      <GridPane fx:id="grid">
-        <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </HBox.margin>
+      </VBox>
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
+      <VBox>
          <children>
-            <Label text="Give" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></Label>
-            <Label text="Get" GridPane.columnIndex="2">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></Label>
-            <Label text="Wood" GridPane.rowIndex="1">
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" text="Placing trade offer">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <GridPane fx:id="grid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="200.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="60.0" minWidth="-Infinity" prefWidth="50.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="60.0" minWidth="-Infinity" prefWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Give" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Get" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Wood" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Clay" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Wool" GridPane.rowIndex="3">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Corn" GridPane.rowIndex="4">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Ore" GridPane.rowIndex="5">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+               </children>
                <padding>
-                  <Insets right="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                </padding>
-            </Label>
-            <Label text="Clay" GridPane.rowIndex="2">
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-            <Label text="Wool" GridPane.rowIndex="3">
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-            <Label text="Corn" GridPane.rowIndex="4">
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-            <Label text="Ore" GridPane.rowIndex="5">
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
+            </GridPane>
+            <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="500.0" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="placeOfferButton" mnemonicParsing="false" onAction="#handlePlaceOfferButton" text="Place offer">
+                     <HBox.margin>
+                        <Insets bottom="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label text="Your offers">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ListView fx:id="ownOffers" prefHeight="139.0" prefWidth="200.0" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="cancelOffer" mnemonicParsing="false" onAction="#handleTradeButton" text="Cancel offer" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
-         </padding>
-      </GridPane>
-      <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="500.0" prefHeight="50.0" prefWidth="200.0">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-         <children>
-            <Button fx:id="placeOfferButton" mnemonicParsing="false" onAction="#handlePlaceOfferButton" text="Place offer" />
-         </children>
-      </HBox>
-      <Separator prefWidth="200.0" />
-      <ListView fx:id="offerList" prefHeight="200.0" prefWidth="200.0" />
-      <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-         <children>
-            <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Trade" />
-         </children>
-      </HBox>
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </HBox.margin>
+      </VBox>
    </children>
-</VBox>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>

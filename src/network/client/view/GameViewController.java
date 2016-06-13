@@ -162,6 +162,7 @@ public class GameViewController implements Initializable {
 	private HashMap<Integer, Integer> playerIDtoViewPosition = new HashMap<Integer, Integer>(4);
 	private HashMap<Integer, Integer> viewPositiontoPlayerID = new HashMap<Integer, Integer>(4);
 	private HashMap<Integer, Color> playerColors = new HashMap<Integer, Color>(4);
+	private HashMap<Integer, String> playerNames = new HashMap<Integer, String>(4);
 	// fieldColors kann weg
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	private HashMap<ResourceType, ImagePattern> resourceImages = new HashMap<ResourceType, ImagePattern>(6);
@@ -213,6 +214,10 @@ public class GameViewController implements Initializable {
 		shadow.setColor(Color.SLATEGRAY);
 	}
 
+	public String getPlayerNames(Integer playerID) {
+		return playerNames.get(playerID);
+	}
+
 	/**
 	 * @param modelID
 	 * @param playerName
@@ -231,15 +236,19 @@ public class GameViewController implements Initializable {
 		switch (playerIDtoViewPosition.get(modelID)) {
 		case 1:
 			playerNameOne.setText(playerName);
+			playerNames.put(1, playerName);
 			break;
 		case 2:
 			playerNameTwo.setText(playerName);
+			playerNames.put(1, playerName);
 			break;
 		case 3:
 			playerNameThree.setText(playerName);
+			playerNames.put(1, playerName);
 			break;
 		case 4:
 			playerNameFour.setText(playerName);
+			playerNames.put(1, playerName);
 			break;
 		}
 
@@ -295,7 +304,7 @@ public class GameViewController implements Initializable {
 		Stage tradeStage = new Stage();
 		tradeStage.setScene(scene);
 		
-		controller.init(selfResources);
+		controller.init(selfResources, viewController);
 
 		tradeStage.initModality(Modality.WINDOW_MODAL);
 		tradeStage.initOwner(gameStage);
