@@ -11,6 +11,8 @@ import model.objects.Field;
 import network.InputHandler;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
@@ -61,6 +63,7 @@ import protocol3.serverinstructions.ProtocolPlayKnightCard;
 import protocol3.serverinstructions.ProtocolRoadBuildingCardInfo;
 
 public class ClientInputHandler extends InputHandler {
+    private static Logger logger = LogManager.getLogger(ClientInputHandler.class.getName());
     private ClientController clientController;
 
     /**
@@ -172,6 +175,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolError error) {
         System.out.println("Meldung wird geschickt");
+        logger.info("Meldung wird geschickt");
         clientController.error(error.getNotice());
 
     }
@@ -322,6 +326,7 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolEndTurn endTurn) {
 
         System.out.println("Der Zug wurde beendet");
+        logger.info("Der Zug wurde beendet");
         clientController.endTurn();
         // unnecessary Method in ClientInputHandler
     }
