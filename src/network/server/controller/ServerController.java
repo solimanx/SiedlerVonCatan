@@ -60,6 +60,7 @@ public class ServerController {
 	private Board board;
 	public int[] resourceStack = { 19, 19, 19, 19, 19 };
 	private static Logger logger = LogManager.getLogger(ServerController.class.getName());
+	private int lengthLongestTradeRoute;
 
 	public ServerController() {
 		board = new Board();
@@ -462,7 +463,7 @@ public class ServerController {
 					serverOutputHandler.buildStreet(x, y, dir, threadID);
 					serverOutputHandler.costs(threadID, DefaultSettings.STREET_BUILD_COST);
 					statusUpdate(modelID);
-					checkLongestTradingRoute(modelID);
+					checkLongestTradingRoute(modelID, x , y, dir);
 				} else {
 					error(modelID, "Kein Straßenbau möglich");
 				}
@@ -472,13 +473,128 @@ public class ServerController {
 	}
 
 	/**
-	 * Checks if a player has longest Trading Route
+	 * Checks if a player has longest Trading Route, which contains 5 or more streets
+	 * and sets it (for all players)
+	 * @param modelID
+	 * @param aX
+	 * @param aY
+	 * @param dir
+	 */
+	private void checkLongestTradingRoute(int modelID, int aX, int aY, int dir) {
+		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
+		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked);
+		if(longestRoute > lengthLongestTradeRoute && longestRoute>4){
+			board.getPlayer(0).setHasLongestRoad(false);
+			board.getPlayer(1).setHasLongestRoad(false);
+			board.getPlayer(2).setHasLongestRoad(false);
+			board.getPlayer(3).setHasLongestRoad(false);
+			board.getPlayer(modelID).setHasLongestRoad(true);
+		}
+	}
+	
+	
+	/**
+	 * recursive method, which calculates the longest possible rout from the given street (edge)
 	 * 
 	 * @param modelID
+	 * @param aX edge x-coordinate
+	 * @param aY edge y-coordinate
+	 * @param dir edge direction
+	 * @param alreadyChecked list of already calculated streets
+	 * @return length of the longest possible road
 	 */
-	private void checkLongestTradingRoute(int modelID) {
-		// TODO Auto-generated method stub
-
+	
+	//TODO verbindung von zwei straßensystemen
+	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked) {
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
+		int[] coord = new int[3];
+		int[] fieldOneCoords = new int[2];
+		int[] fieldTwoCoords = new int[2];
+		String fieldOne;
+		String fieldTwo;
+		ArrayList<Edge> ac = new ArrayList<Edge>();
+		Edge[] neighbours = board.getLinkedEdges(aX, aY, dir);
+		if(neighbours.length > 0){
+			if(neighbours[0].isHasStreet()){
+				if(neighbours[0].getOwnerID() == modelID){
+					if(!alreadyChecked.contains(neighbours[0])){
+						fieldOne = neighbours[0].getEdgeID().substring(0, 1);
+						fieldTwo = neighbours[0].getEdgeID().substring(1, 2);
+						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
+						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
+						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
+						ac = alreadyChecked;
+						ac.add(neighbours[0]);
+						a = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+					}
+				}
+			}
+				
+		}
+			if(neighbours.length > 1){
+				if(neighbours[1].isHasStreet()){
+					if(neighbours[1].getOwnerID() == modelID){
+						if(!alreadyChecked.contains(neighbours[1])){
+							fieldOne = neighbours[1].getEdgeID().substring(0, 1);
+							fieldTwo = neighbours[1].getEdgeID().substring(1, 2);
+							fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
+							fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
+							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
+							ac = alreadyChecked;
+							ac.add(neighbours[1]);
+							b = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+						}
+					}
+				}
+			}
+			if(neighbours.length > 2){
+				if(neighbours[2].isHasStreet()){
+					if(neighbours[2].getOwnerID() == modelID){
+						if(!alreadyChecked.contains(neighbours[2])){
+							fieldOne = neighbours[2].getEdgeID().substring(0, 1);
+							fieldTwo = neighbours[2].getEdgeID().substring(1, 2);
+							fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
+							fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
+							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
+							ac = alreadyChecked;
+							ac.add(neighbours[2]);
+							c = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+						}
+					}
+				}
+			}
+			if(neighbours.length > 3){
+				if(neighbours[3].isHasStreet()){
+					if(neighbours[3].getOwnerID() == modelID){
+						if(!alreadyChecked.contains(neighbours[3])){
+							fieldOne = neighbours[3].getEdgeID().substring(0, 1);
+							fieldTwo = neighbours[3].getEdgeID().substring(1, 2);
+							fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
+							fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
+							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
+							ac = alreadyChecked;
+							ac.add(neighbours[3]);
+							d = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+						}
+					}		
+				}
+			}
+		int result;
+		if(a<b){
+			result=b;
+		}else{
+			result = a;
+		}
+		if(c>result){
+			result = c;
+		}
+		if(d>result){
+			result = d;
+		}
+		return result;
 	}
 
 	private void checkLargestArmy(int modelID) {
