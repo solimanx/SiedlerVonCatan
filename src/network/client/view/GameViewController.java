@@ -133,7 +133,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Label selfName;
-	
+
 	@FXML
 	private Label serverResponse;
 
@@ -183,9 +183,9 @@ public class GameViewController implements Initializable {
 	private PlayerState selfState;
 
 	private int[] selfResources;
-	
+
 	private SimpleStringProperty response;
-	
+
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
@@ -211,9 +211,9 @@ public class GameViewController implements Initializable {
 	 */
 	public void startScene(Stage stage) {
 		this.gameStage = stage;
-		//board.getChildren().addAll(factory.getViewBoard(stage));
+		// board.getChildren().addAll(factory.getViewBoard(stage));
 		board.getChildren().add(factory.getViewBoard(stage));
-		//board = factory.getViewBoard(stage);
+		// board = factory.getViewBoard(stage);
 		board.toBack();
 		viewController.getClientController().initializeGUI();
 
@@ -244,18 +244,30 @@ public class GameViewController implements Initializable {
 		switch (playerIDtoViewPosition.get(modelID)) {
 		case 1:
 			playerNameOne.setText(playerName);
+			if (playerColor != enums.Color.WHITE) {
+				playerNameOne.setTextFill(playerColor.getValue());
+			}
 			playerNames.put(1, playerName);
 			break;
 		case 2:
 			playerNameTwo.setText(playerName);
+			if (playerColor != enums.Color.WHITE) {
+				playerNameOne.setTextFill(playerColor.getValue());
+			}
 			playerNames.put(1, playerName);
 			break;
 		case 3:
 			playerNameThree.setText(playerName);
+			if (playerColor != enums.Color.WHITE) {
+				playerNameOne.setTextFill(playerColor.getValue());
+			}
 			playerNames.put(1, playerName);
 			break;
 		case 4:
 			playerNameFour.setText(playerName);
+			if (playerColor != enums.Color.WHITE) {
+				playerNameOne.setTextFill(playerColor.getValue());
+			}
 			playerNames.put(1, playerName);
 			break;
 		}
@@ -273,11 +285,6 @@ public class GameViewController implements Initializable {
 		fieldColors.put(ResourceType.SHEEP, Color.web("#9CCC65"));
 		fieldColors.put(ResourceType.WOOD, Color.web("#26A69A"));
 		fieldColors.put(ResourceType.SEA, Color.web("#81D4FA"));
-
-		// playerColors.add(0, Color.BLUE);
-		// playerColors.add(1, Color.ORANGE);
-		// playerColors.add(2, Color.RED);
-		// playerColors.add(3, Color.WHITE);
 
 	}
 
@@ -311,7 +318,7 @@ public class GameViewController implements Initializable {
 		Scene scene = new Scene(root);
 		Stage tradeStage = new Stage();
 		tradeStage.setScene(scene);
-		
+
 		controller.init(selfResources, viewController);
 
 		tradeStage.initModality(Modality.WINDOW_MODAL);
@@ -389,7 +396,7 @@ public class GameViewController implements Initializable {
 	/**
 	 * sets Street on coordinates u,v,dir to Player Color of Player with ID
 	 * modelID
-	 * 
+	 *
 	 * @param u
 	 *            axial coordinate (e.g. -3)
 	 * @param v
@@ -503,36 +510,39 @@ public class GameViewController implements Initializable {
 
 	/**
 	 * sets the amount of recource cards of self and other players
+	 *
 	 * @param modelID
 	 * @param resources
 	 */
-	public void setResourceCards(int modelID, int[] resources) {	
-			switch (playerIDtoViewPosition.get(modelID)) {
-			case 1:
-				// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
-				selfResources = resources;
-				selfWood.setText(Integer.toString(resources[0]));
-				selfClay.setText(Integer.toString(resources[1]));
-				selfSheep.setText(Integer.toString(resources[3]));
-				selfCorn.setText(Integer.toString(resources[4]));
-				selfOre.setText(Integer.toString(resources[2]));
-				break;
-			case 2:
-				playerTwoCards.setText(Integer.toString(resources[0]));
-				break;
-			case 3:
-				playerThreeCards.setText(Integer.toString(resources[0]));
-				break;
-			case 4:
-				playerFourCards.setText(Integer.toString(resources[0]));
-				break;
-			default:
-				break;
-			}
+	public void setResourceCards(int modelID, int[] resources) {
+		switch (playerIDtoViewPosition.get(modelID)) {
+		case 1:
+			// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP,
+			// CORN}
+			selfResources = resources;
+			selfWood.setText(Integer.toString(resources[0]));
+			selfClay.setText(Integer.toString(resources[1]));
+			selfSheep.setText(Integer.toString(resources[3]));
+			selfCorn.setText(Integer.toString(resources[4]));
+			selfOre.setText(Integer.toString(resources[2]));
+			break;
+		case 2:
+			playerTwoCards.setText(Integer.toString(resources[0]));
+			break;
+		case 3:
+			playerThreeCards.setText(Integer.toString(resources[0]));
+			break;
+		case 4:
+			playerFourCards.setText(Integer.toString(resources[0]));
+			break;
+		default:
+			break;
+		}
 	}
 
 	/**
 	 * shows result of dice roll on game view
+	 *
 	 * @param result
 	 */
 	public void setDiceRollResult(int result) {
@@ -541,6 +551,7 @@ public class GameViewController implements Initializable {
 
 	/**
 	 * sets the victory points in the game view to corresponding player
+	 *
 	 * @param modelID
 	 * @param victoryPoints
 	 */
@@ -600,7 +611,7 @@ public class GameViewController implements Initializable {
 			break;
 		}
 	}
-	
+
 	private void setMoveRobberState() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Move the Robber");
@@ -609,7 +620,7 @@ public class GameViewController implements Initializable {
 		alert.initOwner(gameStage);
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.showAndWait();
-		
+
 	}
 
 	/**
@@ -619,33 +630,35 @@ public class GameViewController implements Initializable {
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
 		try {
-			root = loader.load(getClass().getResource("/network/client/view/robberview/GiveResources.fxml").openStream());
+			root = loader
+					.load(getClass().getResource("/network/client/view/robberview/GiveResources.fxml").openStream());
 			Scene scene = new Scene(root);
 			Stage robberStage = new Stage();
 			robberStage.setScene(scene);
-		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		RobberViewController robberController = (RobberViewController) loader.getController();
-		robberController.init(this);
-		robberController.createSpinner(selfResources);
-		robberStage.initModality(Modality.APPLICATION_MODAL);
-		robberStage.initOwner(gameStage);
-		robberStage.show();
+			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			RobberViewController robberController = (RobberViewController) loader.getController();
+			robberController.init(this);
+			robberController.createSpinner(selfResources);
+			robberStage.initModality(Modality.APPLICATION_MODAL);
+			robberStage.initOwner(gameStage);
+			robberStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
 	 * @param result
 	 */
-	public void robberLoss(int[] result){
+	public void robberLoss(int[] result) {
 		viewController.getClientController().robberLoss(result);
 	}
 
 	/**
 	 * Auxiliary method drawing cities
+	 *
 	 * @param center
 	 * @return Polygon city
 	 */
@@ -655,15 +668,15 @@ public class GameViewController implements Initializable {
 				center[1] - 20, center[0] - 5, center[1] - 20, center[0] - 5, center[1] - 10);
 		return city;
 	}
-	
-	public void setServerResponse(String response){
+
+	public void setServerResponse(String response) {
 		this.response.set(response);
 	}
 
-	
-	
 	/**
-	 * Inner Class for constructing the board. Instantiated at initial phase of Game
+	 * Inner Class for constructing the board. Instantiated at initial phase of
+	 * Game
+	 *
 	 * @author mattmoos
 	 *
 	 */
@@ -698,7 +711,7 @@ public class GameViewController implements Initializable {
 						Polygon hexagon = drawHexagon(
 								createHexagon(fieldCoordinates[i][j][0], fieldCoordinates[i][j][1]));
 						hexagon.setVisible(true);
-						int[] resourceCoordinates = { i,j };
+						int[] resourceCoordinates = { i, j };
 						hexagon.setOnMouseClicked(e -> {
 							fieldClick(resourceCoordinates);
 						});
@@ -793,7 +806,7 @@ public class GameViewController implements Initializable {
 
 		/**
 		 * draws a Circle with diceIndex
-		 * 
+		 *
 		 * @param u
 		 * @param v
 		 * @param diceIndex

@@ -158,9 +158,14 @@ public class ClientController {
 	 * @param playerId
 	 * @param s
 	 */
-	public void chatReceiveMessage(int playerId, String s) {
-		viewController.messageReceive(
-				"Spieler " + gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerId)).getName() + ": " + s);
+	public void chatReceiveMessage(Integer playerId, String s) {
+		if (playerId != null) {
+			viewController.messageReceive(
+					"Spieler " + gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerId)).getName() + ": " + s);
+
+		} else {
+			viewController.messageReceive("Server: " + s);
+		}
 	}
 
 	// 7.1
@@ -569,7 +574,7 @@ public class ClientController {
 	/**
 	 * gets request resource Array from tradeView and delegates to
 	 * ClientOutputController
-	 * 
+	 *
 	 * @param request
 	 */
 	public void tradeRequest(int[][] request) {
