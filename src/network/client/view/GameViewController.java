@@ -234,9 +234,6 @@ public class GameViewController implements Initializable {
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
 		if (modelID == viewController.getClientController().getOwnPlayerId()) {
 			playerIDtoViewPosition.put(modelID, 1);
-			if (playerColor != enums.Color.WHITE) {
-				playerNameOne.setTextFill(playerColor.getValue());
-			}
 
 		} else {
 			playerIDtoViewPosition.put(modelID, playerCounter);
@@ -247,28 +244,30 @@ public class GameViewController implements Initializable {
 		playerColors.put(modelID, playerColor.getValue());
 		switch (playerIDtoViewPosition.get(modelID)) {
 		case 1:
-			playerNameTwo.setText(playerName);
-
+			playerNameOne.setText(playerName);
+			if (playerColor != enums.Color.WHITE) {
+				playerNameOne.setTextFill(playerColor.getValue());
+			}
 			playerNames.put(1, playerName);
 			break;
 		case 2:
 			playerNameTwo.setText(playerName);
 			if (playerColor != enums.Color.WHITE) {
-				playerNameThree.setTextFill(playerColor.getValue());
+				playerNameTwo.setTextFill(playerColor.getValue());
 			}
 			playerNames.put(1, playerName);
 			break;
 		case 3:
 			playerNameThree.setText(playerName);
 			if (playerColor != enums.Color.WHITE) {
-				playerNameFour.setTextFill(playerColor.getValue());
+				playerNameThree.setTextFill(playerColor.getValue());
 			}
 			playerNames.put(1, playerName);
 			break;
 		case 4:
 			playerNameFour.setText(playerName);
 			if (playerColor != enums.Color.WHITE) {
-				playerNameOne.setTextFill(playerColor.getValue());
+				playerNameFour.setTextFill(playerColor.getValue());
 			}
 			playerNames.put(1, playerName);
 			break;
