@@ -13,6 +13,7 @@ import model.Board;
 import model.objects.Field;
 import model.objects.DevCards.DevelopmentCard;
 import network.ModelToProtocol;
+import network.ProtocolToModel;
 import parsing.Parser;
 import parsing.Response;
 import protocol.configuration.ProtocolError;
@@ -159,12 +160,11 @@ public class ServerOutputHandler {
 
     public void resourceObtain(int playerID, int[] resources) {
     	ProtocolResource pResource;
-    	if (resources.length == 1){
-    		pResource = new ProtocolResource(null, null, null, null, null, resources[0]);
+    	if (resources.length != 5){
+    		pResource = new ProtocolResource(null,null,null,null,null,resources[0]);
     	} else {
-    		pResource = new ProtocolResource(resources[0], resources[1], resources[4], resources[2], resources[3],
-                null);
-    	}      
+    		pResource = ModelToProtocol.convertToProtocolResource(resources);
+    	}    
         ProtocolResourceObtain po = new ProtocolResourceObtain(playerID, pResource);
         Response r = new Response();
         r.pRObtain = po;
@@ -192,14 +192,11 @@ public class ServerOutputHandler {
 
     public void statusUpdate(int playerID, Color color, String name, PlayerState status, int victoryPoints,
                              int[] resources, Integer sendToPlayerID) {
-
-        // Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
         ProtocolResource pResource;
-        if (resources.length == 1) {
+        if (resources.length != 5) {
             pResource = new ProtocolResource(null, null, null, null, null, resources[0]);
         } else {
-            pResource = new ProtocolResource(resources[0], resources[1], resources[4], resources[2], resources[3],
-                    null);
+            pResource = ModelToProtocol.convertToProtocolResource(resources);
         }
         ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource);
         ProtocolStatusUpdate ps = new ProtocolStatusUpdate(pPlayer);
@@ -232,13 +229,13 @@ public class ServerOutputHandler {
     }
 
     public void costs(int playerID, int[] costs) {
-        ProtocolResource pr;
-        if (costs.length > 1) {
-            pr = new ProtocolResource(costs[0], costs[1], costs[4], costs[2], costs[3], 0);
-        } else {
-            pr = new ProtocolResource(0, 0, 0, 0, 0, costs[0]);
-        }
-        ProtocolCosts pc = new ProtocolCosts(playerID, pr);
+    	ProtocolResource pResource;
+    	if (costs.length != 5){
+    		pResource = new ProtocolResource(null, null, null, null, null, costs[0]);
+    	} else {
+    		pResource = ModelToProtocol.convertToProtocolResource(costs);
+    	}
+        ProtocolCosts pc = new ProtocolCosts(playerID, pResource);
         Response r = new Response();
         r.pCosts = pc;
         try {
@@ -268,7 +265,7 @@ public class ServerOutputHandler {
         Response r = new Response();
         r.pRobberMovement = pm;
         try {
-            server.sendToClient(parser.createString(r), player_id);
+            server.broadcast(parser.createString(r));
         } catch (IOException e) {
             logger.error("Threw a Input/Output Exception ", e);
             e.printStackTrace();
@@ -276,21 +273,10 @@ public class ServerOutputHandler {
 
     }
 
-    public void tradePreview(int player_id, int trade_id, int[] offer, int[] demand) {
-        ProtocolResource proff;
-        if (offer.length > 1) {
-            proff = new ProtocolResource(offer[0], offer[1], offer[4], offer[2], offer[3], 0);
-        } else {
-            proff = new ProtocolResource(0, 0, 0, 0, 0, offer[0]);
-        }
-        ProtocolResource prw;
-        if (demand.length > 1) {
-            prw = new ProtocolResource(demand[0], demand[1], demand[4], demand[2], demand[3], 0);
-        } else {
-            prw = new ProtocolResource(0, 0, 0, 0, 0, demand[0]);
-        }
-
-        ProtocolTradePreview ptp = new ProtocolTradePreview(player_id, trade_id, proff, prw);
+    public void tradePreview(int playerID, int tradeID, int[] offer, int[] demand) {
+        ProtocolResource pOff = ModelToProtocol.convertToProtocolResource(offer);
+        ProtocolResource pDem = ModelToProtocol.convertToProtocolResource(demand);
+        ProtocolTradePreview ptp = new ProtocolTradePreview(playerID, tradeID, pOff, pDem);
         Response r = new Response();
         r.pTradePreview = ptp;
         try {

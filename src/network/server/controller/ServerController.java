@@ -336,6 +336,7 @@ public class ServerController {
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 			if (result[0] + result[1] == 7) {
 				pM.setPlayerState(PlayerState.WAITING);
+				statusUpdate(modelID);
 				PlayerModel currPM;
 				for (int i = 0; i < amountPlayers; i++) {
 					currPM = gameLogic.getBoard().getPlayer(i);
@@ -345,10 +346,8 @@ public class ServerController {
 						robberLossCounter++;
 					}
 				}
-				if (robberLossCounter > 0) { // continue only if no robber
+				if (robberLossCounter == 0) { // continue only if no robber
 												// losses
-					statusUpdate(modelID);
-				} else {
 					pM.setPlayerState(PlayerState.MOVE_ROBBER);
 					statusUpdate(modelID);
 				}
@@ -839,12 +838,14 @@ public class ServerController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		int[] playerRes = getPlayerResources(modelID);
 		int newSize = 0;
+		int sizeToReach = (gameLogic.getBoard().getPlayer(modelID).sumResources() + 1) / 2;
 		if (gameLogic.checkPlayerResources(modelID, resources)) {
 			for (int i = 0; i < playerRes.length; i++) {
 				playerRes[i] = playerRes[i] - resources[i];
 				newSize = newSize + playerRes[i];
 			}
-			if (newSize <= 7) {
+			if (newSize <= sizeToReach) {
+				serverResponse(modelID, "OK");
 				robberLossCounter--;
 				subFromPlayersResources(modelID, resources);
 				resourceStackIncrease(resources);
