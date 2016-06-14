@@ -140,6 +140,10 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private TextField diceResult;
+	
+	// DEBUG
+	@FXML
+	private Button openRobberView;
 
 	private ViewController viewController;
 
@@ -678,6 +682,7 @@ public class GameViewController implements Initializable {
 	/**
 	 * Auxiliary methode showing Robber Loss window
 	 */
+	@FXML
 	private void setRobberLossState() {
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;

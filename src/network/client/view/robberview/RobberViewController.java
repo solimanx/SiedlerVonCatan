@@ -39,7 +39,7 @@ public class RobberViewController implements Initializable {
 	@FXML
 	private Label toGive;
 
-	private SimpleIntegerProperty toGiveProperty;
+	private SimpleIntegerProperty toGiveProperty = new SimpleIntegerProperty();
 
 	private int[] result = new int[5];
 

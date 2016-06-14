@@ -4707,3 +4707,103 @@ java.net.SocketException: Socket closed
 [INFO] 2016-06-14 15:26:07,700 [Thread-4] [] network.client.client.Client run - Client connected to server
 [DEBUG] 2016-06-14 15:26:07,804 [Thread-4] [] network.client.controller.ClientController welcome - Handshake complete!
 [WARN] 2016-06-14 15:26:08,229 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[INFO] 2016-06-14 15:46:49,002 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:46:49,203 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:46:50,018 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:46:55,196 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 15:47:01,050 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 15:47:06,972 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-14 15:47:48,245 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:47:48,400 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:47:49,948 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:47:54,622 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 15:48:32,354 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:48:32,507 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:48:33,101 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:48:39,226 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 15:49:28,299 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:49:28,435 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:49:29,151 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:49:33,079 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 15:49:37,502 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-14 15:49:53,376 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-14 15:50:38,169 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[ERROR] 2016-06-14 15:57:36,681 [JavaFX Application Thread] [] network.server.controller.ServerController <init> - catching
+java.net.BindException: Address already in use
+	at java.net.PlainSocketImpl.socketBind(Native Method) ~[?:1.8.0_91]
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:387) ~[?:1.8.0_91]
+	at java.net.ServerSocket.bind(ServerSocket.java:375) ~[?:1.8.0_91]
+	at java.net.ServerSocket.<init>(ServerSocket.java:237) ~[?:1.8.0_91]
+	at java.net.ServerSocket.<init>(ServerSocket.java:181) ~[?:1.8.0_91]
+	at network.server.server.Server.start(Server.java:31) ~[bin/:?]
+	at network.server.controller.ServerController.<init>(ServerController.java:78) ~[bin/:?]
+	at application.Main.start(Main.java:46) ~[bin/:?]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_91]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) [jfxrt.jar:?]
+[INFO] 2016-06-14 15:57:45,866 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:57:46,213 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:57:46,682 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:57:49,850 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 15:57:57,873 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:57:58,149 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:57:58,530 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:58:01,317 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 15:58:17,562 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:58:17,765 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:58:18,435 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:58:22,162 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 15:58:22,862 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 15:58:22,865 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 15:58:22,896 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[ERROR] 2016-06-14 15:59:07,968 [JavaFX Application Thread] [] network.server.controller.ServerController <init> - catching
+java.net.BindException: Address already in use
+	at java.net.PlainSocketImpl.socketBind(Native Method) ~[?:1.8.0_91]
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:387) ~[?:1.8.0_91]
+	at java.net.ServerSocket.bind(ServerSocket.java:375) ~[?:1.8.0_91]
+	at java.net.ServerSocket.<init>(ServerSocket.java:237) ~[?:1.8.0_91]
+	at java.net.ServerSocket.<init>(ServerSocket.java:181) ~[?:1.8.0_91]
+	at network.server.server.Server.start(Server.java:31) ~[bin/:?]
+	at network.server.controller.ServerController.<init>(ServerController.java:78) ~[bin/:?]
+	at application.Main.start(Main.java:46) ~[bin/:?]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_91]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) [jfxrt.jar:?]
+[ERROR] 2016-06-14 15:59:09,663 [JavaFX Application Thread] [] network.server.controller.ServerController <init> - catching
+java.net.BindException: Address already in use
+	at java.net.PlainSocketImpl.socketBind(Native Method) ~[?:1.8.0_91]
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:387) ~[?:1.8.0_91]
+	at java.net.ServerSocket.bind(ServerSocket.java:375) ~[?:1.8.0_91]
+	at java.net.ServerSocket.<init>(ServerSocket.java:237) ~[?:1.8.0_91]
+	at java.net.ServerSocket.<init>(ServerSocket.java:181) ~[?:1.8.0_91]
+	at network.server.server.Server.start(Server.java:31) ~[bin/:?]
+	at network.server.controller.ServerController.<init>(ServerController.java:78) ~[bin/:?]
+	at application.Main.start(Main.java:46) ~[bin/:?]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_91]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) [jfxrt.jar:?]
+[INFO] 2016-06-14 15:59:33,518 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:59:33,876 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:59:34,836 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:59:40,277 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 15:59:50,155 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 15:59:50,349 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 15:59:50,853 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 15:59:54,244 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 16:00:03,020 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 16:00:03,175 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 16:00:03,693 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 16:00:07,771 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 16:00:08,625 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 16:00:08,637 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 16:00:08,645 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-14 16:03:21,202 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village

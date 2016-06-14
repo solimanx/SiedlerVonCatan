@@ -252,7 +252,7 @@
                <children>
                   <Label text="Würfel: " />
                   <TextField fx:id="diceResult" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="34.0" />
-                  <Button mnemonicParsing="false" text="RobberLoss">
+                  <Button fx:id="openRobberView" mnemonicParsing="false" onAction="#setRobberLossState" text="RobberLoss">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
