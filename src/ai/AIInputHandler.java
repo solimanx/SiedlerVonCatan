@@ -29,11 +29,11 @@ import protocol3.serverinstructions.*;
 /**
  * Handling all input for the AI
  */
-public class PrimitiveAIInputHandler extends InputHandler {
+public class AIInputHandler extends InputHandler {
     PrimitiveAI ai;
-    private static Logger logger = LogManager.getLogger(PrimitiveAIInputHandler.class.getName());
+    private static Logger logger = LogManager.getLogger(AIInputHandler.class.getName());
 
-    protected PrimitiveAIInputHandler(PrimitiveAI primitiveAI) {
+    protected AIInputHandler(PrimitiveAI primitiveAI) {
         ai = primitiveAI;
 
     }

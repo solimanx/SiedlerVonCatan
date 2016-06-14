@@ -21,12 +21,12 @@ import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
 
-public class PrimitiveAIOutputHandler {
-    private static Logger logger = LogManager.getLogger(PrimitiveAIOutputHandler.class.getName());
+public class AIOutputHandler {
+    private static Logger logger = LogManager.getLogger(AIOutputHandler.class.getName());
     private PrimitiveAI ai;
     private Parser parser;
 
-    public PrimitiveAIOutputHandler(PrimitiveAI primitiveAI) {
+    public AIOutputHandler(PrimitiveAI primitiveAI) {
         ai = primitiveAI;
         parser = new Parser();
     }

@@ -57,8 +57,8 @@ public class PrimitiveAI extends Thread {
 	// --------------------------------------------------------------------------------
 	private OutputStreamWriter writer;
 	private BufferedReader reader;
-	private PrimitiveAIInputHandler pI = new PrimitiveAIInputHandler(this);
-	private PrimitiveAIOutputHandler pO = new PrimitiveAIOutputHandler(this);
+	private AIInputHandler pI = new AIInputHandler(this);
+	private AIOutputHandler pO = new AIOutputHandler(this);
 	private static Logger logger = LogManager.getLogger(PrimitiveAI.class.getName());
 	// --------------------------------------------------------------------------------
 	// PROFILE FIELDS
@@ -438,11 +438,11 @@ public class PrimitiveAI extends Thread {
 	// ================================================================================
 	// GETTERS AND SETTERS
 	// ================================================================================
-	protected PrimitiveAIOutputHandler getOutput() {
+	protected AIOutputHandler getOutput() {
 		return this.pO;
 	}
 
-	protected PrimitiveAIInputHandler getInput() {
+	protected AIInputHandler getInput() {
 		return this.pI;
 
 	}
