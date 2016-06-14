@@ -195,6 +195,8 @@ public class GameViewController implements Initializable {
 
 	private TradeViewController tradeViewController;
 
+	private Stage tradeStage;
+
 	public TradeViewController getTradeViewController() {
 		return tradeViewController;
 	}
@@ -241,7 +243,7 @@ public class GameViewController implements Initializable {
 			root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
 			tradeViewController = (TradeViewController) loader.getController();
 			Scene scene = new Scene(root);
-			Stage tradeStage = new Stage();
+			tradeStage = new Stage();
 			tradeStage.setScene(scene);
 
 			tradeViewController.init(selfResources, viewController);
@@ -361,17 +363,17 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleStartTradingButton(ActionEvent event) throws IOException {
 
-		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
-		tradeViewController = (TradeViewController) loader.getController();
-		Scene scene = new Scene(root);
-		Stage tradeStage = new Stage();
-		tradeStage.setScene(scene);
-
-		tradeViewController.init(selfResources, viewController);
-
-		tradeStage.initModality(Modality.WINDOW_MODAL);
-		tradeStage.initOwner(gameStage);
+//		FXMLLoader loader = new FXMLLoader();
+//		Pane root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
+//		tradeViewController = (TradeViewController) loader.getController();
+//		Scene scene = new Scene(root);
+//		Stage tradeStage = new Stage();
+//		tradeStage.setScene(scene);
+//
+//		tradeViewController.init(selfResources, viewController);
+//
+//		tradeStage.initModality(Modality.WINDOW_MODAL);
+//		tradeStage.initOwner(gameStage);
 		tradeStage.show();
 	}
 
