@@ -67,7 +67,7 @@ public class RobberViewController implements Initializable {
 		woolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[3], 0));
 		cornSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[4], 0));
 		oreSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[2], 0));
-
+		 // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 		woodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[0] = newVal;
 			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
@@ -79,17 +79,17 @@ public class RobberViewController implements Initializable {
 		});
 
 		woolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[2] = newVal;
-			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
-		});
-
-		cornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[3] = newVal;
 			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
 		});
 
-		oreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+		cornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[4] = newVal;
+			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
+		});
+
+		oreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[2] = newVal;
 			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
 		});
 
