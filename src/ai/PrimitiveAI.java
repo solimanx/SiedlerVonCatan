@@ -59,7 +59,7 @@ public class PrimitiveAI extends Thread {
 	private BufferedReader reader;
 	private PrimitiveAIInputHandler pI = new PrimitiveAIInputHandler(this);
 	private PrimitiveAIOutputHandler pO = new PrimitiveAIOutputHandler(this);
-//	private static Logger logger = LogManager.getLogger(PrimitiveAI.class.getName());
+	private static Logger logger = LogManager.getLogger(PrimitiveAI.class.getName());
 	// --------------------------------------------------------------------------------
 	// PROFILE FIELDS
 	// --------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ public class PrimitiveAI extends Thread {
 	 */
 	public PrimitiveAI() {
 		System.out.println(DefaultSettings.getCurrentTime() + " AI started.");
-//		logger.info("AI started");
+		logger.info("AI started");
 		this.board = new Board();
 		this.gl = new GameLogic(board);
 		this.start();
@@ -100,17 +100,17 @@ public class PrimitiveAI extends Thread {
 			writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 			System.out.println(DefaultSettings.getCurrentTime() + " AI connected to server.");
-//			logger.info(" AI connected to server.");
+			logger.info(" AI connected to server.");
 			read();
 		} catch (IOException e) {
-//			logger.catching(Level.DEBUG, e);
+			logger.catching(Level.DEBUG, e);
 			System.out.println("Connection to server failed.");
-//			logger.warn("Connection to server failed", e);
+			logger.warn("Connection to server failed", e);
 
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException ie) {
-//				logger.catching(Level.DEBUG, ie);
+				logger.catching(Level.DEBUG, ie);
 				ie.printStackTrace();
 			}
 		}
@@ -122,11 +122,11 @@ public class PrimitiveAI extends Thread {
 	 * @throws IOException
 	 */
 	private void read() throws IOException {
-//		logger.warn("Reading input from the servers output(read()) throws IOException");
+		logger.warn("Reading input from the servers output(read()) throws IOException");
 		String line;
 		while ((line = reader.readLine()) != null) {
 			System.out.println(DefaultSettings.getCurrentTime() + " Server: " + line);
-//			logger.info("Server", line);
+			logger.info("Server", line);
 			pI.sendToParser(line);
 		}
 	}
@@ -137,9 +137,9 @@ public class PrimitiveAI extends Thread {
 	 * @throws IOException
 	 */
 	public void write(String json) throws IOException {
-//		logger.warn("Writing output to server, throws IOException");
+		logger.warn("Writing output to server, throws IOException");
 		System.out.println(DefaultSettings.getCurrentTime() + "    A.I: " + json);
-//		logger.info(DefaultSettings.getCurrentTime(), "    A.I: ", json);
+		logger.info(DefaultSettings.getCurrentTime(), "    A.I: ", json);
 		writer.write(json + "\n");
 		writer.flush();
 	}
@@ -203,7 +203,8 @@ public class PrimitiveAI extends Thread {
 					pO.requestBuildInitialRoad(x, y, dir);
 					firstRoadLocation = new int[] { x, y, dir };
 				} else {
-//					logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()1\" ");
+					// logger.warn("Throws new IllegalArgumentException,\"Error
+					// at PrimitiveAI.initialRound()1\" ");
 					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()1");
 				}
 			} else if (dir == 1) {
@@ -217,12 +218,14 @@ public class PrimitiveAI extends Thread {
 					pO.requestBuildInitialRoad(x - 1, y - 1, dir);
 					firstRoadLocation = new int[] { x - 1, y - 1, dir };
 				} else {
-//					logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()2\" ");
+					// logger.warn("Throws new IllegalArgumentException,\"Error
+					// at PrimitiveAI.initialRound()2\" ");
 					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()2");
 				}
 
 			} else {
-//				logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()3\" ");
+				// logger.warn("Throws new IllegalArgumentException,\"Error at
+				// PrimitiveAI.initialRound()3\" ");
 				throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()3");
 			}
 
@@ -244,7 +247,8 @@ public class PrimitiveAI extends Thread {
 					secondRoadLocation = new int[] { x, y, dir };
 					pO.requestBuildInitialRoad(x, y, dir);
 				} else {
-//					logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()\" ");
+					// logger.warn("Throws new IllegalArgumentException,\"Error
+					// at PrimitiveAI.initialRound()\" ");
 					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
 				}
 			} else if (dir == 1) {
@@ -258,12 +262,13 @@ public class PrimitiveAI extends Thread {
 					secondRoadLocation = new int[] { x - 1, y + 1, dir };
 					pO.requestBuildInitialRoad(x - 1, y + 1, dir);
 				} else {
-//					logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()\" ");
+					// logger.warn("Throws new IllegalArgumentException,\"Error
+					// at PrimitiveAI.initialRound()\" ");
 					throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
 				}
 
 			} else {
-//				logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()\" ");
+				logger.warn("Throws new IllegalArgumentException,\"Error at PrimitiveAI.initialRound()\" ");
 				throw new IllegalArgumentException("Error at PrimitiveAI.initialRound()");
 			}
 		}
