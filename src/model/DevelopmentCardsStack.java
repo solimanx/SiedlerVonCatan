@@ -2,6 +2,7 @@ package model;
 
 import model.objects.DevCards.DevCardFactory;
 import model.objects.DevCards.DevelopmentCard;
+import settings.DefaultSettings;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,27 +18,27 @@ public class DevelopmentCardsStack {
 	 */
 	public DevelopmentCardsStack() {
 		devFactory = new DevCardFactory();
-		devCardStack = new DevelopmentCard[25];
+		devCardStack = new DevelopmentCard[DefaultSettings.AMOUNT_DEVELOPMENT_CARDS];
 		nextCard = 0;
 		// TODO random order
 		int arrayPosition = 0;
-		for (int j = 0; j < 14; j++) {
+		for (int j = 0; j < DefaultSettings.AMOUNT_KNIGHT_CARDS; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("knightCard");
 			arrayPosition++;
 		}
-		for (int j = 0; j < 5; j++) {
+		for (int j = 0; j < DefaultSettings.AMOUNT_VICTORY_CARDS; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("victoryCard");
 			arrayPosition++;
 		}
-		for (int j = 0; j < 2; j++) {
+		for (int j = 0; j < DefaultSettings.AMOUNT_MONOPOLY_CARDS; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("monopolyCard");
 			arrayPosition++;
 		}
-		for (int j = 0; j < 2; j++) {
+		for (int j = 0; j < DefaultSettings.AMOUNT_STREETBUILDING_CARDS; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("streetBuilding");
 			arrayPosition++;
 		}
-		for (int j = 0; j < 2; j++) {
+		for (int j = 0; j < DefaultSettings.AMOUNT_INVENTION_CARDS; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("inventionCard");
 			arrayPosition++;
 		}
@@ -87,7 +88,7 @@ public class DevelopmentCardsStack {
 	}
 
 	public boolean buyable(){
-		if(nextCard < 25){
+		if(nextCard < DefaultSettings.AMOUNT_DEVELOPMENT_CARDS){
 			return true;
 		}
 		return false;
