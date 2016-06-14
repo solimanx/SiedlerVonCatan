@@ -752,48 +752,45 @@ public class ClientController {
 
 
 	/**
-	 * @param player_id
+	 * @param playerID
 	 */
-	public void biggestKnightProwess(int player_id) {
-		// TODO
+	public void biggestKnightProwess(int threadID) {
+		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(true);
+		//viewController.getGameViewController().set...
+	}
+	
+	/**
+	 * @param playerID
+	 */
+	public void longestRoad(int threadID) {
+		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(true);
+		//viewController.getGameViewController().set...
+	}	
+	
+	
+	public void requestBuyDevelopmentCard(){
+		if (gameLogic.checkBuyDevCard(0)){
+			clientOutputHandler.buyDevelopmentCard();
+		}
 	}
 
 	/**
 	 * @param resource
-	 * @param player_id
 	 */
-	public void inventionCardInfo(ProtocolResource resource, int player_id) {
-		// TODO
+	public void playInventionCard(int[] resources) {
+		
 	}
-
-	/**
-	 * @param player_id
-	 */
-	public void longestRoad(int player_id) {
-		// TODO
+	
+	public void playMonopolyCard(ResourceType resType){
+		
 	}
-
-	/**
-	 *
-	 */
-	public void monopolyCardInfo() {
-		// TODO
+	
+	public void playStreetBuildCard(int u1,int v1, int dir1, int u2, int v2, int dir2){
+		
 	}
-
-	/**
-	 * @param road1_id
-	 * @param road2_id
-	 * @param player_id
-	 */
-	public void playKnightCard(String road1_id, String road2_id, int player_id) {
-		// TODO
-	}
-
-	/**
-	 *
-	 */
-	public void boughtDevelopmentCard() {
-		// TODO
+	
+	public void playKnightCard(int x, int y, int modelID){
+		
 	}
 
 	/**

@@ -405,7 +405,7 @@ public class ClientOutputHandler {
     /**
      * @param resource
      */
-    public void inventionCardInfo(int[] resource) {
+    public void playInventionCard(int[] resource) {
         ProtocolResource pr = ModelToProtocol.convertToProtocolResource(resource);
         ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(pr);
         Response r = new Response();
