@@ -749,8 +749,8 @@ public class GameViewController implements Initializable {
 
 			boardPane.getChildren().addAll(0, villageFigures);
 			boardPane.getChildren().addAll(0, streetFigures);
-			boardPane.getChildren().addAll(0, fieldFigures);
 			boardPane.getChildren().addAll(0, cityFigures);
+			boardPane.getChildren().addAll(0, fieldFigures);
 
 			return boardPane;
 		}
@@ -805,7 +805,9 @@ public class GameViewController implements Initializable {
 								city.setOpacity(0);
 								city.getStyleClass().add("village");
 								cities[i][j][k] = city;
+								city.toFront();
 								cityFigures.add(city);
+								
 								
 							}
 						}
