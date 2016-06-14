@@ -488,6 +488,8 @@ public class ServerController {
 			board.getPlayer(2).setHasLongestRoad(false);
 			board.getPlayer(3).setHasLongestRoad(false);
 			board.getPlayer(modelID).setHasLongestRoad(true);
+			serverOutputHandler.longestRoad(modelID);
+			lengthLongestTradeRoute = longestRoute;
 		}
 	}
 	
@@ -502,7 +504,6 @@ public class ServerController {
 	 * @param alreadyChecked list of already calculated streets
 	 * @return length of the longest possible road
 	 */
-	
 	//TODO verbindung von zwei straßensystemen
 	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked) {
 		int a = 0;
@@ -611,6 +612,7 @@ public class ServerController {
 							board.getPlayer(1).setHasLargestArmy(false);
 							board.getPlayer(2).setHasLargestArmy(false);
 							board.getPlayer(3).setHasLargestArmy(false);
+							serverOutputHandler.biggestKnightProwess(modelID);
 						}
 					}
 				}
@@ -623,6 +625,7 @@ public class ServerController {
 							board.getPlayer(1).setHasLargestArmy(true);
 							board.getPlayer(2).setHasLargestArmy(false);
 							board.getPlayer(3).setHasLargestArmy(false);
+							serverOutputHandler.biggestKnightProwess(modelID);
 						}
 					}
 				}
@@ -635,6 +638,7 @@ public class ServerController {
 							board.getPlayer(1).setHasLargestArmy(false);
 							board.getPlayer(2).setHasLargestArmy(true);
 							board.getPlayer(3).setHasLargestArmy(false);
+							serverOutputHandler.biggestKnightProwess(modelID);
 						}
 					}
 				}
@@ -647,6 +651,7 @@ public class ServerController {
 							board.getPlayer(1).setHasLargestArmy(false);
 							board.getPlayer(2).setHasLargestArmy(false);
 							board.getPlayer(3).setHasLargestArmy(true);
+							serverOutputHandler.biggestKnightProwess(modelID);
 						}
 					}
 				}
