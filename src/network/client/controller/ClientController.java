@@ -723,7 +723,7 @@ public class ClientController {
 				   unknownSize = unknownSize + resources[i];
 			   }
 			   gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(unknownSize);
-			
+
 		   }
 		}
 
