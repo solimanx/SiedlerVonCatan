@@ -721,7 +721,7 @@ public class GameViewController implements Initializable {
 		city.setFill(playerColor);
 		city.setOpacity(1.0);
 		city.setEffect(shadow);
-		board.getChildren().add(city);
+		city.setStroke(Color.BLACK);
 	}
 
 	/**
@@ -804,7 +804,6 @@ public class GameViewController implements Initializable {
 								
 								Polygon city = drawCity(cornerCoordinates[i][j][k]);
 								city.setOpacity(0);
-								city.getStyleClass().add("village");
 								cities[i][j][k] = city;
 								city.toFront();
 								cityFigures.add(city);
