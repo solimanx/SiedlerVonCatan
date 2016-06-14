@@ -597,8 +597,62 @@ public class ServerController {
 		return result;
 	}
 
+	/**
+	 * checks if the player has the most played knight cards
+	 * 
+	 * @param modelID to chaeck player
+	 */
 	private void checkLargestArmy(int modelID) {
-		// gameLogic.getBoard().getPlayer(modelID).getDevelopmentCards()
+		if(board.getPlayer(modelID).getPlayedKnightCards()>4){
+			if(modelID==0){
+				if(board.getPlayer(1).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+					if(board.getPlayer(2).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+						if(board.getPlayer(3).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+							board.getPlayer(0).setHasLargestArmy(true);
+							board.getPlayer(1).setHasLargestArmy(false);
+							board.getPlayer(2).setHasLargestArmy(false);
+							board.getPlayer(3).setHasLargestArmy(false);
+						}
+					}
+				}
+			}
+			if(modelID==1){
+				if(board.getPlayer(1).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+					if(board.getPlayer(2).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+						if(board.getPlayer(3).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+							board.getPlayer(0).setHasLargestArmy(false);
+							board.getPlayer(1).setHasLargestArmy(true);
+							board.getPlayer(2).setHasLargestArmy(false);
+							board.getPlayer(3).setHasLargestArmy(false);
+						}
+					}
+				}
+			}
+			if(modelID==2){
+				if(board.getPlayer(1).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+					if(board.getPlayer(2).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+						if(board.getPlayer(3).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+							board.getPlayer(0).setHasLargestArmy(false);
+							board.getPlayer(1).setHasLargestArmy(false);
+							board.getPlayer(2).setHasLargestArmy(true);
+							board.getPlayer(3).setHasLargestArmy(false);
+						}
+					}
+				}
+			}
+			if(modelID==3){
+				if(board.getPlayer(1).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+					if(board.getPlayer(2).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+						if(board.getPlayer(3).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
+							board.getPlayer(0).setHasLargestArmy(false);
+							board.getPlayer(1).setHasLargestArmy(false);
+							board.getPlayer(2).setHasLargestArmy(false);
+							board.getPlayer(3).setHasLargestArmy(true);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**

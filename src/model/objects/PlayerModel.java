@@ -26,6 +26,7 @@ public class PlayerModel {
     private int playerID;
     private Color color;
     private String name;
+    private int playedKnightCards;
 
     // {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}
     private int[] playerDevCard = {0, 0, 0, 0, 0};
@@ -39,6 +40,7 @@ public class PlayerModel {
 
     public PlayerModel(int id) {
         this.playerID = id;
+        this.playedKnightCards = 0;
         // this.resourceCards = new ArrayList<ResourceType>();
     }
 
@@ -131,7 +133,15 @@ public class PlayerModel {
         }
     }
 
-
+    
+    public int getPlayedKnightCards(){
+    	return playedKnightCards;
+    }
+    
+    public void incrementPlayedKnightCards(){
+    	playedKnightCards++;
+    }
+    
     public Color getColor() {
         return color;
     }
