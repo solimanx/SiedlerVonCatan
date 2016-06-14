@@ -1,8 +1,12 @@
 package network.client.view.robberview;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -11,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import network.client.view.GameViewController;
 
-public class RobberViewController {
+public class RobberViewController implements Initializable {
 
 	@FXML
 	private GridPane grid;
@@ -41,6 +45,12 @@ public class RobberViewController {
 
 	private GameViewController gvc;
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		toGive.textProperty().bind(toGiveProperty.asString());
+		okButton.disableProperty().bind(toGiveProperty.isNotEqualTo(0));
+	}
+
 	public void init(GameViewController gvc) {
 		this.gvc = gvc;
 	}
@@ -57,7 +67,7 @@ public class RobberViewController {
 		for (int i = 0; i < resources.length; i++) {
 			 sum = sum + resources[i];
 		}
-		toGiveProperty.set(sum);
+		toGiveProperty.set(sum / 2);
 
 		woodSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[0], 0));
 		claySpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[1], 0));
@@ -67,22 +77,27 @@ public class RobberViewController {
 
 		woodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[0] = newVal;
+			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
 		});
 
 		claySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[1] = newVal;
+			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
 		});
 
 		woolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[2] = newVal;
+			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
 		});
 
 		cornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[3] = newVal;
+			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
 		});
 
 		oreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[4] = newVal;
+			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
 		});
 
 		grid.add(woodSpinner,1,0);
