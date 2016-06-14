@@ -135,11 +135,11 @@ public class ViewController {
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
             primaryStage.setScene(scene);
-//			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-//	        primaryStage.setX(primaryScreenBounds.getMinX());
-//	        primaryStage.setY(primaryScreenBounds.getMinY());
-//	        primaryStage.setWidth(primaryScreenBounds.getWidth());
-//	        primaryStage.setHeight(primaryScreenBounds.getHeight());
+			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+	        primaryStage.setX(primaryScreenBounds.getMinX());
+	        primaryStage.setY(primaryScreenBounds.getMinY());
+	        primaryStage.setWidth(primaryScreenBounds.getWidth());
+	        primaryStage.setHeight(primaryScreenBounds.getHeight());
             //primaryStage.setFullScreen(false);
             gameViewController = (GameViewController) loader.getController();
             gameViewController.setViewController(this);
