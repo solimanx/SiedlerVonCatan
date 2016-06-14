@@ -219,7 +219,7 @@ public class ClientOutputHandler {
     public void requestHarbourTrade(int[] offer, int[] demand) {
         ProtocolResource prOff = ModelToProtocol.convertToProtocolResource(offer);
         ProtocolResource prDem = ModelToProtocol.convertToProtocolResource(demand);
-       
+
         ProtocolHarbourRequest phr = new ProtocolHarbourRequest(prOff, prDem);
         Response r = new Response();
         r.pHarbourRequest = phr;

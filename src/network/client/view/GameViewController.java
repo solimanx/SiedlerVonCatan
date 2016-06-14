@@ -172,7 +172,7 @@ public class GameViewController implements Initializable {
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	private HashMap<ResourceType, ImagePattern> resourceImages = new HashMap<ResourceType, ImagePattern>(6);
 	private HashMap<HarbourStatus, ImagePattern> harbourImages = new HashMap<HarbourStatus, ImagePattern>(6);
-	
+
 	private HashMap<enums.ResourceType, ImagePattern> imagePatterns = new HashMap<enums.ResourceType, ImagePattern>(6);
 
 	private ViewBoardFactory factory;
@@ -230,7 +230,7 @@ public class GameViewController implements Initializable {
 		shadow = new DropShadow();
 		shadow.setRadius(4);
 		shadow.setColor(Color.SLATEGRAY);
-		
+
 		FXMLLoader loader = new FXMLLoader();
 		Pane root;
 		try {
@@ -314,7 +314,7 @@ public class GameViewController implements Initializable {
 		fieldColors.put(ResourceType.SHEEP, Color.web("#9CCC65"));
 		fieldColors.put(ResourceType.WOOD, Color.web("#26A69A"));
 		fieldColors.put(ResourceType.SEA, Color.web("#81D4FA"));
-		
+
 		ImagePattern woodPattern = new ImagePattern(new Image("/textures/wood.png"));
 		ImagePattern clayPattern = new ImagePattern(new Image("/textures/clay.png"));
 		ImagePattern woolPattern = new ImagePattern(new Image("/textures/sheep.png"));
@@ -322,7 +322,7 @@ public class GameViewController implements Initializable {
 		ImagePattern orePattern = new ImagePattern(new Image("/textures/ore.png"));
 		ImagePattern desertPattern = new ImagePattern(new Image("/textures/desert.png"));
 		ImagePattern seaPattern = new ImagePattern(new Image("/textures/sea.png"));
-		
+
 		imagePatterns.put(ResourceType.WOOD, woodPattern);
 		imagePatterns.put(ResourceType.CLAY, clayPattern);
 		imagePatterns.put(ResourceType.SHEEP, woolPattern);
@@ -385,9 +385,14 @@ public class GameViewController implements Initializable {
 	 * @param villageCoordinates
 	 */
 	public void villageClick(int[] villageCoordinates) {
+		Polygon village = corners[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
+		if(village.getFill().equals(playerColors.get(1))){
+			viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1], villageCoordinates[2]);
+		}
 		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
 			viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
 					villageCoordinates[2]);
+
 	}
 
 	/**
