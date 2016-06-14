@@ -2,12 +2,20 @@ package network;
 
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import enums.CardType;
 import enums.ResourceType;
 import model.Board;
 import model.Index;
+import model.objects.PlayerModel;
+import model.objects.DevCards.DevelopmentCard;
 import protocol.object.ProtocolResource;
 
 public final class ModelToProtocol {
+	
+	private static Logger logger = LogManager.getLogger(PlayerModel.class.getName());
 
 	public static HashMap<ResourceType, String> resourceToString = new HashMap<ResourceType, String>();
 
@@ -125,5 +133,17 @@ public final class ModelToProtocol {
 		Integer wool = resources[3] == 0 ? null : resources[3];
 		Integer corn = resources[4] == 0 ? null : resources[4];
 		return (new ProtocolResource(wood, clay, wool, corn, ore, null));
+	}
+	
+	public static CardType devCardToCardType(DevelopmentCard devCard){
+		switch (devCard.getName()){
+		case "Knight Card": return enums.CardType.KNIGHT;
+		case "Victory Card": return enums.CardType.VICTORYPOINT;
+		case "Invention Card": return enums.CardType.INVENTION;
+		case "Monoploy Card": return enums.CardType.MONOPOLY;
+		case "Street Building Card": return enums.CardType.STREET;
+		default : logger.info(devCard.getName());
+        throw new IllegalArgumentException("Invalid Development Card object");
+		}
 	}
 }

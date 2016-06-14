@@ -11,6 +11,7 @@ import enums.PlayerState;
 import enums.ResourceType;
 import model.Board;
 import model.objects.Field;
+import model.objects.DevCards.DevelopmentCard;
 import network.ModelToProtocol;
 import parsing.Parser;
 import parsing.Response;
@@ -482,8 +483,8 @@ public class ServerOutputHandler {
         }
     }
 
-    public void boughtDevelopmentCard(int player_id, CardType developmentCard) {
-
+    public void boughtDevelopmentCard(int player_id, DevelopmentCard devCard) {
+    	CardType developmentCard = ModelToProtocol.devCardToCardType(devCard);
         ProtocolBoughtDevelopmentCard pbdc = new ProtocolBoughtDevelopmentCard(player_id, developmentCard);
         Response r = new Response();
         r.pBoughtDevelopmentCard = pbdc;

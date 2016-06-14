@@ -304,7 +304,16 @@ public class GameLogic {
     public Board getBoard() {
         return board;
     }
-
+    
+    /**
+     * 
+     * @param playerID
+     * @param currentPlayer
+     * @param state
+     * @return
+     *  true if it is forbidden
+     *  false if it is not
+     */
     public boolean isActionForbidden(int playerID, int currentPlayer, PlayerState state) {
         if (playerID != currentPlayer || board.getPlayer(currentPlayer).getPlayerState() != state) {
             return true;

@@ -26,6 +26,8 @@ import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
+import model.objects.DevCards.DevCardFactory;
+import model.objects.DevCards.DevelopmentCard;
 import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.server.server.Server;
@@ -55,11 +57,12 @@ public class ServerController {
 	private int robberLossCounter;
 	private TradeController tradeController;
 	private int[] playerOrder;
+	private Board board;
 	public int[] resourceStack = { 19, 19, 19, 19, 19 };
 	private static Logger logger = LogManager.getLogger(ServerController.class.getName());
 
 	public ServerController() {
-		Board board = new Board();
+		board = new Board();
 		this.gameLogic = new GameLogic(board);
 		this.tradeController = new TradeController(this);
 		// ModelPlayerID => threadID
@@ -517,15 +520,30 @@ public class ServerController {
 
 	}
 
+	/**
+	 * 
+	 * @param thredID
+	 */
 	public void requestBuyDevCard(int thredID) {
 		int modelID = threadPlayerIdMap.get(thredID);
-		if (gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
-			/*
-			 * if(gameLogic.checkBuyDevCard(modelID)){
-			 * 
-			 * }
-			 */
+		if (!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
+			if(gameLogic.checkBuyDevCard(modelID)){
+				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
+				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
+				DevelopmentCard devCard = board.getDevCardStack().getNextCard();
+				pm.incrementPlayerDevCard(devCard);
+				
+				serverOutputHandler.boughtDevelopmentCard(thredID, devCard);
+				statusUpdate(modelID);
+			}
+			else {
+				serverResponse(modelID, "Unzulässige Aktion");
+			}
 		}
+		else{
+			serverResponse(modelID, "Unzulässige Aktion");
+		}
+		
 	}
 
 	/**
