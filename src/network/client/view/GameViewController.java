@@ -735,6 +735,7 @@ public class GameViewController implements Initializable {
 		private List<Shape> streetFigures = new LinkedList<Shape>();
 		private List<Shape> fieldFigures = new LinkedList<Shape>();
 		private List<Shape> villageFigures = new LinkedList<Shape>();
+		private List<Shape> cityFigures = new LinkedList<Shape>();
 
 		public Pane getViewBoard(Stage stage) {
 			boardPane = new Pane();
@@ -749,6 +750,7 @@ public class GameViewController implements Initializable {
 			boardPane.getChildren().addAll(0, villageFigures);
 			boardPane.getChildren().addAll(0, streetFigures);
 			boardPane.getChildren().addAll(0, fieldFigures);
+			boardPane.getChildren().addAll(0, cityFigures);
 
 			return boardPane;
 		}
@@ -803,6 +805,7 @@ public class GameViewController implements Initializable {
 								city.setOpacity(0);
 								city.getStyleClass().add("village");
 								cities[i][j][k] = city;
+								cityFigures.add(city);
 								
 							}
 						}
