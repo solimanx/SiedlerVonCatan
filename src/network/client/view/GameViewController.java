@@ -341,6 +341,7 @@ public class GameViewController implements Initializable {
 	 * @param villageCoordinates
 	 */
 	public void villageClick(int[] villageCoordinates) {
+		if(selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
 		viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
 				villageCoordinates[2]);
 	}
@@ -349,6 +350,7 @@ public class GameViewController implements Initializable {
 	 * @param streetCoordinates
 	 */
 	public void streetClick(int[] streetCoord) {
+		if(selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET)
 		viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
 	}
 
