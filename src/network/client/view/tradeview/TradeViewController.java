@@ -185,7 +185,7 @@ public class TradeViewController {
 		ownOffer.clear();
 	}
 	
-	void offerFulfilled(int tradeID){
+	public void offerFulfilled(int tradeID){
 		tradeList.remove(tradeIDtoString.get(tradeID));
 		
 	}
