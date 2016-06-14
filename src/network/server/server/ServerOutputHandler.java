@@ -233,7 +233,7 @@ public class ServerOutputHandler {
     public void costs(int playerID, int[] costs) {
         ProtocolResource pr;
         if (costs.length > 1) {
-            pr = new ProtocolResource(costs[0], costs[1], costs[2], costs[3], costs[4], 0);
+            pr = new ProtocolResource(costs[0], costs[1], costs[4], costs[2], costs[3], 0);
         } else {
             pr = new ProtocolResource(0, 0, 0, 0, 0, costs[0]);
         }
@@ -275,18 +275,18 @@ public class ServerOutputHandler {
 
     }
 
-    public void tradePreview(int player_id, int trade_id, int[] offer, int[] withdrawal) {
+    public void tradePreview(int player_id, int trade_id, int[] offer, int[] demand) {
         ProtocolResource proff;
         if (offer.length > 1) {
-            proff = new ProtocolResource(offer[0], offer[1], offer[3], offer[4], offer[5], 0);
+            proff = new ProtocolResource(offer[0], offer[1], offer[4], offer[2], offer[3], 0);
         } else {
             proff = new ProtocolResource(0, 0, 0, 0, 0, offer[0]);
         }
         ProtocolResource prw;
-        if (withdrawal.length > 1) {
-            prw = new ProtocolResource(withdrawal[0], withdrawal[1], withdrawal[2], withdrawal[3], withdrawal[4], 0);
+        if (demand.length > 1) {
+            prw = new ProtocolResource(demand[0], demand[1], demand[4], demand[2], demand[3], 0);
         } else {
-            prw = new ProtocolResource(0, 0, 0, 0, 0, withdrawal[0]);
+            prw = new ProtocolResource(0, 0, 0, 0, 0, demand[0]);
         }
 
         ProtocolTradePreview ptp = new ProtocolTradePreview(player_id, trade_id, proff, prw);
