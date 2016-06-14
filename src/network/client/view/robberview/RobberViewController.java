@@ -30,15 +30,15 @@ public class RobberViewController {
 
 	@FXML
 	private Label label;
-	
+
 	private int[] result = new int[5];
-	
+
 	private GameViewController gvc;
-	
+
 	public void init(GameViewController gvc) {
 		this.gvc = gvc;
 	}
-	
+
 	@FXML
     void handleOKButton(ActionEvent event) {
 		gvc.robberLoss(result);
@@ -55,32 +55,32 @@ public class RobberViewController {
 		woolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[3], 0));
 		cornSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[4], 0));
 		oreSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[2], 0));
-		
+
 		woodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[0] = newVal;
 		});
-		
+
 		claySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[1] = newVal;
 		});
-		
+
 		woolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[3] = newVal;
-		});
-		
-		cornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[4] = newVal;
-		});
-		
-		oreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			result[2] = newVal;
 		});
-		
+
+		cornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[3] = newVal;
+		});
+
+		oreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			result[4] = newVal;
+		});
+
 		grid.add(woodSpinner,1,0);
 		grid.add(claySpinner,1,1);
 		grid.add(woolSpinner,1,2);
 		grid.add(cornSpinner,1,3);
 		grid.add(oreSpinner,1,4);
-		
+
 	}
 }
