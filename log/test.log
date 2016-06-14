@@ -5278,3 +5278,140 @@ java.net.BindException: Address already in use
 [INFO] 2016-06-14 18:34:52,078 [Thread-6] [] network.client.client.Client run - Client connected to server
 [DEBUG] 2016-06-14 18:34:52,311 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
 [WARN] 2016-06-14 18:34:53,848 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[INFO] 2016-06-14 18:40:24,345 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 18:40:24,584 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 18:40:25,244 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 18:40:28,391 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 18:40:36,633 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 18:40:36,864 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 18:40:37,677 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 18:40:40,372 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 18:40:41,524 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 18:40:41,530 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-14 18:42:01,767 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 18:42:01,994 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 18:42:03,359 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 18:42:11,732 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 18:42:21,016 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-14 18:42:23,060 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-14 18:42:23,338 [Thread-7] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 18:42:23,570 [Thread-7] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 18:42:24,206 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[INFO] 2016-06-14 18:42:25,097 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-14 18:42:27,146 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[DEBUG] 2016-06-14 18:42:27,818 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 18:42:28,573 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 18:42:28,582 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-14 18:42:29,181 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-14 18:42:31,218 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-14 18:42:33,259 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-14 18:42:35,300 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-14 18:42:37,338 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-14 18:42:39,374 [Thread-6] [] network.client.client.Client run - Connection to server failed.
+[ERROR] 2016-06-14 18:42:42,114 [JavaFX Application Thread] [] network.client.client.ClientOutputHandler requestBuildVillage - Threw a Input/Output Exception 
+java.net.SocketException: Broken pipe
+	at java.net.SocketOutputStream.socketWrite0(Native Method) ~[?:1.8.0_91]
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:109) ~[?:1.8.0_91]
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153) ~[?:1.8.0_91]
+	at sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:221) ~[?:1.8.0_91]
+	at sun.nio.cs.StreamEncoder.implFlushBuffer(StreamEncoder.java:291) ~[?:1.8.0_91]
+	at sun.nio.cs.StreamEncoder.implFlush(StreamEncoder.java:295) ~[?:1.8.0_91]
+	at sun.nio.cs.StreamEncoder.flush(StreamEncoder.java:141) ~[?:1.8.0_91]
+	at java.io.OutputStreamWriter.flush(OutputStreamWriter.java:229) ~[?:1.8.0_91]
+	at network.client.client.Client.write(Client.java:76) ~[bin/:?]
+	at network.client.client.ClientOutputHandler.requestBuildVillage(ClientOutputHandler.java:336) ~[bin/:?]
+	at network.client.controller.ClientController.requestBuildInitialVillage(ClientController.java:573) ~[bin/:?]
+	at network.client.controller.ClientController.requestBuildVillage(ClientController.java:558) ~[bin/:?]
+	at network.client.view.GameViewController.villageClick(GameViewController.java:402) ~[bin/:?]
+	at network.client.view.GameViewController$ViewBoardFactory.lambda$2(GameViewController.java:809) ~[bin/:?]
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54) ~[jfxrt.jar:?]
+	at javafx.event.Event.fireEvent(Event.java:198) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$ClickGenerator.postProcess(Scene.java:3470) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$ClickGenerator.access$8100(Scene.java:3398) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3766) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$MouseHandler.access$1500(Scene.java:3485) ~[jfxrt.jar:?]
+	at javafx.scene.Scene.impl_processMouseEvent(Scene.java:1762) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2494) ~[jfxrt.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:380) ~[jfxrt.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:294) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_91]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$354(GlassViewEventHandler.java:416) ~[jfxrt.jar:?]
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:389) [jfxrt.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:415) [jfxrt.jar:?]
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:555) [jfxrt.jar:?]
+	at com.sun.glass.ui.View.notifyMouse(View.java:937) [jfxrt.jar:?]
+[ERROR] 2016-06-14 18:42:42,120 [JavaFX Application Thread] [] network.client.client.ClientOutputHandler requestBuildVillage - catching
+java.net.SocketException: Broken pipe
+	at java.net.SocketOutputStream.socketWrite0(Native Method) ~[?:1.8.0_91]
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:109) ~[?:1.8.0_91]
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153) ~[?:1.8.0_91]
+	at sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:221) ~[?:1.8.0_91]
+	at sun.nio.cs.StreamEncoder.implFlushBuffer(StreamEncoder.java:291) ~[?:1.8.0_91]
+	at sun.nio.cs.StreamEncoder.implFlush(StreamEncoder.java:295) ~[?:1.8.0_91]
+	at sun.nio.cs.StreamEncoder.flush(StreamEncoder.java:141) ~[?:1.8.0_91]
+	at java.io.OutputStreamWriter.flush(OutputStreamWriter.java:229) ~[?:1.8.0_91]
+	at network.client.client.Client.write(Client.java:76) ~[bin/:?]
+	at network.client.client.ClientOutputHandler.requestBuildVillage(ClientOutputHandler.java:336) ~[bin/:?]
+	at network.client.controller.ClientController.requestBuildInitialVillage(ClientController.java:573) ~[bin/:?]
+	at network.client.controller.ClientController.requestBuildVillage(ClientController.java:558) ~[bin/:?]
+	at network.client.view.GameViewController.villageClick(GameViewController.java:402) ~[bin/:?]
+	at network.client.view.GameViewController$ViewBoardFactory.lambda$2(GameViewController.java:809) ~[bin/:?]
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74) ~[jfxrt.jar:?]
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54) ~[jfxrt.jar:?]
+	at javafx.event.Event.fireEvent(Event.java:198) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$ClickGenerator.postProcess(Scene.java:3470) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$ClickGenerator.access$8100(Scene.java:3398) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3766) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$MouseHandler.access$1500(Scene.java:3485) ~[jfxrt.jar:?]
+	at javafx.scene.Scene.impl_processMouseEvent(Scene.java:1762) ~[jfxrt.jar:?]
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2494) ~[jfxrt.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:380) ~[jfxrt.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:294) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_91]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$354(GlassViewEventHandler.java:416) ~[jfxrt.jar:?]
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:389) [jfxrt.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:415) [jfxrt.jar:?]
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:555) [jfxrt.jar:?]
+	at com.sun.glass.ui.View.notifyMouse(View.java:937) [jfxrt.jar:?]
+[INFO] 2016-06-14 18:43:02,834 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 18:43:03,088 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 18:43:03,805 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 18:43:07,412 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 18:43:15,723 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 18:43:15,968 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 18:43:16,356 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 18:43:20,145 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 18:43:29,069 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 18:43:29,266 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 18:43:29,924 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 18:43:34,348 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 18:43:35,024 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 18:43:35,035 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 18:43:35,056 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-14 18:43:49,951 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-14 18:43:54,809 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-14 18:43:58,653 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-14 18:44:06,828 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-14 18:44:16,575 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-14 18:44:27,048 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village

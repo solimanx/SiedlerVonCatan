@@ -2,6 +2,7 @@ package network.client.view.tradeview;
 
 import java.util.HashMap;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import network.client.controller.ViewController;
+import network.client.view.tradeview.TradeViewController.AddTradeStringRunnable;
 
 public class TradeViewController {
 
@@ -204,7 +206,8 @@ public class TradeViewController {
 		tradeIDtoString.put(tradeID, tradeString);
 		stringToTradeID.put(tradeString, tradeID);
 		tradeIDtoPlayerID.put(tradeID, playerID);
-		tradeList.add(tradeString);
+		Platform.runLater(new AddTradeStringRunnable(tradeString));
+		
 	}
 
 	public void addOwnOffer(int[] offer, int[] demand, int tradeID) {
@@ -251,6 +254,20 @@ public class TradeViewController {
 					+ " Corn, " + giveOre + " Ore";
 		}
 		return getting + giving;
+	}
+
+	public class AddTradeStringRunnable implements Runnable {
+		final String string;
+		
+		public AddTradeStringRunnable(String string) {
+			this.string = string;
+		}
+		@Override
+		public void run() {
+			tradeList.add(string);
+	
+		}
+	
 	}
 
 }
