@@ -60,7 +60,8 @@ public class ClientController {
 	private int initialRoundCount = 0;
 	private String currentServerResponse;
 	private PlayerState currentState;
-	private TradeController tradeController;
+	
+	private ArrayList<TradeOffer> tradeOffers = new ArrayList<TradeOffer>();
 
 	/**
 	 * @param primaryStage
@@ -76,7 +77,6 @@ public class ClientController {
 		this.viewController = new ViewController(primaryStage, this);
 		this.board = new Board();
 		this.gameLogic = new GameLogic(board);
-		this.tradeController = new TradeController(this);
 
 	}
 
@@ -657,7 +657,8 @@ public class ClientController {
 	}
 
 	public void receiveTrade(int threadID, int tradingID, int[] supply, int[] demand) {
-		tradeController.addTrade(threadPlayerIdMap.get(threadID),tradingID,supply,demand);
+	    TradeOffer tOf = new TradeOffer(threadPlayerIdMap.get(threadID),tradingID,supply,demand);
+		tradeOffers.add(tOf);
 	}
 
 	public void acceptTrade(int tradingID) {
@@ -665,7 +666,13 @@ public class ClientController {
 	}
 
 	public void tradeAccepted(int threadID, int tradingID) {
-		tradeController.tradeAccepted(threadPlayerIdMap.get(threadID), tradingID);
+		TradeOffer currTOf;
+		for (int i = 0;i <tradeOffers.size();i++){
+			currTOf = tradeOffers.get(i);
+			if (currTOf.getTradingID() == tradingID){
+				currTOf.acceptingPlayers.add(threadPlayerIdMap.get(threadID));
+			}
+		}
 	}
 
 	public void fulfillTrade(int tradingID, int partnerThreadID) {
@@ -673,7 +680,15 @@ public class ClientController {
 	}
 
 	public void tradeFulfilled(int threadID, int partnerModelID) {
-		tradeController.tradeFulfilled(threadPlayerIdMap.get(threadID),threadPlayerIdMap.get(partnerModelID));
+        TradeOffer currTOf;
+        int modelID = threadPlayerIdMap.get(threadID);
+		for (int i = 0; i < tradeOffers.size();i++){
+			currTOf = tradeOffers.get(i);
+			if (currTOf.getOwnerID() == modelID){
+				tradeOffers.remove(i);
+			}
+		}
+		//viewController.getGameViewController().getTradeViewController().
 	}
 
 	public void cancelTrade(int tradingID) {
@@ -681,7 +696,23 @@ public class ClientController {
 	}
 
 	public void tradeCancelled(int threadID, int tradingID) {
-		tradeController.tradeCancelled(threadPlayerIdMap.get(threadID),tradingID);
+		TradeOffer currTOf;
+		int modelID = threadPlayerIdMap.get(threadID);
+		for (int i = 0;i < tradeOffers.size();i++){
+			currTOf = tradeOffers.get(i);
+			if (currTOf.getTradingID() == tradingID){
+				if (currTOf.getOwnerID() == modelID){
+					tradeOffers.remove(i);
+				} else {
+					for (int j = 0; j <currTOf.acceptingPlayers.size();j++){
+						if (currTOf.acceptingPlayers.get(j) == modelID){
+							currTOf.acceptingPlayers.remove(j);
+						}
+					}
+				}
+				break;
+			}
+		}
 	}
 	
 	
