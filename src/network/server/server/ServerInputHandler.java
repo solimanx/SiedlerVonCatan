@@ -227,7 +227,7 @@ public class ServerInputHandler extends InputHandler {
     
     @Override
     protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
-        //gameController.buyDevelopmentCards();
+        serverController.requestBuyDevCard(currentThreadID);
     }
     
     

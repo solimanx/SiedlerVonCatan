@@ -534,7 +534,7 @@ public class ServerController {
 				pm.incrementPlayerDevCard(devCard);
 				
 				serverOutputHandler.boughtDevelopmentCard(thredID, devCard);
-				statusUpdate(modelID);
+				//statusUpdate(modelID);
 			}
 			else {
 				serverResponse(modelID, "Unzulässige Aktion");
@@ -543,7 +543,6 @@ public class ServerController {
 		else{
 			serverResponse(modelID, "Unzulässige Aktion");
 		}
-		
 	}
 
 	/**
