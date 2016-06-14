@@ -63,7 +63,7 @@ public class Client extends Thread {
         String line;
         while ((line = reader.readLine()) != null) {
             System.out.println("Received from Server: " + line);
-            logger.info("Received from Server: " + line);
+            //logger.info("Received from Server: " + line);
             inputHandler.sendToParser(line);
             // redirect line to Networkcontroller
         }
@@ -71,7 +71,7 @@ public class Client extends Thread {
 
     public void write(String s) throws IOException {
         System.out.println("Client sends to Server: " + s);
-        logger.info("Client sends to Server: ", s);
+        //logger.info("Client sends to Server: ", s);
         writer.write(s + "\n");
         writer.flush();
     }
