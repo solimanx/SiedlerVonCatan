@@ -165,9 +165,10 @@ public class PrimitiveAIInputHandler extends InputHandler {
 
         } else if (building.getType().equals("Stadt")) {
             coords = ProtocolToModel.getCornerCoordinates(building.getID());
-        } else
+        } else{
             logger.warn("Throws new IllegalArgumentException \"Building type not defined\"");
             throw new IllegalArgumentException("Building type "+building.getType()+" not defined");
+        }
 
     }
 
