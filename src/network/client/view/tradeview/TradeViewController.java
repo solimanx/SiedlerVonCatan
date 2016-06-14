@@ -38,7 +38,7 @@ public class TradeViewController {
 
 	@FXML
 	private Button acceptButton;
-	
+
 	@FXML
 	private TextField ownOffer;
 
@@ -123,7 +123,7 @@ public class TradeViewController {
 		getWoolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
 		getCornSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
 		getOreSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
-		
+
 		giveWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			resultOffer[0] = newVal;
 		});
@@ -163,7 +163,7 @@ public class TradeViewController {
 		getOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
 			resultDemand[2] = newVal;
 		});
-		
+
 		grid.add(giveWoodSpinner, 1, 1);
 		grid.add(giveClaySpinner, 1, 2);
 		grid.add(giveWoolSpinner, 1, 3);
@@ -194,10 +194,10 @@ public class TradeViewController {
 		ownOfferList.clear();
 		ownOffer.clear();
 	}
-	
-	public void offerFulfilled(int tradeID){
+
+	public void offerFulfilled(int tradeID) {
 		tradeList.remove(tradeIDtoString.get(tradeID));
-		
+
 	}
 
 	public void addOffer(int[] offer, int[] demand, int tradeID, int playerID) {
@@ -207,7 +207,7 @@ public class TradeViewController {
 		stringToTradeID.put(tradeString, tradeID);
 		tradeIDtoPlayerID.put(tradeID, playerID);
 		Platform.runLater(new AddTradeStringRunnable(tradeString));
-		
+
 	}
 
 	public void addOwnOffer(int[] offer, int[] demand, int tradeID) {
@@ -216,58 +216,110 @@ public class TradeViewController {
 		stringToTradeID.put(offerString, tradeID);
 		ownOffer.setText(offerString);
 	}
-	
-	public void acceptingOffer(int playerID, int tradeID){
+
+	public void acceptingOffer(int playerID, int tradeID) {
 		String offerString = viewController.getGameViewController().getPlayerNames(playerID) + " accepts your offer";
 		ownOfferList.add(offerString);
-		
+
 	}
-	
-	public void cancelOwnOffer(){
+
+	public void cancelOwnOffer() {
 		ownOffer.clear();
 	}
-	
-	public void cancelOffer(int tradeID){
+
+	public void cancelOffer(int tradeID) {
 		tradeList.remove(tradeIDtoString.get(tradeID));
 	}
 
 	private String tradeStringGenerator(int[] offer, int[] demand) {
-		String getting = "";
-		String giving = "";
+		StringBuffer getting = new StringBuffer();
+		StringBuffer giving = new StringBuffer();
 		if (demand.length > 0) {
+
+			getting.append("Get: ");
 			// get is set
 			int getWood = demand[0];
 			int getClay = demand[1];
-			int getOre = demand[3];
-			int getSheep = demand[4];
-			int getCorn = demand[2];
-			getting = "Get " + getWood + " Wood, " + getClay + " Clay, " + getSheep + " Wool, " + getCorn + " Corn, "
-					+ getOre + " Ore" + "\n";
+			int getOre = demand[2];
+			int getSheep = demand[3];
+			int getCorn = demand[4];
+
+			if (getWood != 0) {
+				getting.append(getWood + " Wood, ");
+			}
+
+			if (getClay != 0) {
+				getting.append(getClay + " Clay, ");
+			}
+
+			if (getOre != 0) {
+				getting.append(getOre + " Ore, ");
+			}
+
+			if (getSheep != 0) {
+				getting.append(getSheep + " Sheep, ");
+			}
+
+			if (getCorn != 0) {
+				getting.append(getCorn + " Corn, ");
+			}
+			// Remove last space
+			getting.deleteCharAt(getting.length() - 1);
+			// Remove last comma
+			getting.deleteCharAt(getting.length() - 1);
+			// Add full stop.
+			getting.append(".");
 		}
 		if (offer.length > 0) {
+			giving.append("Give :");
 			int giveWood = offer[0];
 			int giveClay = offer[1];
-			int giveOre = offer[3];
-			int giveSheep = offer[4];
-			int giveCorn = offer[2];
-			giving = "Give " + giveWood + " Wood, " + giveClay + " Clay, " + giveSheep + " Wool, " + giveCorn
-					+ " Corn, " + giveOre + " Ore";
+			int giveOre = offer[2];
+			int giveSheep = offer[3];
+			int giveCorn = offer[4];
+			if (giveWood != 0) {
+				giving.append(giveWood + " Wood,");
+			}
+
+			if (giveClay != 0) {
+				giving.append(giveClay + " Clay,");
+			}
+
+			if (giveOre != 0) {
+				giving.append(giveOre + " Ore,");
+			}
+
+			if (giveSheep != 0) {
+				giving.append(giveSheep + " Wool,");
+			}
+
+			if (giveCorn != 0) {
+				giving.append(giveCorn + " Corn,");
+
+			}
+			// Remove last space
+			giving.deleteCharAt(giving.length() - 1);
+			// Remove last comma
+			giving.deleteCharAt(giving.length() - 1);
+			// Add full stop.
+			giving.append(".");
 		}
-		return getting + giving;
+		return getting.toString() + "\n" + giving.toString();
 	}
 
 	public class AddTradeStringRunnable implements Runnable {
 		final String string;
-		
+
 		public AddTradeStringRunnable(String string) {
 			this.string = string;
 		}
+
 		@Override
 		public void run() {
 			tradeList.add(string);
-	
+
 		}
-	
+
 	}
 
 }
