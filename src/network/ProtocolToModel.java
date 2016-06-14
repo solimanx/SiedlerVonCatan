@@ -243,7 +243,7 @@ public final class ProtocolToModel {
 	}
 
 	public static int[] convertResources(ProtocolResource resource) {
-		if (resource.getUnknown() == 0) {
+		if (resource.getUnknown() == null) {
 			int result[] = new int[5];
 			result[0] = resource.getWood() == null ? 0 : resource.getWood().intValue();
 			result[1] = resource.getClay() == null ? 0 : resource.getClay().intValue();

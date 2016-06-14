@@ -300,7 +300,8 @@ public class ClientInputHandler extends InputHandler {
 		int playerID = tradePreview.getTradeID();
 		int tradeID = tradePreview.getTradeID();
 		
-		//hier läuft was schief!!!
+		//hier läuft was schief, wenn ProtocolTradePreview geparst wird. denn dann ist unbekannt = 0 und nicht null!!!
+		// Protocol to Model.convertResources funktioniert dann nicht.
 		int[] offer = ProtocolToModel.convertResources(tradePreview.getOffer());
 		int[] demand = ProtocolToModel.convertResources(tradePreview.getWithdrawal());
 		clientController.receiveTrade(playerID, tradeID, offer, demand);
