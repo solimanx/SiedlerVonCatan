@@ -940,10 +940,11 @@ public class Board {
 	}
 
 	// ================================================================================
-	// ???????
+	// VIEW
 	// ================================================================================
 
 	// TODO FOR DEBUGGING ONLY
+	@Deprecated
 	public ArrayList<Field> getAllFields() {
 		ArrayList<Field> result = new ArrayList<Field>();
 		for (int i = 0; i < fields.length; i++) {
@@ -959,6 +960,9 @@ public class Board {
 	}
 
 	/**
+	 * Intended to check which of the two fields is sea, not intended for two
+	 * land fields.
+	 *
 	 * @param u
 	 *            Field 1 x-coordinate
 	 * @param v
@@ -969,22 +973,20 @@ public class Board {
 	 *            Field 2 y-coordinate
 	 * @return the water Field
 	 */
-	// TODO Axial or array field?
-	public Field getHarbourSeaField(int u, int v, int x, int y) {
-		if (getField(u, v).getResourceType() == enums.ResourceType.SEA) {
-			return getField(u, v);
-		}
-		if (getField(x, y).getResourceType() == enums.ResourceType.SEA) {
-			return getField(x, y);
-		}
-		if (getField(u, v).getResourceType() == enums.ResourceType.SEA
-				&& getField(x, y).getResourceType() == enums.ResourceType.SEA) {
-			logger.warn("Throws new IllegalArgumentException, \"Both Fields are sea Fields\"");
-			throw new IllegalArgumentException("Both Fields are sea Fields");
-		}
-		logger.warn("Throws new IllegalArgumentException, \"None of both Fields is a sea Fields\"");
 
-		throw new IllegalArgumentException("None of both Fields is a sea Fields");
+	public int[] getHarbourField(int[] field1, int[] field2) {
+		if (field1.length == 2 && field2.length == 2) {
+			if (getFieldAt(field1[0], field1[1]).getResourceType() == enums.ResourceType.SEA) {
+				if (getFieldAt(field2[0], field2[1]).getResourceType() == enums.ResourceType.SEA) {
+					throw new IllegalArgumentException("Both fields are sea");
+				} else
+					return field1;
+			} else if (getFieldAt(field2[0], field2[1]).getResourceType() == enums.ResourceType.SEA) {
+				return field2;
+			} else
+				throw new IllegalArgumentException("None are SEAT");
+		}
+		throw new IllegalArgumentException("False input");
 	}
 
 }
