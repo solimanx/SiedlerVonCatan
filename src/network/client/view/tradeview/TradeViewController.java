@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,8 +56,8 @@ public class TradeViewController {
 	@FXML
 	private GridPane grid;
 
-	private ObservableList<String> tradeList;
-	private ObservableList<String> ownOfferList;
+	private ObservableList<String> tradeList = FXCollections.observableArrayList();
+	private ObservableList<String> ownOfferList = FXCollections.observableArrayList();
 
 	private String selectedTrade;
 	private String selectedOffer;
