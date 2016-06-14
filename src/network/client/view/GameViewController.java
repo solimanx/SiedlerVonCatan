@@ -234,32 +234,34 @@ public class GameViewController implements Initializable {
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
 		if (modelID == viewController.getClientController().getOwnPlayerId()) {
 			playerIDtoViewPosition.put(modelID, 1);
+			if (playerColor != enums.Color.WHITE) {
+				playerNameOne.setTextFill(playerColor.getValue());
+			}
 
 		} else {
 			playerIDtoViewPosition.put(modelID, playerCounter);
 			viewPositiontoPlayerID.put(playerCounter, modelID);
+
 			playerCounter++;
 		}
 		playerColors.put(modelID, playerColor.getValue());
 		switch (playerIDtoViewPosition.get(modelID)) {
 		case 1:
-			playerNameOne.setText(playerName);
-			if (playerColor != enums.Color.WHITE) {
-				playerNameOne.setTextFill(playerColor.getValue());
-			}
+			playerNameTwo.setText(playerName);
+
 			playerNames.put(1, playerName);
 			break;
 		case 2:
 			playerNameTwo.setText(playerName);
 			if (playerColor != enums.Color.WHITE) {
-				playerNameOne.setTextFill(playerColor.getValue());
+				playerNameThree.setTextFill(playerColor.getValue());
 			}
 			playerNames.put(1, playerName);
 			break;
 		case 3:
 			playerNameThree.setText(playerName);
 			if (playerColor != enums.Color.WHITE) {
-				playerNameOne.setTextFill(playerColor.getValue());
+				playerNameFour.setTextFill(playerColor.getValue());
 			}
 			playerNames.put(1, playerName);
 			break;
@@ -615,7 +617,7 @@ public class GameViewController implements Initializable {
 	private void setMoveRobberState() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Move the Robber");
-		alert.setHeaderText("You can move the robber and steal from adjoing players!");
+		alert.setHeaderText("You can move the robber and steal from adjoining players!");
 		alert.setContentText("Click on any field to move the robber on the field.");
 		alert.initOwner(gameStage);
 		alert.initModality(Modality.APPLICATION_MODAL);

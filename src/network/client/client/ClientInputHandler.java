@@ -195,7 +195,7 @@ public class ClientInputHandler extends InputHandler {
     @Override
     protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
         String s = chatReceiveMessage.getMessage();
-        int playerId = chatReceiveMessage.getSender();
+        Integer playerId = chatReceiveMessage.getSender();
         clientController.chatReceiveMessage(playerId, s);
     }
 
