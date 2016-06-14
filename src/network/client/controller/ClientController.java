@@ -651,8 +651,10 @@ public class ClientController {
 	/**
 	 *
 	 */
-	public void robberMovement() {
-		// TODO
+	public void robberMovement(String location) {
+		gameLogic.getBoard().setBandit(location);
+		int[] coords = ProtocolToModel.getFieldCoordinates(location);
+		viewController.getGameViewController().setBandit(coords[0], coords[1]);
 	}
 
 	/**
@@ -708,9 +710,25 @@ public class ClientController {
 	/**
 	 *
 	 */
-	public void costs() {
-		// TODO
+	public void costs(int threadID,int[] resources) {
+		int modelID = threadPlayerIdMap.get(threadID);
+		if (resources.length == 1){
+			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
+		} else {
+			if ((modelID == 0)) {
+			gameLogic.getBoard().getPlayer(0).decrementResources(resources);
+		   } else {
+			   int unknownSize = 0;
+			   for (int i = 0;i <resources.length;i++){
+				   unknownSize = unknownSize + resources[i];
+			   }
+			   gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(unknownSize);
+			
+		   }
+		}
+
 	}
+
 
 	/**
 	 * @param player_id

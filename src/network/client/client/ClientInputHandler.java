@@ -457,7 +457,11 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolCosts costs) {
         int playerID = costs.getPlayerID();
         ProtocolResource pr = costs.getResource();
-        // networkController.costs(playerID,pr)
+        if (pr.getUnknown() != null){
+        	int[] resources = {pr.getWood(),pr.getClay(),pr.getOre(),pr.getWool(),pr.getCorn()};
+        	clientController.costs(playerID,resources);
+        }
+        
     }
 
     /* (non-Javadoc)
@@ -469,7 +473,7 @@ public class ClientInputHandler extends InputHandler {
         int playerID = robberMovement.getPlayerID();
         String locationID = robberMovement.getLocationID();
         int victimID = robberMovement.getVictimID();
-        // networkController.robberMovement(playerID,locationID,victimID);
+        clientController.robberMovement(locationID);
 
     }
 
