@@ -60,7 +60,7 @@ public class ClientController {
 	private int initialRoundCount = 0;
 	private String currentServerResponse;
 	private PlayerState currentState;
-
+	
 	private ArrayList<TradeOffer> tradeOffers = new ArrayList<TradeOffer>();
 
 	/**
@@ -339,10 +339,8 @@ public class ClientController {
 			int[] coord = entry.getValue();
 			Field f = gameLogic.getBoard().getFieldAt(coord[0], coord[1]);
 			viewController.getGameViewController().setField(coord[0], coord[1], f.getResourceType(), f.getDiceIndex());
-			// TODO set Harbour Fields in GameView. angleFactor * 60° edge,field
-			// -> int
-			// viewController.getGameViewController().setHarbour(int
-			// angleFactor, int u, int v, enums.HarbourStatus);
+			//TODO set Harbour Fields in GameView. angleFactor * 60° edge,field -> int
+			//viewController.getGameViewController().setHarbour(int angleFactor, int u, int v, enums.HarbourStatus);
 		}
 		int[] banditCorners = gameLogic.getBoard().getStringToCoordMap().get(gameLogic.getBoard().getBandit());
 		viewController.getGameViewController().setBandit(banditCorners[0], banditCorners[1]);
@@ -465,6 +463,7 @@ public class ClientController {
 		// resources);
 
 	}
+
 
 	// 8.6
 
@@ -648,9 +647,9 @@ public class ClientController {
 		clientOutputHandler.robberLoss(result);
 	}
 	// Protocol 0.3
-
+	
 	/**
-	 *
+	 * 
 	 * Basic methods for trading
 	 */
 
@@ -659,28 +658,30 @@ public class ClientController {
 	}
 
 	public void receiveTrade(int threadID, int tradingID, int[] supply, int[] demand) {
-		System.out.println("ThreadID" + threadID);
-		System.out.println("TradingID" + tradingID);
-		System.out.println(
-				"Supply: " + supply[0] + " " + supply[1] + " " + supply[2] + " " + supply[3] + " " + supply[4]);
-		System.out.println(
-				"Demand: " + demand[0] + " " + demand[1] + " " + demand[2] + " " + demand[3] + " " + demand[4]);
-		TradeOffer tOf = new TradeOffer(threadPlayerIdMap.get(threadID), tradingID, supply, demand);
+		int modelID = threadPlayerIdMap.get(threadID);
+	    TradeOffer tOf = new TradeOffer(modelID,tradingID,supply,demand);
 		tradeOffers.add(tOf);
+		if (modelID == 0){
+			viewController.getGameViewController().getTradeViewController().addOwnOffer(supply, demand, tradingID);
+		} else {
+		viewController.getGameViewController().getTradeViewController().addOffer(supply, demand, tradingID, modelID);
+	
+		}
 	}
-
 	public void acceptTrade(int tradingID) {
 		clientOutputHandler.acceptTrade(tradingID);
 	}
 
 	public void tradeAccepted(int threadID, int tradingID) {
 		TradeOffer currTOf;
-		for (int i = 0; i < tradeOffers.size(); i++) {
+		int modelID = threadPlayerIdMap.get(threadID);
+		for (int i = 0;i <tradeOffers.size();i++){
 			currTOf = tradeOffers.get(i);
-			if (currTOf.getTradingID() == tradingID) {
-				currTOf.acceptingPlayers.add(threadPlayerIdMap.get(threadID));
+			if (currTOf.getTradingID() == tradingID){
+				currTOf.acceptingPlayers.add(modelID);
 			}
 		}
+		viewController.getGameViewController().getTradeViewController().acceptingOffer(modelID,tradingID);
 	}
 
 	public void fulfillTrade(int tradingID, int partnerThreadID) {
@@ -688,15 +689,17 @@ public class ClientController {
 	}
 
 	public void tradeFulfilled(int threadID, int partnerModelID) {
-		TradeOffer currTOf;
-		int modelID = threadPlayerIdMap.get(threadID);
-		for (int i = 0; i < tradeOffers.size(); i++) {
+        TradeOffer currTOf;
+        int modelID = threadPlayerIdMap.get(threadID);
+        int id;
+		for (int i = 0; i < tradeOffers.size();i++){
 			currTOf = tradeOffers.get(i);
-			if (currTOf.getOwnerID() == modelID) {
+			if (currTOf.getOwnerID() == modelID){
+				id = tradeOffers.get(i).getTradingID();
 				tradeOffers.remove(i);
 			}
 		}
-		// viewController.getGameViewController().getTradeViewController().
+		viewController.getGameViewController().getTradeViewController().offerFulfilled(id);
 	}
 
 	public void cancelTrade(int tradingID) {
@@ -706,14 +709,14 @@ public class ClientController {
 	public void tradeCancelled(int threadID, int tradingID) {
 		TradeOffer currTOf;
 		int modelID = threadPlayerIdMap.get(threadID);
-		for (int i = 0; i < tradeOffers.size(); i++) {
+		for (int i = 0;i < tradeOffers.size();i++){
 			currTOf = tradeOffers.get(i);
-			if (currTOf.getTradingID() == tradingID) {
-				if (currTOf.getOwnerID() == modelID) {
+			if (currTOf.getTradingID() == tradingID){
+				if (currTOf.getOwnerID() == modelID){
 					tradeOffers.remove(i);
 				} else {
-					for (int j = 0; j < currTOf.acceptingPlayers.size(); j++) {
-						if (currTOf.acceptingPlayers.get(j) == modelID) {
+					for (int j = 0; j <currTOf.acceptingPlayers.size();j++){
+						if (currTOf.acceptingPlayers.get(j) == modelID){
 							currTOf.acceptingPlayers.remove(j);
 						}
 					}
@@ -721,61 +724,68 @@ public class ClientController {
 				break;
 			}
 		}
+		if (modelID == 0){
+			viewController.getGameViewController().getTradeViewController().cancelOwnOffer();			
+		} else {
+			viewController.getGameViewController().getTradeViewController().cancelOffer(modelID);			
+		}
 	}
-
-	public void requestSeaTrade(int[] offer, int[] demand) {
+	
+	
+	public void requestSeaTrade(int[] offer,int[] demand){
 		clientOutputHandler.requestHarbourTrade(offer, demand);
 	}
 
 	/**
-	 * @param message
+	 * @param message 
 	 *
 	 */
 	public void victory(String message, int threadID) {
-		// viewController.getGameViewController().victory(message,
-		// threadPlayerIdMap.get(threadID));
+		//viewController.getGameViewController().victory(message, threadPlayerIdMap.get(threadID));
 	}
 
 	/**
 	 *
 	 */
-	public void costs(int threadID, int[] resources) {
+	public void costs(int threadID,int[] resources) {
 		int modelID = threadPlayerIdMap.get(threadID);
-		if (resources.length == 1) {
+		if (resources.length == 1){
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
 		} else {
 			if ((modelID == 0)) {
-				gameLogic.getBoard().getPlayer(0).decrementResources(resources);
-			} else {
-				int unknownSize = 0;
-				for (int i = 0; i < resources.length; i++) {
-					unknownSize = unknownSize + resources[i];
-				}
-				gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(unknownSize);
+			gameLogic.getBoard().getPlayer(0).decrementResources(resources);
+		   } else {
+			   int unknownSize = 0;
+			   for (int i = 0;i <resources.length;i++){
+				   unknownSize = unknownSize + resources[i];
+			   }
+			   gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(unknownSize);
 
-			}
+		   }
 		}
 
 	}
+
 
 	/**
 	 * @param playerID
 	 */
 	public void biggestKnightProwess(int threadID) {
 		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(true);
-		// viewController.getGameViewController().set...
+		//viewController.getGameViewController().set...
 	}
-
+	
 	/**
 	 * @param playerID
 	 */
 	public void longestRoad(int threadID) {
 		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(true);
-		// viewController.getGameViewController().set...
-	}
-
-	public void requestBuyDevelopmentCard() {
-		if (gameLogic.checkBuyDevCard(0)) {
+		//viewController.getGameViewController().set...
+	}	
+	
+	
+	public void requestBuyDevelopmentCard(){
+		if (gameLogic.checkBuyDevCard(0)){
 			clientOutputHandler.buyDevelopmentCard();
 		}
 	}
@@ -784,19 +794,19 @@ public class ClientController {
 	 * @param resource
 	 */
 	public void playInventionCard(int[] resources) {
-
+		
 	}
-
-	public void playMonopolyCard(ResourceType resType) {
-
+	
+	public void playMonopolyCard(ResourceType resType){
+		
 	}
-
-	public void playStreetBuildCard(int u1, int v1, int dir1, int u2, int v2, int dir2) {
-
+	
+	public void playStreetBuildCard(int u1,int v1, int dir1, int u2, int v2, int dir2){
+		
 	}
-
-	public void playKnightCard(int x, int y, int modelID) {
-
+	
+	public void playKnightCard(int x, int y, int modelID){
+		
 	}
 
 	/**
