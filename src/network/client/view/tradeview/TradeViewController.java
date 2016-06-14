@@ -172,6 +172,17 @@ public class TradeViewController {
 		getWoolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
 		getCornSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
 		getOreSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
+	
+		grid.add(giveWoodSpinner, 1, 1);
+		grid.add(giveClaySpinner, 1, 2);
+		grid.add(giveWoolSpinner, 1, 3);
+		grid.add(giveCornSpinner, 1, 4);
+		grid.add(giveOreSpinner, 1, 5);
+		grid.add(getWoodSpinner, 2, 1);
+		grid.add(getClaySpinner, 2, 2);
+		grid.add(getWoolSpinner, 2, 3);
+		grid.add(getCornSpinner, 2, 4);
+		grid.add(getOreSpinner, 2, 5);
 	}
 
 	@FXML
