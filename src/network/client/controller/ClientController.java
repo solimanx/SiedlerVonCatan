@@ -60,6 +60,7 @@ public class ClientController {
 	private int initialRoundCount = 0;
 	private String currentServerResponse;
 	private PlayerState currentState;
+	private TradeController tradeController;
 
 	/**
 	 * @param primaryStage
@@ -75,6 +76,7 @@ public class ClientController {
 		this.viewController = new ViewController(primaryStage, this);
 		this.board = new Board();
 		this.gameLogic = new GameLogic(board);
+		this.tradeController = new TradeController(this);
 
 	}
 
@@ -296,7 +298,6 @@ public class ClientController {
 		for (Corner c : harbourCorners) {
 			String location = c.getCornerID();
 			int[] coords = ProtocolToModel.getCornerCoordinates(location);
-			// TODO change
 			Corner bCorner = gameLogic.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
 			bCorner.setCornerID(location);
 			bCorner.setHarbourStatus(c.getHarbourStatus());
@@ -461,17 +462,6 @@ public class ClientController {
 
 	}
 
-	// 8.5
-
-	/**
-	 * @param stealingPlayerId
-	 * @param x
-	 * @param y
-	 * @param stealFromPlayerId
-	 */
-	public void setBandit(int stealingPlayerId, int x, int y, int stealFromPlayerId) {
-
-	}
 
 	// 8.6
 
@@ -572,16 +562,6 @@ public class ClientController {
 	}
 
 	/**
-	 * gets request resource Array from tradeView and delegates to
-	 * ClientOutputController
-	 *
-	 * @param request
-	 */
-	public void tradeRequest(int[][] request) {
-		clientOutputHandler.handleTradeRequest(request[0], request[1]);
-	}
-
-	/**
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -661,50 +641,58 @@ public class ClientController {
 	 * @param result
 	 */
 	public void robberLoss(int[] result) {
-		// TODO
 		clientOutputHandler.robberLoss(result);
 	}
 	// Protocol 0.3
-
+	
 	/**
-	 * @param player_id
-	 * @param trade_id
-	 * @param offer
-	 * @param withdrawal
+	 * 
+	 * Basic methods for trading
 	 */
-	public void tradeIsRequested(int player_id, int trade_id, ProtocolResource offer, ProtocolResource demand) {
-		// TODO
+
+	public void requestTrade(int[] offer, int[] demand) {
+		clientOutputHandler.requestTrade( offer, demand);
+	}
+
+	public void receiveTrade(int threadID, int tradingID, int[] supply, int[] demand) {
+		tradeController.addTrade(threadPlayerIdMap.get(threadID),tradingID,supply,demand);
+	}
+
+	public void acceptTrade(int tradingID) {
+		clientOutputHandler.acceptTrade(tradingID);
+	}
+
+	public void tradeAccepted(int threadID, int tradingID) {
+		tradeController.tradeAccepted(threadPlayerIdMap.get(threadID), tradingID);
+	}
+
+	public void fulfillTrade(int tradingID, int partnerThreadID) {
+		clientOutputHandler.tradeComplete(tradingID, partnerThreadID);
+	}
+
+	public void tradeFulfilled(int threadID, int partnerModelID) {
+		tradeController.tradeFulfilled(threadPlayerIdMap.get(threadID),threadPlayerIdMap.get(partnerModelID));
+	}
+
+	public void cancelTrade(int tradingID) {
+		clientOutputHandler.cancelTrade(tradingID);
+	}
+
+	public void tradeCancelled(int threadID, int tradingID) {
+		tradeController.tradeCancelled(threadPlayerIdMap.get(threadID),tradingID);
+	}
+	
+	
+	public void requestSeaTrade(int[] offer,int[] demand){
+		clientOutputHandler.requestHarbourTrade(offer, demand);
 	}
 
 	/**
-	 * @param player_id
-	 * @param trade_id
-	 */
-	public void tradeConfirmation(int player_id, int trade_id) {
-		// TODO
-	}
-
-	/**
-	 * @param player_id
-	 * @param trade_id
-	 */
-	public void tradeIsCanceled(int player_id, int trade_id) {
-		// TODO
-	}
-
-	/**
-	 * @param player_id
-	 * @param tradePartner_id
-	 */
-	public void tradeIsCompleted(int player_id, int tradePartner_id) {
-		// TODO
-	}
-
-	/**
+	 * @param message 
 	 *
 	 */
-	public void victory() {
-		// TODO
+	public void victory(String message, int threadID) {
+		//viewController.getGameViewController().victory(message, threadPlayerIdMap.get(threadID));
 	}
 
 	/**
@@ -773,24 +761,6 @@ public class ClientController {
 	 */
 	public void boughtDevelopmentCard() {
 		// TODO
-	}
-
-	/**
-	 * sets player state in own client model; is called by network controller
-	 * after server has changed a player state
-	 *
-	 * @param state
-	 */
-	/**
-	 * @param playerId
-	 * @param state
-	 */
-	public void setPlayerState(int playerId, PlayerState state) {
-		gameLogic.getBoard().getPlayer(playerId).setPlayerState(state);
-		if (playerId == ownPlayerId) {
-			// update GUI
-			// viewController.setPlayerState(state);
-		}
 	}
 
 	/**

@@ -179,13 +179,8 @@ public class ClientOutputHandler {
      * @param losses
      */
     public void robberLoss(int[] losses) {
-        ProtocolResource prl;
-        if (losses.length > 1) {
-            prl = new ProtocolResource(losses[0], losses[1], losses[2], losses[3], losses[4], null);
-        } else {
-            prl = new ProtocolResource(null,null, null,null,null, losses[0]);
-        }
-        ProtocolRobberLoss prlosses = new ProtocolRobberLoss(prl);
+        ProtocolResource prL = ModelToProtocol.convertToProtocolResource(losses);
+        ProtocolRobberLoss prlosses = new ProtocolRobberLoss(prL);
         Response r = new Response();
         r.pRobberLoss = prlosses;
         try {
@@ -221,20 +216,11 @@ public class ClientOutputHandler {
      * @param offer
      * @param demand
      */
-    public void handleHarbourRequest(int[] offer, int[] demand) {
-        ProtocolResource proff;
-        if (offer.length > 1) {
-            proff = new ProtocolResource(offer[0], offer[1], offer[3], offer[4], offer[5], 0);
-        } else {
-            proff = new ProtocolResource(0, 0, 0, 0, 0, offer[0]);
-        }
-        ProtocolResource prw;
-        if (demand.length > 1) {
-            prw = new ProtocolResource(demand[0], demand[1], demand[2], demand[3], demand[4], 0);
-        } else {
-            prw = new ProtocolResource(0, 0, 0, 0, 0, demand[0]);
-        }
-        ProtocolHarbourRequest phr = new ProtocolHarbourRequest(proff, prw);
+    public void requestHarbourTrade(int[] offer, int[] demand) {
+        ProtocolResource prOff = ModelToProtocol.convertToProtocolResource(offer);
+        ProtocolResource prDem = ModelToProtocol.convertToProtocolResource(demand);
+       
+        ProtocolHarbourRequest phr = new ProtocolHarbourRequest(prOff, prDem);
         Response r = new Response();
         r.pHarbourRequest = phr;
         try {
@@ -248,10 +234,10 @@ public class ClientOutputHandler {
     }
 
     /**
-     * @param trade_id
+     * @param tradeID
      */
-    public void handleTradeAccept(int trade_id) {
-        ProtocolTradeAccept pta = new ProtocolTradeAccept(trade_id);
+    public void acceptTrade(int tradeID) {
+        ProtocolTradeAccept pta = new ProtocolTradeAccept(tradeID);
         Response r = new Response();
         r.pTradeAccept = pta;
         try {
@@ -267,20 +253,10 @@ public class ClientOutputHandler {
      * @param offer
      * @param demand
      */
-    public void handleTradeRequest(int[] offer, int[] demand) {
-        ProtocolResource proff;
-        if (offer.length > 1) {
-            proff = new ProtocolResource(offer[0], offer[1], offer[2], offer[3], offer[4], 0);
-        } else {
-            proff = new ProtocolResource(0, 0, 0, 0, 0, offer[0]);
-        }
-        ProtocolResource prw;
-        if (demand.length > 1) {
-            prw = new ProtocolResource(demand[0], demand[1], demand[2], demand[3], demand[4], 0);
-        } else {
-            prw = new ProtocolResource(0, 0, 0, 0, 0, demand[0]);
-        }
-        ProtocolTradeRequest ptr = new ProtocolTradeRequest(proff, prw);
+    public void requestTrade(int[] offer, int[] demand) {
+        ProtocolResource prOff = ModelToProtocol.convertToProtocolResource(offer);
+        ProtocolResource prDem = ModelToProtocol.convertToProtocolResource(demand);
+        ProtocolTradeRequest ptr = new ProtocolTradeRequest(prOff, prDem);
         Response r = new Response();
         r.pTradeRequest = ptr;
         try {
@@ -293,10 +269,10 @@ public class ClientOutputHandler {
     }
 
     /**
-     * @param trade_id
+     * @param tradeID
      */
-    public void handleTradeCancel(int trade_id) {
-        ProtocolTradeCancel ptc = new ProtocolTradeCancel(trade_id);
+    public void cancelTrade(int tradeID) {
+        ProtocolTradeCancel ptc = new ProtocolTradeCancel(tradeID);
         Response r = new Response();
         r.pTradeCancel = ptc;
         try {
@@ -311,11 +287,11 @@ public class ClientOutputHandler {
     }
 
     /**
-     * @param trade_id
-     * @param tradePartner_id
+     * @param tradeID
+     * @param tradePartnerID
      */
-    public void handleTradeComplete(int trade_id, int tradePartner_id) {
-        ProtocolTradeComplete ptco = new ProtocolTradeComplete(trade_id, tradePartner_id);
+    public void tradeComplete(int tradeID, int tradePartnerID) {
+        ProtocolTradeComplete ptco = new ProtocolTradeComplete(tradeID, tradePartnerID);
         Response r = new Response();
         r.pTradeComplete = ptco;
         try {
@@ -331,7 +307,7 @@ public class ClientOutputHandler {
     /**
      *
      */
-    public void handleBuyDevelopmentCards() {
+    public void buyDevelopmentCard() {
         ProtocolBuyDevelopmentCards pbdc = new ProtocolBuyDevelopmentCards();
         Response r = new Response();
         r.pBuyDevCards = pbdc;
@@ -412,12 +388,7 @@ public class ClientOutputHandler {
      * @param resource
      */
     public void handleMonopoly(int[] resource) {
-        ProtocolResource pr;
-        if (resource.length > 0) {
-            pr = new ProtocolResource(resource[0], resource[1], resource[3], resource[4], resource[5], 0);
-        } else {
-            pr = new ProtocolResource(0, 0, 0, 0, 0, resource[0]);
-        }
+        ProtocolResource pr = ModelToProtocol.convertToProtocolResource(resource);
         ProtocolMonopolyCard pmc = new ProtocolMonopolyCard(pr);
         Response r = new Response();
         r.pMonopolyCard = pmc;
@@ -435,12 +406,7 @@ public class ClientOutputHandler {
      * @param resource
      */
     public void inventionCardInfo(int[] resource) {
-        ProtocolResource pr;
-        if (resource.length > 0) {
-            pr = new ProtocolResource(resource[0], resource[1], resource[3], resource[4], resource[5], 0);
-        } else {
-            pr = new ProtocolResource(0, 0, 0, 0, 0, resource[0]);
-        }
+        ProtocolResource pr = ModelToProtocol.convertToProtocolResource(resource);
         ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(pr);
         Response r = new Response();
         r.pInventionCardInfo = pici;
