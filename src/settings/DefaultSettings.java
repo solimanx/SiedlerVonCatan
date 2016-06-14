@@ -21,10 +21,12 @@ public final class DefaultSettings {
 
 	public final static int AMOUNT_KNIGHT_CARDS = 14;
 	public final static int AMOUNT_VICTORY_CARDS = 5;
-	public final static int AMOUNT_DEVELOPMENT_CARDS = 6;
+
 	public final static int AMOUNT_INVENTION_CARDS = 2;
 	public final static int AMOUNT_MONOPOLY_CARDS = 2;
 	public final static int AMOUNT_STREETBUILDING_CARDS = 2;
+	public final static int AMOUNT_DEVELOPMENT_CARDS = AMOUNT_KNIGHT_CARDS + AMOUNT_VICTORY_CARDS
+			+ AMOUNT_INVENTION_CARDS + AMOUNT_MONOPOLY_CARDS + AMOUNT_STREETBUILDING_CARDS;
 
 	// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
 	public final static int[] VILLAGE_BUILD_COST = { 1, 1, 0, 1, 1 };
@@ -41,14 +43,14 @@ public final class DefaultSettings {
 	public final static ResourceType[] RESOURCE_ORDER = { ResourceType.WOOD, ResourceType.CLAY, ResourceType.ORE,
 			ResourceType.SHEEP, ResourceType.CORN, ResourceType.NOTHING };
 
-	public final static Map<ResourceType,Integer> RESOURCE_VALUES = new HashMap<ResourceType,Integer>(){
+	public final static Map<ResourceType, Integer> RESOURCE_VALUES = new HashMap<ResourceType, Integer>() {
 		{
-			put(ResourceType.WOOD,0);
-			put(ResourceType.CLAY,1);
-			put(ResourceType.ORE,2);
-			put(ResourceType.SHEEP,3);
-			put(ResourceType.CORN,4);
-			put(ResourceType.NOTHING,5);
+			put(ResourceType.WOOD, 0);
+			put(ResourceType.CLAY, 1);
+			put(ResourceType.ORE, 2);
+			put(ResourceType.SHEEP, 3);
+			put(ResourceType.CORN, 4);
+			put(ResourceType.NOTHING, 5);
 		}
 	};
 
@@ -64,8 +66,8 @@ public final class DefaultSettings {
 
 	public static final String SERVER_VERSION = "0.3";
 
-	//Get current time as string
-	public static String getCurrentTime(){
+	// Get current time as string
+	public static String getCurrentTime() {
 		return "[" + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")) + "] ";
 	}
 
