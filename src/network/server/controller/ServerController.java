@@ -565,8 +565,12 @@ public class ServerController {
 																	// backwards
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
 					statusUpdate(modelID);
+					for (int i = 0;i < amountPlayers;i++){
+						if (playerOrder[i] == currentPlayer){
+							currentPlayer = playerOrder[i-1];
+						}
+					}
 
-					currentPlayer = playerOrder[playerOrder[currentPlayer] - 1];
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
 					statusUpdate(currentPlayer);
 				} else { // go forward
