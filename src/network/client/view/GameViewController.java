@@ -348,7 +348,6 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleEndTurnButton(ActionEvent event) {
 		viewController.getClientController().endTurn();
-		playerVBoxOne.setDisable(true);
 	}
 
 	/**

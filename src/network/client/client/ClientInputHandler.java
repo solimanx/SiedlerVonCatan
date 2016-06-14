@@ -299,6 +299,8 @@ public class ClientInputHandler extends InputHandler {
 	protected void handle(ProtocolTradePreview tradePreview) {
 		int playerID = tradePreview.getTradeID();
 		int tradeID = tradePreview.getTradeID();
+		
+		//hier läuft was schief!!!
 		int[] offer = ProtocolToModel.convertResources(tradePreview.getOffer());
 		int[] demand = ProtocolToModel.convertResources(tradePreview.getWithdrawal());
 		clientController.receiveTrade(playerID, tradeID, offer, demand);

@@ -13,7 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import network.client.controller.ViewController;
 
@@ -38,7 +38,7 @@ public class TradeViewController {
 	private Button acceptButton;
 	
 	@FXML
-	private TextArea ownOffer;
+	private TextField ownOffer;
 
 	private Spinner<Integer> giveWoodSpinner;
 	private Spinner<Integer> giveClaySpinner;
@@ -81,57 +81,6 @@ public class TradeViewController {
 		this.viewController = viewController;
 		updateSpinner(resources);
 
-		giveWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultOffer[0] = newVal;
-		});
-
-		giveClaySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultOffer[1] = newVal;
-		});
-
-		giveWoolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultOffer[3] = newVal;
-		});
-
-		giveCornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultOffer[4] = newVal;
-		});
-
-		giveOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultOffer[2] = newVal;
-		});
-
-		getWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultDemand[0] = newVal;
-		});
-
-		getClaySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultDemand[1] = newVal;
-		});
-
-		getWoolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultDemand[3] = newVal;
-		});
-
-		getCornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultDemand[4] = newVal;
-		});
-
-		getOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			resultDemand[2] = newVal;
-		});
-
-		grid.add(giveWoodSpinner, 1, 1);
-		grid.add(giveClaySpinner, 1, 2);
-		grid.add(giveWoolSpinner, 1, 3);
-		grid.add(giveCornSpinner, 1, 4);
-		grid.add(giveOreSpinner, 1, 5);
-		grid.add(getWoodSpinner, 2, 1);
-		grid.add(getClaySpinner, 2, 2);
-		grid.add(getWoolSpinner, 2, 3);
-		grid.add(getCornSpinner, 2, 4);
-		grid.add(getOreSpinner, 2, 5);
-
 		foreignTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		foreignTrades.setItems(tradeList);
 		foreignTrades.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -172,7 +121,47 @@ public class TradeViewController {
 		getWoolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
 		getCornSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
 		getOreSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
-	
+		
+		giveWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultOffer[0] = newVal;
+		});
+
+		giveClaySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultOffer[1] = newVal;
+		});
+
+		giveWoolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultOffer[3] = newVal;
+		});
+
+		giveCornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultOffer[4] = newVal;
+		});
+
+		giveOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultOffer[2] = newVal;
+		});
+
+		getWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultDemand[0] = newVal;
+		});
+
+		getClaySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultDemand[1] = newVal;
+		});
+
+		getWoolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultDemand[3] = newVal;
+		});
+
+		getCornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultDemand[4] = newVal;
+		});
+
+		getOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+			resultDemand[2] = newVal;
+		});
+		
 		grid.add(giveWoodSpinner, 1, 1);
 		grid.add(giveClaySpinner, 1, 2);
 		grid.add(giveWoolSpinner, 1, 3);
