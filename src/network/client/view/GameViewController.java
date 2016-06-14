@@ -186,6 +186,12 @@ public class GameViewController implements Initializable {
 
 	private SimpleStringProperty response;
 
+	private TradeViewController tradeViewController;
+
+	public TradeViewController getTradeViewController() {
+		return tradeViewController;
+	}
+
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
@@ -202,6 +208,25 @@ public class GameViewController implements Initializable {
 		response = new SimpleStringProperty("Server responses will appear here");
 		serverResponse.textProperty().bind(response);
 		factory = new ViewBoardFactory();
+
+		FXMLLoader loader = new FXMLLoader();
+		Pane root;
+		try {
+			root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
+			tradeViewController = (TradeViewController) loader.getController();
+			Scene scene = new Scene(root);
+			Stage tradeStage = new Stage();
+			tradeStage.setScene(scene);
+
+			tradeViewController.init(selfResources, viewController);
+
+			tradeStage.initModality(Modality.WINDOW_MODAL);
+			tradeStage.initOwner(gameStage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -315,12 +340,12 @@ public class GameViewController implements Initializable {
 
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
-		TradeViewController controller = (TradeViewController) loader.getController();
+		tradeViewController = (TradeViewController) loader.getController();
 		Scene scene = new Scene(root);
 		Stage tradeStage = new Stage();
 		tradeStage.setScene(scene);
 
-		controller.init(selfResources, viewController);
+		tradeViewController.init(selfResources, viewController);
 
 		tradeStage.initModality(Modality.WINDOW_MODAL);
 		tradeStage.initOwner(gameStage);
@@ -341,17 +366,17 @@ public class GameViewController implements Initializable {
 	 * @param villageCoordinates
 	 */
 	public void villageClick(int[] villageCoordinates) {
-		if(selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
-		viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
-				villageCoordinates[2]);
+		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
+			viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
+					villageCoordinates[2]);
 	}
 
 	/**
 	 * @param streetCoordinates
 	 */
 	public void streetClick(int[] streetCoord) {
-		if(selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET)
-		viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
+		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET)
+			viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package network.client.view.robberview;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,6 +31,11 @@ public class RobberViewController {
 
 	@FXML
 	private Label label;
+	
+	@FXML
+	private Label toGive;
+	
+	private SimpleIntegerProperty toGiveProperty;
 
 	private int[] result = new int[5];
 
@@ -47,9 +53,12 @@ public class RobberViewController {
     }
 
 	public void createSpinner(int[] resources) {
-//		claySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-//			System.out.println(newVal);
-//		});
+		int sum = 0;
+		for (int i = 0; i < resources.length; i++) {
+			 sum = sum + resources[i];
+		}
+		toGiveProperty.set(sum);
+
 		woodSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[0], 0));
 		claySpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[1], 0));
 		woolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[3], 0));
