@@ -855,8 +855,12 @@ public class ServerController {
 				subFromPlayersResources(modelID, resources);
 				resourceStackIncrease(resources);
 				serverOutputHandler.costs(threadID, playerRes);
-				if (modelID == currentPlayer && robberLossCounter == 0) {
-					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.MOVE_ROBBER);
+				if (robberLossCounter == 0) {
+					if (modelID != currentPlayer){
+						gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
+					}					
+					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.MOVE_ROBBER);
+					statusUpdate(currentPlayer);
 				} else {
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
 				}
@@ -1085,6 +1089,7 @@ public class ServerController {
 						case VILLAGE:
 							currResType = f.getResourceType();
 							if (resourceStackDecrease(currResType)) {
+								addToPlayersResource(neighbors[i].getOwnerID(), currResType, 1);
 								playersObtain[neighbors[i].getOwnerID()][DefaultSettings.RESOURCE_VALUES
 										.get(currResType)]++;
 							}
@@ -1093,6 +1098,7 @@ public class ServerController {
 							currResType = f.getResourceType();
 							for (int j = 0; j < 2; j++) {
 								if (resourceStackDecrease(currResType)) {
+									addToPlayersResource(neighbors[i].getOwnerID(), currResType, 2);
 									playersObtain[neighbors[i].getOwnerID()][DefaultSettings.RESOURCE_VALUES
 											.get(currResType)]++;
 								}
@@ -1166,6 +1172,7 @@ public class ServerController {
 				currResType = connFields[j].getResourceType();
 				if (currResType != ResourceType.NOTHING && currResType != ResourceType.SEA) {
 					if (resourceStackDecrease(currResType)) {
+						addToPlayersResource(initialVillages.get(i).getOwnerID(), currResType, 1);
 						playersObtain[initialVillages.get(i).getOwnerID()][DefaultSettings.RESOURCE_VALUES
 								.get(currResType)]++;
 					} else {
