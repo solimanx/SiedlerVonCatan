@@ -659,7 +659,7 @@ public class ClientController {
 	}
 
 	public void receiveTrade(int threadID, int tradingID, int[] supply, int[] demand) {
-		int modelID = threadPlayerIdMap.get(threadID);
+		//int modelID = threadPlayerIdMap.get(threadID);
 	    TradeOffer tOf = new TradeOffer(threadID,tradingID,supply,demand);
 		tradeOffers.add(tOf);
 		if (threadID == ownPlayerId){
