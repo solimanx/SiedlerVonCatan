@@ -167,7 +167,7 @@ public class PrimitiveAIInputHandler extends InputHandler {
             coords = ProtocolToModel.getCornerCoordinates(building.getID());
         } else
             logger.warn("Throws new IllegalArgumentException \"Building type not defined\"");
-            throw new IllegalArgumentException("Building type not defined");
+            throw new IllegalArgumentException("Building type "+building.getType()+" not defined");
 
     }
 

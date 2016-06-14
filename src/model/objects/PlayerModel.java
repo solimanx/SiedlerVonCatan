@@ -13,9 +13,7 @@ import settings.DefaultSettings;
 
 public class PlayerModel {
     private static Logger logger = LogManager.getLogger(PlayerModel.class.getName());
-    // moved to line 30: private int[] resources
-    // ArrayList<ResourceType> resourceCards;
-    // TODO ArrayList<DevelopmentCard> developmentCards;
+
     private int victoryPoints = 0;
 
     // TODO int hiddenVictoryPoints
@@ -32,7 +30,7 @@ public class PlayerModel {
     // {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}
     private int[] playerDevCard = {0, 0, 0, 0, 0};
 
-    // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
+    // Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
     // is hidden to other players
     private int[] resources = {0, 0, 0, 0, 0};
 

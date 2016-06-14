@@ -41,12 +41,16 @@ public final class ProtocolToModel {
 			throw new IllegalArgumentException("CornerID has to be 3 characters");
 		else {
 			// Get each individual Field coordinate
-			int[] a = getFieldCoordinates(location.substring(0, 1));
-			int[] b = getFieldCoordinates(location.substring(1, 2));
-			int[] c = getFieldCoordinates(location.substring(2, 3));
+			String a = location.substring(0, 1);
+			String b = location.substring(1, 2);
+			String c = location.substring(2, 3);
 			// Calculate their common corner through HexService
-			int[] result = HexService.getCornerCoordinates(a[0], a[1], b[0], b[1], c[0], c[1]);
+			int[] result = HexService.getCornerCoordinates(a,b,c);
+			if(result.length == 3)
 			return result;
+			else{
+				System.out.println(result.length);
+				throw new IllegalArgumentException("Result isn't 3 characters");}
 		}
 	}
 
