@@ -457,11 +457,16 @@ public class ClientInputHandler extends InputHandler {
     protected void handle(ProtocolCosts costs) {
         int playerID = costs.getPlayerID();
         ProtocolResource pr = costs.getResource();
-        if (pr.getUnknown() != null){
+        if (pr.getUnknown() == null){
         	int[] resources = {pr.getWood(),pr.getClay(),pr.getOre(),pr.getWool(),pr.getCorn()};
         	clientController.costs(playerID,resources);
         }
-        
+        else
+        {
+        	int[] resources = {pr.getUnknown()};
+        	clientController.costs(playerID, resources);
+        }
+
     }
 
     /* (non-Javadoc)
