@@ -47,25 +47,20 @@ public class RobberViewController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-			}
+	}
 
 	public void init(GameViewController gvc) {
 		this.gvc = gvc;
 	}
 
 	@FXML
-    void handleOKButton(ActionEvent event) {
+	void handleOKButton(ActionEvent event) {
 		gvc.robberLoss(result);
 		Stage stage = (Stage) okButton.getScene().getWindow();
 		stage.close();
-    }
+	}
 
 	public void createSpinner(int[] resources) {
-		int sum = 0;
-		for (int i = 0; i < resources.length; i++) {
-			 sum = sum + resources[i];
-		}
-		toGiveProperty.set(sum / 2);
 
 		woodSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[0], 0));
 		claySpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[1], 0));
@@ -98,14 +93,18 @@ public class RobberViewController implements Initializable {
 			toGiveProperty.set(toGiveProperty.get() - newVal + oldVal);
 		});
 
-		grid.add(woodSpinner,1,0);
-		grid.add(claySpinner,1,1);
-		grid.add(woolSpinner,1,2);
-		grid.add(cornSpinner,1,3);
-		grid.add(oreSpinner,1,4);
+		grid.add(woodSpinner, 1, 0);
+		grid.add(claySpinner, 1, 1);
+		grid.add(woolSpinner, 1, 2);
+		grid.add(cornSpinner, 1, 3);
+		grid.add(oreSpinner, 1, 4);
+		int sum = 0;
+		for (int i = 0; i < resources.length; i++) {
+			sum = sum + resources[i];
+		}
+		toGiveProperty.set(sum / 2);
 		toGive.textProperty().bind(toGiveProperty.asString());
 		okButton.disableProperty().bind(toGiveProperty.isNotEqualTo(0));
-
 
 	}
 }
