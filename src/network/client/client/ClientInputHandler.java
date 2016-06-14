@@ -236,9 +236,10 @@ public class ClientInputHandler extends InputHandler {
         } else if (building.getType().equals("Stadt")) {
             coords = ProtocolToModel.getCornerCoordinates(building.getID());
             clientController.buildCity(coords[0], coords[1], coords[2], playerID);
-        } else
+        } else {
             logger.warn("Throws new IllegalArgumentException,\"Building type not defined\" ");
-        throw new IllegalArgumentException("Building type not defined");
+            throw new IllegalArgumentException("Building type not defined");
+        }
 
     }
 
