@@ -974,7 +974,7 @@ public class Board {
 	 * @return the water Field
 	 */
 
-	public int[] getHarbourField(int[] field1, int[] field2) {
+	private int[] getHarbourField(int[] field1, int[] field2) {
 		if (field1.length == 2 && field2.length == 2) {
 			if (getFieldAt(field1[0], field1[1]).getResourceType() == enums.ResourceType.SEA) {
 				if (getFieldAt(field2[0], field2[1]).getResourceType() == enums.ResourceType.SEA) {
@@ -987,6 +987,49 @@ public class Board {
 				throw new IllegalArgumentException("None are SEAT");
 		}
 		throw new IllegalArgumentException("False input");
+	}
+
+	/**
+	 * Get Sea Field coordinates through two corners
+	 *
+	 * @param corner1
+	 *            {i,j,k}
+	 * @param corner2
+	 *            {i,j,k}
+	 * @return
+	 */
+	public int[] getHarbourMiddlepoint(int[] corner1, int[] corner2) {
+		if (corner1.length == 3 && corner2.length == 3) {
+			Field[] tF1 = getTouchingFields(corner1[0], corner1[1], corner1[2]);
+			Field[] tF2 = getTouchingFields(corner2[0], corner2[1], corner2[2]);
+			String ID1 = null;
+			String ID2 = null;
+			int count = 0;
+			for (int i = 0; i < tF1.length; i++) {
+				for (int j = 0; j < tF2.length; i++) {
+					// if the IDs match
+					if (tF1[i].getFieldID().equals(tF2[j].getFieldID())) {
+						// if its the first one
+						if (count == 0) {
+							ID1 = tF1[i].getFieldID();
+							count++;
+						} else if (count == 1) {
+							ID2 = tF1[i].getFieldID();
+						} else {
+							throw new IllegalArgumentException("Corners don't connect");
+						}
+
+					}
+
+				}
+			}
+			int[] firstField = getFieldCoordinates(ID1);
+			int[] secondField = getFieldCoordinates(ID2);
+			return getHarbourField(firstField, secondField);
+		} else {
+			throw new IllegalArgumentException("False input");
+		}
+
 	}
 
 }
