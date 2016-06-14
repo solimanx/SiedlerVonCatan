@@ -152,8 +152,9 @@ public class GameViewController implements Initializable {
 	public double[][][] fieldCoordinates = new double[7][7][2]; // [6][6][2]
 	public double[][][][] edgeCoordinates = new double[7][7][3][4]; // [6][6][3][4]
 	public double[][][][] cornerCoordinates = new double[7][7][2][2]; // [6][6][2][2]
-	public Polygon[][] fields = new Polygon[7][7];
-	public Polygon[][][] corners = new Polygon[7][7][2];
+	private Polygon[][] fields = new Polygon[7][7];
+	private Polygon[][][] villages = new Polygon[7][7][2];
+	private Polygon[][][] cities = new Polygon[7][7][2];
 	public Line[][][] streets = new Line[7][7][3];
 	public Circle bandit;
 
@@ -394,7 +395,7 @@ public class GameViewController implements Initializable {
 	 * @param villageCoordinates
 	 */
 	public void villageClick(int[] villageCoordinates) {
-		Polygon village = corners[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
+		Polygon village = villages[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
 		if(village.getFill().equals(playerColors.get(1))){
 			viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1], villageCoordinates[2]);
 		}
@@ -496,7 +497,7 @@ public class GameViewController implements Initializable {
 		if (buildType == enums.CornerStatus.VILLAGE) {
 			setVillage(u, v, dir, playerColors.get(modelID));
 		} else {
-			setCity(u, v, dir, playerColors.get(modelID));
+			//setCity(u, v, dir, playerColors.get(modelID));
 		}
 	}
 
@@ -507,25 +508,11 @@ public class GameViewController implements Initializable {
 	 * @param playerColor
 	 */
 	public void setVillage(int u, int v, int dir, Color playerColor) {
-		Polygon village = corners[u + 3][v + 3][dir];
+		Polygon village = villages[u + 3][v + 3][dir];
 		village.setFill(playerColor);
 		village.setOpacity(1.0);
 		village.setEffect(shadow);
 		village.getStyleClass().remove("village");
-	}
-
-	/**
-	 * @param u
-	 * @param v
-	 * @param dir
-	 * @param playerColor
-	 */
-	public void setCity(int u, int v, int dir, Color playerColor) {
-		Polygon city = drawCity(cornerCoordinates[u + 3][v + 3][dir]);
-		city.setFill(playerColor);
-		city.setVisible(true);
-		city.setEffect(shadow);
-		board.getChildren().add(city);
 	}
 
 	/**
@@ -718,21 +705,22 @@ public class GameViewController implements Initializable {
 		viewController.getClientController().robberLoss(result);
 	}
 
-	/**
-	 * Auxiliary method drawing cities
-	 *
-	 * @param center
-	 * @return Polygon city
-	 */
-	private Polygon drawCity(double[] center) {
-		Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
-				center[1] - 20, center[0] + 10, center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10,
-				center[1] - 20, center[0] - 5, center[1] - 20, center[0] - 5, center[1] - 10);
-		return city;
-	}
-
 	public void setServerResponse(String response) {
 		this.response.set(response);
+	}
+
+	/**
+	 * @param u
+	 * @param v
+	 * @param dir
+	 * @param playerColor
+	 */
+	public void setCity(int u, int v, int dir, Color playerColor) {
+		Polygon city = cities[u+3][v+3][dir];
+		city.setFill(playerColor);
+		city.setOpacity(1.0);
+		city.setEffect(shadow);
+		board.getChildren().add(city);
 	}
 
 	/**
@@ -801,7 +789,7 @@ public class GameViewController implements Initializable {
 								Polygon village = drawVillage(cornerCoordinates[i][j][k]);
 								village.setOpacity(0);
 								village.getStyleClass().add("village");
-								corners[i][j][k] = village;
+								villages[i][j][k] = village;
 
 								int[] villageCoordinates = { i, j, k };
 
@@ -810,6 +798,12 @@ public class GameViewController implements Initializable {
 								});
 								village.toFront();
 								villageFigures.add(village);
+								
+								Polygon city = drawCity(cornerCoordinates[i][j][k]);
+								city.setOpacity(0);
+								city.getStyleClass().add("village");
+								cities[i][j][k] = city;
+								
 							}
 						}
 					}
@@ -910,6 +904,19 @@ public class GameViewController implements Initializable {
 					center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10, center[1] - 10);
 
 			return village;
+		}
+
+		/**
+		 * Auxiliary method drawing cities
+		 *
+		 * @param center
+		 * @return Polygon city
+		 */
+		private Polygon drawCity(double[] center) {
+			Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
+					center[1] - 20, center[0] + 10, center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10,
+					center[1] - 20, center[0] - 5, center[1] - 20, center[0] - 5, center[1] - 10);
+			return city;
 		}
 
 		public Line drawStreet(double[] coordinates) {
