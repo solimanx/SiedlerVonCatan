@@ -339,6 +339,8 @@ public class ClientController {
 			int[] coord = entry.getValue();
 			Field f = gameLogic.getBoard().getFieldAt(coord[0], coord[1]);
 			viewController.getGameViewController().setField(coord[0], coord[1], f.getResourceType(), f.getDiceIndex());
+			//TODO set Harbour Fields in GameView. angleFactor * 60° edge,field -> int
+			//viewController.getGameViewController().setHarbour(int angleFactor, int u, int v, enums.HarbourStatus);
 		}
 		int[] banditCorners = gameLogic.getBoard().getStringToCoordMap().get(gameLogic.getBoard().getBandit());
 		viewController.getGameViewController().setBandit(banditCorners[0], banditCorners[1]);
