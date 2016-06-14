@@ -13,12 +13,16 @@ import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableStringValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
@@ -179,7 +183,9 @@ public class GameViewController implements Initializable {
 	private PlayerState selfState;
 
 	private int[] selfResources;
-
+	
+	private SimpleStringProperty response;
+	
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
@@ -193,6 +199,8 @@ public class GameViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initFieldColors();
+		response = new SimpleStringProperty("Server responses will appear here");
+		serverResponse.textProperty().bind(response);
 		factory = new ViewBoardFactory();
 	}
 
@@ -258,13 +266,13 @@ public class GameViewController implements Initializable {
 	 * Auxiliary method filling field color hashmap
 	 */
 	private void initFieldColors() {
-		fieldColors.put(ResourceType.CLAY, Color.TAN);
-		fieldColors.put(ResourceType.CORN, Color.CORNSILK);
-		fieldColors.put(ResourceType.NOTHING, Color.WHITE);
-		fieldColors.put(ResourceType.ORE, Color.DARKGRAY);
-		fieldColors.put(ResourceType.SHEEP, Color.LIGHTGREEN);
-		fieldColors.put(ResourceType.WOOD, Color.FORESTGREEN);
-		fieldColors.put(ResourceType.SEA, Color.LIGHTSKYBLUE);
+		fieldColors.put(ResourceType.CLAY, Color.web("#A1887F"));
+		fieldColors.put(ResourceType.CORN, Color.web("#FFEE58"));
+		fieldColors.put(ResourceType.NOTHING, Color.web("#FAFAFA"));
+		fieldColors.put(ResourceType.ORE, Color.web("#9E9E9E"));
+		fieldColors.put(ResourceType.SHEEP, Color.web("#9CCC65"));
+		fieldColors.put(ResourceType.WOOD, Color.web("#26A69A"));
+		fieldColors.put(ResourceType.SEA, Color.web("#81D4FA"));
 
 		// playerColors.add(0, Color.BLUE);
 		// playerColors.add(1, Color.ORANGE);
@@ -569,14 +577,14 @@ public class GameViewController implements Initializable {
 			case DISPENSE_CARDS_ROBBER_LOSS:
 				setRobberLossState();
 				break;
-
-			default:
+			case MOVE_ROBBER:
+				setMoveRobberState();
 				break;
-			}
-			if (state != PlayerState.WAITING) {
-				playerVBoxOne.setDisable(false);
-			} else {
+			case WAITING:
 				playerVBoxOne.setDisable(true);
+				break;
+			default:
+				playerVBoxOne.setDisable(false);
 			}
 			break;
 		case 2:
@@ -593,6 +601,17 @@ public class GameViewController implements Initializable {
 		}
 	}
 	
+	private void setMoveRobberState() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Move the Robber");
+		alert.setHeaderText("You can move the robber and steal from adjoing players!");
+		alert.setContentText("Click on any field to move the robber on the field.");
+		alert.initOwner(gameStage);
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.showAndWait();
+		
+	}
+
 	/**
 	 * Auxiliary methode showing Robber Loss window
 	 */
@@ -638,7 +657,7 @@ public class GameViewController implements Initializable {
 	}
 	
 	public void setServerResponse(String response){
-		serverResponse.setText(response);
+		this.response.set(response);
 	}
 
 	
@@ -657,7 +676,7 @@ public class GameViewController implements Initializable {
 		public Pane getViewBoard(Stage stage) {
 			boardPane = new Pane();
 			boardCenter[0] = stage.getWidth() / 2;
-			boardCenter[1] = stage.getHeight() / 2;
+			boardCenter[1] = stage.getHeight() / 2 - 40;
 
 			calculateFieldCenters(boardCenter);
 			calculateCornerCenters();

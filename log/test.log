@@ -3699,3 +3699,168 @@ java.net.SocketException: Socket closed
 [DEBUG] 2016-06-13 22:34:10,388 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
 [DEBUG] 2016-06-13 22:34:19,188 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
 >>>>>>> .r7472
+[INFO] 2016-06-14 09:12:15,115 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 09:12:15,288 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:15,384 [Thread-6] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:15,408 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:15,413 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[DEBUG] 2016-06-14 09:12:15,458 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[WARN] 2016-06-14 09:12:16,261 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 09:12:21,767 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:21,767 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 09:12:21,779 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:21,784 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:22,296 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:22,314 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[INFO] 2016-06-14 09:12:33,889 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 09:12:33,893 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:33,996 [Thread-6] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:34,010 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:34,013 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:34,019 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[DEBUG] 2016-06-14 09:12:34,032 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:34,038 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[WARN] 2016-06-14 09:12:35,291 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 09:12:42,212 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:42,213 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 09:12:42,218 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:42,222 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:42,231 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:43,505 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:43,514 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:43,516 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[INFO] 2016-06-14 09:12:50,780 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 09:12:50,785 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:50,911 [Thread-6] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:50,921 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:50,922 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:50,927 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:50,932 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[DEBUG] 2016-06-14 09:12:50,942 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:50,949 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:50,954 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[WARN] 2016-06-14 09:12:51,416 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 09:12:57,656 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:57,657 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 09:12:57,665 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:57,667 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:57,668 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:57,672 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,936 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:12:58,943 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,950 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,951 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,963 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,963 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,966 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,972 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,973 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,975 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,976 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:58,977 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 09:12:58,980 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 09:12:58,993 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,046 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,050 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,052 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,056 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,060 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,064 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,070 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 09:12:59,078 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,167 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,178 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,181 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,183 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,187 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:12:59,189 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:14:58,099 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:14:58,105 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:14:58,109 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:14:58,110 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:14:58,114 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[INFO] 2016-06-14 09:15:00,658 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[DEBUG] 2016-06-14 09:15:00,661 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[INFO] 2016-06-14 09:15:05,167 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[DEBUG] 2016-06-14 09:15:05,170 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:16:28,462 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[INFO] 2016-06-14 09:22:13,476 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 09:22:13,643 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:13,733 [Thread-6] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:13,757 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:13,769 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[DEBUG] 2016-06-14 09:22:13,786 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[WARN] 2016-06-14 09:22:14,734 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 09:22:21,700 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:21,701 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 09:22:21,711 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:21,716 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:22,300 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:22,310 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[INFO] 2016-06-14 09:22:32,671 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 09:22:32,682 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:32,816 [Thread-6] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:32,824 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:32,828 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:32,834 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[DEBUG] 2016-06-14 09:22:32,847 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:32,853 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[WARN] 2016-06-14 09:22:34,561 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 09:22:39,449 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:39,450 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 09:22:39,457 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:39,462 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:39,466 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:40,673 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:40,679 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:40,683 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[INFO] 2016-06-14 09:22:50,559 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 09:22:50,563 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:50,667 [Thread-6] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:50,677 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:50,681 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:50,684 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:50,695 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[DEBUG] 2016-06-14 09:22:50,708 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:50,724 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:50,728 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[WARN] 2016-06-14 09:22:51,365 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 09:22:55,197 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:55,198 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 09:22:55,204 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:55,209 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:55,210 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:55,213 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,439 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:22:56,445 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,449 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,456 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,472 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,472 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,473 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,478 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,478 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,481 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,481 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,484 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,487 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 09:22:56,487 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,490 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 09:22:56,507 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 09:22:56,593 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,603 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,616 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,626 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,634 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,636 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,643 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,649 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,658 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,661 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,666 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:22:56,667 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:25:08,614 [JavaFX Application Thread] [] network.client.client.Client write - Client sends to Server: 
+[DEBUG] 2016-06-14 09:25:08,620 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:25:08,624 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:25:08,626 [Thread-6] [] network.client.client.Client runClient - Received from Server: 
+[DEBUG] 2016-06-14 09:25:08,626 [Thread-6] [] network.client.client.Client runClient - Received from Server: 

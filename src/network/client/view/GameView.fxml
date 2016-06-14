@@ -16,7 +16,7 @@
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <Pane fx:id="board" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0288D1;" BorderPane.alignment="CENTER" />
+            <Pane fx:id="board" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: radial-gradient(center 50% 50% , radius 150% , #81D4FA, #1E88E5);" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="140.0" style="-fx-background-color: #fff;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -237,24 +237,16 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="63.0" layoutY="50.0" prefHeight="120.0" prefWidth="898.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="63.0" layoutY="50.0" prefWidth="980.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
          <children>
-            <TextArea fx:id="messages" editable="false" focusTraversable="false" prefHeight="72.0" prefWidth="500.0">
+            <TextArea fx:id="messages" editable="false" focusTraversable="false" prefHeight="58.0" prefWidth="500.0" style="-fx-background-color: #1E88E5;">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin></TextArea>
             <TextField fx:id="messageInput" maxWidth="-Infinity" onAction="#sendMessage" prefWidth="500.0" promptText="Enter chat message and press Enter" />
-            <Label fx:id="serverResponse" prefHeight="17.0" prefWidth="346.0" text="Server Response" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Label>
          </children>
       </VBox>
-      <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="43.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="43.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -277,6 +269,14 @@
                   </Button>
                </children>
             </HBox>
+            <Label fx:id="serverResponse" alignment="CENTER" prefHeight="17.0" prefWidth="346.0" text="Server Response" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
          </children>
       </VBox>
    </children>
