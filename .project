@@ -31,6 +31,14 @@
 			</matcher>
 		</filter>
 		<filter>
+			<id>1465933891167</id>
+			<name>log</name>
+			<type>30</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+			</matcher>
+		</filter>
+		<filter>
 			<id>1465341852548</id>
 			<name>web</name>
 			<type>22</type>
