@@ -615,9 +615,10 @@ public class ClientController {
 	 */
 	public void requestBuildCity(int x, int y, int dir) {
 		int radius = DefaultSettings.BOARD_RADIUS;
-		if (gameLogic.checkBuildCity(x - radius, y - radius, dir, ownPlayerId)) {
+		//DEBUG
+		//if (gameLogic.checkBuildCity(x - radius, y - radius, dir, ownPlayerId)) {
 			clientOutputHandler.requestBuildCity(x - radius, y - radius, dir);
-		}
+		//}
 	}
 
 	// 9.7
