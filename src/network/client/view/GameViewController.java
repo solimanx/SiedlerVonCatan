@@ -498,7 +498,7 @@ public class GameViewController implements Initializable {
 		if (buildType == enums.CornerStatus.VILLAGE) {
 			setVillage(u, v, dir, playerColors.get(modelID));
 		} else {
-			//setCity(u, v, dir, playerColors.get(modelID));
+			setCity(u, v, dir, playerColors.get(modelID));
 		}
 	}
 
