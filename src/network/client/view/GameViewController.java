@@ -250,6 +250,9 @@ public class GameViewController implements Initializable {
 
 			tradeStage.initModality(Modality.WINDOW_MODAL);
 			tradeStage.initOwner(gameStage);
+			tradeStage.setOnCloseRequest(e -> {
+				tradeStage.hide();
+			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -374,6 +377,7 @@ public class GameViewController implements Initializable {
 //
 //		tradeStage.initModality(Modality.WINDOW_MODAL);
 //		tradeStage.initOwner(gameStage);
+		tradeViewController.updateSpinner(selfResources);
 		tradeStage.show();
 	}
 
