@@ -521,7 +521,7 @@ public class GameViewController implements Initializable {
 	 * @param diceIndex
 	 */
 	public void setField(int u, int v, ResourceType resourceType, Integer diceIndex) {
-		fields[u + 3][v + 3].setFill(fieldColors.get(resourceType));
+		fields[u + 3][v + 3].setFill(imagePatterns.get(resourceType));
 		if (diceIndex != null) {
 			Text text = new Text("" + diceIndex);
 			text.setBoundsType(TextBoundsType.VISUAL);
