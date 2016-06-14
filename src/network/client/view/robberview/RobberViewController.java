@@ -35,10 +35,10 @@ public class RobberViewController implements Initializable {
 
 	@FXML
 	private Label label;
-	
+
 	@FXML
 	private Label toGive;
-	
+
 	private SimpleIntegerProperty toGiveProperty;
 
 	private int[] result = new int[5];
@@ -47,9 +47,7 @@ public class RobberViewController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		toGive.textProperty().bind(toGiveProperty.asString());
-		okButton.disableProperty().bind(toGiveProperty.isNotEqualTo(0));
-	}
+			}
 
 	public void init(GameViewController gvc) {
 		this.gvc = gvc;
@@ -105,6 +103,9 @@ public class RobberViewController implements Initializable {
 		grid.add(woolSpinner,1,2);
 		grid.add(cornSpinner,1,3);
 		grid.add(oreSpinner,1,4);
+		toGive.textProperty().bind(toGiveProperty.asString());
+		okButton.disableProperty().bind(toGiveProperty.isNotEqualTo(0));
+
 
 	}
 }
