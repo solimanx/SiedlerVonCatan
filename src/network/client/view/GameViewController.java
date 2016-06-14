@@ -212,24 +212,6 @@ public class GameViewController implements Initializable {
 		serverResponse.textProperty().bind(response);
 		factory = new ViewBoardFactory();
 
-		FXMLLoader loader = new FXMLLoader();
-		Pane root;
-		try {
-			root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
-			tradeViewController = (TradeViewController) loader.getController();
-			Scene scene = new Scene(root);
-			Stage tradeStage = new Stage();
-			tradeStage.setScene(scene);
-
-			tradeViewController.init(selfResources, viewController);
-
-			tradeStage.initModality(Modality.WINDOW_MODAL);
-			tradeStage.initOwner(gameStage);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	/**
@@ -248,6 +230,24 @@ public class GameViewController implements Initializable {
 		shadow = new DropShadow();
 		shadow.setRadius(4);
 		shadow.setColor(Color.SLATEGRAY);
+		
+		FXMLLoader loader = new FXMLLoader();
+		Pane root;
+		try {
+			root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
+			tradeViewController = (TradeViewController) loader.getController();
+			Scene scene = new Scene(root);
+			Stage tradeStage = new Stage();
+			tradeStage.setScene(scene);
+
+			tradeViewController.init(selfResources, viewController);
+
+			tradeStage.initModality(Modality.WINDOW_MODAL);
+			tradeStage.initOwner(gameStage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getPlayerNames(Integer playerID) {
@@ -330,10 +330,6 @@ public class GameViewController implements Initializable {
 		imagePatterns.put(ResourceType.ORE, orePattern);
 		imagePatterns.put(ResourceType.NOTHING, desertPattern);
 		imagePatterns.put(ResourceType.SEA, seaPattern);
-		
-		
-		
-		
 
 	}
 

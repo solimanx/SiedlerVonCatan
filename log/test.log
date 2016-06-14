@@ -4642,3 +4642,18 @@ java.net.SocketException: Socket closed
 [INFO] 2016-06-14 14:48:40,680 [Thread-4] [] network.client.client.Client run - Client connected to server
 [DEBUG] 2016-06-14 14:48:40,796 [Thread-4] [] network.client.controller.ClientController welcome - Handshake complete!
 [WARN] 2016-06-14 14:48:41,548 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[INFO] 2016-06-14 14:58:41,276 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 14:58:41,450 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 14:58:42,035 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 14:58:45,205 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 14:58:54,225 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 14:58:54,402 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 14:58:55,215 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 14:58:59,061 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-14 14:59:07,485 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-14 14:59:07,630 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-14 14:59:08,351 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-14 14:59:11,933 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-14 14:59:12,553 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 14:59:12,555 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-14 14:59:12,562 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
