@@ -274,7 +274,6 @@ public class Board {
 				for (int k = 0; k < 3; k++) {
 					if (getCornerAt(j, i, k) != null) {
 						// touching fields
-						System.out.println(j + " " + i + " " + k);
 						Field[] tF = getTouchingFields(j, i, k);
 						String ID1 = tF[0] == null ? "" : tF[0].getFieldID();
 						String ID2 = tF[1] == null ? "" : tF[1].getFieldID();

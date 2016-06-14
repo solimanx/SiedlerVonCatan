@@ -374,8 +374,6 @@ public class PrimitiveAI extends Thread {
 		for (Corner c : harbourCorners) {
 			String location = c.getCornerID();
 			int[] coords = ProtocolToModel.getCornerCoordinates(location);
-			System.out.println(location + coords.length);
-			System.out.println(coords[0]+" "+coords[1]+" "+coords[2]);
 			Corner bCorner = gl.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
 			bCorner.setCornerID(location);
 			bCorner.setHarbourStatus(c.getHarbourStatus());

@@ -49,7 +49,6 @@ public final class ProtocolToModel {
 			if(result.length == 3)
 			return result;
 			else{
-				System.out.println(result.length);
 				throw new IllegalArgumentException("Result isn't 3 characters");}
 		}
 	}
