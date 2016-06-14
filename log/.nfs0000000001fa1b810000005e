@@ -4639,6 +4639,93 @@ java.net.SocketException: Socket closed
 [DEBUG] 2016-06-14 11:58:50,870 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
 [INFO] 2016-06-14 11:59:23,553 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
 [INFO] 2016-06-14 12:00:06,872 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
-[INFO] 2016-06-14 14:48:40,680 [Thread-4] [] network.client.client.Client run - Client connected to server
-[DEBUG] 2016-06-14 14:48:40,796 [Thread-4] [] network.client.controller.ClientController welcome - Handshake complete!
-[WARN] 2016-06-14 14:48:41,548 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[INFO] 2016-06-14 13:58:16,231 [JavaFX Application Thread] [] ai.PrimitiveAI <init> - AI started
+[INFO] 2016-06-14 13:58:52,081 [JavaFX Application Thread] [] ai.PrimitiveAI <init> - AI started
+[INFO] 2016-06-14 13:59:27,682 [JavaFX Application Thread] [] ai.PrimitiveAI <init> - AI started
+[INFO] 2016-06-14 13:59:27,696 [Thread-4] [] ai.PrimitiveAI run -  AI connected to server.
+[WARN] 2016-06-14 13:59:27,696 [Thread-4] [] ai.PrimitiveAI read - Reading input from the servers output(read()) throws IOException
+[INFO] 2016-06-14 13:59:27,704 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:27,812 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:27,813 [Thread-4] [] ai.PrimitiveAI write - [01:59:27] 
+[INFO] 2016-06-14 13:59:27,815 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:27,822 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:27,823 [Thread-4] [] ai.PrimitiveAI write - [01:59:27] 
+[INFO] 2016-06-14 13:59:27,823 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:27,826 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:27,829 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:27,836 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:27,836 [Thread-4] [] ai.PrimitiveAI write - [01:59:27] 
+[INFO] 2016-06-14 13:59:27,838 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:27,840 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,072 [JavaFX Application Thread] [] ai.PrimitiveAI <init> - AI started
+[INFO] 2016-06-14 13:59:42,084 [Thread-4] [] ai.PrimitiveAI run -  AI connected to server.
+[WARN] 2016-06-14 13:59:42,084 [Thread-4] [] ai.PrimitiveAI read - Reading input from the servers output(read()) throws IOException
+[INFO] 2016-06-14 13:59:42,091 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:42,151 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:42,152 [Thread-4] [] ai.PrimitiveAI write - [01:59:42] 
+[INFO] 2016-06-14 13:59:42,159 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,159 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:42,173 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:42,175 [Thread-4] [] ai.PrimitiveAI write - [01:59:42] 
+[INFO] 2016-06-14 13:59:42,176 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,177 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,179 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,185 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,188 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:42,208 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:42,208 [Thread-4] [] ai.PrimitiveAI write - [01:59:42] 
+[INFO] 2016-06-14 13:59:42,210 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:42,220 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:42,221 [Thread-4] [] ai.PrimitiveAI write - [01:59:42] 
+[INFO] 2016-06-14 13:59:42,222 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,226 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,233 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:42,238 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:42,242 [Thread-4] [] ai.PrimitiveAI write - [01:59:42] 
+[INFO] 2016-06-14 13:59:42,243 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,244 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:42,252 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,514 [JavaFX Application Thread] [] ai.PrimitiveAI <init> - AI started
+[INFO] 2016-06-14 13:59:46,525 [Thread-4] [] ai.PrimitiveAI run -  AI connected to server.
+[WARN] 2016-06-14 13:59:46,525 [Thread-4] [] ai.PrimitiveAI read - Reading input from the servers output(read()) throws IOException
+[INFO] 2016-06-14 13:59:46,531 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:46,592 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:46,592 [Thread-4] [] ai.PrimitiveAI write - [01:59:46] 
+[INFO] 2016-06-14 13:59:46,594 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,595 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,595 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:46,611 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:46,613 [Thread-4] [] ai.PrimitiveAI write - [01:59:46] 
+[INFO] 2016-06-14 13:59:46,614 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,615 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,615 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,625 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,630 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,635 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,638 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:46,643 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:46,644 [Thread-4] [] ai.PrimitiveAI write - [01:59:46] 
+[INFO] 2016-06-14 13:59:46,646 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:46,651 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:46,652 [Thread-4] [] ai.PrimitiveAI write - [01:59:46] 
+[INFO] 2016-06-14 13:59:46,653 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,655 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,653 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,666 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:46,672 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:46,672 [Thread-4] [] ai.PrimitiveAI write - [01:59:46] 
+[INFO] 2016-06-14 13:59:46,682 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:46,688 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:46,688 [Thread-4] [] ai.PrimitiveAI write - [01:59:46] 
+[INFO] 2016-06-14 13:59:46,689 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,690 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,691 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,700 [Thread-4] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-14 13:59:46,704 [Thread-4] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-14 13:59:46,704 [Thread-4] [] ai.PrimitiveAI write - [01:59:46] 
+[INFO] 2016-06-14 13:59:46,705 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,705 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,710 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,706 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,717 [Thread-4] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-14 13:59:46,720 [Thread-4] [] ai.PrimitiveAI read - Server
