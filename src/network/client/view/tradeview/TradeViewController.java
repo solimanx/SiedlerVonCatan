@@ -32,6 +32,9 @@ public class TradeViewController {
 	@FXML
 	private Button tradeButton;
 
+	@FXML
+	private Button acceptButton;
+
 	private Spinner<Integer> giveWoodSpinner;
 	private Spinner<Integer> giveClaySpinner;
 	private Spinner<Integer> giveWoolSpinner;
@@ -42,22 +45,27 @@ public class TradeViewController {
 	private Spinner<Integer> getWoolSpinner;
 	private Spinner<Integer> getCornSpinner;
 	private Spinner<Integer> getOreSpinner;
-	private int[][] result = new int[2][5];
+	private int[] resultOffer = new int[5];
+	private int[] resultDemand = new int[5];
 
 	@FXML
 	private GridPane grid;
 
 	private ObservableList<String> tradeList;
 	private ObservableList<String> ownOfferList;
-	
+
 	private String selectedTrade;
 	private String selectedOffer;
 
 	private HashMap<String, Integer> stringToTradeID = new HashMap<String, Integer>();
 	private HashMap<Integer, String> tradeIDtoString = new HashMap<Integer, String>();
 	private HashMap<Integer, Integer> tradeIDtoPlayerID = new HashMap<Integer, Integer>();
-	
+
 	private ViewController viewController;
+
+	public void setViewController(ViewController viewController) {
+		this.viewController = viewController;
+	}
 
 	/**
 	 * Initializes the Trade window with spinners
@@ -78,43 +86,43 @@ public class TradeViewController {
 		getOreSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
 
 		giveWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[0][0] = newVal;
+			resultOffer[0] = newVal;
 		});
 
 		giveClaySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[0][1] = newVal;
+			resultOffer[1] = newVal;
 		});
 
 		giveWoolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[0][3] = newVal;
+			resultOffer[3] = newVal;
 		});
 
 		giveCornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[0][4] = newVal;
+			resultOffer[4] = newVal;
 		});
 
 		giveOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[0][2] = newVal;
+			resultOffer[2] = newVal;
 		});
 
 		getWoodSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[1][0] = newVal;
+			resultDemand[0] = newVal;
 		});
 
 		getClaySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[1][1] = newVal;
+			resultDemand[1] = newVal;
 		});
 
 		getWoolSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[1][3] = newVal;
+			resultDemand[3] = newVal;
 		});
 
 		getCornSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[1][4] = newVal;
+			resultDemand[4] = newVal;
 		});
 
 		getOreSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
-			result[1][2] = newVal;
+			resultDemand[2] = newVal;
 		});
 
 		grid.add(giveWoodSpinner, 1, 1);
@@ -127,7 +135,6 @@ public class TradeViewController {
 		grid.add(getWoolSpinner, 2, 3);
 		grid.add(getCornSpinner, 2, 4);
 		grid.add(getOreSpinner, 2, 5);
-
 
 		foreignTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		foreignTrades.setItems(tradeList);
@@ -157,63 +164,60 @@ public class TradeViewController {
 
 	@FXML
 	void handlePlaceOfferButton(ActionEvent event) {
-		for (int i = 0; i < result.length; i++) {
-			for (int j = 0; j < result.length; j++) {
-				if (result[i][j] != 0) {
-					viewController.getClientController().tradeRequest(result);
-					break;
-				}
-				break;
-			}
-		}
+					viewController.getClientController().requestTrade(resultOffer, resultDemand);
 	}
 
 	@FXML
 	void handleTradeButton(ActionEvent event) {
 		int tradeID = stringToTradeID.get(selectedTrade);
-		viewController.getClientController().tradeConfirmation(tradeIDtoPlayerID.get(tradeID), tradeID);
+		viewController.getClientController().acceptTrade(tradeID);
 	}
 
-	public void addTrade(int[][] tradeResources, int tradeID, int playerID) {
-		String tradeString = tradeStringGenerator(tradeResources) + "\n" + "With:" + viewController.getGameViewController().getPlayerNames(playerID);
+	public void addOffer(int[] offer, int[] demand, int tradeID, int playerID) {
+		String tradeString = tradeStringGenerator(offer, demand) + "\n" + "With:"
+				+ viewController.getGameViewController().getPlayerNames(playerID);
 		tradeIDtoString.put(tradeID, tradeString);
 		stringToTradeID.put(tradeString, tradeID);
 		tradeIDtoPlayerID.put(tradeID, playerID);
 		tradeList.add(tradeString);
 	}
 
-	public void addOwnOffer(int[][] tradeResources, int tradeID) {
-		String offerString = tradeStringGenerator(tradeResources);
+	public void addOwnOffer(int[] offer, int[] demand, int tradeID) {
+		String offerString = tradeStringGenerator(offer, demand);
 		tradeIDtoString.put(tradeID, offerString);
 		stringToTradeID.put(offerString, tradeID);
 		ownOfferList.add(offerString);
 	}
 
-	private String tradeStringGenerator(int[][] tradeResources) {
-		if (tradeResources[0].length > 0) {
+	void handleAcceptButton() {
+		int offerID = stringToTradeID.get(selectedOffer);
+		int playerID = tradeIDtoPlayerID.get(selectedOffer);
+		viewController.getClientController().fulfillTrade(offerID, playerID);
+	}
+
+	private String tradeStringGenerator(int[] offer, int[] demand) {
+		String getting = "";
+		String giving = "";
+		if (demand.length > 0) {
 			// get is set
-			int getWood = tradeResources[0][0];
-			int getClay = tradeResources[0][1];
-			int getOre = tradeResources[0][3];
-			int getSheep = tradeResources[0][4];
-			int getCorn = tradeResources[0][2];
-			String getting = "Get " + getWood + " Wood, " + getClay + " Clay, " + getSheep + " Wool, " + getCorn
-					+ " Corn, " + getOre + " Ore" + "\n";
-			if (tradeResources[1].length > 0) {
-				int giveWood = tradeResources[1][0];
-				int giveClay = tradeResources[1][1];
-				int giveOre = tradeResources[1][3];
-				int giveSheep = tradeResources[1][4];
-				int giveCorn = tradeResources[1][2];
-				String giving = "Give " + giveWood + " Wood, " + giveClay + " Clay, " + giveSheep + " Wool, " + giveCorn
-						+ " Corn, " + giveOre + " Ore";
-				return getting + giving;
-			}
-
+			int getWood = demand[0];
+			int getClay = demand[1];
+			int getOre = demand[3];
+			int getSheep = demand[4];
+			int getCorn = demand[2];
+			getting = "Get " + getWood + " Wood, " + getClay + " Clay, " + getSheep + " Wool, " + getCorn + " Corn, "
+					+ getOre + " Ore" + "\n";
 		}
-
-		return "";
-
+		if (offer.length > 0) {
+			int giveWood = offer[0];
+			int giveClay = offer[1];
+			int giveOre = offer[3];
+			int giveSheep = offer[4];
+			int giveCorn = offer[2];
+			giving = "Give " + giveWood + " Wood, " + giveClay + " Clay, " + giveSheep + " Wool, " + giveCorn
+					+ " Corn, " + giveOre + " Ore";
+		}
+		return getting + giving;
 	}
 
 }

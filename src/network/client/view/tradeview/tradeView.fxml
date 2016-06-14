@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -42,7 +43,7 @@
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <VBox>
          <children>
-            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="320.0" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" text="Placing trade offer">
                      <font>
@@ -51,10 +52,23 @@
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="30.0" />
                </VBox.margin>
             </HBox>
-            <GridPane fx:id="grid" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="200.0" vgap="10.0">
+            <VBox>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label text="Your offer">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextArea prefHeight="0.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <GridPane fx:id="grid" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="200.0" vgap="5.0">
               <columnConstraints>
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0" />
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="60.0" minWidth="-Infinity" prefWidth="50.0" />
@@ -123,7 +137,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label text="Your offers">
+                  <Label text="players accepting your offer">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -133,7 +147,11 @@
             <ListView fx:id="ownOffers" prefHeight="139.0" prefWidth="200.0" />
             <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="cancelOffer" mnemonicParsing="false" onAction="#handleTradeButton" text="Cancel offer" />
+                  <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Fulfill Trade">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="cancelOffer1" layoutX="116.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleTradeButton" text="Cancel offer" />
                </children>
                <VBox.margin>
                   <Insets top="10.0" />

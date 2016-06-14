@@ -29,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -171,6 +172,8 @@ public class GameViewController implements Initializable {
 	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
 	private HashMap<ResourceType, ImagePattern> resourceImages = new HashMap<ResourceType, ImagePattern>(6);
 	private HashMap<HarbourStatus, ImagePattern> harbourImages = new HashMap<HarbourStatus, ImagePattern>(6);
+	
+	private HashMap<enums.ResourceType, ImagePattern> imagePatterns = new HashMap<enums.ResourceType, ImagePattern>(6);
 
 	private ViewBoardFactory factory;
 
@@ -311,6 +314,26 @@ public class GameViewController implements Initializable {
 		fieldColors.put(ResourceType.SHEEP, Color.web("#9CCC65"));
 		fieldColors.put(ResourceType.WOOD, Color.web("#26A69A"));
 		fieldColors.put(ResourceType.SEA, Color.web("#81D4FA"));
+		
+		ImagePattern woodPattern = new ImagePattern(new Image("/textures/wood.png"));
+		ImagePattern clayPattern = new ImagePattern(new Image("/textures/clay.png"));
+		ImagePattern woolPattern = new ImagePattern(new Image("/textures/sheep.png"));
+		ImagePattern cornPattern = new ImagePattern(new Image("/textures/corn.png"));
+		ImagePattern orePattern = new ImagePattern(new Image("/textures/ore.png"));
+		ImagePattern desertPattern = new ImagePattern(new Image("/textures/desert.png"));
+		ImagePattern seaPattern = new ImagePattern(new Image("/textures/sea.png"));
+		
+		imagePatterns.put(ResourceType.WOOD, woodPattern);
+		imagePatterns.put(ResourceType.CLAY, clayPattern);
+		imagePatterns.put(ResourceType.SHEEP, woolPattern);
+		imagePatterns.put(ResourceType.CORN, cornPattern);
+		imagePatterns.put(ResourceType.ORE, orePattern);
+		imagePatterns.put(ResourceType.NOTHING, desertPattern);
+		imagePatterns.put(ResourceType.SEA, seaPattern);
+		
+		
+		
+		
 
 	}
 

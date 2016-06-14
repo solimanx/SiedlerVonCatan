@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import network.client.view.GameViewController;
+import network.client.view.tradeview.TradeViewController;
 import network.server.controller.ServerController;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +26,6 @@ public class ViewController {
     private GameViewController gameViewController;
     private LobbyController lobbyController;
     private PlayerProfileController playerProfileController;
-    private TradeController tradeController;
     private Stage primaryStage;
 
     /**
@@ -38,6 +38,7 @@ public class ViewController {
     private Stage choosingStage;
     private boolean isGameView = false;
     private boolean isChoosingStage = false;
+	private TradeViewController tradeViewController;
 
     /**
      * @param primaryStage
@@ -247,8 +248,8 @@ public class ViewController {
             FXMLLoader fxmlLoader = new FXMLLoader(
                     getClass().getResource("/application/network/client/view/tradeview/tradeView.fxml"));
             Parent root2 = (Parent) fxmlLoader.load();
-            tradeController = fxmlLoader.getController();
-            tradeController.setViewController(this);
+            tradeViewController = (TradeViewController) fxmlLoader.getController();
+            tradeViewController.setViewController(this);
             Stage tradeStage = new Stage();
             tradeStage.setTitle("Choose Name and Color");
             tradeStage.setScene(new Scene(root2));
