@@ -82,13 +82,16 @@ public class PrimitiveAI extends Thread {
 		logger.info("AI started");
 		this.board = new Board();
 		this.gl = new GameLogic(board);
-		this.start();
 
 	}
 
 	// ================================================================================
 	// CONNECTION METHODS
 	// ================================================================================
+
+	public void commence() {
+		this.start();
+	}
 
 	/**
 	 * Initializing socket, writer and reader, then attempt connection.
