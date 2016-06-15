@@ -92,7 +92,7 @@ public class ClientInputHandler extends InputHandler {
 	protected void handle(ProtocolHello hello) {
 		clientController.serverHello(hello.getVersion(), hello.getProtocol());
 	}
-	
+
 	@Override
 	protected void handle(ProtocolWelcome welcome) {
 		clientController.welcome(welcome.getPlayerID());
@@ -297,11 +297,10 @@ public class ClientInputHandler extends InputHandler {
 	}
 
 	protected void handle(ProtocolTradePreview tradePreview) {
-		int playerID = tradePreview.getTradeID();
+		int playerID = tradePreview.getPlayerID();
 		int tradeID = tradePreview.getTradeID();
-		
-		//hier läuft was schief, wenn ProtocolTradePreview geparst wird. denn dann ist unbekannt = 0 und nicht null!!!
-		// Protocol to Model.convertResources funktioniert dann nicht.
+
+		// FIXED
 		int[] offer = ProtocolToModel.convertResources(tradePreview.getOffer());
 		int[] demand = ProtocolToModel.convertResources(tradePreview.getWithdrawal());
 		clientController.receiveTrade(playerID, tradeID, offer, demand);
@@ -320,7 +319,7 @@ public class ClientInputHandler extends InputHandler {
 	}
 
 	protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
-	
+
 		int playerID = tradeIsCompleted.getPlayerID();
 		int tradePartnerID = tradeIsCompleted.getTradePartnerID();
 		clientController.tradeFulfilled(playerID, tradePartnerID);
@@ -350,7 +349,7 @@ public class ClientInputHandler extends InputHandler {
 	protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
 		// unnecessary Method
 	}
-	
+
 	@Override
 	protected void handle(ProtocolVictory victory) {
 		String message = victory.getMessage();
@@ -466,7 +465,7 @@ public class ClientInputHandler extends InputHandler {
 
 	@Override
 	protected void handle(String string) {
-	
+
 		clientController.receiveServerConfirmation(string);
 	}
 

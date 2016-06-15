@@ -278,23 +278,23 @@ public class TradeViewController {
 			int giveSheep = offer[3];
 			int giveCorn = offer[4];
 			if (giveWood != 0) {
-				giving.append(giveWood + " Wood,");
+				giving.append(giveWood + " Wood, ");
 			}
 
 			if (giveClay != 0) {
-				giving.append(giveClay + " Clay,");
+				giving.append(giveClay + " Clay, ");
 			}
 
 			if (giveOre != 0) {
-				giving.append(giveOre + " Ore,");
+				giving.append(giveOre + " Ore, ");
 			}
 
 			if (giveSheep != 0) {
-				giving.append(giveSheep + " Wool,");
+				giving.append(giveSheep + " Wool, ");
 			}
 
 			if (giveCorn != 0) {
-				giving.append(giveCorn + " Corn,");
+				giving.append(giveCorn + " Corn, ");
 
 			}
 			// Remove last space

@@ -662,6 +662,7 @@ public class ClientController {
 		//int modelID = threadPlayerIdMap.get(threadID);
 	    TradeOffer tOf = new TradeOffer(threadID,tradingID,supply,demand);
 		tradeOffers.add(tOf);
+		logger.warn(threadID + " " + ownPlayerId);
 		if (threadID == ownPlayerId){
 			viewController.getGameViewController().getTradeViewController().addOwnOffer(supply, demand, tradingID);
 		} else {

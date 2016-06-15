@@ -36,7 +36,7 @@ public final class DefaultSettings {
 	public final static int[] CITY_BUILD_COST = { 0, 0, 3, 0, 2 };
 	// TODO Fix this
 	public final static int[] DEVCARD_BUILD_COST = { 0, 0, 1, 1, 1 };
-	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
+	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 	// NOTHING (desert)}
 	public final static int[] LANDSCAPE_CARDS = { 4, 3, 3, 4, 4, 1 };
 
