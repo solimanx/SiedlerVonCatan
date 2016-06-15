@@ -47,7 +47,7 @@ public class ClientOutputHandler {
 	/**
 	 * @param clientVersion
 	 */
-	public void clientHello(String clientVersion) {
+	public void sendHello(String clientVersion) {
 		ProtocolHello ph = new ProtocolHello(clientVersion, null);
 		Response r = new Response();
 		r.pHello = ph;
@@ -64,7 +64,7 @@ public class ClientOutputHandler {
 	/**
 	 *
 	 */
-	public void clientReady() {
+	public void sendReady() {
 		ProtocolClientReady pcr = new ProtocolClientReady();
 		Response r = new Response();
 		r.pClientReady = pcr;
@@ -81,7 +81,7 @@ public class ClientOutputHandler {
 	/**
 	 * @param s
 	 */
-	public void chatSendMessage(String s) {
+	public void sendChatMessage(String s) {
 		ProtocolChatSendMessage pcsm = new ProtocolChatSendMessage(s);
 		Response r = new Response();
 		r.pChatSend = pcsm;
@@ -98,7 +98,7 @@ public class ClientOutputHandler {
 	/**
 	 *
 	 */
-	public void diceRollRequest() {
+	public void sendDiceRollRequest() {
 		ProtocolDiceRollRequest pdrr = new ProtocolDiceRollRequest();
 		Response r = new Response();
 		r.pDiceRollRequest = pdrr;
@@ -115,7 +115,7 @@ public class ClientOutputHandler {
 	/**
 	 *
 	 */
-	public void endTurn() {
+	public void sendEndTurn() {
 
 		ProtocolEndTurn pcet = new ProtocolEndTurn();
 		Response r = new Response();
@@ -135,7 +135,7 @@ public class ClientOutputHandler {
 	 * @param y
 	 * @param victim_id
 	 */
-	public void requestSetBandit(int x, int y, int victim_id) {
+	public void sendBanditRequest(int x, int y, int victim_id) {
 		String location = ModelToProtocol.getFieldID(x, y);
 
 		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(location, victim_id);
@@ -173,7 +173,7 @@ public class ClientOutputHandler {
 	/**
 	 * @param losses
 	 */
-	public void robberLoss(int[] losses) {
+	public void sendRobberLoss(int[] losses) {
 		ProtocolResource prL = ModelToProtocol.convertToProtocolResource(losses);
 		ProtocolRobberLoss prlosses = new ProtocolRobberLoss(prL);
 		Response r = new Response();
@@ -188,24 +188,6 @@ public class ClientOutputHandler {
 
 	}
 
-	/**
-	 * @param location_id
-	 * @param victim_id
-	 */
-	public void robberMovementRequest(String location_id, int victim_id) {
-		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(location_id, victim_id);
-		Response r = new Response();
-		r.pRobberMoveRequest = prmr;
-		try {
-			client.write(parser.createString(r));
-
-		} catch (IOException e) {
-			logger.error("Threw a Input/Output Exception ", e);
-			logger.catching(Level.ERROR, e);
-			e.printStackTrace();
-		}
-
-	}
 
 	/**
 	 * @param offer

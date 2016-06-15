@@ -109,7 +109,7 @@ public class ClientController {
 			System.out.println("Invalid Protocol Version; Disconnected");
 			logger.error("Invalid Protocol Version; Disconnected");
 		} else {
-			clientOutputHandler.clientHello(DefaultSettings.CLIENT_VERSION);
+			clientOutputHandler.sendHello(DefaultSettings.CLIENT_VERSION);
 		}
 
 	}
@@ -153,7 +153,7 @@ public class ClientController {
 	 * @param s
 	 */
 	public void chatSendMessage(String s) {
-		clientOutputHandler.chatSendMessage(s);
+		clientOutputHandler.sendChatMessage(s);
 	}
 
 	// 6.3
@@ -191,7 +191,7 @@ public class ClientController {
 	 *
 	 */
 	public void sendReady() {
-		clientOutputHandler.clientReady();
+		clientOutputHandler.sendReady();
 	}
 
 	// 7.3
@@ -532,7 +532,7 @@ public class ClientController {
 	 *
 	 */
 	public void diceRollRequest() {
-		clientOutputHandler.diceRollRequest();
+		clientOutputHandler.sendDiceRollRequest();
 
 	}
 
@@ -544,7 +544,7 @@ public class ClientController {
 	 * @param stealFromPlayerId
 	 */
 	public void requestSetBandit(int x, int y, int stealFromPlayerId) {
-		clientOutputHandler.requestSetBandit(x, y, modelPlayerIdMap.get(stealFromPlayerId));
+		clientOutputHandler.sendBanditRequest(x, y, modelPlayerIdMap.get(stealFromPlayerId));
 
 	}
 
@@ -632,7 +632,7 @@ public class ClientController {
 	 *
 	 */
 	public void endTurn() {
-		clientOutputHandler.endTurn();
+		clientOutputHandler.sendEndTurn();
 	}
 
 	// Protocol 0.2
@@ -650,7 +650,7 @@ public class ClientController {
 	 * @param result
 	 */
 	public void robberLoss(int[] result) {
-		clientOutputHandler.robberLoss(result);
+		clientOutputHandler.sendRobberLoss(result);
 	}
 	// Protocol 0.3
 
