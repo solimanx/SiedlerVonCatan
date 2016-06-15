@@ -489,7 +489,7 @@ public class ServerController {
 	 * @param dir
 	 */
 	private void checkLongestTradingRoute(int modelID, int aX, int aY, int dir) {
-		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
+/*		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
 		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked);
 		if (longestRoute > lengthLongestTradeRoute && longestRoute > 4) {
 			board.getPlayer(0).setHasLongestRoad(false);
@@ -499,7 +499,7 @@ public class ServerController {
 			board.getPlayer(modelID).setHasLongestRoad(true);
 			serverOutputHandler.longestRoad(modelID);
 			lengthLongestTradeRoute = longestRoute;
-		}
+		}*/
 	}
 
 	/**
@@ -517,7 +517,7 @@ public class ServerController {
 	 *            list of already calculated streets
 	 * @return length of the longest possible road
 	 */
-	// TODO verbindung von zwei straßensystemen
+/*	// TODO verbindung von zwei straßensystemen
 	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked) {
 		int a = 0;
 		int b = 0;
@@ -667,7 +667,7 @@ public class ServerController {
 		}
 		return result;
 	}
-
+*/
 	/**
 	 * checks if the player has the most played knight cards
 	 * 
