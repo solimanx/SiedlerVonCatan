@@ -2,6 +2,10 @@ package network.server.controller;
 
 import java.util.ArrayList;
 
+import enums.HarbourStatus;
+import enums.ResourceType;
+import settings.DefaultSettings;
+
 public class TradeController {
 
 	private ServerController serverController;
@@ -72,5 +76,22 @@ public class TradeController {
 		}
 		
 	}
+
+	/*public void requestSeaTrade(int modelID, int[] offer, int[] demand) {
+		ResourceType currResType;
+		ArrayList<HarbourStatus> harbours = getPlayerHarbours(modelID);
+		for (int i = 0;i <offer.length;i++){
+			if (offer[i] != 0){
+				currResType = DefaultSettings.RESOURCE_ORDER[i];
+				for (int j = 0;j < harbours.size();j++){
+					if (currResType.equals(harbours.get(j))){
+						//2:1 trade
+						
+					}
+				}
+			}
+		}
+		
+	}*/
 
 }

@@ -491,7 +491,7 @@ public class ServerController {
 	private void checkLongestTradingRoute(int modelID, int aX, int aY, int dir) {
 		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
 		Edge[] emptyArray = {};
-		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked, emptyArray);
+		int longestRoute = 1 + LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked, emptyArray);
 		if(longestRoute > lengthLongestTradeRoute && longestRoute>4){
 			board.getPlayer(0).setHasLongestRoad(false);
 			board.getPlayer(1).setHasLongestRoad(false);
@@ -926,6 +926,13 @@ public class ServerController {
 	 * 
 	 * Basic methods for trading
 	 */
+	
+	public void requestSeaTrade(int threadID,int[] offer,int[] demand){
+		int modelID = threadPlayerIdMap.get(threadID);
+		if (gameLogic.checkPlayerResources(modelID, offer)){
+			//tradeController.requestSeaTrade(modelID,offer,demand);
+		}		
+	}
 
 	public void clientOffersTrade(int threadID, int[] supply, int[] demand) {
 		tradeController.clientOffersTrade(threadPlayerIdMap.get(threadID), supply, demand);
@@ -1413,6 +1420,14 @@ public class ServerController {
 
 		}
 		gameLogic.getBoard().getPlayer(playerID).setResources(pResources);
+	}
+	
+	public void subFromPlayersResources(int playerID, ResourceType resType,int amount){
+		int[] resources = getPlayerResources(playerID);
+		for (int i = 0; i < amount; i++) {
+			resources[DefaultSettings.RESOURCE_VALUES.get(resType)]--;
+		}
+		gameLogic.getBoard().getPlayer(playerID).setResources(resources);
 	}
 
 	public int getAmountPlayers() {
