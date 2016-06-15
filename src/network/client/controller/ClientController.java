@@ -26,6 +26,8 @@ import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
 import network.client.view.GameViewController;
 import network.client.view.PlayerStatusGUIUpdate;
+import network.client.view.ServerResponseRunnable;
+
 import org.apache.logging.log4j.LogManager;
 import protocol.object.ProtocolResource;
 import settings.DefaultSettings;
@@ -60,7 +62,7 @@ public class ClientController {
 	private int initialRoundCount = 0;
 	private String currentServerResponse;
 	private PlayerState currentState;
-	
+
 	private ArrayList<TradeOffer> tradeOffers = new ArrayList<TradeOffer>();
 
 	/**
@@ -359,6 +361,7 @@ public class ClientController {
 			if (resourcesGained.length == 5) {
 				// playerID := 0,1,2,3
 				gameLogic.getBoard().getPlayer(playerID).incrementResources(resourcesGained);
+				Platform.runLater(new ServerResponseRunnable("You gained ...", viewController.getGameViewController()));
 
 			} else {
 				throw new IllegalArgumentException("Error at adding player resources to player");
@@ -648,9 +651,9 @@ public class ClientController {
 		clientOutputHandler.robberLoss(result);
 	}
 	// Protocol 0.3
-	
+
 	/**
-	 * 
+	 *
 	 * Basic methods for trading
 	 */
 
@@ -666,7 +669,7 @@ public class ClientController {
 			viewController.getGameViewController().getTradeViewController().addOwnOffer(supply, demand, tradingID);
 		} else {
 		viewController.getGameViewController().getTradeViewController().addOffer(supply, demand, tradingID, modelID);
-	
+
 		}
 	}
 	public void acceptTrade(int tradingID) {
@@ -726,19 +729,19 @@ public class ClientController {
 			}
 		}
 		if (modelID == 0){
-			viewController.getGameViewController().getTradeViewController().cancelOwnOffer();			
+			viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
 		} else {
-			viewController.getGameViewController().getTradeViewController().cancelOffer(modelID);			
+			viewController.getGameViewController().getTradeViewController().cancelOffer(modelID);
 		}
 	}
-	
-	
+
+
 	public void requestSeaTrade(int[] offer,int[] demand){
 		clientOutputHandler.requestHarbourTrade(offer, demand);
 	}
 
 	/**
-	 * @param message 
+	 * @param message
 	 *
 	 */
 	public void victory(String message, int threadID) {
@@ -775,16 +778,16 @@ public class ClientController {
 		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(true);
 		//viewController.getGameViewController().set...
 	}
-	
+
 	/**
 	 * @param playerID
 	 */
 	public void longestRoad(int threadID) {
 		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(true);
 		//viewController.getGameViewController().set...
-	}	
-	
-	
+	}
+
+
 	public void requestBuyDevelopmentCard(){
 		if (gameLogic.checkBuyDevCard(0)){
 			clientOutputHandler.buyDevelopmentCard();
@@ -795,19 +798,19 @@ public class ClientController {
 	 * @param resource
 	 */
 	public void playInventionCard(int[] resources) {
-		
+
 	}
-	
+
 	public void playMonopolyCard(ResourceType resType){
-		
+
 	}
-	
+
 	public void playStreetBuildCard(int u1,int v1, int dir1, int u2, int v2, int dir2){
-		
+
 	}
-	
+
 	public void playKnightCard(int x, int y, int modelID){
-		
+
 	}
 
 	/**
