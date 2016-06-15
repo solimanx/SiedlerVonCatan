@@ -16,28 +16,29 @@ import protocol.object.ProtocolResource;
 @Since(0.3)
 public class ProtocolPlayInventionCard {
 
-    @SerializedName("Rohstoffe")
-    private ProtocolResource resource;
+	@SerializedName("Spieler")
+	private Integer player_id;
 
-    @SerializedName("Spieler")
-    private Integer player_id;
+	@SerializedName("Rohstoffe")
+	private ProtocolResource resource;
 
-    //Client to Server
-    public ProtocolPlayInventionCard(ProtocolResource resource) {
-        this.resource = resource;
-    }
+	// Client to Server
+	public ProtocolPlayInventionCard(ProtocolResource resource) {
+		this.resource = resource;
+	}
 
-    //Server to Cliet
-    public ProtocolPlayInventionCard(ProtocolResource resource, Integer player_id) {
-        this.resource = resource;
-        this.player_id = player_id;
-    }
+	// Server to Cliet
+	public ProtocolPlayInventionCard(Integer player_id, ProtocolResource resource) {
+		this.player_id = player_id;
+		this.resource = resource;
 
-    public ProtocolResource getResource() {
-        return resource;
-    }
+	}
 
-    public Integer getPlayer_id() {
-        return player_id;
-    }
+	public ProtocolResource getResource() {
+		return resource;
+	}
+
+	public Integer getPlayer_id() {
+		return player_id;
+	}
 }

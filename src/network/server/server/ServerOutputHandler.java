@@ -21,6 +21,10 @@ import protocol.configuration.ProtocolGameStarted;
 import protocol.configuration.ProtocolVictory;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
+import protocol.dualinstructions.ProtocolPlayInventionCard;
+import protocol.dualinstructions.ProtocolPlayKnightCard;
+import protocol.dualinstructions.ProtocolPlayMonopolyCard;
+import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolBoard;
@@ -29,9 +33,12 @@ import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolPlayer;
 import protocol.object.ProtocolResource;
+import protocol.serverinstructions.ProtocolBoughtDevelopmentCard;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolCosts;
 import protocol.serverinstructions.ProtocolDiceRollResult;
+import protocol.serverinstructions.ProtocolLargestArmy;
+import protocol.serverinstructions.ProtocolLongestRoad;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
@@ -39,13 +46,6 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
-import protocol3.serverinstructions.ProtocolBiggestKnightProwess;
-import protocol3.serverinstructions.ProtocolBoughtDevelopmentCard;
-import protocol3.serverinstructions.ProtocolInventionCardInfo;
-import protocol3.serverinstructions.ProtocolLongestRoad;
-import protocol3.serverinstructions.ProtocolMonopolyCardInfo;
-import protocol3.serverinstructions.ProtocolPlayKnightCard;
-import protocol3.serverinstructions.ProtocolRoadBuildingCardInfo;
 
 //import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
@@ -371,9 +371,9 @@ public class ServerOutputHandler {
     }
 
     public void biggestKnightProwess(int player_id) {
-        ProtocolBiggestKnightProwess pbkp = new ProtocolBiggestKnightProwess(player_id);
+        ProtocolLargestArmy pbkp = new ProtocolLargestArmy(player_id);
         Response r = new Response();
-        r.pBiggestKnightProwess = pbkp;
+        r.pLargestArmy = pbkp;
         try {
             server.broadcast(parser.createString(r));
         } catch (IOException e) {
@@ -390,9 +390,9 @@ public class ServerOutputHandler {
         } else {
             pr = new ProtocolResource(0, 0, 0, 0, 0, resource[0]);
         }
-        ProtocolInventionCardInfo pici = new ProtocolInventionCardInfo(pr, player_id);
+        ProtocolPlayInventionCard pici = new ProtocolPlayInventionCard(player_id,pr);
         Response r = new Response();
-        r.pInventionCardInfo = pici;
+        r.pPlayInventionCard = pici;
         try {
             server.broadcast(parser.createString(r));
         } catch (IOException e) {
@@ -417,9 +417,9 @@ public class ServerOutputHandler {
 
     public void monopolyCardInfo(ResourceType resourceType, Integer player_id) {
 
-        ProtocolMonopolyCardInfo pmci = new ProtocolMonopolyCardInfo(resourceType, player_id);
+        ProtocolPlayMonopolyCard pmci = new ProtocolPlayMonopolyCard(player_id,resourceType);
         Response r = new Response();
-        r.pMonopolyCardInfo = pmci;
+        r.pPlayMonopolyCard = pmci;
         try {
             server.broadcast(parser.createString(r));
         } catch (IOException e) {
@@ -429,14 +429,11 @@ public class ServerOutputHandler {
 
     }
 
-    public void playKnight() {
-        // This should be deleted
-    }
 
     public void playKnightCard(String road1_id, int target, Integer player_id) {
-        ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(road1_id, target, player_id);
+        ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(player_id, road1_id, target);
         Response r = new Response();
-        r.pplayKnightCard = ppkc;
+        r.pPlayKnightCard = ppkc;
         try {
             server.broadcast(parser.createString(r));
         } catch (IOException e) {
@@ -446,9 +443,9 @@ public class ServerOutputHandler {
     }
 
     public void roadBuildingCardInfo(String road1_id, String road2_id, Integer player_id) {
-        ProtocolRoadBuildingCardInfo prbci = new ProtocolRoadBuildingCardInfo(road1_id, road2_id, player_id);
+        ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(player_id, road1_id, road2_id);
         Response r = new Response();
-        r.pRoadBuildingCardInfo = prbci;
+        r.pPlayRoadCard = prbci;
         try {
             server.broadcast(parser.createString(r));
         } catch (IOException e) {
