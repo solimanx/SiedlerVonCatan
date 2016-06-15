@@ -1222,7 +1222,7 @@ public class ServerController {
 		ResourceType currResType;
 		int[][] playersObtain = new int[amountPlayers][5];
 		for (Field f : diceFields) {
-			if (f.getFieldID() != gameLogic.getBoard().getBandit()) {
+			if (!f.getFieldID().equals(gameLogic.getBoard().getBandit())) {
 				coords = gameLogic.getBoard().getFieldCoordinates(f.getFieldID());
 				neighbors = gameLogic.getBoard().getSurroundingCorners(coords[0], coords[1]);
 
