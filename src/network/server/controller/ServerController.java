@@ -481,7 +481,7 @@ public class ServerController {
 	 */
 	private void checkLongestTradingRoute(int modelID, int aX, int aY, int dir) {
 		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
-		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked);
+		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked, null);
 		if(longestRoute > lengthLongestTradeRoute && longestRoute>4){
 			board.getPlayer(0).setHasLongestRoad(false);
 			board.getPlayer(1).setHasLongestRoad(false);
@@ -505,7 +505,7 @@ public class ServerController {
 	 * @return length of the longest possible road
 	 */
 	//TODO verbindung von zwei straßensystemen
-	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked) {
+	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked, Edge[] lastNeighbours) {
 		int a = 0;
 		int b = 0;
 		int c = 0;
@@ -517,8 +517,18 @@ public class ServerController {
 		String fieldTwo;
 		ArrayList<Edge> ac = new ArrayList<Edge>();
 		Edge[] neighbours = board.getLinkedEdges(aX, aY, dir);
+		
+		ArrayList<Edge> notToCheck = new ArrayList<Edge>();
+		for(int i = 0; i<lastNeighbours.length; i++){
+			for(int j = 0; j< neighbours.length; j++){
+				if(lastNeighbours[i].equals(neighbours[j])){
+					notToCheck.add(neighbours[j]);
+				}
+			}
+		}
+		
 		if(neighbours.length > 0){
-			if(neighbours[0].isHasStreet()){
+			if(neighbours[0].isHasStreet() && !notToCheck.contains(neighbours[0])){
 				if(neighbours[0].getOwnerID() == modelID){
 					if(!alreadyChecked.contains(neighbours[0])){
 						fieldOne = neighbours[0].getEdgeID().substring(0, 1);
@@ -528,14 +538,14 @@ public class ServerController {
 						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
 						ac = alreadyChecked;
 						ac.add(neighbours[0]);
-						a = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+						a = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 					}
 				}
 			}
 				
 		}
 			if(neighbours.length > 1){
-				if(neighbours[1].isHasStreet()){
+				if(neighbours[1].isHasStreet() && !notToCheck.contains(neighbours[1])){
 					if(neighbours[1].getOwnerID() == modelID){
 						if(!alreadyChecked.contains(neighbours[1])){
 							fieldOne = neighbours[1].getEdgeID().substring(0, 1);
@@ -545,13 +555,13 @@ public class ServerController {
 							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
 							ac = alreadyChecked;
 							ac.add(neighbours[1]);
-							b = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+							b = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 						}
 					}
 				}
 			}
 			if(neighbours.length > 2){
-				if(neighbours[2].isHasStreet()){
+				if(neighbours[2].isHasStreet() && !notToCheck.contains(neighbours[2])){
 					if(neighbours[2].getOwnerID() == modelID){
 						if(!alreadyChecked.contains(neighbours[2])){
 							fieldOne = neighbours[2].getEdgeID().substring(0, 1);
@@ -561,13 +571,13 @@ public class ServerController {
 							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
 							ac = alreadyChecked;
 							ac.add(neighbours[2]);
-							c = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+							c = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 						}
 					}
 				}
 			}
 			if(neighbours.length > 3){
-				if(neighbours[3].isHasStreet()){
+				if(neighbours[3].isHasStreet() && !notToCheck.contains(neighbours[3])){
 					if(neighbours[3].getOwnerID() == modelID){
 						if(!alreadyChecked.contains(neighbours[3])){
 							fieldOne = neighbours[3].getEdgeID().substring(0, 1);
@@ -577,7 +587,7 @@ public class ServerController {
 							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
 							ac = alreadyChecked;
 							ac.add(neighbours[3]);
-							d = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+							d = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 						}
 					}		
 				}
