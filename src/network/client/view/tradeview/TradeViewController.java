@@ -257,7 +257,7 @@ public class TradeViewController {
 			}
 
 			if (getSheep != 0) {
-				getting.append(getSheep + " Sheep, ");
+				getting.append(getSheep + " Wool, ");
 			}
 
 			if (getCorn != 0) {
@@ -268,7 +268,7 @@ public class TradeViewController {
 			// Remove last comma
 			getting.deleteCharAt(getting.length() - 1);
 			// Add full stop.
-			getting.append(".");
+			getting.append(" ");
 		}
 		if (offer.length > 0) {
 			giving.append("Give: ");
@@ -301,8 +301,6 @@ public class TradeViewController {
 			giving.deleteCharAt(giving.length() - 1);
 			// Remove last comma
 			giving.deleteCharAt(giving.length() - 1);
-			// Add full stop.
-			giving.append(".");
 		}
 		return getting.toString() + " \n" + giving.toString();
 	}
