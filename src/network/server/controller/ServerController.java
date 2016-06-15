@@ -476,7 +476,7 @@ public class ServerController {
 		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(modelID).getID());
 		gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
 
-		checkLongestTradingRoute(modelID, x, y, dir);
+		//checkLongestTradingRoute(modelID, x, y, dir);
 	}
 
 	/**
@@ -813,9 +813,12 @@ public class ServerController {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 		pM.setPlayerState(PlayerState.WAITING);
 		ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
+		if (currDevCards != null){
 		for (int i = 0; i < currDevCards.size(); i++) {
 			// erst jetzt kann spieler über development card verfügen
 			pM.incrementPlayerDevCard(currDevCards.get(i));
+		}
+		   pM.getDevCardsBoughtInThisRound().clear();
 		}
 		// runde zu ende, nächste runde darf dev card gespielt werden
 		pM.setHasPlayedDevCard(false);
