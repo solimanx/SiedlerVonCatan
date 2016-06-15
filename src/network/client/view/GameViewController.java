@@ -13,8 +13,10 @@ import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
+import javafx.animation.FadeTransition;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableStringValue;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +47,7 @@ import javafx.scene.text.TextBoundsType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import network.client.controller.ViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
@@ -140,7 +143,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private TextField diceResult;
-	
+
 	// DEBUG
 	@FXML
 	private Button openRobberView;
@@ -197,6 +200,8 @@ public class GameViewController implements Initializable {
 	private TradeViewController tradeViewController;
 
 	private Stage tradeStage;
+
+	private FadeTransition transition;
 
 	public TradeViewController getTradeViewController() {
 		return tradeViewController;
@@ -258,6 +263,21 @@ public class GameViewController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		transition = new FadeTransition(new Duration(3000));
+		transition.setDelay(new Duration(2000));
+		transition.setFromValue(1);
+		transition.setToValue(0);
+		transition.setNode(serverResponse);
+
+		response.addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				transition.play();
+
+			}
+		});
+
 	}
 
 	public String getPlayerNames(Integer playerID) {
@@ -366,17 +386,18 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleStartTradingButton(ActionEvent event) throws IOException {
 
-//		FXMLLoader loader = new FXMLLoader();
-//		Pane root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
-//		tradeViewController = (TradeViewController) loader.getController();
-//		Scene scene = new Scene(root);
-//		Stage tradeStage = new Stage();
-//		tradeStage.setScene(scene);
-//
-//		tradeViewController.init(selfResources, viewController);
-//
-//		tradeStage.initModality(Modality.WINDOW_MODAL);
-//		tradeStage.initOwner(gameStage);
+		// FXMLLoader loader = new FXMLLoader();
+		// Pane root =
+		// loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
+		// tradeViewController = (TradeViewController) loader.getController();
+		// Scene scene = new Scene(root);
+		// Stage tradeStage = new Stage();
+		// tradeStage.setScene(scene);
+		//
+		// tradeViewController.init(selfResources, viewController);
+		//
+		// tradeStage.initModality(Modality.WINDOW_MODAL);
+		// tradeStage.initOwner(gameStage);
 		tradeViewController.updateSpinner(selfResources);
 		tradeStage.show();
 	}
@@ -396,10 +417,11 @@ public class GameViewController implements Initializable {
 	 */
 	public void villageClick(int[] villageCoordinates) {
 		Polygon village = villages[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
-		//DEBUG
-		//if(village.getFill().equals(playerColors.get(1))){
-			viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1], villageCoordinates[2]);
-		//}
+		// DEBUG
+		// if(village.getFill().equals(playerColors.get(1))){
+		viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1],
+				villageCoordinates[2]);
+		// }
 		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
 			viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
 					villageCoordinates[2]);
@@ -717,7 +739,7 @@ public class GameViewController implements Initializable {
 	 * @param playerColor
 	 */
 	public void setCity(int u, int v, int dir, Color playerColor) {
-		Polygon city = cities[u+3][v+3][dir];
+		Polygon city = cities[u + 3][v + 3][dir];
 		city.setFill(playerColor);
 		city.setOpacity(1.0);
 		city.setEffect(shadow);
@@ -801,14 +823,13 @@ public class GameViewController implements Initializable {
 								});
 								village.toFront();
 								villageFigures.add(village);
-								
+
 								Polygon city = drawCity(cornerCoordinates[i][j][k]);
 								city.setOpacity(0);
 								cities[i][j][k] = city;
 								city.toFront();
 								cityFigures.add(city);
-								
-								
+
 							}
 						}
 					}

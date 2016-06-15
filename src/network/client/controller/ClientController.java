@@ -361,7 +361,7 @@ public class ClientController {
 			if (resourcesGained.length == 5) {
 				// playerID := 0,1,2,3
 				gameLogic.getBoard().getPlayer(playerID).incrementResources(resourcesGained);
-				Platform.runLater(new ServerResponseRunnable("You gained ...", viewController.getGameViewController()));
+				//Platform.runLater(new ServerResponseRunnable("You gained ...", viewController.getGameViewController()));
 
 			} else {
 				throw new IllegalArgumentException("Error at adding player resources to player");
