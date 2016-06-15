@@ -490,7 +490,8 @@ public class ServerController {
 	 */
 	private void checkLongestTradingRoute(int modelID, int aX, int aY, int dir) {
 		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
-		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked, null);
+		Edge[] emptyArray = {};
+		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked, emptyArray);
 		if(longestRoute > lengthLongestTradeRoute && longestRoute>4){
 			board.getPlayer(0).setHasLongestRoad(false);
 			board.getPlayer(1).setHasLongestRoad(false);
