@@ -5489,3 +5489,178 @@ java.net.BindException: Address already in use
 [INFO] 2016-06-14 22:34:14,802 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
 [INFO] 2016-06-14 22:34:19,050 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
 [INFO] 2016-06-14 22:34:25,282 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:11:59,384 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:11:59,573 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:12:00,252 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:12:03,362 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:12:09,499 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:12:09,713 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:12:10,109 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:12:13,336 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:12:20,988 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:12:21,183 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:12:21,575 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:12:24,620 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-15 08:12:24,959 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:12:24,993 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:12:25,152 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-15 08:12:28,043 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:12:33,475 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:12:36,397 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:12:39,814 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:12:42,653 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:12:47,492 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[WARN] 2016-06-15 08:13:07,852 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[WARN] 2016-06-15 08:13:07,854 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[WARN] 2016-06-15 08:13:07,855 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[INFO] 2016-06-15 08:14:13,694 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:14:13,882 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:14:14,164 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:14:16,343 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:14:21,998 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:14:22,221 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:14:22,586 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:14:26,650 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:14:32,210 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:14:32,403 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:14:32,715 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:14:35,155 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-15 08:14:35,486 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:14:35,533 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:14:35,726 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-15 08:14:41,242 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:14:42,965 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:14:47,304 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:14:49,067 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:14:51,859 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:14:56,272 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[WARN] 2016-06-15 08:15:03,206 [Thread-5] [] network.client.controller.ClientController receiveTrade - 0 0
+[WARN] 2016-06-15 08:15:03,207 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[WARN] 2016-06-15 08:15:03,206 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[INFO] 2016-06-15 08:17:32,245 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:17:32,440 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:17:32,928 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:17:35,640 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:17:42,553 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:17:42,755 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:17:43,090 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:17:46,501 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:17:52,161 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:17:52,335 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:17:52,710 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:17:57,938 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-15 08:17:58,301 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:17:58,327 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:17:58,327 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-15 08:18:04,544 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:18:08,511 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:18:11,284 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:18:13,719 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:18:16,017 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:18:19,037 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[WARN] 2016-06-15 08:18:27,927 [Thread-5] [] network.client.controller.ClientController receiveTrade - 1 0
+[WARN] 2016-06-15 08:18:27,927 [Thread-5] [] network.client.controller.ClientController receiveTrade - 0 0
+[WARN] 2016-06-15 08:18:27,928 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[INFO] 2016-06-15 08:20:12,079 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:20:12,317 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:20:13,382 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:20:15,915 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:20:21,634 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:20:21,823 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:20:22,508 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:20:24,584 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:20:30,332 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:20:30,587 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:20:31,432 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:20:33,315 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-15 08:20:33,692 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:20:33,736 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:20:33,779 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-15 08:20:38,760 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:20:45,687 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:20:48,304 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:20:50,863 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:21:04,431 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:21:14,406 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[WARN] 2016-06-15 08:21:27,691 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[WARN] 2016-06-15 08:21:27,691 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[WARN] 2016-06-15 08:21:27,692 [Thread-5] [] network.client.controller.ClientController receiveTrade - 0 0
+[DEBUG] 2016-06-15 08:22:54,449 [JavaFX Application Thread] [] debugging.DebugClient <init> - Running debugging/testing mode
+[DEBUG] 2016-06-15 08:23:00,258 [JavaFX Application Thread] [] debugging.DebugClient <init> - Running debugging/testing mode
+[INFO] 2016-06-15 08:23:27,444 [JavaFX Application Thread] [] ai.PrimitiveAI <init> - AI started
+[INFO] 2016-06-15 08:23:27,502 [Thread-5] [] ai.PrimitiveAI run -  AI connected to server.
+[WARN] 2016-06-15 08:23:27,502 [Thread-5] [] ai.PrimitiveAI read - Reading input from the servers output(read()) throws IOException
+[INFO] 2016-06-15 08:23:27,572 [Thread-5] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-15 08:23:27,655 [Thread-5] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-15 08:23:27,656 [Thread-5] [] ai.PrimitiveAI write - [08:23:27] 
+[INFO] 2016-06-15 08:23:27,694 [Thread-5] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-15 08:23:27,704 [Thread-5] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-15 08:23:27,704 [Thread-5] [] ai.PrimitiveAI write - [08:23:27] 
+[INFO] 2016-06-15 08:23:27,704 [Thread-5] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-15 08:23:27,742 [Thread-5] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-15 08:23:27,746 [Thread-5] [] ai.PrimitiveAI read - Server
+[WARN] 2016-06-15 08:23:27,765 [Thread-5] [] ai.PrimitiveAI write - Writing output to server, throws IOException
+[INFO] 2016-06-15 08:23:27,766 [Thread-5] [] ai.PrimitiveAI write - [08:23:27] 
+[INFO] 2016-06-15 08:23:27,804 [Thread-5] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-15 08:23:27,808 [Thread-5] [] ai.PrimitiveAI read - Server
+[INFO] 2016-06-15 08:23:36,401 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:23:36,572 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:23:37,125 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:23:40,473 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:23:49,565 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:23:49,772 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:23:50,162 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:23:52,721 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:23:59,648 [Thread-6] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:23:59,839 [Thread-6] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:24:00,483 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:24:03,984 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-15 08:24:04,588 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:24:04,627 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:24:04,788 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-15 08:24:07,461 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:24:13,233 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:24:17,239 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:24:19,007 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:24:26,419 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:24:32,068 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:24:36,390 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:24:42,010 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[WARN] 2016-06-15 08:24:45,788 [Thread-5] [] network.client.controller.ClientController receiveTrade - 1 0
+[WARN] 2016-06-15 08:24:45,789 [Thread-5] [] network.client.controller.ClientController receiveTrade - 0 0
+[WARN] 2016-06-15 08:24:45,789 [Thread-6] [] network.client.controller.ClientController receiveTrade - 1 0
+[INFO] 2016-06-15 08:25:05,013 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:25:28,015 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:25:51,019 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:26:14,021 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:26:37,024 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:27:00,027 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:27:23,030 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:27:46,031 [Thread-5] [] network.client.client.Client run - Connection to server failed.
+[INFO] 2016-06-15 08:30:20,111 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:30:20,291 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:30:22,027 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:30:24,573 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:30:30,619 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:30:30,791 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:30:31,492 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:30:34,253 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[INFO] 2016-06-15 08:30:41,618 [Thread-5] [] network.client.client.Client run - Client connected to server
+[DEBUG] 2016-06-15 08:30:41,802 [Thread-5] [] network.client.controller.ClientController welcome - Handshake complete!
+[WARN] 2016-06-15 08:30:42,163 [JavaFX Application Thread] [] network.client.controller.ViewController startChooseView - startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException
+[DEBUG] 2016-06-15 08:30:45,768 [JavaFX Application Thread] [] application.lobby.PlayerProfileController handleSendButton - Profile
+[DEBUG] 2016-06-15 08:30:46,193 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:30:46,247 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[DEBUG] 2016-06-15 08:30:46,261 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
+[INFO] 2016-06-15 08:30:49,437 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:30:53,280 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:30:56,697 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:30:57,473 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:30:59,435 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[INFO] 2016-06-15 08:31:02,546 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[WARN] 2016-06-15 08:31:14,193 [Thread-5] [] network.client.controller.ClientController receiveTrade - 1 0
+[WARN] 2016-06-15 08:31:14,193 [Thread-5] [] network.client.controller.ClientController receiveTrade - 0 0
+[WARN] 2016-06-15 08:31:14,195 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[WARN] 2016-06-15 08:31:54,066 [Thread-5] [] network.client.controller.ClientController receiveTrade - 0 0
+[WARN] 2016-06-15 08:31:54,068 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0
+[WARN] 2016-06-15 08:31:54,086 [Thread-5] [] network.client.controller.ClientController receiveTrade - 2 0

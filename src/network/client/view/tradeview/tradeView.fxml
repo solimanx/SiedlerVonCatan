@@ -19,7 +19,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" text="Accepting trade offers">
+                  <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" text="Accepting trade offers:">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -60,12 +60,15 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label text="Your offer">
+                  <Label text="Your offer:">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="ownOffer" />
+                  <TextField fx:id="ownOffer" editable="false" focusTraversable="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font></TextField>
                </children>
             </VBox>
             <GridPane fx:id="grid" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="200.0" vgap="5.0">
@@ -137,7 +140,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label text="players accepting your offer">
+                  <Label text="Players accepting your offer:">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

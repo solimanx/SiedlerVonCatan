@@ -261,7 +261,7 @@ public class GameViewController implements Initializable {
 	}
 
 	public String getPlayerNames(Integer playerID) {
-		return playerNames.get(playerID);
+		return viewController.getClientController().getGameLogic().getBoard().getPlayer(playerID).getName();
 	}
 
 	/**

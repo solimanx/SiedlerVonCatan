@@ -659,14 +659,14 @@ public class ClientController {
 	}
 
 	public void receiveTrade(int threadID, int tradingID, int[] supply, int[] demand) {
-		//int modelID = threadPlayerIdMap.get(threadID);
+		int modelID = threadPlayerIdMap.get(threadID);
 	    TradeOffer tOf = new TradeOffer(threadID,tradingID,supply,demand);
 		tradeOffers.add(tOf);
-		logger.warn(threadID + " " + ownPlayerId);
-		if (threadID == ownPlayerId){
+		logger.warn(modelID + " " + ownPlayerId);
+		if (modelID == ownPlayerId){
 			viewController.getGameViewController().getTradeViewController().addOwnOffer(supply, demand, tradingID);
 		} else {
-		viewController.getGameViewController().getTradeViewController().addOffer(supply, demand, tradingID, threadID);
+		viewController.getGameViewController().getTradeViewController().addOffer(supply, demand, tradingID, modelID);
 	
 		}
 	}

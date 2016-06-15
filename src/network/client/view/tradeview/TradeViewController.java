@@ -201,7 +201,7 @@ public class TradeViewController {
 	}
 
 	public void addOffer(int[] offer, int[] demand, int tradeID, int playerID) {
-		String tradeString = tradeStringGenerator(offer, demand) + "\n" + "With:"
+		String tradeString = tradeStringGenerator(offer, demand) + "\n" + "With: "
 				+ viewController.getGameViewController().getPlayerNames(playerID);
 		tradeIDtoString.put(tradeID, tradeString);
 		stringToTradeID.put(tradeString, tradeID);
@@ -271,7 +271,7 @@ public class TradeViewController {
 			getting.append(".");
 		}
 		if (offer.length > 0) {
-			giving.append("Give :");
+			giving.append("Give: ");
 			int giveWood = offer[0];
 			int giveClay = offer[1];
 			int giveOre = offer[2];
@@ -304,7 +304,7 @@ public class TradeViewController {
 			// Add full stop.
 			giving.append(".");
 		}
-		return getting.toString() + "\n" + giving.toString();
+		return getting.toString() + " \n" + giving.toString();
 	}
 
 	public class AddTradeStringRunnable implements Runnable {
