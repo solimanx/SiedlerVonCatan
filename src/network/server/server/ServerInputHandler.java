@@ -1,10 +1,13 @@
 package network.server.server;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import enums.Color;
 import enums.ResourceType;
-import network.InputHandler;
 import network.ProtocolToModel;
 import network.server.controller.ServerController;
+import parsing.Parser;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -30,7 +33,6 @@ import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
-import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
 import protocol.serverinstructions.ProtocolBoughtDevelopmentCard;
 import protocol.serverinstructions.ProtocolBuild;
@@ -41,18 +43,147 @@ import protocol.serverinstructions.ProtocolLongestRoad;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
-import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
+import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
-public class ServerInputHandler extends InputHandler {
+public class ServerInputHandler{
+	private static Logger logger = LogManager.getLogger(ServerInputHandler.class.getName());
+	protected Parser parser;
 	private ServerController serverController;
 	private int currentThreadID;
 
 	public ServerInputHandler(ServerController serverController) {
-		super();
+		parser = new Parser();
 		this.serverController = serverController;
+	}
+
+	protected void handle(Object o) {
+		switch (o.getClass().getSimpleName()) {
+		case "ProtocolHello":
+			handle((ProtocolHello) o);
+			break;
+		case "ProtocolWelcome":
+			handle((ProtocolWelcome) o);
+			break;
+		case "ProtocolClientReady":
+			handle((ProtocolClientReady) o);
+			break;
+		case "ProtocolError":
+			handle((ProtocolError) o);
+			break;
+		case "ProtocolGameStarted":
+			handle((ProtocolGameStarted) o);
+			break;
+		case "ProtocolPlayerProfile":
+			handle((ProtocolPlayerProfile) o);
+			break;
+		case "ProtocolChatReceiveMessage":
+			handle((ProtocolChatReceiveMessage) o);
+			break;
+		case "ProtocolChatSendMessage":
+			handle((ProtocolChatSendMessage) o);
+			break;
+		case "ProtocolServerResponse":
+			handle((ProtocolServerResponse) o);
+			break;
+		case "ProtocolBuild":
+			handle((ProtocolBuild) o);
+			break;
+		case "ProtocolDiceRollResult":
+			handle((ProtocolDiceRollResult) o);
+			break;
+		case "ProtocolResourceObtain":
+			handle((ProtocolResourceObtain) o);
+			break;
+		case "ProtocolStatusUpdate":
+			handle((ProtocolStatusUpdate) o);
+			break;
+		case "ProtocolBuildRequest":
+			handle((ProtocolBuildRequest) o);
+			break;
+		case "ProtocolDiceRollRequest":
+			handle((ProtocolDiceRollRequest) o);
+			break;
+		case "ProtocolEndTurn":
+			handle((ProtocolEndTurn) o);
+			break;
+		case "ProtocolRobberMovement": // 0.2
+			handle((ProtocolRobberMovement) o);
+			break;
+		case "ProtocolRobberMovementRequest": // 0.2
+			handle((ProtocolRobberMovementRequest) o);
+			break;
+		case "String":
+			handle(new ProtocolServerResponse((String) o));
+			break;
+		case "ProtocolVictory":
+			handle((ProtocolVictory) o);
+			break;
+		case "ProtocolCosts":
+			handle((ProtocolCosts) o);
+			break;
+		case "ProtocolRobberLoss":
+			handle((ProtocolRobberLoss) o);
+			break;
+		case "ProtocolHarbourRequest":
+			handle((ProtocolHarbourRequest) o);
+			break;
+		case "ProtocolTradeRequest":
+			handle((ProtocolTradeRequest) o);
+			break;
+		case "ProtocolTradePreview":
+			handle((ProtocolTradePreview) o);
+			break;
+		case "ProtocolTradeAccept":
+			handle((ProtocolTradeAccept) o);
+			break;
+		case "ProtocolTradeConfirmation":
+			handle((ProtocolTradeConfirmation) o);
+			break;
+		case "ProtocolTradeComplete":
+			handle((ProtocolTradeComplete) o);
+			break;
+		case "ProtocolTradeCompletion":
+			handle((ProtocolTradeCompletion) o);
+			break;
+		case "ProtocolTradeCancel":
+			handle((ProtocolTradeCancel) o);
+			break;
+		case "ProtocolTradeCancellation":
+			handle((ProtocolTradeCancellation) o);
+			break;
+		case "ProtocolBuyDevCard":
+			handle((ProtocolBuyDevCard) o);
+			break;
+		case "ProtocolLargestArmy":
+			handle((ProtocolLargestArmy) o);
+			break;
+		case "ProtocolPlayInventionCard":
+			handle((ProtocolPlayInventionCard) o);
+			break;
+		case "ProtocolLongestRoad":
+			handle((ProtocolLongestRoad) o);
+			break;
+		case "ProtocolPlayMonopolyCard":
+			handle((ProtocolPlayMonopolyCard) o);
+			break;
+		case "ProtocolPlayKnightCard":
+			handle((ProtocolPlayKnightCard) o);
+			break;
+		case "ProtocolPlayRoadCard":
+			handle((ProtocolPlayRoadCard) o);
+			break;
+		case "ProtocolBoughtDevelopmentCard":
+			handle((ProtocolBoughtDevelopmentCard) o);
+			break;
+
+		default:
+			System.out.println("Class not found");
+			logger.info("Class not found");
+		}
+
 	}
 
 	public ServerController getGameController() {
@@ -74,24 +205,13 @@ public class ServerInputHandler extends InputHandler {
 		handle(object);
 	}
 
-	@Override
+	protected void hello(int threadID) {
+		serverController.hello(threadID);
+	}
+
 	protected void handle(ProtocolHello hello) {
 		System.out.println("SERVER: Hello gelesen!");
 		serverController.receiveHello(currentThreadID);
-
-	}
-
-	@Override
-	protected void handle(ProtocolClientReady clientReady) {
-		serverController.clientReady(currentThreadID);
-
-	}
-
-	@Override
-	protected void handle(ProtocolPlayerProfile playerProfile) {
-		String name = playerProfile.getName();
-		Color color = playerProfile.getColor();
-		serverController.playerProfileUpdate(color, name, currentThreadID);
 
 	}
 
@@ -100,9 +220,40 @@ public class ServerInputHandler extends InputHandler {
 		serverController.chatSendMessage(s, currentThreadID);
 	}
 
-	//
+	protected void handle(ProtocolClientReady clientReady) {
+		serverController.clientReady(currentThreadID);
 
-	@Override
+	}
+
+	protected void handle(ProtocolPlayerProfile playerProfile) {
+		String name = playerProfile.getName();
+		Color color = playerProfile.getColor();
+		serverController.playerProfileUpdate(color, name, currentThreadID);
+
+	}
+
+	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
+		serverController.diceRollRequest(currentThreadID);
+
+	}
+
+	protected void handle(ProtocolRobberLoss robberLoss) {
+		ProtocolResource prl = robberLoss.getLosses();
+		serverController.robberLoss(currentThreadID, ProtocolToModel.convertResources(prl));
+	}
+
+	protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
+		String location_id = robberMovementRequest.getLocationID();
+		int[] coords = ProtocolToModel.getFieldCoordinates(location_id);
+		Integer victim_id = robberMovementRequest.getVictimID();
+		serverController.robberMovementRequest(coords[0], coords[1], victim_id, currentThreadID);
+
+	}
+
+	protected void handle(ProtocolEndTurn endTurn) {
+		serverController.endTurn(currentThreadID);
+	}
+
 	protected void handle(ProtocolBuildRequest buildRequest) {
 		if (buildRequest.getBuildingType().equals("Straße")) {
 			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocationID());
@@ -118,22 +269,8 @@ public class ServerInputHandler extends InputHandler {
 		}
 	}
 
-	@Override
-	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
-		serverController.diceRollRequest(currentThreadID);
-
-	}
-
-	@Override
-	protected void handle(ProtocolEndTurn endTurn) {
-		serverController.endTurn(currentThreadID);
-	}
-
-	protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
-		String location_id = robberMovementRequest.getLocationID();
-		int[] coords = ProtocolToModel.getFieldCoordinates(location_id);
-		Integer victim_id = robberMovementRequest.getVictimID();
-		serverController.robberMovementRequest(coords[0], coords[1], victim_id, currentThreadID);
+	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
+		// TODO
 
 	}
 
@@ -141,12 +278,7 @@ public class ServerInputHandler extends InputHandler {
 
 		ProtocolResource offer = harbourRequest.getOffer();
 		ProtocolResource withdrawal = harbourRequest.getWithdrawal();
-		// gameController.harbourRequest(offer,withdrawal);
-	}
-
-	protected void handle(ProtocolTradeAccept tradeAccept) {
-		int tradeID = tradeAccept.getTradeID();
-		serverController.acceptTrade(currentThreadID, tradeID);
+		// TODO clientController.harbourRequest(offer,withdrawal);
 	}
 
 	protected void handle(ProtocolTradeRequest tradeRequest) {
@@ -156,9 +288,9 @@ public class ServerInputHandler extends InputHandler {
 				ProtocolToModel.convertResources(demand));
 	}
 
-	protected void handle(ProtocolTradeCancel tradeCancel) {
-		int tradeID = tradeCancel.getTradeID();
-		serverController.cancelTrade(currentThreadID, tradeID);
+	protected void handle(ProtocolTradeAccept tradeAccept) {
+		int tradeID = tradeAccept.getTradeID();
+		serverController.acceptTrade(currentThreadID, tradeID);
 	}
 
 	protected void handle(ProtocolTradeComplete tradeComplete) {
@@ -167,183 +299,34 @@ public class ServerInputHandler extends InputHandler {
 		serverController.fulfillTrade(currentThreadID, tradeID, tradePartnerID);
 	}
 
-	@Override
-	protected void handle(ProtocolRobberLoss robberLoss) {
-		ProtocolResource prl = robberLoss.getLosses();
-		serverController.robberLoss(currentThreadID, ProtocolToModel.convertResources(prl));
+	protected void handle(ProtocolTradeCancel tradeCancel) {
+		int tradeID = tradeCancel.getTradeID();
+		serverController.cancelTrade(currentThreadID, tradeID);
 	}
 
-	public ServerController getServerController() {
-
-		return this.serverController;
-	}
-
-	public void hello(int threadID) {
-
-		serverController.hello(threadID);
-	}
-
-	// Unnecessary Methods
-
-	@Override
-	protected void handle(ProtocolWelcome welcome) {
-		// Unnecessary Method
-
-	}
-
-	@Override
-	protected void handle(ProtocolServerResponse serverConfirmation) {
-		// Unnecessary Method in ServerInputHadler
-	}
-
-	//
-	@Override
-	protected void handle(ProtocolBuild build) {
-		// unnecessary Method in ServerInputHandler
-
-	}
-
-	@Override
-	protected void handle(ProtocolDiceRollResult diceRollResult) {
-		// unnecessary Method in ServerInputHandler
-
-	}
-
-	@Override
-	protected void handle(ProtocolResourceObtain resourceObtain) {
-		// unnecessary Method in ServerInputHandler
-	}
-
-	@Override
-	protected void handle(ProtocolStatusUpdate statusUpdate) {
-		// unnecessary Method in ServerInputHandler
-
-	}
-
-	@Override
-	protected void handle(ProtocolTradePreview tradePreview) {
-		// Unnecessary Method
-
-	}
-
-	@Override
-	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
-		// Unnecessary Method
-
-	}
-
-	@Override
-	protected void handle(ProtocolTradeCompletion tradeIsCompleted) {
-		// Unnecessary Method
-
-	}
-
-	@Override
-	protected void handle(ProtocolTradeCancellation tradeIsCanceled) {
-		// Unnecessary Method
-
-	}
-
-
-
-	@Override
-	protected void handle(ProtocolGameStarted gameStarted) {
-		// unnecessary Method in ServerInputHandler
-
-	}
-
-	@Override
-	protected void handle(ProtocolError error) {
-		// unnecessary Method in ServerInputHandler
-
-	}
-
-	@Override
-	protected void handle(ProtocolVictory victory) {
-		// Unnecessary Method
-
-	}
-
-	@Override
-	protected void handle(ProtocolCosts costs) {
-		// Unnecessary Method
-
-	}
-
-	@Override
-	protected void handle(ProtocolRobberMovement robberMovement) {
-
-		// unnecessary Method
-
-	}
-
-	@Override
-	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
-		/*
-		 * ChatRecieveMessage, (Nachricht wird vom Server verteilt) needs to be
-		 * handled only in ServerOutputHandler and in ClientInputHandler.
-		 * unnecessary Method in ServerInputHandler
-		 */
-	}
-
-	@Override
-	protected void handle(String string) {
+	protected void handle(ProtocolPlayInventionCard playInventionCard) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
+	protected void handle(ProtocolPlayMonopolyCard playKnightCard) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	protected void handle(ProtocolDevCard developmentCards) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void handle(ProtocolLargestArmy biggestKnightProwess) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void handle(ProtocolLongestRoad longestRoad) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void handle(ProtocolPlayKnightCard playKnightCard) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
-		// TODO Auto-generated method stub
+	public ServerController getServerController() {
 
+		return this.serverController;
 	}
 
 }

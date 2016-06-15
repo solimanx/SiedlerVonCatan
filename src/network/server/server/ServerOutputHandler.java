@@ -55,7 +55,7 @@ public class ServerOutputHandler {
 
     public ServerOutputHandler(Server server) {
         this.server = server;
-        this.parser = server.getServerInputHandler().getParser();
+        this.parser = new Parser();
     }
 
     private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getName());
