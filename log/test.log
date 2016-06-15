@@ -5760,3 +5760,1576 @@ java.net.BindException: Address already in use
 [DEBUG] 2016-06-15 12:14:23,488 [JavaFX Application Thread] [] network.client.controller.ClientController run - STARTING GAME VIEW IN Platform.runLater
 [INFO] 2016-06-15 12:14:33,658 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
 [INFO] 2016-06-15 12:14:55,477 [JavaFX Application Thread] [] network.client.controller.ClientController requestBuildStreet - Building Initial Village
+[30m19:25:41.692 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:25:41.832 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:25:41.832 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:25:41.917 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:42.000 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:42.001 INFO  ai.PrimitiveAI.write() @145 - [07:25:42] 
+[m[30m19:25:42.070 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:42.080 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:42.080 INFO  ai.PrimitiveAI.write() @145 - [07:25:42] 
+[m[30m19:25:42.267 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:42.270 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:42.273 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:42.276 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:42.282 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:42.283 INFO  ai.PrimitiveAI.write() @145 - [07:25:42] 
+[m[30m19:25:42.321 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:42.325 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:48.610 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:25:48.674 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:25:48.674 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:25:48.748 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:48.811 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:48.812 INFO  ai.PrimitiveAI.write() @145 - [07:25:48] 
+[m[30m19:25:48.850 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:48.857 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:48.857 INFO  ai.PrimitiveAI.write() @145 - [07:25:48] 
+[m[30m19:25:48.990 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:48.993 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:48.996 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:48.999 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:49.003 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:49.006 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:49.016 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:49.016 INFO  ai.PrimitiveAI.write() @145 - [07:25:49] 
+[m[30m19:25:49.018 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:49.055 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:49.067 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:49.068 INFO  ai.PrimitiveAI.write() @145 - [07:25:49] 
+[m[30m19:25:49.105 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:49.106 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:49.109 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:49.114 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:49.115 INFO  ai.PrimitiveAI.write() @145 - [07:25:49] 
+[m[30m19:25:49.152 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:49.154 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:49.157 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:51.656 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:25:51.721 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:25:51.721 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:25:51.800 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:51.863 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:51.864 INFO  ai.PrimitiveAI.write() @145 - [07:25:51] 
+[m[30m19:25:51.901 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:51.901 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:51.910 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:51.911 INFO  ai.PrimitiveAI.write() @145 - [07:25:51] 
+[m[30m19:25:52.047 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.051 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.053 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.057 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.059 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.060 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.061 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.061 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.064 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:52.072 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:52.072 INFO  ai.PrimitiveAI.write() @145 - [07:25:52] 
+[m[30m19:25:52.110 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:52.125 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:52.125 INFO  ai.PrimitiveAI.write() @145 - [07:25:52] 
+[m[30m19:25:52.163 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.164 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.166 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.169 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:52.169 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:52.171 INFO  ai.PrimitiveAI.write() @145 - [07:25:52] 
+[m[30m19:25:52.208 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:52.211 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:52.211 INFO  ai.PrimitiveAI.write() @145 - [07:25:52] 
+[m[30m19:25:52.250 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.251 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.251 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.253 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:25:52.256 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:25:52.256 INFO  ai.PrimitiveAI.write() @145 - [07:25:52] 
+[m[30m19:25:52.294 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.296 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.296 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:52.297 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:55.558 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:55.559 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:25:56.344 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:00.432 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:26:00.498 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:26:00.498 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:26:00.588 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:00.651 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:00.651 INFO  ai.PrimitiveAI.write() @145 - [07:26:00] 
+[m[30m19:26:00.691 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:00.697 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:00.698 INFO  ai.PrimitiveAI.write() @145 - [07:26:00] 
+[m[30m19:26:00.698 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:00.701 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:00.736 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:00.741 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:00.746 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:00.746 INFO  ai.PrimitiveAI.write() @145 - [07:26:00] 
+[m[30m19:26:00.785 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:00.787 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:01.634 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:26:01.699 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:26:01.700 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:26:01.783 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:01.850 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:01.851 INFO  ai.PrimitiveAI.write() @145 - [07:26:01] 
+[m[30m19:26:01.890 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:01.896 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:01.896 INFO  ai.PrimitiveAI.write() @145 - [07:26:01] 
+[m[30m19:26:02.018 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.019 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.022 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.025 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.027 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.032 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:02.041 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:02.041 INFO  ai.PrimitiveAI.write() @145 - [07:26:02] 
+[m[30m19:26:02.048 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.080 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:02.091 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:02.091 INFO  ai.PrimitiveAI.write() @145 - [07:26:02] 
+[m[30m19:26:02.131 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.131 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.133 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:02.138 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:02.138 INFO  ai.PrimitiveAI.write() @145 - [07:26:02] 
+[m[30m19:26:02.177 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.179 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:02.180 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:03.604 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:26:03.671 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:26:03.671 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:26:03.756 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:03.821 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:03.821 INFO  ai.PrimitiveAI.write() @145 - [07:26:03] 
+[m[30m19:26:03.860 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:03.861 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:03.871 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:03.871 INFO  ai.PrimitiveAI.write() @145 - [07:26:03] 
+[m[30m19:26:04.003 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.003 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.005 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.007 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.006 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.010 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.014 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.017 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.020 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:04.027 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:04.027 INFO  ai.PrimitiveAI.write() @145 - [07:26:04] 
+[m[30m19:26:04.071 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:04.085 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:04.085 INFO  ai.PrimitiveAI.write() @145 - [07:26:04] 
+[m[30m19:26:04.124 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.125 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.126 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.128 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:04.132 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:04.132 INFO  ai.PrimitiveAI.write() @145 - [07:26:04] 
+[m[30m19:26:04.171 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:04.173 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:04.174 INFO  ai.PrimitiveAI.write() @145 - [07:26:04] 
+[m[30m19:26:04.217 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.217 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.220 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.221 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:04.223 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:04.224 INFO  ai.PrimitiveAI.write() @145 - [07:26:04] 
+[m[30m19:26:04.262 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.262 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.264 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:04.266 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:10.863 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:26:10.928 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:26:10.928 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:26:11.020 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.081 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.081 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.121 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.121 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.123 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.131 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.131 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.274 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.274 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.279 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.279 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.279 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.287 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.290 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.295 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.297 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.300 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.303 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.316 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.316 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.357 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.363 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.365 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.403 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.403 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.403 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.405 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.408 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.408 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.409 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.447 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.451 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.451 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.490 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.490 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.491 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.493 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.496 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.496 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.497 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.535 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.538 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.538 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.578 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.578 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.579 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.580 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.581 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.583 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.584 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.622 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.623 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.623 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.625 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.679 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.731 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.794 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.794 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.796 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.796 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.799 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.800 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.801 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.805 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.808 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.810 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.810 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.811 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.812 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.813 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.814 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.815 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.815 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.816 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.819 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.820 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.820 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.821 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.823 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.824 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.825 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.825 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.826 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.827 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.828 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.828 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.828 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.829 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.830 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.831 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.832 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.832 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.833 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.833 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.834 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.835 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.835 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.837 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.838 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.840 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.840 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.842 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.843 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.844 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.844 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.844 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.845 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.845 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.845 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.847 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.847 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.848 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.849 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.850 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.851 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.852 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:11.854 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:11.854 INFO  ai.PrimitiveAI.write() @145 - [07:26:11] 
+[m[30m19:26:11.855 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.871 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:11.971 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:25.900 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:26:25.966 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:26:25.966 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:26:26.050 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:26.110 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:26.111 INFO  ai.PrimitiveAI.write() @145 - [07:26:26] 
+[m[30m19:26:26.150 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:26.157 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:26.157 INFO  ai.PrimitiveAI.write() @145 - [07:26:26] 
+[m[30m19:26:26.197 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:26.202 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:26.206 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:26.212 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:26.212 INFO  ai.PrimitiveAI.write() @145 - [07:26:26] 
+[m[30m19:26:26.251 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:26.253 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:28.713 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:26:28.776 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:26:28.776 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:26:28.844 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:28.905 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:28.906 INFO  ai.PrimitiveAI.write() @145 - [07:26:28] 
+[m[30m19:26:28.978 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:28.986 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:28.986 INFO  ai.PrimitiveAI.write() @145 - [07:26:28] 
+[m[30m19:26:29.141 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.141 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.145 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.149 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.149 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.153 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:29.158 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:29.158 INFO  ai.PrimitiveAI.write() @145 - [07:26:29] 
+[m[30m19:26:29.196 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:29.204 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:29.205 INFO  ai.PrimitiveAI.write() @145 - [07:26:29] 
+[m[30m19:26:29.242 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.247 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.255 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:29.261 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:29.261 INFO  ai.PrimitiveAI.write() @145 - [07:26:29] 
+[m[30m19:26:29.299 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.300 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:29.301 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.406 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:26:31.471 INFO  ai.PrimitiveAI.run() @106 -  AI connected to server.
+[m[33m19:26:31.472 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
+[m[30m19:26:31.554 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:31.620 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:31.620 INFO  ai.PrimitiveAI.write() @145 - [07:26:31] 
+[m[30m19:26:31.660 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.660 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:31.668 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:31.668 INFO  ai.PrimitiveAI.write() @145 - [07:26:31] 
+[m[30m19:26:31.797 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.798 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.799 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.802 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.802 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.808 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.813 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.815 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:31.819 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:31.820 INFO  ai.PrimitiveAI.write() @145 - [07:26:31] 
+[m[30m19:26:31.858 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:31.871 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:31.871 INFO  ai.PrimitiveAI.write() @145 - [07:26:31] 
+[m[30m19:26:31.909 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.912 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.913 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:31.917 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:31.921 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:31.922 INFO  ai.PrimitiveAI.write() @145 - [07:26:31] 
+[m[30m19:26:31.960 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:31.966 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:31.966 INFO  ai.PrimitiveAI.write() @145 - [07:26:31] 
+[m[30m19:26:32.004 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.005 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.007 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.009 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.011 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.011 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.049 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.058 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.060 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.086 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.146 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.147 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.147 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.149 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.150 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.150 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.151 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.151 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.153 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.155 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.155 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.156 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.156 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.157 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.158 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.159 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.159 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.161 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.163 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.165 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.167 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.168 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.168 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.206 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.211 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.212 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.213 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.214 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.216 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.216 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.217 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.212 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.254 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.264 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.264 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.264 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.265 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.267 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.269 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.270 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.274 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.274 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.275 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.276 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.461 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.533 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.685 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.686 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.688 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.689 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.690 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.729 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.730 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.730 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.732 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.734 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.734 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.734 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.736 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.737 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.737 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.738 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.739 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.740 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.742 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.776 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.776 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.777 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.777 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.779 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.779 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.780 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.780 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.780 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.818 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.818 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.821 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.822 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.822 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.827 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.828 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.834 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.840 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.840 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.842 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.843 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.880 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.881 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.881 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.883 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.883 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.945 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.947 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.947 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.948 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.948 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.950 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.951 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.985 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.987 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.988 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.991 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.992 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.993 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:32.996 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:32.996 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:32.997 INFO  ai.PrimitiveAI.write() @145 - [07:26:32] 
+[m[30m19:26:32.997 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.000 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.003 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.036 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.038 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.039 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.039 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.040 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.041 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.043 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.045 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.047 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.050 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.052 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.053 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.091 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.093 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.095 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.096 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.100 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.100 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.101 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.103 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.104 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.106 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.109 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.110 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.139 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.140 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.143 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.145 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.146 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.146 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.147 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.148 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.149 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.151 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.151 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.151 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.194 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.198 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.199 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.201 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.204 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.206 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.208 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.209 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.209 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.207 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.212 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.213 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.247 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.248 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.249 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.249 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.250 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.250 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.251 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.251 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.253 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.254 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.254 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.256 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.257 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.257 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.258 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.295 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.296 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.297 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.299 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.299 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.300 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.301 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.302 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.302 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.433 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.489 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.556 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.557 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.558 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.558 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.558 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.559 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.559 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.560 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.560 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.561 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.561 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.561 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.563 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.599 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.599 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.600 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.601 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.601 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.601 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.602 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.602 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.603 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.641 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.642 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.643 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.644 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.644 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.646 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.646 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.647 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.650 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.684 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.686 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.687 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.687 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.687 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.688 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.689 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.690 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.690 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.727 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.728 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.728 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.729 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.729 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.731 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.732 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.733 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.735 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.735 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.735 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.735 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.736 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.737 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.738 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.773 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.774 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.775 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.775 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.776 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.776 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.778 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.780 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.781 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.827 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.827 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.828 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.828 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.829 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.830 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.830 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.831 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.832 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.833 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.833 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.833 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.874 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.875 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.876 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.877 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.877 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.878 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.879 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.879 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.880 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.881 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.881 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.882 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.917 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.918 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.919 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.920 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.919 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.923 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.922 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.923 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.923 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.961 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.962 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:33.965 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:33.965 INFO  ai.PrimitiveAI.write() @145 - [07:26:33] 
+[m[30m19:26:33.966 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.967 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.968 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.969 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:33.969 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.002 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.009 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.012 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.014 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.014 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.016 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.013 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.017 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.016 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.019 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.020 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.020 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.058 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.059 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.060 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.061 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.062 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.064 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.065 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.068 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.068 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.106 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.107 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.108 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.109 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.114 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.115 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.119 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.119 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.120 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.309 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.310 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.311 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.311 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.313 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.313 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.315 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.315 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.315 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.353 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.353 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.354 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.355 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.357 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.358 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.359 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.360 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.360 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.398 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.399 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.400 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.400 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.402 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.402 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.402 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.403 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.408 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.440 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.441 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.442 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.442 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.442 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.442 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.443 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.444 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.445 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.480 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.481 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.481 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.482 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.483 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.485 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.485 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.485 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.487 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.565 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.621 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.669 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.670 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.671 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.671 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.671 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.672 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.673 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.709 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.709 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.710 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.710 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.710 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.711 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.711 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.712 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.712 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.751 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.756 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.756 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.756 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.757 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.757 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.758 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.758 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.759 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.797 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.798 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.800 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.802 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.802 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.802 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.803 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.806 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.807 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.840 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.842 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.843 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.844 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.843 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.844 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.843 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.845 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.845 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.846 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.846 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.847 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.848 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.848 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.849 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.886 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.886 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.887 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.887 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.887 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.888 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.888 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.888 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.889 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.926 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.927 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.927 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.928 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.928 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.928 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.929 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.929 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.929 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.930 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.930 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:34.930 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.930 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.931 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.932 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.968 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.969 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.970 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.970 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.971 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.971 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:34.972 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:34.973 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:34.973 INFO  ai.PrimitiveAI.write() @145 - [07:26:34] 
+[m[30m19:26:35.014 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.014 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.015 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.015 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.015 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.015 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.016 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.016 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.016 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.017 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.017 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.018 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.018 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.018 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.019 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.057 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.057 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.058 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.058 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.059 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.060 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.060 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.061 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.061 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.098 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.098 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.099 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.099 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.100 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.100 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.101 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.101 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.102 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.139 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.140 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.140 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.141 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.141 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.142 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.142 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.142 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.143 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.180 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.180 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.181 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.180 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.183 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.183 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.184 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.183 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.185 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.222 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.223 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.224 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.226 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.226 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.227 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.227 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.229 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.229 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.266 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.267 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.267 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.269 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.269 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.269 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.270 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.271 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.271 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.308 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.309 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.309 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.309 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.310 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.310 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.311 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.311 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.312 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.349 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.350 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.351 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.351 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.351 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.352 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.353 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.353 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.353 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.390 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.391 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.391 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.392 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.392 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.393 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.393 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.394 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.394 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.395 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.396 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.397 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.434 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.435 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.436 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.436 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.437 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.437 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.438 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.438 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.439 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.478 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.479 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.479 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.480 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.481 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.479 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.481 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.482 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.482 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.482 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.483 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.483 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.520 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.521 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.521 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.522 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.522 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.522 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.522 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.523 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.523 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.561 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.612 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.614 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.614 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.614 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.615 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.616 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.617 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.617 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.654 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.655 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.656 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.657 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.657 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.658 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.658 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.658 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.659 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.696 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.697 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.697 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.697 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.697 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.698 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.698 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.698 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.699 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.699 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.700 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.700 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.737 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.738 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.739 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.740 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.748 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.748 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.749 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.749 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.749 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.787 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.788 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.789 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.790 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.791 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.791 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.791 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.791 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.792 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.792 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.793 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.793 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.831 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.832 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.832 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.832 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.833 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.833 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.834 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.835 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.841 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.842 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.842 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.843 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.881 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.881 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.882 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.882 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.883 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.883 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.883 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.883 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.884 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.921 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.921 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.922 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.922 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.923 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.923 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.924 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.925 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.926 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.964 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.967 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.967 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.968 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.968 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:35.968 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:35.970 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:35.970 INFO  ai.PrimitiveAI.write() @145 - [07:26:35] 
+[m[30m19:26:35.970 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.008 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.008 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.009 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.009 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.010 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.011 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.011 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.011 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.011 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.049 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.050 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.050 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.050 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.051 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.051 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.052 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.053 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.053 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.092 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.092 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.093 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.093 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.093 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.094 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.095 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.095 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.095 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.133 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.138 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.139 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.140 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.140 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.141 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.141 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.143 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.143 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.181 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.182 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.182 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.182 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.183 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.183 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.183 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.183 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.184 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.221 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.222 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.222 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.223 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.223 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.223 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.224 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.225 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.225 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.263 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.264 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.264 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.265 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.266 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.266 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.266 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.267 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.267 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.268 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.268 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.269 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.269 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.270 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.270 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.307 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.308 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.308 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.308 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.309 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.309 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.309 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.310 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.310 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.348 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.351 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.351 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.351 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.352 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.352 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.353 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.353 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.353 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.395 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.395 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.396 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.396 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.396 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.397 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.397 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.397 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.398 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.434 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.435 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.435 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.436 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.437 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.437 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.439 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.439 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.439 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.477 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.478 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.478 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.479 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.479 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.479 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.480 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.481 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.482 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.519 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.523 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.523 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.523 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.524 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.524 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.525 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.526 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.526 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.563 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.564 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.565 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.566 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.566 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.567 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.567 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.567 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.567 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.605 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.607 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.607 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.607 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.608 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.608 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.608 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.609 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.609 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.609 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.609 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.609 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.611 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.611 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.611 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.649 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.650 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.650 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.650 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.651 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.652 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.652 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.653 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.653 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.689 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.690 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.690 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.691 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.691 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.692 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.692 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.692 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.693 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.694 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.694 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.695 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.696 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.696 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.697 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.730 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.731 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.732 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.733 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.733 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.733 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.733 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.734 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.735 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.772 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.773 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.774 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.775 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.775 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.775 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.775 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.775 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.776 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.776 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.776 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.777 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.948 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.949 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.949 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.949 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.950 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.950 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.950 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.951 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.952 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.953 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.954 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.954 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.993 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.994 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.994 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.994 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.995 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:36.995 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:36.996 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:36.996 INFO  ai.PrimitiveAI.write() @145 - [07:26:36] 
+[m[30m19:26:36.996 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.034 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.035 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.035 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.036 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.036 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.037 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.038 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.039 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.037 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.077 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.078 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.079 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.079 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.079 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.080 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.080 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.081 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.081 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.081 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.082 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.082 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.119 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.119 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.119 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.120 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.120 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.121 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.121 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.122 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.122 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.158 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.159 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.159 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.161 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.161 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.161 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.161 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.161 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.161 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.199 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.199 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.200 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.200 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.200 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.200 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.201 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.202 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.202 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.240 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.240 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.242 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.242 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.243 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.243 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.243 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.245 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.245 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.245 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.249 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.249 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.289 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.289 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.290 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.290 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.290 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.290 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.291 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.291 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.292 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.329 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.330 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.331 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.331 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.332 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.333 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.333 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.333 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.333 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.334 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.334 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.335 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.371 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.371 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.372 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.373 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.373 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.374 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.374 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.374 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.375 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.411 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.412 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.413 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.414 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.414 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.415 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.415 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.415 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.415 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.457 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.457 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.458 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.458 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.458 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.458 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.459 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.459 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.459 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.498 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.498 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.499 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.499 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.500 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.500 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.501 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.501 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.503 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.504 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.504 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.504 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.542 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.546 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.546 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.546 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.547 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.547 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.548 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.548 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.548 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.585 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.586 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.586 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.587 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.587 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.587 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.588 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.588 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.588 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.628 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.628 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.629 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.629 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.629 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.630 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.630 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.630 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.630 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.668 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.669 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.669 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.670 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.671 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.671 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.671 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.672 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.672 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.673 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.673 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.673 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.711 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.712 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.713 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.713 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.713 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.714 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.715 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.716 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.716 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.754 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.755 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.755 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.756 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.756 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.756 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.757 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.757 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.758 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.808 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.808 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.809 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.809 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.809 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.809 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.810 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.811 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.811 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.849 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.849 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.850 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.851 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.851 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.851 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.851 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.852 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.852 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.896 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.896 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.897 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.897 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.898 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.899 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.910 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.911 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.912 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.937 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.937 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.938 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.939 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.939 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.940 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.940 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.940 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:37.941 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.978 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.979 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.979 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.980 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.980 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.980 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:37.981 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:37.982 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:37.982 INFO  ai.PrimitiveAI.write() @145 - [07:26:37] 
+[m[30m19:26:38.019 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.030 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.030 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.031 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.032 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.032 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.033 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:38.033 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:38.033 INFO  ai.PrimitiveAI.write() @145 - [07:26:38] 
+[m[30m19:26:38.033 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.033 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:38.034 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:38.034 INFO  ai.PrimitiveAI.write() @145 - [07:26:38] 
+[m[30m19:26:38.035 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.113 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.113 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.114 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.114 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.115 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.116 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.116 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.164 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.165 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.165 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.166 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.170 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.170 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.170 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.171 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.171 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.172 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:38.173 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:38.173 INFO  ai.PrimitiveAI.write() @145 - [07:26:38] 
+[m[30m19:26:38.211 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.212 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.212 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.213 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.213 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.214 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:38.215 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:38.215 INFO  ai.PrimitiveAI.write() @145 - [07:26:38] 
+[m[30m19:26:38.215 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.252 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.253 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.253 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.253 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.254 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.254 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:38.255 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:38.255 INFO  ai.PrimitiveAI.write() @145 - [07:26:38] 
+[m[30m19:26:38.255 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.292 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.295 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.295 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.295 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.296 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.296 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.297 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.297 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.297 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:38.298 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:38.298 INFO  ai.PrimitiveAI.write() @145 - [07:26:38] 
+[m[30m19:26:38.298 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.336 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.338 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.339 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.339 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.340 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[33m19:26:38.340 WARN  ai.PrimitiveAI.write() @143 - Writing output to server, throws IOException
+[m[30m19:26:38.340 INFO  ai.PrimitiveAI.write() @145 - [07:26:38] 
+[m[30m19:26:38.362 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:26:38.363 INFO  ai.PrimitiveAI.read() @132 - Server
+[m[30m19:27:12.633 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:27:20.568 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:27:57.366 INFO  ai.PrimitiveAI.<init>() @82 - AI started
+[m[30m19:28:09.923 INFO  network.client.client.Client.run() @45 - Client connected to server
+[m[32m19:28:10.095 DEBUG network.client.controller.ClientController.welcome() @129 - Handshake complete!
+[m

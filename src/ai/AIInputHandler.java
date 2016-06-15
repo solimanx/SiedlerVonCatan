@@ -15,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import protocol.clientinstructions.*;
-import protocol.clientinstructions.trade.*;
 import protocol.configuration.*;
 import protocol.connection.*;
 import protocol.dualinstructions.ProtocolPlayInventionCard;

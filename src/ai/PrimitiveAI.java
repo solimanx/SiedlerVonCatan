@@ -78,7 +78,6 @@ public class PrimitiveAI extends Thread {
 	 * Creates a PrimitiveAI object, and forces it to connect to the 0.3 server.
 	 */
 	public PrimitiveAI() {
-		System.out.println(DefaultSettings.getCurrentTime() + " AI started.");
 		logger.info("AI started");
 		this.board = new Board();
 		this.gl = new GameLogic(board);
@@ -90,6 +89,7 @@ public class PrimitiveAI extends Thread {
 	// ================================================================================
 
 	public void commence() {
+		System.out.println(DefaultSettings.getCurrentTime() + " AI started.");
 		this.start();
 	}
 

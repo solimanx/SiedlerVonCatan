@@ -384,20 +384,6 @@ public class ClientController {
 
 	}
 
-	/**
-	 * @param playerId
-	 * @param resources
-	 */
-	public void setPlayerResources(int playerId, int[] resources) {
-		ArrayList<ResourceType> resourceCards = new ArrayList<ResourceType>();
-		for (int i = 0; i < resources.length; i++) {
-			for (int j = 0; j < resources[i]; j++) {
-				resourceCards.add(settings.DefaultSettings.RESOURCE_ORDER[i]);
-			}
-		}
-		gameLogic.getBoard().getPlayer(playerId).setResourceCards(resourceCards);
-
-	}
 
 	/**
 	 * @return

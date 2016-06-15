@@ -11,7 +11,6 @@ import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
-import network.ProtocolToModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import settings.DefaultSettings;
@@ -44,22 +43,6 @@ public class Board {
 	// CONSTRUCTORS
 	// ================================================================================
 
-	@Deprecated
-	public Board(ArrayList<PlayerModel> tempPlayers) {
-		int r = DefaultSettings.BOARD_SIZE;
-		fields = new Field[r][r];
-		initializeFields();
-		initializeHashMaps();
-		corners = new Corner[r][r][2];
-		initializeCorners();
-		edges = new Edge[r][r][3];
-		initializeEdges();
-		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
-		initializePlayers(tempPlayers);
-		initializeBandit();
-		devCardStack = new DevelopmentCardsStack();
-	}
-
 	public Board() {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
@@ -76,7 +59,6 @@ public class Board {
 			players[i] = new PlayerModel(i);
 		}
 
-		initializeBandit();
 	}
 
 	// ================================================================================
@@ -243,17 +225,6 @@ public class Board {
 	}
 
 	/**
-	 * Add players to the player model
-	 *
-	 * @param tempPlayers
-	 */
-	private void initializePlayers(ArrayList<PlayerModel> tempPlayers) {
-		for (int i = 0; i < tempPlayers.size(); i++) {
-			players[i] = tempPlayers.get(i);
-		}
-	}
-
-	/**
 	 * Initialize ID for field, corners and edges.
 	 */
 	private void initializeID() {
@@ -295,12 +266,6 @@ public class Board {
 				}
 			}
 		}
-
-	}
-
-	@Deprecated
-	private void initializeBandit() {
-		// TODO Auto-generated method stub
 
 	}
 

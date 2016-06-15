@@ -41,18 +41,21 @@ public class Main extends Application {
 		//
 		// logger.log(Level.INFO, "Our first log");
 		ModelToProtocol.initModelToProtocol();
-		switch(mode){
-		case 0: setClientController(new ClientController(primaryStage));break;
-		case 1: setServerController(new ServerController()); break;
-		case 2: pa = new PrimitiveAI();break;
-		case 3: dc = new DebugClient(primaryStage);break;
+		switch (mode) {
+		case 0:
+			setClientController(new ClientController(primaryStage));
+			break;
+		case 1:
+			setServerController(new ServerController());
+			break;
+		case 2:
+			pa = new PrimitiveAI();
+			pa.commence();
+			break;
+		case 3:
+			dc = new DebugClient(primaryStage);
+			break;
 		}
-//		if (mode) {
-//			// server = new Server();
-//			setGameController(new ServerController());
-//		} else {
-//			setFlowController(new ClientController(primaryStage));
-//		}
 
 	}
 
@@ -63,11 +66,9 @@ public class Main extends Application {
 		for (String string : raw) {
 			if (string.equals("server")) {
 				mode = 1;
-			}
-			else if (string.equals("ai")){
+			} else if (string.equals("ai")) {
 				mode = 2;
-			}
-			else if (string.equals("debug")){
+			} else if (string.equals("debug")) {
 				mode = 3;
 			}
 		}

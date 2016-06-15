@@ -2,7 +2,6 @@ package ai;
 
 import java.io.IOException;
 
-import application.Main;
 import enums.Color;
 import network.ModelToProtocol;
 import org.apache.logging.log4j.Level;

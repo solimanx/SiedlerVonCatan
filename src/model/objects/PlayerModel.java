@@ -190,11 +190,6 @@ public class PlayerModel {
         amountCities--;
     }
 
-    @Deprecated
-    public ArrayList<ResourceType> getResourceCards() {
-        return null;
-        // return resourceCards;
-    }
 
     public int getAmountCities() {
         return amountCities;
@@ -240,10 +235,6 @@ public class PlayerModel {
         this.resources = resources;
     }
 
-    @Deprecated
-    public void setResourceCards(ArrayList<ResourceType> resourceCards) {
-        // this.resourceCards = resourceCards;
-    }
 
     public void setAmountVillages(int amountVillages) {
         this.amountVillages = amountVillages;
