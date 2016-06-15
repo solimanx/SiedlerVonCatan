@@ -11,20 +11,19 @@ import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.*;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
+import protocol.dualinstructions.ProtocolPlayInventionCard;
+import protocol.dualinstructions.ProtocolPlayKnightCard;
+import protocol.dualinstructions.ProtocolPlayMonopolyCard;
+import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
+import protocol.object.ProtocolDevCard;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
-import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
-import protocol3.clientinstructions.ProtocolDevelopmentCards;
-import protocol3.object.ProtocolInventionCard;
-import protocol3.object.ProtocolMonopolyCard;
-import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.serverinstructions.*;
 
 public abstract class InputHandler {
     private static Logger logger = LogManager.getLogger(InputHandler.class.getName());
@@ -142,37 +141,25 @@ public abstract class InputHandler {
                 handle((ProtocolTradeCancellation) o);
                 break;
             case "Entwicklungskarte kaufen":
-                handle((ProtocolBuyDevelopmentCards) o);
+                handle((ProtocolBuyDevCard) o);
                 break;
-            case "Entwicklungskarte":
-                handle((ProtocolDevelopmentCards) o);
+            case "ProtocolLargestArmy":
+                handle((ProtocolLargestArmy) o);
                 break;
-            case "Erfindungskarte":
-                handle((ProtocolInventionCard) o);
-                break;
-            case "Monopolkarte":
-                handle((ProtocolMonopolyCard) o);
-                break;
-            case "Strassenbaukarte":
-                handle((ProtocolRoadBuildingCard) o);
-                break;
-            case "ProtocolBiggestKnightProwess":
-                handle((ProtocolBiggestKnightProwess) o);
-                break;
-            case "ProtocolInventionCardInfo":
-                handle((ProtocolInventionCardInfo) o);
+            case "ProtocolPlayInventionCard":
+                handle((ProtocolPlayInventionCard) o);
                 break;
             case "ProtocolLongestRoad":
                 handle((ProtocolLongestRoad) o);
                 break;
-            case "ProtocolMonopolyCardInfo":
-                handle((ProtocolMonopolyCardInfo) o);
+            case "ProtocolPlayMonopolyCard":
+                handle((ProtocolPlayMonopolyCard) o);
                 break;
             case "ProtocolPlayKnightCard":
                 handle((ProtocolPlayKnightCard) o);
                 break;
-            case "ProtocolRoadBuildingCardInfo":
-                handle((ProtocolRoadBuildingCardInfo) o);
+            case "ProtocolPlayRoadCard":
+                handle((ProtocolPlayRoadCard) o);
                 break;
             case "ProtocolBoughtDevelopmentCard":
                 handle((ProtocolBoughtDevelopmentCard) o);
@@ -248,27 +235,21 @@ public abstract class InputHandler {
 
     protected abstract void handle(ProtocolTradeCancellation tradeIsCanceled);
 
-    protected abstract void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards);
+    protected abstract void handle(ProtocolBuyDevCard buyDevelopmentCards);
 
-    protected abstract void handle(ProtocolDevelopmentCards developmentCards);
+    protected abstract void handle(ProtocolDevCard developmentCards);
 
-    protected abstract void handle(ProtocolInventionCard inventionCard);
+    protected abstract void handle(ProtocolLargestArmy biggestKnightProwess);
 
-    protected abstract void handle(ProtocolMonopolyCard monopolyCard);
-
-    protected abstract void handle(ProtocolRoadBuildingCard roadBuildingCard);
-
-    protected abstract void handle(ProtocolBiggestKnightProwess biggestKnightProwess);
-
-    protected abstract void handle(ProtocolInventionCardInfo inventionCardInfo);
+    protected abstract void handle(ProtocolPlayInventionCard inventionCardInfo);
 
     protected abstract void handle(ProtocolLongestRoad longestRoad);
 
-    protected abstract void handle(ProtocolMonopolyCardInfo monopolyCardInfo);
+    protected abstract void handle(ProtocolPlayMonopolyCard monopolyCardInfo);
 
     protected abstract void handle(ProtocolPlayKnightCard playKnightCard);
 
-    protected abstract void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo);
+    protected abstract void handle(ProtocolPlayRoadCard roadBuildingCardInfo);
 
     protected abstract void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard);
 

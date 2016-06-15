@@ -5,8 +5,7 @@ import com.google.gson.annotations.Since;
 
 import enums.Color;
 import enums.PlayerState;
-import protocol3.clientinstructions.ProtocolDevelopmentCards;
-import protocol3.serverinstructions.ProtocolPlayKnightCard;
+import protocol.dualinstructions.ProtocolPlayKnightCard;
 
 /**
  * <b>Spieler (Player)</b>

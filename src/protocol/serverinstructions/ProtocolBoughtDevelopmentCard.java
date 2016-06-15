@@ -1,9 +1,9 @@
-package protocol3.serverinstructions;
+package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 import enums.CardType;
-import protocol3.clientinstructions.ProtocolDevelopmentCards;
+import protocol.object.ProtocolDevCard;
 
 /**
  * <b>9,7 Entwicklungskarte gekauft (bought development card) </b>

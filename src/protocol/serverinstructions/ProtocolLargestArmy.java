@@ -1,4 +1,4 @@
-package protocol3.serverinstructions;
+package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
@@ -13,18 +13,18 @@ import com.google.gson.annotations.Since;
  */
 
 @Since(0.3)
-public class ProtocolBiggestKnightProwess {
+public class ProtocolLargestArmy {
 
     @SerializedName("Spieler")
 
     int player_id;
 
-    public ProtocolBiggestKnightProwess(int player_id) {
+    public ProtocolLargestArmy(int player_id) {
 
         this.player_id = player_id;
     }
 
-    public int getPlayer_id() {
+    public int getPlayerID() {
 
         return player_id;
     }

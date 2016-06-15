@@ -1,4 +1,4 @@
-package protocol3.clientinstructions;
+package protocol.clientinstructions;
 
 import com.google.gson.annotations.Since;
 
@@ -11,9 +11,9 @@ import com.google.gson.annotations.Since;
  * Created on 06.06.2016.
  */
 @Since(0.3)
-public class ProtocolBuyDevelopmentCards {
+public class ProtocolBuyDevCard {
 
-    public ProtocolBuyDevelopmentCards() {
+    public ProtocolBuyDevCard() {
 
     }
 

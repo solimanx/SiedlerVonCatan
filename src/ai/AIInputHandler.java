@@ -11,20 +11,23 @@ import network.InputHandler;
 import network.ProtocolToModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import protocol.clientinstructions.*;
 import protocol.clientinstructions.trade.*;
 import protocol.configuration.*;
 import protocol.connection.*;
+import protocol.dualinstructions.ProtocolPlayInventionCard;
+import protocol.dualinstructions.ProtocolPlayKnightCard;
+import protocol.dualinstructions.ProtocolPlayMonopolyCard;
+import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.*;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.*;
-import protocol3.clientinstructions.*;
-import protocol3.object.*;
-import protocol3.serverinstructions.*;
 
 /**
  * Handling all input for the AI
@@ -342,43 +345,25 @@ public class AIInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
+    protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    protected void handle(ProtocolDevelopmentCards developmentCards) {
+    protected void handle(ProtocolDevCard developmentCards) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    protected void handle(ProtocolInventionCard inventionCard) {
+    protected void handle(ProtocolLargestArmy biggestKnightProwess) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    protected void handle(ProtocolMonopolyCard monopolyCard) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
+    protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
         // TODO Auto-generated method stub
 
     }
@@ -390,7 +375,7 @@ public class AIInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolMonopolyCardInfo monopolyCardInfo) {
+    protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
         // TODO Auto-generated method stub
 
     }
@@ -402,7 +387,7 @@ public class AIInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
+    protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
         // TODO Auto-generated method stub
 
     }

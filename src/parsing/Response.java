@@ -3,6 +3,7 @@ package parsing;
 import com.google.gson.annotations.SerializedName;
 
 import protocol.clientinstructions.ProtocolBuildRequest;
+import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
 import protocol.clientinstructions.ProtocolHarbourRequest;
@@ -16,11 +17,19 @@ import protocol.configuration.ProtocolPlayerProfile;
 import protocol.configuration.ProtocolVictory;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
+import protocol.dualinstructions.ProtocolPlayInventionCard;
+import protocol.dualinstructions.ProtocolPlayKnightCard;
+import protocol.dualinstructions.ProtocolPlayMonopolyCard;
+import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
+import protocol.object.ProtocolDevCard;
+import protocol.serverinstructions.ProtocolBoughtDevelopmentCard;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolCosts;
 import protocol.serverinstructions.ProtocolDiceRollResult;
+import protocol.serverinstructions.ProtocolLargestArmy;
+import protocol.serverinstructions.ProtocolLongestRoad;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
@@ -28,12 +37,6 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
-import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
-import protocol3.clientinstructions.ProtocolDevelopmentCards;
-import protocol3.object.ProtocolInventionCard;
-import protocol3.object.ProtocolMonopolyCard;
-import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.serverinstructions.*;
 
 public class Response {
 
@@ -116,7 +119,7 @@ public class Response {
 	// Client
 	@SerializedName("Handel anbieten")
 	public ProtocolTradeRequest pTradeRequest; // new in 0.2
-	
+
 	@SerializedName("Handel abschließen")
 	public ProtocolTradeComplete pTradeComplete;// new in 0.2
 
@@ -125,60 +128,43 @@ public class Response {
 
 	@SerializedName("Handel abbrechen")
 	public ProtocolTradeCancel pTradeCancel;// new in 0.2
-	
+
 	// server
 	@SerializedName("Handelsangebot")
 	public ProtocolTradePreview pTradePreview;// new in 0.2
-	
+
 	@SerializedName("Handelsangebot angenommen")
-	
+
 	public ProtocolTradeConfirmation pTradeConfirm; // new in 0.2
 
 	@SerializedName("Handel ausgeführt")
 	public ProtocolTradeCompletion pTradeIsCompleted;// new in 0.2
 
-	
 	@SerializedName("Handelsangebot abgebrochen")
 	public ProtocolTradeCancellation pTradeIsCanceled;// new in 0.2
 
-	// Serverinstructions in Protocol 0.3
-
-	@SerializedName("Größte Rittermacht")
-	public ProtocolBiggestKnightProwess pBiggestKnightProwess;// new in 0.3
-
-	@SerializedName("Erfindung")
-	public ProtocolInventionCardInfo pInventionCardInfo;// new in 0.3
+	// 0.3
 
 	@SerializedName("Längste Handelsstraße")
 	public ProtocolLongestRoad pLongestRoad;// new in 0.3
 
-	@SerializedName("Monopol")
-	public ProtocolMonopolyCardInfo pMonopolyCardInfo;// new in 0.3
+	@SerializedName("Größte Rittermacht")
+	public ProtocolLargestArmy pLargestArmy;// new in 0.3
 
 	@SerializedName("Ritter ausspielen")
-	public ProtocolPlayKnightCard pplayKnightCard;// new in 0.3
+	public ProtocolPlayKnightCard pPlayKnightCard;// new in 0.3
 
 	@SerializedName("Straßenbaukarte ausspielen")
-	public ProtocolRoadBuildingCardInfo pRoadBuildingCardInfo;// new in 0,3
+	public ProtocolPlayRoadCard pPlayRoadCard;// new in 0,3
 
-	// Clientinstructions in Protocol 0.3
+	@SerializedName("Monopol")
+	public ProtocolPlayMonopolyCard pPlayMonopolyCard;// new in 0.3
 
+	@SerializedName("Erfindung")
+	public ProtocolPlayInventionCard pPlayInventionCard;// new in 0.3
+	
 	@SerializedName("Entwicklungskarte kaufen")
-	public ProtocolBuyDevelopmentCards pBuyDevCards; // new in 0.3
-
-	@SerializedName("Entwicklungskarte")
-	public ProtocolDevelopmentCards pDevelopmentCard; // new in 0.3
-
-	// Object in Protocol 0.3
-
-	@SerializedName("Erfindungskarte")
-	public ProtocolInventionCard pInvention; // new in 0.3
-
-	@SerializedName("Monopolkarte")
-	public ProtocolMonopolyCard pMonopolyCard; // new in 0.3
-
-	@SerializedName("Strassenbaukarte")
-	public ProtocolRoadBuildingCard pRoadBuildCard; // new in 0.3
+	public ProtocolBuyDevCard pBuyDevCards; // new in 0.3
 
 	@SerializedName("Entwicklungskarte gekauft")
 	public ProtocolBoughtDevelopmentCard pBoughtDevelopmentCard;// new in 0.3

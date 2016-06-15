@@ -1,4 +1,4 @@
-package protocol3.serverinstructions;
+package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
@@ -14,20 +14,21 @@ import com.google.gson.annotations.Since;
 @Since(0.3)
 public class ProtocolLongestRoad {
 
-    @SerializedName("Spieler")
-    Integer player_id;
+	@SerializedName("Spieler")
+	Integer player_id;
 
-    public ProtocolLongestRoad(Integer player_id) {
-        this.player_id = player_id;
-    }
+	// normal case
+	public ProtocolLongestRoad(Integer player_id) {
+		this.player_id = player_id;
+	}
 
-    //Special Case
-    public ProtocolLongestRoad() {
-    }
+	// Special Case
+	public ProtocolLongestRoad() {
+	}
 
-    public int getPlayer_id() {
+	public int getPlayerID() {
 
-        return player_id;
-    }
+		return player_id;
+	}
 
 }
