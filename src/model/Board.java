@@ -971,7 +971,7 @@ public class Board {
 			String ID2 = null;
 			int count = 0;
 			for (int i = 0; i < tF1.length; i++) {
-				for (int j = 0; j < tF2.length; i++) {
+				for (int j = 0; j < tF2.length; j++) {
 					// if the IDs match
 					if (tF1[i].getFieldID().equals(tF2[j].getFieldID())) {
 						// if its the first one
