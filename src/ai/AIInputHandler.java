@@ -278,27 +278,23 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	
-
 	@Override
 	protected void handle(ProtocolTradePreview tradePreview) {
 		// TODO Auto-generated method stub
 
 	}
 
-	
 	@Override
 	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
 		// TODO Auto-generated method stub
 
 	}
+
 	@Override
 	protected void handle(ProtocolTradeCompletion tradeIsCompleted) {
 		// TODO Auto-generated method stub
 
 	}
-
-	
 
 	@Override
 	protected void handle(ProtocolTradeCancellation tradeIsCanceled) {
@@ -365,14 +361,5 @@ public class AIInputHandler extends ClientInputHandler {
 		// Preferably the AI will try to avoid all errors, which makes this
 		// method useless.
 	}
-
-
-	// ================================================================================
-	// UNUSED/DEPRECATED
-	// ================================================================================
-
-	
-
-
 
 }

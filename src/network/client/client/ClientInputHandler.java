@@ -61,6 +61,10 @@ import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
+/**
+ * Relays information to Client controller.
+ *
+ */
 public class ClientInputHandler {
 	private static Logger logger = LogManager.getLogger(ClientInputHandler.class.getName());
 	private ClientController clientController;
@@ -214,20 +218,41 @@ public class ClientInputHandler {
 
 	// Paragraph 5
 
+	/**
+	 * Transition to Controller on receiving : Hello
+	 * 
+	 * @param hello
+	 */
 	protected void handle(ProtocolHello hello) {
 		clientController.serverHello(hello.getVersion(), hello.getProtocol());
 	}
 
+	/**
+	 * Transition to Controller on receiving : Welcome
+	 * 
+	 * @param welcome
+	 */
 	protected void handle(ProtocolWelcome welcome) {
 		clientController.welcome(welcome.getPlayerID());
 	}
 
 	// Paragraph 7
+	
+	/**
+	 * Transition to Controller on receiving : ServerResponse
+	 * 
+	 * @param serverConfirmation
+	 */
 	protected void handle(ProtocolServerResponse serverConfirmation) {
 		String server_response = serverConfirmation.getServerResponse();
 		clientController.receiveServerConfirmation(server_response);
 	}
 
+	/**
+	 * Transition to Controller on receiving : Chat Message
+	 * 
+	 * @param chatReceiveMessage
+	 */
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		String s = chatReceiveMessage.getMessage();
 		Integer playerId = chatReceiveMessage.getSender();
@@ -235,12 +260,22 @@ public class ClientInputHandler {
 	}
 
 	// Paragraph 8
-
+	/**
+	 * Transition to Controller on receiving : Error Message
+	 * 
+	 * @param error
+	 */
 	protected void handle(ProtocolError error) {
 		logger.info("Meldung wird geschickt");
 		clientController.error(error.getNotice());
 
 	}
+
+	/**
+	 * Transition to Controller on receiving : Game Started
+	 * 
+	 * @param gameStarted
+	 */
 
 	protected void handle(ProtocolGameStarted gameStarted) {
 		// ProtocolBoard object retrieved (Karte: ...}
@@ -300,6 +335,12 @@ public class ClientInputHandler {
 
 	}
 
+	// Paragraph 9
+	
+	/**
+	 * Transition to Controller on receiving : Status Update
+	 * @param statusUpdate
+	 */
 	protected void handle(ProtocolStatusUpdate statusUpdate) {
 		// get player object
 		ProtocolPlayer pPlayer = statusUpdate.getPlayer();
@@ -320,13 +361,21 @@ public class ClientInputHandler {
 		clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
 
 	}
-
+	
+	/**
+	 * Transition to Controller on receiving : Dice Roll result
+	 * @param diceRollResult
+	 */
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
 		int playerID = diceRollResult.getPlayerID();
 		int[] result = diceRollResult.getRoll();
 		clientController.diceRollResult(playerID, result);
 	}
 
+	/**
+	 * Transition to Controller on receiving : Resource Obtain
+	 * @param resourceObtain
+	 */
 	protected void handle(ProtocolResourceObtain resourceObtain) {
 		int playerID = resourceObtain.getPlayerID();
 		ProtocolResource pr = resourceObtain.getResource();
@@ -336,6 +385,10 @@ public class ClientInputHandler {
 
 	}
 
+	/**
+	 * Transition to Controller on receiving : Resource Costs
+	 * @param costs
+	 */
 	protected void handle(ProtocolCosts costs) {
 		int playerID = costs.getPlayerID();
 		ProtocolResource pr = costs.getResource();
@@ -345,8 +398,12 @@ public class ClientInputHandler {
 
 	}
 
+	/**
+	 * Transition to Controller on receiving : Robber New Position
+	 * @param robberMovement
+	 */
 	protected void handle(ProtocolRobberMovement robberMovement) {
-
+		//TODO
 		int playerID = robberMovement.getPlayerID();
 		String locationID = robberMovement.getLocationID();
 		int victimID = robberMovement.getVictimID();
@@ -354,6 +411,10 @@ public class ClientInputHandler {
 
 	}
 
+	/**
+	 * Transition to Controller on receiving : Build process
+	 * @param build
+	 */
 	protected void handle(ProtocolBuild build) {
 		ProtocolBuilding building = build.getBuilding();
 		int playerID = building.getPlayerID();
@@ -374,50 +435,89 @@ public class ClientInputHandler {
 		}
 
 	}
-
+	
+	/**
+	 * Transition to Controller on receiving : Buying DevCard
+	 * @param boughtDevelopmentCard
+	 */
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	/**
+	 * Transition to Controller on receiving : Longest Road Card
+	 * @param longestRoad
+	 */
 	protected void handle(ProtocolLongestRoad longestRoad) {
 		// TODO TWO CASES
 
 	}
-
+	
+	/**
+	 * Transition to Controller on receiving : Largest Army Card
+	 * @param largestArmy
+	 */
 	protected void handle(ProtocolLargestArmy largestArmy) {
 		// TODO Auto-generated method stub
 
 	}
 
+	// Paragraph 11
+	
+	/**
+	 * Transition to Controller on receiving : Trade Preview
+	 * 
+	 * @param tradePreview
+	 */
 	protected void handle(ProtocolTradePreview tradePreview) {
 		int playerID = tradePreview.getPlayerID();
 		int tradeID = tradePreview.getTradeID();
 
-		// FIXED
 		int[] offer = ProtocolToModel.convertResources(tradePreview.getOffer());
 		int[] demand = ProtocolToModel.convertResources(tradePreview.getWithdrawal());
 		clientController.receiveTrade(playerID, tradeID, offer, demand);
+
 	}
 
+	/**
+	 * Transition to Controller on receiving : Trade Confirmation
+	 * 
+	 * @param tradeConfirmation
+	 */
 	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
 		int playerID = tradeConfirmation.getPlayerID();
 		int tradeID = tradeConfirmation.getTradeID();
 		clientController.tradeAccepted(playerID, tradeID);
 	}
 
+	/**
+	 * Transition to Controller on receiving : Trade Completion
+	 * 
+	 * @param tradeIsCompleted
+	 */
 	protected void handle(ProtocolTradeCompletion tradeIsCompleted) {
 
 		int playerID = tradeIsCompleted.getPlayerID();
 		int tradePartnerID = tradeIsCompleted.getTradePartnerID();
 		clientController.tradeFulfilled(playerID, tradePartnerID);
 	}
-
+	
+	/**
+	 * Transition to Controller on receiving : Trade Cancelation
+	 * @param tradeIsCanceled
+	 */
 	protected void handle(ProtocolTradeCancellation tradeIsCanceled) {
 		int playerID = tradeIsCanceled.getPlayerID();
 		int tradeID = tradeIsCanceled.getTradeID();
 		clientController.tradeCancelled(playerID, tradeID);
 	}
+
+	/**
+	 * Transition to Controller on receiving: Road Building Card
+	 * 
+	 * @param buyDevelopmentCards
+	 */
 
 	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
 		// TODO Auto-generated method stub
@@ -428,27 +528,52 @@ public class ClientInputHandler {
 		// TODO Auto-generated method stub
 
 	}
+	
+	/**
+	 * Transition to Controller on receiving : Invention Card
+	 * @param inventionCardInfo
+	 */
 
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
 		// TODO Auto-generated method stub
 
 	}
+	
+	/**
+	 * Transition to Controller on receiving : Monopoly Card
+	 * @param monopolyCardInfo
+	 */
 
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
 		// TODO Auto-generated method stub
 
 	}
+	
+	/**
+	 * Transition to Controller on receiving : Knight Card
+	 * @param knightCardInfo
+	 */
 
-	protected void handle(ProtocolPlayKnightCard playKnightCard) {
+	protected void handle(ProtocolPlayKnightCard knightCardInfo) {
 		// TODO Auto-generated method stub
 
 	}
+	/**
+	 * Transition to Controller on receiving : Road Card
+	 * @param roadBuildingCardInfo
+	 */
 
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
 		// TODO Auto-generated method stub
 
 	}
 
+	// Custom
+	/**
+	 * Transition to Controller on receiving non defined String
+	 * 
+	 * @param string
+	 */
 	protected void handle(String string) {
 		clientController.receiveServerConfirmation(string);
 	}
