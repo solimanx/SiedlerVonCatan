@@ -18,6 +18,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,6 +45,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -53,21 +55,36 @@ import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
 
 public class GameViewController implements Initializable {
+	
+	@FXML
+	private Text selfWoodText;
 
 	@FXML
-	private TextField selfWood;
+	private TextFlow selfWood;
 
 	@FXML
-	private TextField selfClay;
+	private Text selfClayText;
 
 	@FXML
-	private TextField selfSheep;
+	private TextFlow selfClay;
 
 	@FXML
-	private TextField selfCorn;
+	private Text selfSheepText;
 
 	@FXML
-	private TextField selfOre;
+	private TextFlow selfSheep;
+
+	@FXML
+	private Text selfCornText;
+
+	@FXML
+	private TextFlow selfCorn;
+
+	@FXML
+	private Text selfOreText;
+
+	@FXML
+	private TextFlow selfOre;
 
 	@FXML
 	private Button rollDiceButton;
@@ -79,13 +96,13 @@ public class GameViewController implements Initializable {
 	private Button endTurnButton;
 
 	@FXML
-	private TextField playerTwoCards;
+	private Text playerTwoCards;
 
 	@FXML
-	private TextField playerThreeCards;
+	private Text playerThreeCards;
 
 	@FXML
-	private TextField playerFourCards;
+	private Text playerFourCards;
 
 	@FXML
 	private TextArea messages;
@@ -137,9 +154,6 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Label selfName;
-
-	@FXML
-	private Label serverResponse;
 
 	@FXML
 	private TextArea serverLog;
@@ -204,7 +218,15 @@ public class GameViewController implements Initializable {
 
 	private Stage tradeStage;
 
-	private FadeTransition transition;
+	private FadeTransition woodTransition;
+
+	private FadeTransition clayTransition;
+
+	private FadeTransition woolTransition;
+
+	private FadeTransition cornTransition;
+
+	private FadeTransition oreTransition;
 
 	public TradeViewController getTradeViewController() {
 		return tradeViewController;
@@ -224,7 +246,6 @@ public class GameViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initFieldColors();
 		response = new SimpleStringProperty("Server responses will appear here");
-		serverResponse.textProperty().bind(response);
 		factory = new ViewBoardFactory();
 
 	}
@@ -236,9 +257,7 @@ public class GameViewController implements Initializable {
 	 */
 	public void startScene(Stage stage) {
 		this.gameStage = stage;
-		// board.getChildren().addAll(factory.getViewBoard(stage));
 		board.getChildren().add(factory.getViewBoard(stage));
-		// board = factory.getViewBoard(stage);
 		board.toBack();
 		viewController.getClientController().initializeGUI();
 
@@ -266,24 +285,103 @@ public class GameViewController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		transition = new FadeTransition(new Duration(500));
-		transition.setDelay(new Duration(2000));
-		transition.setFromValue(1);
-		transition.setToValue(0);
-		transition.setNode(serverResponse);
 
-		response.addListener(new ChangeListener<String>() {
+		woodTransition = generateTransition(selfWoodText);
+		clayTransition = generateTransition(selfClayText);
+		woolTransition = generateTransition(selfSheepText);
+		cornTransition = generateTransition(selfCornText);
+		oreTransition = generateTransition(selfOreText);
 
+		selfWoodText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				transition.play();
-				if (!newValue.equals("OK")) {
-					serverLog.appendText(newValue + "\n");
+				if (Integer.parseInt(newValue) - Integer.parseInt(oldValue) > 0) {
+					selfWoodText.setFill(Color.LIMEGREEN);
+				} else {
+					selfWoodText.setFill(Color.RED);
 				}
-
+				woodTransition.play();
+			}
+		});
+		
+		selfClayText.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (Integer.parseInt(newValue) - Integer.parseInt(oldValue) > 0) {
+					selfClayText.setFill(Color.LIMEGREEN);
+				} else {
+					selfClayText.setFill(Color.RED);
+				}
+				clayTransition.play();
+			}
+		});
+		
+		selfSheepText.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (Integer.parseInt(newValue) - Integer.parseInt(oldValue) > 0) {
+					selfSheepText.setFill(Color.LIMEGREEN);
+				} else {
+					selfSheepText.setFill(Color.RED);
+				}
+				woolTransition.play();
+			}
+		});
+		
+		selfCornText.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (Integer.parseInt(newValue) - Integer.parseInt(oldValue) > 0) {
+					selfCornText.setFill(Color.LIMEGREEN);
+				} else {
+					selfCornText.setFill(Color.RED);
+				}
+				cornTransition.play();
+			}
+		});
+		
+		selfOreText.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (Integer.parseInt(newValue) - Integer.parseInt(oldValue) > 0) {
+					selfOreText.setFill(Color.LIMEGREEN);
+				} else {
+					selfOreText.setFill(Color.RED);
+				}
+				oreTransition.play();
 			}
 		});
 
+		response.addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.equals("OK")) {
+					serverLog.appendText("\n" + newValue);
+				}
+			}
+		});
+
+	}
+
+	/**
+	 * @param text
+	 * @return
+	 */
+	private FadeTransition generateTransition(Text text) {
+		FadeTransition transition = new FadeTransition(new Duration(200), text);
+		transition.setFromValue(1);
+		transition.setToValue(0);
+		transition.setAutoReverse(true);
+		transition.setCycleCount(5);
+		transition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				text.setFill(Color.BLACK);
+				// TODO Auto-generated method stub
+			}
+		});
+		return transition;
 	}
 
 	public String getPlayerNames(Integer playerID) {
@@ -597,11 +695,11 @@ public class GameViewController implements Initializable {
 			// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP,
 			// CORN}
 			selfResources = resources;
-			selfWood.setText(Integer.toString(resources[0]));
-			selfClay.setText(Integer.toString(resources[1]));
-			selfSheep.setText(Integer.toString(resources[3]));
-			selfCorn.setText(Integer.toString(resources[4]));
-			selfOre.setText(Integer.toString(resources[2]));
+			selfWoodText.setText(Integer.toString(resources[0]));
+			selfClayText.setText(Integer.toString(resources[1]));
+			selfSheepText.setText(Integer.toString(resources[3]));
+			selfCornText.setText(Integer.toString(resources[4]));
+			selfOreText.setText(Integer.toString(resources[2]));
 			break;
 		case 2:
 			playerTwoCards.setText(Integer.toString(resources[0]));
@@ -623,6 +721,7 @@ public class GameViewController implements Initializable {
 	 * @param result
 	 */
 	public void setDiceRollResult(int result) {
+		diceResult.clear();
 		diceResult.setText("" + result);
 	}
 
@@ -662,6 +761,9 @@ public class GameViewController implements Initializable {
 			playerStatusOne.setText(state.toString());
 			selfState = state;
 			switch (state) {
+			case DICEROLLING:
+				rollDiceButton.setDisable(false);
+				break;
 			case DISPENSE_CARDS_ROBBER_LOSS:
 				setRobberLossState();
 				break;
@@ -669,10 +771,12 @@ public class GameViewController implements Initializable {
 				setMoveRobberState();
 				break;
 			case WAITING:
-				playerVBoxOne.setDisable(true);
+				rollDiceButton.setDisable(true);
+				endTurnButton.setDisable(true);
 				break;
 			default:
-				playerVBoxOne.setDisable(false);
+				rollDiceButton.setDisable(false);
+				endTurnButton.setDisable(false);
 			}
 			break;
 		case 2:

@@ -11,8 +11,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.GameViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.GameViewController">
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -31,58 +33,38 @@
                   <Label fx:id="playerStatusOne" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
                </children>
             </HBox>
-            <VBox fx:id="playerVBoxOne" disable="true" prefHeight="200.0" prefWidth="125.0">
+            <VBox fx:id="playerVBoxOne" disable="true" prefHeight="200.0" prefWidth="125.0" spacing="5.0">
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
+                  <TextFlow fx:id="selfWood" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
                      <children>
-                        <Label text="Wood">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="selfWood" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="29.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wood: " />
+                        <Text fx:id="selfWoodText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
+                  </TextFlow>
+                  <TextFlow fx:id="selfClay" layoutX="10.0" layoutY="234.0" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
                      <children>
-                        <Label text="Clay">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="selfClay" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="29.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Clay: " />
+                        <Text fx:id="selfClayText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
+                  </TextFlow>
+                  <TextFlow fx:id="selfSheep" layoutX="10.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
                      <children>
-                        <Label text="Wool">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="selfSheep" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="29.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wool: " />
+                        <Text fx:id="selfSheepText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
+                  </TextFlow>
+                  <TextFlow fx:id="selfCorn" layoutX="10.0" layoutY="266.0" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
                      <children>
-                        <Label text="Corn">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="selfCorn" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="29.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Corn: " />
+                        <Text fx:id="selfCornText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
+                  </TextFlow>
+                  <TextFlow fx:id="selfOre" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
                      <children>
-                        <Label text="Ore">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="selfOre" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="29.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ore: " />
+                        <Text fx:id="selfOreText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
-                  </HBox>
+                  </TextFlow>
                   <VBox fx:id="playerButtons" alignment="CENTER_RIGHT">
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -109,6 +91,9 @@
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -134,16 +119,12 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
+                  <TextFlow prefHeight="33.0" prefWidth="120.0" textAlignment="RIGHT">
                      <children>
-                        <Label text="Cards">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="playerFourCards" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="29.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:  " />
+                        <Text fx:id="playerFourCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
-                  </HBox>
+                  </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0">
                      <children>
                         <Label fx:id="playerFourVPoints" />
@@ -173,16 +154,12 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
+                  <TextFlow prefHeight="33.0" prefWidth="120.0" textAlignment="RIGHT">
                      <children>
-                        <Label text="Cards">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="playerTwoCards" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="29.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:  " />
+                        <Text fx:id="playerTwoCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
-                  </HBox>
+                  </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0">
                      <children>
                         <Label fx:id="playerTwoVPoints" />
@@ -212,16 +189,12 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
+                  <TextFlow prefHeight="33.0" prefWidth="120.0" textAlignment="RIGHT">
                      <children>
-                        <Label text="Cards">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="playerThreeCards" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="29.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:  " />
+                        <Text fx:id="playerThreeCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
-                  </HBox>
+                  </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0">
                      <children>
                         <Label fx:id="playerThreeVPoints" />
@@ -246,12 +219,12 @@
             <TextField fx:id="messageInput" maxWidth="-Infinity" onAction="#sendMessage" prefWidth="500.0" promptText="Enter chat message and press Enter" />
          </children>
       </VBox>
-      <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="43.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
+      <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="95.0" prefWidth="980.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Würfel: " />
-                  <TextField fx:id="diceResult" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="34.0" />
+                  <TextField fx:id="diceResult" alignment="CENTER" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="44.0" />
                   <Button fx:id="openRobberView" mnemonicParsing="false" onAction="#setRobberLossState" text="RobberLoss">
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -269,15 +242,10 @@
                   </Button>
                </children>
             </HBox>
-            <Label fx:id="serverResponse" alignment="CENTER" prefHeight="17.0" prefWidth="346.0" text="Server Response" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
+            <TextArea fx:id="serverLog" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="500.0">
                <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Label>
-            <TextArea fx:id="serverLog" maxWidth="-Infinity" prefHeight="38.0" prefWidth="500.0" />
+                  <Insets top="10.0" />
+               </VBox.margin></TextArea>
          </children>
       </VBox>
    </children>
