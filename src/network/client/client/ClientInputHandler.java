@@ -200,6 +200,7 @@ public class ClientInputHandler {
 		}
 
 	}
+
 	/**
 	 * sends JSON formatted string to parser and initiates handling of parsed
 	 * object
@@ -211,6 +212,8 @@ public class ClientInputHandler {
 		handle(object);
 	}
 
+	// Paragraph 5
+
 	protected void handle(ProtocolHello hello) {
 		clientController.serverHello(hello.getVersion(), hello.getProtocol());
 	}
@@ -219,6 +222,7 @@ public class ClientInputHandler {
 		clientController.welcome(welcome.getPlayerID());
 	}
 
+	// Paragraph 7
 	protected void handle(ProtocolServerResponse serverConfirmation) {
 		String server_response = serverConfirmation.getServerResponse();
 		clientController.receiveServerConfirmation(server_response);
@@ -229,6 +233,8 @@ public class ClientInputHandler {
 		Integer playerId = chatReceiveMessage.getSender();
 		clientController.chatReceiveMessage(playerId, s);
 	}
+
+	// Paragraph 8
 
 	protected void handle(ProtocolError error) {
 		logger.info("Meldung wird geschickt");
@@ -324,7 +330,7 @@ public class ClientInputHandler {
 	protected void handle(ProtocolResourceObtain resourceObtain) {
 		int playerID = resourceObtain.getPlayerID();
 		ProtocolResource pr = resourceObtain.getResource();
-		// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
+		// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 		int[] result = ProtocolToModel.convertResources(pr);
 		clientController.resourceObtain(playerID, result);
 
@@ -333,6 +339,7 @@ public class ClientInputHandler {
 	protected void handle(ProtocolCosts costs) {
 		int playerID = costs.getPlayerID();
 		ProtocolResource pr = costs.getResource();
+		// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 		int[] resources = ProtocolToModel.convertResources(pr);
 		clientController.costs(playerID, resources);
 

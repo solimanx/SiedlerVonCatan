@@ -361,24 +361,6 @@ public class ClientOutputHandler {
 
 	}
 
-	/**
-	 * @param resource
-	 */
-	public void handleMonopoly(int[] resource) {
-		// Resource type goes in
-		// TODO
-		ProtocolPlayMonopolyCard pmc = new ProtocolPlayMonopolyCard(null);
-		Response r = new Response();
-		r.pPlayMonopolyCard = pmc;
-		try {
-			client.write(parser.createString(r));
-		} catch (IOException e) {
-			logger.error("Threw a Input/Output Exception ", e);
-			logger.catching(Level.ERROR, e);
-			e.printStackTrace();
-		}
-
-	}
 
 	/**
 	 * @param resource
@@ -401,7 +383,7 @@ public class ClientOutputHandler {
 	/**
 	 * @param resource
 	 */
-	public void monopolyCardInfo(ResourceType resource) {
+	public void playMonopolyCard(ResourceType resource) {
 
 		ProtocolPlayMonopolyCard pmci = new ProtocolPlayMonopolyCard(resource);
 		Response r = new Response();
@@ -420,7 +402,7 @@ public class ClientOutputHandler {
 	 * @param road1_id
 	 * @param road2_id
 	 */
-	public void roadBuildingCardInfo(String road1_id, String road2_id) {
+	public void playRoadCard(String road1_id, String road2_id) {
 		ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(road1_id, road2_id);
 		Response r = new Response();
 		r.pPlayRoadCard = prbci;
