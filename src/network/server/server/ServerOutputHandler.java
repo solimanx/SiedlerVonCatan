@@ -382,26 +382,6 @@ public class ServerOutputHandler {
         }
 
     }
-
-    public void inventionCardInfo(int[] resource, Integer player_id) {
-        ProtocolResource pr;
-        if (resource.length > 1) {
-            pr = new ProtocolResource(resource[0], resource[1], resource[2], resource[3], resource[4], 0);
-        } else {
-            pr = new ProtocolResource(0, 0, 0, 0, 0, resource[0]);
-        }
-        ProtocolPlayInventionCard pici = new ProtocolPlayInventionCard(player_id,pr);
-        Response r = new Response();
-        r.pPlayInventionCard = pici;
-        try {
-            server.broadcast(parser.createString(r));
-        } catch (IOException e) {
-            logger.error("Threw a Input/Output Exception ", e);
-            e.printStackTrace();
-        }
-    }
-
-
     public void longestRoad(int player_id) {
         ProtocolLongestRoad plr = new ProtocolLongestRoad(player_id);
         Response r = new Response();
@@ -414,10 +394,23 @@ public class ServerOutputHandler {
         }
 
     }
+    
+    public void inventionCardPlayed(int[] resource, Integer player_id) {
+        ProtocolResource pr = ModelToProtocol.getResources(resource);
+        ProtocolPlayInventionCard pici = new ProtocolPlayInventionCard(player_id,pr);
+        Response r = new Response();
+        r.pPlayInventionCard = pici;
+        try {
+            server.broadcast(parser.createString(r));
+        } catch (IOException e) {
+            logger.error("Threw a Input/Output Exception ", e);
+            e.printStackTrace();
+        }
+    }
+    
+    public void monopolyCardPlayed(ResourceType resourceType, int threadID) {
 
-    public void monopolyCardInfo(ResourceType resourceType, Integer player_id) {
-
-        ProtocolPlayMonopolyCard pmci = new ProtocolPlayMonopolyCard(player_id,resourceType);
+        ProtocolPlayMonopolyCard pmci = new ProtocolPlayMonopolyCard(threadID,resourceType);
         Response r = new Response();
         r.pPlayMonopolyCard = pmci;
         try {
@@ -430,8 +423,8 @@ public class ServerOutputHandler {
     }
 
 
-    public void playKnightCard(String road1_id, int target, Integer player_id) {
-        ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(player_id, road1_id, target);
+    public void knightCardPlayed(int threadID,String location, Integer victimID) {
+        ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(threadID, location, victimID);
         Response r = new Response();
         r.pPlayKnightCard = ppkc;
         try {
@@ -442,8 +435,10 @@ public class ServerOutputHandler {
         }
     }
 
-    public void roadBuildingCardInfo(String road1_id, String road2_id, Integer player_id) {
-        ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(player_id, road1_id, road2_id);
+    public void roadBuildingCardPlayed(int threadID,int x1, int y1, int dir1, int x2, int y2, int dir2) {
+    	String location1 = ModelToProtocol.getEdgeID(x1, y1, dir1);
+    	String location2 = ModelToProtocol.getEdgeID(x2, y2, dir2);
+        ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(threadID, location1, location2);
         Response r = new Response();
         r.pPlayRoadCard = prbci;
         try {

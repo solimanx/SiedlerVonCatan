@@ -322,4 +322,11 @@ public class GameLogic {
         }
     }
 
+	public boolean checkPlayDevCard(int modelID, int currentPlayer) {
+		if (isActionForbidden(modelID,currentPlayer,PlayerState.TRADING_OR_BUILDING) || board.getPlayer(modelID).hasPlayedDevCard()){
+			return false;
+		}
+		return true;
+	}
+
 }

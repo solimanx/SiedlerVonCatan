@@ -15,37 +15,37 @@ import com.google.gson.annotations.Since;
 @Since(0.3)
 public class ProtocolPlayKnightCard {
 	@SerializedName("Spieler")
-	private Integer player_id;
+	private Integer playerID;
 
-	@SerializedName("Straße 1")
-	private String road1_id;
+	@SerializedName("Ort")
+	private String fieldID;
 
 	@SerializedName("Ziel")
-	private int target;
+	private int targetID;
 
 	// Client to Server
 	public ProtocolPlayKnightCard(String road1_id, int target) {
-		this.road1_id = road1_id;
-		this.target = target;
+		this.fieldID = road1_id;
+		this.targetID = target;
 	}
 
 	// Server to Client
-	public ProtocolPlayKnightCard(Integer player_id, String road1_id, int target) {
-		this.player_id = player_id;
-		this.road1_id = road1_id;
-		this.target = target;
+	public ProtocolPlayKnightCard(Integer playerID, String fieldID, int targetID) {
+		this.playerID = playerID;
+		this.fieldID = fieldID;
+		this.targetID = targetID;
 
 	}
 
 	public String getRoad1_id() {
-		return road1_id;
+		return fieldID;
 	}
 
 	public int getTarget() {
-		return target;
+		return targetID;
 	}
 
 	public Integer getPlayer_id() {
-		return player_id;
+		return playerID;
 	}
 }

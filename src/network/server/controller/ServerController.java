@@ -489,9 +489,9 @@ public class ServerController {
 	 * @param dir
 	 */
 	private void checkLongestTradingRoute(int modelID, int aX, int aY, int dir) {
-/*		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
-		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked);
-		if (longestRoute > lengthLongestTradeRoute && longestRoute > 4) {
+		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
+		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked, null);
+		if(longestRoute > lengthLongestTradeRoute && longestRoute>4){
 			board.getPlayer(0).setHasLongestRoad(false);
 			board.getPlayer(1).setHasLongestRoad(false);
 			board.getPlayer(2).setHasLongestRoad(false);
@@ -499,7 +499,7 @@ public class ServerController {
 			board.getPlayer(modelID).setHasLongestRoad(true);
 			serverOutputHandler.longestRoad(modelID);
 			lengthLongestTradeRoute = longestRoute;
-		}*/
+		}
 	}
 
 	/**
@@ -517,8 +517,18 @@ public class ServerController {
 	 *            list of already calculated streets
 	 * @return length of the longest possible road
 	 */
-/*	// TODO verbindung von zwei straßensystemen
-	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked) {
+	/**
+	 * recursive method, which calculates the longest possible rout from the given street (edge)
+	 * 
+	 * @param modelID
+	 * @param aX edge x-coordinate
+	 * @param aY edge y-coordinate
+	 * @param dir edge direction
+	 * @param alreadyChecked list of already calculated streets
+	 * @return length of the longest possible road
+	 */
+	//TODO verbindung von zwei straßensystemen
+	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked, Edge[] lastNeighbours) {
 		int a = 0;
 		int b = 0;
 		int c = 0;
@@ -540,10 +550,6 @@ public class ServerController {
 			}
 		}
 		
-		if (neighbours.length > 0) {
-			if (neighbours[0].isHasStreet()) {
-				if (neighbours[0].getOwnerID() == modelID) {
-					if (!alreadyChecked.contains(neighbours[0])) {
 		if(neighbours.length > 0){
 			if(neighbours[0].isHasStreet() && !notToCheck.contains(neighbours[0])){
 				if(neighbours[0].getOwnerID() == modelID){
@@ -552,29 +558,15 @@ public class ServerController {
 						fieldTwo = neighbours[0].getEdgeID().substring(1, 2);
 						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
 						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
-						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0],
-								fieldTwoCoords[1]);
+						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
 						ac = alreadyChecked;
 						ac.add(neighbours[0]);
 						a = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 					}
 				}
 			}
-
+				
 		}
-		if (neighbours.length > 1) {
-			if (neighbours[1].isHasStreet()) {
-				if (neighbours[1].getOwnerID() == modelID) {
-					if (!alreadyChecked.contains(neighbours[1])) {
-						fieldOne = neighbours[1].getEdgeID().substring(0, 1);
-						fieldTwo = neighbours[1].getEdgeID().substring(1, 2);
-						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
-						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
-						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0],
-								fieldTwoCoords[1]);
-						ac = alreadyChecked;
-						ac.add(neighbours[1]);
-						b = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
 			if(neighbours.length > 1){
 				if(neighbours[1].isHasStreet() && !notToCheck.contains(neighbours[1])){
 					if(neighbours[1].getOwnerID() == modelID){
@@ -591,20 +583,6 @@ public class ServerController {
 					}
 				}
 			}
-		}
-		if (neighbours.length > 2) {
-			if (neighbours[2].isHasStreet()) {
-				if (neighbours[2].getOwnerID() == modelID) {
-					if (!alreadyChecked.contains(neighbours[2])) {
-						fieldOne = neighbours[2].getEdgeID().substring(0, 1);
-						fieldTwo = neighbours[2].getEdgeID().substring(1, 2);
-						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
-						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
-						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0],
-								fieldTwoCoords[1]);
-						ac = alreadyChecked;
-						ac.add(neighbours[2]);
-						c = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
 			if(neighbours.length > 2){
 				if(neighbours[2].isHasStreet() && !notToCheck.contains(neighbours[2])){
 					if(neighbours[2].getOwnerID() == modelID){
@@ -621,21 +599,6 @@ public class ServerController {
 					}
 				}
 			}
-		}
-		if (neighbours.length > 3) {
-			if (neighbours[3].isHasStreet()) {
-				if (neighbours[3].getOwnerID() == modelID) {
-					if (!alreadyChecked.contains(neighbours[3])) {
-						fieldOne = neighbours[3].getEdgeID().substring(0, 1);
-						fieldTwo = neighbours[3].getEdgeID().substring(1, 2);
-						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
-						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
-						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0],
-								fieldTwoCoords[1]);
-						ac = alreadyChecked;
-						ac.add(neighbours[3]);
-						d = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
-					}
 			if(neighbours.length > 3){
 				if(neighbours[3].isHasStreet() && !notToCheck.contains(neighbours[3])){
 					if(neighbours[3].getOwnerID() == modelID){
@@ -652,22 +615,21 @@ public class ServerController {
 					}		
 				}
 			}
-		}
 		int result;
-		if (a < b) {
-			result = b;
-		} else {
+		if(a<b){
+			result=b;
+		}else{
 			result = a;
 		}
-		if (c > result) {
+		if(c>result){
 			result = c;
 		}
-		if (d > result) {
+		if(d>result){
 			result = d;
 		}
 		return result;
 	}
-*/
+
 	/**
 	 * checks if the player has the most played knight cards
 	 * 
@@ -1020,7 +982,7 @@ public class ServerController {
 				if (victimThreadID == null) {
 					String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
 					gameLogic.getBoard().setBandit(location);
-					serverOutputHandler.robberMovement(threadID, location, null);
+					serverOutputHandler.knightCardPlayed(threadID, location, null);
 				} else {
 					PlayerModel victimPM = gameLogic.getBoard().getPlayer(victimModelID);
 					if (victimPM.sumResources() != 0) { // steal a random card
@@ -1042,7 +1004,7 @@ public class ServerController {
 
 						String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
 						gameLogic.getBoard().setBandit(location);
-						serverOutputHandler.robberMovement(threadID, location, victimThreadID);
+						serverOutputHandler.knightCardPlayed(threadID, location, victimThreadID);
 
 					}
 				}
@@ -1061,8 +1023,7 @@ public class ServerController {
 		if (gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
 			error(modelID, "Ungültiger Spielzug");
 		} else {
-			// serverOutputHandler.roadBuildingCardInfo(road1_id, road2_id,
-			// player_id);
+			serverOutputHandler.roadBuildingCardPlayed(threadID,x1,y1,dir1,x2,y2,dir2);
 			// workaround:
 			// resourcen für gameLogic hinzufügen
 			addToPlayersResource(modelID, DefaultSettings.STREET_BUILD_COST);
@@ -1099,7 +1060,7 @@ public class ServerController {
 			int[] obtain = new int[5];
 			int currPRes;
 			int[] currLoss = new int[5];
-			serverOutputHandler.monopolyCardInfo(resType, threadID);
+			serverOutputHandler.monopolyCardPlayed(resType, threadID);
 			for (int i = 0; i < amountPlayers; i++) {
 				if (i != modelID) {
 					currPRes = gameLogic.getBoard().getPlayer(i).getResourceAmountOf(resIndex);
@@ -1124,7 +1085,7 @@ public class ServerController {
 			int resAmountCheck = 0;
 			int[] obtain = new int[5];
 			ResourceType currResType;
-			serverOutputHandler.inventionCardInfo(resources, threadID);
+			serverOutputHandler.inventionCardPlayed(resources, threadID);
 			for (int i = 0; i < resources.length; i++) {
 				if (resources[i] != 0) {
 					currResType = DefaultSettings.RESOURCE_ORDER[i];
@@ -1132,7 +1093,6 @@ public class ServerController {
 						obtain[i]++;
 						resAmountCheck++;
 					}
-
 				}
 			}
 			if (resAmountCheck > 2){

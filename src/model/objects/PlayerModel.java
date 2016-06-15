@@ -27,6 +27,8 @@ public class PlayerModel {
     private Color color;
     private String name;
     private int playedKnightCards;
+    private boolean hasPlayedDevCard = false;
+    private ArrayList<DevelopmentCard> devCardsBoughtInThisRound;
 
     // {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}
     private int[] playerDevCard = {0, 0, 0, 0, 0};
@@ -37,6 +39,10 @@ public class PlayerModel {
 
     // is null for self, but non null for other players
     private Integer hiddenResources;
+
+	
+
+	
 
     public PlayerModel(int id) {
         this.playerID = id;
@@ -333,4 +339,19 @@ public class PlayerModel {
     public int sumResources() {
         return resources[0] + resources[1] + resources[2] + resources[3] + resources[4];
     }
+
+
+	public ArrayList<DevelopmentCard> getDevCardsBoughtInThisRound() {
+		return devCardsBoughtInThisRound;
+	}
+
+	public void setHasPlayedDevCard(boolean flag) {
+		hasPlayedDevCard = flag;
+		
+	}
+	
+	public boolean hasPlayedDevCard(){
+		return hasPlayedDevCard;
+	}
+	
 }
