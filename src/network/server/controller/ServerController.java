@@ -540,8 +540,9 @@ public class ServerController {
 		String fieldOne;
 		String fieldTwo;
 		ArrayList<Edge> ac = new ArrayList<Edge>();
+		ac = alreadyChecked;
+		ac.add(board.getEdgeAt(aX, aY, dir));
 		Edge[] neighbours = board.getLinkedEdges(aX, aY, dir);
-		
 		ArrayList<Edge> notToCheck = new ArrayList<Edge>();
 		for(int i = 0; i<lastNeighbours.length; i++){
 			for(int j = 0; j< neighbours.length; j++){
@@ -560,8 +561,7 @@ public class ServerController {
 						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
 						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
 						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
-						ac = alreadyChecked;
-						ac.add(neighbours[0]);
+						
 						a = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 					}
 				}
@@ -577,8 +577,6 @@ public class ServerController {
 							fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
 							fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
 							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
-							ac = alreadyChecked;
-							ac.add(neighbours[1]);
 							b = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 						}
 					}
@@ -593,8 +591,7 @@ public class ServerController {
 							fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
 							fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
 							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
-							ac = alreadyChecked;
-							ac.add(neighbours[2]);
+							
 							c = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 						}
 					}
@@ -609,8 +606,7 @@ public class ServerController {
 							fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
 							fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
 							coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
-							ac = alreadyChecked;
-							ac.add(neighbours[3]);
+							
 							d = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 						}
 					}		
