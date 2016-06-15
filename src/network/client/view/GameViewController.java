@@ -142,6 +142,9 @@ public class GameViewController implements Initializable {
 	private Label serverResponse;
 
 	@FXML
+	private TextArea serverLog;
+
+	@FXML
 	private TextField diceResult;
 
 	// DEBUG
@@ -263,7 +266,7 @@ public class GameViewController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		transition = new FadeTransition(new Duration(3000));
+		transition = new FadeTransition(new Duration(500));
 		transition.setDelay(new Duration(2000));
 		transition.setFromValue(1);
 		transition.setToValue(0);
@@ -274,6 +277,9 @@ public class GameViewController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				transition.play();
+				if (!newValue.equals("OK")) {
+					serverLog.appendText(newValue + "\n");
+				}
 
 			}
 		});

@@ -127,7 +127,6 @@ public class ViewController {
     void startGameView() {
         choosingStage.hide();
         isChoosingStage = false;
-        isGameView = true;
         FXMLLoader loader = new FXMLLoader();
         Parent root;
         try {
@@ -145,6 +144,7 @@ public class ViewController {
             gameViewController.setViewController(this);
             primaryStage.show();
             gameViewController.startScene(primaryStage);
+            isGameView = true;
 
         } catch (IOException e) {
             logger.error("Input/Output Exception", e);
