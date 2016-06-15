@@ -14,6 +14,7 @@ import network.client.controller.ClientController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocol.clientinstructions.ProtocolBuildRequest;
+import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
 import protocol.clientinstructions.ProtocolHarbourRequest;
@@ -30,18 +31,26 @@ import protocol.configuration.ProtocolPlayerProfile;
 import protocol.configuration.ProtocolVictory;
 import protocol.connection.ProtocolHello;
 import protocol.connection.ProtocolWelcome;
+import protocol.dualinstructions.ProtocolPlayInventionCard;
+import protocol.dualinstructions.ProtocolPlayKnightCard;
+import protocol.dualinstructions.ProtocolPlayMonopolyCard;
+import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolPlayer;
 import protocol.object.ProtocolResource;
+import protocol.serverinstructions.ProtocolBoughtDevelopmentCard;
 import protocol.serverinstructions.ProtocolBuild;
 import protocol.serverinstructions.ProtocolCosts;
 import protocol.serverinstructions.ProtocolDiceRollResult;
+import protocol.serverinstructions.ProtocolLargestArmy;
+import protocol.serverinstructions.ProtocolLongestRoad;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
@@ -49,18 +58,6 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
-import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
-import protocol3.clientinstructions.ProtocolDevelopmentCards;
-import protocol3.object.ProtocolInventionCard;
-import protocol3.object.ProtocolMonopolyCard;
-import protocol3.object.ProtocolRoadBuildingCard;
-import protocol3.serverinstructions.ProtocolBiggestKnightProwess;
-import protocol3.serverinstructions.ProtocolBoughtDevelopmentCard;
-import protocol3.serverinstructions.ProtocolInventionCardInfo;
-import protocol3.serverinstructions.ProtocolLongestRoad;
-import protocol3.serverinstructions.ProtocolMonopolyCardInfo;
-import protocol3.serverinstructions.ProtocolPlayKnightCard;
-import protocol3.serverinstructions.ProtocolRoadBuildingCardInfo;
 
 public class ClientInputHandler extends InputHandler {
 	private static Logger logger = LogManager.getLogger(ClientInputHandler.class.getName());
@@ -325,30 +322,6 @@ public class ClientInputHandler extends InputHandler {
 		clientController.tradeFulfilled(playerID, tradePartnerID);
 	}
 
-	@Override
-	protected void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards) {
-		// unnecessary Method
-	}
-
-	@Override
-	protected void handle(ProtocolDevelopmentCards developmentCards) {
-		// unnecessary Method
-	}
-
-	@Override
-	protected void handle(ProtocolInventionCard inventionCard) {
-		// unnecessary Method
-	}
-
-	@Override
-	protected void handle(ProtocolMonopolyCard monopolyCard) {
-		// unnecessary Method
-	}
-
-	@Override
-	protected void handle(ProtocolRoadBuildingCard roadBuildingCard) {
-		// unnecessary Method
-	}
 
 	@Override
 	protected void handle(ProtocolVictory victory) {
@@ -409,64 +382,63 @@ public class ClientInputHandler extends InputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolBiggestKnightProwess biggestKnightProwess) {
-		int playerID = biggestKnightProwess.getPlayer_id();
-		// networkController.biggestKnightProwess(player_id);
+	protected void handle(String string) {
 
+		clientController.receiveServerConfirmation(string);
 	}
 
 	@Override
-	protected void handle(ProtocolInventionCardInfo inventionCardInfo) {
-		ProtocolResource resource = inventionCardInfo.getResource();
-		int playerID = inventionCardInfo.getPlayer_id();
-		// networkController.inventionCardInfo(resource,player_id);
+	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolDevCard developmentCards) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolLargestArmy biggestKnightProwess) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void handle(ProtocolLongestRoad longestRoad) {
-		int playerID = longestRoad.getPlayer_id();
-		// networkController.longestRoad(player_id);
-
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	protected void handle(ProtocolMonopolyCardInfo monopolyCardInfo) {
-		ResourceType resourceType = monopolyCardInfo.getResourceType();
-		Integer playerID = monopolyCardInfo.getPlayer_id();
-		// networkController.monopolyCardInfo(resourceType,player_id)
-
+	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void handle(ProtocolPlayKnightCard playKnightCard) {
-		String road1_id = playKnightCard.getRoad1_id();
-		int target = playKnightCard.getTarget();
-		Integer playerID = playKnightCard.getPlayer_id();
-
-		// networkController.playKnightCard(road1_id,target,player_id)
-
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	protected void handle(ProtocolRoadBuildingCardInfo roadBuildingCardInfo) {
-		String road1_id = roadBuildingCardInfo.getRoad1_id();
-		String road2_idx = roadBuildingCardInfo.getRoad2_id();
-		Integer playerID = roadBuildingCardInfo.getPlayer_id();
-		// networkController.roadBuildingCardInfo(road1_id,road2_id,player_id)
+	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
-		int playerID = boughtDevelopmentCard.getPlayer_id();
-		CardType developmentCard = boughtDevelopmentCard.getDevelopmentCard();
-		// networkController.boughtDevelopmentCard(playerID,developmentCards;
-
-	}
-
-	@Override
-	protected void handle(String string) {
-
-		clientController.receiveServerConfirmation(string);
+		// TODO Auto-generated method stub
+		
 	}
 
 }
