@@ -11,7 +11,7 @@ import com.google.gson.annotations.Since;
  */
 
 @Since(0.2)
-public class ProtocolTradeIsCompleted {
+public class ProtocolTradeCompletion {
 
 	@SerializedName("Spieler")
 	private int playerID;
@@ -19,7 +19,7 @@ public class ProtocolTradeIsCompleted {
 	@SerializedName("Mitspieler")
 	private int tradePartnerID;
 
-	public ProtocolTradeIsCompleted(int playerID, int tradePartnerID) {
+	public ProtocolTradeCompletion(int playerID, int tradePartnerID) {
 
 		this.playerID = playerID;
 		this.tradePartnerID = tradePartnerID;

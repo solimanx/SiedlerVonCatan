@@ -46,8 +46,8 @@ import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
-import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
-import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
+import protocol.serverinstructions.trade.ProtocolTradeCancellation;
+import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
@@ -312,13 +312,13 @@ public class ClientInputHandler extends InputHandler {
 		clientController.tradeAccepted(playerID, tradeID);
 	}
 
-	protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
+	protected void handle(ProtocolTradeCancellation tradeIsCanceled) {
 		int playerID = tradeIsCanceled.getPlayerID();
 		int tradeID = tradeIsCanceled.getTradeID();
 		clientController.tradeCancelled(playerID, tradeID);
 	}
 
-	protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
+	protected void handle(ProtocolTradeCompletion tradeIsCompleted) {
 
 		int playerID = tradeIsCompleted.getPlayerID();
 		int tradePartnerID = tradeIsCompleted.getTradePartnerID();

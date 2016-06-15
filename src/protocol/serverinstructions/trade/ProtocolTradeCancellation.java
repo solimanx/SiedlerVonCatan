@@ -12,7 +12,7 @@ import com.google.gson.annotations.Since;
  */
 
 @Since(0.2)
-public class ProtocolTradeIsCanceled {
+public class ProtocolTradeCancellation {
 
 	@SerializedName("Spieler")
 	private int playerID;
@@ -20,7 +20,7 @@ public class ProtocolTradeIsCanceled {
 	@SerializedName("Handel id")
 	private int tradeID;
 
-	public ProtocolTradeIsCanceled(int playerID, int tradeID) {
+	public ProtocolTradeCancellation(int playerID, int tradeID) {
 
 		this.playerID = playerID;
 		this.tradeID = tradeID;

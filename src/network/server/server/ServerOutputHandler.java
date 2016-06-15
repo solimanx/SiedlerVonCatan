@@ -36,8 +36,8 @@ import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
-import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
-import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
+import protocol.serverinstructions.trade.ProtocolTradeCancellation;
+import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 import protocol3.serverinstructions.ProtocolBiggestKnightProwess;
 import protocol3.serverinstructions.ProtocolBoughtDevelopmentCard;
@@ -301,7 +301,7 @@ public class ServerOutputHandler {
     }
 
     public void tradeIsCanceled(int player_id, int trade_id) {
-        ProtocolTradeIsCanceled ptic = new ProtocolTradeIsCanceled(player_id, trade_id);
+        ProtocolTradeCancellation ptic = new ProtocolTradeCancellation(player_id, trade_id);
         Response r = new Response();
         r.pTradeIsCanceled = ptic;
         try {
@@ -313,7 +313,7 @@ public class ServerOutputHandler {
     }
 
     public void tradeIsCompleted(int player_id, int tradePartner_id) {
-        ProtocolTradeIsCompleted ptico = new ProtocolTradeIsCompleted(player_id, tradePartner_id);
+        ProtocolTradeCompletion ptico = new ProtocolTradeCompletion(player_id, tradePartner_id);
         Response r = new Response();
         r.pTradeIsCompleted = ptico;
         try {

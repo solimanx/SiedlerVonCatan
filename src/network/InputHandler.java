@@ -16,8 +16,8 @@ import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
-import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
-import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
+import protocol.serverinstructions.trade.ProtocolTradeCancellation;
+import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
@@ -133,13 +133,13 @@ public abstract class InputHandler {
                 handle((ProtocolTradeComplete) o);
                 break;
             case "ProtocolTradeIsCompleted":
-                handle((ProtocolTradeIsCompleted) o);
+                handle((ProtocolTradeCompletion) o);
                 break;
             case "ProtocolTradeCancel":
                 handle((ProtocolTradeCancel) o);
                 break;
             case "ProtocolTradeIsCanceled":
-                handle((ProtocolTradeIsCanceled) o);
+                handle((ProtocolTradeCancellation) o);
                 break;
             case "Entwicklungskarte kaufen":
                 handle((ProtocolBuyDevelopmentCards) o);
@@ -242,11 +242,11 @@ public abstract class InputHandler {
 
     protected abstract void handle(ProtocolTradeComplete tradeComplete);
 
-    protected abstract void handle(ProtocolTradeIsCompleted tradeIsCompleted);
+    protected abstract void handle(ProtocolTradeCompletion tradeIsCompleted);
 
     protected abstract void handle(ProtocolTradeCancel tradeCancel);
 
-    protected abstract void handle(ProtocolTradeIsCanceled tradeIsCanceled);
+    protected abstract void handle(ProtocolTradeCancellation tradeIsCanceled);
 
     protected abstract void handle(ProtocolBuyDevelopmentCards buyDevelopmentCards);
 

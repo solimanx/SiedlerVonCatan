@@ -25,8 +25,8 @@ import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
-import protocol.serverinstructions.trade.ProtocolTradeIsCanceled;
-import protocol.serverinstructions.trade.ProtocolTradeIsCompleted;
+import protocol.serverinstructions.trade.ProtocolTradeCancellation;
+import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 import protocol3.clientinstructions.ProtocolBuyDevelopmentCards;
 import protocol3.clientinstructions.ProtocolDevelopmentCards;
@@ -135,11 +135,11 @@ public class Response {
 	public ProtocolTradeConfirmation pTradeConfirm; // new in 0.2
 
 	@SerializedName("Handel ausgeführt")
-	public ProtocolTradeIsCompleted pTradeIsCompleted;// new in 0.2
+	public ProtocolTradeCompletion pTradeIsCompleted;// new in 0.2
 
 	
 	@SerializedName("Handelsangebot abgebrochen")
-	public ProtocolTradeIsCanceled pTradeIsCanceled;// new in 0.2
+	public ProtocolTradeCancellation pTradeIsCanceled;// new in 0.2
 
 	// Serverinstructions in Protocol 0.3
 

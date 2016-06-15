@@ -324,7 +324,7 @@ public class AIInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolTradeIsCompleted tradeIsCompleted) {
+    protected void handle(ProtocolTradeCompletion tradeIsCompleted) {
         // TODO Auto-generated method stub
 
     }
@@ -336,7 +336,7 @@ public class AIInputHandler extends InputHandler {
     }
 
     @Override
-    protected void handle(ProtocolTradeIsCanceled tradeIsCanceled) {
+    protected void handle(ProtocolTradeCancellation tradeIsCanceled) {
         // TODO Auto-generated method stub
 
     }
