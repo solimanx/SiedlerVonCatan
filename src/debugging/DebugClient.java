@@ -41,7 +41,7 @@ public class DebugClient extends Application {
         primaryStage.sizeToScene();
         //
         primaryStage.setTitle("Debug Client");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.setOnCloseRequest(e -> System.exit(0));
         // primaryStage.initStyle(StageStyle.UTILITY);
         //
