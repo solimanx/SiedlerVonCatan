@@ -457,6 +457,8 @@ public class ClientController {
 		// if self
 		if (modelID == 0) {
 			gameLogic.getBoard().getPlayer(modelID).incrementResources(resources);
+			viewController.getGameViewController().setServerResponse("You get ressources!!!");
+			//Platform.runLater(new ServerResponseRunnable("You get ressources!", viewController.getGameViewController()));
 		} else {
 			// decrement the hiddenresource not the resource
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
