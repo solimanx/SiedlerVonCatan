@@ -391,19 +391,9 @@ public class ServerController {
 				serverResponse(modelID, "Unzulässige Aktion");
 			} else {
 				if (gameLogic.checkBuildVillage(x, y, dir, modelID)) {
-					Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
-					c.setStatus(enums.CornerStatus.VILLAGE);
-					c.setOwnerID(modelID);
-					gameLogic.getBoard().getPlayer(modelID).decreaseAmountVillages();
-					Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
-					for (int i = 0; i < neighbors.length; i++) {
-						if (neighbors[i] != null) {
-							neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
-						}
-					}
 
 					serverResponse(modelID, "OK");
-
+					buildVillage(x, y, dir, modelID);
 					subFromPlayersResources(modelID, DefaultSettings.VILLAGE_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.VILLAGE_BUILD_COST);
 					increaseVictoryPoints(modelID);
@@ -414,6 +404,21 @@ public class ServerController {
 				}
 			}
 		}
+
+	}
+
+	private Corner buildVillage(int x, int y, int dir, int modelID) {
+		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
+		c.setStatus(enums.CornerStatus.VILLAGE);
+		c.setOwnerID(modelID);
+		gameLogic.getBoard().getPlayer(modelID).decreaseAmountVillages();
+		Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
+		for (int i = 0; i < neighbors.length; i++) {
+			if (neighbors[i] != null) {
+				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
+			}
+		}
+		return c;
 
 	}
 
@@ -449,20 +454,14 @@ public class ServerController {
 				serverResponse(modelID, "Unzulässige Aktion");
 			} else {
 				if (gameLogic.checkBuildStreet(x, y, dir, modelID)) {
-					Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
-					e.setHasStreet(true);
-					e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(modelID).getID());
-					gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
-
 					serverResponse(modelID, "OK");
-
+					buildStreet(x, y, dir, modelID);
 					subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.STREET_BUILD_COST);
-
 					serverOutputHandler.buildStreet(x, y, dir, threadID);
 					serverOutputHandler.costs(threadID, DefaultSettings.STREET_BUILD_COST);
 					statusUpdate(modelID);
-					checkLongestTradingRoute(modelID, x , y, dir);
+
 				} else {
 					error(modelID, "Kein Straßenbau möglich");
 				}
@@ -471,9 +470,19 @@ public class ServerController {
 
 	}
 
+	private void buildStreet(int x, int y, int dir, int modelID) {
+		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
+		e.setHasStreet(true);
+		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(modelID).getID());
+		gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
+
+		checkLongestTradingRoute(modelID, x, y, dir);
+	}
+
 	/**
-	 * Checks if a player has longest Trading Route, which contains 5 or more streets
-	 * and sets it (for all players)
+	 * Checks if a player has longest Trading Route, which contains 5 or more
+	 * streets and sets it (for all players)
+	 * 
 	 * @param modelID
 	 * @param aX
 	 * @param aY
@@ -481,8 +490,8 @@ public class ServerController {
 	 */
 	private void checkLongestTradingRoute(int modelID, int aX, int aY, int dir) {
 		ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
-		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked, null);
-		if(longestRoute > lengthLongestTradeRoute && longestRoute>4){
+		int longestRoute = LongestTradingRoute(modelID, aX, aY, dir, alreadyChecked);
+		if (longestRoute > lengthLongestTradeRoute && longestRoute > 4) {
 			board.getPlayer(0).setHasLongestRoad(false);
 			board.getPlayer(1).setHasLongestRoad(false);
 			board.getPlayer(2).setHasLongestRoad(false);
@@ -492,20 +501,24 @@ public class ServerController {
 			lengthLongestTradeRoute = longestRoute;
 		}
 	}
-	
-	
+
 	/**
-	 * recursive method, which calculates the longest possible rout from the given street (edge)
+	 * recursive method, which calculates the longest possible rout from the
+	 * given street (edge)
 	 * 
 	 * @param modelID
-	 * @param aX edge x-coordinate
-	 * @param aY edge y-coordinate
-	 * @param dir edge direction
-	 * @param alreadyChecked list of already calculated streets
+	 * @param aX
+	 *            edge x-coordinate
+	 * @param aY
+	 *            edge y-coordinate
+	 * @param dir
+	 *            edge direction
+	 * @param alreadyChecked
+	 *            list of already calculated streets
 	 * @return length of the longest possible road
 	 */
-	//TODO verbindung von zwei straßensystemen
-	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked, Edge[] lastNeighbours) {
+	// TODO verbindung von zwei straßensystemen
+	private int LongestTradingRoute(int modelID, int aX, int aY, int dir, ArrayList<Edge> alreadyChecked) {
 		int a = 0;
 		int b = 0;
 		int c = 0;
@@ -527,6 +540,10 @@ public class ServerController {
 			}
 		}
 		
+		if (neighbours.length > 0) {
+			if (neighbours[0].isHasStreet()) {
+				if (neighbours[0].getOwnerID() == modelID) {
+					if (!alreadyChecked.contains(neighbours[0])) {
 		if(neighbours.length > 0){
 			if(neighbours[0].isHasStreet() && !notToCheck.contains(neighbours[0])){
 				if(neighbours[0].getOwnerID() == modelID){
@@ -535,15 +552,29 @@ public class ServerController {
 						fieldTwo = neighbours[0].getEdgeID().substring(1, 2);
 						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
 						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
-						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0], fieldTwoCoords[1]);
+						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0],
+								fieldTwoCoords[1]);
 						ac = alreadyChecked;
 						ac.add(neighbours[0]);
 						a = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac, neighbours);
 					}
 				}
 			}
-				
+
 		}
+		if (neighbours.length > 1) {
+			if (neighbours[1].isHasStreet()) {
+				if (neighbours[1].getOwnerID() == modelID) {
+					if (!alreadyChecked.contains(neighbours[1])) {
+						fieldOne = neighbours[1].getEdgeID().substring(0, 1);
+						fieldTwo = neighbours[1].getEdgeID().substring(1, 2);
+						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
+						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
+						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0],
+								fieldTwoCoords[1]);
+						ac = alreadyChecked;
+						ac.add(neighbours[1]);
+						b = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
 			if(neighbours.length > 1){
 				if(neighbours[1].isHasStreet() && !notToCheck.contains(neighbours[1])){
 					if(neighbours[1].getOwnerID() == modelID){
@@ -560,6 +591,20 @@ public class ServerController {
 					}
 				}
 			}
+		}
+		if (neighbours.length > 2) {
+			if (neighbours[2].isHasStreet()) {
+				if (neighbours[2].getOwnerID() == modelID) {
+					if (!alreadyChecked.contains(neighbours[2])) {
+						fieldOne = neighbours[2].getEdgeID().substring(0, 1);
+						fieldTwo = neighbours[2].getEdgeID().substring(1, 2);
+						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
+						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
+						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0],
+								fieldTwoCoords[1]);
+						ac = alreadyChecked;
+						ac.add(neighbours[2]);
+						c = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
 			if(neighbours.length > 2){
 				if(neighbours[2].isHasStreet() && !notToCheck.contains(neighbours[2])){
 					if(neighbours[2].getOwnerID() == modelID){
@@ -576,6 +621,21 @@ public class ServerController {
 					}
 				}
 			}
+		}
+		if (neighbours.length > 3) {
+			if (neighbours[3].isHasStreet()) {
+				if (neighbours[3].getOwnerID() == modelID) {
+					if (!alreadyChecked.contains(neighbours[3])) {
+						fieldOne = neighbours[3].getEdgeID().substring(0, 1);
+						fieldTwo = neighbours[3].getEdgeID().substring(1, 2);
+						fieldOneCoords = Board.getStringToCoordMap().get(fieldOne);
+						fieldTwoCoords = Board.getStringToCoordMap().get(fieldTwo);
+						coord = HexService.getEdgeCoordinates(fieldOneCoords[0], fieldOneCoords[1], fieldTwoCoords[0],
+								fieldTwoCoords[1]);
+						ac = alreadyChecked;
+						ac.add(neighbours[3]);
+						d = 1 + LongestTradingRoute(modelID, coord[0], coord[1], coord[2], ac);
+					}
 			if(neighbours.length > 3){
 				if(neighbours[3].isHasStreet() && !notToCheck.contains(neighbours[3])){
 					if(neighbours[3].getOwnerID() == modelID){
@@ -592,16 +652,17 @@ public class ServerController {
 					}		
 				}
 			}
+		}
 		int result;
-		if(a<b){
-			result=b;
-		}else{
+		if (a < b) {
+			result = b;
+		} else {
 			result = a;
 		}
-		if(c>result){
+		if (c > result) {
 			result = c;
 		}
-		if(d>result){
+		if (d > result) {
 			result = d;
 		}
 		return result;
@@ -610,61 +671,24 @@ public class ServerController {
 	/**
 	 * checks if the player has the most played knight cards
 	 * 
-	 * @param modelID to chaeck player
+	 * @param modelID
+	 *            to chaeck player
 	 */
 	private void checkLargestArmy(int modelID) {
-		if(board.getPlayer(modelID).getPlayedKnightCards()>4){
-			if(modelID==0){
-				if(board.getPlayer(1).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-					if(board.getPlayer(2).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-						if(board.getPlayer(3).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-							board.getPlayer(0).setHasLargestArmy(true);
-							board.getPlayer(1).setHasLargestArmy(false);
-							board.getPlayer(2).setHasLargestArmy(false);
-							board.getPlayer(3).setHasLargestArmy(false);
-							serverOutputHandler.biggestKnightProwess(modelID);
-						}
+		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+		int amountCards = pM.getPlayedKnightCards();
+		boolean hasLargestArmy = true;
+		if (pM.getPlayedKnightCards() >= 3) {
+			for (int i = 0; i < amountPlayers; i++) {
+				if (i != modelID) {
+					if (amountCards <= gameLogic.getBoard().getPlayer(i).getPlayedKnightCards()) {
+						hasLargestArmy = false;
 					}
 				}
 			}
-			if(modelID==1){
-				if(board.getPlayer(1).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-					if(board.getPlayer(2).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-						if(board.getPlayer(3).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-							board.getPlayer(0).setHasLargestArmy(false);
-							board.getPlayer(1).setHasLargestArmy(true);
-							board.getPlayer(2).setHasLargestArmy(false);
-							board.getPlayer(3).setHasLargestArmy(false);
-							serverOutputHandler.biggestKnightProwess(modelID);
-						}
-					}
-				}
-			}
-			if(modelID==2){
-				if(board.getPlayer(1).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-					if(board.getPlayer(2).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-						if(board.getPlayer(3).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-							board.getPlayer(0).setHasLargestArmy(false);
-							board.getPlayer(1).setHasLargestArmy(false);
-							board.getPlayer(2).setHasLargestArmy(true);
-							board.getPlayer(3).setHasLargestArmy(false);
-							serverOutputHandler.biggestKnightProwess(modelID);
-						}
-					}
-				}
-			}
-			if(modelID==3){
-				if(board.getPlayer(1).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-					if(board.getPlayer(2).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-						if(board.getPlayer(3).getPlayedKnightCards()<board.getPlayer(modelID).getPlayedKnightCards()){
-							board.getPlayer(0).setHasLargestArmy(false);
-							board.getPlayer(1).setHasLargestArmy(false);
-							board.getPlayer(2).setHasLargestArmy(false);
-							board.getPlayer(3).setHasLargestArmy(true);
-							serverOutputHandler.biggestKnightProwess(modelID);
-						}
-					}
-				}
+			if (hasLargestArmy) {
+				pM.setHasLargestArmy(true);
+				serverOutputHandler.biggestKnightProwess(modelID);
 			}
 		}
 	}
@@ -684,13 +708,9 @@ public class ServerController {
 			serverResponse(modelID, "Unzulässige Aktion");
 		} else {
 			if (gameLogic.checkBuildCity(x, y, dir, modelID)) {
-				Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
-				c.setStatus(enums.CornerStatus.CITY);
-				c.setOwnerID(modelID);
-				gameLogic.getBoard().getPlayer(modelID).increaseAmountVillages();
-				gameLogic.getBoard().getPlayer(modelID).decreaseAmountCities();
 
 				serverResponse(modelID, "OK");
+				buildCity(x, y, dir, modelID);
 
 				subFromPlayersResources(modelID, DefaultSettings.CITY_BUILD_COST);
 				resourceStackIncrease(DefaultSettings.CITY_BUILD_COST);
@@ -704,27 +724,35 @@ public class ServerController {
 
 	}
 
+	private void buildCity(int x, int y, int dir, int modelID) {
+		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
+		c.setStatus(enums.CornerStatus.CITY);
+		c.setOwnerID(modelID);
+		gameLogic.getBoard().getPlayer(modelID).increaseAmountVillages();
+		gameLogic.getBoard().getPlayer(modelID).decreaseAmountCities();
+	}
+
 	/**
 	 * 
-	 * @param thredID
+	 * @param threadID
 	 */
-	public void requestBuyDevCard(int thredID) {
-		int modelID = threadPlayerIdMap.get(thredID);
+	public void requestBuyDevCard(int threadID) {
+		int modelID = threadPlayerIdMap.get(threadID);
 		if (!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
-			if(gameLogic.checkBuyDevCard(modelID)){
+			if (gameLogic.checkBuyDevCard(modelID)) {
 				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
 				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
+				// TODO: costs to all
+				serverOutputHandler.costs(threadID, DefaultSettings.DEVCARD_BUILD_COST);
 				DevelopmentCard devCard = board.getDevCardStack().getNextCard();
-				pm.incrementPlayerDevCard(devCard);
-				
-				serverOutputHandler.boughtDevelopmentCard(thredID, devCard);
-				//statusUpdate(modelID);
-			}
-			else {
+				pm.getDevCardsBoughtInThisRound().add(devCard);
+
+				serverOutputHandler.boughtDevelopmentCard(threadID, devCard);
+
+			} else {
 				serverResponse(modelID, "Unzulässige Aktion");
 			}
-		}
-		else{
+		} else {
 			serverResponse(modelID, "Unzulässige Aktion");
 		}
 	}
@@ -744,41 +772,41 @@ public class ServerController {
 			serverResponse(modelID, "Unzulässige Aktion");
 		} else {
 			if (gameLogic.checkBuildInitialStreet(x, y, dir, modelID)) {
-				Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
-				e.setHasStreet(true);
-				e.setOwnedByPlayer(modelID);
-				gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
+				serverResponse(modelID, "OK");
+				buildStreet(x, y, dir, modelID);
 
 				serverOutputHandler.buildStreet(x, y, dir, threadID);
 
-				serverResponse(modelID, "OK");
-
 				InitialStreetCounter++;
-				if (InitialStreetCounter >= amountPlayers * 2) { // initial
-																	// finished
+				PlayerModel currPM = gameLogic.getBoard().getPlayer(currentPlayer);
+				if (InitialStreetCounter >= amountPlayers * 2) {
+					// initial building phase finished
 					gainFirstBoardResources();
-					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
+					currPM.setPlayerState(PlayerState.DICEROLLING);
 					statusUpdate(currentPlayer);
-				} else if (InitialStreetCounter == amountPlayers) { // no change
-					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
+				} else if (InitialStreetCounter == amountPlayers) {
+					// no change
+					currPM.setPlayerState(PlayerState.BUILDING_VILLAGE);
 					statusUpdate(currentPlayer);
-				} else if (InitialStreetCounter > amountPlayers) { // go
-																	// backwards
-					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
-					statusUpdate(modelID);
-					for (int i = 0;i < amountPlayers;i++){
-						if (playerOrder[i] == currentPlayer){
-							currentPlayer = playerOrder[i-1];
+				} else if (InitialStreetCounter > amountPlayers) {
+					// go backwards
+					currPM.setPlayerState(PlayerState.WAITING);
+					statusUpdate(currentPlayer);
+					// getPreviousPlayer
+					for (int i = 0; i < amountPlayers; i++) {
+						if (playerOrder[i] == currentPlayer) {
+							currentPlayer = playerOrder[i - 1];
 						}
 					}
 
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
 					statusUpdate(currentPlayer);
-				} else { // go forward
-					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
-					statusUpdate(modelID);
+				} else {
+					// go forward
+					currPM.setPlayerState(PlayerState.WAITING);
+					statusUpdate(currentPlayer);
 
-					currentPlayer = getNextPlayer(modelID);
+					currentPlayer = getNextPlayer(currentPlayer);
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.BUILDING_VILLAGE);
 					statusUpdate(currentPlayer);
 				}
@@ -801,23 +829,11 @@ public class ServerController {
 			serverResponse(modelID, "Unzulässige Aktion");
 		} else {
 			if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
-				Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
-				c.setStatus(enums.CornerStatus.VILLAGE);
-				c.setOwnerID(modelID);
-				gameLogic.getBoard().getPlayer(modelID).decreaseAmountVillages();
-				Corner[] neighbors = gameLogic.getBoard().getAdjacentCorners(x, y, dir);
-				for (int i = 0; i < neighbors.length; i++) {
-					if (neighbors[i] != null) {
-						neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
-					}
-				}
+				serverResponse(modelID, "OK");
+				Corner c = buildVillage(x, y, dir, modelID);
 				initialVillages.add(c);
 
-				serverResponse(modelID, "OK");
-
-				gameLogic.getBoard().getPlayer(modelID)
-						.setVictoryPoints(gameLogic.getBoard().getPlayer(modelID).getVictoryPoints() + 1);
-
+				increaseVictoryPoints(modelID);
 				serverOutputHandler.buildVillage(x, y, dir, threadID);
 				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.BUILDING_STREET);
 				statusUpdate(modelID);
@@ -834,6 +850,13 @@ public class ServerController {
 		int modelID = threadPlayerIdMap.get(playerID);
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 		pM.setPlayerState(PlayerState.WAITING);
+		ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
+		for (int i = 0; i < currDevCards.size(); i++) {
+			// erst jetzt kann spieler über development card verfügen
+			pM.incrementPlayerDevCard(currDevCards.get(i));
+		}
+		// runde zu ende, nächste runde darf dev card gespielt werden
+		pM.setHasPlayedDevCard(false);
 		statusUpdate(modelID);
 
 		currentPlayer = getNextPlayer(modelID); // next players turn
@@ -866,9 +889,9 @@ public class ServerController {
 				resourceStackIncrease(resources);
 				serverOutputHandler.costs(threadID, playerRes);
 				if (robberLossCounter == 0) {
-					if (modelID != currentPlayer){
+					if (modelID != currentPlayer) {
 						gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
-					}					
+					}
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.MOVE_ROBBER);
 					statusUpdate(currentPlayer);
 				} else {
@@ -979,6 +1002,149 @@ public class ServerController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
 		resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
+	}
+
+	public void playKnightCard(int threadID, int x, int y, Integer victimThreadID) {
+		int modelID = threadPlayerIdMap.get(threadID);
+		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+		if (gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+			error(modelID, "Ungültiger Spielzug");
+		} else {
+			Integer victimModelID;
+			if (victimThreadID != null) {
+				victimModelID = threadPlayerIdMap.get(victimThreadID);
+			} else {
+				victimModelID = null;
+			}
+			if (gameLogic.checkSetBandit(x, y, victimModelID)) {
+				if (victimThreadID == null) {
+					String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
+					gameLogic.getBoard().setBandit(location);
+					serverOutputHandler.robberMovement(threadID, location, null);
+				} else {
+					PlayerModel victimPM = gameLogic.getBoard().getPlayer(victimModelID);
+					if (victimPM.sumResources() != 0) { // steal a random card
+						int[] victimResources = getPlayerResources(victimModelID);
+						Random rand = new Random();
+						int stealResource;
+						do {
+							stealResource = rand.nextInt(4); // random resource
+							// while no resource of this type
+						} while (victimResources[stealResource] == 0);
+
+						int[] costs = { 0, 0, 0, 0, 0 };
+						costs[stealResource] = 1;
+						subFromPlayersResources(victimModelID, costs);
+						serverOutputHandler.costs(victimThreadID, costs);
+
+						addToPlayersResource(modelID, costs);
+						serverOutputHandler.resourceObtain(threadID, costs);
+
+						String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
+						gameLogic.getBoard().setBandit(location);
+						serverOutputHandler.robberMovement(threadID, location, victimThreadID);
+
+					}
+				}
+				pM.incrementPlayedKnightCards();
+				pM.setHasPlayedDevCard(true);
+				checkLargestArmy(modelID);
+			} else {
+				error(modelID, "Ungültige Eingabe");
+			}
+		}
+
+	}
+
+	public void playStreetCard(int threadID, int x1, int y1, int dir1, int x2, int y2, int dir2) {
+		int modelID = threadPlayerIdMap.get(threadID);
+		if (gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+			error(modelID, "Ungültiger Spielzug");
+		} else {
+			// serverOutputHandler.roadBuildingCardInfo(road1_id, road2_id,
+			// player_id);
+			// workaround:
+			// resourcen für gameLogic hinzufügen
+			addToPlayersResource(modelID, DefaultSettings.STREET_BUILD_COST);
+			addToPlayersResource(modelID, DefaultSettings.STREET_BUILD_COST);
+			if (gameLogic.checkBuildStreet(x1, y1, dir1, modelID)) {
+				serverResponse(modelID, "OK");
+				buildStreet(x1, y1, dir1, modelID);
+				serverOutputHandler.buildStreet(x1, y1, dir1, modelID);
+
+			} else {
+				error(modelID, "Eine Straße konnte nicht gebaut werden");
+			}
+			if (gameLogic.checkBuildStreet(x2, y2, dir2, modelID)) {
+				serverResponse(modelID, "OK");
+				buildStreet(x2, y2, dir2, modelID);
+				serverOutputHandler.buildStreet(x2, y2, dir2, modelID);
+			} else {
+				error(modelID, "Eine Straße konnte nicht gebaut werden");
+			}
+			// resourcen für gameLogic wieder abziehen
+			subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
+			subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
+			gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
+		}
+
+	}
+
+	public void playMonopolyCard(int threadID, ResourceType resType) {
+		int modelID = threadPlayerIdMap.get(threadID);
+		if (gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+			error(modelID, "Ungültiger Spielzug");
+		} else {
+			int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
+			int[] obtain = new int[5];
+			int currPRes;
+			int[] currLoss = new int[5];
+			serverOutputHandler.monopolyCardInfo(resType, threadID);
+			for (int i = 0; i < amountPlayers; i++) {
+				if (i != modelID) {
+					currPRes = gameLogic.getBoard().getPlayer(i).getResourceAmountOf(resIndex);
+					obtain[resIndex] = obtain[resIndex] + currPRes;
+					currLoss[resIndex] = currPRes;
+					subFromPlayersResources(i, currLoss);
+					serverOutputHandler.costs(i, currLoss);
+				}
+				currLoss[resIndex] = 0; // reset for next player
+			}
+			addToPlayersResource(modelID, obtain);
+			serverOutputHandler.resourceObtain(modelID, obtain);
+			gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
+		}
+	}
+
+	public void playInventionCard(int threadID, int resources[]) {
+		int modelID = threadPlayerIdMap.get(threadID);
+		if (gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+			error(modelID, "Ungültiger Spielzug");
+		} else {
+			int resAmountCheck = 0;
+			int[] obtain = new int[5];
+			ResourceType currResType;
+			serverOutputHandler.inventionCardInfo(resources, threadID);
+			for (int i = 0; i < resources.length; i++) {
+				if (resources[i] != 0) {
+					currResType = DefaultSettings.RESOURCE_ORDER[i];
+					if (resourceStackDecrease(currResType)){
+						obtain[i]++;
+						resAmountCheck++;
+					}
+
+				}
+			}
+			if (resAmountCheck > 2){
+				error(modelID, "Du hast du viele Resourcen angegeben; jetzt bekommst du keine ;)");
+				resourceStackIncrease(obtain);
+			} else {
+				addToPlayersResource(modelID, obtain);
+				serverOutputHandler.resourceObtain(threadID, obtain);
+			}
+			gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
+		}
+
 	}
 
 	/**
@@ -1221,7 +1387,12 @@ public class ServerController {
 	 * @return int[] resources
 	 */
 	private int[] getPlayerResources(int modelPlayerID) {
-		return gameLogic.getBoard().getPlayer(modelPlayerID).getResources();
+		int[] result = new int[5];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = gameLogic.getBoard().getPlayer(modelPlayerID).getResourceAmountOf(i);
+		}
+
+		return result;
 	}
 
 	/**
