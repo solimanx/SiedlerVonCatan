@@ -2,7 +2,6 @@ package protocol.serverinstructions;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
-import enums.CardType;
 import protocol.object.ProtocolDevCard;
 
 /**
@@ -19,22 +18,22 @@ import protocol.object.ProtocolDevCard;
 public class ProtocolBoughtDevelopmentCard {
     @SerializedName("Spieler")
 
-    private int player_id;
+    private int playerID;
 
     @SerializedName("Entwicklungskarte")
 
-    private CardType developmentCard;
+    private ProtocolDevCard developmentCard;
 
-    public ProtocolBoughtDevelopmentCard(int player_id, CardType developmentCard) {
-        this.player_id = player_id;
+    public ProtocolBoughtDevelopmentCard(int player_id, ProtocolDevCard developmentCard) {
+        this.playerID = player_id;
         this.developmentCard = developmentCard;
     }
 
-    public int getPlayer_id() {
-        return player_id;
+    public int getPlayerID() {
+        return playerID;
     }
 
-    public CardType getDevelopmentCard() {
+    public ProtocolDevCard getDevelopmentCard() {
         return developmentCard;
     }
 }
