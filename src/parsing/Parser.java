@@ -174,7 +174,7 @@ public class Parser {
 			return (T) response.pLongestRoad;
 		}
 
-		logger.info("CANNOT READ INPUT");
+		logger.warn("CANNOT READ INPUT");
 		System.out.println("CANNOT READ INPUT");
 		return null;
 
