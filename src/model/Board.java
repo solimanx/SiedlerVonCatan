@@ -418,10 +418,9 @@ public class Board {
         if (fields[i + radius][j + radius] != null) {
             fields[i + radius][j + radius].setResourceType(resourceType);
             fields[i + radius][j + radius].setDiceIndex(diceIndex);
-        } else {
+        } else
             logger.warn("Throws new Illegal Argument Exception\"Field doesn't exist\"");
         throw new IllegalArgumentException("Field doesn't exist");
-        }
 
     }
 
@@ -942,10 +941,10 @@ public class Board {
                             count++;
                         } else if (count == 1) {
                             ID2 = tF1[i].getFieldID();
-                        } else {
+                        } else
                             logger.warn("Throw new Illegal Argument Exception\"Corners don 't connect\"");
                             throw new IllegalArgumentException("Corners don't connect");
-                        }
+
 
                     }
 

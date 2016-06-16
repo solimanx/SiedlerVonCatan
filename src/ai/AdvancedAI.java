@@ -40,11 +40,24 @@ public class AdvancedAI extends PrimitiveAI {
 				}
 			}
 		}
+		int x = 0;
+		int y = 0;
+		int z = 0;
+
+		int bestUtility = 0;
 		for (int i = 0; i < cA.length; i++) {
-			System.out.println(cA[i].getLocationString() + cA[i].calculateUtility());
+			if(cA[i].calculateUtility() > bestUtility){
+				bestUtility=cA[i].calculateUtility();
+				x = cA[i].getLocation()[0];
+				y = cA[i].getLocation()[1];
+				z = cA[i].getLocation()[2];
+			}
 		}
-		super.initialVillage();
+		super.pO.requestBuildInitialVillage(x,y,z);
 	}
+
+	@Override
+	public void initialRoad() {};
 
 	private void initializeDiceRollProbabilities() {
 		diceRollProbabilities = new HashMap<Integer, Double>();
