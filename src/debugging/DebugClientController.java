@@ -146,7 +146,7 @@ public class DebugClientController extends Thread {
         try {
             write(parser.createString(r));
         } catch (IOException e) {
-            logger.catching(Level.DEBUG,e);
+            logger.catching(Level.DEBUG, e);
             e.printStackTrace();
         }
     }
@@ -232,7 +232,7 @@ public class DebugClientController extends Thread {
             writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
             System.out.println("Client connected to server.");
-            logger.debug("Client connected to server");
+            logger.info("Client connected to server");
             runDebugClient();
         } catch (IOException e) {
             logger.catching(Level.DEBUG, e);

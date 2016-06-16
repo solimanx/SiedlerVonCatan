@@ -20,12 +20,13 @@ public class DebugClient extends Application {
 
     public DebugClient(Stage primaryStage) {
         System.out.println("Running debugging/testing mode");
-        logger.debug("Running debugging/testing mode");
+        logger.info("Running debugging/testing mode");
 
         try {
             start(primaryStage);
         } catch (Exception e) {
             // TODO Auto-generated catch block
+            logger.error("Exception", e);
             logger.catching(Level.DEBUG, e);
             e.printStackTrace();
         }
