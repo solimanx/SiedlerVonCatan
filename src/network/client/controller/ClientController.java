@@ -303,6 +303,7 @@ public class ClientController {
             Corner bCorner = gameLogic.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
             bCorner.setCornerID(location);
             bCorner.setHarbourStatus(c.getHarbourStatus());
+            board.setHarbourCorner(harbourCorners);
         }
 
         gameLogic.getBoard().setBandit(banditLocation);

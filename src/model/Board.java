@@ -31,6 +31,7 @@ public class Board {
     private PlayerModel[] players;
     private String banditLocation;
     private DevelopmentCardsStack devCardStack;
+	private Corner[] harbourCorners;
     // Field
     private static Map<String, int[]> stringToCoordMap;
     private static Map<Index, String> coordToStringMap;
@@ -960,5 +961,13 @@ public class Board {
         }
 
     }
+
+	public void setHarbourCorner(Corner[] harbourCorners) {
+		this.harbourCorners = harbourCorners;
+	}
+
+	public Corner[] getHarbourCorners(){
+		return this.harbourCorners;
+	}
 
 }
