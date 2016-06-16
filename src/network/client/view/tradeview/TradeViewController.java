@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -23,25 +24,18 @@ public class TradeViewController {
 
 	@FXML
 	private Button placeOfferButton;
-
 	@FXML
 	private ListView<String> foreignTrades;
-
 	@FXML
 	private ListView<String> ownOffers;
-
 	@FXML
 	private Button cancelOffer;
-
 	@FXML
 	private Button tradeButton;
-
 	@FXML
 	private Button acceptButton;
-
 	@FXML
 	private TextField ownOffer;
-
 	private Spinner<Integer> giveWoodSpinner;
 	private Spinner<Integer> giveClaySpinner;
 	private Spinner<Integer> giveWoolSpinner;
@@ -54,9 +48,24 @@ public class TradeViewController {
 	private Spinner<Integer> getOreSpinner;
 	private int[] resultOffer = new int[5];
 	private int[] resultDemand = new int[5];
-
 	@FXML
 	private GridPane grid;
+	@FXML
+	private GridPane harbourGrid;
+	@FXML
+	private Button tradeHarbour;
+	@FXML
+	RadioButton woolHarbour;
+	@FXML
+	RadioButton woodHarbour;
+	@FXML
+	RadioButton clayHarbour;
+	@FXML
+	RadioButton cornHarbour;
+	@FXML
+	RadioButton oreHarbour;
+	@FXML
+	RadioButton genericHarbour;
 
 	private ObservableList<String> tradeList = FXCollections.observableArrayList();
 	private ObservableList<String> ownOfferList = FXCollections.observableArrayList();
@@ -81,8 +90,7 @@ public class TradeViewController {
 	 */
 	public void init(int[] resources, ViewController viewController) {
 		this.viewController = viewController;
-		updateSpinner(resources);
-
+		start(resources);
 		foreignTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		foreignTrades.setItems(tradeList);
 		foreignTrades.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -109,10 +117,15 @@ public class TradeViewController {
 		});
 	}
 
+	public void start(int[] selfResources) {
+		updateSpinner(selfResources, grid);
+		updateSpinner(selfResources, harbourGrid);
+	}
+
 	/**
 	 * @param resources
 	 */
-	public void updateSpinner(int[] resources) {
+	public void updateSpinner(int[] resources, GridPane grid) {
 		giveWoodSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[0], 0));
 		giveClaySpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[1], 0));
 		giveWoolSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[3], 0));

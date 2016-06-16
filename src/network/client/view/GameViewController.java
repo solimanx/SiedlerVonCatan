@@ -22,6 +22,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -50,6 +51,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import model.objects.Corner;
+import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
@@ -291,47 +294,46 @@ public class GameViewController implements Initializable {
 		woolTransition = generateTransition(selfSheepText);
 		cornTransition = generateTransition(selfCornText);
 		oreTransition = generateTransition(selfOreText);
-		
+
 		woodTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				selfWoodText.setFill(Color.BLACK);
 			}
 		});
-		
+
 		clayTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				selfClayText.setFill(Color.BLACK);
 			}
 		});
-		
+
 		woolTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				selfSheepText.setFill(Color.BLACK);
 			}
 		});
-		
+
 		cornTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				selfCornText.setFill(Color.BLACK);
 			}
 		});
-		
+
 		oreTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				selfOreText.setFill(Color.BLACK);
 			}
 		});
-		
 
 		selfWoodText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -341,7 +343,6 @@ public class GameViewController implements Initializable {
 				} else {
 					selfWoodText.setFill(Color.RED);
 				}
-				woodTransition.setAutoReverse(true);
 				woodTransition.play();
 
 			}
@@ -411,11 +412,11 @@ public class GameViewController implements Initializable {
 	 * @return
 	 */
 	private FadeTransition generateTransition(Text text) {
-		FadeTransition transition = new FadeTransition(new Duration(200), text);
+		FadeTransition transition = new FadeTransition(new Duration(100), text);
 		transition.setFromValue(1);
 		transition.setToValue(0);
 		transition.setAutoReverse(true);
-		transition.setCycleCount(5);
+		transition.setCycleCount(4);
 		transition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -492,13 +493,13 @@ public class GameViewController implements Initializable {
 		fieldColors.put(ResourceType.WOOD, Color.web("#26A69A"));
 		fieldColors.put(ResourceType.SEA, Color.web("#81D4FA"));
 
-		ImagePattern woodPattern = new ImagePattern(new Image("/textures/wood.png"));
-		ImagePattern clayPattern = new ImagePattern(new Image("/textures/clay.png"));
-		ImagePattern woolPattern = new ImagePattern(new Image("/textures/sheep.png"));
-		ImagePattern cornPattern = new ImagePattern(new Image("/textures/corn.png"));
-		ImagePattern orePattern = new ImagePattern(new Image("/textures/ore.png"));
-		ImagePattern desertPattern = new ImagePattern(new Image("/textures/desert.png"));
-		ImagePattern seaPattern = new ImagePattern(new Image("/textures/sea.png"));
+		ImagePattern woodPattern = new ImagePattern(new Image("/textures/wood.jpg"));
+		ImagePattern clayPattern = new ImagePattern(new Image("/textures/clay.jpg"));
+		ImagePattern woolPattern = new ImagePattern(new Image("/textures/sheep.jpg"));
+		ImagePattern cornPattern = new ImagePattern(new Image("/textures/corn.jpg"));
+		ImagePattern orePattern = new ImagePattern(new Image("/textures/ore.jpg"));
+		ImagePattern desertPattern = new ImagePattern(new Image("/textures/desert.jpg"));
+		ImagePattern seaPattern = new ImagePattern(new Image("/textures/sea.jpg"));
 
 		imagePatterns.put(ResourceType.WOOD, woodPattern);
 		imagePatterns.put(ResourceType.CLAY, clayPattern);
@@ -507,6 +508,20 @@ public class GameViewController implements Initializable {
 		imagePatterns.put(ResourceType.ORE, orePattern);
 		imagePatterns.put(ResourceType.NOTHING, desertPattern);
 		imagePatterns.put(ResourceType.SEA, seaPattern);
+
+		ImagePattern woodHarbour = new ImagePattern(new Image("/textures/woodHarbour.jpg"));
+		ImagePattern clayHarbour = new ImagePattern(new Image("/textures/clayHarbour.jpg"));
+		ImagePattern woolHarbour = new ImagePattern(new Image("/textures/sheepHarbour.jpg"));
+		ImagePattern cornHarbour = new ImagePattern(new Image("/textures/cornHarbour.jpg"));
+		ImagePattern oreHarbour = new ImagePattern(new Image("/textures/oreHarbour.jpg"));
+		ImagePattern genericHarbour = new ImagePattern(new Image("/textures/genericHarbour.jpg"));
+
+		harbourImages.put(HarbourStatus.WOOD, woodHarbour);
+		harbourImages.put(HarbourStatus.CLAY, clayHarbour);
+		harbourImages.put(HarbourStatus.SHEEP, woolHarbour);
+		harbourImages.put(HarbourStatus.CORN, cornHarbour);
+		harbourImages.put(HarbourStatus.ORE, oreHarbour);
+		harbourImages.put(HarbourStatus.THREE_TO_ONE, genericHarbour);
 
 	}
 
@@ -545,7 +560,7 @@ public class GameViewController implements Initializable {
 		//
 		// tradeStage.initModality(Modality.WINDOW_MODAL);
 		// tradeStage.initOwner(gameStage);
-		tradeViewController.updateSpinner(selfResources);
+		tradeViewController.start(selfResources);
 		tradeStage.show();
 	}
 
@@ -566,8 +581,9 @@ public class GameViewController implements Initializable {
 		Polygon village = villages[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
 		// DEBUG
 		// if(village.getFill().equals(playerColors.get(1))){
-//		viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1],
-//				villageCoordinates[2]);
+		// viewController.getClientController().requestBuildCity(villageCoordinates[0],
+		// villageCoordinates[1],
+		// villageCoordinates[2]);
 		// }
 		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
 			viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
@@ -715,15 +731,27 @@ public class GameViewController implements Initializable {
 	 * @param v
 	 * @param harbourType
 	 */
-	public void setHarbour(int u, int v, HarbourStatus harbourType) {
-		Circle circle = new Circle(30.0);
-		circle.setFill(Color.LIGHTGRAY);
-		Text text = new Text(harbourType.toString());
-		StackPane chip = new StackPane(circle, text);
-		chip.toFront();
-		chip.setTranslateX(fieldCoordinates[u + 3][v + 3][0] - 30.0);
-		chip.setTranslateY(fieldCoordinates[u + 3][v + 3][1] - 30.0);
-		board.getChildren().add(chip);
+	public void setHarbour(Corner[] hCorners) {
+		for (int i = 0; i < hCorners.length; i += 2) {
+			int[] corner1 = ProtocolToModel.getCornerCoordinates(hCorners[i].getCornerID());
+			int[] corner2 = ProtocolToModel.getCornerCoordinates(hCorners[i + 1].getCornerID());
+			double[] cCoord1 = cornerCoordinates[corner1[0] + 3][corner1[1] + 3][corner1[2]];
+			double[] cCoord2 = cornerCoordinates[corner2[0] + 3][corner2[1] + 3][corner2[2]];
+			int[] fieldCoord = viewController.getClientController().getGameLogic().getBoard()
+					.getHarbourMiddlepoint(corner1, corner2);
+			double[] fCoord = fieldCoordinates[fieldCoord[0] + 3][fieldCoord[1] + 3];
+			Polygon triangle = new Polygon(cCoord1[0], cCoord1[1], cCoord2[0], cCoord2[1], fCoord[0], fCoord[1]);
+			triangle.setFill(Color.web("#fff", 0.5));
+			Circle circle = new Circle(20.0);
+			circle.setTranslateX(fCoord[0]);
+			circle.setTranslateY(fCoord[1]);
+			enums.HarbourStatus hstate = viewController.getClientController().getGameLogic().getBoard()
+					.getCornerAt(corner1[0], corner1[1], corner1[2]).getHarbourStatus();
+			circle.setFill(harbourImages.get(hstate));
+			circle.toFront();
+
+			board.getChildren().addAll(triangle, circle);
+		}
 	}
 
 	/**

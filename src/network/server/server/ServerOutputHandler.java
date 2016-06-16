@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import enums.CardType;
 import enums.Color;
+import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
 import model.Board;
@@ -120,7 +121,7 @@ public class ServerOutputHandler {
         }
 
         ProtocolBuilding[] pBuildingsArray = {};
-        ProtocolHarbour[] pHarbourArray = {};
+        ProtocolHarbour[] pHarbourArray = {new ProtocolHarbour("eA", HarbourStatus.SHEEP), new ProtocolHarbour("nP", HarbourStatus.THREE_TO_ONE)};
         ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray, board.getBandit());
         ProtocolGameStarted pgs = new ProtocolGameStarted(pb);
         Response r = new Response();

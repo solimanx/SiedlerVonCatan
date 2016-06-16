@@ -347,6 +347,9 @@ public class ClientController {
             // viewController.getGameViewController().setHarbour(int
             // angleFactor, int u, int v, enums.HarbourStatus);
         }
+        Corner[] hCorners = board.getHarbourCorners();
+        viewController.getGameViewController().setHarbour(hCorners);
+
         int[] banditCorners = gameLogic.getBoard().getStringToCoordMap().get(gameLogic.getBoard().getBandit());
         viewController.getGameViewController().setBandit(banditCorners[0], banditCorners[1]);
 
