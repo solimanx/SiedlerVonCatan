@@ -943,10 +943,10 @@ public class Board {
                             count++;
                         } else if (count == 1) {
                             ID2 = tF1[i].getFieldID();
-                        } else
+                        } else{
                             logger.warn("Throw new Illegal Argument Exception\"Corners don 't connect\"");
                             throw new IllegalArgumentException("Corners don't connect");
-
+                        }
 
                     }
 
