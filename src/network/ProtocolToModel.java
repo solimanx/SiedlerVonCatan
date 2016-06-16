@@ -16,7 +16,7 @@ public final class ProtocolToModel {
 	 * <p>
 	 * Example J -> (0,0)
 	 * </p>
-	 * 
+	 *
 	 * @param fieldID
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public final class ProtocolToModel {
 	 * <p>
 	 * Example EFJ -> (0,0,0)
 	 * </p>
-	 * 
+	 *
 	 * @param location
 	 *            3-character-string
 	 * @return
@@ -58,7 +58,7 @@ public final class ProtocolToModel {
 	 * <p>
 	 * Example EJ -> (0,0,0)
 	 * </p>
-	 * 
+	 *
 	 * @param location
 	 *            3-character-string
 	 * @return
@@ -69,17 +69,17 @@ public final class ProtocolToModel {
 
 		else {
 			// Get each individual Field coordinate
-			int[] a = getFieldCoordinates(location.substring(0, 1));
-			int[] b = getFieldCoordinates(location.substring(1, 2));
+			String a = location.substring(0, 1);
+			String b = location.substring(1, 2);
 			// Calculate their common edge through HexService
-			int[] result = HexService.getEdgeCoordinates(a[0], a[1], b[0], b[1]);
+			int[] result = HexService.getEdgeCoordinates(a,b);
 			return result;
 		}
 	}
 
 	/**
 	 * Convert a land type to enum.ResourceType
-	 * 
+	 *
 	 * @param resourceString
 	 * @return Resource Type
 	 */
@@ -137,7 +137,7 @@ public final class ProtocolToModel {
 
 	/**
 	 * Convert protocol resource to own resource array.
-	 * 
+	 *
 	 * @param resources
 	 * @return ResourceArray
 	 */
@@ -189,7 +189,7 @@ public final class ProtocolToModel {
 
 	/**
 	 * Convert Building type to match CornerStatus
-	 * 
+	 *
 	 * @param pBuildingType
 	 * @return
 	 */

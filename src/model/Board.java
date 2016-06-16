@@ -36,6 +36,8 @@ public class Board {
     private static Map<Index, String> coordToStringMap;
     // Corner
     private static Map<String, int[]> cMap;
+    // Edge
+    private static Map<String, int[]> eMap;
     private static Logger logger = LogManager.getLogger(Board.class.getName());
     // TODO private DevDeck devDeck;
 
@@ -101,6 +103,7 @@ public class Board {
         stringToCoordMap = new HashMap<String, int[]>();
         coordToStringMap = new HashMap<Index, String>();
         cMap = new HashMap<String, int[]>();
+        eMap = new HashMap<String, int[]>();
         // temp to make code look clearer
         int radius = DefaultSettings.BOARD_RADIUS;
 
@@ -261,7 +264,7 @@ public class Board {
                         String ID2 = cF[1] == null ? "" : cF[1].getFieldID();
                         String ID = ID1 + ID2;
                         getEdgeAt(j, i, k).setEdgeID(ID);
-
+                        eMap.put(ID, new int[]{j, i,k});
                     }
                 }
             }
@@ -476,6 +479,10 @@ public class Board {
     public static Map<String, int[]> getCMap() {
         return cMap;
 
+    }
+
+    public static Map<String, int[]> getEMap(){
+    	return eMap;
     }
 
     /**
