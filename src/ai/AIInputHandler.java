@@ -302,18 +302,6 @@ public class AIInputHandler extends ClientInputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void handle(ProtocolDevCard developmentCards) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void handle(ProtocolLargestArmy biggestKnightProwess) {
 		// TODO Auto-generated method stub
 

@@ -24,9 +24,10 @@ public class ProtocolLongestRoad {
 
 	// Special Case
 	public ProtocolLongestRoad() {
+		this.player_id = null;
 	}
 
-	public int getPlayerID() {
+	public Integer getPlayerID() {
 
 		return player_id;
 	}
