@@ -7786,4 +7786,18 @@ java.net.BindException: Address already in use
 [m[33m09:13:16.089 WARN  ai.PrimitiveAI.read() @128 - Reading input from the servers output(read()) throws IOException
 [m[32m09:31:08.299 DEBUG debugging.DebugClient.<init>() @23 - Running debugging/testing mode
 [m[32m09:33:27.265 DEBUG debugging.DebugClient.<init>() @23 - Running debugging/testing mode
+[m[30m12:56:22.055 INFO  network.client.client.Client.run() @45 - Client connected to server
+[m[32m12:56:22.214 DEBUG network.client.controller.ClientController.welcome() @129 - Handshake complete!
+[m[30m12:56:26.881 INFO  network.client.client.Client.run() @45 - Client connected to server
+[m[32m12:56:26.940 DEBUG network.client.controller.ClientController.welcome() @129 - Handshake complete!
+[m[30m12:56:31.690 INFO  network.client.client.Client.run() @45 - Client connected to server
+[m[32m12:56:31.762 DEBUG network.client.controller.ClientController.welcome() @129 - Handshake complete!
+[m[33m12:56:32.377 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m12:56:36.316 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileaBLUE
+[m[33m12:56:44.561 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m12:56:48.228 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfilebORANGE
+[m[33m12:56:55.249 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m12:56:58.458 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfilecRED
+[m[33m12:57:25.465 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m12:57:31.019 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfilebWHITE
 [m
