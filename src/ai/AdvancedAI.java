@@ -18,7 +18,6 @@ public class AdvancedAI extends PrimitiveAI {
 	private CornerAgent[] cA = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
 	private Map<Integer, Double> diceRollProbabilities;
 
-
 	public AdvancedAI() {
 
 	}
@@ -34,16 +33,17 @@ public class AdvancedAI extends PrimitiveAI {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
 					if (getGl().getBoard().getCornerAt(j, i, k) != null) {
-						cA[c] = new CornerAgent(new int[] { j, i, k }, getGl().getBoard(),this);
+						cA[c] = new CornerAgent(new int[] { j, i, k }, getGl().getBoard(), this);
 						c++;
 
 					}
 				}
 			}
 		}
-		for (int i=0; i<cA.length; i++){
-			//TODO
+		for (int i = 0; i < cA.length; i++) {
+			System.out.println(cA[i].getLocationString() + cA[i].calculateUtility());
 		}
+		super.initialVillage();
 	}
 
 	private void initializeDiceRollProbabilities() {

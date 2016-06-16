@@ -59,12 +59,10 @@ public class CornerAgent {
 	 */
 	public int calculateUtility() {
 		if (isBlocked()) {
-			throw new IllegalAccessError("Blocked corners have no utility");
+			return -10000;
 		} else {
-			netUtility = -landDiversity() - harbourDiversity() - rollProbability(); // TODO
-																					// add
-																					// more
-																					// factors
+			netUtility = landDiversity() + harbourDiversity() + rollProbability();
+			// TODO add more factors
 			return netUtility;
 
 		}
@@ -177,4 +175,13 @@ public class CornerAgent {
 
 	}
 	// TODO edge
+
+	public int[] getLocation() {
+		return location;
+	}
+
+	//DEBUG
+	public String getLocationString(){
+		return "["+location[0]+","+location[1]+","+location[2]+"]";
+	}
 }

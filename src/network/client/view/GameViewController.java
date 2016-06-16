@@ -55,7 +55,7 @@ import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
 
 public class GameViewController implements Initializable {
-	
+
 	@FXML
 	private Text selfWoodText;
 
@@ -300,10 +300,12 @@ public class GameViewController implements Initializable {
 				} else {
 					selfWoodText.setFill(Color.RED);
 				}
+				woodTransition.setAutoReverse(true);
 				woodTransition.play();
+
 			}
 		});
-		
+
 		selfClayText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -315,7 +317,7 @@ public class GameViewController implements Initializable {
 				clayTransition.play();
 			}
 		});
-		
+
 		selfSheepText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -327,7 +329,7 @@ public class GameViewController implements Initializable {
 				woolTransition.play();
 			}
 		});
-		
+
 		selfCornText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -339,7 +341,7 @@ public class GameViewController implements Initializable {
 				cornTransition.play();
 			}
 		});
-		
+
 		selfOreText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
