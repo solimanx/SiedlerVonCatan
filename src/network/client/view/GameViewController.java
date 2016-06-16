@@ -291,6 +291,47 @@ public class GameViewController implements Initializable {
 		woolTransition = generateTransition(selfSheepText);
 		cornTransition = generateTransition(selfCornText);
 		oreTransition = generateTransition(selfOreText);
+		
+		woodTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				selfWoodText.setFill(Color.BLACK);
+			}
+		});
+		
+		clayTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				selfClayText.setFill(Color.BLACK);
+			}
+		});
+		
+		woolTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				selfSheepText.setFill(Color.BLACK);
+			}
+		});
+		
+		cornTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				selfCornText.setFill(Color.BLACK);
+			}
+		});
+		
+		oreTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				selfOreText.setFill(Color.BLACK);
+			}
+		});
+		
 
 		selfWoodText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -779,6 +820,7 @@ public class GameViewController implements Initializable {
 			default:
 				rollDiceButton.setDisable(false);
 				endTurnButton.setDisable(false);
+				break;
 			}
 			break;
 		case 2:
@@ -856,6 +898,11 @@ public class GameViewController implements Initializable {
 		city.setOpacity(1.0);
 		city.setEffect(shadow);
 		city.setStroke(Color.BLACK);
+	}
+	
+	public void showVictory(int playerID){
+		//playerIDtoViewPosition(playerID); // 1,2,3,4 als viewPosition, 1 == self
+		// new Stage
 	}
 
 	/**
