@@ -2,11 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
+import settings.DefaultSettings;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -264,12 +267,163 @@ public class GameLogic {
 		return true;
 	}
 
+	/**
+	 * Check if player has a settlement on a wood 2:1 harbour
+	 *
+	 * @return
+	 */
+	public boolean hasWoodHarbour(int playerID) {
+		int radius = DefaultSettings.BOARD_RADIUS;
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				for (int k = 0; k < 2; k++) {
+					if (board.getCornerAt(j, i, k) != null) {
+						Corner c = board.getCornerAt(j, i, k);
+						if (c.getHarbourStatus().equals(HarbourStatus.WOOD)) {
+							if (c.getOwnerID() == playerID) {
+								return true;
+							}
+						}
+
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check if player has a settlement on a clay 2:1 harbour
+	 *
+	 * @return
+	 */
+	public boolean hasClayHarbour(int playerID) {
+		int radius = DefaultSettings.BOARD_RADIUS;
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				for (int k = 0; k < 2; k++) {
+					if (board.getCornerAt(j, i, k) != null) {
+						Corner c = board.getCornerAt(j, i, k);
+						if (c.getHarbourStatus().equals(HarbourStatus.CLAY)) {
+							if (c.getOwnerID() == playerID) {
+								return true;
+							}
+						}
+
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check if player has a settlement on a wool 2:1 harbour
+	 *
+	 * @return
+	 */
+	public boolean hasWoolHarbour(int playerID) {
+		int radius = DefaultSettings.BOARD_RADIUS;
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				for (int k = 0; k < 2; k++) {
+					if (board.getCornerAt(j, i, k) != null) {
+						Corner c = board.getCornerAt(j, i, k);
+						if (c.getHarbourStatus().equals(HarbourStatus.SHEEP)) {
+							if (c.getOwnerID() == playerID) {
+								return true;
+							}
+						}
+
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check if player has a settlement on a corn 2:1 harbour
+	 *
+	 * @return
+	 */
+	public boolean hasCornHarbour(int playerID) {
+		int radius = DefaultSettings.BOARD_RADIUS;
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				for (int k = 0; k < 2; k++) {
+					if (board.getCornerAt(j, i, k) != null) {
+						Corner c = board.getCornerAt(j, i, k);
+						if (c.getHarbourStatus().equals(HarbourStatus.CORN)) {
+							if (c.getOwnerID() == playerID) {
+								return true;
+							}
+						}
+
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check if player has a settlement on a ore 2:1 harbour
+	 *
+	 * @return
+	 */
+	public boolean hasOreHarbour(int playerID) {
+		int radius = DefaultSettings.BOARD_RADIUS;
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				for (int k = 0; k < 2; k++) {
+					if (board.getCornerAt(j, i, k) != null) {
+						Corner c = board.getCornerAt(j, i, k);
+						if (c.getHarbourStatus().equals(HarbourStatus.ORE)) {
+							if (c.getOwnerID() == playerID) {
+								return true;
+							}
+						}
+
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check if player has a settlement on a 3:1 harbour.
+	 *
+	 * @return
+	 */
+	public boolean hasThreeOneHarbour(int playerID) {
+		int radius = DefaultSettings.BOARD_RADIUS;
+		for (int i = -radius; i <= radius; i++) {
+			for (int j = -radius; j <= radius; j++) {
+				for (int k = 0; k < 2; k++) {
+					if (board.getCornerAt(j, i, k) != null) {
+						Corner c = board.getCornerAt(j, i, k);
+						if (c.getHarbourStatus().equals(HarbourStatus.THREE_TO_ONE)) {
+							if (c.getOwnerID() == playerID) {
+								return true;
+							}
+						}
+
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+
 	public Board getBoard() {
 		return board;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param playerID
 	 * @param currentPlayer
 	 * @param state
