@@ -47,7 +47,7 @@ public class CornerAgent {
 			this.e = board.getProjectingEdges(loc[0], loc[1], loc[2]);
 			this.c = board.getAdjacentCorners(loc[0], loc[1], loc[2]);
 			this.netUtility = 0;
-			this.rb = ResourceBundle.getBundle("ai.bundle.AIProperties.properties");
+			this.rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 		}
 	}
 
@@ -60,7 +60,10 @@ public class CornerAgent {
 		if (isBlocked()) {
 			throw new IllegalAccessError("Blocked corners have no utility");
 		} else {
-			netUtility = -landDiversity() - harbourDiversity() - rollProbability(); //TODO add more factors
+			netUtility = -landDiversity() - harbourDiversity() - rollProbability(); // TODO
+																					// add
+																					// more
+																					// factors
 			return netUtility;
 
 		}
@@ -155,11 +158,13 @@ public class CornerAgent {
 	 */
 	protected int rollProbability() {
 		Double diversity = 0.0;
-		Integer f0p = f[0] != null ? f[0].getDiceIndex() : 0;
-		Integer f1p = f[1] != null ? f[1].getDiceIndex() : 0;
-		Integer f2p = f[2] != null ? f[2].getDiceIndex() : 0;
-		diversity += aai.diceRollProbabilities.get(f0p) + aai.diceRollProbabilities.get(f1p)
-				+ aai.diceRollProbabilities.get(f2p);
+		Integer f0p = f[0] != null ? f[0].getDiceIndex() != null ? f[0].getDiceIndex() : 0 : 0;
+		Integer f1p = f[1] != null ? f[1].getDiceIndex() != null ? f[1].getDiceIndex() : 0 : 0;
+		Integer f2p = f[2] != null ? f[2].getDiceIndex() != null ? f[2].getDiceIndex() : 0 : 0;
+		Double roll0 = aai.diceRollProbabilities.containsKey(f0p)?aai.diceRollProbabilities.get(f0p):0.0;
+		Double roll1 = aai.diceRollProbabilities.containsKey(f1p)?aai.diceRollProbabilities.get(f1p):0.0;
+		Double roll2 = aai.diceRollProbabilities.containsKey(f2p)?aai.diceRollProbabilities.get(f2p):0.0;
+		diversity += roll0 + roll1 + roll2;
 		// round up
 		final int HEX_DICE_WEIGHT = Integer.parseInt(rb.getString("HEX_DICE_WEIGHT"));
 		return (int) (HEX_DICE_WEIGHT * diversity);

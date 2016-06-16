@@ -68,6 +68,7 @@ public class PrimitiveAI extends Thread {
 	private int colorCounter = 0;
 	private boolean started = false;
 	private GameLogic gl;
+
 	private Board board;
 
 	// ================================================================================
@@ -78,7 +79,7 @@ public class PrimitiveAI extends Thread {
 	 * Creates a PrimitiveAI object, and forces it to connect to the 0.3 server.
 	 */
 	public PrimitiveAI() {
-		logger.info("AI started");
+		//logger.info("AI started");
 		this.board = new Board();
 		this.gl = new GameLogic(board);
 
@@ -103,7 +104,7 @@ public class PrimitiveAI extends Thread {
 			writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 			System.out.println(DefaultSettings.getCurrentTime() + " AI connected to server.");
-			logger.info(" AI connected to server.");
+			//logger.info(" AI connected to server.");
 			read();
 		} catch (IOException e) {
 			logger.catching(Level.DEBUG, e);
@@ -125,11 +126,11 @@ public class PrimitiveAI extends Thread {
 	 * @throws IOException
 	 */
 	private void read() throws IOException {
-		logger.warn("Reading input from the servers output(read()) throws IOException");
+		//logger.warn("Reading input from the servers output(read()) throws IOException");
 		String line;
 		while ((line = reader.readLine()) != null) {
 			System.out.println(DefaultSettings.getCurrentTime() + " Server: " + line);
-			logger.info("Server", line);
+			//logger.info("Server", line);
 			pI.sendToParser(line);
 		}
 	}
@@ -140,9 +141,9 @@ public class PrimitiveAI extends Thread {
 	 * @throws IOException
 	 */
 	public void write(String json) throws IOException {
-		logger.warn("Writing output to server, throws IOException");
+		//logger.warn("Writing output to server, throws IOException");
 		System.out.println(DefaultSettings.getCurrentTime() + "    A.I: " + json);
-		logger.info(DefaultSettings.getCurrentTime(), "    A.I: ", json);
+		//logger.info(DefaultSettings.getCurrentTime(), "    A.I: ", json);
 		writer.write(json + "\n");
 		writer.flush();
 	}
@@ -503,4 +504,7 @@ public class PrimitiveAI extends Thread {
 		return me;
 	}
 
+	public GameLogic getGl() {
+		return gl;
+	}
 }

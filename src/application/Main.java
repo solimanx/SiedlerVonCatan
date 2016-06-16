@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ai.AdvancedAI;
 import ai.PrimitiveAI;
 import debugging.DebugClient;
 import javafx.application.Application;
@@ -22,6 +23,7 @@ public class Main extends Application {
 	private ClientController fc;
 	private DebugClient dc;
 	private PrimitiveAI pa;
+	private AdvancedAI pa2;
 
 	// 0 for client, 1 for server , 2 for AI, 3 for debug/test mode
 	private int mode = 0;
@@ -55,6 +57,9 @@ public class Main extends Application {
 		case 3:
 			dc = new DebugClient(primaryStage);
 			break;
+		case 4:
+			pa = new AdvancedAI();
+			pa.commence();
 		}
 
 	}
@@ -70,6 +75,8 @@ public class Main extends Application {
 				mode = 2;
 			} else if (string.equals("debug")) {
 				mode = 3;
+			} else if (string.equals("ai2")) {
+				mode = 4;
 			}
 		}
 	}
