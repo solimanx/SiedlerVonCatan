@@ -566,8 +566,8 @@ public class GameViewController implements Initializable {
 		Polygon village = villages[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
 		// DEBUG
 		// if(village.getFill().equals(playerColors.get(1))){
-		viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1],
-				villageCoordinates[2]);
+//		viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1],
+//				villageCoordinates[2]);
 		// }
 		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
 			viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
