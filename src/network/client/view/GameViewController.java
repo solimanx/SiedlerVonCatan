@@ -901,6 +901,22 @@ public class GameViewController implements Initializable {
 	}
 	
 	public void showVictory(int playerID){
+		//FXMLLoader loader = new FXMLLoader();
+		//Parent root;
+		//try {
+		//	root = loader.load(getClass().getResource().openStream());
+		//	Scene scene = new Scene(root);
+		//	Stage victoryStage = new Stage();
+		//    victoryStage.setScene(scene);
+		//    victoryStage.initModality(Modality.APPLICATION_MODAL);
+		//	victoryStage.initOwner(gameStage);
+		//	victoryStage.show();
+		    
+		//} catch (IOException e) {
+			// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
+		
 		//playerIDtoViewPosition(playerID); // 1,2,3,4 als viewPosition, 1 == self
 		// new Stage
 	}
