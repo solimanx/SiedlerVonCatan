@@ -418,9 +418,10 @@ public class Board {
         if (fields[i + radius][j + radius] != null) {
             fields[i + radius][j + radius].setResourceType(resourceType);
             fields[i + radius][j + radius].setDiceIndex(diceIndex);
-        } else
+        } else {
             logger.warn("Throws new Illegal Argument Exception\"Field doesn't exist\"");
         throw new IllegalArgumentException("Field doesn't exist");
+        }
 
     }
 
