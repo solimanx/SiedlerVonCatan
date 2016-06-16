@@ -54,7 +54,7 @@ public final class DefaultSettings {
 		}
 	};
 
-	public final static int[] DICE_NUMBERS = { 2, 5, 10, 8, 4, 11, 12, 9, 10, 8, 3, 6, 4, 9, 11, 3, 6, 5 };
+	public final static int[] DICE_NUMBERS = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11 }; 
 
 	public final static int MAXIMUM_PLAYERS_AMOUNT = 4;
 
