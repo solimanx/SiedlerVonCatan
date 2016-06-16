@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 import com.sun.media.jfxmedia.logging.Logger;
 
 import application.lobby.PlayerProfileController;
+import enums.CardType;
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
@@ -20,6 +21,7 @@ import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
+import model.objects.DevCards.DevelopmentCard;
 import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
@@ -811,5 +813,11 @@ public class ClientController {
         int[] resources = gameLogic.getBoard().getPlayer(playerID).getResources();
         return resources;
     }
+
+	public void addToDeck(int playerID, DevelopmentCard devCard) {
+		int modelID = threadPlayerIdMap.get(playerID);
+		gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(devCard);
+		
+	}
 
 }

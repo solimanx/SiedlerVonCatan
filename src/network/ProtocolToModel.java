@@ -1,12 +1,22 @@
 package network;
 
+import enums.CardType;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.ResourceType;
 import model.Board;
 import model.HexService;
+import model.objects.DevCards.DevelopmentCard;
+import model.objects.DevCards.InventionCard;
+import model.objects.DevCards.KnightCard;
+import model.objects.DevCards.MonopolyCard;
+import model.objects.DevCards.StreetBuildingCard;
+import model.objects.DevCards.VictoryPointCard;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
 
 public final class ProtocolToModel {
@@ -142,7 +152,6 @@ public final class ProtocolToModel {
 	 * @return ResourceArray
 	 */
 	public static enums.ResourceType[] getResources(ProtocolResource resources) {
-		// TODO
 		int wood = resources.getWood();
 		int clay = resources.getClay();
 		int wool = resources.getWool();
@@ -260,6 +269,36 @@ public final class ProtocolToModel {
 		else{
 			throw new IllegalArgumentException("Error at convertResources");
 		}
+	}
+
+	/**
+	 * Intended for use by ClientInputHandler after buying a card only.
+	 * @param pdv
+	 * @return
+	 */
+	public static DevelopmentCard getCardType(ProtocolDevCard pdv) {
+		if(pdv.getInvention()!= null){
+			return new InventionCard();
+		}
+		if(pdv.getKnight()!= null){
+			return new KnightCard();
+		}
+		if(pdv.getMonopoly()!=null){
+			return new MonopolyCard();
+		}
+		if(pdv.getRoadbuild()!=null){
+			return new StreetBuildingCard();
+		}
+		if(pdv.getVictoryPoint()!=null){
+			return new VictoryPointCard();
+		}
+		if(pdv.getUnknown()!= null){
+			return null;//TODO 
+		}
+		else{
+			throw new IllegalArgumentException("ProtocolDevCard is all null");
+		}
+		
 	}
 
 }

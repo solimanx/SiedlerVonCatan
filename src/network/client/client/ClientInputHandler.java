@@ -2,19 +2,17 @@ package network.client.client;
 
 import java.util.ArrayList;
 
-import enums.CardType;
-import enums.ResourceType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
+import model.objects.DevCards.DevelopmentCard;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
 import parsing.Parser;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -56,9 +54,9 @@ import protocol.serverinstructions.ProtocolLongestRoad;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
-import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
+import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
 /**
@@ -449,6 +447,9 @@ public class ClientInputHandler {
      */
     protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
        ProtocolDevCard pdv = boughtDevelopmentCard.getDevelopmentCard();
+       DevelopmentCard ct = ProtocolToModel.getCardType(pdv);
+       int playerID = boughtDevelopmentCard.getPlayerID();
+       clientController.addToDeck(playerID, ct);
 
     }
 
