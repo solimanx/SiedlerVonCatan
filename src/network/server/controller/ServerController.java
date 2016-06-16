@@ -62,6 +62,7 @@ public class ServerController {
 	private static Logger logger = LogManager.getLogger(ServerController.class.getName());
 	private int lengthLongestTradeRoute;
 	private ArrayList<ArrayList<Edge>> streetSets = new ArrayList<ArrayList<Edge>>();
+	private int[] longestRoutes;
 
 	public ServerController() {
 		board = new Board();
@@ -283,6 +284,7 @@ public class ServerController {
 	 * player to play
 	 */
 	public void initializeBoard() {
+		longestRoutes = new int[amountPlayers];
 		generateBoard("A", true);
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 		int[] currDiceRollResult;
@@ -478,7 +480,7 @@ public class ServerController {
 		gameLogic.getBoard().getPlayer(modelID).decreaseAmountStreets();
 		addToStreetSet(e, modelID);
 
-		//checkLongestTradingRoute(modelID, x, y, dir);
+		checkLongestTradingRoute(modelID);
 	}
 
 
@@ -514,6 +516,99 @@ public class ServerController {
 			streetSets.add(newList);
 		}
 	}
+
+	public void checkLongestTradingRoute(int modelID){
+		int max = getLongestTradingRoute(modelID);
+	    longestRoutes[modelID] = max;
+
+		System.out.println("Calculated longest Trading Route: Player = "+modelID+" Lenght = "+max);
+
+	}
+
+	public int getLongestTradingRoute(int modelID){
+		ArrayList<Integer> longestStreets = new ArrayList<Integer>();
+		ArrayList<Edge> currEndingStreets = new ArrayList<Edge>();
+		ArrayList<Edge> currStreetSet;
+		for(int i = 0; i<streetSets.size(); i++){
+			currStreetSet = streetSets.get(i);
+			if(currStreetSet.get(0).getOwnerID() == modelID){
+				for (int j = 0; j <currStreetSet.size();j++){
+			        String id = currStreetSet.get(j).getEdgeID();
+					int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
+					Edge[] neighbours = gameLogic.getBoard().getLinkedEdges(coords[0], coords[1], coords[2]);
+					boolean top = false;
+					boolean bottom = false;
+					switch (coords[2]) {
+					case 0: //neighbour order differs order of dir 1,2
+						if(currStreetSet.contains(neighbours[0]) || currStreetSet.contains(neighbours[1])){
+							top = true;
+						}
+						if (currStreetSet.contains(neighbours[2]) || currStreetSet.contains(neighbours[3])){
+							bottom = true;
+						}
+						if (!(top && bottom)){
+							currEndingStreets.add(currStreetSet.get(j));
+						}
+
+						break;
+					default:
+						if(currStreetSet.contains(neighbours[0]) || currStreetSet.contains(neighbours[3])){
+							top = true;
+						}
+						if (currStreetSet.contains(neighbours[2]) || currStreetSet.contains(neighbours[1])){
+							bottom = true;
+						}
+						if (!(top && bottom)){
+							currEndingStreets.add(currStreetSet.get(j));
+						}
+						break;
+					}
+				}
+				if (currEndingStreets.isEmpty()){
+					ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
+					ArrayList<Edge> lastNeighbours = new ArrayList<Edge>();
+					ArrayList<Integer> greatestValue = new ArrayList<Integer>();
+					for (int j = 0;j < currStreetSet.size();j++){ //gehe über alle straßen
+						greatestValue.add(1+ depthFirstSearch(currStreetSet.get(i),currStreetSet, alreadyChecked, lastNeighbours));
+					}
+					longestStreets.add(Collections.max(greatestValue));
+				} else {
+					for (int j = 0;j < currEndingStreets.size();j++){
+						ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
+						ArrayList<Edge> lastNeighbours = new ArrayList<Edge>();
+						longestStreets.add(1+ depthFirstSearch(currEndingStreets.get(j),currStreetSet, alreadyChecked, lastNeighbours));
+					}
+				}
+
+			}
+		}
+
+		return Collections.max(longestStreets);
+	}
+
+
+	private Integer depthFirstSearch(Edge edge, ArrayList<Edge> currStreetSet, ArrayList<Edge> alreadyChecked, ArrayList<Edge> lastNeighbours) {
+		int[] coord = HexService.getEdgeCoordinates(edge.getEdgeID().substring(0, 1), edge.getEdgeID().substring(1, 2));
+		Edge[] neighbours = board.getLinkedEdges(coord[0], coord[1], coord[2]);
+		ArrayList<Edge> aC = new ArrayList<Edge>(alreadyChecked);
+		aC.add(edge);
+		ArrayList<Edge> validNeighbours = new ArrayList<Edge>();
+		for(int i = 0; i<neighbours.length; i++){
+			if(currStreetSet.contains(neighbours[i]) && !aC.contains(neighbours[i]) && !lastNeighbours.contains(neighbours[i])){
+				validNeighbours.add(neighbours[i]);
+			}
+		}
+		int greatestValue = 0;
+		for(int i= 0; i<validNeighbours.size(); i++){
+			int currSize = 1+depthFirstSearch(neighbours[i], currStreetSet, aC, validNeighbours);
+			if (currSize>greatestValue){
+				greatestValue = currSize;
+			}
+		}
+		return greatestValue;
+	}
+
+
 
 	/**
 	 * Checks if a player has longest Trading Route, which contains 5 or more
@@ -662,6 +757,8 @@ public class ServerController {
 //		}
 //		return result;
 //	}
+
+
 
 	/**
 	 * checks if the player has the most played knight cards
