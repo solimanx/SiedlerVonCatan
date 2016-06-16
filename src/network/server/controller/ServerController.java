@@ -1457,7 +1457,7 @@ public class ServerController {
 	 * @param resType
 	 * @return
 	 */
-	private boolean resourceStackDecrease(ResourceType resType) {
+	protected boolean resourceStackDecrease(ResourceType resType) {
 		int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
 		if (resourceStack[resIndex] > 0) {
 			resourceStack[resIndex]--;
@@ -1472,7 +1472,7 @@ public class ServerController {
 	 *
 	 * @param resType
 	 */
-	private void resourceStackIncrease(ResourceType resType) {
+	protected void resourceStackIncrease(ResourceType resType) {
 		int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
 		resourceStack[resIndex] = resourceStack[resIndex]++;
 	}
