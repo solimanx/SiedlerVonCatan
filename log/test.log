@@ -7800,4 +7800,12 @@ java.net.BindException: Address already in use
 [m[32m12:56:58.458 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfilecRED
 [m[33m12:57:25.465 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
 [m[32m12:57:31.019 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfilebWHITE
+[m[30m18:38:47.980 INFO  network.client.client.Client.run() @45 - Client connected to server
+[m[32m18:38:48.142 DEBUG network.client.controller.ClientController.welcome() @129 - Handshake complete!
+[m[33m18:38:48.441 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m18:39:02.610 DEBUG application.lobby.PlayerProfileController.handleSendButton() @58 - No name given
+[m[32m18:39:03.650 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileaBLUE
+[m[32m18:39:06.107 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileaeRED
+[m[32m18:39:08.999 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileaeORANGE
+[m[32m18:39:11.421 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileaewwWHITE
 [m

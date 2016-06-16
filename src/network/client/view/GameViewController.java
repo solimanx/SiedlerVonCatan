@@ -99,6 +99,9 @@ public class GameViewController implements Initializable {
 	private Button endTurnButton;
 
 	@FXML
+	private Button buyCardButton;
+	
+	@FXML
 	private Text playerTwoCards;
 
 	@FXML
@@ -564,6 +567,12 @@ public class GameViewController implements Initializable {
 		tradeStage.show();
 	}
 
+	@FXML
+	void handleBuyCardButton(ActionEvent event) throws IOException{
+		
+	}
+	
+	
 	/**
 	 * @param event
 	 */

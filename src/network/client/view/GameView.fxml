@@ -85,6 +85,7 @@
                               <Insets bottom="3.0" />
                            </VBox.margin>
                         </Button>
+                        <Button fx:id="buyCardButton" layoutX="50.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleBuyCardButton" prefWidth="80.0" text="Buy Card" />
                      </children>
                   </VBox>
                </children>
