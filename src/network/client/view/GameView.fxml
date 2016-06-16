@@ -18,7 +18,7 @@
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <Pane fx:id="board" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: radial-gradient(center 50% 50% , radius 150% , #81D4FA, #1E88E5); -fx-background-image: url(https://trello-attachments.s3.amazonaws.com/5762833cb71355d661cfb6ce/1024x724/40c105ae8aadcbfaec2f9c1984db342e/background.jpg); -fx-background-size: stretch;" BorderPane.alignment="CENTER" />
+            <Pane fx:id="board" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: radial-gradient(center 50% 50% , radius 150% , #81D4FA, #1E88E5); -fx-background-size: stretch;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="140.0" style="-fx-background-color: #fff;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -33,7 +33,7 @@
                   <Label fx:id="playerStatusOne" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
                </children>
             </HBox>
-            <VBox fx:id="playerVBoxOne" disable="true" prefHeight="200.0" prefWidth="125.0" spacing="5.0">
+            <VBox fx:id="playerVBoxOne" prefHeight="200.0" prefWidth="125.0" spacing="5.0">
                <children>
                   <TextFlow fx:id="selfWood" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
                      <children>
