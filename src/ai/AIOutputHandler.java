@@ -43,7 +43,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.throwing(Level.DEBUG, e);
+            logger.error("Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -60,7 +61,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.error("Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
     }
@@ -94,7 +96,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.error("Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -117,7 +120,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.error("Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -130,6 +134,7 @@ public class AIOutputHandler {
      * @param y
      * @param dir
      */
+
     public void requestBuildInitialRoad(int x, int y, int dir) {
         String location = ModelToProtocol.getEdgeID(x, y, dir);
         ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", location);
@@ -140,7 +145,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.error("Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -158,7 +164,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.error("Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
     }
@@ -177,7 +184,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.error("Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -195,7 +203,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.error("Input/Output Exception ", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -215,8 +224,10 @@ public class AIOutputHandler {
         try {
             ai.write(parser.createString(r));
         } catch (IOException e) {
+
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.catching(Level.ERROR, e);
+            logger.error("Input/Output Exception ", e);
             e.printStackTrace();
         }
 
@@ -236,7 +247,8 @@ public class AIOutputHandler {
             ai.write(parser.createString(r));
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            logger.catching(Level.DEBUG, e);
+            logger.catching(Level.ERROR, e);
+            logger.error("Input/Output Exception ", e);
             e.printStackTrace();
         }
 
