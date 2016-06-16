@@ -16,7 +16,8 @@ public class AdvancedAI extends PrimitiveAI {
 	private ResourceBundle rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 
 	private CornerAgent[] cA = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
-	public final Map<Integer, Double> diceRollProbabilities = new HashMap<Integer, Double>();
+	private Map<Integer, Double> diceRollProbabilities;
+
 
 	public AdvancedAI() {
 
@@ -25,7 +26,7 @@ public class AdvancedAI extends PrimitiveAI {
 	@Override
 	public void initialVillage() {
 		initializeDiceRollProbabilities();
-		Integer test = 5;
+		Integer test = 0;
 		System.out.println(diceRollProbabilities.get(test));
 		int c = 0;
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -33,7 +34,7 @@ public class AdvancedAI extends PrimitiveAI {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
 					if (getGl().getBoard().getCornerAt(j, i, k) != null) {
-						cA[c] = new CornerAgent(new int[] { j, i, k }, getGl().getBoard());
+						cA[c] = new CornerAgent(new int[] { j, i, k }, getGl().getBoard(),this);
 						c++;
 
 					}
@@ -41,11 +42,12 @@ public class AdvancedAI extends PrimitiveAI {
 			}
 		}
 		for (int i=0; i<cA.length; i++){
-			System.out.print(cA[i].calculateUtility());
+			//TODO
 		}
 	}
 
 	private void initializeDiceRollProbabilities() {
+		diceRollProbabilities = new HashMap<Integer, Double>();
 		diceRollProbabilities.put(2, Double.parseDouble(rb.getString("probability_two")));
 		diceRollProbabilities.put(3, Double.parseDouble(rb.getString("probability_three")));
 		diceRollProbabilities.put(4, Double.parseDouble(rb.getString("probability_four")));
@@ -60,4 +62,7 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
+	public Map<Integer, Double> getDiceRollProbabilities() {
+		return diceRollProbabilities;
+	}
 }

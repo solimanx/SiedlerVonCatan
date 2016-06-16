@@ -36,7 +36,8 @@ public class CornerAgent {
 	private ResourceBundle rb;
 	private int difference;
 
-	public CornerAgent(int[] loc, Board board) {
+	public CornerAgent(int[] loc, Board board, AdvancedAI aai) {
+		this.aai = aai;
 		this.board = board;
 		Corner c = board.getCornerAt(loc[0], loc[1], loc[2]);
 		this.state = c.getStatus();
@@ -161,11 +162,11 @@ public class CornerAgent {
 		Integer f0p = f[0] != null ? f[0].getDiceIndex() != null ? f[0].getDiceIndex() : 0 : 0;
 		Integer f1p = f[1] != null ? f[1].getDiceIndex() != null ? f[1].getDiceIndex() : 0 : 0;
 		Integer f2p = f[2] != null ? f[2].getDiceIndex() != null ? f[2].getDiceIndex() : 0 : 0;
-		Double roll0 = aai.diceRollProbabilities.containsKey(f0p)?aai.diceRollProbabilities.get(f0p):0.0;
-		Double roll1 = aai.diceRollProbabilities.containsKey(f1p)?aai.diceRollProbabilities.get(f1p):0.0;
-		Double roll2 = aai.diceRollProbabilities.containsKey(f2p)?aai.diceRollProbabilities.get(f2p):0.0;
+		Double roll0 = aai.getDiceRollProbabilities().get(f0p)!=null?aai.getDiceRollProbabilities().get(f0p):0.0;
+		Double roll1 = aai.getDiceRollProbabilities().get(f1p)!=null?aai.getDiceRollProbabilities().get(f1p):0.0;
+		Double roll2 = aai.getDiceRollProbabilities().get(f2p)!=null?aai.getDiceRollProbabilities().get(f2p):0.0;
 		diversity += roll0 + roll1 + roll2;
-		// round up
+//		 round up
 		final int HEX_DICE_WEIGHT = Integer.parseInt(rb.getString("HEX_DICE_WEIGHT"));
 		return (int) (HEX_DICE_WEIGHT * diversity);
 
