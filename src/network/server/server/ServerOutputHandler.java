@@ -382,7 +382,7 @@ public class ServerOutputHandler {
         }
 
     }
-    public void longestRoad(int player_id) {
+    public void longestRoad(Integer player_id) {
         ProtocolLongestRoad plr = new ProtocolLongestRoad(player_id);
         Response r = new Response();
         r.pLongestRoad = plr;
