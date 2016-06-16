@@ -53,12 +53,13 @@ public class CornerAgent {
 	}
 
 	/**
-	 * Adds all the factors together to calculate the utility, the lower the
-	 * utility, the more likely to be picked by the AI as a good spot to build
-	 * on.
+	 * Adds all the factors together to calculate the utility for placing the
+	 * initial settlement, the higher the utility, the higher the chance to be picked
+	 * by the AI as a spot to build on.
 	 */
-	public int calculateUtility() {
+	public int calculateInitialVillageUtility() {
 		if (isBlocked()) {
+			//Random negative number to avoid building here.
 			return -10000;
 		} else {
 			netUtility = landDiversity() + harbourDiversity() + rollProbability();
@@ -160,11 +161,11 @@ public class CornerAgent {
 		Integer f0p = f[0] != null ? f[0].getDiceIndex() != null ? f[0].getDiceIndex() : 0 : 0;
 		Integer f1p = f[1] != null ? f[1].getDiceIndex() != null ? f[1].getDiceIndex() : 0 : 0;
 		Integer f2p = f[2] != null ? f[2].getDiceIndex() != null ? f[2].getDiceIndex() : 0 : 0;
-		Double roll0 = aai.getDiceRollProbabilities().get(f0p)!=null?aai.getDiceRollProbabilities().get(f0p):0.0;
-		Double roll1 = aai.getDiceRollProbabilities().get(f1p)!=null?aai.getDiceRollProbabilities().get(f1p):0.0;
-		Double roll2 = aai.getDiceRollProbabilities().get(f2p)!=null?aai.getDiceRollProbabilities().get(f2p):0.0;
+		Double roll0 = aai.getDiceRollProbabilities().get(f0p) != null ? aai.getDiceRollProbabilities().get(f0p) : 0.0;
+		Double roll1 = aai.getDiceRollProbabilities().get(f1p) != null ? aai.getDiceRollProbabilities().get(f1p) : 0.0;
+		Double roll2 = aai.getDiceRollProbabilities().get(f2p) != null ? aai.getDiceRollProbabilities().get(f2p) : 0.0;
 		diversity += roll0 + roll1 + roll2;
-//		 round up
+		// round up
 		final int HEX_DICE_WEIGHT = Integer.parseInt(rb.getString("HEX_DICE_WEIGHT"));
 		return (int) (HEX_DICE_WEIGHT * diversity);
 
@@ -180,8 +181,8 @@ public class CornerAgent {
 		return location;
 	}
 
-	//DEBUG
-	public String getLocationString(){
-		return "["+location[0]+","+location[1]+","+location[2]+"]";
+	// DEBUG
+	public String getLocationString() {
+		return "[" + location[0] + "," + location[1] + "," + location[2] + "]";
 	}
 }

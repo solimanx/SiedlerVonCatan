@@ -11,6 +11,7 @@ import model.Board;
 import model.Index;
 import model.objects.PlayerModel;
 import model.objects.DevCards.DevelopmentCard;
+import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
 
 public final class ModelToProtocol {
@@ -135,13 +136,13 @@ public final class ModelToProtocol {
 		return (new ProtocolResource(wood, clay, wool, corn, ore, null));
 	}
 	
-	public static CardType devCardToCardType(DevelopmentCard devCard){
+	public static ProtocolDevCard devCardToProtocolDevCard(DevelopmentCard devCard){
 		switch (devCard.getName()){
-		case "Knight Card": return enums.CardType.KNIGHT;
-		case "Victory Card": return enums.CardType.VICTORYPOINT;
-		case "Invention Card": return enums.CardType.INVENTION;
-		case "Monoploy Card": return enums.CardType.MONOPOLY;
-		case "Street Building Card": return enums.CardType.STREET;
+		case "Knight Card": return new ProtocolDevCard(1,null,null,null,null,null);
+		case "Victory Card": return new ProtocolDevCard(null, null, null, null, 1, null);
+		case "Invention Card": return new ProtocolDevCard(null, null, null, null, 1, null);
+		case "Monopoly Card": return new ProtocolDevCard(null, null, 1, null, null, null);
+		case "Street Building Card": return new ProtocolDevCard(null, 1, null, null, null, null);
 		default : logger.info(devCard.getName());
         throw new IllegalArgumentException("Invalid Development Card object");
 		}

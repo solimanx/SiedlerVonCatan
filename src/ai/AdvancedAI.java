@@ -46,8 +46,8 @@ public class AdvancedAI extends PrimitiveAI {
 
 		int bestUtility = 0;
 		for (int i = 0; i < cA.length; i++) {
-			if(cA[i].calculateUtility() > bestUtility){
-				bestUtility=cA[i].calculateUtility();
+			if(cA[i].calculateInitialVillageUtility() > bestUtility){
+				bestUtility=cA[i].calculateInitialVillageUtility();
 				x = cA[i].getLocation()[0];
 				y = cA[i].getLocation()[1];
 				z = cA[i].getLocation()[2];

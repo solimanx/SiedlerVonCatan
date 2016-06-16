@@ -448,7 +448,7 @@ public class ClientInputHandler {
      * @param boughtDevelopmentCard
      */
     protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
-        // TODO Auto-generated method stub
+       ProtocolDevCard pdv = boughtDevelopmentCard.getDevelopmentCard();
 
     }
 

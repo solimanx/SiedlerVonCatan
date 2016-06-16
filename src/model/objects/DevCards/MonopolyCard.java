@@ -2,7 +2,7 @@ package model.objects.DevCards;
 
 public class MonopolyCard implements DevelopmentCard {
 
-	String name = "Monoploy Card";
+	String name = "Monopoly Card";
 	String text = "";
 
 	@Override

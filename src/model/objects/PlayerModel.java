@@ -88,7 +88,7 @@ public class PlayerModel {
         if (devCard.getName() == "Invention Card") {
             playerDevCard[2] = playerDevCard[2] + 1;
         }
-        if (devCard.getName() == "Monoploy Card") {
+        if (devCard.getName() == "Monopoly Card") {
             playerDevCard[3] = playerDevCard[3] + 1;
         }
         if (devCard.getName() == "Street Building Card") {
@@ -123,7 +123,7 @@ public class PlayerModel {
                 throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
             }
         }
-        if (devCard.getName() == "Monoploy Card") {
+        if (devCard.getName() == "Monopoly Card") {
             if (playerDevCard[3] != 0) {
                 playerDevCard[3] = playerDevCard[3] - 1;
             } else {
