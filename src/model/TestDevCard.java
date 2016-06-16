@@ -12,7 +12,7 @@ public class TestDevCard {
         DevelopmentCardsStack devStack = new DevelopmentCardsStack();
         for (int i = 0; i < 25; i++) {
             System.out.println(i + " " + devStack.getNextCard().getName());
-            logger.info("Karte ",i , devStack.getNextCard().getName());
+            logger.info("Karte " + i + devStack.getNextCard().getName());
         }
     }
 }
