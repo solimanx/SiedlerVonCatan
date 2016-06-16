@@ -16,7 +16,7 @@ public class TestSpiral {
         result = HexService.getSpiral("N");
         for (int i = 0; i < result.length(); i++) {
             System.out.println(result.charAt(i));
-            logger.info(result.charAt(i));
+            logger.debug(result.charAt(i));
         }
     }
 }
