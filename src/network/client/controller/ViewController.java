@@ -38,7 +38,7 @@ public class ViewController {
     private Stage choosingStage;
     private boolean isGameView = false;
     private boolean isChoosingStage = false;
-	private TradeViewController tradeViewController;
+    private TradeViewController tradeViewController;
 
     /**
      * @param primaryStage
@@ -98,7 +98,7 @@ public class ViewController {
      */
 
     public void startChooseView() throws IOException {
-        logger.warn("startChooseView(),(method for starting the View for choosing Player name and Player Color viev)throws IOException");
+        logger.warn("startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException");
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -134,11 +134,11 @@ public class ViewController {
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
             primaryStage.setScene(scene);
-			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-	        primaryStage.setX(primaryScreenBounds.getMinX());
-	        primaryStage.setY(primaryScreenBounds.getMinY());
-	        primaryStage.setWidth(primaryScreenBounds.getWidth());
-	        primaryStage.setHeight(primaryScreenBounds.getHeight());
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            primaryStage.setX(primaryScreenBounds.getMinX());
+            primaryStage.setY(primaryScreenBounds.getMinY());
+            primaryStage.setWidth(primaryScreenBounds.getWidth());
+            primaryStage.setHeight(primaryScreenBounds.getHeight());
             //primaryStage.setFullScreen(false);
             gameViewController = (GameViewController) loader.getController();
             gameViewController.setViewController(this);
@@ -293,7 +293,7 @@ public class ViewController {
             Platform.runLater(createSResponseProfileRunnable(server_response, playerProfileController));
         } else {
             System.out.println("Server response: " + server_response);
-            logger.debug("Server response: ", server_response);
+            logger.debug("Server response: " + server_response);
         }
 
         // TODO Auto-generated method stub
