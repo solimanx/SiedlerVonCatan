@@ -2,7 +2,7 @@ package model;
 
 /**
  * Servers as a key for the hashmap of board
- * 
+ *
  * @author reffj
  *
  */
@@ -35,5 +35,13 @@ public class Index {
 		if (y != other.y)
 			return false;
 		return true;
+	}
+
+	public int getX(){
+		return x;
+	}
+
+	public int getY(){
+		return y;
 	}
 }
