@@ -40,7 +40,7 @@ public class PlayerModel {
 	private int[] resources = { 0, 0, 0, 0, 0 };
 
 	// is null for self, but non null for other players
-	private Integer hiddenResources;
+	private Integer hiddenResources = 0;
 
 	public PlayerModel(int id) {
 		this.playerID = id;

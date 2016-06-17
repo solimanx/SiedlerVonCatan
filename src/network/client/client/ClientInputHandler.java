@@ -375,7 +375,7 @@ public class ClientInputHandler {
 		String locationID = robberMovement.getLocationID();
 		// TODO smth with information
 		int victimID = robberMovement.getVictimID();
-		clientController.receiveKnightCard(locationID);
+		clientController.robberMove(locationID);
 
 	}
 
@@ -507,7 +507,7 @@ public class ClientInputHandler {
 			String locationID = knightCardInfo.getLocationID();
 			// TODO smth with information
 			int victimID = knightCardInfo.getVictimID();
-			clientController.receiveKnightCard(locationID);
+			clientController.robberMove(locationID);
 
 		}
 

@@ -193,6 +193,7 @@ public class ClientController {
 			}
 			break;
 		case GAME_STARTING:
+			//addToPlayersResource(modelID, resources);
 			break;
 		case WAITING_FOR_GAMESTART:
 			// if player wasn't saved in list
@@ -213,7 +214,6 @@ public class ClientController {
 			pM.setPlayerState(status);
 			pM.setVictoryPoints(victoryPoints);
 			// TODO this should be done ONCE
-			addToPlayersResource(modelID, resources);
 
 			if (viewController.getGameViewController() != null) {
 				// and here..
@@ -837,10 +837,10 @@ public class ClientController {
 	/**
 	 *
 	 */
-	public void receiveKnightCard(String location) {
+	public void robberMove(String location) {
 		gameLogic.getBoard().setBandit(location);
 		int[] coords = ProtocolToModel.getFieldCoordinates(location);
-		// TODO display user and victim
+		// TODO display user and victim popup
 		viewController.getGameViewController().setBandit(coords[0], coords[1]);
 	}
 
