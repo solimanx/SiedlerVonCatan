@@ -44,12 +44,12 @@ import settings.DefaultSettings;
  *
  */
 public class ServerController {
-	private GameLogic gameLogic;
+	protected GameLogic gameLogic;
 	private ServerOutputHandler serverOutputHandler;
 	private int amountPlayers = 0;
 	private Server server;
-	private Map<Integer, Integer> modelPlayerIdMap;
-	private Map<Integer, Integer> threadPlayerIdMap;
+	protected Map<Integer, Integer> modelPlayerIdMap;
+	protected Map<Integer, Integer> threadPlayerIdMap;
 	private ServerInputHandler serverInputHandler;
 	private int InitialStreetCounter;
 	private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
@@ -67,7 +67,6 @@ public class ServerController {
 	public ServerController() {
 		board = new Board();
 		this.gameLogic = new GameLogic(board);
-		this.tradeController = new TradeController(this);
 		// ModelPlayerID => threadID
 		modelPlayerIdMap = new HashMap<Integer, Integer>();
 
@@ -285,6 +284,7 @@ public class ServerController {
 	 */
 	public void initializeBoard() {
 		longestRoutes = new int[amountPlayers];
+		this.tradeController = new TradeController(this,amountPlayers);
 		generateBoard("A", true);
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 		int[] currDiceRollResult;
@@ -421,6 +421,9 @@ public class ServerController {
 			if (neighbors[i] != null) {
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 			}
+		}
+		if (c.getHarbourStatus() != null){
+			gameLogic.getBoard().getPlayer(modelID).addToPlayerHarbours(c.getHarbourStatus());
 		}
 		return c;
 
@@ -1544,7 +1547,7 @@ public class ServerController {
 	 * @param modelPlayerID
 	 * @return int[] resources
 	 */
-	private int[] getPlayerResources(int modelPlayerID) {
+	protected int[] getPlayerResources(int modelPlayerID) {
 		int[] result = new int[5];
 		for (int i = 0; i < result.length; i++) {
 			result[i] = gameLogic.getBoard().getPlayer(modelPlayerID).getResourceAmountOf(i);

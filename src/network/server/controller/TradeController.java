@@ -12,7 +12,7 @@ public class TradeController {
 	private int tradeCounter = 0;
 	private ArrayList<TradeOffer> tradeOffers = new ArrayList<TradeOffer>();
 
-	public TradeController(ServerController serverController) {
+	public TradeController(ServerController serverController, int amountPlayers) {
 		this.serverController = serverController;
 	}
 
@@ -109,43 +109,44 @@ public class TradeController {
 				if (harbours.contains(offerResType)){
 					if (serverController.resourceStackDecrease(demandResType)){
 						serverController.addToPlayersResource(modelID, demandResType, 1);
-						//serverController.resourceObtain(modelID, resources);
+						serverController.getServerOutputHandler().resourceObtain(serverController.modelPlayerIdMap.get(modelID), serverController.getPlayerResources(modelID));
 					} else {
-						//serverController.error("stack empty");
+						serverController.getServerOutputHandler().error("resource stack empty", serverController.modelPlayerIdMap.get(modelID));
 					}					
 				} else {
-					//error("You havent got this harbour")
+					serverController.getServerOutputHandler().error("You don't have a 2:1 harbour of this resource", serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
 			case 3:
 				if (harbours.contains(HarbourStatus.THREE_TO_ONE)){
 					if (serverController.resourceStackDecrease(demandResType)){
 						serverController.addToPlayersResource(modelID, demandResType, 1);
-						//serverController.resourceObtain(modelID, resources);
+						serverController.getServerOutputHandler().resourceObtain(serverController.modelPlayerIdMap.get(modelID), serverController.getPlayerResources(modelID));
 					} else {
-						//serverController.error("stack empty");
+						serverController.getServerOutputHandler().error("resource stack empty", serverController.modelPlayerIdMap.get(modelID));
 					}	
+				} else {
+					serverController.getServerOutputHandler().error("You don't have a 3:1 harbour", serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
 			case 4:
 				if (serverController.resourceStackDecrease(demandResType)){
 					serverController.addToPlayersResource(modelID, demandResType, 1);
-					//serverController.resourceObtain(modelID, resources);
+					serverController.getServerOutputHandler().resourceObtain(serverController.modelPlayerIdMap.get(modelID), serverController.getPlayerResources(modelID));
 				} else {
-					//serverController.error("stack empty");
+					serverController.getServerOutputHandler().error("resource stack empty", serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
 
 			default:
-				//error("invalid resource amount")
+				serverController.getServerOutputHandler().error("invalid resource argument", serverController.modelPlayerIdMap.get(modelID));
 				break;
 			}
 		 }
 	}
 
 	private ArrayList<HarbourStatus> getPlayerHarbours(int modelID) {
-		// TODO implement PlayerHarbour ArrayLists
-		return null;
+		return serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerHarbours();
 	}
 
 }

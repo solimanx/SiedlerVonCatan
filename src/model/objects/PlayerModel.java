@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import enums.ResourceType;
 import model.objects.DevCards.DevelopmentCard;
 import enums.Color;
+import enums.HarbourStatus;
 //TODO import DevelopmentCard enum
 import enums.PlayerState;
 import org.apache.logging.log4j.LogManager;
@@ -29,6 +30,7 @@ public class PlayerModel {
 	private int playedKnightCards;
 	private boolean hasPlayedDevCard = false;
 	private ArrayList<DevelopmentCard> devCardsBoughtInThisRound;
+	private ArrayList<HarbourStatus> harbours = new ArrayList<HarbourStatus>();
 
 	// {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}
 	private int[] playerDevCard = { 0, 0, 0, 0, 0 };
@@ -343,6 +345,14 @@ public class PlayerModel {
 
 	public boolean hasPlayedDevCard() {
 		return hasPlayedDevCard;
+	}
+	
+	public void addToPlayerHarbours(HarbourStatus harbour){
+		harbours.add(harbour);
+	}
+	
+	public ArrayList<HarbourStatus> getPlayerHarbours(){
+		return harbours;
 	}
 
 }

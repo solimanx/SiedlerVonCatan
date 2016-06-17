@@ -37,9 +37,10 @@ public class HexService {
 
 		} else if (Board.getCMap().get(c + b + a) != null) {
 			return Board.getCMap().get(c + b + a);
-		} else
+		} else {
 			logger.warn("Throws new IllegalArgumentException,\"Corner ID\" " + a + b + c + " doesn't exist");
 		throw new IllegalArgumentException("Corner ID " + a + b + c + "doesn't exist");
+		}
 
 	}
 
