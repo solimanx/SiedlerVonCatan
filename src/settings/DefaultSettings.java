@@ -43,6 +43,7 @@ public final class DefaultSettings {
 	public final static ResourceType[] RESOURCE_ORDER = { ResourceType.WOOD, ResourceType.CLAY, ResourceType.ORE,
 			ResourceType.SHEEP, ResourceType.CORN, ResourceType.NOTHING };
 
+	@SuppressWarnings("serial")
 	public final static Map<ResourceType, Integer> RESOURCE_VALUES = new HashMap<ResourceType, Integer>() {
 		{
 			put(ResourceType.WOOD, 0);

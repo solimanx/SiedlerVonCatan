@@ -441,7 +441,7 @@ public class GameViewController implements Initializable {
 	 * @param playerColor
 	 */
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
-		if (modelID == viewController.getClientController().getOwnPlayerId()) {
+		if (modelID == viewController.getClientController().getOwnPlayerID()) {
 			playerIDtoViewPosition.put(modelID, 1);
 
 		} else {
@@ -580,7 +580,7 @@ public class GameViewController implements Initializable {
 	void sendMessage(ActionEvent event) {
 		String message = messageInput.getText();
 		messageInput.clear();
-		viewController.getClientController().chatSendMessage(message);
+		viewController.getClientController().sendChatMessage(message);
 	}
 
 	/**

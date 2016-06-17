@@ -108,7 +108,7 @@ public class LobbyController implements Initializable {
 	public void sendChatMessage() {
 		String message = chatInput.getText();
 		chatInput.clear();
-		viewController.getClientController().chatSendMessage(message);
+		viewController.getClientController().sendChatMessage(message);
 	}
 
 	public void receiveChatMessage(String string) {

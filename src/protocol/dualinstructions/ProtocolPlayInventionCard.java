@@ -17,7 +17,7 @@ import protocol.object.ProtocolResource;
 public class ProtocolPlayInventionCard {
 
 	@SerializedName("Spieler")
-	private Integer player_id;
+	private Integer playerID;
 
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resource;
@@ -28,8 +28,8 @@ public class ProtocolPlayInventionCard {
 	}
 
 	// Server to Cliet
-	public ProtocolPlayInventionCard(Integer player_id, ProtocolResource resource) {
-		this.player_id = player_id;
+	public ProtocolPlayInventionCard(Integer playerID, ProtocolResource resource) {
+		this.playerID = playerID;
 		this.resource = resource;
 
 	}
@@ -38,7 +38,7 @@ public class ProtocolPlayInventionCard {
 		return resource;
 	}
 
-	public Integer getPlayer_id() {
-		return player_id;
+	public Integer getPlayerID() {
+		return playerID;
 	}
 }

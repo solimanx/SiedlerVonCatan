@@ -21,31 +21,31 @@ public class ProtocolPlayKnightCard {
 	private String fieldID;
 
 	@SerializedName("Ziel")
-	private int targetID;
+	private int victimID;
 
 	// Client to Server
-	public ProtocolPlayKnightCard(String road1_id, int target) {
-		this.fieldID = road1_id;
-		this.targetID = target;
+	public ProtocolPlayKnightCard(String fieldID, int target) {
+		this.fieldID = fieldID;
+		this.victimID = target;
 	}
 
 	// Server to Client
-	public ProtocolPlayKnightCard(Integer playerID, String fieldID, int targetID) {
+	public ProtocolPlayKnightCard(Integer playerID, String fieldID, int victimID) {
 		this.playerID = playerID;
 		this.fieldID = fieldID;
-		this.targetID = targetID;
+		this.victimID = victimID;
 
 	}
 
-	public String getRoad1_id() {
+	public String getLocationID() {
 		return fieldID;
 	}
 
-	public int getTarget() {
-		return targetID;
+	public int getVictimID() {
+		return victimID;
 	}
 
-	public Integer getPlayer_id() {
+	public Integer getPlayerID() {
 		return playerID;
 	}
 }

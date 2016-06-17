@@ -16,37 +16,37 @@ import com.google.gson.annotations.Since;
 public class ProtocolPlayRoadCard {
 
 	@SerializedName("Spieler")
-	private Integer player_id;
+	private Integer playerID;
 	
 	@SerializedName("Straße 1")
-	private String road1_id;
+	private String roadID1;
 
 	@SerializedName("Straße 2")
-	private String road2_id;
+	private String roadID2;
 
 	// Client to Server
-	public ProtocolPlayRoadCard(String road1_id, String road2_id) {
-		this.road1_id = road1_id;
-		this.road2_id = road2_id;
+	public ProtocolPlayRoadCard(String roadID1, String roadID2) {
+		this.roadID1 = roadID1;
+		this.roadID2 = roadID2;
 	}
 
 	// Server to Client
-	public ProtocolPlayRoadCard(Integer player_id, String road1_id, String road2_id) {
-		this.player_id = player_id;
-		this.road1_id = road1_id;
-		this.road2_id = road2_id;
+	public ProtocolPlayRoadCard(Integer playerID, String roadID1, String roadID2) {
+		this.playerID = playerID;
+		this.roadID1 = roadID1;
+		this.roadID2 = roadID2;
 		
 	}
 
-	public String getRoad1_id() {
-		return road1_id;
+	public String getRoadID1() {
+		return roadID1;
 	}
 
-	public String getRoad2_id() {
-		return road2_id;
+	public String getRoadID2() {
+		return roadID2;
 	}
 
-	public int getPlayer_id() {
-		return player_id;
+	public Integer getPlayerID() {
+		return playerID;
 	}
 }

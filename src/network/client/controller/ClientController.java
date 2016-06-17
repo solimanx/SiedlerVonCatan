@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
-
-import com.sun.media.jfxmedia.logging.Logger;
-
-import application.lobby.PlayerProfileController;
-import enums.CardType;
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
@@ -26,30 +20,16 @@ import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
-import network.client.view.GameViewController;
 import network.client.view.PlayerStatusGUIUpdate;
 import network.client.view.ServerResponseRunnable;
 
 import org.apache.logging.log4j.LogManager;
-import protocol.object.ProtocolResource;
 import settings.DefaultSettings;
 
 /**
- * @author NiedlichePixel Controls the game flow.
+ * The central point between InputHandler and OutputHandler for the client.
  */
 public class ClientController {
-	private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(ClientController.class.getName());
-	private Board board;
-	private GameLogic gameLogic;
-
-	private int ownPlayerId;
-	private int amountPlayers = 1;
-
-	protected ViewController viewController;
-
-	private ClientOutputHandler clientOutputHandler;
-	private ClientInputHandler clientInputHandler;
-
 	/**
 	 * e.g. (0 -> 45), (1, -> 32) etc. HashMap mapping modelIDs to playerIDs
 	 */
@@ -59,6 +39,17 @@ public class ClientController {
 	 * e.g. (45-> 0), (32, -> 1) etc. HashMap mapping playerIDs to modelIDs
 	 */
 	private Map<Integer, Integer> threadPlayerIdMap;
+	private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(ClientController.class.getName());
+	private Board board;
+	private GameLogic gameLogic;
+
+	private int ownPlayerID;
+	private int amountPlayers = 1;
+
+	protected ViewController viewController;
+
+	private ClientOutputHandler clientOutputHandler;
+	private ClientInputHandler clientInputHandler;
 
 	protected Client client;
 	private int initialRoundCount = 0;
@@ -68,6 +59,8 @@ public class ClientController {
 	private ArrayList<TradeOffer> tradeOffers = new ArrayList<TradeOffer>();
 
 	/**
+	 * Default constructor for the ClientController.
+	 * 
 	 * @param primaryStage
 	 */
 	public ClientController(Stage primaryStage) {
@@ -85,8 +78,8 @@ public class ClientController {
 	}
 
 	/**
-	 * @param serverHost
-	 * @param port
+	 * Load up the client.
+	 * 
 	 */
 	public void connectToServer(String serverHost, int port) {
 		this.client = new Client(clientInputHandler, serverHost, port);
@@ -94,21 +87,20 @@ public class ClientController {
 		client.start();
 	}
 
+	// ================================================================================
+	// RECEIVE
+	// ================================================================================
+
 	/**
 	 * Check if versions match and act accordingly; if they match begin sending
-	 * confirmation from client otherwise disconnect
+	 * confirmation from client otherwise disconnect.
 	 *
 	 * @param serverVersion
 	 * @param protocolVersion
 	 */
-	/**
-	 * @param serverVersion
-	 * @param protocolVersion
-	 */
-	public void serverHello(String serverVersion, String protocolVersion) {
+	public void receiveHello(String serverVersion, String protocolVersion) {
 		if (!protocolVersion.equals(settings.DefaultSettings.PROTOCOL_VERSION)) {
 			client.stopClient();
-			System.out.println("Invalid Protocol Version; Disconnected");
 			logger.error("Invalid Protocol Version; Disconnected");
 		} else {
 			clientOutputHandler.sendHello(DefaultSettings.CLIENT_VERSION);
@@ -116,99 +108,71 @@ public class ClientController {
 
 	}
 
-	// 4.2
-
 	/**
+	 * After receiving an ID from the server, assign to self , confirm the
+	 * handshake and and enable chat in the lobby.
+	 * 
 	 * @param playerID
 	 */
-	public void welcome(int playerID) {
+	public void receiveWelcome(int playerID) {
 		// playerID is 42,35, etc.
 		setOwnPlayerID(playerID);
 		// add myself to hashmap
 		threadPlayerIdMap.put(playerID, 0);
 		modelPlayerIdMap.put(0, playerID);
-		System.out.println("Handshake complete!");
-		logger.debug("Handshake complete!");
+		logger.info("Handshake complete!");
 		viewController.getLobbyController().enableChat();
 	}
 
-	// 6.1
-
 	/**
-	 * @param server_response
+	 * Sending the Server response up to the view.
+	 * 
+	 * @param serverResponse
 	 */
-	public void receiveServerConfirmation(String server_response) {
+	public void receiveServerConfirmation(String serverResponse) {
 		// TODO client confirm in later protocols
-		currentServerResponse = server_response;
+		currentServerResponse = serverResponse;
 		switch (currentState) {
 		case GAME_STARTING:
 		case WAITING_FOR_GAMESTART:
-			viewController.setServerResponse(server_response);
+			viewController.setServerResponse(serverResponse);
 		default:
-			viewController.setServerResponse(server_response);
+			viewController.setServerResponse(serverResponse);
 		}
 	}
 
-	// 6.2
-
 	/**
-	 * @param s
+	 * Displaying the received chat message to the client.
+	 * 
+	 * @param playerID
+	 * @param message
 	 */
-	public void chatSendMessage(String s) {
-		clientOutputHandler.sendChatMessage(s);
-	}
-
-	// 6.3
-
-	/**
-	 * @param playerId
-	 * @param s
-	 */
-	public void chatReceiveMessage(Integer playerId, String s) {
-		if (playerId != null) {
-			viewController.messageReceive(
-					"Spieler " + gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerId)).getName() + ": " + s);
+	public void receiveChatMessage(Integer playerID, String message) {
+		if (playerID != null) {
+			viewController.messageReceive("Spieler "
+					+ gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerID)).getName() + ": " + message);
 
 		} else {
-			viewController.messageReceive("Server: " + s);
+			viewController.messageReceive("Server: " + message);
 		}
 	}
 
-	// 7.1
-
 	/**
-	 * @param name
-	 * @param color
-	 */
-	public void sendPlayerProfile(String name, Color color) {
-		clientOutputHandler.sendPlayerProfile(name, color);
-		// TODO later
-		// viewController.getGameViewController().initSelf(getOwnPlayerId(),
-		// name, color);
-	}
-
-	// 7.2
-
-	/**
-	 *
-	 */
-	public void sendReady() {
-		clientOutputHandler.sendReady();
-	}
-
-	// 7.3
-
-	/**
+	 * Receiving an error message from the server and displaying it to the
+	 * client.
+	 * 
 	 * @param notice
 	 */
-	public void error(String notice) {
+	public void receiveError(String notice) {
+		// TODO
 		System.out.println(notice);
 		logger.debug(notice);
 	}
 
-	// 8.1
-
 	/**
+	 * Receiving a new status update message, and updating the client through
+	 * it.
+	 * 
 	 * @param threadID
 	 * @param color
 	 * @param name
@@ -216,8 +180,8 @@ public class ClientController {
 	 * @param victoryPoints
 	 * @param resources
 	 */
-	public void statusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status, int victoryPoints,
-			int[] resources) {
+	public void receiveStatusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status,
+			int victoryPoints, int[] resources) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
 		currentState = status;
 		switch (status) {
@@ -262,17 +226,19 @@ public class ClientController {
 		// Hier get bei Break weiter
 	}
 
-	// 7.4
-
 	/**
+	 * After receiving how the board appears, translate it to how the board is
+	 * created in the model, and initialize all field types, harbour locations,
+	 * buildings.
+	 * 
 	 * @param serverFields
 	 * @param corners
 	 * @param streets
 	 * @param harbourCorners
 	 * @param banditLocation
 	 */
-	public void initBoard(Field[] serverFields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
-			String banditLocation) {
+	public void initializeBoard(Field[] serverFields, Corner[] corners, ArrayList<Edge> streets,
+			Corner[] harbourCorners, String banditLocation) {
 
 		for (Field f : serverFields) {
 			String location = f.getFieldID();
@@ -309,10 +275,7 @@ public class ClientController {
 		}
 
 		gameLogic.getBoard().setBandit(banditLocation);
-		setOwnPlayerID(threadPlayerIdMap.get(getOwnPlayerId())); // change
-		// ownPlayerId
-		// to
-		// modelID
+		setOwnPlayerID(threadPlayerIdMap.get(getOwnPlayerID()));
 		Platform.runLater(new Runnable() {
 
 			@Override
@@ -327,7 +290,57 @@ public class ClientController {
 	}
 
 	/**
+	 * 
+	 * @param playerID
+	 * @param result
+	 */
+	public void receiveDiceRollResult(int playerID, int[] result) {
+		// TODO WARNING, PLAYERID NOTHING GETS DONE WITH IT
+		if (viewController.getGameViewController() != null) {
+			int res = result[0] + result[1];
+			viewController.getGameViewController().setDiceRollResult(res);
+		}
+
+	}
+	
+	// ================================================================================
+	// SEND
+	// ================================================================================
+
+	/**
+	 * Send a message to the server.
+	 * 
+	 * @param message
+	 */
+	public void sendChatMessage(String message) {
+		clientOutputHandler.sendChatMessage(message);
+	}
+
+	/**
+	 * Send player profile to the server.
+	 * 
+	 * @param name
+	 * @param color
+	 */
+	public void sendPlayerProfile(String name, Color color) {
+		clientOutputHandler.sendPlayerProfile(name, color);
+	}
+
+	/**
+	 * Send the server the information that the client is ready to start
+	 * playing.
 	 *
+	 */
+	public void sendReady() {
+		clientOutputHandler.sendReady();
+	}
+
+	// ================================================================================
+	// RELAY TO VIEW
+	// ================================================================================
+
+	/**
+	 * Starting up the view, and assigning the players and fields.
 	 */
 	public void initializeGUI() {
 
@@ -392,7 +405,12 @@ public class ClientController {
 
 	}
 
+	// ================================================================================
+	// GETTERS AND SETTERS
+	// ================================================================================
 	/**
+	 * Returns the game logic object.
+	 * 
 	 * @return
 	 */
 	public GameLogic getGameLogic() {
@@ -400,20 +418,26 @@ public class ClientController {
 	}
 
 	/**
+	 * Returns own ID.
+	 * 
 	 * @return
 	 */
-	public int getOwnPlayerId() {
-		return ownPlayerId;
+	public int getOwnPlayerID() {
+		return ownPlayerID;
 	}
 
 	/**
-	 * @param ownPlayerId
+	 * Sets own ID.
+	 * 
+	 * @param ownPlayerID
 	 */
-	public void setOwnPlayerID(int ownPlayerId) {
-		this.ownPlayerId = ownPlayerId;
+	public void setOwnPlayerID(int ownPlayerID) {
+		this.ownPlayerID = ownPlayerID;
 	}
 
 	/**
+	 * Returns the amount of players that are playing the game.
+	 * 
 	 * @return
 	 */
 	public int getAmountPlayers() {
@@ -421,28 +445,14 @@ public class ClientController {
 	}
 
 	/**
+	 * Sets the amount of players that are playing the game.
+	 * 
 	 * @param amountPlayers
 	 */
 	public void setAmountPlayers(int amountPlayers) {
 		this.amountPlayers = amountPlayers;
 	}
 
-	// 8.2
-
-	/**
-	 * @param playerId
-	 * @param result
-	 */
-	public void diceRollResult(int playerId, int[] result) {
-		// WARNING, PLAYERID NOTHING GETS DONE WITH IT
-		if (viewController.getGameViewController() != null) {
-			int res = result[0] + result[1];
-			viewController.getGameViewController().setDiceRollResult(res);
-		}
-
-	}
-
-	// 8.3
 
 	/**
 	 * @param playerID
@@ -575,7 +585,7 @@ public class ClientController {
 			requestBuildInitialVillage(x - radius, y - radius, dir);
 
 		}
-		if (gameLogic.checkBuildVillage(x - radius, y - radius, dir, ownPlayerId)) {
+		if (gameLogic.checkBuildVillage(x - radius, y - radius, dir, ownPlayerID)) {
 			clientOutputHandler.requestBuildVillage(x - radius, y - radius, dir);
 		}
 	}
@@ -605,7 +615,7 @@ public class ClientController {
 			logger.debug("Building Initial Village");
 			requestBuildInitialStreet(x - radius, y - radius, dir);
 		}
-		if (gameLogic.checkBuildStreet(x - radius, y - radius, dir, ownPlayerId)) {
+		if (gameLogic.checkBuildStreet(x - radius, y - radius, dir, ownPlayerID)) {
 			clientOutputHandler.requestBuildStreet(x - radius, y - radius, dir);
 		}
 
@@ -617,7 +627,7 @@ public class ClientController {
 	 * @param dir
 	 */
 	public void requestBuildInitialStreet(int x, int y, int dir) {
-		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownPlayerId)) {
+		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownPlayerID)) {
 			clientOutputHandler.requestBuildStreet(x, y, dir);
 			initialRoundCount++; // TODO: this should happen after server OK
 		}
@@ -650,14 +660,6 @@ public class ClientController {
 
 	// Protocol 0.2
 
-	/**
-	 *
-	 */
-	public void robberMovement(String location) {
-		gameLogic.getBoard().setBandit(location);
-		int[] coords = ProtocolToModel.getFieldCoordinates(location);
-		viewController.getGameViewController().setBandit(coords[0], coords[1]);
-	}
 
 	/**
 	 * @param result
@@ -679,7 +681,7 @@ public class ClientController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		TradeOffer tOf = new TradeOffer(threadID, tradingID, supply, demand);
 		tradeOffers.add(tOf);
-		if (modelID == ownPlayerId) {
+		if (modelID == ownPlayerID) {
 			viewController.getGameViewController().getTradeViewController().addOwnOffer(supply, demand, tradingID);
 		} else {
 			viewController.getGameViewController().getTradeViewController().addOffer(supply, demand, tradingID,
@@ -776,18 +778,18 @@ public class ClientController {
 	 */
 	public void longestRoad(Integer threadID) {
 		if (threadID != null) {
-			if (threadID == ownPlayerId) {
+			if (threadID == ownPlayerID) {
 				gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(true);
-				//TODO  viewController.getGameViewController().set show
+				// TODO viewController.getGameViewController().set show
 			} else {
 				gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(false);
-				//TODO viewController.getGameViewController().set hide
+				// TODO viewController.getGameViewController().set hide
 			}
 		}
 		// special case, if player loses to a settlement block by another player
 		else {
 			gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(false);
-			//TODO viewController.getGameViewController(). set hide..
+			// TODO viewController.getGameViewController(). set hide..
 		}
 
 	}
@@ -829,7 +831,32 @@ public class ClientController {
 	public void addToDeck(int playerID, DevelopmentCard devCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(devCard);
-		//TODO viewcontroller add to deck / refresh deck
+		// TODO viewcontroller add to deck / refresh deck
+	}
+
+	/**
+	 *
+	 */
+	public void receiveKnightCard(String location) {
+		gameLogic.getBoard().setBandit(location);
+		int[] coords = ProtocolToModel.getFieldCoordinates(location);
+		// TODO display user and victim
+		viewController.getGameViewController().setBandit(coords[0], coords[1]);
+	}
+
+	public void receiveRoadCard(int playerID, String locationID1, String locationID2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void receiveMonopolyCard(int playerID, ResourceType rt) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void receiveInventionCard(int playerID, int[] resource) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

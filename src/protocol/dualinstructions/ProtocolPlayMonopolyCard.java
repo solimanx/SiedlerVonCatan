@@ -18,7 +18,7 @@ import enums.ResourceType;
 public class ProtocolPlayMonopolyCard {
 
 	@SerializedName("Spieler")
-	private Integer player_id;
+	private Integer playerID;
 
 	@SerializedName("Rohstoff")
 	private ResourceType resourceType;
@@ -29,14 +29,14 @@ public class ProtocolPlayMonopolyCard {
 	}
 
 	// Server to Client
-	public ProtocolPlayMonopolyCard(Integer player_id, ResourceType resourceType) {
-		this.player_id = player_id;
+	public ProtocolPlayMonopolyCard(Integer playerID, ResourceType resourceType) {
+		this.playerID = playerID;
 		this.resourceType = resourceType;
 
 	}
 
-	public Integer getPlayer_id() {
-		return player_id;
+	public Integer getPlayerID() {
+		return playerID;
 	}
 
 	public ResourceType getResourceType() {

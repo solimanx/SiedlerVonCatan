@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import enums.ResourceType;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
@@ -184,7 +185,7 @@ public class ClientInputHandler {
 	 * @param hello
 	 */
 	protected void handle(ProtocolHello hello) {
-		clientController.serverHello(hello.getVersion(), hello.getProtocol());
+		clientController.receiveHello(hello.getVersion(), hello.getProtocol());
 	}
 
 	/**
@@ -193,7 +194,7 @@ public class ClientInputHandler {
 	 * @param welcome
 	 */
 	protected void handle(ProtocolWelcome welcome) {
-		clientController.welcome(welcome.getPlayerID());
+		clientController.receiveWelcome(welcome.getPlayerID());
 	}
 
 	// Paragraph 7
@@ -216,7 +217,7 @@ public class ClientInputHandler {
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		String s = chatReceiveMessage.getMessage();
 		Integer playerId = chatReceiveMessage.getSender();
-		clientController.chatReceiveMessage(playerId, s);
+		clientController.receiveChatMessage(playerId, s);
 	}
 
 	// Paragraph 8
@@ -228,7 +229,7 @@ public class ClientInputHandler {
 	 */
 	protected void handle(ProtocolError error) {
 		logger.debug("Meldung wird geschickt");
-		clientController.error(error.getNotice());
+		clientController.receiveError(error.getNotice());
 
 	}
 
@@ -285,7 +286,7 @@ public class ClientInputHandler {
 			c2.setHarbourStatus(pHarb.getType());
 		}
 		String banditLocation = pBoard.getRobber_location();
-		clientController.initBoard(fields, corners, streets, harbourCorners, banditLocation);
+		clientController.initializeBoard(fields, corners, streets, harbourCorners, banditLocation);
 
 	}
 
@@ -320,7 +321,7 @@ public class ClientInputHandler {
 		ProtocolResource pRes = pPlayer.getResources();
 
 		int[] resources = ProtocolToModel.convertResources(pRes);
-		clientController.statusUpdate(threadID, color, name, status, victoryPoints, resources);
+		clientController.receiveStatusUpdate(threadID, color, name, status, victoryPoints, resources);
 
 	}
 
@@ -332,7 +333,7 @@ public class ClientInputHandler {
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
 		int playerID = diceRollResult.getPlayerID();
 		int[] result = diceRollResult.getRoll();
-		clientController.diceRollResult(playerID, result);
+		clientController.receiveDiceRollResult(playerID, result);
 	}
 
 	/**
@@ -374,7 +375,7 @@ public class ClientInputHandler {
 		String locationID = robberMovement.getLocationID();
 		// TODO smth with information
 		int victimID = robberMovement.getVictimID();
-		clientController.robberMovement(locationID);
+		clientController.receiveKnightCard(locationID);
 
 	}
 
@@ -403,9 +404,9 @@ public class ClientInputHandler {
 		}
 
 	}
-	
+
 	// Paragraph 9.10
-	
+
 	/**
 	 * Transition to Controller on receiving : Buying DevCard
 	 *
@@ -500,7 +501,15 @@ public class ClientInputHandler {
 	 * @param knightCardInfo
 	 */
 	protected void handle(ProtocolPlayKnightCard knightCardInfo) {
-		// TODO Auto-generated method stub
+		if (knightCardInfo.getPlayerID() != null) {
+			// TODO smth with information
+			int playerID = knightCardInfo.getPlayerID();
+			String locationID = knightCardInfo.getLocationID();
+			// TODO smth with information
+			int victimID = knightCardInfo.getVictimID();
+			clientController.receiveKnightCard(locationID);
+
+		}
 
 	}
 
@@ -510,7 +519,14 @@ public class ClientInputHandler {
 	 * @param roadBuildingCardInfo
 	 */
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
-		// TODO Auto-generated method stub
+		if(roadBuildingCardInfo.getPlayerID()!=null){
+			int playerID = roadBuildingCardInfo.getPlayerID();
+			String locationID1 = roadBuildingCardInfo.getRoadID1();
+			String locationID2 = roadBuildingCardInfo.getRoadID2();
+			clientController.receiveRoadCard(playerID, locationID1, locationID2);
+			
+			
+		}
 
 	}
 
@@ -521,7 +537,11 @@ public class ClientInputHandler {
 	 */
 
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
-		// TODO Auto-generated method stub
+		if(monopolyCardInfo.getPlayerID()!=null){
+			int playerID = monopolyCardInfo.getPlayerID();
+			ResourceType rt = monopolyCardInfo.getResourceType();
+			clientController.receiveMonopolyCard(playerID, rt);
+		}
 
 	}
 
@@ -531,7 +551,11 @@ public class ClientInputHandler {
 	 * @param inventionCardInfo
 	 */
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
-		// TODO Auto-generated method stub
+		if(inventionCardInfo.getPlayerID()!=null){
+			int playerID = inventionCardInfo.getPlayerID();
+			int[] resource = ProtocolToModel.convertResources(inventionCardInfo.getResource());
+			clientController.receiveInventionCard(playerID, resource);
+		}
 
 	}
 
