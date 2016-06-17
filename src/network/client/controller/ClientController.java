@@ -796,9 +796,9 @@ public class ClientController {
 	}
 
 	public void requestBuyDevelopmentCard() {
-		if (gameLogic.checkBuyDevCard(0)) {
+		//if (gameLogic.checkBuyDevCard(0)) {
 			clientOutputHandler.buyDevelopmentCard();
-		}
+		//}
 	}
 
 	/**
