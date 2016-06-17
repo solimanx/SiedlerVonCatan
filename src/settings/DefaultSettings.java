@@ -55,13 +55,13 @@ public final class DefaultSettings {
 		}
 	};
 
-	public final static int[] DICE_NUMBERS = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11 }; 
+	public final static int[] DICE_NUMBERS = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11 };
 
 	public final static int MAXIMUM_PLAYERS_AMOUNT = 4;
 
-	public final static String PROTOCOL_VERSION = "0.3";
+	public final static String PROTOCOL_VERSION = "1.0";
 
-	public final static String CLIENT_VERSION = "JavaFXClient 0.3 (NiedlichePixel)";
+	public final static String CLIENT_VERSION = "JavaFXClient 1.0 (NiedlichePixel)";
 
 	public final static String AI_VERSION = "NiedlichePixel (KI)";
 

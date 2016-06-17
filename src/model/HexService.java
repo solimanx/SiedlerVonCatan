@@ -1,8 +1,11 @@
 package model;
 
 import model.objects.*;
+import network.ProtocolToModel;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.net.Protocol;
 
 import java.util.ArrayList;
 
@@ -428,6 +431,12 @@ public class HexService {
 		result[0] = s.substring(0, 1) + s.substring(1, 2) + common.substring(0, 1);
 		result[1] = s.substring(0, 1) + s.substring(1, 2) + common.substring(1, 2);
 		return result;
+	}
+
+	public static String[] getCornerFromEdge(Index[] i){
+		String a = ProtocolToModel.getProtocolOneID(i[0]);
+		String b = ProtocolToModel.getProtocolOneID(i[1]);
+		return getCornerFromEdge(a+b);
 	}
 
 }

@@ -20,18 +20,18 @@ public class ProtocolBuildRequest {
 	private String building_type;
 
 	@SerializedName("Ort")
-	private Index locationID;
+	private Index[] locationID;
 
-	public ProtocolBuildRequest(String building_type, Index locationID) {
+	public ProtocolBuildRequest(String building_type, Index[] location) {
 		this.building_type = building_type;
-		this.locationID = locationID;
+		this.locationID = location;
 	}
 
 	public String getBuildingType() {
 		return building_type;
 	}
 
-	public Index getLocationID() {
+	public Index[] getLocationID() {
 		return locationID;
 	}
 

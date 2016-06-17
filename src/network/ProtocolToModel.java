@@ -35,6 +35,7 @@ public final class ProtocolToModel {
 	 */
 	private static Logger logger = LogManager.getLogger(ProtocolToModel.class.getName());
 	private static Map<Index, String> hm1 = new HashMap<Index, String>();
+	private static Map<String, Index> hm2 = new HashMap<String, Index>();
 
 	public static int[] getFieldCoordinates(String fieldID) {
 		// Get the field ID through the Board's HashMap
@@ -133,9 +134,11 @@ public final class ProtocolToModel {
 					int comparison = HexService.sumAbsCubeXYZ(HexService.specialConvertAxialToCube(new int[] { i, j }));
 					if (comparison == r * 2) {
 						hm1.put(new Index(j, i), String.valueOf(outerFieldsBegin));
+						hm2.put(String.valueOf(outerFieldsBegin), new Index(j,i));
 						outerFieldsBegin++;
 					} else if (comparison < r * 2) {
 						hm1.put(new Index(j, i), String.valueOf(innerFieldsBegin));
+						hm2.put(String.valueOf(innerFieldsBegin), new Index(j,i));
 						innerFieldsBegin++;
 					}
 				}
@@ -143,6 +146,10 @@ public final class ProtocolToModel {
 			}
 
 		}
+	}
+
+	public static Index getProtocolOneIndex(String s){
+		return hm2.get(s);
 	}
 
 	public static String getProtocolOneID(Index i) {
@@ -307,7 +314,7 @@ public final class ProtocolToModel {
 
 	/**
 	 * Intended for use by ClientInputHandler after buying a card only.
-	 * 
+	 *
 	 * @param pdv
 	 * @return
 	 */
@@ -333,6 +340,33 @@ public final class ProtocolToModel {
 			throw new IllegalArgumentException("ProtocolDevCard is all null");
 		}
 
+	}
+
+	public static int[] getCornerCoordinates(Index[] id) {
+		String a = getProtocolOneID(id[0])!=null?getProtocolOneID(id[0]):"";
+		String b = getProtocolOneID(id[1])!=null?getProtocolOneID(id[1]):"";
+		String c = getProtocolOneID(id[2])!=null?getProtocolOneID(id[2]):"";
+		return getCornerCoordinates(a+b+c);
+	}
+
+	public static int[] getEdgeCoordinates(Index[] id){
+		String a = getProtocolOneID(id[0])!=null?getProtocolOneID(id[0]):"";
+		String b = getProtocolOneID(id[1])!=null?getProtocolOneID(id[1]):"";
+		return getEdgeCoordinates(a+b);
+	}
+
+	public static String getCornerIDIndex(Index[] id) {
+		String id0 = getProtocolOneID(id[0]);
+		String id1 = getProtocolOneID(id[1]);
+		String id2 = getProtocolOneID(id[2]);
+		return id0+id1+id2;
+	}
+
+
+	public static String getEdgeIDIndex(Index[] id) {
+		String id0 = getProtocolOneID(id[0]);
+		String id1 = getProtocolOneID(id[1]);
+		return id0+id1;
 	}
 
 }

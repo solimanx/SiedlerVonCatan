@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler;
+
 import enums.CardType;
 import enums.ResourceType;
 import model.Board;
@@ -15,7 +17,7 @@ import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
 
 public final class ModelToProtocol {
-	
+
 	private static Logger logger = LogManager.getLogger(PlayerModel.class.getName());
 
 	public static HashMap<ResourceType, String> resourceToString = new HashMap<ResourceType, String>();
@@ -121,7 +123,7 @@ public final class ModelToProtocol {
 
 	/**
 	 * CONVERTS NON UNKNOWN RESOURCE ARRAYS TO PROTOCOLRESOURCE
-	 * 
+	 *
 	 * @param resources
 	 * @return
 	 */
@@ -135,16 +137,55 @@ public final class ModelToProtocol {
 		Integer corn = resources[4] == 0 ? null : resources[4];
 		return (new ProtocolResource(wood, clay, wool, corn, ore, null));
 	}
-	
-	public static ProtocolDevCard devCardToProtocolDevCard(DevelopmentCard devCard){
-		switch (devCard.getName()){
-		case "Knight Card": return new ProtocolDevCard(1,null,null,null,null,null);
-		case "Victory Card": return new ProtocolDevCard(null, null, null, null, 1, null);
-		case "Invention Card": return new ProtocolDevCard(null, null, null, null, 1, null);
-		case "Monopoly Card": return new ProtocolDevCard(null, null, 1, null, null, null);
-		case "Street Building Card": return new ProtocolDevCard(null, 1, null, null, null, null);
-		default : logger.info(devCard.getName());
-        throw new IllegalArgumentException("Invalid Development Card object");
+
+	public static ProtocolDevCard devCardToProtocolDevCard(DevelopmentCard devCard) {
+		switch (devCard.getName()) {
+		case "Knight Card":
+			return new ProtocolDevCard(1, null, null, null, null, null);
+		case "Victory Card":
+			return new ProtocolDevCard(null, null, null, null, 1, null);
+		case "Invention Card":
+			return new ProtocolDevCard(null, null, null, null, 1, null);
+		case "Monopoly Card":
+			return new ProtocolDevCard(null, null, 1, null, null, null);
+		case "Street Building Card":
+			return new ProtocolDevCard(null, 1, null, null, null, null);
+		default:
+			logger.info(devCard.getName());
+			throw new IllegalArgumentException("Invalid Development Card object");
 		}
+	}
+
+	public static Index[] convertToEdgeIndex(String locationString) {
+		if (locationString.length() == 2) {
+			String field1 = locationString.substring(0, 1);
+			String field2 = locationString.substring(1, 2);
+			Index a = ProtocolToModel.getProtocolOneIndex(field1);
+			Index b = ProtocolToModel.getProtocolOneIndex(field2);
+
+			return new Index[] { a, b };
+		} else {
+			throw new IllegalArgumentException("Edge has to be two characters long");
+		}
+	}
+
+	public static Index[] convertCornerIndex(String locationString) {
+		if(locationString.length() == 3){
+			String field1 = locationString.substring(0,1);
+			String field2 = locationString.substring(1,2);
+			String field3 = locationString.substring(2,3);
+			Index a = ProtocolToModel.getProtocolOneIndex(field1);
+			Index b = ProtocolToModel.getProtocolOneIndex(field2);
+			Index c = ProtocolToModel.getProtocolOneIndex(field3);
+
+			return new Index[] {a,b,c};
+		}
+		else{
+			throw new IllegalArgumentException("Corner has to be 3 characters long");
+		}
+	}
+
+	public static Index getFieldIndex(String field) {
+		return ProtocolToModel.getProtocolOneIndex(field);
 	}
 }

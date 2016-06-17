@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
@@ -11,6 +13,7 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import model.Board;
 import model.GameLogic;
+import model.Index;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
@@ -22,8 +25,6 @@ import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
 import network.client.view.PlayerStatusGUIUpdate;
 import network.client.view.ServerResponseRunnable;
-
-import org.apache.logging.log4j.LogManager;
 import settings.DefaultSettings;
 
 /**
@@ -60,7 +61,7 @@ public class ClientController {
 
 	/**
 	 * Default constructor for the ClientController.
-	 * 
+	 *
 	 * @param primaryStage
 	 */
 	public ClientController(Stage primaryStage) {
@@ -79,7 +80,7 @@ public class ClientController {
 
 	/**
 	 * Load up the client.
-	 * 
+	 *
 	 */
 	public void connectToServer(String serverHost, int port) {
 		this.client = new Client(clientInputHandler, serverHost, port);
@@ -111,7 +112,7 @@ public class ClientController {
 	/**
 	 * After receiving an ID from the server, assign to self , confirm the
 	 * handshake and and enable chat in the lobby.
-	 * 
+	 *
 	 * @param playerID
 	 */
 	public void receiveWelcome(int playerID) {
@@ -126,7 +127,7 @@ public class ClientController {
 
 	/**
 	 * Sending the Server response up to the view.
-	 * 
+	 *
 	 * @param serverResponse
 	 */
 	public void receiveServerConfirmation(String serverResponse) {
@@ -143,7 +144,7 @@ public class ClientController {
 
 	/**
 	 * Displaying the received chat message to the client.
-	 * 
+	 *
 	 * @param playerID
 	 * @param message
 	 */
@@ -160,7 +161,7 @@ public class ClientController {
 	/**
 	 * Receiving an error message from the server and displaying it to the
 	 * client.
-	 * 
+	 *
 	 * @param notice
 	 */
 	public void receiveError(String notice) {
@@ -172,7 +173,7 @@ public class ClientController {
 	/**
 	 * Receiving a new status update message, and updating the client through
 	 * it.
-	 * 
+	 *
 	 * @param threadID
 	 * @param color
 	 * @param name
@@ -230,7 +231,7 @@ public class ClientController {
 	 * After receiving how the board appears, translate it to how the board is
 	 * created in the model, and initialize all field types, harbour locations,
 	 * buildings.
-	 * 
+	 *
 	 * @param serverFields
 	 * @param corners
 	 * @param streets
@@ -290,7 +291,7 @@ public class ClientController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param playerID
 	 * @param result
 	 */
@@ -302,14 +303,14 @@ public class ClientController {
 		}
 
 	}
-	
+
 	// ================================================================================
 	// SEND
 	// ================================================================================
 
 	/**
 	 * Send a message to the server.
-	 * 
+	 *
 	 * @param message
 	 */
 	public void sendChatMessage(String message) {
@@ -318,7 +319,7 @@ public class ClientController {
 
 	/**
 	 * Send player profile to the server.
-	 * 
+	 *
 	 * @param name
 	 * @param color
 	 */
@@ -410,7 +411,7 @@ public class ClientController {
 	// ================================================================================
 	/**
 	 * Returns the game logic object.
-	 * 
+	 *
 	 * @return
 	 */
 	public GameLogic getGameLogic() {
@@ -419,7 +420,7 @@ public class ClientController {
 
 	/**
 	 * Returns own ID.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getOwnPlayerID() {
@@ -428,7 +429,7 @@ public class ClientController {
 
 	/**
 	 * Sets own ID.
-	 * 
+	 *
 	 * @param ownPlayerID
 	 */
 	public void setOwnPlayerID(int ownPlayerID) {
@@ -437,7 +438,7 @@ public class ClientController {
 
 	/**
 	 * Returns the amount of players that are playing the game.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getAmountPlayers() {
@@ -446,7 +447,7 @@ public class ClientController {
 
 	/**
 	 * Sets the amount of players that are playing the game.
-	 * 
+	 *
 	 * @param amountPlayers
 	 */
 	public void setAmountPlayers(int amountPlayers) {
@@ -837,26 +838,27 @@ public class ClientController {
 	/**
 	 *
 	 */
-	public void robberMove(String location) {
+	public void robberMove(Index index) {
+		String location = ProtocolToModel.getProtocolOneID(index);
 		gameLogic.getBoard().setBandit(location);
 		int[] coords = ProtocolToModel.getFieldCoordinates(location);
 		// TODO display user and victim popup
 		viewController.getGameViewController().setBandit(coords[0], coords[1]);
 	}
 
-	public void receiveRoadCard(int playerID, String locationID1, String locationID2) {
+	public void receiveRoadCard(int playerID, Index[] locationID1, Index[] locationID2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void receiveMonopolyCard(int playerID, ResourceType rt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void receiveInventionCard(int playerID, int[] resource) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
