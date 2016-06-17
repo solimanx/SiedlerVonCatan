@@ -84,7 +84,8 @@ public class ServerController {
 		}
 
 	}
-
+	
+    @Deprecated
 	public void setServerOutputHandler(ServerOutputHandler sNC) {
 		this.serverOutputHandler = sNC;
 
@@ -377,9 +378,8 @@ public class ServerController {
 	}
 
 	/**
-	 * is called when client wants to build a village if initialBuildingPhase
-	 * then jumps to requestBuildInitialVillage
-	 *
+	 * is called when client wants to build a village 
+	 * if initialBuildingPhase then jumps to requestBuildInitialVillage
 	 * @param x
 	 * @param y
 	 * @param dir
@@ -411,6 +411,15 @@ public class ServerController {
 
 	}
 
+	/**
+	 * builds a village on specified position
+	 * checks if position is a harbour and adds it to player model
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param modelID
+	 * @return corner object
+	 */
 	private Corner buildVillage(int x, int y, int dir, int modelID) {
 		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
 		c.setStatus(enums.CornerStatus.VILLAGE);
@@ -429,6 +438,10 @@ public class ServerController {
 
 	}
 
+	/**
+	 * increases victory points of a player and checks if the player has won
+	 * @param modelID
+	 */
 	private void increaseVictoryPoints(int modelID) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
 		gameLogic.getBoard().getPlayer(modelID).setVictoryPoints(points + 1);
@@ -437,6 +450,10 @@ public class ServerController {
 		}
 	}
 
+	/**
+	 * is called when a player has 10 victory points
+	 * @param modelID
+	 */
 	private void victory(int modelID) {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 		serverOutputHandler.victory("Spieler " + pM.getName() + " hat das Spiel gewonnen.",
@@ -477,6 +494,14 @@ public class ServerController {
 
 	}
 
+	/**
+	 * builds a street at the specified position
+	 * checks if street changes longest trading route
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param modelID
+	 */
 	private void buildStreet(int x, int y, int dir, int modelID) {
 		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
@@ -487,6 +512,10 @@ public class ServerController {
 		checkLongestTradingRoute(modelID);
 	}
 	
+	/**
+	 * checks if a village interrupts a street set
+	 * @param corner
+	 */
 	public void checkIfVillageInterruptsStreetSet(Corner c){
 		String id = c.getCornerID();
 		int[] coords = HexService.getCornerCoordinates(id.substring(0, 1), id.substring(1,2), id.substring(1, 2));
@@ -529,6 +558,11 @@ public class ServerController {
 	}
 
 
+	/**
+	 * adds a specified street (edge object) to a street set
+	 * @param edge
+	 * @param modelID
+	 */
 	private void addToStreetSet(Edge e, int modelID) {
 		int[] coord = ProtocolToModel.getEdgeCoordinates(e.getEdgeID());
 		boolean edgeAdded = false;
