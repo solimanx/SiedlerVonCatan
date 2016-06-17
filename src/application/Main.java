@@ -11,6 +11,7 @@ import debugging.DebugClient;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import network.ModelToProtocol;
+import network.ProtocolToModel;
 import network.client.controller.ClientController;
 import network.server.controller.ServerController;
 
@@ -43,6 +44,7 @@ public class Main extends Application {
 		//
 		// logger.log(Level.INFO, "Our first log");
 		ModelToProtocol.initModelToProtocol();
+		ProtocolToModel.initProtocolToModel();
 		switch (mode) {
 		case 0:
 			setClientController(new ClientController(primaryStage));

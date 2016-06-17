@@ -342,6 +342,29 @@ public class HexService {
 	}
 
 	/**
+	 * Converts Axial (x,y) to Cube (x,y,z)
+	 *
+	 * @param a
+	 *            (x,y)
+	 */
+	public static int[] specialConvertAxialToCube(int[] a) {
+
+		if (a.length != 2) {
+			logger.error("Error in HexService.convertAxialToCube");
+			System.out.println("Error in HexService.convertAxialToCube");
+			return null;
+
+		} else {
+
+			int x = a[0];
+			int y = a[1];
+			int z = -x - y;
+
+			return new int[] { x, y, z };
+		}
+	}
+
+	/**
 	 * Converts Cube (x,y,z) to Axial (x,y)
 	 *
 	 * @param c
