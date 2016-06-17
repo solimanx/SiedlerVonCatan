@@ -909,6 +909,7 @@ public class GameViewController implements Initializable {
 			switch (state) {
 			case DICEROLLING:
 				rollDiceButton.setDisable(false);
+				endTurnButton.setDisable(true);
 				break;
 			case DISPENSE_CARDS_ROBBER_LOSS:
 				setRobberLossState();
@@ -919,11 +920,17 @@ public class GameViewController implements Initializable {
 			case WAITING:
 				rollDiceButton.setDisable(true);
 				endTurnButton.setDisable(true);
+				playCardButton.setDisable(true);
+				buyCardButton.setDisable(true);
 				break;
+			case TRADING_OR_BUILDING:
+				endTurnButton.setDisable(false);
 			default:
 				rollDiceButton.setDisable(true);
 				endTurnButton.setDisable(false);
 				playCardButton.setDisable(false);
+				playCardButton.setDisable(false);
+				buyCardButton.setDisable(false);
 				break;
 			}
 			break;
