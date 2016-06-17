@@ -3,6 +3,8 @@ package protocol.clientinstructions;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+import model.Index;
+
 /**
  * <b>Räuber versetzen (Request moving Robber)</b>
  * <p>
@@ -11,27 +13,27 @@ import com.google.gson.annotations.Since;
  *
  */
 
-@Since(0.2)
+@Since(1.0)
 public class ProtocolRobberMovementRequest {
 
 	@SerializedName("Ort")
-	String locationID;
+	Index locationID;
 
 	// optional
 	@SerializedName("Ziel")
 	Integer victimID;
 
 	//the standard constructor
-	public ProtocolRobberMovementRequest(String locationID) {
+	public ProtocolRobberMovementRequest(Index locationID) {
 		this.locationID = locationID;
 	}
 	//the optional one
-	public ProtocolRobberMovementRequest(String locationID, Integer victimID) {
+	public ProtocolRobberMovementRequest(Index locationID, Integer victimID) {
 		this.locationID = locationID;
 		this.victimID = victimID;
 	}
 
-	public String getLocationID() {
+	public Index getLocationID() {
 		return locationID;
 	}
 

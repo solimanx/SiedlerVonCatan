@@ -3,16 +3,18 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+import model.Index;
+
 /**
  * <b>Karte (Board)</b>
  * <p>
  * Contains information about board: fields-, buildings-, harbours-list and
  * robber's location.
  * </p>
- * 
+ *
  */
 
-@Since(0.1)
+@Since(1.0)
 public class ProtocolBoard {
 
 	@SerializedName("Felder")
@@ -25,10 +27,10 @@ public class ProtocolBoard {
 	private ProtocolHarbour[] harbours;
 
 	@SerializedName("Räuber")
-	private String robber_location;
+	private Index robber_location;
 
 	public ProtocolBoard(ProtocolField[] fields, ProtocolBuilding[] buildings, ProtocolHarbour[] harbours,
-			String robber_location) {
+			Index robber_location) {
 		this.fields = fields;
 		this.buildings = buildings;
 		this.harbours = harbours;
@@ -47,7 +49,7 @@ public class ProtocolBoard {
 		return harbours[i] != null ? harbours[i] : null;
 	}
 
-	public String getRobber_location() {
+	public Index getRobber_location() {
 		return robber_location;
 	}
 

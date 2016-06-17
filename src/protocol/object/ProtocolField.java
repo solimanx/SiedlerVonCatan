@@ -3,19 +3,21 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+import model.Index;
+
 /**
  * <b>Felder (Fields)</b>
  * <p>
  * Contains information about field: ID/location, land type and dice index.
  * </p>
- * 
+ *
  */
 
-@Since(0.1)
+@Since(1.0)
 public class ProtocolField {
 
 	@SerializedName("Ort")
-	private String fieldID;
+	private Index fieldID;
 
 	@SerializedName("Typ")
 	private String fieldType;
@@ -23,13 +25,13 @@ public class ProtocolField {
 	@SerializedName("Zahl")
 	private Integer diceIndex;
 
-	public ProtocolField(String fieldID, String fieldType, Integer diceIndex) {
+	public ProtocolField(Index fieldID, String fieldType, Integer diceIndex) {
 		this.fieldID = fieldID;
 		this.fieldType = fieldType;
 		this.diceIndex = diceIndex;
 	}
 
-	public String getFieldID() {
+	public Index getFieldID() {
 		return fieldID;
 	}
 

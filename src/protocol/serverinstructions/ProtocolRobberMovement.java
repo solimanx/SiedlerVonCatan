@@ -3,28 +3,30 @@ package protocol.serverinstructions;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+import model.Index;
+
 /**
- * 
+ *
  * <b>Räuber versetzt (Robber repositioned)</b>
  * <p>
  * After robber's location has been changed.
  * </p>
- * 
+ *
  */
 
-@Since(0.2)
+@Since(1.0)
 public class ProtocolRobberMovement {
 
 	@SerializedName("Spieler")
 	private int playerID;
 
 	@SerializedName("Ort")
-	private String locationID;
+	private Index locationID;
 
 	@SerializedName("Ziel")
 	private int victimID;
 
-	public ProtocolRobberMovement(int playerID, String locationID, int victimID) {
+	public ProtocolRobberMovement(int playerID, Index locationID, int victimID) {
 		this.playerID = playerID;
 		this.locationID = locationID;
 		this.victimID = victimID;
@@ -34,7 +36,7 @@ public class ProtocolRobberMovement {
 		return playerID;
 	}
 
-	public String getLocationID() {
+	public Index getLocationID() {
 		return locationID;
 	}
 

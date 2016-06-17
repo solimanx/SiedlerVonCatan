@@ -3,18 +3,18 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+import model.Index;
+
 /**
  * <b>Gebäude (Buildings)</b>
  * <p>
  * Contains information about building: owner's ID, building type and location
  * ID.
  * </p>
- * 
- * @since 0.1
- * 
+ *
  */
 
-@Since(0.1)
+@Since(1.0)
 public class ProtocolBuilding {
 
 	@SerializedName("Eigentümer")
@@ -24,9 +24,9 @@ public class ProtocolBuilding {
 	private String building;
 
 	@SerializedName("Ort")
-	private String locationID;
+	private Index[] locationID; //can be 2 or 3
 
-	public ProtocolBuilding(int playerID, String building, String locationID) {
+	public ProtocolBuilding(int playerID, String building, Index[] locationID) {
 		this.playerID = playerID;
 		this.building = building;
 		this.locationID = locationID;
@@ -40,7 +40,7 @@ public class ProtocolBuilding {
 		return building;
 	}
 
-	public String getID() {
+	public Index[] getID() {
 		return locationID;
 	}
 
