@@ -219,7 +219,21 @@ public class ClientOutputHandler {
 	 * @param tradeID
 	 */
 	public void acceptTrade(int tradeID) {
-		ProtocolTradeAccept pta = new ProtocolTradeAccept(tradeID);
+		ProtocolTradeAccept pta = new ProtocolTradeAccept(tradeID, true);
+		Response r = new Response();
+		r.pTradeAccept = pta;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
+	}
+	
+	//TODO
+	public void declineTrade(int tradeID){
+		ProtocolTradeAccept pta = new ProtocolTradeAccept(tradeID, false);
 		Response r = new Response();
 		r.pTradeAccept = pta;
 		try {

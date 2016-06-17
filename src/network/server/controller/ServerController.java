@@ -1243,8 +1243,8 @@ public class ServerController {
 		tradeController.acceptTrade(threadPlayerIdMap.get(threadID), tradingID);
 	}
 
-	public void tradeAccepted(int modelID, int tradingID) {
-		serverOutputHandler.tradeConfirmation(modelPlayerIdMap.get(modelID), tradingID);
+	public void tradeAccepted(int modelID, int tradingID, boolean accepted) {
+		serverOutputHandler.tradeConfirmation(modelPlayerIdMap.get(modelID), tradingID, accepted);
 	}
 
 	public void fulfillTrade(int threadID, int tradingID, int partnerThreadID) {

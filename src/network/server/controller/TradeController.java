@@ -27,7 +27,17 @@ public class TradeController {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID) {
 				tradeOffers.get(tradingID).acceptingPlayers.add(tradingID);
-				serverController.tradeAccepted(modelID, tradingID);
+				serverController.tradeAccepted(modelID, tradingID, true);
+			}
+		}
+	}
+	
+	//ADDED
+	public void declineTrade(int modelID, int tradingID){
+		for (int i = 0; i < tradeOffers.size(); i++) {
+			if (tradeOffers.get(i).getTradingID() == tradingID) {
+				tradeOffers.get(tradingID).acceptingPlayers.add(tradingID);
+				serverController.tradeAccepted(modelID, tradingID, false);
 			}
 		}
 	}

@@ -291,8 +291,8 @@ public class ServerOutputHandler {
 
 	}
 
-	public void tradeConfirmation(int player_id, int trade_id) {
-		ProtocolTradeConfirmation pc = new ProtocolTradeConfirmation(player_id, trade_id);
+	public void tradeConfirmation(int player_id, int trade_id, boolean accepted) {
+		ProtocolTradeConfirmation pc = new ProtocolTradeConfirmation(player_id, trade_id, accepted);
 		Response r = new Response();
 		r.pTradeConfirm = pc;
 		try {
