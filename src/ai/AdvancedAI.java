@@ -52,6 +52,7 @@ public class AdvancedAI extends PrimitiveAI {
 				y = cA[i].getLocation()[1];
 				z = cA[i].getLocation()[2];
 			}
+			System.out.println(cA[i].getLocationString()+" "+cA[i].calculateInitialVillageUtility());
 		}
 		super.pO.requestBuildInitialVillage(x,y,z);
 	}

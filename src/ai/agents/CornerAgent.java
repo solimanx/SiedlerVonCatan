@@ -54,16 +54,42 @@ public class CornerAgent {
 
 	/**
 	 * Adds all the factors together to calculate the utility for placing the
-	 * initial settlement, the higher the utility, the higher the chance to be picked
-	 * by the AI as a spot to build on.
+	 * initial settlement, the higher the utility, the higher the chance to be
+	 * picked by the AI as a spot to build on.
 	 */
 	public int calculateInitialVillageUtility() {
 		if (isBlocked()) {
-			//Random negative number to avoid building here.
+			// Random negative number to avoid building here.
 			return -10000;
 		} else {
-			netUtility = landDiversity() + harbourDiversity() + rollProbability();
-			// TODO add more factors
+			int ld = landDiversity();
+			int hd = harbourDiversity();
+			int rp = rollProbability();
+			int bonus = 0;
+			int[] utilities = { ld, hd, rp };
+			if (difference == 0) {
+				// change nothing
+			} else {
+				// get greatest and second greatest utility
+				int high1 = Integer.MIN_VALUE;
+				int high2 = Integer.MIN_VALUE;
+				for (int num : utilities) {
+					if (num >= high1) {
+						high2 = high1;
+						high1 = num;
+					} else if (num > high2) {
+						high2 = num;
+					}
+
+				}
+				if (difference == 1)
+					bonus = high2;
+				else if (difference == 2)
+					bonus = high1;
+
+			}
+			netUtility = ld + hd + rp + bonus;
+
 			return netUtility;
 
 		}
