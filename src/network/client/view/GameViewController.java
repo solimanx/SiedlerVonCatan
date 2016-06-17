@@ -53,6 +53,7 @@ import javafx.util.Duration;
 import model.objects.Corner;
 import network.ProtocolToModel;
 import network.client.controller.ViewController;
+import network.client.view.devcardview.DevCardViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
 
@@ -585,7 +586,23 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	void handlePlayCardButton(ActionEvent event) throws IOException {
-		
+		FXMLLoader loader = new FXMLLoader();
+		Parent root;
+		try {
+			root = loader
+					.load(getClass().getResource("/network/client/view/devcardview/DevCardView.fxml").openStream());
+			Scene scene = new Scene(root);
+			Stage devCardStage = new Stage();
+			devCardStage.setScene(scene);
+			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			DevCardViewController devController = (DevCardViewController) loader.getController();
+			int[] devCards = viewController.getClientController().getGameLogic().getBoard().getPlayer(0).getPlayerDevCards();
+			devController.init(viewController, devCardStage, devCards);
+			devCardStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

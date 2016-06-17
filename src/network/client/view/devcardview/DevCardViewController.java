@@ -74,7 +74,7 @@ public class DevCardViewController implements Initializable {
 
 	}
 
-	void init(ViewController viewController, Stage stage) {
+	public void init(ViewController viewController, Stage stage, int[] devCards) {
 		this.stage = stage;
 		this.viewController = viewController;
 		devCardListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -89,6 +89,32 @@ public class DevCardViewController implements Initializable {
 
 			}
 		});
+		
+		for (int i = 0; i < devCards.length; i++) {
+			for (int j = 0; j < devCards[i]; j++) {
+				String string = "";
+				switch (i) {
+				case 0:
+					string = CardType.KNIGHT.toString();
+					break;
+				case 1:
+					string = CardType.VICTORYPOINT.toString();
+					break;
+				case 2:
+					string = CardType.INVENTION.toString();
+					break;
+				case 3:
+					string = CardType.MONOPOLY.toString();
+					break;
+				case 4:
+					string = CardType.STREET.toString();
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
 	}
 
 	@FXML
