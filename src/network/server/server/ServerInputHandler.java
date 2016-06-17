@@ -243,7 +243,7 @@ public class ServerInputHandler{
 	}
 
 	protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
-		String location_id = robberMovementRequest.getLocationID();
+		String location_id = ProtocolToModel.getProtocolOneID(robberMovementRequest.getLocationID());
 		int[] coords = ProtocolToModel.getFieldCoordinates(location_id);
 		Integer victim_id = robberMovementRequest.getVictimID();
 		serverController.robberMovementRequest(coords[0], coords[1], victim_id, currentThreadID);

@@ -5,12 +5,12 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import enums.CardType;
 import enums.Color;
-import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
 import model.Board;
+import model.HexService;
+import model.Index;
 import model.objects.Field;
 import model.objects.DevCards.DevelopmentCard;
 import network.ModelToProtocol;
@@ -44,9 +44,9 @@ import protocol.serverinstructions.ProtocolLongestRoad;
 import protocol.serverinstructions.ProtocolResourceObtain;
 import protocol.serverinstructions.ProtocolRobberMovement;
 import protocol.serverinstructions.ProtocolStatusUpdate;
-import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
+import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
 //import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
@@ -115,16 +115,16 @@ public class ServerOutputHandler {
 		for (String key : board.getStringToCoordMap().keySet()) {
 			int coords[] = board.getStringToCoordMap().get(key);
 			Field f = board.getFieldAt(coords[0], coords[1]);
-			pfArray[counter] = new ProtocolField(f.getFieldID(),
+			pfArray[counter] = new ProtocolField(ProtocolToModel.getProtocolOneIndex(f.getFieldID()),
 					ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
 			counter++;
 
 		}
 
 		ProtocolBuilding[] pBuildingsArray = {};
-		ProtocolHarbour[] pHarbourArray = { new ProtocolHarbour("eA", HarbourStatus.SHEEP),
-				new ProtocolHarbour("nP", HarbourStatus.THREE_TO_ONE) };
-		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray, board.getBandit());
+		ProtocolHarbour[] pHarbourArray = {};
+		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray,
+				ProtocolToModel.getProtocolOneIndex(board.getBandit()));
 		ProtocolGameStarted pgs = new ProtocolGameStarted(pb);
 		Response r = new Response();
 		r.pGameStarted = pgs;
@@ -263,7 +263,8 @@ public class ServerOutputHandler {
 	}
 
 	public void robberMovement(int player_id, String location_id, Integer victim_id) {
-		ProtocolRobberMovement pm = new ProtocolRobberMovement(player_id, location_id, victim_id);
+		Index location = ProtocolToModel.getProtocolOneIndex(location_id);
+		ProtocolRobberMovement pm = new ProtocolRobberMovement(player_id, location, victim_id);
 
 		Response r = new Response();
 		r.pRobberMovement = pm;
@@ -330,7 +331,8 @@ public class ServerOutputHandler {
 
 	public void buildVillage(int x, int y, int dir, int playerID) {
 		String location = ModelToProtocol.getCornerID(x, y, dir);
-		ProtocolBuilding pb = new ProtocolBuilding(playerID, "Dorf", location);
+		Index[] locationIndex = ModelToProtocol.convertCornerIndex(location);
+		ProtocolBuilding pb = new ProtocolBuilding(playerID, "Dorf", locationIndex);
 		ProtocolBuild pbu = new ProtocolBuild(pb);
 		Response r = new Response();
 		r.pBuild = pbu;
@@ -345,7 +347,8 @@ public class ServerOutputHandler {
 
 	public void buildStreet(int x, int y, int dir, int playerID) {
 		String location = ModelToProtocol.getEdgeID(x, y, dir);
-		ProtocolBuilding pb = new ProtocolBuilding(playerID, "Straße", location);
+		Index[] locationIndex = ModelToProtocol.convertToEdgeIndex(location);
+		ProtocolBuilding pb = new ProtocolBuilding(playerID, "Straße", locationIndex);
 		ProtocolBuild pbu = new ProtocolBuild(pb);
 		Response r = new Response();
 		r.pBuild = pbu;
@@ -360,7 +363,8 @@ public class ServerOutputHandler {
 
 	public void buildCity(int x, int y, int dir, int playerID) {
 		String location = ModelToProtocol.getCornerID(x, y, dir);
-		ProtocolBuilding pb = new ProtocolBuilding(playerID, "Stadt", location);
+		Index[] locationIndex = ModelToProtocol.convertCornerIndex(location);
+		ProtocolBuilding pb = new ProtocolBuilding(playerID, "Stadt", locationIndex);
 		ProtocolBuild pbu = new ProtocolBuild(pb);
 		Response r = new Response();
 		r.pBuild = pbu;
@@ -427,7 +431,8 @@ public class ServerOutputHandler {
 	}
 
 	public void knightCardPlayed(int threadID, String location, Integer victimID) {
-		ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(threadID, location, victimID);
+		Index locationIndex = ProtocolToModel.getProtocolOneIndex(location);
+		ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(threadID, locationIndex, victimID);
 		Response r = new Response();
 		r.pPlayKnightCard = ppkc;
 		try {
@@ -441,7 +446,9 @@ public class ServerOutputHandler {
 	public void roadBuildingCardPlayed(int threadID, int x1, int y1, int dir1, int x2, int y2, int dir2) {
 		String location1 = ModelToProtocol.getEdgeID(x1, y1, dir1);
 		String location2 = ModelToProtocol.getEdgeID(x2, y2, dir2);
-		ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(threadID, location1, location2);
+		Index[] location1Index = ModelToProtocol.convertToEdgeIndex(location1);
+		Index[] location2Index = ModelToProtocol.convertToEdgeIndex(location2);
+		ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(threadID, location1Index, location2Index);
 		Response r = new Response();
 		r.pPlayRoadCard = prbci;
 		try {
