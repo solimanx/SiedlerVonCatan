@@ -832,7 +832,7 @@ public class ClientController {
 	public void addToDeck(int playerID, DevelopmentCard devCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(devCard);
-		// TODO viewcontroller add to deck / refresh deck
+		//viewController.getGameViewController().card
 	}
 
 	/**

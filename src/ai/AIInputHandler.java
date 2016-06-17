@@ -87,6 +87,7 @@ public class AIInputHandler extends ClientInputHandler {
 		for (int i = 0; i < pBoard.getAmountFields(); i++) {
 			ProtocolField pField = pBoard.getProtocolField(i);
 			fields[i] = new Field();
+			fields[i].setFieldID(ProtocolToModel.getProtocolOneID(pField.getFieldID()));
 			fields[i].setDiceIndex(pField.getDiceIndex());
 			fields[i].setResourceType(ProtocolToModel.getResourceType(pField.getFieldType()));
 		}
@@ -96,6 +97,7 @@ public class AIInputHandler extends ClientInputHandler {
 			ProtocolBuilding pBuild = pBoard.getProtocolBuilding(i);
 			if (!pBuild.getType().equals("Straße")) {
 				corners[i] = new Corner();
+				corners[i].setCornerID(ProtocolToModel.getCornerIDIndex(pBuild.getID()));
 				corners[i].setOwnerID(pBuild.getPlayerID());
 				corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getType()));
 			} else {
