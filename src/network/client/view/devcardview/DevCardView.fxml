@@ -10,7 +10,7 @@
    <children>
       <HBox spacing="10.0">
          <children>
-            <ListView fx:id="devCardList" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="devCardListView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" />
             <VBox spacing="10.0">
                <children>
                   <Button fx:id="playCardButton" mnemonicParsing="false" onAction="#handlePlayCardButton" prefHeight="27.0" prefWidth="138.0" text="Play Card" />
