@@ -697,7 +697,7 @@ public class ClientController {
 
 	public void tradeAccepted(int threadID, int tradingID) {
 		TradeOffer currTOf;
-		int modelID = threadPlayerIdMap.get(threadID);
+		int modelID = modelPlayerIdMap.get(threadID);
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			currTOf = tradeOffers.get(i);
 			if (currTOf.getTradingID() == tradingID) {

@@ -7875,4 +7875,59 @@ java.net.BindException: Address already in use
 [m[32m18:31:12.636 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
 [m[32m18:31:20.913 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
 [m[32m18:31:24.236 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[30m18:59:46.675 INFO  network.client.client.Client.run() @50 - Client connected to server
+[m[30m18:59:47.179 INFO  network.client.controller.ClientController.receiveWelcome() @124 - Handshake complete!
+[m[33m18:59:48.206 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m18:59:49.821 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfilebBLUE
+[m[30m18:59:56.807 INFO  network.client.client.Client.run() @50 - Client connected to server
+[m[30m18:59:56.953 INFO  network.client.controller.ClientController.receiveWelcome() @124 - Handshake complete!
+[m[33m18:59:57.520 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m19:00:01.339 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileorrORANGE
+[m[30m19:00:07.299 INFO  network.client.client.Client.run() @50 - Client connected to server
+[m[30m19:00:07.447 INFO  network.client.controller.ClientController.receiveWelcome() @124 - Handshake complete!
+[m[33m19:00:07.823 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m19:00:09.956 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileredRED
+[m[32m19:00:10.319 DEBUG network.client.controller.ClientController.run() @285 - STARTING GAME VIEW IN Platform.runLater
+[m[32m19:00:10.354 DEBUG network.client.controller.ClientController.run() @285 - STARTING GAME VIEW IN Platform.runLater
+[m[32m19:00:10.387 DEBUG network.client.controller.ClientController.run() @285 - STARTING GAME VIEW IN Platform.runLater
+[m[32m19:00:10.428 DEBUG network.client.controller.ViewController.setServerResponse() @296 - Server response: OK
+[m[32m19:00:46.158 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:00:47.396 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:00:50.382 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:00:50.864 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:00:53.686 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:00:54.884 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:00:55.959 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:00:56.828 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:01:01.011 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:01:02.121 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:01:06.024 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:01:06.581 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[30m19:02:22.768 INFO  network.client.client.Client.run() @50 - Client connected to server
+[m[30m19:02:22.897 INFO  network.client.controller.ClientController.receiveWelcome() @124 - Handshake complete!
+[m[33m19:02:23.297 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m19:02:25.350 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfilebBLUE
+[m[30m19:02:31.179 INFO  network.client.client.Client.run() @50 - Client connected to server
+[m[30m19:02:31.316 INFO  network.client.controller.ClientController.receiveWelcome() @124 - Handshake complete!
+[m[33m19:02:31.644 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m19:02:33.951 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileurrORANGE
+[m[30m19:02:39.296 INFO  network.client.client.Client.run() @50 - Client connected to server
+[m[30m19:02:39.465 INFO  network.client.controller.ClientController.receiveWelcome() @124 - Handshake complete!
+[m[33m19:02:39.642 WARN  network.client.controller.ViewController.startChooseView() @101 - startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException
+[m[32m19:02:41.772 DEBUG application.lobby.PlayerProfileController.handleSendButton() @67 - ProfileredRED
+[m[32m19:02:42.086 DEBUG network.client.controller.ClientController.run() @285 - STARTING GAME VIEW IN Platform.runLater
+[m[32m19:02:42.115 DEBUG network.client.controller.ClientController.run() @285 - STARTING GAME VIEW IN Platform.runLater
+[m[32m19:02:42.322 DEBUG network.client.controller.ClientController.run() @285 - STARTING GAME VIEW IN Platform.runLater
+[m[32m19:02:46.211 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:02:46.903 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:02:49.928 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:02:50.397 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:02:53.639 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:02:54.458 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:02:55.274 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:02:56.556 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:02:59.290 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:03:00.028 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
+[m[32m19:03:01.899 DEBUG network.client.controller.ClientController.requestBuildVillage() @585 - Building Initial Village
+[m[32m19:03:02.193 DEBUG network.client.controller.ClientController.requestBuildStreet() @616 - Building Initial Village
 [m
