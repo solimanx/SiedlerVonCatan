@@ -2,11 +2,14 @@ package ai;
 
 import java.io.IOException;
 
-import enums.Color;
-import network.ModelToProtocol;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import enums.Color;
+import model.Index;
+import network.ModelToProtocol;
+import network.ProtocolToModel;
 import parsing.Parser;
 import parsing.Response;
 import protocol.clientinstructions.ProtocolBuildRequest;
@@ -112,7 +115,8 @@ public class AIOutputHandler {
      */
     public void requestBuildInitialVillage(int j, int i, int k) {
         String location = ModelToProtocol.getCornerID(j, i, k);
-        ProtocolBuildRequest pbr = new ProtocolBuildRequest("Dorf", location);
+        Index[] locationIndex = ModelToProtocol.convertCornerIndex(location);
+        ProtocolBuildRequest pbr = new ProtocolBuildRequest("Dorf", locationIndex);
 
         Response r = new Response();
         r.pBuildRequest = pbr;
@@ -137,7 +141,8 @@ public class AIOutputHandler {
 
     public void requestBuildInitialRoad(int x, int y, int dir) {
         String location = ModelToProtocol.getEdgeID(x, y, dir);
-        ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", location);
+        Index[] locationIndex = ModelToProtocol.convertToEdgeIndex(location);
+        ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", locationIndex);
 
         Response r = new Response();
         r.pBuildRequest = pbr;
@@ -239,7 +244,8 @@ public class AIOutputHandler {
      * @param newRobber
      */
     public void respondMoveRobber(String newRobber) {
-        ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobber, null);
+    	Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
+        ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, null);
         Response r = new Response();
 
         r.pRobberMoveRequest = prmr;

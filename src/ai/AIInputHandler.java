@@ -88,7 +88,6 @@ public class AIInputHandler extends ClientInputHandler {
 			ProtocolField pField = pBoard.getProtocolField(i);
 			fields[i] = new Field();
 			fields[i].setDiceIndex(pField.getDiceIndex());
-			fields[i].setFieldID(pField.getFieldID());
 			fields[i].setResourceType(ProtocolToModel.getResourceType(pField.getFieldType()));
 		}
 		ArrayList<Edge> streets = new ArrayList<Edge>();
@@ -97,13 +96,11 @@ public class AIInputHandler extends ClientInputHandler {
 			ProtocolBuilding pBuild = pBoard.getProtocolBuilding(i);
 			if (!pBuild.getType().equals("Straße")) {
 				corners[i] = new Corner();
-				corners[i].setCornerID(pBuild.getID());
 				corners[i].setOwnerID(pBuild.getPlayerID());
 				corners[i].setStatus(ProtocolToModel.getCornerType(pBuild.getType()));
 			} else {
 				Edge e = new Edge();
 				streets.add(e);
-				e.setEdgeID(pBuild.getID());
 				e.setOwnedByPlayer(pBuild.getPlayerID());
 				e.setHasStreet(true);
 			}
@@ -125,7 +122,7 @@ public class AIInputHandler extends ClientInputHandler {
 			c1.setHarbourStatus(pHarb.getType());
 			c2.setHarbourStatus(pHarb.getType());
 		}
-		String banditLocation = pBoard.getRobber_location();
+		String banditLocation = ProtocolToModel.getProtocolOneID(pBoard.getRobber_location());
 		ai.updateBoard(fields, corners, streets, harbourCorners, banditLocation);
 
 	}
@@ -261,7 +258,7 @@ public class AIInputHandler extends ClientInputHandler {
 	 */
 	@Override
 	protected void handle(ProtocolRobberMovement robberMovement) {
-		ai.updateRobber(robberMovement.getLocationID());
+		ai.updateRobber(ProtocolToModel.getProtocolOneID(robberMovement.getLocationID()));
 
 	}
 
