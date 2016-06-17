@@ -93,9 +93,9 @@ public class CornerAgent {
 			if (f[i] != null) {
 				switch (f[i].getResourceType()) {
 				case NOTHING:
-					utility -= DESERT_PENALTY;
+					utility += DESERT_PENALTY;
 				case SEA:
-					utility -= SEA_PENALTY;
+					utility += SEA_PENALTY;
 				default: // nothing
 				}
 			}
