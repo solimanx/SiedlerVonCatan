@@ -1,23 +1,26 @@
 package network;
 
-import enums.CardType;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.ResourceType;
 import model.Board;
 import model.HexService;
+import model.Index;
 import model.objects.DevCards.DevelopmentCard;
 import model.objects.DevCards.InventionCard;
 import model.objects.DevCards.KnightCard;
 import model.objects.DevCards.MonopolyCard;
 import model.objects.DevCards.StreetBuildingCard;
 import model.objects.DevCards.VictoryPointCard;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
+import settings.DefaultSettings;
 
 public final class ProtocolToModel {
 
@@ -31,6 +34,8 @@ public final class ProtocolToModel {
 	 * @return
 	 */
 	private static Logger logger = LogManager.getLogger(ProtocolToModel.class.getName());
+	private static Map<Index, String> hm1 = new HashMap<Index, String>();
+
 	public static int[] getFieldCoordinates(String fieldID) {
 		// Get the field ID through the Board's HashMap
 		return Board.getStringToCoordMap().get(fieldID);
@@ -55,11 +60,12 @@ public final class ProtocolToModel {
 			String b = location.substring(1, 2);
 			String c = location.substring(2, 3);
 			// Calculate their common corner through HexService
-			int[] result = HexService.getCornerCoordinates(a,b,c);
-			if(result.length == 3)
-			return result;
-			else{
-				throw new IllegalArgumentException("Result isn't 3 characters");}
+			int[] result = HexService.getCornerCoordinates(a, b, c);
+			if (result.length == 3)
+				return result;
+			else {
+				throw new IllegalArgumentException("Result isn't 3 characters");
+			}
 		}
 	}
 
@@ -82,7 +88,7 @@ public final class ProtocolToModel {
 			String a = location.substring(0, 1);
 			String b = location.substring(1, 2);
 			// Calculate their common edge through HexService
-			int[] result = HexService.getEdgeCoordinates(a,b);
+			int[] result = HexService.getEdgeCoordinates(a, b);
 			return result;
 		}
 	}
@@ -112,6 +118,35 @@ public final class ProtocolToModel {
 		default:
 			return ResourceType.UNKNOWN;
 		}
+	}
+
+	public static void initProtocolToModel() {
+		int r = DefaultSettings.BOARD_RADIUS;
+
+		// Starting indices.
+		char outerFieldsBegin = 'a';
+		char innerFieldsBegin = 'A';
+
+		for (int i = r; i >= -r; i--) {
+			for (int j = -r; j <= r; j++) {
+				if (Math.abs(i + j) <= r) {
+					int comparison = HexService.sumAbsCubeXYZ(HexService.specialConvertAxialToCube(new int[] { i, j }));
+					if (comparison == r * 2) {
+						hm1.put(new Index(j, i), String.valueOf(outerFieldsBegin));
+						outerFieldsBegin++;
+					} else if (comparison < r * 2) {
+						hm1.put(new Index(j, i), String.valueOf(innerFieldsBegin));
+						innerFieldsBegin++;
+					}
+				}
+
+			}
+
+		}
+	}
+
+	public static String getProtocolOneID(Index i) {
+		return hm1.get(i);
 	}
 
 	@Deprecated
@@ -152,6 +187,7 @@ public final class ProtocolToModel {
 	 * @return ResourceArray
 	 */
 	public static enums.ResourceType[] getResources(ProtocolResource resources) {
+		// TODO
 		int wood = resources.getWood();
 		int clay = resources.getClay();
 		int wool = resources.getWool();
@@ -259,46 +295,44 @@ public final class ProtocolToModel {
 			result[2] = resource.getOre() == null ? 0 : resource.getOre().intValue();
 			result[3] = resource.getWool() == null ? 0 : resource.getWool().intValue();
 			result[4] = resource.getCorn() == null ? 0 : resource.getCorn().intValue();
-			//Array of length 5
+			// Array of length 5
 			return result;
-		}
-		else if (resource.getUnknown() != null){
-			//array of length 1 (hiddenResource)
-			return new int[]{resource.getUnknown().intValue()};
-		}
-		else{
+		} else if (resource.getUnknown() != null) {
+			// array of length 1 (hiddenResource)
+			return new int[] { resource.getUnknown().intValue() };
+		} else {
 			throw new IllegalArgumentException("Error at convertResources");
 		}
 	}
 
 	/**
 	 * Intended for use by ClientInputHandler after buying a card only.
+	 * 
 	 * @param pdv
 	 * @return
 	 */
 	public static DevelopmentCard getCardType(ProtocolDevCard pdv) {
-		if(pdv.getInvention()!= null){
+		if (pdv.getInvention() != null) {
 			return new InventionCard();
 		}
-		if(pdv.getKnight()!= null){
+		if (pdv.getKnight() != null) {
 			return new KnightCard();
 		}
-		if(pdv.getMonopoly()!=null){
+		if (pdv.getMonopoly() != null) {
 			return new MonopolyCard();
 		}
-		if(pdv.getRoadbuild()!=null){
+		if (pdv.getRoadbuild() != null) {
 			return new StreetBuildingCard();
 		}
-		if(pdv.getVictoryPoint()!=null){
+		if (pdv.getVictoryPoint() != null) {
 			return new VictoryPointCard();
 		}
-		if(pdv.getUnknown()!= null){
-			return null;//TODO 
-		}
-		else{
+		if (pdv.getUnknown() != null) {
+			return null;// TODO
+		} else {
 			throw new IllegalArgumentException("ProtocolDevCard is all null");
 		}
-		
+
 	}
 
 }
