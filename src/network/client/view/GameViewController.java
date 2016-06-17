@@ -90,6 +90,12 @@ public class GameViewController implements Initializable {
 	private TextFlow selfOre;
 
 	@FXML
+	private Label selfLongestTradeRoute;
+
+	@FXML
+	private Label selfGreatestKnightForce;
+
+	@FXML
 	private Button rollDiceButton;
 
 	@FXML
@@ -166,7 +172,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private TextField diceResult;
-	
+
 	@FXML
 	private Button playCardButton;
 
@@ -248,8 +254,8 @@ public class GameViewController implements Initializable {
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
-	
-	public void setIsStreetDev(Boolean isStreetDev){
+
+	public void setIsStreetDev(Boolean isStreetDev) {
 		this.isStreetDevCard = isStreetDevCard;
 	}
 
@@ -596,7 +602,8 @@ public class GameViewController implements Initializable {
 			devCardStage.setScene(scene);
 			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			DevCardViewController devController = (DevCardViewController) loader.getController();
-			int[] devCards = viewController.getClientController().getGameLogic().getBoard().getPlayer(0).getPlayerDevCards();
+			int[] devCards = viewController.getClientController().getGameLogic().getBoard().getPlayer(0)
+					.getPlayerDevCards();
 			devController.init(viewController, devCardStage, devCards);
 			devCardStage.show();
 		} catch (IOException e) {
@@ -644,12 +651,12 @@ public class GameViewController implements Initializable {
 				int[] streetCoord1 = streetsSelected.get(0);
 				int[] streetCoord2 = streetsSelected.get(1);
 
-				viewController.getClientController().playStreetBuildCard(streetCoord1[0], streetCoord1[1], streetCoord1[2],
-						streetCoord2[0], streetCoord2[1], streetCoord2[2]);
-				
+				viewController.getClientController().playStreetBuildCard(streetCoord1[0], streetCoord1[1],
+						streetCoord1[2], streetCoord2[0], streetCoord2[1], streetCoord2[2]);
+
 				streetsSelected.clear();
 				isStreetDevCard = false;
-				
+
 			}
 		} else if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET) {
 			viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
@@ -888,6 +895,17 @@ public class GameViewController implements Initializable {
 		case 1:
 			playerStatusOne.setText(state.toString());
 			selfState = state;
+			if(viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLongestRoad()){
+				selfLongestTradeRoute.setText("Longest Trade Road");
+			} else {
+				selfLongestTradeRoute.setText("");
+			}
+			if(viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLargestArmy()){
+				selfGreatestKnightForce.setText("Greates Knight Force");
+			} else {
+				selfGreatestKnightForce.setText("");
+			}
+			
 			switch (state) {
 			case DICEROLLING:
 				rollDiceButton.setDisable(false);
