@@ -13,7 +13,7 @@ public class Edge {
 	// Whether the edge is occupied or not
 	private boolean hasStreet;
 	// The 31-bit-integer ID of an owner
-	private int ownerID;
+	private Integer ownerID;
 	// A 2-character long ID for the edge, (Two fields make an edge)
 	private String edgeID;
 
@@ -36,7 +36,7 @@ public class Edge {
 		return hasStreet;
 	}
 
-	public int getOwnerID() {
+	public Integer getOwnerID() {
 		return ownerID;
 	}
 

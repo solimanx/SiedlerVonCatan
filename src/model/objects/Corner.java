@@ -17,7 +17,7 @@ public class Corner {
 	// Whether the corner is a harbour, and the type of the harbour
 	private HarbourStatus harbourStatus;
 	// The 31-bit-integer ID of an owner
-	private int ownerID;
+	private Integer ownerID;
 	// A 3-character long ID for the corner, (Three fields make a corner)
 	private String cornerID;
 
@@ -46,7 +46,7 @@ public class Corner {
 		return harbourStatus;
 	}
 
-	public int getOwnerID() {
+	public Integer getOwnerID() {
 		return ownerID;
 	}
 

@@ -8,6 +8,7 @@ import enums.ResourceType;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
+import network.ProtocolToModel;
 import settings.DefaultSettings;
 
 import org.apache.logging.log4j.LogManager;
@@ -55,7 +56,7 @@ public class GameLogic {
 				Edge[] e = board.getProjectingEdges(x, y, dir);
 				for (int i = 0; i < e.length; i++) {
 					if (e[i] != null) {
-						if (e[i].getOwnerID() == playerID) { // is
+						if (e[i].getOwnerID() != null && e[i].getOwnerID() == playerID) { // is
 							// there
 							// an
 							// adjusting
@@ -139,9 +140,25 @@ public class GameLogic {
 				Edge[] neighbors = board.getLinkedEdges(x, y, dir);
 				for (int i = 0; i < neighbors.length; i++) {
 					if (neighbors[i] != null) {
-						if (neighbors[i].getOwnerID() == playerID) {
-							return true;
-
+						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() == playerID) {
+							//check if there is a hostile village in between
+							Corner[] thisAdjoiningVillages = board.getAttachedCorners(x, y, dir);
+							String id = e.getEdgeID();
+							int[] nCs = ProtocolToModel.getEdgeCoordinates(id);
+							Corner[] neighbourAdjoiningVillages = board.getAttachedCorners(nCs[0], nCs[1], nCs[2]);
+							Corner schnitt = null; //schnittmenge aus Villages;
+							for (int j = 0; j < thisAdjoiningVillages.length;j++){
+								for (int k = 0;k < neighbourAdjoiningVillages.length;j++){
+									if (thisAdjoiningVillages[j].equals(neighbourAdjoiningVillages[j])){
+										schnitt = thisAdjoiningVillages[j];
+									}
+								}
+							}
+							if (schnitt.getOwnerID() != null && schnitt.getOwnerID() != playerID){
+								return false;
+							} else {
+								return true;
+							}
 						}
 					}
 				}
@@ -170,7 +187,7 @@ public class GameLogic {
 			} else {
 				Corner[] corners = board.getSurroundingCorners(x, y);
 				for (Corner c : corners) {
-					if (c.getOwnerID() == playerID) {
+					if (c.getOwnerID() != null && c.getOwnerID() == playerID) {
 						return true;
 					}
 				}
@@ -209,7 +226,7 @@ public class GameLogic {
 				Corner[] neighbors = board.getAttachedCorners(x, y, dir);
 				for (int i = 0; i < neighbors.length; i++) {
 					if (neighbors[i] != null) {
-						if (neighbors[i].getOwnerID() == playerID) {
+						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() ==  playerID) {
 							return true;
 
 						}
