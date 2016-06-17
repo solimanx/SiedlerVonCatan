@@ -65,7 +65,7 @@ public final class DefaultSettings {
 
 	public final static String AI_VERSION = "NiedlichePixel (KI)";
 
-	public static final String SERVER_VERSION = "0.3";
+	public static final String SERVER_VERSION = "1.0";
 
 	// Get current time as string
 	public static String getCurrentTime() {
