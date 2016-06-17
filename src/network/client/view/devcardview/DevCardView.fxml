@@ -2,13 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="385.0" prefWidth="325.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.devcardview.DevCardViewController">
+<VBox prefHeight="200.0" prefWidth="325.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.devcardview.DevCardViewController">
    <children>
       <HBox spacing="10.0">
          <children>
@@ -19,18 +17,6 @@
                   <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
                </children>
             </VBox>
-         </children>
-      </HBox>
-      <Separator prefWidth="200.0" />
-      <HBox spacing="10.0">
-         <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-               <children>
-                  <ComboBox fx:id="resourceA" minWidth="-Infinity" prefWidth="200.0" promptText="Choose a resource" />
-                  <ComboBox fx:id="resourceB" prefWidth="200.0" promptText="Choose a resource" />
-               </children>
-            </VBox>
-            <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOK" text="OK" />
          </children>
       </HBox>
    </children>

@@ -165,6 +165,9 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private TextField diceResult;
+	
+	@FXML
+	private Button playCardButton;
 
 	// DEBUG
 	@FXML
@@ -243,6 +246,10 @@ public class GameViewController implements Initializable {
 
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
+	}
+	
+	public void setIsStreetDev(Boolean isStreetDev){
+		this.isStreetDevCard = isStreetDevCard;
 	}
 
 	/*
@@ -572,16 +579,13 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	void handleBuyCardButton(ActionEvent event) throws IOException {
-
+		viewController.getClientController().requestBuyDevelopmentCard();
+		playCardButton.setDisable(true);
 	}
 
 	@FXML
-	void handleFinishedButton(ActionEvent event) throws IOException {
-		int[] streetCoord1 = streetsSelected.get(0);
-		int[] streetCoord2 = streetsSelected.get(1);
-
-		viewController.getClientController().playStreetBuildCard(streetCoord1[0], streetCoord1[1], streetCoord1[2],
-				streetCoord2[0], streetCoord2[1], streetCoord2[2]);
+	void handlePlayCardButton(ActionEvent event) throws IOException {
+		
 	}
 
 	/**
@@ -615,12 +619,21 @@ public class GameViewController implements Initializable {
 	 * @param streetCoordinates
 	 */
 	public void streetClick(int[] streetCoord) {
-		if (isStreetDevCard && streetsSelected.size() < 2) {
+		if (isStreetDevCard && streetsSelected.size() <= 2) {
 			Line street = streets[streetCoord[0] + 3][streetCoord[1] + 3][streetCoord[2]];
 			streetsSelected.add(streetCoord);
 			street.setOpacity(0.8);
-			// finished Button
+			if (streetsSelected.size() == 2) {
+				int[] streetCoord1 = streetsSelected.get(0);
+				int[] streetCoord2 = streetsSelected.get(1);
 
+				viewController.getClientController().playStreetBuildCard(streetCoord1[0], streetCoord1[1], streetCoord1[2],
+						streetCoord2[0], streetCoord2[1], streetCoord2[2]);
+				
+				streetsSelected.clear();
+				isStreetDevCard = false;
+				
+			}
 		} else if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET) {
 			viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
 		}
@@ -873,8 +886,9 @@ public class GameViewController implements Initializable {
 				endTurnButton.setDisable(true);
 				break;
 			default:
-				rollDiceButton.setDisable(false);
+				rollDiceButton.setDisable(true);
 				endTurnButton.setDisable(false);
+				playCardButton.setDisable(false);
 				break;
 			}
 			break;
@@ -892,7 +906,7 @@ public class GameViewController implements Initializable {
 		}
 	}
 
-	private void setMoveRobberState() {
+	public void setMoveRobberState() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Move the Robber");
 		alert.setHeaderText("You can move the robber and steal from adjoining players!");

@@ -213,7 +213,7 @@
                   <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#handleRollDiceButton" prefWidth="80.0" text="Roll dices" />
                   <Button fx:id="startTradingButton" mnemonicParsing="false" onAction="#handleStartTradingButton" prefWidth="80.0" text="Trading" />
                   <Button fx:id="buyCardButton" mnemonicParsing="false" onAction="#handleBuyCardButton" prefWidth="80.0" text="Buy Card" />
-                  <Button fx:id="buyCardButton1" layoutX="407.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBuyCardButton" prefWidth="80.0" text="Play Card" />
+                  <Button fx:id="playCardButton" layoutX="407.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBuyCardButton" prefWidth="80.0" text="Play Card" />
                   <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#handleEndTurnButton" prefWidth="80.0" text="End turn">
                      <font>
                         <Font name="System Bold" size="13.0" />
