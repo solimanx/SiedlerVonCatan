@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import enums.CardType;
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
 import model.Board;
-import model.HexService;
 import model.Index;
 import model.objects.Field;
 import model.objects.DevCards.DevelopmentCard;
@@ -30,7 +30,6 @@ import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
-import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolPlayer;
@@ -471,7 +470,7 @@ public class ServerOutputHandler {
 	}
 
 	public void boughtDevelopmentCard(int player_id, DevelopmentCard devCard) {
-		ProtocolDevCard pdc = ModelToProtocol.devCardToProtocolDevCard(devCard);
+		CardType pdc = ModelToProtocol.devCardToCardType(devCard);
 		ProtocolBoughtDevelopmentCard pbdc = new ProtocolBoughtDevelopmentCard(player_id, pdc);
 		Response r = new Response();
 		r.pBoughtDevelopmentCard = pbdc;

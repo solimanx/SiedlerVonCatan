@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import enums.CardType;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.ResourceType;
@@ -134,11 +135,11 @@ public final class ProtocolToModel {
 					int comparison = HexService.sumAbsCubeXYZ(HexService.specialConvertAxialToCube(new int[] { i, j }));
 					if (comparison == r * 2) {
 						hm1.put(new Index(j, i), String.valueOf(outerFieldsBegin));
-						hm2.put(String.valueOf(outerFieldsBegin), new Index(j,i));
+						hm2.put(String.valueOf(outerFieldsBegin), new Index(j, i));
 						outerFieldsBegin++;
 					} else if (comparison < r * 2) {
 						hm1.put(new Index(j, i), String.valueOf(innerFieldsBegin));
-						hm2.put(String.valueOf(innerFieldsBegin), new Index(j,i));
+						hm2.put(String.valueOf(innerFieldsBegin), new Index(j, i));
 						innerFieldsBegin++;
 					}
 				}
@@ -148,7 +149,7 @@ public final class ProtocolToModel {
 		}
 	}
 
-	public static Index getProtocolOneIndex(String s){
+	public static Index getProtocolOneIndex(String s) {
 		return hm2.get(s);
 	}
 
@@ -343,30 +344,46 @@ public final class ProtocolToModel {
 	}
 
 	public static int[] getCornerCoordinates(Index[] id) {
-		String a = getProtocolOneID(id[0])!=null?getProtocolOneID(id[0]):"";
-		String b = getProtocolOneID(id[1])!=null?getProtocolOneID(id[1]):"";
-		String c = getProtocolOneID(id[2])!=null?getProtocolOneID(id[2]):"";
-		return getCornerCoordinates(a+b+c);
+		String a = getProtocolOneID(id[0]) != null ? getProtocolOneID(id[0]) : "";
+		String b = getProtocolOneID(id[1]) != null ? getProtocolOneID(id[1]) : "";
+		String c = getProtocolOneID(id[2]) != null ? getProtocolOneID(id[2]) : "";
+		return getCornerCoordinates(a + b + c);
 	}
 
-	public static int[] getEdgeCoordinates(Index[] id){
-		String a = getProtocolOneID(id[0])!=null?getProtocolOneID(id[0]):"";
-		String b = getProtocolOneID(id[1])!=null?getProtocolOneID(id[1]):"";
-		return getEdgeCoordinates(a+b);
+	public static int[] getEdgeCoordinates(Index[] id) {
+		String a = getProtocolOneID(id[0]) != null ? getProtocolOneID(id[0]) : "";
+		String b = getProtocolOneID(id[1]) != null ? getProtocolOneID(id[1]) : "";
+		return getEdgeCoordinates(a + b);
 	}
 
 	public static String getCornerIDIndex(Index[] id) {
 		String id0 = getProtocolOneID(id[0]);
 		String id1 = getProtocolOneID(id[1]);
 		String id2 = getProtocolOneID(id[2]);
-		return id0+id1+id2;
+		return id0 + id1 + id2;
 	}
-
 
 	public static String getEdgeIDIndex(Index[] id) {
 		String id0 = getProtocolOneID(id[0]);
 		String id1 = getProtocolOneID(id[1]);
-		return id0+id1;
+		return id0 + id1;
 	}
 
+	public static DevelopmentCard getDevCard(CardType ct) {
+		switch (ct) {
+		case INVENTION:
+			return new InventionCard();
+		case KNIGHT:
+			return new KnightCard();
+		case MONOPOLY:
+			return new MonopolyCard();
+		case STREET:
+			return new StreetBuildingCard();
+		case VICTORYPOINT:
+			return new VictoryPointCard();
+		case UNKNOWN: // ??
+		}
+		
+		throw new IllegalArgumentException("CardType doesn't exit");
+	}
 }

@@ -138,18 +138,18 @@ public final class ModelToProtocol {
 		return (new ProtocolResource(wood, clay, wool, corn, ore, null));
 	}
 
-	public static ProtocolDevCard devCardToProtocolDevCard(DevelopmentCard devCard) {
+	public static CardType devCardToCardType(DevelopmentCard devCard) {
 		switch (devCard.getName()) {
 		case "Knight Card":
-			return new ProtocolDevCard(1, null, null, null, null, null);
+			return CardType.KNIGHT;
 		case "Victory Card":
-			return new ProtocolDevCard(null, null, null, null, 1, null);
+			return CardType.VICTORYPOINT;
 		case "Invention Card":
-			return new ProtocolDevCard(null, null, null, null, 1, null);
+			return CardType.INVENTION;
 		case "Monopoly Card":
-			return new ProtocolDevCard(null, null, 1, null, null, null);
+			return CardType.MONOPOLY;
 		case "Street Building Card":
-			return new ProtocolDevCard(null, 1, null, null, null, null);
+			return CardType.STREET;
 		default:
 			logger.info(devCard.getName());
 			throw new IllegalArgumentException("Invalid Development Card object");

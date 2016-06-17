@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.net.Protocol;
 
+import enums.CardType;
 import enums.ResourceType;
 import model.HexService;
 import model.Index;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
+import model.objects.DevCards.DevCardFactory;
 import model.objects.DevCards.DevelopmentCard;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
@@ -29,7 +30,6 @@ import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
-import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolPlayer;
@@ -416,10 +416,10 @@ public class ClientInputHandler {
 	 * @param boughtDevelopmentCard
 	 */
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
-		ProtocolDevCard pdv = boughtDevelopmentCard.getDevelopmentCard();
-		DevelopmentCard ct = ProtocolToModel.getCardType(pdv);
+		CardType ct = boughtDevelopmentCard.getDevelopmentCard();
 		int playerID = boughtDevelopmentCard.getPlayerID();
-		clientController.addToDeck(playerID, ct);
+		DevelopmentCard dc = ProtocolToModel.getDevCard(ct);
+		clientController.addToDeck(playerID, dc);
 
 	}
 
