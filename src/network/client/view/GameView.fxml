@@ -18,7 +18,7 @@
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <Pane fx:id="board" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: radial-gradient(center 50% 50% , radius 150% , #81D4FA, #1E88E5); -fx-background-size: stretch;" BorderPane.alignment="CENTER" />
+            <Pane fx:id="board" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: radial-gradient(center 50% 50% , radius 200% , #81D4FA, #1E88E5); -fx-background-size: stretch;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="140.0" style="-fx-background-color: #fff;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -69,24 +69,6 @@
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
-                     <children>
-                        <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#handleRollDiceButton" prefWidth="80.0" text="Roll dices">
-                           <VBox.margin>
-                              <Insets bottom="3.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="startTradingButton" mnemonicParsing="false" onAction="#handleStartTradingButton" prefWidth="80.0" text="Trading">
-                           <VBox.margin>
-                              <Insets bottom="3.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#handleEndTurnButton" prefWidth="80.0" text="End turn">
-                           <VBox.margin>
-                              <Insets bottom="3.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="buyCardButton" layoutX="50.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleBuyCardButton" prefWidth="80.0" text="Buy Card" />
-                     </children>
                   </VBox>
                </children>
                <VBox.margin>
@@ -96,11 +78,15 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <VBox alignment="TOP_RIGHT">
                <children>
-                  <Label fx:id="selfVictoryPoints" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="selfVictoryPoints" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -222,16 +208,17 @@
       </VBox>
       <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="95.0" prefWidth="980.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Würfel: " />
-                  <TextField fx:id="diceResult" alignment="CENTER" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="44.0" />
+                  <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#handleRollDiceButton" prefWidth="80.0" text="Roll dices" />
+                  <Button fx:id="startTradingButton" mnemonicParsing="false" onAction="#handleStartTradingButton" prefWidth="80.0" text="Trading" />
+                  <Button fx:id="buyCardButton" mnemonicParsing="false" onAction="#handleBuyCardButton" prefWidth="80.0" text="Buy Card" />
+                  <Button fx:id="buyCardButton1" layoutX="407.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBuyCardButton" prefWidth="80.0" text="Play Card" />
+                  <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#handleEndTurnButton" prefWidth="80.0" text="End turn">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
                   <Button fx:id="openRobberView" mnemonicParsing="false" onAction="#setRobberLossState" text="RobberLoss">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button layoutX="662.0" layoutY="18.0" mnemonicParsing="false" text="Steal">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -247,6 +234,12 @@
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></TextArea>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label text="Würfel: " />
+                  <TextField fx:id="diceResult" alignment="CENTER" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="44.0" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

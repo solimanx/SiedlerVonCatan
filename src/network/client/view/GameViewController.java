@@ -22,7 +22,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -100,7 +99,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Button buyCardButton;
-	
+
 	@FXML
 	private Text playerTwoCards;
 
@@ -233,6 +232,10 @@ public class GameViewController implements Initializable {
 	private FadeTransition cornTransition;
 
 	private FadeTransition oreTransition;
+
+	private List<int[]> streetsSelected = new ArrayList<int[]>();
+
+	private Boolean isStreetDevCard = false;
 
 	public TradeViewController getTradeViewController() {
 		return tradeViewController;
@@ -568,11 +571,19 @@ public class GameViewController implements Initializable {
 	}
 
 	@FXML
-	void handleBuyCardButton(ActionEvent event) throws IOException{
-		
+	void handleBuyCardButton(ActionEvent event) throws IOException {
+
 	}
-	
-	
+
+	@FXML
+	void handleFinishedButton(ActionEvent event) throws IOException {
+		int[] streetCoord1 = streetsSelected.get(0);
+		int[] streetCoord2 = streetsSelected.get(1);
+
+		viewController.getClientController().playStreetBuildCard(streetCoord1[0], streetCoord1[1], streetCoord1[2],
+				streetCoord2[0], streetCoord2[1], streetCoord2[2]);
+	}
+
 	/**
 	 * @param event
 	 */
@@ -604,8 +615,15 @@ public class GameViewController implements Initializable {
 	 * @param streetCoordinates
 	 */
 	public void streetClick(int[] streetCoord) {
-		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET)
+		if (isStreetDevCard && streetsSelected.size() < 2) {
+			Line street = streets[streetCoord[0] + 3][streetCoord[1] + 3][streetCoord[2]];
+			streetsSelected.add(streetCoord);
+			street.setOpacity(0.8);
+			// finished Button
+
+		} else if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET) {
 			viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
+		}
 	}
 
 	/**
@@ -936,25 +954,26 @@ public class GameViewController implements Initializable {
 		city.setEffect(shadow);
 		city.setStroke(Color.BLACK);
 	}
-	
-	public void showVictory(int playerID){
-		//FXMLLoader loader = new FXMLLoader();
-		//Parent root;
-		//try {
-		//	root = loader.load(getClass().getResource().openStream());
-		//	Scene scene = new Scene(root);
-		//	Stage victoryStage = new Stage();
-		//    victoryStage.setScene(scene);
-		//    victoryStage.initModality(Modality.APPLICATION_MODAL);
-		//	victoryStage.initOwner(gameStage);
-		//	victoryStage.show();
-		    
-		//} catch (IOException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
-		
-		//playerIDtoViewPosition(playerID); // 1,2,3,4 als viewPosition, 1 == self
+
+	public void showVictory(int playerID) {
+		// FXMLLoader loader = new FXMLLoader();
+		// Parent root;
+		// try {
+		// root = loader.load(getClass().getResource().openStream());
+		// Scene scene = new Scene(root);
+		// Stage victoryStage = new Stage();
+		// victoryStage.setScene(scene);
+		// victoryStage.initModality(Modality.APPLICATION_MODAL);
+		// victoryStage.initOwner(gameStage);
+		// victoryStage.show();
+
+		// } catch (IOException e) {
+		// TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+		// playerIDtoViewPosition(playerID); // 1,2,3,4 als viewPosition, 1 ==
+		// self
 		// new Stage
 	}
 
