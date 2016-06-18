@@ -5,11 +5,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
@@ -33,38 +37,78 @@
                   <Label fx:id="playerStatusOne" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
                </children>
             </HBox>
-            <VBox fx:id="playerVBoxOne" prefHeight="200.0" prefWidth="125.0" spacing="5.0">
+            <VBox fx:id="playerVBoxOne" prefHeight="200.0" prefWidth="125.0" spacing="10.0">
                <children>
-                  <TextFlow fx:id="selfWood" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
+                  <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wood: " />
-                        <Text fx:id="selfWoodText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../textures/iconLumber.png" />
+                           </image>
+                        </ImageView>
+                        <TextFlow fx:id="selfWood" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
+                           <children>
+                              <Text fx:id="selfWoodText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                           </children>
+                        </TextFlow>
                      </children>
-                  </TextFlow>
-                  <TextFlow fx:id="selfClay" layoutX="10.0" layoutY="234.0" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Clay: " />
-                        <Text fx:id="selfClayText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../textures/iconBrick.png" />
+                           </image>
+                        </ImageView>
+                        <TextFlow fx:id="selfClay" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
+                           <children>
+                              <Text fx:id="selfClayText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                           </children>
+                        </TextFlow>
                      </children>
-                  </TextFlow>
-                  <TextFlow fx:id="selfSheep" layoutX="10.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wool: " />
-                        <Text fx:id="selfSheepText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../textures/iconWool.png" />
+                           </image>
+                        </ImageView>
+                        <TextFlow fx:id="selfSheep" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
+                           <children>
+                              <Text fx:id="selfSheepText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                           </children>
+                        </TextFlow>
                      </children>
-                  </TextFlow>
-                  <TextFlow fx:id="selfCorn" layoutX="10.0" layoutY="266.0" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Corn: " />
-                        <Text fx:id="selfCornText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../textures/iconGrain.png" />
+                           </image>
+                        </ImageView>
+                        <TextFlow fx:id="selfCorn" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
+                           <children>
+                              <Text fx:id="selfCornText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                           </children>
+                        </TextFlow>
                      </children>
-                  </TextFlow>
-                  <TextFlow fx:id="selfOre" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" textAlignment="RIGHT">
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ore: " />
-                        <Text fx:id="selfOreText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../textures/iconOre.png" />
+                           </image>
+                        </ImageView>
+                        <TextFlow fx:id="selfOre" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
+                           <children>
+                              <Text fx:id="selfOreText" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                           </children>
+                        </TextFlow>
                      </children>
-                  </TextFlow>
+                  </HBox>
                   <VBox fx:id="playerButtons" alignment="CENTER_RIGHT">
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -210,7 +254,12 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label text="Würfel: " />
-                  <TextField fx:id="diceResult" alignment="CENTER" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="44.0" />
+                  <StackPane>
+                     <children>
+                        <Circle fill="WHITE" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Text fx:id="diceResult" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" />
+                     </children>
+                  </StackPane>
                   <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#handleRollDiceButton" prefWidth="80.0" text="Roll dices" />
                   <Button fx:id="startTradingButton" mnemonicParsing="false" onAction="#handleStartTradingButton" prefWidth="80.0" text="Trading" />
                   <Button fx:id="buyCardButton" mnemonicParsing="false" onAction="#handleBuyCardButton" prefWidth="80.0" text="Buy Card" />

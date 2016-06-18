@@ -174,7 +174,7 @@ public class GameViewController implements Initializable {
     private TextArea serverLog;
 
     @FXML
-    private TextField diceResult;
+    private Text diceResult;
 
     @FXML
     private Button playCardButton;
@@ -859,7 +859,6 @@ public class GameViewController implements Initializable {
      * @param result
      */
     public void setDiceRollResult(int result) {
-        diceResult.clear();
         diceResult.setText("" + result);
     }
 
