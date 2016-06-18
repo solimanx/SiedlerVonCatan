@@ -291,7 +291,6 @@ public class ViewController {
 		} else if (isChoosingStage) {
 			Platform.runLater(createSResponseProfileRunnable(server_response, playerProfileController));
 		} else {
-			System.out.println("Server response: " + server_response);
 			logger.debug("Server response: " + server_response);
 		}
 

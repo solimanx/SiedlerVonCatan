@@ -14,6 +14,7 @@ import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,6 +31,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
@@ -96,7 +98,25 @@ public class GameViewController implements Initializable {
 	private Label selfLongestTradeRoute;
 
 	@FXML
+	private Label secondLongestTradeRoute;
+
+	@FXML
+	private Label thirdLongestTradeRoute;
+
+	@FXML
+	private Label fourthLongestTradeRoute;
+
+	@FXML
 	private Label selfGreatestKnightForce;
+
+	@FXML
+	private Label secondGreatestKnightForce;
+
+	@FXML
+	private Label thirdGreatestKnightForce;
+
+	@FXML
+	private Label fourthGreatestKnightForce;
 
 	@FXML
 	private Button rollDiceButton;
@@ -295,7 +315,7 @@ public class GameViewController implements Initializable {
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = new Pane();
 		try {
-			
+
 			root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
 			tradeViewController = (TradeViewController) loader.getController();
 			Scene scene = new Scene(root);
@@ -1013,6 +1033,78 @@ public class GameViewController implements Initializable {
 		city.setStroke(Color.BLACK);
 	}
 
+	public void setLongestTradeRoad(int modelID) {
+		Platform.runLater(new Runnable() {
+			int modelID;
+
+			@Override
+			public void run() {
+				selfLongestTradeRoute.setText("");
+				secondLongestTradeRoute.setText("");
+				thirdLongestTradeRoute.setText("");
+				fourthLongestTradeRoute.setText("");
+				String string = "Longest Trade Road!";
+				if (modelID != -1) {
+					switch (playerIDtoViewPosition.get(modelID)) {
+					case 1:
+						selfLongestTradeRoute.setText(string);
+						break;
+					case 2:
+						secondLongestTradeRoute.setText(string);
+						break;
+					case 3:
+						thirdLongestTradeRoute.setText(string);
+						break;
+					case 4:
+						fourthLongestTradeRoute.setText(string);
+						break;
+					}
+				}
+			}
+
+			public Runnable init(int modelID) {
+				this.modelID = modelID;
+				return (this);
+			}
+		}.init(modelID));
+
+	}
+
+	public void setGreatestKnightForce(int modelID) {
+		Platform.runLater(new Runnable() {
+			int modelID;
+
+			@Override
+			public void run() {
+				selfGreatestKnightForce.setText("");
+				secondGreatestKnightForce.setText("");
+				thirdGreatestKnightForce.setText("");
+				fourthGreatestKnightForce.setText("");
+				String string = "Greatest Knight Force!";
+				switch (playerIDtoViewPosition.get(modelID)) {
+				case 1:
+					selfGreatestKnightForce.setText(string);
+					break;
+				case 2:
+					secondGreatestKnightForce.setText(string);
+					break;
+				case 3:
+					thirdGreatestKnightForce.setText(string);
+					break;
+				case 4:
+					fourthGreatestKnightForce.setText(string);
+					break;
+				}
+			}
+
+			public Runnable init(int modelID) {
+				this.modelID = modelID;
+				return (this);
+			}
+		}.init(modelID));
+
+	}
+
 	/**
 	 * Method showing a new window, which displays, who the winner of the game
 	 * is.
@@ -1138,18 +1230,6 @@ public class GameViewController implements Initializable {
 			fieldFigures.add(bandit);
 
 		}
-
-		// /**
-		// * TODO perhaps unnecessary
-		// */
-		// public void initCorners() {
-		// for (int i = 0; i < fieldCoordinates.length; i++) {
-		// for (int j = 0; j < fieldCoordinates.length; j++) {
-		// corners[i][j][0] = createVillage(i, j, 0);
-		// }
-		// }
-		//
-		// }
 
 		/**
 		 * // * @param centerCoordinates

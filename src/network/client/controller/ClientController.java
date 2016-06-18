@@ -690,10 +690,18 @@ public class ClientController {
 		}
 	}
 
+	/**
+	 * @param tradingID
+	 */
 	public void acceptTrade(int tradingID) {
 		clientOutputHandler.acceptTrade(tradingID);
 	}
 
+	/**
+	 * A Player has accepted your offer. Show acceptance on list
+	 * @param threadID
+	 * @param tradingID
+	 */
 	public void tradeAccepted(int threadID, int tradingID) {
 		// TradeOffer currTOf;
 		// for (int i = 0; i < tradeOffers.size(); i++) {
@@ -702,15 +710,26 @@ public class ClientController {
 		// currTOf.acceptingPlayers.add(modelID);
 		// }
 		// }
-		if (getOwnTradingID()!=null && getOwnTradingID()==tradingID){
-			viewController.getGameViewController().getTradeViewController().acceptingOffer(threadPlayerIdMap.get(threadID), tradingID);
+		if (getOwnTradingID() != null && getOwnTradingID() == tradingID) {
+			viewController.getGameViewController().getTradeViewController()
+					.acceptingOffer(threadPlayerIdMap.get(threadID), tradingID);
 		}
 	}
 
+	/**
+	 * You agree to the trading
+	 * @param tradingID
+	 * @param partnerThreadID
+	 */
 	public void fulfillTrade(int tradingID, int partnerThreadID) {
-		clientOutputHandler.tradeComplete(tradingID, partnerThreadID);
+		clientOutputHandler.tradeComplete(tradingID, modelPlayerIdMap.get(partnerThreadID));
 	}
 
+	/**
+	 * trade was fulfilled
+	 * @param threadID
+	 * @param partnerModelID
+	 */
 	public void tradeFulfilled(int threadID, int partnerModelID) {
 		TradeOffer currTOf;
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -762,8 +781,7 @@ public class ClientController {
 	 * @param message
 	 */
 	public void victory(String message, int threadID) {
-		// viewController.getGameViewController().victory(message,
-		// threadPlayerIdMap.get(threadID));
+		viewController.getGameViewController().showVictory(threadPlayerIdMap.get(threadID));
 	}
 
 	/**
@@ -771,7 +789,8 @@ public class ClientController {
 	 */
 	public void largestArmy(int threadID) {
 		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(true);
-		// viewController.getGameViewController().set... show
+		viewController.getGameViewController().setGreatestKnightForce(threadPlayerIdMap.get(threadID));
+		
 	}
 
 	/**
@@ -781,16 +800,15 @@ public class ClientController {
 		if (threadID != null) {
 			if (threadID == ownPlayerID) {
 				gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(true);
-				// TODO viewController.getGameViewController().set show
 			} else {
 				gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(false);
-				// TODO viewController.getGameViewController().set hide
 			}
+			viewController.getGameViewController().setLongestTradeRoad(threadPlayerIdMap.get(threadID));
 		}
 		// special case, if player loses to a settlement block by another player
 		else {
 			gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(false);
-			// TODO viewController.getGameViewController(). set hide..
+			viewController.getGameViewController().setLongestTradeRoad(-1);
 		}
 
 	}

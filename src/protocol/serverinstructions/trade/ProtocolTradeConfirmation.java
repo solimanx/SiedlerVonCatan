@@ -14,7 +14,7 @@ import com.google.gson.annotations.Since;
 @Since(0.2)
 public class ProtocolTradeConfirmation {
 
-	@SerializedName("Spieler")
+	@SerializedName("Mitspieler")
 	private int playerID;
 
 	@SerializedName("Handel id")
