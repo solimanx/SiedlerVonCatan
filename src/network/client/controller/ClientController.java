@@ -40,10 +40,11 @@ public class ClientController {
 	 * e.g. (45-> 0), (32, -> 1) etc. HashMap mapping playerIDs to modelIDs
 	 */
 	private Map<Integer, Integer> threadPlayerIdMap;
-	private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(ClientController.class.getSimpleName());
+	private static org.apache.logging.log4j.Logger logger = LogManager
+			.getLogger(ClientController.class.getSimpleName());
 	private Board board;
 	private GameLogic gameLogic;
-
+	private Integer ownTradingID;
 	private int ownPlayerID;
 	private int amountPlayers = 1;
 
@@ -680,6 +681,7 @@ public class ClientController {
 		TradeOffer tOf = new TradeOffer(threadID, tradingID, supply, demand);
 		tradeOffers.add(tOf);
 		if (modelID == ownPlayerID) {
+			setOwnTradingID(tradingID);
 			viewController.getGameViewController().getTradeViewController().addOwnOffer(supply, demand, tradingID);
 		} else {
 			viewController.getGameViewController().getTradeViewController().addOffer(supply, demand, tradingID,
@@ -693,15 +695,16 @@ public class ClientController {
 	}
 
 	public void tradeAccepted(int threadID, int tradingID) {
-		TradeOffer currTOf;
-		int modelID = modelPlayerIdMap.get(threadID);
-		for (int i = 0; i < tradeOffers.size(); i++) {
-			currTOf = tradeOffers.get(i);
-			if (currTOf.getTradingID() == tradingID) {
-				currTOf.acceptingPlayers.add(modelID);
-			}
+		// TradeOffer currTOf;
+		// for (int i = 0; i < tradeOffers.size(); i++) {
+		// currTOf = tradeOffers.get(i);
+		// if (currTOf.getTradingID() == tradingID) {
+		// currTOf.acceptingPlayers.add(modelID);
+		// }
+		// }
+		if (tradingID == getOwnTradingID()){
+			viewController.getGameViewController().getTradeViewController().acceptingOffer(threadID, tradingID);
 		}
-		viewController.getGameViewController().getTradeViewController().acceptingOffer(modelID, tradingID);
 	}
 
 	public void fulfillTrade(int tradingID, int partnerThreadID) {
@@ -856,6 +859,21 @@ public class ClientController {
 	public void receiveInventionCard(int playerID, int[] resource) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * @return the ownTradingID
+	 */
+	public Integer getOwnTradingID() {
+		return ownTradingID;
+	}
+
+	/**
+	 * @param ownTradingID
+	 *            the ownTradingID to set
+	 */
+	public void setOwnTradingID(Integer ownTradingID) {
+		this.ownTradingID = ownTradingID;
 	}
 
 }
