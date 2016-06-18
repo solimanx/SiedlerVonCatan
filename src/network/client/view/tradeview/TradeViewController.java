@@ -93,9 +93,9 @@ public class TradeViewController {
 	private String selectedOffer;
 
 	private HashMap<String, Integer> stringToTradeID = new HashMap<String, Integer>();
-	private HashMap<String, Integer> acceptedOfferToPlayerID = new HashMap<String, Integer>();
+	private HashMap<String, Integer> acceptedOfferToModelID = new HashMap<String, Integer>();
 	private HashMap<Integer, String> tradeIDtoString = new HashMap<Integer, String>();
-	private HashMap<Integer, Integer> tradeIDtoPlayerID = new HashMap<Integer, Integer>();
+	private HashMap<Integer, Integer> tradeIDtoModelID = new HashMap<Integer, Integer>();
 
 	private ViewController viewController;
 	private int ownTradeID = 0;
@@ -254,7 +254,7 @@ public class TradeViewController {
 	 */
 	@FXML
 	void fullFillTrade(ActionEvent event) {
-		viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToPlayerID.get(selectedOffer));
+		viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToModelID.get(selectedOffer));
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class TradeViewController {
 	@FXML
 	void handleCancelTrade(ActionEvent event) {
 		int tID = stringToTradeID.get(selectedTrade);
-		int pID = tradeIDtoPlayerID.get(tID);
+		int pID = tradeIDtoModelID.get(tID);
 		viewController.getClientController().tradeCancelled(pID, tID);
 	}
 
@@ -286,7 +286,7 @@ public class TradeViewController {
 				+ viewController.getGameViewController().getPlayerNames(playerID);
 		tradeIDtoString.put(tradeID, tradeString);
 		stringToTradeID.put(tradeString, tradeID);
-		tradeIDtoPlayerID.put(tradeID, playerID);
+		tradeIDtoModelID.put(tradeID, playerID);
 		Platform.runLater(new AddTradeStringRunnable(tradeString));
 
 	}
@@ -314,7 +314,8 @@ public class TradeViewController {
 	public void acceptingOffer(int modelID, int tradeID) {
 		String offerString = viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).getName() + " accepts your offer";
 		Platform.runLater(new AddOfferStringRunnable(offerString));
-		acceptedOfferToPlayerID.put(offerString, modelID);
+		int playerID = viewController.getClientController().getPlayerID(modelID);
+		acceptedOfferToModelID.put(offerString, playerID);
 
 	}
 

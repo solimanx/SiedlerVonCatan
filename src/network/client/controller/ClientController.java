@@ -721,8 +721,8 @@ public class ClientController {
 	 * @param tradingID
 	 * @param partnerThreadID
 	 */
-	public void fulfillTrade(int tradingID, int partnerThreadID) {
-		clientOutputHandler.tradeComplete(tradingID, modelPlayerIdMap.get(partnerThreadID));
+	public void fulfillTrade(int tradingID, int partnerModelID) {
+		clientOutputHandler.tradeComplete(tradingID, modelPlayerIdMap.get(partnerModelID));
 	}
 
 	/**
@@ -892,6 +892,10 @@ public class ClientController {
 	 */
 	public void setOwnTradingID(Integer ownTradingID) {
 		this.ownTradingID = ownTradingID;
+	}
+	
+	public int getPlayerID(int modelID){
+		return modelPlayerIdMap.get(modelID);
 	}
 
 }
