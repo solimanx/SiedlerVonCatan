@@ -1007,7 +1007,11 @@ public class GameViewController implements Initializable {
         city.setEffect(shadow);
         city.setStroke(Color.BLACK);
     }
-
+    /**
+     * Method showing a new window, which displays, who the winner of the game is.
+     *
+     *
+     */
     public void showVictory(int winnerID) {
         VBox vBox = new VBox(10);
         vBox.setPadding(new Insets(5));
@@ -1023,7 +1027,7 @@ public class GameViewController implements Initializable {
         text1.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 30));
         vBox.getChildren().add(text1);
 
-        ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/res/winner.png")));
+        ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/imageVictoryStage/winner.png")));
         vBox.getChildren().add(image);
 
         Scene scene = new Scene(vBox, 600, 600, Color.BEIGE);
