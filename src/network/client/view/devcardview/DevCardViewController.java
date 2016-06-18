@@ -124,7 +124,7 @@ public class DevCardViewController implements Initializable {
 	
 	@FXML
 	void handleInventionOK(ActionEvent event) {
-		int[] resources = new int[5];
+		int[] resources = {0,0,0,0,0};
 		switch (inventRChooser1.getSelectionModel().getSelectedItem()) {
 		case WOOD:
 			resources[0] += 1;
@@ -142,6 +142,24 @@ public class DevCardViewController implements Initializable {
 			resources[2] += 1;
 			break;
 		}
+		switch (inventRChooser2.getSelectionModel().getSelectedItem()) {
+		case WOOD:
+			resources[0] += 1;
+			break;
+		case CLAY:
+			resources[1] += 1;
+			break;
+		case SHEEP:
+			resources[3] += 1;
+			break;
+		case CORN:
+			resources[4] += 1;
+			break;
+		case ORE:
+			resources[2] += 1;
+			break;
+		}
+		viewController.getClientController().playInventionCard(resources);
 		this.stage.close();
 	}
 	
