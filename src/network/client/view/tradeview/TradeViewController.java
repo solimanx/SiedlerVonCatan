@@ -20,14 +20,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
 
-/**
- * @author mattmoos
- *
- */
-/**
- * @author mattmoos
- *
- */
 public class TradeViewController {
 	
 	@FXML
