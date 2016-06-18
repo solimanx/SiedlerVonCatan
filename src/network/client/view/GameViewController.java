@@ -1022,17 +1022,14 @@ public class GameViewController implements Initializable {
         vBox.setSpacing(8);
         Text title = new Text("Das Spiel ist aus!");
         title.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 40));
-        vBox.getChildren().addAll();
-        vBox.getChildren().add(title);
         Text text = new Text("Glückwunsch zum verdienten Sieg.");
         text.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 30));
-        vBox.getChildren().add(text);
         Text text1 = new Text("Unser Gewinner ist:" + viewController.getClientController().getGameLogic().getBoard().getPlayer(winnerID).getName());
         text1.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 30));
-        vBox.getChildren().add(text1);
 
-        ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/imageVictoryStage/winner.png")));
-        vBox.getChildren().add(image);
+
+        ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/textures/winner.png")));
+        vBox.getChildren().addAll(title, text, text1, image);
 
         Scene scene = new Scene(vBox, 600, 600, Color.BEIGE);
         Stage victoryStage = new Stage();
@@ -1040,8 +1037,6 @@ public class GameViewController implements Initializable {
         victoryStage.setHeight(200);
         victoryStage.setScene(scene);
         victoryStage.sizeToScene();
-
-        victoryStage.setScene(scene);
         victoryStage.initModality(Modality.APPLICATION_MODAL);
         victoryStage.initOwner(gameStage);
         victoryStage.show();
