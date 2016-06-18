@@ -17,9 +17,17 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import network.client.controller.ViewController;
-import network.client.view.tradeview.TradeViewController.AddTradeStringRunnable;
 
+/**
+ * @author mattmoos
+ *
+ */
+/**
+ * @author mattmoos
+ *
+ */
 public class TradeViewController {
 
 	@FXML
@@ -74,11 +82,13 @@ public class TradeViewController {
 	private String selectedOffer;
 
 	private HashMap<String, Integer> stringToTradeID = new HashMap<String, Integer>();
+	private HashMap<String, Integer> acceptedOfferToPlayerID = new HashMap<String, Integer>();
 	private HashMap<Integer, String> tradeIDtoString = new HashMap<Integer, String>();
 	private HashMap<Integer, Integer> tradeIDtoPlayerID = new HashMap<Integer, Integer>();
 
 	private ViewController viewController;
 	private int ownTradeID = 0;
+	private Stage stage;
 
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
@@ -89,8 +99,9 @@ public class TradeViewController {
 	 * 
 	 * @param resources
 	 */
-	public void init(int[] resources, ViewController viewController) {
+	public void init(int[] resources, ViewController viewController, Stage stage) {
 		this.viewController = viewController;
+		this.stage = stage;
 		start(resources);
 		foreignTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		foreignTrades.setItems(tradeList);
@@ -191,53 +202,73 @@ public class TradeViewController {
 		grid.add(getOreSpinner, 2, 5);
 	}
 
+	/**
+	 * @param event
+	 */
 	@FXML
 	void handlePlaceOfferButton(ActionEvent event) {
 		viewController.getClientController().requestTrade(resultOffer, resultDemand);
 	}
 
+	/**
+	 * @param event
+	 */
 	@FXML
 	void handleTradeButton(ActionEvent event) {
 		int tradeID = stringToTradeID.get(selectedTrade);
 		viewController.getClientController().acceptTrade(tradeID);
 	}
 
-	@FXML
-	void handleAcceptButton(ActionEvent event) {
-		int offerID = stringToTradeID.get(selectedOffer);
-		int playerID = tradeIDtoPlayerID.get(selectedOffer);
-		viewController.getClientController().fulfillTrade(offerID, playerID);
-		ownOfferList.clear();
-		ownOffer.clear();
-	}
-	
+	/**
+	 * @param event
+	 */
 	@FXML
 	void handleSeaTradeButton(ActionEvent event) {
 		viewController.getClientController().requestSeaTrade(resultOffer, resultDemand);
+		stage.hide();
 	}
 
+	/**
+	 * @param event
+	 */
 	@FXML
 	void handleCancelOwnOffer(ActionEvent event) {
-		viewController.getClientController().tradeCancelled(viewController.getClientController().getOwnPlayerID(), ownTradeID);
+		viewController.getClientController().tradeCancelled(viewController.getClientController().getOwnPlayerID(),
+				ownTradeID);
 	}
-	
+
+	/**
+	 * @param event
+	 */
 	@FXML
-	void fullFillTrade(ActionEvent event){
-		viewController.getClientController().fulfillTrade(ownTradeID, tradeIDtoPlayerID.get(stringToTradeID.get(selectedOffer)));
+	void fullFillTrade(ActionEvent event) {
+		viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToPlayerID.get(selectedOffer));
 	}
-	
+
+	/**
+	 * @param event
+	 */
 	@FXML
-	void handleCancelTrade(ActionEvent event){
+	void handleCancelTrade(ActionEvent event) {
 		int tID = stringToTradeID.get(selectedTrade);
 		int pID = tradeIDtoPlayerID.get(tID);
 		viewController.getClientController().tradeCancelled(pID, tID);
 	}
-	
+
+	/**
+	 * @param tradeID
+	 */
 	public void offerFulfilled(int tradeID) {
 		tradeList.remove(tradeIDtoString.get(tradeID));
 
 	}
 
+	/**
+	 * @param offer
+	 * @param demand
+	 * @param tradeID
+	 * @param playerID
+	 */
 	public void addOffer(int[] offer, int[] demand, int tradeID, int playerID) {
 		String tradeString = tradeStringGenerator(offer, demand) + "\n" + "With: "
 				+ viewController.getGameViewController().getPlayerNames(playerID);
@@ -248,21 +279,36 @@ public class TradeViewController {
 
 	}
 
+	/**
+	 * @param offer
+	 * @param demand
+	 * @param tradeID
+	 */
 	public void addOwnOffer(int[] offer, int[] demand, int tradeID) {
 		String offerString = tradeStringGenerator(offer, demand);
-		ownTradeID  = tradeID;
+		ownTradeID = tradeID;
 		tradeIDtoString.put(tradeID, offerString);
 		stringToTradeID.put(offerString, tradeID);
 		ownOffer.setText(offerString);
 		cancelOffer.setDisable(false);
 	}
 
+	/**
+	 * called, when player accepts your offer and adds offer to ownOfferList
+	 * @param playerID
+	 * @param tradeID
+	 */
 	public void acceptingOffer(int playerID, int tradeID) {
 		String offerString = viewController.getGameViewController().getPlayerNames(playerID) + " accepts your offer";
 		ownOfferList.add(offerString);
+		acceptedOfferToPlayerID.put(offerString, playerID);
 
 	}
 
+	/**
+	 * cancels trade item from left tradeList
+	 * @param tradeID
+	 */
 	public void cancelOffer(int tradeID) {
 		tradeList.remove(tradeIDtoString.get(tradeID));
 	}
@@ -341,10 +387,16 @@ public class TradeViewController {
 		return getting.toString() + " \n" + giving.toString();
 	}
 
+	/**
+	 * called, when own offer is cancelled
+	 * removes own offer from view
+	 * clears own offer accepting players list
+	 */
 	public void cancelOwnOffer() {
 		ownOffer.clear();
+		ownOfferList.clear();
 		cancelOffer.setDisable(true);
-		
+
 	}
 
 	public class AddTradeStringRunnable implements Runnable {
@@ -361,7 +413,7 @@ public class TradeViewController {
 		}
 
 	}
-	
+
 	public class AddOfferStringRunnable implements Runnable {
 		final String string;
 

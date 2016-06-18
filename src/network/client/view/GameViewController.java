@@ -301,7 +301,7 @@ public class GameViewController implements Initializable {
 			tradeStage = new Stage();
 			tradeStage.setScene(scene);
 
-			tradeViewController.init(selfResources, viewController);
+			tradeViewController.init(selfResources, viewController, tradeStage);
 
 			tradeStage.initModality(Modality.WINDOW_MODAL);
 			tradeStage.initOwner(gameStage);
