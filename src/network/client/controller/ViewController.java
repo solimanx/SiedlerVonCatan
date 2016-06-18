@@ -141,9 +141,9 @@ public class ViewController {
 			// primaryStage.setFullScreen(false);
 			gameViewController = (GameViewController) loader.getController();
 			gameViewController.setViewController(this);
-			primaryStage.show();
 			gameViewController.startScene(primaryStage);
 			isGameView = true;
+			primaryStage.show();
 
 		} catch (IOException e) {
 			logger.error("Input/Output Exception", e);

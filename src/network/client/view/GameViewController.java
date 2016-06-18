@@ -293,8 +293,9 @@ public class GameViewController implements Initializable {
 		shadow.setColor(Color.SLATEGRAY);
 
 		FXMLLoader loader = new FXMLLoader();
-		Pane root;
+		Pane root = new Pane();
 		try {
+			
 			root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
 			tradeViewController = (TradeViewController) loader.getController();
 			Scene scene = new Scene(root);
