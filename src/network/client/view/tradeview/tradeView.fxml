@@ -42,10 +42,11 @@
                               <HBox alignment="CENTER_RIGHT" spacing="20.0">
                                  <children>
                                     <Button fx:id="cancelTrade" mnemonicParsing="false" onAction="#handleCancelTrade" text="Cancel Trade" />
-                                    <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Accept Trade" />
+                                    <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Accept Trade">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
-                                       </font></Button>
+                                       </font>
+                                       </Button>
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />
