@@ -98,7 +98,7 @@ public class ViewController {
      */
 
     public void startChooseView() throws IOException {
-        logger.warn("startChooseView(),(method for starting the View for choosing Player name and Player Color)throws IOException");
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -112,7 +112,7 @@ public class ViewController {
 
 
         } catch (IOException e) {
-            logger.error("Input/Output Exception,e");
+            logger.error("Input/Output Exception", e);
             logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
