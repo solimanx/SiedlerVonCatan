@@ -67,6 +67,7 @@ public class CornerAgent {
 			int rp = rollProbability();
 			int bonus = 0;
 			int[] utilities = { ld, hd, rp };
+			
 			if (difference == 0) {
 				// change nothing
 			} else {
@@ -172,9 +173,8 @@ public class CornerAgent {
 					}
 				}
 			}
-
 		}
-
+		
 		return utility;
 	}
 
@@ -211,4 +211,6 @@ public class CornerAgent {
 	public String getLocationString() {
 		return "[" + location[0] + "," + location[1] + "," + location[2] + "]";
 	}
+	
+	
 }

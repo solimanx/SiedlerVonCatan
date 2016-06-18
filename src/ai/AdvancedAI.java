@@ -25,8 +25,6 @@ public class AdvancedAI extends PrimitiveAI {
 	@Override
 	public void initialVillage() {
 		initializeDiceRollProbabilities();
-		Integer test = 0;
-		System.out.println(diceRollProbabilities.get(test));
 		int c = 0;
 		int radius = DefaultSettings.BOARD_RADIUS;
 		for (int i = -radius; i <= radius; i++) {
