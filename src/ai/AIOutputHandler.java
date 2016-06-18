@@ -24,240 +24,241 @@ import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
 
 public class AIOutputHandler {
-    private static Logger logger = LogManager.getLogger(AIOutputHandler.class.getName());
-    private PrimitiveAI ai;
-    private Parser parser;
+	private static Logger logger = LogManager.getLogger(AIOutputHandler.class.getName());
+	private PrimitiveAI ai;
+	private Parser parser;
 
-    public AIOutputHandler(PrimitiveAI primitiveAI) {
-        ai = primitiveAI;
-        parser = new Parser();
-    }
+	public AIOutputHandler(PrimitiveAI primitiveAI) {
+		ai = primitiveAI;
+		parser = new Parser();
+	}
 
-    /**
-     * Say hello to server.
-     *
-     * @param version
-     */
-    protected void respondHello(String version) {
-        ProtocolHello ph = new ProtocolHello(version, null);
-        Response r = new Response();
-        r.pHello = ph;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("Input/Output Exception ", e);
-            logger.catching(Level.ERROR, e);
-            e.printStackTrace();
-        }
+	/**
+	 * Say hello to server.
+	 *
+	 * @param version
+	 */
+	protected void respondHello(String version) {
+		ProtocolHello ph = new ProtocolHello(version, null);
+		Response r = new Response();
+		r.pHello = ph;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    /**
-     * Tell the server it's ready to begin the game
-     */
-    protected void respondStartGame() {
-        ProtocolClientReady pcr = new ProtocolClientReady();
-        Response r = new Response();
-        r.pClientReady = pcr;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("Input/Output Exception ", e);
-            logger.catching(Level.ERROR, e);
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Tell the server it's ready to begin the game
+	 */
+	protected void respondStartGame() {
+		ProtocolClientReady pcr = new ProtocolClientReady();
+		Response r = new Response();
+		r.pClientReady = pcr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * Goes on a loop to find the first non taken color
-     *
-     * @param colorCounter
-     */
-    public void respondProfile(int colorCounter) {
-        ProtocolPlayerProfile ppp;
-        switch (colorCounter) {
-            case 0:
-                ppp = new ProtocolPlayerProfile("BlueBro", Color.BLUE);
-                break;
-            case 1:
-                ppp = new ProtocolPlayerProfile("RedBro", Color.RED);
-                break;
-            case 2:
-                ppp = new ProtocolPlayerProfile("Orange Destroyer", Color.ORANGE);
-                break;
-            case 3:
-                ppp = new ProtocolPlayerProfile("Walter White", Color.WHITE);
-                break;
-            default:
-                ppp = null;
-        }
-        Response r = new Response();
-        r.pPlayerProfile = ppp;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("Input/Output Exception ", e);
-            logger.catching(Level.ERROR, e);
-            e.printStackTrace();
-        }
+	/**
+	 * Goes on a loop to find the first non taken color
+	 *
+	 * @param colorCounter
+	 */
+	public void respondProfile(int colorCounter) {
+		ProtocolPlayerProfile ppp;
+		switch (colorCounter) {
+		case 0:
+			ppp = new ProtocolPlayerProfile("BlueBro", Color.BLUE);
+			break;
+		case 1:
+			ppp = new ProtocolPlayerProfile("RedBro", Color.RED);
+			break;
+		case 2:
+			ppp = new ProtocolPlayerProfile("Orange Destroyer", Color.ORANGE);
+			break;
+		case 3:
+			ppp = new ProtocolPlayerProfile("Walter White", Color.WHITE);
+			break;
+		default:
+			ppp = null;
+		}
+		Response r = new Response();
+		r.pPlayerProfile = ppp;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    /**
-     * Building the first (and second) village of the initial round
-     *
-     * @param j
-     * @param i
-     * @param k
-     */
-    public void requestBuildInitialVillage(int j, int i, int k) {
-        String location = ModelToProtocol.getCornerID(j, i, k);
-        Index[] locationIndex = ModelToProtocol.convertCornerIndex(location);
-        ProtocolBuildRequest pbr = new ProtocolBuildRequest("Dorf", locationIndex);
+	/**
+	 * Building the first (and second) village of the initial round
+	 *
+	 * @param j
+	 * @param i
+	 * @param k
+	 */
+	public void requestBuildInitialVillage(int j, int i, int k) {
+		String location = ModelToProtocol.getCornerID(j, i, k);
+		Index[] locationIndex = ModelToProtocol.convertCornerIndex(location);
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Dorf", locationIndex);
 
-        Response r = new Response();
-        r.pBuildRequest = pbr;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("Input/Output Exception ", e);
-            logger.catching(Level.ERROR, e);
-            e.printStackTrace();
-        }
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    /**
-     * Building the first (and second) road of the initial round
-     *
-     * @param x
-     * @param y
-     * @param dir
-     */
+	/**
+	 * Building the first (and second) road of the initial round
+	 *
+	 * @param x
+	 * @param y
+	 * @param dir
+	 */
 
-    public void requestBuildInitialRoad(int x, int y, int dir) {
-        String location = ModelToProtocol.getEdgeID(x, y, dir);
-        Index[] locationIndex = ModelToProtocol.convertToEdgeIndex(location);
-        ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", locationIndex);
+	public void requestBuildInitialRoad(int x, int y, int dir) {
+		String location = ModelToProtocol.getEdgeID(x, y, dir);
+		Index[] locationIndex = ModelToProtocol.convertToEdgeIndex(location);
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", locationIndex);
 
-        Response r = new Response();
-        r.pBuildRequest = pbr;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("Input/Output Exception ", e);
-            logger.catching(Level.ERROR, e);
-            e.printStackTrace();
-        }
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    /**
-     * Roll the dice
-     */
-    public void respondDiceRoll() {
-        ProtocolDiceRollRequest pdrr = new ProtocolDiceRollRequest();
-        Response r = new Response();
+	/**
+	 * Roll the dice
+	 */
+	public void respondDiceRoll() {
+		ProtocolDiceRollRequest pdrr = new ProtocolDiceRollRequest();
+		Response r = new Response();
 
-        r.pDiceRollRequest = pdrr;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("Input/Output Exception ", e);
-            logger.catching(Level.ERROR, e);
-            e.printStackTrace();
-        }
-    }
+		r.pDiceRollRequest = pdrr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * Send a message to others
-     *
-     * @param message random message
-     */
-    public void respondWithMessage(String message) {
-        ProtocolChatSendMessage pcsm = new ProtocolChatSendMessage(message);
-        Response r = new Response();
+	/**
+	 * Send a message to others
+	 *
+	 * @param message
+	 *            random message
+	 */
+	public void respondWithMessage(String message) {
+		ProtocolChatSendMessage pcsm = new ProtocolChatSendMessage(message);
+		Response r = new Response();
 
-        r.pChatSend = pcsm;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("Input/Output Exception ", e);
-            logger.catching(Level.ERROR, e);
-            e.printStackTrace();
-        }
+		r.pChatSend = pcsm;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    /**
-     * End my turn
-     */
-    public void respondEndTurn() {
-        ProtocolEndTurn pet = new ProtocolEndTurn();
-        Response r = new Response();
+	/**
+	 * End my turn
+	 */
+	public void respondEndTurn() {
+		ProtocolEndTurn pet = new ProtocolEndTurn();
+		Response r = new Response();
 
-        r.pEndTurn = pet;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("Input/Output Exception ", e);
-            logger.catching(Level.ERROR, e);
-            e.printStackTrace();
-        }
+		r.pEndTurn = pet;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    /**
-     * Lose resources to robber
-     *
-     * @param losses
-     */
-    public void respondRobberLoss(int[] losses) {
-        ProtocolResource loss = ModelToProtocol.convertToProtocolResource(losses);
-        ProtocolRobberLoss prl = new ProtocolRobberLoss(loss);
-        Response r = new Response();
+	/**
+	 * Lose resources to robber
+	 *
+	 * @param losses
+	 */
+	public void respondRobberLoss(int[] losses) {
+		ProtocolResource loss = ModelToProtocol.convertToProtocolResource(losses);
+		ProtocolRobberLoss prl = new ProtocolRobberLoss(loss);
+		Response r = new Response();
 
-        r.pRobberLoss = prl;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
+		r.pRobberLoss = prl;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
 
-            // TODO Auto-generated catch block
-            logger.catching(Level.ERROR, e);
-            logger.error("Input/Output Exception ", e);
-            e.printStackTrace();
-        }
+			// TODO Auto-generated catch block
+			logger.catching(Level.ERROR, e);
+			logger.error("Input/Output Exception ", e);
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    /**
-     * Move robber to a new position
-     *
-     * @param newRobber
-     */
-    public void respondMoveRobber(String newRobber) {
-    	Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
-        ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, null);
-        Response r = new Response();
+	/**
+	 * Move robber to a new position
+	 *
+	 * @param newRobber
+	 */
+	public void respondMoveRobber(String newRobber) {
+		Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
+		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, null);
+		Response r = new Response();
 
-        r.pRobberMoveRequest = prmr;
-        try {
-            ai.write(parser.createString(r));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.catching(Level.ERROR, e);
-            logger.error("Input/Output Exception ", e);
-            e.printStackTrace();
-        }
+		r.pRobberMoveRequest = prmr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.catching(Level.ERROR, e);
+			logger.error("Input/Output Exception ", e);
+			e.printStackTrace();
+		}
 
-    }
+	}
 
 }

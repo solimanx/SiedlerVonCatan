@@ -3,7 +3,6 @@ package network.client.view;
 import enums.PlayerState;
 
 public class PlayerStatusGUIUpdate implements Runnable {
-	
 
 	final int modelID;
 	final GameViewController gameViewController;
@@ -20,8 +19,6 @@ public class PlayerStatusGUIUpdate implements Runnable {
 		this.status = status;
 		this.resources = resources;
 	}
-
-
 
 	@Override
 	public void run() {

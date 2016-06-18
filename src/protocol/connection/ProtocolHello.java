@@ -19,10 +19,11 @@ public class ProtocolHello {
 
 	@SerializedName("Protokoll")
 	private String protocol;
-	
-	public ProtocolHello(String version){
+
+	public ProtocolHello(String version) {
 		this.version = version;
 	}
+
 	public ProtocolHello(String version, String protocol) {
 		this.version = version;
 		this.protocol = protocol;

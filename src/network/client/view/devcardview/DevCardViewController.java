@@ -89,7 +89,7 @@ public class DevCardViewController implements Initializable {
 
 			}
 		});
-		
+
 		for (int i = 0; i < devCards.length; i++) {
 			for (int j = 0; j < devCards[i]; j++) {
 				String string = "";
@@ -121,10 +121,10 @@ public class DevCardViewController implements Initializable {
 	void handleCancel(ActionEvent event) {
 		this.stage.close();
 	}
-	
+
 	@FXML
 	void handleInventionOK(ActionEvent event) {
-		int[] resources = {0,0,0,0,0};
+		int[] resources = { 0, 0, 0, 0, 0 };
 		switch (inventRChooser1.getSelectionModel().getSelectedItem()) {
 		case WOOD:
 			resources[0] += 1;
@@ -162,7 +162,7 @@ public class DevCardViewController implements Initializable {
 		viewController.getClientController().playInventionCard(resources);
 		this.stage.close();
 	}
-	
+
 	@FXML
 	void handleMonopolyOK(ActionEvent event) {
 

@@ -9,7 +9,6 @@ public class StreetSet {
 	private ArrayList<Edge> edges;
 	private boolean hasCircle;
 
-
 	public StreetSet(int playerID, ArrayList<Edge> edges) {
 		this.playerID = playerID;
 		this.edges = edges;
@@ -17,7 +16,7 @@ public class StreetSet {
 
 	}
 
-	protected void addEdge(Edge e){
+	protected void addEdge(Edge e) {
 		edges.add(e);
 	}
 
@@ -29,24 +28,23 @@ public class StreetSet {
 		return edges;
 	}
 
-	protected boolean getHasCircle(){
+	protected boolean getHasCircle() {
 		return hasCircle;
 	}
 
-	protected void setHasCircle(boolean flag){
+	protected void setHasCircle(boolean flag) {
 		hasCircle = flag;
 	}
 
-	protected Edge getEdgeAt(int index){
+	protected Edge getEdgeAt(int index) {
 		return edges.get(index);
 	}
 
-	protected int size(){
-		if (edges != null){
+	protected int size() {
+		if (edges != null) {
 			return edges.size();
 		}
 		return 0;
 	}
-
 
 }

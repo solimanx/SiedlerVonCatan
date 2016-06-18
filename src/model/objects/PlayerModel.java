@@ -346,12 +346,12 @@ public class PlayerModel {
 	public boolean hasPlayedDevCard() {
 		return hasPlayedDevCard;
 	}
-	
-	public void addToPlayerHarbours(HarbourStatus harbour){
+
+	public void addToPlayerHarbours(HarbourStatus harbour) {
 		harbours.add(harbour);
 	}
-	
-	public ArrayList<HarbourStatus> getPlayerHarbours(){
+
+	public ArrayList<HarbourStatus> getPlayerHarbours() {
 		return harbours;
 	}
 

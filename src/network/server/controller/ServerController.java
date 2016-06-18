@@ -559,25 +559,24 @@ public class ServerController {
 				}
 			}
 			checkLongestTradingRoute(currPlayer);
-		}else {
+		} else {
 			EdgeToStreetSet(streetEdges.get(0)).setHasCircle(false);
 		}
 	}
-
 
 	/**
 	 * calculates the StreetSet, which contains the given edge
 	 *
 	 * don't use this method, if the edge has no street!!!
 	 *
-	 * @param e Edge with street
-	 * @return
-	 * StreetSet containing the Edge
+	 * @param e
+	 *            Edge with street
+	 * @return StreetSet containing the Edge
 	 */
-	public StreetSet EdgeToStreetSet(Edge e){
-		if(e != null){
-			for(int i = 0; i< streetSets.size(); i++){
-				if(streetSets.get(i).getEdges().contains(e)){
+	public StreetSet EdgeToStreetSet(Edge e) {
+		if (e != null) {
+			for (int i = 0; i < streetSets.size(); i++) {
+				if (streetSets.get(i).getEdges().contains(e)) {
 					return streetSets.get(i);
 				}
 			}
@@ -625,14 +624,13 @@ public class ServerController {
 		}
 	}
 
-
 	public void checkLongestTradingRoute(int modelID) {
 		int max = getLongestTradingRoute(modelID);
 		longestRoutes[modelID] = max;
 		if (max >= 5) {
 			if (longestTradingRoutePlayer != modelID && longestRoutes[longestTradingRoutePlayer] < max) {
-				if (longestTradingRoutePlayer > -1){
-				gameLogic.getBoard().getPlayer(longestTradingRoutePlayer).setHasLongestRoad(false);
+				if (longestTradingRoutePlayer > -1) {
+					gameLogic.getBoard().getPlayer(longestTradingRoutePlayer).setHasLongestRoad(false);
 				}
 				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
 				longestTradingRoutePlayer = modelID;
@@ -651,8 +649,8 @@ public class ServerController {
 	}
 
 	/**
-	 * DON'T CALL THIS WHEN PLAYER HAS NO STREETS!!!
-	 * calculates the longest trading route for a specific player with streets
+	 * DON'T CALL THIS WHEN PLAYER HAS NO STREETS!!! calculates the longest
+	 * trading route for a specific player with streets
 	 *
 	 * @param modelID
 	 *
@@ -664,7 +662,7 @@ public class ServerController {
 		ArrayList<Edge> currEndingStreets = new ArrayList<Edge>();
 		StreetSet currStreetSet = null;
 		for (int i = 0; i < streetSets.size(); i++) {
-			//currStreetSet = streetSets.get(i).getEdges();
+			// currStreetSet = streetSets.get(i).getEdges();
 			currStreetSet = streetSets.get(i);
 			if (currStreetSet.getPlayerID() == modelID && currStreetSet.size() >= 5) {
 				for (int j = 0; j < currStreetSet.size(); j++) {
@@ -675,10 +673,12 @@ public class ServerController {
 					boolean bottom = false;
 					switch (coords[2]) {
 					case 0: // neighbour order differs order of dir 1,2
-						if (currStreetSet.getEdges().contains(neighbours[0]) || currStreetSet.getEdges().contains(neighbours[1])) {
+						if (currStreetSet.getEdges().contains(neighbours[0])
+								|| currStreetSet.getEdges().contains(neighbours[1])) {
 							top = true;
 						}
-						if (currStreetSet.getEdges().contains(neighbours[2]) || currStreetSet.getEdges().contains(neighbours[3])) {
+						if (currStreetSet.getEdges().contains(neighbours[2])
+								|| currStreetSet.getEdges().contains(neighbours[3])) {
 							bottom = true;
 						}
 						if (!(top && bottom)) {
@@ -687,10 +687,12 @@ public class ServerController {
 
 						break;
 					default:
-						if (currStreetSet.getEdges().contains(neighbours[0]) || currStreetSet.getEdges().contains(neighbours[3])) {
+						if (currStreetSet.getEdges().contains(neighbours[0])
+								|| currStreetSet.getEdges().contains(neighbours[3])) {
 							top = true;
 						}
-						if (currStreetSet.getEdges().contains(neighbours[2]) || currStreetSet.getEdges().contains(neighbours[1])) {
+						if (currStreetSet.getEdges().contains(neighbours[2])
+								|| currStreetSet.getEdges().contains(neighbours[1])) {
 							bottom = true;
 						}
 						if (!(top && bottom)) {
@@ -708,8 +710,8 @@ public class ServerController {
 																		// über
 																		// alle
 																		// straßen
-						greatestValue.add(1 + depthFirstSearch(currStreetSet.getEdgeAt(j), currStreetSet, alreadyChecked,
-								lastNeighbours));
+						greatestValue.add(1 + depthFirstSearch(currStreetSet.getEdgeAt(j), currStreetSet,
+								alreadyChecked, lastNeighbours));
 					}
 					longestStreets.add(Collections.max(greatestValue));
 				} else {
@@ -727,14 +729,18 @@ public class ServerController {
 		return Collections.max(longestStreets);
 	}
 
-
 	/**
-	 * recursive method for calculating the longest route starting from an specific edge
+	 * recursive method for calculating the longest route starting from an
+	 * specific edge
 	 *
-	 * @param edge starting street
-	 * @param currStreetSet street set which contains the street
-	 * @param alreadyChecked streets which are already counted
-	 * @param lastNeighbours neighbours, which are prohibited to check
+	 * @param edge
+	 *            starting street
+	 * @param currStreetSet
+	 *            street set which contains the street
+	 * @param alreadyChecked
+	 *            streets which are already counted
+	 * @param lastNeighbours
+	 *            neighbours, which are prohibited to check
 	 * @return longest rout of not checked streets
 	 */
 	private Integer depthFirstSearch(Edge edge, StreetSet currStreetSet, ArrayList<Edge> alreadyChecked,

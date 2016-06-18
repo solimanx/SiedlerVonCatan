@@ -42,7 +42,7 @@ public class HexService {
 			return Board.getCMap().get(c + b + a);
 		} else {
 			logger.warn("Throws new IllegalArgumentException,\"Corner ID\" " + a + b + c + " doesn't exist");
-		throw new IllegalArgumentException("Corner ID " + a + b + c + "doesn't exist");
+			throw new IllegalArgumentException("Corner ID " + a + b + c + "doesn't exist");
 		}
 
 	}
@@ -430,10 +430,10 @@ public class HexService {
 		return result;
 	}
 
-	public static String[] getCornerFromEdge(Index[] i){
+	public static String[] getCornerFromEdge(Index[] i) {
 		String a = ProtocolToModel.getProtocolOneID(i[0]);
 		String b = ProtocolToModel.getProtocolOneID(i[1]);
-		return getCornerFromEdge(a+b);
+		return getCornerFromEdge(a + b);
 	}
 
 }

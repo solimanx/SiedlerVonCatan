@@ -87,8 +87,8 @@ public class DevelopmentCardsStack {
 		return null;
 	}
 
-	public boolean buyable(){
-		if(nextCard < DefaultSettings.AMOUNT_DEVELOPMENT_CARDS){
+	public boolean buyable() {
+		if (nextCard < DefaultSettings.AMOUNT_DEVELOPMENT_CARDS) {
 			return true;
 		}
 		return false;

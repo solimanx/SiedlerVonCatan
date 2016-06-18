@@ -20,7 +20,7 @@ public class ProtocolPlayRoadCard {
 	private Integer playerID;
 
 	@SerializedName("Straße 1")
-	private Index[] roadID1; //length 2
+	private Index[] roadID1; // length 2
 
 	@SerializedName("Straße 2")
 	private Index[] roadID2; // length 2

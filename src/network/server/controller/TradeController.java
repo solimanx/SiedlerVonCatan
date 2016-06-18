@@ -31,9 +31,9 @@ public class TradeController {
 			}
 		}
 	}
-	
-	//ADDED
-	public void declineTrade(int modelID, int tradingID){
+
+	// ADDED
+	public void declineTrade(int modelID, int tradingID) {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID) {
 				tradeOffers.get(tradingID).acceptingPlayers.add(tradingID);
@@ -97,62 +97,73 @@ public class TradeController {
 		}
 
 	}
-	
+
 	public void requestSeaTrade(int modelID, int[] offer, int[] demand) {
-		 ResourceType offerResType = null;
-		 ResourceType demandResType = null;
-		 int offerAmount = 0;
-		 ArrayList<HarbourStatus> harbours = getPlayerHarbours(modelID);
-		 for (int i = 0; i <offer.length;i++){
-			 if (offer[i] != 0){
-				 offerResType = DefaultSettings.RESOURCE_ORDER[i];
-				 offerAmount = offer[i];
-			 }
-			 else if(demand[i] != 0){
-				 demandResType = DefaultSettings.RESOURCE_ORDER[i];
-			 }
-				
-		 }
-		 if (offerResType != null){
-			 switch (offerAmount) {
+		ResourceType offerResType = null;
+		ResourceType demandResType = null;
+		int offerAmount = 0;
+		ArrayList<HarbourStatus> harbours = getPlayerHarbours(modelID);
+		for (int i = 0; i < offer.length; i++) {
+			if (offer[i] != 0) {
+				offerResType = DefaultSettings.RESOURCE_ORDER[i];
+				offerAmount = offer[i];
+			} else if (demand[i] != 0) {
+				demandResType = DefaultSettings.RESOURCE_ORDER[i];
+			}
+
+		}
+		if (offerResType != null) {
+			switch (offerAmount) {
 			case 2:
-				if (harbours.contains(offerResType)){
-					if (serverController.resourceStackDecrease(demandResType)){
+				if (harbours.contains(offerResType)) {
+					if (serverController.resourceStackDecrease(demandResType)) {
 						serverController.addToPlayersResource(modelID, demandResType, 1);
-						serverController.getServerOutputHandler().resourceObtain(serverController.modelPlayerIdMap.get(modelID), serverController.getPlayerResources(modelID));
+						serverController.getServerOutputHandler().resourceObtain(
+								serverController.modelPlayerIdMap.get(modelID),
+								serverController.getPlayerResources(modelID));
 					} else {
-						serverController.getServerOutputHandler().error("resource stack empty", serverController.modelPlayerIdMap.get(modelID));
-					}					
+						serverController.getServerOutputHandler().error("resource stack empty",
+								serverController.modelPlayerIdMap.get(modelID));
+					}
 				} else {
-					serverController.getServerOutputHandler().error("You don't have a 2:1 harbour of this resource", serverController.modelPlayerIdMap.get(modelID));
+					serverController.getServerOutputHandler().error("You don't have a 2:1 harbour of this resource",
+							serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
 			case 3:
-				if (harbours.contains(HarbourStatus.THREE_TO_ONE)){
-					if (serverController.resourceStackDecrease(demandResType)){
+				if (harbours.contains(HarbourStatus.THREE_TO_ONE)) {
+					if (serverController.resourceStackDecrease(demandResType)) {
 						serverController.addToPlayersResource(modelID, demandResType, 1);
-						serverController.getServerOutputHandler().resourceObtain(serverController.modelPlayerIdMap.get(modelID), serverController.getPlayerResources(modelID));
+						serverController.getServerOutputHandler().resourceObtain(
+								serverController.modelPlayerIdMap.get(modelID),
+								serverController.getPlayerResources(modelID));
 					} else {
-						serverController.getServerOutputHandler().error("resource stack empty", serverController.modelPlayerIdMap.get(modelID));
-					}	
+						serverController.getServerOutputHandler().error("resource stack empty",
+								serverController.modelPlayerIdMap.get(modelID));
+					}
 				} else {
-					serverController.getServerOutputHandler().error("You don't have a 3:1 harbour", serverController.modelPlayerIdMap.get(modelID));
+					serverController.getServerOutputHandler().error("You don't have a 3:1 harbour",
+							serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
 			case 4:
-				if (serverController.resourceStackDecrease(demandResType)){
+				if (serverController.resourceStackDecrease(demandResType)) {
 					serverController.addToPlayersResource(modelID, demandResType, 1);
-					serverController.getServerOutputHandler().resourceObtain(serverController.modelPlayerIdMap.get(modelID), serverController.getPlayerResources(modelID));
+					serverController.getServerOutputHandler().resourceObtain(
+							serverController.modelPlayerIdMap.get(modelID),
+							serverController.getPlayerResources(modelID));
 				} else {
-					serverController.getServerOutputHandler().error("resource stack empty", serverController.modelPlayerIdMap.get(modelID));
+					serverController.getServerOutputHandler().error("resource stack empty",
+							serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
 
 			default:
-				serverController.getServerOutputHandler().error("invalid resource argument", serverController.modelPlayerIdMap.get(modelID));
+				serverController.getServerOutputHandler().error("invalid resource argument",
+						serverController.modelPlayerIdMap.get(modelID));
 				break;
 			}
-		 }
+		}
 	}
 
 	private ArrayList<HarbourStatus> getPlayerHarbours(int modelID) {

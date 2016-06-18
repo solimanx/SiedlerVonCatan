@@ -381,7 +381,7 @@ public final class ProtocolToModel {
 			return new VictoryPointCard();
 		case UNKNOWN: // ??
 		}
-		
+
 		throw new IllegalArgumentException("CardType doesn't exit");
 	}
 }

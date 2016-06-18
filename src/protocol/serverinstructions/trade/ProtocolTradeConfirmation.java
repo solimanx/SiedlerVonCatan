@@ -22,6 +22,7 @@ public class ProtocolTradeConfirmation {
 
 	@SerializedName("Annehmen")
 	private boolean accepted;
+
 	public ProtocolTradeConfirmation(int playerID, int tradeID, boolean accepted) {
 		this.playerID = playerID;
 		this.tradeID = tradeID;
@@ -35,8 +36,8 @@ public class ProtocolTradeConfirmation {
 	public int getTradeID() {
 		return tradeID;
 	}
-	
-	public boolean getAccepted(){
+
+	public boolean getAccepted() {
 		return accepted;
 	}
 

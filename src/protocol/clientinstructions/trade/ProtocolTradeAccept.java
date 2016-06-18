@@ -15,10 +15,10 @@ public class ProtocolTradeAccept {
 
 	@SerializedName("Handel id")
 	private int tradeID;
-	
+
 	@SerializedName("Annehmen")
 	private boolean accepted;
-	
+
 	public ProtocolTradeAccept(int tradeID, boolean accepted) {
 
 		this.tradeID = tradeID;
@@ -29,8 +29,8 @@ public class ProtocolTradeAccept {
 
 		return tradeID;
 	}
-	
-	public Boolean getAccepted(){
+
+	public Boolean getAccepted() {
 		return accepted;
 	}
 }

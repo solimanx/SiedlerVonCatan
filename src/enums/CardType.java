@@ -17,18 +17,18 @@ public enum CardType {
 	@SerializedName("Unbekannt") UNKNOWN("Unknown");
 
 	private String value;
-	
-	CardType(String value){
+
+	CardType(String value) {
 		this.value = value;
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return this.getValue();
 	}
 
 	public String getValue() {
-		
+
 		return value;
 	}
 }

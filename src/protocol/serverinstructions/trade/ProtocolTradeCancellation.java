@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 /**
- * used Protocol
- * <b>Handelsangebot abgebrochen (Request trade/offer was canceled)</b>
+ * used Protocol <b>Handelsangebot abgebrochen (Request trade/offer was
+ * canceled)</b>
  * <p>
  * Server sends Information, that the trade request was canceled to players.
  * </p>

@@ -99,7 +99,7 @@ public class LobbyController implements Initializable {
 		try {
 			viewController.startChooseView();
 		} catch (IOException e) {
-			logger.catching(Level.ERROR,e);
+			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
 	}

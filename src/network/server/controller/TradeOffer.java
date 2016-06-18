@@ -9,8 +9,8 @@ public class TradeOffer {
 	private int[] supply;
 	private int[] demand;
 	public ArrayList<Integer> acceptingPlayers = new ArrayList<Integer>();
-	
-	public TradeOffer(int ownerID,int tradingID, int[] supply, int[] demand) {
+
+	public TradeOffer(int ownerID, int tradingID, int[] supply, int[] demand) {
 		this.ownerID = ownerID;
 		this.tradingID = tradingID;
 		this.supply = supply;
@@ -25,13 +25,12 @@ public class TradeOffer {
 		return supply;
 	}
 
-
 	protected int[] getDemand() {
 		return demand;
 	}
 
 	public int getTradingID() {
 		return tradingID;
-	}	
-	
+	}
+
 }

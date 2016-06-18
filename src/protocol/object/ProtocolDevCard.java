@@ -24,14 +24,15 @@ public class ProtocolDevCard {
 
 	@SerializedName("Erfindung")
 	private Integer invention;
-	
+
 	@SerializedName("Siegpunkt")
 	private Integer victoryPoint;
 
 	@SerializedName("Unbekannt")
 	private Integer unknown;
 
-	public ProtocolDevCard(Integer knight, Integer roadbuild, Integer monopoly, Integer invention, Integer victoryPoint, Integer unknown) {
+	public ProtocolDevCard(Integer knight, Integer roadbuild, Integer monopoly, Integer invention, Integer victoryPoint,
+			Integer unknown) {
 		this.knight = knight;
 		this.roadbuild = roadbuild;
 		this.monopoly = monopoly;
@@ -56,10 +57,11 @@ public class ProtocolDevCard {
 	public Integer getInvention() {
 		return invention;
 	}
-	
-	public Integer getVictoryPoint(){
+
+	public Integer getVictoryPoint() {
 		return victoryPoint;
 	}
+
 	public Integer getUnknown() {
 		return unknown;
 	}

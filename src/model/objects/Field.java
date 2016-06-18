@@ -24,7 +24,7 @@ public class Field {
 	// ================================================================================
 	// CONSTRUCTORS
 	// ================================================================================
-	
+
 	/**
 	 * Creates a primitive field object
 	 */
@@ -32,8 +32,10 @@ public class Field {
 		resourceType = ResourceType.NOTHING;
 		diceIndex = null;
 	}
+
 	/**
 	 * Creates a detailed field object
+	 * 
 	 * @param id
 	 * @param resourceType
 	 * @param diceIndex

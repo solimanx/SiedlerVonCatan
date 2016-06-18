@@ -141,20 +141,20 @@ public class GameLogic {
 				for (int i = 0; i < neighbors.length; i++) {
 					if (neighbors[i] != null) {
 						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() == playerID) {
-							//check if there is a hostile village in between
+							// check if there is a hostile village in between
 							Corner[] thisAdjoiningVillages = board.getAttachedCorners(x, y, dir);
 							String id = e.getEdgeID();
 							int[] nCs = ProtocolToModel.getEdgeCoordinates(id);
 							Corner[] neighbourAdjoiningVillages = board.getAttachedCorners(nCs[0], nCs[1], nCs[2]);
-							Corner schnitt = null; //schnittmenge aus Villages;
-							for (int j = 0; j < thisAdjoiningVillages.length;j++){
-								for (int k = 0;k < neighbourAdjoiningVillages.length;j++){
-									if (thisAdjoiningVillages[j].equals(neighbourAdjoiningVillages[j])){
+							Corner schnitt = null; // schnittmenge aus Villages;
+							for (int j = 0; j < thisAdjoiningVillages.length; j++) {
+								for (int k = 0; k < neighbourAdjoiningVillages.length; j++) {
+									if (thisAdjoiningVillages[j].equals(neighbourAdjoiningVillages[j])) {
 										schnitt = thisAdjoiningVillages[j];
 									}
 								}
 							}
-							if (schnitt.getOwnerID() != null && schnitt.getOwnerID() != playerID){
+							if (schnitt.getOwnerID() != null && schnitt.getOwnerID() != playerID) {
 								return false;
 							} else {
 								return true;
@@ -226,7 +226,7 @@ public class GameLogic {
 				Corner[] neighbors = board.getAttachedCorners(x, y, dir);
 				for (int i = 0; i < neighbors.length; i++) {
 					if (neighbors[i] != null) {
-						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() ==  playerID) {
+						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() == playerID) {
 							return true;
 
 						}
@@ -433,7 +433,6 @@ public class GameLogic {
 		}
 		return false;
 	}
-
 
 	public Board getBoard() {
 		return board;

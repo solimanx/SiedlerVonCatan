@@ -170,17 +170,16 @@ public final class ModelToProtocol {
 	}
 
 	public static Index[] convertCornerIndex(String locationString) {
-		if(locationString.length() == 3){
-			String field1 = locationString.substring(0,1);
-			String field2 = locationString.substring(1,2);
-			String field3 = locationString.substring(2,3);
+		if (locationString.length() == 3) {
+			String field1 = locationString.substring(0, 1);
+			String field2 = locationString.substring(1, 2);
+			String field3 = locationString.substring(2, 3);
 			Index a = ProtocolToModel.getProtocolOneIndex(field1);
 			Index b = ProtocolToModel.getProtocolOneIndex(field2);
 			Index c = ProtocolToModel.getProtocolOneIndex(field3);
 
-			return new Index[] {a,b,c};
-		}
-		else{
+			return new Index[] { a, b, c };
+		} else {
 			throw new IllegalArgumentException("Corner has to be 3 characters long");
 		}
 	}

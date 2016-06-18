@@ -23,11 +23,12 @@ public class ProtocolRobberMovementRequest {
 	@SerializedName("Ziel")
 	Integer victimID;
 
-	//the standard constructor
+	// the standard constructor
 	public ProtocolRobberMovementRequest(Index locationID) {
 		this.locationID = locationID;
 	}
-	//the optional one
+
+	// the optional one
 	public ProtocolRobberMovementRequest(Index locationID, Integer victimID) {
 		this.locationID = locationID;
 		this.victimID = victimID;

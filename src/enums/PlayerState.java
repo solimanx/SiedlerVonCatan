@@ -25,19 +25,20 @@ public enum PlayerState {
 
 	// OLD enums for debugging only
 	TRADING(""), OFFERING(""), PLAYING("");
-	
+
 	private String value;
-	PlayerState(String value){
+
+	PlayerState(String value) {
 		this.value = value;
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return this.getValue();
 	}
 
 	private String getValue() {
-		
+
 		return value;
 	}
 }

@@ -25,7 +25,7 @@ public class Edge {
 	 * Creates a primitive constructor for edge
 	 */
 	public Edge() {
-		hasStreet = false; 
+		hasStreet = false;
 	}
 
 	// ================================================================================

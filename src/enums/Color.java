@@ -10,14 +10,14 @@ public enum Color {
 	@SerializedName("Blau") BLUE(javafx.scene.paint.Color.DODGERBLUE),
 
 	@SerializedName("Weiß") WHITE(javafx.scene.paint.Color.WHITESMOKE);
-	
+
 	private javafx.scene.paint.Color value;
-	
-	Color(javafx.scene.paint.Color color){
+
+	Color(javafx.scene.paint.Color color) {
 		this.value = color;
 	}
-	
-	public javafx.scene.paint.Color getValue(){
+
+	public javafx.scene.paint.Color getValue() {
 		return value;
 	}
 

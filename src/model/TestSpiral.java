@@ -8,15 +8,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class TestSpiral {
-    private static Logger logger = LogManager.getLogger(TestSpiral.class.getName());
+	private static Logger logger = LogManager.getLogger(TestSpiral.class.getName());
 
-    public static void main(String[] args) {
-        Board board = new Board();
-        String result = "";
-        result = HexService.getSpiral("N");
-        for (int i = 0; i < result.length(); i++) {
-            System.out.println(result.charAt(i));
-            logger.debug(result.charAt(i));
-        }
-    }
+	public static void main(String[] args) {
+		Board board = new Board();
+		String result = "";
+		result = HexService.getSpiral("N");
+		for (int i = 0; i < result.length(); i++) {
+			System.out.println(result.charAt(i));
+			logger.debug(result.charAt(i));
+		}
+	}
 }

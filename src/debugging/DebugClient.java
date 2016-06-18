@@ -15,38 +15,38 @@ import org.apache.logging.log4j.Logger;
  * responds.
  */
 public class DebugClient extends Application {
-    private static Logger logger = LogManager.getLogger(DebugClient.class.getName());
-    DebugClientController dcc;
+	private static Logger logger = LogManager.getLogger(DebugClient.class.getName());
+	DebugClientController dcc;
 
-    public DebugClient(Stage primaryStage) {
-        System.out.println("Running debugging/testing mode");
-        logger.info("Running debugging/testing mode");
+	public DebugClient(Stage primaryStage) {
+		System.out.println("Running debugging/testing mode");
+		logger.info("Running debugging/testing mode");
 
-        try {
-            start(primaryStage);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            logger.error("Exception", e);
-            logger.catching(Level.DEBUG, e);
-            e.printStackTrace();
-        }
-    }
+		try {
+			start(primaryStage);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Exception", e);
+			logger.catching(Level.DEBUG, e);
+			e.printStackTrace();
+		}
+	}
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        Parent root = loader.load(getClass().getResource("/debugging/DebugClientFXML.fxml").openStream());
-        Scene scene = new Scene(root);
-        dcc = (DebugClientController) loader.getController();
-        primaryStage.setScene(scene);
-        primaryStage.sizeToScene();
-        //
-        primaryStage.setTitle("Debug Client");
-        primaryStage.setResizable(true);
-        primaryStage.setOnCloseRequest(e -> System.exit(0));
-        // primaryStage.initStyle(StageStyle.UTILITY);
-        //
-        primaryStage.show();
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		Parent root = loader.load(getClass().getResource("/debugging/DebugClientFXML.fxml").openStream());
+		Scene scene = new Scene(root);
+		dcc = (DebugClientController) loader.getController();
+		primaryStage.setScene(scene);
+		primaryStage.sizeToScene();
+		//
+		primaryStage.setTitle("Debug Client");
+		primaryStage.setResizable(true);
+		primaryStage.setOnCloseRequest(e -> System.exit(0));
+		// primaryStage.initStyle(StageStyle.UTILITY);
+		//
+		primaryStage.show();
 
-    }
+	}
 }

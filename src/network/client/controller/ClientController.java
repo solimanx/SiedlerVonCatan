@@ -194,7 +194,7 @@ public class ClientController {
 			}
 			break;
 		case GAME_STARTING:
-			//addToPlayersResource(modelID, resources);
+			// addToPlayersResource(modelID, resources);
 			break;
 		case WAITING_FOR_GAMESTART:
 			// if player wasn't saved in list
@@ -454,7 +454,6 @@ public class ClientController {
 		this.amountPlayers = amountPlayers;
 	}
 
-
 	/**
 	 * @param playerID
 	 * @param resources
@@ -661,7 +660,6 @@ public class ClientController {
 
 	// Protocol 0.2
 
-
 	/**
 	 * @param result
 	 */
@@ -796,9 +794,9 @@ public class ClientController {
 	}
 
 	public void requestBuyDevelopmentCard() {
-		//if (gameLogic.checkBuyDevCard(0)) {
-			clientOutputHandler.buyDevelopmentCard();
-		//}
+		// if (gameLogic.checkBuyDevCard(0)) {
+		clientOutputHandler.buyDevelopmentCard();
+		// }
 	}
 
 	/**
@@ -832,7 +830,7 @@ public class ClientController {
 	public void addToDeck(int playerID, DevelopmentCard devCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(devCard);
-		//viewController.getGameViewController().card
+		// viewController.getGameViewController().card
 	}
 
 	/**

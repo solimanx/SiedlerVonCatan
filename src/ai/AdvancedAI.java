@@ -44,19 +44,20 @@ public class AdvancedAI extends PrimitiveAI {
 
 		int bestUtility = 0;
 		for (int i = 0; i < cA.length; i++) {
-			if(cA[i].calculateInitialVillageUtility() > bestUtility){
-				bestUtility=cA[i].calculateInitialVillageUtility();
+			if (cA[i].calculateInitialVillageUtility() > bestUtility) {
+				bestUtility = cA[i].calculateInitialVillageUtility();
 				x = cA[i].getLocation()[0];
 				y = cA[i].getLocation()[1];
 				z = cA[i].getLocation()[2];
 			}
-			System.out.println(cA[i].getLocationString()+" "+cA[i].calculateInitialVillageUtility());
+			System.out.println(cA[i].getLocationString() + " " + cA[i].calculateInitialVillageUtility());
 		}
-		super.pO.requestBuildInitialVillage(x,y,z);
+		super.pO.requestBuildInitialVillage(x, y, z);
 	}
 
 	@Override
-	public void initialRoad() {};
+	public void initialRoad() {
+	};
 
 	private void initializeDiceRollProbabilities() {
 		diceRollProbabilities = new HashMap<Integer, Double>();

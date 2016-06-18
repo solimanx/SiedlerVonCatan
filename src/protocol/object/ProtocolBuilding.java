@@ -24,7 +24,7 @@ public class ProtocolBuilding {
 	private String building;
 
 	@SerializedName("Ort")
-	private Index[] locationID; //can be 2 or 3
+	private Index[] locationID; // can be 2 or 3
 
 	public ProtocolBuilding(int playerID, String building, Index[] locationID) {
 		this.playerID = playerID;

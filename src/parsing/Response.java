@@ -161,7 +161,7 @@ public class Response {
 
 	@SerializedName("Erfindung")
 	public ProtocolPlayInventionCard pPlayInventionCard;// new in 0.3
-	
+
 	@SerializedName("Entwicklungskarte kaufen")
 	public ProtocolBuyDevCard pBuyDevCards; // new in 0.3
 

@@ -18,7 +18,7 @@ import model.Index;
 public class ProtocolHarbour {
 
 	@SerializedName("Ort")
-	private Index[] locationID; //length 2
+	private Index[] locationID; // length 2
 
 	@SerializedName("Typ")
 	private HarbourStatus harbour_type;
