@@ -35,7 +35,7 @@ import protocol.serverinstructions.trade.*;
  */
 public class AIInputHandler extends ClientInputHandler {
 	private PrimitiveAI ai;
-	private static Logger logger = LogManager.getLogger(AIInputHandler.class.getName());
+	private static Logger logger = LogManager.getLogger(AIInputHandler.class.getSimpleName());
 	private Parser parser = new Parser();
 
 	protected AIInputHandler(PrimitiveAI primitiveAI) {

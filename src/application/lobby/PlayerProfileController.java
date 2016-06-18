@@ -15,7 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class PlayerProfileController implements Initializable {
-	private static Logger logger = LogManager.getLogger(PlayerProfileController.class.getName());
+	private static Logger logger = LogManager.getLogger(PlayerProfileController.class.getSimpleName());
 	private ViewController viewController;
 
 	@FXML

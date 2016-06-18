@@ -19,7 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ViewController {
-	private static Logger logger = LogManager.getLogger(ViewController.class.getName());
+	private static Logger logger = LogManager.getLogger(ViewController.class.getSimpleName());
 	private FXMLLoader loader;
 	protected ServerController serverController; // DEBUG
 	private ClientController clientController;

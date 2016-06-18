@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import settings.DefaultSettings;
 
 public class PlayerModel {
-	private static Logger logger = LogManager.getLogger(PlayerModel.class.getName());
+	private static Logger logger = LogManager.getLogger(PlayerModel.class.getSimpleName());
 
 	private int victoryPoints = 0;
 

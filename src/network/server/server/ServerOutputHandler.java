@@ -59,7 +59,7 @@ public class ServerOutputHandler {
 		this.parser = new Parser();
 	}
 
-	private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getName());
+	private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getSimpleName());
 
 	public void buildBuilding(ProtocolBuilding building) {
 		ProtocolBuild pb = new ProtocolBuild(building);

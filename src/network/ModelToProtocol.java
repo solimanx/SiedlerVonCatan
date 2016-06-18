@@ -18,7 +18,7 @@ import protocol.object.ProtocolResource;
 
 public final class ModelToProtocol {
 
-	private static Logger logger = LogManager.getLogger(PlayerModel.class.getName());
+	private static Logger logger = LogManager.getLogger(PlayerModel.class.getSimpleName());
 
 	public static HashMap<ResourceType, String> resourceToString = new HashMap<ResourceType, String>();
 

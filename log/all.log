@@ -1,0 +1,6 @@
+18-06-2016 15:39:00.438 [Thread-5] Client:47 run - Connected to server
+18-06-2016 15:39:00.473 [Thread-5] Client:71 runClient - Received from Server: {"Hallo":{"Version":"Catan-Testserver (TeureUnternehmensBeratung GmkH)","Protokoll":"1.0"}}
+18-06-2016 15:39:00.526 [Thread-5] Client:84 write - Client sends to Server: {"Hallo":{"Version":"JavaFXClient 1.0 (NiedlichePixel)"}}
+18-06-2016 15:39:00.569 [Thread-5] Client:71 runClient - Received from Server: {"Willkommen":{"id":4}}
+18-06-2016 15:39:00.572 [Thread-5] network.client.controller.ClientController:124 receiveWelcome - Handshake complete!
+18-06-2016 15:39:00.578 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Name":null,"Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}

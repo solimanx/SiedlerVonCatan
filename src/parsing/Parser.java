@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Parser {
-	private static Logger logger = LogManager.getLogger(Parser.class.getName());
+	private static Logger logger = LogManager.getLogger(Parser.class.getSimpleName());
 
 	@SuppressWarnings("unchecked")
 	public <T> T parseString(String string) {

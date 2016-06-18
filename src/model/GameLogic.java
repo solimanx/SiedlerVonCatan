@@ -24,7 +24,7 @@ public class GameLogic {
 		this.board = b;
 	}
 
-	private static Logger logger = LogManager.getLogger(GameLogic.class.getName());
+	private static Logger logger = LogManager.getLogger(GameLogic.class.getSimpleName());
 
 	/**
 	 * Checks if the player can build a city at the given position

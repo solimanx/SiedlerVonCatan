@@ -184,7 +184,7 @@ public class GameViewController implements Initializable {
 	private Button openRobberView;
 
 	private ViewController viewController;
-	private static Logger logger = LogManager.getLogger(GameViewController.class.getName());
+	private static Logger logger = LogManager.getLogger(GameViewController.class.getSimpleName());
 
 	// jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
 	// für Edge 2 Koordinaten (4 Punkte), weil Anfangs- und Endpunkt

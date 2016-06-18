@@ -47,7 +47,7 @@ public class ClientOutputHandler {
 		this.parser = new Parser();
 	}
 
-	private static Logger logger = LogManager.getLogger(ClientOutputHandler.class.getName());
+	private static Logger logger = LogManager.getLogger(ClientOutputHandler.class.getSimpleName());
 
 	/**
 	 * If the connection can be established, send "Hello" back to server.

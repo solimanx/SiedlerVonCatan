@@ -17,7 +17,7 @@ import network.server.controller.ServerController;
 
 public class Main extends Application {
 
-	private static Logger logger = LogManager.getLogger(Main.class.getName());
+	private static Logger logger = LogManager.getLogger(Main.class.getSimpleName());
 
 	private ServerController gc;
 	private ClientController fc;

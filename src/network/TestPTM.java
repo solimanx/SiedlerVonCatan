@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class TestPTM {
-	private static Logger logger = LogManager.getLogger(TestPTM.class.getName());
+	private static Logger logger = LogManager.getLogger(TestPTM.class.getSimpleName());
 
 	public static void main(String[] Args) {
 		Board board = new Board();

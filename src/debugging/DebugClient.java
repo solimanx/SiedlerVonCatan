@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
  * responds.
  */
 public class DebugClient extends Application {
-	private static Logger logger = LogManager.getLogger(DebugClient.class.getName());
+	private static Logger logger = LogManager.getLogger(DebugClient.class.getSimpleName());
 	DebugClientController dcc;
 
 	public DebugClient(Stage primaryStage) {

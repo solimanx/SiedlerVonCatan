@@ -59,7 +59,7 @@ public class PrimitiveAI extends Thread {
 	private BufferedReader reader;
 	protected AIInputHandler pI = new AIInputHandler(this);
 	protected AIOutputHandler pO = new AIOutputHandler(this);
-	private static Logger logger = LogManager.getLogger(PrimitiveAI.class.getName());
+	private static Logger logger = LogManager.getLogger(PrimitiveAI.class.getSimpleName());
 
 	// --------------------------------------------------------------------------------
 	// PROFILE FIELDS

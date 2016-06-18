@@ -39,7 +39,7 @@ public class Board {
 	private static Map<String, int[]> cMap;
 	// Edge
 	private static Map<String, int[]> eMap;
-	private static Logger logger = LogManager.getLogger(Board.class.getName());
+	private static Logger logger = LogManager.getLogger(Board.class.getSimpleName());
 	// TODO private DevDeck devDeck;
 
 	// ================================================================================

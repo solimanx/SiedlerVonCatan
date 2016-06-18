@@ -49,7 +49,7 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
 public class ServerInputHandler {
-	private static Logger logger = LogManager.getLogger(ServerInputHandler.class.getName());
+	private static Logger logger = LogManager.getLogger(ServerInputHandler.class.getSimpleName());
 	protected Parser parser;
 	private ServerController serverController;
 	private int currentThreadID;

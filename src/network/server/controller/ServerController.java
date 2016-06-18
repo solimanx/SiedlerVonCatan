@@ -59,7 +59,7 @@ public class ServerController {
 	private int[] playerOrder;
 	private Board board;
 	public int[] resourceStack = { 19, 19, 19, 19, 19 };
-	private static Logger logger = LogManager.getLogger(ServerController.class.getName());
+	private static Logger logger = LogManager.getLogger(ServerController.class.getSimpleName());
 	private ArrayList<StreetSet> streetSets = new ArrayList<StreetSet>();
 	private int[] longestRoutes;
 	private int longestTradingRoutePlayer = -1;

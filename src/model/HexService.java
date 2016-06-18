@@ -10,7 +10,7 @@ import org.apache.logging.log4j.core.net.Protocol;
 import java.util.ArrayList;
 
 public class HexService {
-	private static Logger logger = LogManager.getLogger(HexService.class.getName());
+	private static Logger logger = LogManager.getLogger(HexService.class.getSimpleName());
 
 	/**
 	 * Get coorner coordinates given coordinates of three fields

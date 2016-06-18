@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Stack;
 
 public class TestDevCard {
-	private static Logger logger = LogManager.getLogger(TestDevCard.class.getName());
+	private static Logger logger = LogManager.getLogger(TestDevCard.class.getSimpleName());
 
 	public static void main(String[] Args) {
 		DevelopmentCardsStack devStack = new DevelopmentCardsStack();

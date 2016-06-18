@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 import settings.DefaultSettings;
 
 public class Server {
-	private static Logger logger = LogManager.getLogger(Server.class.getName());
+	private static Logger logger = LogManager.getLogger(Server.class.getSimpleName());
 	// HashMap PlayerID => Thread
 	private ClientThread[] clients = new ClientThread[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
 

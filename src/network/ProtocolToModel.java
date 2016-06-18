@@ -34,7 +34,7 @@ public final class ProtocolToModel {
 	 * @param fieldID
 	 * @return
 	 */
-	private static Logger logger = LogManager.getLogger(ProtocolToModel.class.getName());
+	private static Logger logger = LogManager.getLogger(ProtocolToModel.class.getSimpleName());
 	private static Map<Index, String> hm1 = new HashMap<Index, String>();
 	private static Map<String, Index> hm2 = new HashMap<String, Index>();
 

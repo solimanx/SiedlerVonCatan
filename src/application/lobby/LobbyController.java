@@ -53,7 +53,7 @@ public class LobbyController implements Initializable {
 	@FXML
 	private Button startGameButton;
 
-	private static Logger logger = LogManager.getLogger(LobbyController.class.getName());
+	private static Logger logger = LogManager.getLogger(LobbyController.class.getSimpleName());
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

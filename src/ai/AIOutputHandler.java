@@ -24,7 +24,7 @@ import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
 
 public class AIOutputHandler {
-	private static Logger logger = LogManager.getLogger(AIOutputHandler.class.getName());
+	private static Logger logger = LogManager.getLogger(AIOutputHandler.class.getSimpleName());
 	private PrimitiveAI ai;
 	private Parser parser;
 

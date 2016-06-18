@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class TestSpiral {
-	private static Logger logger = LogManager.getLogger(TestSpiral.class.getName());
+	private static Logger logger = LogManager.getLogger(TestSpiral.class.getSimpleName());
 
 	public static void main(String[] args) {
 		Board board = new Board();

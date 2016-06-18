@@ -52,7 +52,7 @@ import protocol.serverinstructions.trade.ProtocolTradePreview;
  * Relays information to Client controller.
  */
 public class ClientInputHandler {
-	private static Logger logger = LogManager.getLogger(ClientInputHandler.class.getName());
+	private static Logger logger = LogManager.getLogger(ClientInputHandler.class.getSimpleName());
 	private ClientController clientController;
 	private Parser parser;
 

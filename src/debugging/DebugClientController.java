@@ -28,7 +28,7 @@ import protocol.messaging.ProtocolChatSendMessage;
 import settings.DefaultSettings;
 
 public class DebugClientController extends Thread {
-	private static Logger logger = LogManager.getLogger(DebugClientController.class.getName());
+	private static Logger logger = LogManager.getLogger(DebugClientController.class.getSimpleName());
 	private Socket socket;
 	private final String SERVERHOST = "aruba.dbs.ifi.lmu.de";
 	private final int PORT = 10000;

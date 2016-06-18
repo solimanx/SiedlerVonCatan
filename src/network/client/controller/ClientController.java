@@ -40,7 +40,7 @@ public class ClientController {
 	 * e.g. (45-> 0), (32, -> 1) etc. HashMap mapping playerIDs to modelIDs
 	 */
 	private Map<Integer, Integer> threadPlayerIdMap;
-	private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(ClientController.class.getName());
+	private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(ClientController.class.getSimpleName());
 	private Board board;
 	private GameLogic gameLogic;
 
