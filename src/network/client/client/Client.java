@@ -24,7 +24,7 @@ public class Client extends Thread {
 	boolean scanning = true;
 	boolean connectionActive = false;
 	protected ClientInputHandler inputHandler;
-	private static Logger logger = LogManager.getLogger(Client.class.getName());
+	private static Logger logger = LogManager.getLogger(Client.class.getSimpleName());
 
 	public Client(ClientInputHandler inputHandler, String serverHost, int port) {
 		this.port = port;
@@ -44,7 +44,7 @@ public class Client extends Thread {
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				scanning = false;
 				connectionActive = true;
-				logger.info("Client connected to server");
+				logger.info("Connected to server");
 				runClient();
 			} catch (IOException e) {
 				logger.info("Connection to server failed." + " Attempt:" + connectionTry);
@@ -68,7 +68,7 @@ public class Client extends Thread {
 	private void runClient() throws IOException {
 		String line;
 		while ((line = reader.readLine()) != null) {
-			logger.debug("Received from Server: " + line);
+			logger.info("Received from Server: " + line);
 			inputHandler.sendToParser(line);
 
 		}

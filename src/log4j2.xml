@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<configuration status="OFF">
-
-    <appenders>
-
-        <Console name="Console" target="System_Out">
-            <PatternLayout
-                    pattern="%highlight{%d{HH:mm:ss.SSS} %-5level %logger{36}.%M() @%L - %msg%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=black, DEBUG=green bold, TRACE=blue}"/>
+<Configuration status="warn">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{HH:mm:ss.SSS} [%t] %c::%L: %M - %msg%n" />
         </Console>
-        <File name="File" fileName="log/test.log">
-            <PatternLayout
-                    pattern="%highlight{%d{HH:mm:ss.SSS} %-5level %logger{36}.%M() @%L - %msg%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=black, DEBUG=green bold, TRACE=blue}"/>
+        <File name="MyFile" fileName="log/all.log" append="false">
+            <PatternLayout pattern="%d{dd-MM-yyy HH:mm:ss.SSS} [%t] %c:%L %M - %msg%n"/>
         </File>
-
-    </appenders>
-    <loggers>
-
-        <root level="trace">
-            <appender-ref ref="Console"/>
-            <appender-ref ref="File"/>
-        </root>
-
-    </loggers>
-
-</configuration>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="MyFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
