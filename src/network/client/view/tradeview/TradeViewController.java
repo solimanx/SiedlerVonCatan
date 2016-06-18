@@ -244,7 +244,7 @@ public class TradeViewController {
 		tradeIDtoString.put(tradeID, tradeString);
 		stringToTradeID.put(tradeString, tradeID);
 		tradeIDtoPlayerID.put(tradeID, playerID);
-		Platform.runLater(new AddTradeStringRunnable(tradeString));
+		Platform.runLater(new AddOfferStringRunnable(tradeString));
 
 	}
 
@@ -357,6 +357,21 @@ public class TradeViewController {
 		@Override
 		public void run() {
 			tradeList.add(string);
+
+		}
+
+	}
+	
+	public class AddOfferStringRunnable implements Runnable {
+		final String string;
+
+		public AddOfferStringRunnable(String string) {
+			this.string = string;
+		}
+
+		@Override
+		public void run() {
+			ownOfferList.add(string);
 
 		}
 
