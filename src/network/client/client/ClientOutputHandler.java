@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.net.Protocol;
 
 import enums.ResourceType;
 import model.Index;
@@ -143,8 +144,8 @@ public class ClientOutputHandler {
      * @param victim_id
      */
     public void sendBanditRequest(int x, int y, int victim_id) {
-
-        ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(new Index(x, y), victim_id);
+    	Index i = ProtocolToModel.getProtocolOneIndex(ModelToProtocol.getFieldID(x, y));
+        ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(i, victim_id);
         Response r = new Response();
         r.pRobberMoveRequest = prmr;
         try {
