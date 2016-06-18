@@ -219,6 +219,7 @@ public class TradeViewController {
 	@FXML
 	void handlePlaceOfferButton(ActionEvent event) {
 		viewController.getClientController().requestTrade(resultOffer, resultDemand);
+		
 	}
 
 	/**
@@ -312,7 +313,7 @@ public class TradeViewController {
 	 */
 	public void acceptingOffer(int playerID, int tradeID) {
 		String offerString = viewController.getGameViewController().getPlayerNames(playerID) + " accepts your offer";
-		ownOfferList.add(offerString);
+		Platform.runLater(new AddOfferStringRunnable(offerString));
 		acceptedOfferToPlayerID.put(offerString, playerID);
 
 	}
@@ -323,7 +324,7 @@ public class TradeViewController {
 	 * @param tradeID
 	 */
 	public void cancelOffer(int tradeID) {
-		tradeList.remove(tradeIDtoString.get(tradeID));
+		Platform.runLater(new RemoveOfferStringRunnable(tradeIDtoString.get(tradeID)));
 	}
 
 	private String tradeStringGenerator(int[] offer, int[] demand) {
@@ -425,6 +426,21 @@ public class TradeViewController {
 		}
 
 	}
+	
+	public class RemoveTradeStringRunnable implements Runnable {
+		final String string;
+
+		public RemoveTradeStringRunnable(String string) {
+			this.string = string;
+		}
+
+		@Override
+		public void run() {
+			tradeList.remove(string);
+
+		}
+
+	}
 
 	public class AddOfferStringRunnable implements Runnable {
 		final String string;
@@ -436,6 +452,21 @@ public class TradeViewController {
 		@Override
 		public void run() {
 			ownOfferList.add(string);
+
+		}
+
+	}
+	
+	public class RemoveOfferStringRunnable implements Runnable {
+		final String string;
+
+		public RemoveOfferStringRunnable(String string) {
+			this.string = string;
+		}
+
+		@Override
+		public void run() {
+			ownOfferList.remove(string);
 
 		}
 
