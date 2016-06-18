@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import network.client.controller.ViewController;
 
 public class TradeViewController {
-	
+
 	@FXML
 	private Button cancelTrade;
 
@@ -290,6 +290,7 @@ public class TradeViewController {
 
 	/**
 	 * called, when player accepts your offer and adds offer to ownOfferList
+	 * 
 	 * @param playerID
 	 * @param tradeID
 	 */
@@ -302,6 +303,7 @@ public class TradeViewController {
 
 	/**
 	 * cancels trade item from left tradeList
+	 * 
 	 * @param tradeID
 	 */
 	public void cancelOffer(int tradeID) {
@@ -383,9 +385,8 @@ public class TradeViewController {
 	}
 
 	/**
-	 * called, when own offer is cancelled
-	 * removes own offer from view
-	 * clears own offer accepting players list
+	 * called, when own offer is cancelled removes own offer from view clears
+	 * own offer accepting players list
 	 */
 	public void cancelOwnOffer() {
 		ownOffer.clear();
