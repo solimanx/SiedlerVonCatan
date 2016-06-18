@@ -458,7 +458,7 @@ public class ClientInputHandler {
 
 		int[] offer = ProtocolToModel.convertResources(tradePreview.getOffer());
 		int[] demand = ProtocolToModel.convertResources(tradePreview.getWithdrawal());
-		clientController.receiveTrade(playerID, tradeID, offer, demand);
+		clientController.showTrade(playerID, tradeID, offer, demand);
 
 	}
 
