@@ -56,6 +56,9 @@ import network.client.controller.ViewController;
 import network.client.view.devcardview.DevCardViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GameViewController implements Initializable {
 
@@ -181,6 +184,7 @@ public class GameViewController implements Initializable {
     private Button openRobberView;
 
     private ViewController viewController;
+    private static Logger logger = LogManager.getLogger(GameViewController.class.getName());
 
     // jeweils die letzte Dimension des Arrays zur Speicherung der Koordinaten;
     // für Edge 2 Koordinaten (4 Punkte), weil Anfangs- und Endpunkt
@@ -306,6 +310,8 @@ public class GameViewController implements Initializable {
             });
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            logger.error("Input/Output Exception", e);
+            logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
 
@@ -1007,10 +1013,9 @@ public class GameViewController implements Initializable {
         city.setEffect(shadow);
         city.setStroke(Color.BLACK);
     }
+
     /**
      * Method showing a new window, which displays, who the winner of the game is.
-     *
-     *
      */
     public void showVictory(int winnerID) {
         VBox vBox = new VBox(10);
