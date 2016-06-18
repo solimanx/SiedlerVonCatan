@@ -702,7 +702,7 @@ public class ClientController {
 		// currTOf.acceptingPlayers.add(modelID);
 		// }
 		// }
-		int modelID = modelPlayerIdMap.get(threadID);
+		int modelID = threadPlayerIdMap.get(threadID);
 		if (getOwnTradingID()!=null && getOwnTradingID()==tradingID){
 			viewController.getGameViewController().getTradeViewController().acceptingOffer(modelID, tradingID);
 		}
