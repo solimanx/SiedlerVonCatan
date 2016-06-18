@@ -282,7 +282,7 @@ public class TradeViewController {
 	 * @param playerID
 	 */
 	public void addOffer(int[] offer, int[] demand, int tradeID, int playerID) {
-		String tradeString = tradeStringGenerator(offer, demand) + "\n" + "With: "
+		String tradeString = tradeStringGenerator(offer, demand) + "\n" + "From: "
 				+ viewController.getGameViewController().getPlayerNames(playerID);
 		tradeIDtoString.put(tradeID, tradeString);
 		stringToTradeID.put(tradeString, tradeID);
@@ -311,10 +311,10 @@ public class TradeViewController {
 	 * @param playerID
 	 * @param tradeID
 	 */
-	public void acceptingOffer(int playerID, int tradeID) {
-		String offerString = viewController.getGameViewController().getPlayerNames(playerID) + " accepts your offer";
+	public void acceptingOffer(int modelID, int tradeID) {
+		String offerString = viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).getName() + " accepts your offer";
 		Platform.runLater(new AddOfferStringRunnable(offerString));
-		acceptedOfferToPlayerID.put(offerString, playerID);
+		acceptedOfferToPlayerID.put(offerString, modelID);
 
 	}
 
