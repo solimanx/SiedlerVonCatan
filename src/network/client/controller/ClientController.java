@@ -680,7 +680,7 @@ public class ClientController {
 		TradeOffer tOf = new TradeOffer(threadID, tradingID, supply, demand);
 		tradeOffers.add(tOf);
 		if (modelID == ownPlayerID) {
-			viewController.getGameViewController().getTradeViewController().addOwnOffer(supply, demand, tradingID);
+			viewController.getGameViewController().getTradeViewController().acceptingOffer(threadID, tradingID);
 		} else {
 			viewController.getGameViewController().getTradeViewController().addOffer(supply, demand, tradingID,
 					modelID);

@@ -286,7 +286,7 @@ public class TradeViewController {
 		tradeIDtoString.put(tradeID, tradeString);
 		stringToTradeID.put(tradeString, tradeID);
 		tradeIDtoPlayerID.put(tradeID, playerID);
-		Platform.runLater(new AddOfferStringRunnable(tradeString));
+		Platform.runLater(new AddTradeStringRunnable(tradeString));
 
 	}
 
