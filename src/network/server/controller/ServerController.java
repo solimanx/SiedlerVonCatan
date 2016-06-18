@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Map;
 
 import enums.Color;
+import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
 import javafx.stage.Stage;
@@ -287,11 +289,13 @@ public class ServerController {
 		longestRoutes = new int[amountPlayers];
 		this.tradeController = new TradeController(this, amountPlayers);
 		generateBoard("A", true);
+		inizializeHarbour();
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 		int[] currDiceRollResult;
 		boolean noDuplicates;
 		Map<Integer, Integer> diceResults = new HashMap<Integer, Integer>();
 		this.playerOrder = new int[amountPlayers];
+		
 		do {
 			noDuplicates = true;
 			for (int i = 0; i < amountPlayers; i++) {
@@ -321,7 +325,82 @@ public class ServerController {
 			statusUpdate(playerOrder[i]);
 		}
 		InitialStreetCounter = 0;
+		
 
+	}
+	
+	
+	/**
+	 * sets the harbors
+	 */
+	public void inizializeHarbour(){
+		String outerRing = "abcdfhjlnrqpomkige";
+		Random generator = new Random();
+		int random = generator.nextInt()%2;
+		int harbourCounter = 0;
+		int[] coord = new int[2];
+		int[] edgeCoord = new int[3];
+		Corner[] corner = new Corner[2];
+		Corner[] harbourCorners = new Corner[18];
+		HarbourStatus[] harbourOrder= {HarbourStatus.THREE_TO_ONE, HarbourStatus.CLAY, HarbourStatus.CORN, HarbourStatus.THREE_TO_ONE, HarbourStatus.ORE, HarbourStatus.THREE_TO_ONE, HarbourStatus.SHEEP,HarbourStatus.WOOD, HarbourStatus.THREE_TO_ONE};
+		shuffleArray(harbourOrder);
+		if(random == 0){
+			for(int i = 0; i<outerRing.length(); i = i+2){
+				coord = Board.getStringToCoordMap().get(outerRing.substring(i, i+1));
+				Field[] neighbours = board.getNeighbouringFields(coord[0], coord[1]);
+				ArrayList<Field> landNeighbours = new ArrayList<Field>();
+				for(int j = 0; j<neighbours.length; j++){
+					if(neighbours[j] != null){
+						if(neighbours[j].getResourceType() != enums.ResourceType.SEA){
+							landNeighbours.add(neighbours[j]);
+						}
+					}
+				}
+				int idx = new Random().nextInt(landNeighbours.size());
+				String secondDefiningField = (landNeighbours.get(idx).getFieldID());
+				edgeCoord = HexService.getEdgeCoordinates(outerRing.substring(i, i+1), secondDefiningField);
+				corner = board.getAttachedCorners(edgeCoord[0], edgeCoord[1], edgeCoord[2]);
+				corner[0].setHarbourStatus(harbourOrder[harbourCounter]);
+				corner[1].setHarbourStatus(harbourOrder[harbourCounter]);
+				harbourCorners[2*harbourCounter] = corner[0];
+				harbourCorners[2*harbourCounter+1] = corner[1];
+				harbourCounter++;
+			}
+		}else{
+			for(int i = 1; i<outerRing.length(); i = i+2){
+				coord = Board.getStringToCoordMap().get(outerRing.substring(i, i+1));
+				Field[] neighbours = board.getNeighbouringFields(coord[0], coord[1]);
+				ArrayList<Field> landNeighbours = new ArrayList<Field>();
+				for(int j = 0; j<neighbours.length; j++){
+					if(neighbours[j] != null){
+						if(neighbours[j].getResourceType() != enums.ResourceType.SEA){
+							landNeighbours.add(neighbours[j]);
+						}
+					}
+				}
+				int idx = new Random().nextInt(landNeighbours.size());
+				String secondDefiningField = (landNeighbours.get(idx).getFieldID());
+				edgeCoord = HexService.getEdgeCoordinates(outerRing.substring(i, i+1), secondDefiningField);
+				corner = board.getAttachedCorners(edgeCoord[0], edgeCoord[1], edgeCoord[2]);
+				corner[0].setHarbourStatus(harbourOrder[harbourCounter]);
+				corner[1].setHarbourStatus(harbourOrder[harbourCounter]);
+				harbourCorners[2*harbourCounter] = corner[0];
+				harbourCorners[2*harbourCounter+1] = corner[1];
+				harbourCounter++;
+			}
+		}
+		board.setHarbourCorner(harbourCorners);
+	}
+	
+	public HarbourStatus[] shuffleArray(HarbourStatus[] harbourOrder) {
+		Random rnd = ThreadLocalRandom.current();
+		for (int i = harbourOrder.length - 1; i > 0; i--) {
+			int index = rnd.nextInt(i + 1);
+			HarbourStatus a = harbourOrder[index];
+			harbourOrder[index] = harbourOrder[i];
+			harbourOrder[i] = a;
+		}
+		return harbourOrder;
 	}
 
 	/**
