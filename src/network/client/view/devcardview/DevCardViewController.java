@@ -119,12 +119,37 @@ public class DevCardViewController implements Initializable {
 
 	@FXML
 	void handleCancel(ActionEvent event) {
-
+		this.stage.close();
 	}
-
+	
 	@FXML
-	void handleOK(ActionEvent event) {
+	void handleInventionOK(ActionEvent event) {
+		int[] resources = new int[5];
+		switch (inventRChooser1.getSelectionModel().getSelectedItem()) {
+		case WOOD:
+			resources[0] += 1;
+			break;
+		case CLAY:
+			resources[1] += 1;
+			break;
+		case SHEEP:
+			resources[3] += 1;
+			break;
+		case CORN:
+			resources[4] += 1;
+			break;
+		case ORE:
+			resources[2] += 1;
+			break;
+		}
+		this.stage.close();
+	}
+	
+	@FXML
+	void handleMonopolyOK(ActionEvent event) {
 
+		viewController.getClientController().playMonopolyCard(monopolyRChooser.getSelectionModel().getSelectedItem());
+		this.stage.close();
 	}
 
 	@FXML

@@ -43,7 +43,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../textures/iconLumber.png" />
+                              <Image url="/textures/iconLumber.png" />
                            </image>
                         </ImageView>
                         <TextFlow fx:id="selfWood" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
@@ -57,7 +57,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../textures/iconBrick.png" />
+                              <Image url="/textures/iconBrick.png" />
                            </image>
                         </ImageView>
                         <TextFlow fx:id="selfClay" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
@@ -71,7 +71,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../textures/iconWool.png" />
+                              <Image url="/textures/iconWool.png" />
                            </image>
                         </ImageView>
                         <TextFlow fx:id="selfSheep" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
@@ -85,7 +85,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../textures/iconGrain.png" />
+                              <Image url="/textures/iconGrain.png" />
                            </image>
                         </ImageView>
                         <TextFlow fx:id="selfCorn" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">
@@ -99,7 +99,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../textures/iconOre.png" />
+                              <Image url="/textures/iconOre.png" />
                            </image>
                         </ImageView>
                         <TextFlow fx:id="selfOre" prefHeight="16.0" prefWidth="24.0" textAlignment="RIGHT">

@@ -9,6 +9,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -16,7 +18,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.tradeview.TradeViewController">
    <children>
@@ -114,31 +115,31 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Wood" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Clay" GridPane.rowIndex="2">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Wool" GridPane.rowIndex="3">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Corn" GridPane.rowIndex="4">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Ore" GridPane.rowIndex="5">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                                       <image>
+                                          <Image url="/textures/iconLumber.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                                       <image>
+                                          <Image url="/textures/iconBrick.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                       <image>
+                                          <Image url="/textures/iconWool.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                                       <image>
+                                          <Image url="/textures/iconGrain.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+                                       <image>
+                                          <Image url="/textures/iconOre.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </GridPane>
                               <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="500.0" prefHeight="50.0" prefWidth="200.0">
@@ -217,11 +218,6 @@
                                     <RadioButton fx:id="oreHarbour" disable="true" mnemonicParsing="false" GridPane.columnIndex="4" />
                                     <RadioButton fx:id="genericHarbour" alignment="TOP_LEFT" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" mnemonicParsing="false" GridPane.columnIndex="5" />
                                     <RadioButton disable="true" mnemonicParsing="false" selected="true" GridPane.columnIndex="6" />
-                                    <Label text="Wood" GridPane.rowIndex="1" />
-                                    <Label text="Clay" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label text="Wool" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <Label text="Corn" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                    <Label text="Ore" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                                     <Label text="2:1" GridPane.rowIndex="2" />
                                     <Label text="2:1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Label text="2:1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
@@ -229,6 +225,31 @@
                                     <Label text="2:1" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                                     <Label text="3:1" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                                     <Label text="4:1" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                                       <image>
+                                          <Image url="/textures/iconLumber.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <image>
+                                          <Image url="/textures/iconBrick.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <image>
+                                          <Image url="/textures/iconWool.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                       <image>
+                                          <Image url="/textures/iconGrain.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                       <image>
+                                          <Image url="/textures/iconOre.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </GridPane>
                               <GridPane fx:id="harbourGrid" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="200.0" vgap="5.0">
@@ -262,31 +283,31 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Wood" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Clay" GridPane.rowIndex="2">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Wool" GridPane.rowIndex="3">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Corn" GridPane.rowIndex="4">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Ore" GridPane.rowIndex="5">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                    </Label>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                                       <image>
+                                          <Image url="/textures/iconLumber.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                                       <image>
+                                          <Image url="/textures/iconBrick.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                       <image>
+                                          <Image url="/textures/iconWool.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                                       <image>
+                                          <Image url="/textures/iconGrain.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+                                       <image>
+                                          <Image url="/textures/iconOre.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                                  <VBox.margin>
                                     <Insets top="30.0" />
