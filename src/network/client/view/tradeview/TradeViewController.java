@@ -29,6 +29,9 @@ import network.client.controller.ViewController;
  *
  */
 public class TradeViewController {
+	
+	@FXML
+	private Button cancelTrade;
 
 	@FXML
 	private Button placeOfferButton;
