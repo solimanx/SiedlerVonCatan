@@ -442,7 +442,7 @@ public class GameViewController implements Initializable {
         transition.setFromValue(1);
         transition.setToValue(0);
         transition.setAutoReverse(true);
-        transition.setCycleCount(4);
+        transition.setCycleCount(8);
         transition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
 
             @Override
@@ -696,7 +696,7 @@ public class GameViewController implements Initializable {
                     resultID = 3;
                 } else if (string.equals(player4)) {
                     resultID = 4;
-                }
+                } 
                 viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3, fieldCoordinates[1] - 3,
                         viewPositiontoPlayerID.get(resultID));
             }

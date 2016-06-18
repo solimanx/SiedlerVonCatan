@@ -231,12 +231,10 @@ public class DebugClientController extends Thread {
             socket = new Socket(SERVERHOST, PORT);
             writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-            System.out.println("Client connected to server.");
             logger.info("Client connected to server");
             runDebugClient();
         } catch (IOException e) {
             logger.catching(Level.DEBUG, e);
-            System.out.println("Connection to server failed.");
             logger.warn("Connection to server failed");
             try {
                 Thread.sleep(2000);

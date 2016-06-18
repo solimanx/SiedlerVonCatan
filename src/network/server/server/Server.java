@@ -32,7 +32,6 @@ public class Server {
     public void start() throws IOException {
 
         ServerSocket serverSocket = new ServerSocket(8080, 150);
-        System.out.println("Server running.");
         logger.info("Server running");
         try {
             while (clientCounter < getClients().length) {
@@ -67,17 +66,14 @@ public class Server {
             try {
                 writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
                 reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-                System.out.println("Client connected! " + socket.getRemoteSocketAddress());
                 logger.info("Client connected! " + socket.getRemoteSocketAddress());
                 // outputHandler.hello(serverVersion, protocolVersion,
                 // threadID);
                 inputHandler.hello(threadID);
-                System.out.println("Hello sent to " + threadID + " Thread");
                 logger.debug("Hello sent to " + threadID + " Thread");
                 // socket.setTcpNoDelay(true);
                 while (true) {
                     String line = reader.readLine();
-                    System.out.println("Server got message: " + line);
                     logger.debug("Server got message: " + line);
                     inputHandler.sendToParser(line, threadID);
                 }
@@ -96,7 +92,6 @@ public class Server {
         thread.start();
         getClients()[clientCounter] = thread;
         clientCounter++;
-        System.out.println("The Next Client gets Number " + clientCounter);
         logger.debug("The Next Client gets Number " + clientCounter);
     }
 

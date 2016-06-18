@@ -180,7 +180,6 @@ public class ServerInputHandler {
                 break;
 
             default:
-                System.out.println("Class not found");
                 logger.info("Class not found");
         }
 
@@ -210,7 +209,6 @@ public class ServerInputHandler {
     }
 
     protected void handle(ProtocolHello hello) {
-        System.out.println("SERVER: Hello gelesen!");
         logger.debug("SERVER: Hello gelesen!");
         serverController.receiveHello(currentThreadID);
 

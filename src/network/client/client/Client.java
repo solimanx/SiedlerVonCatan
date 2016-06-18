@@ -45,11 +45,9 @@ public class Client extends Thread {
                 reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 scanning = false;
                 connectionActive = true;
-                System.out.println("Client connected to server.");
                 logger.info("Client connected to server");
                 runClient();
             } catch (IOException e) {
-                System.out.println("Connection to server failed." + " Attempt:" + connectionTry);
                 logger.info("Connection to server failed." + " Attempt:" + connectionTry);
                 connectionTry++;
                 try {
@@ -71,7 +69,6 @@ public class Client extends Thread {
     private void runClient() throws IOException {
         String line;
         while ((line = reader.readLine()) != null) {
-            System.out.println("Received from Server: " + line);
             logger.debug("Received from Server: " + line);
             inputHandler.sendToParser(line);
 
@@ -85,7 +82,6 @@ public class Client extends Thread {
      * @throws IOException
      */
     public void write(String s) throws IOException {
-        System.out.println("Client sends to Server: " + s);
         logger.debug("Client sends to Server: " + s);
         writer.write(s + "\n");
         writer.flush();

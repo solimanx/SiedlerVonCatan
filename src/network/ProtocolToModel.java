@@ -182,7 +182,6 @@ public final class ProtocolToModel {
 		case "Verbindung verloren":
 			return enums.PlayerState.CONNECTION_LOST;
 		default:
-			System.out.println("Error in ProtocolToModel.getPlayerState");
 			logger.error("Error in ProtocolToModel.getPlayerState");
 			return null;
 		}
@@ -256,7 +255,6 @@ public final class ProtocolToModel {
 		case "Stadt":
 			return CornerStatus.CITY;
 		default:
-			System.out.println("Error in ProtocolToModel.getCornerType");
 			logger.error("Error in ProtocolToModel.getCornerType");
 			return null;
 		}

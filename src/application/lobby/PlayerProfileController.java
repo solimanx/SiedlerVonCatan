@@ -54,16 +54,13 @@ public class PlayerProfileController implements Initializable {
         String name = playerName.getText();
         serverColorAnswer.setText("");
         if (name.equals("")) {
-            System.out.println("No name given.");
             logger.debug("No name given");
         } else if (chosenColor == null) {
-            System.out.println("No color selected.");
             logger.debug("No color selected");
         } else {
             viewController.getClientController().sendPlayerProfile(name, chosenColor);
             // TODO receive confirmation from server that color isnt taken
             // FOR DEBUG ONLY ASSUME SERVER CONFIRMED
-            System.out.println("Profile: " + name + " " + chosenColor);
             logger.debug("Profile" + name + chosenColor);
             readyButton.setDisable(false);
         }

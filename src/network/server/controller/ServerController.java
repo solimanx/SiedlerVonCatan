@@ -1616,7 +1616,7 @@ public class ServerController {
 						playersObtain[initialVillages.get(i).getOwnerID()][DefaultSettings.RESOURCE_VALUES
 								.get(currResType)]++;
 					} else {
-						System.out.println("Stack empty: " + currResType);
+						logger.debug("Stack empty: " + currResType);
 					}
 				}
 
