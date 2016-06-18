@@ -39,9 +39,13 @@
                                  </children>
                               </HBox>
                               <ListView fx:id="foreignTrades" prefHeight="402.0" prefWidth="400.0" />
-                              <HBox alignment="CENTER_RIGHT">
+                              <HBox alignment="CENTER_RIGHT" spacing="20.0">
                                  <children>
-                                    <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Accept Trade" />
+                                    <Button fx:id="cancelTrade" mnemonicParsing="false" onAction="#handleCancelTrade" text="Cancel Trade" />
+                                    <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Accept Trade">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Button>
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />
@@ -148,6 +152,9 @@
                                        <HBox.margin>
                                           <Insets bottom="10.0" top="10.0" />
                                        </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
                                     </Button>
                                  </children>
                               </HBox>
@@ -163,12 +170,12 @@
                               <ListView fx:id="ownOffers" prefHeight="139.0" prefWidth="200.0" />
                               <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Fulfill Trade">
+                                    <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#fullFillTrade" text="Fulfill Trade">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="cancelOffer" layoutX="116.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleTradeButton" text="Cancel offer" />
+                                    <Button fx:id="cancelOffer" layoutX="116.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancelOwnOffer" text="Cancel offer" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />
@@ -317,7 +324,7 @@
                         </VBox>
                         <HBox alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <Button fx:id="tradeHarbour" alignment="BOTTOM_RIGHT" mnemonicParsing="false" text="Trade" />
+                              <Button fx:id="tradeHarbour" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#handleSeaTradeButton" text="Trade" />
                            </children>
                            <padding>
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

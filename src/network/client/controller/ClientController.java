@@ -281,7 +281,6 @@ public class ClientController {
 
 			@Override
 			public void run() {
-				System.out.println("STARTING GAME VIEW IN Platform.runLater");
 				logger.debug("STARTING GAME VIEW IN Platform.runLater");
 				// TODO vielleicht ein fix?
 				viewController.startGameView();
