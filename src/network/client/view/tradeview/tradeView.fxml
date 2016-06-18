@@ -173,7 +173,7 @@
                                  <children>
                                     <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#fullFillTrade" text="Fulfill Trade">
                                        <HBox.margin>
-                                          <Insets right="10.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </Button>
                                  </children>

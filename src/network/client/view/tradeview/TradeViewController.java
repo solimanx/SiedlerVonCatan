@@ -24,21 +24,28 @@ public class TradeViewController {
 
 	@FXML
 	private Button cancelTrade;
-
+	
 	@FXML
 	private Button placeOfferButton;
+	
 	@FXML
 	private ListView<String> foreignTrades;
+	
 	@FXML
 	private ListView<String> ownOffers;
+	
 	@FXML
 	private Button cancelOffer;
+	
 	@FXML
 	private Button tradeButton;
+	
 	@FXML
 	private Button acceptButton;
+	
 	@FXML
 	private TextField ownOffer;
+	
 	private Spinner<Integer> giveWoodSpinner;
 	private Spinner<Integer> giveClaySpinner;
 	private Spinner<Integer> giveWoolSpinner;
@@ -51,22 +58,31 @@ public class TradeViewController {
 	private Spinner<Integer> getOreSpinner;
 	private int[] resultOffer = new int[5];
 	private int[] resultDemand = new int[5];
+	
 	@FXML
 	private GridPane grid;
+	
 	@FXML
 	private GridPane harbourGrid;
+	
 	@FXML
 	private Button tradeHarbour;
+	
 	@FXML
 	RadioButton woolHarbour;
+	
 	@FXML
 	RadioButton woodHarbour;
+	
 	@FXML
 	RadioButton clayHarbour;
+	
 	@FXML
 	RadioButton cornHarbour;
+	
 	@FXML
 	RadioButton oreHarbour;
+	
 	@FXML
 	RadioButton genericHarbour;
 
