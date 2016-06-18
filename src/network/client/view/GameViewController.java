@@ -303,8 +303,6 @@ public class GameViewController implements Initializable {
 
 			tradeViewController.init(selfResources, viewController, tradeStage);
 
-			tradeStage.initModality(Modality.WINDOW_MODAL);
-			tradeStage.initOwner(gameStage);
 			tradeStage.setOnCloseRequest(e -> {
 				tradeStage.hide();
 			});
