@@ -253,7 +253,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Würfel: " />
+                  <Label text="Würfel: " textFill="WHITE" />
                   <StackPane>
                      <children>
                         <Circle fill="WHITE" radius="15.0" stroke="BLACK" strokeType="INSIDE" />

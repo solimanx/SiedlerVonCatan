@@ -1135,6 +1135,15 @@ public class GameViewController implements Initializable {
 		victoryStage.show();
 
 	}
+	
+	public void alert(String message){
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Alert");
+		alert.setHeaderText("message");
+		alert.initOwner(gameStage);
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.showAndWait();
+	}
 
 	/**
 	 * Inner Class for constructing the board. Instantiated at initial phase of

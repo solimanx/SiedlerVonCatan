@@ -785,7 +785,11 @@ public class ClientController {
 	 * @param message
 	 */
 	public void victory(String message, int threadID) {
-		viewController.getGameViewController().showVictory(threadPlayerIdMap.get(threadID));
+		if(threadID != -1){
+			viewController.getGameViewController().showVictory(threadPlayerIdMap.get(threadID));
+		} else {
+			viewController.getGameViewController().alert("message" + " Spieler: " + threadID);
+		}
 	}
 
 	/**
