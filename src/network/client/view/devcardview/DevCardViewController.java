@@ -199,7 +199,7 @@ public class DevCardViewController implements Initializable {
 			Pane root;
 			try {
 				root = loader
-						.load(getClass().getResource("/network/client/view/tradeview/inventionView.fxml").openStream());
+						.load(getClass().getResource("/network/client/view/tradeview/InventionView.fxml").openStream());
 				Scene scene = new Scene(root);
 				Stage inventionStage = new Stage();
 				inventionStage.setScene(scene);
