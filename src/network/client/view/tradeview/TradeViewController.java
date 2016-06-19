@@ -333,7 +333,7 @@ public class TradeViewController {
 		StringBuffer giving = new StringBuffer();
 		if (demand.length > 0) {
 
-			getting.append("Get: ");
+			getting.append("Demand: ");
 			// get is set
 			int getWood = demand[0];
 			int getClay = demand[1];
@@ -368,7 +368,7 @@ public class TradeViewController {
 			getting.append(" ");
 		}
 		if (offer.length > 0) {
-			giving.append("Give: ");
+			giving.append("Offer: ");
 			int giveWood = offer[0];
 			int giveClay = offer[1];
 			int giveOre = offer[2];
