@@ -397,7 +397,7 @@ public class ClientController {
 
 			// safety check
 			if (resourcesGained.length == 1) {
-				gameLogic.getBoard().getPlayer(playerID).setHiddenResources(resourcesGained[0]);
+				gameLogic.getBoard().getPlayer(playerID).incrementHiddenResources(resourcesGained[0]);
 			} else {
 				logger.warn("Throws new IllegalArgumentException \"Error at adding player resource to player\"");
 				throw new IllegalArgumentException("Error at adding player resources to player");
