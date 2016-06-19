@@ -297,7 +297,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.WOOD)) {
-							if (c.getOwnerID() == playerID) {
+							if (c.getOwnerID()!= null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
@@ -322,7 +322,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.CLAY)) {
-							if (c.getOwnerID() == playerID) {
+							if (c.getOwnerID() != null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
@@ -347,7 +347,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.SHEEP)) {
-							if (c.getOwnerID() == playerID) {
+							if (c.getOwnerID() != null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
@@ -372,7 +372,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.CORN)) {
-							if (c.getOwnerID() == playerID) {
+							if (c.getOwnerID()!=null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
@@ -397,7 +397,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.ORE)) {
-							if (c.getOwnerID() == playerID) {
+							if (c.getOwnerID() != null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
@@ -422,7 +422,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.THREE_TO_ONE)) {
-							if (c.getOwnerID() == playerID) {
+							if (c.getOwnerID()!= null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
