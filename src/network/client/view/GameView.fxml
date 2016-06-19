@@ -253,7 +253,10 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Würfel: " textFill="WHITE" />
+                  <Label text="Dice roll:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
                   <StackPane>
                      <children>
                         <Circle fill="WHITE" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
@@ -272,7 +275,7 @@
                   </Button>
                </children>
             </HBox>
-            <TextArea fx:id="serverLog" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="500.0">
+            <TextArea fx:id="serverLog" editable="false" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="500.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
