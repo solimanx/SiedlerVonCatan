@@ -741,10 +741,11 @@ public class GameViewController implements Initializable {
 					viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3,
 							fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
 				} else {
+					knight = false;
 					viewController.getClientController().playKnightCard(fieldCoordinates[0] - 3,
 							fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
 				}
-				knight = false;
+				
 			}
 		}
 
