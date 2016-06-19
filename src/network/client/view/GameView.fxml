@@ -159,6 +159,16 @@
                         <Label fx:id="playerFourVPoints" />
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
+                     <children>
+                        <Label fx:id="fourthLongestTradeRoute" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
+                     <children>
+                        <Label fx:id="fourthGreatestKnightForce" />
+                     </children>
+                  </HBox>
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
@@ -194,6 +204,16 @@
                         <Label fx:id="playerTwoVPoints" />
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
+                     <children>
+                        <Label fx:id="secondLongestTradeRoute" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
+                     <children>
+                        <Label fx:id="secondGreatestKnightForce" />
+                     </children>
+                  </HBox>
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
@@ -227,6 +247,16 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0">
                      <children>
                         <Label fx:id="playerThreeVPoints" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
+                     <children>
+                        <Label fx:id="thirdLongestTradeRoute" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
+                     <children>
+                        <Label fx:id="thirdGreatestKnightForce" />
                      </children>
                   </HBox>
                </children>

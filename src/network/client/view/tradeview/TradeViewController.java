@@ -256,6 +256,9 @@ public class TradeViewController {
 	void handleSeaTradeButton(ActionEvent event) {
 		viewController.getClientController().requestSeaTrade(resultOffer, resultDemand);
 		stage.hide();
+		resultDemand = new int[5];
+		resultOffer = new int[5];
+		
 	}
 
 	/**
