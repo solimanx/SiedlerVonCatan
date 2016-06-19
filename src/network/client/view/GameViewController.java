@@ -737,6 +737,7 @@ public class GameViewController implements Initializable {
 	/**
 	 * @param fieldCoordinates
 	 */
+	@SuppressWarnings("null")
 	public void fieldClick(int[] fieldCoordinates, boolean knight) {
 		if (selfState == PlayerState.MOVE_ROBBER || knight == true) {
 			List<String> choices = new ArrayList<>();
@@ -755,20 +756,25 @@ public class GameViewController implements Initializable {
 			if (result.isPresent()) {
 				int resultID = 0;
 				String string = result.get();
-				if (string.equals(player2)) {
-					resultID = 2;
-				} else if (string.equals(player3)) {
-					resultID = 3;
-				} else if (string.equals(player4)) {
-					resultID = 4;
-				}
-				if (knight == false) {
-					viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3,
-							fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
+				if (string != null) {
+					if (string.equals(player2)) {
+						resultID = 2;
+					} else if (string.equals(player3)) {
+						resultID = 3;
+					} else if (string.equals(player4)) {
+						resultID = 4;
+					}
+					if (knight == false) {
+						viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3,
+								fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
+					} else {
+						knight = false;
+						viewController.getClientController().playKnightCard(fieldCoordinates[0] - 3,
+								fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
+					}
 				} else {
-					knight = false;
-					viewController.getClientController().playKnightCard(fieldCoordinates[0] - 3,
-							fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
+					viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3,
+								fieldCoordinates[1] - 3, (Integer) null);
 				}
 
 			}
@@ -1165,8 +1171,9 @@ public class GameViewController implements Initializable {
 	 * is.
 	 */
 	public void showVictory(int winnerID) {
-		String winnerName = viewController.getClientController().getGameLogic().getBoard().getPlayer(winnerID).getName();
-		
+		String winnerName = viewController.getClientController().getGameLogic().getBoard().getPlayer(winnerID)
+				.getName();
+
 		Platform.runLater(new Runnable() {
 			String winner;
 
@@ -1177,9 +1184,8 @@ public class GameViewController implements Initializable {
 				vBox.setSpacing(8);
 				Text title = new Text("Das Spiel ist aus!");
 				Text text = new Text("Glückwunsch zum verdienten Sieg.");
-				Text text1 = new Text("Unser Gewinner ist: "
-						+ winner );
-				
+				Text text1 = new Text("Unser Gewinner ist: " + winner);
+
 				ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/textures/winner.png")));
 				vBox.getChildren().addAll(title, text, text1, image);
 
@@ -1199,9 +1205,6 @@ public class GameViewController implements Initializable {
 				return (this);
 			}
 		}.init(winnerName));
-
-
-
 
 	}
 
