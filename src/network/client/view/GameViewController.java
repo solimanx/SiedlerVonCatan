@@ -198,7 +198,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Button playCardButton;
-	
+
 	@FXML
 	private Button helpButton;
 
@@ -639,14 +639,13 @@ public class GameViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	void handleHelpButton(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
 		try {
-			root = loader
-					.load(getClass().getResource("/network/client/view/helpview/HelpView.fxml").openStream());
+			root = loader.load(getClass().getResource("/network/client/view/helpview/HelpView.fxml").openStream());
 			Scene scene = new Scene(root);
 			Stage helpView = new Stage();
 			helpView.setScene(scene);
@@ -1155,14 +1154,27 @@ public class GameViewController implements Initializable {
 		victoryStage.show();
 
 	}
-	
-	public void alert(String message){
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Alert");
-		alert.setHeaderText("message");
-		alert.initOwner(gameStage);
-		alert.initModality(Modality.APPLICATION_MODAL);
-		alert.showAndWait();
+
+	public void alert(String message) {
+		Platform.runLater(new Runnable() {
+			String message;
+
+			@Override
+			public void run() {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Alert");
+				alert.setHeaderText("message");
+				alert.initOwner(gameStage);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.showAndWait();
+			}
+
+			public Runnable init(String message) {
+				this.message = message;
+				return (this);
+			}
+		}.init(message));
+
 	}
 
 	/**
