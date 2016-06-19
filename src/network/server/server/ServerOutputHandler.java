@@ -129,7 +129,7 @@ public class ServerOutputHandler {
 		Edge[] c1Edges;
 		Edge[] c2Edges;
 		Edge schnitt = null;
-		for (int i = 0;i < hC.length/2;i++){
+		for (int i = 0;i < hC.length ;i+=2){
 			coords = ProtocolToModel.getCornerCoordinates(hC[i].getCornerID());
 			c1Edges = board.getProjectingEdges(coords[0],coords[1],coords[2]);
 			
@@ -145,7 +145,7 @@ public class ServerOutputHandler {
 				}
 			}
 			Index[] location = ModelToProtocol.convertToEdgeIndex(schnitt.getEdgeID());
-			pHarbourArray[i] = new ProtocolHarbour(location,hC[i].getHarbourStatus());
+			pHarbourArray[i/2] = new ProtocolHarbour(location,hC[i].getHarbourStatus());
 		}
 		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray,
 				ProtocolToModel.getProtocolOneIndex(board.getBandit()));
