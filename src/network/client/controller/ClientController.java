@@ -418,6 +418,10 @@ public class ClientController {
 	public GameLogic getGameLogic() {
 		return gameLogic;
 	}
+	
+	public ClientOutputHandler getClientOuptputHandler() {
+		return clientOutputHandler;
+	}
 
 	/**
 	 * Returns own ID.

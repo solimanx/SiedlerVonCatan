@@ -457,5 +457,15 @@ public class ClientOutputHandler {
 		}
 		
 	}
+	
+	public void sendCheat(String string){
+		try {
+			client.write(string);
+		} catch (IOException e) {
+			logger.error("Threw an Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
+	}
 
 }
