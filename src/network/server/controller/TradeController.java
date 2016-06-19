@@ -27,9 +27,9 @@ public class TradeController {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID) {
 				if (accept){
-					tradeOffers.get(tradingID).acceptingPlayers.add(tradingID);
+					tradeOffers.get(i).acceptingPlayers.add(tradingID);
 				} else {
-					tradeOffers.get(tradingID).decliningPlayers.add(tradingID);
+					tradeOffers.get(i).decliningPlayers.add(tradingID);
 				}
 				
 				serverController.tradeAccepted(modelID, tradingID, accept);
@@ -37,15 +37,6 @@ public class TradeController {
 		}
 	}
 
-	// ADDED methode wieder auskommentiert, siehe obige Methode
-	/* public void declineTrade(int modelID, int tradingID) {
-		for (int i = 0; i < tradeOffers.size(); i++) {
-			if (tradeOffers.get(i).getTradingID() == tradingID) {
-				tradeOffers.get(tradingID).acceptingPlayers.add(tradingID);
-				serverController.tradeAccepted(modelID, tradingID, false);
-			}
-		}
-	} */
 
 	public void fulfillTrade(int modelID, int tradingID, int partnerModelID) {
 		for (int i = 0; i < tradeOffers.size(); i++) {
@@ -107,6 +98,7 @@ public class TradeController {
 		ResourceType offerResType = null;
 		ResourceType demandResType = null;
 		int offerAmount = 0;
+		int demandAmount = 0;
 		ArrayList<HarbourStatus> harbours = getPlayerHarbours(modelID);
 		for (int i = 0; i < offer.length; i++) {
 			if (offer[i] != 0) {
@@ -114,18 +106,25 @@ public class TradeController {
 				offerAmount = offer[i];
 			} else if (demand[i] != 0) {
 				demandResType = DefaultSettings.RESOURCE_ORDER[i];
+				demandAmount = demand[i];
 			}
 
 		}
-		if (offerResType != null) {
+		if (offerResType != null && demandAmount == 1) { //currently only single trade allowed
 			switch (offerAmount) {
 			case 2:
-				if (harbours.contains(offerResType)) {
+				boolean contains = false;
+				for (int i = 0; i < harbours.size(); i++) {
+					if (harbours.get(i).name().equals(offerResType.name())){
+						contains = true;
+					}
+				}
+				if (contains) {
 					if (serverController.resourceStackDecrease(demandResType)) {
 						serverController.addToPlayersResource(modelID, demandResType, 1);
 						serverController.getServerOutputHandler().resourceObtain(
 								serverController.modelPlayerIdMap.get(modelID),
-								serverController.getPlayerResources(modelID));
+								demand);
 					} else {
 						serverController.getServerOutputHandler().error("resource stack empty",
 								serverController.modelPlayerIdMap.get(modelID));
@@ -141,7 +140,7 @@ public class TradeController {
 						serverController.addToPlayersResource(modelID, demandResType, 1);
 						serverController.getServerOutputHandler().resourceObtain(
 								serverController.modelPlayerIdMap.get(modelID),
-								serverController.getPlayerResources(modelID));
+								demand);
 					} else {
 						serverController.getServerOutputHandler().error("resource stack empty",
 								serverController.modelPlayerIdMap.get(modelID));
@@ -156,7 +155,7 @@ public class TradeController {
 					serverController.addToPlayersResource(modelID, demandResType, 1);
 					serverController.getServerOutputHandler().resourceObtain(
 							serverController.modelPlayerIdMap.get(modelID),
-							serverController.getPlayerResources(modelID));
+							demand);
 				} else {
 					serverController.getServerOutputHandler().error("resource stack empty",
 							serverController.modelPlayerIdMap.get(modelID));
