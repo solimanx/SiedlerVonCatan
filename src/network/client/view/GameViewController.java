@@ -198,6 +198,9 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Button playCardButton;
+	
+	@FXML
+	private Button helpButton;
 
 	// DEBUG
 	@FXML
@@ -631,6 +634,23 @@ public class GameViewController implements Initializable {
 					.getPlayerDevCards();
 			devController.init(viewController, devCardStage, devCards);
 			devCardStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	void handleHelpButton(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		Parent root;
+		try {
+			root = loader
+					.load(getClass().getResource("/network/client/view/helpview/HelpView.fxml").openStream());
+			Scene scene = new Scene(root);
+			Stage helpView = new Stage();
+			helpView.setScene(scene);
+			helpView.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
