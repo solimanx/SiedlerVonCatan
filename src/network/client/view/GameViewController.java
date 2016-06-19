@@ -249,7 +249,7 @@ public class GameViewController implements Initializable {
 
 	private PlayerState selfState;
 
-	private int[] selfResources;
+	private int[] selfResources = { 0, 0, 0, 0, 0 };
 
 	private SimpleStringProperty response;
 
