@@ -174,6 +174,7 @@ public class DevCardViewController implements Initializable {
 	void handlePlayCardButton(ActionEvent event) {
 		if (devCardSelected.equals(CardType.KNIGHT.toString())) {
 			stage.hide();
+			viewController.getGameViewController().setKnight(true);
 			viewController.getGameViewController().setMoveRobberState();
 		} else if (devCardSelected.equals(CardType.STREET.toString())) {
 			viewController.getGameViewController().setIsStreetDev(true);
