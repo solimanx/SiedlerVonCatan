@@ -375,6 +375,7 @@ public class ClientController {
 	 * @param playerID
 	 * @param resourcesGained
 	 */
+	@Deprecated
 	public void addToPlayersResource(int playerID, int[] resourcesGained) {
 		// playerID = 0,1,2,3
 		// if it's self
@@ -471,7 +472,7 @@ public class ClientController {
 		else {
 			// increment their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
-			viewController.getGameViewController().setResourceCards(modelID, getPlayerHiddenResource(modelID));
+			//viewController.getGameViewController().setResourceCards(modelID, getPlayerHiddenResource(modelID));
 		}
 
 	}
@@ -491,7 +492,7 @@ public class ClientController {
 		else {
 			// decrement their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources[0]);
-			viewController.getGameViewController().setResourceCards(modelID, getPlayerHiddenResource(modelID));
+			//viewController.getGameViewController().setResourceCards(modelID, getPlayerHiddenResource(modelID));
 		}
 	}
 
