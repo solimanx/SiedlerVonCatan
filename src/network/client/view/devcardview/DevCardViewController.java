@@ -77,6 +77,7 @@ public class DevCardViewController implements Initializable {
 	public void init(ViewController viewController, Stage stage, int[] devCards) {
 		this.stage = stage;
 		this.viewController = viewController;
+		devCardList.clear();
 		devCardListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		devCardListView.setItems(devCardList);
 		devCardListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -109,10 +110,8 @@ public class DevCardViewController implements Initializable {
 				case 4:
 					string = CardType.STREET.toString();
 					break;
-
-				default:
-					break;
 				}
+				devCardList.add(string);
 			}
 		}
 	}
