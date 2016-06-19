@@ -201,7 +201,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Button helpButton;
-	
+
 	@FXML
 	private Button cheatButton;
 
@@ -661,7 +661,7 @@ public class GameViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	void handleCheatButton(ActionEvent event) throws IOException {
 		Stage cheatStage = new Stage();
@@ -669,17 +669,17 @@ public class GameViewController implements Initializable {
 		Scene cheatScene = new Scene(cheatRoot);
 		TextField cheatField = new TextField();
 		Button ok = new Button("Send Cheat");
-		
+
 		ok.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				cheatStage.close();
 				viewController.getClientController().getClientOuptputHandler().sendCheat(cheatField.getText());
-				
+
 			}
 		});
-		
+
 		cheatRoot.getChildren().addAll(cheatField, ok);
 		cheatStage.setScene(cheatScene);
 		cheatStage.show();
@@ -700,12 +700,10 @@ public class GameViewController implements Initializable {
 	 */
 	public void villageClick(int[] villageCoordinates) {
 		Polygon village = villages[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
-		// DEBUG
-		// if(village.getFill().equals(playerColors.get(1))){
-		// viewController.getClientController().requestBuildCity(villageCoordinates[0],
-		// villageCoordinates[1],
-		// villageCoordinates[2]);
-		// }
+		if (village.getFill().equals(playerColors.get(0))) {
+			viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1],
+					villageCoordinates[2]);
+		}
 		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
 			viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
 					villageCoordinates[2]);
@@ -772,7 +770,7 @@ public class GameViewController implements Initializable {
 					viewController.getClientController().playKnightCard(fieldCoordinates[0] - 3,
 							fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
 				}
-				
+
 			}
 		}
 
@@ -1167,29 +1165,43 @@ public class GameViewController implements Initializable {
 	 * is.
 	 */
 	public void showVictory(int winnerID) {
-		VBox vBox = new VBox(10);
-		vBox.setPadding(new Insets(5));
-		vBox.setSpacing(8);
-		Text title = new Text("Das Spiel ist aus!");
-		title.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 40));
-		Text text = new Text("Glückwunsch zum verdienten Sieg.");
-		text.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 30));
-		Text text1 = new Text("Unser Gewinner ist:"
-				+ viewController.getClientController().getGameLogic().getBoard().getPlayer(winnerID).getName());
-		text1.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 30));
+		String winnerName = viewController.getClientController().getGameLogic().getBoard().getPlayer(winnerID).getName();
+		
+		Platform.runLater(new Runnable() {
+			String winner;
 
-		ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/textures/winner.png")));
-		vBox.getChildren().addAll(title, text, text1, image);
+			@Override
+			public void run() {
+				VBox vBox = new VBox(10);
+				vBox.setPadding(new Insets(5));
+				vBox.setSpacing(8);
+				Text title = new Text("Das Spiel ist aus!");
+				Text text = new Text("Glückwunsch zum verdienten Sieg.");
+				Text text1 = new Text("Unser Gewinner ist: "
+						+ winner );
+				
+				ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/textures/winner.png")));
+				vBox.getChildren().addAll(title, text, text1, image);
 
-		Scene scene = new Scene(vBox, 600, 600, Color.BEIGE);
-		Stage victoryStage = new Stage();
-		victoryStage.setWidth(415);
-		victoryStage.setHeight(200);
-		victoryStage.setScene(scene);
-		victoryStage.sizeToScene();
-		victoryStage.initModality(Modality.APPLICATION_MODAL);
-		victoryStage.initOwner(gameStage);
-		victoryStage.show();
+				Scene scene = new Scene(vBox, 600, 600, Color.BEIGE);
+				Stage victoryStage = new Stage();
+				victoryStage.setWidth(415);
+				victoryStage.setHeight(200);
+				victoryStage.setScene(scene);
+				victoryStage.sizeToScene();
+				victoryStage.initModality(Modality.APPLICATION_MODAL);
+				victoryStage.initOwner(gameStage);
+				victoryStage.show();
+			}
+
+			public Runnable init(String winnerName) {
+				this.winner = winnerName;
+				return (this);
+			}
+		}.init(winnerName));
+
+
+
 
 	}
 
@@ -1213,6 +1225,14 @@ public class GameViewController implements Initializable {
 			}
 		}.init(message));
 
+	}
+
+	public boolean isKnight() {
+		return knight;
+	}
+
+	public void setKnight(boolean knight) {
+		this.knight = knight;
 	}
 
 	/**
@@ -1385,7 +1405,7 @@ public class GameViewController implements Initializable {
 		public Polygon drawVillage(double[] center) {
 			Polygon village = new Polygon(center[0], center[1] - 18, center[0] + 10, center[1] - 10, center[0] + 10,
 					center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10, center[1] - 10);
-
+			village.setStroke(Color.BLACK);
 			return village;
 		}
 
@@ -1399,6 +1419,7 @@ public class GameViewController implements Initializable {
 			Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
 					center[1] - 20, center[0] + 10, center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10,
 					center[1] - 20, center[0] - 5, center[1] - 20, center[0] - 5, center[1] - 10);
+			city.setStroke(Color.BLACK);
 			return city;
 		}
 
@@ -1613,13 +1634,5 @@ public class GameViewController implements Initializable {
 
 		}
 
-	}
-
-	public boolean isKnight() {
-		return knight;
-	}
-
-	public void setKnight(boolean knight) {
-		this.knight = knight;
 	}
 }
