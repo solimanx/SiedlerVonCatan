@@ -146,8 +146,6 @@ public class ServerOutputHandler {
 			}
 			Index[] location = ModelToProtocol.convertToEdgeIndex(schnitt.getEdgeID());
 			pHarbourArray[i] = new ProtocolHarbour(location,hC[i].getHarbourStatus());
-			//TODO: Index location  = Schnittmenge aus Kanten, die aus ecke [2*i] und [2*i+1] hervorgeht bilden
-			//pHarbourArray[i] = new ProtocolHarbour(location,[2*1].getHarbourType)
 		}
 		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray,
 				ProtocolToModel.getProtocolOneIndex(board.getBandit()));

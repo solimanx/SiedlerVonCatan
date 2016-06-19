@@ -23,24 +23,29 @@ public class TradeController {
 		tradeCounter++;
 	}
 
-	public void acceptTrade(int modelID, int tradingID) {
+	public void acceptTrade(int modelID, int tradingID, boolean accept) {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID) {
-				tradeOffers.get(tradingID).acceptingPlayers.add(tradingID);
-				serverController.tradeAccepted(modelID, tradingID, true);
+				if (accept){
+					tradeOffers.get(tradingID).acceptingPlayers.add(tradingID);
+				} else {
+					tradeOffers.get(tradingID).decliningPlayers.add(tradingID);
+				}
+				
+				serverController.tradeAccepted(modelID, tradingID, accept);
 			}
 		}
 	}
 
-	// ADDED
-	public void declineTrade(int modelID, int tradingID) {
+	// ADDED methode wieder auskommentiert, siehe obige Methode
+	/* public void declineTrade(int modelID, int tradingID) {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID) {
 				tradeOffers.get(tradingID).acceptingPlayers.add(tradingID);
 				serverController.tradeAccepted(modelID, tradingID, false);
 			}
 		}
-	}
+	} */
 
 	public void fulfillTrade(int modelID, int tradingID, int partnerModelID) {
 		for (int i = 0; i < tradeOffers.size(); i++) {

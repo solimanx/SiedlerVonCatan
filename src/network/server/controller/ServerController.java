@@ -1312,7 +1312,7 @@ public class ServerController {
 	public void requestSeaTrade(int threadID, int[] offer, int[] demand) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (gameLogic.checkPlayerResources(modelID, offer)) {
-			// tradeController.requestSeaTrade(modelID,offer,demand);
+			tradeController.requestSeaTrade(modelID,offer,demand);
 		}
 	}
 
@@ -1324,8 +1324,8 @@ public class ServerController {
 		serverOutputHandler.tradePreview(modelPlayerIdMap.get(modelID), tradingID, supply, demand);
 	}
 
-	public void acceptTrade(int threadID, int tradingID) {
-		tradeController.acceptTrade(threadPlayerIdMap.get(threadID), tradingID);
+	public void acceptTrade(int threadID, int tradingID,boolean accept) {
+		tradeController.acceptTrade(threadPlayerIdMap.get(threadID), tradingID, accept);
 	}
 
 	public void tradeAccepted(int modelID, int tradingID, boolean accepted) {

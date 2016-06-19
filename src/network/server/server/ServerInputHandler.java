@@ -269,15 +269,15 @@ public class ServerInputHandler {
 	}
 
 	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
-		// TODO
-
+		serverController.buyDevelopmentCard(currentThreadID);
 	}
 
 	protected void handle(ProtocolHarbourRequest harbourRequest) {
-
-		ProtocolResource offer = harbourRequest.getOffer();
-		ProtocolResource withdrawal = harbourRequest.getWithdrawal();
-		// TODO clientController.harbourRequest(offer,withdrawal);
+		ProtocolResource rOf = harbourRequest.getOffer();
+		ProtocolResource rDe = harbourRequest.getWithdrawal();
+		int[] offer = ProtocolToModel.convertResources(rOf);
+		int[] demand = ProtocolToModel.convertResources(rDe);
+		serverController.requestSeaTrade(currentThreadID, offer, demand);
 	}
 
 	protected void handle(ProtocolTradeRequest tradeRequest) {
@@ -289,7 +289,8 @@ public class ServerInputHandler {
 
 	protected void handle(ProtocolTradeAccept tradeAccept) {
 		int tradeID = tradeAccept.getTradeID();
-		serverController.acceptTrade(currentThreadID, tradeID);
+		boolean acceptFlag = tradeAccept.getAccepted();
+		serverController.acceptTrade(currentThreadID, tradeID, acceptFlag);
 	}
 
 	protected void handle(ProtocolTradeComplete tradeComplete) {
@@ -304,22 +305,26 @@ public class ServerInputHandler {
 	}
 
 	protected void handle(ProtocolPlayInventionCard playInventionCard) {
-		// TODO Auto-generated method stub
+		int[] resources = ProtocolToModel.convertResources(playInventionCard.getResource());
+		serverController.playInventionCard(currentThreadID, resources);
 
 	}
 
-	protected void handle(ProtocolPlayMonopolyCard playKnightCard) {
-		// TODO Auto-generated method stub
+	protected void handle(ProtocolPlayMonopolyCard monopolyCard) {
+		serverController.playMonopolyCard(currentThreadID, monopolyCard.getResourceType());
+	}
+
+	protected void handle(ProtocolPlayKnightCard knightCard) {
+		String fieldID = ProtocolToModel.getProtocolOneID(knightCard.getLocationID());
+		int coords[] = ProtocolToModel.getFieldCoordinates(fieldID);
+		serverController.playKnightCard(currentThreadID, coords[0], coords[1], knightCard.getVictimID());
 
 	}
 
-	protected void handle(ProtocolPlayKnightCard playKnightCard) {
-		// TODO Auto-generated method stub
-
-	}
-
-	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
-		// TODO Auto-generated method stub
+	protected void handle(ProtocolPlayRoadCard roadBuildingCard) {
+		int coords1[] = ProtocolToModel.getEdgeCoordinates(roadBuildingCard.getRoadID1());
+		int coords2[] = ProtocolToModel.getEdgeCoordinates(roadBuildingCard.getRoadID2());
+		serverController.playStreetCard(currentThreadID, coords1[0], coords1[1], coords1[2], coords2[0], coords1[1], coords2[2]);
 
 	}
 
