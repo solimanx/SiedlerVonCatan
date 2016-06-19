@@ -649,6 +649,7 @@ public class GameViewController implements Initializable {
 			Scene scene = new Scene(root);
 			Stage helpView = new Stage();
 			helpView.setScene(scene);
+			helpView.setResizable(false);
 			helpView.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
