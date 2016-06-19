@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import enums.CardType;
 import enums.ResourceType;
 import javafx.beans.value.ChangeListener;
@@ -23,6 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
+import network.client.view.GameViewController;
 import network.client.view.tradeview.TradeViewController;
 
 public class DevCardViewController implements Initializable {
@@ -67,6 +72,8 @@ public class DevCardViewController implements Initializable {
 
 	@FXML
 	private Button inventionOK;
+	
+	private static Logger logger = LogManager.getLogger(DevCardViewController.class.getSimpleName());
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -208,7 +215,8 @@ public class DevCardViewController implements Initializable {
 				inventionStage.initModality(Modality.WINDOW_MODAL);
 				inventionStage.initOwner(this.stage);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				logger.error("Input/Output Exception", e);
+				logger.catching(Level.ERROR, e);
 				e.printStackTrace();
 			}
 

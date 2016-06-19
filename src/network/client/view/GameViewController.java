@@ -656,7 +656,8 @@ public class GameViewController implements Initializable {
 			helpView.setScene(scene);
 			helpView.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception", e);
+			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
 	}
@@ -1056,7 +1057,8 @@ public class GameViewController implements Initializable {
 			robberStage.initOwner(gameStage);
 			robberStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			logger.error("Input/Output Exception", e);
+			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
 
