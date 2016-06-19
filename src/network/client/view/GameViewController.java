@@ -1157,20 +1157,20 @@ public class GameViewController implements Initializable {
 
 	public void alert(String message) {
 		Platform.runLater(new Runnable() {
-			String message;
+			String msg;
 
 			@Override
 			public void run() {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Alert");
-				alert.setHeaderText("message");
+				alert.setHeaderText("msg");
 				alert.initOwner(gameStage);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.showAndWait();
 			}
 
 			public Runnable init(String message) {
-				this.message = message;
+				this.msg = message;
 				return (this);
 			}
 		}.init(message));
