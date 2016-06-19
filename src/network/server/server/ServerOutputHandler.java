@@ -12,6 +12,7 @@ import enums.ResourceType;
 import model.Board;
 import model.Index;
 import model.objects.Corner;
+import model.objects.Edge;
 import model.objects.Field;
 import model.objects.DevCards.DevelopmentCard;
 import network.ModelToProtocol;
@@ -124,7 +125,27 @@ public class ServerOutputHandler {
 		ProtocolBuilding[] pBuildingsArray = {};
 		ProtocolHarbour[] pHarbourArray = new ProtocolHarbour[board.getHarbourCorners().length/2];
 		Corner[] hC = board.getHarbourCorners();
-		for (int i = 0;i < board.getHarbourCorners().length/2;i++){
+		int[] coords;
+		Edge[] c1Edges;
+		Edge[] c2Edges;
+		Edge schnitt = null;
+		for (int i = 0;i < hC.length/2;i++){
+			coords = ProtocolToModel.getCornerCoordinates(hC[i].getCornerID());
+			c1Edges = board.getProjectingEdges(coords[0],coords[1],coords[2]);
+			
+			coords = ProtocolToModel.getCornerCoordinates(hC[i+1].getCornerID());
+			c2Edges = board.getProjectingEdges(coords[0],coords[1],coords[2]);
+			for (int j = 0;j <c1Edges.length;j++){
+				for (int k = 0;k <c2Edges.length;k++){
+					if (c1Edges[j] != null && c2Edges[k] != null){
+					if (c1Edges[j].equals(c2Edges[k])){
+						schnitt = c1Edges[j];
+					}
+					}
+				}
+			}
+			Index[] location = ModelToProtocol.convertToEdgeIndex(schnitt.getEdgeID());
+			pHarbourArray[i] = new ProtocolHarbour(location,hC[i].getHarbourStatus());
 			//TODO: Index location  = Schnittmenge aus Kanten, die aus ecke [2*i] und [2*i+1] hervorgeht bilden
 			//pHarbourArray[i] = new ProtocolHarbour(location,[2*1].getHarbourType)
 		}
@@ -206,7 +227,7 @@ public class ServerOutputHandler {
 		} else {
 			pResource = ModelToProtocol.convertToProtocolResource(resources);
 		}
-		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource); //TODO die 1.0 neue attribute
+		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, null, false, false); //TODO die 1.0 neue attribute
 		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(pPlayer);
 		Response r = new Response();
 		r.pSUpdate = ps;
