@@ -143,7 +143,7 @@ public class ClientOutputHandler {
 	 * @param y
 	 * @param victim_id
 	 */
-	public void sendBanditRequest(int x, int y, int victim_id) {
+	public void sendBanditRequest(int x, int y, Integer victim_id) {
 		Index i = ProtocolToModel.getProtocolOneIndex(ModelToProtocol.getFieldID(x, y));
 		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(i, victim_id);
 		Response r = new Response();
