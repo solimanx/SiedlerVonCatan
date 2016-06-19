@@ -707,13 +707,17 @@ public class ServerController {
 		int max = getLongestTradingRoute(modelID);
 		longestRoutes[modelID] = max;
 		if (max >= 5) {
-			if (longestTradingRoutePlayer != modelID && longestRoutes[longestTradingRoutePlayer] < max) {
-				if (longestTradingRoutePlayer > -1) {
+			if (longestTradingRoutePlayer != -1){
+				if (longestTradingRoutePlayer != modelID && longestRoutes[longestTradingRoutePlayer] < max) {
 					gameLogic.getBoard().getPlayer(longestTradingRoutePlayer).setHasLongestRoad(false);
-				}
 				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
 				longestTradingRoutePlayer = modelID;
-				serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));
+				serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));					
+				}
+			} else {
+				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
+				longestTradingRoutePlayer = modelID;
+				serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));	
 			}
 		} else {
 			if (longestTradingRoutePlayer == modelID) { // special case

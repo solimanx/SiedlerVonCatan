@@ -11,6 +11,7 @@ import enums.PlayerState;
 import enums.ResourceType;
 import model.Board;
 import model.Index;
+import model.objects.Corner;
 import model.objects.Field;
 import model.objects.DevCards.DevelopmentCard;
 import network.ModelToProtocol;
@@ -121,7 +122,12 @@ public class ServerOutputHandler {
 		}
 
 		ProtocolBuilding[] pBuildingsArray = {};
-		ProtocolHarbour[] pHarbourArray = {};
+		ProtocolHarbour[] pHarbourArray = new ProtocolHarbour[board.getHarbourCorners().length/2];
+		Corner[] hC = board.getHarbourCorners();
+		for (int i = 0;i < board.getHarbourCorners().length/2;i++){
+			//TODO: Index location  = Schnittmenge aus Kanten, die aus ecke [2*i] und [2*i+1] hervorgeht bilden
+			//pHarbourArray[i] = new ProtocolHarbour(location,[2*1].getHarbourType)
+		}
 		ProtocolBoard pb = new ProtocolBoard(pfArray, pBuildingsArray, pHarbourArray,
 				ProtocolToModel.getProtocolOneIndex(board.getBandit()));
 		ProtocolGameStarted pgs = new ProtocolGameStarted(pb);

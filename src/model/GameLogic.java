@@ -148,8 +148,8 @@ public class GameLogic {
 							Corner[] neighbourAdjoiningVillages = board.getAttachedCorners(nCs[0], nCs[1], nCs[2]);
 							Corner schnitt = null; // schnittmenge aus Villages;
 							for (int j = 0; j < thisAdjoiningVillages.length; j++) {
-								for (int k = 0; k < neighbourAdjoiningVillages.length; j++) {
-									if (thisAdjoiningVillages[j].equals(neighbourAdjoiningVillages[j])) {
+								for (int k = 0; k < neighbourAdjoiningVillages.length; k++) {
+									if (thisAdjoiningVillages[j].equals(neighbourAdjoiningVillages[k])) {
 										schnitt = thisAdjoiningVillages[j];
 									}
 								}
