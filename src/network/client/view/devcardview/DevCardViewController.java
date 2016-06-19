@@ -72,6 +72,10 @@ public class DevCardViewController implements Initializable {
 
 	@FXML
 	private Button inventionOK;
+
+	private Stage monopolyStage;
+
+	private Stage inventionStage;
 	
 	private static Logger logger = LogManager.getLogger(DevCardViewController.class.getSimpleName());
 
@@ -167,6 +171,7 @@ public class DevCardViewController implements Initializable {
 			break;
 		}
 		viewController.getClientController().playInventionCard(resources);
+		inventionStage.close();
 		this.stage.close();
 	}
 
@@ -174,6 +179,7 @@ public class DevCardViewController implements Initializable {
 	void handleMonopolyOK(ActionEvent event) {
 
 		viewController.getClientController().playMonopolyCard(monopolyRChooser.getSelectionModel().getSelectedItem());
+		monopolyStage.close();
 		this.stage.close();
 	}
 
@@ -192,7 +198,7 @@ public class DevCardViewController implements Initializable {
 				root = loader
 						.load(getClass().getResource("/network/client/view/tradeview/monopolyView.fxml").openStream());
 				Scene scene = new Scene(root);
-				Stage monopolyStage = new Stage();
+				monopolyStage = new Stage();
 				monopolyStage.setScene(scene);
 				monopolyRChooser.getItems().addAll(ResourceType.values());
 				monopolyStage.initModality(Modality.WINDOW_MODAL);
@@ -208,7 +214,7 @@ public class DevCardViewController implements Initializable {
 				root = loader
 						.load(getClass().getResource("/network/client/view/tradeview/InventionView.fxml").openStream());
 				Scene scene = new Scene(root);
-				Stage inventionStage = new Stage();
+				inventionStage = new Stage();
 				inventionStage.setScene(scene);
 				inventRChooser1.getItems().addAll(ResourceType.values());
 				inventRChooser2.getItems().addAll(ResourceType.values());
