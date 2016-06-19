@@ -201,6 +201,9 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Button helpButton;
+	
+	@FXML
+	private Button cheatButton;
 
 	// DEBUG
 	@FXML
@@ -656,6 +659,29 @@ public class GameViewController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	void handleCheatButton(ActionEvent event) throws IOException {
+		Stage cheatStage = new Stage();
+		VBox cheatRoot = new VBox();
+		Scene cheatScene = new Scene(cheatRoot);
+		TextField cheatField = new TextField();
+		Button ok = new Button("Send Cheat");
+		
+		ok.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				cheatStage.close();
+				viewController.getClientController().getClientOuptputHandler().sendCheat(cheatField.getText());
+				
+			}
+		});
+		
+		cheatRoot.getChildren().addAll(cheatField, ok);
+		cheatStage.setScene(cheatScene);
+		cheatStage.show();
 	}
 
 	/**
