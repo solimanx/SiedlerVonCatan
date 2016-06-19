@@ -79,7 +79,7 @@ public class DevCardViewController implements Initializable {
 		this.viewController = viewController;
 		devCardList.clear();
 		devCardListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		devCardListView.setItems(devCardList);
+
 		devCardListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
 			@Override
@@ -114,6 +114,7 @@ public class DevCardViewController implements Initializable {
 				devCardList.add(string);
 			}
 		}
+		devCardListView.setItems(devCardList);
 	}
 
 	@FXML
