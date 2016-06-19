@@ -463,6 +463,7 @@ public class ClientController {
 		// if self
 		if (modelID == 0) {
 			gameLogic.getBoard().getPlayer(modelID).incrementResources(resources);
+			viewController.getGameViewController().setResourceCards(modelID, getPlayerResources(modelID));
 			Platform.runLater(
 					new ServerResponseRunnable(DefaultSettings.getCurrentTime() + " You have gained resources!",
 							viewController.getGameViewController()));
@@ -470,6 +471,7 @@ public class ClientController {
 		else {
 			// increment their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
+			viewController.getGameViewController().setResourceCards(modelID, getPlayerHiddenResource(modelID));
 		}
 
 	}
@@ -482,12 +484,14 @@ public class ClientController {
 		// if self
 		if (modelID == 0) {
 			gameLogic.getBoard().getPlayer(modelID).decrementResources(resources);
+			viewController.getGameViewController().setResourceCards(modelID, getPlayerResources(modelID));
 			Platform.runLater(new ServerResponseRunnable(DefaultSettings.getCurrentTime() + " You have lost resources!",
 					viewController.getGameViewController()));
 		} // if someone else
 		else {
 			// decrement their hiddenresources
-			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
+			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources[0]);
+			viewController.getGameViewController().setResourceCards(modelID, getPlayerHiddenResource(modelID));
 		}
 	}
 
@@ -836,6 +840,11 @@ public class ClientController {
 
 	public void playKnightCard(int x, int y, int modelID) {
 
+	}
+	
+	private int[] getPlayerHiddenResource(int playerID){
+		int[] resource = new int[]{gameLogic.getBoard().getPlayer(playerID).getHiddenResources()};
+		return resource;
 	}
 
 	/**
