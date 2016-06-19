@@ -789,7 +789,7 @@ public class ClientController {
 		if(threadID != -1){
 			viewController.getGameViewController().showVictory(threadPlayerIdMap.get(threadID));
 		} else {
-			viewController.getGameViewController().alert("message" + " Spieler: " + threadID);
+			viewController.getGameViewController().alert(message + " Spieler: " + threadID);
 		}
 	}
 
