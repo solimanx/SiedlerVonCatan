@@ -24,28 +24,28 @@ public class TradeViewController {
 
 	@FXML
 	private Button cancelTrade;
-	
+
 	@FXML
 	private Button placeOfferButton;
-	
+
 	@FXML
 	private ListView<String> foreignTrades;
-	
+
 	@FXML
 	private ListView<String> ownOffers;
-	
+
 	@FXML
 	private Button cancelOffer;
-	
+
 	@FXML
 	private Button tradeButton;
-	
+
 	@FXML
 	private Button acceptButton;
-	
+
 	@FXML
 	private TextField ownOffer;
-	
+
 	private Spinner<Integer> giveWoodSpinner;
 	private Spinner<Integer> giveClaySpinner;
 	private Spinner<Integer> giveWoolSpinner;
@@ -58,31 +58,31 @@ public class TradeViewController {
 	private Spinner<Integer> getOreSpinner;
 	private int[] resultOffer = new int[5];
 	private int[] resultDemand = new int[5];
-	
+
 	@FXML
 	private GridPane grid;
-	
+
 	@FXML
 	private GridPane harbourGrid;
-	
+
 	@FXML
 	private Button tradeHarbour;
-	
+
 	@FXML
 	RadioButton woolHarbour;
-	
+
 	@FXML
 	RadioButton woodHarbour;
-	
+
 	@FXML
 	RadioButton clayHarbour;
-	
+
 	@FXML
 	RadioButton cornHarbour;
-	
+
 	@FXML
 	RadioButton oreHarbour;
-	
+
 	@FXML
 	RadioButton genericHarbour;
 
@@ -144,6 +144,24 @@ public class TradeViewController {
 		updateSpinner(selfResources, grid);
 		updateSpinner(selfResources, harbourGrid);
 		cancelOffer.setDisable(true);
+		if (viewController.getClientController().getGameLogic().hasOreHarbour(0)) {
+			oreHarbour.setSelected(true);
+		}
+		if (viewController.getClientController().getGameLogic().hasCornHarbour(0)) {
+			cornHarbour.setSelected(true);
+		}
+		if (viewController.getClientController().getGameLogic().hasClayHarbour(0)) {
+			clayHarbour.setSelected(true);
+		}
+		if (viewController.getClientController().getGameLogic().hasWoodHarbour(0)) {
+			woodHarbour.setSelected(true);
+		}
+		if (viewController.getClientController().getGameLogic().hasThreeOneHarbour(0)) {
+			genericHarbour.setSelected(true);
+		}
+		if (viewController.getClientController().getGameLogic().hasWoolHarbour(0)) {
+			woolHarbour.setSelected(true);
+		}
 	}
 
 	/**
@@ -219,7 +237,7 @@ public class TradeViewController {
 	@FXML
 	void handlePlaceOfferButton(ActionEvent event) {
 		viewController.getClientController().requestTrade(resultOffer, resultDemand);
-		
+
 	}
 
 	/**
@@ -312,7 +330,8 @@ public class TradeViewController {
 	 * @param tradeID
 	 */
 	public void acceptingOffer(int modelID, int tradeID) {
-		String offerString = viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).getName() + " accepts your offer";
+		String offerString = viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).getName()
+				+ " accepts your offer";
 		Platform.runLater(new AddOfferStringRunnable(offerString));
 		int playerID = viewController.getClientController().getPlayerID(modelID);
 		acceptedOfferToModelID.put(offerString, playerID);
@@ -427,7 +446,7 @@ public class TradeViewController {
 		}
 
 	}
-	
+
 	public class RemoveTradeStringRunnable implements Runnable {
 		final String string;
 
@@ -457,7 +476,7 @@ public class TradeViewController {
 		}
 
 	}
-	
+
 	public class RemoveOfferStringRunnable implements Runnable {
 		final String string;
 
