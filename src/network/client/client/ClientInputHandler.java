@@ -308,6 +308,7 @@ public class ClientInputHandler {
 	 * @param statusUpdate
 	 */
 	protected void handle(ProtocolStatusUpdate statusUpdate) {
+		//TODO get new 1.0 stuff
 		// get player object
 		ProtocolPlayer pPlayer = statusUpdate.getPlayer();
 		// get ID which is "32" or "42" etc.

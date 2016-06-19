@@ -206,7 +206,7 @@ public class ServerOutputHandler {
 		} else {
 			pResource = ModelToProtocol.convertToProtocolResource(resources);
 		}
-		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource);
+		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource); //TODO die 1.0 neue attribute
 		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(pPlayer);
 		Response r = new Response();
 		r.pSUpdate = ps;

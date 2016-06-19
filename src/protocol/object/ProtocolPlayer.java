@@ -37,22 +37,27 @@ public class ProtocolPlayer {
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resources;
 
-	// @SerializedName("Rittermacht")
-	// private ProtocolPlayKnightCard playKnightCard;
-	// nur ausgespielte Rittter Karten
-
-	// @SerializedName("Entwicklungskarten")
-	// private ProtocolDevelopmentCards developmentCards;
-
+	@SerializedName("Entwicklungskarten")
+	private ProtocolDevCard developmentCards;
+	
+	@SerializedName("Größte Rittermacht")
+	private boolean largestArmy;
+	
+	@SerializedName("Größte Handelsstraße")
+	private boolean longestRoad;
+	
+	
 	public ProtocolPlayer(int playerID, Color color, String name, PlayerState status, int victoryPoints,
-			ProtocolResource resources) {
+			ProtocolResource resources, ProtocolDevCard developmentCards, boolean largestArmy, boolean longestRoad ) {
 		this.playerID = playerID;
 		this.color = color;
 		this.name = name;
 		this.status = status;
 		this.victoryPoints = victoryPoints;
 		this.resources = resources;
-		// this.developmentCards=developmentCards;
+		this.developmentCards = developmentCards;
+		this.largestArmy = largestArmy;
+		this.longestRoad = longestRoad;
 	}
 
 	public int getPlayerID() {
@@ -79,7 +84,15 @@ public class ProtocolPlayer {
 		return resources;
 	}
 
-	// public ProtocolDevelopmentCards getDevelopmentCards() {
-	// return developmentCards;
-	// }
+	public ProtocolDevCard getDevelopmentCards() {
+		return developmentCards;
+	}
+	
+	public boolean getLargestArmy(){
+		return largestArmy;
+	}
+	
+	public boolean getLongestRoad(){
+		return longestRoad;
+	}
 }
