@@ -457,11 +457,11 @@ public class GameViewController implements Initializable {
 	 * @return
 	 */
 	private FadeTransition generateTransition(Text text) {
-		FadeTransition transition = new FadeTransition(new Duration(100), text);
+		FadeTransition transition = new FadeTransition(new Duration(200), text);
 		transition.setFromValue(1);
 		transition.setToValue(0);
 		transition.setAutoReverse(true);
-		transition.setCycleCount(8);
+		transition.setCycleCount(10);
 		transition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
 
 			@Override
