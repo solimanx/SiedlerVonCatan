@@ -992,6 +992,7 @@ public class GameViewController implements Initializable {
 				setRobberLossState();
 				break;
 			case MOVE_ROBBER:
+				knight = false;
 				setMoveRobberState();
 				break;
 			case WAITING:
