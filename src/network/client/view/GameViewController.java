@@ -700,10 +700,11 @@ public class GameViewController implements Initializable {
 	 */
 	public void villageClick(int[] villageCoordinates) {
 		Polygon village = villages[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
-//		if (village.getFill().equals(playerColors.get(0))) {
-//			viewController.getClientController().requestBuildCity(villageCoordinates[0], villageCoordinates[1],
-//					villageCoordinates[2]);
-//		}
+		// if (village.getFill().equals(playerColors.get(0))) {
+		// viewController.getClientController().requestBuildCity(villageCoordinates[0],
+		// villageCoordinates[1],
+		// villageCoordinates[2]);
+		// }
 		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
 			viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
 					villageCoordinates[2]);
@@ -774,7 +775,7 @@ public class GameViewController implements Initializable {
 					}
 				} else {
 					viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3,
-								fieldCoordinates[1] - 3, (Integer) null);
+							fieldCoordinates[1] - 3, (Integer) null);
 				}
 
 			}
@@ -847,13 +848,13 @@ public class GameViewController implements Initializable {
 		village.setOpacity(1.0);
 		village.setEffect(shadow);
 		village.getStyleClass().remove("village");
-		int[] coordinates = {u+3,v+3,dir}; 
+		int[] coordinates = { u, v, dir };
 		village.setOnMouseClicked(e -> {
 			cityClick(coordinates);
 		});
 	}
-	
-	private void cityClick(int[] coordinates){
+
+	private void cityClick(int[] coordinates) {
 		viewController.getClientController().requestBuildCity(coordinates[0], coordinates[1], coordinates[2]);
 	}
 
