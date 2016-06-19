@@ -441,16 +441,13 @@ public class ClientOutputHandler {
 
 	}
 
-	/**
-	 * //* @param road1_id
-	 * 
-	 * @param target
-	 */
-	public void playKnightCard(String field, int target) {
-		Index fieldID = ModelToProtocol.getFieldIndex(field);
-		ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(fieldID, target);
+	
+
+	public void playKnightCard(int x, int y, Integer victimID) {
+		Index i = ProtocolToModel.getProtocolOneIndex(ModelToProtocol.getFieldID(x, y));
+		ProtocolPlayKnightCard pkc = new ProtocolPlayKnightCard(i, victimID);
 		Response r = new Response();
-		r.pPlayKnightCard = ppkc;
+		r.pPlayKnightCard = pkc;
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
@@ -458,6 +455,7 @@ public class ClientOutputHandler {
 			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
+		
 	}
 
 }

@@ -844,6 +844,7 @@ public class ClientController {
 	}
 
 	public void playKnightCard(int x, int y, int modelID) {
+			clientOutputHandler.playKnightCard(x, y, modelPlayerIdMap.get(modelID));
 
 	}
 	

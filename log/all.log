@@ -1,141 +1,122 @@
-19-06-2016 12:45:12.967 [Thread-5] Client:47 run - Connected to server
-19-06-2016 12:45:12.997 [Thread-5] Client:71 runClient - Received from Server: {"Hallo":{"Version":"Catan-Testserver (TeureUnternehmensBeratung GmkH)","Protokoll":"1.0"}}
-19-06-2016 12:45:13.085 [Thread-5] Client:84 write - Client sends to Server: {"Hallo":{"Version":"JavaFXClient 1.0 (NiedlichePixel)"}}
-19-06-2016 12:45:13.124 [Thread-5] Client:71 runClient - Received from Server: {"Willkommen":{"id":3}}
-19-06-2016 12:45:13.127 [Thread-5] ClientController:125 receiveWelcome - Handshake complete!
-19-06-2016 12:45:13.134 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Name":null,"Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:45:13.137 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Name":null,"Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:45:16.037 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:45:16.794 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:45:18.424 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spieler":{"Name":"ww","Farbe":"Blau"}}
-19-06-2016 12:45:18.425 [JavaFX Application Thread] PlayerProfileController:64 handleSendButton - ProfilewwBLUE
-19-06-2016 12:45:18.463 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Blau","Name":"ww","Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:45:18.468 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:45:22.377 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spieler":{"Name":"ww","Farbe":"Weiß"}}
-19-06-2016 12:45:22.377 [JavaFX Application Thread] PlayerProfileController:64 handleSendButton - ProfilewwWHITE
-19-06-2016 12:45:22.417 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:45:22.419 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:45:22.963 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spiel starten":{}}
-19-06-2016 12:45:23.002 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:45:23.004 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:45:26.870 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Name":null,"Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:45:33.021 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:45:33.547 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:45:33.558 [Thread-5] Client:71 runClient - Received from Server: {"Spiel gestartet":{"Karte":{"Felder":[{"Ort":{"x":-3,"y":3},"Typ":"Meer"},{"Ort":{"x":-2,"y":3},"Typ":"Meer"},{"Ort":{"x":-1,"y":3},"Typ":"Meer"},{"Ort":{"x":0,"y":3},"Typ":"Meer"},{"Ort":{"x":-3,"y":2},"Typ":"Meer"},{"Ort":{"x":-2,"y":2},"Typ":"Hügelland","Zahl":5},{"Ort":{"x":-1,"y":2},"Typ":"Gebirge","Zahl":10},{"Ort":{"x":0,"y":2},"Typ":"Weideland","Zahl":8},{"Ort":{"x":1,"y":2},"Typ":"Meer"},{"Ort":{"x":-3,"y":1},"Typ":"Meer"},{"Ort":{"x":-2,"y":1},"Typ":"Gebirge","Zahl":2},{"Ort":{"x":-1,"y":1},"Typ":"Wald","Zahl":9},{"Ort":{"x":0,"y":1},"Typ":"Weideland","Zahl":3},{"Ort":{"x":1,"y":1},"Typ":"Hügelland","Zahl":4},{"Ort":{"x":2,"y":1},"Typ":"Meer"},{"Ort":{"x":-3,"y":0},"Typ":"Meer"},{"Ort":{"x":-2,"y":0},"Typ":"Ackerland","Zahl":6},{"Ort":{"x":-1,"y":0},"Typ":"Wald","Zahl":4},{"Ort":{"x":0,"y":0},"Typ":"Wald","Zahl":11},{"Ort":{"x":1,"y":0},"Typ":"Wald","Zahl":6},{"Ort":{"x":2,"y":0},"Typ":"Weideland","Zahl":11},{"Ort":{"x":3,"y":0},"Typ":"Meer"},{"Ort":{"x":-2,"y":-1},"Typ":"Meer"},{"Ort":{"x":-1,"y":-1},"Typ":"Gebirge","Zahl":3},{"Ort":{"x":0,"y":-1},"Typ":"Weideland","Zahl":5},{"Ort":{"x":1,"y":-1},"Typ":"Wüste"},{"Ort":{"x":2,"y":-1},"Typ":"Ackerland","Zahl":12},{"Ort":{"x":3,"y":-1},"Typ":"Meer"},{"Ort":{"x":-1,"y":-2},"Typ":"Meer"},{"Ort":{"x":0,"y":-2},"Typ":"Hügelland","Zahl":8},{"Ort":{"x":1,"y":-2},"Typ":"Ackerland","Zahl":10},{"Ort":{"x":2,"y":-2},"Typ":"Ackerland","Zahl":9},{"Ort":{"x":3,"y":-2},"Typ":"Meer"},{"Ort":{"x":0,"y":-3},"Typ":"Meer"},{"Ort":{"x":1,"y":-3},"Typ":"Meer"},{"Ort":{"x":2,"y":-3},"Typ":"Meer"},{"Ort":{"x":3,"y":-3},"Typ":"Meer"}],"Gebäude":[],"Räuber":{"x":1,"y":-1},"Häfen":[{"Typ":"Hafen","Ort":[{"x":-3,"y":3},{"x":-2,"y":2}]},{"Typ":"Getreide Hafen","Ort":[{"x":-1,"y":3},{"x":0,"y":2}]},{"Typ":"Erz Hafen","Ort":[{"x":1,"y":2},{"x":1,"y":1}]},{"Typ":"Hafen","Ort":[{"x":-3,"y":1},{"x":-2,"y":0}]},{"Typ":"Holz Hafen","Ort":[{"x":3,"y":0},{"x":2,"y":0}]},{"Typ":"Lehm Hafen","Ort":[{"x":-2,"y":-1},{"x":-1,"y":-1}]},{"Typ":"Hafen","Ort":[{"x":3,"y":-2},{"x":2,"y":-1}]},{"Typ":"Hafen","Ort":[{"x":0,"y":-3},{"x":0,"y":-2}]},{"Typ":"Wolle Hafen","Ort":[{"x":2,"y":-3},{"x":1,"y":-2}]}]}}}
-19-06-2016 12:45:33.563 [JavaFX Application Thread] ClientController:285 run - STARTING GAME VIEW IN Platform.runLater
-19-06-2016 12:45:33.563 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[6,4]}}
-19-06-2016 12:45:33.566 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":3,"Wurf":[4,2]}}
-19-06-2016 12:45:33.568 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":4,"Wurf":[3,1]}}
-19-06-2016 12:45:33.571 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Dorf bauen","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:45:33.573 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Warten","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:45:33.576 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Warten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:46:01.056 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":2,"Typ":"Dorf","Ort":[{"x":-1,"y":2},{"x":0,"y":2},{"x":0,"y":1}]}}}
-19-06-2016 12:46:01.059 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Straße bauen","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:46:02.887 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":2,"Typ":"Straße","Ort":[{"x":-1,"y":2},{"x":0,"y":1}]}}}
-19-06-2016 12:46:02.892 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:46:02.896 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Dorf bauen","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:46:33.314 [JavaFX Application Thread] ClientController:589 requestBuildVillage - Building Initial Village
-19-06-2016 12:46:33.315 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Dorf","Ort":[{"x":1,"y":-2},{"x":2,"y":-2},{"x":2,"y":-3}]}}
-19-06-2016 12:46:33.357 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Dorf","Ort":[{"x":1,"y":-2},{"x":2,"y":-2},{"x":2,"y":-3}]}}}
-19-06-2016 12:46:33.360 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Straße bauen","Siegpunkte":1,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:46:33.364 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:46:40.502 [JavaFX Application Thread] ClientController:620 requestBuildStreet - Building Initial Village
-19-06-2016 12:46:40.503 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Straße","Ort":[{"x":1,"y":-2},{"x":2,"y":-3}]}}
-19-06-2016 12:46:40.542 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Straße","Ort":[{"x":1,"y":-2},{"x":2,"y":-3}]}}}
-19-06-2016 12:46:40.543 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Warten","Siegpunkte":1,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:46:40.544 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Dorf bauen","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:46:40.545 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:46:57.981 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":4,"Typ":"Dorf","Ort":[{"x":-2,"y":0},{"x":-2,"y":-1},{"x":-1,"y":-1}]}}}
-19-06-2016 12:46:57.985 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Straße bauen","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:46:59.507 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":4,"Typ":"Straße","Ort":[{"x":-2,"y":0},{"x":-1,"y":-1}]}}}
-19-06-2016 12:46:59.508 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Warten","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:46:59.510 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Dorf bauen","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:06.499 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":4,"Typ":"Dorf","Ort":[{"x":1,"y":0},{"x":2,"y":0},{"x":2,"y":-1}]}}}
-19-06-2016 12:47:06.503 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":4,"Rohstoffe":{"Holz":1,"Wolle":1,"Getreide":1}}}
-19-06-2016 12:47:06.505 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Straße bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:08.608 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":4,"Typ":"Straße","Ort":[{"x":2,"y":0},{"x":2,"y":-1}]}}}
-19-06-2016 12:47:08.612 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:08.617 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Dorf bauen","Siegpunkte":1,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:47:25.525 [JavaFX Application Thread] ClientController:589 requestBuildVillage - Building Initial Village
-19-06-2016 12:47:25.526 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-2,"y":2},{"x":-1,"y":2},{"x":-1,"y":1}]}}
-19-06-2016 12:47:25.564 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Dorf","Ort":[{"x":-2,"y":2},{"x":-1,"y":2},{"x":-1,"y":1}]}}}
-19-06-2016 12:47:25.565 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Holz":1,"Lehm":1,"Erz":1}}}
-19-06-2016 12:47:25.567 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Straße bauen","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":1,"Erz":1},"Entwicklungskarten":{}}}}
-19-06-2016 12:47:25.569 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:47:31.246 [JavaFX Application Thread] ClientController:620 requestBuildStreet - Building Initial Village
-19-06-2016 12:47:31.247 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Straße","Ort":[{"x":-2,"y":2},{"x":-1,"y":1}]}}
-19-06-2016 12:47:31.288 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Straße","Ort":[{"x":-2,"y":2},{"x":-1,"y":1}]}}}
-19-06-2016 12:47:31.290 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":1,"Erz":1},"Entwicklungskarten":{}}}}
-19-06-2016 12:47:31.291 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Dorf bauen","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:31.291 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:47:38.084 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":2,"Typ":"Dorf","Ort":[{"x":2,"y":-1},{"x":2,"y":-2},{"x":3,"y":-2}]}}}
-19-06-2016 12:47:38.085 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{"Getreide":2}}}
-19-06-2016 12:47:38.086 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Straße bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":2},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:42.303 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":2,"Typ":"Straße","Ort":[{"x":2,"y":-1},{"x":3,"y":-2}]}}}
-19-06-2016 12:47:42.307 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":2},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:42.311 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":2},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:47.140 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[6,5]}}
-19-06-2016 12:47:47.143 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":4,"Rohstoffe":{"Wolle":1}}}
-19-06-2016 12:47:47.146 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":2},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:50.373 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":2},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:47:50.376 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":1,"Erz":1},"Entwicklungskarten":{}}}}
-19-06-2016 12:47:53.204 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Würfeln":{}}
-19-06-2016 12:47:53.243 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":3,"Wurf":[3,1]}}
-19-06-2016 12:47:53.244 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":1,"Erz":1},"Entwicklungskarten":{}}}}
-19-06-2016 12:47:53.245 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:48:19.527 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Straße","Ort":[{"x":1,"y":-2},{"x":1,"y":-3}]}}
-19-06-2016 12:48:19.565 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":3,"Rohstoffe":{"Holz":1,"Lehm":1}}}
-19-06-2016 12:48:19.566 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Straße","Ort":[{"x":1,"y":-2},{"x":1,"y":-3}]}}}
-19-06-2016 12:48:19.567 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Erz":1},"Entwicklungskarten":{}}}}
-19-06-2016 12:48:19.568 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:48:22.141 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Zug beenden":{}}
-19-06-2016 12:48:22.179 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Erz":1},"Entwicklungskarten":{}}}}
-19-06-2016 12:48:22.180 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:48:22.181 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:48:30.619 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":4,"Wurf":[1,6]}}
-19-06-2016 12:48:30.633 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Räuber versetzen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:48:42.770 [Thread-5] Client:71 runClient - Received from Server: {"Räuber versetzt":{"Spieler":4,"Ort":{"x":-1,"y":1},"Ziel":3}}
-19-06-2016 12:48:42.773 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":3,"Rohstoffe":{"Erz":1}}}
-19-06-2016 12:48:42.776 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":4,"Rohstoffe":{"Erz":1}}}
-19-06-2016 12:48:42.779 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":5},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:49:01.679 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":4,"Rohstoffe":{"Wolle":1,"Getreide":1,"Erz":1}}}
-19-06-2016 12:49:01.682 [Thread-5] Client:71 runClient - Received from Server: {"Entwicklungskarte gekauft":{"Spieler":4,"Entwicklungskarte":"Ritter"}}
-19-06-2016 12:49:01.685 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":2},"Entwicklungskarten":{"Unbekannt":1}}}}
-19-06-2016 12:49:07.187 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":2},"Entwicklungskarten":{"Unbekannt":1}}}}
-19-06-2016 12:49:07.189 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":2},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:49:11.792 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[1,2]}}
-19-06-2016 12:49:11.796 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{"Wolle":1}}}
-19-06-2016 12:49:11.803 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":4,"Rohstoffe":{"Erz":1}}}
-19-06-2016 12:49:11.805 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:49:13.461 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
-19-06-2016 12:49:13.462 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:49:15.704 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Würfeln":{}}
-19-06-2016 12:49:15.742 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":3,"Wurf":[6,1]}}
-19-06-2016 12:49:15.742 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Räuber versetzen","Siegpunkte":2,"Rohstoffe":{},"Entwicklungskarten":{}}}}
-19-06-2016 12:49:15.744 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:49:52.025 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Räuber versetzen":{"Ort":{"x":0,"y":2},"Ziel":2}}
-19-06-2016 12:49:52.065 [Thread-5] Client:71 runClient - Received from Server: {"Räuber versetzt":{"Spieler":3,"Ort":{"x":0,"y":2},"Ziel":2}}
-19-06-2016 12:49:52.066 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":2,"Rohstoffe":{"Getreide":1}}}
-19-06-2016 12:49:52.066 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Getreide":1}}}
-19-06-2016 12:49:52.067 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Getreide":1},"Entwicklungskarten":{}}}}
-19-06-2016 12:49:52.068 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:49:54.294 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Zug beenden":{}}
-19-06-2016 12:49:54.332 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Weiß","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Getreide":1},"Entwicklungskarten":{}}}}
-19-06-2016 12:49:54.333 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":1}}}}
-19-06-2016 12:49:54.333 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:49:58.355 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":4,"Wurf":[5,5]}}
-19-06-2016 12:49:58.358 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{"Erz":1}}}
-19-06-2016 12:49:58.361 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Erz":1}}}
-19-06-2016 12:49:58.364 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Getreide":1}}}
-19-06-2016 12:49:58.367 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":4,"Farbe":"Rot","Name":"matthred","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":1}}}}
-19-06-2016 12:50:29.569 [Thread-5] Client:71 runClient - Received from Server: {"Chatnachricht":{"Absender":4,"Nachricht":"hello"}}
-19-06-2016 12:50:31.339 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Chatnachricht senden":{"Nachricht":"bnye"}}
-19-06-2016 12:50:31.377 [Thread-5] Client:71 runClient - Received from Server: {"Chatnachricht":{"Absender":3,"Nachricht":"bnye"}}
-19-06-2016 12:50:31.378 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:50:32.074 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Chatnachricht senden":{"Nachricht":"btye"}}
-19-06-2016 12:50:32.112 [Thread-5] Client:71 runClient - Received from Server: {"Chatnachricht":{"Absender":3,"Nachricht":"btye"}}
-19-06-2016 12:50:32.113 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:50:32.546 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Chatnachricht senden":{"Nachricht":"bye"}}
-19-06-2016 12:50:32.585 [Thread-5] Client:71 runClient - Received from Server: {"Chatnachricht":{"Absender":3,"Nachricht":"bye"}}
-19-06-2016 12:50:32.586 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-19-06-2016 12:51:19.239 [Thread-5] Client:71 runClient - Received from Server: {"Spiel beendet":{"Nachricht":"Verbindung zu einem Spieler verloren","Sieger":-1}}
+19-06-2016 13:32:00.645 [Thread-5] Client:47 run - Connected to server
+19-06-2016 13:32:00.680 [Thread-5] Client:71 runClient - Received from Server: {"Hallo":{"Version":"Catan-Testserver (TeureUnternehmensBeratung GmkH)","Protokoll":"1.0"}}
+19-06-2016 13:32:00.739 [Thread-5] Client:84 write - Client sends to Server: {"Hallo":{"Version":"JavaFXClient 1.0 (NiedlichePixel)"}}
+19-06-2016 13:32:00.778 [Thread-5] Client:71 runClient - Received from Server: {"Willkommen":{"id":2}}
+19-06-2016 13:32:00.781 [Thread-5] ClientController:125 receiveWelcome - Handshake complete!
+19-06-2016 13:32:00.788 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:00.791 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Name":null,"Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
+19-06-2016 13:32:03.617 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spieler":{"Name":"www","Farbe":"Weiß"}}
+19-06-2016 13:32:03.618 [JavaFX Application Thread] PlayerProfileController:64 handleSendButton - ProfilewwwWHITE
+19-06-2016 13:32:03.657 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
+19-06-2016 13:32:03.659 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:32:03.878 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spiel starten":{}}
+19-06-2016 13:32:03.917 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
+19-06-2016 13:32:03.919 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:32:06.562 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Name":null,"Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:15.295 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:16.690 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:16.698 [Thread-5] Client:71 runClient - Received from Server: {"Spiel gestartet":{"Karte":{"Felder":[{"Ort":{"x":-3,"y":3},"Typ":"Meer"},{"Ort":{"x":-2,"y":3},"Typ":"Meer"},{"Ort":{"x":-1,"y":3},"Typ":"Meer"},{"Ort":{"x":0,"y":3},"Typ":"Meer"},{"Ort":{"x":-3,"y":2},"Typ":"Meer"},{"Ort":{"x":-2,"y":2},"Typ":"Ackerland","Zahl":5},{"Ort":{"x":-1,"y":2},"Typ":"Hügelland","Zahl":8},{"Ort":{"x":0,"y":2},"Typ":"Wüste"},{"Ort":{"x":1,"y":2},"Typ":"Meer"},{"Ort":{"x":-3,"y":1},"Typ":"Meer"},{"Ort":{"x":-2,"y":1},"Typ":"Wald","Zahl":2},{"Ort":{"x":-1,"y":1},"Typ":"Hügelland","Zahl":10},{"Ort":{"x":0,"y":1},"Typ":"Ackerland","Zahl":3},{"Ort":{"x":1,"y":1},"Typ":"Weideland","Zahl":4},{"Ort":{"x":2,"y":1},"Typ":"Meer"},{"Ort":{"x":-3,"y":0},"Typ":"Meer"},{"Ort":{"x":-2,"y":0},"Typ":"Ackerland","Zahl":6},{"Ort":{"x":-1,"y":0},"Typ":"Ackerland","Zahl":9},{"Ort":{"x":0,"y":0},"Typ":"Gebirge","Zahl":11},{"Ort":{"x":1,"y":0},"Typ":"Gebirge","Zahl":6},{"Ort":{"x":2,"y":0},"Typ":"Weideland","Zahl":11},{"Ort":{"x":3,"y":0},"Typ":"Meer"},{"Ort":{"x":-2,"y":-1},"Typ":"Meer"},{"Ort":{"x":-1,"y":-1},"Typ":"Weideland","Zahl":3},{"Ort":{"x":0,"y":-1},"Typ":"Hügelland","Zahl":4},{"Ort":{"x":1,"y":-1},"Typ":"Wald","Zahl":5},{"Ort":{"x":2,"y":-1},"Typ":"Wald","Zahl":12},{"Ort":{"x":3,"y":-1},"Typ":"Meer"},{"Ort":{"x":-1,"y":-2},"Typ":"Meer"},{"Ort":{"x":0,"y":-2},"Typ":"Gebirge","Zahl":8},{"Ort":{"x":1,"y":-2},"Typ":"Wald","Zahl":10},{"Ort":{"x":2,"y":-2},"Typ":"Weideland","Zahl":9},{"Ort":{"x":3,"y":-2},"Typ":"Meer"},{"Ort":{"x":0,"y":-3},"Typ":"Meer"},{"Ort":{"x":1,"y":-3},"Typ":"Meer"},{"Ort":{"x":2,"y":-3},"Typ":"Meer"},{"Ort":{"x":3,"y":-3},"Typ":"Meer"}],"Gebäude":[],"Räuber":{"x":0,"y":2},"Häfen":[{"Typ":"Hafen","Ort":[{"x":-3,"y":3},{"x":-2,"y":2}]},{"Typ":"Holz Hafen","Ort":[{"x":-1,"y":3},{"x":0,"y":2}]},{"Typ":"Hafen","Ort":[{"x":1,"y":2},{"x":1,"y":1}]},{"Typ":"Wolle Hafen","Ort":[{"x":-3,"y":1},{"x":-2,"y":0}]},{"Typ":"Erz Hafen","Ort":[{"x":3,"y":0},{"x":2,"y":0}]},{"Typ":"Hafen","Ort":[{"x":-2,"y":-1},{"x":-2,"y":0}]},{"Typ":"Lehm Hafen","Ort":[{"x":3,"y":-2},{"x":2,"y":-2}]},{"Typ":"Hafen","Ort":[{"x":0,"y":-3},{"x":0,"y":-2}]},{"Typ":"Getreide Hafen","Ort":[{"x":2,"y":-3},{"x":1,"y":-2}]}]}}}
+19-06-2016 13:32:16.704 [JavaFX Application Thread] ClientController:285 run - STARTING GAME VIEW IN Platform.runLater
+19-06-2016 13:32:16.704 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":1,"Wurf":[2,1]}}
+19-06-2016 13:32:16.709 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[2,4]}}
+19-06-2016 13:32:16.712 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":3,"Wurf":[5,6]}}
+19-06-2016 13:32:16.715 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:16.718 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
+19-06-2016 13:32:16.720 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Dorf bauen","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:35.212 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Dorf","Ort":[{"x":1,"y":1},{"x":1,"y":0},{"x":2,"y":0}]}}}
+19-06-2016 13:32:35.215 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Straße bauen","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:36.406 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Straße","Ort":[{"x":1,"y":0},{"x":2,"y":0}]}}}
+19-06-2016 13:32:36.410 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Warten","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:36.412 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Dorf bauen","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:44.489 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":1,"Typ":"Dorf","Ort":[{"x":-1,"y":-1},{"x":0,"y":-1},{"x":0,"y":-2}]}}}
+19-06-2016 13:32:44.494 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Straße bauen","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:45.658 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":1,"Typ":"Straße","Ort":[{"x":-1,"y":-1},{"x":0,"y":-1}]}}}
+19-06-2016 13:32:45.662 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:32:45.665 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Dorf bauen","Siegpunkte":0,"Rohstoffe":{},"Entwicklungskarten":{}}}}
+19-06-2016 13:33:04.289 [JavaFX Application Thread] ClientController:589 requestBuildVillage - Building Initial Village
+19-06-2016 13:33:04.291 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Dorf","Ort":[{"x":1,"y":-2},{"x":2,"y":-2},{"x":2,"y":-3}]}}
+19-06-2016 13:33:04.329 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":2,"Typ":"Dorf","Ort":[{"x":1,"y":-2},{"x":2,"y":-2},{"x":2,"y":-3}]}}}
+19-06-2016 13:33:04.330 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Straße bauen","Siegpunkte":1,"Rohstoffe":{},"Entwicklungskarten":{}}}}
+19-06-2016 13:33:04.331 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:33:08.481 [JavaFX Application Thread] ClientController:620 requestBuildStreet - Building Initial Village
+19-06-2016 13:33:08.482 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Straße","Ort":[{"x":1,"y":-2},{"x":2,"y":-3}]}}
+19-06-2016 13:33:08.521 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":2,"Typ":"Straße","Ort":[{"x":1,"y":-2},{"x":2,"y":-3}]}}}
+19-06-2016 13:33:08.522 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":1,"Rohstoffe":{},"Entwicklungskarten":{}}}}
+19-06-2016 13:33:08.523 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Dorf bauen","Siegpunkte":1,"Rohstoffe":{},"Entwicklungskarten":{}}}}
+19-06-2016 13:33:08.524 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:33:20.318 [JavaFX Application Thread] ClientController:589 requestBuildVillage - Building Initial Village
+19-06-2016 13:33:20.320 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-1,"y":1},{"x":-1,"y":0},{"x":0,"y":0}]}}
+19-06-2016 13:33:20.358 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":2,"Typ":"Dorf","Ort":[{"x":-1,"y":1},{"x":-1,"y":0},{"x":0,"y":0}]}}}
+19-06-2016 13:33:20.359 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":1}}}
+19-06-2016 13:33:20.361 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Straße bauen","Siegpunkte":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":1},"Entwicklungskarten":{}}}}
+19-06-2016 13:33:20.362 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:33:28.687 [JavaFX Application Thread] ClientController:620 requestBuildStreet - Building Initial Village
+19-06-2016 13:33:28.688 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Bauen":{"Typ":"Straße","Ort":[{"x":-1,"y":1},{"x":-1,"y":0}]}}
+19-06-2016 13:33:28.726 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":2,"Typ":"Straße","Ort":[{"x":-1,"y":1},{"x":-1,"y":0}]}}}
+19-06-2016 13:33:28.727 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":1},"Entwicklungskarten":{}}}}
+19-06-2016 13:33:28.728 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Dorf bauen","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:33:28.729 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:33:45.677 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":1,"Typ":"Dorf","Ort":[{"x":-2,"y":0},{"x":-1,"y":0},{"x":-1,"y":-1}]}}}
+19-06-2016 13:33:45.681 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Wolle":1,"Getreide":2}}}
+19-06-2016 13:33:45.685 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Straße bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:33:46.803 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":1,"Typ":"Straße","Ort":[{"x":-1,"y":0},{"x":-1,"y":-1}]}}}
+19-06-2016 13:33:46.807 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:33:46.811 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Dorf bauen","Siegpunkte":1,"Rohstoffe":{"Unbekannt":0},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:09.638 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Dorf","Ort":[{"x":-2,"y":2},{"x":-1,"y":2},{"x":-1,"y":1}]}}}
+19-06-2016 13:34:09.640 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Lehm":2,"Getreide":1}}}
+19-06-2016 13:34:09.641 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Straße bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:12.965 [Thread-5] Client:71 runClient - Received from Server: {"Bauvorgang":{"Gebäude":{"Eigentümer":3,"Typ":"Straße","Ort":[{"x":-1,"y":2},{"x":-1,"y":1}]}}}
+19-06-2016 13:34:12.967 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:12.969 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:14.896 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":3,"Wurf":[6,5]}}
+19-06-2016 13:34:14.899 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{"Erz":1}}}
+19-06-2016 13:34:14.901 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Wolle":1}}}
+19-06-2016 13:34:14.904 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:18.500 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:18.503 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":3},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:20.851 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":1,"Wurf":[5,1]}}
+19-06-2016 13:34:20.855 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Getreide":1}}}
+19-06-2016 13:34:20.858 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Erz":1}}}
+19-06-2016 13:34:20.861 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:22.498 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:22.500 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":2},"Entwicklungskarten":{}}}}
+19-06-2016 13:34:25.029 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Würfeln":{}}
+19-06-2016 13:34:25.067 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[5,1]}}
+19-06-2016 13:34:25.068 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Getreide":1}}}
+19-06-2016 13:34:25.069 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Erz":1}}}
+19-06-2016 13:34:25.069 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":2},"Entwicklungskarten":{}}}}
+19-06-2016 13:34:25.070 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:34:36.669 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Zug beenden":{}}
+19-06-2016 13:34:36.707 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":2},"Entwicklungskarten":{}}}}
+19-06-2016 13:34:36.708 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":6},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:36.709 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:34:41.219 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":3,"Wurf":[3,1]}}
+19-06-2016 13:34:41.222 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Wolle":1}}}
+19-06-2016 13:34:41.225 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Lehm":1}}}
+19-06-2016 13:34:41.232 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":7},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:34:46.372 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":3,"Rohstoffe":{"Wolle":1,"Getreide":1,"Erz":1}}}
+19-06-2016 13:34:46.374 [Thread-5] Client:71 runClient - Received from Server: {"Entwicklungskarte gekauft":{"Spieler":3,"Entwicklungskarte":"Ritter"}}
+19-06-2016 13:34:46.376 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Entwicklungskarten":{"Unbekannt":1}}}}
+19-06-2016 13:35:10.780 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Entwicklungskarten":{"Unbekannt":1}}}}
+19-06-2016 13:35:10.793 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":6},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:35:13.579 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":1,"Wurf":[2,3]}}
+19-06-2016 13:35:13.581 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Getreide":1}}}
+19-06-2016 13:35:13.583 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":6},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:35:14.403 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Blau","Name":"matth","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":6},"Entwicklungskarten":{"Unbekannt":0}}}}
+19-06-2016 13:35:14.406 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":2},"Entwicklungskarten":{}}}}
+19-06-2016 13:35:14.944 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Würfeln":{}}
+19-06-2016 13:35:14.982 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[4,1]}}
+19-06-2016 13:35:14.983 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Getreide":1}}}
+19-06-2016 13:35:14.984 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":2},"Entwicklungskarten":{}}}}
+19-06-2016 13:35:14.984 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:35:15.648 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Zug beenden":{}}
+19-06-2016 13:35:15.687 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":1,"Getreide":1,"Erz":2},"Entwicklungskarten":{}}}}
+19-06-2016 13:35:15.688 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":6},"Entwicklungskarten":{"Unbekannt":1}}}}
+19-06-2016 13:35:15.689 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+19-06-2016 13:35:18.064 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":3,"Wurf":[1,6]}}
+19-06-2016 13:35:18.065 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Räuber versetzen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":6},"Entwicklungskarten":{"Unbekannt":1}}}}
+19-06-2016 13:35:26.909 [Thread-5] Client:71 runClient - Received from Server: {"Räuber versetzt":{"Spieler":3,"Ort":{"x":0,"y":0},"Ziel":2}}
+19-06-2016 13:35:26.911 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":2,"Rohstoffe":{"Getreide":1}}}
+19-06-2016 13:35:26.913 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":3,"Rohstoffe":{"Getreide":1}}}
+19-06-2016 13:35:26.914 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":3,"Farbe":"Orange","Name":"orange","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":7},"Entwicklungskarten":{"Unbekannt":1}}}}
+19-06-2016 13:36:32.239 [Thread-5] Client:71 runClient - Received from Server: {"Spiel beendet":{"Nachricht":"Verbindung zu einem Spieler verloren","Sieger":-1}}

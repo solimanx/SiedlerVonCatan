@@ -713,7 +713,7 @@ public class GameViewController implements Initializable {
 	 * @param fieldCoordinates
 	 */
 	public void fieldClick(int[] fieldCoordinates, boolean knight) {
-		if (selfState == PlayerState.MOVE_ROBBER || knight==true) {
+		if (selfState == PlayerState.MOVE_ROBBER || knight == true) {
 			List<String> choices = new ArrayList<>();
 			String player2 = playerNameTwo.getText();
 			choices.add(player2);
@@ -737,8 +737,13 @@ public class GameViewController implements Initializable {
 				} else if (string.equals(player4)) {
 					resultID = 4;
 				}
-				viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3, fieldCoordinates[1] - 3,
-						viewPositiontoPlayerID.get(resultID));
+				if (knight == false) {
+					viewController.getClientController().requestSetBandit(fieldCoordinates[0] - 3,
+							fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
+				} else {
+					viewController.getClientController().playKnightCard(fieldCoordinates[0] - 3,
+							fieldCoordinates[1] - 3, viewPositiontoPlayerID.get(resultID));
+				}
 				knight = false;
 			}
 		}
@@ -1221,7 +1226,7 @@ public class GameViewController implements Initializable {
 						hexagon.setVisible(true);
 						int[] resourceCoordinates = { i, j };
 						hexagon.setOnMouseClicked(e -> {
-							fieldClick(resourceCoordinates,knight);
+							fieldClick(resourceCoordinates, knight);
 						});
 						fieldFigures.add(0, hexagon);
 						fields[i][j] = hexagon;
