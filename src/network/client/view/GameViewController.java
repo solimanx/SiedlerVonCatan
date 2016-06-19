@@ -1163,7 +1163,7 @@ public class GameViewController implements Initializable {
 			public void run() {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Alert");
-				alert.setHeaderText("msg");
+				alert.setHeaderText(msg);
 				alert.initOwner(gameStage);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.showAndWait();
