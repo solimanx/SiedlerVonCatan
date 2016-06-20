@@ -100,7 +100,7 @@ public class TradeViewController {
 	private ViewController viewController;
 	private int ownTradeID = 0;
 	private Stage stage;
-
+	
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
@@ -141,6 +141,8 @@ public class TradeViewController {
 	}
 
 	public void start(int[] selfResources) {
+		resultDemand = new int[5];
+		resultOffer = new int[5];
 		updateSpinner(selfResources, grid);
 		updateSpinner(selfResources, harbourGrid);
 		cancelOffer.setDisable(true);
@@ -237,6 +239,8 @@ public class TradeViewController {
 	@FXML
 	void handlePlaceOfferButton(ActionEvent event) {
 		viewController.getClientController().requestTrade(resultOffer, resultDemand);
+		resultDemand = new int[5];
+		resultOffer = new int[5];
 
 	}
 
@@ -268,6 +272,8 @@ public class TradeViewController {
 	void handleCancelOwnOffer(ActionEvent event) {
 		viewController.getClientController().tradeCancelled(viewController.getClientController().getOwnPlayerID(),
 				ownTradeID);
+		resultDemand = new int[5];
+		resultOffer = new int[5];
 	}
 
 	/**

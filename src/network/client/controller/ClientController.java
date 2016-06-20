@@ -473,16 +473,15 @@ public class ClientController {
 		if (modelID == 0) {
 			gameLogic.getBoard().getPlayer(modelID).incrementResources(resources);
 			viewController.getGameViewController().setResourceCards(modelID, getPlayerResources(modelID));
-			Platform.runLater(
-					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), resources));
+			Platform.runLater(new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(),
+					gameLogic.getBoard().getPlayer(modelID).getResources()));
 		} // if someone else
 		else {
 			// increment their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
+			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
 			Platform.runLater(
-					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), resources));
-			// viewController.getGameViewController().setResourceCards(modelID,
-			// getPlayerHiddenResource(modelID));
+					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), hiddenResources));
 		}
 
 	}
@@ -496,15 +495,18 @@ public class ClientController {
 		if (modelID == 0) {
 			gameLogic.getBoard().getPlayer(modelID).decrementResources(resources);
 			viewController.getGameViewController().setResourceCards(modelID, getPlayerResources(modelID));
-			Platform.runLater(new ServerResponseRunnable(DefaultSettings.getCurrentTime() + " You have lost resources!",
-					viewController.getGameViewController()));
+			Platform.runLater(new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(),
+					gameLogic.getBoard().getPlayer(modelID).getResources()));
 		} // if someone else
 		else {
 			// decrement their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources[0]);
-			// viewController.getGameViewController().setResourceCards(modelID,
-			// getPlayerHiddenResource(modelID));
+			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
+			Platform.runLater(
+					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), hiddenResources));
 		}
+		// getPlayerHiddenResource(modelID));
+
 	}
 
 	// 8.6
