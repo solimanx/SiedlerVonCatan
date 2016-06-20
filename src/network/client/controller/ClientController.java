@@ -418,7 +418,7 @@ public class ClientController {
 	public GameLogic getGameLogic() {
 		return gameLogic;
 	}
-	
+
 	public ClientOutputHandler getClientOuptputHandler() {
 		return clientOutputHandler;
 	}
@@ -654,7 +654,7 @@ public class ClientController {
 		// DEBUG
 		// if (gameLogic.checkBuildCity(x - radius, y - radius, dir,
 		// ownPlayerId)) {
-		clientOutputHandler.requestBuildCity(x - radius, y - radius, dir);
+		clientOutputHandler.requestBuildCity(x , y , dir);
 		// }
 	}
 
@@ -803,7 +803,7 @@ public class ClientController {
 	public void largestArmy(int threadID) {
 		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(true);
 		viewController.getGameViewController().setGreatestKnightForce(threadPlayerIdMap.get(threadID));
-		
+
 	}
 
 	/**
@@ -851,7 +851,7 @@ public class ClientController {
 			clientOutputHandler.playKnightCard(x, y, modelPlayerIdMap.get(modelID));
 
 	}
-	
+
 	private int[] getPlayerHiddenResource(int playerID){
 		int[] resource = new int[]{gameLogic.getBoard().getPlayer(playerID).getHiddenResources()};
 		return resource;
@@ -912,7 +912,7 @@ public class ClientController {
 	public void setOwnTradingID(Integer ownTradingID) {
 		this.ownTradingID = ownTradingID;
 	}
-	
+
 	public int getPlayerID(int modelID){
 		return modelPlayerIdMap.get(modelID);
 	}

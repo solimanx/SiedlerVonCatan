@@ -846,14 +846,16 @@ public class GameViewController implements Initializable {
 		village.setOpacity(1.0);
 		village.setEffect(shadow);
 		village.getStyleClass().remove("village");
-		int[] coordinates = { u, v, dir };
+		int[] coordinates = { u, v , dir };
 		village.setOnMouseClicked(e -> {
 			cityClick(coordinates);
 		});
 	}
 
 	private void cityClick(int[] coordinates) {
+
 		viewController.getClientController().requestBuildCity(coordinates[0], coordinates[1], coordinates[2]);
+
 	}
 
 	/**

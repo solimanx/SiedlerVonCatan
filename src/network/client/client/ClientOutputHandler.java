@@ -441,7 +441,7 @@ public class ClientOutputHandler {
 
 	}
 
-	
+
 
 	public void playKnightCard(int x, int y, Integer victimID) {
 		Index i = ProtocolToModel.getProtocolOneIndex(ModelToProtocol.getFieldID(x, y));
@@ -455,9 +455,9 @@ public class ClientOutputHandler {
 			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void sendCheat(String string){
 		try {
 			client.write(string);
