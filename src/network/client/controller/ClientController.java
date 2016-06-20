@@ -480,8 +480,8 @@ public class ClientController {
 			// increment their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
 			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
-			Platform.runLater(
-					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), hiddenResources));
+//			Platform.runLater(
+//					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), hiddenResources));
 		}
 
 	}
@@ -502,8 +502,8 @@ public class ClientController {
 			// decrement their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources[0]);
 			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
-			Platform.runLater(
-					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), hiddenResources));
+//			Platform.runLater(
+//					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), hiddenResources));
 		}
 		// getPlayerHiddenResource(modelID));
 

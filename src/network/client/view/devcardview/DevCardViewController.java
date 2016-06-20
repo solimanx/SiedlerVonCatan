@@ -196,7 +196,7 @@ public class DevCardViewController implements Initializable {
 			Pane root;
 			try {
 				root = loader
-						.load(getClass().getResource("/network/client/view/tradeview/monopolyView.fxml").openStream());
+						.load(getClass().getResource("/network/client/view/devcardview/MonopolyView.fxml").openStream());
 				Scene scene = new Scene(root);
 				monopolyStage = new Stage();
 				monopolyStage.setScene(scene);
@@ -212,7 +212,7 @@ public class DevCardViewController implements Initializable {
 			Pane root;
 			try {
 				root = loader
-						.load(getClass().getResource("/network/client/view/tradeview/InventionView.fxml").openStream());
+						.load(getClass().getResource("/network/client/view/devcardview/InventionView.fxml").openStream());
 				Scene scene = new Scene(root);
 				inventionStage = new Stage();
 				inventionStage.setScene(scene);
