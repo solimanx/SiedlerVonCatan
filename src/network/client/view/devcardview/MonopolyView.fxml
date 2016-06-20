@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -10,7 +10,7 @@
 <VBox prefHeight="131.0" prefWidth="192.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.devcardview.DevCardViewController">
    <children>
       <Label text="Choose your resource type" />
-      <ComboBox fx:id="monopolyRChooser" prefWidth="150.0" promptText="Resource" />
+      <ChoiceBox fx:id="monopolyRChooser" prefWidth="150.0" />
       <HBox alignment="TOP_RIGHT">
          <children>
             <Button fx:id="monopolyOK" mnemonicParsing="false" onAction="#handleMonopolyOK" text="OK" />
