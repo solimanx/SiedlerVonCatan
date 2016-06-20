@@ -200,7 +200,7 @@ public class DevCardViewController implements Initializable {
 				Scene scene = new Scene(root);
 				monopolyStage = new Stage();
 				monopolyStage.setScene(scene);
-				monopolyRChooser.getItems().addAll(ResourceType.values());
+				monopolyRChooser.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP, ResourceType.CORN, ResourceType.ORE);
 				monopolyStage.initModality(Modality.WINDOW_MODAL);
 				monopolyStage.initOwner(this.stage);
 			} catch (IOException e) {
@@ -216,8 +216,8 @@ public class DevCardViewController implements Initializable {
 				Scene scene = new Scene(root);
 				inventionStage = new Stage();
 				inventionStage.setScene(scene);
-				inventRChooser1.getItems().addAll(ResourceType.values());
-				inventRChooser2.getItems().addAll(ResourceType.values());
+				inventRChooser1.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP, ResourceType.CORN, ResourceType.ORE);
+				inventRChooser2.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP, ResourceType.CORN, ResourceType.ORE);
 				inventionStage.initModality(Modality.WINDOW_MODAL);
 				inventionStage.initOwner(this.stage);
 			} catch (IOException e) {
