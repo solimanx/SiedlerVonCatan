@@ -27,9 +27,9 @@ public class TradeController {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID) {
 				if (accept){
-					tradeOffers.get(i).acceptingPlayers.add(tradingID);
+					tradeOffers.get(i).acceptingPlayers.add(modelID);
 				} else {
-					tradeOffers.get(i).decliningPlayers.add(tradingID);
+					tradeOffers.get(i).decliningPlayers.add(modelID);
 				}
 				
 				serverController.tradeAccepted(modelID, tradingID, accept);
@@ -51,18 +51,28 @@ public class TradeController {
 				if (notFound) {
 					serverController.serverResponse(modelID, "This player hasn't accepted your supply");
 				} else {
-					serverController.subFromPlayersResources(modelID, tOf.getSupply());
-					serverController.subFromPlayersResources(partnerModelID, tOf.getDemand());
+					if (serverController.gameLogic.checkPlayerResources(modelID, tOf.getSupply())){
+						if (serverController.gameLogic.checkPlayerResources(partnerModelID, tOf.getDemand())){
+							serverController.subFromPlayersResources(modelID, tOf.getSupply());
+							serverController.subFromPlayersResources(partnerModelID, tOf.getDemand());
 
-					serverController.addToPlayersResource(modelID, tOf.getDemand());
-					serverController.subFromPlayersResources(partnerModelID, tOf.getSupply());
+							serverController.addToPlayersResource(modelID, tOf.getDemand());
+							serverController.subFromPlayersResources(partnerModelID, tOf.getSupply());
 
-					serverController.statusUpdate(modelID);
-					serverController.statusUpdate(partnerModelID);
+							serverController.statusUpdate(modelID);
+							serverController.statusUpdate(partnerModelID);
 
-					tradeOffers.remove(i);
+							tradeOffers.remove(i);
 
-					serverController.tradeFulfilled(modelID, partnerModelID);
+							serverController.tradeFulfilled(modelID, partnerModelID);
+						} else {
+							serverController.error(partnerModelID, "You haven't got enough resources for the trade");
+							serverController.error(modelID, "Your partner hasn't got enough resources for this trade");
+						}
+					} else {
+						serverController.error(partnerModelID, "Your partner hasn't got enough resources for this trade");
+						serverController.error(modelID, "You haven't got enough resources for the trade");
+					}
 				}
 				break;
 			}

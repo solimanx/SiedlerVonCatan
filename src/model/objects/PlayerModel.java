@@ -31,7 +31,7 @@ public class PlayerModel {
 	private String name;
 	private int playedKnightCards;
 	private boolean hasPlayedDevCard = false;
-	private ArrayList<DevelopmentCard> devCardsBoughtInThisRound;
+	private ArrayList<DevelopmentCard> devCardsBoughtInThisRound = new ArrayList<DevelopmentCard>();
 	private ArrayList<HarbourStatus> harbours = new ArrayList<HarbourStatus>();
 
 	// {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}

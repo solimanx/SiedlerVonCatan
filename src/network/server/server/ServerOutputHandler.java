@@ -32,6 +32,7 @@ import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolPlayer;
@@ -132,7 +133,7 @@ public class ServerOutputHandler {
 		for (int i = 0;i < hC.length ;i+=2){
 			coords = ProtocolToModel.getCornerCoordinates(hC[i].getCornerID());
 			c1Edges = board.getProjectingEdges(coords[0],coords[1],coords[2]);
-
+			
 			coords = ProtocolToModel.getCornerCoordinates(hC[i+1].getCornerID());
 			c2Edges = board.getProjectingEdges(coords[0],coords[1],coords[2]);
 			for (int j = 0;j <c1Edges.length;j++){
@@ -218,14 +219,20 @@ public class ServerOutputHandler {
 	}
 
 	public void statusUpdate(int playerID, Color color, String name, PlayerState status, int victoryPoints,
-			int[] resources, Integer sendToPlayerID) {
+			int[] resources,int knightAmount, int[] devCards,boolean longestTR, boolean biggestKP, Integer sendToPlayerID) {
 		ProtocolResource pResource;
 		if (resources.length != 5) {
 			pResource = new ProtocolResource(null, null, null, null, null, resources[0]);
 		} else {
 			pResource = ModelToProtocol.convertToProtocolResource(resources);
 		}
-		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, 0 , null, false, false);
+		ProtocolDevCard pDevCard;
+		if (devCards.length != 5){
+			pDevCard = new ProtocolDevCard(null,null,null,null,null,devCards[0]);
+		} else {
+			pDevCard = new ProtocolDevCard(devCards[0],devCards[1],devCards[2],devCards[3],devCards[4],null);
+		}
+		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, knightAmount, pDevCard, longestTR, biggestKP); //TODO die 1.0 neue attribute
 		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(pPlayer);
 		Response r = new Response();
 		r.pSUpdate = ps;
@@ -495,7 +502,12 @@ public class ServerOutputHandler {
 	}
 
 	public void boughtDevelopmentCard(int player_id, DevelopmentCard devCard) {
-		CardType pdc = ModelToProtocol.devCardToCardType(devCard);
+		CardType pdc;
+		if (devCard == null){
+			pdc = CardType.UNKNOWN;
+		} else {
+			pdc = ModelToProtocol.devCardToCardType(devCard);
+		}	
 		ProtocolBoughtDevelopmentCard pbdc = new ProtocolBoughtDevelopmentCard(player_id, pdc);
 		Response r = new Response();
 		r.pBoughtDevelopmentCard = pbdc;

@@ -183,7 +183,7 @@ public class ServerController {
 	 * @param modelID
 	 * @param string
 	 */
-	private void error(int modelID, String string) {
+	protected void error(int modelID, String string) {
 		serverOutputHandler.error(string, modelPlayerIdMap.get(modelID));
 
 	}
@@ -276,12 +276,14 @@ public class ServerController {
 
 		if (sendToPlayer == playerModelID) {
 			int[] resources = getPlayerResources(playerModelID);
+			int[] devCards = pM.getPlayerDevCards();
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
-					pM.getPlayerState(), pM.getVictoryPoints(), resources, modelPlayerIdMap.get(sendToPlayer));
+					pM.getPlayerState(), pM.getVictoryPoints(), resources,pM.getPlayedKnightCards(),devCards,pM.hasLongestRoad(),pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
 		} else {
 			int[] resources = { gameLogic.getBoard().getPlayer(playerModelID).sumResources() };
+			int[] devCards = {pM.getPlayerDevCards().length};
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
-					pM.getPlayerState(), pM.getVictoryPoints(), resources, modelPlayerIdMap.get(sendToPlayer));
+					pM.getPlayerState(), pM.getVictoryPoints(), resources,pM.getPlayedKnightCards(),devCards,pM.hasLongestRoad(),pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
 		}
 
 	}
@@ -615,7 +617,7 @@ public class ServerController {
 		ArrayList<Edge> streetEdges = new ArrayList<Edge>();
 		Integer currPlayer = null;
 		for (int i = 0; i < neighbours.length; i++) {
-			if (neighbours[i].getOwnerID() != modelID && neighbours[i].isHasStreet()) {
+			if (neighbours[i].getOwnerID() != null && neighbours[i].getOwnerID() != modelID && neighbours[i].isHasStreet()) {
 
 				if (currPlayer != null && currPlayer == neighbours[i].getOwnerID()) {
 					streetEdges.add(neighbours[i]);
@@ -646,7 +648,7 @@ public class ServerController {
 			checkLongestTradingRoute(currPlayer);
 		} else {
 			EdgeToStreetSet(streetEdges.get(0)).setHasCircle(false);
-			//checkLongestTradingRoute ?
+			//checkLongestTradingRoute ? nullpointer arrayList leer
 		}
 	}
 
@@ -1372,7 +1374,7 @@ public class ServerController {
 	public void playKnightCard(int threadID, int x, int y, Integer victimThreadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-		if (gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
 			error(modelID, "Ungültiger Spielzug");
 		} else {
 			Integer victimModelID;
@@ -1825,16 +1827,20 @@ public class ServerController {
 	 * @param playerID
 	 * @param costsparam
 	 */
-	public void subFromPlayersResources(int playerID, int[] costsparam) {
-		int[] costs = new int[5];
+	public void subFromPlayersResources(int playerID, int[] costs) {
+		int[] pResources = getPlayerResources(playerID);
+		for (int i = 0;i <costs.length;i++){
+			pResources[i] = pResources[i] - costs[i];
+		}
+		/*int[] costs = new int[5];
 		for (int i = 0; i < costsparam.length; i++) { // copy array
 			costs[i] = costsparam[i];
 		}
-		int[] pResources = getPlayerResources(playerID);
+		
 		for (int i = 0; i < costs.length; i++) {
 			pResources[i] = pResources[i] - costs[i];
 
-		}
+		}*/
 		gameLogic.getBoard().getPlayer(playerID).setResources(pResources);
 	}
 
