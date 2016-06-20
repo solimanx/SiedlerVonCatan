@@ -57,7 +57,7 @@ public class TradeController {
 							serverController.subFromPlayersResources(partnerModelID, tOf.getDemand());
 
 							serverController.addToPlayersResource(modelID, tOf.getDemand());
-							serverController.subFromPlayersResources(partnerModelID, tOf.getSupply());
+							serverController.addToPlayersResource(partnerModelID, tOf.getSupply());
 
 							serverController.statusUpdate(modelID);
 							serverController.statusUpdate(partnerModelID);
