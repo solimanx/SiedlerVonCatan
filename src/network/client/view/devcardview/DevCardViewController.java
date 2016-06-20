@@ -25,6 +25,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
@@ -57,25 +58,18 @@ public class DevCardViewController implements Initializable {
 
 	private Stage stage;
 
-	@FXML
-	private ChoiceBox<ResourceType> monopolyRChooser;
-
-	@FXML
-	private Button monopolyOK;
-
-	@FXML
-	private ChoiceBox<ResourceType> inventRChooser1;
-
-	@FXML
-	private ChoiceBox<ResourceType> inventRChooser2;
-
-	@FXML
-	private Button inventionOK;
-
 	private Stage monopolyStage;
 
 	private Stage inventionStage;
-	
+
+	private ChoiceBox<enums.ResourceType> inventRChooser2;
+
+	private ChoiceBox<enums.ResourceType> inventRChooser1;
+
+	private Button inventButton;
+
+	private ChoiceBox<ResourceType> monopolyRChooser;
+
 	private static Logger logger = LogManager.getLogger(DevCardViewController.class.getSimpleName());
 
 	@Override
@@ -192,39 +186,46 @@ public class DevCardViewController implements Initializable {
 			stage.close();
 			viewController.getGameViewController().setIsStreetDev(true);
 		} else if (devCardSelected.equals(CardType.MONOPOLY.toString())) {
-			FXMLLoader loader = new FXMLLoader();
-			Pane root;
-			try {
-				root = loader
-						.load(getClass().getResource("/network/client/view/devcardview/MonopolyView.fxml").openStream());
-				Scene scene = new Scene(root);
-				monopolyStage = new Stage();
-				monopolyStage.setScene(scene);
-				monopolyRChooser.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP, ResourceType.CORN, ResourceType.ORE);
-				monopolyStage.initModality(Modality.WINDOW_MODAL);
-				monopolyStage.initOwner(this.stage);
-			} catch (IOException e) {
-				logger.catching(Level.ERROR, e);
-				e.printStackTrace();
-			}
-		} else if (devCardSelected.equals(CardType.INVENTION.toString())) {
-			FXMLLoader loader = new FXMLLoader();
-			Pane root;
-			try {
-				root = loader
-						.load(getClass().getResource("/network/client/view/devcardview/InventionView.fxml").openStream());
-				Scene scene = new Scene(root);
-				inventionStage = new Stage();
-				inventionStage.setScene(scene);
-				inventRChooser1.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP, ResourceType.CORN, ResourceType.ORE);
-				inventRChooser2.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP, ResourceType.CORN, ResourceType.ORE);
-				inventionStage.initModality(Modality.WINDOW_MODAL);
-				inventionStage.initOwner(this.stage);
-			} catch (IOException e) {
-				logger.catching(Level.ERROR, e);
-				e.printStackTrace();
-			}
 
+			VBox inventionBox = new VBox();
+			Scene scene = new Scene(inventionBox);
+
+			monopolyRChooser = new ChoiceBox<enums.ResourceType>();
+			monopolyRChooser.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
+					ResourceType.CORN, ResourceType.ORE);
+			inventButton = new Button("OK");
+			inventButton.setOnAction(e -> {
+				handleMonopolyOK(e);
+			});
+			inventionBox.getChildren().addAll(inventRChooser1, inventRChooser2, inventButton);
+			monopolyStage = new Stage();
+			monopolyStage.setScene(scene);
+			monopolyStage.initModality(Modality.WINDOW_MODAL);
+			monopolyStage.initOwner(this.stage);
+			monopolyStage.show();
+		} else if (devCardSelected.equals(CardType.INVENTION.toString())) {
+
+			VBox inventionBox = new VBox();
+			Scene scene = new Scene(inventionBox);
+			inventRChooser1 = new ChoiceBox<enums.ResourceType>();
+			inventRChooser1.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
+					ResourceType.CORN, ResourceType.ORE);
+			inventRChooser2 = new ChoiceBox<enums.ResourceType>();
+			inventRChooser2.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
+					ResourceType.CORN, ResourceType.ORE);
+			inventButton = new Button("OK");
+			inventButton.setOnAction(e -> {
+				handleInventionOK(e);
+			});
+			inventionBox.getChildren().addAll(inventRChooser1, inventRChooser2, inventButton);
+			inventionStage = new Stage();
+			inventionStage.setScene(scene);
+			inventionStage.initModality(Modality.WINDOW_MODAL);
+			inventionStage.initOwner(this.stage);
+			inventionStage.show();
+
+		} else if (devCardSelected.equals(CardType.VICTORYPOINT.toString())) {
+			stage.close();
 		}
 
 	}
