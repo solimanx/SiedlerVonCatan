@@ -846,15 +846,15 @@ public class ClientController {
 	 * //* @param resource
 	 */
 	public void playInventionCard(int[] resources) {
-
+		clientOutputHandler.playInventionCard(resources);
 	}
 
 	public void playMonopolyCard(ResourceType resType) {
-
+		clientOutputHandler.playMonopolyCard(resType);
 	}
 
 	public void playStreetBuildCard(int u1, int v1, int dir1, int u2, int v2, int dir2) {
-
+		//clientOutputHandler.playRoadCard(road1_id, road2_id);
 	}
 
 	public void playKnightCard(int x, int y, int modelID) {
