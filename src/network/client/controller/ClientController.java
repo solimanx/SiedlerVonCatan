@@ -27,6 +27,7 @@ import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
+import network.client.view.PlayerResourceUpdateRunnable;
 import network.client.view.PlayerStatusGUIUpdate;
 import network.client.view.ServerResponseRunnable;
 import settings.DefaultSettings;
@@ -473,8 +474,7 @@ public class ClientController {
 			gameLogic.getBoard().getPlayer(modelID).incrementResources(resources);
 			viewController.getGameViewController().setResourceCards(modelID, getPlayerResources(modelID));
 			Platform.runLater(
-					new ServerResponseRunnable(DefaultSettings.getCurrentTime() + " You have gained resources!",
-							viewController.getGameViewController()));
+					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), resources));
 		} // if someone else
 		else {
 			// increment their hiddenresources
