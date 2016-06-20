@@ -204,7 +204,7 @@ public class DevCardViewController implements Initializable {
 				monopolyStage.initModality(Modality.WINDOW_MODAL);
 				monopolyStage.initOwner(this.stage);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				logger.catching(Level.ERROR, e);
 				e.printStackTrace();
 			}
 		} else if (devCardSelected.equals(CardType.INVENTION.toString())) {
@@ -221,7 +221,6 @@ public class DevCardViewController implements Initializable {
 				inventionStage.initModality(Modality.WINDOW_MODAL);
 				inventionStage.initOwner(this.stage);
 			} catch (IOException e) {
-				logger.error("Input/Output Exception", e);
 				logger.catching(Level.ERROR, e);
 				e.printStackTrace();
 			}
