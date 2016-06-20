@@ -255,7 +255,7 @@ public class ServerOutputHandler {
 		}
 	}
 
-	public void costs(int playerID, int[] costs) {
+	public void costs(int playerID, int[] costs,int sendToPlayer) {
 		ProtocolResource pResource;
 		if (costs.length != 5) {
 			pResource = new ProtocolResource(null, null, null, null, null, costs[0]);
@@ -266,7 +266,7 @@ public class ServerOutputHandler {
 		Response r = new Response();
 		r.pCosts = pc;
 		try {
-			server.sendToClient(parser.createString(r), playerID);
+			server.sendToClient(parser.createString(r), sendToPlayer);			
 		} catch (IOException e) {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();

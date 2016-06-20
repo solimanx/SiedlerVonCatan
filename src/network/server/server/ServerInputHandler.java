@@ -269,7 +269,7 @@ public class ServerInputHandler {
 	}
 
 	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
-		serverController.buyDevelopmentCard(currentThreadID);
+		serverController.requestBuyDevCard(currentThreadID);
 	}
 
 	protected void handle(ProtocolHarbourRequest harbourRequest) {

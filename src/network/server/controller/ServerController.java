@@ -489,7 +489,7 @@ public class ServerController {
 					//evtl. auch in initial village?
 
 					serverOutputHandler.buildVillage(x, y, dir, threadID);
-					serverOutputHandler.costs(threadID, DefaultSettings.VILLAGE_BUILD_COST);
+					serverOutputHandler.costs(threadID, DefaultSettings.VILLAGE_BUILD_COST,threadID);
 					statusUpdate(modelID);
 				}
 			}
@@ -572,7 +572,7 @@ public class ServerController {
 					subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.STREET_BUILD_COST);
 					serverOutputHandler.buildStreet(x, y, dir, threadID);
-					serverOutputHandler.costs(threadID, DefaultSettings.STREET_BUILD_COST);
+					serverOutputHandler.costs(threadID, DefaultSettings.STREET_BUILD_COST,threadID);
 					statusUpdate(modelID);
 
 				} else {
@@ -1065,7 +1065,7 @@ public class ServerController {
 				increaseVictoryPoints(modelID);
 
 				serverOutputHandler.buildCity(x, y, dir, threadID);
-				serverOutputHandler.costs(threadID, DefaultSettings.CITY_BUILD_COST);
+				serverOutputHandler.costs(threadID, DefaultSettings.CITY_BUILD_COST,threadID);
 				statusUpdate(modelID);
 			}
 		}
@@ -1090,8 +1090,9 @@ public class ServerController {
 			if (gameLogic.checkBuyDevCard(modelID)) {
 				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
 				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
-				// TODO: costs to all
-				serverOutputHandler.costs(threadID, DefaultSettings.DEVCARD_BUILD_COST);
+				for (int i = 0;i <amountPlayers;i++){
+					serverOutputHandler.costs(threadID, DefaultSettings.DEVCARD_BUILD_COST,modelPlayerIdMap.get(i));
+				}	
 				DevelopmentCard devCard = board.getDevCardStack().getNextCard();
 				pm.getDevCardsBoughtInThisRound().add(devCard);
 
@@ -1240,7 +1241,7 @@ public class ServerController {
 				robberLossCounter--;
 				subFromPlayersResources(modelID, resources);
 				resourceStackIncrease(resources);
-				serverOutputHandler.costs(threadID, playerRes);
+				serverOutputHandler.costs(threadID, playerRes,threadID);
 				if (robberLossCounter == 0) {
 					if (modelID != currentPlayer) {
 						gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
@@ -1294,7 +1295,7 @@ public class ServerController {
 					int[] costs = { 0, 0, 0, 0, 0 };
 					costs[stealResource] = 1;
 					subFromPlayersResources(victimModelID, costs);
-					serverOutputHandler.costs(victimThreadID, costs);
+					serverOutputHandler.costs(victimThreadID, costs,victimThreadID);
 
 					int modelID = threadPlayerIdMap.get(currentThreadID);
 					addToPlayersResource(modelID, costs);
@@ -1358,7 +1359,7 @@ public class ServerController {
 		serverOutputHandler.tradeIsCanceled(modelPlayerIdMap.get(modelID), tradingID);
 	}
 
-	public void buyDevelopmentCard(int threadID) {
+	/*public void buyDevelopmentCard(int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
 		resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
@@ -1366,7 +1367,7 @@ public class ServerController {
 		//TODO: Only one dev card per round
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(currCard);
 		serverOutputHandler.boughtDevelopmentCard(threadID, currCard);
-	}
+	}*/
 
 	public void playKnightCard(int threadID, int x, int y, Integer victimThreadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1399,7 +1400,7 @@ public class ServerController {
 						int[] costs = { 0, 0, 0, 0, 0 };
 						costs[stealResource] = 1;
 						subFromPlayersResources(victimModelID, costs);
-						serverOutputHandler.costs(victimThreadID, costs);
+						serverOutputHandler.costs(victimThreadID, costs,victimThreadID);
 
 						addToPlayersResource(modelID, costs);
 						serverOutputHandler.resourceObtain(threadID, costs);
@@ -1469,7 +1470,7 @@ public class ServerController {
 					obtain[resIndex] = obtain[resIndex] + currPRes;
 					currLoss[resIndex] = currPRes;
 					subFromPlayersResources(i, currLoss);
-					serverOutputHandler.costs(i, currLoss);
+					serverOutputHandler.costs(i, currLoss,i);
 				}
 				currLoss[resIndex] = 0; // reset for next player
 			}
