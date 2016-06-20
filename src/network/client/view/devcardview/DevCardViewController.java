@@ -186,10 +186,11 @@ public class DevCardViewController implements Initializable {
 	@FXML
 	void handlePlayCardButton(ActionEvent event) {
 		if (devCardSelected.equals(CardType.KNIGHT.toString())) {
-			stage.hide();
+			stage.close();
 			viewController.getGameViewController().setKnight(true);
 			viewController.getGameViewController().setMoveRobberState();
 		} else if (devCardSelected.equals(CardType.STREET.toString())) {
+			stage.close();
 			viewController.getGameViewController().setIsStreetDev(true);
 		} else if (devCardSelected.equals(CardType.MONOPOLY.toString())) {
 			FXMLLoader loader = new FXMLLoader();
