@@ -55,7 +55,7 @@ public class ServerController {
 	protected Map<Integer, Integer> threadPlayerIdMap;
 	private ServerInputHandler serverInputHandler;
 	private int InitialStreetCounter;
-	private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
+	//private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
 	private int currentPlayer;
 	private int robberLossCounter;
 	private TradeController tradeController;
@@ -609,7 +609,7 @@ public class ServerController {
 	 */
 	public void checkIfVillageInterruptsStreetSet(Corner c) {
 		String id = c.getCornerID();
-		int[] coords = HexService.getCornerCoordinates(id.substring(0, 1), id.substring(1, 2), id.substring(1, 2));
+		int[] coords = HexService.getCornerCoordinates(id.substring(0, 1), id.substring(1, 2), id.substring(2, 3));
 		Edge[] neighbours = gameLogic.getBoard().getProjectingEdges(coords[0], coords[1], coords[2]);
 		int modelID = c.getOwnerID();
 		ArrayList<Edge> streetEdges = new ArrayList<Edge>();
@@ -1129,7 +1129,7 @@ public class ServerController {
 				PlayerModel currPM = gameLogic.getBoard().getPlayer(currentPlayer);
 				if (InitialStreetCounter >= amountPlayers * 2) {
 					// initial building phase finished
-					gainFirstBoardResources();
+					//gainFirstBoardResources();
 					currPM.setPlayerState(PlayerState.DICEROLLING);
 					statusUpdate(currentPlayer);
 				} else if (InitialStreetCounter == amountPlayers) {
@@ -1179,7 +1179,9 @@ public class ServerController {
 			if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
 				serverResponse(modelID, "OK");
 				Corner c = buildVillage(x, y, dir, modelID);
-				initialVillages.add(c);
+				if (InitialStreetCounter >= amountPlayers){ //second round
+					gainFirstBoardResources(modelID, c);
+				}
 
 				increaseVictoryPoints(modelID);
 				serverOutputHandler.buildVillage(x, y, dir, threadID);
@@ -1691,11 +1693,31 @@ public class ServerController {
 			}
 		}
 	}
+	
+	private void gainFirstBoardResources(int modelID,Corner c){
+		int[] playersObtain = new int[5];
+		int[] coords = ProtocolToModel.getCornerCoordinates(c.getCornerID());
+		Field[] connFields = gameLogic.getBoard().getTouchingFields(coords[0], coords[1], coords[2]);
+		ResourceType currResType;
+		for (int i = 0; i < connFields.length; i++) {
+			currResType = connFields[i].getResourceType();
+			if (currResType != ResourceType.NOTHING && currResType != ResourceType.SEA) {
+				if (resourceStackDecrease(currResType)) {
+					playersObtain[DefaultSettings.RESOURCE_VALUES.get(currResType)]++;
+				}
+			}
+		}
+			addToPlayersResource(modelID, playersObtain);
+			serverOutputHandler.resourceObtain(modelPlayerIdMap.get(modelID), playersObtain);
+		statusUpdate(modelID);
+		
+	}
 
 	/**
 	 * sets player resources after initial building phase
 	 *
 	 */
+	/*
 	private void gainFirstBoardResources() {
 		int[] coords; // wegen performance nur einmaliges Initialisieren
 		Field[] connFields;
@@ -1724,7 +1746,7 @@ public class ServerController {
 		}
 		statusUpdateForAllPlayers();
 	}
-
+*/
 	/**
 	 * gets next player in the player order
 	 *
