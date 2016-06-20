@@ -19,6 +19,8 @@ public enum PlayerState {
 
 	@SerializedName("Handeln oder Bauen") TRADING_OR_BUILDING("Trading/Building"),
 
+	@SerializedName("Bauen") BUILDING("BUILDING"), //WARNING: 5-6 PLAYERS ONLY
+
 	@SerializedName("Warten") WAITING("Waiting"),
 
 	@SerializedName("Verbindung verloren") CONNECTION_LOST("Disconnected"),

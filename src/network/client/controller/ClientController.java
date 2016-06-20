@@ -167,7 +167,6 @@ public class ClientController {
 	 */
 	public void receiveError(String notice) {
 		// TODO
-		System.out.println(notice);
 		logger.debug(notice);
 	}
 
@@ -589,8 +588,7 @@ public class ClientController {
 		// view saves coordinates from 0 to 7 system
 		int radius = DefaultSettings.BOARD_RADIUS;
 		if (initialRoundCount < 2) {
-			System.out.println("Building Initial Village");
-			logger.debug("Building Initial Village");
+			logger.info("Building Initial Village");
 			requestBuildInitialVillage(x - radius, y - radius, dir);
 
 		}
@@ -620,8 +618,7 @@ public class ClientController {
 	public void requestBuildStreet(int x, int y, int dir) {
 		int radius = DefaultSettings.BOARD_RADIUS;
 		if (initialRoundCount < 2) {
-			System.out.println("Building Initial Village");
-			logger.debug("Building Initial Village");
+			logger.info("Building Initial Road");
 			requestBuildInitialStreet(x - radius, y - radius, dir);
 		}
 		if (gameLogic.checkBuildStreet(x - radius, y - radius, dir, ownPlayerID)) {

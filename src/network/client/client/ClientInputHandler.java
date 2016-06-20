@@ -162,7 +162,6 @@ public class ClientInputHandler {
 			break;
 
 		default:
-			System.out.println("Class not found");
 			logger.warn("Class not found");
 		}
 

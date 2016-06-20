@@ -908,8 +908,7 @@ public class Board {
 		if (x < 0 && y > 0 && sum <= 0) {
 			return 5;
 		}
-
-		System.out.println("Error in Board.getDirektion");
+		
 		logger.error("Error in Board.getDirektion");
 		return 0;
 	}

@@ -132,7 +132,7 @@ public class ServerOutputHandler {
 		for (int i = 0;i < hC.length ;i+=2){
 			coords = ProtocolToModel.getCornerCoordinates(hC[i].getCornerID());
 			c1Edges = board.getProjectingEdges(coords[0],coords[1],coords[2]);
-			
+
 			coords = ProtocolToModel.getCornerCoordinates(hC[i+1].getCornerID());
 			c2Edges = board.getProjectingEdges(coords[0],coords[1],coords[2]);
 			for (int j = 0;j <c1Edges.length;j++){
@@ -225,13 +225,13 @@ public class ServerOutputHandler {
 		} else {
 			pResource = ModelToProtocol.convertToProtocolResource(resources);
 		}
-		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, null, false, false); //TODO die 1.0 neue attribute
+		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, 0 , null, false, false);
 		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(pPlayer);
 		Response r = new Response();
 		r.pSUpdate = ps;
 		try {
 			if (sendToPlayerID != null) {
-				System.out.println("Send " + status + " to " + sendToPlayerID);
+				logger.info("Send " + status + " to " + sendToPlayerID);
 				server.sendToClient(parser.createString(r), sendToPlayerID);
 			} else {
 				server.broadcast((parser.createString(r)));

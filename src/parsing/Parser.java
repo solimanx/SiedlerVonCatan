@@ -175,7 +175,6 @@ public class Parser {
 		}
 
 		logger.warn("CANNOT READ INPUT");
-		System.out.println("CANNOT READ INPUT");
 		return null;
 
 	}

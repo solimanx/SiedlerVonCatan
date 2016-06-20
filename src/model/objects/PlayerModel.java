@@ -8,6 +8,8 @@ import enums.Color;
 import enums.HarbourStatus;
 //TODO import DevelopmentCard enum
 import enums.PlayerState;
+
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import settings.DefaultSettings;
@@ -259,7 +261,7 @@ public class PlayerModel {
 			for (int i = 0; i < 5; i++)
 				this.resources[i] -= resources[i];
 		} else
-			throw new IllegalArgumentException("Invalid resources object");
+			logger.catching(Level.FATAL, new IllegalArgumentException("Invalid resources object"));
 	}
 
 	/**
@@ -271,9 +273,7 @@ public class PlayerModel {
 			for (int i = 0; i < 5; i++)
 				this.resources[i] += resources[i];
 		} else {
-			System.out.println(resources.length);
-			logger.info(resources.length);
-			throw new IllegalArgumentException("Invalid resources object");
+			logger.catching(Level.FATAL, new IllegalArgumentException("Invalid resources object"));
 
 		}
 

@@ -80,9 +80,9 @@ public class ServerController {
 		ServerInputHandler serverInputHandler = new ServerInputHandler(this);
 		this.server = new Server(serverInputHandler);
 		this.serverOutputHandler = new ServerOutputHandler(server);
-		
+
         devStack = new DevelopmentCardsStack();
-		
+
 		try {
 			server.start();
 		} catch (IOException e) {
@@ -300,7 +300,7 @@ public class ServerController {
 		boolean noDuplicates;
 		Map<Integer, Integer> diceResults = new HashMap<Integer, Integer>();
 		this.playerOrder = new int[amountPlayers];
-		
+
 		do {
 			noDuplicates = true;
 			for (int i = 0; i < amountPlayers; i++) {
@@ -330,11 +330,11 @@ public class ServerController {
 			statusUpdate(playerOrder[i]);
 		}
 		InitialStreetCounter = 0;
-		
+
 
 	}
-	
-	
+
+
 	/**
 	 * sets the harbors
 	 */
@@ -396,7 +396,7 @@ public class ServerController {
 		}
 		board.setHarbourCorner(harbourCorners);
 	}
-	
+
 	public HarbourStatus[] shuffleArray(HarbourStatus[] harbourOrder) {
 		Random rnd = ThreadLocalRandom.current();
 		for (int i = harbourOrder.length - 1; i > 0; i--) {
@@ -730,7 +730,7 @@ public class ServerController {
 			}
 		}
 
-		System.out.println("Calculated longest Trading Route: Player = " + modelID + " Lenght = " + max);
+		logger.info("Calculated longest Trading Route: Player = " + modelID + " Lenght = " + max);
 
 	}
 
@@ -1694,7 +1694,7 @@ public class ServerController {
 			}
 		}
 	}
-	
+
 	private void gainFirstBoardResources(int modelID,Corner c){
 		int[] playersObtain = new int[5];
 		int[] coords = ProtocolToModel.getCornerCoordinates(c.getCornerID());
@@ -1711,7 +1711,7 @@ public class ServerController {
 			addToPlayersResource(modelID, playersObtain);
 			serverOutputHandler.resourceObtain(modelPlayerIdMap.get(modelID), playersObtain);
 		statusUpdate(modelID);
-		
+
 	}
 
 	/**

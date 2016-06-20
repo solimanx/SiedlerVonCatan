@@ -83,7 +83,6 @@ public class GameLogic {
 	 */
 	public boolean checkBuildCity(int x, int y, int dir, int playerID) {
 		if (board.getPlayer(playerID).getAmountCities() <= 0) {
-			System.out.println("no cities left");
 			logger.info("no cities left");
 			return false; // no Cities left to build
 		}
