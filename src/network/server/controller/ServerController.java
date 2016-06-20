@@ -21,6 +21,7 @@ import enums.PlayerState;
 import enums.ResourceType;
 import javafx.stage.Stage;
 import model.Board;
+import model.DevelopmentCardsStack;
 import model.GameLogic;
 import model.HexService;
 import model.Index;
@@ -65,6 +66,7 @@ public class ServerController {
 	private ArrayList<StreetSet> streetSets = new ArrayList<StreetSet>();
 	private int[] longestRoutes;
 	private int longestTradingRoutePlayer = -1;
+	private DevelopmentCardsStack devStack;
 
 	public ServerController() {
 		board = new Board();
@@ -78,6 +80,9 @@ public class ServerController {
 		ServerInputHandler serverInputHandler = new ServerInputHandler(this);
 		this.server = new Server(serverInputHandler);
 		this.serverOutputHandler = new ServerOutputHandler(server);
+		
+        devStack = new DevelopmentCardsStack();
+		
 		try {
 			server.start();
 		} catch (IOException e) {
@@ -481,6 +486,7 @@ public class ServerController {
 					resourceStackIncrease(DefaultSettings.VILLAGE_BUILD_COST);
 					increaseVictoryPoints(modelID);
 					checkIfVillageInterruptsStreetSet(c);
+					//evtl. auch in initial village?
 
 					serverOutputHandler.buildVillage(x, y, dir, threadID);
 					serverOutputHandler.costs(threadID, DefaultSettings.VILLAGE_BUILD_COST);
@@ -640,6 +646,7 @@ public class ServerController {
 			checkLongestTradingRoute(currPlayer);
 		} else {
 			EdgeToStreetSet(streetEdges.get(0)).setHasCircle(false);
+			//checkLongestTradingRoute ?
 		}
 	}
 
@@ -1353,6 +1360,10 @@ public class ServerController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
 		resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
+		DevelopmentCard currCard = devStack.getNextCard();
+		//TODO: Only one dev card per round
+		gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(currCard);
+		serverOutputHandler.boughtDevelopmentCard(threadID, currCard);
 	}
 
 	public void playKnightCard(int threadID, int x, int y, Integer victimThreadID) {
