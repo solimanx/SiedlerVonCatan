@@ -14,6 +14,10 @@ import model.objects.Edge;
 import model.objects.Field;
 import model.objects.DevCards.DevCardFactory;
 import model.objects.DevCards.DevelopmentCard;
+import model.objects.DevCards.InventionCard;
+import model.objects.DevCards.KnightCard;
+import model.objects.DevCards.MonopolyCard;
+import model.objects.DevCards.StreetBuildingCard;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
 import parsing.Parser;
@@ -507,6 +511,9 @@ public class ClientInputHandler {
 		if (knightCardInfo.getPlayerID() != null) {
 			// TODO smth with information
 			int playerID = knightCardInfo.getPlayerID();
+			if ( playerID == clientController.getOwnPlayerID()){
+				clientController.removeFromDeck(playerID, new KnightCard());
+			}
 			Index locationID = knightCardInfo.getLocationID();
 			// TODO smth with information
 			int victimID = knightCardInfo.getVictimID();
@@ -524,6 +531,9 @@ public class ClientInputHandler {
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
 		if (roadBuildingCardInfo.getPlayerID() != null) {
 			int playerID = roadBuildingCardInfo.getPlayerID();
+			if ( playerID == clientController.getOwnPlayerID()){
+				clientController.removeFromDeck(playerID, new StreetBuildingCard());
+			}
 			Index[] locationID1 = roadBuildingCardInfo.getRoadID1();
 			Index[] locationID2 = roadBuildingCardInfo.getRoadID2();
 			clientController.receiveRoadCard(playerID, locationID1, locationID2);
@@ -541,6 +551,9 @@ public class ClientInputHandler {
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
 		if (monopolyCardInfo.getPlayerID() != null) {
 			int playerID = monopolyCardInfo.getPlayerID();
+			if ( playerID == clientController.getOwnPlayerID()){
+				clientController.removeFromDeck(playerID, new MonopolyCard());
+			}
 			ResourceType rt = monopolyCardInfo.getResourceType();
 			clientController.receiveMonopolyCard(playerID, rt);
 		}
@@ -555,6 +568,9 @@ public class ClientInputHandler {
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
 		if (inventionCardInfo.getPlayerID() != null) {
 			int playerID = inventionCardInfo.getPlayerID();
+			if ( playerID == clientController.getOwnPlayerID()){
+				clientController.removeFromDeck(playerID, new InventionCard());
+			}
 			int[] resource = ProtocolToModel.convertResources(inventionCardInfo.getResource());
 			clientController.receiveInventionCard(playerID, resource);
 		}

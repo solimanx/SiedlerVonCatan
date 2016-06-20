@@ -19,6 +19,10 @@ import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
 import model.objects.DevCards.DevelopmentCard;
+import model.objects.DevCards.InventionCard;
+import model.objects.DevCards.KnightCard;
+import model.objects.DevCards.MonopolyCard;
+import model.objects.DevCards.StreetBuildingCard;
 import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
@@ -912,6 +916,24 @@ public class ClientController {
 
 	public int getPlayerID(int modelID){
 		return modelPlayerIdMap.get(modelID);
+	}
+
+	public void removeFromDeck(int playerID, KnightCard knightCard) {
+		int modelID = threadPlayerIdMap.get(playerID);
+		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(knightCard);
+		gameLogic.getBoard().getPlayer(modelID).incrementPlayedKnightCards();
+	}
+	public void removeFromDeck(int playerID, StreetBuildingCard streetBuildCard) {
+		int modelID = threadPlayerIdMap.get(playerID);
+		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(streetBuildCard);
+	}
+	public void removeFromDeck(int playerID, MonopolyCard monopolyCard) {
+		int modelID = threadPlayerIdMap.get(playerID);
+		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(monopolyCard);
+	}
+	public void removeFromDeck(int playerID, InventionCard inventionCard) {
+		int modelID = threadPlayerIdMap.get(playerID);
+		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(inventionCard);
 	}
 
 }
