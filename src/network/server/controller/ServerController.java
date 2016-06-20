@@ -1409,6 +1409,7 @@ public class ServerController {
 
 						String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
 						gameLogic.getBoard().setBandit(location);
+						serverOutputHandler.robberMovement(threadID, location, victimThreadID);
 						serverOutputHandler.knightCardPlayed(threadID, location, victimThreadID);
 
 					}
