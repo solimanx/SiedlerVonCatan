@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -27,8 +28,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
-import network.client.view.GameViewController;
-import network.client.view.tradeview.TradeViewController;
 
 public class DevCardViewController implements Initializable {
 
@@ -59,16 +58,16 @@ public class DevCardViewController implements Initializable {
 	private Stage stage;
 
 	@FXML
-	private ComboBox<ResourceType> monopolyRChooser;
+	private ChoiceBox<ResourceType> monopolyRChooser;
 
 	@FXML
 	private Button monopolyOK;
 
 	@FXML
-	private ComboBox<ResourceType> inventRChooser1;
+	private ChoiceBox<ResourceType> inventRChooser1;
 
 	@FXML
-	private ComboBox<ResourceType> inventRChooser2;
+	private ChoiceBox<ResourceType> inventRChooser2;
 
 	@FXML
 	private Button inventionOK;
