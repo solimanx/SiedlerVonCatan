@@ -13,10 +13,10 @@ import protocol.dualinstructions.ProtocolPlayKnightCard;
  * Contains information about player: player ID, color, name , status, score,
  * and resources.
  * </p>
- * 
+ *
  */
 
-@Since(0.1)
+@Since(1.0)
 public class ProtocolPlayer {
 
 	@SerializedName("id")
@@ -37,24 +37,28 @@ public class ProtocolPlayer {
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resources;
 
+	@SerializedName("Rittermacht")
+	private int knightCount;
+
 	@SerializedName("Entwicklungskarten")
 	private ProtocolDevCard developmentCards;
-	
+
 	@SerializedName("Größte Rittermacht")
 	private boolean largestArmy;
-	
+
 	@SerializedName("Größte Handelsstraße")
 	private boolean longestRoad;
-	
-	
+
+
 	public ProtocolPlayer(int playerID, Color color, String name, PlayerState status, int victoryPoints,
-			ProtocolResource resources, ProtocolDevCard developmentCards, boolean largestArmy, boolean longestRoad ) {
+			ProtocolResource resources, int knightCount, ProtocolDevCard developmentCards, boolean largestArmy, boolean longestRoad ) {
 		this.playerID = playerID;
 		this.color = color;
 		this.name = name;
 		this.status = status;
 		this.victoryPoints = victoryPoints;
 		this.resources = resources;
+		this.knightCount = knightCount;
 		this.developmentCards = developmentCards;
 		this.largestArmy = largestArmy;
 		this.longestRoad = longestRoad;
@@ -84,14 +88,18 @@ public class ProtocolPlayer {
 		return resources;
 	}
 
+	public int getKnightCount(){
+		return knightCount;
+	}
+
 	public ProtocolDevCard getDevelopmentCards() {
 		return developmentCards;
 	}
-	
+
 	public boolean getLargestArmy(){
 		return largestArmy;
 	}
-	
+
 	public boolean getLongestRoad(){
 		return longestRoad;
 	}
