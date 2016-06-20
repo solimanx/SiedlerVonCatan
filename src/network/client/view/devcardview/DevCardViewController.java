@@ -187,9 +187,6 @@ public class DevCardViewController implements Initializable {
 			viewController.getGameViewController().setIsStreetDev(true);
 		} else if (devCardSelected.equals(CardType.MONOPOLY.toString())) {
 
-			VBox inventionBox = new VBox();
-			Scene scene = new Scene(inventionBox);
-
 			monopolyRChooser = new ChoiceBox<enums.ResourceType>();
 			monopolyRChooser.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
 					ResourceType.CORN, ResourceType.ORE);
@@ -197,16 +194,14 @@ public class DevCardViewController implements Initializable {
 			inventButton.setOnAction(e -> {
 				handleMonopolyOK(e);
 			});
-			inventionBox.getChildren().addAll(inventRChooser1, inventRChooser2, inventButton);
+			VBox monopolyBox = new VBox(inventRChooser1, inventRChooser2, inventButton);
+			Scene scene = new Scene(monopolyBox);
 			monopolyStage = new Stage();
 			monopolyStage.setScene(scene);
 			monopolyStage.initModality(Modality.WINDOW_MODAL);
 			monopolyStage.initOwner(this.stage);
 			monopolyStage.show();
 		} else if (devCardSelected.equals(CardType.INVENTION.toString())) {
-
-			VBox inventionBox = new VBox();
-			Scene scene = new Scene(inventionBox);
 			inventRChooser1 = new ChoiceBox<enums.ResourceType>();
 			inventRChooser1.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
 					ResourceType.CORN, ResourceType.ORE);
@@ -217,7 +212,8 @@ public class DevCardViewController implements Initializable {
 			inventButton.setOnAction(e -> {
 				handleInventionOK(e);
 			});
-			inventionBox.getChildren().addAll(inventRChooser1, inventRChooser2, inventButton);
+			VBox inventionBox = new VBox(inventRChooser1, inventRChooser2, inventButton);
+			Scene scene = new Scene(inventionBox);
 			inventionStage = new Stage();
 			inventionStage.setScene(scene);
 			inventionStage.initModality(Modality.WINDOW_MODAL);
