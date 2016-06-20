@@ -354,5 +354,9 @@ public class PlayerModel {
 	public ArrayList<HarbourStatus> getPlayerHarbours() {
 		return harbours;
 	}
+	
+	public int sumDevCards(){
+		return playerDevCard[0] + playerDevCard[1] + playerDevCard[2] + playerDevCard[3] + playerDevCard[4];
+	}
 
 }

@@ -281,7 +281,7 @@ public class ServerController {
 					pM.getPlayerState(), pM.getVictoryPoints(), resources,pM.getPlayedKnightCards(),devCards,pM.hasLongestRoad(),pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
 		} else {
 			int[] resources = { gameLogic.getBoard().getPlayer(playerModelID).sumResources() };
-			int[] devCards = {pM.getPlayerDevCards().length};
+			int[] devCards = {pM.sumDevCards()};
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
 					pM.getPlayerState(), pM.getVictoryPoints(), resources,pM.getPlayedKnightCards(),devCards,pM.hasLongestRoad(),pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
 		}
