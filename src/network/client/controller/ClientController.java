@@ -479,7 +479,10 @@ public class ClientController {
 		else {
 			// increment their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources[0]);
-			//viewController.getGameViewController().setResourceCards(modelID, getPlayerHiddenResource(modelID));
+			Platform.runLater(
+					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), resources));
+			// viewController.getGameViewController().setResourceCards(modelID,
+			// getPlayerHiddenResource(modelID));
 		}
 
 	}
@@ -499,7 +502,8 @@ public class ClientController {
 		else {
 			// decrement their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources[0]);
-			//viewController.getGameViewController().setResourceCards(modelID, getPlayerHiddenResource(modelID));
+			// viewController.getGameViewController().setResourceCards(modelID,
+			// getPlayerHiddenResource(modelID));
 		}
 	}
 
@@ -655,7 +659,7 @@ public class ClientController {
 		// DEBUG
 		// if (gameLogic.checkBuildCity(x - radius, y - radius, dir,
 		// ownPlayerId)) {
-		clientOutputHandler.requestBuildCity(x , y , dir);
+		clientOutputHandler.requestBuildCity(x, y, dir);
 		// }
 	}
 
@@ -709,6 +713,7 @@ public class ClientController {
 
 	/**
 	 * A Player has accepted your offer. Show acceptance on list
+	 * 
 	 * @param threadID
 	 * @param tradingID
 	 */
@@ -728,6 +733,7 @@ public class ClientController {
 
 	/**
 	 * You agree to the trading
+	 * 
 	 * @param tradingID
 	 * @param partnerThreadID
 	 */
@@ -737,6 +743,7 @@ public class ClientController {
 
 	/**
 	 * trade was fulfilled
+	 * 
 	 * @param threadID
 	 * @param partnerModelID
 	 */
@@ -791,7 +798,7 @@ public class ClientController {
 	 * @param message
 	 */
 	public void victory(String message, int threadID) {
-		if(threadID != -1){
+		if (threadID != -1) {
 			viewController.getGameViewController().showVictory(threadPlayerIdMap.get(threadID));
 		} else {
 			viewController.getGameViewController().alert(message + " Spieler: " + threadID);
@@ -849,12 +856,12 @@ public class ClientController {
 	}
 
 	public void playKnightCard(int x, int y, int modelID) {
-			clientOutputHandler.playKnightCard(x, y, modelPlayerIdMap.get(modelID));
+		clientOutputHandler.playKnightCard(x, y, modelPlayerIdMap.get(modelID));
 
 	}
 
-	private int[] getPlayerHiddenResource(int playerID){
-		int[] resource = new int[]{gameLogic.getBoard().getPlayer(playerID).getHiddenResources()};
+	private int[] getPlayerHiddenResource(int playerID) {
+		int[] resource = new int[] { gameLogic.getBoard().getPlayer(playerID).getHiddenResources() };
 		return resource;
 	}
 
@@ -914,7 +921,7 @@ public class ClientController {
 		this.ownTradingID = ownTradingID;
 	}
 
-	public int getPlayerID(int modelID){
+	public int getPlayerID(int modelID) {
 		return modelPlayerIdMap.get(modelID);
 	}
 
@@ -923,14 +930,17 @@ public class ClientController {
 		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(knightCard);
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayedKnightCards();
 	}
+
 	public void removeFromDeck(int playerID, StreetBuildingCard streetBuildCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(streetBuildCard);
 	}
+
 	public void removeFromDeck(int playerID, MonopolyCard monopolyCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(monopolyCard);
 	}
+
 	public void removeFromDeck(int playerID, InventionCard inventionCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(inventionCard);
