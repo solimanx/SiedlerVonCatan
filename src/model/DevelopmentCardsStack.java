@@ -72,6 +72,11 @@ public class DevelopmentCardsStack {
 	public DevelopmentCard[] getCardStack() {
 		return devCardStack;
 	}
+	
+	//Debug only!!
+	public void setCardStack(DevelopmentCard[] cards){
+		this.devCardStack = cards;
+	}
 
 	/**
 	 * returns the next DevelopmentCard from the stack

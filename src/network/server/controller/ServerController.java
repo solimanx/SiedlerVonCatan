@@ -31,6 +31,11 @@ import model.objects.Field;
 import model.objects.PlayerModel;
 import model.objects.DevCards.DevCardFactory;
 import model.objects.DevCards.DevelopmentCard;
+import model.objects.DevCards.InventionCard;
+import model.objects.DevCards.KnightCard;
+import model.objects.DevCards.MonopolyCard;
+import model.objects.DevCards.StreetBuildingCard;
+import model.objects.DevCards.VictoryPointCard;
 import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.server.server.Server;
@@ -82,6 +87,18 @@ public class ServerController {
 		this.serverOutputHandler = new ServerOutputHandler(server);
 
         devStack = new DevelopmentCardsStack();
+        DevelopmentCard[] debugCards = new DevelopmentCard[10];
+        debugCards[0] = new InventionCard();
+        debugCards[1] = new StreetBuildingCard();
+        debugCards[2] = new MonopolyCard();
+        debugCards[3] = new VictoryPointCard();
+        debugCards[4] = new KnightCard();
+        debugCards[5] = new InventionCard();
+        debugCards[6] = new StreetBuildingCard();
+        debugCards[7] = new MonopolyCard();
+        debugCards[8] = new VictoryPointCard();
+        debugCards[9] = new KnightCard();
+        devStack.setCardStack(debugCards);
 
 		try {
 			server.start();

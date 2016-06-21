@@ -280,6 +280,9 @@ public class GameLogic {
 		if (!checkPlayerResources(playerID, settings.DefaultSettings.DEVCARD_BUILD_COST)) {
 			return false;
 		}
+		if (board.getPlayer(playerID).getDevCardsBoughtInThisRound().size() > 0){
+			return false;
+		}
 		return true;
 	}
 
