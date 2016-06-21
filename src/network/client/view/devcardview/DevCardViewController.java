@@ -47,10 +47,10 @@ public class DevCardViewController implements Initializable {
 
 	@FXML
 	private Button okButton;
-	
+
 	@FXML
 	private Button debugButton;
-	
+
 	@FXML
 	private ChoiceBox<CardType> debugChoice;
 
@@ -85,11 +85,11 @@ public class DevCardViewController implements Initializable {
 	public void init(ViewController viewController, Stage stage, int[] devCards) {
 		this.stage = stage;
 		this.viewController = viewController;
-		
+
 		//DEBUG
 		debugChoice.setItems(FXCollections.observableArrayList(CardType.INVENTION, CardType.STREET, CardType.KNIGHT, CardType.MONOPOLY));
 		//END DEBUG
-		
+
 		devCardList.clear();
 		devCardListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -204,7 +204,7 @@ public class DevCardViewController implements Initializable {
 				handleMonopolyOK(e);
 			});
 			Label label = new Label("Choose Resource ...");
-			VBox monopolyBox = new VBox(label, inventRChooser1, inventRChooser2, inventButton);
+			VBox monopolyBox = new VBox(label, monopolyRChooser, inventButton);
 			monopolyBox.setPrefWidth(200);
 			monopolyBox.setPrefHeight(200);
 			monopolyBox.setPadding(new Insets(20, 20, 20, 20));
@@ -244,7 +244,7 @@ public class DevCardViewController implements Initializable {
 		}
 
 	}
-	
+
 	@FXML
 	void handleDebugButton(ActionEvent event) {
 		devCardSelected = debugChoice.getSelectionModel().getSelectedItem().toString();
