@@ -24,9 +24,9 @@ public class ProtocolRobberMovement {
 	private Index locationID;
 
 	@SerializedName("Ziel")
-	private int victimID;
+	private Integer victimID;
 
-	public ProtocolRobberMovement(int playerID, Index locationID, int victimID) {
+	public ProtocolRobberMovement(int playerID, Index locationID, Integer victimID) {
 		this.playerID = playerID;
 		this.locationID = locationID;
 		this.victimID = victimID;
@@ -40,7 +40,7 @@ public class ProtocolRobberMovement {
 		return locationID;
 	}
 
-	public int getVictimID() {
+	public Integer getVictimID() {
 		return victimID;
 	}
 
