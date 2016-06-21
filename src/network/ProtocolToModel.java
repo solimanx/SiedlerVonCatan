@@ -384,4 +384,5 @@ public final class ProtocolToModel {
 
 		throw new IllegalArgumentException("CardType doesn't exit");
 	}
+
 }
