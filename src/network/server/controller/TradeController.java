@@ -103,6 +103,7 @@ public class TradeController {
 		}
 
 	}
+	
 
 	public void requestSeaTrade(int modelID, int[] offer, int[] demand) {
 		ResourceType offerResType = null;
@@ -135,6 +136,10 @@ public class TradeController {
 						serverController.getServerOutputHandler().resourceObtain(
 								serverController.modelPlayerIdMap.get(modelID),
 								demand);
+						serverController.subFromPlayersResources(modelID, offerResType, 1);
+						serverController.getServerOutputHandler().costs(
+								serverController.modelPlayerIdMap.get(modelID),
+								offer,serverController.modelPlayerIdMap.get(modelID));
 					} else {
 						serverController.getServerOutputHandler().error("resource stack empty",
 								serverController.modelPlayerIdMap.get(modelID));
@@ -151,6 +156,10 @@ public class TradeController {
 						serverController.getServerOutputHandler().resourceObtain(
 								serverController.modelPlayerIdMap.get(modelID),
 								demand);
+						serverController.subFromPlayersResources(modelID, offerResType, 1);
+						serverController.getServerOutputHandler().costs(
+								serverController.modelPlayerIdMap.get(modelID),
+								offer,serverController.modelPlayerIdMap.get(modelID));
 					} else {
 						serverController.getServerOutputHandler().error("resource stack empty",
 								serverController.modelPlayerIdMap.get(modelID));
@@ -166,6 +175,10 @@ public class TradeController {
 					serverController.getServerOutputHandler().resourceObtain(
 							serverController.modelPlayerIdMap.get(modelID),
 							demand);
+					serverController.subFromPlayersResources(modelID, offerResType, 1);
+					serverController.getServerOutputHandler().costs(
+							serverController.modelPlayerIdMap.get(modelID),
+							offer,serverController.modelPlayerIdMap.get(modelID));
 				} else {
 					serverController.getServerOutputHandler().error("resource stack empty",
 							serverController.modelPlayerIdMap.get(modelID));
