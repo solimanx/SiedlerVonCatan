@@ -502,7 +502,7 @@ public class ClientController {
 					gameLogic.getBoard().getPlayer(modelID).getResources()));
 		} // if someone else
 		else {
-			int resources2 = resources[0]+resources[1]+resources[2]+resources[3]+resources[4]; 
+			int resources2 = resources[0]; 
 			// decrement their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources2);
 			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
@@ -935,6 +935,7 @@ public class ClientController {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(knightCard);
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayedKnightCards();
+		
 	}
 
 	public void removeFromDeck(int playerID, StreetBuildingCard streetBuildCard) {

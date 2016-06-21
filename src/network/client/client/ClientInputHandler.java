@@ -311,7 +311,7 @@ public class ClientInputHandler {
 	 * @param statusUpdate
 	 */
 	protected void handle(ProtocolStatusUpdate statusUpdate) {
-		//TODO get new 1.0 stuff
+		// TODO get new 1.0 stuff
 		// get player object
 		ProtocolPlayer pPlayer = statusUpdate.getPlayer();
 		// get ID which is "32" or "42" etc.
@@ -511,9 +511,8 @@ public class ClientInputHandler {
 		if (knightCardInfo.getPlayerID() != null) {
 			// TODO smth with information
 			int playerID = knightCardInfo.getPlayerID();
-			if ( playerID == clientController.getOwnPlayerID()){
-				clientController.removeFromDeck(playerID, new KnightCard());
-			}
+			clientController.removeFromDeck(playerID, new KnightCard());
+
 			Index locationID = knightCardInfo.getLocationID();
 			// TODO smth with information
 			int victimID = knightCardInfo.getVictimID();
@@ -531,7 +530,7 @@ public class ClientInputHandler {
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
 		if (roadBuildingCardInfo.getPlayerID() != null) {
 			int playerID = roadBuildingCardInfo.getPlayerID();
-			if ( playerID == clientController.getOwnPlayerID()){
+			if (playerID == clientController.getOwnPlayerID()) {
 				clientController.removeFromDeck(playerID, new StreetBuildingCard());
 			}
 			Index[] locationID1 = roadBuildingCardInfo.getRoadID1();
@@ -551,7 +550,7 @@ public class ClientInputHandler {
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
 		if (monopolyCardInfo.getPlayerID() != null) {
 			int playerID = monopolyCardInfo.getPlayerID();
-			if ( playerID == clientController.getOwnPlayerID()){
+			if (playerID == clientController.getOwnPlayerID()) {
 				clientController.removeFromDeck(playerID, new MonopolyCard());
 			}
 			ResourceType rt = monopolyCardInfo.getResourceType();
@@ -568,7 +567,7 @@ public class ClientInputHandler {
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
 		if (inventionCardInfo.getPlayerID() != null) {
 			int playerID = inventionCardInfo.getPlayerID();
-			if ( playerID == clientController.getOwnPlayerID()){
+			if (playerID == clientController.getOwnPlayerID()) {
 				clientController.removeFromDeck(playerID, new InventionCard());
 			}
 			int[] resource = ProtocolToModel.convertResources(inventionCardInfo.getResource());
