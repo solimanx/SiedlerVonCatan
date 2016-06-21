@@ -66,13 +66,10 @@ public class TradeController {
 							int partnerThreadID = serverController.modelPlayerIdMap.get(partnerModelID);
 							
 							serverController.getServerOutputHandler().costs(threadID, offer, threadID);
-							serverController.getServerOutputHandler().costs(partnerThreadID, offer, partnerThreadID);
+							serverController.getServerOutputHandler().costs(partnerThreadID, demand, partnerThreadID);
 							
 							serverController.getServerOutputHandler().resourceObtain(threadID, demand);
 							serverController.getServerOutputHandler().resourceObtain(partnerThreadID, offer);
-
-							serverController.statusUpdate(modelID);
-							serverController.statusUpdate(partnerModelID);
 
 							tradeOffers.remove(i);
 
@@ -148,7 +145,7 @@ public class TradeController {
 						serverController.getServerOutputHandler().resourceObtain(
 								serverController.modelPlayerIdMap.get(modelID),
 								demand);
-						serverController.subFromPlayersResources(modelID, offerResType, 1);
+						serverController.subFromPlayersResources(modelID, offerResType, 2);
 						serverController.getServerOutputHandler().costs(
 								serverController.modelPlayerIdMap.get(modelID),
 								offer,serverController.modelPlayerIdMap.get(modelID));
@@ -168,7 +165,7 @@ public class TradeController {
 						serverController.getServerOutputHandler().resourceObtain(
 								serverController.modelPlayerIdMap.get(modelID),
 								demand);
-						serverController.subFromPlayersResources(modelID, offerResType, 1);
+						serverController.subFromPlayersResources(modelID, offerResType, 3);
 						serverController.getServerOutputHandler().costs(
 								serverController.modelPlayerIdMap.get(modelID),
 								offer,serverController.modelPlayerIdMap.get(modelID));
@@ -187,7 +184,7 @@ public class TradeController {
 					serverController.getServerOutputHandler().resourceObtain(
 							serverController.modelPlayerIdMap.get(modelID),
 							demand);
-					serverController.subFromPlayersResources(modelID, offerResType, 1);
+					serverController.subFromPlayersResources(modelID, offerResType, 4);
 					serverController.getServerOutputHandler().costs(
 							serverController.modelPlayerIdMap.get(modelID),
 							offer,serverController.modelPlayerIdMap.get(modelID));
