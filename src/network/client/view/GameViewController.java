@@ -467,7 +467,7 @@ public class GameViewController implements Initializable {
 	 * @return
 	 */
 	private FadeTransition generateTransition(Text text) {
-		FadeTransition transition = new FadeTransition(new Duration(200), text);
+		FadeTransition transition = new FadeTransition(new Duration(100), text);
 		transition.setFromValue(1);
 		transition.setToValue(0);
 		transition.setAutoReverse(true);

@@ -777,7 +777,7 @@ public class ClientController {
 				tradeOffers.remove(i);
 			}
 		}
-		viewController.getGameViewController().getTradeViewController().offerFulfilled(id);
+		viewController.getGameViewController().getTradeViewController().offerFulfilled();
 	}
 
 	public void cancelTrade(int tradingID) {

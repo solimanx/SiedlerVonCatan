@@ -297,8 +297,14 @@ public class TradeViewController {
 	/**
 	 * @param tradeID
 	 */
-	public void offerFulfilled(int tradeID) {
-		ownOfferList.clear();
+	public void offerFulfilled() {
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				ownOfferList.clear();
+			}
+		});
 
 	}
 
