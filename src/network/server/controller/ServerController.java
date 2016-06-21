@@ -60,7 +60,7 @@ public class ServerController {
 	protected Map<Integer, Integer> threadPlayerIdMap;
 	private ServerInputHandler serverInputHandler;
 	private int InitialStreetCounter;
-	//private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
+	// private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
 	private int currentPlayer;
 	private int robberLossCounter;
 	private TradeController tradeController;
@@ -86,19 +86,19 @@ public class ServerController {
 		this.server = new Server(serverInputHandler);
 		this.serverOutputHandler = new ServerOutputHandler(server);
 
-        devStack = new DevelopmentCardsStack();
-        DevelopmentCard[] debugCards = new DevelopmentCard[10];
-        debugCards[0] = new InventionCard();
-        debugCards[1] = new StreetBuildingCard();
-        debugCards[2] = new MonopolyCard();
-        debugCards[3] = new VictoryPointCard();
-        debugCards[4] = new KnightCard();
-        debugCards[5] = new InventionCard();
-        debugCards[6] = new StreetBuildingCard();
-        debugCards[7] = new MonopolyCard();
-        debugCards[8] = new VictoryPointCard();
-        debugCards[9] = new KnightCard();
-        devStack.setCardStack(debugCards);
+		devStack = new DevelopmentCardsStack();
+		DevelopmentCard[] debugCards = new DevelopmentCard[10];
+		debugCards[0] = new InventionCard();
+		debugCards[1] = new StreetBuildingCard();
+		debugCards[2] = new MonopolyCard();
+		debugCards[3] = new VictoryPointCard();
+		debugCards[4] = new KnightCard();
+		debugCards[5] = new InventionCard();
+		debugCards[6] = new StreetBuildingCard();
+		debugCards[7] = new MonopolyCard();
+		debugCards[8] = new VictoryPointCard();
+		debugCards[9] = new KnightCard();
+		gameLogic.getBoard().getDevCardStack().setCardStack(debugCards);
 
 		try {
 			server.start();
@@ -295,12 +295,14 @@ public class ServerController {
 			int[] resources = getPlayerResources(playerModelID);
 			int[] devCards = pM.getPlayerDevCards();
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
-					pM.getPlayerState(), pM.getVictoryPoints(), resources,pM.getPlayedKnightCards(),devCards,pM.hasLongestRoad(),pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
+					pM.getPlayerState(), pM.getVictoryPoints(), resources, pM.getPlayedKnightCards(), devCards,
+					pM.hasLongestRoad(), pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
 		} else {
 			int[] resources = { gameLogic.getBoard().getPlayer(playerModelID).sumResources() };
-			int[] devCards = {pM.sumDevCards()};
+			int[] devCards = { pM.sumDevCards() };
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
-					pM.getPlayerState(), pM.getVictoryPoints(), resources,pM.getPlayedKnightCards(),devCards,pM.hasLongestRoad(),pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
+					pM.getPlayerState(), pM.getVictoryPoints(), resources, pM.getPlayedKnightCards(), devCards,
+					pM.hasLongestRoad(), pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
 		}
 
 	}
@@ -349,67 +351,71 @@ public class ServerController {
 			statusUpdate(playerOrder[i]);
 		}
 		InitialStreetCounter = 0;
-
+		int[] debugResources = { 0, 0, 2, 2, 2 };
+		for (int i = 0; i < amountPlayers; i++) {
+			addToPlayersResource(i, debugResources);
+		}
 
 	}
-
 
 	/**
 	 * sets the harbors
 	 */
-	public void inizializeHarbour(){
+	public void inizializeHarbour() {
 		String outerRing = "abcdfhjlnrqpomkige";
 		Random generator = new Random();
-		int random = generator.nextInt()%2;
+		int random = generator.nextInt() % 2;
 		int harbourCounter = 0;
 		int[] coord = new int[2];
 		int[] edgeCoord = new int[3];
 		Corner[] corner = new Corner[2];
 		Corner[] harbourCorners = new Corner[18];
-		HarbourStatus[] harbourOrder= {HarbourStatus.THREE_TO_ONE, HarbourStatus.CLAY, HarbourStatus.CORN, HarbourStatus.THREE_TO_ONE, HarbourStatus.ORE, HarbourStatus.THREE_TO_ONE, HarbourStatus.SHEEP,HarbourStatus.WOOD, HarbourStatus.THREE_TO_ONE};
+		HarbourStatus[] harbourOrder = { HarbourStatus.THREE_TO_ONE, HarbourStatus.CLAY, HarbourStatus.CORN,
+				HarbourStatus.THREE_TO_ONE, HarbourStatus.ORE, HarbourStatus.THREE_TO_ONE, HarbourStatus.SHEEP,
+				HarbourStatus.WOOD, HarbourStatus.THREE_TO_ONE };
 		shuffleArray(harbourOrder);
-		if(random == 0){
-			for(int i = 0; i<outerRing.length(); i = i+2){
-				coord = Board.getStringToCoordMap().get(outerRing.substring(i, i+1));
+		if (random == 0) {
+			for (int i = 0; i < outerRing.length(); i = i + 2) {
+				coord = Board.getStringToCoordMap().get(outerRing.substring(i, i + 1));
 				Field[] neighbours = board.getNeighbouringFields(coord[0], coord[1]);
 				ArrayList<Field> landNeighbours = new ArrayList<Field>();
-				for(int j = 0; j<neighbours.length; j++){
-					if(neighbours[j] != null){
-						if(neighbours[j].getResourceType() != enums.ResourceType.SEA){
+				for (int j = 0; j < neighbours.length; j++) {
+					if (neighbours[j] != null) {
+						if (neighbours[j].getResourceType() != enums.ResourceType.SEA) {
 							landNeighbours.add(neighbours[j]);
 						}
 					}
 				}
 				int idx = new Random().nextInt(landNeighbours.size());
 				String secondDefiningField = (landNeighbours.get(idx).getFieldID());
-				edgeCoord = HexService.getEdgeCoordinates(outerRing.substring(i, i+1), secondDefiningField);
+				edgeCoord = HexService.getEdgeCoordinates(outerRing.substring(i, i + 1), secondDefiningField);
 				corner = board.getAttachedCorners(edgeCoord[0], edgeCoord[1], edgeCoord[2]);
 				corner[0].setHarbourStatus(harbourOrder[harbourCounter]);
 				corner[1].setHarbourStatus(harbourOrder[harbourCounter]);
-				harbourCorners[2*harbourCounter] = corner[0];
-				harbourCorners[2*harbourCounter+1] = corner[1];
+				harbourCorners[2 * harbourCounter] = corner[0];
+				harbourCorners[2 * harbourCounter + 1] = corner[1];
 				harbourCounter++;
 			}
-		}else{
-			for(int i = 1; i<outerRing.length(); i = i+2){
-				coord = Board.getStringToCoordMap().get(outerRing.substring(i, i+1));
+		} else {
+			for (int i = 1; i < outerRing.length(); i = i + 2) {
+				coord = Board.getStringToCoordMap().get(outerRing.substring(i, i + 1));
 				Field[] neighbours = board.getNeighbouringFields(coord[0], coord[1]);
 				ArrayList<Field> landNeighbours = new ArrayList<Field>();
-				for(int j = 0; j<neighbours.length; j++){
-					if(neighbours[j] != null){
-						if(neighbours[j].getResourceType() != enums.ResourceType.SEA){
+				for (int j = 0; j < neighbours.length; j++) {
+					if (neighbours[j] != null) {
+						if (neighbours[j].getResourceType() != enums.ResourceType.SEA) {
 							landNeighbours.add(neighbours[j]);
 						}
 					}
 				}
 				int idx = new Random().nextInt(landNeighbours.size());
 				String secondDefiningField = (landNeighbours.get(idx).getFieldID());
-				edgeCoord = HexService.getEdgeCoordinates(outerRing.substring(i, i+1), secondDefiningField);
+				edgeCoord = HexService.getEdgeCoordinates(outerRing.substring(i, i + 1), secondDefiningField);
 				corner = board.getAttachedCorners(edgeCoord[0], edgeCoord[1], edgeCoord[2]);
 				corner[0].setHarbourStatus(harbourOrder[harbourCounter]);
 				corner[1].setHarbourStatus(harbourOrder[harbourCounter]);
-				harbourCorners[2*harbourCounter] = corner[0];
-				harbourCorners[2*harbourCounter+1] = corner[1];
+				harbourCorners[2 * harbourCounter] = corner[0];
+				harbourCorners[2 * harbourCounter + 1] = corner[1];
 				harbourCounter++;
 			}
 		}
@@ -504,11 +510,11 @@ public class ServerController {
 					subFromPlayersResources(modelID, DefaultSettings.VILLAGE_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.VILLAGE_BUILD_COST);
 					increaseVictoryPoints(modelID);
-					//checkIfVillageInterruptsStreetSet(c);
-					//evtl. auch in initial village?
+					// checkIfVillageInterruptsStreetSet(c);
+					// evtl. auch in initial village?
 
 					serverOutputHandler.buildVillage(x, y, dir, threadID);
-					serverOutputHandler.costs(threadID, DefaultSettings.VILLAGE_BUILD_COST,threadID);
+					serverOutputHandler.costs(threadID, DefaultSettings.VILLAGE_BUILD_COST, threadID);
 					statusUpdate(modelID);
 				}
 			}
@@ -591,7 +597,7 @@ public class ServerController {
 					subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.STREET_BUILD_COST);
 					serverOutputHandler.buildStreet(x, y, dir, threadID);
-					serverOutputHandler.costs(threadID, DefaultSettings.STREET_BUILD_COST,threadID);
+					serverOutputHandler.costs(threadID, DefaultSettings.STREET_BUILD_COST, threadID);
 					statusUpdate(modelID);
 
 				} else {
@@ -634,7 +640,8 @@ public class ServerController {
 		ArrayList<Edge> streetEdges = new ArrayList<Edge>();
 		Integer currPlayer = null;
 		for (int i = 0; i < neighbours.length; i++) {
-			if (neighbours[i].getOwnerID() != null && neighbours[i].getOwnerID() != modelID && neighbours[i].isHasStreet()) {
+			if (neighbours[i].getOwnerID() != null && neighbours[i].getOwnerID() != modelID
+					&& neighbours[i].isHasStreet()) {
 
 				if (currPlayer != null && currPlayer == neighbours[i].getOwnerID()) {
 					streetEdges.add(neighbours[i]);
@@ -665,7 +672,7 @@ public class ServerController {
 			checkLongestTradingRoute(currPlayer);
 		} else {
 			EdgeToStreetSet(streetEdges.get(0)).setHasCircle(false);
-			//checkLongestTradingRoute ? nullpointer arrayList leer
+			// checkLongestTradingRoute ? nullpointer arrayList leer
 		}
 	}
 
@@ -733,17 +740,17 @@ public class ServerController {
 		int max = getLongestTradingRoute(modelID);
 		longestRoutes[modelID] = max;
 		if (max >= 5) {
-			if (longestTradingRoutePlayer != -1){
+			if (longestTradingRoutePlayer != -1) {
 				if (longestTradingRoutePlayer != modelID && longestRoutes[longestTradingRoutePlayer] < max) {
 					gameLogic.getBoard().getPlayer(longestTradingRoutePlayer).setHasLongestRoad(false);
-				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
-				longestTradingRoutePlayer = modelID;
-				serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));					
+					gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
+					longestTradingRoutePlayer = modelID;
+					serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));
 				}
 			} else {
 				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
 				longestTradingRoutePlayer = modelID;
-				serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));	
+				serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));
 			}
 		} else {
 			if (longestTradingRoutePlayer == modelID) { // special case
@@ -756,7 +763,6 @@ public class ServerController {
 		System.out.println("Calculated longest Trading Route: Player = " + modelID + " Lenght = " + max);
 
 	}
-
 
 	/**
 	 * DON'T CALL THIS WHEN PLAYER HAS NO STREETS!!! calculates the longest
@@ -925,7 +931,7 @@ public class ServerController {
 				increaseVictoryPoints(modelID);
 
 				serverOutputHandler.buildCity(x, y, dir, threadID);
-				serverOutputHandler.costs(threadID, DefaultSettings.CITY_BUILD_COST,threadID);
+				serverOutputHandler.costs(threadID, DefaultSettings.CITY_BUILD_COST, threadID);
 				statusUpdate(modelID);
 			}
 		}
@@ -950,10 +956,10 @@ public class ServerController {
 			if (gameLogic.checkBuyDevCard(modelID)) {
 				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
 				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
-				for (int i = 0;i <amountPlayers;i++){
-					serverOutputHandler.costs(threadID, DefaultSettings.DEVCARD_BUILD_COST,modelPlayerIdMap.get(i));
-				}	
-				DevelopmentCard devCard = board.getDevCardStack().getNextCard();
+				for (int i = 0; i < amountPlayers; i++) {
+					serverOutputHandler.costs(threadID, DefaultSettings.DEVCARD_BUILD_COST, modelPlayerIdMap.get(i));
+				}
+				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
 				pm.getDevCardsBoughtInThisRound().add(devCard);
 
 				serverOutputHandler.boughtDevelopmentCard(threadID, devCard);
@@ -990,7 +996,7 @@ public class ServerController {
 				PlayerModel currPM = gameLogic.getBoard().getPlayer(currentPlayer);
 				if (InitialStreetCounter >= amountPlayers * 2) {
 					// initial building phase finished
-					//gainFirstBoardResources();
+					// gainFirstBoardResources();
 					currPM.setPlayerState(PlayerState.DICEROLLING);
 					statusUpdate(currentPlayer);
 				} else if (InitialStreetCounter == amountPlayers) {
@@ -1040,7 +1046,7 @@ public class ServerController {
 			if (gameLogic.checkBuildInitialVillage(x, y, dir)) {
 				serverResponse(modelID, "OK");
 				Corner c = buildVillage(x, y, dir, modelID);
-				if (InitialStreetCounter >= amountPlayers){ //second round
+				if (InitialStreetCounter >= amountPlayers) { // second round
 					gainFirstBoardResources(modelID, c);
 				}
 
@@ -1101,7 +1107,7 @@ public class ServerController {
 				robberLossCounter--;
 				subFromPlayersResources(modelID, resources);
 				resourceStackIncrease(resources);
-				serverOutputHandler.costs(threadID, playerRes,threadID);
+				serverOutputHandler.costs(threadID, playerRes, threadID);
 				if (robberLossCounter == 0) {
 					if (modelID != currentPlayer) {
 						gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
@@ -1158,7 +1164,7 @@ public class ServerController {
 					int[] costs = { 0, 0, 0, 0, 0 };
 					costs[stealResource] = 1;
 					subFromPlayersResources(victimModelID, costs);
-					serverOutputHandler.costs(victimThreadID, costs,victimThreadID);
+					serverOutputHandler.costs(victimThreadID, costs, victimThreadID);
 
 					int modelID = threadPlayerIdMap.get(currentThreadID);
 					addToPlayersResource(modelID, costs);
@@ -1185,7 +1191,7 @@ public class ServerController {
 	public void requestSeaTrade(int threadID, int[] offer, int[] demand) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (gameLogic.checkPlayerResources(modelID, offer)) {
-			tradeController.requestSeaTrade(modelID,offer,demand);
+			tradeController.requestSeaTrade(modelID, offer, demand);
 		}
 	}
 
@@ -1197,7 +1203,7 @@ public class ServerController {
 		serverOutputHandler.tradePreview(modelPlayerIdMap.get(modelID), tradingID, supply, demand);
 	}
 
-	public void acceptTrade(int threadID, int tradingID,boolean accept) {
+	public void acceptTrade(int threadID, int tradingID, boolean accept) {
 		tradeController.acceptTrade(threadPlayerIdMap.get(threadID), tradingID, accept);
 	}
 
@@ -1222,15 +1228,16 @@ public class ServerController {
 		serverOutputHandler.tradeIsCanceled(modelPlayerIdMap.get(modelID), tradingID);
 	}
 
-	/*public void buyDevelopmentCard(int threadID) {
-		int modelID = threadPlayerIdMap.get(threadID);
-		subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
-		resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
-		DevelopmentCard currCard = devStack.getNextCard();
-		//TODO: Only one dev card per round
-		gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(currCard);
-		serverOutputHandler.boughtDevelopmentCard(threadID, currCard);
-	}*/
+	/*
+	 * public void buyDevelopmentCard(int threadID) { int modelID =
+	 * threadPlayerIdMap.get(threadID); subFromPlayersResources(modelID,
+	 * DefaultSettings.DEVCARD_BUILD_COST);
+	 * resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
+	 * DevelopmentCard currCard = devStack.getNextCard(); //TODO: Only one dev
+	 * card per round
+	 * gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(currCard);
+	 * serverOutputHandler.boughtDevelopmentCard(threadID, currCard); }
+	 */
 
 	public void playKnightCard(int threadID, int x, int y, Integer victimThreadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1245,11 +1252,7 @@ public class ServerController {
 				victimModelID = null;
 			}
 			if (gameLogic.checkSetBandit(x, y, victimModelID)) {
-				if (victimThreadID == null) {
-					String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
-					gameLogic.getBoard().setBandit(location);
-					serverOutputHandler.knightCardPlayed(threadID, location, null);
-				} else {
+				if (victimThreadID != null) {
 					PlayerModel victimPM = gameLogic.getBoard().getPlayer(victimModelID);
 					if (victimPM.sumResources() != 0) { // steal a random card
 						int[] victimResources = getPlayerResources(victimModelID);
@@ -1263,18 +1266,17 @@ public class ServerController {
 						int[] costs = { 0, 0, 0, 0, 0 };
 						costs[stealResource] = 1;
 						subFromPlayersResources(victimModelID, costs);
-						serverOutputHandler.costs(victimThreadID, costs,victimThreadID);
+						serverOutputHandler.costs(victimThreadID, costs, victimThreadID);
 
 						addToPlayersResource(modelID, costs);
 						serverOutputHandler.resourceObtain(threadID, costs);
-
-						String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
-						gameLogic.getBoard().setBandit(location);
-						serverOutputHandler.robberMovement(threadID, location, victimThreadID);
-						serverOutputHandler.knightCardPlayed(threadID, location, victimThreadID);
-
 					}
 				}
+				String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
+				gameLogic.getBoard().setBandit(location);
+				serverOutputHandler.robberMovement(threadID, location, victimThreadID);
+				serverOutputHandler.knightCardPlayed(threadID, location, victimThreadID);
+
 				pM.incrementPlayedKnightCards();
 				pM.setHasPlayedDevCard(true);
 				checkLargestArmy(modelID);
@@ -1334,7 +1336,7 @@ public class ServerController {
 					obtain[resIndex] = obtain[resIndex] + currPRes;
 					currLoss[resIndex] = currPRes;
 					subFromPlayersResources(i, currLoss);
-					serverOutputHandler.costs(i, currLoss,i);
+					serverOutputHandler.costs(i, currLoss, i);
 				}
 				currLoss[resIndex] = 0; // reset for next player
 			}
@@ -1559,7 +1561,7 @@ public class ServerController {
 		}
 	}
 
-	private void gainFirstBoardResources(int modelID,Corner c){
+	private void gainFirstBoardResources(int modelID, Corner c) {
 		int[] playersObtain = new int[5];
 		int[] coords = ProtocolToModel.getCornerCoordinates(c.getCornerID());
 		Field[] connFields = gameLogic.getBoard().getTouchingFields(coords[0], coords[1], coords[2]);
@@ -1572,12 +1574,12 @@ public class ServerController {
 				}
 			}
 		}
-			addToPlayersResource(modelID, playersObtain);
-			serverOutputHandler.resourceObtain(modelPlayerIdMap.get(modelID), playersObtain);
+		addToPlayersResource(modelID, playersObtain);
+		serverOutputHandler.resourceObtain(modelPlayerIdMap.get(modelID), playersObtain);
 		statusUpdate(modelID);
 
 	}
-	
+
 	/**
 	 * gets next player in the player order
 	 *
@@ -1657,18 +1659,18 @@ public class ServerController {
 	 */
 	public void subFromPlayersResources(int playerID, int[] costs) {
 		int[] pResources = getPlayerResources(playerID);
-		for (int i = 0;i <costs.length;i++){
-			pResources[i] = pResources[i] - costs[i];
-		}
-		/*int[] costs = new int[5];
-		for (int i = 0; i < costsparam.length; i++) { // copy array
-			costs[i] = costsparam[i];
-		}
-		
 		for (int i = 0; i < costs.length; i++) {
 			pResources[i] = pResources[i] - costs[i];
-
-		}*/
+		}
+		/*
+		 * int[] costs = new int[5]; for (int i = 0; i < costsparam.length; i++)
+		 * { // copy array costs[i] = costsparam[i]; }
+		 * 
+		 * for (int i = 0; i < costs.length; i++) { pResources[i] =
+		 * pResources[i] - costs[i];
+		 * 
+		 * }
+		 */
 		gameLogic.getBoard().getPlayer(playerID).setResources(pResources);
 	}
 
