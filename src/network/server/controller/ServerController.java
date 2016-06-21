@@ -351,10 +351,6 @@ public class ServerController {
 			statusUpdate(playerOrder[i]);
 		}
 		InitialStreetCounter = 0;
-		int[] debugResources = { 0, 0, 2, 2, 2 };
-		for (int i = 0; i < amountPlayers; i++) {
-			addToPlayersResource(i, debugResources);
-		}
 
 	}
 
@@ -1136,6 +1132,7 @@ public class ServerController {
 	 * @param currentThreadID
 	 */
 	public void robberMovementRequest(int x, int y, Integer victimThreadID, int currentThreadID) {
+		int modelID = threadPlayerIdMap.get(currentThreadID);
 		Integer victimModelID;
 		if (victimThreadID != null) {
 			victimModelID = threadPlayerIdMap.get(victimThreadID);
@@ -1143,14 +1140,7 @@ public class ServerController {
 			victimModelID = null;
 		}
 		if (gameLogic.checkSetBandit(x, y, victimModelID)) {
-			if (victimThreadID == null) {
-				String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
-				gameLogic.getBoard().setBandit(location);
-				serverOutputHandler.robberMovement(currentThreadID, location, null);
-				int modelID = threadPlayerIdMap.get(currentThreadID);
-				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
-				statusUpdate(modelID);
-			} else {
+			if (victimThreadID != null) {
 				PlayerModel victimPM = gameLogic.getBoard().getPlayer(victimModelID);
 				if (victimPM.sumResources() != 0) { // steal a random card
 					int[] victimResources = getPlayerResources(victimModelID);
@@ -1166,19 +1156,15 @@ public class ServerController {
 					subFromPlayersResources(victimModelID, costs);
 					serverOutputHandler.costs(victimThreadID, costs, victimThreadID);
 
-					int modelID = threadPlayerIdMap.get(currentThreadID);
 					addToPlayersResource(modelID, costs);
 					serverOutputHandler.resourceObtain(currentThreadID, costs);
-
-					String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
-					gameLogic.getBoard().setBandit(location);
-					serverOutputHandler.robberMovement(currentThreadID, location, victimThreadID);
-
-					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
-					statusUpdate(modelID);
 				}
 			}
-
+			String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
+			gameLogic.getBoard().setBandit(location);
+			serverOutputHandler.robberMovement(currentThreadID, location, victimThreadID);
+			gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
+			statusUpdate(modelID);
 		}
 
 	}
