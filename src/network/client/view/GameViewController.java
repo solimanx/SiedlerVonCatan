@@ -292,7 +292,7 @@ public class GameViewController implements Initializable {
 	}
 
 	public void setIsStreetDev(Boolean isStreetDev) {
-		this.isStreetDevCard = isStreetDevCard;
+		this.isStreetDevCard = isStreetDev;
 	}
 
 	/*
@@ -954,7 +954,7 @@ public class GameViewController implements Initializable {
 	 * @param result
 	 */
 	public void setDiceRollResult(int result) {
-		diceResult.setText("" + result);
+		diceResult.setText(String.valueOf(result));
 	}
 
 	/**
