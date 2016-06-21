@@ -1,10 +1,8 @@
 package network.client.view.devcardview;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,15 +14,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -49,6 +46,9 @@ public class DevCardViewController implements Initializable {
 
 	@FXML
 	private Button okButton;
+	
+	@FXML
+	private Button debugButton;
 
 	private ViewController viewController;
 
@@ -194,7 +194,11 @@ public class DevCardViewController implements Initializable {
 			inventButton.setOnAction(e -> {
 				handleMonopolyOK(e);
 			});
-			VBox monopolyBox = new VBox(inventRChooser1, inventRChooser2, inventButton);
+			Label label = new Label("Choose Resource ...");
+			VBox monopolyBox = new VBox(label, inventRChooser1, inventRChooser2, inventButton);
+			monopolyBox.setPrefWidth(300);
+			monopolyBox.setPrefHeight(400);
+			monopolyBox.setSpacing(20);
 			Scene scene = new Scene(monopolyBox);
 			monopolyStage = new Stage();
 			monopolyStage.setScene(scene);
@@ -212,7 +216,11 @@ public class DevCardViewController implements Initializable {
 			inventButton.setOnAction(e -> {
 				handleInventionOK(e);
 			});
-			VBox inventionBox = new VBox(inventRChooser1, inventRChooser2, inventButton);
+			Label label = new Label("Choose Resources ...");
+			VBox inventionBox = new VBox(label, inventRChooser1, inventRChooser2, inventButton);
+			inventionBox.setPrefWidth(300);
+			inventionBox.setPrefHeight(400);
+			inventionBox.setSpacing(20);
 			Scene scene = new Scene(inventionBox);
 			inventionStage = new Stage();
 			inventionStage.setScene(scene);
@@ -224,6 +232,12 @@ public class DevCardViewController implements Initializable {
 			stage.close();
 		}
 
+	}
+	
+	@FXML
+	void handleDebugButton(ActionEvent event) {
+		devCardSelected = CardType.INVENTION.toString();
+		handlePlayCardButton(event);
 	}
 
 }

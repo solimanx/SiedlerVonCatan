@@ -15,6 +15,7 @@
                <children>
                   <Button fx:id="playCardButton" mnemonicParsing="false" onAction="#handlePlayCardButton" prefHeight="27.0" prefWidth="138.0" text="Play Card" />
                   <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+                  <Button fx:id="debugButton" mnemonicParsing="false" onAction="#handleDebugButton" text="Debug" />
                </children>
             </VBox>
          </children>
