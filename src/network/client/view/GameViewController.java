@@ -468,7 +468,7 @@ public class GameViewController implements Initializable {
 		transition.setFromValue(1);
 		transition.setToValue(0);
 		transition.setAutoReverse(true);
-		transition.setCycleCount(10);
+		transition.setCycleCount(4);
 		transition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
 
 			@Override
