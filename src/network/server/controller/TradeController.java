@@ -51,13 +51,25 @@ public class TradeController {
 				if (notFound) {
 					serverController.serverResponse(modelID, "This player hasn't accepted your supply");
 				} else {
-					if (serverController.gameLogic.checkPlayerResources(modelID, tOf.getSupply())){
-						if (serverController.gameLogic.checkPlayerResources(partnerModelID, tOf.getDemand())){
-							serverController.subFromPlayersResources(modelID, tOf.getSupply());
-							serverController.subFromPlayersResources(partnerModelID, tOf.getDemand());
+					int[] offer = tOf.getSupply();
+					int[] demand = tOf.getDemand();
+					if (serverController.gameLogic.checkPlayerResources(modelID, offer)){
+						if (serverController.gameLogic.checkPlayerResources(partnerModelID, demand)){
+							
+							serverController.subFromPlayersResources(modelID, offer);
+							serverController.subFromPlayersResources(partnerModelID, demand);
 
-							serverController.addToPlayersResource(modelID, tOf.getDemand());
-							serverController.addToPlayersResource(partnerModelID, tOf.getSupply());
+							serverController.addToPlayersResource(modelID, demand);
+							serverController.addToPlayersResource(partnerModelID, offer);
+							
+							int threadID = serverController.modelPlayerIdMap.get(modelID);
+							int partnerThreadID = serverController.modelPlayerIdMap.get(partnerModelID);
+							
+							serverController.getServerOutputHandler().costs(threadID, offer, threadID);
+							serverController.getServerOutputHandler().costs(partnerThreadID, offer, partnerThreadID);
+							
+							serverController.getServerOutputHandler().resourceObtain(threadID, demand);
+							serverController.getServerOutputHandler().resourceObtain(partnerThreadID, offer);
 
 							serverController.statusUpdate(modelID);
 							serverController.statusUpdate(partnerModelID);

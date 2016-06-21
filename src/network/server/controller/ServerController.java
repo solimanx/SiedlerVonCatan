@@ -506,7 +506,7 @@ public class ServerController {
 					subFromPlayersResources(modelID, DefaultSettings.VILLAGE_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.VILLAGE_BUILD_COST);
 					increaseVictoryPoints(modelID);
-					// checkIfVillageInterruptsStreetSet(c);
+					checkIfVillageInterruptsStreetSet(c);
 					// evtl. auch in initial village?
 
 					serverOutputHandler.buildVillage(x, y, dir, threadID);
@@ -632,43 +632,52 @@ public class ServerController {
 		String id = c.getCornerID();
 		int[] coords = HexService.getCornerCoordinates(id.substring(0, 1), id.substring(1, 2), id.substring(2, 3));
 		Edge[] neighbours = gameLogic.getBoard().getProjectingEdges(coords[0], coords[1], coords[2]);
-		int modelID = c.getOwnerID();
+		Integer modelID = c.getOwnerID();
 		ArrayList<Edge> streetEdges = new ArrayList<Edge>();
 		Integer currPlayer = null;
+		// first: check if there are two adjusting streets with other player
 		for (int i = 0; i < neighbours.length; i++) {
-			if (neighbours[i].getOwnerID() != null && neighbours[i].getOwnerID() != modelID
-					&& neighbours[i].isHasStreet()) {
-
-				if (currPlayer != null && currPlayer == neighbours[i].getOwnerID()) {
-					streetEdges.add(neighbours[i]);
-				} else if (currPlayer == null) {
-					streetEdges.add(neighbours[i]);
-					currPlayer = neighbours[i].getOwnerID();
+			if (neighbours[i] != null) {
+				Integer owner = neighbours[i].getOwnerID();
+				if (owner != null && owner != modelID) {
+					if (currPlayer == owner) {
+						streetEdges.add(neighbours[i]);
+					} else if (currPlayer == null) {
+						streetEdges.add(neighbours[i]);
+						currPlayer = owner;
+					}
 				}
 			}
 		}
-		if (streetEdges.size() == 2 && !EdgeToStreetSet(streetEdges.get(0)).getHasCircle()) {
-			for (int i = 0; i < streetSets.size(); i++) {
-				if (streetSets.get(i).getEdges().contains(streetEdges.get(0))) {
-					StreetSet newSet1 = new StreetSet(modelID, null);
-					newSet1.addEdge(streetEdges.get(0));
-					StreetSet newSet2 = new StreetSet(modelID, null);
-					newSet1.addEdge(streetEdges.get(1));
-					for (Edge e : streetSets.get(i).getEdges()) {
-						if (e != streetEdges.get(0) && e != streetEdges.get(1)) {
-							addToStreetSet(e, currPlayer);
+		// if yes then divide street set which contains both streets into two
+		// seperate sets; but if street set == circle then only remove the
+		// 'circle' flag
+		if (streetEdges.size() == 2) {
+			if (!EdgeToStreetSet(streetEdges.get(0)).getHasCircle()) {
+				for (int i = 0; i < streetSets.size(); i++) {
+					if (streetSets.get(i).getPlayerID() == currPlayer) {
+						if (streetSets.get(i).getEdges().contains(streetEdges.get(0))) {
+							StreetSet newSet1 = new StreetSet(modelID, null);
+							newSet1.addEdge(streetEdges.get(0));
+							StreetSet newSet2 = new StreetSet(modelID, null);
+							newSet2.addEdge(streetEdges.get(1));
+							ArrayList<Edge> tempEdges = streetSets.get(i).getEdges();
+							streetSets.remove(i);
+							streetSets.add(newSet1);
+							streetSets.add(newSet2);
+							for (Edge e : tempEdges) {
+								if (e != streetEdges.get(0) && e != streetEdges.get(1)) {
+									addToStreetSet(e, currPlayer);
+								}
+							}
+							break;
 						}
 					}
-					streetSets.remove(i);
-					streetSets.add(newSet1);
-					streetSets.add(newSet2);
-					break;
 				}
+				checkLongestTradingRoute(currPlayer);
+			} else {
+				EdgeToStreetSet(streetEdges.get(0)).setHasCircle(false);
 			}
-			checkLongestTradingRoute(currPlayer);
-		} else {
-			EdgeToStreetSet(streetEdges.get(0)).setHasCircle(false);
-			// checkLongestTradingRoute ? nullpointer arrayList leer
 		}
 	}
 
@@ -774,7 +783,6 @@ public class ServerController {
 		ArrayList<Edge> currEndingStreets = new ArrayList<Edge>();
 		StreetSet currStreetSet = null;
 		for (int i = 0; i < streetSets.size(); i++) {
-			// currStreetSet = streetSets.get(i).getEdges();
 			currStreetSet = streetSets.get(i);
 			if (currStreetSet.getPlayerID() == modelID && currStreetSet.size() >= 5) {
 				for (int j = 0; j < currStreetSet.size(); j++) {
@@ -818,10 +826,8 @@ public class ServerController {
 					ArrayList<Edge> alreadyChecked = new ArrayList<Edge>();
 					ArrayList<Edge> lastNeighbours = new ArrayList<Edge>();
 					ArrayList<Integer> greatestValue = new ArrayList<Integer>();
-					for (int j = 0; j < currStreetSet.size(); j++) { // gehe
-																		// über
-																		// alle
-																		// straßen
+					// gehe über alle Straßen
+					for (int j = 0; j < currStreetSet.size(); j++) {
 						greatestValue.add(1 + depthFirstSearch(currStreetSet.getEdgeAt(j), currStreetSet,
 								alreadyChecked, lastNeighbours));
 					}
@@ -1047,6 +1053,8 @@ public class ServerController {
 				}
 
 				increaseVictoryPoints(modelID);
+				checkIfVillageInterruptsStreetSet(c);
+
 				serverOutputHandler.buildVillage(x, y, dir, threadID);
 				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.BUILDING_STREET);
 				statusUpdate(modelID);
@@ -1332,7 +1340,7 @@ public class ServerController {
 		}
 	}
 
-	public void playInventionCard(int threadID, int resources[]) {
+	public void playInventionCard(int threadID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
 			error(modelID, "Ungültiger Spielzug");
@@ -1480,7 +1488,6 @@ public class ServerController {
 						case VILLAGE:
 							currResType = f.getResourceType();
 							if (resourceStackDecrease(currResType)) {
-								addToPlayersResource(neighbors[i].getOwnerID(), currResType, 1);
 								playersObtain[neighbors[i].getOwnerID()][DefaultSettings.RESOURCE_VALUES
 										.get(currResType)]++;
 							}
@@ -1489,7 +1496,6 @@ public class ServerController {
 							currResType = f.getResourceType();
 							for (int j = 0; j < 2; j++) {
 								if (resourceStackDecrease(currResType)) {
-									addToPlayersResource(neighbors[i].getOwnerID(), currResType, 2);
 									playersObtain[neighbors[i].getOwnerID()][DefaultSettings.RESOURCE_VALUES
 											.get(currResType)]++;
 								}

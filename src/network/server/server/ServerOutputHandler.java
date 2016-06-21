@@ -232,7 +232,7 @@ public class ServerOutputHandler {
 		} else {
 			pDevCard = new ProtocolDevCard(devCards[0],devCards[1],devCards[2],devCards[3],devCards[4],null);
 		}
-		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, knightAmount, pDevCard, longestTR, biggestKP); //TODO die 1.0 neue attribute
+		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, knightAmount, pDevCard, biggestKP,longestTR ); //TODO die 1.0 neue attribute
 		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(pPlayer);
 		Response r = new Response();
 		r.pSUpdate = ps;
