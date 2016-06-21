@@ -381,7 +381,7 @@ public class ClientInputHandler {
 		int playerID = robberMovement.getPlayerID();
 		Index locationID = robberMovement.getLocationID();
 		// TODO smth with information
-		int victimID = robberMovement.getVictimID();
+		Integer victimID = robberMovement.getVictimID();
 		clientController.robberMove(locationID);
 
 	}
