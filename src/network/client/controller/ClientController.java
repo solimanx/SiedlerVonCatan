@@ -540,8 +540,15 @@ public class ClientController {
 		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(modelID).getID());
-
-		viewController.getGameViewController().setStreet(x, y, dir, modelID);
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				viewController.getGameViewController().setStreet(x, y, dir, modelID);
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 	// 8.6
@@ -563,8 +570,15 @@ public class ClientController {
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 			}
 		}
-
-		viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, modelID);
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, modelID);
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 	// 8.6
@@ -580,7 +594,15 @@ public class ClientController {
 		c.setStatus(enums.CornerStatus.CITY);
 		c.setOwnerID(playerID);
 		int modelID = threadPlayerIdMap.get(playerID);
-		viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, modelID);
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, modelID);
+				
+			}
+		});
+		
 	}
 
 	// 9.1
