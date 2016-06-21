@@ -23,7 +23,7 @@ public class PlayerStatusGUIUpdate implements Runnable {
 	@Override
 	public void run() {
 		gameViewController.setVictoryPoints(modelID, victoryPoints);
-		gameViewController.setResourceCards(modelID, resources);
+		//gameViewController.setResourceCards(modelID, resources);
 		gameViewController.setPlayerStatus(modelID, status);
 	}
 

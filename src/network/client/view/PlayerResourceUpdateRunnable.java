@@ -17,7 +17,7 @@ public class PlayerResourceUpdateRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		gameViewController.setResourceCards(modelID, resources);
+		//gameViewController.setResourceCards(modelID, resources);
 	}
 
 }

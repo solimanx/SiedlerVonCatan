@@ -496,7 +496,7 @@ public class ClientController {
 		// if self
 		if (modelID == 0) {
 			gameLogic.getBoard().getPlayer(modelID).decrementResources(resources);
-			viewController.getGameViewController().setResourceCards(modelID, getPlayerResources(modelID));
+			//viewController.getGameViewController().setResourceCards(modelID, getPlayerResources(modelID));
 			Platform.runLater(new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(),
 					gameLogic.getBoard().getPlayer(modelID).getResources()));
 		} // if someone else
