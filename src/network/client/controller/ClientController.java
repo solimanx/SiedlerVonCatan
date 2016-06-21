@@ -23,6 +23,7 @@ import model.objects.DevCards.InventionCard;
 import model.objects.DevCards.KnightCard;
 import model.objects.DevCards.MonopolyCard;
 import model.objects.DevCards.StreetBuildingCard;
+import network.ModelToProtocol;
 import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
@@ -871,7 +872,10 @@ public class ClientController {
 	}
 
 	public void playStreetBuildCard(int u1, int v1, int dir1, int u2, int v2, int dir2) {
-		// clientOutputHandler.playRoadCard(road1_id, road2_id);
+		int radius = DefaultSettings.BOARD_RADIUS;
+		String road1 = ModelToProtocol.getEdgeID(u1 - radius, v1 - radius, dir1);
+		String road2 = ModelToProtocol.getEdgeID(u2 - radius, v2 - radius, dir2);
+		clientOutputHandler.playRoadCard(road1, road2);
 	}
 
 	public void playKnightCard(int x, int y, int modelID) {
