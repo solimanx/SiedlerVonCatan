@@ -945,8 +945,6 @@ public class GameViewController implements Initializable {
 		case 4:
 			playerFourCards.setText(Integer.toString(resources[0]));
 			break;
-		default:
-			break;
 		}
 	}
 
