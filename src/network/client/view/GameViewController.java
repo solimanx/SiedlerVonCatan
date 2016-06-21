@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.PlayerState;
@@ -18,6 +22,7 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,13 +36,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -47,20 +50,21 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.*;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextBoundsType;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import model.objects.Corner;
+import model.objects.PlayerModel;
 import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.client.view.devcardview.DevCardViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class GameViewController implements Initializable {
 
@@ -456,7 +460,6 @@ public class GameViewController implements Initializable {
 				}
 			}
 		});
-
 	}
 
 	/**
@@ -531,6 +534,12 @@ public class GameViewController implements Initializable {
 			break;
 		}
 
+	}
+
+	public void startResourceUpdater(){
+		Thread th = new Thread(resourceUpdater);
+		th.setDaemon(true);
+		th.start();
 	}
 
 	/**
@@ -619,7 +628,7 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleBuyCardButton(ActionEvent event) throws IOException {
 		viewController.getClientController().requestBuyDevelopmentCard();
-		playCardButton.setDisable(true);
+		// playCardButton.setDisable(true);
 	}
 
 	@FXML
@@ -846,7 +855,7 @@ public class GameViewController implements Initializable {
 		village.setOpacity(1.0);
 		village.setEffect(shadow);
 		village.getStyleClass().remove("village");
-		int[] coordinates = { u, v , dir };
+		int[] coordinates = { u, v, dir };
 		village.setOnMouseClicked(e -> {
 			cityClick(coordinates);
 		});
@@ -1646,4 +1655,35 @@ public class GameViewController implements Initializable {
 		}
 
 	}
+
+	Task resourceUpdater = new Task<Void>() {
+
+		protected Void call() throws Exception {
+			while (true) {
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						setResourceCards(0, viewController.getClientController().getGameLogic().getBoard().getPlayer(0)
+								.getResources());
+						int[] hidden1 = { viewController.getClientController().getGameLogic().getBoard().getPlayer(1)
+								.getHiddenResources() };
+						setResourceCards(1, hidden1);
+						int[] hidden2 = { viewController.getClientController().getGameLogic().getBoard().getPlayer(2)
+								.getHiddenResources() };
+						setResourceCards(2, hidden2);
+						if(viewController.getClientController().getAmountPlayers() > 3){
+							int[] hidden3 = { viewController.getClientController().getGameLogic().getBoard().getPlayer(3)
+									.getHiddenResources() };
+							setResourceCards(3, hidden3);
+						}
+						logger.log(Level.DEBUG, "Resources updated!");
+					}
+				});
+				Thread.sleep(1000);
+			}
+
+		}
+
+	};
 }

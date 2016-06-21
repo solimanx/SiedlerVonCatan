@@ -373,6 +373,8 @@ public class ClientController {
 		int[] banditCorners = gameLogic.getBoard().getStringToCoordMap().get(gameLogic.getBoard().getBandit());
 		viewController.getGameViewController().setBandit(banditCorners[0], banditCorners[1]);
 
+		viewController.getGameViewController().startResourceUpdater();
+
 	}
 
 	/**
@@ -715,7 +717,7 @@ public class ClientController {
 
 	/**
 	 * A Player has accepted your offer. Show acceptance on list
-	 * 
+	 *
 	 * @param threadID
 	 * @param tradingID
 	 */
@@ -735,7 +737,7 @@ public class ClientController {
 
 	/**
 	 * You agree to the trading
-	 * 
+	 *
 	 * @param tradingID
 	 * @param partnerThreadID
 	 */
@@ -745,7 +747,7 @@ public class ClientController {
 
 	/**
 	 * trade was fulfilled
-	 * 
+	 *
 	 * @param threadID
 	 * @param partnerModelID
 	 */
