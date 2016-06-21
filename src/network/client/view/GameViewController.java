@@ -1677,7 +1677,6 @@ public class GameViewController implements Initializable {
 									.getHiddenResources() };
 							setResourceCards(3, hidden3);
 						}
-						logger.log(Level.DEBUG, "Resources updated!");
 					}
 				});
 				Thread.sleep(1000);
