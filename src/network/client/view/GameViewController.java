@@ -293,6 +293,7 @@ public class GameViewController implements Initializable {
 
 	public void setIsStreetDev(Boolean isStreetDev) {
 		this.isStreetDevCard = isStreetDev;
+		Platform.runLater(new NewAlert("Street build Developement Card", "Build two streets, or double-click on a new street to build just one."));
 	}
 
 	/*
@@ -536,7 +537,7 @@ public class GameViewController implements Initializable {
 
 	}
 
-	public void startResourceUpdater(){
+	public void startResourceUpdater() {
 		Thread th = new Thread(resourceUpdater);
 		th.setDaemon(true);
 		th.start();
@@ -1253,6 +1254,58 @@ public class GameViewController implements Initializable {
 		this.knight = knight;
 	}
 
+	Task resourceUpdater = new Task<Void>() {
+
+		protected Void call() throws Exception {
+			while (true) {
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						setResourceCards(0, viewController.getClientController().getGameLogic().getBoard().getPlayer(0)
+								.getResources());
+						int[] hidden1 = { viewController.getClientController().getGameLogic().getBoard().getPlayer(1)
+								.getHiddenResources() };
+						setResourceCards(1, hidden1);
+						int[] hidden2 = { viewController.getClientController().getGameLogic().getBoard().getPlayer(2)
+								.getHiddenResources() };
+						setResourceCards(2, hidden2);
+						if (viewController.getClientController().getAmountPlayers() > 3) {
+							int[] hidden3 = { viewController.getClientController().getGameLogic().getBoard()
+									.getPlayer(3).getHiddenResources() };
+							setResourceCards(3, hidden3);
+						}
+					}
+				});
+				Thread.sleep(1000);
+			}
+
+		}
+
+	};
+
+	public class NewAlert implements Runnable {
+
+		String message;
+		String title;
+
+		public NewAlert(String title, String message) {
+			this.title = title;
+			this.message = message;
+		}
+
+		@Override
+		public void run() {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle(title);
+			alert.setContentText(message);
+
+			alert.showAndWait();
+
+		}
+
+	}
+
 	/**
 	 * Inner Class for constructing the board. Instantiated at initial phase of
 	 * Game
@@ -1654,33 +1707,4 @@ public class GameViewController implements Initializable {
 
 	}
 
-	Task resourceUpdater = new Task<Void>() {
-
-		protected Void call() throws Exception {
-			while (true) {
-				Platform.runLater(new Runnable() {
-
-					@Override
-					public void run() {
-						setResourceCards(0, viewController.getClientController().getGameLogic().getBoard().getPlayer(0)
-								.getResources());
-						int[] hidden1 = { viewController.getClientController().getGameLogic().getBoard().getPlayer(1)
-								.getHiddenResources() };
-						setResourceCards(1, hidden1);
-						int[] hidden2 = { viewController.getClientController().getGameLogic().getBoard().getPlayer(2)
-								.getHiddenResources() };
-						setResourceCards(2, hidden2);
-						if(viewController.getClientController().getAmountPlayers() > 3){
-							int[] hidden3 = { viewController.getClientController().getGameLogic().getBoard().getPlayer(3)
-									.getHiddenResources() };
-							setResourceCards(3, hidden3);
-						}
-					}
-				});
-				Thread.sleep(1000);
-			}
-
-		}
-
-	};
 }
