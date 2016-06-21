@@ -479,12 +479,18 @@ public class ClientController {
 					gameLogic.getBoard().getPlayer(modelID).getResources()));
 		} // if someone else
 		else {
-			int resources2 = resources[0]+resources[1]+resources[2]+resources[3]+resources[4]; 
+			int resources2;
+			if (resources.length == 5) {
+				resources2 = resources[0] + resources[1] + resources[2] + resources[3] + resources[4];
+			} else {
+				resources2 = resources[0];
+			}
 			// increment their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources2);
 			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
-//			Platform.runLater(
-//					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), hiddenResources));
+			// Platform.runLater(
+			// new PlayerResourceUpdateRunnable(modelID,
+			// viewController.getGameViewController(), hiddenResources));
 		}
 
 	}
@@ -497,17 +503,24 @@ public class ClientController {
 		// if self
 		if (modelID == 0) {
 			gameLogic.getBoard().getPlayer(modelID).decrementResources(resources);
-			//viewController.getGameViewController().setResourceCards(modelID, getPlayerResources(modelID));
+			// viewController.getGameViewController().setResourceCards(modelID,
+			// getPlayerResources(modelID));
 			Platform.runLater(new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(),
 					gameLogic.getBoard().getPlayer(modelID).getResources()));
 		} // if someone else
 		else {
-			int resources2 = resources[0]; 
+			int resources2;
+			if (resources.length == 5) {
+				resources2 = resources[0] + resources[1] + resources[2] + resources[3] + resources[4];
+			} else {
+				resources2 = resources[0];
+			}
 			// decrement their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources2);
 			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
-//			Platform.runLater(
-//					new PlayerResourceUpdateRunnable(modelID, viewController.getGameViewController(), hiddenResources));
+			// Platform.runLater(
+			// new PlayerResourceUpdateRunnable(modelID,
+			// viewController.getGameViewController(), hiddenResources));
 		}
 		// getPlayerHiddenResource(modelID));
 
@@ -858,7 +871,7 @@ public class ClientController {
 	}
 
 	public void playStreetBuildCard(int u1, int v1, int dir1, int u2, int v2, int dir2) {
-		//clientOutputHandler.playRoadCard(road1_id, road2_id);
+		// clientOutputHandler.playRoadCard(road1_id, road2_id);
 	}
 
 	public void playKnightCard(int x, int y, int modelID) {
@@ -935,7 +948,7 @@ public class ClientController {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(knightCard);
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayedKnightCards();
-		
+
 	}
 
 	public void removeFromDeck(int playerID, StreetBuildingCard streetBuildCard) {
