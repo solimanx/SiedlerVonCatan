@@ -723,7 +723,7 @@ public class GameViewController implements Initializable {
 	 */
 	public void streetClick(int[] streetCoord) {
 		if (isStreetDevCard && streetsSelected.size() <= 2) {
-			Line street = streets[streetCoord[0] + 3][streetCoord[1] + 3][streetCoord[2]];
+			Line street = streets[streetCoord[0]][streetCoord[1]][streetCoord[2]];
 			streetsSelected.add(streetCoord);
 			street.setOpacity(0.8);
 			if (streetsSelected.size() == 2) {
