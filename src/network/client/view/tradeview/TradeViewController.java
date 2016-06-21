@@ -348,8 +348,8 @@ public class TradeViewController {
 		String offerString = viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).getName()
 				+ " accepts your offer";
 		Platform.runLater(new AddOfferStringRunnable(offerString));
-		int playerID = viewController.getClientController().getPlayerID(modelID);
-		acceptedOfferToModelID.put(offerString, playerID);
+//		int playerID = viewController.getClientController().getPlayerID(modelID);
+		acceptedOfferToModelID.put(offerString, modelID);
 
 	}
 
