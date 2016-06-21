@@ -88,8 +88,8 @@ public class ServerController {
 
 		devStack = new DevelopmentCardsStack();
 		DevelopmentCard[] debugCards = new DevelopmentCard[10];
-		debugCards[0] = new InventionCard();
-		debugCards[1] = new StreetBuildingCard();
+		debugCards[0] = new StreetBuildingCard();
+		debugCards[1] = new InventionCard();
 		debugCards[2] = new MonopolyCard();
 		debugCards[3] = new VictoryPointCard();
 		debugCards[4] = new KnightCard();
