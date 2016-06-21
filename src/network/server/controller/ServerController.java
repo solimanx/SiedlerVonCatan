@@ -1141,6 +1141,9 @@ public class ServerController {
 				String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
 				gameLogic.getBoard().setBandit(location);
 				serverOutputHandler.robberMovement(currentThreadID, location, null);
+				int modelID = threadPlayerIdMap.get(currentThreadID);
+				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
+				statusUpdate(modelID);
 			} else {
 				PlayerModel victimPM = gameLogic.getBoard().getPlayer(victimModelID);
 				if (victimPM.sumResources() != 0) { // steal a random card
