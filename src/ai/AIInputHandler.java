@@ -245,6 +245,7 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.loseToBandit();
 				break;
 			case TRADING_OR_BUILDING:
+				// TODO change
 				ai.getOutput().respondEndTurn();
 				break;
 			default:// do nothing
@@ -266,79 +267,79 @@ public class AIInputHandler extends ClientInputHandler {
 
 	@Override
 	protected void handle(ProtocolVictory victory) {
-		// TODO Auto-generated method stub
+		// TODO end
 
 	}
 
 	@Override
 	protected void handle(ProtocolCosts costs) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai - > resource agent / opponent agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolTradePreview tradePreview) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> trade agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> trade agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolTradeCompletion tradeIsCompleted) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> trade agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolTradeCancellation tradeIsCanceled) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> trade agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolLargestArmy biggestKnightProwess) {
-		// TODO Auto-generated method stub
+		// TODO if self, nothing else redirect to ai -> opponent agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> card agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolLongestRoad longestRoad) {
-		// TODO Auto-generated method stub
+		// TODO if self, nothing else redirect to ai -> opponent agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> card agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolPlayKnightCard playKnightCard) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> card agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> card agent
 
 	}
 
 	@Override
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
-		// TODO Auto-generated method stub
+		// TODO redirect to ai -> card agent
 
 	}
 
