@@ -1,5 +1,6 @@
 package ai;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -17,6 +18,9 @@ public class AdvancedAI extends PrimitiveAI {
 
 	private CornerAgent[] cA = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
 	private Map<Integer, Double> diceRollProbabilities;
+
+	// belongs to resourceAgent
+	private ArrayList<CornerAgent> myCorners = new ArrayList<CornerAgent>();
 
 	public AdvancedAI() {
 
@@ -43,21 +47,28 @@ public class AdvancedAI extends PrimitiveAI {
 		int z = 0;
 
 		int bestUtility = 0;
+		int d = -1;
 		for (int i = 0; i < cA.length; i++) {
 			if (cA[i].calculateInitialVillageUtility() > bestUtility) {
 				bestUtility = cA[i].calculateInitialVillageUtility();
 				x = cA[i].getLocation()[0];
 				y = cA[i].getLocation()[1];
 				z = cA[i].getLocation()[2];
+				d = i;
 			}
 			System.out.println(cA[i].getLocationString() + " " + cA[i].calculateInitialVillageUtility());
 		}
+		myCorners.add(cA[d]);
 		super.pO.requestBuildInitialVillage(x, y, z);
 	}
 
 	@Override
 	public void initialRoad() {
-	};
+		myCorners.get(0).calculateInitialRoadOne();
+		int[] rC = myCorners.get(0).getBestRoad();
+		super.pO.requestBuildInitialRoad(rC[0], rC[1], rC[2]);
+
+	}
 
 	private void initializeDiceRollProbabilities() {
 		diceRollProbabilities = new HashMap<Integer, Double>();
@@ -79,13 +90,21 @@ public class AdvancedAI extends PrimitiveAI {
 		return diceRollProbabilities;
 	}
 
-	public CornerAgent getCornerAgentByID(String id){
-		for(int i=0; i<cA.length;i++){
-			if(id.equals(cA[i].getID())){
+	public CornerAgent getCornerAgentByID(String id) {
+		if (id.length() != 3 ) {
+			throw new IllegalArgumentException("id unequal 3");
+		}
+		for (int i = 0; i < cA.length; i++) {
+			String a = id.substring(0, 1);
+			String b = id.substring(1, 2);
+			String c = id.substring(2, 3);
+			if ((a + b + c).equals(cA[i].getID()) || (a + c + b).equals(cA[i].getID())
+					|| (b + a + c).equals((cA[i].getID())) || (b + c + a).equals((cA[i].getID()))
+					|| (c + a + b).equals((cA[i].getID())) || (c + b + a).equals((cA[i].getID()))) {
 				return cA[i];
 			}
 		}
-		throw new IllegalArgumentException(id+" doesn't exist");
+		throw new IllegalArgumentException(id + " doesn't exist");
 
 	}
 }

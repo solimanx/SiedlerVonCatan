@@ -44,9 +44,10 @@ public class CornerAgent {
 		this.aai = aai;
 		this.board = board;
 		Corner c = board.getCornerAt(loc[0], loc[1], loc[2]);
+		this.id = c.getCornerID();
 		this.state = c.getStatus();
 		if (!isBlocked()) {
-			this.id = c.getCornerID();
+
 			this.harbour_state = c.getHarbourStatus();
 			this.location = loc;
 			this.f = board.getTouchingFields(loc[0], loc[1], loc[2]);
@@ -88,7 +89,7 @@ public class CornerAgent {
 	/**
 	 *
 	 */
-	public int getBestRoad() {
+	public int[] getBestRoad() {
 		int max = -1;
 		int c = -1;
 		for (int i = 0; i < 3; i++) {
@@ -98,7 +99,7 @@ public class CornerAgent {
 			}
 		}
 
-		return c;
+		return ProtocolToModel.getEdgeCoordinates(e[c].getEdgeID());
 	}
 
 	/**
