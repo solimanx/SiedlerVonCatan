@@ -253,17 +253,29 @@ public class CornerAgent {
 	 */
 	protected int resourceBonus() {
 		int bonus = 0;
-		int oreB = Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT"));
-		int cornB = Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT"));
+		int woodB = aai.getSingleResourceWeight(ResourceType.WOOD);
+		int clayB = aai.getSingleResourceWeight(ResourceType.CLAY);
+		int oreB = aai.getSingleResourceWeight(ResourceType.ORE);
+		int woolB = aai.getSingleResourceWeight(ResourceType.SHEEP);
+		int cornB = aai.getSingleResourceWeight(ResourceType.CORN);		
 		for (int i = 0; i < 3; i++) {
 			if (f[i] != null) {
 				switch (f[i].getResourceType()) {
-				case CORN:
-					bonus += cornB;
+				case WOOD:
+					bonus += woodB;
 					break;
+				case CLAY:
+					bonus += clayB;
+					break;						
 				case ORE:
 					bonus += oreB;
 					break;
+				case SHEEP:
+					bonus += woolB;
+					break;
+				case CORN:
+					bonus += cornB;
+					break;					
 				default:
 					break;
 				}
