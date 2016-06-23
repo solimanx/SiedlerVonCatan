@@ -463,7 +463,7 @@ public class PrimitiveAI extends Thread {
 		return PROTOCOL;
 	}
 
-	protected int getID() {
+	public int getID() {
 		return ID;
 	}
 

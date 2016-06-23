@@ -103,4 +103,6 @@ public class BanditAgent {
 		}
 		return new int[] { x - radius, y - radius };
 	}
+	
+	//TODO communicate with opponent agent which opponent should be targeted
 }
