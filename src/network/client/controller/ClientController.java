@@ -157,8 +157,12 @@ public class ClientController {
 	 */
 	public void receiveChatMessage(Integer playerID, String message) {
 		if (playerID != null) {
-			viewController.messageReceive("Spieler "
-					+ gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerID)).getName() + ": " + message);
+			String playerName = gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerID)).getName();
+			if (playerName != null) {
+				viewController.messageReceive("Player " + playerName + ": " + message);
+			} else {
+				viewController.messageReceive("Player " + playerID.toString() + ": " + message);
+			}
 
 		} else {
 			viewController.messageReceive("Server: " + message);
@@ -172,7 +176,7 @@ public class ClientController {
 	 * @param notice
 	 */
 	public void receiveError(String notice) {
-		// TODO
+		viewController.getLobbyController().setServerColorAnswer(notice);
 		logger.debug(notice);
 	}
 
@@ -200,9 +204,11 @@ public class ClientController {
 			}
 			break;
 		case GAME_STARTING:
-			// addToPlayersResource(modelID, resources);
+			// addToPlayersResource(modelID, resources);#
+			viewController.getLobbyController().updatePlayer(threadID, name, color, status);
 			break;
 		case WAITING_FOR_GAMESTART:
+			viewController.getLobbyController().updatePlayer(threadID, name, color, status);
 			// if player wasn't saved in list
 			if (modelID == null) {
 				// e.g. (42 -> 0), (13 -> 1) etc.
@@ -541,12 +547,12 @@ public class ClientController {
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(gameLogic.getBoard().getPlayer(modelID).getID());
 		Platform.runLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				viewController.getGameViewController().setStreet(x, y, dir, modelID);
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
@@ -571,12 +577,12 @@ public class ClientController {
 			}
 		}
 		Platform.runLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, modelID);
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
@@ -595,14 +601,14 @@ public class ClientController {
 		c.setOwnerID(playerID);
 		int modelID = threadPlayerIdMap.get(playerID);
 		Platform.runLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.CITY, modelID);
-				
+
 			}
 		});
-		
+
 	}
 
 	// 9.1

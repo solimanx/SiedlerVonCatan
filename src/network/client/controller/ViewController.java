@@ -25,7 +25,7 @@ public class ViewController {
 	private ClientController clientController;
 	private GameViewController gameViewController;
 	private LobbyController lobbyController;
-	private PlayerProfileController playerProfileController;
+//	private PlayerProfileController playerProfileController;
 	private Stage primaryStage;
 
 	/**
@@ -97,25 +97,25 @@ public class ViewController {
 	 * @throws IOException
 	 */
 
-	public void startChooseView() throws IOException {
-
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
-			Parent root1 = (Parent) fxmlLoader.load();
-			playerProfileController = fxmlLoader.getController();
-			playerProfileController.setViewController(this);
-			choosingStage = new Stage();
-			choosingStage.setTitle("Choose Name and Color");
-			choosingStage.setScene(new Scene(root1));
-			isChoosingStage = true;
-			choosingStage.show();
-
-		} catch (IOException e) {
-			logger.error("Input/Output Exception", e);
-			logger.catching(Level.ERROR, e);
-			e.printStackTrace();
-		}
-	}
+//	public void startChooseView() throws IOException {
+//
+//		try {
+//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
+//			Parent root1 = (Parent) fxmlLoader.load();
+//			playerProfileController = fxmlLoader.getController();
+//			playerProfileController.setViewController(this);
+//			choosingStage = new Stage();
+//			choosingStage.setTitle("Choose Name and Color");
+//			choosingStage.setScene(new Scene(root1));
+//			isChoosingStage = true;
+//			choosingStage.show();
+//
+//		} catch (IOException e) {
+//			logger.error("Input/Output Exception", e);
+//			logger.catching(Level.ERROR, e);
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * starts GameView and GameViewController
@@ -262,15 +262,15 @@ public class ViewController {
 
 	}
 
-	public PlayerProfileController getPlayerProfileController() {
-		return playerProfileController;
+//	public PlayerProfileController getPlayerProfileController() {
+//		return playerProfileController;
+//
+//	}
 
-	}
-
-	private Runnable createSResponseProfileRunnable(final String paramStr, final PlayerProfileController c) {
+	private Runnable createSResponseProfileRunnable(final String paramStr, final LobbyController lobbyController) {
 		Runnable aRunnable = new Runnable() {
 			public void run() {
-				c.setServerColorAnswer(paramStr);
+				lobbyController.setServerColorAnswer(paramStr);
 			}
 		};
 		return aRunnable;
@@ -289,7 +289,7 @@ public class ViewController {
 		if (isGameView) {
 			Platform.runLater(createSResponseRunnable(server_response, gameViewController));
 		} else if (isChoosingStage) {
-			Platform.runLater(createSResponseProfileRunnable(server_response, playerProfileController));
+			Platform.runLater(createSResponseProfileRunnable(server_response, lobbyController));
 		} else {
 			logger.debug("Server response: " + server_response);
 		}
