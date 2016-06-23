@@ -70,7 +70,7 @@ public class CornerAgent {
 					if (neighbouringEdges[j] != null && neighbouringEdges[j] != e[i]) {
 						if (!neighbouringEdges[j].isHasStreet()) {
 							int[] coords2 = ProtocolToModel.getEdgeCoordinates(neighbouringEdges[j].getEdgeID());
-							Corner[] neighbouringCorners = board.getAttachedCorners(coords2[0], coords2[1], coords[2]);
+							Corner[] neighbouringCorners = board.getAttachedCorners(coords2[0], coords2[1], coords2[2]);
 							for (int k = 0; k < neighbouringCorners.length; k++) {
 								if (neighbouringCorners[k] != c[i]) {
 									int util = aai.getCornerAgentByID(neighbouringCorners[k].getCornerID())
