@@ -137,7 +137,7 @@ public class LobbyController {
 	@FXML
 	public void startGame() {
 		// try {
-		colorNameSelectPane.setVisible(true);
+		colorNameSelectPane.setDisable(false);
 		
 		// viewController.startChooseView();
 		// } catch (IOException e) {

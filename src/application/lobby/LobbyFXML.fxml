@@ -87,7 +87,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <AnchorPane fx:id="colorNameSelectPane" layoutX="40.0" prefHeight="319.0" prefWidth="540.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <AnchorPane fx:id="colorNameSelectPane" disable="true" layoutX="40.0" prefHeight="319.0" prefWidth="540.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="295.0" prefWidth="344.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
