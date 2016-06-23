@@ -13,9 +13,11 @@ import settings.DefaultSettings;
 public class BanditAgent {
 	private AdvancedAI aai;
 	double[][] robberscale = new double[7][7];
+	private OpponentAgent oa;
 
-	public BanditAgent(AdvancedAI aai) {
+	public BanditAgent(AdvancedAI aai, OpponentAgent oa) {
 		this.aai = aai;
+		this.oa = oa;
 	}
 
 	/**
@@ -103,6 +105,12 @@ public class BanditAgent {
 		}
 		return new int[] { x - radius, y - radius };
 	}
-	
-	//TODO communicate with opponent agent which opponent should be targeted
+
+	// TODO communicate with opponent agent which opponent should be targeted
+	protected Integer bestVictim() {
+		// get victims ids around (bestNewRobber) and target the best one
+		// both information is sent to advanced ai and eventually to
+		// requestSetBandit in outputhandler
+		return null;
+	}
 }
