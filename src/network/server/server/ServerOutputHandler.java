@@ -186,7 +186,7 @@ public class ServerOutputHandler {
 		}
 	}
 
-	public void resourceObtain(int playerID, int[] resources) {
+	public void resourceObtain(int playerID, int[] resources,int sendToClient) {
 		ProtocolResource pResource;
 		if (resources.length != 5) {
 			pResource = new ProtocolResource(null, null, null, null, null, resources[0]);
@@ -197,7 +197,7 @@ public class ServerOutputHandler {
 		Response r = new Response();
 		r.pRObtain = po;
 		try {
-			server.broadcast(parser.createString(r));
+			server.sendToClient(parser.createString(r),sendToClient);
 		} catch (IOException e) {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();

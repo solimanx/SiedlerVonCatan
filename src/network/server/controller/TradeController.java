@@ -65,11 +65,17 @@ public class TradeController {
 							int threadID = serverController.modelPlayerIdMap.get(modelID);
 							int partnerThreadID = serverController.modelPlayerIdMap.get(partnerModelID);
 							
-							serverController.getServerOutputHandler().costs(threadID, offer, threadID);
+							serverController.costsToAll(modelID, offer, true);
+							serverController.costsToAll(partnerModelID, demand, true);
+							
+							serverController.obtainToAll(modelID, demand, true);
+							serverController.obtainToAll(partnerModelID, offer, true);
+							
+							/*serverController.getServerOutputHandler().costs(threadID, offer, threadID);
 							serverController.getServerOutputHandler().costs(partnerThreadID, demand, partnerThreadID);
 							
 							serverController.getServerOutputHandler().resourceObtain(threadID, demand);
-							serverController.getServerOutputHandler().resourceObtain(partnerThreadID, offer);
+							serverController.getServerOutputHandler().resourceObtain(partnerThreadID, offer);*/
 
 							tradeOffers.remove(i);
 
@@ -142,13 +148,9 @@ public class TradeController {
 				if (contains) {
 					if (serverController.resourceStackDecrease(demandResType)) {
 						serverController.addToPlayersResource(modelID, demandResType, 1);
-						serverController.getServerOutputHandler().resourceObtain(
-								serverController.modelPlayerIdMap.get(modelID),
-								demand);
+						serverController.obtainToAll(modelID, demand, true);
 						serverController.subFromPlayersResources(modelID, offerResType, 2);
-						serverController.getServerOutputHandler().costs(
-								serverController.modelPlayerIdMap.get(modelID),
-								offer,serverController.modelPlayerIdMap.get(modelID));
+						serverController.costsToAll(modelID, offer, true);
 					} else {
 						serverController.getServerOutputHandler().error("resource stack empty",
 								serverController.modelPlayerIdMap.get(modelID));
@@ -162,13 +164,9 @@ public class TradeController {
 				if (harbours.contains(HarbourStatus.THREE_TO_ONE)) {
 					if (serverController.resourceStackDecrease(demandResType)) {
 						serverController.addToPlayersResource(modelID, demandResType, 1);
-						serverController.getServerOutputHandler().resourceObtain(
-								serverController.modelPlayerIdMap.get(modelID),
-								demand);
+						serverController.obtainToAll(modelID, demand, true);
 						serverController.subFromPlayersResources(modelID, offerResType, 3);
-						serverController.getServerOutputHandler().costs(
-								serverController.modelPlayerIdMap.get(modelID),
-								offer,serverController.modelPlayerIdMap.get(modelID));
+						serverController.costsToAll(modelID, offer, true);
 					} else {
 						serverController.getServerOutputHandler().error("resource stack empty",
 								serverController.modelPlayerIdMap.get(modelID));
@@ -181,13 +179,9 @@ public class TradeController {
 			case 4:
 				if (serverController.resourceStackDecrease(demandResType)) {
 					serverController.addToPlayersResource(modelID, demandResType, 1);
-					serverController.getServerOutputHandler().resourceObtain(
-							serverController.modelPlayerIdMap.get(modelID),
-							demand);
+					serverController.obtainToAll(modelID, demand, true);
 					serverController.subFromPlayersResources(modelID, offerResType, 4);
-					serverController.getServerOutputHandler().costs(
-							serverController.modelPlayerIdMap.get(modelID),
-							offer,serverController.modelPlayerIdMap.get(modelID));
+					serverController.costsToAll(modelID, offer, true);
 				} else {
 					serverController.getServerOutputHandler().error("resource stack empty",
 							serverController.modelPlayerIdMap.get(modelID));

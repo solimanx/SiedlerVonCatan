@@ -510,12 +510,48 @@ public class ServerController {
 					// evtl. auch in initial village?
 
 					serverOutputHandler.buildVillage(x, y, dir, threadID);
-					serverOutputHandler.costs(threadID, DefaultSettings.VILLAGE_BUILD_COST, threadID);
+					costsToAll(modelID, DefaultSettings.VILLAGE_BUILD_COST,true);
 					statusUpdate(modelID);
 				}
 			}
 		}
 
+	}
+
+	protected void costsToAll(int modelID, int[] resources, boolean visible) {
+		int threadID = modelPlayerIdMap.get(modelID);
+		if (visible) {
+			for (int i = 0; i < amountPlayers; i++) {
+				serverOutputHandler.costs(threadID, resources, modelPlayerIdMap.get(i));
+			}
+		} else {
+			int[] unknown = { resources[0] + resources[1] + resources[2] + resources[3] + resources[4] };
+			for (int i = 0; i < amountPlayers; i++) {
+				if (i == modelID) {
+					serverOutputHandler.costs(threadID, resources, threadID);
+				} else {
+					serverOutputHandler.costs(threadID, unknown, modelPlayerIdMap.get(modelID));
+				}
+			}
+		}
+	}
+
+	protected void obtainToAll(int modelID, int[] resources, boolean visible) {
+		int threadID = modelPlayerIdMap.get(modelID);
+		if (visible){			
+			for (int i = 0; i < amountPlayers; i++) {
+				serverOutputHandler.resourceObtain(threadID, resources, modelPlayerIdMap.get(i));
+			}
+		} else {
+		int[] unknown = { resources[0] + resources[1] + resources[2] + resources[3] + resources[4] };
+		for (int i = 0; i < amountPlayers; i++) {
+			if (i == modelID) {
+				serverOutputHandler.resourceObtain(threadID, resources, threadID);
+			} else {
+				serverOutputHandler.resourceObtain(threadID, unknown, modelPlayerIdMap.get(modelID));
+			}
+		}
+		}
 	}
 
 	/**
@@ -593,7 +629,7 @@ public class ServerController {
 					subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.STREET_BUILD_COST);
 					serverOutputHandler.buildStreet(x, y, dir, threadID);
-					serverOutputHandler.costs(threadID, DefaultSettings.STREET_BUILD_COST, threadID);
+					costsToAll(modelID, DefaultSettings.STREET_BUILD_COST,true);
 					statusUpdate(modelID);
 
 				} else {
@@ -933,7 +969,7 @@ public class ServerController {
 				increaseVictoryPoints(modelID);
 
 				serverOutputHandler.buildCity(x, y, dir, threadID);
-				serverOutputHandler.costs(threadID, DefaultSettings.CITY_BUILD_COST, threadID);
+				costsToAll(modelID, DefaultSettings.CITY_BUILD_COST,true);
 				statusUpdate(modelID);
 			}
 		}
@@ -958,9 +994,7 @@ public class ServerController {
 			if (gameLogic.checkBuyDevCard(modelID)) {
 				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
 				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
-				for (int i = 0; i < amountPlayers; i++) {
-					serverOutputHandler.costs(threadID, DefaultSettings.DEVCARD_BUILD_COST, modelPlayerIdMap.get(i));
-				}
+				costsToAll(modelID, DefaultSettings.DEVCARD_BUILD_COST, true);
 				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
 				pm.getDevCardsBoughtInThisRound().add(devCard);
 
@@ -1111,7 +1145,7 @@ public class ServerController {
 				robberLossCounter--;
 				subFromPlayersResources(modelID, resources);
 				resourceStackIncrease(resources);
-				serverOutputHandler.costs(threadID, playerRes, threadID);
+				costsToAll(modelID,playerRes,false);
 				if (robberLossCounter == 0) {
 					if (modelID != currentPlayer) {
 						gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
@@ -1162,10 +1196,10 @@ public class ServerController {
 					int[] costs = { 0, 0, 0, 0, 0 };
 					costs[stealResource] = 1;
 					subFromPlayersResources(victimModelID, costs);
-					serverOutputHandler.costs(victimThreadID, costs, victimThreadID);
+					costsToAll(victimModelID,costs,false); //evtl. auch modelID benachrichtigt?
 
 					addToPlayersResource(modelID, costs);
-					serverOutputHandler.resourceObtain(currentThreadID, costs);
+					obtainToAll(modelID, costs,false);
 				}
 			}
 			String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
@@ -1260,10 +1294,10 @@ public class ServerController {
 						int[] costs = { 0, 0, 0, 0, 0 };
 						costs[stealResource] = 1;
 						subFromPlayersResources(victimModelID, costs);
-						serverOutputHandler.costs(victimThreadID, costs, victimThreadID);
+						costsToAll(victimModelID,costs,false);
 
 						addToPlayersResource(modelID, costs);
-						serverOutputHandler.resourceObtain(threadID, costs);
+						obtainToAll(modelID,costs,false);
 					}
 				}
 				String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
@@ -1330,12 +1364,12 @@ public class ServerController {
 					obtain[resIndex] = obtain[resIndex] + currPRes;
 					currLoss[resIndex] = currPRes;
 					subFromPlayersResources(i, currLoss);
-					serverOutputHandler.costs(i, currLoss, i);
+					costsToAll(i,currLoss,true);
 				}
 				currLoss[resIndex] = 0; // reset for next player
 			}
 			addToPlayersResource(modelID, obtain);
-			serverOutputHandler.resourceObtain(modelID, obtain);
+			obtainToAll(modelID,obtain,true);
 			gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
 		}
 	}
@@ -1363,7 +1397,7 @@ public class ServerController {
 				resourceStackIncrease(obtain);
 			} else {
 				addToPlayersResource(modelID, obtain);
-				serverOutputHandler.resourceObtain(threadID, obtain);
+				obtainToAll(modelID,obtain,false);
 			}
 			gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
 		}
@@ -1509,7 +1543,7 @@ public class ServerController {
 		}
 		for (int i = 0; i < amountPlayers; i++) {
 			addToPlayersResource(i, playersObtain[i]);
-			serverOutputHandler.resourceObtain(modelPlayerIdMap.get(i), playersObtain[i]);
+			obtainToAll(i,playersObtain[i],true);
 		}
 		statusUpdateForAllPlayers();
 	}
@@ -1567,7 +1601,7 @@ public class ServerController {
 			}
 		}
 		addToPlayersResource(modelID, playersObtain);
-		serverOutputHandler.resourceObtain(modelPlayerIdMap.get(modelID), playersObtain);
+		obtainToAll(modelID,playersObtain,true);
 		statusUpdate(modelID);
 
 	}
@@ -1654,15 +1688,6 @@ public class ServerController {
 		for (int i = 0; i < costs.length; i++) {
 			pResources[i] = pResources[i] - costs[i];
 		}
-		/*
-		 * int[] costs = new int[5]; for (int i = 0; i < costsparam.length; i++)
-		 * { // copy array costs[i] = costsparam[i]; }
-		 * 
-		 * for (int i = 0; i < costs.length; i++) { pResources[i] =
-		 * pResources[i] - costs[i];
-		 * 
-		 * }
-		 */
 		gameLogic.getBoard().getPlayer(playerID).setResources(pResources);
 	}
 
