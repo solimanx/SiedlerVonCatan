@@ -19,8 +19,6 @@ import network.ProtocolToModel;
  * the surrounding fields, their dice index is, and connected edges.
  */
 public class CornerAgent {
-	private Board board;
-	private AdvancedAI aai;
 	// Whether the corner is occupied, blocked
 	private CornerStatus state;
 	// Whether the corner is also a harbor
@@ -33,12 +31,18 @@ public class CornerAgent {
 	private Edge[] e = new Edge[3];
 	// Corners around it
 	private Corner[] c = new Corner[3];
-
+	// utility of edges surrounding the corner
 	private int[] edgeUtility = { 0, 0, 0 };
+	// total utility of corner
 	private int netUtility;
-	private ResourceBundle rb;
+	// difference level of field resources
 	private int difference;
+	// id of corner/corneragent
 	private String id;
+
+	private ResourceBundle rb;
+	private Board board;
+	private AdvancedAI aai;
 
 	public CornerAgent(int[] loc, Board board, AdvancedAI aai) {
 		this.aai = aai;
@@ -59,9 +63,10 @@ public class CornerAgent {
 	}
 
 	/**
-	 *
+	 * Used to calculate the best direction for the initial roads, by checking
+	 * the corners on the adjacent edges of the adjacent edges to this corner.
 	 */
-	public void calculateInitialRoadOne() {
+	public void calculateInitialRoad() {
 		for (int i = 0; i < 3; i++) {
 			if (c[i] != null) {
 				int[] coords = ProtocolToModel.getCornerCoordinates(c[i].getCornerID());
@@ -87,7 +92,7 @@ public class CornerAgent {
 	}
 
 	/**
-	 *
+	 * Returns the coordinates of the highest utility road.
 	 */
 	public int[] getBestRoad() {
 		int max = -1;
@@ -257,7 +262,7 @@ public class CornerAgent {
 		int clayB = aai.getSingleResourceWeight(ResourceType.CLAY);
 		int oreB = aai.getSingleResourceWeight(ResourceType.ORE);
 		int woolB = aai.getSingleResourceWeight(ResourceType.SHEEP);
-		int cornB = aai.getSingleResourceWeight(ResourceType.CORN);		
+		int cornB = aai.getSingleResourceWeight(ResourceType.CORN);
 		for (int i = 0; i < 3; i++) {
 			if (f[i] != null) {
 				switch (f[i].getResourceType()) {
@@ -266,7 +271,7 @@ public class CornerAgent {
 					break;
 				case CLAY:
 					bonus += clayB;
-					break;						
+					break;
 				case ORE:
 					bonus += oreB;
 					break;
@@ -275,7 +280,7 @@ public class CornerAgent {
 					break;
 				case CORN:
 					bonus += cornB;
-					break;					
+					break;
 				default:
 					break;
 				}
@@ -288,7 +293,6 @@ public class CornerAgent {
 		difference = i;
 
 	}
-	// TODO edge
 
 	public int[] getLocation() {
 		return location;
@@ -302,8 +306,8 @@ public class CornerAgent {
 	public String getID() {
 		return id;
 	}
-	
-	public Field[] getFields(){
+
+	public Field[] getFields() {
 		return f;
 	}
 

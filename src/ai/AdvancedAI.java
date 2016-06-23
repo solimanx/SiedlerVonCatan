@@ -93,7 +93,7 @@ public class AdvancedAI extends PrimitiveAI {
 			System.out.println(cA[i].getLocationString() + " " + cA[i].calculateInitialVillageUtility());
 		}
 		myCorners.add(cA[d]);
-		super.pO.requestBuildInitialVillage(x, y, z);
+		super.pO.requestBuildVillage(x, y, z);
 
 	}
 
@@ -110,9 +110,9 @@ public class AdvancedAI extends PrimitiveAI {
 	@Override
 	public void initialRoad() {
 		setResourceWeighting(new int[]{0,0,0,0,0});
-		myCorners.get(initialRoundCounter).calculateInitialRoadOne();
+		myCorners.get(initialRoundCounter).calculateInitialRoad();
 		int[] rC = myCorners.get(initialRoundCounter).getBestRoad();
-		super.pO.requestBuildInitialRoad(rC[0], rC[1], rC[2]);
+		super.pO.requestBuildRoad(rC[0], rC[1], rC[2]);
 
 		initialRoundCounter++;
 

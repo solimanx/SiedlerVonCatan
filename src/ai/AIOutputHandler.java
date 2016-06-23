@@ -113,7 +113,7 @@ public class AIOutputHandler {
 	 * @param i
 	 * @param k
 	 */
-	public void requestBuildInitialVillage(int j, int i, int k) {
+	public void requestBuildVillage(int j, int i, int k) {
 		String location = ModelToProtocol.getCornerID(j, i, k);
 		Index[] locationIndex = ModelToProtocol.convertCornerIndex(location);
 		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Dorf", locationIndex);
@@ -139,7 +139,7 @@ public class AIOutputHandler {
 	 * @param dir
 	 */
 
-	public void requestBuildInitialRoad(int x, int y, int dir) {
+	public void requestBuildRoad(int x, int y, int dir) {
 		String location = ModelToProtocol.getEdgeID(x, y, dir);
 		Index[] locationIndex = ModelToProtocol.convertToEdgeIndex(location);
 		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Straße", locationIndex);
