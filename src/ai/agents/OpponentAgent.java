@@ -77,4 +77,31 @@ public class OpponentAgent {
 			}
 		}
 	}
+
+	public void robberLossEnemy(int playerID){
+
+	}
+
+	public void buildingCostEnemy(int playerID){
+
+	}
+
+	public void tradingEnemy(int playerID){
+
+	}
+
+	public void drawCardRobber(int victimID, int playerID){
+
+	}
+
+	public void inventionCardEnemy(int playerID, ResourceType resType){
+
+	}
+
+	public void monopolyCardEnemy(int playerID, int ammountCardsRecievd){
+
+	}
+
+
+
 }
