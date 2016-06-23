@@ -124,7 +124,6 @@ public class ViewController {
 	 *
 	 */
 	void startGameView() {
-		choosingStage.hide();
 		isChoosingStage = false;
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;

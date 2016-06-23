@@ -1,15 +1,14 @@
 package application.lobby;
 
-import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import enums.Color;
 import enums.PlayerState;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -178,7 +177,14 @@ public class LobbyController {
 	}
 
 	public void setServerColorAnswer(String server_response) {
-		serverColorAnswer.setText(server_response);
+		Platform.runLater(new Runnable(){
+
+			@Override
+			public void run() {
+				serverColorAnswer.setText(server_response);				
+			}
+			
+		});
 	}
 
 	@FXML
