@@ -78,4 +78,14 @@ public class AdvancedAI extends PrimitiveAI {
 	public Map<Integer, Double> getDiceRollProbabilities() {
 		return diceRollProbabilities;
 	}
+
+	public CornerAgent getCornerAgentByID(String id){
+		for(int i=0; i<cA.length;i++){
+			if(id.equals(cA[i].getID())){
+				return cA[i];
+			}
+		}
+		throw new IllegalArgumentException(id+" doesn't exist");
+
+	}
 }

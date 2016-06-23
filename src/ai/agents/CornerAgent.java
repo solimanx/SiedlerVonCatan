@@ -11,6 +11,8 @@ import model.Index;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
+import network.ModelToProtocol;
+import network.ProtocolToModel;
 
 /**
  * Calculates the advantage of occupying the corner, by taking into account what
@@ -32,9 +34,11 @@ public class CornerAgent {
 	// Corners around it
 	private Corner[] c = new Corner[3];
 
+	private int[] edgeUtility = { 0, 0, 0 };
 	private int netUtility;
 	private ResourceBundle rb;
 	private int difference;
+	private String id;
 
 	public CornerAgent(int[] loc, Board board, AdvancedAI aai) {
 		this.aai = aai;
@@ -42,6 +46,7 @@ public class CornerAgent {
 		Corner c = board.getCornerAt(loc[0], loc[1], loc[2]);
 		this.state = c.getStatus();
 		if (!isBlocked()) {
+			this.id = c.getCornerID();
 			this.harbour_state = c.getHarbourStatus();
 			this.location = loc;
 			this.f = board.getTouchingFields(loc[0], loc[1], loc[2]);
@@ -50,6 +55,50 @@ public class CornerAgent {
 			this.netUtility = 0;
 			this.rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 		}
+	}
+
+	/**
+	 *
+	 */
+	public void calculateInitialRoadOne() {
+		for (int i = 0; i < 3; i++) {
+			if (c[i] != null) {
+				int[] coords = ProtocolToModel.getCornerCoordinates(c[i].getCornerID());
+				Edge[] neighbouringEdges = board.getProjectingEdges(coords[0], coords[1], coords[2]);
+				for (int j = 0; j < neighbouringEdges.length; j++) {
+					if (neighbouringEdges[j] != null && neighbouringEdges[j] != e[i]) {
+						if (!neighbouringEdges[j].isHasStreet()) {
+							int[] coords2 = ProtocolToModel.getEdgeCoordinates(neighbouringEdges[j].getEdgeID());
+							Corner[] neighbouringCorners = board.getAttachedCorners(coords2[0], coords2[1], coords[2]);
+							for (int k = 0; k < neighbouringCorners.length; k++) {
+								if (neighbouringCorners[k] != c[i]) {
+									int util = aai.getCornerAgentByID(neighbouringCorners[k].getCornerID())
+											.calculateInitialVillageUtility();
+									edgeUtility[i] += util;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	/**
+	 *
+	 */
+	public int getBestRoad() {
+		int max = -1;
+		int c = -1;
+		for (int i = 0; i < 3; i++) {
+			if (edgeUtility[i] > max) {
+				max = edgeUtility[i];
+				c = i;
+			}
+		}
+
+		return c;
 	}
 
 	/**
@@ -67,7 +116,7 @@ public class CornerAgent {
 			int rp = rollProbability();
 			int rb = resourceBonus();
 			int bonus = 0;
-			int[] utilities = { ld, hd, rp};
+			int[] utilities = { ld, hd, rp };
 
 			if (difference == 0) {
 				// change nothing
@@ -201,16 +250,21 @@ public class CornerAgent {
 	/**
 	 * Calculates whether there is an ore/corn bonus.
 	 */
-	protected int resourceBonus(){
+	protected int resourceBonus() {
 		int bonus = 0;
 		int oreB = Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT"));
 		int cornB = Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT"));
-		for(int i=0; i<3; i++){
-			if(f[i]!=null){
-				switch(f[i].getResourceType()){
-				case CORN : bonus+= cornB; break;
-				case ORE : bonus+= oreB; break;
-				default: break;
+		for (int i = 0; i < 3; i++) {
+			if (f[i] != null) {
+				switch (f[i].getResourceType()) {
+				case CORN:
+					bonus += cornB;
+					break;
+				case ORE:
+					bonus += oreB;
+					break;
+				default:
+					break;
 				}
 			}
 		}
@@ -230,6 +284,10 @@ public class CornerAgent {
 	// DEBUG
 	public String getLocationString() {
 		return "[" + location[0] + "," + location[1] + "," + location[2] + "]";
+	}
+
+	public String getID() {
+		return id;
 	}
 
 }
