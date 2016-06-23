@@ -60,6 +60,9 @@ public class AdvancedAI extends PrimitiveAI {
 
 	@Override
 	public void initialVillage() {
+		if (initialRoundCounter== 1){
+			subtractResources(myCorners.get(0));
+		}
 		int c = 0;
 		int radius = DefaultSettings.BOARD_RADIUS;
 		for (int i = -radius; i <= radius; i++) {
@@ -89,12 +92,9 @@ public class AdvancedAI extends PrimitiveAI {
 			}
 			System.out.println(cA[i].getLocationString() + " " + cA[i].calculateInitialVillageUtility());
 		}
-		initialRoundCounter = 1;
 		myCorners.add(cA[d]);
 		super.pO.requestBuildInitialVillage(x, y, z);
-		if (initialRoundCounter== 1){
-			subtractResources(myCorners.get(0));
-		}
+
 	}
 
 	private void subtractResources(CornerAgent cornerAgent) {
@@ -109,9 +109,12 @@ public class AdvancedAI extends PrimitiveAI {
 
 	@Override
 	public void initialRoad() {
-		myCorners.get(0).calculateInitialRoadOne();
-		int[] rC = myCorners.get(0).getBestRoad();
+		setResourceWeighting(new int[]{0,0,0,0,0});
+		myCorners.get(initialRoundCounter).calculateInitialRoadOne();
+		int[] rC = myCorners.get(initialRoundCounter).getBestRoad();
 		super.pO.requestBuildInitialRoad(rC[0], rC[1], rC[2]);
+
+		initialRoundCounter++;
 
 	}
 
