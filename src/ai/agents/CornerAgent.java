@@ -65,8 +65,9 @@ public class CornerAgent {
 			int ld = landDiversity();
 			int hd = harbourDiversity();
 			int rp = rollProbability();
+			int rb = resourceBonus();
 			int bonus = 0;
-			int[] utilities = { ld, hd, rp };
+			int[] utilities = { ld, hd, rp};
 
 			if (difference == 0) {
 				// change nothing
@@ -89,7 +90,7 @@ public class CornerAgent {
 					bonus = high1;
 
 			}
-			netUtility = ld + hd + rp + bonus;
+			netUtility = ld + hd + rp + bonus + rb;
 
 			return netUtility;
 
@@ -195,6 +196,25 @@ public class CornerAgent {
 		final int HEX_DICE_WEIGHT = Integer.parseInt(rb.getString("HEX_DICE_WEIGHT"));
 		return (int) (HEX_DICE_WEIGHT * diversity);
 
+	}
+
+	/**
+	 * Calculates whether there is an ore/corn bonus.
+	 */
+	protected int resourceBonus(){
+		int bonus = 0;
+		int oreB = Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT"));
+		int cornB = Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT"));
+		for(int i=0; i<3; i++){
+			if(f[i]!=null){
+				switch(f[i].getResourceType()){
+				case CORN : bonus+= cornB; break;
+				case ORE : bonus+= oreB; break;
+				default: break;
+				}
+			}
+		}
+		return bonus;
 	}
 
 	private void setDifference(int i) {
