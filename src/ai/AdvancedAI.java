@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import ai.agents.CornerAgent;
 import enums.ResourceType;
+import model.objects.Field;
 import settings.DefaultSettings;
 
 /**
@@ -24,9 +25,12 @@ public class AdvancedAI extends PrimitiveAI {
 	private ArrayList<CornerAgent> myCorners = new ArrayList<CornerAgent>();
 	
 	int[] resourceWeighting;
+	
+	int initialRoundCounter = 0;
 
 	public AdvancedAI() {
 		resourceWeighting = new int[]{0,0,Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")),0,Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT"))};
+		initializeDiceRollProbabilities();
 	}
 	
 	
@@ -56,7 +60,6 @@ public class AdvancedAI extends PrimitiveAI {
 
 	@Override
 	public void initialVillage() {
-		initializeDiceRollProbabilities();
 		int c = 0;
 		int radius = DefaultSettings.BOARD_RADIUS;
 		for (int i = -radius; i <= radius; i++) {
@@ -86,9 +89,23 @@ public class AdvancedAI extends PrimitiveAI {
 			}
 			System.out.println(cA[i].getLocationString() + " " + cA[i].calculateInitialVillageUtility());
 		}
+		initialRoundCounter = 1;
 		myCorners.add(cA[d]);
 		super.pO.requestBuildInitialVillage(x, y, z);
+		if (initialRoundCounter== 1){
+			subtractResources(myCorners.get(0));
+		}
 	}
+
+	private void subtractResources(CornerAgent cornerAgent) {
+		Field[] fields = cornerAgent.getFields();
+		for (int i = 0;i < fields.length;i++){
+			if (fields[i] != null){
+				decrementSingleResourceWeight(fields[i].getResourceType(), Integer.parseInt(rb.getString("INITIAL_RESOURCE_REDUNDANCY")));
+			}
+		}		
+	}
+
 
 	@Override
 	public void initialRoad() {

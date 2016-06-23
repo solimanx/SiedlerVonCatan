@@ -302,5 +302,9 @@ public class CornerAgent {
 	public String getID() {
 		return id;
 	}
+	
+	public Field[] getFields(){
+		return f;
+	}
 
 }
