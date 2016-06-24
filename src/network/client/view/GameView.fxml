@@ -19,14 +19,14 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-text-base-color: white;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.GameViewController">
+<AnchorPane id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-text-base-color: white;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.GameViewController">
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <Pane fx:id="board" prefHeight="200.0" prefWidth="200.0" style="-fx-background-size: stretch; -fx-background-image: url(/textures/background.jpg);" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="140.0" style="-fx-background-color: #fff; -fx-background-color: #5D4037;" styleClass="player-board" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="140.0" style="-fx-background-color: #fff;" styleClass="player-board" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <Label fx:id="playerNameOne" text="Player 1">
                <font>
@@ -35,7 +35,7 @@
             </Label>
             <HBox prefHeight="27.0" prefWidth="140.0">
                <children>
-                  <Label fx:id="playerStatusOne" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
+                  <Label fx:id="playerStatusOne" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" styleClass="white" />
                </children>
             </HBox>
             <VBox fx:id="playerVBoxOne" prefHeight="200.0" prefWidth="125.0" spacing="10.0">
@@ -159,7 +159,7 @@
             </Label>
             <HBox prefHeight="27.0" prefWidth="140.0">
                <children>
-                  <Label fx:id="playerStatusFour" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
+                  <Label fx:id="playerStatusFour" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" styleClass="white" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
@@ -172,17 +172,17 @@
                   </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="playerFourVPoints" />
+                        <Label fx:id="playerFourVPoints" styleClass="white" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="fourthLongestTradeRoute" />
+                        <Label fx:id="fourthLongestTradeRoute" styleClass="white" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="fourthGreatestKnightForce" />
+                        <Label fx:id="fourthGreatestKnightForce" styleClass="white" />
                      </children>
                   </HBox>
                </children>
@@ -204,7 +204,7 @@
             </Label>
             <HBox prefHeight="27.0" prefWidth="140.0">
                <children>
-                  <Label fx:id="playerStatusTwo" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" />
+                  <Label fx:id="playerStatusTwo" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="140.0" styleClass="white" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
@@ -217,17 +217,17 @@
                   </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0" styleClass="white">
                      <children>
-                        <Label fx:id="playerTwoVPoints" />
+                        <Label fx:id="playerTwoVPoints" styleClass="white" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="secondLongestTradeRoute" />
+                        <Label fx:id="secondLongestTradeRoute" styleClass="white" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="secondGreatestKnightForce" />
+                        <Label fx:id="secondGreatestKnightForce" styleClass="white" />
                      </children>
                   </HBox>
                </children>
@@ -249,7 +249,7 @@
             </Label>
             <HBox prefHeight="27.0" prefWidth="140.0">
                <children>
-                  <Label fx:id="playerStatusThree" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="141.0" />
+                  <Label fx:id="playerStatusThree" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="141.0" styleClass="white" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
@@ -262,17 +262,17 @@
                   </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="playerThreeVPoints" />
+                        <Label fx:id="playerThreeVPoints" styleClass="white" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="thirdLongestTradeRoute" />
+                        <Label fx:id="thirdLongestTradeRoute" styleClass="white" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="thirdGreatestKnightForce" />
+                        <Label fx:id="thirdGreatestKnightForce" styleClass="white" />
                      </children>
                   </HBox>
                </children>

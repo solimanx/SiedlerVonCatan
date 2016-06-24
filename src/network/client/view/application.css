@@ -10,8 +10,8 @@
 	-fx-background-radius: 3;
 	-fx-text-fill: #fff;
 	-fx-background-color: #795548;
-	-fx-font-family: Georgia;
-	-fx-effect: dropshadow(gaussian , #5D4037 , 0,0,0,3); 
+	-fx-font-family: Georgia, serif;
+	-fx-effect: dropshadow(gaussian , #5D4037 , 0,0,0,3);
 }
 
 .player-board {
@@ -26,7 +26,8 @@
 }
 
 .white {
-	-fx-fill: #fff!important;
-	
+	-fx-fill: #fff;
+	-fx-font-family: Georgia, serif;
+	-fx-text-fill: #fff;
+
 }
- 

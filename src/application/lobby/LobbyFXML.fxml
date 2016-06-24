@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="741.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lobby.LobbyController">
+<AnchorPane prefHeight="741.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lobby.LobbyController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="40.0" layoutY="50.0" prefHeight="319.0" prefWidth="560.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
         <items>
@@ -102,10 +102,10 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                  <TextField fx:id="playerName" focusTraversable="false" maxWidth="-Infinity" prefHeight="27.0" prefWidth="140.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="playerName" focusTraversable="false" maxWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" />
                   <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Player Name:" GridPane.halignment="RIGHT" />
                   <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="117.0" text="Color:" textAlignment="RIGHT" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <ChoiceBox fx:id="playerColor" prefHeight="27.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="playerColor" prefHeight="27.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
                         <Button fx:id="startGame" mnemonicParsing="false" onAction="#handleSendButton" text="Set Name and Color" />
