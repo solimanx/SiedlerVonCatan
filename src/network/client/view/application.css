@@ -4,3 +4,29 @@
 	-fx-stroke: pink;
 	-fx-opacity: 1;
 }
+
+.button {
+	-fx-background-image: url(/textures/button-back-png);
+	-fx-background-radius: 3;
+	-fx-text-fill: #fff;
+	-fx-background-color: #795548;
+	-fx-font-family: Georgia;
+	-fx-effect: dropshadow(gaussian , #5D4037 , 0,0,0,3); 
+}
+
+.player-board {
+	-fx-background-image: url(/textures/player-board.jpg);
+	-fx-background-color: #5D4037;
+	-fx-background-radius: 5;
+	-fx-border-radius: 5;
+	-fx-border-color: #5D4037;
+	-fx-border-width: 4;
+	-fx-fill: #fff;
+	-fx-text-fill: #fff;
+}
+
+.white {
+	-fx-fill: #fff!important;
+	
+}
+ 
