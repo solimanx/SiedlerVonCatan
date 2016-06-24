@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import ai.agents.BanditAgent;
 import ai.agents.CornerAgent;
 import enums.ResourceType;
 import model.objects.Field;
+import network.ModelToProtocol;
+import network.ProtocolToModel;
 import settings.DefaultSettings;
 
 /**
@@ -19,48 +22,25 @@ public class AdvancedAI extends PrimitiveAI {
 	private ResourceBundle rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 
 	private CornerAgent[] cA = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
+	private BanditAgent bA = new BanditAgent(this, null);
 	private Map<Integer, Double> diceRollProbabilities;
 
 	// belongs to resourceAgent
 	private ArrayList<CornerAgent> myCorners = new ArrayList<CornerAgent>();
-	
+
 	int[] resourceWeighting;
-	
+
 	int initialRoundCounter = 0;
 
 	public AdvancedAI() {
-		resourceWeighting = new int[]{0,0,Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")),0,Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT"))};
+		resourceWeighting = new int[] { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
+				Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 		initializeDiceRollProbabilities();
-	}
-	
-	
-	public int[] getResourceWeighting(){
-		return resourceWeighting;
-	}
-	
-	public void setResourceWeighting(int[] weighting){
-		
-	}
-	
-	public void setSingleResourceWeight(ResourceType resType,int weight){
-		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] = weight;
-	}
-	
-	public int getSingleResourceWeight(ResourceType resType){
-		return resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)];
-	}
-
-	public void incrementSingleResourceWeight(ResourceType resType,int change){
-		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] += change;
-	}
-	
-	public void decrementSingleResourceWeight(ResourceType resType,int change){
-		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
 	}
 
 	@Override
 	public void initialVillage() {
-		if (initialRoundCounter== 1){
+		if (initialRoundCounter == 1) {
 			subtractResources(myCorners.get(0));
 		}
 		int c = 0;
@@ -97,25 +77,34 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
-	private void subtractResources(CornerAgent cornerAgent) {
-		Field[] fields = cornerAgent.getFields();
-		for (int i = 0;i < fields.length;i++){
-			if (fields[i] != null){
-				decrementSingleResourceWeight(fields[i].getResourceType(), Integer.parseInt(rb.getString("INITIAL_RESOURCE_REDUNDANCY")));
-			}
-		}		
-	}
-
-
 	@Override
 	public void initialRoad() {
-		setResourceWeighting(new int[]{0,0,0,0,0});
+		setResourceWeighting(new int[] { 0, 0, 0, 0, 0 });
 		myCorners.get(initialRoundCounter).calculateInitialRoad();
 		int[] rC = myCorners.get(initialRoundCounter).getBestRoad();
 		super.pO.requestBuildRoad(rC[0], rC[1], rC[2]);
 
 		initialRoundCounter++;
 
+	}
+
+	@Override
+	protected void moveRobber() {
+		bA.moveRobber();
+		int[] coords = bA.bestNewRobber();
+		String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
+		pO.respondMoveRobber(newRobber);
+
+	}
+
+	private void subtractResources(CornerAgent cornerAgent) {
+		Field[] fields = cornerAgent.getFields();
+		for (int i = 0; i < fields.length; i++) {
+			if (fields[i] != null) {
+				decrementSingleResourceWeight(fields[i].getResourceType(),
+						Integer.parseInt(rb.getString("INITIAL_RESOURCE_REDUNDANCY")));
+			}
+		}
 	}
 
 	private void initializeDiceRollProbabilities() {
@@ -139,7 +128,7 @@ public class AdvancedAI extends PrimitiveAI {
 	}
 
 	public CornerAgent getCornerAgentByID(String id) {
-		if (id.length() != 3 ) {
+		if (id.length() != 3) {
 			throw new IllegalArgumentException("id unequal 3");
 		}
 		for (int i = 0; i < cA.length; i++) {
@@ -154,5 +143,29 @@ public class AdvancedAI extends PrimitiveAI {
 		}
 		throw new IllegalArgumentException(id + " doesn't exist");
 
+	}
+
+	public int[] getResourceWeighting() {
+		return resourceWeighting;
+	}
+
+	public void setResourceWeighting(int[] weighting) {
+
+	}
+
+	public void setSingleResourceWeight(ResourceType resType, int weight) {
+		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] = weight;
+	}
+
+	public int getSingleResourceWeight(ResourceType resType) {
+		return resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)];
+	}
+
+	public void incrementSingleResourceWeight(ResourceType resType, int change) {
+		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] += change;
+	}
+
+	public void decrementSingleResourceWeight(ResourceType resType, int change) {
+		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
 	}
 }

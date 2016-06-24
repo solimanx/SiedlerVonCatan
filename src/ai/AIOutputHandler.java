@@ -246,6 +246,7 @@ public class AIOutputHandler {
 	 */
 	public void respondMoveRobber(String newRobber) {
 		Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
+		// TODO add ID instead of null aka opponentagent's victim
 		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, null);
 		Response r = new Response();
 

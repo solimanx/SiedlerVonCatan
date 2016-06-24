@@ -95,8 +95,8 @@ public class CornerAgent {
 	 * Returns the coordinates of the highest utility road.
 	 */
 	public int[] getBestRoad() {
-		int max = -1;
-		int c = -1;
+		int max = edgeUtility[0];
+		int c = 0;
 		for (int i = 0; i < 3; i++) {
 			if (edgeUtility[i] > max) {
 				max = edgeUtility[i];
