@@ -3,6 +3,7 @@ package ai.agents;
 import java.util.ArrayList;
 import java.util.Map;
 
+import ai.AdvancedAI;
 import enums.ResourceType;
 import model.Board;
 import model.objects.Corner;
@@ -22,68 +23,53 @@ public class OpponentAgent {
 	private int amountPlayer;
 	private Board board;
 
-	public OpponentAgent() {
-		amountPlayer = board.getAmountPlayers(); // TODO is ammount enemy
-													// player
+	public OpponentAgent(AdvancedAI aai) {
+		board = aai.getGl().getBoard();
+		amountPlayer = board.getAmountPlayers();
 		opponentsRessources = new int[amountPlayer][7];
-		board = new Board();
 		for (int i = 0; i < amountPlayer; i++) {
 			opponentsRessources[i] = initialRessources;
 		}
-
 	}
 
-	// errechnet aus dem würfelergebniss die ressourcen, die ein gegner erhalten
-	// würde und speichert dies.
+	// inputhandler iunpur an diese methode
 	public void ressourceObtainEnemy(int diceRollNum) {
-		ArrayList<Field> diceFields = new ArrayList<Field>();
-		for (Map.Entry<String, int[]> entry : Board.getStringToCoordMap().entrySet()) {
-			int[] coord = entry.getValue();
-			Field f = board.getFieldAt(coord[0], coord[1]);
-			Integer diceInd = f.getDiceIndex();
-			if (diceInd != null) {
-				if (diceInd == diceRollNum) {
-					diceFields.add(f);
-				}
-			}
-		}
-		int[] coords;
-		Corner[] neighbors;
-		ResourceType currResType;
-		for (Field f : diceFields) {
-			if (!f.getFieldID().equals(board.getBandit())) {
-				coords = board.getFieldCoordinates(f.getFieldID());
-				neighbors = board.getSurroundingCorners(coords[0], coords[1]);
-				for (int i = 0; i < neighbors.length; i++) {
-					if (neighbors[i] != null) {
-						switch (neighbors[i].getStatus()) {
-						case VILLAGE:
-							currResType = f.getResourceType();
-							opponentsRessources[neighbors[i].getOwnerID()][DefaultSettings.RESOURCE_VALUES
-									.get(currResType)]++;
-							break;
-						case CITY:
-							currResType = f.getResourceType();
-							for (int j = 0; j < 2; j++) {
-								opponentsRessources[neighbors[i].getOwnerID()][DefaultSettings.RESOURCE_VALUES
-										.get(currResType)]++;
-							}
-							break;
-						default:
-							break;
-						}
-					}
-				}
-			}
-		}
+		
 	}
 
 	public void robberLossEnemy(int playerID){
-
+		opponentsRessources[playerID][7] = opponentsRessources[playerID][7] -1;
 	}
 
-	public void buildingCostEnemy(int playerID){
-
+	public void buildingCostEnemy(int playerID, int[] costs){
+		if(costs.length != 5){
+			throw new IllegalArgumentException("Illegal Argument in opponentAgent.buildingCostEnemy.");
+		}
+		decrementOpponentsRessources(playerID, costs);
+	}
+	
+	private void decrementOpponentsRessources(int playerID, int[] costs){
+		for(int i = 0; i<5; i++){
+			if(costs[i] != 0){
+				if(opponentsRessources[playerID][i]<costs[i]){
+					for(int j = 0; j<costs[i]; j++){
+						if(opponentsRessources[playerID][i] != 0){
+							opponentsRessources[playerID][i]--;
+						}
+						else{
+							if(opponentsRessources[playerID][6] != 0){
+								opponentsRessources[playerID][6]--;
+							}
+							else{
+								throw new IllegalStateException("Error in calculation of enemy resources");
+							}
+						}
+					}
+				} else {
+					opponentsRessources[playerID][i] = opponentsRessources[playerID][i] - costs[i];
+				}
+			}
+		}
 	}
 
 	public void tradingEnemy(int playerID){
@@ -101,7 +87,15 @@ public class OpponentAgent {
 	public void monopolyCardEnemy(int playerID, int ammountCardsRecievd){
 
 	}
-
+	
+	/**
+	 * 
+	 * @param playerID
+	 * @return strength of a player as int
+	 */
+	public int playerStrength(int playerID){
+		return 0;
+	}
 
 
 }
