@@ -153,15 +153,19 @@ public class Main extends Application {
 
 	@FXML
 	void handleStartButton(ActionEvent event) {
+		Stage s = (Stage) startButton.getScene().getWindow();
 		RadioButton rb = (RadioButton) startMode.getSelectedToggle();
 		switch (rb.getText()) {
 		case "Client":
-			setClientController(new ClientController(primaryStage));
+			s.hide();
+			setClientController(new ClientController(new Stage()));
 			break;
 		case "Server":
+			s.hide();
 			this.setServerController(new ServerController(Integer.parseInt(serverPort.getText())));
 			break;
 		case "AI":
+			s.hide();
 			String server = aiServer.getText();
 			int Port = Integer.parseInt(aiPort.getText());
 			pa = new AdvancedAI();

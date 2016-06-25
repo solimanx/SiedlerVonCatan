@@ -50,7 +50,7 @@ public class ViewController {
 		loader = new FXMLLoader();
 
 		try {
-			startLobbyView(primaryStage);
+			startLobbyView(this.primaryStage);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error("Input/Output Exception", e);
