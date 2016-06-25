@@ -22,7 +22,7 @@
    <children>
       <SplitPane dividerPositions="0.5" layoutX="40.0" layoutY="50.0" prefHeight="319.0" prefWidth="560.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
         <items>
-          <AnchorPane minHeight="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: rgba(0,0,0,0);">
                <children>
                   <VBox alignment="TOP_RIGHT" layoutX="75.0" prefHeight="248.0" prefWidth="278.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
@@ -75,7 +75,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="-Infinity" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="-Infinity" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: rgba(0,0,0,0);">
                <children>
                   <AnchorPane AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
@@ -122,9 +122,9 @@
             <TableView fx:id="playerTable" prefHeight="200.0" prefWidth="699.0">
               <columns>
                 <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="nameColumn" prefWidth="180.0" text="Name" />
+                <TableColumn fx:id="nameColumn" prefWidth="194.0" text="Name" />
                   <TableColumn fx:id="colorColumn" minWidth="7.0" prefWidth="129.0" text="Color" />
-                  <TableColumn fx:id="statusColumn" prefWidth="314.0" text="Status" />
+                  <TableColumn fx:id="statusColumn" prefWidth="300.0" text="Status" />
               </columns>
                <VBox.margin>
                   <Insets />

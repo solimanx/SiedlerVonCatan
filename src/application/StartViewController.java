@@ -47,6 +47,9 @@ public class StartViewController {
 
 	@FXML
 	private Button startButton;
+	
+	@FXML
+	private Button stopServer;
 
 	@FXML
 	private TextField serverPort;
@@ -58,6 +61,8 @@ public class StartViewController {
 	private TextField aiPort;
 
 	private Stage primaryStage;
+
+	private Thread serverThread;
 
 	public void setStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -84,6 +89,11 @@ public class StartViewController {
 		aiServer.setDisable(true);
 
 	}
+	
+	@FXML
+	void handleStopServer(ActionEvent event){
+		serverThread.interrupt();
+	}
 
 	@FXML
 	void handleStartButton(ActionEvent event) {
@@ -93,19 +103,20 @@ public class StartViewController {
 			setClientController(new ClientController(primaryStage));
 			break;
 		case "Server":
-			primaryStage.hide();
-			int port = !(serverPort.equals("")) ? Integer.parseInt(serverPort.getText()) : 8080;
-			new Thread( new Runnable() {
+			int port = serverPort.getText().equals("") ? 8080 : Integer.parseInt(serverPort.getText());
+			serverThread = new Thread( new Runnable() {
 			    @Override
 			    public void run() {
 			    	gc = new ServerController(port);			    	
 			    }
-			}).start();	
+			});
+			serverThread.start();
+			stopServer.setDisable(false);
 			break;
 		case "AI":
 			primaryStage.hide();
-			String server = aiServer.getText();
-			int aip = !aiPort.equals("") ? Integer.parseInt(aiPort.getText()) : 8080;
+			String server = !aiServer.getText().equals("") ? aiServer.getText() : "localhost" ;
+			int aip = !aiPort.getText().equals("") ? Integer.parseInt(aiPort.getText()) : 8080;
 			pa = new AdvancedAI(server, aip);
 			pa.commence();
 			break;
