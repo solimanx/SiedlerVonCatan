@@ -2,11 +2,17 @@ package ai;
 
 import java.util.ArrayList;
 
+import enums.CardType;
 import enums.PlayerState;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
+import model.objects.DevCards.InventionCard;
+import model.objects.DevCards.KnightCard;
+import model.objects.DevCards.MonopolyCard;
+import model.objects.DevCards.StreetBuildingCard;
+import network.ModelToProtocol;
 import network.ProtocolToModel;
 import network.client.client.ClientInputHandler;
 import parsing.Parser;
@@ -131,7 +137,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	@Override
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
-		// TODO Chatbot?
+		// Chatbot?
 
 	}
 
@@ -179,8 +185,7 @@ public class AIInputHandler extends ClientInputHandler {
 	 * After receiving a {"Würfelwurf":...} JSON
 	 */
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
-		// TODO Store this.
-
+		// Nothing useful can be done with this information.
 	}
 
 	/**
@@ -267,7 +272,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	@Override
 	protected void handle(ProtocolVictory victory) {
-		// TODO end
+		// Disconnect?
 
 	}
 
@@ -308,38 +313,97 @@ public class AIInputHandler extends ClientInputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
-		// TODO redirect to ai -> card agent
-
-	}
-
-	@Override
 	protected void handle(ProtocolLongestRoad longestRoad) {
 		// TODO if self, nothing else redirect to ai -> opponent agent
 
 	}
 
 	@Override
+	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
+		// TODO
+
+		// Get ID and resources
+		int ID = inventionCardInfo.getPlayerID();
+		// if it's me
+		if (ID == ai.getID()) {
+			ai.getMe().decrementPlayerDevCard(new InventionCard());
+		}
+		// if it isn't me
+		else {
+			// TODO Store for strategy
+		}
+
+	}
+
+	@Override
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
-		// TODO redirect to ai -> card agent
+		// TODO
+
+		// Get ID and resources
+		int ID = monopolyCardInfo.getPlayerID();
+		// if it's me
+		if (ID == ai.getID()) {
+			ai.getMe().decrementPlayerDevCard(new MonopolyCard());
+		}
+		// if it isn't me
+		else {
+			// TODO Store for strategy
+		}
 
 	}
 
 	@Override
 	protected void handle(ProtocolPlayKnightCard playKnightCard) {
-		// TODO redirect to ai -> card agent
+		// TODO
+
+		// Get ID and resources
+		int ID = playKnightCard.getPlayerID();
+		ai.updateRobber(ProtocolToModel.getProtocolOneID(playKnightCard.getLocationID()));
+
+		// if it's me
+		if (ID == ai.getID()) {
+			ai.getMe().decrementPlayerDevCard(new KnightCard());
+			ai.getMe().incrementPlayedKnightCards();
+		}
+		// if it isn't me
+		else {
+			// TODO Store for strategy
+		}
 
 	}
 
 	@Override
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
-		// TODO redirect to ai -> card agent
+		// TODO
+
+		// Get ID and resources
+		int ID = roadBuildingCardInfo.getPlayerID();
+		// if it's me
+		if (ID == ai.getID()) {
+			ai.getMe().decrementPlayerDevCard(new StreetBuildingCard());
+		}
+		// if it isn't me
+		else {
+			// TODO Store for strategy
+		}
 
 	}
 
 	@Override
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
-		// TODO redirect to ai -> card agent
+		// Get ID and resources
+		int ID = boughtDevelopmentCard.getPlayerID();
+		CardType ct = boughtDevelopmentCard.getDevelopmentCard();
+
+		// if it's me
+		if (ID == ai.getID()) {
+			ai.getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(ct));
+			;
+		}
+		// if it isn't me
+		else {
+			// TODO Store for strategy
+		}
 
 	}
 

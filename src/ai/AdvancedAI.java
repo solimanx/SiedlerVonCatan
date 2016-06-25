@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import ai.agents.BanditAgent;
+import ai.agents.CardAgent;
 import ai.agents.CornerAgent;
 import enums.ResourceType;
 import model.objects.Field;
@@ -21,19 +22,20 @@ import settings.DefaultSettings;
 public class AdvancedAI extends PrimitiveAI {
 	private ResourceBundle rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 
-	private CornerAgent[] cA = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
-	private BanditAgent bA = new BanditAgent(this, null);
+	private CornerAgent[] cornerAgent = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
+	private BanditAgent banditAgent = new BanditAgent(this, null);
+	private CardAgent cardAgent = new CardAgent(this);
 	private Map<Integer, Double> diceRollProbabilities;
 
 	// belongs to resourceAgent
 	private ArrayList<CornerAgent> myCorners = new ArrayList<CornerAgent>();
-
-	int[] resourceWeighting;
+	
+	int[] initialResourceWeight;
 
 	int initialRoundCounter = 0;
 
 	public AdvancedAI() {
-		resourceWeighting = new int[] { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
+		initialResourceWeight = new int[] { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
 				Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 		initializeDiceRollProbabilities();
 	}
@@ -49,7 +51,7 @@ public class AdvancedAI extends PrimitiveAI {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
 					if (getGl().getBoard().getCornerAt(j, i, k) != null) {
-						cA[c] = new CornerAgent(new int[] { j, i, k }, getGl().getBoard(), this);
+						cornerAgent[c] = new CornerAgent(new int[] { j, i, k }, getGl().getBoard(), this);
 						c++;
 
 					}
@@ -62,17 +64,18 @@ public class AdvancedAI extends PrimitiveAI {
 
 		int bestUtility = 0;
 		int d = -1;
-		for (int i = 0; i < cA.length; i++) {
-			if (cA[i].calculateInitialVillageUtility() > bestUtility) {
-				bestUtility = cA[i].calculateInitialVillageUtility();
-				x = cA[i].getLocation()[0];
-				y = cA[i].getLocation()[1];
-				z = cA[i].getLocation()[2];
+		for (int i = 0; i < cornerAgent.length; i++) {
+			if (cornerAgent[i].calculateInitialVillageUtility() > bestUtility) {
+				bestUtility = cornerAgent[i].calculateInitialVillageUtility();
+				x = cornerAgent[i].getLocation()[0];
+				y = cornerAgent[i].getLocation()[1];
+				z = cornerAgent[i].getLocation()[2];
 				d = i;
 			}
-			System.out.println(cA[i].getLocationString() + " " + cA[i].calculateInitialVillageUtility());
+			System.out.println(
+					cornerAgent[i].getLocationString() + " " + cornerAgent[i].calculateInitialVillageUtility());
 		}
-		myCorners.add(cA[d]);
+		myCorners.add(cornerAgent[d]);
 		super.pO.requestBuildVillage(x, y, z);
 
 	}
@@ -90,13 +93,13 @@ public class AdvancedAI extends PrimitiveAI {
 
 	@Override
 	protected void moveRobber() {
-		bA.moveRobber();
-		int[] coords = bA.bestNewRobber();
+		banditAgent.moveRobber();
+		int[] coords = banditAgent.bestNewRobber();
 		String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
 		pO.respondMoveRobber(newRobber);
 
 	}
-
+	
 	private void subtractResources(CornerAgent cornerAgent) {
 		Field[] fields = cornerAgent.getFields();
 		for (int i = 0; i < fields.length; i++) {
@@ -131,14 +134,14 @@ public class AdvancedAI extends PrimitiveAI {
 		if (id.length() != 3) {
 			throw new IllegalArgumentException("id unequal 3");
 		}
-		for (int i = 0; i < cA.length; i++) {
+		for (int i = 0; i < cornerAgent.length; i++) {
 			String a = id.substring(0, 1);
 			String b = id.substring(1, 2);
 			String c = id.substring(2, 3);
-			if ((a + b + c).equals(cA[i].getID()) || (a + c + b).equals(cA[i].getID())
-					|| (b + a + c).equals((cA[i].getID())) || (b + c + a).equals((cA[i].getID()))
-					|| (c + a + b).equals((cA[i].getID())) || (c + b + a).equals((cA[i].getID()))) {
-				return cA[i];
+			if ((a + b + c).equals(cornerAgent[i].getID()) || (a + c + b).equals(cornerAgent[i].getID())
+					|| (b + a + c).equals((cornerAgent[i].getID())) || (b + c + a).equals((cornerAgent[i].getID()))
+					|| (c + a + b).equals((cornerAgent[i].getID())) || (c + b + a).equals((cornerAgent[i].getID()))) {
+				return cornerAgent[i];
 			}
 		}
 		throw new IllegalArgumentException(id + " doesn't exist");
@@ -146,7 +149,7 @@ public class AdvancedAI extends PrimitiveAI {
 	}
 
 	public int[] getResourceWeighting() {
-		return resourceWeighting;
+		return initialResourceWeight;
 	}
 
 	public void setResourceWeighting(int[] weighting) {
@@ -154,18 +157,18 @@ public class AdvancedAI extends PrimitiveAI {
 	}
 
 	public void setSingleResourceWeight(ResourceType resType, int weight) {
-		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] = weight;
+		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] = weight;
 	}
 
 	public int getSingleResourceWeight(ResourceType resType) {
-		return resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)];
+		return initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)];
 	}
 
 	public void incrementSingleResourceWeight(ResourceType resType, int change) {
-		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] += change;
+		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] += change;
 	}
 
 	public void decrementSingleResourceWeight(ResourceType resType, int change) {
-		resourceWeighting[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
+		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
 	}
 }

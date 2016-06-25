@@ -504,7 +504,7 @@ public class PrimitiveAI extends Thread {
 		return secondRoadLocation;
 	}
 
-	protected PlayerModel getMe() {
+	public PlayerModel getMe() {
 		return me;
 	}
 
