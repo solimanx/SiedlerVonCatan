@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class GameLogic {
 	private Board board;
+	private Corner initialLastVillage;
 
 	public GameLogic(Board b) {
 		this.board = b;
@@ -225,7 +226,7 @@ public class GameLogic {
 				Corner[] neighbors = board.getAttachedCorners(x, y, dir);
 				for (int i = 0; i < neighbors.length; i++) {
 					if (neighbors[i] != null) {
-						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() == playerID) {
+						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() == playerID && neighbors[i] == initialLastVillage) {
 							return true;
 
 						}
@@ -461,6 +462,10 @@ public class GameLogic {
 			return false;
 		}
 		return true;
+	}
+	
+	public void setInitialLastVillage(Corner c){
+		this.initialLastVillage = c;
 	}
 
 }

@@ -576,6 +576,9 @@ public class ClientController {
 				neighbors[i].setStatus(enums.CornerStatus.BLOCKED);
 			}
 		}
+		if (initialRoundCount < 2){
+			gameLogic.setInitialLastVillage(c);
+		}
 		Platform.runLater(new Runnable() {
 
 			@Override

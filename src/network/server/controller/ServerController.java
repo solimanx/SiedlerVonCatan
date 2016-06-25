@@ -1092,6 +1092,9 @@ public class ServerController {
 				serverOutputHandler.buildVillage(x, y, dir, threadID);
 				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.BUILDING_STREET);
 				statusUpdate(modelID);
+				
+				//for check if next street is adjacent to exactly this corner	
+				gameLogic.setInitialLastVillage(c); 
 			}
 		}
 	}
