@@ -131,7 +131,8 @@ public class Main extends Application {
 
 	@FXML
 	void handleAiSelected(ActionEvent event) {
-
+		aiPort.setDisable(false);
+		aiServer.setDisable(false);
 	}
 
 	@FXML
@@ -143,6 +144,7 @@ public class Main extends Application {
 
 	@FXML
 	void handleServerSelected(ActionEvent event) {
+		serverPort.setDisable(false);
 
 	}
 
