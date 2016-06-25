@@ -74,6 +74,8 @@ public class ViewController {
 
 		Parent root = loader.load(getClass().getResource("/application/lobby/LobbyFXML.fxml").openStream());
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
+
 		lobbyController = (LobbyController) loader.getController();
 		lobbyController.setViewController(this);
 		primaryStage.setScene(scene);

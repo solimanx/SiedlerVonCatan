@@ -12,6 +12,10 @@
     -fx-background: #795548;
 }
 
+.background{
+	-fx-background-image: url(/textures/background.jpg)
+}
+
 .button {
 	-fx-background-radius: 3;
 	-fx-text-fill: #fff;

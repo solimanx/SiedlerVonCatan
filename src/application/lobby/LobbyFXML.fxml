@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="741.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lobby.LobbyController">
+<AnchorPane prefHeight="741.0" prefWidth="759.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lobby.LobbyController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="40.0" layoutY="50.0" prefHeight="319.0" prefWidth="560.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
         <items>
