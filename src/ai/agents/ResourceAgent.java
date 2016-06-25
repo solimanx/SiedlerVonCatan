@@ -14,7 +14,7 @@ import settings.DefaultSettings;
 public class ResourceAgent {
 	private AdvancedAI aai;
 
-	private int[] ownResources = aai.getMe().getResources();
+	private int[] ownResources;
 	private int currentBuyingFocus; // 0 = Street; 1 = Village; 2 = City; 3 =
 									// DevCard
 	private ArrayList<Corner> myCorners = new ArrayList<Corner>();
@@ -39,8 +39,13 @@ public class ResourceAgent {
 
 	public ResourceAgent(AdvancedAI ai) {
 		this.aai = ai;
+		
 	}
-
+	
+	public void initializeResources(){
+		ownResources = aai.getMe().getResources();
+	}
+	
 	/**
 	 * calculates the cards to give to the robber
 	 * 

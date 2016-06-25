@@ -419,8 +419,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 	@Override
 	protected void handle(ProtocolError error) {
-		// Preferably the AI will try to avoid all errors, which makes this
-		// method useless.
+			ai.setColorCounter(ai.getColorCounter() + 1);
+			ai.getOutput().respondProfile(ai.getColorCounter());
 	}
 
 }
