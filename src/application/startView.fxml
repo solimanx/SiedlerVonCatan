@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+   <children>
+      <Label text="Start game as ..." />
+      <GridPane prefHeight="329.0" prefWidth="320.0" vgap="30.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="147.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="153.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <RadioButton mnemonicParsing="false" selected="true" text="Client">
+               <toggleGroup>
+                  <ToggleGroup fx:id="startMode" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="AI" toggleGroup="$startMode" GridPane.rowIndex="2" />
+            <RadioButton mnemonicParsing="false" text="Server" toggleGroup="$startMode" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" text="Start" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <TextField disable="true" promptText="Port" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <VBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <children>
+                  <TextField disable="true" promptText="Server" />
+                  <TextField disable="true" promptText="Port" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
