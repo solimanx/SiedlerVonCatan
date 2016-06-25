@@ -5,12 +5,18 @@
 	-fx-opacity: 1;
 }
 
+.root{
+    -fx-font-size: 11pt;
+    -fx-font-family: "Georgia", serif;
+    -fx-base: #fff;
+    -fx-background: #795548;
+}
+
 .button {
-	-fx-background-image: url(/textures/button-back-png);
 	-fx-background-radius: 3;
 	-fx-text-fill: #fff;
 	-fx-background-color: #795548;
-	-fx-font-family: Georgia, serif;
+	-fx-font-family: "Georgia", serif;
 	-fx-effect: dropshadow(gaussian , #5D4037 , 0,0,0,3);
 }
 

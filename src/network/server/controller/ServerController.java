@@ -73,7 +73,7 @@ public class ServerController {
 	private int longestTradingRoutePlayer = -1;
 	private DevelopmentCardsStack devStack;
 
-	public ServerController() {
+	public ServerController(int serverPort) {
 		board = new Board();
 		this.gameLogic = new GameLogic(board);
 		// ModelPlayerID => threadID
@@ -83,7 +83,7 @@ public class ServerController {
 		threadPlayerIdMap = new HashMap<Integer, Integer>();
 
 		ServerInputHandler serverInputHandler = new ServerInputHandler(this);
-		this.server = new Server(serverInputHandler);
+		this.server = new Server(serverInputHandler, serverPort);
 		this.serverOutputHandler = new ServerOutputHandler(server);
 
 		devStack = new DevelopmentCardsStack();

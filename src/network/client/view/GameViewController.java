@@ -457,7 +457,7 @@ public class GameViewController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if (!newValue.equals("OK")) {
-					serverLog.appendText("\n" + newValue);
+					messages.appendText("\n" + newValue);
 				}
 			}
 		});
@@ -477,8 +477,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				text.setFill(Color.BLACK);
-				// TODO Auto-generated method stub
+				text.setFill(Color.WHITE);
 			}
 		});
 		return transition;

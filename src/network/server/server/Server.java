@@ -24,14 +24,16 @@ public class Server {
 
 	private ServerInputHandler serverInputHandler;
 	private ServerOutputHandler serverOutputHandler;
+	private int serverPort;
 
-	public Server(ServerInputHandler inputHandler) {
+	public Server(ServerInputHandler inputHandler, int serverPort) {
 		this.serverInputHandler = inputHandler;
+		this.serverPort = serverPort;
 	}
 
 	public void start() throws IOException {
 
-		ServerSocket serverSocket = new ServerSocket(8080, 150);
+		ServerSocket serverSocket = new ServerSocket(serverPort, 150);
 		logger.info("Server running");
 		try {
 			while (clientCounter < getClients().length) {

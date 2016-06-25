@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,6 +10,15 @@ import ai.AdvancedAI;
 import ai.PrimitiveAI;
 import debugging.DebugClient;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
@@ -25,37 +35,38 @@ public class Main extends Application {
 	private PrimitiveAI pa;
 	private AdvancedAI pa2;
 
+	@FXML
+	private ToggleGroup startMode;
+
+	@FXML
+	private RadioButton startClient;
+
+	@FXML
+	private RadioButton startAI;
+
+	@FXML
+	private RadioButton startServer;
+
+	@FXML
+	private Button startButton;
+
+	@FXML
+	private TextField serverPort;
+
+	@FXML
+	private TextField aiServer;
+
+	@FXML
+	private TextField aiPort;
+
 	// 0 for client, 1 for server , 2 for AI, 3 for debug/test mode
 	private int mode = 0;
 
-	@Override
-	public void start(Stage primaryStage) {
-
-		ModelToProtocol.initModelToProtocol();
-		ProtocolToModel.initProtocolToModel();
-		switch (mode) {
-		case 0:
-			setClientController(new ClientController(primaryStage));
-			break;
-		case 1:
-			setServerController(new ServerController());
-			break;
-		case 2:
-			pa = new PrimitiveAI();
-			pa.commence();
-			break;
-		case 3:
-			dc = new DebugClient(primaryStage);
-			break;
-		case 4:
-			pa = new AdvancedAI();
-			pa.commence();
-		}
-
-	}
+	private Stage primaryStage;
 
 	@Override
 	public void init() throws Exception {
+
 		Parameters p = getParameters();
 		List<String> raw = p.getRaw();
 		for (String string : raw) {
@@ -71,11 +82,88 @@ public class Main extends Application {
 		}
 	}
 
+	@Override
+	public void start(Stage primaryStage) {
+		this.primaryStage = primaryStage;
+		FXMLLoader loader = new FXMLLoader();
+		Parent root;
+		try {
+			root = loader.load(getClass().getResource("/application/startView.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.sizeToScene();
+			primaryStage.setTitle("Choose mode");
+			primaryStage.setResizable(false);
+			primaryStage.setOnCloseRequest(e -> System.exit(0));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		primaryStage.show();
+		ModelToProtocol.initModelToProtocol();
+		ProtocolToModel.initProtocolToModel();
+//		startClient.setUserData(1);
+//		switch (mode) {
+//		case 0:
+////			setClientController(new ClientController(primaryStage));
+//			break;
+//		case 1:
+//			setServerController(new ServerController(8080));
+//			break;
+//		case 2:
+//			pa = new PrimitiveAI();
+//			pa.commence();
+//			break;
+//		case 3:
+//			dc = new DebugClient(primaryStage);
+//			break;
+//		case 4:
+//			pa = new AdvancedAI();
+//			pa.commence();
+//		}
+
+	}
+
 	public static void main(String[] args) {
 
 		launch(args);
 
 	}
+
+	@FXML
+	void handleAiSelected(ActionEvent event) {
+
+	}
+
+	@FXML
+	void handleClientSelected(ActionEvent event) {
+		serverPort.setDisable(true);
+		aiPort.setDisable(true);
+		aiServer.setDisable(true);
+	}
+
+	@FXML
+	void handleServerSelected(ActionEvent event) {
+
+	}
+
+	@FXML
+	void handleStartButton(ActionEvent event) {
+		switch ((int) startMode.getSelectedToggle().getUserData()) {
+		case 1:
+			setClientController(new ClientController(primaryStage));
+			break;
+		case 2:
+			this.setServerController(new ServerController(Integer.parseInt(serverPort.getText())));
+			break;
+		case 3:
+			String server = aiServer.getText();
+			int Port = Integer.parseInt(aiPort.getText());
+			pa = new AdvancedAI();
+			pa.commence();
+			break;
+		}
+	}
+
 
 	/**
 	 * @return the gc
