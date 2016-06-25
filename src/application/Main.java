@@ -148,19 +148,21 @@ public class Main extends Application {
 
 	@FXML
 	void handleStartButton(ActionEvent event) {
-		switch ((int) startMode.getSelectedToggle().getUserData()) {
-		case 1:
+		RadioButton rb = (RadioButton) startMode.getSelectedToggle();
+		switch (rb.getText()) {
+		case "Client":
 			setClientController(new ClientController(primaryStage));
 			break;
-		case 2:
+		case "Server":
 			this.setServerController(new ServerController(Integer.parseInt(serverPort.getText())));
 			break;
-		case 3:
+		case "AI":
 			String server = aiServer.getText();
 			int Port = Integer.parseInt(aiPort.getText());
 			pa = new AdvancedAI();
 			pa.commence();
 			break;
+			default:System.out.println(rb.getText());
 		}
 	}
 
