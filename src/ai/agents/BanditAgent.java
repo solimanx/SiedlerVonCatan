@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import ai.AdvancedAI;
 import enums.ResourceType;
 import model.objects.Corner;
+import network.ModelToProtocol;
+import network.ProtocolToModel;
 import settings.DefaultSettings;
 
 /**
@@ -31,8 +33,9 @@ public class BanditAgent {
 				// value of the field
 				// (the higher the more likely to move bandit on)
 				int buildingsValue = 0;
-				// If it exists
-				if (aai.getGl().getBoard().getFieldAt(i, j) != null) {
+				// If it exists and isn't already the bandit
+				if (aai.getGl().getBoard().getFieldAt(i, j) != null
+						&& !aai.getGl().getBoard().getBandit().equals(ModelToProtocol.getFieldID(i, j))) {
 					// and isn't sea or desert
 					if (!aai.getGl().getBoard().getFieldAt(i, j).getResourceType().equals(ResourceType.NOTHING)
 							&& !aai.getGl().getBoard().getFieldAt(i, j).getResourceType().equals(ResourceType.SEA)) {
@@ -73,9 +76,9 @@ public class BanditAgent {
 								}
 							}
 						}
-						robberscale[i + radius][j + radius] = buildingsValue / 6;
+						robberscale[i + radius][j + radius] = buildingsValue / 6.0;
 						if (differentPlayers.size() > 0) {
-							robberscale[i + radius][j + radius] += 1 - differentPlayers.size() / 4;
+							robberscale[i + radius][j + radius] += 1.0 - (double) differentPlayers.size() / 4.0;
 						}
 					}
 				}
@@ -94,7 +97,7 @@ public class BanditAgent {
 		int x = 0;
 		int y = 0;
 		for (int i = 0; i < robberscale.length; i++) {
-			for (int j = 0; j < robberscale.length; j++) {
+			for (int j = 0; j < robberscale[0].length; j++) {
 				if (robberscale[i][j] > max) {
 					max = robberscale[i][j];
 					x = i;
