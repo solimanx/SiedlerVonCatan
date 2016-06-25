@@ -8,10 +8,12 @@ import java.util.ResourceBundle;
 import ai.agents.BanditAgent;
 import ai.agents.CardAgent;
 import ai.agents.CornerAgent;
+import ai.agents.OpponentAgent;
+import ai.agents.ResourceAgent;
+import ai.agents.TradeAgent;
 import enums.ResourceType;
 import model.objects.Field;
 import network.ModelToProtocol;
-import network.ProtocolToModel;
 import settings.DefaultSettings;
 
 /**
@@ -23,13 +25,16 @@ public class AdvancedAI extends PrimitiveAI {
 	private ResourceBundle rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 
 	private CornerAgent[] cornerAgent = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
-	private BanditAgent banditAgent = new BanditAgent(this, null);
 	private CardAgent cardAgent = new CardAgent(this);
+	private ResourceAgent resourceAgent = new ResourceAgent(this);
+	private OpponentAgent opponentAgent = new OpponentAgent(this);
+	private TradeAgent tradeAgent = new TradeAgent(this, resourceAgent);
+	private BanditAgent banditAgent = new BanditAgent(this, opponentAgent);
+
+	private ArrayList<CornerAgent> myCornerAgents = new ArrayList<CornerAgent>();
+
 	private Map<Integer, Double> diceRollProbabilities;
 
-	// belongs to resourceAgent
-	private ArrayList<CornerAgent> myCorners = new ArrayList<CornerAgent>();
-	
 	int[] initialResourceWeight;
 
 	int initialRoundCounter = 0;
@@ -43,7 +48,7 @@ public class AdvancedAI extends PrimitiveAI {
 	@Override
 	public void initialVillage() {
 		if (initialRoundCounter == 1) {
-			subtractResources(myCorners.get(0));
+			subtractResources(myCornerAgents.get(0));
 		}
 		int c = 0;
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -75,7 +80,7 @@ public class AdvancedAI extends PrimitiveAI {
 			System.out.println(
 					cornerAgent[i].getLocationString() + " " + cornerAgent[i].calculateInitialVillageUtility());
 		}
-		myCorners.add(cornerAgent[d]);
+		myCornerAgents.add(cornerAgent[d]);
 		super.pO.requestBuildVillage(x, y, z);
 
 	}
@@ -83,8 +88,8 @@ public class AdvancedAI extends PrimitiveAI {
 	@Override
 	public void initialRoad() {
 		setResourceWeighting(new int[] { 0, 0, 0, 0, 0 });
-		myCorners.get(initialRoundCounter).calculateInitialRoad();
-		int[] rC = myCorners.get(initialRoundCounter).getBestRoad();
+		myCornerAgents.get(initialRoundCounter).calculateInitialRoad();
+		int[] rC = myCornerAgents.get(initialRoundCounter).getBestRoad();
 		super.pO.requestBuildRoad(rC[0], rC[1], rC[2]);
 
 		initialRoundCounter++;
@@ -95,11 +100,12 @@ public class AdvancedAI extends PrimitiveAI {
 	protected void moveRobber() {
 		banditAgent.moveRobber();
 		int[] coords = banditAgent.bestNewRobber();
+		int target = banditAgent.getTarget();
 		String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
-		pO.respondMoveRobber(newRobber);
+		pO.respondMoveRobber(newRobber, target);
 
 	}
-	
+
 	private void subtractResources(CornerAgent cornerAgent) {
 		Field[] fields = cornerAgent.getFields();
 		for (int i = 0; i < fields.length; i++) {
@@ -170,5 +176,10 @@ public class AdvancedAI extends PrimitiveAI {
 
 	public void decrementSingleResourceWeight(ResourceType resType, int change) {
 		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
+	}
+
+	public ResourceAgent getResourceAgent() {
+		return null;
+
 	}
 }

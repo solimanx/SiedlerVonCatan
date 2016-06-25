@@ -18,6 +18,8 @@ import network.ProtocolToModel;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import ai.agents.ResourceAgent;
 import settings.DefaultSettings;
 
 /**
@@ -46,8 +48,8 @@ public class PrimitiveAI extends Thread {
 	// --------------------------------------------------------------------------------
 
 	private Socket socket;
-	private final String SERVERHOST = "localhost";//"aruba.dbs.ifi.lmu.de";
-	private final int PORT = 8080;//10001;
+	private final String SERVERHOST = "localhost";// "aruba.dbs.ifi.lmu.de";
+	private final int PORT = 8080;// 10001;
 
 	private final String PROTOCOL = DefaultSettings.PROTOCOL_VERSION;
 	private final String VERSION = DefaultSettings.AI_VERSION;
@@ -296,7 +298,7 @@ public class PrimitiveAI extends Thread {
 		} while (newRobber.equals(robber));
 
 		// send to output
-		pO.respondMoveRobber(newRobber);
+		pO.respondMoveRobber(newRobber, null);
 
 	}
 
@@ -438,6 +440,24 @@ public class PrimitiveAI extends Thread {
 
 	}
 
+	/**
+	 * Updates a new city in the board.
+	 *
+	 * @param i
+	 *            Axial-x corner coordinate
+	 * @param j
+	 *            Axial-y corner coordinate
+	 * @param k
+	 *            corner direction
+	 * @param playerID
+	 *            owner
+	 */
+	protected void updateCity(int i, int j, int k, int playerID) {
+		Corner c = gl.getBoard().getCornerAt(i, j, k);
+		c.setStatus(enums.CornerStatus.CITY);
+
+	}
+
 	protected void updateRobber(String locationID) {
 		gl.getBoard().setBandit(locationID);
 
@@ -510,5 +530,10 @@ public class PrimitiveAI extends Thread {
 
 	public GameLogic getGl() {
 		return gl;
+	}
+
+	public ResourceAgent getResourceAgent() {
+		return null;
+		
 	}
 }

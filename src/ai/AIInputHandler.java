@@ -12,7 +12,6 @@ import model.objects.DevCards.InventionCard;
 import model.objects.DevCards.KnightCard;
 import model.objects.DevCards.MonopolyCard;
 import model.objects.DevCards.StreetBuildingCard;
-import network.ModelToProtocol;
 import network.ProtocolToModel;
 import network.client.client.ClientInputHandler;
 import parsing.Parser;
@@ -20,7 +19,6 @@ import parsing.Parser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import protocol.clientinstructions.*;
 import protocol.configuration.*;
 import protocol.connection.*;
 import protocol.dualinstructions.ProtocolPlayInventionCard;
@@ -30,7 +28,6 @@ import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.*;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
-import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.serverinstructions.*;
@@ -167,16 +164,29 @@ public class AIInputHandler extends ClientInputHandler {
 
 		if (building.getType().equals("Dorf")) {
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			if (playerID == ai.getID()) {
+				ai.getResourceAgent().add(ai.getGl().getBoard().getCornerAt(coords[0], coords[1], coords[2]));
+				ai.getMe().decreaseAmountVillages();
+			}
 			ai.updateVillage(coords[0], coords[1], coords[2], playerID);
+
 		} else if (building.getType().equals("Straße")) {
 			coords = ProtocolToModel.getEdgeCoordinates(building.getID());
+			if (playerID == ai.getID()) {
+				ai.getMe().decreaseAmountStreets();
+				ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
+			}
+
 			ai.updateRoad(coords[0], coords[1], coords[2], playerID);
 
 		} else if (building.getType().equals("Stadt")) {
+			if (playerID == ai.getID()) {
+				ai.getMe().decreaseAmountCities();
+				ai.getMe().increaseAmountVillages();
+			}
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
 		} else {
 			logger.warn("Throws new IllegalArgumentException \"Building type not defined\"");
-			throw new IllegalArgumentException("Building type " + building.getType() + " not defined");
 		}
 
 	}

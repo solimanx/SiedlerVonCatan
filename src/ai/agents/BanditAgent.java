@@ -17,6 +17,7 @@ public class BanditAgent {
 	double[][] robberscale = new double[7][7];
 	private OpponentAgent oa;
 	ArrayList<Integer> differentPlayers;
+	private Integer myTarget;
 
 	public BanditAgent(AdvancedAI aai, OpponentAgent oa) {
 		this.aai = aai;
@@ -112,12 +113,25 @@ public class BanditAgent {
 
 	// TODO communicate with opponent agent which opponent should be targeted
 	protected void bestVictim() {
-		for(int i=0; i<differentPlayers.size(); i++){
+//		if(differentPlayers.size()==1){
+			setTarget(differentPlayers.get(0));
+//		}
+//		else
+//		for(int i=0; i<differentPlayers.size(); i++){
 			//send differentPlayers.get(i) to newRobber
 			//get their value
 			// choose highest value
 			// combine with bestNewRobber()
 			// and back to requestsetBandit in outputhandler
-		}
+//		}
+	}
+
+	private void setTarget(Integer integer) {
+		myTarget = integer;
+		
+	}
+	
+	public Integer getTarget(){
+		return myTarget;
 	}
 }

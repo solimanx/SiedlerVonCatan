@@ -244,19 +244,16 @@ public class AIOutputHandler {
 	 *
 	 * @param newRobber
 	 */
-	public void respondMoveRobber(String newRobber) {
+	public void respondMoveRobber(String newRobber, Integer target) {
 		Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
-		// TODO add ID instead of null aka opponentagent's victim
-		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, null);
+		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, target);
 		Response r = new Response();
 
 		r.pRobberMoveRequest = prmr;
 		try {
 			ai.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.catching(Level.ERROR, e);
-			logger.error("Input/Output Exception ", e);
+			logger.trace(Level.ERROR, e);
 			e.printStackTrace();
 		}
 
