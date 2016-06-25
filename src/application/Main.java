@@ -167,8 +167,8 @@ public class Main extends Application {
 		case "AI":
 			s.hide();
 			String server = aiServer.getText();
-			int Port = Integer.parseInt(aiPort.getText());
-			pa = new AdvancedAI();
+			int port = Integer.parseInt(aiPort.getText());
+			pa = new AdvancedAI(server,port);
 			pa.commence();
 			break;
 			default:System.out.println(rb.getText());

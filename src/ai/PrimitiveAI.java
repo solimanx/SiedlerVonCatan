@@ -48,8 +48,8 @@ public class PrimitiveAI extends Thread {
 	// --------------------------------------------------------------------------------
 
 	private Socket socket;
-	private final String SERVERHOST = "localhost";// "aruba.dbs.ifi.lmu.de";
-	private final int PORT = 8080;// 10001;
+	private final String SERVERHOST;// = "localhost";// "aruba.dbs.ifi.lmu.de";
+	private final int PORT;// = 8080;// 10001;
 
 	private final String PROTOCOL = DefaultSettings.PROTOCOL_VERSION;
 	private final String VERSION = DefaultSettings.AI_VERSION;
@@ -81,8 +81,10 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Creates a PrimitiveAI object, and forces it to connect to the 0.3 server.
 	 */
-	public PrimitiveAI() {
+	public PrimitiveAI(String serverHost, int port) {
 		// logger.info("AI started");
+		this.SERVERHOST = serverHost;
+		this.PORT = port;
 		this.board = new Board();
 		this.gl = new GameLogic(board);
 

@@ -39,7 +39,8 @@ public class AdvancedAI extends PrimitiveAI {
 
 	int initialRoundCounter = 0;
 
-	public AdvancedAI() {
+	public AdvancedAI(String serverHost, int port) {
+		super(serverHost, port);
 		initialResourceWeight = new int[] { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
 				Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 		initializeDiceRollProbabilities();
