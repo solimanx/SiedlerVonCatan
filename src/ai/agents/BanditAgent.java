@@ -16,6 +16,7 @@ public class BanditAgent {
 	private AdvancedAI aai;
 	double[][] robberscale = new double[7][7];
 	private OpponentAgent oa;
+	ArrayList<Integer> differentPlayers;
 
 	public BanditAgent(AdvancedAI aai, OpponentAgent oa) {
 		this.aai = aai;
@@ -41,7 +42,7 @@ public class BanditAgent {
 							&& !aai.getGl().getBoard().getFieldAt(i, j).getResourceType().equals(ResourceType.SEA)) {
 						// get corners around it
 						Corner[] surroundingCorners = aai.getGl().getBoard().getSurroundingCorners(i, j);
-						ArrayList<Integer> differentPlayers = new ArrayList<Integer>();
+						differentPlayers = new ArrayList<Integer>();
 						innerloop: for (int k = 0; k < surroundingCorners.length; k++) {
 							// if it exists
 							if (surroundingCorners[k] != null) {
@@ -110,10 +111,13 @@ public class BanditAgent {
 	}
 
 	// TODO communicate with opponent agent which opponent should be targeted
-	protected Integer bestVictim() {
-		// get victims ids around (bestNewRobber) and target the best one
-		// both information is sent to advanced ai and eventually to
-		// requestSetBandit in outputhandler
-		return null;
+	protected void bestVictim() {
+		for(int i=0; i<differentPlayers.size(); i++){
+			//send differentPlayers.get(i) to newRobber
+			//get their value
+			// choose highest value
+			// combine with bestNewRobber()
+			// and back to requestsetBandit in outputhandler
+		}
 	}
 }
