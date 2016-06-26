@@ -13,6 +13,7 @@ import ai.agents.ResourceAgent;
 import ai.agents.TradeAgent;
 import enums.CornerStatus;
 import enums.ResourceType;
+import model.objects.Edge;
 import model.objects.Field;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
@@ -37,14 +38,13 @@ public class AdvancedAI extends PrimitiveAI {
 
 	private Map<Integer, Double> diceRollProbabilities;
 
-	int[] initialResourceWeight;
+	int[] initialResourceWeight = { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
+			Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 
 	int initialRoundCounter = 0;
 
 	public AdvancedAI(String serverHost, int port) {
 		super(serverHost, port);
-		initialResourceWeight = new int[] { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
-				Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 		initializeDiceRollProbabilities();
 	}
 
@@ -141,21 +141,61 @@ public class AdvancedAI extends PrimitiveAI {
 		else if (!getMe().hasLongestRoad()) {
 			if (getMe().getAmountStreets() > 0) {
 				if (resourceAgent.canBuildRoad()) {
+					int radius = DefaultSettings.BOARD_RADIUS;
 					int[][][] bestUtilityRoad = new int[7][7][3];
 					for (int i = 0; i < resourceAgent.getMyEdges().size(); i++) {
-						// algorithm for finding best road, add +3 to coordinate
-						// and place in bestutilityRoad array
+						// my road
+						Edge myEdge = resourceAgent.getMyEdges().get(i);
+						int[] coord = ProtocolToModel.getEdgeCoordinates(myEdge.getEdgeID());
+						// that road's neighbours
+						Edge[] linkedEdges = getGl().getBoard().getLinkedEdges(coord[0], coord[1], coord[2]);
+						// loop neighbours
+						for (int j = 0; j < linkedEdges.length; j++) {
+							// if neighbour exists and is empty
+							if (linkedEdges[j] != null && !linkedEdges[j].isHasStreet()) {
+								int[] coord2 = ProtocolToModel.getEdgeCoordinates(linkedEdges[j].getEdgeID());
+								Edge[] neighbourOfLinked = getGl().getBoard().getLinkedEdges(coord2[0], coord2[1],
+										coord2[2]);
+								for (int k = 0; k < neighbourOfLinked.length; k++) {
+									if (neighbourOfLinked[k] != null && neighbourOfLinked[k] != myEdge) {
+										// if it's my road that can be connected
+										if (neighbourOfLinked[k].isHasStreet()) {
+											if (neighbourOfLinked[k].getOwnerID() == getID()) {
+												bestUtilityRoad[coord2[0] + radius][coord2[1]
+														+ radius][coord2[2]] += 100;
+											} else
+												bestUtilityRoad[coord2[0] + radius][coord2[1]
+														+ radius][coord2[2]] += 10;
+										} else {
+											bestUtilityRoad[coord2[0] + radius][coord2[1] + radius][coord2[2]] += 1;
+										}
+									}
+
+								}
+							}
+						}
+
 					}
+					int max = bestUtilityRoad[0][0][0];
+					int x = 0, y = 0, z = 0;
+					for (int i = 0; i < 7; i++) {
+						for (int j = 0; j < 7; j++) {
+							for (int k = 0; k < 3; k++) {
+								if (bestUtilityRoad[i][j][k] > max) {
+									max = bestUtilityRoad[i][j][k];
+									x = i - radius;
+									y = j - radius;
+									z = k;
+
+								}
+							}
+						}
+					}
+					pO.requestBuildRoad(x, y, z);
 					resourceAgent.update();
 				}
+				// }
 			}
-
-		}
-
-		else if (getMe().getAmountStreets() != 0) {
-
-		} else if (getMe().getAmountVillages() != 0) {
-
 		}
 
 	}
