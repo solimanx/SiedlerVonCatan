@@ -357,7 +357,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				selfWoodText.setFill(Color.BLACK);
+				selfWoodText.setFill(Color.WHITE);
 			}
 		});
 
@@ -365,7 +365,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				selfClayText.setFill(Color.BLACK);
+				selfClayText.setFill(Color.WHITE);
 			}
 		});
 
@@ -373,7 +373,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				selfSheepText.setFill(Color.BLACK);
+				selfSheepText.setFill(Color.WHITE);
 			}
 		});
 
@@ -381,7 +381,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				selfCornText.setFill(Color.BLACK);
+				selfCornText.setFill(Color.WHITE);
 			}
 		});
 
@@ -389,7 +389,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				selfOreText.setFill(Color.BLACK);
+				selfOreText.setFill(Color.WHITE);
 			}
 		});
 
