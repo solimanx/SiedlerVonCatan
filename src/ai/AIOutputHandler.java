@@ -13,6 +13,7 @@ import network.ProtocolToModel;
 import parsing.Parser;
 import parsing.Response;
 import protocol.clientinstructions.ProtocolBuildRequest;
+import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
 import protocol.clientinstructions.ProtocolRobberLoss;
@@ -208,10 +209,7 @@ public class AIOutputHandler {
 		try {
 			ai.write(parser.createString(r));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.error("Input/Output Exception ", e);
-			logger.catching(Level.ERROR, e);
-			e.printStackTrace();
+			logger.trace(Level.ERROR, e);
 		}
 
 	}
@@ -230,11 +228,7 @@ public class AIOutputHandler {
 		try {
 			ai.write(parser.createString(r));
 		} catch (IOException e) {
-
-			// TODO Auto-generated catch block
-			logger.catching(Level.ERROR, e);
-			logger.error("Input/Output Exception ", e);
-			e.printStackTrace();
+			logger.trace(Level.ERROR, e);
 		}
 
 	}
@@ -254,7 +248,19 @@ public class AIOutputHandler {
 			ai.write(parser.createString(r));
 		} catch (IOException e) {
 			logger.trace(Level.ERROR, e);
-			e.printStackTrace();
+		}
+
+	}
+
+	public void requestBuyCard() {
+		ProtocolBuyDevCard pbdc = new ProtocolBuyDevCard();
+		Response r = new Response();
+		r.pBuyDevCards = pbdc;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.trace(Level.ERROR, e);
+
 		}
 
 	}

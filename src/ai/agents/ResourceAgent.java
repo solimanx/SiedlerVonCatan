@@ -19,7 +19,7 @@ public class ResourceAgent {
 									// DevCard
 	private ArrayList<Corner> myCorners = new ArrayList<Corner>();
 	private ArrayList<Edge> myEdges = new ArrayList<Edge>();
-	
+
 	public final static HashMap<Integer, int[]> buildingCosts = new HashMap<Integer, int[]>() {
 		{
 			put(0, DefaultSettings.STREET_BUILD_COST);
@@ -28,24 +28,21 @@ public class ResourceAgent {
 			put(3, DefaultSettings.DEVCARD_BUILD_COST);
 		}
 	};
-
-	/*
-	 * private boolean canBuildStreet; private boolean canBuildVillage; private
-	 * boolean canBuildCity;
-	 */
+	//(Street,Village,City,DevCard)
+	private boolean[] affords;
 	// {THREE_TO_ONE, WOOD, CLAY, ORE, SHEEP, CORN}
 	// maybe in trading agent?
 	private boolean[] harbours = { false, false, false, false, false, false };
 
 	public ResourceAgent(AdvancedAI ai) {
 		this.aai = ai;
-		
+
 	}
-	
-	public void initializeResources(){
+
+	public void initializeResources() {
 		ownResources = aai.getMe().getResources();
 	}
-	
+
 	/**
 	 * calculates the cards to give to the robber
 	 * 
@@ -104,16 +101,16 @@ public class ResourceAgent {
 	public boolean[] getPossibleBuildings() {
 		boolean[] results = new boolean[4];
 		if (compareResources(ownResources, DefaultSettings.STREET_BUILD_COST)) {
-			results[1] = true;
+			results[0] = true;
 		}
 		if (compareResources(ownResources, DefaultSettings.VILLAGE_BUILD_COST)) {
-			results[2] = true;
+			results[1] = true;
 		}
 		if (compareResources(ownResources, DefaultSettings.CITY_BUILD_COST)) {
-			results[3] = true;
+			results[2] = true;
 		}
 		if (compareResources(ownResources, DefaultSettings.DEVCARD_BUILD_COST)) {
-			results[4] = true;
+			results[3] = true;
 		}
 		return results;
 	}
@@ -189,9 +186,30 @@ public class ResourceAgent {
 	public void add(Corner cornerAt) {
 		myCorners.add(cornerAt);
 	}
-	
-	public void add(Edge edgeAt){
+
+	public void add(Edge edgeAt) {
 		myEdges.add(edgeAt);
+	}
+
+	public void update() {
+		affords = getPossibleBuildings();
+
+	}
+	
+	public boolean canBuildRoad(){
+		return affords[0];
+	}
+	
+	public boolean canBuildVillage(){
+		return affords[1];
+	}
+	
+	public boolean canBuildCity(){
+		return affords[2];
+	}
+	
+	public boolean canBuyCard(){
+		return affords[3];
 	}
 
 }

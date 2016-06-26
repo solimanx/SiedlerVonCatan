@@ -1,675 +1,486 @@
-26-06-2016 12:13:55.209 [Thread-5] PlayerModel:276 incrementResources - catching
-java.lang.IllegalArgumentException: Invalid resources object
-	at model.objects.PlayerModel.incrementResources(PlayerModel.java:276) [bin/:?]
-	at ai.AIInputHandler.handle(AIInputHandler.java:212) [bin/:?]
-	at network.client.client.ClientInputHandler.handle(ClientInputHandler.java:119) [bin/:?]
-	at ai.AIInputHandler.sendToParser(AIInputHandler.java:52) [bin/:?]
-	at ai.PrimitiveAI.read(PrimitiveAI.java:142) [bin/:?]
-	at ai.PrimitiveAI.run(PrimitiveAI.java:113) [bin/:?]
-26-06-2016 12:13:55.214 [Thread-5] PlayerModel:276 incrementResources - catching
-java.lang.IllegalArgumentException: Invalid resources object
-	at model.objects.PlayerModel.incrementResources(PlayerModel.java:276) [bin/:?]
-	at ai.AIInputHandler.handle(AIInputHandler.java:212) [bin/:?]
-	at network.client.client.ClientInputHandler.handle(ClientInputHandler.java:119) [bin/:?]
-	at ai.AIInputHandler.sendToParser(AIInputHandler.java:52) [bin/:?]
-	at ai.PrimitiveAI.read(PrimitiveAI.java:142) [bin/:?]
-	at ai.PrimitiveAI.run(PrimitiveAI.java:113) [bin/:?]
-t":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:23.924 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:27.149 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spieler":{"Name":"eer","Farbe":"Orange"}}
-26-06-2016 12:13:27.150 [JavaFX Application Thread] LobbyController:203 handleSendButton - ProfileeerORANGE
-26-06-2016 12:13:27.156 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:27.160 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
-26-06-2016 12:13:27.163 [Thread-5] ViewController:295 setServerResponse - Server response: OK
-26-06-2016 12:13:27.163 [Thread-5] ViewController:295 setServerResponse - Server response: OK
-26-06-2016 12:13:29.499 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spiel starten":{}}
-26-06-2016 12:13:29.504 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:29.511 [Thread-5] Client:71 runClient - Received from Server: {"Spiel gestartet":{"Karte":{"Felder":[{"Ort":{"x":-2,"y":2},"Typ":"Weideland","Zahl":5},{"Ort":{"x":-1,"y":2},"Typ":"Wald","Zahl":2},{"Ort":{"x":0,"y":2},"Typ":"Wüste"},{"Ort":{"x":-2,"y":1},"Typ":"Gebirge","Zahl":8},{"Ort":{"x":-1,"y":1},"Typ":"Hügelland","Zahl":10},{"Ort":{"x":0,"y":1},"Typ":"Weideland","Zahl":9},{"Ort":{"x":1,"y":1},"Typ":"Wald","Zahl":6},{"Ort":{"x":-2,"y":0},"Typ":"Weideland","Zahl":4},{"Ort":{"x":-1,"y":0},"Typ":"Ackerland","Zahl":3},{"Ort":{"x":0,"y":0},"Typ":"Ackerland","Zahl":11},{"Ort":{"x":1,"y":0},"Typ":"Wald","Zahl":4},{"Ort":{"x":2,"y":0},"Typ":"Ackerland","Zahl":3},{"Ort":{"x":-1,"y":-1},"Typ":"Weideland","Zahl":11},{"Ort":{"x":0,"y":-1},"Typ":"Ackerland","Zahl":6},{"Ort":{"x":1,"y":-1},"Typ":"Hügelland","Zahl":5},{"Ort":{"x":2,"y":-1},"Typ":"Hügelland","Zahl":8},{"Ort":{"x":0,"y":-2},"Typ":"Wald","Zahl":12},{"Ort":{"x":1,"y":-2},"Typ":"Gebirge","Zahl":9},{"Ort":{"x":2,"y":-2},"Typ":"Gebirge","Zahl":10},{"Ort":{"x":-3,"y":3},"Typ":"Meer"},{"Ort":{"x":-2,"y":3},"Typ":"Meer"},{"Ort":{"x":-1,"y":3},"Typ":"Meer"},{"Ort":{"x":0,"y":3},"Typ":"Meer"},{"Ort":{"x":-3,"y":2},"Typ":"Meer"},{"Ort":{"x":1,"y":2},"Typ":"Meer"},{"Ort":{"x":-3,"y":1},"Typ":"Meer"},{"Ort":{"x":2,"y":1},"Typ":"Meer"},{"Ort":{"x":-3,"y":0},"Typ":"Meer"},{"Ort":{"x":3,"y":0},"26-06-2016 12:13:29.531 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:29.534 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:29.537 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:29.538 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:29.542 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:29.544 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:29.545 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:29.546 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:29.558 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":0,"y":-1},{"x":1,"y":-1},{"x":1,"y":-2}]}}
-26-06-2016 12:13:29.601 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:29.616 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 0
-26-06-2016 12:13:29.629 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 1
-26-06-2016 12:13:29.648 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 2
-26-06-2016 12:13:29.650 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":1,"y":-1},{"x":1,"y":-2}]}}
-26-06-2016 12:13:29.662 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:29.714 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:29.717 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:29.721 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:29.726 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:29.790 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:33.878 [Thread-8] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-2,"y":3},{"x":-1,"y":3},{"x":-1,"y":2}]}}
-26-06-2016 12:13:33.881 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 0
-26-06-2016 12:13:33.882 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 1
-26-06-2016 12:13:33.883 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 2
-26-06-2016 12:13:35.090 [Thread-8] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":-2,"y":3},{"x":-1,"y":2}]}}
-26-06-2016 12:13:35.092 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:35.094 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:35.096 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:35.097 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:35.099 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:35.100 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:35.109 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-2,"y":2},{"x":-2,"y":1},{"x":-1,"y":1}]}}
-26-06-2016 12:13:35.111 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 0
-26-06-2016 12:13:35.112 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 1
-26-06-2016 12:13:35.114 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 2
-26-06-2016 12:13:35.120 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":-2,"y":1},{"x":-1,"y":1}]}}
-26-06-2016 12:13:35.123 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:35.124 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:35.126 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:35.134 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":1,"y":1},{"x":1,"y":0},{"x":2,"y":0}]}}
-26-06-2016 12:13:35.139 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:35.141 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:35.144 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:35.150 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 0
-26-06-2016 12:13:35.151 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 1
-26-06-2016 12:13:35.152 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 2
-26-06-2016 12:13:35.160 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":1,"y":1},{"x":1,"y":0},{"x":2,"y":0}]}}
-26-06-2016 12:13:35.164 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":1,"y":1},{"x":2,"y":0}]}}
-26-06-2016 12:13:35.168 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:35.171 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:35.172 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:35.177 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:35.237 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:35.239 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:36.130 [Thread-8] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-1,"y":2},{"x":-1,"y":1},{"x":0,"y":1}]}}
-26-06-2016 12:13:36.135 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:36.136 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:36.137 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:36.161 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 0
-26-06-2016 12:13:36.162 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 1
-26-06-2016 12:13:36.166 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 2
-26-06-2016 12:13:37.128 [Thread-8] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":-1,"y":2},{"x":-1,"y":1}]}}
-26-06-2016 12:13:37.141 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:37.143 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:37.144 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:37.145 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:37.147 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:37.152 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:37.158 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":0,"y":2},{"x":0,"y":1},{"x":1,"y":1}]}}
-26-06-2016 12:13:37.161 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
-26-06-2016 12:13:37.161 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
-26-06-2016 12:13:37.162 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
-26-06-2016 12:13:37.169 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 0
-26-06-2016 12:13:37.170 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 1
-26-06-2016 12:13:37.170 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 2
-26-06-2016 12:13:37.171 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":0,"y":2},{"x":0,"y":1},{"x":1,"y":1}]}}
-26-06-2016 12:13:37.175 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":0,"y":2},{"x":1,"y":1}]}}
-26-06-2016 12:13:37.179 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:37.200 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:37.201 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:37.211 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:37.223 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:37.224 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:37.225 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:37.236 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:37.237 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:37.238 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:37.240 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:37.241 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:37.241 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:37.242 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:37.244 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:37.245 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:37.294 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:37.295 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:37.296 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:37.296 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:37.297 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:37.298 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:37.299 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:37.300 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:38.910 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:38.917 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:38.920 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:38.921 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:38.923 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:38.923 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:38.928 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:38.930 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:38.931 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:38.932 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:38.934 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:38.935 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:38.936 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:39.944 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:39.945 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:39.945 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:39.946 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:39.947 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:39.947 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:39.948 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:39.955 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:39.964 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:39.965 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:39.966 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:39.967 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:39.969 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:39.970 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:39.971 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:39.972 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:39.972 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:39.973 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:39.975 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:39.975 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:39.976 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:39.978 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:39.979 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:39.980 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:39.981 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:39.983 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:39.984 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:39.985 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:40.004 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:40.018 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:40.018 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:40.019 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:40.021 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:40.023 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:40.026 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:40.026 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:40.027 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:40.028 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:40.029 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:40.029 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:40.030 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:40.042 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:40.043 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:40.043 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:40.044 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:40.045 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:40.045 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:40.046 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:40.047 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:41.384 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:41.398 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:41.399 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:41.400 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:41.402 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:41.403 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:41.407 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:41.411 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:41.412 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:41.412 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:41.414 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:41.419 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:41.420 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:42.478 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:42.479 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:42.480 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:42.481 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:42.481 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:42.482 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:42.483 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:42.486 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:42.491 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:42.497 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:42.500 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:42.501 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:42.501 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:42.504 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:42.506 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:42.508 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:42.509 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:42.513 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:42.514 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:42.516 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:42.516 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:42.517 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:42.518 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:42.519 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:42.520 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:42.523 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:42.523 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:42.527 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:42.537 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:42.538 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:42.539 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:42.539 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:42.541 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:42.541 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:42.542 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:42.544 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:42.545 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:42.546 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:42.547 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:42.548 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:42.549 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:42.550 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:42.551 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:42.552 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:42.552 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:42.553 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:42.554 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:42.555 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:42.557 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:43.950 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:43.951 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:43.951 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:43.952 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:43.953 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 0
-26-06-2016 12:13:43.953 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 1
-26-06-2016 12:13:43.954 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 2
-26-06-2016 12:13:43.955 [Thread-7] Server:79 run - Server got message: {"Karten abgeben":{"Abgeben":{"Holz":4}}}
-26-06-2016 12:13:43.957 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 0
-26-06-2016 12:13:43.958 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 1
-26-06-2016 12:13:43.959 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 2
-26-06-2016 12:13:43.959 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:43.960 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:43.960 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:47.683 [Thread-8] Server:79 run - Server got message: {"Räuber versetzen":{"Ort":{"x":2,"y":-1}}}
-26-06-2016 12:13:47.684 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:47.685 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:47.686 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:48.471 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:48.472 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:48.472 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:48.473 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:48.473 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:48.474 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:48.475 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:48.480 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:48.486 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:48.486 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:48.487 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:48.488 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:48.488 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:48.489 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:48.490 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:48.490 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:48.491 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:48.492 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:48.493 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:48.493 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:48.494 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:48.495 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:48.495 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:48.496 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:48.496 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:48.497 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:48.498 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:48.498 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:48.500 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:48.508 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:48.509 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:48.510 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:48.510 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:48.511 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:48.512 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:48.512 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:48.513 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:48.514 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:48.514 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:48.515 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:48.516 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:48.516 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:48.517 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:48.518 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:48.518 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:48.519 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:48.520 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:48.520 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:48.521 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:49.313 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:49.319 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:49.320 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:49.321 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:49.321 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:49.322 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:49.323 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:49.323 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:49.324 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:49.325 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:49.327 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:49.328 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:49.328 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:50.128 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:50.129 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.130 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.130 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.131 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:50.131 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:50.132 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:50.133 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:50.138 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.139 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.144 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.146 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:50.148 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:50.149 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:50.151 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.151 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.152 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.153 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:50.153 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:50.154 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:50.156 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:50.157 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:50.158 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.159 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.159 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.160 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:50.161 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:50.164 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:50.164 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:50.174 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:50.175 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:50.176 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:50.177 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.178 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.179 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.184 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.185 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.186 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.187 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:50.188 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:50.189 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:50.189 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:50.190 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:50.191 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.191 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.192 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.194 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:50.194 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:50.195 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:50.926 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:50.933 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.933 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.934 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.935 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:50.936 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:50.938 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:50.938 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:50.939 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:50.940 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:50.942 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:50.943 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:50.944 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:51.761 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:51.761 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:51.762 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:51.762 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:51.763 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:51.764 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:51.764 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:51.766 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:51.771 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:51.772 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:51.773 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:51.775 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:51.777 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:51.778 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:51.780 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:51.780 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:51.781 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:51.782 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:51.783 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:51.783 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:51.784 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:51.785 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:51.786 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:51.787 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:51.787 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:51.788 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:51.789 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:51.790 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:51.790 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:51.796 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:51.797 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:51.798 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:51.798 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:51.799 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:51.800 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:51.800 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:51.802 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:51.804 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:51.805 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:51.806 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:51.806 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:51.807 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:51.809 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:51.810 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:51.810 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:51.811 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:51.812 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:51.812 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:51.813 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:52.629 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:52.638 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:52.639 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:52.639 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:52.640 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:52.641 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:52.642 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:52.643 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:52.643 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:52.644 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:52.645 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:52.646 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:52.646 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:53.612 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:53.612 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:53.613 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:53.614 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:53.614 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:53.615 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:53.616 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:53.618 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:53.623 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:53.624 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:53.625 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:53.625 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:53.626 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:53.627 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:53.627 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:53.629 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:53.631 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:53.633 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:53.634 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:53.635 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:53.636 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:53.637 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:53.638 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:53.639 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:53.639 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:53.640 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:53.641 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:53.641 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:53.646 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:53.653 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:53.654 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:53.655 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:53.656 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:53.657 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:53.657 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:53.658 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:53.659 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:53.659 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:53.660 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:53.663 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:53.664 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:53.665 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:53.666 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:53.666 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:53.667 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:53.668 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:53.668 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:53.669 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:53.670 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:54.368 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:54.374 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:54.375 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:54.376 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:54.376 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:54.377 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:54.378 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:54.379 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:54.380 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:54.381 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:54.382 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:54.383 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:54.383 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:55.168 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:55.169 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:55.170 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:55.170 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:55.171 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:55.171 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:55.172 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:55.173 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:55.174 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:55.174 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:55.175 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:55.176 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 0
-26-06-2016 12:13:55.176 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 1
-26-06-2016 12:13:55.177 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 2
-26-06-2016 12:13:55.177 [Thread-6] Server:79 run - Server got message: {"Karten abgeben":{"Abgeben":{"Holz":3,"Lehm":5}}}
-26-06-2016 12:13:55.177 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 0
-26-06-2016 12:13:55.178 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 1
-26-06-2016 12:13:55.179 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Losing resources to robber to 2
-26-06-2016 12:13:55.181 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:55.182 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:55.183 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:55.187 [Thread-7] Server:79 run - Server got message: {"Karten abgeben":{"Abgeben":{"Holz":7,"Lehm":1}}}
-26-06-2016 12:13:55.190 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 0
-26-06-2016 12:13:55.193 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 1
-26-06-2016 12:13:55.194 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 2
-26-06-2016 12:13:55.196 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 0
-26-06-2016 12:13:55.197 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 1
-26-06-2016 12:13:55.198 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Moving robber to 2
-26-06-2016 12:13:55.199 [Thread-7] Server:79 run - Server got message: {"Räuber versetzen":{"Ort":{"x":-1,"y":2},"Ziel":2}}
-26-06-2016 12:13:55.206 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:55.207 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:55.207 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:55.207 [Thread-7] Server:79 run - Server got message: {"Räuber versetzen":{"Ort":{"x":-1,"y":2},"Ziel":2}}
-26-06-2016 12:13:55.215 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:55.216 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:55.217 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:55.217 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:55.217 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:55.218 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:55.219 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:55.221 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:55.227 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:55.229 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:55.230 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-26-06-2016 12:13:55.231 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:55.231 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:55.232 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:55.232 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:55.233 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:55.234 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:55.234 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
-26-06-2016 12:13:55.235 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
-26-06-2016 12:13:55.235 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
-26-06-2016 12:13:55.241 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
-26-06-2016 12:13:55.244 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
-26-06-2016 12:13:55.244 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
-26-06-2016 12:13:55.245 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
-26-06-2016 12:13:55.246 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
-26-06-2016 12:13:55.246 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
-26-06-2016 12:13:55.247 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
-26-06-2016 12:13:55.248 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
-:51.791 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":11},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:51.792 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":0,"Wurf":[2,3]}}
-26-06-2016 12:13:51.794 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Lehm":1}}}
-26-06-2016 12:13:51.795 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Wolle":1}}}
-26-06-2016 12:13:51.796 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
-26-06-2016 12:13:51.798 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":12},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:51.800 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":13},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:51.805 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:51.807 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":12},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:51.812 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":12},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:51.814 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:52.628 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Würfeln":{}}
-26-06-2016 12:13:52.630 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[3,2]}}
-26-06-2016 12:13:52.634 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Lehm":1}}}
-26-06-2016 12:13:52.635 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Wolle":1}}}
-26-06-2016 12:13:52.638 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
-26-06-2016 12:13:52.640 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":13},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:52.642 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":14},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:52.645 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:52.647 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.611 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Zug beenden":{}}
-26-06-2016 12:13:53.614 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.616 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":14},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.619 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":1,"Wurf":[5,1]}}
-26-06-2016 12:13:53.620 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Holz":1,"Getreide":1}}}
-26-06-2016 12:13:53.622 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Holz":1}}}
-26-06-2016 12:13:53.623 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
-26-06-2016 12:13:53.625 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":15},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.627 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":15},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.633 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.636 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":15},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.640 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":15},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.646 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":15},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.647 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":0,"Wurf":[3,1]}}
-26-06-2016 12:13:53.649 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{}}}
-26-06-2016 12:13:53.651 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Holz":1}}}
-26-06-2016 12:13:53.653 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
-26-06-2016 12:13:53.656 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":15},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.658 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":16},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.660 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.665 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":15},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.669 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":15},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:53.670 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:54.367 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Würfeln":{}}
-26-06-2016 12:13:54.369 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[1,4]}}
-26-06-2016 12:13:54.371 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Lehm":1}}}
-26-06-2016 12:13:54.372 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Wolle":1}}}
-26-06-2016 12:13:54.374 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
-26-06-2016 12:13:54.376 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":16},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:54.379 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":17},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:54.382 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:54.384 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.167 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Zug beenden":{}}
-26-06-2016 12:13:55.171 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.172 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":17},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.174 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":1,"Wurf":[2,5]}}
-26-06-2016 12:13:55.176 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":17},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.177 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Karten wegen Räuber abgeben","Siegpunkte":2,"Rohstoffe":{"Unbekannt":16},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.179 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Karten wegen Räuber abgeben","Siegpunkte":2,"Rohstoffe":{"Unbekannt":17},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.185 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":8},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.195 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Räuber versetzen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":9},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.198 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Räuber versetzen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":9},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.200 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":2,"Rohstoffe":{"Unbekannt":1}}}
-26-06-2016 12:13:55.201 [Thread-5] PlayerModel:264 decrementResources - catching
-java.lang.IllegalArgumentException: Invalid resources object
-	at model.objects.PlayerModel.decrementResources(PlayerModel.java:264) [bin/:?]
-	at network.client.controller.ClientController.costs(ClientController.java:512) [bin/:?]
-	at network.client.client.ClientInputHandler.handle(ClientInputHandler.java:370) [bin/:?]
-	at network.client.client.ClientInputHandler.handle(ClientInputHandler.java:122) [bin/:?]
-	at network.client.client.ClientInputHandler.sendToParser(ClientInputHandler.java:182) [bin/:?]
-	at network.client.client.Client.runClient(Client.java:72) [bin/:?]
-	at network.client.client.Client.run(Client.java:48) [bin/:?]
-26-06-2016 12:13:55.204 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":2,"Rohstoffe":{"Unbekannt":1}}}
-26-06-2016 12:13:55.205 [Thread-5] PlayerModel:264 decrementResources - catching
-java.lang.IllegalArgumentException: Invalid resources object
-	at model.objects.PlayerModel.decrementResources(PlayerModel.java:264) [bin/:?]
-	at network.client.controller.ClientController.costs(ClientController.java:512) [bin/:?]
-	at network.client.client.ClientInputHandler.handle(ClientInputHandler.java:370) [bin/:?]
-	at network.client.client.ClientInputHandler.handle(ClientInputHandler.java:122) [bin/:?]
-	at network.client.client.ClientInputHandler.sendToParser(ClientInputHandler.java:182) [bin/:?]
-	at network.client.client.Client.runClient(Client.java:72) [bin/:?]
-	at network.client.client.Client.run(Client.java:48) [bin/:?]
-26-06-2016 12:13:55.205 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":2,"Rohstoffe":{"Wolle":1}}}
-26-06-2016 12:13:55.206 [Thread-5] Client:71 runClient - Received from Server: {"Räuber versetzt":{"Spieler":1,"Ort":{"x":-1,"y":2},"Ziel":2}}
-26-06-2016 12:13:55.207 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":10},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.217 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":10},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.220 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":8},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.222 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":0,"Wurf":[3,5]}}
-26-06-2016 12:13:55.225 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{}}}
-26-06-2016 12:13:55.226 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Erz":1}}}
-26-06-2016 12:13:55.227 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
-26-06-2016 12:13:55.231 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":8},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.232 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Rot","Name":"RedBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":11},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.234 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":1},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.236 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":8},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.246 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":8},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
-26-06-2016 12:13:55.249 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Orange","Name":"eer","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Holz":1,"Lehm":2,"Wolle":1},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:07:49.582 [Thread-5] Client:47 run - Connected to server
+26-06-2016 13:07:49.586 [Thread-5] Client:71 runClient - Received from Server: {"Hallo":{"Version":"1.0","Protokoll":"1.0"}}
+26-06-2016 13:07:49.640 [Thread-5] Client:84 write - Client sends to Server: {"Hallo":{"Version":"JavaFXClient 1.0 (NiedlichePixel)"}}
+26-06-2016 13:07:49.644 [Thread-5] Client:71 runClient - Received from Server: {"Willkommen":{"id":2}}
+26-06-2016 13:07:49.648 [Thread-5] ClientController:131 receiveWelcome - Handshake complete!
+26-06-2016 13:07:49.656 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:07:49.663 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:07:49.670 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:07:50.892 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spieler":{"Name":"www","Farbe":"Weiß"}}
+26-06-2016 13:07:50.892 [JavaFX Application Thread] LobbyController:203 handleSendButton - ProfilewwwWHITE
+26-06-2016 13:07:50.901 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Spiel starten","Siegpunkte":0,"Rohstoffe":{},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:07:50.905 [Thread-5] Client:71 runClient - Received from Server: {"Serverantwort":"OK"}
+26-06-2016 13:07:50.907 [Thread-5] ViewController:295 setServerResponse - Server response: OK
+26-06-2016 13:07:50.908 [Thread-5] ViewController:295 setServerResponse - Server response: OK
+26-06-2016 13:07:51.272 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Spiel starten":{}}
+26-06-2016 13:07:51.279 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Wartet auf Spielbeginn","Siegpunkte":0,"Rohstoffe":{},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:07:51.285 [Thread-5] Client:71 runClient - Received from Server: {"Spiel gestartet":{"Karte":{"Felder":[{"Ort":{"x":-2,"y":2},"Typ":"Wüste"},{"Ort":{"x":-1,"y":2},"Typ":"Hügelland","Zahl":5},{"Ort":{"x":0,"y":2},"Typ":"Weideland","Zahl":2},{"Ort":{"x":-2,"y":1},"Typ":"Wald","Zahl":8},{"Ort":{"x":-1,"y":1},"Typ":"Weideland","Zahl":10},{"Ort":{"x":0,"y":1},"Typ":"Ackerland","Zahl":9},{"Ort":{"x":1,"y":1},"Typ":"Wald","Zahl":6},{"Ort":{"x":-2,"y":0},"Typ":"Gebirge","Zahl":4},{"Ort":{"x":-1,"y":0},"Typ":"Weideland","Zahl":3},{"Ort":{"x":0,"y":0},"Typ":"Wald","Zahl":11},{"Ort":{"x":1,"y":0},"Typ":"Ackerland","Z26-06-2016 13:07:51.291 [Thread-5] Client:71 runClient - Received from Server: {"Spiel gestartet":{"Karte":{"Felder":[{"Ort":{"x":-2,"y":2},"Typ":"Wüste"},{"Ort":{"x":-1,"y":2},"Typ":"Hügelland","Zahl":5},{"Ort":{"x":0,"y":2},"Typ":"Weideland","Zahl":2},{"Ort":{"x":-2,"y":1},"Typ":"Wald","Zahl":8},{"Ort":{"x":-1,"y":1},"Typ":"Weideland","Zahl":10},{"Ort":{"x":0,"y":1},"Typ":"Ackerland","Zahl":9},{"Ort":{"x":1,"y":1},"Typ":"Wald","Zahl":6},{"Ort":{"x":-2,"y":0},"Typ":"Gebirge","Zahl":4},{"Ort":{"x":-1,"y":0},"Typ":"Weideland","Zahl":3},{"Ort":{"x":0,"y":0},"Typ":"Wald","Zahl":11},{"Ort":{"x":1,"y":0},"Typ":"Ackerland","Zahl":4},{"Ort":{"26-06-2016 13:07:51.293 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
+26-06-2016 13:07:51.306 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
+26-06-2016 13:07:51.310 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
+26-06-2016 13:07:51.312 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:07:51.315 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:07:51.317 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:07:51.318 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:07:51.322 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:07:51.325 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:07:51.328 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":0,"y":-1},{"x":1,"y":-1},{"x":1,"y":-2}]}}
+26-06-2016 13:07:51.341 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 0
+26-06-2016 13:07:51.344 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 1
+26-06-2016 13:07:51.346 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 2
+26-06-2016 13:07:51.353 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":1,"y":-1},{"x":1,"y":-2}]}}
+26-06-2016 13:07:51.357 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:07:51.358 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:07:51.359 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:07:51.360 [Thread-6] ServerOutputHandle26-06-2016 13:07:51.375 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Warten","Siegpunkte":0,"Rohstoffe":{"Unbekannt":0},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Grö26-06-2016 13:07:56.877 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-2,"y":3},{"x":-1,"y":3},{"x":-1,"y":2}]}}
+26-06-2016 13:07:56.880 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 0
+26-06-2016 13:07:56.884 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 1
+26-06-2016 13:07:56.887 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 2
+26-06-2016 13:07:57.429 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":-2,"y":3},{"x":-1,"y":2}]}}
+26-06-2016 13:07:57.434 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:07:57.435 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:07:57.439 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:07:57.442 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
+26-06-2016 13:07:57.443 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
+26-06-2016 13:07:57.446 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
+26-06-2016 13:08:00.726 [Thread-8] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-3,"y":1},{"x":-3,"y":0},{"x":-2,"y":0}]}}
+26-06-2016 13:08:00.728 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 0
+26-06-2016 13:08:00.732 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 1
+26-06-2016 13:08:00.733 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 2
+26-06-2016 13:08:01.163 [Thread-8] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":-3,"y":0},{"x":-2,"y":0}]}}
+26-06-2016 13:08:01.165 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
+26-06-2016 13:08:01.166 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
+26-06-2016 13:08:01.169 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
+26-06-2016 13:08:02.520 [Thread-8] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-2,"y":0},{"x":-2,"y":-1},{"x":-1,"y":-1}]}}
+26-06-2016 13:08:02.524 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
+26-06-2016 13:08:02.526 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
+26-06-2016 13:08:02.530 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
+26-06-2016 13:08:02.533 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 0
+26-06-2016 13:08:02.534 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 1
+26-06-2016 13:08:02.535 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building road to 2
+26-06-2016 13:08:03.034 [Thread-8] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":-2,"y":0},{"x":-2,"y":-1}]}}
+26-06-2016 13:08:03.036 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:03.037 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:03.040 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:03.041 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
+26-06-2016 13:08:03.046 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
+26-06-2016 13:08:03.048 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
+26-06-2016 13:08:08.761 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":-1,"y":2},{"x":-1,"y":1},{"x":0,"y":1}]}}
+26-06-2016 13:08:08.765 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
+26-06-2016 13:08:08.766 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
+26-06-2016 13:08:08.768 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
+26-06-2016 13:08:08.769 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 0
+26-06-2016 13:08:08.770 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 1
+26-06-2016 13:08:08.774 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building road to 2
+26-06-2016 13:08:09.214 [Thread-7] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":-1,"y":2},{"x":-1,"y":1}]}}
+26-06-2016 13:08:09.216 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:09.217 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:09.220 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:09.224 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
+26-06-2016 13:08:09.225 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
+26-06-2016 13:08:09.226 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
+26-06-2016 13:08:09.238 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":2,"y":-1},{"x":2,"y":-2},{"x":3,"y":-2}]}}
+26-06-2016 13:08:09.242 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 0
+26-06-2016 13:08:09.244 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 1
+26-06-2016 13:08:09.246 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building settlement to 2
+26-06-2016 13:08:09.259 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 0
+26-06-2016 13:08:09.264 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 1
+26-06-2016 13:08:09.268 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Building road to 2
+26-06-2016 13:08:09.270 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Dorf","Ort":[{"x":2,"y":-1},{"x":2,"y":-2},{"x":3,"y":-2}]}}
+26-06-2016 13:08:09.271 [Thread-6] Server:79 run - Server got message: {"Bauen":{"Typ":"Straße","Ort":[{"x":2,"y":-2},{"x":3,"y":-2}]}}
+26-06-2016 13:08:09.274 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:09.275 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:09.284 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:09.285 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:09.293 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:09.293 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:09.295 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:09.296 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:09.296 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:09.297 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:09.298 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:09.299 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:09.307 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:09.308 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:09.400 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:09.402 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:09.404 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:09.408 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:09.409 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:09.411 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:09.412 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:09.415 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:09.416 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:09.418 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:10.881 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:10.895 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:10.896 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:10.898 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:10.899 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:10.904 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:10.910 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:10.911 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:10.912 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:10.913 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:10.914 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:10.915 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:10.915 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:16.014 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:16.015 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:16.015 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:16.016 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:16.017 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:16.018 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:16.018 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:17.252 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:17.259 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:17.260 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:17.261 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:17.262 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:17.263 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:17.264 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:17.266 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:17.267 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:17.268 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:17.268 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:17.269 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:17.270 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:18.468 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:18.468 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:18.469 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:18.469 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:18.471 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:18.471 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:18.472 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:18.475 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:18.504 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:18.505 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:18.505 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:18.507 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:18.508 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:18.509 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:18.511 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:18.512 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:18.521 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:18.523 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:18.524 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:18.525 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:18.534 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:18.536 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:18.537 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:18.538 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:18.538 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:18.540 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:18.541 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:18.542 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:20.265 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:20.272 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:20.273 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:20.275 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:20.276 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:20.279 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:20.286 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:20.287 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:20.287 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:20.289 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:20.290 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:20.291 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:20.292 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:38.603 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:38.603 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:38.604 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:38.604 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:38.605 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:38.606 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:38.606 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:39.676 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:39.677 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:39.680 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:39.681 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:39.683 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Moving robber to 0
+26-06-2016 13:08:39.684 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Moving robber to 1
+26-06-2016 13:08:39.684 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Moving robber to 2
+26-06-2016 13:08:44.331 [Thread-8] Server:79 run - Server got message: {"Räuber versetzen":{"Ort":{"x":-1,"y":2},"Ziel":1}}
+26-06-2016 13:08:44.339 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:44.341 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:44.342 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:45.299 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:45.300 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:45.301 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:45.302 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:45.302 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:45.303 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:45.304 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:45.305 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:45.315 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:45.316 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:45.317 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:45.317 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:45.319 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:45.319 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:45.320 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:45.321 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:45.323 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:45.329 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:45.330 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:45.331 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:45.333 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:45.334 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:45.334 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:45.335 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:45.336 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:45.338 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:45.338 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:45.339 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:47.801 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:47.806 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:47.807 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:47.807 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:47.808 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:47.809 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:47.812 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:47.813 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:47.814 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:47.815 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:47.816 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:47.816 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:47.817 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:48.528 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:48.528 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:48.529 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:48.530 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:48.530 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:48.531 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:48.532 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:49.729 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:49.736 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:49.736 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:49.737 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:49.738 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:49.738 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:49.739 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:49.740 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:49.740 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:49.741 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:49.742 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:49.744 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:49.745 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:50.347 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:50.347 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:50.348 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:50.348 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:50.349 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:50.350 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:50.351 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:50.352 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:50.358 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:50.359 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:50.360 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:50.360 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:50.361 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:50.361 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:50.362 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:50.363 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:50.364 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:50.365 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:50.365 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:50.366 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:50.367 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:50.368 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:50.369 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:50.369 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:50.370 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:50.371 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:50.372 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:50.373 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:51.206 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:51.212 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:51.212 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:51.213 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:51.214 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:51.214 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:51.215 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:51.215 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:51.216 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:51.217 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:51.217 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:51.218 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:51.218 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:51.756 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:51.756 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:51.757 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:51.757 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:51.758 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:51.758 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:51.759 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:52.358 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:52.365 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:52.365 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:52.366 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:52.369 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:52.370 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:52.371 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:52.373 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:52.374 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:52.374 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:52.376 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:52.377 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:52.377 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:53.339 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:53.340 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:53.341 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:53.341 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:53.342 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:53.342 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:53.343 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:53.345 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:53.352 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:53.352 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:53.353 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:53.353 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:53.354 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:53.355 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:53.356 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:53.357 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:53.358 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:53.362 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:53.365 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:53.366 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:53.367 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:53.369 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:53.370 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:53.371 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:53.371 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:53.372 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:53.373 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:53.373 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:54.530 [Thread-7] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:54.536 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:54.537 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:54.537 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:54.538 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:54.538 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:54.539 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:54.540 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:54.540 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:54.541 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:54.541 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:54.542 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:54.542 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:55.150 [Thread-7] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:55.150 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:55.151 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:55.151 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:55.152 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:55.153 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:55.153 [Thread-7] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:55.685 [Thread-8] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:55.690 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:55.691 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:55.692 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:55.692 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:55.693 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:55.693 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:55.694 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:55.694 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:55.695 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:55.696 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:55.697 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:55.697 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:56.281 [Thread-8] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:56.282 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:56.283 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:56.283 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:56.284 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:56.284 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:56.285 [Thread-8] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:56.286 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:56.294 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:56.295 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:56.296 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+26-06-2016 13:08:56.297 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:56.297 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:56.298 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:56.299 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:56.299 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:56.300 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:56.301 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 0
+26-06-2016 13:08:56.302 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 1
+26-06-2016 13:08:56.303 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Trading/Building to 2
+26-06-2016 13:08:56.304 [Thread-6] Server:79 run - Server got message: {"Würfeln":{}}
+26-06-2016 13:08:56.304 [Thread-6] Server:79 run - Server got message: {"Entwicklungskarte kaufen":{}}
+26-06-2016 13:08:56.309 [Thread-6] Server:79 run - Server got message: {"Zug beenden":{}}
+26-06-2016 13:08:56.310 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 0
+26-06-2016 13:08:56.311 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 1
+26-06-2016 13:08:56.312 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Waiting to 2
+26-06-2016 13:08:56.312 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 0
+26-06-2016 13:08:56.313 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 1
+26-06-2016 13:08:56.314 [Thread-6] ServerOutputHandler:241 statusUpdate - Send Rolling dice to 2
+r: {"Würfelwurf":{"Spieler":1,"Wurf":[3,3]}}
+26-06-2016 13:08:51.209 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Holz":1}}}
+26-06-2016 13:08:51.212 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{}}}
+26-06-2016 13:08:51.213 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
+26-06-2016 13:08:51.214 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":8},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:51.215 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:51.217 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:51.219 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:51.758 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:51.760 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:52.357 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Würfeln":{}}
+26-06-2016 13:08:52.359 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[4,4]}}
+26-06-2016 13:08:52.361 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Lehm":1}}}
+26-06-2016 13:08:52.363 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{}}}
+26-06-2016 13:08:52.365 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
+26-06-2016 13:08:52.367 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":9},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:52.371 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:52.375 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:52.378 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfind26-06-2016 13:08:52.380 [Thread-5] Client:71 runClient - Received from Server: {"Status26-06-2016 13:08:53.339 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Zug beenden":{}}
+26-06-2016 13:08:53.342 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:53.343 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":9},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:53.347 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":0,"Wurf":[4,4]}}
+26-06-2016 13:08:53.349 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Lehm":1}}}
+26-06-2016 13:08:53.350 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{}}}
+26-06-2016 13:08:53.352 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
+26-06-2016 13:08:53.354 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":10},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:53.356 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:53.362 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:53.367 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":10},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:53.372 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":10},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:53.374 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:54.532 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":1,"Wurf":[5,1]}}
+26-06-2016 13:08:54.534 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Holz":1}}}
+26-06-2016 13:08:54.535 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{}}}
+26-06-2016 13:08:54.536 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
+26-06-2016 13:08:54.538 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":11},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:54.540 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:54.542 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:54.543 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:55.152 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:55.154 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:55.685 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Würfeln":{}}
+26-06-2016 13:08:55.687 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":2,"Wurf":[1,2]}}
+26-06-2016 13:08:55.688 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{}}}
+26-06-2016 13:08:55.689 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{}}}
+26-06-2016 13:08:55.690 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
+26-06-2016 13:08:55.692 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":11},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:55.694 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":4},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:55.696 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:55.698 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.281 [JavaFX Application Thread] Client:84 write - Client sends to Server: {"Zug beenden":{}}
+26-06-2016 13:08:56.284 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.286 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":11},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.287 [Thread-5] Client:71 runClient - Received from Server: {"Würfelwurf":{"Spieler":0,"Wurf":[5,4]}}
+26-06-2016 13:08:56.291 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":0,"Rohstoffe":{"Erz":1}}}
+26-06-2016 13:08:56.293 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":1,"Rohstoffe":{"Getreide":1}}}
+26-06-2016 13:08:56.295 [Thread-5] Client:71 runClient - Received from Server: {"Ertrag":{"Spieler":2,"Rohstoffe":{}}}
+26-06-2016 13:08:56.296 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":12},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.299 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":5},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.301 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":2,"Farbe":"Weiß","Name":"www","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Erz":3},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.304 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Handeln oder Bauen","Siegpunkte":2,"Rohstoffe":{"Unbekannt":12},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.307 [Thread-5] Client:71 runClient - Received from Server: {"Kosten":{"Spieler":0,"Rohstoffe":{"Wolle":1,"Getreide":1,"Erz":1}}}
+26-06-2016 13:08:56.309 [Thread-5] Client:71 runClient - Received from Server: {"Entwicklungskarte gekauft":{"Spieler":0,"Entwicklungskarte":"Straßenbau"}}
+26-06-2016 13:08:56.312 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":9},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":1},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.314 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Unbekannt":5},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+eceived from Server: {"Kosten":{"Spieler":0,"Rohstoffe":{"Wolle":1,"Getreide":1,"Erz":1}}}
+26-06-2016 13:08:56.310 [Thread-5] Client:71 runClient - Received from Server: {"Entwicklungskarte gekauft":{"Spieler":0,"Entwicklungskarte":"Straßenbau"}}
+26-06-2016 13:08:56.312 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":0,"Farbe":"Blau","Name":"BlueBro","Status":"Warten","Siegpunkte":2,"Rohstoffe":{"Unbekannt":9},"Rittermacht":0,"Entwicklungskarten":{"Unbekannt":1},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}
+26-06-2016 13:08:56.314 [Thread-5] Client:71 runClient - Received from Server: {"Statusupdate":{"Spieler":{"id":1,"Farbe":"Orange","Name":"ww","Status":"Würfeln","Siegpunkte":2,"Rohstoffe":{"Lehm":2,"Wolle":1,"Getreide":2},"Rittermacht":0,"Entwicklungskarten":{"Ritter":0,"Straßenbau":0,"Monopol":0,"Erfindung":0,"Siegpunkt":0},"Größte Rittermacht":false,"Größte Handelsstraße":false}}}

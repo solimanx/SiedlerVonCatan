@@ -94,9 +94,24 @@ public class AdvancedAI extends PrimitiveAI {
 		super.pO.requestBuildRoad(rC[0], rC[1], rC[2]);
 
 		initialRoundCounter++;
+		resourceAgent.initializeResources();
 
 	}
 
+	@Override
+	public void actuate() {
+		//try to get longest road
+		resourceAgent.update();
+		if(resourceAgent.canBuyCard()){
+			pO.requestBuyCard();
+			resourceAgent.update();
+		}
+		
+		if(resourceAgent.canBuyCard()){
+			pO.requestBuyCard();
+		}
+		
+	}
 	@Override
 	protected void moveRobber() {
 		banditAgent.moveRobber();

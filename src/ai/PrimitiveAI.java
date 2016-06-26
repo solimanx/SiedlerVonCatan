@@ -538,4 +538,9 @@ public class PrimitiveAI extends Thread {
 		return null;
 		
 	}
+
+	public void actuate() {
+		// TODO Auto-generated method stub
+		
+	}
 }
