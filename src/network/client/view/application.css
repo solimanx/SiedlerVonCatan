@@ -101,14 +101,14 @@
 }
 .tab-pane:top .tab-header-area .headers-region .tab:selected:top {
 	-fx-background-color: #795548;
+	-fx-outer-border: #795548;
+	-fx-border-width: 1;
+	-fx-border-color: #795548;
 }
 .tab-pane:top .tab-header-area .headers-region .tab:top{
 	-fx-background-color: #8D6E63
 }
 .tab-pane:top .tab-header-area .tab-header-background {
 	-fx-outer-border: #795548;
-}
-
-.tab-pane:top .tab-header-area .headers-region .tab {
-	-fx-background-color: #3E2723;
+	-fx-background-color: #5D4037;
 }
