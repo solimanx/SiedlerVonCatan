@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" styleClass="background" fx:controller="network.client.view.tradeview.TradeViewController">
+<AnchorPane styleClass="background" stylesheets="/network/client/view/application.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.tradeview.TradeViewController">
    <children>
       <TabPane>
          <tabs>
@@ -29,9 +29,9 @@
                      <children>
                         <VBox>
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                              <HBox fillHeight="false" pickOnBounds="false" prefHeight="50.0" prefWidth="400.0">
                                  <children>
-                                    <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" text="Accepting trade offers:">
+                                    <Label maxHeight="-Infinity" minHeight="-Infinity" text="Accepting trade offers:">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>

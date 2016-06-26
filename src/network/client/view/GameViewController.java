@@ -190,12 +190,12 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Label playerFourVPoints;
+	
+	@FXML
+	private VBox playerFourBox;
 
 	@FXML
 	private Label selfName;
-
-	@FXML
-	private TextArea serverLog;
 
 	@FXML
 	private Text diceResult;
@@ -293,7 +293,8 @@ public class GameViewController implements Initializable {
 
 	public void setIsStreetDev(Boolean isStreetDev) {
 		this.isStreetDevCard = isStreetDev;
-		Platform.runLater(new NewAlert("Street build Developement Card", "Build two streets, or double-click on a new street to build just one."));
+		Platform.runLater(new NewAlert("Street build Developement Card",
+				"Build two streets, or double-click on a new street to build just one."));
 	}
 
 	/*
@@ -506,30 +507,23 @@ public class GameViewController implements Initializable {
 		switch (playerIDtoViewPosition.get(modelID)) {
 		case 1:
 			playerNameOne.setText(playerName);
-			if (playerColor != enums.Color.WHITE) {
-				playerNameOne.setTextFill(playerColor.getValue());
-			}
+			playerNameOne.setTextFill(playerColor.getValue());
 			playerNames.put(1, playerName);
 			break;
 		case 2:
 			playerNameTwo.setText(playerName);
-			if (playerColor != enums.Color.WHITE) {
-				playerNameTwo.setTextFill(playerColor.getValue());
-			}
+			playerNameTwo.setTextFill(playerColor.getValue());
 			playerNames.put(1, playerName);
 			break;
 		case 3:
 			playerNameThree.setText(playerName);
-			if (playerColor != enums.Color.WHITE) {
-				playerNameThree.setTextFill(playerColor.getValue());
-			}
+			playerNameThree.setTextFill(playerColor.getValue());
 			playerNames.put(1, playerName);
 			break;
 		case 4:
+			playerFourBox.setVisible(true);
 			playerNameFour.setText(playerName);
-			if (playerColor != enums.Color.WHITE) {
-				playerNameFour.setTextFill(playerColor.getValue());
-			}
+			playerNameFour.setTextFill(playerColor.getValue());
 			playerNames.put(1, playerName);
 			break;
 		}

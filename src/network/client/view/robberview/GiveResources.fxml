@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="362.0" prefWidth="186.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.robberview.RobberViewController">
+<DialogPane prefHeight="362.0" prefWidth="186.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" stylesheets="/network/client/view/application.css" fx:controller="network.client.view.robberview.RobberViewController">
    <header>
       <VBox>
          <children>
