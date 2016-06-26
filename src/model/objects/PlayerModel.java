@@ -260,8 +260,11 @@ public class PlayerModel {
 		if (resources.length == 5) {
 			for (int i = 0; i < 5; i++)
 				this.resources[i] -= resources[i];
-		} else
+		} else if (resources.length == 1) {
+			decrementHiddenResources(resources[0]);
+		} else {
 			logger.catching(Level.FATAL, new IllegalArgumentException("Invalid resources object"));
+		}
 	}
 
 	/**
@@ -272,9 +275,10 @@ public class PlayerModel {
 		if (resources.length == 5) {
 			for (int i = 0; i < 5; i++)
 				this.resources[i] += resources[i];
+		} else if (resources.length == 1) {
+			incrementHiddenResources(resources[0]);
 		} else {
 			logger.catching(Level.FATAL, new IllegalArgumentException("Invalid resources object"));
-
 		}
 
 	}
@@ -354,8 +358,8 @@ public class PlayerModel {
 	public ArrayList<HarbourStatus> getPlayerHarbours() {
 		return harbours;
 	}
-	
-	public int sumDevCards(){
+
+	public int sumDevCards() {
 		return playerDevCard[0] + playerDevCard[1] + playerDevCard[2] + playerDevCard[3] + playerDevCard[4];
 	}
 

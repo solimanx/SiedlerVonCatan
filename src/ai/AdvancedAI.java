@@ -101,7 +101,7 @@ public class AdvancedAI extends PrimitiveAI {
 	protected void moveRobber() {
 		banditAgent.moveRobber();
 		int[] coords = banditAgent.bestNewRobber();
-		int target = banditAgent.getTarget();
+		Integer target = banditAgent.getTarget();
 		String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
 		pO.respondMoveRobber(newRobber, target);
 
@@ -178,9 +178,10 @@ public class AdvancedAI extends PrimitiveAI {
 	public void decrementSingleResourceWeight(ResourceType resType, int change) {
 		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
 	}
-
+	
+	@Override
 	public ResourceAgent getResourceAgent() {
-		return null;
+		return this.resourceAgent;
 
 	}
 }

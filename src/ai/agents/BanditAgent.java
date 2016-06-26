@@ -15,8 +15,9 @@ import settings.DefaultSettings;
 public class BanditAgent {
 	private AdvancedAI aai;
 	double[][] robberscale = new double[7][7];
+	int[] bestRobberPosition;
 	private OpponentAgent oa;
-	ArrayList<Integer> differentPlayers;
+	private ArrayList<Integer> differentPlayers;
 	private Integer myTarget;
 
 	public BanditAgent(AdvancedAI aai, OpponentAgent oa) {
@@ -108,30 +109,41 @@ public class BanditAgent {
 
 			}
 		}
-		return new int[] { x - radius, y - radius };
+		bestRobberPosition = new int[] { x - radius, y - radius };
+		bestVictim(bestRobberPosition);
+		return bestRobberPosition;
 	}
 
 	// TODO communicate with opponent agent which opponent should be targeted
-	protected void bestVictim() {
-//		if(differentPlayers.size()==1){
-			setTarget(differentPlayers.get(0));
-//		}
-//		else
-//		for(int i=0; i<differentPlayers.size(); i++){
-			//send differentPlayers.get(i) to newRobber
-			//get their value
-			// choose highest value
-			// combine with bestNewRobber()
-			// and back to requestsetBandit in outputhandler
-//		}
+	protected void bestVictim(int[] coords) {
+		// if(differentPlayers.size()==1){
+		// FOR NOW
+		Corner[] c = aai.getGl().getBoard().getSurroundingCorners(coords[0], coords[1]);
+		for (int i = 0; i < c.length; i++) {
+			if (c[i].getOwnerID() != null) {
+				if (!differentPlayers.contains(c[i].getOwnerID())) {
+					differentPlayers.add(c[i].getOwnerID());
+				}
+			}
+		}
+		setTarget(differentPlayers.get(0));
+		// }
+		// else
+		// for(int i=0; i<differentPlayers.size(); i++){
+		// send differentPlayers.get(i) to newRobber
+		// get their value
+		// choose highest value
+		// combine with bestNewRobber()
+		// and back to requestsetBandit in outputhandler
+		// }
 	}
 
 	private void setTarget(Integer integer) {
 		myTarget = integer;
-		
+
 	}
-	
-	public Integer getTarget(){
+
+	public Integer getTarget() {
 		return myTarget;
 	}
 }

@@ -165,8 +165,8 @@ public class AIInputHandler extends ClientInputHandler {
 		if (building.getType().equals("Dorf")) {
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
 			if (playerID == ai.getID()) {
-				ai.getResourceAgent().add(ai.getGl().getBoard().getCornerAt(coords[0], coords[1], coords[2]));
 				ai.getMe().decreaseAmountVillages();
+				ai.getResourceAgent().add(ai.getGl().getBoard().getCornerAt(coords[0], coords[1], coords[2]));
 			}
 			ai.updateVillage(coords[0], coords[1], coords[2], playerID);
 
