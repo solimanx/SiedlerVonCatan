@@ -309,6 +309,7 @@ public class PrimitiveAI extends Thread {
 	 */
 	protected void loseToBandit() {
 		// Count all my resources
+		int[] myResources = getMe().getResources().clone();
 		int sum = 0;
 
 		for (int i = 0; i < 5; i++)
@@ -323,9 +324,9 @@ public class PrimitiveAI extends Thread {
 			// scan every resource
 			for (int j = 0; j < 5; j++) {
 				// if there's some of it
-				if (getMe().getResourceAmountOf(j) > 0) {
+				if (myResources[j] > 0) {
 					// decrement it from your list
-					getMe().decrementResourceAt(j);
+					myResources[j]-= 1;
 					// increment it to losses array
 					losses[j]++;
 					loss -= 1;
@@ -540,6 +541,11 @@ public class PrimitiveAI extends Thread {
 	}
 
 	public void actuate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateCards() {
 		// TODO Auto-generated method stub
 		
 	}

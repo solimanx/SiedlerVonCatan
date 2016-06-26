@@ -102,11 +102,43 @@ public class AdvancedAI extends PrimitiveAI {
 
 	@Override
 	public void actuate() {
-		// try to get longest road
 		resourceAgent.update();
-		if (getMe().getAmountCities() != 0) {
-			boolean cityBuilt = false;
-			while (resourceAgent.canBuildCity() && cityBuilt == false) {
+
+		// if i can get cards
+		if (resourceAgent.canBuyCard()) {
+			// i'll get them
+			pO.requestBuyCard();
+			resourceAgent.update();
+		}
+		// try getting largest army
+		if (!getMe().hasLargestArmy()) {
+			if (cardAgent.hasKnight()) {
+				banditAgent.moveRobber();
+				int[] coords = banditAgent.bestNewRobber();
+				Integer target = banditAgent.getTarget();
+				String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
+				pO.respondKnightCard(newRobber, target);
+
+			}
+		}
+
+		// try getting longest road
+		else if (!getMe().hasLongestRoad()) {
+			if (getMe().getAmountStreets() > 0) {
+				if (resourceAgent.canBuildRoad()) {
+					int[][][] bestUtilityRoad = new int[7][7][3];
+					for (int i = 0; i < resourceAgent.getMyEdges().size(); i++) {
+						// algorithm for finding best road, add +3 to coordinate
+						// and place in bestutilityRoad array
+					}
+					resourceAgent.update();
+				}
+			}
+
+		}
+
+		else if (getMe().getAmountCities() != 0) {
+			while (resourceAgent.canBuildCity()) {
 				for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
 					// if it's a village
 					if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
@@ -115,16 +147,13 @@ public class AdvancedAI extends PrimitiveAI {
 								.getCornerCoordinates(resourceAgent.getMyCorners().get(i).getCornerID());
 						pO.requestBuildCity(coords[0], coords[1], coords[2]);
 						resourceAgent.update();
-						cityBuilt = true;
 					}
 				}
 			}
-		}
-		else if(getMe().getAmountStreets() != 0){
-			
-		}
-		else if(getMe().getAmountVillages()!=0){
-			
+		} else if (getMe().getAmountStreets() != 0) {
+
+		} else if (getMe().getAmountVillages() != 0) {
+
 		}
 
 	}
@@ -215,5 +244,10 @@ public class AdvancedAI extends PrimitiveAI {
 	public ResourceAgent getResourceAgent() {
 		return this.resourceAgent;
 
+	}
+
+	@Override
+	public void updateCards() {
+		cardAgent.updateCards();
 	}
 }

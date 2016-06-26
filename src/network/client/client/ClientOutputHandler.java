@@ -441,8 +441,6 @@ public class ClientOutputHandler {
 
 	}
 
-
-
 	public void playKnightCard(int x, int y, Integer victimID) {
 		Index i = ProtocolToModel.getProtocolOneIndex(ModelToProtocol.getFieldID(x, y));
 		ProtocolPlayKnightCard pkc = new ProtocolPlayKnightCard(i, victimID);
@@ -451,14 +449,12 @@ public class ClientOutputHandler {
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {
-			logger.error("Threw an Input/Output Exception ", e);
-			logger.catching(Level.ERROR, e);
-			e.printStackTrace();
+			logger.trace(Level.ERROR, e);
 		}
 
 	}
 
-	public void sendCheat(String string){
+	public void sendCheat(String string) {
 		try {
 			client.write(string);
 		} catch (IOException e) {

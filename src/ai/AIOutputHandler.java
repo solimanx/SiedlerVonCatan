@@ -21,6 +21,7 @@ import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
+import protocol.dualinstructions.ProtocolPlayKnightCard;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
 
@@ -240,7 +241,7 @@ public class AIOutputHandler {
 	 */
 	public void respondMoveRobber(String newRobber, Integer target) {
 		Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
-		//todo fix
+		// todo fix
 		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, null);
 		Response r = new Response();
 
@@ -278,7 +279,21 @@ public class AIOutputHandler {
 		} catch (IOException e) {
 			logger.trace(Level.ERROR, e);
 		}
-		
+
+	}
+
+	public void respondKnightCard(String newRobber, Integer target) {
+		Index i = ProtocolToModel.getProtocolOneIndex(newRobber);
+		//TODO fix null opponent targeting
+		ProtocolPlayKnightCard pkc = new ProtocolPlayKnightCard(i, null);
+		Response r = new Response();
+		r.pPlayKnightCard = pkc;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.trace(Level.ERROR, e);
+		}
+
 	}
 
 }

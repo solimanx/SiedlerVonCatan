@@ -23,16 +23,16 @@ public class ProtocolPlayKnightCard {
 	private Index fieldID;
 
 	@SerializedName("Ziel")
-	private int victimID;
+	private Integer victimID;
 
 	// Client to Server
-	public ProtocolPlayKnightCard(Index fieldID, int target) {
+	public ProtocolPlayKnightCard(Index fieldID, Integer target) {
 		this.fieldID = fieldID;
 		this.victimID = target;
 	}
 
 	// Server to Client
-	public ProtocolPlayKnightCard(Integer playerID, Index fieldID, int victimID) {
+	public ProtocolPlayKnightCard(Integer playerID, Index fieldID, Integer victimID) {
 		this.playerID = playerID;
 		this.fieldID = fieldID;
 		this.victimID = victimID;
@@ -43,7 +43,7 @@ public class ProtocolPlayKnightCard {
 		return fieldID;
 	}
 
-	public int getVictimID() {
+	public Integer getVictimID() {
 		return victimID;
 	}
 

@@ -230,13 +230,11 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// if it's me
 		if (pID == ai.getID()) {
-			if(ai.getMe()!=null)
-			logger.debug(
-					"Wood: " + ai.getMe().getResourceAmountOf(0) 
-					+ ", CLay: " + ai.getMe().getResourceAmountOf(1)
-					+ ", ORE: "+ ai.getMe().getResourceAmountOf(2)
-					+ ", SHEEP: "+ ai.getMe().getResourceAmountOf(3)
-					+ ", CORN: "+ ai.getMe().getResourceAmountOf(4));
+			if (ai.getMe() != null)
+				logger.debug(
+						"Wood: " + ai.getMe().getResourceAmountOf(0) + ", CLay: " + ai.getMe().getResourceAmountOf(1)
+								+ ", ORE: " + ai.getMe().getResourceAmountOf(2) + ", SHEEP: "
+								+ ai.getMe().getResourceAmountOf(3) + ", CORN: " + ai.getMe().getResourceAmountOf(4));
 			switch (ps) {
 			// and i'm waiting for game to start
 			case WAITING_FOR_GAMESTART:
@@ -269,6 +267,7 @@ public class AIInputHandler extends ClientInputHandler {
 				// TODO change
 				ai.actuate();
 				ai.getOutput().respondEndTurn();
+				ai.updateCards();
 				break;
 			default:// do nothing
 
@@ -297,12 +296,12 @@ public class AIInputHandler extends ClientInputHandler {
 	protected void handle(ProtocolCosts costs) {
 		// Get ID and resources
 		int ID = costs.getPlayerID();
-		int[] gain;
+		int[] loss;
 
 		// if it's me
 		if (ID == ai.getID()) {
-			gain = ProtocolToModel.convertResources(costs.getResource());
-			ai.getMe().decrementResources(gain);
+			loss = ProtocolToModel.convertResources(costs.getResource());
+			ai.getMe().decrementResources(loss);
 		}
 		// if it isn't me
 		else {
@@ -336,14 +335,25 @@ public class AIInputHandler extends ClientInputHandler {
 	}
 
 	@Override
-	protected void handle(ProtocolLargestArmy biggestKnightProwess) {
+	protected void handle(ProtocolLargestArmy largestArmy) {
 		// TODO if self, nothing else redirect to ai -> opponent agent
-
+		if (largestArmy.getPlayerID() == ai.getID()) {
+			ai.getMe().setHasLargestArmy(true);
+		} else {
+			ai.getMe().setHasLargestArmy(false);
+			// TODO Mark opponent
+		}
 	}
 
 	@Override
 	protected void handle(ProtocolLongestRoad longestRoad) {
 		// TODO if self, nothing else redirect to ai -> opponent agent
+		if (longestRoad.getPlayerID() == ai.getID()) {
+			ai.getMe().setHasLongestRoad(true);
+		} else {
+			ai.getMe().setHasLongestRoad(false);
+			// TODO Mark opponent
+		}
 
 	}
 
@@ -393,6 +403,7 @@ public class AIInputHandler extends ClientInputHandler {
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new KnightCard());
 			ai.getMe().incrementPlayedKnightCards();
+			
 		}
 		// if it isn't me
 		else {
@@ -427,7 +438,6 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(ct));
-			;
 		}
 		// if it isn't me
 		else {
