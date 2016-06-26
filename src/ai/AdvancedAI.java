@@ -104,8 +104,23 @@ public class AdvancedAI extends PrimitiveAI {
 	public void actuate() {
 		resourceAgent.update();
 
+		if (getMe().getAmountCities() != 0) {
+			while (resourceAgent.canBuildCity()) {
+				for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
+					// if it's a village
+					if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
+						// upgrade it
+						int[] coords = ProtocolToModel
+								.getCornerCoordinates(resourceAgent.getMyCorners().get(i).getCornerID());
+						pO.requestBuildCity(coords[0], coords[1], coords[2]);
+						resourceAgent.update();
+					}
+				}
+			}
+		}
+
 		// if i can get cards
-		if (resourceAgent.canBuyCard()) {
+		else if (resourceAgent.canBuyCard()) {
 			// i'll get them
 			pO.requestBuyCard();
 			resourceAgent.update();
@@ -137,20 +152,7 @@ public class AdvancedAI extends PrimitiveAI {
 
 		}
 
-		else if (getMe().getAmountCities() != 0) {
-			while (resourceAgent.canBuildCity()) {
-				for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
-					// if it's a village
-					if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
-						// upgrade it
-						int[] coords = ProtocolToModel
-								.getCornerCoordinates(resourceAgent.getMyCorners().get(i).getCornerID());
-						pO.requestBuildCity(coords[0], coords[1], coords[2]);
-						resourceAgent.update();
-					}
-				}
-			}
-		} else if (getMe().getAmountStreets() != 0) {
+		else if (getMe().getAmountStreets() != 0) {
 
 		} else if (getMe().getAmountVillages() != 0) {
 

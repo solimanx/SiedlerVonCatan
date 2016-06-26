@@ -141,6 +141,7 @@ public class BanditAgent {
 
 	private void setTarget(Integer integer) {
 		myTarget = integer;
+		robberscale = new double [7][7];
 
 	}
 
