@@ -113,3 +113,5 @@
 	-fx-outer-border: #795548;
 	-fx-background-color: #5D4037;
 }
+
+.text, .text-field, .text-area  {-fx-fill: #fff; -fx-text-fill: #fff;}

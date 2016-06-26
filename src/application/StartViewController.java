@@ -1,6 +1,7 @@
 package application;
 
-import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,16 +11,12 @@ import ai.PrimitiveAI;
 import debugging.DebugClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import network.ModelToProtocol;
-import network.ProtocolToModel;
 import network.client.controller.ClientController;
 import network.server.controller.ServerController;
 
@@ -59,6 +56,9 @@ public class StartViewController {
 
 	@FXML
 	private TextField aiPort;
+	
+	@FXML
+	private Label serverIP;
 
 	private Stage primaryStage;
 
@@ -112,6 +112,14 @@ public class StartViewController {
 			});
 			serverThread.start();
 			stopServer.setDisable(false);
+			InetAddress IP;
+			try {
+				IP = InetAddress.getLocalHost();
+				serverIP.setText(IP.getHostAddress());
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case "AI":
 			primaryStage.hide();
