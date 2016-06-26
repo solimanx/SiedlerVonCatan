@@ -230,7 +230,13 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// if it's me
 		if (pID == ai.getID()) {
-
+			if(ai.getMe()!=null)
+			logger.debug(
+					"Wood: " + ai.getMe().getResourceAmountOf(0) 
+					+ ", CLay: " + ai.getMe().getResourceAmountOf(1)
+					+ ", ORE: "+ ai.getMe().getResourceAmountOf(2)
+					+ ", SHEEP: "+ ai.getMe().getResourceAmountOf(3)
+					+ ", CORN: "+ ai.getMe().getResourceAmountOf(4));
 			switch (ps) {
 			// and i'm waiting for game to start
 			case WAITING_FOR_GAMESTART:
@@ -289,7 +295,19 @@ public class AIInputHandler extends ClientInputHandler {
 
 	@Override
 	protected void handle(ProtocolCosts costs) {
-		// TODO redirect to ai - > resource agent / opponent agent
+		// Get ID and resources
+		int ID = costs.getPlayerID();
+		int[] gain;
+
+		// if it's me
+		if (ID == ai.getID()) {
+			gain = ProtocolToModel.convertResources(costs.getResource());
+			ai.getMe().decrementResources(gain);
+		}
+		// if it isn't me
+		else {
+			// TODO / opponent agent
+		}
 
 	}
 
@@ -420,8 +438,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 	@Override
 	protected void handle(ProtocolError error) {
-			ai.setColorCounter(ai.getColorCounter() + 1);
-			ai.getOutput().respondProfile(ai.getColorCounter());
+		ai.setColorCounter(ai.getColorCounter() + 1);
+		ai.getOutput().respondProfile(ai.getColorCounter());
 	}
 
 }

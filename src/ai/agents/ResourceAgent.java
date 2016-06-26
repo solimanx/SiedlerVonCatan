@@ -212,4 +212,12 @@ public class ResourceAgent {
 		return affords[3];
 	}
 
+	public ArrayList<Corner> getMyCorners() {
+		return myCorners;
+	}
+	
+	public ArrayList<Edge> getMyEdges(){
+		return myEdges;
+	}
+
 }

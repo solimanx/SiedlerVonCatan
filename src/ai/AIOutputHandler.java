@@ -240,7 +240,8 @@ public class AIOutputHandler {
 	 */
 	public void respondMoveRobber(String newRobber, Integer target) {
 		Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
-		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, target);
+		//todo fix
+		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, null);
 		Response r = new Response();
 
 		r.pRobberMoveRequest = prmr;
@@ -263,6 +264,21 @@ public class AIOutputHandler {
 
 		}
 
+	}
+
+	public void requestBuildCity(int x, int y, int dir) {
+		String locationString = ModelToProtocol.getCornerID(x, y, dir);
+		Index[] location = ModelToProtocol.convertCornerIndex(locationString);
+		ProtocolBuildRequest pbr = new ProtocolBuildRequest("Stadt", location);
+
+		Response r = new Response();
+		r.pBuildRequest = pbr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.trace(Level.ERROR, e);
+		}
+		
 	}
 
 }

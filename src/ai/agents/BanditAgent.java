@@ -118,6 +118,7 @@ public class BanditAgent {
 	protected void bestVictim(int[] coords) {
 		// if(differentPlayers.size()==1){
 		// FOR NOW
+		differentPlayers = new ArrayList<Integer>();
 		Corner[] c = aai.getGl().getBoard().getSurroundingCorners(coords[0], coords[1]);
 		for (int i = 0; i < c.length; i++) {
 			if (c[i].getOwnerID() != null) {

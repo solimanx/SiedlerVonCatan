@@ -11,9 +11,11 @@ import ai.agents.CornerAgent;
 import ai.agents.OpponentAgent;
 import ai.agents.ResourceAgent;
 import ai.agents.TradeAgent;
+import enums.CornerStatus;
 import enums.ResourceType;
 import model.objects.Field;
 import network.ModelToProtocol;
+import network.ProtocolToModel;
 import settings.DefaultSettings;
 
 /**
@@ -100,18 +102,33 @@ public class AdvancedAI extends PrimitiveAI {
 
 	@Override
 	public void actuate() {
-		//try to get longest road
+		// try to get longest road
 		resourceAgent.update();
-		if(resourceAgent.canBuyCard()){
-			pO.requestBuyCard();
-			resourceAgent.update();
+		if (getMe().getAmountCities() != 0) {
+			boolean cityBuilt = false;
+			while (resourceAgent.canBuildCity() && cityBuilt == false) {
+				for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
+					// if it's a village
+					if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
+						// upgrade it
+						int[] coords = ProtocolToModel
+								.getCornerCoordinates(resourceAgent.getMyCorners().get(i).getCornerID());
+						pO.requestBuildCity(coords[0], coords[1], coords[2]);
+						resourceAgent.update();
+						cityBuilt = true;
+					}
+				}
+			}
 		}
-		
-		if(resourceAgent.canBuyCard()){
-			pO.requestBuyCard();
+		else if(getMe().getAmountStreets() != 0){
+			
 		}
-		
+		else if(getMe().getAmountVillages()!=0){
+			
+		}
+
 	}
+
 	@Override
 	protected void moveRobber() {
 		banditAgent.moveRobber();
@@ -193,7 +210,7 @@ public class AdvancedAI extends PrimitiveAI {
 	public void decrementSingleResourceWeight(ResourceType resType, int change) {
 		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
 	}
-	
+
 	@Override
 	public ResourceAgent getResourceAgent() {
 		return this.resourceAgent;
