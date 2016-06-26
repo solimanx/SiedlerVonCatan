@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="768.0" minWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GameViewController">
+   <children>
+      <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="140.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label text="Player 1">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="27.0" prefWidth="140.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="53.0" text="Status: " />
+                  <Label fx:id="playerStatusOne" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="99.0" />
+               </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="125.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Wood">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="selfWood" editable="false" prefHeight="26.0" prefWidth="29.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Clay">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="selfClay" editable="false" prefHeight="26.0" prefWidth="29.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Wool">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="selfSheep" editable="false" prefHeight="26.0" prefWidth="29.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Corn">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="selfCorn" editable="false" prefHeight="26.0" prefWidth="29.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Ore">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="selfOre" editable="false" prefHeight="26.0" prefWidth="29.0" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="playerButtons" alignment="CENTER_RIGHT">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#handleRollDiceButton" text="Würfeln">
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="startTradingButton" mnemonicParsing="false" onAction="#handleStartTradingButton" text="Handeln">
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#handleEndTurnButton" text="Spielzug beenden">
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Pane fx:id="board" layoutX="300.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0" />
+      <VBox layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="140.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+         <children>
+            <Label text="Player 4">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="27.0" prefWidth="140.0">
+               <children>
+                  <Label text="Status: " />
+                  <Label fx:id="playerStatusFour" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="91.0" />
+               </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="125.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Cards">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="playerTwoCards" editable="false" prefHeight="26.0" prefWidth="29.0" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox layoutX="30.0" layoutY="390.0" prefHeight="200.0" prefWidth="140.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label text="Player 2">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="27.0" prefWidth="140.0">
+               <children>
+                  <Label text="Status: " />
+                  <Label fx:id="playerStatusTwo" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="91.0" />
+               </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="125.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Cards">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="playerThreeCards" editable="false" prefHeight="26.0" prefWidth="29.0" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox layoutX="675.0" layoutY="20.0" prefHeight="200.0" prefWidth="140.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <Label text="Player 3">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="27.0" prefWidth="140.0">
+               <children>
+                  <Label text="Status: " />
+                  <Label fx:id="playerStatusThree" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="91.0" />
+               </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="125.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Cards">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="playerFourCards" editable="false" prefHeight="26.0" prefWidth="29.0" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="63.0" layoutY="50.0" prefHeight="87.0" prefWidth="898.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <TextArea fx:id="messages" editable="false" prefHeight="200.0" prefWidth="300.0" />
+            <TextField fx:id="messageInput" maxWidth="-Infinity" onAction="#sendMessage" prefWidth="300.0" promptText="Enter Chat Message and press Enter" />
+         </children>
+      </VBox>
+      <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="43.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Würfel: " />
+                  <TextField editable="false" prefHeight="26.0" prefWidth="21.0" />
+                  <TextField editable="false" layoutX="62.0" layoutY="10.0" prefHeight="26.0" prefWidth="21.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button layoutX="144.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="91.0" text="Video Tutorial" />
+      <Button layoutX="235.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="71.0" text="Quick Info" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</AnchorPane>
