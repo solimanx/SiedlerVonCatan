@@ -37,7 +37,7 @@ public class ViewController {
 
 	private Stage choosingStage;
 	private boolean isGameView = false;
-	private boolean isChoosingStage = false;
+	public boolean isChoosingStage = false;
 	private TradeViewController tradeViewController;
 
 	/**
@@ -84,6 +84,7 @@ public class ViewController {
 		primaryStage.setTitle("Settlers of Catan : Lobby");
 		primaryStage.setResizable(false);
 		primaryStage.setOnCloseRequest(e -> System.exit(0));
+		isChoosingStage = true;
 		// primaryStage.initStyle(StageStyle.UTILITY);
 		//
 		primaryStage.show();

@@ -28,7 +28,7 @@ public class PlayerModel {
 	private PlayerState playerState;
 	private int playerID;
 	private Color color;
-	private String name;
+	private String name = "";
 	private int playedKnightCards;
 	private boolean hasPlayedDevCard = false;
 	private ArrayList<DevelopmentCard> devCardsBoughtInThisRound = new ArrayList<DevelopmentCard>();
