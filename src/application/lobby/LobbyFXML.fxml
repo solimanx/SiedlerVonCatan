@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="678.0" prefWidth="833.0" styleClass="background" stylesheets="/network/client/view/application.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lobby.LobbyController">
+<AnchorPane prefHeight="678.0" prefWidth="833.0" styleClass="background" stylesheets="/network/client/view/application.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lobby.LobbyController">
    <children>
       <HBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefHeight="248.0" prefWidth="793.0" spacing="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
          <children>
@@ -58,16 +58,6 @@
                      </VBox.margin>
                   </Button>
                   <HBox prefHeight="35.0" prefWidth="300.0" />
-                  <VBox alignment="TOP_RIGHT">
-                     <children>
-                        <Label alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="258.0" text="Press Start to choose name and color:" />
-                        <Button fx:id="startButton" disable="true" mnemonicParsing="false" onAction="#startGame" text="Start">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
                </children>
             </VBox>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="357.0" spacing="10.0">

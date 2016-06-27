@@ -45,9 +45,6 @@ public class LobbyController {
 	private TextArea messages;
 
 	@FXML
-	private Button startButton;
-
-	@FXML
 	private Button startGameButton;
 
 	@FXML
@@ -131,19 +128,7 @@ public class LobbyController {
 		String server = serverComboBox.getValue();
 		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getClientController().connectToServer(server, port);
-	}
-
-	@FXML
-	public void startGame() {
-		// try {
 		colorNameSelectPane.setDisable(false);
-		
-		// viewController.startChooseView();
-		// } catch (IOException e) {
-		// logger.catching(Level.ERROR, e);
-		// e.printStackTrace();
-		// }
-
 	}
 
 	@FXML
@@ -160,7 +145,6 @@ public class LobbyController {
 	public void enableChat() {
 		messages.appendText(currentTime() + "Connected to lobby chat.\n");
 		chatInput.setDisable(false);
-		startButton.setDisable(false);
 	}
 
 	public void disconnect() {

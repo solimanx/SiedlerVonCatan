@@ -242,6 +242,7 @@ public class TradeViewController {
 		viewController.getClientController().requestTrade(resultOffer, resultDemand);
 		resultDemand = new int[5];
 		resultOffer = new int[5];
+		tradeButton.setDisable(true);
 
 	}
 
@@ -283,6 +284,7 @@ public class TradeViewController {
 	@FXML
 	void fullFillTrade(ActionEvent event) {
 		viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToModelID.get(selectedOffer));
+		tradeButton.setDisable(false);
 	}
 
 	/**
@@ -301,6 +303,7 @@ public class TradeViewController {
 	 * @param tradeID
 	 */
 	public void offerFulfilled(int threadID, int partnerModelID) {
+		ownOffer.clear();
 		if (threadID == viewController.getClientController().getOwnPlayerID()) {
 			Platform.runLater(new Runnable() {
 
@@ -311,7 +314,7 @@ public class TradeViewController {
 			});
 		}
 		try {
-			tradeList.remove(playerIDtoString.get(threadID));
+			tradeList.remove(playerIDtoString.get(partnerModelID));
 		} catch (Exception e) {
 			viewController.getGameViewController().alert("Couldn't delete trade!");
 		}

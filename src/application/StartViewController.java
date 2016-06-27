@@ -119,6 +119,7 @@ public class StartViewController {
 			startClient.setDisable(true);
 			startAI.setDisable(true);
 			startButton.setDisable(true);
+			serverPort.setDisable(true);
 			InetAddress IP;
 			try {
 				IP = InetAddress.getLocalHost();
