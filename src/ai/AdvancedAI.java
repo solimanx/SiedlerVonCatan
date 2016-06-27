@@ -13,6 +13,7 @@ import ai.agents.ResourceAgent;
 import ai.agents.TradeAgent;
 import enums.CornerStatus;
 import enums.ResourceType;
+import model.HexService;
 import model.objects.Edge;
 import model.objects.Field;
 import network.ModelToProtocol;
@@ -141,7 +142,13 @@ public class AdvancedAI extends PrimitiveAI {
 		else if (!getMe().hasLongestRoad()) {
 			if (getMe().getAmountStreets() > 0) {
 				if (resourceAgent.canBuildRoad()) {
-					int radius = DefaultSettings.BOARD_RADIUS;
+					Edge bestEdge = resourceAgent.getBestStreet();
+					String id = bestEdge.getEdgeID();
+					int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
+					pO.requestBuildRoad(coords[0], coords[1], coords[2]);
+					resourceAgent.update();
+				}
+				/*	int radius = DefaultSettings.BOARD_RADIUS;
 					int[][][] bestUtilityRoad = new int[7][7][3];
 					for (int i = 0; i < resourceAgent.getMyEdges().size(); i++) {
 						// my road
@@ -193,7 +200,7 @@ public class AdvancedAI extends PrimitiveAI {
 					}
 					pO.requestBuildRoad(x, y, z);
 					resourceAgent.update();
-				}
+				} */
 				// }
 			}
 		}
