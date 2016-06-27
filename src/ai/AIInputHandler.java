@@ -175,6 +175,7 @@ public class AIInputHandler extends ClientInputHandler {
 			if (playerID == ai.getID()) {
 				ai.getMe().decreaseAmountStreets();
 				ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
+				ai.getResourceAgent().addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
 			}
 
 			ai.updateRoad(coords[0], coords[1], coords[2], playerID);
