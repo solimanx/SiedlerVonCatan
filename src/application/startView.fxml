@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="background" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StartViewController">
+<VBox styleClass="background" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" stylesheets="/network/client/view/application.css" fx:controller="application.StartViewController">
    <children>
       <Label text="Start game as ...">
          <VBox.margin>
@@ -42,7 +42,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="20.0">
                      <children>
-                        <TextField fx:id="serverPort" disable="true" prefHeight="27.0" prefWidth="146.0" promptText="Port" />
+                        <TextField fx:id="serverPort" disable="true" prefHeight="27.0" prefWidth="146.0" promptText="Port (default 8080)" />
                         <Button fx:id="stopServer" disable="true" mnemonicParsing="false" onAction="#handleStopServer" prefHeight="27.0" prefWidth="59.0" text="Stop" />
                      </children>
                   </HBox>

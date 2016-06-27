@@ -44,7 +44,7 @@ public class StartViewController {
 
 	@FXML
 	private Button startButton;
-	
+
 	@FXML
 	private Button stopServer;
 
@@ -56,7 +56,7 @@ public class StartViewController {
 
 	@FXML
 	private TextField aiPort;
-	
+
 	@FXML
 	private Label serverIP;
 
@@ -89,10 +89,14 @@ public class StartViewController {
 		aiServer.setDisable(true);
 
 	}
-	
+
 	@FXML
 	void handleStopServer(ActionEvent event){
 		serverThread.interrupt();
+		stopServer.setDisable(true);
+		startClient.setDisable(false);
+		startAI.setDisable(false);
+		startButton.setDisable(false);
 	}
 
 	@FXML
@@ -107,15 +111,18 @@ public class StartViewController {
 			serverThread = new Thread( new Runnable() {
 			    @Override
 			    public void run() {
-			    	gc = new ServerController(port);			    	
+			    	gc = new ServerController(port);
 			    }
 			});
 			serverThread.start();
 			stopServer.setDisable(false);
+			startClient.setDisable(true);
+			startAI.setDisable(true);
+			startButton.setDisable(true);
 			InetAddress IP;
 			try {
 				IP = InetAddress.getLocalHost();
-				serverIP.setText(IP.getHostAddress());
+				serverIP.setText(IP.getHostAddress() + ":" + port);
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
