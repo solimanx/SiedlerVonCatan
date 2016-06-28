@@ -530,7 +530,7 @@ public class ServerController {
 				if (i == modelID) {
 					serverOutputHandler.costs(threadID, resources, threadID);
 				} else {
-					serverOutputHandler.costs(threadID, unknown, modelPlayerIdMap.get(modelID));
+					serverOutputHandler.costs(threadID, unknown, modelPlayerIdMap.get(i));
 				}
 			}
 		}
@@ -548,7 +548,7 @@ public class ServerController {
 			if (i == modelID) {
 				serverOutputHandler.resourceObtain(threadID, resources, threadID);
 			} else {
-				serverOutputHandler.resourceObtain(threadID, unknown, modelPlayerIdMap.get(modelID));
+				serverOutputHandler.resourceObtain(threadID, unknown, modelPlayerIdMap.get(i));
 			}
 		}
 		}
@@ -1152,13 +1152,14 @@ public class ServerController {
 				if (robberLossCounter == 0) {
 					if (modelID != currentPlayer) {
 						gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
+						statusUpdate(modelID);
 					}
 					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.MOVE_ROBBER);
 					statusUpdate(currentPlayer);
 				} else {
 					gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
+					statusUpdate(modelID);
 				}
-				statusUpdate(modelID);
 			} else {
 				error(modelID, "You haven't specified enough resources");
 			}
