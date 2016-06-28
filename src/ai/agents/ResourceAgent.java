@@ -405,7 +405,7 @@ public class ResourceAgent {
 				for (int j = 0; j < longestStreets.size(); j++) {
 					// füge alle besten endständigen Edges hinzu
 					if (longestStreets.get(j) == gV) {
-						bestEdges.get(i).add(currStreetSet.getEdgeAt(j));
+						bestEdges.get(i).add(currEndingStreets.get(j));
 					}
 				}
 				currEndingStreets.clear();
