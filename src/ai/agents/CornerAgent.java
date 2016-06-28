@@ -32,7 +32,7 @@ public class CornerAgent {
 	// Corners around it
 	private Corner[] c = new Corner[3];
 	// utility of edges surrounding the corner
-	private int[] edgeUtility = { 0, 0, 0 };
+	private int[] edgeUtility = { Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE };
 	// total utility of corner
 	private int netUtility;
 	// difference level of field resources
