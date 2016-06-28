@@ -121,7 +121,7 @@ public class AdvancedAI extends PrimitiveAI {
 		}
 
 		// if i can get cards
-		else if (resourceAgent.canBuyCard()) {
+		if (resourceAgent.canBuyCard()) {
 			// i'll get them
 			pO.requestBuyCard();
 			resourceAgent.update();
@@ -139,7 +139,7 @@ public class AdvancedAI extends PrimitiveAI {
 		}
 
 		// try getting longest road
-		else if (!getMe().hasLongestRoad()) {
+		if (!getMe().hasLongestRoad()) {
 			if (getMe().getAmountStreets() > 0) {
 				if (resourceAgent.canBuildRoad()) {
 					Edge bestEdge = resourceAgent.getBestStreet();
