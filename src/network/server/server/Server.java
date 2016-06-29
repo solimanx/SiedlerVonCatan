@@ -98,6 +98,7 @@ public class Server {
 	}
 
 	public void broadcast(String s) throws IOException {
+		logger.info("Broadcast: " + s);
 		for (ClientThread clientThread : getClients()) {
 			if (clientThread != null) {
 				clientThread.writer.write(s + "\n");
@@ -108,6 +109,7 @@ public class Server {
 
 	public void sendToClient(String s, int threadID) throws IOException {
 		ClientThread thread = getClients()[threadID];
+		logger.info("Send to Client: " + threadID+ " " + s);
 		thread.writer.write(s + "\n");
 		thread.writer.flush();
 	}

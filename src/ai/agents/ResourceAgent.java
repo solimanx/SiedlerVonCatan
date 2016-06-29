@@ -198,6 +198,7 @@ public class ResourceAgent {
 	}
 
 	public void update() {
+		initializeResources();
 		affords = getPossibleBuildings();
 
 	}
@@ -278,11 +279,11 @@ public class ResourceAgent {
 			boolean oneHostileEdge = false;
 			for (int j = 0; j < currNeighbours.length; j++) {
 				// is not already in street set
-				if (currNeighbours[i] != null) {
+				if (currNeighbours[j] != null) {
 					if (!streetSet.getEdges().contains(currNeighbours[j])) {
 						// has street?
-						if (currNeighbours[i].isHasStreet()) {
-							if (currNeighbours[i].getOwnerID() == aai.getID()) {
+						if (currNeighbours[j].isHasStreet()) {
+							if (currNeighbours[j].getOwnerID() == aai.getID()) {
 								// own player; can connect two streets
 								edgeWeighting[i] += 100;
 							} else {
@@ -299,7 +300,8 @@ public class ResourceAgent {
 						}
 					}
 				}
-				//TODO: Schaue auf unmittelbare Corner Nachbarn und gewichte nach angrenzenden fields
+				// TODO: Schaue auf unmittelbare Corner Nachbarn und gewichte
+				// nach angrenzenden fields
 
 			}
 		}
@@ -322,15 +324,16 @@ public class ResourceAgent {
 	 *         <Edge> best street suggestions
 	 */
 	public ArrayList<Object> getPossibleLTRExtensions() {
-		ArrayList<Integer> longestStreets = new ArrayList<Integer>();
-		longestStreets.add(0);
-		ArrayList<Edge> currEndingStreets = new ArrayList<Edge>();
-		StreetSet currStreetSet = null;
-		ArrayList<ArrayList<Edge>> bestEdges = new ArrayList<ArrayList<Edge>>();
+		ArrayList<ArrayList<Edge>> bestNeighbours = new ArrayList<ArrayList<Edge>>();
+		
 		int[] maxIndex = { 0, 0 };
 		for (int i = 0; i < myStreetSets.size(); i++) {
-
-			bestEdges.add(new ArrayList<Edge>());
+			ArrayList<Integer> longestStreets = new ArrayList<Integer>();
+			ArrayList<Edge> currEndingStreets = new ArrayList<Edge>();
+			ArrayList<Edge> bestEdges = new ArrayList<Edge>();
+			bestNeighbours.add(new ArrayList<Edge>());
+			StreetSet currStreetSet = null;
+			
 			currStreetSet = myStreetSets.get(i);
 			// berechne zuerst alle endständigen Straßen dieses Street Sets
 			for (int j = 0; j < currStreetSet.size(); j++) {
@@ -390,7 +393,7 @@ public class ResourceAgent {
 					// Straße das Strassenset
 					// länger machen wird; aber dieser Fall ist sehr selten...
 					if (greatestValue.get(j) == gV) {
-						bestEdges.get(i).add(currStreetSet.getEdgeAt(j));
+						bestEdges.add(currStreetSet.getEdgeAt(j));
 					}
 				}
 
@@ -405,22 +408,22 @@ public class ResourceAgent {
 				for (int j = 0; j < longestStreets.size(); j++) {
 					// füge alle besten endständigen Edges hinzu
 					if (longestStreets.get(j) == gV) {
-						bestEdges.get(i).add(currEndingStreets.get(j));
+						bestEdges.add(currEndingStreets.get(j));
 					}
 				}
 				currEndingStreets.clear();
 			}
 			// berechne gültige Nachbarn für die besten Edges
-			ArrayList<Edge> bestNeighbours = new ArrayList<Edge>();
+			
 			Edge[] currEdges;
 			int[] currCoords;
-			for (int j = 0; j < bestNeighbours.size(); j++) {
-				String id = currStreetSet.getEdgeAt(j).getEdgeID();
+			for (int j = 0; j < bestEdges.size(); j++) {
+				String id = bestEdges.get(j).getEdgeID();
 				currCoords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
 				currEdges = aai.getGl().getBoard().getLinkedEdges(currCoords[0], currCoords[1], currCoords[2]);
 				for (int k = 0; k < currEdges.length; k++) {
-					if (!(currStreetSet.getEdges().contains(currEdges[k]) || currEdges[k].getOwnerID() != null)) {
-						bestNeighbours.add(currEdges[k]);
+					if (currEdges[k] != null && ! currStreetSet.getEdges().contains(currEdges[k]) && currEdges[k].getOwnerID() == null) {
+						bestNeighbours.get(i).add(currEdges[k]);
 					}
 				}
 			}
@@ -434,7 +437,7 @@ public class ResourceAgent {
 		}
 		ArrayList<Object> result = new ArrayList<Object>();
 		result.add(myStreetSets.get(maxIndex[0]));
-		result.addAll(bestEdges.get(maxIndex[0]));
+		result.add(bestNeighbours.get(maxIndex[0]));
 
 		return result;
 	}

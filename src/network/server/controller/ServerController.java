@@ -61,7 +61,7 @@ public class ServerController {
 	private ServerInputHandler serverInputHandler;
 	private int InitialStreetCounter;
 	// private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
-	private int currentPlayer;
+	private Integer currentPlayer;
 	private int robberLossCounter;
 	private TradeController tradeController;
 	private int[] playerOrder;
@@ -213,6 +213,9 @@ public class ServerController {
 	 * @param currentThreadID
 	 */
 	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
+		if (currentPlayer != null){
+			error(modelPlayerIdMap.get(currentThreadID),"Spiel bereits gestratet");
+		}
 
 		boolean colorAvailable = true;
 		Color currColor;
@@ -444,8 +447,6 @@ public class ServerController {
 
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 			if (result[0] + result[1] == 7) {
-				pM.setPlayerState(PlayerState.WAITING);
-				statusUpdate(modelID);
 				PlayerModel currPM;
 				for (int i = 0; i < amountPlayers; i++) {
 					currPM = gameLogic.getBoard().getPlayer(i);
@@ -459,6 +460,11 @@ public class ServerController {
 												// losses
 					pM.setPlayerState(PlayerState.MOVE_ROBBER);
 					statusUpdate(modelID);
+				} else {
+					if (pM.getPlayerState() != PlayerState.DISPENSE_CARDS_ROBBER_LOSS) {
+						pM.setPlayerState(PlayerState.WAITING);
+						statusUpdate(modelID);
+					}
 				}
 
 			} else {
@@ -510,7 +516,7 @@ public class ServerController {
 					// evtl. auch in initial village?
 
 					serverOutputHandler.buildVillage(x, y, dir, threadID);
-					costsToAll(modelID, DefaultSettings.VILLAGE_BUILD_COST,true);
+					costsToAll(modelID, DefaultSettings.VILLAGE_BUILD_COST, true);
 					statusUpdate(modelID);
 				}
 			}
@@ -538,19 +544,19 @@ public class ServerController {
 
 	protected void obtainToAll(int modelID, int[] resources, boolean visible) {
 		int threadID = modelPlayerIdMap.get(modelID);
-		if (visible){			
+		if (visible) {
 			for (int i = 0; i < amountPlayers; i++) {
 				serverOutputHandler.resourceObtain(threadID, resources, modelPlayerIdMap.get(i));
 			}
 		} else {
-		int[] unknown = { resources[0] + resources[1] + resources[2] + resources[3] + resources[4] };
-		for (int i = 0; i < amountPlayers; i++) {
-			if (i == modelID) {
-				serverOutputHandler.resourceObtain(threadID, resources, threadID);
-			} else {
-				serverOutputHandler.resourceObtain(threadID, unknown, modelPlayerIdMap.get(i));
+			int[] unknown = { resources[0] + resources[1] + resources[2] + resources[3] + resources[4] };
+			for (int i = 0; i < amountPlayers; i++) {
+				if (i == modelID) {
+					serverOutputHandler.resourceObtain(threadID, resources, threadID);
+				} else {
+					serverOutputHandler.resourceObtain(threadID, unknown, modelPlayerIdMap.get(i));
+				}
 			}
-		}
 		}
 	}
 
@@ -629,7 +635,7 @@ public class ServerController {
 					subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.STREET_BUILD_COST);
 					serverOutputHandler.buildStreet(x, y, dir, threadID);
-					costsToAll(modelID, DefaultSettings.STREET_BUILD_COST,true);
+					costsToAll(modelID, DefaultSettings.STREET_BUILD_COST, true);
 					statusUpdate(modelID);
 
 				} else {
@@ -969,7 +975,7 @@ public class ServerController {
 				increaseVictoryPoints(modelID);
 
 				serverOutputHandler.buildCity(x, y, dir, threadID);
-				costsToAll(modelID, DefaultSettings.CITY_BUILD_COST,true);
+				costsToAll(modelID, DefaultSettings.CITY_BUILD_COST, true);
 				statusUpdate(modelID);
 			}
 		}
@@ -1092,9 +1098,9 @@ public class ServerController {
 				serverOutputHandler.buildVillage(x, y, dir, threadID);
 				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.BUILDING_STREET);
 				statusUpdate(modelID);
-				
-				//for check if next street is adjacent to exactly this corner	
-				gameLogic.setInitialLastVillage(c); 
+
+				// for check if next street is adjacent to exactly this corner
+				gameLogic.setInitialLastVillage(c);
 			}
 		}
 	}
@@ -1106,23 +1112,27 @@ public class ServerController {
 	 */
 	public void endTurn(int playerID) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-		pM.setPlayerState(PlayerState.WAITING);
-		ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
-		if (currDevCards != null) {
-			for (int i = 0; i < currDevCards.size(); i++) {
-				// erst jetzt kann spieler über development card verfügen
-				pM.incrementPlayerDevCard(currDevCards.get(i));
+		if (modelID != currentPlayer) {
+			error(modelID, "Unzulässige Aktion");
+		} else {
+			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+			pM.setPlayerState(PlayerState.WAITING);
+			ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
+			if (currDevCards != null) {
+				for (int i = 0; i < currDevCards.size(); i++) {
+					// erst jetzt kann spieler über development card verfügen
+					pM.incrementPlayerDevCard(currDevCards.get(i));
+				}
+				pM.getDevCardsBoughtInThisRound().clear();
 			}
-			pM.getDevCardsBoughtInThisRound().clear();
-		}
-		// runde zu ende, nächste runde darf dev card gespielt werden
-		pM.setHasPlayedDevCard(false);
-		statusUpdate(modelID);
+			// runde zu ende, nächste runde darf dev card gespielt werden
+			pM.setHasPlayedDevCard(false);
+			statusUpdate(modelID);
 
-		currentPlayer = getNextPlayer(modelID); // next players turn
-		gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
-		statusUpdate(currentPlayer);
+			currentPlayer = getNextPlayer(modelID); // next players turn
+			gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
+			statusUpdate(currentPlayer);
+		}
 
 	}
 
@@ -1148,7 +1158,7 @@ public class ServerController {
 				robberLossCounter--;
 				subFromPlayersResources(modelID, resources);
 				resourceStackIncrease(resources);
-				costsToAll(modelID,playerRes,false);
+				costsToAll(modelID, playerRes, false);
 				if (robberLossCounter == 0) {
 					if (modelID != currentPlayer) {
 						gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
@@ -1164,7 +1174,7 @@ public class ServerController {
 				error(modelID, "You haven't specified enough resources");
 			}
 		} else {
-			error(modelID, "You haven't the specified resources");
+			error(modelID, "You dont have the specified resources");
 		}
 
 	}
@@ -1200,10 +1210,12 @@ public class ServerController {
 					int[] costs = { 0, 0, 0, 0, 0 };
 					costs[stealResource] = 1;
 					subFromPlayersResources(victimModelID, costs);
-					costsToAll(victimModelID,costs,false); //evtl. auch modelID benachrichtigt?
+					costsToAll(victimModelID, costs, false); // evtl. auch
+																// modelID
+																// benachrichtigt?
 
 					addToPlayersResource(modelID, costs);
-					obtainToAll(modelID, costs,false);
+					obtainToAll(modelID, costs, false);
 				}
 			}
 			String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
@@ -1298,10 +1310,10 @@ public class ServerController {
 						int[] costs = { 0, 0, 0, 0, 0 };
 						costs[stealResource] = 1;
 						subFromPlayersResources(victimModelID, costs);
-						costsToAll(victimModelID,costs,false);
+						costsToAll(victimModelID, costs, false);
 
 						addToPlayersResource(modelID, costs);
-						obtainToAll(modelID,costs,false);
+						obtainToAll(modelID, costs, false);
 					}
 				}
 				String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
@@ -1368,12 +1380,12 @@ public class ServerController {
 					obtain[resIndex] = obtain[resIndex] + currPRes;
 					currLoss[resIndex] = currPRes;
 					subFromPlayersResources(i, currLoss);
-					costsToAll(i,currLoss,true);
+					costsToAll(i, currLoss, true);
 				}
 				currLoss[resIndex] = 0; // reset for next player
 			}
 			addToPlayersResource(modelID, obtain);
-			obtainToAll(modelID,obtain,true);
+			obtainToAll(modelID, obtain, true);
 			gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
 		}
 	}
@@ -1401,7 +1413,7 @@ public class ServerController {
 				resourceStackIncrease(obtain);
 			} else {
 				addToPlayersResource(modelID, obtain);
-				obtainToAll(modelID,obtain,false);
+				obtainToAll(modelID, obtain, false);
 			}
 			gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
 		}
@@ -1547,7 +1559,7 @@ public class ServerController {
 		}
 		for (int i = 0; i < amountPlayers; i++) {
 			addToPlayersResource(i, playersObtain[i]);
-			obtainToAll(i,playersObtain[i],true);
+			obtainToAll(i, playersObtain[i], true);
 		}
 		statusUpdateForAllPlayers();
 	}
@@ -1605,7 +1617,7 @@ public class ServerController {
 			}
 		}
 		addToPlayersResource(modelID, playersObtain);
-		obtainToAll(modelID,playersObtain,true);
+		obtainToAll(modelID, playersObtain, true);
 		statusUpdate(modelID);
 
 	}

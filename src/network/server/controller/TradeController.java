@@ -62,20 +62,11 @@ public class TradeController {
 							serverController.addToPlayersResource(modelID, demand);
 							serverController.addToPlayersResource(partnerModelID, offer);
 							
-							int threadID = serverController.modelPlayerIdMap.get(modelID);
-							int partnerThreadID = serverController.modelPlayerIdMap.get(partnerModelID);
-							
 							serverController.costsToAll(modelID, offer, true);
 							serverController.costsToAll(partnerModelID, demand, true);
 							
 							serverController.obtainToAll(modelID, demand, true);
 							serverController.obtainToAll(partnerModelID, offer, true);
-							
-							/*serverController.getServerOutputHandler().costs(threadID, offer, threadID);
-							serverController.getServerOutputHandler().costs(partnerThreadID, demand, partnerThreadID);
-							
-							serverController.getServerOutputHandler().resourceObtain(threadID, demand);
-							serverController.getServerOutputHandler().resourceObtain(partnerThreadID, offer);*/
 
 							tradeOffers.remove(i);
 
@@ -102,7 +93,6 @@ public class TradeController {
 			if (currOf.getTradingID() == tradingID) {
 				if (currOf.getOwnerID() == modelID) {
 					tradeOffers.remove(i);
-					serverController.tradeCancelled(modelID, tradingID);
 				} else {
 					for (int j = 0; j < currOf.acceptingPlayers.size(); j++) {
 						if (currOf.acceptingPlayers.get(j) == modelID) {
