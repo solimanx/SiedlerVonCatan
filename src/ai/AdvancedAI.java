@@ -106,7 +106,7 @@ public class AdvancedAI extends PrimitiveAI {
 		resourceAgent.update();
 
 		if (getMe().getAmountCities() != 0) {
-			while (resourceAgent.canBuildCity()) {
+			if (resourceAgent.canBuildCity()) { //TODO: fix while
 				for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
 					// if it's a village
 					if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
@@ -286,7 +286,9 @@ public class AdvancedAI extends PrimitiveAI {
 	}
 
 	public void decrementSingleResourceWeight(ResourceType resType, int change) {
-		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
+		if (resType != ResourceType.SEA){
+			initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
+		}		
 	}
 
 	@Override
