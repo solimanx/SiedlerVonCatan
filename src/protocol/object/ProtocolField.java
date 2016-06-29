@@ -5,6 +5,7 @@ import com.google.gson.annotations.Since;
 
 import model.Index;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Felder (Fields)</b>
  * <p>
@@ -25,20 +26,42 @@ public class ProtocolField {
 	@SerializedName("Zahl")
 	private Integer diceIndex;
 
+	/**
+	 * Instantiates a new protocol field.
+	 *
+	 * @param fieldID the field ID
+	 * @param fieldType the field type
+	 * @param diceIndex the dice index
+	 */
 	public ProtocolField(Index fieldID, String fieldType, Integer diceIndex) {
 		this.fieldID = fieldID;
 		this.fieldType = fieldType;
 		this.diceIndex = diceIndex;
 	}
 
+	/**
+	 * Gets the field ID.
+	 *
+	 * @return the field ID
+	 */
 	public Index getFieldID() {
 		return fieldID;
 	}
 
+	/**
+	 * Gets the field type.
+	 *
+	 * @return the field type
+	 */
 	public String getFieldType() {
 		return fieldType;
 	}
 
+	/**
+	 * Gets the dice index.
+	 *
+	 * @return the dice index
+	 */
 	public Integer getDiceIndex() {
 		return diceIndex;
 	}

@@ -3,6 +3,7 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Rohstoffe (Resources)</b>
  * <p>
@@ -32,6 +33,16 @@ public class ProtocolResource {
 	@SerializedName("Unbekannt")
 	private Integer unknown;
 
+	/**
+	 * Instantiates a new protocol resource.
+	 *
+	 * @param wood the wood
+	 * @param clay the clay
+	 * @param wool the wool
+	 * @param corn the corn
+	 * @param ore the ore
+	 * @param unknown the unknown
+	 */
 	public ProtocolResource(Integer wood, Integer clay, Integer wool, Integer corn, Integer ore, Integer unknown) {
 		this.wood = wood;
 		this.clay = clay;
@@ -41,26 +52,56 @@ public class ProtocolResource {
 		this.unknown = unknown;
 	}
 
+	/**
+	 * Gets the wood.
+	 *
+	 * @return the wood
+	 */
 	public Integer getWood() {
 		return wood;
 	}
 
+	/**
+	 * Gets the clay.
+	 *
+	 * @return the clay
+	 */
 	public Integer getClay() {
 		return clay;
 	}
 
+	/**
+	 * Gets the wool.
+	 *
+	 * @return the wool
+	 */
 	public Integer getWool() {
 		return wool;
 	}
 
+	/**
+	 * Gets the corn.
+	 *
+	 * @return the corn
+	 */
 	public Integer getCorn() {
 		return corn;
 	}
 
+	/**
+	 * Gets the ore.
+	 *
+	 * @return the ore
+	 */
 	public Integer getOre() {
 		return ore;
 	}
 
+	/**
+	 * Gets the unknown.
+	 *
+	 * @return the unknown
+	 */
 	public Integer getUnknown() {
 		return unknown;
 	}

@@ -16,16 +16,23 @@ import model.objects.DevCards.DevelopmentCard;
 import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
 
+// TODO: Auto-generated Javadoc
 public final class ModelToProtocol {
 
 	private static Logger logger = LogManager.getLogger(PlayerModel.class.getSimpleName());
 
 	public static HashMap<ResourceType, String> resourceToString = new HashMap<ResourceType, String>();
 
+	/**
+	 * Inits the model to protocol.
+	 */
 	public static void initModelToProtocol() {
 		fillHashMap();
 	}
 
+	/**
+	 * Fill hash map.
+	 */
 	public static void fillHashMap() {
 		resourceToString.put(ResourceType.SHEEP, "Weideland");
 		resourceToString.put(ResourceType.WOOD, "Wald");
@@ -36,12 +43,24 @@ public final class ModelToProtocol {
 		resourceToString.put(ResourceType.NOTHING, "Wüste");
 	}
 
+	/**
+	 * Gets the player id.
+	 *
+	 * @param threadID the thread ID
+	 * @return the player id
+	 */
 	@Deprecated
 	public static int getPlayerId(int threadID) {
 		// refer to ServerNetworkController
 		return 0;
 	}
 
+	/**
+	 * Gets the resources.
+	 *
+	 * @param resources the resources
+	 * @return the resources
+	 */
 	// TODO what ?
 	public static ProtocolResource getResources(int[] resources) {
 		// TODO
@@ -78,6 +97,14 @@ public final class ModelToProtocol {
 		return pr;
 	}
 
+	/**
+	 * Gets the corner ID.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
+	 * @return the corner ID
+	 */
 	public static String getCornerID(int x, int y, int dir) {
 		String result = "";
 		switch (dir) {
@@ -96,6 +123,14 @@ public final class ModelToProtocol {
 		}
 	}
 
+	/**
+	 * Gets the edge ID.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
+	 * @return the edge ID
+	 */
 	public static String getEdgeID(int x, int y, int dir) {
 		String result = "";
 		switch (dir) {
@@ -116,16 +151,23 @@ public final class ModelToProtocol {
 		}
 	}
 
+	/**
+	 * Gets the field ID.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the field ID
+	 */
 	public static String getFieldID(int x, int y) {
 		Index index = new Index(x, y);
 		return Board.getCoordToStringMap().get(index);
 	}
 
 	/**
-	 * CONVERTS NON UNKNOWN RESOURCE ARRAYS TO PROTOCOLRESOURCE
+	 * CONVERTS NON UNKNOWN RESOURCE ARRAYS TO PROTOCOLRESOURCE.
 	 *
-	 * @param resources
-	 * @return
+	 * @param resources the resources
+	 * @return the protocol resource
 	 */
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
 	public static ProtocolResource convertToProtocolResource(int[] resources) {
@@ -138,6 +180,12 @@ public final class ModelToProtocol {
 		return (new ProtocolResource(wood, clay, wool, corn, ore, null));
 	}
 
+	/**
+	 * Dev card to card type.
+	 *
+	 * @param devCard the dev card
+	 * @return the card type
+	 */
 	public static CardType devCardToCardType(DevelopmentCard devCard) {
 		switch (devCard.getName()) {
 		case "Knight Card":
@@ -156,6 +204,12 @@ public final class ModelToProtocol {
 		}
 	}
 
+	/**
+	 * Convert to edge index.
+	 *
+	 * @param locationString the location string
+	 * @return the index[]
+	 */
 	public static Index[] convertToEdgeIndex(String locationString) {
 		if (locationString.length() == 2) {
 			String field1 = locationString.substring(0, 1);
@@ -169,6 +223,12 @@ public final class ModelToProtocol {
 		}
 	}
 
+	/**
+	 * Convert corner index.
+	 *
+	 * @param locationString the location string
+	 * @return the index[]
+	 */
 	public static Index[] convertCornerIndex(String locationString) {
 		if (locationString.length() == 3) {
 			String field1 = locationString.substring(0, 1);
@@ -184,6 +244,12 @@ public final class ModelToProtocol {
 		}
 	}
 
+	/**
+	 * Gets the field index.
+	 *
+	 * @param field the field
+	 * @return the field index
+	 */
 	public static Index getFieldIndex(String field) {
 		return ProtocolToModel.getProtocolOneIndex(field);
 	}

@@ -48,17 +48,28 @@ import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
+// TODO: Auto-generated Javadoc
 public class ServerInputHandler {
 	private static Logger logger = LogManager.getLogger(ServerInputHandler.class.getSimpleName());
 	protected Parser parser;
 	private ServerController serverController;
 	private int currentThreadID;
 
+	/**
+	 * Instantiates a new server input handler.
+	 *
+	 * @param serverController the server controller
+	 */
 	public ServerInputHandler(ServerController serverController) {
 		parser = new Parser();
 		this.serverController = serverController;
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param o the o
+	 */
 	protected void handle(Object o) {
 		switch (o.getClass().getSimpleName()) {
 		case "ProtocolHello":
@@ -185,15 +196,21 @@ public class ServerInputHandler {
 
 	}
 
+	/**
+	 * Gets the game controller.
+	 *
+	 * @return the game controller
+	 */
 	public ServerController getGameController() {
 		return serverController;
 	}
 
 	/**
 	 * sends JSON formatted string to parser and initiates handling of parsed
-	 * object
+	 * object.
 	 *
-	 * @param s
+	 * @param s the s
+	 * @param threadID the thread ID
 	 */
 	public void sendToParser(String s, int threadID) {
 		// speichert die threadID, falls sie in handle(Protocol...) gebraucht
@@ -204,26 +221,51 @@ public class ServerInputHandler {
 		handle(object);
 	}
 
+	/**
+	 * Hello.
+	 *
+	 * @param threadID the thread ID
+	 */
 	protected void hello(int threadID) {
 		serverController.hello(threadID);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param hello the hello
+	 */
 	protected void handle(ProtocolHello hello) {
 		logger.debug("SERVER: Hello gelesen!");
 		serverController.receiveHello(currentThreadID);
 
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param chatSendMessage the chat send message
+	 */
 	protected void handle(ProtocolChatSendMessage chatSendMessage) {
 		String s = chatSendMessage.getMessage();
 		serverController.chatSendMessage(s, currentThreadID);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param clientReady the client ready
+	 */
 	protected void handle(ProtocolClientReady clientReady) {
 		serverController.clientReady(currentThreadID);
 
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param playerProfile the player profile
+	 */
 	protected void handle(ProtocolPlayerProfile playerProfile) {
 		String name = playerProfile.getName();
 		Color color = playerProfile.getColor();
@@ -231,16 +273,31 @@ public class ServerInputHandler {
 
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param diceRollRequest the dice roll request
+	 */
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
 		serverController.diceRollRequest(currentThreadID);
 
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param robberLoss the robber loss
+	 */
 	protected void handle(ProtocolRobberLoss robberLoss) {
 		ProtocolResource prl = robberLoss.getLosses();
 		serverController.robberLoss(currentThreadID, ProtocolToModel.convertResources(prl));
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param robberMovementRequest the robber movement request
+	 */
 	protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
 		String location_id = ProtocolToModel.getProtocolOneID(robberMovementRequest.getLocationID());
 		int[] coords = ProtocolToModel.getFieldCoordinates(location_id);
@@ -249,10 +306,20 @@ public class ServerInputHandler {
 
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param endTurn the end turn
+	 */
 	protected void handle(ProtocolEndTurn endTurn) {
 		serverController.endTurn(currentThreadID);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param buildRequest the build request
+	 */
 	protected void handle(ProtocolBuildRequest buildRequest) {
 		if (buildRequest.getBuildingType().equals("Straße")) {
 			int[] loc = ProtocolToModel.getEdgeCoordinates(buildRequest.getLocationID());
@@ -268,10 +335,20 @@ public class ServerInputHandler {
 		}
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param buyDevelopmentCards the buy development cards
+	 */
 	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
 		serverController.requestBuyDevCard(currentThreadID);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param harbourRequest the harbour request
+	 */
 	protected void handle(ProtocolHarbourRequest harbourRequest) {
 		ProtocolResource rOf = harbourRequest.getOffer();
 		ProtocolResource rDe = harbourRequest.getWithdrawal();
@@ -280,6 +357,11 @@ public class ServerInputHandler {
 		serverController.requestSeaTrade(currentThreadID, offer, demand);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param tradeRequest the trade request
+	 */
 	protected void handle(ProtocolTradeRequest tradeRequest) {
 		ProtocolResource offer = tradeRequest.getOffer();
 		ProtocolResource demand = tradeRequest.getDemand();
@@ -287,33 +369,63 @@ public class ServerInputHandler {
 				ProtocolToModel.convertResources(demand));
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param tradeAccept the trade accept
+	 */
 	protected void handle(ProtocolTradeAccept tradeAccept) {
 		int tradeID = tradeAccept.getTradeID();
 		boolean acceptFlag = tradeAccept.getAccepted();
 		serverController.acceptTrade(currentThreadID, tradeID, acceptFlag);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param tradeComplete the trade complete
+	 */
 	protected void handle(ProtocolTradeComplete tradeComplete) {
 		int tradeID = tradeComplete.getTradeID();
 		int tradePartnerID = tradeComplete.getTradePartnerID();
 		serverController.fulfillTrade(currentThreadID, tradeID, tradePartnerID);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param tradeCancel the trade cancel
+	 */
 	protected void handle(ProtocolTradeCancel tradeCancel) {
 		int tradeID = tradeCancel.getTradeID();
 		serverController.cancelTrade(currentThreadID, tradeID);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param playInventionCard the play invention card
+	 */
 	protected void handle(ProtocolPlayInventionCard playInventionCard) {
 		int[] resources = ProtocolToModel.convertResources(playInventionCard.getResource());
 		serverController.playInventionCard(currentThreadID, resources);
 
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param monopolyCard the monopoly card
+	 */
 	protected void handle(ProtocolPlayMonopolyCard monopolyCard) {
 		serverController.playMonopolyCard(currentThreadID, monopolyCard.getResourceType());
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param knightCard the knight card
+	 */
 	protected void handle(ProtocolPlayKnightCard knightCard) {
 		String fieldID = ProtocolToModel.getProtocolOneID(knightCard.getLocationID());
 		int coords[] = ProtocolToModel.getFieldCoordinates(fieldID);
@@ -321,6 +433,11 @@ public class ServerInputHandler {
 
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param roadBuildingCard the road building card
+	 */
 	protected void handle(ProtocolPlayRoadCard roadBuildingCard) {
 		int coords1[] = ProtocolToModel.getEdgeCoordinates(roadBuildingCard.getRoadID1());
 		int coords2[] = ProtocolToModel.getEdgeCoordinates(roadBuildingCard.getRoadID2());
@@ -328,6 +445,11 @@ public class ServerInputHandler {
 
 	}
 
+	/**
+	 * Gets the server controller.
+	 *
+	 * @return the server controller
+	 */
 	public ServerController getServerController() {
 
 		return this.serverController;

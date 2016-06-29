@@ -25,12 +25,16 @@ import network.ProtocolToModel;
 import network.client.controller.ClientController;
 import network.server.controller.ServerController;
 
+// TODO: Auto-generated Javadoc
 public class Main extends Application {
 
 	StartViewController startViewCtrl;
 
 	private int mode = 0;
 
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#init()
+	 */
 	@Override
 	public void init() throws Exception {
 
@@ -49,6 +53,9 @@ public class Main extends Application {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 
@@ -96,6 +103,11 @@ public class Main extends Application {
 
 	
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
 		launch(args);

@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import network.client.view.GameViewController;
 
+// TODO: Auto-generated Javadoc
 public class RobberViewController implements Initializable {
 
 	@FXML
@@ -45,14 +46,27 @@ public class RobberViewController implements Initializable {
 
 	private GameViewController gvc;
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	}
 
+	/**
+	 * Inits the.
+	 *
+	 * @param gvc the gvc
+	 */
 	public void init(GameViewController gvc) {
 		this.gvc = gvc;
 	}
 
+	/**
+	 * Handle OK button.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleOKButton(ActionEvent event) {
 		gvc.robberLoss(result);
@@ -60,6 +74,11 @@ public class RobberViewController implements Initializable {
 		stage.close();
 	}
 
+	/**
+	 * Creates the spinner.
+	 *
+	 * @param resources the resources
+	 */
 	public void createSpinner(int[] resources) {
 
 		woodSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[0], 0));

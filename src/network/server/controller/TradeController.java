@@ -6,16 +6,30 @@ import enums.HarbourStatus;
 import enums.ResourceType;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 public class TradeController {
 
 	private ServerController serverController;
 	private int tradeCounter = 0;
 	private ArrayList<TradeOffer> tradeOffers = new ArrayList<TradeOffer>();
 
+	/**
+	 * Instantiates a new trade controller.
+	 *
+	 * @param serverController the server controller
+	 * @param amountPlayers the amount players
+	 */
 	public TradeController(ServerController serverController, int amountPlayers) {
 		this.serverController = serverController;
 	}
 
+	/**
+	 * Client offers trade.
+	 *
+	 * @param modelID the model ID
+	 * @param supply the supply
+	 * @param demand the demand
+	 */
 	public void clientOffersTrade(int modelID, int[] supply, int[] demand) {
 		TradeOffer offer = new TradeOffer(modelID, tradeCounter, supply, demand);
 		tradeOffers.add(offer);
@@ -23,6 +37,13 @@ public class TradeController {
 		tradeCounter++;
 	}
 
+	/**
+	 * Accept trade.
+	 *
+	 * @param modelID the model ID
+	 * @param tradingID the trading ID
+	 * @param accept the accept
+	 */
 	public void acceptTrade(int modelID, int tradingID, boolean accept) {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID) {
@@ -38,6 +59,13 @@ public class TradeController {
 	}
 
 
+	/**
+	 * Fulfill trade.
+	 *
+	 * @param modelID the model ID
+	 * @param tradingID the trading ID
+	 * @param partnerModelID the partner model ID
+	 */
 	public void fulfillTrade(int modelID, int tradingID, int partnerModelID) {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			TradeOffer tOf = tradeOffers.get(i);
@@ -86,6 +114,12 @@ public class TradeController {
 
 	}
 
+	/**
+	 * Cancel trade.
+	 *
+	 * @param modelID the model ID
+	 * @param tradingID the trading ID
+	 */
 	public void cancelTrade(int modelID, int tradingID) {
 		TradeOffer currOf;
 		for (int i = 0; i < tradeOffers.size(); i++) {
@@ -110,6 +144,13 @@ public class TradeController {
 	}
 	
 
+	/**
+	 * Request sea trade.
+	 *
+	 * @param modelID the model ID
+	 * @param offer the offer
+	 * @param demand the demand
+	 */
 	public void requestSeaTrade(int modelID, int[] offer, int[] demand) {
 		ResourceType offerResType = null;
 		ResourceType demandResType = null;
@@ -186,6 +227,12 @@ public class TradeController {
 		}
 	}
 
+	/**
+	 * Gets the player harbours.
+	 *
+	 * @param modelID the model ID
+	 * @return the player harbours
+	 */
 	private ArrayList<HarbourStatus> getPlayerHarbours(int modelID) {
 		return serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerHarbours();
 	}

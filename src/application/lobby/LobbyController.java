@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import network.client.controller.ViewController;
 
+// TODO: Auto-generated Javadoc
 public class LobbyController {
 
 	private ViewController viewController;
@@ -84,6 +85,9 @@ public class LobbyController {
 
 	private static Logger logger = LogManager.getLogger(LobbyController.class.getSimpleName());
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	public void initialize() {
 		playerName.setPromptText("Name in Game (required)");
@@ -103,6 +107,9 @@ public class LobbyController {
 		addPorts();
 	}
 
+	/**
+	 * Adds the servers.
+	 */
 	// Debug only
 	private void addServers() {
 		serverComboBox.getItems().add("localhost");
@@ -113,6 +120,9 @@ public class LobbyController {
 
 	}
 
+	/**
+	 * Adds the ports.
+	 */
 	// Debug only
 	private void addPorts() {
 		portComboBox.getItems().add("8080");
@@ -123,6 +133,9 @@ public class LobbyController {
 		portComboBox.setValue(portComboBox.getItems().get(0));
 	}
 
+	/**
+	 * Handle connect button.
+	 */
 	@FXML
 	public void handleConnectButton() {
 		String server = serverComboBox.getValue();
@@ -131,6 +144,9 @@ public class LobbyController {
 		colorNameSelectPane.setDisable(false);
 	}
 
+	/**
+	 * Send chat message.
+	 */
 	@FXML
 	public void sendChatMessage() {
 		String message = chatInput.getText();
@@ -138,28 +154,54 @@ public class LobbyController {
 		viewController.getClientController().sendChatMessage(message);
 	}
 
+	/**
+	 * Receive chat message.
+	 *
+	 * @param string the string
+	 */
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
 	}
 
+	/**
+	 * Enable chat.
+	 */
 	public void enableChat() {
 		messages.appendText(currentTime() + "Connected to lobby chat.\n");
 		chatInput.setDisable(false);
 	}
 
+	/**
+	 * Disconnect.
+	 */
 	public void disconnect() {
 		messages.appendText(currentTime() + "Disconnected.\n");
 		chatInput.setDisable(true);
 	}
 
+	/**
+	 * Current time.
+	 *
+	 * @return the string
+	 */
 	private String currentTime() {
 		return "[" + LocalTime.now().format(dateFormat) + "] ";
 	}
 
+	/**
+	 * Sets the view controller.
+	 *
+	 * @param viewController the new view controller
+	 */
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
 
+	/**
+	 * Sets the server color answer.
+	 *
+	 * @param server_response the new server color answer
+	 */
 	public void setServerColorAnswer(String server_response) {
 		Platform.runLater(new Runnable(){
 
@@ -171,6 +213,9 @@ public class LobbyController {
 		});
 	}
 
+	/**
+	 * Handle send button.
+	 */
 	@FXML
 	private void handleSendButton() {
 		Color chosenColor = playerColor.getValue();
@@ -189,6 +234,9 @@ public class LobbyController {
 		}
 	}
 
+	/**
+	 * Handle ready button.
+	 */
 	@FXML
 	private void handleReadyButton() {
 		viewController.getClientController().sendReady();
@@ -198,6 +246,14 @@ public class LobbyController {
 	// // TODO deletePlayer Method!
 	// }
 
+	/**
+	 * Update player.
+	 *
+	 * @param threadID the thread ID
+	 * @param name the name
+	 * @param color the color
+	 * @param status the status
+	 */
 	public void updatePlayer(int threadID, String name, Color color, PlayerState status) {
 		Boolean playerFound = false;
 		for (TablePlayer playersEntry : players) {

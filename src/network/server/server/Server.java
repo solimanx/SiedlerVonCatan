@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 public class Server {
 	private static Logger logger = LogManager.getLogger(Server.class.getSimpleName());
 	// HashMap PlayerID => Thread
@@ -26,11 +27,22 @@ public class Server {
 	private ServerOutputHandler serverOutputHandler;
 	private int serverPort;
 
+	/**
+	 * Instantiates a new server.
+	 *
+	 * @param inputHandler the input handler
+	 * @param serverPort the server port
+	 */
 	public Server(ServerInputHandler inputHandler, int serverPort) {
 		this.serverInputHandler = inputHandler;
 		this.serverPort = serverPort;
 	}
 
+	/**
+	 * Start.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void start() throws IOException {
 
 		ServerSocket serverSocket = new ServerSocket(serverPort, 150);
@@ -53,6 +65,14 @@ public class Server {
 		public ServerInputHandler inputHandler;
 		public ServerOutputHandler outputHandler;
 
+		/**
+		 * Instantiates a new client thread.
+		 *
+		 * @param socket the socket
+		 * @param inputHandler the input handler
+		 * @param outputHandler the output handler
+		 * @param threadID the thread ID
+		 */
 		public ClientThread(Socket socket, ServerInputHandler inputHandler, ServerOutputHandler outputHandler,
 				int threadID) {
 			this.socket = socket;
@@ -62,6 +82,9 @@ public class Server {
 
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		@Override
 		public void run() {
 
@@ -89,6 +112,13 @@ public class Server {
 		}
 	}
 
+	/**
+	 * Start handler.
+	 *
+	 * @param socket the socket
+	 * @param inputHandler the input handler
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
 		ClientThread thread = new ClientThread(socket, inputHandler, serverOutputHandler, clientCounter);
 		thread.start();
@@ -97,6 +127,12 @@ public class Server {
 		logger.debug("The Next Client gets Number " + clientCounter);
 	}
 
+	/**
+	 * Broadcast.
+	 *
+	 * @param s the s
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void broadcast(String s) throws IOException {
 		logger.info("Broadcast: " + s);
 		for (ClientThread clientThread : getClients()) {
@@ -107,6 +143,13 @@ public class Server {
 		}
 	}
 
+	/**
+	 * Send to client.
+	 *
+	 * @param s the s
+	 * @param threadID the thread ID
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void sendToClient(String s, int threadID) throws IOException {
 		ClientThread thread = getClients()[threadID];
 		logger.info("Send to Client: " + threadID+ " " + s);
@@ -114,6 +157,9 @@ public class Server {
 		thread.writer.flush();
 	}
 
+	/**
+	 * Close socket.
+	 */
 	public void closeSocket() {
 		for (ClientThread clientThread : getClients()) {
 			try {
@@ -127,18 +173,38 @@ public class Server {
 
 	}
 
+	/**
+	 * Gets the server input handler.
+	 *
+	 * @return the server input handler
+	 */
 	public ServerInputHandler getServerInputHandler() {
 		return serverInputHandler;
 	}
 
+	/**
+	 * Gets the clients.
+	 *
+	 * @return the clients
+	 */
 	public ClientThread[] getClients() {
 		return clients;
 	}
 
+	/**
+	 * Sets the clients.
+	 *
+	 * @param clients the new clients
+	 */
 	public void setClients(ClientThread[] clients) {
 		this.clients = clients;
 	}
 
+	/**
+	 * Gets the client counter.
+	 *
+	 * @return the client counter
+	 */
 	public int getClientCounter() {
 		return clientCounter;
 	}

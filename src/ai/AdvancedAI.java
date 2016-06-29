@@ -20,6 +20,7 @@ import network.ModelToProtocol;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 /**
  * Communication between other agents and input/output from/to server. The brain
  * behind the AI.
@@ -44,11 +45,20 @@ public class AdvancedAI extends PrimitiveAI {
 
 	int initialRoundCounter = 0;
 
+	/**
+	 * Instantiates a new advanced AI.
+	 *
+	 * @param serverHost the server host
+	 * @param port the port
+	 */
 	public AdvancedAI(String serverHost, int port) {
 		super(serverHost, port);
 		initializeDiceRollProbabilities();
 	}
 
+	/* (non-Javadoc)
+	 * @see ai.PrimitiveAI#initialVillage()
+	 */
 	@Override
 	public void initialVillage() {
 		if (initialRoundCounter == 1) {
@@ -89,6 +99,9 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see ai.PrimitiveAI#initialRoad()
+	 */
 	@Override
 	public void initialRoad() {
 		setResourceWeighting(new int[] { 0, 0, 0, 0, 0 });
@@ -101,6 +114,9 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see ai.PrimitiveAI#actuate()
+	 */
 	@Override
 	public void actuate() {
 		resourceAgent.update();
@@ -207,6 +223,9 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see ai.PrimitiveAI#moveRobber()
+	 */
 	@Override
 	protected void moveRobber() {
 		banditAgent.moveRobber();
@@ -217,6 +236,11 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
+	/**
+	 * Subtract resources.
+	 *
+	 * @param cornerAgent the corner agent
+	 */
 	private void subtractResources(CornerAgent cornerAgent) {
 		Field[] fields = cornerAgent.getFields();
 		for (int i = 0; i < fields.length; i++) {
@@ -227,6 +251,9 @@ public class AdvancedAI extends PrimitiveAI {
 		}
 	}
 
+	/**
+	 * Initialize dice roll probabilities.
+	 */
 	private void initializeDiceRollProbabilities() {
 		diceRollProbabilities = new HashMap<Integer, Double>();
 		diceRollProbabilities.put(2, Double.parseDouble(rb.getString("probability_two")));
@@ -243,10 +270,21 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
+	/**
+	 * Gets the dice roll probabilities.
+	 *
+	 * @return the dice roll probabilities
+	 */
 	public Map<Integer, Double> getDiceRollProbabilities() {
 		return diceRollProbabilities;
 	}
 
+	/**
+	 * Gets the corner agent by ID.
+	 *
+	 * @param id the id
+	 * @return the corner agent by ID
+	 */
 	public CornerAgent getCornerAgentByID(String id) {
 		if (id.length() != 3) {
 			throw new IllegalArgumentException("id unequal 3");
@@ -265,38 +303,78 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
+	/**
+	 * Gets the resource weighting.
+	 *
+	 * @return the resource weighting
+	 */
 	public int[] getResourceWeighting() {
 		return initialResourceWeight;
 	}
 
+	/**
+	 * Sets the resource weighting.
+	 *
+	 * @param weighting the new resource weighting
+	 */
 	public void setResourceWeighting(int[] weighting) {
 
 	}
 
+	/**
+	 * Sets the single resource weight.
+	 *
+	 * @param resType the res type
+	 * @param weight the weight
+	 */
 	public void setSingleResourceWeight(ResourceType resType, int weight) {
 		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] = weight;
 	}
 
+	/**
+	 * Gets the single resource weight.
+	 *
+	 * @param resType the res type
+	 * @return the single resource weight
+	 */
 	public int getSingleResourceWeight(ResourceType resType) {
 		return initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)];
 	}
 
+	/**
+	 * Increment single resource weight.
+	 *
+	 * @param resType the res type
+	 * @param change the change
+	 */
 	public void incrementSingleResourceWeight(ResourceType resType, int change) {
 		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] += change;
 	}
 
+	/**
+	 * Decrement single resource weight.
+	 *
+	 * @param resType the res type
+	 * @param change the change
+	 */
 	public void decrementSingleResourceWeight(ResourceType resType, int change) {
 		if (resType != ResourceType.SEA){
 			initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
 		}		
 	}
 
+	/* (non-Javadoc)
+	 * @see ai.PrimitiveAI#getResourceAgent()
+	 */
 	@Override
 	public ResourceAgent getResourceAgent() {
 		return this.resourceAgent;
 
 	}
 
+	/* (non-Javadoc)
+	 * @see ai.PrimitiveAI#updateCards()
+	 */
 	@Override
 	public void updateCards() {
 		cardAgent.updateCards();

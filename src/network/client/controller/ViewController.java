@@ -18,6 +18,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
 public class ViewController {
 	private static Logger logger = LogManager.getLogger(ViewController.class.getSimpleName());
 	private FXMLLoader loader;
@@ -29,7 +30,9 @@ public class ViewController {
 	private Stage primaryStage;
 
 	/**
-	 * @return
+	 * Gets the primary stage.
+	 *
+	 * @return the primary stage
 	 */
 	public Stage getPrimaryStage() {
 		return primaryStage;
@@ -41,8 +44,10 @@ public class ViewController {
 	private TradeViewController tradeViewController;
 
 	/**
-	 * @param primaryStage
-	 * @param fc
+	 * Instantiates a new view controller.
+	 *
+	 * @param primaryStage the primary stage
+	 * @param fc the fc
 	 */
 	public ViewController(Stage primaryStage, ClientController fc) {
 		this.primaryStage = primaryStage;
@@ -61,10 +66,10 @@ public class ViewController {
 	}
 
 	/**
-	 * Starts the lobby view, which provides connecting to server and chat
+	 * Starts the lobby view, which provides connecting to server and chat.
 	 *
-	 * @param primaryStage
-	 * @throws IOException
+	 * @param primaryStage the primary stage
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	/**
 	 * @param primaryStage
@@ -92,9 +97,7 @@ public class ViewController {
 
 	/**
 	 * starts the View for choosing Player name and Player Color view also
-	 * offers Button for setting Player ready for game to start
-	 *
-	 * @throws IOException
+	 * offers Button for setting Player ready for game to start.
 	 */
 	/**
 	 * @throws IOException
@@ -164,7 +167,7 @@ public class ViewController {
 	// }
 
 	/**
-	 *
+	 * Inits the.
 	 */
 	private void init() {
 
@@ -189,49 +192,63 @@ public class ViewController {
 	}
 
 	/**
-	 * @return
+	 * Gets the client controller.
+	 *
+	 * @return the client controller
 	 */
 	public ClientController getClientController() {
 		return clientController;
 	}
 
 	/**
-	 * @return
+	 * Gets the game view controller.
+	 *
+	 * @return the game view controller
 	 */
 	public GameViewController getGameViewController() {
 		return gameViewController;
 	}
 
 	/**
-	 * @return
+	 * Gets the lobby controller.
+	 *
+	 * @return the lobby controller
 	 */
 	public LobbyController getLobbyController() {
 		return lobbyController;
 	}
 
 	/**
-	 * @param clientController
+	 * Sets the flow controller.
+	 *
+	 * @param clientController the new flow controller
 	 */
 	public void setFlowController(ClientController clientController) {
 		this.clientController = clientController;
 	}
 
 	/**
-	 * @param gameViewController
+	 * Sets the main view controller.
+	 *
+	 * @param gameViewController the new main view controller
 	 */
 	public void setMainViewController(GameViewController gameViewController) {
 		this.gameViewController = gameViewController;
 	}
 
 	/**
-	 * @param lobbyController
+	 * Sets the lobby controller.
+	 *
+	 * @param lobbyController the new lobby controller
 	 */
 	public void setLobbyController(LobbyController lobbyController) {
 		this.lobbyController = lobbyController;
 	}
 
 	/**
-	 * @param s
+	 * Message receive.
+	 *
+	 * @param s the s
 	 */
 	public void messageReceive(String s) {
 		if (isGameView) {
@@ -242,7 +259,7 @@ public class ViewController {
 	}
 
 	/**
-	 *
+	 * New trade view.
 	 */
 	public void newTradeView() {
 		try {
@@ -269,7 +286,14 @@ public class ViewController {
 //
 //	}
 
-	private Runnable createSResponseProfileRunnable(final String paramStr, final LobbyController lobbyController) {
+	/**
+ * Creates the S response profile runnable.
+ *
+ * @param paramStr the param str
+ * @param lobbyController the lobby controller
+ * @return the runnable
+ */
+private Runnable createSResponseProfileRunnable(final String paramStr, final LobbyController lobbyController) {
 		Runnable aRunnable = new Runnable() {
 			public void run() {
 				lobbyController.setServerColorAnswer(paramStr);
@@ -278,6 +302,13 @@ public class ViewController {
 		return aRunnable;
 	}
 
+	/**
+	 * Creates the S response runnable.
+	 *
+	 * @param paramStr the param str
+	 * @param c the c
+	 * @return the runnable
+	 */
 	private Runnable createSResponseRunnable(final String paramStr, final GameViewController c) {
 		Runnable aRunnable = new Runnable() {
 			public void run() {
@@ -287,6 +318,11 @@ public class ViewController {
 		return aRunnable;
 	}
 
+	/**
+	 * Sets the server response.
+	 *
+	 * @param server_response the new server response
+	 */
 	public void setServerResponse(String server_response) {
 		if (isGameView) {
 			Platform.runLater(createSResponseRunnable(server_response, gameViewController));

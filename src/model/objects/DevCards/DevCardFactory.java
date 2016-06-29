@@ -2,6 +2,7 @@ package model.objects.DevCards;
 
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 public class DevCardFactory {
 
 	int knightCards = DefaultSettings.AMOUNT_KNIGHT_CARDS;
@@ -10,6 +11,12 @@ public class DevCardFactory {
 	int buildStreetCards = DefaultSettings.AMOUNT_STREETBUILDING_CARDS;
 	int inventionCards = DefaultSettings.AMOUNT_INVENTION_CARDS;
 
+	/**
+	 * Creates a new DevCard object.
+	 *
+	 * @param name the name
+	 * @return the development card
+	 */
 	public DevelopmentCard createDevelopmentCard(String name) {
 		switch (name) {
 		case "knightCard":
@@ -32,6 +39,12 @@ public class DevCardFactory {
 		}
 	}
 
+	/**
+	 * Decrement argument.
+	 *
+	 * @param a the a
+	 * @return the int
+	 */
 	public int decrementArgument(int a) {
 		if (a > 0) {
 			return --a;

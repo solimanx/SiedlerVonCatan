@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package ai;
 
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ import protocol.object.ProtocolHarbour;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * Handling all input for the AI
  */
@@ -41,12 +45,20 @@ public class AIInputHandler extends ClientInputHandler {
 	private static Logger logger = LogManager.getLogger(AIInputHandler.class.getSimpleName());
 	private Parser parser = new Parser();
 
+	/**
+	 * Instantiates a new AI input handler.
+	 *
+	 * @param primitiveAI the primitive AI
+	 */
 	protected AIInputHandler(PrimitiveAI primitiveAI) {
 		super(null);
 		ai = primitiveAI;
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#sendToParser(java.lang.String)
+	 */
 	public void sendToParser(String line) {
 		Object object = parser.parseString(line);
 		handle(object);
@@ -54,7 +66,9 @@ public class AIInputHandler extends ClientInputHandler {
 	}
 
 	/**
-	 * What to do after receiving hello from server
+	 * What to do after receiving hello from server.
+	 *
+	 * @param hello the hello
 	 */
 	@Override
 	protected void handle(ProtocolHello hello) {
@@ -71,6 +85,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * Initializing ID after receiving welcome from server. Attempt to create a
 	 * profile.
+	 *
+	 * @param welcome the welcome
 	 */
 	@Override
 	protected void handle(ProtocolWelcome welcome) {
@@ -81,6 +97,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/**
 	 * Update board in the AI, after receiving the board json.
+	 *
+	 * @param gameStarted the game started
 	 */
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
@@ -132,6 +150,9 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.messaging.ProtocolChatReceiveMessage)
+	 */
 	@Override
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		// Chatbot?
@@ -139,7 +160,9 @@ public class AIInputHandler extends ClientInputHandler {
 	}
 
 	/**
-	 * After receiving a {"Serverantwort":} JSON
+	 * After receiving a {"Serverantwort":} JSON.
+	 *
+	 * @param serverResponse the server response
 	 */
 	protected void handle(ProtocolServerResponse serverResponse) {
 		// if game hasn't started, start it
@@ -155,7 +178,9 @@ public class AIInputHandler extends ClientInputHandler {
 	}
 
 	/**
-	 * After receiving a {"Bauvorgang":} JSON
+	 * After receiving a {"Bauvorgang":} JSON.
+	 *
+	 * @param build the build
 	 */
 	protected void handle(ProtocolBuild build) {
 		ProtocolBuilding building = build.getBuilding();
@@ -194,6 +219,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/**
 	 * After receiving a {"Würfelwurf":...} JSON
+	 *
+	 * @param diceRollResult the dice roll result
 	 */
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
 		// Nothing useful can be done with this information.
@@ -201,6 +228,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/**
 	 * After receiving a {"Ertrag": ...} JSON
+	 *
+	 * @param resourceObtain the resource obtain
 	 */
 	protected void handle(ProtocolResourceObtain resourceObtain) {
 		// Get ID and resources
@@ -221,6 +250,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/**
 	 * After receiving a {"Statusupdate": ...} JSON
+	 *
+	 * @param statusUpdate the status update
 	 */
 	@Override
 	protected void handle(ProtocolStatusUpdate statusUpdate) {
@@ -279,7 +310,9 @@ public class AIInputHandler extends ClientInputHandler {
 	}
 
 	/**
-	 * After receiving a {Räuber versetzt} JSON
+	 * After receiving a {Räuber versetzt} JSON.
+	 *
+	 * @param robberMovement the robber movement
 	 */
 	@Override
 	protected void handle(ProtocolRobberMovement robberMovement) {
@@ -287,12 +320,18 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.configuration.ProtocolVictory)
+	 */
 	@Override
 	protected void handle(ProtocolVictory victory) {
 		// Disconnect?
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.ProtocolCosts)
+	 */
 	@Override
 	protected void handle(ProtocolCosts costs) {
 		// Get ID and resources
@@ -311,30 +350,45 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.trade.ProtocolTradePreview)
+	 */
 	@Override
 	protected void handle(ProtocolTradePreview tradePreview) {
 		// TODO redirect to ai -> trade agent
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeConfirmation)
+	 */
 	@Override
 	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
 		// TODO redirect to ai -> trade agent
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeCompletion)
+	 */
 	@Override
 	protected void handle(ProtocolTradeCompletion tradeIsCompleted) {
 		// TODO redirect to ai -> trade agent
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeCancellation)
+	 */
 	@Override
 	protected void handle(ProtocolTradeCancellation tradeIsCanceled) {
 		// TODO redirect to ai -> trade agent
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.ProtocolLargestArmy)
+	 */
 	@Override
 	protected void handle(ProtocolLargestArmy largestArmy) {
 		// TODO if self, nothing else redirect to ai -> opponent agent
@@ -346,6 +400,9 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.ProtocolLongestRoad)
+	 */
 	@Override
 	protected void handle(ProtocolLongestRoad longestRoad) {
 		// TODO if self, nothing else redirect to ai -> opponent agent
@@ -358,6 +415,9 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.dualinstructions.ProtocolPlayInventionCard)
+	 */
 	@Override
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
 		// TODO
@@ -375,6 +435,9 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.dualinstructions.ProtocolPlayMonopolyCard)
+	 */
 	@Override
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
 		// TODO
@@ -392,6 +455,9 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.dualinstructions.ProtocolPlayKnightCard)
+	 */
 	@Override
 	protected void handle(ProtocolPlayKnightCard playKnightCard) {
 		// TODO
@@ -413,6 +479,9 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.dualinstructions.ProtocolPlayRoadCard)
+	 */
 	@Override
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
 		// TODO
@@ -430,6 +499,9 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.ProtocolBoughtDevelopmentCard)
+	 */
 	@Override
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
 		// Get ID and resources
@@ -447,6 +519,9 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see network.client.client.ClientInputHandler#handle(protocol.configuration.ProtocolError)
+	 */
 	@Override
 	protected void handle(ProtocolError error) {
 		ai.setColorCounter(ai.getColorCounter() + 1);

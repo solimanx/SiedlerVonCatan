@@ -14,6 +14,7 @@ import settings.DefaultSettings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
 /**
  * @author Implements rules of the game
  */
@@ -21,6 +22,11 @@ public class GameLogic {
 	private Board board;
 	private Corner initialLastVillage;
 
+	/**
+	 * Instantiates a new game logic.
+	 *
+	 * @param b the b
+	 */
 	public GameLogic(Board b) {
 		this.board = b;
 	}
@@ -28,12 +34,12 @@ public class GameLogic {
 	private static Logger logger = LogManager.getLogger(GameLogic.class.getSimpleName());
 
 	/**
-	 * Checks if the player can build a city at the given position
+	 * Checks if the player can build a city at the given position.
 	 *
-	 * @param x
-	 * @param y
-	 * @param dir
-	 *            //* @param player
+	 * @param x the x
+	 * @param y the y
+	 * @param dir            //* @param player
+	 * @param playerID the player ID
 	 * @return boolean true/false
 	 */
 
@@ -74,12 +80,12 @@ public class GameLogic {
 	}
 
 	/**
-	 * Checks if the player can build a city at the given position
+	 * Checks if the player can build a city at the given position.
 	 *
-	 * @param x
-	 * @param y
-	 * @param dir
-	 *            //* @param player
+	 * @param x the x
+	 * @param y the y
+	 * @param dir            //* @param player
+	 * @param playerID the player ID
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildCity(int x, int y, int dir, int playerID) {
@@ -110,12 +116,12 @@ public class GameLogic {
 	}
 
 	/**
-	 * Checks if the player can build a Street at the given position
+	 * Checks if the player can build a Street at the given position.
 	 *
-	 * @param x
-	 * @param y
-	 * @param dir
-	 *            // * @param player
+	 * @param x the x
+	 * @param y the y
+	 * @param dir            // * @param player
+	 * @param playerID the player ID
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildStreet(int x, int y, int dir, int playerID) {
@@ -168,11 +174,11 @@ public class GameLogic {
 	}
 
 	/**
-	 * checks if bandit can be set at specified position
+	 * checks if bandit can be set at specified position.
 	 *
-	 * @param x
-	 * @param y
-	 *            // * @param playerId
+	 * @param x the x
+	 * @param y            // * @param playerId
+	 * @param playerID the player ID
 	 * @return true/false
 	 */
 	public boolean checkSetBandit(int x, int y, Integer playerID) {
@@ -198,6 +204,13 @@ public class GameLogic {
 		return false;
 	}
 
+	/**
+	 * Check player resources.
+	 *
+	 * @param playerID the player ID
+	 * @param cost the cost
+	 * @return true, if successful
+	 */
 	public boolean checkPlayerResources(int playerID, int[] cost) {
 		// int[] playerResources = getPlayerResources(playerID);
 		int[] playerResources = board.getPlayer(playerID).getResources();
@@ -211,12 +224,12 @@ public class GameLogic {
 
 	/**
 	 * Checks if the player can build a Street at the given position at the
-	 * beginning of the game
+	 * beginning of the game.
 	 *
-	 * @param x
-	 * @param y
-	 * @param dir
-	 * @param playerID
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
+	 * @param playerID the player ID
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildInitialStreet(int x, int y, int dir, int playerID) {
@@ -240,11 +253,11 @@ public class GameLogic {
 
 	/**
 	 * Checks if the player can build a Street at the given position at the
-	 * beginning of the game
+	 * beginning of the game.
 	 *
-	 * @param x
-	 * @param y
-	 * @param dir
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildInitialVillage(int x, int y, int dir) {
@@ -257,20 +270,31 @@ public class GameLogic {
 		return false;
 	}
 
+	/**
+	 * Can trade.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canTrade() {
 
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * Can play card.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canPlayCard() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/**
-	 * @param playerID
-	 *            ID of the player, who wants to buy a DevelopmentCard
+	 * Check buy dev card.
+	 *
+	 * @param playerID            ID of the player, who wants to buy a DevelopmentCard
 	 * @return returns true, if it is possible for the player to buy a
 	 *         Developmentcard else false
 	 */
@@ -288,9 +312,10 @@ public class GameLogic {
 	}
 
 	/**
-	 * Check if player has a settlement on a wood 2:1 harbour
+	 * Check if player has a settlement on a wood 2:1 harbour.
 	 *
-	 * @return
+	 * @param playerID the player ID
+	 * @return true, if successful
 	 */
 	public boolean hasWoodHarbour(int playerID) {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -313,9 +338,10 @@ public class GameLogic {
 	}
 
 	/**
-	 * Check if player has a settlement on a clay 2:1 harbour
+	 * Check if player has a settlement on a clay 2:1 harbour.
 	 *
-	 * @return
+	 * @param playerID the player ID
+	 * @return true, if successful
 	 */
 	public boolean hasClayHarbour(int playerID) {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -338,9 +364,10 @@ public class GameLogic {
 	}
 
 	/**
-	 * Check if player has a settlement on a wool 2:1 harbour
+	 * Check if player has a settlement on a wool 2:1 harbour.
 	 *
-	 * @return
+	 * @param playerID the player ID
+	 * @return true, if successful
 	 */
 	public boolean hasWoolHarbour(int playerID) {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -363,9 +390,10 @@ public class GameLogic {
 	}
 
 	/**
-	 * Check if player has a settlement on a corn 2:1 harbour
+	 * Check if player has a settlement on a corn 2:1 harbour.
 	 *
-	 * @return
+	 * @param playerID the player ID
+	 * @return true, if successful
 	 */
 	public boolean hasCornHarbour(int playerID) {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -388,9 +416,10 @@ public class GameLogic {
 	}
 
 	/**
-	 * Check if player has a settlement on a ore 2:1 harbour
+	 * Check if player has a settlement on a ore 2:1 harbour.
 	 *
-	 * @return
+	 * @param playerID the player ID
+	 * @return true, if successful
 	 */
 	public boolean hasOreHarbour(int playerID) {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -415,7 +444,8 @@ public class GameLogic {
 	/**
 	 * Check if player has a settlement on a 3:1 harbour.
 	 *
-	 * @return
+	 * @param playerID the player ID
+	 * @return true, if successful
 	 */
 	public boolean hasThreeOneHarbour(int playerID) {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -437,15 +467,21 @@ public class GameLogic {
 		return false;
 	}
 
+	/**
+	 * Gets the board.
+	 *
+	 * @return the board
+	 */
 	public Board getBoard() {
 		return board;
 	}
 
 	/**
+	 * Checks if is action forbidden.
 	 *
-	 * @param playerID
-	 * @param currentPlayer
-	 * @param state
+	 * @param playerID the player ID
+	 * @param currentPlayer the current player
+	 * @param state the state
 	 * @return true if it is forbidden false if it is not
 	 */
 	public boolean isActionForbidden(int playerID, int currentPlayer, PlayerState state) {
@@ -456,6 +492,13 @@ public class GameLogic {
 		}
 	}
 
+	/**
+	 * Check play dev card.
+	 *
+	 * @param modelID the model ID
+	 * @param currentPlayer the current player
+	 * @return true, if successful
+	 */
 	public boolean checkPlayDevCard(int modelID, int currentPlayer) {
 		if (isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)
 				|| board.getPlayer(modelID).hasPlayedDevCard()) {
@@ -464,6 +507,11 @@ public class GameLogic {
 		return true;
 	}
 	
+	/**
+	 * Sets the initial last village.
+	 *
+	 * @param c the new initial last village
+	 */
 	public void setInitialLastVillage(Corner c){
 		this.initialLastVillage = c;
 	}

@@ -1,5 +1,6 @@
 package model.objects;
 
+// TODO: Auto-generated Javadoc
 /**
  * All properties of an edge object, each edge represents a road/street in the
  * board.
@@ -22,7 +23,7 @@ public class Edge {
 	// ================================================================================
 
 	/**
-	 * Creates a primitive constructor for edge
+	 * Creates a primitive constructor for edge.
 	 */
 	public Edge() {
 		hasStreet = false;
@@ -32,14 +33,29 @@ public class Edge {
 	// GETTERS
 	// ================================================================================
 
+	/**
+	 * Checks if is checks for street.
+	 *
+	 * @return true, if is checks for street
+	 */
 	public boolean isHasStreet() {
 		return hasStreet;
 	}
 
+	/**
+	 * Gets the owner ID.
+	 *
+	 * @return the owner ID
+	 */
 	public Integer getOwnerID() {
 		return ownerID;
 	}
 
+	/**
+	 * Gets the edge ID.
+	 *
+	 * @return the edge ID
+	 */
 	public String getEdgeID() {
 		return edgeID;
 	}
@@ -48,14 +64,29 @@ public class Edge {
 	// SETTERS
 	// ================================================================================
 
+	/**
+	 * Sets the checks for street.
+	 *
+	 * @param hasStreet the new checks for street
+	 */
 	public void setHasStreet(boolean hasStreet) {
 		this.hasStreet = hasStreet;
 	}
 
+	/**
+	 * Sets the owned by player.
+	 *
+	 * @param ownerID the new owned by player
+	 */
 	public void setOwnedByPlayer(int ownerID) {
 		this.ownerID = ownerID;
 	}
 
+	/**
+	 * Sets the edge ID.
+	 *
+	 * @param edgeID the new edge ID
+	 */
 	public void setEdgeID(String edgeID) {
 		this.edgeID = edgeID;
 	}

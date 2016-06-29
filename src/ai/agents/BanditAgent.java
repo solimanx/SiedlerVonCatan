@@ -20,6 +20,14 @@ public class BanditAgent {
 	private ArrayList<Integer> differentPlayers;
 	private Integer myTarget;
 
+	/**
+	 * Instantiates a new bandit agent.
+	 *
+	 * @param aai
+	 *            the aai
+	 * @param oa
+	 *            the oa
+	 */
 	public BanditAgent(AdvancedAI aai, OpponentAgent oa) {
 		this.aai = aai;
 		this.oa = oa;
@@ -92,7 +100,8 @@ public class BanditAgent {
 
 	/**
 	 * Return best robber coordinates, by finding the highest robberscale value.
-	 * 
+	 *
+	 * @return the int[]
 	 */
 	public int[] bestNewRobber() {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -114,6 +123,12 @@ public class BanditAgent {
 		return bestRobberPosition;
 	}
 
+	/**
+	 * Finding the coordinates of best victim on the specified field.
+	 *
+	 * @param coords
+	 *            the coords
+	 */
 	// TODO communicate with opponent agent which opponent should be targeted
 	protected void bestVictim(int[] coords) {
 		// if(differentPlayers.size()==1){
@@ -139,12 +154,23 @@ public class BanditAgent {
 		// }
 	}
 
+	/**
+	 * Sets the target victim ID.
+	 *
+	 * @param integer
+	 *            the new target
+	 */
 	private void setTarget(Integer integer) {
 		myTarget = integer;
-		robberscale = new double [7][7];
+		robberscale = new double[7][7];
 
 	}
 
+	/**
+	 * Gets the target victim ID.
+	 *
+	 * @return the target
+	 */
 	public Integer getTarget() {
 		return myTarget;
 	}

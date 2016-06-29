@@ -13,6 +13,9 @@ import com.google.gson.annotations.Since;
 @Since(0.3)
 public class ProtocolBuyDevCard {
 
+	/**
+	 * Instantiates a new protocol buy dev card.
+	 */
 	public ProtocolBuyDevCard() {
 
 	}

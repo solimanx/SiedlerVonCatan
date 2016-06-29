@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 import protocol.object.ProtocolResource;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Erfindung(invention card)12.4 </b>
  * <p>
@@ -22,11 +23,22 @@ public class ProtocolPlayInventionCard {
 	@SerializedName("Rohstoffe")
 	private ProtocolResource resource;
 
+	/**
+	 * Instantiates a new protocol play invention card.
+	 *
+	 * @param resource the resource
+	 */
 	// Client to Server
 	public ProtocolPlayInventionCard(ProtocolResource resource) {
 		this.resource = resource;
 	}
 
+	/**
+	 * Instantiates a new protocol play invention card.
+	 *
+	 * @param playerID the player ID
+	 * @param resource the resource
+	 */
 	// Server to Cliet
 	public ProtocolPlayInventionCard(Integer playerID, ProtocolResource resource) {
 		this.playerID = playerID;
@@ -34,10 +46,20 @@ public class ProtocolPlayInventionCard {
 
 	}
 
+	/**
+	 * Gets the resource.
+	 *
+	 * @return the resource
+	 */
 	public ProtocolResource getResource() {
 		return resource;
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public Integer getPlayerID() {
 		return playerID;
 	}

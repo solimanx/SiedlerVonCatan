@@ -5,6 +5,7 @@ import com.google.gson.annotations.Since;
 
 import protocol.object.ProtocolBuilding;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Bauvorgang (Build Process)</b>
  * <p>
@@ -20,10 +21,20 @@ public class ProtocolBuild {
 
 	private ProtocolBuilding building;
 
+	/**
+	 * Instantiates a new protocol build.
+	 *
+	 * @param building the building
+	 */
 	public ProtocolBuild(ProtocolBuilding building) {
 		this.building = building;
 	}
 
+	/**
+	 * Gets the building.
+	 *
+	 * @return the building
+	 */
 	public ProtocolBuilding getBuilding() {
 		return building;
 	}

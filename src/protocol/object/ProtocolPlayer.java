@@ -7,6 +7,7 @@ import enums.Color;
 import enums.PlayerState;
 import protocol.dualinstructions.ProtocolPlayKnightCard;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Spieler (Player)</b>
  * <p>
@@ -50,6 +51,20 @@ public class ProtocolPlayer {
 	private boolean longestRoad;
 
 
+	/**
+	 * Instantiates a new protocol player.
+	 *
+	 * @param playerID the player ID
+	 * @param color the color
+	 * @param name the name
+	 * @param status the status
+	 * @param victoryPoints the victory points
+	 * @param resources the resources
+	 * @param knightCount the knight count
+	 * @param developmentCards the development cards
+	 * @param largestArmy the largest army
+	 * @param longestRoad the longest road
+	 */
 	public ProtocolPlayer(int playerID, Color color, String name, PlayerState status, int victoryPoints,
 			ProtocolResource resources, int knightCount, ProtocolDevCard developmentCards, boolean largestArmy, boolean longestRoad ) {
 		this.playerID = playerID;
@@ -64,42 +79,92 @@ public class ProtocolPlayer {
 		this.longestRoad = longestRoad;
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public int getPlayerID() {
 		return playerID;
 	}
 
+	/**
+	 * Gets the color.
+	 *
+	 * @return the color
+	 */
 	public Color getColor() {
 		return color;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Gets the status.
+	 *
+	 * @return the status
+	 */
 	public PlayerState getStatus() {
 		return status;
 	}
 
+	/**
+	 * Gets the victory points.
+	 *
+	 * @return the victory points
+	 */
 	public int getVictoryPoints() {
 		return victoryPoints;
 	}
 
+	/**
+	 * Gets the resources.
+	 *
+	 * @return the resources
+	 */
 	public ProtocolResource getResources() {
 		return resources;
 	}
 
+	/**
+	 * Gets the knight count.
+	 *
+	 * @return the knight count
+	 */
 	public int getKnightCount(){
 		return knightCount;
 	}
 
+	/**
+	 * Gets the development cards.
+	 *
+	 * @return the development cards
+	 */
 	public ProtocolDevCard getDevelopmentCards() {
 		return developmentCards;
 	}
 
+	/**
+	 * Gets the largest army.
+	 *
+	 * @return the largest army
+	 */
 	public boolean getLargestArmy(){
 		return largestArmy;
 	}
 
+	/**
+	 * Gets the longest road.
+	 *
+	 * @return the longest road
+	 */
 	public boolean getLongestRoad(){
 		return longestRoad;
 	}

@@ -22,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import ai.agents.ResourceAgent;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 /**
  * Primivite AI that can connect to server, play the initial rounds, build two
  * villages and two roadss.
@@ -80,6 +81,9 @@ public class PrimitiveAI extends Thread {
 
 	/**
 	 * Creates a PrimitiveAI object, and forces it to connect to the 0.3 server.
+	 *
+	 * @param serverHost the server host
+	 * @param port the port
 	 */
 	public PrimitiveAI(String serverHost, int port) {
 		// logger.info("AI started");
@@ -94,6 +98,9 @@ public class PrimitiveAI extends Thread {
 	// CONNECTION METHODS
 	// ================================================================================
 
+	/**
+	 * Commence.
+	 */
 	public void commence() {
 		System.out.println(DefaultSettings.getCurrentTime() + " AI started.");
 		this.start();
@@ -130,7 +137,7 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Reading input from the servers output.
 	 *
-	 * @throws IOException
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void read() throws IOException {
 		// logger.warn("Reading input from the servers output(read()) throws
@@ -146,7 +153,8 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Output to server.
 	 *
-	 * @throws IOException
+	 * @param json the json
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void write(String json) throws IOException {
 		// logger.warn("Writing output to server, throws IOException");
@@ -287,7 +295,7 @@ public class PrimitiveAI extends Thread {
 	}
 
 	/**
-	 * Randomly moving robber position
+	 * Randomly moving robber position.
 	 */
 	protected void moveRobber() {
 		String robber = gl.getBoard().getBandit();
@@ -305,7 +313,7 @@ public class PrimitiveAI extends Thread {
 	}
 
 	/**
-	 * Giving up half of resources by order
+	 * Giving up half of resources by order.
 	 */
 	protected void loseToBandit() {
 		// Count all my resources
@@ -354,11 +362,11 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Initialize board.
 	 *
-	 * @param fields
-	 * @param corners
-	 * @param streets
-	 * @param harbourCorners
-	 * @param banditLocation
+	 * @param fields the fields
+	 * @param corners the corners
+	 * @param streets the streets
+	 * @param harbourCorners the harbour corners
+	 * @param banditLocation the bandit location
 	 */
 	protected void updateBoard(Field[] fields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
 			String banditLocation) {
@@ -461,6 +469,11 @@ public class PrimitiveAI extends Thread {
 
 	}
 
+	/**
+	 * Update robber.
+	 *
+	 * @param locationID the location ID
+	 */
 	protected void updateRobber(String locationID) {
 		gl.getBoard().setBandit(locationID);
 
@@ -468,83 +481,174 @@ public class PrimitiveAI extends Thread {
 
 	// ================================================================================
 	// GETTERS AND SETTERS
+	/**
+	 * Gets the output.
+	 *
+	 * @return the output
+	 */
 	// ================================================================================
 	protected AIOutputHandler getOutput() {
 		return this.pO;
 	}
 
+	/**
+	 * Gets the input.
+	 *
+	 * @return the input
+	 */
 	protected AIInputHandler getInput() {
 		return this.pI;
 
 	}
 
+	/**
+	 * Gets the version.
+	 *
+	 * @return the version
+	 */
 	protected String getVersion() {
 		return VERSION;
 	}
 
+	/**
+	 * Gets the protocol.
+	 *
+	 * @return the protocol
+	 */
 	protected String getProtocol() {
 		return PROTOCOL;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getID() {
 		return ID;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param playerID the new id
+	 */
 	protected void setID(int playerID) {
 		ID = playerID;
 
 	}
 
+	/**
+	 * Gets the color counter.
+	 *
+	 * @return the color counter
+	 */
 	protected int getColorCounter() {
 		return colorCounter;
 	}
 
+	/**
+	 * Sets the color counter.
+	 *
+	 * @param colorCounter the new color counter
+	 */
 	protected void setColorCounter(int colorCounter) {
 		this.colorCounter = colorCounter;
 	}
 
+	/**
+	 * Checks if is started.
+	 *
+	 * @return true, if is started
+	 */
 	protected boolean isStarted() {
 		return started;
 	}
 
+	/**
+	 * Sets the started.
+	 *
+	 * @param started the new started
+	 */
 	protected void setStarted(boolean started) {
 		this.started = started;
 	}
 
+	/**
+	 * Gets the first village location.
+	 *
+	 * @return the first village location
+	 */
 	protected int[] getFirstVillageLocation() {
 		return firstVillageLocation;
 	}
 
+	/**
+	 * Gets the second village location.
+	 *
+	 * @return the second village location
+	 */
 	protected int[] getSecondVillageLocation() {
 		return secondVillageLocation;
 	}
 
+	/**
+	 * Gets the first road location.
+	 *
+	 * @return the first road location
+	 */
 	protected int[] getFirstRoadLocation() {
 		return firstRoadLocation;
 	}
 
+	/**
+	 * Gets the second road location.
+	 *
+	 * @return the second road location
+	 */
 	protected int[] getSecondRoadLocation() {
 		return secondRoadLocation;
 	}
 
+	/**
+	 * Gets the me.
+	 *
+	 * @return the me
+	 */
 	public PlayerModel getMe() {
 		return me;
 	}
 
+	/**
+	 * Gets the gl.
+	 *
+	 * @return the gl
+	 */
 	public GameLogic getGl() {
 		return gl;
 	}
 
+	/**
+	 * Gets the resource agent.
+	 *
+	 * @return the resource agent
+	 */
 	public ResourceAgent getResourceAgent() {
 		return null;
 		
 	}
 
+	/**
+	 * Actuate.
+	 */
 	public void actuate() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Update cards.
+	 */
 	public void updateCards() {
 		// TODO Auto-generated method stub
 		

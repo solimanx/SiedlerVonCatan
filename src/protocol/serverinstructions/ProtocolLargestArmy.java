@@ -3,6 +3,7 @@ package protocol.serverinstructions;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>9.10Größte Rittermacht(biggest knight prowess) </b>
  * <p>
@@ -19,11 +20,21 @@ public class ProtocolLargestArmy {
 
 	int player_id;
 
+	/**
+	 * Instantiates a new protocol largest army.
+	 *
+	 * @param player_id the player id
+	 */
 	public ProtocolLargestArmy(int player_id) {
 
 		this.player_id = player_id;
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public int getPlayerID() {
 
 		return player_id;

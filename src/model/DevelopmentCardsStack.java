@@ -7,6 +7,7 @@ import settings.DefaultSettings;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+// TODO: Auto-generated Javadoc
 public class DevelopmentCardsStack {
 
 	private DevCardFactory devFactory;
@@ -14,7 +15,7 @@ public class DevelopmentCardsStack {
 	private int nextCard;
 
 	/**
-	 * constructor sets standard values creates a stack of DevelopmentCards
+	 * constructor sets standard values creates a stack of DevelopmentCards.
 	 */
 	public DevelopmentCardsStack() {
 		devFactory = new DevCardFactory();
@@ -46,10 +47,9 @@ public class DevelopmentCardsStack {
 	}
 
 	/**
-	 * randomizes the order of the DevelopmentCards in the array
+	 * randomizes the order of the DevelopmentCards in the array.
 	 *
-	 * @param stack
-	 *            Array of DevelopmentCards
+	 * @param stack            Array of DevelopmentCards
 	 * @return the same array with randomized order
 	 */
 	public DevelopmentCard[] shuffleArray(DevelopmentCard[] stack) {
@@ -64,7 +64,7 @@ public class DevelopmentCardsStack {
 	}
 
 	/**
-	 * getter
+	 * getter.
 	 *
 	 * @return returns the whole DevelopmentCardStack, as if there was no card
 	 *         drawn
@@ -73,13 +73,18 @@ public class DevelopmentCardsStack {
 		return devCardStack;
 	}
 	
+	/**
+	 * Sets the card stack.
+	 *
+	 * @param cards the new card stack
+	 */
 	//Debug only!!
 	public void setCardStack(DevelopmentCard[] cards){
 		this.devCardStack = cards;
 	}
 
 	/**
-	 * returns the next DevelopmentCard from the stack
+	 * returns the next DevelopmentCard from the stack.
 	 *
 	 * @return next card from the stack null if empty
 	 */
@@ -92,6 +97,11 @@ public class DevelopmentCardsStack {
 		return null;
 	}
 
+	/**
+	 * Buyable.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean buyable() {
 		if (nextCard < DefaultSettings.AMOUNT_DEVELOPMENT_CARDS) {
 			return true;

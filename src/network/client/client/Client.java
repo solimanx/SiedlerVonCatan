@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
 /**
  * Client class, which is responsible for connecting to a server, as well as
  * writing and receiving message from the server.
@@ -26,6 +27,13 @@ public class Client extends Thread {
 	protected ClientInputHandler inputHandler;
 	private static Logger logger = LogManager.getLogger(Client.class.getSimpleName());
 
+	/**
+	 * Instantiates a new client.
+	 *
+	 * @param inputHandler the input handler
+	 * @param serverHost the server host
+	 * @param port the port
+	 */
 	public Client(ClientInputHandler inputHandler, String serverHost, int port) {
 		this.port = port;
 		this.serverHost = serverHost;
@@ -63,7 +71,7 @@ public class Client extends Thread {
 	/**
 	 * Commence reading messages from the server.
 	 *
-	 * @throws IOException
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void runClient() throws IOException {
 		String line;
@@ -77,8 +85,8 @@ public class Client extends Thread {
 	/**
 	 * Commence sending a message to the server.
 	 *
-	 * @param s
-	 * @throws IOException
+	 * @param s the s
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void write(String s) throws IOException {
 		logger.debug("Client sends to Server: " + s);

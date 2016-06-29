@@ -9,6 +9,7 @@ import org.apache.logging.log4j.core.net.Protocol;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 public class HexService {
 	private static Logger logger = LogManager.getLogger(HexService.class.getSimpleName());
 
@@ -18,8 +19,11 @@ public class HexService {
 	 * // * @param x1 FIELD ONE X AXIAL COORDINATE // * @param y1 FIELD ONE Y
 	 * AXIAL COORDINATE // * @param x2 FIELD TWO X AXIAL COORDINATE //* @param
 	 * y2 FIELD TWO Y AXIAL COORDINATE //* @param x3 FIELD ONE X AXIAL
-	 * COORDINATE //* @param y3 FIELD TWO Y AXIAL COORDINATE
+	 * COORDINATE //* @param y3 FIELD TWO Y AXIAL COORDINATE.
 	 *
+	 * @param a the a
+	 * @param b the b
+	 * @param c the c
 	 * @return Corner Axial coordinate (X,Y,DIR)
 	 */
 	public static int[] getCornerCoordinates(String a, String b, String c) {
@@ -48,16 +52,10 @@ public class HexService {
 	}
 
 	/**
-	 * Get edge coordinates given coordinates of two fields
+	 * Get edge coordinates given coordinates of two fields.
 	 *
-	 * @param x1
-	 *            FIELD ONE X AXIAL COORDINATE
-	 * @param y1
-	 *            FIELD ONE Y AXIAL COORDINATE
-	 * @param x2
-	 *            FIELD TWO X AXIAL COORDINATE
-	 * @param y2
-	 *            FIELD TWO Y AXIAL COORDINATE
+	 * @param a the a
+	 * @param b the b
 	 * @return Edge Axial coordinate (X,Y,DIR)
 	 */
 	public static int[] getEdgeCoordinates(String a, String b) {
@@ -82,6 +80,9 @@ public class HexService {
 	 * "NIEFKOJ"
 	 * <p>
 	 * does not work with water
+	 *
+	 * @param f the f
+	 * @return the spiral
 	 */
 	// TODO water
 	public static String getSpiral(String f) {
@@ -143,10 +144,9 @@ public class HexService {
 	}
 
 	/**
-	 * calculates the distance to center example: (0,0) -> 0 (-2,2) -> 2
+	 * calculates the distance to center example: (0,0) -> 0 (-2,2) -> 2.
 	 *
-	 * @param f
-	 *            Field ID
+	 * @param f            Field ID
 	 * @return distance to mid or radius
 	 */
 	public static int getDistanceFromMid(String f) {
@@ -187,10 +187,9 @@ public class HexService {
 	}
 
 	/**
-	 * calculates clockwise the direction of the next field
+	 * calculates clockwise the direction of the next field.
 	 *
-	 * @param f
-	 *            Field ID
+	 * @param f            Field ID
 	 * @return Edge Direction
 	 */
 	public static int getDirection(String f) {
@@ -220,14 +219,11 @@ public class HexService {
 	}
 
 	/**
-	 * calculates a field in the searched direction
+	 * calculates a field in the searched direction.
 	 *
-	 * @param aX
-	 *            Field x-coordinate
-	 * @param aY
-	 *            Field y-coordinate
-	 * @param dir
-	 *            direction of the searched field
+	 * @param aX            Field x-coordinate
+	 * @param aY            Field y-coordinate
+	 * @param dir            direction of the searched field
 	 * @return Field ID of the next Field
 	 */
 	public static String getNextField(int aX, int aY, int dir) {
@@ -269,7 +265,11 @@ public class HexService {
 	}
 
 	/**
-	 * Get neighbouring fields IDs
+	 * Get neighbouring fields IDs.
+	 *
+	 * @param aX the a X
+	 * @param aY the a Y
+	 * @return the neighbours ID
 	 */
 	private static String getNeighboursID(int aX, int aY) {
 
@@ -293,12 +293,10 @@ public class HexService {
 	}
 
 	/**
-	 * calculates a legal value of direction
+	 * calculates a legal value of direction.
 	 *
-	 * @param dir
-	 *            original direction
-	 * @param i
-	 *            value of increment
+	 * @param dir            original direction
+	 * @param i            value of increment
 	 * @return legal direction
 	 */
 	public static int nextDirection(int dir, int i) {
@@ -314,18 +312,18 @@ public class HexService {
 	 * Sums the absolute value of X, absolute value of Y, and absolute value of
 	 * Z of the cube coordinate together.
 	 *
-	 * @param temp
-	 * @return
+	 * @param temp the temp
+	 * @return the int
 	 */
 	public static int sumAbsCubeXYZ(int[] temp) {
 		return Math.abs(temp[0]) + Math.abs(temp[1]) + Math.abs(temp[2]);
 	}
 
 	/**
-	 * Converts Axial (x,y) to Cube (x,y,z)
+	 * Converts Axial (x,y) to Cube (x,y,z).
 	 *
-	 * @param a
-	 *            (x,y)
+	 * @param a            (x,y)
+	 * @return the int[]
 	 */
 	public static int[] convertAxialToCube(int[] a) {
 
@@ -344,10 +342,10 @@ public class HexService {
 	}
 
 	/**
-	 * Converts Axial (x,y) to Cube (x,y,z)
+	 * Converts Axial (x,y) to Cube (x,y,z).
 	 *
-	 * @param a
-	 *            (x,y)
+	 * @param a            (x,y)
+	 * @return the int[]
 	 */
 	public static int[] specialConvertAxialToCube(int[] a) {
 
@@ -366,10 +364,10 @@ public class HexService {
 	}
 
 	/**
-	 * Converts Cube (x,y,z) to Axial (x,y)
+	 * Converts Cube (x,y,z) to Axial (x,y).
 	 *
-	 * @param c
-	 *            (x,y,z)
+	 * @param c            (x,y,z)
+	 * @return the int[]
 	 */
 	public static int[] convertCubeToAxial(int[] c) {
 		if (c.length != 3) {
@@ -383,10 +381,10 @@ public class HexService {
 	}
 
 	/**
-	 * Sums the X and Y of the cube coordinate
+	 * Sums the X and Y of the cube coordinate.
 	 *
-	 * @param subarray
-	 * @return
+	 * @param subarray the subarray
+	 * @return the int
 	 */
 	public static int sumOfCubeXY(int[] subarray) {
 		return subarray[0] + subarray[1];
@@ -397,10 +395,9 @@ public class HexService {
 	// ================================================================================
 
 	/**
-	 * returns both adjacent corners of an edge
+	 * returns both adjacent corners of an edge.
 	 *
-	 * @param s
-	 *            Field ID of two Fields defining the edge
+	 * @param s            Field ID of two Fields defining the edge
 	 * @return two Strings of 3 characters defining the upper and lower corner
 	 */
 	public static String[] getCornerFromEdge(String s) {
@@ -430,6 +427,12 @@ public class HexService {
 		return result;
 	}
 
+	/**
+	 * Gets the corner from edge.
+	 *
+	 * @param i the i
+	 * @return the corner from edge
+	 */
 	public static String[] getCornerFromEdge(Index[] i) {
 		String a = ProtocolToModel.getProtocolOneID(i[0]);
 		String b = ProtocolToModel.getProtocolOneID(i[1]);

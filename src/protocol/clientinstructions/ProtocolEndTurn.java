@@ -13,6 +13,9 @@ import com.google.gson.annotations.Since;
 @Since(0.1)
 public class ProtocolEndTurn {
 
+	/**
+	 * Instantiates a new protocol end turn.
+	 */
 	public ProtocolEndTurn() {
 
 	}

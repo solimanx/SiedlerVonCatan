@@ -5,6 +5,7 @@ import com.google.gson.annotations.Since;
 
 import protocol.object.ProtocolResource;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Handel anbieten (Request trade/offer)</b>
  * <p>
@@ -21,17 +22,33 @@ public class ProtocolTradeRequest {
 	@SerializedName("Nachfrage")
 	private ProtocolResource demand;
 
+	/**
+	 * Instantiates a new protocol trade request.
+	 *
+	 * @param offer the offer
+	 * @param demand the demand
+	 */
 	public ProtocolTradeRequest(ProtocolResource offer, ProtocolResource demand) {
 
 		this.offer = offer;
 		this.demand = demand;
 	}
 
+	/**
+	 * Gets the offer.
+	 *
+	 * @return the offer
+	 */
 	public ProtocolResource getOffer() {
 
 		return offer;
 	}
 
+	/**
+	 * Gets the demand.
+	 *
+	 * @return the demand
+	 */
 	public ProtocolResource getDemand() {
 
 		return demand;

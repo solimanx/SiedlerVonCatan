@@ -40,18 +40,26 @@ public class ResourceAgent {
 	// maybe in trading agent?
 	private boolean[] harbours = { false, false, false, false, false, false };
 
+	/**
+	 * Instantiates a new resource agent.
+	 *
+	 * @param ai the ai
+	 */
 	public ResourceAgent(AdvancedAI ai) {
 		this.aai = ai;
 
 	}
 
+	/**
+	 * Initialize resources.
+	 */
 	public void initializeResources() {
 		ownResources = aai.getMe().getResources();
 	}
 
 	/**
-	 * calculates the cards to give to the robber
-	 * 
+	 * Calculates the cards to give to the robber.
+	 *
 	 * @return int[] to give to robber
 	 */
 	public int[] getRobberLossCards() {
@@ -100,8 +108,8 @@ public class ResourceAgent {
 	}
 
 	/**
-	 * gets possible buys with current resourceCards
-	 * 
+	 * gets possible buys with current resourceCards.
+	 *
 	 * @return boolean list (Street,Village,City,DevCard)
 	 */
 	public boolean[] getPossibleBuildings() {
@@ -123,9 +131,9 @@ public class ResourceAgent {
 
 	/**
 	 * returns the building type with the lowest resource difference to
-	 * playersResources
-	 * 
-	 * @return
+	 * playersResources.
+	 *
+	 * @return the most probable building
 	 */
 	public int[] getMostProbableBuilding() {
 		int[] buildingDifference = new int[4];
@@ -148,9 +156,9 @@ public class ResourceAgent {
 	}
 
 	/**
-	 * returns the resources missing for building a certain type
-	 * 
-	 * @param bType
+	 * returns the resources missing for building a certain type.
+	 *
+	 * @param bType the b type
 	 * @return int[] resourcesMissing
 	 */
 	public int[] getResourcesMissingForBuilding(int bType) {
@@ -166,10 +174,10 @@ public class ResourceAgent {
 	}
 
 	/**
-	 * compares two resource arrays
-	 * 
-	 * @param playerResources
-	 * @param resource
+	 * compares two resource arrays.
+	 *
+	 * @param playerResources the player resources
+	 * @param resource the resource
 	 * @return true if the second array is <= for every resource, else false
 	 */
 	public static boolean compareResources(int[] playerResources, int[] resource) {
@@ -181,6 +189,12 @@ public class ResourceAgent {
 		return true;
 	}
 
+	/**
+	 * Sum array.
+	 *
+	 * @param array the array
+	 * @return the int
+	 */
 	private int sumArray(int[] array) {
 		int result = 0;
 		for (int i = 0; i < array.length; i++) {
@@ -189,48 +203,91 @@ public class ResourceAgent {
 		return result;
 	}
 
+	/**
+	 * Adds the.
+	 *
+	 * @param cornerAt the corner at
+	 */
 	public void add(Corner cornerAt) {
 		myCorners.add(cornerAt);
 	}
 
+	/**
+	 * Adds the.
+	 *
+	 * @param edgeAt the edge at
+	 */
 	public void add(Edge edgeAt) {
 		myEdges.add(edgeAt);
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		initializeResources();
 		affords = getPossibleBuildings();
 
 	}
 
+	/**
+	 * Can build road.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canBuildRoad() {
 		return affords[0];
 	}
 
+	/**
+	 * Can build village.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canBuildVillage() {
 		return affords[1];
 	}
 
+	/**
+	 * Can build city.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canBuildCity() {
 		return affords[2];
 	}
 
+	/**
+	 * Can buy card.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canBuyCard() {
 		return affords[3];
 	}
 
+	/**
+	 * Gets the my corners.
+	 *
+	 * @return the my corners
+	 */
 	public ArrayList<Corner> getMyCorners() {
 		return myCorners;
 	}
 
+	/**
+	 * Gets the my edges.
+	 *
+	 * @return the my edges
+	 */
 	public ArrayList<Edge> getMyEdges() {
 		return myEdges;
 	}
 
 	/**
-	 * adds a specified street (edge object) to a street set
+	 * adds a specified street (edge object) to a street set.
 	 *
-	 * @param edge
+	 * @param e the e
 	 */
 	public void addToOwnStreetSet(Edge e) {
 		int[] coord = ProtocolToModel.getEdgeCoordinates(e.getEdgeID());
@@ -266,6 +323,11 @@ public class ResourceAgent {
 		}
 	}
 
+	/**
+	 * Gets the best street.
+	 *
+	 * @return the best street
+	 */
 	public Edge getBestStreet() {
 		ArrayList<Object> bestStreets = getPossibleLTRExtensions();
 		StreetSet streetSet = (StreetSet) bestStreets.get(0);
@@ -444,16 +506,12 @@ public class ResourceAgent {
 
 	/**
 	 * recursive method for calculating the longest route starting from an
-	 * specific edge
+	 * specific edge.
 	 *
-	 * @param edge
-	 *            starting street
-	 * @param currStreetSet
-	 *            street set which contains the street
-	 * @param alreadyChecked
-	 *            streets which are already counted
-	 * @param lastNeighbours
-	 *            neighbours, which are prohibited to check
+	 * @param edge            starting street
+	 * @param currStreetSet            street set which contains the street
+	 * @param alreadyChecked            streets which are already counted
+	 * @param lastNeighbours            neighbours, which are prohibited to check
 	 * @return longest rout of not checked streets
 	 */
 	private Integer depthFirstSearch(Edge edge, StreetSet currStreetSet, ArrayList<Edge> alreadyChecked,

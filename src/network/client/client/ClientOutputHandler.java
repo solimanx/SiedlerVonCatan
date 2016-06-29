@@ -34,13 +34,16 @@ import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
 
+// TODO: Auto-generated Javadoc
 public class ClientOutputHandler {
 
 	private Client client;
 	private Parser parser;
 
 	/**
-	 * @param client
+	 * Instantiates a new client output handler.
+	 *
+	 * @param client the client
 	 */
 	public ClientOutputHandler(Client client) {
 		this.client = client;
@@ -51,6 +54,8 @@ public class ClientOutputHandler {
 
 	/**
 	 * If the connection can be established, send "Hello" back to server.
+	 *
+	 * @param clientVersion the client version
 	 */
 	/**
 	 * @param clientVersion
@@ -70,7 +75,7 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 *
+	 * Send ready.
 	 */
 	public void sendReady() {
 		ProtocolClientReady pcr = new ProtocolClientReady();
@@ -87,7 +92,9 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param s
+	 * Send chat message.
+	 *
+	 * @param s the s
 	 */
 	public void sendChatMessage(String s) {
 		ProtocolChatSendMessage pcsm = new ProtocolChatSendMessage(s);
@@ -104,7 +111,7 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 *
+	 * Send dice roll request.
 	 */
 	public void sendDiceRollRequest() {
 		ProtocolDiceRollRequest pdrr = new ProtocolDiceRollRequest();
@@ -121,7 +128,7 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 *
+	 * Send end turn.
 	 */
 	public void sendEndTurn() {
 
@@ -139,9 +146,11 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param x
-	 * @param y
-	 * @param victim_id
+	 * Send bandit request.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param victim_id the victim id
 	 */
 	public void sendBanditRequest(int x, int y, Integer victim_id) {
 		Index i = ProtocolToModel.getProtocolOneIndex(ModelToProtocol.getFieldID(x, y));
@@ -159,8 +168,10 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param name
-	 * @param color
+	 * Send player profile.
+	 *
+	 * @param name the name
+	 * @param color the color
 	 */
 	public void sendPlayerProfile(String name, enums.Color color) {
 
@@ -178,7 +189,9 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param losses
+	 * Send robber loss.
+	 *
+	 * @param losses the losses
 	 */
 	public void sendRobberLoss(int[] losses) {
 		ProtocolResource prL = ModelToProtocol.convertToProtocolResource(losses);
@@ -196,8 +209,10 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param offer
-	 * @param demand
+	 * Request harbour trade.
+	 *
+	 * @param offer the offer
+	 * @param demand the demand
 	 */
 	public void requestHarbourTrade(int[] offer, int[] demand) {
 		ProtocolResource prOff = ModelToProtocol.convertToProtocolResource(offer);
@@ -217,7 +232,9 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param tradeID
+	 * Accept trade.
+	 *
+	 * @param tradeID the trade ID
 	 */
 	public void acceptTrade(int tradeID) {
 		ProtocolTradeAccept pta = new ProtocolTradeAccept(tradeID, true);
@@ -232,6 +249,11 @@ public class ClientOutputHandler {
 		}
 	}
 
+	/**
+	 * Decline trade.
+	 *
+	 * @param tradeID the trade ID
+	 */
 	// TODO
 	public void declineTrade(int tradeID) {
 		ProtocolTradeAccept pta = new ProtocolTradeAccept(tradeID, false);
@@ -247,8 +269,10 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param offer
-	 * @param demand
+	 * Request trade.
+	 *
+	 * @param offer the offer
+	 * @param demand the demand
 	 */
 	public void requestTrade(int[] offer, int[] demand) {
 		ProtocolResource prOff = ModelToProtocol.convertToProtocolResource(offer);
@@ -266,7 +290,9 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param tradeID
+	 * Cancel trade.
+	 *
+	 * @param tradeID the trade ID
 	 */
 	public void cancelTrade(int tradeID) {
 		ProtocolTradeCancel ptc = new ProtocolTradeCancel(tradeID);
@@ -284,8 +310,10 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param tradeID
-	 * @param tradePartnerID
+	 * Trade complete.
+	 *
+	 * @param tradeID the trade ID
+	 * @param tradePartnerID the trade partner ID
 	 */
 	public void tradeComplete(int tradeID, int tradePartnerID) {
 		ProtocolTradeComplete ptco = new ProtocolTradeComplete(tradeID, tradePartnerID);
@@ -302,7 +330,7 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 *
+	 * Buy development card.
 	 */
 	public void buyDevelopmentCard() {
 		ProtocolBuyDevCard pbdc = new ProtocolBuyDevCard();
@@ -319,9 +347,11 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param x
-	 * @param y
-	 * @param dir
+	 * Request build village.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
 	 */
 	public void requestBuildVillage(int x, int y, int dir) {
 		String locationString = ModelToProtocol.getCornerID(x, y, dir);
@@ -341,9 +371,11 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param x
-	 * @param y
-	 * @param dir
+	 * Request build street.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
 	 */
 	public void requestBuildStreet(int x, int y, int dir) {
 		String locationString = ModelToProtocol.getEdgeID(x, y, dir);
@@ -363,9 +395,11 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param x
-	 * @param y
-	 * @param dir
+	 * Request build city.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
 	 */
 	public void requestBuildCity(int x, int y, int dir) {
 		String locationString = ModelToProtocol.getCornerID(x, y, dir);
@@ -385,7 +419,9 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param resource
+	 * Play invention card.
+	 *
+	 * @param resource the resource
 	 */
 	public void playInventionCard(int[] resource) {
 		ProtocolResource pr = ModelToProtocol.convertToProtocolResource(resource);
@@ -403,7 +439,9 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param resource
+	 * Play monopoly card.
+	 *
+	 * @param resource the resource
 	 */
 	public void playMonopolyCard(ResourceType resource) {
 
@@ -421,8 +459,10 @@ public class ClientOutputHandler {
 	}
 
 	/**
-	 * @param road1_id
-	 * @param road2_id
+	 * Play road card.
+	 *
+	 * @param road1_id the road 1 id
+	 * @param road2_id the road 2 id
 	 */
 	public void playRoadCard(String road1_id, String road2_id) {
 		Index[] road1 = ModelToProtocol.convertToEdgeIndex(road1_id);
@@ -441,6 +481,13 @@ public class ClientOutputHandler {
 
 	}
 
+	/**
+	 * Play knight card.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param victimID the victim ID
+	 */
 	public void playKnightCard(int x, int y, Integer victimID) {
 		Index i = ProtocolToModel.getProtocolOneIndex(ModelToProtocol.getFieldID(x, y));
 		ProtocolPlayKnightCard pkc = new ProtocolPlayKnightCard(i, victimID);
@@ -454,6 +501,11 @@ public class ClientOutputHandler {
 
 	}
 
+	/**
+	 * Send cheat.
+	 *
+	 * @param string the string
+	 */
 	public void sendCheat(String string) {
 		try {
 			client.write(string);

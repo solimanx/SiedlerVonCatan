@@ -5,9 +5,17 @@ import com.google.gson.GsonBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
 public class Parser {
 	private static Logger logger = LogManager.getLogger(Parser.class.getSimpleName());
 
+	/**
+	 * Parses the string.
+	 *
+	 * @param <T> the generic type
+	 * @param string the string
+	 * @return the t
+	 */
 	@SuppressWarnings("unchecked")
 	public <T> T parseString(String string) {
 
@@ -179,6 +187,12 @@ public class Parser {
 
 	}
 
+	/**
+	 * Creates the string.
+	 *
+	 * @param fromObject the from object
+	 * @return the string
+	 */
 	public String createString(Object fromObject) {
 		Gson gson = new GsonBuilder().create();
 		String response = gson.toJson(fromObject, fromObject.getClass());

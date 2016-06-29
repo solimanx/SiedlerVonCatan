@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import network.client.controller.ClientController;
 import network.server.controller.ServerController;
 
+// TODO: Auto-generated Javadoc
 public class StartViewController {
 
 	private static Logger logger = LogManager.getLogger(StartViewController.class.getSimpleName());
@@ -64,10 +65,20 @@ public class StartViewController {
 
 	private Thread serverThread;
 
+	/**
+	 * Sets the stage.
+	 *
+	 * @param primaryStage the new stage
+	 */
 	public void setStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
 
+	/**
+	 * Handle ai selected.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleAiSelected(ActionEvent event) {
 		aiPort.setDisable(false);
@@ -75,6 +86,11 @@ public class StartViewController {
 		serverPort.setDisable(true);
 	}
 
+	/**
+	 * Handle client selected.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleClientSelected(ActionEvent event) {
 		serverPort.setDisable(true);
@@ -82,6 +98,11 @@ public class StartViewController {
 		aiServer.setDisable(true);
 	}
 
+	/**
+	 * Handle server selected.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleServerSelected(ActionEvent event) {
 		serverPort.setDisable(false);
@@ -90,6 +111,11 @@ public class StartViewController {
 
 	}
 
+	/**
+	 * Handle stop server.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleStopServer(ActionEvent event){
 		serverThread.interrupt();
@@ -99,6 +125,11 @@ public class StartViewController {
 		startButton.setDisable(false);
 	}
 
+	/**
+	 * Handle start button.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleStartButton(ActionEvent event) {
 		RadioButton rb = (RadioButton) startMode.getSelectedToggle();
@@ -142,6 +173,8 @@ public class StartViewController {
 	}
 
 	/**
+	 * Gets the game controller.
+	 *
 	 * @return the gc
 	 */
 	public ServerController getGameController() {
@@ -149,14 +182,17 @@ public class StartViewController {
 	}
 
 	/**
-	 * @param gc
-	 *            the gc to set
+	 * Sets the server controller.
+	 *
+	 * @param gc            the gc to set
 	 */
 	public void setServerController(ServerController gc) {
 		this.gc = gc;
 	}
 
 	/**
+	 * Gets the flow controller.
+	 *
 	 * @return the fc
 	 */
 	public ClientController getFlowController() {
@@ -164,8 +200,9 @@ public class StartViewController {
 	}
 
 	/**
-	 * @param fc
-	 *            the fc to set
+	 * Sets the client controller.
+	 *
+	 * @param fc            the fc to set
 	 */
 	public void setClientController(ClientController fc) {
 		this.fc = fc;

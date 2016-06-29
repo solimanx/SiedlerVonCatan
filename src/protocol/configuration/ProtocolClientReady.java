@@ -13,6 +13,9 @@ import com.google.gson.annotations.Since;
 @Since(0.1)
 public class ProtocolClientReady {
 
+	/**
+	 * Instantiates a new protocol client ready.
+	 */
 	public ProtocolClientReady() {
 
 	}

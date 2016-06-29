@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package ai.agents;
 
 import java.util.ArrayList;
@@ -11,6 +14,7 @@ import model.objects.Field;
 import model.objects.PlayerModel;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 /**
  * Tracks other opponents resources/cards.
  *
@@ -27,6 +31,11 @@ public class OpponentAgent {
 	private Board board;
 
 	
+	/**
+	 * Instantiates a new opponent agent.
+	 *
+	 * @param aai the aai
+	 */
 	public OpponentAgent(AdvancedAI aai) {
 		board = aai.getGl().getBoard();
 		amountPlayer = board.getAmountPlayers();
@@ -37,9 +46,10 @@ public class OpponentAgent {
 	}
 	
 	/**
-	 * converts the internal playerID
-	 * @param playerID
-	 * @return
+	 * converts the internal playerID.
+	 *
+	 * @param boardPlayerID the board player ID
+	 * @return the opponent model
 	 */
 	public PlayerModel getOpponentModel(Integer boardPlayerID){
 		for(int i=0; i<opponents.size(); i++){
@@ -50,6 +60,12 @@ public class OpponentAgent {
 		throw new IllegalArgumentException("ID "+boardPlayerID+" doesn't exist");
 	}
 	
+	/**
+	 * Gets the internal player ID.
+	 *
+	 * @param pm the pm
+	 * @return the internal player ID
+	 */
 	public int getInternalPlayerID(PlayerModel pm){
 		for(int i = 0; i<opponents.size(); i++){
 			if(opponents.get(i).equals(pm)){
@@ -59,11 +75,20 @@ public class OpponentAgent {
 		throw new IllegalArgumentException("there is no such playerModel in opponents");
 	}
 
+	/**
+	 * Ressource obtain enemy.
+	 */
 	// inputhandler an diese methode
 	public void ressourceObtainEnemy() {
 		
 	}
 
+	/**
+	 * Building cost enemy.
+	 *
+	 * @param playerID the player ID
+	 * @param costs the costs
+	 */
 	public void buildingCostEnemy(int playerID, int[] costs){
 		if(costs.length != 5){
 			throw new IllegalArgumentException("Illegal Argument in opponentAgent.buildingCostEnemy.");
@@ -73,9 +98,10 @@ public class OpponentAgent {
 	
 	
 	/**
-	 * use this method only with internal player ID's
-	 * @param playerID
-	 * @param costs
+	 * use this method only with internal player ID's.
+	 *
+	 * @param playerID the player ID
+	 * @param costs the costs
 	 */
 	private void decrementOpponentsResources(int playerID, int[] costs){
 		for(int i = 0; i<5; i++){
@@ -101,10 +127,21 @@ public class OpponentAgent {
 		}
 	}
 
+	/**
+	 * Trading enemy.
+	 *
+	 * @param boardPlayerID the board player ID
+	 */
 	public void tradingEnemy(int boardPlayerID){
 		
 	}
 
+	/**
+	 * Draw card robber.
+	 *
+	 * @param boardVictimID the board victim ID
+	 * @param boardPlayerID the board player ID
+	 */
 	public void drawCardRobber(int boardVictimID, int boardPlayerID){
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
 		int victimID = getInternalPlayerID(getOpponentModel(boardVictimID));
@@ -113,6 +150,12 @@ public class OpponentAgent {
 		opponentsRessources[playerID][6]++;
 	}
 
+	/**
+	 * Invention card enemy.
+	 *
+	 * @param boardPlayerID the board player ID
+	 * @param resType the res type
+	 */
 	public void inventionCardEnemy(int boardPlayerID, ResourceType resType){
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
 		switch (resType) {
@@ -136,6 +179,13 @@ public class OpponentAgent {
 		}
 	}
 
+	/**
+	 * Monopoly card enemy.
+	 *
+	 * @param boardPlayerID the board player ID
+	 * @param ammountCardsRecievd the ammount cards recievd
+	 * @param resType the res type
+	 */
 	public void monopolyCardEnemy(int boardPlayerID, int ammountCardsRecievd, ResourceType resType){
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
 		switch (resType) {
@@ -161,8 +211,9 @@ public class OpponentAgent {
 	}
 	
 	/**
-	 * 
-	 * @param boardPlayerID
+	 * Player strength.
+	 *
+	 * @param boardPlayerID the board player ID
 	 * @return strength of a player as int
 	 */
 	public int playerStrength(int boardPlayerID){
@@ -176,6 +227,12 @@ public class OpponentAgent {
 		return result;
 	}
 	
+	/**
+	 * Ammount resource card.
+	 *
+	 * @param playerID the player ID
+	 * @return the int
+	 */
 	public int ammountResourceCard(int playerID){
 		int result = 0;
 		for(int i = 0; i<6; i++){

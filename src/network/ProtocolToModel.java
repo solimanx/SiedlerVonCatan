@@ -23,6 +23,7 @@ import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 public final class ProtocolToModel {
 
 	/**
@@ -38,6 +39,12 @@ public final class ProtocolToModel {
 	private static Map<Index, String> hm1 = new HashMap<Index, String>();
 	private static Map<String, Index> hm2 = new HashMap<String, Index>();
 
+	/**
+	 * Gets the field coordinates.
+	 *
+	 * @param fieldID the field ID
+	 * @return the field coordinates
+	 */
 	public static int[] getFieldCoordinates(String fieldID) {
 		// Get the field ID through the Board's HashMap
 		return Board.getStringToCoordMap().get(fieldID);
@@ -47,11 +54,10 @@ public final class ProtocolToModel {
 	 * Get Corner axial coordinates + direction through a three-character ID
 	 * <p>
 	 * Example EFJ -> (0,0,0)
-	 * </p>
+	 * </p>.
 	 *
-	 * @param location
-	 *            3-character-string
-	 * @return
+	 * @param location            3-character-string
+	 * @return the corner coordinates
 	 */
 	public static int[] getCornerCoordinates(String location) {
 		if (location.length() != 3)
@@ -75,11 +81,10 @@ public final class ProtocolToModel {
 	 * Get Corner axial coordinates + direction through a 2-character ID
 	 * <p>
 	 * Example EJ -> (0,0,0)
-	 * </p>
+	 * </p>.
 	 *
-	 * @param location
-	 *            3-character-string
-	 * @return
+	 * @param location            3-character-string
+	 * @return the edge coordinates
 	 */
 	public static int[] getEdgeCoordinates(String location) {
 		if (location.length() != 2)
@@ -98,7 +103,7 @@ public final class ProtocolToModel {
 	/**
 	 * Convert a land type to enum.ResourceType
 	 *
-	 * @param resourceString
+	 * @param resourceString the resource string
 	 * @return Resource Type
 	 */
 	public static enums.ResourceType getResourceType(String resourceString) {
@@ -122,6 +127,9 @@ public final class ProtocolToModel {
 		}
 	}
 
+	/**
+	 * Inits the protocol to model.
+	 */
 	public static void initProtocolToModel() {
 		int r = DefaultSettings.BOARD_RADIUS;
 
@@ -149,14 +157,32 @@ public final class ProtocolToModel {
 		}
 	}
 
+	/**
+	 * Gets the protocol one index.
+	 *
+	 * @param s the s
+	 * @return the protocol one index
+	 */
 	public static Index getProtocolOneIndex(String s) {
 		return hm2.get(s);
 	}
 
+	/**
+	 * Gets the protocol one ID.
+	 *
+	 * @param i the i
+	 * @return the protocol one ID
+	 */
 	public static String getProtocolOneID(Index i) {
 		return hm1.get(i);
 	}
 
+	/**
+	 * Gets the player state.
+	 *
+	 * @param state the state
+	 * @return the player state
+	 */
 	@Deprecated
 	// ENUMS ARE ALREADY SERIALIZED....
 	public static enums.PlayerState getPlayerState(String state) {
@@ -190,7 +216,7 @@ public final class ProtocolToModel {
 	/**
 	 * Convert protocol resource to own resource array.
 	 *
-	 * @param resources
+	 * @param resources the resources
 	 * @return ResourceArray
 	 */
 	public static enums.ResourceType[] getResources(ProtocolResource resources) {
@@ -240,10 +266,10 @@ public final class ProtocolToModel {
 	}
 
 	/**
-	 * Convert Building type to match CornerStatus
+	 * Convert Building type to match CornerStatus.
 	 *
-	 * @param pBuildingType
-	 * @return
+	 * @param pBuildingType the building type
+	 * @return the corner type
 	 */
 	/*
 	 * Warning: Works only for Village and City
@@ -260,6 +286,12 @@ public final class ProtocolToModel {
 		}
 	}
 
+	/**
+	 * Gets the harbour type.
+	 *
+	 * @param pHarbourType the harbour type
+	 * @return the harbour type
+	 */
 	@Deprecated
 	// ENUMS ARE ALREADY SERIALIZED....
 	public static HarbourStatus getHarbourType(String pHarbourType) {
@@ -281,6 +313,16 @@ public final class ProtocolToModel {
 		}
 	}
 
+	/**
+	 * Convert resources.
+	 *
+	 * @param wood the wood
+	 * @param clay the clay
+	 * @param ore the ore
+	 * @param wool the wool
+	 * @param corn the corn
+	 * @return the int[]
+	 */
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
 	@Deprecated
 	public static int[] convertResources(Integer wood, Integer clay, Integer ore, Integer wool, Integer corn) {
@@ -293,6 +335,12 @@ public final class ProtocolToModel {
 		return result;
 	}
 
+	/**
+	 * Convert resources.
+	 *
+	 * @param resource the resource
+	 * @return the int[]
+	 */
 	public static int[] convertResources(ProtocolResource resource) {
 		if (resource.getUnknown() == null) {
 			int result[] = new int[5];
@@ -314,8 +362,8 @@ public final class ProtocolToModel {
 	/**
 	 * Intended for use by ClientInputHandler after buying a card only.
 	 *
-	 * @param pdv
-	 * @return
+	 * @param pdv the pdv
+	 * @return the card type
 	 */
 	public static DevelopmentCard getCardType(ProtocolDevCard pdv) {
 		if (pdv.getInvention() != null) {
@@ -341,6 +389,12 @@ public final class ProtocolToModel {
 
 	}
 
+	/**
+	 * Gets the corner coordinates.
+	 *
+	 * @param id the id
+	 * @return the corner coordinates
+	 */
 	public static int[] getCornerCoordinates(Index[] id) {
 		String a = getProtocolOneID(id[0]) != null ? getProtocolOneID(id[0]) : "";
 		String b = getProtocolOneID(id[1]) != null ? getProtocolOneID(id[1]) : "";
@@ -348,12 +402,24 @@ public final class ProtocolToModel {
 		return getCornerCoordinates(a + b + c);
 	}
 
+	/**
+	 * Gets the edge coordinates.
+	 *
+	 * @param id the id
+	 * @return the edge coordinates
+	 */
 	public static int[] getEdgeCoordinates(Index[] id) {
 		String a = getProtocolOneID(id[0]) != null ? getProtocolOneID(id[0]) : "";
 		String b = getProtocolOneID(id[1]) != null ? getProtocolOneID(id[1]) : "";
 		return getEdgeCoordinates(a + b);
 	}
 
+	/**
+	 * Gets the corner ID index.
+	 *
+	 * @param id the id
+	 * @return the corner ID index
+	 */
 	public static String getCornerIDIndex(Index[] id) {
 		String id0 = getProtocolOneID(id[0]);
 		String id1 = getProtocolOneID(id[1]);
@@ -361,12 +427,24 @@ public final class ProtocolToModel {
 		return id0 + id1 + id2;
 	}
 
+	/**
+	 * Gets the edge ID index.
+	 *
+	 * @param id the id
+	 * @return the edge ID index
+	 */
 	public static String getEdgeIDIndex(Index[] id) {
 		String id0 = getProtocolOneID(id[0]);
 		String id1 = getProtocolOneID(id[1]);
 		return id0 + id1;
 	}
 
+	/**
+	 * Gets the dev card.
+	 *
+	 * @param ct the ct
+	 * @return the dev card
+	 */
 	public static DevelopmentCard getDevCard(CardType ct) {
 		switch (ct) {
 		case INVENTION:

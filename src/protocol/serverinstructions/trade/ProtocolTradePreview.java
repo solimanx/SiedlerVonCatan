@@ -5,6 +5,7 @@ import com.google.gson.annotations.Since;
 
 import protocol.object.ProtocolResource;
 
+// TODO: Auto-generated Javadoc
 /**
  * 
  * <b>Handelsangebot (Trade Confirmation)</b>
@@ -29,6 +30,14 @@ public class ProtocolTradePreview {
 	@SerializedName("Nachfrage")
 	private ProtocolResource withdrawal;
 
+	/**
+	 * Instantiates a new protocol trade preview.
+	 *
+	 * @param playerID the player ID
+	 * @param tradeID the trade ID
+	 * @param offer the offer
+	 * @param withdrawal the withdrawal
+	 */
 	public ProtocolTradePreview(int playerID, int tradeID, ProtocolResource offer, ProtocolResource withdrawal) {
 		this.playerID = playerID;
 		this.tradeID = tradeID;
@@ -36,18 +45,38 @@ public class ProtocolTradePreview {
 		this.withdrawal = withdrawal;
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public int getPlayerID() {
 		return playerID;
 	}
 
+	/**
+	 * Gets the trade ID.
+	 *
+	 * @return the trade ID
+	 */
 	public int getTradeID() {
 		return tradeID;
 	}
 
+	/**
+	 * Gets the offer.
+	 *
+	 * @return the offer
+	 */
 	public ProtocolResource getOffer() {
 		return offer;
 	}
 
+	/**
+	 * Gets the withdrawal.
+	 *
+	 * @return the withdrawal
+	 */
 	public ProtocolResource getWithdrawal() {
 		return withdrawal;
 	}

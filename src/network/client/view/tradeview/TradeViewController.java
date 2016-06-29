@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
 
+// TODO: Auto-generated Javadoc
 public class TradeViewController {
 
 	@FXML
@@ -102,14 +103,21 @@ public class TradeViewController {
 	private int ownTradeID = 0;
 	private Stage stage;
 
+	/**
+	 * Sets the view controller.
+	 *
+	 * @param viewController the new view controller
+	 */
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
 
 	/**
-	 * Initializes the Trade window with spinners
-	 * 
-	 * @param resources
+	 * Initializes the Trade window with spinners.
+	 *
+	 * @param resources the resources
+	 * @param viewController the view controller
+	 * @param stage the stage
 	 */
 	public void init(int[] resources, ViewController viewController, Stage stage) {
 		this.viewController = viewController;
@@ -141,6 +149,11 @@ public class TradeViewController {
 		});
 	}
 
+	/**
+	 * Start.
+	 *
+	 * @param selfResources the self resources
+	 */
 	public void start(int[] selfResources) {
 		resultDemand = new int[5];
 		resultOffer = new int[5];
@@ -168,7 +181,10 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param resources
+	 * Update spinner.
+	 *
+	 * @param resources the resources
+	 * @param grid the grid
 	 */
 	public void updateSpinner(int[] resources, GridPane grid) {
 		giveWoodSpinner = new Spinner<Integer>(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, resources[0], 0));
@@ -235,7 +251,9 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param event
+	 * Handle place offer button.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void handlePlaceOfferButton(ActionEvent event) {
@@ -247,7 +265,9 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param event
+	 * Handle trade button.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void handleTradeButton(ActionEvent event) {
@@ -256,7 +276,9 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param event
+	 * Handle sea trade button.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void handleSeaTradeButton(ActionEvent event) {
@@ -268,7 +290,9 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param event
+	 * Handle cancel own offer.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void handleCancelOwnOffer(ActionEvent event) {
@@ -279,7 +303,9 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param event
+	 * Full fill trade.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void fullFillTrade(ActionEvent event) {
@@ -288,7 +314,9 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param event
+	 * Handle cancel trade.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void handleCancelTrade(ActionEvent event) {
@@ -298,9 +326,10 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param partnerModelID
-	 * @param threadID
-	 * @param tradeID
+	 * Offer fulfilled.
+	 *
+	 * @param threadID the thread ID
+	 * @param partnerModelID the partner model ID
 	 */
 	public void offerFulfilled(int threadID, int partnerModelID) {
 		ownOffer.clear();
@@ -322,10 +351,12 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param offer
-	 * @param demand
-	 * @param tradeID
-	 * @param playerID
+	 * Adds the offer.
+	 *
+	 * @param offer the offer
+	 * @param demand the demand
+	 * @param tradeID the trade ID
+	 * @param playerID the player ID
 	 */
 	public void addOffer(int[] offer, int[] demand, int tradeID, int playerID) {
 		String tradeString = tradeStringGenerator(offer, demand) + "\n" + "From: "
@@ -339,9 +370,11 @@ public class TradeViewController {
 	}
 
 	/**
-	 * @param offer
-	 * @param demand
-	 * @param tradeID
+	 * Adds the own offer.
+	 *
+	 * @param offer the offer
+	 * @param demand the demand
+	 * @param tradeID the trade ID
 	 */
 	public void addOwnOffer(int[] offer, int[] demand, int tradeID) {
 		String offerString = tradeStringGenerator(offer, demand);
@@ -353,10 +386,10 @@ public class TradeViewController {
 	}
 
 	/**
-	 * called, when player accepts your offer and adds offer to ownOfferList
-	 * 
-	 * @param playerID
-	 * @param tradeID
+	 * called, when player accepts your offer and adds offer to ownOfferList.
+	 *
+	 * @param modelID the model ID
+	 * @param tradeID the trade ID
 	 */
 	public void acceptingOffer(int modelID, int tradeID) {
 		String offerString = viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).getName()
@@ -369,14 +402,21 @@ public class TradeViewController {
 	}
 
 	/**
-	 * cancels trade item from left tradeList
-	 * 
-	 * @param tradeID
+	 * cancels trade item from left tradeList.
+	 *
+	 * @param tradeID the trade ID
 	 */
 	public void cancelOffer(int tradeID) {
 		Platform.runLater(new RemoveOfferStringRunnable(tradeIDtoString.get(tradeID)));
 	}
 
+	/**
+	 * Trade string generator.
+	 *
+	 * @param offer the offer
+	 * @param demand the demand
+	 * @return the string
+	 */
 	private String tradeStringGenerator(int[] offer, int[] demand) {
 		StringBuffer getting = new StringBuffer();
 		StringBuffer giving = new StringBuffer();
@@ -453,7 +493,7 @@ public class TradeViewController {
 
 	/**
 	 * called, when own offer is cancelled removes own offer from view clears
-	 * own offer accepting players list
+	 * own offer accepting players list.
 	 */
 	public void cancelOwnOffer() {
 		ownOffer.clear();
@@ -465,10 +505,18 @@ public class TradeViewController {
 	public class AddTradeStringRunnable implements Runnable {
 		final String string;
 
+		/**
+		 * Instantiates a new adds the trade string runnable.
+		 *
+		 * @param string the string
+		 */
 		public AddTradeStringRunnable(String string) {
 			this.string = string;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run() {
 			tradeList.add(string);
@@ -480,10 +528,18 @@ public class TradeViewController {
 	public class RemoveTradeStringRunnable implements Runnable {
 		final String string;
 
+		/**
+		 * Instantiates a new removes the trade string runnable.
+		 *
+		 * @param string the string
+		 */
 		public RemoveTradeStringRunnable(String string) {
 			this.string = string;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run() {
 			tradeList.remove(string);
@@ -495,10 +551,18 @@ public class TradeViewController {
 	public class AddOfferStringRunnable implements Runnable {
 		final String string;
 
+		/**
+		 * Instantiates a new adds the offer string runnable.
+		 *
+		 * @param string the string
+		 */
 		public AddOfferStringRunnable(String string) {
 			this.string = string;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run() {
 			ownOfferList.add(string);
@@ -510,10 +574,18 @@ public class TradeViewController {
 	public class RemoveOfferStringRunnable implements Runnable {
 		final String string;
 
+		/**
+		 * Instantiates a new removes the offer string runnable.
+		 *
+		 * @param string the string
+		 */
 		public RemoveOfferStringRunnable(String string) {
 			this.string = string;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run() {
 			ownOfferList.remove(string);

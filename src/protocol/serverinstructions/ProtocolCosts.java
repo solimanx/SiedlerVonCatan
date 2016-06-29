@@ -16,6 +16,12 @@ import protocol.object.ProtocolResource;
 @Since(0.2)
 public class ProtocolCosts extends ProtocolResourceObtain {
 
+	/**
+	 * Instantiates a new protocol costs.
+	 *
+	 * @param playerID the player ID
+	 * @param resource the resource
+	 */
 	public ProtocolCosts(int playerID, ProtocolResource resource) {
 		super(playerID, resource);
 	}

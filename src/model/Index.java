@@ -1,5 +1,6 @@
 package model;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servers as a key for the hashmap of board
  *
@@ -11,16 +12,28 @@ public class Index {
 	private int x;
 	private int y;
 
+	/**
+	 * Instantiates a new index.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	public Index(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return (x << 16) + y;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -37,10 +50,20 @@ public class Index {
 		return true;
 	}
 
+	/**
+	 * Gets the x.
+	 *
+	 * @return the x
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * Gets the y.
+	 *
+	 * @return the y
+	 */
 	public int getY() {
 		return y;
 	}

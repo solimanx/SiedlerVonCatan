@@ -6,6 +6,7 @@ import com.google.gson.annotations.Since;
 import enums.HarbourStatus;
 import model.Index;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Häfen (Harbours)</b>
  * <p>
@@ -23,15 +24,31 @@ public class ProtocolHarbour {
 	@SerializedName("Typ")
 	private HarbourStatus harbour_type;
 
+	/**
+	 * Instantiates a new protocol harbour.
+	 *
+	 * @param locationID the location ID
+	 * @param harbourType the harbour type
+	 */
 	public ProtocolHarbour(Index[] locationID, HarbourStatus harbourType) {
 		this.locationID = locationID;
 		this.harbour_type = harbourType;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Index[] getID() {
 		return locationID;
 	}
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public HarbourStatus getType() {
 		return harbour_type;
 	}

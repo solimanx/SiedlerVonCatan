@@ -28,6 +28,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
 
+// TODO: Auto-generated Javadoc
 public class DevCardViewController implements Initializable {
 
 	@FXML
@@ -76,12 +77,22 @@ public class DevCardViewController implements Initializable {
 
 	private static Logger logger = LogManager.getLogger(DevCardViewController.class.getSimpleName());
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Inits the.
+	 *
+	 * @param viewController the view controller
+	 * @param stage the stage
+	 * @param devCards the dev cards
+	 */
 	public void init(ViewController viewController, Stage stage, int[] devCards) {
 		this.stage = stage;
 		this.viewController = viewController;
@@ -130,11 +141,21 @@ public class DevCardViewController implements Initializable {
 		devCardListView.setItems(devCardList);
 	}
 
+	/**
+	 * Handle cancel.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleCancel(ActionEvent event) {
 		this.stage.close();
 	}
 
+	/**
+	 * Handle invention OK.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleInventionOK(ActionEvent event) {
 		int[] resources = { 0, 0, 0, 0, 0 };
@@ -177,6 +198,11 @@ public class DevCardViewController implements Initializable {
 		this.stage.close();
 	}
 
+	/**
+	 * Handle monopoly OK.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleMonopolyOK(ActionEvent event) {
 
@@ -185,6 +211,11 @@ public class DevCardViewController implements Initializable {
 		this.stage.close();
 	}
 
+	/**
+	 * Handle play card button.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handlePlayCardButton(ActionEvent event) {
 		if (devCardSelected.equals(CardType.KNIGHT.toString())) {
@@ -245,6 +276,11 @@ public class DevCardViewController implements Initializable {
 
 	}
 
+	/**
+	 * Handle debug button.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleDebugButton(ActionEvent event) {
 		devCardSelected = debugChoice.getSelectionModel().getSelectedItem().toString();

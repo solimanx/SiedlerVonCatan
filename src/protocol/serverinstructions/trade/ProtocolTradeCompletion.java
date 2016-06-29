@@ -3,6 +3,7 @@ package protocol.serverinstructions.trade;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Handel ausgeführt (trade was completed)</b>
  * <p>
@@ -19,6 +20,12 @@ public class ProtocolTradeCompletion {
 	@SerializedName("Mitspieler")
 	private int tradePartnerID;
 
+	/**
+	 * Instantiates a new protocol trade completion.
+	 *
+	 * @param playerID the player ID
+	 * @param tradePartnerID the trade partner ID
+	 */
 	public ProtocolTradeCompletion(int playerID, int tradePartnerID) {
 
 		this.playerID = playerID;
@@ -26,11 +33,21 @@ public class ProtocolTradeCompletion {
 
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public int getPlayerID() {
 
 		return playerID;
 	}
 
+	/**
+	 * Gets the trade partner ID.
+	 *
+	 * @return the trade partner ID
+	 */
 	public int getTradePartnerID() {
 
 		return tradePartnerID;

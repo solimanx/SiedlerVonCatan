@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package settings;
 
 import java.time.LocalTime;
@@ -67,6 +70,11 @@ public final class DefaultSettings {
 
 	public static final String SERVER_VERSION = "1.0";
 
+	/**
+	 * Gets the current time.
+	 *
+	 * @return the current time
+	 */
 	// Get current time as string
 	public static String getCurrentTime() {
 		return "[" + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")) + "] ";

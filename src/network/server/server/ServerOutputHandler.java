@@ -51,12 +51,18 @@ import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
+// TODO: Auto-generated Javadoc
 //import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
 public class ServerOutputHandler {
 	private Server server;
 	private Parser parser;
 
+	/**
+	 * Instantiates a new server output handler.
+	 *
+	 * @param server the server
+	 */
 	public ServerOutputHandler(Server server) {
 		this.server = server;
 		this.parser = new Parser();
@@ -64,6 +70,11 @@ public class ServerOutputHandler {
 
 	private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getSimpleName());
 
+	/**
+	 * Builds the building.
+	 *
+	 * @param building the building
+	 */
 	public void buildBuilding(ProtocolBuilding building) {
 		ProtocolBuild pb = new ProtocolBuild(building);
 		Response r = new Response();
@@ -78,10 +89,11 @@ public class ServerOutputHandler {
 	}
 
 	/**
-	 * Create ProtocolHello JSON and broadcast it as a String through server
+	 * Create ProtocolHello JSON and broadcast it as a String through server.
 	 *
-	 * @param serverVersion
-	 * @param protocolVersion
+	 * @param serverVersion the server version
+	 * @param protocolVersion the protocol version
+	 * @param thread_id the thread id
 	 */
 	public void hello(String serverVersion, String protocolVersion, int thread_id) {
 		ProtocolHello ph = new ProtocolHello(serverVersion, protocolVersion);
@@ -96,6 +108,12 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Chat receive message.
+	 *
+	 * @param threadID the thread ID
+	 * @param message the message
+	 */
 	public void chatReceiveMessage(int threadID, String message) {
 		ProtocolChatReceiveMessage pcrm = new ProtocolChatReceiveMessage(threadID, message);
 		Response r = new Response();
@@ -109,6 +127,12 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Inits the board.
+	 *
+	 * @param amountPlayers the amount players
+	 * @param board the board
+	 */
 	public void initBoard(int amountPlayers, Board board) {
 
 		ProtocolField[] pfArray = new ProtocolField[board.getStringToCoordMap().size()];
@@ -161,6 +185,12 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Error.
+	 *
+	 * @param s the s
+	 * @param threadPlayerID the thread player ID
+	 */
 	public void error(String s, int threadPlayerID) {
 		ProtocolError pe = new ProtocolError(s);
 		Response r = new Response();
@@ -174,6 +204,12 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Dice roll result.
+	 *
+	 * @param playerID the player ID
+	 * @param result the result
+	 */
 	public void diceRollResult(int playerID, int[] result) {
 		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(playerID, result);
 		Response r = new Response();
@@ -186,6 +222,13 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Resource obtain.
+	 *
+	 * @param playerID the player ID
+	 * @param resources the resources
+	 * @param sendToClient the send to client
+	 */
 	public void resourceObtain(int playerID, int[] resources,int sendToClient) {
 		ProtocolResource pResource;
 		if (resources.length != 5) {
@@ -204,6 +247,11 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Welcome.
+	 *
+	 * @param player_id the player id
+	 */
 	public void welcome(int player_id) {
 		ProtocolWelcome pw = new ProtocolWelcome(player_id);
 
@@ -218,6 +266,21 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Status update.
+	 *
+	 * @param playerID the player ID
+	 * @param color the color
+	 * @param name the name
+	 * @param status the status
+	 * @param victoryPoints the victory points
+	 * @param resources the resources
+	 * @param knightAmount the knight amount
+	 * @param devCards the dev cards
+	 * @param longestTR the longest TR
+	 * @param biggestKP the biggest KP
+	 * @param sendToPlayerID the send to player ID
+	 */
 	public void statusUpdate(int playerID, Color color, String name, PlayerState status, int victoryPoints,
 			int[] resources,int knightAmount, int[] devCards,boolean longestTR, boolean biggestKP, Integer sendToPlayerID) {
 		ProtocolResource pResource;
@@ -250,6 +313,11 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Builds the.
+	 *
+	 * @param building the building
+	 */
 	public void build(ProtocolBuilding building) {
 		ProtocolBuild pb = new ProtocolBuild(building);
 		Response r = new Response();
@@ -262,6 +330,13 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Costs.
+	 *
+	 * @param playerID the player ID
+	 * @param costs the costs
+	 * @param sendToPlayer the send to player
+	 */
 	public void costs(int playerID, int[] costs,int sendToPlayer) {
 		ProtocolResource pResource;
 		if (costs.length != 5) {
@@ -280,6 +355,12 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Victory.
+	 *
+	 * @param message the message
+	 * @param winner_id the winner id
+	 */
 	public void victory(String message, int winner_id) {
 		ProtocolVictory pv = new ProtocolVictory(message, winner_id);
 		Response r = new Response();
@@ -293,6 +374,13 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Robber movement.
+	 *
+	 * @param player_id the player id
+	 * @param location_id the location id
+	 * @param victim_id the victim id
+	 */
 	public void robberMovement(int player_id, String location_id, Integer victim_id) {
 		Index location = ProtocolToModel.getProtocolOneIndex(location_id);
 		ProtocolRobberMovement pm = new ProtocolRobberMovement(player_id, location, victim_id);
@@ -308,6 +396,14 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Trade preview.
+	 *
+	 * @param playerID the player ID
+	 * @param tradeID the trade ID
+	 * @param offer the offer
+	 * @param demand the demand
+	 */
 	public void tradePreview(int playerID, int tradeID, int[] offer, int[] demand) {
 		ProtocolResource pOff = ModelToProtocol.convertToProtocolResource(offer);
 		ProtocolResource pDem = ModelToProtocol.convertToProtocolResource(demand);
@@ -323,6 +419,13 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Trade confirmation.
+	 *
+	 * @param player_id the player id
+	 * @param trade_id the trade id
+	 * @param accepted the accepted
+	 */
 	public void tradeConfirmation(int player_id, int trade_id, boolean accepted) {
 		ProtocolTradeConfirmation pc = new ProtocolTradeConfirmation(player_id, trade_id, accepted);
 		Response r = new Response();
@@ -335,6 +438,12 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Trade is canceled.
+	 *
+	 * @param player_id the player id
+	 * @param trade_id the trade id
+	 */
 	public void tradeIsCanceled(int player_id, int trade_id) {
 		ProtocolTradeCancellation ptic = new ProtocolTradeCancellation(player_id, trade_id);
 		Response r = new Response();
@@ -347,6 +456,12 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Trade is completed.
+	 *
+	 * @param player_id the player id
+	 * @param tradePartner_id the trade partner id
+	 */
 	public void tradeIsCompleted(int player_id, int tradePartner_id) {
 		ProtocolTradeCompletion ptico = new ProtocolTradeCompletion(player_id, tradePartner_id);
 		Response r = new Response();
@@ -360,6 +475,14 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Builds the village.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
+	 * @param playerID the player ID
+	 */
 	public void buildVillage(int x, int y, int dir, int playerID) {
 		String location = ModelToProtocol.getCornerID(x, y, dir);
 		Index[] locationIndex = ModelToProtocol.convertCornerIndex(location);
@@ -376,6 +499,14 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Builds the street.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
+	 * @param playerID the player ID
+	 */
 	public void buildStreet(int x, int y, int dir, int playerID) {
 		String location = ModelToProtocol.getEdgeID(x, y, dir);
 		Index[] locationIndex = ModelToProtocol.convertToEdgeIndex(location);
@@ -392,6 +523,14 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Builds the city.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
+	 * @param playerID the player ID
+	 */
 	public void buildCity(int x, int y, int dir, int playerID) {
 		String location = ModelToProtocol.getCornerID(x, y, dir);
 		Index[] locationIndex = ModelToProtocol.convertCornerIndex(location);
@@ -408,6 +547,11 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Biggest knight prowess.
+	 *
+	 * @param player_id the player id
+	 */
 	public void biggestKnightProwess(int player_id) {
 		ProtocolLargestArmy pbkp = new ProtocolLargestArmy(player_id);
 		Response r = new Response();
@@ -421,6 +565,11 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Longest road.
+	 *
+	 * @param player_id the player id
+	 */
 	public void longestRoad(Integer player_id) {
 		ProtocolLongestRoad plr = new ProtocolLongestRoad(player_id);
 		Response r = new Response();
@@ -434,6 +583,12 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Invention card played.
+	 *
+	 * @param resource the resource
+	 * @param player_id the player id
+	 */
 	public void inventionCardPlayed(int[] resource, Integer player_id) {
 		ProtocolResource pr = ModelToProtocol.getResources(resource);
 		ProtocolPlayInventionCard pici = new ProtocolPlayInventionCard(player_id, pr);
@@ -447,6 +602,12 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Monopoly card played.
+	 *
+	 * @param resourceType the resource type
+	 * @param threadID the thread ID
+	 */
 	public void monopolyCardPlayed(ResourceType resourceType, int threadID) {
 
 		ProtocolPlayMonopolyCard pmci = new ProtocolPlayMonopolyCard(threadID, resourceType);
@@ -461,6 +622,13 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Knight card played.
+	 *
+	 * @param threadID the thread ID
+	 * @param location the location
+	 * @param victimID the victim ID
+	 */
 	public void knightCardPlayed(int threadID, String location, Integer victimID) {
 		Index locationIndex = ProtocolToModel.getProtocolOneIndex(location);
 		ProtocolPlayKnightCard ppkc = new ProtocolPlayKnightCard(threadID, locationIndex, victimID);
@@ -474,6 +642,17 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Road building card played.
+	 *
+	 * @param threadID the thread ID
+	 * @param x1 the x 1
+	 * @param y1 the y 1
+	 * @param dir1 the dir 1
+	 * @param x2 the x 2
+	 * @param y2 the y 2
+	 * @param dir2 the dir 2
+	 */
 	public void roadBuildingCardPlayed(int threadID, int x1, int y1, int dir1, int x2, int y2, int dir2) {
 		String location1 = ModelToProtocol.getEdgeID(x1, y1, dir1);
 		String location2 = ModelToProtocol.getEdgeID(x2, y2, dir2);
@@ -491,6 +670,12 @@ public class ServerOutputHandler {
 
 	}
 
+	/**
+	 * Server confirm.
+	 *
+	 * @param server_response the server response
+	 * @param threadPlayerID the thread player ID
+	 */
 	public void serverConfirm(String server_response, int threadPlayerID) {
 		ProtocolServerResponse psc = new ProtocolServerResponse(server_response);
 		try {
@@ -501,6 +686,12 @@ public class ServerOutputHandler {
 		}
 	}
 
+	/**
+	 * Bought development card.
+	 *
+	 * @param player_id the player id
+	 * @param devCard the dev card
+	 */
 	public void boughtDevelopmentCard(int player_id, DevelopmentCard devCard) {
 		CardType pdc;
 		if (devCard == null){

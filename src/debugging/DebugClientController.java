@@ -27,6 +27,7 @@ import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 public class DebugClientController extends Thread {
 	private static Logger logger = LogManager.getLogger(DebugClientController.class.getSimpleName());
 	private Socket socket;
@@ -127,11 +128,21 @@ public class DebugClientController extends Thread {
 	@FXML
 	private TextArea textField;
 
+	/**
+	 * Buy it.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void buyIt(ActionEvent event) {
 
 	}
 
+	/**
+	 * Chat handle.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void chatHandle(ActionEvent event) {
 
@@ -151,42 +162,82 @@ public class DebugClientController extends Thread {
 		}
 	}
 
+	/**
+	 * Connect to server.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void connectToServer(ActionEvent event) {
 		start();
 		connectButton.setDisable(true);
 	}
 
+	/**
+	 * End turn doit.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void endTurnDoit(ActionEvent event) {
 
 	}
 
+	/**
+	 * Export to TXT.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void exportToTXT(ActionEvent event) {
 
 	}
 
+	/**
+	 * Handle build button.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleBuildButton(ActionEvent event) {
 
 	}
 
+	/**
+	 * Handle D iceroll.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleDIceroll(ActionEvent event) {
 
 	}
 
+	/**
+	 * Handle move robber.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleMoveRobber(ActionEvent event) {
 
 	}
 
+	/**
+	 * Handle start button.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleStartButton(ActionEvent event) {
 
 	}
 
+	/**
+	 * Hello handle.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void helloHandle(ActionEvent event) {
 		ProtocolHello ph;
@@ -205,26 +256,49 @@ public class DebugClientController extends Thread {
 		}
 	}
 
+	/**
+	 * Lose torobber.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void loseTorobber(ActionEvent event) {
 
 	}
 
+	/**
+	 * Player handle.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void playerHandle(ActionEvent event) {
 
 	}
 
+	/**
+	 * Quick start.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void quickStart(ActionEvent event) {
 
 	}
 
+	/**
+	 * Random JSO noutput.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void randomJSONoutput(ActionEvent event) {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 		try {
@@ -246,6 +320,11 @@ public class DebugClientController extends Thread {
 
 	}
 
+	/**
+	 * Run debug client.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void runDebugClient() throws IOException {
 		String line;
 		while ((line = reader.readLine()) != null) {
@@ -253,6 +332,12 @@ public class DebugClientController extends Thread {
 		}
 	}
 
+	/**
+	 * Write.
+	 *
+	 * @param s the s
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void write(String s) throws IOException {
 		if (writer == null) {
 			textField.appendText("Not connected to server.\n");
@@ -263,6 +348,9 @@ public class DebugClientController extends Thread {
 		}
 	}
 
+	/**
+	 * Stop debug client.
+	 */
 	public void stopDebugClient() {
 		try {
 			socket.close();

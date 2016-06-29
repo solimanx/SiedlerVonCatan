@@ -21,6 +21,7 @@ import protocol.object.ProtocolPlayer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
 public class PlayerProfileController {
 	private static Logger logger = LogManager.getLogger(PlayerProfileController.class.getSimpleName());
 	private ViewController viewController;
@@ -57,10 +58,18 @@ public class PlayerProfileController {
 
 	private ObservableList<TablePlayer> players = FXCollections.observableArrayList();
 
+	/**
+	 * Sets the server color answer.
+	 *
+	 * @param server_response the new server color answer
+	 */
 	public void setServerColorAnswer(String server_response) {
 		serverColorAnswer.setText(server_response);
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	public void initialize() {
 		playerName.setPromptText("Name in Game (required)");
@@ -73,10 +82,18 @@ public class PlayerProfileController {
 		playerTable.setItems(players);
 	}
 
+	/**
+	 * Sets the view controller.
+	 *
+	 * @param viewController the new view controller
+	 */
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
 
+	/**
+	 * Handle send button.
+	 */
 	@FXML
 	private void handleSendButton() {
 		Color chosenColor = playerColor.getValue();
@@ -95,6 +112,9 @@ public class PlayerProfileController {
 		}
 	}
 
+	/**
+	 * Handle ready button.
+	 */
 	@FXML
 	private void handleReadyButton() {
 		viewController.getClientController().sendReady();
@@ -104,6 +124,14 @@ public class PlayerProfileController {
 	// // TODO deletePlayer Method!
 	// }
 
+	/**
+	 * Update player.
+	 *
+	 * @param threadID the thread ID
+	 * @param name the name
+	 * @param color the color
+	 * @param status the status
+	 */
 	public void updatePlayer(int threadID, String name, Color color, PlayerState status) {
 		Boolean playerFound = false;
 		for (TablePlayer playersEntry : players) {

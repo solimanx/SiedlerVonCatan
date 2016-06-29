@@ -3,6 +3,7 @@ package protocol.clientinstructions.trade;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Handel abschließen(Complete trading)</b>
  * <p>
@@ -21,17 +22,33 @@ public class ProtocolTradeComplete {
 
 	private int tradePartnerID;
 
+	/**
+	 * Instantiates a new protocol trade complete.
+	 *
+	 * @param tradeID the trade ID
+	 * @param tradePartnerID the trade partner ID
+	 */
 	public ProtocolTradeComplete(int tradeID, int tradePartnerID) {
 
 		this.tradeID = tradeID;
 		this.tradePartnerID = tradePartnerID;
 	}
 
+	/**
+	 * Gets the trade ID.
+	 *
+	 * @return the trade ID
+	 */
 	public int getTradeID() {
 
 		return tradeID;
 	}
 
+	/**
+	 * Gets the trade partner ID.
+	 *
+	 * @return the trade partner ID
+	 */
 	public int getTradePartnerID() {
 
 		return tradePartnerID;

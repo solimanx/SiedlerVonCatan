@@ -2,6 +2,7 @@ package enums;
 
 import com.google.gson.annotations.SerializedName;
 
+// TODO: Auto-generated Javadoc
 public enum PlayerState {
 	@SerializedName("Spiel starten") GAME_STARTING("Setting up"),
 
@@ -30,15 +31,28 @@ public enum PlayerState {
 
 	private String value;
 
+	/**
+	 * Instantiates a new player state.
+	 *
+	 * @param value the value
+	 */
 	PlayerState(String value) {
 		this.value = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Enum#toString()
+	 */
 	@Override
 	public String toString() {
 		return this.getValue();
 	}
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	private String getValue() {
 
 		return value;

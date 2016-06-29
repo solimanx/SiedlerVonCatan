@@ -13,6 +13,9 @@ import com.google.gson.annotations.Since;
 @Since(0.1)
 public class ProtocolDiceRollRequest {
 
+	/**
+	 * Instantiates a new protocol dice roll request.
+	 */
 	public ProtocolDiceRollRequest() {
 
 	}

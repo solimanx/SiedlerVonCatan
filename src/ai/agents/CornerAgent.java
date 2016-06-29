@@ -44,6 +44,13 @@ public class CornerAgent {
 	private Board board;
 	private AdvancedAI aai;
 
+	/**
+	 * Instantiates a new corner agent.
+	 *
+	 * @param loc the loc
+	 * @param board the board
+	 * @param aai the aai
+	 */
 	public CornerAgent(int[] loc, Board board, AdvancedAI aai) {
 		this.aai = aai;
 		this.board = board;
@@ -93,6 +100,8 @@ public class CornerAgent {
 
 	/**
 	 * Returns the coordinates of the highest utility road.
+	 *
+	 * @return the best road
 	 */
 	public int[] getBestRoad() {
 		int max = edgeUtility[0];
@@ -111,6 +120,8 @@ public class CornerAgent {
 	 * Adds all the factors together to calculate the utility for placing the
 	 * initial settlement, the higher the utility, the higher the chance to be
 	 * picked by the AI as a spot to build on.
+	 *
+	 * @return the int
 	 */
 	public int calculateInitialVillageUtility() {
 		if (isBlocked()) {
@@ -156,6 +167,8 @@ public class CornerAgent {
 	/**
 	 * Returns false if the corner can be build upon, otherwise true and
 	 * blocked. Blocked corners aren't taken into account.
+	 *
+	 * @return true, if is blocked
 	 */
 	protected boolean isBlocked() {
 		return (!state.equals(CornerStatus.EMPTY));
@@ -166,6 +179,8 @@ public class CornerAgent {
 	 * fields; and their type. Difference since we want to prioritize fields
 	 * that have different types over fields that have the same type, and then
 	 * since sea and desert fields are not benefitial they deduct value
+	 *
+	 * @return the int
 	 */
 	protected int landDiversity() {
 		int utility = 0;
@@ -208,6 +223,8 @@ public class CornerAgent {
 	/**
 	 * Returns a utility number depending on the type of harbour surrounds the
 	 * corner; 2to1 harbours preferred over 3to1 harbours.
+	 *
+	 * @return the int
 	 */
 	protected int harbourDiversity() {
 		int utility = 0;
@@ -237,6 +254,8 @@ public class CornerAgent {
 	/**
 	 * Adds or deducts utility depending on the probability to roll the number
 	 * set on the field.
+	 *
+	 * @return the int
 	 */
 	protected int rollProbability() {
 		Double diversity = 0.0;
@@ -255,6 +274,8 @@ public class CornerAgent {
 
 	/**
 	 * Calculates whether there is an ore/corn bonus.
+	 *
+	 * @return the int
 	 */
 	protected int resourceBonus() {
 		int bonus = 0;
@@ -289,24 +310,49 @@ public class CornerAgent {
 		return bonus;
 	}
 
+	/**
+	 * Sets the difference.
+	 *
+	 * @param i the new difference
+	 */
 	private void setDifference(int i) {
 		difference = i;
 
 	}
 
+	/**
+	 * Gets the location.
+	 *
+	 * @return the location
+	 */
 	public int[] getLocation() {
 		return location;
 	}
 
+	/**
+	 * Gets the location string.
+	 *
+	 * @return the location string
+	 */
 	// DEBUG
 	public String getLocationString() {
 		return "[" + location[0] + "," + location[1] + "," + location[2] + "]";
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public String getID() {
 		return id;
 	}
 
+	/**
+	 * Gets the fields.
+	 *
+	 * @return the fields
+	 */
 	public Field[] getFields() {
 		return f;
 	}

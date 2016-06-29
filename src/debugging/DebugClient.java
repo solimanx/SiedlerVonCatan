@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
 /**
  * To "illegaly" test sending JSONs, and figuring out how the test server
  * responds.
@@ -18,6 +19,11 @@ public class DebugClient extends Application {
 	private static Logger logger = LogManager.getLogger(DebugClient.class.getSimpleName());
 	DebugClientController dcc;
 
+	/**
+	 * Instantiates a new debug client.
+	 *
+	 * @param primaryStage the primary stage
+	 */
 	public DebugClient(Stage primaryStage) {
 		System.out.println("Running debugging/testing mode");
 		logger.info("Running debugging/testing mode");
@@ -32,6 +38,9 @@ public class DebugClient extends Application {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader();

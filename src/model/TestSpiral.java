@@ -10,6 +10,11 @@ import org.apache.logging.log4j.Logger;
 public class TestSpiral {
 	private static Logger logger = LogManager.getLogger(TestSpiral.class.getSimpleName());
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		Board board = new Board();
 		String result = "";

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 import enums.ResourceType;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>12.3 Monopol (monopoly card ) </b>
  * <p>
@@ -23,11 +24,22 @@ public class ProtocolPlayMonopolyCard {
 	@SerializedName("Rohstoff")
 	private ResourceType resourceType;
 
+	/**
+	 * Instantiates a new protocol play monopoly card.
+	 *
+	 * @param resourceType the resource type
+	 */
 	// Client to Server
 	public ProtocolPlayMonopolyCard(ResourceType resourceType) {
 		this.resourceType = resourceType;
 	}
 
+	/**
+	 * Instantiates a new protocol play monopoly card.
+	 *
+	 * @param playerID the player ID
+	 * @param resourceType the resource type
+	 */
 	// Server to Client
 	public ProtocolPlayMonopolyCard(Integer playerID, ResourceType resourceType) {
 		this.playerID = playerID;
@@ -35,10 +47,20 @@ public class ProtocolPlayMonopolyCard {
 
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public Integer getPlayerID() {
 		return playerID;
 	}
 
+	/**
+	 * Gets the resource type.
+	 *
+	 * @return the resource type
+	 */
 	public ResourceType getResourceType() {
 		return resourceType;
 	}

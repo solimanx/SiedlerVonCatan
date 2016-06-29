@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 /**
  * Contains all Board methods, retrieving fields, edges and corners.
  *
@@ -46,6 +47,9 @@ public class Board {
 	// CONSTRUCTORS
 	// ================================================================================
 
+	/**
+	 * Instantiates a new board.
+	 */
 	public Board() {
 		int r = DefaultSettings.BOARD_SIZE;
 		fields = new Field[r][r];
@@ -92,7 +96,7 @@ public class Board {
 
 	/**
 	 * Initialize String-to-axial coordinate HashMap and it's reverse, and
-	 * systematically assigns IDs to each field by it's coordinate
+	 * systematically assigns IDs to each field by it's coordinate.
 	 */
 	/*
 	 * Warning: Works as intended ONLY if amount of inner fields is not greater
@@ -137,7 +141,7 @@ public class Board {
 	/**
 	 * Initialize the corners systematically
 	 * <p>
-	 * //* @param corners
+	 * //* @param corners.
 	 */
 	private void initializeCorners() {
 		// temporary variables to make code appear clearer
@@ -174,7 +178,7 @@ public class Board {
 	/**
 	 * Initialize the edges systematically;
 	 * <p>
-	 * //* @param edges
+	 * //* @param edges.
 	 */
 	/*
 	 * NW = north west, NE = north east, E = east
@@ -278,12 +282,11 @@ public class Board {
 	// ================================================================================
 
 	/**
-	 * Returns field given axial coordinates, if field doesn't exist then null
+	 * Returns field given axial coordinates, if field doesn't exist then null.
 	 *
-	 * @param aX
-	 *            Field axial x-coordinate
-	 * @param aY
-	 *            Field axial y-coordinate
+	 * @param aX            Field axial x-coordinate
+	 * @param aY            Field axial y-coordinate
+	 * @return the field at
 	 */
 
 	public Field getFieldAt(int aX, int aY) {
@@ -299,14 +302,12 @@ public class Board {
 
 	/**
 	 * Returns corner given axial coordinates and index(direction), if corner
-	 * doesn't exist then null
+	 * doesn't exist then null.
 	 *
-	 * @param aX
-	 *            Corner axial x-coordinate
-	 * @param aY
-	 *            Corner axial y-coordinate
-	 * @param dir
-	 *            Corner direction (0 = North, 1 = South)
+	 * @param aX            Corner axial x-coordinate
+	 * @param aY            Corner axial y-coordinate
+	 * @param dir            Corner direction (0 = North, 1 = South)
+	 * @return the corner at
 	 */
 
 	public Corner getCornerAt(int aX, int aY, int dir) {
@@ -322,14 +323,12 @@ public class Board {
 
 	/**
 	 * Returns edge given axial coordinates and index(direction), if edge
-	 * doesn't exist then null
+	 * doesn't exist then null.
 	 *
-	 * @param aX
-	 *            Edge axial x-coordinate
-	 * @param aY
-	 *            Edge axial y-coordinate
-	 * @param dir
-	 *            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
+	 * @param aX            Edge axial x-coordinate
+	 * @param aY            Edge axial y-coordinate
+	 * @param dir            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
+	 * @return the edge at
 	 */
 
 	public Edge getEdgeAt(int aX, int aY, int dir) {
@@ -344,7 +343,11 @@ public class Board {
 	}
 
 	/**
-	 * Returns fields by normal array index
+	 * Returns fields by normal array index.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the field
 	 */
 
 	@Deprecated
@@ -353,7 +356,12 @@ public class Board {
 	}
 
 	/**
-	 * Returns corners by normal array index and direction
+	 * Returns corners by normal array index and direction.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
+	 * @return the corner
 	 */
 
 	@Deprecated
@@ -362,7 +370,12 @@ public class Board {
 	}
 
 	/**
-	 * Returns edges array by normal array index and direction
+	 * Returns edges array by normal array index and direction.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param dir the dir
+	 * @return the edge
 	 */
 	@Deprecated
 	public Edge getEdge(int x, int y, int dir) {
@@ -370,7 +383,10 @@ public class Board {
 	}
 
 	/**
-	 * Returns a Player object
+	 * Returns a Player object.
+	 *
+	 * @param i the i
+	 * @return the player
 	 */
 
 	public PlayerModel getPlayer(int i) {
@@ -378,7 +394,9 @@ public class Board {
 	}
 
 	/**
-	 * Returns the amount of players
+	 * Returns the amount of players.
+	 *
+	 * @return the amount players
 	 */
 	public int getAmountPlayers() {
 		return this.players.length;
@@ -386,6 +404,8 @@ public class Board {
 
 	/**
 	 * Returns bandit.
+	 *
+	 * @return the bandit
 	 */
 
 	public String getBandit() {
@@ -393,9 +413,9 @@ public class Board {
 	}
 
 	/**
-	 * Sets bandit location
+	 * Sets bandit location.
 	 *
-	 * @param banditLocation
+	 * @param banditLocation the new bandit
 	 */
 
 	public void setBandit(String banditLocation) {
@@ -404,10 +424,12 @@ public class Board {
 	}
 
 	/**
-	 * @param i
-	 * @param j
-	 * @param resourceType
-	 * @param diceIndex
+	 * Sets the field.
+	 *
+	 * @param i the i
+	 * @param j the j
+	 * @param resourceType the resource type
+	 * @param diceIndex the dice index
 	 */
 	@Deprecated
 	public void setField(int i, int j, ResourceType resourceType, Integer diceIndex) {
@@ -417,12 +439,12 @@ public class Board {
 	}
 
 	/**
-	 * @param i
-	 *            axial X
-	 * @param j
-	 *            axial Y
-	 * @param resourceType
-	 * @param diceIndex
+	 * Sets the field at.
+	 *
+	 * @param i            axial X
+	 * @param j            axial Y
+	 * @param resourceType the resource type
+	 * @param diceIndex the dice index
 	 */
 	public void setFieldAt(int i, int j, ResourceType resourceType, Integer diceIndex) {
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -437,20 +459,14 @@ public class Board {
 	}
 
 	/**
-	 * Sets corner
+	 * Sets corner.
 	 *
-	 * @param i
-	 *            corner axial x
-	 * @param j
-	 *            corner axial y
-	 * @param k
-	 *            corner direction
-	 * @param status
-	 *            corner status
-	 * @param hstatus
-	 *            corner harbourstatus
-	 * @param ownerID
-	 *            corner owner
+	 * @param i            corner axial x
+	 * @param j            corner axial y
+	 * @param k            corner direction
+	 * @param status            corner status
+	 * @param hstatus            corner harbourstatus
+	 * @param ownerID            corner owner
 	 */
 	@Deprecated
 	public void setCorner(int i, int j, int k, CornerStatus status, HarbourStatus hstatus, int ownerID) {
@@ -482,7 +498,7 @@ public class Board {
 	}
 
 	/**
-	 * Return ID to Coordinate map
+	 * Return ID to Coordinate map.
 	 *
 	 * @return the stringToCoordMap
 	 */
@@ -491,7 +507,7 @@ public class Board {
 	}
 
 	/**
-	 * Return Coordinate to ID map
+	 * Return Coordinate to ID map.
 	 *
 	 * @return the coordToStringMap
 	 */
@@ -499,16 +515,28 @@ public class Board {
 		return coordToStringMap;
 	}
 
+	/**
+	 * Gets the c map.
+	 *
+	 * @return the c map
+	 */
 	public static Map<String, int[]> getCMap() {
 		return cMap;
 
 	}
 
+	/**
+	 * Gets the e map.
+	 *
+	 * @return the e map
+	 */
 	public static Map<String, int[]> getEMap() {
 		return eMap;
 	}
 
 	/**
+	 * Gets the dev card stack.
+	 *
 	 * @return returns the DevelopmentCardStack
 	 */
 	public DevelopmentCardsStack getDevCardStack() {
@@ -522,12 +550,11 @@ public class Board {
 	/**
 	 * Get neighbouring fields of the specified field with the following order:
 	 * <p>
-	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}
+	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}.
 	 *
-	 * @param aX
-	 *            Field axial x-coordinate
-	 * @param aY
-	 *            Field axial y-coordinate
+	 * @param aX            Field axial x-coordinate
+	 * @param aY            Field axial y-coordinate
+	 * @return the neighbouring fields
 	 */
 
 	public Field[] getNeighbouringFields(int aX, int aY) {
@@ -546,14 +573,12 @@ public class Board {
 	 * <p>
 	 * For Northern corner (i = 0): {NorthEast, South, NorthWest}
 	 * <p>
-	 * For Southern corner (i = 1): {North, SouthEast, SouthWest}
+	 * For Southern corner (i = 1): {North, SouthEast, SouthWest}.
 	 *
-	 * @param aX
-	 *            Corner axial x-coordinate
-	 * @param aY
-	 *            Corner axial y-coordinate
-	 * @param dir
-	 *            Corner index/direction (0 = North, 1 = South)
+	 * @param aX            Corner axial x-coordinate
+	 * @param aY            Corner axial y-coordinate
+	 * @param dir            Corner index/direction (0 = North, 1 = South)
+	 * @return the touching fields
 	 */
 
 	public Field[] getTouchingFields(int aX, int aY, int dir) {
@@ -582,14 +607,12 @@ public class Board {
 	 * <p>
 	 * For NorthEastern edge (i = 1): {NorthEast, SouthWest}
 	 * <p>
-	 * for Eastern edge (i = 2): {West, East}
+	 * for Eastern edge (i = 2): {West, East}.
 	 *
-	 * @param aX
-	 *            Edge axial x-coordinate
-	 * @param aY
-	 *            Edge axial y-coordinate
-	 * @param dir
-	 *            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
+	 * @param aX            Edge axial x-coordinate
+	 * @param aY            Edge axial y-coordinate
+	 * @param dir            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
+	 * @return the connected fields
 	 */
 
 	public Field[] getConnectedFields(int aX, int aY, int dir) {
@@ -620,12 +643,11 @@ public class Board {
 	 * Get all surrounding corners of a field with the following order:
 	 * <p>
 	 * <p>
-	 * {North, NorthEast, SouthEast, South, SouthWest, NorthWest}
+	 * {North, NorthEast, SouthEast, South, SouthWest, NorthWest}.
 	 *
-	 * @param aX
-	 *            Field axial x-coordinate
-	 * @param aY
-	 *            Field axial y-coordinate
+	 * @param aX            Field axial x-coordinate
+	 * @param aY            Field axial y-coordinate
+	 * @return the surrounding corners
 	 */
 
 	public Corner[] getSurroundingCorners(int aX, int aY) {
@@ -645,14 +667,12 @@ public class Board {
 	 * <p>
 	 * For Northern corner (i = 0): {North, SouthEast, SouthWest}
 	 * <p>
-	 * For Southern corner (i = 1): {NorthEast, South, NorthWest}
+	 * For Southern corner (i = 1): {NorthEast, South, NorthWest}.
 	 *
-	 * @param aX
-	 *            Corner axial x-coordinate
-	 * @param aY
-	 *            Corner axial y-coordinate
-	 * @param dir
-	 *            Corner index/direction (0 = North, 1 = South)
+	 * @param aX            Corner axial x-coordinate
+	 * @param aY            Corner axial y-coordinate
+	 * @param dir            Corner index/direction (0 = North, 1 = South)
+	 * @return the adjacent corners
 	 */
 
 	public Corner[] getAdjacentCorners(int aX, int aY, int dir) {
@@ -691,14 +711,12 @@ public class Board {
 	 * <p>
 	 * For NorthEastern edge (i = 1): {NorthWest, SouthEast}
 	 * <p>
-	 * for Eastern edge (i = 2): {North, South}
+	 * for Eastern edge (i = 2): {North, South}.
 	 *
-	 * @param aX
-	 *            Edge axial x-coordinate
-	 * @param aY
-	 *            Edge axial y-coordinate
-	 * @param dir
-	 *            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
+	 * @param aX            Edge axial x-coordinate
+	 * @param aY            Edge axial y-coordinate
+	 * @param dir            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
+	 * @return the attached corners
 	 */
 
 	public Corner[] getAttachedCorners(int aX, int aY, int dir) {
@@ -742,12 +760,11 @@ public class Board {
 	 * Get bordering edges of a field with the following order:
 	 * <p>
 	 * <p>
-	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}
+	 * {NorthEast, East, SouthEast, SouthWest, West, NorthWest}.
 	 *
-	 * @param aX
-	 *            Field axial x-coordinate
-	 * @param aY
-	 *            Field axial y-coordinate
+	 * @param aX            Field axial x-coordinate
+	 * @param aY            Field axial y-coordinate
+	 * @return the bordering edges
 	 */
 
 	public Edge[] getBorderingEdges(int aX, int aY) {
@@ -767,14 +784,12 @@ public class Board {
 	 * <p>
 	 * For Northern corner (i = 0): {North, SouthEast, SouthWest}
 	 * <p>
-	 * For Southern corner (i = 1): {NorthEast, South, NorthWest}
+	 * For Southern corner (i = 1): {NorthEast, South, NorthWest}.
 	 *
-	 * @param aX
-	 *            Corner axial x-coordinate
-	 * @param aY
-	 *            Corner axial y-coordinate
-	 * @param dir
-	 *            Corner index/direction (0 = North, 1 = South)
+	 * @param aX            Corner axial x-coordinate
+	 * @param aY            Corner axial y-coordinate
+	 * @param dir            Corner index/direction (0 = North, 1 = South)
+	 * @return the projecting edges
 	 */
 
 	public Edge[] getProjectingEdges(int aX, int aY, int dir) {
@@ -802,14 +817,12 @@ public class Board {
 	 * <p>
 	 * For NorthEastern edge (i = 1): {North, NorthEast, South, SouthWest}
 	 * <p>
-	 * for Eastern edge (i = 2): {NorthEast, SouthEast, SouthWest, NorthWest}
+	 * for Eastern edge (i = 2): {NorthEast, SouthEast, SouthWest, NorthWest}.
 	 *
-	 * @param aX
-	 *            Edge axial x-coordinate
-	 * @param aY
-	 *            Edge axial y-coordinate
-	 * @param dir
-	 *            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
+	 * @param aX            Edge axial x-coordinate
+	 * @param aY            Edge axial y-coordinate
+	 * @param dir            Edge index/direction (0 = NorthWest, 1 = NorthEast, 2 = East)
+	 * @return the linked edges
 	 */
 
 	public Edge[] getLinkedEdges(int aX, int aY, int dir) {
@@ -842,6 +855,12 @@ public class Board {
 	// HASHMAP RELATED
 	// ================================================================================
 
+	/**
+	 * Gets the field coordinates.
+	 *
+	 * @param f the f
+	 * @return the field coordinates
+	 */
 	public int[] getFieldCoordinates(String f) {
 
 		// filter bad input
@@ -853,7 +872,7 @@ public class Board {
 	}
 
 	/**
-	 * Get sequence of sea field ID's
+	 * Get sequence of sea field ID's.
 	 *
 	 * @return "ABCDEFGHIJKLMNOPQR"
 	 */
@@ -868,7 +887,7 @@ public class Board {
 	}
 
 	/**
-	 * Get sequence of non-sea field IDs
+	 * Get sequence of non-sea field IDs.
 	 *
 	 * @return "ABCDEFGHIJKLMNOPQRS"
 	 */
@@ -883,6 +902,12 @@ public class Board {
 
 	}
 
+	/**
+	 * Gets the direction.
+	 *
+	 * @param f the f
+	 * @return the direction
+	 */
 	@Deprecated
 	// MOVED TO HEXSERVICE
 	public int getDirection(String f) {
@@ -917,6 +942,11 @@ public class Board {
 	// VIEW
 	// ================================================================================
 
+	/**
+	 * Gets the all fields.
+	 *
+	 * @return the all fields
+	 */
 	// TODO FOR DEBUGGING ONLY
 	@Deprecated
 	public ArrayList<Field> getAllFields() {
@@ -940,6 +970,8 @@ public class Board {
 	 * // * @param u Field 1 x-coordinate // * @param v Field 1 y-coordinate
 	 * //* @param x Field 2 x-coordinate //* @param y Field 2 y-coordinate
 	 *
+	 * @param field1 the field 1
+	 * @param field2 the field 2
 	 * @return the water Field
 	 */
 
@@ -962,13 +994,11 @@ public class Board {
 	}
 
 	/**
-	 * Get Sea Field coordinates through two corners
+	 * Get Sea Field coordinates through two corners.
 	 *
-	 * @param corner1
-	 *            {i,j,k}
-	 * @param corner2
-	 *            {i,j,k}
-	 * @return
+	 * @param corner1            {i,j,k}
+	 * @param corner2            {i,j,k}
+	 * @return the harbour middlepoint
 	 */
 	public int[] getHarbourMiddlepoint(int[] corner1, int[] corner2) {
 		if (corner1.length == 3 && corner2.length == 3) {
@@ -1006,10 +1036,20 @@ public class Board {
 
 	}
 
+	/**
+	 * Sets the harbour corner.
+	 *
+	 * @param harbourCorners the new harbour corner
+	 */
 	public void setHarbourCorner(Corner[] harbourCorners) {
 		this.harbourCorners = harbourCorners;
 	}
 
+	/**
+	 * Gets the harbour corners.
+	 *
+	 * @return the harbour corners
+	 */
 	public Corner[] getHarbourCorners() {
 		return this.harbourCorners;
 	}

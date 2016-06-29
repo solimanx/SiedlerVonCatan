@@ -5,6 +5,7 @@ import com.google.gson.annotations.Since;
 
 import model.Index;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Ritter ausspielen(play the knight card)12.1</b>
  * <p>
@@ -25,12 +26,25 @@ public class ProtocolPlayKnightCard {
 	@SerializedName("Ziel")
 	private Integer victimID;
 
+	/**
+	 * Instantiates a new protocol play knight card.
+	 *
+	 * @param fieldID the field ID
+	 * @param target the target
+	 */
 	// Client to Server
 	public ProtocolPlayKnightCard(Index fieldID, Integer target) {
 		this.fieldID = fieldID;
 		this.victimID = target;
 	}
 
+	/**
+	 * Instantiates a new protocol play knight card.
+	 *
+	 * @param playerID the player ID
+	 * @param fieldID the field ID
+	 * @param victimID the victim ID
+	 */
 	// Server to Client
 	public ProtocolPlayKnightCard(Integer playerID, Index fieldID, Integer victimID) {
 		this.playerID = playerID;
@@ -39,14 +53,29 @@ public class ProtocolPlayKnightCard {
 
 	}
 
+	/**
+	 * Gets the location ID.
+	 *
+	 * @return the location ID
+	 */
 	public Index getLocationID() {
 		return fieldID;
 	}
 
+	/**
+	 * Gets the victim ID.
+	 *
+	 * @return the victim ID
+	 */
 	public Integer getVictimID() {
 		return victimID;
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public Integer getPlayerID() {
 		return playerID;
 	}

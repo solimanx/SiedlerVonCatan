@@ -5,6 +5,7 @@ import com.google.gson.annotations.Since;
 
 import model.Index;
 
+// TODO: Auto-generated Javadoc
 /**
  * <b>Gebäude (Buildings)</b>
  * <p>
@@ -26,20 +27,42 @@ public class ProtocolBuilding {
 	@SerializedName("Ort")
 	private Index[] locationID; // can be 2 or 3
 
+	/**
+	 * Instantiates a new protocol building.
+	 *
+	 * @param playerID the player ID
+	 * @param building the building
+	 * @param locationID the location ID
+	 */
 	public ProtocolBuilding(int playerID, String building, Index[] locationID) {
 		this.playerID = playerID;
 		this.building = building;
 		this.locationID = locationID;
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public int getPlayerID() {
 		return playerID;
 	}
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType() {
 		return building;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Index[] getID() {
 		return locationID;
 	}

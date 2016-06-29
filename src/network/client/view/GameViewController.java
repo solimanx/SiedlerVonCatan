@@ -66,6 +66,7 @@ import network.client.view.devcardview.DevCardViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
 
+// TODO: Auto-generated Javadoc
 public class GameViewController implements Initializable {
 
 	@FXML
@@ -283,14 +284,29 @@ public class GameViewController implements Initializable {
 
 	public boolean knight = false;
 
+	/**
+	 * Gets the trade view controller.
+	 *
+	 * @return the trade view controller
+	 */
 	public TradeViewController getTradeViewController() {
 		return tradeViewController;
 	}
 
+	/**
+	 * Sets the view controller.
+	 *
+	 * @param viewController the new view controller
+	 */
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
 
+	/**
+	 * Sets the checks if is street dev.
+	 *
+	 * @param isStreetDev the new checks if is street dev
+	 */
 	public void setIsStreetDev(Boolean isStreetDev) {
 		this.isStreetDevCard = isStreetDev;
 		Platform.runLater(new NewAlert("Street build Developement Card",
@@ -312,9 +328,9 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * draws and shows the board Pane with game board
+	 * draws and shows the board Pane with game board.
 	 *
-	 * @param stage
+	 * @param stage the stage
 	 */
 	public void startScene(Stage stage) {
 		this.gameStage = stage;
@@ -465,8 +481,10 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param text
-	 * @return
+	 * Generate transition.
+	 *
+	 * @param text the text
+	 * @return the fade transition
 	 */
 	private FadeTransition generateTransition(Text text) {
 		FadeTransition transition = new FadeTransition(new Duration(100), text);
@@ -484,14 +502,22 @@ public class GameViewController implements Initializable {
 		return transition;
 	}
 
+	/**
+	 * Gets the player names.
+	 *
+	 * @param playerID the player ID
+	 * @return the player names
+	 */
 	public String getPlayerNames(Integer playerID) {
 		return viewController.getClientController().getGameLogic().getBoard().getPlayer(playerID).getName();
 	}
 
 	/**
-	 * @param modelID
-	 * @param playerName
-	 * @param playerColor
+	 * Inits the player.
+	 *
+	 * @param modelID the model ID
+	 * @param playerName the player name
+	 * @param playerColor the player color
 	 */
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
 		if (modelID == viewController.getClientController().getOwnPlayerID()) {
@@ -530,6 +556,9 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * Start resource updater.
+	 */
 	public void startResourceUpdater() {
 		Thread th = new Thread(resourceUpdater);
 		th.setDaemon(true);
@@ -537,7 +566,7 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * Auxiliary method filling field color hashmap
+	 * Auxiliary method filling field color hashmap.
 	 */
 	private void initFieldColors() {
 		fieldColors.put(ResourceType.CLAY, Color.web("#A1887F"));
@@ -581,7 +610,9 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Handle end turn button.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void handleEndTurnButton(ActionEvent event) {
@@ -589,7 +620,9 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Handle roll dice button.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void handleRollDiceButton(ActionEvent event) {
@@ -597,8 +630,10 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param event
-	 * @throws IOException
+	 * Handle start trading button.
+	 *
+	 * @param event the event
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@FXML
 	void handleStartTradingButton(ActionEvent event) throws IOException {
@@ -619,12 +654,24 @@ public class GameViewController implements Initializable {
 		tradeStage.show();
 	}
 
+	/**
+	 * Handle buy card button.
+	 *
+	 * @param event the event
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	void handleBuyCardButton(ActionEvent event) throws IOException {
 		viewController.getClientController().requestBuyDevelopmentCard();
 		// playCardButton.setDisable(true);
 	}
 
+	/**
+	 * Handle play card button.
+	 *
+	 * @param event the event
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	void handlePlayCardButton(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
@@ -647,6 +694,12 @@ public class GameViewController implements Initializable {
 		}
 	}
 
+	/**
+	 * Handle help button.
+	 *
+	 * @param event the event
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	void handleHelpButton(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
@@ -663,6 +716,12 @@ public class GameViewController implements Initializable {
 		}
 	}
 
+	/**
+	 * Handle cheat button.
+	 *
+	 * @param event the event
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	void handleCheatButton(ActionEvent event) throws IOException {
 		Stage cheatStage = new Stage();
@@ -687,7 +746,9 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Send message.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void sendMessage(ActionEvent event) {
@@ -697,7 +758,9 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param villageCoordinates
+	 * Village click.
+	 *
+	 * @param villageCoordinates the village coordinates
 	 */
 	public void villageClick(int[] villageCoordinates) {
 		Polygon village = villages[villageCoordinates[0]][villageCoordinates[1]][villageCoordinates[2]];
@@ -713,7 +776,9 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * //* @param streetCoordinates
+	 * //* @param streetCoordinates.
+	 *
+	 * @param streetCoord the street coord
 	 */
 	public void streetClick(int[] streetCoord) {
 		if (isStreetDevCard && streetsSelected.size() <= 2) {
@@ -737,7 +802,10 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param fieldCoordinates
+	 * Field click.
+	 *
+	 * @param fieldCoordinates the field coordinates
+	 * @param knight the knight
 	 */
 	@SuppressWarnings("null")
 	public void fieldClick(int[] fieldCoordinates, boolean knight) {
@@ -785,7 +853,9 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param line
+	 * Receive chat message.
+	 *
+	 * @param line the line
 	 */
 	public void receiveChatMessage(String line) {
 		messages.appendText(line);
@@ -793,15 +863,12 @@ public class GameViewController implements Initializable {
 
 	/**
 	 * sets Street on coordinates u,v,dir to Player Color of Player with ID
-	 * modelID
+	 * modelID.
 	 *
-	 * @param u
-	 *            axial coordinate (e.g. -3)
-	 * @param v
-	 *            axial coordinate (e.g. -3)
-	 * @param dir
-	 *            coordinate (e.g. 1 | 2 | 0)
-	 * @param modelID
+	 * @param u            axial coordinate (e.g. -3)
+	 * @param v            axial coordinate (e.g. -3)
+	 * @param dir            coordinate (e.g. 1 | 2 | 0)
+	 * @param modelID the model ID
 	 */
 	public void setStreet(int u, int v, int dir, int modelID) {
 		Line street = streets[u + 3][v + 3][dir];
@@ -812,8 +879,10 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param u
-	 * @param v
+	 * Sets the bandit.
+	 *
+	 * @param u the u
+	 * @param v the v
 	 */
 	public void setBandit(int u, int v) {
 		bandit.setCenterX(fieldCoordinates[u + 3][v + 3][0]);
@@ -823,11 +892,13 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param u
-	 * @param v
-	 * @param dir
-	 * @param buildType
-	 * @param modelID
+	 * Sets the corner.
+	 *
+	 * @param u the u
+	 * @param v the v
+	 * @param dir the dir
+	 * @param buildType the build type
+	 * @param modelID the model ID
 	 */
 	public void setCorner(int u, int v, int dir, CornerStatus buildType, int modelID) {
 		if (buildType == enums.CornerStatus.VILLAGE) {
@@ -838,10 +909,12 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param u
-	 * @param v
-	 * @param dir
-	 * @param playerColor
+	 * Sets the village.
+	 *
+	 * @param u the u
+	 * @param v the v
+	 * @param dir the dir
+	 * @param playerColor the player color
 	 */
 	public void setVillage(int u, int v, int dir, Color playerColor) {
 		Polygon village = villages[u + 3][v + 3][dir];
@@ -855,6 +928,11 @@ public class GameViewController implements Initializable {
 		});
 	}
 
+	/**
+	 * City click.
+	 *
+	 * @param coordinates the coordinates
+	 */
 	private void cityClick(int[] coordinates) {
 
 		viewController.getClientController().requestBuildCity(coordinates[0], coordinates[1], coordinates[2]);
@@ -862,10 +940,12 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param u
-	 * @param v
-	 * @param resourceType
-	 * @param diceIndex
+	 * Sets the field.
+	 *
+	 * @param u the u
+	 * @param v the v
+	 * @param resourceType the resource type
+	 * @param diceIndex the dice index
 	 */
 	public void setField(int u, int v, ResourceType resourceType, Integer diceIndex) {
 		fields[u + 3][v + 3].setFill(imagePatterns.get(resourceType));
@@ -887,7 +967,9 @@ public class GameViewController implements Initializable {
 	/**
 	 * sets Harbour on a Field(u,v)
 	 * <p>
-	 * //* @param u //* @param v //* @param harbourType
+	 * //* @param u //* @param v //* @param harbourType.
+	 *
+	 * @param hCorners the new harbour
 	 */
 	public void setHarbour(Corner[] hCorners) {
 		for (int i = 0; i < hCorners.length; i += 2) {
@@ -913,10 +995,10 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * sets the amount of recource cards of self and other players
+	 * sets the amount of recource cards of self and other players.
 	 *
-	 * @param modelID
-	 * @param resources
+	 * @param modelID the model ID
+	 * @param resources the resources
 	 */
 	public void setResourceCards(int modelID, int[] resources) {
 		switch (playerIDtoViewPosition.get(modelID)) {
@@ -943,19 +1025,19 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * shows result of dice roll on game view
+	 * shows result of dice roll on game view.
 	 *
-	 * @param result
+	 * @param result the new dice roll result
 	 */
 	public void setDiceRollResult(int result) {
 		diceResult.setText(String.valueOf(result));
 	}
 
 	/**
-	 * sets the victory points in the game view to corresponding player
+	 * sets the victory points in the game view to corresponding player.
 	 *
-	 * @param modelID
-	 * @param victoryPoints
+	 * @param modelID the model ID
+	 * @param victoryPoints the victory points
 	 */
 	public void setVictoryPoints(int modelID, int victoryPoints) {
 		String victoryString = victoryPoints + " Victory Points";
@@ -978,8 +1060,10 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param modelID
-	 * @param state
+	 * Sets the player status.
+	 *
+	 * @param modelID the model ID
+	 * @param state the state
 	 */
 	public void setPlayerStatus(int modelID, PlayerState state) {
 		switch (playerIDtoViewPosition.get(modelID)) {
@@ -1040,6 +1124,9 @@ public class GameViewController implements Initializable {
 		}
 	}
 
+	/**
+	 * Sets the move robber state.
+	 */
 	public void setMoveRobberState() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Move the Robber");
@@ -1052,7 +1139,7 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * Auxiliary methode showing Robber Loss window
+	 * Auxiliary methode showing Robber Loss window.
 	 */
 	@FXML
 	private void setRobberLossState() {
@@ -1079,21 +1166,30 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * @param result
+	 * Robber loss.
+	 *
+	 * @param result the result
 	 */
 	public void robberLoss(int[] result) {
 		viewController.getClientController().robberLoss(result);
 	}
 
+	/**
+	 * Sets the server response.
+	 *
+	 * @param response the new server response
+	 */
 	public void setServerResponse(String response) {
 		this.response.set(response);
 	}
 
 	/**
-	 * @param u
-	 * @param v
-	 * @param dir
-	 * @param playerColor
+	 * Sets the city.
+	 *
+	 * @param u the u
+	 * @param v the v
+	 * @param dir the dir
+	 * @param playerColor the player color
 	 */
 	public void setCity(int u, int v, int dir, Color playerColor) {
 		Polygon city = cities[u + 3][v + 3][dir];
@@ -1103,6 +1199,11 @@ public class GameViewController implements Initializable {
 		city.setStroke(Color.BLACK);
 	}
 
+	/**
+	 * Sets the longest trade road.
+	 *
+	 * @param modelID the new longest trade road
+	 */
 	public void setLongestTradeRoad(int modelID) {
 		Platform.runLater(new Runnable() {
 			int modelID;
@@ -1140,6 +1241,11 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * Sets the greatest knight force.
+	 *
+	 * @param modelID the new greatest knight force
+	 */
 	public void setGreatestKnightForce(int modelID) {
 		Platform.runLater(new Runnable() {
 			int modelID;
@@ -1178,6 +1284,8 @@ public class GameViewController implements Initializable {
 	/**
 	 * Method showing a new window, which displays, who the winner of the game
 	 * is.
+	 *
+	 * @param winnerID the winner ID
 	 */
 	public void showVictory(int winnerID) {
 		String winnerName = viewController.getClientController().getGameLogic().getBoard().getPlayer(winnerID)
@@ -1217,6 +1325,11 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * Alert.
+	 *
+	 * @param message the message
+	 */
 	public void alert(String message) {
 		Platform.runLater(new Runnable() {
 			String msg;
@@ -1239,10 +1352,20 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * Checks if is knight.
+	 *
+	 * @return true, if is knight
+	 */
 	public boolean isKnight() {
 		return knight;
 	}
 
+	/**
+	 * Sets the knight.
+	 *
+	 * @param knight the new knight
+	 */
 	public void setKnight(boolean knight) {
 		this.knight = knight;
 	}
@@ -1282,11 +1405,20 @@ public class GameViewController implements Initializable {
 		String message;
 		String title;
 
+		/**
+		 * Instantiates a new new alert.
+		 *
+		 * @param title the title
+		 * @param message the message
+		 */
 		public NewAlert(String title, String message) {
 			this.title = title;
 			this.message = message;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run() {
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -1312,6 +1444,12 @@ public class GameViewController implements Initializable {
 		private List<Shape> villageFigures = new LinkedList<Shape>();
 		private List<Shape> cityFigures = new LinkedList<Shape>();
 
+		/**
+		 * Gets the view board.
+		 *
+		 * @param stage the stage
+		 * @return the view board
+		 */
 		public Pane getViewBoard(Stage stage) {
 			boardPane = new Pane();
 			boardCenter[0] = stage.getWidth() / 2;
@@ -1330,6 +1468,9 @@ public class GameViewController implements Initializable {
 			return boardPane;
 		}
 
+		/**
+		 * Inits the board.
+		 */
 		private void initBoard() {
 
 			for (int i = 0; i < 7; i++) {
@@ -1395,8 +1536,10 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * // * @param centerCoordinates
+		 * // * @param centerCoordinates.
 		 *
+		 * @param x the x
+		 * @param y the y
 		 * @return double array of coordinates of 6 Points (12 double values)
 		 *         calculates coordinates of Hexagon from given center
 		 *         coordinates
@@ -1412,6 +1555,14 @@ public class GameViewController implements Initializable {
 			return points;
 		}
 
+		/**
+		 * Creates a new ViewBoard object.
+		 *
+		 * @param i the i
+		 * @param j the j
+		 * @param k the k
+		 * @return the polygon
+		 */
 		private Polygon createVillage(int i, int j, int k) {
 			Polygon village;
 			if (k == 0) {
@@ -1428,11 +1579,11 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * draws a Circle with diceIndex
+		 * draws a Circle with diceIndex.
 		 *
-		 * @param u
-		 * @param v
-		 * @param diceIndex
+		 * @param u the u
+		 * @param v the v
+		 * @param diceIndex the dice index
 		 */
 		public void setFieldChip(int u, int v, int diceIndex) {
 			Text text = new Text("" + diceIndex);
@@ -1448,9 +1599,9 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * takes 6 coordinate pairs (x,y) and draws a Polygon hexagon
+		 * takes 6 coordinate pairs (x,y) and draws a Polygon hexagon.
 		 *
-		 * @param points
+		 * @param points the points
 		 * @return Polygon
 		 */
 		public Polygon drawHexagon(double[] points) {
@@ -1461,9 +1612,9 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * takes pair of coordinates as center point and draws a village
+		 * takes pair of coordinates as center point and draws a village.
 		 *
-		 * @param center
+		 * @param center the center
 		 * @return Polygon
 		 */
 		public Polygon drawVillage(double[] center) {
@@ -1474,9 +1625,9 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * Auxiliary method drawing cities
+		 * Auxiliary method drawing cities.
 		 *
-		 * @param center
+		 * @param center the center
 		 * @return Polygon city
 		 */
 		private Polygon drawCity(double[] center) {
@@ -1487,6 +1638,12 @@ public class GameViewController implements Initializable {
 			return city;
 		}
 
+		/**
+		 * Draw street.
+		 *
+		 * @param coordinates the coordinates
+		 * @return the line
+		 */
 		public Line drawStreet(double[] coordinates) {
 			Line street = new Line(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
 			street.setStrokeWidth(6.0);
@@ -1494,6 +1651,11 @@ public class GameViewController implements Initializable {
 			return street;
 		}
 
+		/**
+		 * Draw bandit.
+		 *
+		 * @return the circle
+		 */
 		public Circle drawBandit() {
 			Circle bandit = new Circle(25.0);
 			bandit.setFill(Color.BLACK);
@@ -1506,7 +1668,7 @@ public class GameViewController implements Initializable {
 		 * auxiliary method calculating center coordinates of every field.
 		 * windowsCenter is taken as center point of board
 		 *
-		 * @param windowCenter
+		 * @param windowCenter the window center
 		 */
 		private void calculateFieldCenters(double[] windowCenter) {
 			double x;
@@ -1523,6 +1685,9 @@ public class GameViewController implements Initializable {
 			}
 		}
 
+		/**
+		 * Calculate edge corners.
+		 */
 		private void calculateEdgeCorners() {
 			double x1;
 			double y1;
@@ -1587,7 +1752,7 @@ public class GameViewController implements Initializable {
 
 		/**
 		 * sets x-coordinate of unused corners to 0 fields with x-coordinate 0
-		 * are sea
+		 * are sea.
 		 */
 		private void filterUnusedCorners() {
 
@@ -1622,7 +1787,7 @@ public class GameViewController implements Initializable {
 
 		/**
 		 * sets x-coordinate of unused edges to 0; edges with x-coordinate 0
-		 * won't be initialized
+		 * won't be initialized.
 		 */
 		private void filterUnusedEdges() {
 			// row 0
@@ -1691,6 +1856,13 @@ public class GameViewController implements Initializable {
 
 		}
 
+		/**
+		 * Inits the self.
+		 *
+		 * @param ownPlayerId the own player id
+		 * @param name the name
+		 * @param color the color
+		 */
 		public void initSelf(int ownPlayerId, String name, enums.Color color) {
 			playerIDtoViewPosition.put(ownPlayerId, 0);
 			playerColors.put(0, color.getValue());
