@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import ai.AdvancedAI;
+import enums.CardType;
 import enums.ResourceType;
 import model.Board;
 import model.objects.Corner;
@@ -29,6 +30,8 @@ public class OpponentAgent {
 	private int[] initialRessources = { 0, 0, 0, 0, 0, 0, 0 };
 	private int amountPlayer;
 	private Board board;
+	private int[] playedDevCards = {0,0,0,0,0}; //{KNIGHT,INVENTION,STREET,MONOPOLY,VICTORYPOINT}
+	private int[] playerDevCards = {0,0,0,0}; // 4 player
 
 	
 	/**
@@ -221,7 +224,18 @@ public class OpponentAgent {
 		int result = 0;
 		result = 100 * opponents.get(playerID).getVictoryPoints();
 		result = result + 10 * ammountResourceCard(playerID);
-		//TODO devCard
+		for(int i = 0; i<playerDevCards[playerID]; i++){
+			switch (i) {
+			case 0: result = result + 30;
+				break;
+			case 1:
+				result = result + 55;
+				break;
+			default:
+				result = result + 95;
+				break;
+			}
+		}
 		
 		
 		return result;
@@ -240,6 +254,44 @@ public class OpponentAgent {
 		}
 		result = result - opponentsRessources[playerID][6];
 		return result;
+	}
+	
+	public void boughtDevCard(int boardPlayerID){
+		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
+		playerDevCards[playerID]++;
+	}
+	
+	
+	/** {KNIGHT,INVENTION,STREET,MONOPOLY,VICTORYPOINT}
+	 * 
+	 * @param type
+	 */
+	public void devCardPlayed(CardType type, int boardPlayerID){
+		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
+		if(playerDevCards[playerID] != 0){
+			playerDevCards[playerID]--;
+		} else {
+			throw new IllegalStateException("more development cards played, than the player has");
+		}
+		switch (type) {
+		case KNIGHT:
+			playedDevCards[0]++;
+			break;
+		case INVENTION:
+			playedDevCards[1]++;
+			break;
+		case STREET:
+			playedDevCards[2]++;
+			break;
+		case MONOPOLY:
+			playedDevCards[3]++;
+			break;
+		case VICTORYPOINT:
+			playedDevCards[4]++;
+			break;
+		default:
+			throw new IllegalArgumentException("no such card implemented");
+		}
 	}
 
 
