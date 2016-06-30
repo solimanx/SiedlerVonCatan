@@ -906,7 +906,7 @@ public class ClientController {
 		if (modelID == 0) {
 			viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
 		} else {
-			viewController.getGameViewController().getTradeViewController().cancelOffer(modelID);
+			viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
 		}
 	}
 

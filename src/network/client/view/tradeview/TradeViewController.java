@@ -133,6 +133,7 @@ public class TradeViewController {
 		this.viewController = viewController;
 		this.stage = stage;
 		start(resources);
+		cancelOffer.setDisable(true);
 		foreignTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		foreignTrades.setItems(tradeList);
 		foreignTrades.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -172,7 +173,6 @@ public class TradeViewController {
 		resultOffer = new int[5];
 		updateSpinner(selfResources, grid);
 		updateSpinner(selfResources, harbourGrid);
-		cancelOffer.setDisable(true);
 		if (viewController.getClientController().getGameLogic().hasOreHarbour(0)) {
 			oreHarbour.setSelected(true);
 		}
