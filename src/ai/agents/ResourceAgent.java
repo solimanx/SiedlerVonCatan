@@ -551,7 +551,11 @@ public class ResourceAgent {
             	maxIndex  = i;
             }
 		}
+		if (max == Integer.MIN_VALUE){
+			return null;
+		} else {
 		return validPositions.get(maxIndex);
+		}
 	}
 
 	private ArrayList<Corner> getPossibleVillages() {

@@ -140,9 +140,11 @@ public class AdvancedAI extends PrimitiveAI {
 		if (getMe().getAmountVillages() != 0){
 			if (resourceAgent.canBuildVillage()){
 				Corner bestCorner = resourceAgent.getBestVillage();
+				if (bestCorner != null){
 				int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
 				pO.requestBuildVillage(coords[0], coords[1], coords[2]);
 				resourceAgent.update();
+				}
 			}
 		}
 
