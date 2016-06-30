@@ -816,6 +816,10 @@ public class ClientController {
 		clientOutputHandler.acceptTrade(tradingID);
 	}
 
+	public void declineTrade(int tradeID) {
+		clientOutputHandler.declineTrade(tradeID);
+	}
+
 	/**
 	 * A Player has accepted your offer. Show acceptance on list
 	 *

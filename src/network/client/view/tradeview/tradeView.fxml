@@ -42,7 +42,8 @@
                               <HBox alignment="CENTER_RIGHT" spacing="20.0">
                                  <children>
                                     <Button fx:id="cancelTrade" mnemonicParsing="false" onAction="#handleCancelTrade" text="Cancel Trade" />
-                                    <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" text="Accept Trade" />
+                                    <Button fx:id="declineTrade" mnemonicParsing="false" onAction="#handleDeclineTrade" text="Decline Trade" />
+                                    <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" prefHeight="27.0" prefWidth="153.0" text="Accept Trade" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />

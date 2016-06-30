@@ -474,7 +474,7 @@ public class GameViewController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if (!newValue.equals("OK")) {
-					messages.appendText(newValue);
+					messages.appendText("\n" + newValue);
 				}
 			}
 		});
@@ -651,6 +651,7 @@ public class GameViewController implements Initializable {
 		// tradeStage.initModality(Modality.WINDOW_MODAL);
 		// tradeStage.initOwner(gameStage);
 		tradeViewController.start(selfResources);
+		tradeViewController.isPlayerTradingStatus.set((selfState == PlayerState.TRADING_OR_BUILDING) ? true : false);
 		tradeStage.show();
 	}
 
@@ -858,7 +859,7 @@ public class GameViewController implements Initializable {
 	 * @param line the line
 	 */
 	public void receiveChatMessage(String line) {
-		messages.appendText(line);
+		messages.appendText("\n" + line);
 	}
 
 	/**
