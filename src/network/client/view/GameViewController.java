@@ -1686,7 +1686,8 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * Calculate edge corners.
+		 * calculates the edge corners and saves them in
+		 * edgeCoordinate array. dependency: filled fieldCoordinates array
 		 */
 		private void calculateEdgeCorners() {
 			double x1;
