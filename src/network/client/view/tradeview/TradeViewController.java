@@ -99,11 +99,11 @@ public class TradeViewController {
 	private String selectedTrade;
 	private String selectedOffer;
 
-	private HashMap<String, Integer> stringToTradeID = new HashMap<String, Integer>();
-	private HashMap<String, Integer> acceptedOfferToModelID = new HashMap<String, Integer>();
-	private HashMap<Integer, String> tradeIDtoString = new HashMap<Integer, String>();
-	private HashMap<Integer, Integer> tradeIDtoModelID = new HashMap<Integer, Integer>();
-	private HashMap<Integer, String> playerIDtoString = new HashMap<Integer, String>();
+	public HashMap<String, Integer> stringToTradeID = new HashMap<String, Integer>();
+	public HashMap<String, Integer> acceptedOfferToModelID = new HashMap<String, Integer>();
+	public HashMap<Integer, String> tradeIDtoString = new HashMap<Integer, String>();
+	public HashMap<Integer, Integer> tradeIDtoModelID = new HashMap<Integer, Integer>();
+	public HashMap<Integer, String> playerIDtoString = new HashMap<Integer, String>();
 
 	private ViewController viewController;
 	private int ownTradeID = 0;
@@ -644,7 +644,7 @@ public class TradeViewController {
 		 */
 		@Override
 		public void run() {
-			ownOfferList.remove(string);
+			tradeList.remove(string);
 
 		}
 
