@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ai.agents.OpponentAgent;
 import ai.agents.ResourceAgent;
 import settings.DefaultSettings;
 
@@ -635,7 +636,7 @@ public class PrimitiveAI extends Thread {
 	 */
 	public ResourceAgent getResourceAgent() {
 		return null;
-		
+
 	}
 
 	/**
@@ -643,7 +644,7 @@ public class PrimitiveAI extends Thread {
 	 */
 	public void actuate() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -651,6 +652,11 @@ public class PrimitiveAI extends Thread {
 	 */
 	public void updateCards() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public OpponentAgent getOpponentAgent() {
+		return null;
+
 	}
 }

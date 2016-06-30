@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package ai;
 
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import enums.CardType;
 import enums.PlayerState;
+import enums.ResourceType;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
@@ -22,6 +23,8 @@ import parsing.Parser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
+
 import protocol.configuration.*;
 import protocol.connection.*;
 import protocol.dualinstructions.ProtocolPlayInventionCard;
@@ -35,6 +38,7 @@ import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.*;
+import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -194,6 +198,7 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.getResourceAgent().add(ai.getGl().getBoard().getCornerAt(coords[0], coords[1], coords[2]));
 			}
 			ai.updateVillage(coords[0], coords[1], coords[2], playerID);
+			ai.getOpponentAgent().CostsEnemy(playerID, DefaultSettings.VILLAGE_BUILD_COST);
 
 		} else if (building.getType().equals("Straße")) {
 			coords = ProtocolToModel.getEdgeCoordinates(building.getID());
@@ -204,6 +209,7 @@ public class AIInputHandler extends ClientInputHandler {
 			}
 
 			ai.updateRoad(coords[0], coords[1], coords[2], playerID);
+			ai.getOpponentAgent().CostsEnemy(playerID, DefaultSettings.STREET_BUILD_COST);
 
 		} else if (building.getType().equals("Stadt")) {
 			if (playerID == ai.getID()) {
@@ -211,6 +217,7 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.getMe().increaseAmountVillages();
 			}
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			ai.getOpponentAgent().CostsEnemy(playerID, DefaultSettings.CITY_BUILD_COST);
 		} else {
 			logger.warn("Throws new IllegalArgumentException \"Building type not defined\"");
 		}
@@ -242,8 +249,10 @@ public class AIInputHandler extends ClientInputHandler {
 			ai.getMe().incrementResources(gain);
 		}
 		// if it isn't me
+
 		else {
-			// TODO Store for strategy
+			int[] ressources = {resourceObtain.getResource().getWood(),resourceObtain.getResource().getClay(),resourceObtain.getResource().getOre(),resourceObtain.getResource().getWool(),resourceObtain.getResource().getCorn()};
+			ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
 		}
 
 	}
@@ -345,7 +354,8 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
-			// TODO / opponent agent
+			int[] ressources = {costs.getResource().getWood(),costs.getResource().getClay(),costs.getResource().getOre(),costs.getResource().getWool(),costs.getResource().getCorn()};
+			ai.getOpponentAgent().CostsEnemy(ID, ressources);
 		}
 
 	}
@@ -420,17 +430,21 @@ public class AIInputHandler extends ClientInputHandler {
 	 */
 	@Override
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
-		// TODO
+		//TODO
 
 		// Get ID and resources
 		int ID = inventionCardInfo.getPlayerID();
+
+		// opponent agent
+		ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new InventionCard());
 		}
 		// if it isn't me
 		else {
-			// TODO Store for strategy
+			int[] ressources = {inventionCardInfo.getResource().getWood(),inventionCardInfo.getResource().getClay(),inventionCardInfo.getResource().getOre(),inventionCardInfo.getResource().getWool(),inventionCardInfo.getResource().getCorn()};
+			ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
 		}
 
 	}
@@ -444,13 +458,15 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// Get ID and resources
 		int ID = monopolyCardInfo.getPlayerID();
+		//OpponentAgent
+		ai.getOpponentAgent().devCardPlayed(CardType.MONOPOLY, ID);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new MonopolyCard());
 		}
 		// if it isn't me
 		else {
-			// TODO Store for strategy
+			// massages as costs and obtain -> not necessary
 		}
 
 	}
@@ -464,13 +480,15 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// Get ID and resources
 		int ID = playKnightCard.getPlayerID();
+		//OpponentAgent
+		ai.getOpponentAgent().devCardPlayed(CardType.KNIGHT, ID);
 		ai.updateRobber(ProtocolToModel.getProtocolOneID(playKnightCard.getLocationID()));
 
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new KnightCard());
 			ai.getMe().incrementPlayedKnightCards();
-			
+
 		}
 		// if it isn't me
 		else {
@@ -488,6 +506,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// Get ID and resources
 		int ID = roadBuildingCardInfo.getPlayerID();
+		//OpponentAgent
+		ai.getOpponentAgent().devCardPlayed(CardType.STREET, ID);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new StreetBuildingCard());
@@ -507,6 +527,9 @@ public class AIInputHandler extends ClientInputHandler {
 		// Get ID and resources
 		int ID = boughtDevelopmentCard.getPlayerID();
 		CardType ct = boughtDevelopmentCard.getDevelopmentCard();
+
+		//OpponentAgent
+		ai.getOpponentAgent().boughtDevCard(ID);
 
 		// if it's me
 		if (ID == ai.getID()) {

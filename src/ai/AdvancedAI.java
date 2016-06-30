@@ -360,7 +360,7 @@ public class AdvancedAI extends PrimitiveAI {
 	public void decrementSingleResourceWeight(ResourceType resType, int change) {
 		if (resType != ResourceType.SEA){
 			initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
-		}		
+		}
 	}
 
 	/* (non-Javadoc)
@@ -378,5 +378,9 @@ public class AdvancedAI extends PrimitiveAI {
 	@Override
 	public void updateCards() {
 		cardAgent.updateCards();
+	}
+
+	public OpponentAgent getOpponentAgent(){
+		return opponentAgent;
 	}
 }

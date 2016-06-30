@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package ai.agents;
 
@@ -23,7 +23,7 @@ import settings.DefaultSettings;
 public class OpponentAgent {
 
 	private ArrayList<PlayerModel> opponents = new ArrayList<PlayerModel>();
-	
+
 	private int[][] opponentsRessources;
 	// {WOOD, CLAY, ORE, SHEEP, CORN, unknown, missing} missing is positive>0
 	// after robber loss
@@ -33,7 +33,7 @@ public class OpponentAgent {
 	private int[] playedDevCards = {0,0,0,0,0}; //{KNIGHT,INVENTION,STREET,MONOPOLY,VICTORYPOINT}
 	private int[] playerDevCards = {0,0,0,0}; // 4 player
 
-	
+
 	/**
 	 * Instantiates a new opponent agent.
 	 *
@@ -47,7 +47,7 @@ public class OpponentAgent {
 			opponentsRessources[i] = initialRessources;
 		}
 	}
-	
+
 	/**
 	 * converts the internal playerID.
 	 *
@@ -62,7 +62,7 @@ public class OpponentAgent {
 		}
 		throw new IllegalArgumentException("ID "+boardPlayerID+" doesn't exist");
 	}
-	
+
 	/**
 	 * Gets the internal player ID.
 	 *
@@ -82,8 +82,11 @@ public class OpponentAgent {
 	 * Ressource obtain enemy.
 	 */
 	// inputhandler an diese methode
-	public void ressourceObtainEnemy() {
-		
+	public void ressourceObtainEnemy(int boardPlayerID, int[] ressources) {
+		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
+		for(int i = 0; i<5; i++){
+			opponentsRessources[playerID][i] = opponentsRessources[playerID][i] + ressources[i];
+		}
 	}
 
 	/**
@@ -92,14 +95,15 @@ public class OpponentAgent {
 	 * @param playerID the player ID
 	 * @param costs the costs
 	 */
-	public void buildingCostEnemy(int playerID, int[] costs){
+	public void CostsEnemy(int boardPlayerID, int[] costs){
+		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
 		if(costs.length != 5){
 			throw new IllegalArgumentException("Illegal Argument in opponentAgent.buildingCostEnemy.");
 		}
 		decrementOpponentsResources(playerID, costs);
 	}
-	
-	
+
+
 	/**
 	 * use this method only with internal player ID's.
 	 *
@@ -128,6 +132,9 @@ public class OpponentAgent {
 				}
 			}
 		}
+		if (ammountResourceCard(playerID) == 0){
+			opponentsRessources[playerID] = initialRessources;
+		}
 	}
 
 	/**
@@ -136,7 +143,7 @@ public class OpponentAgent {
 	 * @param boardPlayerID the board player ID
 	 */
 	public void tradingEnemy(int boardPlayerID){
-		
+
 	}
 
 	/**
@@ -212,7 +219,7 @@ public class OpponentAgent {
 		}
 		//TODO andere spieler, die dadurch karten verlieren...
 	}
-	
+
 	/**
 	 * Player strength.
 	 *
@@ -236,11 +243,11 @@ public class OpponentAgent {
 				break;
 			}
 		}
-		
-		
+
+
 		return result;
 	}
-	
+
 	/**
 	 * Ammount resource card.
 	 *
@@ -255,15 +262,15 @@ public class OpponentAgent {
 		result = result - opponentsRessources[playerID][6];
 		return result;
 	}
-	
+
 	public void boughtDevCard(int boardPlayerID){
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
 		playerDevCards[playerID]++;
 	}
-	
-	
+
+
 	/** {KNIGHT,INVENTION,STREET,MONOPOLY,VICTORYPOINT}
-	 * 
+	 *
 	 * @param type
 	 */
 	public void devCardPlayed(CardType type, int boardPlayerID){
