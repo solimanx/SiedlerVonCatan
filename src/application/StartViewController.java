@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import ai.AdvancedAI;
 import ai.PrimitiveAI;
 import debugging.DebugClient;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -135,7 +136,14 @@ public class StartViewController {
 		RadioButton rb = (RadioButton) startMode.getSelectedToggle();
 		switch (rb.getText()) {
 		case "Client":
-			setClientController(new ClientController(primaryStage));
+			Thread clientThread = new Thread( new Runnable(){
+
+				@Override
+				public void run() {
+					setClientController(new ClientController(new Stage()));
+				}
+			});
+			Platform.runLater(clientThread);
 			break;
 		case "Server":
 			int port = serverPort.getText().equals("") ? 8080 : Integer.parseInt(serverPort.getText());
@@ -147,9 +155,9 @@ public class StartViewController {
 			});
 			serverThread.start();
 			stopServer.setDisable(false);
-			startClient.setDisable(true);
-			startAI.setDisable(true);
-			startButton.setDisable(true);
+//			startClient.setDisable(true);
+//			startAI.setDisable(true);
+//			startButton.setDisable(true);
 			serverPort.setDisable(true);
 			InetAddress IP;
 			try {
