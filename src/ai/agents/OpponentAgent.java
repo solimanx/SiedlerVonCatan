@@ -31,7 +31,7 @@ public class OpponentAgent {
 	private int amountPlayer;
 	private Board board;
 	private int[] playedDevCards = {0,0,0,0,0}; //{KNIGHT,INVENTION,STREET,MONOPOLY,VICTORYPOINT}
-	private int[] playerDevCards = {0,0,0,0}; // 4 player
+	private int[] playerDevCards = {0,0,0,0}; // 4 player, amount cards by player
 
 
 	/**

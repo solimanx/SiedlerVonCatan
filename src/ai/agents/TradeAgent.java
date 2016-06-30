@@ -1,6 +1,8 @@
 package ai.agents;
 
+import ai.AIInputHandler;
 import ai.AdvancedAI;
+import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -16,7 +18,7 @@ public class TradeAgent {
 
 	private AdvancedAI aai;
 	private ResourceAgent ra;
-	
+
 	/**
 	 * Instantiates a new trade agent.
 	 *
@@ -28,7 +30,7 @@ public class TradeAgent {
 		this.ra = ra;
 		updateAgent();
 	}
-	
+
 	/**
 	 * Calculate hand.
 	 *
@@ -110,4 +112,42 @@ public class TradeAgent {
 	public boolean hasThreeOneHarbour() {
 		return threeOneHarbour;
 	}
+
+
+	////////////////////
+	// PLAYER TRADING //
+	////////////////////
+
+	/**
+	 *
+	 * @param neededResources {WOOD, CLAY, ORE, SHEEP, CORN} amount of the needed resource
+	 */
+	public void tradeResourcesOffer(){
+		int[] costs;
+		int[] ownResources = aai.getResourceAgent().getOwnResources();
+		int[] resourcesNeeded = new int[5];
+		// currentBuyingFocus : 0 = Street; 1 = Village; 2 = City; 3 = DevCard
+		switch (aai.getResourceAgent().getCurrentBuyingFocus()) {
+		case 0: costs = DefaultSettings.STREET_BUILD_COST;
+			break;
+		case 1:
+			costs = DefaultSettings.VILLAGE_BUILD_COST;
+			break;
+		case 2:
+			costs = DefaultSettings.CITY_BUILD_COST;
+			break;
+		case 3 :
+			costs = DefaultSettings.DEVCARD_BUILD_COST;
+			break;
+		default:
+			throw new IllegalStateException("currentBuyingFocus must not be any other number than 0,1,2,3!!!!");
+		}
+		for(int i = 0; i<5; i++){
+			resourcesNeeded[i] = costs[i] - ownResources[i];
+			//TODO...
+		}
+
+	}
+
+
 }

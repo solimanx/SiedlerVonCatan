@@ -102,7 +102,7 @@ public class ResourceAgent {
 		}
 		/*
 		 * } else {
-		 * 
+		 *
 		 * }
 		 */
 	}
@@ -381,13 +381,13 @@ public class ResourceAgent {
 
 	/**
 	 * gets the possible trading route extensions for the AI.
-	 * 
+	 *
 	 * @return ArrayList<Object> with first: streetSet; second: ArrayList
 	 *         <Edge> best street suggestions
 	 */
 	public ArrayList<Object> getPossibleLTRExtensions() {
 		ArrayList<ArrayList<Edge>> bestNeighbours = new ArrayList<ArrayList<Edge>>();
-		
+
 		int[] maxIndex = { 0, 0 };
 		for (int i = 0; i < myStreetSets.size(); i++) {
 			ArrayList<Integer> longestStreets = new ArrayList<Integer>();
@@ -395,7 +395,7 @@ public class ResourceAgent {
 			ArrayList<Edge> bestEdges = new ArrayList<Edge>();
 			bestNeighbours.add(new ArrayList<Edge>());
 			StreetSet currStreetSet = null;
-			
+
 			currStreetSet = myStreetSets.get(i);
 			// berechne zuerst alle endständigen Straßen dieses Street Sets
 			for (int j = 0; j < currStreetSet.size(); j++) {
@@ -476,7 +476,7 @@ public class ResourceAgent {
 				currEndingStreets.clear();
 			}
 			// berechne gültige Nachbarn für die besten Edges
-			
+
 			Edge[] currEdges;
 			int[] currCoords;
 			for (int j = 0; j < bestEdges.size(); j++) {
@@ -535,6 +535,14 @@ public class ResourceAgent {
 			}
 		}
 		return greatestValue;
+	}
+
+	public int getCurrentBuyingFocus(){
+		return currentBuyingFocus;
+	}
+
+	public int[] getOwnResources(){
+		return ownResources;
 	}
 
 }
