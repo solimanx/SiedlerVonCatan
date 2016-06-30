@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import ai.AdvancedAI;
+import enums.CornerStatus;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
@@ -102,7 +103,7 @@ public class ResourceAgent {
 		}
 		/*
 		 * } else {
-		 *
+		 * 
 		 * }
 		 */
 	}
@@ -381,13 +382,13 @@ public class ResourceAgent {
 
 	/**
 	 * gets the possible trading route extensions for the AI.
-	 *
+	 * 
 	 * @return ArrayList<Object> with first: streetSet; second: ArrayList
 	 *         <Edge> best street suggestions
 	 */
 	public ArrayList<Object> getPossibleLTRExtensions() {
 		ArrayList<ArrayList<Edge>> bestNeighbours = new ArrayList<ArrayList<Edge>>();
-
+		
 		int[] maxIndex = { 0, 0 };
 		for (int i = 0; i < myStreetSets.size(); i++) {
 			ArrayList<Integer> longestStreets = new ArrayList<Integer>();
@@ -395,7 +396,7 @@ public class ResourceAgent {
 			ArrayList<Edge> bestEdges = new ArrayList<Edge>();
 			bestNeighbours.add(new ArrayList<Edge>());
 			StreetSet currStreetSet = null;
-
+			
 			currStreetSet = myStreetSets.get(i);
 			// berechne zuerst alle endständigen Straßen dieses Street Sets
 			for (int j = 0; j < currStreetSet.size(); j++) {
@@ -476,7 +477,7 @@ public class ResourceAgent {
 				currEndingStreets.clear();
 			}
 			// berechne gültige Nachbarn für die besten Edges
-
+			
 			Edge[] currEdges;
 			int[] currCoords;
 			for (int j = 0; j < bestEdges.size(); j++) {
@@ -535,6 +536,43 @@ public class ResourceAgent {
 			}
 		}
 		return greatestValue;
+	}
+
+	public Corner getBestVillage() {
+		ArrayList<Corner> validPositions = getPossibleVillages();
+		int max = Integer.MIN_VALUE;
+		int currVal;
+		int maxIndex = 0;
+		for (int i = 0; i < validPositions.size();i++){
+			
+			currVal = aai.getCornerAgentByID(validPositions.get(i).getCornerID()).calculateInitialVillageUtility();
+            if (currVal > max){
+            	max = currVal;
+            	maxIndex  = i;
+            }
+		}
+		return validPositions.get(maxIndex);
+	}
+
+	private ArrayList<Corner> getPossibleVillages() {
+		ArrayList<Corner> allCorners = new ArrayList<Corner>();
+		StreetSet currStreetSet;
+		Corner[] currNeighbours;
+		int[] currCoords;
+		for (int i = 0; i < myStreetSets.size();i++){
+			currStreetSet = myStreetSets.get(i);
+			for (int j = 0; j < currStreetSet.size();j++){
+				String id = currStreetSet.getEdgeAt(j).getEdgeID();
+				currCoords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
+				currNeighbours = aai.getGl().getBoard().getAttachedCorners(currCoords[0], currCoords[1], currCoords[2]);
+				for (int k = 0; k < currNeighbours.length; k++) {
+					if (currNeighbours[k] != null && currNeighbours[k].getStatus() == CornerStatus.EMPTY && !allCorners.contains(currNeighbours[k])){
+						allCorners.add(currNeighbours[k]);
+					}
+				}
+			}
+		}
+		return allCorners;
 	}
 
 	public int getCurrentBuyingFocus(){

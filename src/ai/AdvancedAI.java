@@ -14,6 +14,7 @@ import ai.agents.TradeAgent;
 import enums.CornerStatus;
 import enums.ResourceType;
 import model.HexService;
+import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import network.ModelToProtocol;
@@ -133,6 +134,15 @@ public class AdvancedAI extends PrimitiveAI {
 						resourceAgent.update();
 					}
 				}
+			}
+		}
+		
+		if (getMe().getAmountVillages() != 0){
+			if (resourceAgent.canBuildVillage()){
+				Corner bestCorner = resourceAgent.getBestVillage();
+				int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
+				pO.requestBuildVillage(coords[0], coords[1], coords[2]);
+				resourceAgent.update();
 			}
 		}
 
