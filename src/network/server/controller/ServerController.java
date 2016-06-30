@@ -225,7 +225,7 @@ public class ServerController {
 	 */
 	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
 		if (currentPlayer != null){
-			error(modelPlayerIdMap.get(currentThreadID),"Spiel bereits gestratet");
+			serverResponse(modelPlayerIdMap.get(currentThreadID),"Spiel bereits gestratet");
 		}
 
 		boolean colorAvailable = true;
@@ -670,7 +670,7 @@ public class ServerController {
 					statusUpdate(modelID);
 
 				} else {
-					error(modelID, "Kein Straßenbau möglich");
+					serverResponse(modelID, "Kein Straßenbau möglich");
 				}
 			}
 		}
@@ -1151,7 +1151,7 @@ public class ServerController {
 	public void endTurn(int playerID) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		if (modelID != currentPlayer) {
-			error(modelID, "Unzulässige Aktion");
+			serverResponse(modelID, "Unzulässige Aktion");
 		} else {
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 			pM.setPlayerState(PlayerState.WAITING);
@@ -1209,10 +1209,10 @@ public class ServerController {
 					statusUpdate(modelID);
 				}
 			} else {
-				error(modelID, "You haven't specified enough resources");
+				serverResponse(modelID, "You haven't specified enough resources");
 			}
 		} else {
-			error(modelID, "You dont have the specified resources");
+			serverResponse(modelID, "You dont have the specified resources");
 		}
 
 	}
@@ -1390,7 +1390,7 @@ public class ServerController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
-			error(modelID, "Ungültiger Spielzug");
+			serverResponse(modelID, "Ungültiger Spielzug");
 		} else {
 			Integer victimModelID;
 			if (victimThreadID != null) {
@@ -1428,7 +1428,7 @@ public class ServerController {
 				pM.setHasPlayedDevCard(true);
 				checkLargestArmy(modelID);
 			} else {
-				error(modelID, "Ungültige Eingabe");
+				serverResponse(modelID, "Ungültige Eingabe");
 			}
 		}
 
@@ -1448,7 +1448,7 @@ public class ServerController {
 	public void playStreetCard(int threadID, int x1, int y1, int dir1, int x2, int y2, int dir2) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
-			error(modelID, "Ungültiger Spielzug");
+			serverResponse(modelID, "Ungültiger Spielzug");
 		} else {
 			serverOutputHandler.roadBuildingCardPlayed(threadID, x1, y1, dir1, x2, y2, dir2);
 			// workaround:
@@ -1461,14 +1461,14 @@ public class ServerController {
 				serverOutputHandler.buildStreet(x1, y1, dir1, modelID);
 
 			} else {
-				error(modelID, "Eine Straße konnte nicht gebaut werden");
+				serverResponse(modelID, "Eine Straße konnte nicht gebaut werden");
 			}
 			if (gameLogic.checkBuildStreet(x2, y2, dir2, modelID)) {
 				serverResponse(modelID, "OK");
 				buildStreet(x2, y2, dir2, modelID);
 				serverOutputHandler.buildStreet(x2, y2, dir2, modelID);
 			} else {
-				error(modelID, "Eine Straße konnte nicht gebaut werden");
+				serverResponse(modelID, "Eine Straße konnte nicht gebaut werden");
 			}
 			// resourcen für gameLogic wieder abziehen
 			subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
@@ -1487,7 +1487,7 @@ public class ServerController {
 	public void playMonopolyCard(int threadID, ResourceType resType) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
-			error(modelID, "Ungültiger Spielzug");
+			serverResponse(modelID, "Ungültiger Spielzug");
 		} else {
 			int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
 			int[] obtain = new int[5];
@@ -1519,7 +1519,7 @@ public class ServerController {
 	public void playInventionCard(int threadID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
-			error(modelID, "Ungültiger Spielzug");
+			serverResponse(modelID, "Ungültiger Spielzug");
 		} else {
 			int resAmountCheck = 0;
 			int[] obtain = new int[5];
@@ -1535,7 +1535,7 @@ public class ServerController {
 				}
 			}
 			if (resAmountCheck > 2) {
-				error(modelID, "Du hast du viele Resourcen angegeben; jetzt bekommst du keine ;)");
+				serverResponse(modelID, "Du hast du viele Resourcen angegeben; jetzt bekommst du keine ;)");
 				resourceStackIncrease(obtain);
 			} else {
 				addToPlayersResource(modelID, obtain);
