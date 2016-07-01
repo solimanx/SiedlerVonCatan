@@ -295,9 +295,9 @@
             <TextField fx:id="messageInput" maxWidth="-Infinity" onAction="#sendMessage" prefWidth="500.0" promptText="Enter chat message and press Enter" styleClass="chat-area" />
          </children>
       </VBox>
-      <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="95.0" prefWidth="980.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
+      <VBox alignment="TOP_CENTER" layoutX="350.0" layoutY="551.0" prefHeight="95.0" prefWidth="980.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label text="Dice roll:" textFill="WHITE">
                      <font>

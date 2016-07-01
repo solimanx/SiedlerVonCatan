@@ -901,17 +901,10 @@ public class ClientController {
 	 *            the trading ID
 	 */
 	public void tradeAccepted(int threadID, int tradingID) {
-		// TradeOffer currTOf;
-		// for (int i = 0; i < tradeOffers.size(); i++) {
-		// currTOf = tradeOffers.get(i);
-		// if (currTOf.getTradingID() == tradingID) {
-		// currTOf.acceptingPlayers.add(modelID);
-		// }
-		// }
 		if (getOwnTradingID() != null && getOwnTradingID() == tradingID) {
 			viewController.getGameViewController().getTradeViewController()
 					.acceptingOffer(threadPlayerIdMap.get(threadID), tradingID);
-		}
+		} 
 	}
 
 	/**
@@ -934,18 +927,22 @@ public class ClientController {
 	 * @param partnerModelID
 	 *            the partner model ID
 	 */
-	public void tradeFulfilled(int threadID, int partnerModelID) {
+	public void tradeFulfilled(int threadID, int partnerThreadID) {
 		TradeOffer currTOf;
 		int modelID = threadPlayerIdMap.get(threadID);
-		int id = 0;
+		int tradeID = 0;
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			currTOf = tradeOffers.get(i);
 			if (currTOf.getOwnerID() == modelID) {
-				id = tradeOffers.get(i).getTradingID();
+				tradeID = tradeOffers.get(i).getTradingID();
 				tradeOffers.remove(i);
 			}
 		}
-		viewController.getGameViewController().getTradeViewController().offerFulfilled(threadID, partnerModelID);
+		if (modelID == 0) {
+			viewController.getGameViewController().getTradeViewController().offerFulfilled(modelID, partnerThreadID);
+		} else {
+			tradeCancelled(threadID, tradeID);
+		}
 	}
 
 	/**

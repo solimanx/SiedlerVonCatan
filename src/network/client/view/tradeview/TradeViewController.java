@@ -282,7 +282,7 @@ public class TradeViewController {
 	}
 
 	/**
-	 * Handle trade button.
+	 * Handle Accept button.
 	 *
 	 * @param event
 	 *            the event
@@ -291,6 +291,8 @@ public class TradeViewController {
 	void handleTradeButton(ActionEvent event) {
 		int tradeID = stringToTradeID.get(selectedTrade);
 		viewController.getClientController().acceptTrade(tradeID);
+		int index = tradeList.indexOf(selectedTrade);
+		tradeList.set(index, selectedTrade + "\nYOU ACCEPTED");
 	}
 
 	@FXML
@@ -339,6 +341,7 @@ public class TradeViewController {
 	void fullFillTrade(ActionEvent event) {
 		viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToModelID.get(selectedOffer));
 		tradeButton.setDisable(false);
+		stage.hide();
 	}
 
 	/**
@@ -363,13 +366,12 @@ public class TradeViewController {
 	 * @param partnerModelID
 	 *            the partner model ID
 	 */
-	public void offerFulfilled(int threadID, int partnerModelID) {
-		ownOffer.clear();
-		if (threadID == viewController.getClientController().getOwnPlayerID()) {
+	public void offerFulfilled(int modelID, int partnerModelID) {
+		if (modelID == 0) {
 			Platform.runLater(new Runnable() {
-
 				@Override
 				public void run() {
+					ownOffer.clear();
 					ownOfferList.clear();
 				}
 			});
@@ -451,6 +453,7 @@ public class TradeViewController {
 	public void cancelOffer(int tradeID) {
 		Platform.runLater(new RemoveOfferStringRunnable(tradeIDtoString.get(tradeID)));
 	}
+	
 
 	/**
 	 * Trade string generator.
