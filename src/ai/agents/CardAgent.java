@@ -20,9 +20,15 @@ public class CardAgent {
 	public CardAgent(AdvancedAI aai) {
 		this.aai = aai;
 	}
+	/**
+	 * Strategy for playing the cards.
+	 */
+	public void playCardStrategy(){
+		
+	}
 
 	/**
-	 * Update cards.
+	 * Update cards in the model.
 	 */
 	public void updateCards() {
 		// {KNIGHT, VICTORY, INVENTION , MONOPOLY, ROAD}

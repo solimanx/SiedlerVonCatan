@@ -11,6 +11,7 @@ import ai.PrimitiveAI;
 import debugging.DebugClient;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +20,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
@@ -32,7 +37,12 @@ public class Main extends Application {
 
 	private int mode = 0;
 
-	/* (non-Javadoc)
+	private double xOffset = 0;
+	private double yOffset = 0;
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javafx.application.Application#init()
 	 */
 	@Override
@@ -53,7 +63,9 @@ public class Main extends Application {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
 	 */
 	@Override
@@ -62,23 +74,52 @@ public class Main extends Application {
 		ModelToProtocol.initModelToProtocol();
 		ProtocolToModel.initProtocolToModel();
 
-
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			Parent root = loader.load(getClass().getResource("/application/startView.fxml").openStream());
+			root.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					xOffset = event.getSceneX();
+					yOffset = event.getSceneY();
+				}
+			});
+			root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					primaryStage.setX(event.getScreenX() - xOffset);
+					primaryStage.setY(event.getScreenY() - yOffset);
+				}
+			});
 			startViewCtrl = loader.getController();
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
+			scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+
+				@Override
+				public void handle(KeyEvent t) {
+					if (t.getCode() == KeyCode.ESCAPE) {
+						Stage sb = (Stage) root.getScene().getWindow();// use
+																		// any
+																		// one
+																		// object
+						sb.close();
+					}
+					else if(t.getCode() == KeyCode.ENTER){
+						startViewCtrl.handleStartButton(null);
+					}
+				}
+			});
 			primaryStage.setScene(scene);
-//			primaryStage.sizeToScene();
-			primaryStage.setTitle("Choose mode");
-//			primaryStage.setResizable(false);
+			// primaryStage.sizeToScene();
+			// primaryStage.setResizable(false);
+			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setOnCloseRequest(e -> System.exit(0));
 			primaryStage.show();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-			startViewCtrl.setStage(primaryStage);
+		startViewCtrl.setStage(primaryStage);
 	}
 
 	// startClient.setUserData(1);
@@ -101,12 +142,11 @@ public class Main extends Application {
 	// pa.commence();
 	// }
 
-	
-
 	/**
 	 * The main method.
 	 *
-	 * @param args the arguments
+	 * @param args
+	 *            the arguments
 	 */
 	public static void main(String[] args) {
 
