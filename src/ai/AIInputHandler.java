@@ -317,7 +317,6 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.loseToBandit();
 				break;
 			case TRADING_OR_BUILDING:
-				// TODO change
 				ai.actuate();
 				//ai.getOutput().respondEndTurn();
 				ai.updateCards();
@@ -450,8 +449,6 @@ public class AIInputHandler extends ClientInputHandler {
 		// Get ID and resources
 		int ID = inventionCardInfo.getPlayerID();
 
-		// opponent agent
-		ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new InventionCard());
@@ -461,6 +458,8 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
+			// opponent agent
+			ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
 		//	int[] ressources = {inventionCardInfo.getResource().getWood(),inventionCardInfo.getResource().getClay(),inventionCardInfo.getResource().getOre(),inventionCardInfo.getResource().getWool(),inventionCardInfo.getResource().getCorn()};
 		//	ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
 		}
@@ -476,9 +475,6 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// Get ID and resources
 		int ID = monopolyCardInfo.getPlayerID();
-		//OpponentAgent
-		ai.getOpponentAgent().devCardPlayed(CardType.MONOPOLY, ID);
-		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new MonopolyCard());
 			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
@@ -487,6 +483,9 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
+			//OpponentAgent
+			ai.getOpponentAgent().devCardPlayed(CardType.MONOPOLY, ID);
+			// if it's me
 			// massages as costs and obtain -> not necessary
 		}
 
@@ -501,9 +500,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// Get ID and resources
 		int ID = playKnightCard.getPlayerID();
-		//OpponentAgent
-		ai.getOpponentAgent().devCardPlayed(CardType.KNIGHT, ID);
-		ai.updateRobber(ProtocolToModel.getProtocolOneID(playKnightCard.getLocationID()));
+			ai.updateRobber(ProtocolToModel.getProtocolOneID(playKnightCard.getLocationID()));
 
 		// if it's me
 		if (ID == ai.getID()) {
@@ -516,7 +513,9 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
-			// TODO Store for strategy
+			//OpponentAgent
+			ai.getOpponentAgent().devCardPlayed(CardType.KNIGHT, ID);
+
 		}
 
 	}
@@ -530,8 +529,6 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// Get ID and resources
 		int ID = roadBuildingCardInfo.getPlayerID();
-		//OpponentAgent
-		ai.getOpponentAgent().devCardPlayed(CardType.STREET, ID);
 
 		// if it's me
 		if (ID == ai.getID()) {
@@ -542,7 +539,8 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
-			// TODO Store for strategy
+			//OpponentAgent
+			ai.getOpponentAgent().devCardPlayed(CardType.STREET, ID);
 		}
 
 	}
@@ -556,8 +554,6 @@ public class AIInputHandler extends ClientInputHandler {
 		int ID = boughtDevelopmentCard.getPlayerID();
 		CardType ct = boughtDevelopmentCard.getDevelopmentCard();
 
-		//OpponentAgent
-		ai.getOpponentAgent().boughtDevCard(ID);
 
 		// if it's me
 		if (ID == ai.getID()) {
@@ -565,7 +561,8 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
-			// TODO Store for strategy
+			//OpponentAgent
+			ai.getOpponentAgent().boughtDevCard(ID);
 		}
 
 	}
