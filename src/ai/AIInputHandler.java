@@ -223,7 +223,7 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.getMe().increaseAmountVillages();
 			}
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
-			ai.updateCity(coords[0], coords[1], coords[2], playerID);			
+			ai.updateCity(coords[0], coords[1], coords[2], playerID);
 			//ai.getOpponentAgent().CostsEnemy(playerID, DefaultSettings.CITY_BUILD_COST);
 		} else {
 			logger.warn("Throws new IllegalArgumentException \"Building type not defined\"");
@@ -451,7 +451,7 @@ public class AIInputHandler extends ClientInputHandler {
 		int ID = inventionCardInfo.getPlayerID();
 
 		// opponent agent
-		//ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
+		ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new InventionCard());
@@ -477,7 +477,7 @@ public class AIInputHandler extends ClientInputHandler {
 		// Get ID and resources
 		int ID = monopolyCardInfo.getPlayerID();
 		//OpponentAgent
-		//ai.getOpponentAgent().devCardPlayed(CardType.MONOPOLY, ID);
+		ai.getOpponentAgent().devCardPlayed(CardType.MONOPOLY, ID);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new MonopolyCard());
@@ -502,7 +502,7 @@ public class AIInputHandler extends ClientInputHandler {
 		// Get ID and resources
 		int ID = playKnightCard.getPlayerID();
 		//OpponentAgent
-		//ai.getOpponentAgent().devCardPlayed(CardType.KNIGHT, ID);
+		ai.getOpponentAgent().devCardPlayed(CardType.KNIGHT, ID);
 		ai.updateRobber(ProtocolToModel.getProtocolOneID(playKnightCard.getLocationID()));
 
 		// if it's me
@@ -531,7 +531,8 @@ public class AIInputHandler extends ClientInputHandler {
 		// Get ID and resources
 		int ID = roadBuildingCardInfo.getPlayerID();
 		//OpponentAgent
-		//ai.getOpponentAgent().devCardPlayed(CardType.STREET, ID);
+		ai.getOpponentAgent().devCardPlayed(CardType.STREET, ID);
+
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new StreetBuildingCard());
@@ -556,7 +557,7 @@ public class AIInputHandler extends ClientInputHandler {
 		CardType ct = boughtDevelopmentCard.getDevelopmentCard();
 
 		//OpponentAgent
-		//ai.getOpponentAgent().boughtDevCard(ID);
+		ai.getOpponentAgent().boughtDevCard(ID);
 
 		// if it's me
 		if (ID == ai.getID()) {
