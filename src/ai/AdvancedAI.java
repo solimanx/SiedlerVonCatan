@@ -49,15 +49,19 @@ public class AdvancedAI extends PrimitiveAI {
 	/**
 	 * Instantiates a new advanced AI.
 	 *
-	 * @param serverHost the server host
-	 * @param port the port
+	 * @param serverHost
+	 *            the server host
+	 * @param port
+	 *            the port
 	 */
 	public AdvancedAI(String serverHost, int port) {
 		super(serverHost, port);
 		initializeDiceRollProbabilities();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ai.PrimitiveAI#initialVillage()
 	 */
 	@Override
@@ -100,7 +104,9 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ai.PrimitiveAI#initialRoad()
 	 */
 	@Override
@@ -115,127 +121,74 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ai.PrimitiveAI#actuate()
 	 */
 	@Override
 	public void actuate() {
 		resourceAgent.update();
 
-		if (getMe().getAmountCities() != 0) {
-			if (resourceAgent.canBuildCity()) { //TODO: fix while
-				for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
-					// if it's a village
-					if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
-						// upgrade it
-						int[] coords = ProtocolToModel
-								.getCornerCoordinates(resourceAgent.getMyCorners().get(i).getCornerID());
-						pO.requestBuildCity(coords[0], coords[1], coords[2]);
-						resourceAgent.update();
-					}
+		if (getMe().getAmountCities() != 0 && resourceAgent.canBuildCity()) {
+			for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
+				// if it's a village
+				if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
+					// upgrade it
+					int[] coords = ProtocolToModel
+							.getCornerCoordinates(resourceAgent.getMyCorners().get(i).getCornerID());
+					pO.requestBuildCity(coords[0], coords[1], coords[2]);
+					break;
 				}
 			}
 		}
-		
-		if (getMe().getAmountVillages() != 0){
-			if (resourceAgent.canBuildVillage()){
-				Corner bestCorner = resourceAgent.getBestVillage();
-				if (bestCorner != null){
-				int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
-				pO.requestBuildVillage(coords[0], coords[1], coords[2]);
-				resourceAgent.update();
-				}
-			}
-		}
-
 		// if i can get cards
-		if (resourceAgent.canBuyCard()) {
+		else if (resourceAgent.canBuyCard()) {
 			// i'll get them
 			pO.requestBuyCard();
-			resourceAgent.update();
-		}
-		// try getting largest army
-		if (!getMe().hasLargestArmy()) {
-			if (cardAgent.hasKnight()) {
-				banditAgent.moveRobber();
-				int[] coords = banditAgent.bestNewRobber();
-				Integer target = banditAgent.getTarget();
-				String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
-				pO.respondKnightCard(newRobber, target);
-
-			}
-		}
-
-		// try getting longest road
-		if (!getMe().hasLongestRoad()) {
-			if (getMe().getAmountStreets() > 0) {
-				if (resourceAgent.canBuildRoad()) {
+		} 
+		else if (getMe().getAmountVillages() != 0 && resourceAgent.canBuildVillage()) {
+				Corner bestCorner = resourceAgent.getBestVillage();
+				if (bestCorner != null) {
+					int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
+					pO.requestBuildVillage(coords[0], coords[1], coords[2]);
+			} else { //try to build street
+				if (!getMe().hasLongestRoad() && getMe().getAmountStreets() > 0 && resourceAgent.canBuildRoad()) {
 					Edge bestEdge = resourceAgent.getBestStreet();
 					String id = bestEdge.getEdgeID();
 					int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
 					pO.requestBuildRoad(coords[0], coords[1], coords[2]);
-					resourceAgent.update();
 				}
-				/*	int radius = DefaultSettings.BOARD_RADIUS;
-					int[][][] bestUtilityRoad = new int[7][7][3];
-					for (int i = 0; i < resourceAgent.getMyEdges().size(); i++) {
-						// my road
-						Edge myEdge = resourceAgent.getMyEdges().get(i);
-						int[] coord = ProtocolToModel.getEdgeCoordinates(myEdge.getEdgeID());
-						// that road's neighbours
-						Edge[] linkedEdges = getGl().getBoard().getLinkedEdges(coord[0], coord[1], coord[2]);
-						// loop neighbours
-						for (int j = 0; j < linkedEdges.length; j++) {
-							// if neighbour exists and is empty
-							if (linkedEdges[j] != null && !linkedEdges[j].isHasStreet()) {
-								int[] coord2 = ProtocolToModel.getEdgeCoordinates(linkedEdges[j].getEdgeID());
-								Edge[] neighbourOfLinked = getGl().getBoard().getLinkedEdges(coord2[0], coord2[1],
-										coord2[2]);
-								for (int k = 0; k < neighbourOfLinked.length; k++) {
-									if (neighbourOfLinked[k] != null && neighbourOfLinked[k] != myEdge) {
-										// if it's my road that can be connected
-										if (neighbourOfLinked[k].isHasStreet()) {
-											if (neighbourOfLinked[k].getOwnerID() == getID()) {
-												bestUtilityRoad[coord2[0] + radius][coord2[1]
-														+ radius][coord2[2]] += 100;
-											} else
-												bestUtilityRoad[coord2[0] + radius][coord2[1]
-														+ radius][coord2[2]] += 10;
-										} else {
-											bestUtilityRoad[coord2[0] + radius][coord2[1] + radius][coord2[2]] += 1;
-										}
-									}
-
-								}
-							}
-						}
-
-					}
-					int max = bestUtilityRoad[0][0][0];
-					int x = 0, y = 0, z = 0;
-					for (int i = 0; i < 7; i++) {
-						for (int j = 0; j < 7; j++) {
-							for (int k = 0; k < 3; k++) {
-								if (bestUtilityRoad[i][j][k] > max) {
-									max = bestUtilityRoad[i][j][k];
-									x = i - radius;
-									y = j - radius;
-									z = k;
-
-								}
-							}
-						}
-					}
-					pO.requestBuildRoad(x, y, z);
-					resourceAgent.update();
-				} */
-				// }
 			}
+		}
+
+		// try getting largest army
+		else if (!getMe().hasLargestArmy() && cardAgent.hasKnight()) {
+			banditAgent.moveRobber();
+			int[] coords = banditAgent.bestNewRobber();
+			Integer target = banditAgent.getTarget();
+			String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
+			pO.respondKnightCard(newRobber, target);
+		}
+
+		// try getting longest road
+		// TODO: This should also happen when the AI HAS the longest road
+		else if (!getMe().hasLongestRoad() && getMe().getAmountStreets() > 0 && resourceAgent.canBuildRoad()) {
+			Edge bestEdge = resourceAgent.getBestStreet();
+			String id = bestEdge.getEdgeID();
+			int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
+			pO.requestBuildRoad(coords[0], coords[1], coords[2]);
+		}
+		// if AI can do nothing
+		else {
+			getOutput().respondEndTurn();
 		}
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ai.PrimitiveAI#moveRobber()
 	 */
 	@Override
@@ -251,7 +204,8 @@ public class AdvancedAI extends PrimitiveAI {
 	/**
 	 * Subtract resources.
 	 *
-	 * @param cornerAgent the corner agent
+	 * @param cornerAgent
+	 *            the corner agent
 	 */
 	private void subtractResources(CornerAgent cornerAgent) {
 		Field[] fields = cornerAgent.getFields();
@@ -294,7 +248,8 @@ public class AdvancedAI extends PrimitiveAI {
 	/**
 	 * Gets the corner agent by ID.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the corner agent by ID
 	 */
 	public CornerAgent getCornerAgentByID(String id) {
@@ -327,7 +282,8 @@ public class AdvancedAI extends PrimitiveAI {
 	/**
 	 * Sets the resource weighting.
 	 *
-	 * @param weighting the new resource weighting
+	 * @param weighting
+	 *            the new resource weighting
 	 */
 	public void setResourceWeighting(int[] weighting) {
 
@@ -336,8 +292,10 @@ public class AdvancedAI extends PrimitiveAI {
 	/**
 	 * Sets the single resource weight.
 	 *
-	 * @param resType the res type
-	 * @param weight the weight
+	 * @param resType
+	 *            the res type
+	 * @param weight
+	 *            the weight
 	 */
 	public void setSingleResourceWeight(ResourceType resType, int weight) {
 		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] = weight;
@@ -346,7 +304,8 @@ public class AdvancedAI extends PrimitiveAI {
 	/**
 	 * Gets the single resource weight.
 	 *
-	 * @param resType the res type
+	 * @param resType
+	 *            the res type
 	 * @return the single resource weight
 	 */
 	public int getSingleResourceWeight(ResourceType resType) {
@@ -356,8 +315,10 @@ public class AdvancedAI extends PrimitiveAI {
 	/**
 	 * Increment single resource weight.
 	 *
-	 * @param resType the res type
-	 * @param change the change
+	 * @param resType
+	 *            the res type
+	 * @param change
+	 *            the change
 	 */
 	public void incrementSingleResourceWeight(ResourceType resType, int change) {
 		initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] += change;
@@ -366,16 +327,20 @@ public class AdvancedAI extends PrimitiveAI {
 	/**
 	 * Decrement single resource weight.
 	 *
-	 * @param resType the res type
-	 * @param change the change
+	 * @param resType
+	 *            the res type
+	 * @param change
+	 *            the change
 	 */
 	public void decrementSingleResourceWeight(ResourceType resType, int change) {
-		if (resType != ResourceType.SEA){
+		if (resType != ResourceType.SEA) {
 			initialResourceWeight[DefaultSettings.RESOURCE_VALUES.get(resType)] -= change;
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ai.PrimitiveAI#getResourceAgent()
 	 */
 	@Override
@@ -384,7 +349,9 @@ public class AdvancedAI extends PrimitiveAI {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ai.PrimitiveAI#updateCards()
 	 */
 	@Override
@@ -392,7 +359,7 @@ public class AdvancedAI extends PrimitiveAI {
 		cardAgent.updateCards();
 	}
 
-	public OpponentAgent getOpponentAgent(){
+	public OpponentAgent getOpponentAgent() {
 		return opponentAgent;
 	}
 }

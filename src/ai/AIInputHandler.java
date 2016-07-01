@@ -159,6 +159,9 @@ public class AIInputHandler extends ClientInputHandler {
 	 */
 	@Override
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
+		if(ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
+			ai.getOutput().respondEndTurn(); //if error then end turn
+		}
 		// Chatbot?
 
 	}
@@ -177,6 +180,9 @@ public class AIInputHandler extends ClientInputHandler {
 		else if (serverResponse.getServerResponse().equals("Farbe bereits vergeben")) {
 			ai.setColorCounter(ai.getColorCounter() + 1);
 			ai.getOutput().respondProfile(ai.getColorCounter());
+		}
+		else if(ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
+			ai.getOutput().respondEndTurn(); //if error then end turn
 		}
 
 	}
@@ -217,6 +223,7 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.getMe().increaseAmountVillages();
 			}
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			ai.updateCity(coords[0], coords[1], coords[2], playerID);			
 			//ai.getOpponentAgent().CostsEnemy(playerID, DefaultSettings.CITY_BUILD_COST);
 		} else {
 			logger.warn("Throws new IllegalArgumentException \"Building type not defined\"");
@@ -247,6 +254,9 @@ public class AIInputHandler extends ClientInputHandler {
 		if (ID == ai.getID()) {
 			gain = ProtocolToModel.convertResources(resourceObtain.getResource());
 			ai.getMe().incrementResources(gain);
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
+				ai.actuate();
+			}
 		}
 		// if it isn't me
 
@@ -271,11 +281,13 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// if it's me
 		if (pID == ai.getID()) {
-			if (ai.getMe() != null)
+			if (ai.getMe() != null){
 				logger.debug(
 						"Wood: " + ai.getMe().getResourceAmountOf(0) + ", CLay: " + ai.getMe().getResourceAmountOf(1)
 								+ ", ORE: " + ai.getMe().getResourceAmountOf(2) + ", SHEEP: "
 								+ ai.getMe().getResourceAmountOf(3) + ", CORN: " + ai.getMe().getResourceAmountOf(4));
+				ai.getMe().setPlayerState(ps);
+			}
 			switch (ps) {
 			// and i'm waiting for game to start
 			case WAITING_FOR_GAMESTART:
@@ -307,7 +319,7 @@ public class AIInputHandler extends ClientInputHandler {
 			case TRADING_OR_BUILDING:
 				// TODO change
 				ai.actuate();
-				ai.getOutput().respondEndTurn();
+				//ai.getOutput().respondEndTurn();
 				ai.updateCards();
 				break;
 			default:// do nothing
@@ -351,6 +363,9 @@ public class AIInputHandler extends ClientInputHandler {
 		if (ID == ai.getID()) {
 			loss = ProtocolToModel.convertResources(costs.getResource());
 			ai.getMe().decrementResources(loss);
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
+				ai.actuate();
+			}
 		}
 		// if it isn't me
 		else {
@@ -440,10 +455,13 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new InventionCard());
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
+				ai.actuate(); //actuate after played a card
+			}
 		}
 		// if it isn't me
 		else {
-			int[] ressources = {inventionCardInfo.getResource().getWood(),inventionCardInfo.getResource().getClay(),inventionCardInfo.getResource().getOre(),inventionCardInfo.getResource().getWool(),inventionCardInfo.getResource().getCorn()};
+		//	int[] ressources = {inventionCardInfo.getResource().getWood(),inventionCardInfo.getResource().getClay(),inventionCardInfo.getResource().getOre(),inventionCardInfo.getResource().getWool(),inventionCardInfo.getResource().getCorn()};
 		//	ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
 		}
 
@@ -463,6 +481,9 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new MonopolyCard());
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
+				ai.actuate(); //actuate after played a card
+			}
 		}
 		// if it isn't me
 		else {
@@ -488,6 +509,9 @@ public class AIInputHandler extends ClientInputHandler {
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new KnightCard());
 			ai.getMe().incrementPlayedKnightCards();
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
+				ai.actuate(); //actuate after played a card
+			}
 
 		}
 		// if it isn't me
@@ -511,6 +535,9 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new StreetBuildingCard());
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
+				ai.actuate(); //actuate after played a card
+			}
 		}
 		// if it isn't me
 		else {
