@@ -52,7 +52,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * Instantiates a new AI input handler.
 	 *
-	 * @param primitiveAI the primitive AI
+	 * @param primitiveAI
+	 *            the primitive AI
 	 */
 	protected AIInputHandler(PrimitiveAI primitiveAI) {
 		super(null);
@@ -60,8 +61,11 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#sendToParser(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * network.client.client.ClientInputHandler#sendToParser(java.lang.String)
 	 */
 	public void sendToParser(String line) {
 		Object object = parser.parseString(line);
@@ -72,7 +76,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * What to do after receiving hello from server.
 	 *
-	 * @param hello the hello
+	 * @param hello
+	 *            the hello
 	 */
 	@Override
 	protected void handle(ProtocolHello hello) {
@@ -90,7 +95,8 @@ public class AIInputHandler extends ClientInputHandler {
 	 * Initializing ID after receiving welcome from server. Attempt to create a
 	 * profile.
 	 *
-	 * @param welcome the welcome
+	 * @param welcome
+	 *            the welcome
 	 */
 	@Override
 	protected void handle(ProtocolWelcome welcome) {
@@ -102,7 +108,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * Update board in the AI, after receiving the board json.
 	 *
-	 * @param gameStarted the game started
+	 * @param gameStarted
+	 *            the game started
 	 */
 	@Override
 	protected void handle(ProtocolGameStarted gameStarted) {
@@ -154,13 +161,16 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.messaging.ProtocolChatReceiveMessage)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.messaging.
+	 * ProtocolChatReceiveMessage)
 	 */
 	@Override
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
-		if(ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
-			ai.getOutput().respondEndTurn(); //if error then end turn
+		if (ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+			ai.getOutput().respondEndTurn(); // if error then end turn
 		}
 		// Chatbot?
 
@@ -169,20 +179,24 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * After receiving a {"Serverantwort":} JSON.
 	 *
-	 * @param serverResponse the server response
+	 * @param serverResponse
+	 *            the server response
 	 */
 	protected void handle(ProtocolServerResponse serverResponse) {
 		// if game hasn't started, start it
-		if (serverResponse.getServerResponse().equals("OK") && !ai.isStarted()) {
-			ai.getOutput().respondStartGame();
+		if (serverResponse.getServerResponse().equals("OK")) {
+			if (!ai.isStarted()) {
+				ai.getOutput().respondStartGame();
+			}
 		}
 		// if color taken, try other colors
 		else if (serverResponse.getServerResponse().equals("Farbe bereits vergeben")) {
 			ai.setColorCounter(ai.getColorCounter() + 1);
 			ai.getOutput().respondProfile(ai.getColorCounter());
 		}
-		else if(ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
-			ai.getOutput().respondEndTurn(); //if error then end turn
+		// TODO: Fix OK Message
+		else if (ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+			ai.getOutput().respondEndTurn(); // if error then end turn
 		}
 
 	}
@@ -190,7 +204,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * After receiving a {"Bauvorgang":} JSON.
 	 *
-	 * @param build the build
+	 * @param build
+	 *            the build
 	 */
 	protected void handle(ProtocolBuild build) {
 		ProtocolBuilding building = build.getBuilding();
@@ -199,32 +214,47 @@ public class AIInputHandler extends ClientInputHandler {
 
 		if (building.getType().equals("Dorf")) {
 			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			ai.updateVillage(coords[0], coords[1], coords[2], playerID);
 			if (playerID == ai.getID()) {
 				ai.getMe().decreaseAmountVillages();
 				ai.getResourceAgent().add(ai.getGl().getBoard().getCornerAt(coords[0], coords[1], coords[2]));
+				if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+					ai.actuate();
+				}
 			}
-			ai.updateVillage(coords[0], coords[1], coords[2], playerID);
-			//ai.getOpponentAgent().CostsEnemy(playerID, DefaultSettings.VILLAGE_BUILD_COST);
+
+			// ai.getOpponentAgent().CostsEnemy(playerID,
+			// DefaultSettings.VILLAGE_BUILD_COST);
 
 		} else if (building.getType().equals("Straße")) {
 			coords = ProtocolToModel.getEdgeCoordinates(building.getID());
+			ai.updateRoad(coords[0], coords[1], coords[2], playerID);
 			if (playerID == ai.getID()) {
 				ai.getMe().decreaseAmountStreets();
 				ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
-				ai.getResourceAgent().addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
+				ai.getResourceAgent()
+						.addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
+				if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+					ai.actuate();
+				}
 			}
 
-			ai.updateRoad(coords[0], coords[1], coords[2], playerID);
-			//ai.getOpponentAgent().CostsEnemy(playerID, DefaultSettings.STREET_BUILD_COST);
+			// ai.getOpponentAgent().CostsEnemy(playerID,
+			// DefaultSettings.STREET_BUILD_COST);
 
 		} else if (building.getType().equals("Stadt")) {
+			coords = ProtocolToModel.getCornerCoordinates(building.getID());
+			ai.updateCity(coords[0], coords[1], coords[2], playerID);
 			if (playerID == ai.getID()) {
 				ai.getMe().decreaseAmountCities();
 				ai.getMe().increaseAmountVillages();
+				if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+					ai.actuate();
+				}
 			}
-			coords = ProtocolToModel.getCornerCoordinates(building.getID());
-			ai.updateCity(coords[0], coords[1], coords[2], playerID);
-			//ai.getOpponentAgent().CostsEnemy(playerID, DefaultSettings.CITY_BUILD_COST);
+
+			// ai.getOpponentAgent().CostsEnemy(playerID,
+			// DefaultSettings.CITY_BUILD_COST);
 		} else {
 			logger.warn("Throws new IllegalArgumentException \"Building type not defined\"");
 		}
@@ -234,7 +264,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * After receiving a {"Würfelwurf":...} JSON
 	 *
-	 * @param diceRollResult the dice roll result
+	 * @param diceRollResult
+	 *            the dice roll result
 	 */
 	protected void handle(ProtocolDiceRollResult diceRollResult) {
 		// Nothing useful can be done with this information.
@@ -243,7 +274,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * After receiving a {"Ertrag": ...} JSON
 	 *
-	 * @param resourceObtain the resource obtain
+	 * @param resourceObtain
+	 *            the resource obtain
 	 */
 	protected void handle(ProtocolResourceObtain resourceObtain) {
 		// Get ID and resources
@@ -254,15 +286,13 @@ public class AIInputHandler extends ClientInputHandler {
 		if (ID == ai.getID()) {
 			gain = ProtocolToModel.convertResources(resourceObtain.getResource());
 			ai.getMe().incrementResources(gain);
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
-				ai.actuate();
-			}
 		}
 		// if it isn't me
 
 		else {
-			//int[] ressources = {resourceObtain.getResource().getWood(),resourceObtain.getResource().getClay(),resourceObtain.getResource().getOre(),resourceObtain.getResource().getWool(),resourceObtain.getResource().getCorn()};
-			//ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
+			// int[] ressources =
+			// {resourceObtain.getResource().getWood(),resourceObtain.getResource().getClay(),resourceObtain.getResource().getOre(),resourceObtain.getResource().getWool(),resourceObtain.getResource().getCorn()};
+			// ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
 		}
 
 	}
@@ -270,7 +300,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * After receiving a {"Statusupdate": ...} JSON
 	 *
-	 * @param statusUpdate the status update
+	 * @param statusUpdate
+	 *            the status update
 	 */
 	@Override
 	protected void handle(ProtocolStatusUpdate statusUpdate) {
@@ -281,7 +312,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// if it's me
 		if (pID == ai.getID()) {
-			if (ai.getMe() != null){
+			if (ai.getMe() != null) {
 				logger.debug(
 						"Wood: " + ai.getMe().getResourceAmountOf(0) + ", CLay: " + ai.getMe().getResourceAmountOf(1)
 								+ ", ORE: " + ai.getMe().getResourceAmountOf(2) + ", SHEEP: "
@@ -318,7 +349,7 @@ public class AIInputHandler extends ClientInputHandler {
 				break;
 			case TRADING_OR_BUILDING:
 				ai.actuate();
-				//ai.getOutput().respondEndTurn();
+				// ai.getOutput().respondEndTurn();
 				ai.updateCards();
 				break;
 			default:// do nothing
@@ -332,7 +363,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * After receiving a {Räuber versetzt} JSON.
 	 *
-	 * @param robberMovement the robber movement
+	 * @param robberMovement
+	 *            the robber movement
 	 */
 	@Override
 	protected void handle(ProtocolRobberMovement robberMovement) {
@@ -340,8 +372,12 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.configuration.ProtocolVictory)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * network.client.client.ClientInputHandler#handle(protocol.configuration.
+	 * ProtocolVictory)
 	 */
 	@Override
 	protected void handle(ProtocolVictory victory) {
@@ -349,8 +385,11 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.ProtocolCosts)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.
+	 * serverinstructions.ProtocolCosts)
 	 */
 	@Override
 	protected void handle(ProtocolCosts costs) {
@@ -362,20 +401,21 @@ public class AIInputHandler extends ClientInputHandler {
 		if (ID == ai.getID()) {
 			loss = ProtocolToModel.convertResources(costs.getResource());
 			ai.getMe().decrementResources(loss);
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
-				ai.actuate();
-			}
 		}
 		// if it isn't me
 		else {
-			//int[] ressources = {costs.getResource().getWood(),costs.getResource().getClay(),costs.getResource().getOre(),costs.getResource().getWool(),costs.getResource().getCorn()};
-			//ai.getOpponentAgent().CostsEnemy(ID, ressources);
+			// int[] ressources =
+			// {costs.getResource().getWood(),costs.getResource().getClay(),costs.getResource().getOre(),costs.getResource().getWool(),costs.getResource().getCorn()};
+			// ai.getOpponentAgent().CostsEnemy(ID, ressources);
 		}
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.trade.ProtocolTradePreview)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.
+	 * serverinstructions.trade.ProtocolTradePreview)
 	 */
 	@Override
 	protected void handle(ProtocolTradePreview tradePreview) {
@@ -383,8 +423,11 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeConfirmation)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.
+	 * serverinstructions.trade.ProtocolTradeConfirmation)
 	 */
 	@Override
 	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
@@ -392,8 +435,11 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeCompletion)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.
+	 * serverinstructions.trade.ProtocolTradeCompletion)
 	 */
 	@Override
 	protected void handle(ProtocolTradeCompletion tradeIsCompleted) {
@@ -401,8 +447,11 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.trade.ProtocolTradeCancellation)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.
+	 * serverinstructions.trade.ProtocolTradeCancellation)
 	 */
 	@Override
 	protected void handle(ProtocolTradeCancellation tradeIsCanceled) {
@@ -410,8 +459,11 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.ProtocolLargestArmy)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.
+	 * serverinstructions.ProtocolLargestArmy)
 	 */
 	@Override
 	protected void handle(ProtocolLargestArmy largestArmy) {
@@ -424,8 +476,11 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.ProtocolLongestRoad)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.
+	 * serverinstructions.ProtocolLongestRoad)
 	 */
 	@Override
 	protected void handle(ProtocolLongestRoad longestRoad) {
@@ -439,12 +494,16 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.dualinstructions.ProtocolPlayInventionCard)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * network.client.client.ClientInputHandler#handle(protocol.dualinstructions
+	 * .ProtocolPlayInventionCard)
 	 */
 	@Override
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
-		//TODO
+		// TODO
 
 		// Get ID and resources
 		int ID = inventionCardInfo.getPlayerID();
@@ -452,22 +511,27 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new InventionCard());
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
-				ai.actuate(); //actuate after played a card
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+				ai.actuate(); // actuate after played a card
 			}
 		}
 		// if it isn't me
 		else {
 			// opponent agent
 			ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
-		//	int[] ressources = {inventionCardInfo.getResource().getWood(),inventionCardInfo.getResource().getClay(),inventionCardInfo.getResource().getOre(),inventionCardInfo.getResource().getWool(),inventionCardInfo.getResource().getCorn()};
-		//	ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
+			// int[] ressources =
+			// {inventionCardInfo.getResource().getWood(),inventionCardInfo.getResource().getClay(),inventionCardInfo.getResource().getOre(),inventionCardInfo.getResource().getWool(),inventionCardInfo.getResource().getCorn()};
+			// ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
 		}
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.dualinstructions.ProtocolPlayMonopolyCard)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * network.client.client.ClientInputHandler#handle(protocol.dualinstructions
+	 * .ProtocolPlayMonopolyCard)
 	 */
 	@Override
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
@@ -477,13 +541,13 @@ public class AIInputHandler extends ClientInputHandler {
 		int ID = monopolyCardInfo.getPlayerID();
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new MonopolyCard());
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
-				ai.actuate(); //actuate after played a card
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+				ai.actuate(); // actuate after played a card
 			}
 		}
 		// if it isn't me
 		else {
-			//OpponentAgent
+			// OpponentAgent
 			ai.getOpponentAgent().devCardPlayed(CardType.MONOPOLY, ID);
 			// if it's me
 			// massages as costs and obtain -> not necessary
@@ -491,8 +555,12 @@ public class AIInputHandler extends ClientInputHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.dualinstructions.ProtocolPlayKnightCard)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * network.client.client.ClientInputHandler#handle(protocol.dualinstructions
+	 * .ProtocolPlayKnightCard)
 	 */
 	@Override
 	protected void handle(ProtocolPlayKnightCard playKnightCard) {
@@ -500,28 +568,32 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// Get ID and resources
 		int ID = playKnightCard.getPlayerID();
-			ai.updateRobber(ProtocolToModel.getProtocolOneID(playKnightCard.getLocationID()));
+		ai.updateRobber(ProtocolToModel.getProtocolOneID(playKnightCard.getLocationID()));
 
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new KnightCard());
 			ai.getMe().incrementPlayedKnightCards();
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
-				ai.actuate(); //actuate after played a card
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+				ai.actuate(); // actuate after played a card
 			}
 
 		}
 		// if it isn't me
 		else {
-			//OpponentAgent
+			// OpponentAgent
 			ai.getOpponentAgent().devCardPlayed(CardType.KNIGHT, ID);
 
 		}
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.dualinstructions.ProtocolPlayRoadCard)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * network.client.client.ClientInputHandler#handle(protocol.dualinstructions
+	 * .ProtocolPlayRoadCard)
 	 */
 	@Override
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
@@ -533,20 +605,23 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new StreetBuildingCard());
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING){
-				ai.actuate(); //actuate after played a card
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+				ai.actuate(); // actuate after played a card
 			}
 		}
 		// if it isn't me
 		else {
-			//OpponentAgent
+			// OpponentAgent
 			ai.getOpponentAgent().devCardPlayed(CardType.STREET, ID);
 		}
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.serverinstructions.ProtocolBoughtDevelopmentCard)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see network.client.client.ClientInputHandler#handle(protocol.
+	 * serverinstructions.ProtocolBoughtDevelopmentCard)
 	 */
 	@Override
 	protected void handle(ProtocolBoughtDevelopmentCard boughtDevelopmentCard) {
@@ -554,21 +629,27 @@ public class AIInputHandler extends ClientInputHandler {
 		int ID = boughtDevelopmentCard.getPlayerID();
 		CardType ct = boughtDevelopmentCard.getDevelopmentCard();
 
-
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(ct));
+			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+				ai.actuate();
+			}
 		}
 		// if it isn't me
 		else {
-			//OpponentAgent
+			// OpponentAgent
 			ai.getOpponentAgent().boughtDevCard(ID);
 		}
 
 	}
 
-	/* (non-Javadoc)
-	 * @see network.client.client.ClientInputHandler#handle(protocol.configuration.ProtocolError)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * network.client.client.ClientInputHandler#handle(protocol.configuration.
+	 * ProtocolError)
 	 */
 	@Override
 	protected void handle(ProtocolError error) {
