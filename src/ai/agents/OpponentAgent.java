@@ -45,6 +45,7 @@ public class OpponentAgent {
 		opponentsRessources = new int[amountPlayer][7];
 		for (int i = 0; i < amountPlayer; i++) {
 			opponentsRessources[i] = initialRessources;
+			opponents.add(aai.getGl().getBoard().getPlayer(i));
 		}
 	}
 
