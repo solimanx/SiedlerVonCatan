@@ -23,6 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import network.client.controller.ViewController;
 
+
+
 // TODO: Auto-generated Javadoc
 public class LobbyController {
 

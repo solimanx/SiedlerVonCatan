@@ -3,23 +3,11 @@ package application;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import ai.AdvancedAI;
-import ai.PrimitiveAI;
-import debugging.DebugClient;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -27,8 +15,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
-import network.client.controller.ClientController;
-import network.server.controller.ServerController;
 
 // TODO: Auto-generated Javadoc
 public class Main extends Application {
@@ -71,12 +57,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
+
 		ModelToProtocol.initModelToProtocol();
 		ProtocolToModel.initProtocolToModel();
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			Parent root = loader.load(getClass().getResource("/application/startView.fxml").openStream());
+
+
 			root.setOnMousePressed(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
@@ -111,6 +100,7 @@ public class Main extends Application {
 				}
 			});
 			primaryStage.setScene(scene);
+
 			// primaryStage.sizeToScene();
 			// primaryStage.setResizable(false);
 			primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -149,6 +139,8 @@ public class Main extends Application {
 	 *            the arguments
 	 */
 	public static void main(String[] args) {
+
+
 
 		launch(args);
 
