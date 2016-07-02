@@ -113,9 +113,10 @@ public class OpponentAgent {
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
 		if (costs.length == 5 || costs.length == 1) {
 			decrementOpponentsResources(playerID, costs);
-		}
+		} else {
 		throw new IllegalArgumentException("Illegal Argument in opponentAgent.buildingCostEnemy.");
-	}
+		}
+		}
 
 	/**
 	 * use this method only with internal player ID's.
