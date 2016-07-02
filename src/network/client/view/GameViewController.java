@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import audio.Soundeffects;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.PlayerState;
@@ -1031,6 +1032,7 @@ public class GameViewController implements Initializable {
 	 * @param result the new dice roll result
 	 */
 	public void setDiceRollResult(int result) {
+		Soundeffects.DICEROLL.play();
 		diceResult.setText(String.valueOf(result));
 	}
 
