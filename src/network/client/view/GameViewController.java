@@ -67,7 +67,9 @@ import network.client.view.devcardview.DevCardViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
 
+import static sounds.Sound.playButtonSound;
 import static sounds.Sound.playDiceRollSound;
+import static sounds.Sound.playMoveRobberSound;
 
 
 // TODO: Auto-generated Javadoc
@@ -620,25 +622,8 @@ public class GameViewController implements Initializable {
      */
     @FXML
     void handleEndTurnButton(ActionEvent event) {
-
-        URL thing = getClass().getResource("sounds/button.mp3");
-        Media audioFile = new Media(thing.toString());
-        try {
-            MediaPlayer player = new MediaPlayer(audioFile);
-            player.play();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.exit(0);
-
-        }
-
         viewController.getClientController().endTurn();
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });
-
+        playButtonSound();
     }
 
     /**
@@ -1160,7 +1145,7 @@ public class GameViewController implements Initializable {
         alert.initOwner(gameStage);
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.showAndWait();
-
+        playMoveRobberSound();
     }
 
     /**

@@ -21,6 +21,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
 
+import static sounds.Sound.playMakeOfferSound;
+
 // TODO: Auto-generated Javadoc
 public class TradeViewController {
 
@@ -278,7 +280,7 @@ public class TradeViewController {
 		resultOffer = new int[5];
 		updateSpinner(resultDemand, grid);
 		tradeButton.setDisable(true);
-
+      playMakeOfferSound();
 	}
 
 	/**
@@ -361,7 +363,7 @@ public class TradeViewController {
 	/**
 	 * Offer fulfilled.
 	 *
-	 * @param threadID
+	 //* @param threadID
 	 *            the thread ID
 	 * @param partnerModelID
 	 *            the partner model ID
