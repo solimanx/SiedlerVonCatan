@@ -192,7 +192,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Label playerFourVPoints;
-	
+
 	@FXML
 	private VBox playerFourBox;
 
@@ -1032,7 +1032,7 @@ public class GameViewController implements Initializable {
 	 * @param result the new dice roll result
 	 */
 	public void setDiceRollResult(int result) {
-		Soundeffects.DICEROLL.play();
+		//Soundeffects.DICEROLL.play();
 		diceResult.setText(String.valueOf(result));
 	}
 
