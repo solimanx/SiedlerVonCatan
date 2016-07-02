@@ -692,7 +692,7 @@ public class ServerOutputHandler {
 	 * @param player_id the player id
 	 * @param devCard the dev card
 	 */
-	public void boughtDevelopmentCard(int player_id, DevelopmentCard devCard) {
+	public void boughtDevelopmentCard(int player_id, DevelopmentCard devCard,int sendToID) {
 		CardType pdc;
 		if (devCard == null){
 			pdc = CardType.UNKNOWN;
@@ -703,7 +703,7 @@ public class ServerOutputHandler {
 		Response r = new Response();
 		r.pBoughtDevelopmentCard = pbdc;
 		try {
-			server.broadcast(parser.createString(r));
+			server.sendToClient(parser.createString(r),sendToID);
 		} catch (IOException e) {
 			logger.error("Threw a Input/Output Exception ", e);
 			e.printStackTrace();

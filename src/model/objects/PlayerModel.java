@@ -116,7 +116,7 @@ public class PlayerModel {
 			if (playerDevCard[0] != 0) {
 				playerDevCard[0] = playerDevCard[0] - 1;
 			} else {
-				throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
+				//throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
 			}
 		}
 		if (devCard.getName() == "Victory Card") {

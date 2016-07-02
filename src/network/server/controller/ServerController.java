@@ -92,19 +92,7 @@ public class ServerController {
 		this.server = new Server(serverInputHandler, serverPort);
 		this.serverOutputHandler = new ServerOutputHandler(server);
 
-		devStack = new DevelopmentCardsStack();
-		DevelopmentCard[] debugCards = new DevelopmentCard[10];
-		debugCards[0] = new StreetBuildingCard();
-		debugCards[1] = new InventionCard();
-		debugCards[2] = new MonopolyCard();
-		debugCards[3] = new VictoryPointCard();
-		debugCards[4] = new KnightCard();
-		debugCards[5] = new InventionCard();
-		debugCards[6] = new StreetBuildingCard();
-		debugCards[7] = new MonopolyCard();
-		debugCards[8] = new VictoryPointCard();
-		debugCards[9] = new KnightCard();
-		gameLogic.getBoard().getDevCardStack().setCardStack(debugCards);
+		this.devStack = new DevelopmentCardsStack();
 
 		try {
 			server.start();
@@ -531,10 +519,10 @@ public class ServerController {
 					increaseVictoryPoints(modelID);
 					checkIfVillageInterruptsStreetSet(c);
 					// evtl. auch in initial village?
-
-					serverOutputHandler.buildVillage(x, y, dir, threadID);
 					costsToAll(modelID, DefaultSettings.VILLAGE_BUILD_COST, true);
-					statusUpdate(modelID);
+					serverOutputHandler.buildVillage(x, y, dir, threadID);
+					
+					//statusUpdate(modelID);
 				}
 			}
 		}
@@ -665,9 +653,9 @@ public class ServerController {
 					buildStreet(x, y, dir, modelID);
 					subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.STREET_BUILD_COST);
-					serverOutputHandler.buildStreet(x, y, dir, threadID);
 					costsToAll(modelID, DefaultSettings.STREET_BUILD_COST, true);
-					statusUpdate(modelID);
+					serverOutputHandler.buildStreet(x, y, dir, threadID);					
+					//statusUpdate(modelID);
 
 				} else {
 					serverResponse(modelID, "Kein Straßenbau möglich");
@@ -1002,10 +990,11 @@ public class ServerController {
 				subFromPlayersResources(modelID, DefaultSettings.CITY_BUILD_COST);
 				resourceStackIncrease(DefaultSettings.CITY_BUILD_COST);
 				increaseVictoryPoints(modelID);
-
+				
+                costsToAll(modelID, DefaultSettings.CITY_BUILD_COST, true);
 				serverOutputHandler.buildCity(x, y, dir, threadID);
-				costsToAll(modelID, DefaultSettings.CITY_BUILD_COST, true);
-				statusUpdate(modelID);
+				
+				//statusUpdate(modelID);
 			}
 		}
 
@@ -1041,8 +1030,13 @@ public class ServerController {
 				costsToAll(modelID, DefaultSettings.DEVCARD_BUILD_COST, true);
 				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
 				pm.getDevCardsBoughtInThisRound().add(devCard);
-
-				serverOutputHandler.boughtDevelopmentCard(threadID, devCard);
+				for (int i = 0;i <amountPlayers;i++){
+					if (i == modelID){
+						serverOutputHandler.boughtDevelopmentCard(threadID, devCard,threadID);
+					} else {
+						serverOutputHandler.boughtDevelopmentCard(threadID, null,modelPlayerIdMap.get(i));
+					}					
+				}		
 
 			} else {
 				serverResponse(modelID, "Unzulässige Aktion");
@@ -1196,7 +1190,7 @@ public class ServerController {
 				robberLossCounter--;
 				subFromPlayersResources(modelID, resources);
 				resourceStackIncrease(resources);
-				costsToAll(modelID, playerRes, false);
+				costsToAll(modelID, resources, false);
 				if (robberLossCounter == 0) {
 					if (modelID != currentPlayer) {
 						gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.WAITING);
@@ -1690,7 +1684,7 @@ public class ServerController {
 			addToPlayersResource(i, playersObtain[i]);
 			obtainToAll(i, playersObtain[i], true);
 		}
-		statusUpdateForAllPlayers();
+		//statusUpdateForAllPlayers();
 	}
 
 	/**
@@ -1753,7 +1747,6 @@ public class ServerController {
 		}
 		addToPlayersResource(modelID, playersObtain);
 		obtainToAll(modelID, playersObtain, true);
-		statusUpdate(modelID);
 
 	}
 

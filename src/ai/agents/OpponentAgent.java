@@ -135,8 +135,8 @@ public class OpponentAgent {
 							if (opponentsRessources[playerID][i] != 0) {
 								opponentsRessources[playerID][i]--;
 							} else {
-								if (opponentsRessources[playerID][5] != 0) {
-									opponentsRessources[playerID][5]--;
+								if (opponentsRessources[playerID][4] != 0) {
+									opponentsRessources[playerID][4]--;
 								} else {
 									throw new IllegalStateException("Error in calculation of enemy resources");
 								}
@@ -148,7 +148,7 @@ public class OpponentAgent {
 				}
 			}
 		} else if (costs.length == 1) {
-			opponentsRessources[playerID][7]++;
+			opponentsRessources[playerID][6]++;
 		}
 
 		if (ammountResourceCard(playerID) == 0) {

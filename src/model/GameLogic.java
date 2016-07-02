@@ -102,7 +102,7 @@ public class GameLogic {
 			if (c.getStatus() == enums.CornerStatus.VILLAGE && c.getOwnerID() == playerID) {
 				Edge[] e = board.getProjectingEdges(x, y, dir);
 				for (int i = 0; i < e.length; i++) {
-					if (e[i] != null) {
+					if (e[i] != null && e[i].getOwnerID() != null) {
 						if (e[i].getOwnerID() == playerID) {
 							return true;
 						}

@@ -131,6 +131,7 @@ public class AdvancedAI extends PrimitiveAI {
 		resourceAgent.update();
 
 		if (getMe().getAmountCities() != 0 && resourceAgent.canBuildCity()) {
+			boolean notFound = true;
 			for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
 				// if it's a village
 				if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
@@ -138,8 +139,13 @@ public class AdvancedAI extends PrimitiveAI {
 					int[] coords = ProtocolToModel
 							.getCornerCoordinates(resourceAgent.getMyCorners().get(i).getCornerID());
 					pO.requestBuildCity(coords[0], coords[1], coords[2]);
+					notFound = false;
 					break;
 				}
+			}
+			if (notFound){
+				//TODO: Fix this, so other possibilities are checked!
+				getOutput().respondEndTurn();
 			}
 		}
 		// if i can get cards

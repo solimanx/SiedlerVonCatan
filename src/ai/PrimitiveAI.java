@@ -147,6 +147,12 @@ public class PrimitiveAI extends Thread {
 		while ((line = reader.readLine()) != null) {
 			System.out.println(DefaultSettings.getCurrentTime() + " Server: " + line);
 			// logger.debug("Server"+ line);
+			/*try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
 			pI.sendToParser(line);
 		}
 	}
