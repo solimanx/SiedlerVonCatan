@@ -281,18 +281,17 @@ public class AIInputHandler extends ClientInputHandler {
 		// Get ID and resources
 		int ID = resourceObtain.getPlayerID();
 		int[] gain;
+		gain = ProtocolToModel.convertResources(resourceObtain.getResource());
+		ai.getOpponentAgent().ressourceObtainEnemy(ID, gain);
 
 		// if it's me
 		if (ID == ai.getID()) {
-			gain = ProtocolToModel.convertResources(resourceObtain.getResource());
 			ai.getMe().incrementResources(gain);
 		}
 		// if it isn't me
 
 		else {
-			// int[] ressources =
-			// {resourceObtain.getResource().getWood(),resourceObtain.getResource().getClay(),resourceObtain.getResource().getOre(),resourceObtain.getResource().getWool(),resourceObtain.getResource().getCorn()};
-			// ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
+
 		}
 
 	}
@@ -396,17 +395,15 @@ public class AIInputHandler extends ClientInputHandler {
 		// Get ID and resources
 		int ID = costs.getPlayerID();
 		int[] loss;
-
+		loss = ProtocolToModel.convertResources(costs.getResource());
+		ai.getOpponentAgent().CostsEnemy(ID, loss);
 		// if it's me
 		if (ID == ai.getID()) {
-			loss = ProtocolToModel.convertResources(costs.getResource());
 			ai.getMe().decrementResources(loss);
 		}
 		// if it isn't me
 		else {
-			// int[] ressources =
-			// {costs.getResource().getWood(),costs.getResource().getClay(),costs.getResource().getOre(),costs.getResource().getWool(),costs.getResource().getCorn()};
-			// ai.getOpponentAgent().CostsEnemy(ID, ressources);
+
 		}
 
 	}
@@ -507,7 +504,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// Get ID and resources
 		int ID = inventionCardInfo.getPlayerID();
-
+		// opponent agent
+		ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new InventionCard());
@@ -517,11 +515,7 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
-			// opponent agent
-			ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
-			// int[] ressources =
-			// {inventionCardInfo.getResource().getWood(),inventionCardInfo.getResource().getClay(),inventionCardInfo.getResource().getOre(),inventionCardInfo.getResource().getWool(),inventionCardInfo.getResource().getCorn()};
-			// ai.getOpponentAgent().ressourceObtainEnemy(ID, ressources);
+
 		}
 
 	}
