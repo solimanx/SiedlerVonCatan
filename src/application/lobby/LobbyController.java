@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import network.client.controller.ViewController;
 
+import static sounds.Sound.*;
 
 
 // TODO: Auto-generated Javadoc
@@ -144,6 +145,8 @@ public class LobbyController {
 		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getClientController().connectToServer(server, port);
 		colorNameSelectPane.setDisable(false);
+		playButtonSound();
+
 	}
 
 	/**
@@ -154,6 +157,7 @@ public class LobbyController {
 		String message = chatInput.getText();
 		chatInput.clear();
 		viewController.getClientController().sendChatMessage(message);
+		playNotificationSound();
 	}
 
 	/**
@@ -163,6 +167,7 @@ public class LobbyController {
 	 */
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
+		playNotificationSound();
 	}
 
 	/**
@@ -233,6 +238,7 @@ public class LobbyController {
 			// FOR DEBUG ONLY ASSUME SERVER CONFIRMED
 			logger.debug("Profile" + name + chosenColor);
 			readyButton.setDisable(false);
+			playButtonSound();
 		}
 	}
 
@@ -242,6 +248,7 @@ public class LobbyController {
 	@FXML
 	private void handleReadyButton() {
 		viewController.getClientController().sendReady();
+		playReadySound();
 	}
 
 	// public void deletePlayer(ProtocolPlayer player){
