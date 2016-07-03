@@ -160,7 +160,7 @@ public class LobbyController {
 		String message = chatInput.getText();
 		chatInput.clear();
 		viewController.getClientController().sendChatMessage(message);
-		playNotificationSound();
+		//playNotificationSound();
 	}
 
 	/**

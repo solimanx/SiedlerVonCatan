@@ -772,7 +772,7 @@ public class GameViewController implements Initializable {
         String message = messageInput.getText();
         messageInput.clear();
         viewController.getClientController().sendChatMessage(message);
-        playNotificationSound();
+        //playNotificationSound();
     }
 
     /**
