@@ -3,13 +3,15 @@ package sounds;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
+import java.net.URL;
 
 /**
  * Created by Amina on 03.07.2016.
  */
 public class Sound { public static void playButtonSound() {
     try {
-        File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\button-3.wav");
+        URL url = Sound.class.getResource("/sounds/button-3.wav");
+        File file = new File(url.getPath());
         Clip clip = AudioSystem.getClip();
         clip.open(AudioSystem.getAudioInputStream(file));
         clip.start();
@@ -19,8 +21,9 @@ public class Sound { public static void playButtonSound() {
 }
 
     public static void playDiceRollSound() {
-        try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\Shake.wav");
+        try {URL url = Sound.class.getResource("/sounds/Shake.wav");
+            File file = new File(url.getPath());
+
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
@@ -32,7 +35,8 @@ public class Sound { public static void playButtonSound() {
 
     public static void playMoveRobberSound() {
         try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\Cinematic.wav");
+            URL url = Sound.class.getResource("/sounds/Cinematic.wav");
+            File file = new File(url.getPath());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
@@ -44,7 +48,8 @@ public class Sound { public static void playButtonSound() {
 
     public static void playMakeOfferSound() {
         try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\offer.wav");
+            URL url = Sound.class.getResource("/sounds/offer.wav");
+            File file = new File(url.getPath());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
@@ -56,7 +61,8 @@ public class Sound { public static void playButtonSound() {
 
     public static void playCancelOfferSound() {
         try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\cancel.wav");
+            URL url = Sound.class.getResource("/sounds/cancel.wav");
+            File file = new File(url.getPath());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
@@ -68,7 +74,8 @@ public class Sound { public static void playButtonSound() {
 
     public static void playNotificationSound() {
         try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\notification.wav");
+            URL url = Sound.class.getResource("/sounds/notification.wav");
+            File file = new File(url.getPath());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
@@ -80,7 +87,8 @@ public class Sound { public static void playButtonSound() {
 
     public static void playReadySound() {
         try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\ready.wav");
+            URL url = Sound.class.getResource("/sounds/ready.wav");
+            File file = new File(url.getPath());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
@@ -93,7 +101,8 @@ public class Sound { public static void playButtonSound() {
 
     public static void playTradeButtonSound() {
         try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\trade.wav");
+            URL url = Sound.class.getResource("/sounds/trade.wav");
+            File file = new File(url.getPath());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
@@ -105,7 +114,8 @@ public class Sound { public static void playButtonSound() {
 
     public static void playCardButtonSound() {
         try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\Card.wav");
+            URL url = Sound.class.getResource("/sounds/Card.wav");
+            File file = new File(url.getPath());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
@@ -116,7 +126,8 @@ public class Sound { public static void playButtonSound() {
     }
     public static void playDeclineTradeOfferSound() {
         try {
-            File file = new File("E:\\Programing\\IntelliJ\\sep\\h\\NiedlichePixel\\src\\sounds\\decline.wav");
+            URL url = Sound.class.getResource("/sounds/decline.wav");
+            File file = new File(url.getPath());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
