@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import audio.Soundeffects;
 import enums.Color;
 import enums.PlayerState;
 import javafx.application.Platform;
@@ -145,7 +146,9 @@ public class LobbyController {
 		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getClientController().connectToServer(server, port);
 		colorNameSelectPane.setDisable(false);
-		playButtonSound();
+        Soundeffects.LOGIN.play();
+
+		//playButtonSound();
 
 	}
 
@@ -238,8 +241,12 @@ public class LobbyController {
 			// FOR DEBUG ONLY ASSUME SERVER CONFIRMED
 			logger.debug("Profile" + name + chosenColor);
 			readyButton.setDisable(false);
-			playButtonSound();
+			Soundeffects.LOGIN.play();
+
+			// playButtonSound();
 		}
+        
+
 	}
 
 	/**

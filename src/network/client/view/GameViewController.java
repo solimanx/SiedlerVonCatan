@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import audio.Soundeffects;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.PlayerState;
@@ -622,7 +623,9 @@ public class GameViewController implements Initializable {
     @FXML
     void handleEndTurnButton(ActionEvent event) {
         viewController.getClientController().endTurn();
-        playButtonSound();
+        Soundeffects.LOGIN.play();
+
+        //playButtonSound();
     }
 
     /**
@@ -724,7 +727,9 @@ public class GameViewController implements Initializable {
             logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
-        playButtonSound();
+        Soundeffects.LOGIN.play();
+
+        //playButtonSound();
     }
 
     /**
@@ -740,7 +745,8 @@ public class GameViewController implements Initializable {
         Scene cheatScene = new Scene(cheatRoot);
         TextField cheatField = new TextField();
         Button ok = new Button("Send Cheat");
-        playButtonSound();
+        Soundeffects.LOGIN.play();
+        //playButtonSound();
         ok.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

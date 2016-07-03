@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import ai.AdvancedAI;
 import ai.PrimitiveAI;
+import audio.Soundeffects;
 import debugging.DebugClient;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -90,7 +91,8 @@ public class StartViewController {
         aiPort.setDisable(false);
         aiServer.setDisable(false);
         serverPort.setDisable(true);
-        playButtonSound();
+        Soundeffects.LOGIN.play();
+//        playButtonSound();
     }
 
     /**
@@ -103,7 +105,9 @@ public class StartViewController {
         serverPort.setDisable(true);
         aiPort.setDisable(true);
         aiServer.setDisable(true);
-        playButtonSound();
+        Soundeffects.LOGIN.play();
+
+        //playButtonSound();
     }
 
     /**
@@ -116,7 +120,9 @@ public class StartViewController {
         serverPort.setDisable(false);
         aiPort.setDisable(true);
         aiServer.setDisable(true);
-        playButtonSound();
+        Soundeffects.LOGIN.play();
+
+        //playButtonSound();
     }
 
     /**
@@ -131,7 +137,9 @@ public class StartViewController {
         startClient.setDisable(false);
         startAI.setDisable(false);
         startButton.setDisable(false);
-        playButtonSound();
+        Soundeffects.LOGIN.play();
+
+        //playButtonSound();
     }
 
     /**
@@ -142,7 +150,8 @@ public class StartViewController {
     @FXML
     void handleStartButton(ActionEvent event) {
         RadioButton rb = (RadioButton) startMode.getSelectedToggle();
-        playButtonSound();
+        Soundeffects.LOGIN.play();
+        //playButtonSound();
         switch (rb.getText()) {
             case "Client":
                 Thread clientThread = new Thread(new Runnable() {
