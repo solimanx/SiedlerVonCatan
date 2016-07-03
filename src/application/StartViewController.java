@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import network.client.controller.ClientController;
 import network.server.controller.ServerController;
 
+
 import static sounds.Sound.playButtonSound;
 
 
@@ -76,6 +77,7 @@ public class StartViewController {
      */
     public void setStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+
     }
 
     /**
@@ -140,6 +142,7 @@ public class StartViewController {
     @FXML
     void handleStartButton(ActionEvent event) {
         RadioButton rb = (RadioButton) startMode.getSelectedToggle();
+        playButtonSound();
         switch (rb.getText()) {
             case "Client":
                 Thread clientThread = new Thread(new Runnable() {
@@ -183,7 +186,7 @@ public class StartViewController {
                 break;
             default:
                 System.out.println(rb.getText());
-                playButtonSound();
+
         }
     }
 
