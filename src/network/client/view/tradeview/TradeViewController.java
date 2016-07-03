@@ -2,6 +2,7 @@ package network.client.view.tradeview;
 
 import java.util.HashMap;
 
+import audio.Soundeffects;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -311,6 +312,7 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleSeaTradeButton(ActionEvent event) {
+		Soundeffects.HARBOUR.play();
 		viewController.getClientController().requestSeaTrade(resultOffer, resultDemand);
 		stage.hide();
 		resultDemand = new int[5];

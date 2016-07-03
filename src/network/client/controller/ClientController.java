@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 
+import audio.Soundeffects;
 import enums.Color;
 import enums.PlayerState;
 import enums.ResourceType;
@@ -564,6 +565,7 @@ public class ClientController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		// if self
 		if (modelID == 0) {
+			Soundeffects.RESOURCE.play();
 			gameLogic.getBoard().getPlayer(modelID).decrementResources(resources);
 			// viewController.getGameViewController().setResourceCards(modelID,
 			// getPlayerResources(modelID));

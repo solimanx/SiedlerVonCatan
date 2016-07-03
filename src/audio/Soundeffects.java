@@ -15,6 +15,7 @@ public class Soundeffects {
 	public final static AudioClip SWORD = new AudioClip(Soundeffects.class.getResource("/audio/sword.mp3").toString());
 	public final static AudioClip VICTORY = new AudioClip(Soundeffects.class.getResource("/audio/victory.mp3").toString());
 	public final static AudioClip CHATRECEIVE = new AudioClip(Soundeffects.class.getResource("/audio/chatreceive.mp3").toString());
+	public final static AudioClip LONGESTROAD = new AudioClip(Soundeffects.class.getResource("/audio/longestroad.wav").toString());
 	
 
 }
