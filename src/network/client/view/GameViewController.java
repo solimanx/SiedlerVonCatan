@@ -67,9 +67,7 @@ import network.client.view.devcardview.DevCardViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
 
-import static sounds.Sound.playButtonSound;
-import static sounds.Sound.playDiceRollSound;
-import static sounds.Sound.playMoveRobberSound;
+import static sounds.Sound.*;
 
 
 // TODO: Auto-generated Javadoc
@@ -362,6 +360,7 @@ public class GameViewController implements Initializable {
 
             tradeStage.setOnCloseRequest(e -> {
                 tradeStage.hide();
+
             });
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -661,6 +660,7 @@ public class GameViewController implements Initializable {
         tradeViewController.start(selfResources);
         tradeViewController.isPlayerTradingStatus.set((selfState == PlayerState.TRADING_OR_BUILDING) ? true : false);
         tradeStage.show();
+        playTradeButtonSound();
     }
 
     /**
@@ -701,6 +701,7 @@ public class GameViewController implements Initializable {
             logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
+        playCardButtonSound();
     }
 
     /**
@@ -723,6 +724,7 @@ public class GameViewController implements Initializable {
             logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
+        playButtonSound();
     }
 
     /**
@@ -738,7 +740,7 @@ public class GameViewController implements Initializable {
         Scene cheatScene = new Scene(cheatRoot);
         TextField cheatField = new TextField();
         Button ok = new Button("Send Cheat");
-
+        playButtonSound();
         ok.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -764,6 +766,7 @@ public class GameViewController implements Initializable {
         String message = messageInput.getText();
         messageInput.clear();
         viewController.getClientController().sendChatMessage(message);
+        playNotificationSound();
     }
 
     /**
@@ -868,6 +871,7 @@ public class GameViewController implements Initializable {
      */
     public void receiveChatMessage(String line) {
         messages.appendText(line + "\n");
+        playNotificationSound();
     }
 
     /**
