@@ -41,10 +41,15 @@ public class AdvancedAI extends PrimitiveAI {
 
 	private Map<Integer, Double> diceRollProbabilities;
 
-	int[] initialResourceWeight = { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
+	private int[] initialResourceWeight = { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
 			Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 
-	int initialRoundCounter = 0;
+	private int initialRoundCounter = 0;
+
+	private Double knightValue;
+	private Double monopolyValue;
+	private Double inventionValue;
+	private Double roadBuildingValue;
 
 	/**
 	 * Instantiates a new advanced AI.
@@ -130,6 +135,49 @@ public class AdvancedAI extends PrimitiveAI {
 	public void actuate() {
 		resourceAgent.update();
 
+		receiveProposals();
+		if (cardAgent.getSum() > 0) {
+			if (cardAgent.getSum() == 1) {
+				if (cardAgent.hasKnight()) {
+					if (knightValue > 1.0) {
+						cardAgent.playKnightCard();
+					}
+				} else if (cardAgent.hasMonopoly()
+						&& (getMe().getVictoryPoints() == 8 || getMe().getVictoryPoints() == 9)) {
+					if (monopolyValue > 0.5) {
+						cardAgent.playMonopolyCard();
+					}
+				} else if (cardAgent.hasMonopoly()) {
+					if (monopolyValue > 1.5) {
+						cardAgent.playMonopolyCard();
+					}
+				} else if (cardAgent.hasInvention()) {
+					if (inventionValue > 0.5) {
+						cardAgent.playInventionCard();
+					}
+				} else if (cardAgent.hasRoad()) {
+					if (roadBuildingValue > 0.5) {
+						cardAgent.playRoadCard();
+					}
+				}
+			} else {
+				double max = Math.max(knightValue,
+						Math.max(monopolyValue, Math.max(inventionValue, roadBuildingValue)));
+				if (max > 0.5) {
+					if (knightValue == max) {
+						cardAgent.playKnightCard();
+					} else if (monopolyValue == max) {
+						cardAgent.playMonopolyCard();
+					} else if (inventionValue == max) {
+						cardAgent.playInventionCard();
+					} else if (roadBuildingValue == max) {
+						cardAgent.playRoadCard();
+					}
+				}
+			}
+
+		}
+
 		if (getMe().getAmountCities() != 0 && resourceAgent.canBuildCity()) {
 			boolean notFound = true;
 			for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
@@ -143,8 +191,8 @@ public class AdvancedAI extends PrimitiveAI {
 					break;
 				}
 			}
-			if (notFound){
-				//TODO: Fix this, so other possibilities are checked!
+			if (notFound) {
+				// TODO: Fix this, so other possibilities are checked!
 				getOutput().respondEndTurn();
 			}
 		}
@@ -152,13 +200,14 @@ public class AdvancedAI extends PrimitiveAI {
 		else if (resourceAgent.canBuyCard()) {
 			// i'll get them
 			pO.requestBuyCard();
-		} 
+		}
+
 		else if (getMe().getAmountVillages() != 0 && resourceAgent.canBuildVillage()) {
-				Corner bestCorner = resourceAgent.getBestVillage();
-				if (bestCorner != null) {
-					int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
-					pO.requestBuildVillage(coords[0], coords[1], coords[2]);
-			} else { //try to build street
+			Corner bestCorner = resourceAgent.getBestVillage();
+			if (bestCorner != null) {
+				int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
+				pO.requestBuildVillage(coords[0], coords[1], coords[2]);
+			} else { // try to build street
 				if (!getMe().hasLongestRoad() && getMe().getAmountStreets() > 0 && resourceAgent.canBuildRoad()) {
 					Edge bestEdge = resourceAgent.getBestStreet();
 					String id = bestEdge.getEdgeID();
@@ -367,5 +416,12 @@ public class AdvancedAI extends PrimitiveAI {
 
 	public OpponentAgent getOpponentAgent() {
 		return opponentAgent;
+	}
+
+	/**
+	 * Calculate value of playing each card if available.
+	 */
+	public void receiveProposals() {
+
 	}
 }

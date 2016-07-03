@@ -15,16 +15,18 @@ public class CardAgent {
 	/**
 	 * Instantiates a new card agent.
 	 *
-	 * @param aai the AdvancedAi
+	 * @param aai
+	 *            the AdvancedAi
 	 */
 	public CardAgent(AdvancedAI aai) {
 		this.aai = aai;
 	}
+
 	/**
 	 * Strategy for playing the cards.
 	 */
-	public void playCardStrategy(){
-		
+	public void playCardStrategy() {
+
 	}
 
 	/**
@@ -75,6 +77,35 @@ public class CardAgent {
 	 */
 	public boolean hasRoad() {
 		return myCards[3] > 0;
+	}
+
+	/**
+	 * Returns the sum of all cards.
+	 * 
+	 * @return sum
+	 */
+	public int getSum() {
+		return myCards[0] + myCards[1] + myCards[2] + myCards[3];
+	}
+
+	public void playMonopolyCard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void playKnightCard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void playInventionCard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void playRoadCard() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
