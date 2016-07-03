@@ -907,6 +907,7 @@ public class GameViewController implements Initializable {
         bandit.setCenterX(fieldCoordinates[u + 3][v + 3][0]);
         bandit.setCenterY(fieldCoordinates[u + 3][v + 3][1]);
         bandit.setOpacity(1.0);
+        Soundeffects.ROBBER.play();
 
     }
 
@@ -1155,7 +1156,7 @@ public class GameViewController implements Initializable {
         alert.initOwner(gameStage);
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.showAndWait();
-        playMoveRobberSound();
+        //playMoveRobberSound();
     }
 
     /**
