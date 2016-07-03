@@ -636,7 +636,7 @@ public class GameViewController implements Initializable {
     @FXML
     void handleRollDiceButton(ActionEvent event) {
         viewController.getClientController().diceRollRequest();
-        playDiceRollSound();
+        //playDiceRollSound();
     }
 
     /**
@@ -1049,7 +1049,7 @@ public class GameViewController implements Initializable {
      * @param result the new dice roll result
      */
     public void setDiceRollResult(int result) {
-        //Soundeffects.DICEROLL.play();
+        Soundeffects.DICEROLL.play();
         diceResult.setText(String.valueOf(result));
     }
 
