@@ -877,7 +877,8 @@ public class GameViewController implements Initializable {
      */
     public void receiveChatMessage(String line) {
         messages.appendText(line + "\n");
-        playNotificationSound();
+        Soundeffects.CHATRECEIVE.play();
+        //playNotificationSound();
     }
 
     /**
