@@ -1321,7 +1321,7 @@ public class GameViewController implements Initializable {
                 Text text = new Text("Glückwunsch zum verdienten Sieg.");
                 Text text1 = new Text("Unser Gewinner ist: " + winner);
 
-                ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/textures/winner.png")));
+                ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/textures/standard/winner.png")));
                 vBox.getChildren().addAll(title, text, text1, image);
 
                 Scene scene = new Scene(vBox, 600, 600, Color.BEIGE);

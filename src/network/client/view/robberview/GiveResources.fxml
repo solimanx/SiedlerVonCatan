@@ -56,27 +56,27 @@
             <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOKButton" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/textures/iconLumber.png" />
+                  <Image url="/textures/standard/iconLumber.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="/textures/iconBrick.png" />
+                  <Image url="/textures/standard/iconBrick.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="/textures/iconWool.png" />
+                  <Image url="/textures/standard/iconWool.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
-                  <Image url="/textures/iconGrain.png" />
+                  <Image url="/textures/standard/iconGrain.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                <image>
-                  <Image url="/textures/iconOre.png" />
+                  <Image url="/textures/standard/iconOre.png" />
                </image>
             </ImageView>
          </children>

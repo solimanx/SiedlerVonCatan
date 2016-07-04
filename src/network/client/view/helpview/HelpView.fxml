@@ -36,22 +36,22 @@
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconLumber.png" />
+                        <Image url="/textures/standard/iconLumber.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconBrick.png" />
+                        <Image url="/textures/standard/iconBrick.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconGrain.png" />
+                        <Image url="/textures/standard/iconGrain.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconWool.png" />
+                        <Image url="/textures/standard/iconWool.png" />
                      </image>
                   </ImageView>
                </children>
@@ -60,12 +60,12 @@
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconLumber.png" />
+                        <Image url="/textures/standard/iconLumber.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconBrick.png" />
+                        <Image url="/textures/standard/iconBrick.png" />
                      </image>
                   </ImageView>
                </children>
@@ -74,27 +74,27 @@
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconGrain.png" />
+                        <Image url="/textures/standard/iconGrain.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconGrain.png" />
+                        <Image url="/textures/standard/iconGrain.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconOre.png" />
+                        <Image url="/textures/standard/iconOre.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconOre.png" />
+                        <Image url="/textures/standard/iconOre.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconOre.png" />
+                        <Image url="/textures/standard/iconOre.png" />
                      </image>
                   </ImageView>
                </children>
@@ -103,17 +103,17 @@
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconGrain.png" />
+                        <Image url="/textures/standard/iconGrain.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconWool.png" />
+                        <Image url="/textures/standard/iconWool.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/textures/iconOre.png" />
+                        <Image url="/textures/standard/iconOre.png" />
                      </image>
                   </ImageView>
                </children>
