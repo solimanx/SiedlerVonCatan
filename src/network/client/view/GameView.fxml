@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -23,7 +22,7 @@
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <Pane fx:id="board" prefHeight="200.0" prefWidth="200.0" style="-fx-background-size: stretch; -fx-background-image: url(/textures/game-background.jpg);" BorderPane.alignment="CENTER" />
+            <Pane id="board" fx:id="board" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="170.0" styleClass="player-board" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -43,9 +42,6 @@
                   <HBox alignment="CENTER_RIGHT">
                      <children>
                         <ImageView fx:id="iconLumber" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/iconLumber.png" />
-                           </image>
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -60,9 +56,6 @@
                   <HBox alignment="CENTER_RIGHT">
                      <children>
                         <ImageView fx:id="iconBrick" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/iconBrick.png" />
-                           </image>
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -77,9 +70,6 @@
                   <HBox alignment="CENTER_RIGHT">
                      <children>
                         <ImageView fx:id="iconWool" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/iconWool.png" />
-                           </image>
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -94,9 +84,6 @@
                   <HBox alignment="CENTER_RIGHT">
                      <children>
                         <ImageView fx:id="iconGrain" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/iconGrain.png" />
-                           </image>
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -111,9 +98,6 @@
                   <HBox alignment="CENTER_RIGHT">
                      <children>
                         <ImageView fx:id="iconOre" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/iconOre.png" />
-                           </image>
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
