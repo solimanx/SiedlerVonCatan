@@ -20,7 +20,21 @@ public class PlayerModel {
 
 	private int victoryPoints = 0;
 
-	// TODO int hiddenVictoryPoints
+	private int hiddenVictoryPoints;
+	/**
+	 * @return the hiddenVictoryPoints
+	 */
+	public int getHiddenVictoryPoints() {
+		return hiddenVictoryPoints;
+	}
+
+	/**
+	 * @param hiddenVictoryPoints the hiddenVictoryPoints to set
+	 */
+	public void setHiddenVictoryPoints(int hiddenVictoryPoints) {
+		this.hiddenVictoryPoints = hiddenVictoryPoints;
+	}
+
 	private int amountVillages = DefaultSettings.START_AMOUNT_VILLAGES;
 	private int amountCities = DefaultSettings.START_AMOUNT_CITIES;
 	private int amountStreets = DefaultSettings.START_AMOUNT_STREETS;
