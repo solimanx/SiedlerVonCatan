@@ -26,7 +26,7 @@
 	-fx-text-fill: #fff;
 	-fx-background-color: linear-gradient( #6495ED, #062D92 );
 	-fx-font-family: "Georgia", serif;
-	-fx-effect: dropshadow(gaussian , #3E2723 , 0.0,0.0,0.0,3.0);
+	-fx-effect: dropshadow(gaussian , #02123a , 0.0,0.0,0.0,2.0);
 }
 
 .button:pressed {
@@ -45,7 +45,7 @@
 }
 
 .dialog-background {
-	-fx-background-image: url(/textures/biergarten/dialogbackground);
+	-fx-background-image: url(/textures/biergarten/dialogbackground.jpg);
 }
 
 #board {

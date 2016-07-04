@@ -76,7 +76,7 @@ public class StartViewController {
 	@FXML
 	public void initialize() {
 		themeChooser.getItems().addAll("Standard", "Biergarten");
-		themeChooser.setValue("Default");
+		themeChooser.setValue("Standard");
 	}
 
 	/**
