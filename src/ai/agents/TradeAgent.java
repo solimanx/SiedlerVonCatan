@@ -105,7 +105,7 @@ public class TradeAgent {
 	}
 
 	/**
-	 * Checks for three one harbour.
+	 * Checks for three one harbor.
 	 *
 	 * @return true, if successful
 	 */
