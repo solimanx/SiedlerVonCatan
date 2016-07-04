@@ -25,6 +25,7 @@ import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
 import protocol.dualinstructions.ProtocolPlayKnightCard;
+import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
 
@@ -211,6 +212,7 @@ public class AIOutputHandler {
 	 * End my turn.
 	 */
 	public void respondEndTurn() {
+		ai.updateCards();
 		ProtocolEndTurn pet = new ProtocolEndTurn();
 		Response r = new Response();
 
@@ -319,6 +321,23 @@ public class AIOutputHandler {
 			logger.trace(Level.ERROR, e);
 		}
 
+	}
+
+	public void requestPlayStreetCard(int[] coords1, int[] coords2) {
+		Index[] road1 = ModelToProtocol.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords1[0], coords1[1], coords1[2]));
+		Index[] road2 = coords2 == null ? null : ModelToProtocol.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords2[0], coords2[1], coords2[2]));
+		
+		ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(road1, road2);
+		Response r = new Response();
+		r.pPlayRoadCard = prbci;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw an Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
+		
 	}
 
 }

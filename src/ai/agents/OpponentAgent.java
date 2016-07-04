@@ -63,7 +63,7 @@ public class OpponentAgent {
 			if (opponents.get(i).getID() == boardPlayerID) {
 				return opponents.get(i);
 			}
-		}
+		} 
 		throw new IllegalArgumentException("ID " + boardPlayerID + " doesn't exist");
 	}
 

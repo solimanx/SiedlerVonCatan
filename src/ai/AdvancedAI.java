@@ -136,7 +136,7 @@ public class AdvancedAI extends PrimitiveAI {
 		resourceAgent.update();
 		
 		receiveProposals();
-		if (cardAgent.getSum() > 0) {
+		/*if (cardAgent.getSum() > 0) {
 			if (cardAgent.getSum() == 1) {
 				if (cardAgent.hasKnight()) {
 					if (knightValue > 1.0) {
@@ -176,6 +176,10 @@ public class AdvancedAI extends PrimitiveAI {
 				}
 			}
 
+		}*/
+		
+		if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()){
+			cardAgent.playRoadCard();
 		}
 
 		if (getMe().getAmountCities() != 0 && resourceAgent.canBuildCity()) {
@@ -239,6 +243,10 @@ public class AdvancedAI extends PrimitiveAI {
 			getOutput().respondEndTurn();
 		}
 
+	}
+	
+	public void myActuate(){
+		
 	}
 
 	/*
@@ -423,5 +431,14 @@ public class AdvancedAI extends PrimitiveAI {
 	 */
 	public void receiveProposals() {
 
+	}
+
+	public void playStreetCard(int[] coords1, int[] coords2) {
+		if (coords2 == null){
+			pO.requestPlayStreetCard(coords1,null);
+		} else {
+			pO.requestPlayStreetCard(coords1,coords2);
+		}
+		
 	}
 }

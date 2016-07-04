@@ -349,7 +349,6 @@ public class AIInputHandler extends ClientInputHandler {
 			case TRADING_OR_BUILDING:
 				ai.actuate();
 				// ai.getOutput().respondEndTurn();
-				ai.updateCards();
 				break;
 			default:// do nothing
 

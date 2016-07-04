@@ -1,7 +1,11 @@
 package ai.agents;
 
+import java.util.ArrayList;
+
 import ai.AdvancedAI;
 import enums.CardType;
+import model.objects.Edge;
+import network.ProtocolToModel;
 
 /**
  * Tracks all cards, and what strategy to use when having the cards, or seeing
@@ -90,22 +94,40 @@ public class CardAgent {
 
 	public void playMonopolyCard() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void playKnightCard() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void playInventionCard() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void playRoadCard() {
-		// TODO Auto-generated method stub
-		
+		Edge e1 = aai.getResourceAgent().getBestStreet();
+		int[] coords1 = ProtocolToModel.getEdgeCoordinates(e1.getEdgeID());
+		aai.getResourceAgent().addToOwnStreetSet(e1);
+		int[] coords2 = null;
+		if (aai.getMe().getAmountStreets() > 1) {
+			Edge e2 = aai.getResourceAgent().getBestStreet();
+		    coords2 = ProtocolToModel.getEdgeCoordinates(e2.getEdgeID());
+		}
+
+		ArrayList<StreetSet> myStreetSets = aai.getResourceAgent().getMyStreetSets();
+
+		for (int i = 0; i < myStreetSets.size(); i++) {
+			if (myStreetSets.get(i).getEdges().contains(e1)) {
+				myStreetSets.get(i).getEdges().remove(e1);
+				break;
+			}
+		}
+
+		aai.playStreetCard(coords1, coords2);
+
 	}
 
 }

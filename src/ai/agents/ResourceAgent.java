@@ -27,6 +27,10 @@ public class ResourceAgent {
 																			// import
 																			// ändern
 
+	public ArrayList<StreetSet> getMyStreetSets() {
+		return myStreetSets;
+	}
+
 	public final static HashMap<Integer, int[]> buildingCosts = new HashMap<Integer, int[]>() {
 		{
 			put(0, DefaultSettings.STREET_BUILD_COST);

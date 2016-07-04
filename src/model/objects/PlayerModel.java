@@ -211,6 +211,14 @@ public class PlayerModel {
 	public int getID() {
 		return playerID;
 	}
+	
+	/**
+	 * Sets the id.
+	 * AI Only!
+	 */
+	public void setID(int id) {
+		this.playerID = id;
+	}	
 
 	/**
 	 * Gets the amount streets.
