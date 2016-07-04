@@ -409,6 +409,10 @@ public class Board {
 	public PlayerModel getPlayer(int i) {
 		return this.players[i] != null ? this.players[i] : null;
 	}
+	
+	public PlayerModel[] getPlayerModels(){
+		return this.players;
+	}
 
 	/**
 	 * Returns the amount of players.

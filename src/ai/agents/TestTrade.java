@@ -8,9 +8,9 @@ public class TestTrade {
 		// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 		//	CITY_BUILD_COST = { 0, 0, 3, 0, 2 };
 		TradeAgent ta = new TradeAgent(null, null);
-		ta.setHarbor();
+		//ta.setHarbor();
 		int[] resources = { 2, 2, 1, 0, 2};
-		System.out.println(ta.isBuildableAfterTrade(2, resources));
+		//System.out.println(ta.isBuildableAfterTrade(2, resources));
 	}
 
 //	//debug method //TODO

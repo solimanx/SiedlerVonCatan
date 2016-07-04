@@ -1955,6 +1955,28 @@ public class ServerController {
 			}
 			
 		} else { //während lobbybetrieb
+			//von pM n bis pM 
+			PlayerModel[] playerModels = gameLogic.getBoard().getPlayerModels();
+			PlayerModel tempPM = playerModels[amountPlayers-1];
+			int tempThreadID = modelPlayerIdMap.get(amountPlayers-1);
+			//temp ModelID = i;
+			//verschiebe alle PlayerModels um 1 nach unten bis zu
+			// spieler der sich disconnected hat...
+			for (int i = amountPlayers - 2;i >= modelID;i--){
+				PlayerModel currPM = playerModels[i];
+				playerModels[i] = tempPM;
+				tempPM = currPM;
+				
+				int newTID = modelPlayerIdMap.get(i);
+				modelPlayerIdMap.replace(i, tempThreadID);				
+				threadPlayerIdMap.replace(tempThreadID, i);
+				tempThreadID = newTID;
+								
+			}
+			//resette den letzten Eintrag
+			playerModels[amountPlayers-1] = new PlayerModel();
+			modelPlayerIdMap.replace(amountPlayers-1, null);
+			threadPlayerIdMap.replace(threadID,null);
 			
 		}
 		
