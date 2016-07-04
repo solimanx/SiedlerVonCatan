@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package ai;
 
@@ -21,6 +21,7 @@ import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
 import protocol.clientinstructions.ProtocolRobberLoss;
 import protocol.clientinstructions.ProtocolRobberMovementRequest;
+import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
@@ -323,10 +324,34 @@ public class AIOutputHandler {
 
 	}
 
+
+
+	/**
+	 * Request trade.
+	 *
+	 * @param offer the offer
+	 * @param demand the demand
+	 */
+	public void requestTrade(int[] offer, int[] demand) {
+		ProtocolResource prOff = ModelToProtocol.convertToProtocolResource(offer);
+		ProtocolResource prDem = ModelToProtocol.convertToProtocolResource(demand);
+		ProtocolTradeRequest ptr = new ProtocolTradeRequest(prOff, prDem);
+		Response r = new Response();
+		r.pTradeRequest = ptr;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw an Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
+	}
+
+
 	public void requestPlayStreetCard(int[] coords1, int[] coords2) {
 		Index[] road1 = ModelToProtocol.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords1[0], coords1[1], coords1[2]));
 		Index[] road2 = coords2 == null ? null : ModelToProtocol.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords2[0], coords2[1], coords2[2]));
-		
+
 		ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(road1, road2);
 		Response r = new Response();
 		r.pPlayRoadCard = prbci;
@@ -337,7 +362,6 @@ public class AIOutputHandler {
 			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
-		
-	}
 
+	}
 }

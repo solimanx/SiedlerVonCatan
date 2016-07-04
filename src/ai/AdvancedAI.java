@@ -44,12 +44,16 @@ public class AdvancedAI extends PrimitiveAI {
 	private int[] initialResourceWeight = { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
 			Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 
+
+	private int[] globalResourceWeight = {100,100,100,100,100};
+
 	private int initialRoundCounter = 0;
 
 	private double knightValue;
 	private double monopolyValue;
 	private double inventionValue;
 	private double roadBuildingValue;
+
 
 	/**
 	 * Instantiates a new advanced AI.
@@ -66,7 +70,7 @@ public class AdvancedAI extends PrimitiveAI {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ai.PrimitiveAI#initialVillage()
 	 */
 	@Override
@@ -111,7 +115,7 @@ public class AdvancedAI extends PrimitiveAI {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ai.PrimitiveAI#initialRoad()
 	 */
 	@Override
@@ -128,13 +132,13 @@ public class AdvancedAI extends PrimitiveAI {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ai.PrimitiveAI#actuate()
 	 */
 	@Override
 	public void actuate() {
 		resourceAgent.update();
-		
+
 		receiveProposals();
 		/*if (cardAgent.getSum() > 0) {
 			if (cardAgent.getSum() == 1) {
@@ -177,7 +181,7 @@ public class AdvancedAI extends PrimitiveAI {
 			}
 
 		}*/
-		
+
 		if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()){
 			cardAgent.playRoadCard();
 		}
@@ -244,14 +248,14 @@ public class AdvancedAI extends PrimitiveAI {
 		}
 
 	}
-	
+
 	public void myActuate(){
-		
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ai.PrimitiveAI#moveRobber()
 	 */
 	@Override
@@ -403,7 +407,7 @@ public class AdvancedAI extends PrimitiveAI {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ai.PrimitiveAI#getResourceAgent()
 	 */
 	@Override
@@ -414,7 +418,7 @@ public class AdvancedAI extends PrimitiveAI {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ai.PrimitiveAI#updateCards()
 	 */
 	@Override
@@ -424,6 +428,29 @@ public class AdvancedAI extends PrimitiveAI {
 
 	public OpponentAgent getOpponentAgent() {
 		return opponentAgent;
+	}
+
+
+	public int[] getGlobalResourceWeight(){
+		return globalResourceWeight;
+	}
+
+
+	/**
+	 *
+	 * @param changes value of the change
+	 * positive values to increment
+	 * negative values to decrement
+	 *
+	 *
+	 */
+	public void setGlobalResourceWeight(int[] changes){
+		if(changes.length != 5){
+			throw new IllegalArgumentException("int Array length != 5 in aai.setGlobalResourceWeight");
+		}
+		for(int i = 0; i<globalResourceWeight.length; i++){
+			globalResourceWeight[i] = globalResourceWeight[i] + changes[i];
+		}
 	}
 
 	/**
@@ -439,6 +466,6 @@ public class AdvancedAI extends PrimitiveAI {
 		} else {
 			pO.requestPlayStreetCard(coords1,coords2);
 		}
-		
+
 	}
 }
