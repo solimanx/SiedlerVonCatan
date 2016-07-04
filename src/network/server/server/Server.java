@@ -30,8 +30,10 @@ public class Server {
 	/**
 	 * Instantiates a new server.
 	 *
-	 * @param inputHandler the input handler
-	 * @param serverPort the server port
+	 * @param inputHandler
+	 *            the input handler
+	 * @param serverPort
+	 *            the server port
 	 */
 	public Server(ServerInputHandler inputHandler, int serverPort) {
 		this.serverInputHandler = inputHandler;
@@ -41,7 +43,8 @@ public class Server {
 	/**
 	 * Start.
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void start() throws IOException {
 
@@ -68,10 +71,14 @@ public class Server {
 		/**
 		 * Instantiates a new client thread.
 		 *
-		 * @param socket the socket
-		 * @param inputHandler the input handler
-		 * @param outputHandler the output handler
-		 * @param threadID the thread ID
+		 * @param socket
+		 *            the socket
+		 * @param inputHandler
+		 *            the input handler
+		 * @param outputHandler
+		 *            the output handler
+		 * @param threadID
+		 *            the thread ID
 		 */
 		public ClientThread(Socket socket, ServerInputHandler inputHandler, ServerOutputHandler outputHandler,
 				int threadID) {
@@ -82,7 +89,9 @@ public class Server {
 
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
@@ -104,7 +113,15 @@ public class Server {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-				closeSocket();
+				inputHandler.lostConnection(threadID);
+				try {
+					socket.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				//closeSocket();
 				// TODO server beendet sich momentan noch vollständig, wenn
 				// Client abbricht
 			} finally {
@@ -115,9 +132,12 @@ public class Server {
 	/**
 	 * Start handler.
 	 *
-	 * @param socket the socket
-	 * @param inputHandler the input handler
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param socket
+	 *            the socket
+	 * @param inputHandler
+	 *            the input handler
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
 		ClientThread thread = new ClientThread(socket, inputHandler, serverOutputHandler, clientCounter);
@@ -130,8 +150,10 @@ public class Server {
 	/**
 	 * Broadcast.
 	 *
-	 * @param s the s
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param s
+	 *            the s
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void broadcast(String s) throws IOException {
 		logger.info("Broadcast: " + s);
@@ -146,13 +168,16 @@ public class Server {
 	/**
 	 * Send to client.
 	 *
-	 * @param s the s
-	 * @param threadID the thread ID
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param s
+	 *            the s
+	 * @param threadID
+	 *            the thread ID
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void sendToClient(String s, int threadID) throws IOException {
 		ClientThread thread = getClients()[threadID];
-		logger.info("Send to Client: " + threadID+ " " + s);
+		logger.info("Send to Client: " + threadID + " " + s);
 		thread.writer.write(s + "\n");
 		thread.writer.flush();
 	}
@@ -162,12 +187,14 @@ public class Server {
 	 */
 	public void closeSocket() {
 		for (ClientThread clientThread : getClients()) {
-			try {
-				clientThread.socket.close();
-			} catch (IOException e) {
-				logger.error("Input/Output Exception ", e);
-				logger.catching(Level.ERROR, e);
-				e.printStackTrace();
+			if (clientThread != null) {
+				try {
+					clientThread.socket.close();
+				} catch (IOException e) {
+					logger.error("Input/Output Exception ", e);
+					logger.catching(Level.ERROR, e);
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -194,7 +221,8 @@ public class Server {
 	/**
 	 * Sets the clients.
 	 *
-	 * @param clients the new clients
+	 * @param clients
+	 *            the new clients
 	 */
 	public void setClients(ClientThread[] clients) {
 		this.clients = clients;

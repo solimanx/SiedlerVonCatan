@@ -455,4 +455,10 @@ public class ServerInputHandler {
 		return this.serverController;
 	}
 
+	public void lostConnection(int threadID) {
+		serverController.connectionLost(threadID);
+		// TODO Auto-generated method stub
+		
+	}
+
 }

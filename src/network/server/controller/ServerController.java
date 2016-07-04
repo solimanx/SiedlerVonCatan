@@ -72,6 +72,7 @@ public class ServerController {
 	private ArrayList<StreetSet> streetSets = new ArrayList<StreetSet>();
 	private int[] longestRoutes;
 	private int longestTradingRoutePlayer = -1;
+	private int biggestKnightForcePlayer = -1;
 	private DevelopmentCardsStack devStack;
 
 	/**
@@ -297,7 +298,7 @@ public class ServerController {
 			int[] resources = getPlayerResources(playerModelID);
 			int[] devCards = pM.getPlayerDevCards();
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
-					pM.getPlayerState(), pM.getVictoryPoints(), resources, pM.getPlayedKnightCards(), devCards,
+					pM.getPlayerState(), pM.getVictoryPoints() + pM.getHiddenVictoryPoints(), resources, pM.getPlayedKnightCards(), devCards,
 					pM.hasLongestRoad(), pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
 		} else {
 			int[] resources = { gameLogic.getBoard().getPlayer(playerModelID).sumResources() };
@@ -516,7 +517,7 @@ public class ServerController {
 					Corner c = buildVillage(x, y, dir, modelID);
 					subFromPlayersResources(modelID, DefaultSettings.VILLAGE_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.VILLAGE_BUILD_COST);
-					increaseVictoryPoints(modelID);
+					increaseVictoryPoints(modelID,1);
 					checkIfVillageInterruptsStreetSet(c);
 					// evtl. auch in initial village?
 					costsToAll(modelID, DefaultSettings.VILLAGE_BUILD_COST, true);
@@ -612,16 +613,43 @@ public class ServerController {
 	 *
 	 * @param modelID the model ID
 	 */
-	private void increaseVictoryPoints(int modelID) {
+	private void increaseVictoryPoints(int modelID,int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
-		gameLogic.getBoard().getPlayer(modelID).setVictoryPoints(points + 1);
-		if (points + 1 == DefaultSettings.MAX_VICTORY_POINTS) {
+		gameLogic.getBoard().getPlayer(modelID).setVictoryPoints(points + amount);
+		checkVictory(modelID);
+	}
+	
+	/**
+	 * decreases victory points of a player and checks if the player has won.
+	 *
+	 * @param modelID the model ID
+	 */
+	private void decreaseVictoryPoints(int modelID,int amount) {
+		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
+		gameLogic.getBoard().getPlayer(modelID).setVictoryPoints(points - amount);
+	}	
+
+	/**
+	 * increases victory points of a player and checks if the player has won.
+	 *
+	 * @param modelID the model ID
+	 */
+	private void increaseHiddenVictoryPoints(int modelID,int amount) {
+		int points = gameLogic.getBoard().getPlayer(modelID).getHiddenVictoryPoints();
+		gameLogic.getBoard().getPlayer(modelID).setHiddenVictoryPoints(points + amount);
+		checkVictory(modelID);
+	}	
+	
+	private void checkVictory(int modelID) {
+		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
+		int hiddenpoints = gameLogic.getBoard().getPlayer(modelID).getHiddenVictoryPoints();
+		if (points >= DefaultSettings.MAX_VICTORY_POINTS) {
 			victory(modelID);
-		}
+		}			
 	}
 
 	/**
-	 * is called when a player has 10 victory points.
+	 * is called when a player has or more 10 victory points.
 	 *
 	 * @param modelID the model ID
 	 */
@@ -629,6 +657,8 @@ public class ServerController {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 		serverOutputHandler.victory("Spieler " + pM.getName() + " hat das Spiel gewonnen.",
 				modelPlayerIdMap.get(modelID));
+		server.closeSocket();
+		System.exit(0);
 	}
 
 	/**
@@ -813,18 +843,24 @@ public class ServerController {
 			if (longestTradingRoutePlayer != -1) {
 				if (longestTradingRoutePlayer != modelID && longestRoutes[longestTradingRoutePlayer] < max) {
 					gameLogic.getBoard().getPlayer(longestTradingRoutePlayer).setHasLongestRoad(false);
+					decreaseVictoryPoints(longestTradingRoutePlayer,2);
 					gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
+					
+					increaseVictoryPoints(modelID,2);
+					
 					longestTradingRoutePlayer = modelID;
 					serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));
 				}
 			} else {
 				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
+				increaseVictoryPoints(modelID,2);
 				longestTradingRoutePlayer = modelID;
 				serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));
 			}
 		} else {
 			if (longestTradingRoutePlayer == modelID) { // special case
 				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(false);
+				decreaseVictoryPoints(modelID,2);
 				longestTradingRoutePlayer = -1;
 				serverOutputHandler.longestRoad(null);
 			}
@@ -951,6 +987,7 @@ public class ServerController {
 	 */
 	private void checkLargestArmy(int modelID) {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+		if (! pM.hasLargestArmy()){
 		int amountCards = pM.getPlayedKnightCards();
 		boolean hasLargestArmy = true;
 		if (pM.getPlayedKnightCards() >= 3) {
@@ -962,9 +999,16 @@ public class ServerController {
 				}
 			}
 			if (hasLargestArmy) {
+				if (biggestKnightForcePlayer != -1){
+					gameLogic.getBoard().getPlayer(biggestKnightForcePlayer).setHasLargestArmy(false);
+					decreaseVictoryPoints(biggestKnightForcePlayer,2);
+				}
 				pM.setHasLargestArmy(true);
+				biggestKnightForcePlayer = modelID;
+				increaseVictoryPoints(modelID, 2);
 				serverOutputHandler.biggestKnightProwess(modelID);
 			}
+		}
 		}
 	}
 
@@ -989,7 +1033,7 @@ public class ServerController {
 
 				subFromPlayersResources(modelID, DefaultSettings.CITY_BUILD_COST);
 				resourceStackIncrease(DefaultSettings.CITY_BUILD_COST);
-				increaseVictoryPoints(modelID);
+				increaseVictoryPoints(modelID,1);
 				
                 costsToAll(modelID, DefaultSettings.CITY_BUILD_COST, true);
 				serverOutputHandler.buildCity(x, y, dir, threadID);
@@ -1029,7 +1073,12 @@ public class ServerController {
 				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
 				costsToAll(modelID, DefaultSettings.DEVCARD_BUILD_COST, true);
 				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
+				if (devCard.getName().equals("Victory Card")){
+					increaseHiddenVictoryPoints(modelID, 1);
+					pm.getPlayerDevCards()[4]++;
+				} else {
 				pm.getDevCardsBoughtInThisRound().add(devCard);
+				}
 				for (int i = 0;i <amountPlayers;i++){
 					if (i == modelID){
 						serverOutputHandler.boughtDevelopmentCard(threadID, devCard,threadID);
@@ -1124,7 +1173,7 @@ public class ServerController {
 					gainFirstBoardResources(modelID, c);
 				}
 
-				increaseVictoryPoints(modelID);
+				increaseVictoryPoints(modelID,1);
 				checkIfVillageInterruptsStreetSet(c);
 
 				serverOutputHandler.buildVillage(x, y, dir, threadID);
@@ -1884,6 +1933,31 @@ public class ServerController {
 	 */
 	public ServerInputHandler getServerInputHandler() {
 		return serverInputHandler;
+	}
+
+	public void connectionLost(int threadID) {
+		int modelID = threadPlayerIdMap.get(threadID);
+		/*PlayerModel pM = new PlayerModel();
+				pM =
+		pM.
+		*/
+		if (currentPlayer != null){
+			gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);;
+			statusUpdate(modelID);
+			Integer currTID;
+			for (int i = 0; i < amountPlayers;i++){
+				currTID = modelPlayerIdMap.get(i);
+				if (currTID != null){
+					serverOutputHandler.victory("Verbindung zu einem Spieler verloren!", threadID);
+					server.closeSocket();
+					System.exit(0);
+				}
+			}
+			
+		} else { //während lobbybetrieb
+			
+		}
+		
 	}
 
 }
