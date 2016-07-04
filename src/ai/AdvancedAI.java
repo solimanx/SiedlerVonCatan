@@ -46,10 +46,10 @@ public class AdvancedAI extends PrimitiveAI {
 
 	private int initialRoundCounter = 0;
 
-	private Double knightValue;
-	private Double monopolyValue;
-	private Double inventionValue;
-	private Double roadBuildingValue;
+	private double knightValue;
+	private double monopolyValue;
+	private double inventionValue;
+	private double roadBuildingValue;
 
 	/**
 	 * Instantiates a new advanced AI.
@@ -101,8 +101,8 @@ public class AdvancedAI extends PrimitiveAI {
 				z = cornerAgent[i].getLocation()[2];
 				d = i;
 			}
-			System.out.println(
-					cornerAgent[i].getLocationString() + " " + cornerAgent[i].calculateInitialVillageUtility());
+			//System.out.println(
+				//	cornerAgent[i].getLocationString() + " " + cornerAgent[i].calculateInitialVillageUtility());
 		}
 		myCornerAgents.add(cornerAgent[d]);
 		super.pO.requestBuildVillage(x, y, z);
@@ -134,7 +134,7 @@ public class AdvancedAI extends PrimitiveAI {
 	@Override
 	public void actuate() {
 		resourceAgent.update();
-
+		
 		receiveProposals();
 		if (cardAgent.getSum() > 0) {
 			if (cardAgent.getSum() == 1) {
