@@ -27,7 +27,7 @@ public class PlayerModel {
 	private boolean hasLongestRoad;
 	private boolean hasLargestArmy;
 	private PlayerState playerState;
-	private int playerID;
+	private Integer playerID;
 	private Color color;
 	private String name = "";
 	private int playedKnightCards;
@@ -54,6 +54,10 @@ public class PlayerModel {
 		this.playerID = id;
 		this.playedKnightCards = 0;
 		// this.resourceCards = new ArrayList<ResourceType>();
+	}
+
+	public PlayerModel() {
+		this.playedKnightCards = 0;
 	}
 
 	/**
@@ -211,14 +215,14 @@ public class PlayerModel {
 	public int getID() {
 		return playerID;
 	}
-	
+
 	/**
 	 * Sets the id.
 	 * AI Only!
 	 */
 	public void setID(int id) {
 		this.playerID = id;
-	}	
+	}
 
 	/**
 	 * Gets the amount streets.
