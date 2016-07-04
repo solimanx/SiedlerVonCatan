@@ -1954,8 +1954,12 @@ public class ServerController {
 				}
 			}
 			
-		} else { //während lobbybetrieb
-			//von pM n bis pM 
+		} else { //während lobbybetrieb disconnect möglich
+			//zuerst noch ein letztes statusupdate
+			gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);
+			statusUpdate(modelID);
+			
+			//danach entfernen aus dem speicher
 			PlayerModel[] playerModels = gameLogic.getBoard().getPlayerModels();
 			PlayerModel tempPM = playerModels[amountPlayers-1];
 			int tempThreadID = modelPlayerIdMap.get(amountPlayers-1);
@@ -1975,8 +1979,10 @@ public class ServerController {
 			}
 			//resette den letzten Eintrag
 			playerModels[amountPlayers-1] = new PlayerModel();
-			modelPlayerIdMap.replace(amountPlayers-1, null);
-			threadPlayerIdMap.replace(threadID,null);
+			modelPlayerIdMap.remove(amountPlayers-1);
+			threadPlayerIdMap.remove(threadID);
+			
+			amountPlayers--;
 			
 		}
 		

@@ -51,7 +51,8 @@ public class Server {
 		ServerSocket serverSocket = new ServerSocket(serverPort, 150);
 		logger.info("Server running");
 		try {
-			while (clientCounter < getClients().length) {
+			//geändert weil sonst können sich nur 4 spieler verbinden; keine disconnects möglich
+			while (clientCounter < 10) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket, serverInputHandler);
 			}
@@ -158,7 +159,7 @@ public class Server {
 	public void broadcast(String s) throws IOException {
 		logger.info("Broadcast: " + s);
 		for (ClientThread clientThread : getClients()) {
-			if (clientThread != null) {
+			if (clientThread != null && clientThread.isAlive()) {
 				clientThread.writer.write(s + "\n");
 				clientThread.writer.flush();
 			}
