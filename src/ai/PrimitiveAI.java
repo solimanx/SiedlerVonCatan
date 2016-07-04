@@ -413,6 +413,7 @@ public class PrimitiveAI extends Thread {
 		}
 
 		gl.getBoard().setBandit(banditLocation);
+		gl.getBoard().deletePlayers();
 	}
 
 	/**

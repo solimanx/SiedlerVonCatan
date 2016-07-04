@@ -49,6 +49,8 @@ public class AIInputHandler extends ClientInputHandler {
 	private static Logger logger = LogManager.getLogger(AIInputHandler.class.getSimpleName());
 	private Parser parser = new Parser();
 
+	private ArrayList<Integer> opponentID = new ArrayList<Integer>();
+
 	/**
 	 * Instantiates a new AI input handler.
 	 *
@@ -63,7 +65,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * network.client.client.ClientInputHandler#sendToParser(java.lang.String)
 	 */
@@ -159,11 +161,18 @@ public class AIInputHandler extends ClientInputHandler {
 		String banditLocation = ProtocolToModel.getProtocolOneID(pBoard.getRobber_location());
 		ai.updateBoard(fields, corners, streets, harbourCorners, banditLocation);
 
+		//ID MATCHING
+
+		ai.getGl().getBoard().deletePlayers();
+		ai.getGl().getBoard().insertPlayers(opponentID.size());
+		for(int i=0; i<opponentID.size(); i++){
+			ai.getGl().getBoard().getPlayer(i).setID(opponentID.get(i));
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.messaging.
 	 * ProtocolChatReceiveMessage)
 	 */
@@ -354,6 +363,16 @@ public class AIInputHandler extends ClientInputHandler {
 
 			}
 
+		} else {
+			switch (ps) {
+			case WAITING_FOR_GAMESTART:
+				if (!opponentID.contains(pID)) {
+					opponentID.add(pID);
+				}
+				break;
+			default:
+				break;
+			}
 		}
 
 	}
@@ -372,7 +391,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * network.client.client.ClientInputHandler#handle(protocol.configuration.
 	 * ProtocolVictory)
@@ -385,7 +404,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.
 	 * serverinstructions.ProtocolCosts)
 	 */
@@ -409,7 +428,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.
 	 * serverinstructions.trade.ProtocolTradePreview)
 	 */
@@ -421,7 +440,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.
 	 * serverinstructions.trade.ProtocolTradeConfirmation)
 	 */
@@ -433,7 +452,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.
 	 * serverinstructions.trade.ProtocolTradeCompletion)
 	 */
@@ -445,7 +464,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.
 	 * serverinstructions.trade.ProtocolTradeCancellation)
 	 */
@@ -457,7 +476,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.
 	 * serverinstructions.ProtocolLargestArmy)
 	 */
@@ -474,7 +493,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.
 	 * serverinstructions.ProtocolLongestRoad)
 	 */
@@ -492,7 +511,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * network.client.client.ClientInputHandler#handle(protocol.dualinstructions
 	 * .ProtocolPlayInventionCard)
@@ -521,7 +540,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * network.client.client.ClientInputHandler#handle(protocol.dualinstructions
 	 * .ProtocolPlayMonopolyCard)
@@ -550,7 +569,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * network.client.client.ClientInputHandler#handle(protocol.dualinstructions
 	 * .ProtocolPlayKnightCard)
@@ -583,7 +602,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * network.client.client.ClientInputHandler#handle(protocol.dualinstructions
 	 * .ProtocolPlayRoadCard)
@@ -612,7 +631,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see network.client.client.ClientInputHandler#handle(protocol.
 	 * serverinstructions.ProtocolBoughtDevelopmentCard)
 	 */
@@ -639,7 +658,7 @@ public class AIInputHandler extends ClientInputHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * network.client.client.ClientInputHandler#handle(protocol.configuration.
 	 * ProtocolError)
