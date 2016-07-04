@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="background" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" stylesheets="/network/client/view/application.css" fx:controller="application.StartViewController">
+<VBox styleClass="background" stylesheets="/network/client/view/default.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StartViewController">
    <children>
       <Label text="Start game as ...">
          <VBox.margin>
@@ -55,6 +56,12 @@
                   <TextField fx:id="aiPort" disable="true" promptText="Port" />
                </children>
             </VBox>
+            <HBox spacing="10.0" GridPane.columnIndex="1">
+               <children>
+                  <Label text="Theme" />
+                  <ChoiceBox fx:id="themeChooser" prefWidth="150.0" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
    </children>

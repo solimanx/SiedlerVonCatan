@@ -103,6 +103,21 @@ public class GameViewController implements Initializable {
 
     @FXML
     private TextFlow selfOre;
+    
+    @FXML
+    private ImageView iconLumber;
+    
+    @FXML
+    private ImageView iconClay;
+    
+    @FXML
+    private ImageView iconWool;
+    
+    @FXML
+    private ImageView iconGrain;
+    
+    @FXML
+    private ImageView iconOre;
 
     @FXML
     private Label selfLongestTradeRoute;
@@ -288,6 +303,8 @@ public class GameViewController implements Initializable {
     private Boolean isStreetDevCard = false;
 
     public boolean knight = false;
+    
+    public String theme;
 
     /**
      * Gets the trade view controller.
@@ -326,7 +343,6 @@ public class GameViewController implements Initializable {
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        initFieldColors();
         response = new SimpleStringProperty("Server responses will appear here");
         factory = new ViewBoardFactory();
 
@@ -337,7 +353,9 @@ public class GameViewController implements Initializable {
      *
      * @param stage the stage
      */
-    public void startScene(Stage stage) {
+    public void startScene(Stage stage, String theme) {
+    	this.theme = theme;
+    	initFieldColors();
         this.gameStage = stage;
         board.getChildren().add(factory.getViewBoard(stage));
         board.toBack();
@@ -575,44 +593,14 @@ public class GameViewController implements Initializable {
      * Auxiliary method filling field color hashmap.
      */
     private void initFieldColors() {
-        fieldColors.put(ResourceType.CLAY, Color.web("#A1887F"));
-        fieldColors.put(ResourceType.CORN, Color.web("#FFEE58"));
-        fieldColors.put(ResourceType.NOTHING, Color.web("#FAFAFA"));
-        fieldColors.put(ResourceType.ORE, Color.web("#9E9E9E"));
-        fieldColors.put(ResourceType.SHEEP, Color.web("#9CCC65"));
-        fieldColors.put(ResourceType.WOOD, Color.web("#26A69A"));
-        fieldColors.put(ResourceType.SEA, Color.web("#81D4FA"));
-
-        ImagePattern woodPattern = new ImagePattern(new Image("/textures/wood.jpg"));
-        ImagePattern clayPattern = new ImagePattern(new Image("/textures/clay.jpg"));
-        ImagePattern woolPattern = new ImagePattern(new Image("/textures/sheep.jpg"));
-        ImagePattern cornPattern = new ImagePattern(new Image("/textures/corn.jpg"));
-        ImagePattern orePattern = new ImagePattern(new Image("/textures/ore.jpg"));
-        ImagePattern desertPattern = new ImagePattern(new Image("/textures/desert.jpg"));
-        ImagePattern seaPattern = new ImagePattern(new Image("/textures/sea.jpg"));
-
-        imagePatterns.put(ResourceType.WOOD, woodPattern);
-        imagePatterns.put(ResourceType.CLAY, clayPattern);
-        imagePatterns.put(ResourceType.SHEEP, woolPattern);
-        imagePatterns.put(ResourceType.CORN, cornPattern);
-        imagePatterns.put(ResourceType.ORE, orePattern);
-        imagePatterns.put(ResourceType.NOTHING, desertPattern);
-        imagePatterns.put(ResourceType.SEA, seaPattern);
-
-        ImagePattern woodHarbour = new ImagePattern(new Image("/textures/woodHarbour.jpg"));
-        ImagePattern clayHarbour = new ImagePattern(new Image("/textures/clayHarbour.jpg"));
-        ImagePattern woolHarbour = new ImagePattern(new Image("/textures/sheepHarbour.jpg"));
-        ImagePattern cornHarbour = new ImagePattern(new Image("/textures/cornHarbour.jpg"));
-        ImagePattern oreHarbour = new ImagePattern(new Image("/textures/oreHarbour.jpg"));
-        ImagePattern genericHarbour = new ImagePattern(new Image("/textures/genericHarbour.jpg"));
-
-        harbourImages.put(HarbourStatus.WOOD, woodHarbour);
-        harbourImages.put(HarbourStatus.CLAY, clayHarbour);
-        harbourImages.put(HarbourStatus.SHEEP, woolHarbour);
-        harbourImages.put(HarbourStatus.CORN, cornHarbour);
-        harbourImages.put(HarbourStatus.ORE, oreHarbour);
-        harbourImages.put(HarbourStatus.THREE_TO_ONE, genericHarbour);
-
+        ViewFactory vFactory = new ViewFactory(theme);
+        fieldColors = vFactory.getFieldColors();
+        imagePatterns = vFactory.getImagePatterns();
+        harbourImages = vFactory.getHarbourImages();
+        
+        String folder = theme +"/";
+        
+        iconLumber.setImage(new Image("/textures/"+ folder + "iconLumber.png"));
     }
 
     /**

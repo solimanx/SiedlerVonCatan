@@ -71,21 +71,24 @@ public class ClientController {
 
 	private ArrayList<TradeOffer> tradeOffers = new ArrayList<TradeOffer>();
 
+	private String theme;
+
 	/**
 	 * Default constructor for the ClientController.
 	 *
 	 * @param primaryStage
 	 *            the primary stage
 	 */
-	public ClientController(Stage primaryStage) {
+	public ClientController(Stage primaryStage, String theme) {
 		// ModelPlayerID => threadID
 		modelPlayerIdMap = new HashMap<Integer, Integer>();
 
 		// threadID => ModelPlayerID
 		threadPlayerIdMap = new HashMap<Integer, Integer>();
-
+		
+		this.theme = theme;
 		this.clientInputHandler = new ClientInputHandler(this);
-		this.viewController = new ViewController(primaryStage, this);
+		this.viewController = new ViewController(primaryStage, this, this.theme);
 		this.board = new Board();
 		this.gameLogic = new GameLogic(board);
 

@@ -82,7 +82,7 @@ public class Main extends Application {
 			});
 			startViewCtrl = loader.getController();
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/network/client/view/default.css").toExternalForm());
 			scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 
 				@Override

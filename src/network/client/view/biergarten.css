@@ -1,0 +1,133 @@
+
+.village:hover, .street:hover {
+	-fx-fill: pink;
+	-fx-stroke: pink;
+	-fx-opacity: 1.0;
+}
+
+.root{
+    -fx-font-size: 11.0pt;
+    -fx-font-family: "Georgia", serif;
+    -fx-base: #fff;
+    -fx-text-fill: #fff;
+    -fx-background: #6981BD;
+    -fx-box-border: #fff;
+    -fx-control-inner-background: #6981BD;
+    -fx-accent: #6981BD;
+    -fx-focus-color: #8296c8;
+}
+
+.background{
+	-fx-background-image: url(/textures/alt/schneidebrett.jpg)
+}
+
+.button {
+	-fx-background-radius: 3.0;
+	-fx-text-fill: #fff;
+	-fx-background-color: linear-gradient( #6495ED, #062D92 );
+	-fx-font-family: "Georgia", serif;
+	-fx-effect: dropshadow(gaussian , #3E2723 , 0.0,0.0,0.0,3.0);
+}
+
+.button:pressed {
+	-fx-background-color: linear-gradient( #062D92, #6495ED );
+	-fx-effect: dropshadow(gaussian , #3E2723 , 0.8,0.8,0.8,1.0);
+}
+
+.player-board {
+	-fx-background-image: url(/textures/biergarten/schneidebrett.jpg);
+	-fx-background-color: #062D92;
+	-fx-background-radius: 5.0;
+	-fx-border-radius: 5.0;
+	-fx-border-width: 4.0;
+	-fx-fill: #fff;
+	-fx-text-fill: #fff;
+}
+
+.dialog-background {
+	-fx-background-image: url(/textures/biergarten/dialogbackground);
+}
+
+#board {
+	-fx-background-image: url(/textures/alt/background.jpg);
+}
+
+.white {
+	-fx-fill: #fff;
+	-fx-font-family: Georgia, serif;
+	-fx-text-fill: #fff;
+}
+
+.table-view {
+	-fx-table-cell-border-color: transparent;
+}
+
+.table-view .column-header-background,
+.table-view:row-selection .column-header-background .filler,
+.choice-box,
+.combo-box:editable .arrow-button,
+.combo-box-base,
+.spinner .decrement-arrow-button,
+.spinner .increment-arrow-button  {
+    -fx-background-color: #8296c8;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell, .choice-box .label {
+    -fx-text-fill: white;
+}
+
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
+
+
+
+.table-view > .virtual-flow > .scroll-bar > .increment-button,
+.table-view > .virtual-flow > .scroll-bar > .decrement-button {
+    -fx-opacity: 0.0;
+}
+
+.choice-box .open-button .arrow,
+.combo-box:editable .arrow-button .arrow,
+.spinner .decrement-arrow-button .decrement-arrow,
+.spinner .increment-arrow-button  .increment-arrow {
+	-fx-background-color: #e6eaf4;
+}
+.tab-pane:top .tab-header-area .headers-region .tab:selected:top {
+	-fx-background-color: #062D92;
+	-fx-outer-border: #fff;
+	-fx-border-width: 1.0;
+	-fx-border-color: #8296c8;
+}
+.tab-pane:top .tab-header-area .headers-region .tab:top{
+	-fx-background-color: #8D6E63
+}
+.tab-pane:top .tab-header-area .tab-header-background {
+	-fx-outer-border: #795548;
+	-fx-background-color: #5D4037;
+}
+
+.text, .text-field, .text-area  {-fx-fill: #fff; -fx-text-fill: #fff;}
+
+.radio {
+	-fx-background-color: #8D6E63;
+}
+
+.radio-button:selected .radio .dot {
+	-fx-background-color: #5D4037;
+	-fx-background-insets: 0.0,0.0,0.0,0.0,0.0;
+}

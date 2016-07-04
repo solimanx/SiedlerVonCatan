@@ -26,7 +26,7 @@ public class ViewController {
 	private ClientController clientController;
 	private GameViewController gameViewController;
 	private LobbyController lobbyController;
-//	private PlayerProfileController playerProfileController;
+	// private PlayerProfileController playerProfileController;
 	private Stage primaryStage;
 
 	/**
@@ -42,16 +42,20 @@ public class ViewController {
 	private boolean isGameView = false;
 	public boolean isChoosingStage = false;
 	private TradeViewController tradeViewController;
+	private String theme;
 
 	/**
 	 * Instantiates a new view controller.
 	 *
-	 * @param primaryStage the primary stage
-	 * @param fc the fc
+	 * @param primaryStage
+	 *            the primary stage
+	 * @param fc
+	 *            the fc
 	 */
-	public ViewController(Stage primaryStage, ClientController fc) {
+	public ViewController(Stage primaryStage, ClientController fc, String theme) {
 		this.primaryStage = primaryStage;
 		this.clientController = fc;
+		this.theme = theme;
 		loader = new FXMLLoader();
 
 		try {
@@ -68,8 +72,10 @@ public class ViewController {
 	/**
 	 * Starts the lobby view, which provides connecting to server and chat.
 	 *
-	 * @param primaryStage the primary stage
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param primaryStage
+	 *            the primary stage
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	/**
 	 * @param primaryStage
@@ -79,7 +85,7 @@ public class ViewController {
 
 		Parent root = loader.load(getClass().getResource("/application/lobby/LobbyFXML.fxml").openStream());
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/network/client/view/" + theme + ".css").toExternalForm());
 
 		lobbyController = (LobbyController) loader.getController();
 		lobbyController.setViewController(this);
@@ -103,25 +109,26 @@ public class ViewController {
 	 * @throws IOException
 	 */
 
-//	public void startChooseView() throws IOException {
-//
-//		try {
-//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
-//			Parent root1 = (Parent) fxmlLoader.load();
-//			playerProfileController = fxmlLoader.getController();
-//			playerProfileController.setViewController(this);
-//			choosingStage = new Stage();
-//			choosingStage.setTitle("Choose Name and Color");
-//			choosingStage.setScene(new Scene(root1));
-//			isChoosingStage = true;
-//			choosingStage.show();
-//
-//		} catch (IOException e) {
-//			logger.error("Input/Output Exception", e);
-//			logger.catching(Level.ERROR, e);
-//			e.printStackTrace();
-//		}
-//	}
+	// public void startChooseView() throws IOException {
+	//
+	// try {
+	// FXMLLoader fxmlLoader = new
+	// FXMLLoader(getClass().getResource("/application/lobby/PlayerProfileFXML.fxml"));
+	// Parent root1 = (Parent) fxmlLoader.load();
+	// playerProfileController = fxmlLoader.getController();
+	// playerProfileController.setViewController(this);
+	// choosingStage = new Stage();
+	// choosingStage.setTitle("Choose Name and Color");
+	// choosingStage.setScene(new Scene(root1));
+	// isChoosingStage = true;
+	// choosingStage.show();
+	//
+	// } catch (IOException e) {
+	// logger.error("Input/Output Exception", e);
+	// logger.catching(Level.ERROR, e);
+	// e.printStackTrace();
+	// }
+	// }
 
 	/**
 	 * starts GameView and GameViewController
@@ -136,7 +143,7 @@ public class ViewController {
 		try {
 			root = loader.load(getClass().getResource("/network/client/view/GameView.fxml").openStream());
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/network/client/view/application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/network/client/view/" + theme + ".css").toExternalForm());
 			primaryStage.setScene(scene);
 			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 			primaryStage.setX(primaryScreenBounds.getMinX());
@@ -146,7 +153,7 @@ public class ViewController {
 			// primaryStage.setFullScreen(false);
 			gameViewController = (GameViewController) loader.getController();
 			gameViewController.setViewController(this);
-			gameViewController.startScene(primaryStage);
+			gameViewController.startScene(primaryStage, theme);
 			isGameView = true;
 			primaryStage.show();
 
@@ -221,7 +228,8 @@ public class ViewController {
 	/**
 	 * Sets the flow controller.
 	 *
-	 * @param clientController the new flow controller
+	 * @param clientController
+	 *            the new flow controller
 	 */
 	public void setFlowController(ClientController clientController) {
 		this.clientController = clientController;
@@ -230,7 +238,8 @@ public class ViewController {
 	/**
 	 * Sets the main view controller.
 	 *
-	 * @param gameViewController the new main view controller
+	 * @param gameViewController
+	 *            the new main view controller
 	 */
 	public void setMainViewController(GameViewController gameViewController) {
 		this.gameViewController = gameViewController;
@@ -239,7 +248,8 @@ public class ViewController {
 	/**
 	 * Sets the lobby controller.
 	 *
-	 * @param lobbyController the new lobby controller
+	 * @param lobbyController
+	 *            the new lobby controller
 	 */
 	public void setLobbyController(LobbyController lobbyController) {
 		this.lobbyController = lobbyController;
@@ -248,7 +258,8 @@ public class ViewController {
 	/**
 	 * Message receive.
 	 *
-	 * @param s the s
+	 * @param s
+	 *            the s
 	 */
 	public void messageReceive(String s) {
 		if (isGameView) {
@@ -281,19 +292,21 @@ public class ViewController {
 
 	}
 
-//	public PlayerProfileController getPlayerProfileController() {
-//		return playerProfileController;
-//
-//	}
+	// public PlayerProfileController getPlayerProfileController() {
+	// return playerProfileController;
+	//
+	// }
 
 	/**
- * Creates the S response profile runnable.
- *
- * @param paramStr the param str
- * @param lobbyController the lobby controller
- * @return the runnable
- */
-private Runnable createSResponseProfileRunnable(final String paramStr, final LobbyController lobbyController) {
+	 * Creates the S response profile runnable.
+	 *
+	 * @param paramStr
+	 *            the param str
+	 * @param lobbyController
+	 *            the lobby controller
+	 * @return the runnable
+	 */
+	private Runnable createSResponseProfileRunnable(final String paramStr, final LobbyController lobbyController) {
 		Runnable aRunnable = new Runnable() {
 			public void run() {
 				lobbyController.setServerColorAnswer(paramStr);
@@ -305,8 +318,10 @@ private Runnable createSResponseProfileRunnable(final String paramStr, final Lob
 	/**
 	 * Creates the S response runnable.
 	 *
-	 * @param paramStr the param str
-	 * @param c the c
+	 * @param paramStr
+	 *            the param str
+	 * @param c
+	 *            the c
 	 * @return the runnable
 	 */
 	private Runnable createSResponseRunnable(final String paramStr, final GameViewController c) {
@@ -321,7 +336,8 @@ private Runnable createSResponseProfileRunnable(final String paramStr, final Lob
 	/**
 	 * Sets the server response.
 	 *
-	 * @param server_response the new server response
+	 * @param server_response
+	 *            the new server response
 	 */
 	public void setServerResponse(String server_response) {
 		if (isGameView) {

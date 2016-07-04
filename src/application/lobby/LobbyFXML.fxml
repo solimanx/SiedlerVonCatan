@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="678.0" prefWidth="833.0" styleClass="background" stylesheets="/network/client/view/application.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lobby.LobbyController">
+<AnchorPane prefHeight="678.0" prefWidth="833.0" styleClass="dialog-background" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lobby.LobbyController">
    <children>
       <HBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefHeight="248.0" prefWidth="793.0" spacing="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
          <children>
