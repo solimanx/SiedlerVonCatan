@@ -83,8 +83,10 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Creates a PrimitiveAI object, and forces it to connect to the 0.3 server.
 	 *
-	 * @param serverHost the server host
-	 * @param port the port
+	 * @param serverHost
+	 *            the server host
+	 * @param port
+	 *            the port
 	 */
 	public PrimitiveAI(String serverHost, int port) {
 		// logger.info("AI started");
@@ -103,7 +105,7 @@ public class PrimitiveAI extends Thread {
 	 * Commence.
 	 */
 	public void commence() {
-		System.out.println(DefaultSettings.getCurrentTime() + " AI started.");
+		logger.info(" AI started.");
 		this.start();
 	}
 
@@ -116,21 +118,15 @@ public class PrimitiveAI extends Thread {
 			socket = new Socket(SERVERHOST, PORT);
 			writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-			System.out.println(DefaultSettings.getCurrentTime() + " AI connected to server.");
-			// logger.info(" AI connected to server.");
+			logger.info(" AI connected to server.");
 			read();
 		} catch (IOException e) {
-			logger.error("Input/Output Excepton", e);
 			logger.catching(Level.ERROR, e);
-			System.out.println("Connection to server failed.");
-			logger.warn("Connection to server failed");
 
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException ie) {
-				logger.error("Interrupted Exception", ie);
 				logger.catching(Level.ERROR, ie);
-				ie.printStackTrace();
 			}
 		}
 	}
@@ -138,21 +134,20 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Reading input from the servers output.
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void read() throws IOException {
 		// logger.warn("Reading input from the servers output(read()) throws
 		// IOException");
 		String line;
 		while ((line = reader.readLine()) != null) {
-			System.out.println(DefaultSettings.getCurrentTime() + " Server: " + line);
+			logger.debug("Server: " + line);
 			// logger.debug("Server"+ line);
-			/*try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+			/*
+			 * try { Thread.sleep(500); } catch (InterruptedException e) { //
+			 * TODO Auto-generated catch block e.printStackTrace(); }
+			 */
 			pI.sendToParser(line);
 		}
 	}
@@ -160,12 +155,14 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Output to server.
 	 *
-	 * @param json the json
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param json
+	 *            the json
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void write(String json) throws IOException {
 		// logger.warn("Writing output to server, throws IOException");
-		System.out.println(DefaultSettings.getCurrentTime() + "    A.I: " + json);
+		logger.info("    A.I: " + json);
 		// logger.info(DefaultSettings.getCurrentTime()+ " A.I: "+ json);
 		writer.write(json + "\n");
 		writer.flush();
@@ -341,7 +338,7 @@ public class PrimitiveAI extends Thread {
 				// if there's some of it
 				if (myResources[j] > 0) {
 					// decrement it from your list
-					myResources[j]-= 1;
+					myResources[j] -= 1;
 					// increment it to losses array
 					losses[j]++;
 					loss -= 1;
@@ -369,11 +366,16 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Initialize board.
 	 *
-	 * @param fields the fields
-	 * @param corners the corners
-	 * @param streets the streets
-	 * @param harbourCorners the harbour corners
-	 * @param banditLocation the bandit location
+	 * @param fields
+	 *            the fields
+	 * @param corners
+	 *            the corners
+	 * @param streets
+	 *            the streets
+	 * @param harbourCorners
+	 *            the harbour corners
+	 * @param banditLocation
+	 *            the bandit location
 	 */
 	protected void updateBoard(Field[] fields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
 			String banditLocation) {
@@ -480,7 +482,8 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Update robber.
 	 *
-	 * @param locationID the location ID
+	 * @param locationID
+	 *            the location ID
 	 */
 	protected void updateRobber(String locationID) {
 		gl.getBoard().setBandit(locationID);
@@ -539,7 +542,8 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Sets the id.
 	 *
-	 * @param playerID the new id
+	 * @param playerID
+	 *            the new id
 	 */
 	protected void setID(int playerID) {
 		ID = playerID;
@@ -558,7 +562,8 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Sets the color counter.
 	 *
-	 * @param colorCounter the new color counter
+	 * @param colorCounter
+	 *            the new color counter
 	 */
 	protected void setColorCounter(int colorCounter) {
 		this.colorCounter = colorCounter;
@@ -576,7 +581,8 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Sets the started.
 	 *
-	 * @param started the new started
+	 * @param started
+	 *            the new started
 	 */
 	protected void setStarted(boolean started) {
 		this.started = started;

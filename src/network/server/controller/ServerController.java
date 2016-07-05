@@ -866,7 +866,7 @@ public class ServerController {
 			}
 		}
 
-		System.out.println("Calculated longest Trading Route: Player = " + modelID + " Lenght = " + max);
+		logger.info("Calculated longest Trading Route: Player = " + modelID + " Length = " + max);
 
 	}
 
