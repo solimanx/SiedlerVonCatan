@@ -128,9 +128,9 @@ public class TradeAgent {
 	 * @param projekt 0,1,2,3
 	 * @return
 	 */
-	public boolean isBuildableAfterTrade(int projekt, int[] res){
+	public boolean isBuildableAfterTrade(int projekt){
 		int[] costs;
-		int[] ownResources =  res ;//aai.getResourceAgent().getOwnResources();
+		int[] ownResources = aai.getResourceAgent().getOwnResources();
 		int[] resourcesNeeded = new int[5];
 		int[] tradableResources = new int[5];
 		switch (projekt) {
@@ -176,100 +176,90 @@ public class TradeAgent {
 
 			if(amountResourcesNeeded>0){
 				if(hasWoodHarbour()){
-					for(int i = 0 ; i<5; i++){
-						while(tradableResources[0]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
-							tradableResources[0] = tradableResources[0]-2;
-							amountResourcesNeeded--;
-							amountResourcesTradable = amountResourcesTradable-2;
-							boolean loop = true;
-							int counter = 0;
-							while(loop && counter<5){
-								if(resourcesNeeded[counter]>0){
-									resourcesNeeded[counter]--;
-									loop = false;
-								}
-								counter++;
+					while(tradableResources[0]>1 && amountResourcesNeeded>0 && resourcesNeeded[0]<=0){
+						tradableResources[0] = tradableResources[0]-2;
+						amountResourcesNeeded--;
+						amountResourcesTradable = amountResourcesTradable-2;
+						boolean loop = true;
+						int counter = 0;
+						while(loop && counter<5){
+							if(resourcesNeeded[counter]>0){
+								resourcesNeeded[counter]--;
+								loop = false;
 							}
+							counter++;
 						}
 					}
 				}
 			}
 			if(amountResourcesNeeded>0){
 				if(hasClayHarbour()){
-					for(int i = 0 ; i<5; i++){
-						while(tradableResources[1]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
-							tradableResources[1] = tradableResources[1]-2;
-							amountResourcesNeeded--;
-							amountResourcesTradable = amountResourcesTradable-2;
-							boolean loop = true;
-							int counter = 0;
-							while(loop && counter<5){
-								if(resourcesNeeded[counter]>0){
-									resourcesNeeded[counter]--;
-									loop = false;
-								}
-								counter++;
+					while(tradableResources[1]>1 && amountResourcesNeeded>0 && resourcesNeeded[1]<=0){
+						tradableResources[1] = tradableResources[1]-2;
+						amountResourcesNeeded--;
+						amountResourcesTradable = amountResourcesTradable-2;
+						boolean loop = true;
+						int counter = 0;
+						while(loop && counter<5){
+							if(resourcesNeeded[counter]>0){
+								resourcesNeeded[counter]--;
+								loop = false;
 							}
+							counter++;
 						}
 					}
 				}
 			}
 			if(amountResourcesNeeded>0){
 				if(hasOreHarbour()){
-					for(int i = 0 ; i<5; i++){
-						while(tradableResources[2]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
-							tradableResources[2] = tradableResources[2]-2;
-							amountResourcesNeeded--;
-							amountResourcesTradable = amountResourcesTradable-2;
-							boolean loop = true;
-							int counter = 0;
-							while(loop && counter<5){
-								if(resourcesNeeded[counter]>0){
-									resourcesNeeded[counter]--;
-									loop = false;
-								}
-								counter++;
+					while(tradableResources[2]>1 && amountResourcesNeeded>0 && resourcesNeeded[2]<=0){
+						tradableResources[2] = tradableResources[2]-2;
+						amountResourcesNeeded--;
+						amountResourcesTradable = amountResourcesTradable-2;
+						boolean loop = true;
+						int counter = 0;
+						while(loop && counter<5){
+							if(resourcesNeeded[counter]>0){
+								resourcesNeeded[counter]--;
+								loop = false;
 							}
+							counter++;
 						}
 					}
 				}
 			}
 			if(amountResourcesNeeded>0){
 				if(hasWoolHarbour()){
-					for(int i = 0 ; i<5; i++){
-						while(tradableResources[3]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
-							tradableResources[3] = tradableResources[3]-2;
-							amountResourcesNeeded--;
-							amountResourcesTradable = amountResourcesTradable-2;
-							boolean loop = true;
-							int counter = 0;
-							while(loop && counter<5){
-								if(resourcesNeeded[counter]>0){
-									resourcesNeeded[counter]--;
-									loop = false;
-								}
-								counter++;
+					while(tradableResources[3]>1 && amountResourcesNeeded>0 && resourcesNeeded[3]<=0){
+						tradableResources[3] = tradableResources[3]-2;
+						amountResourcesNeeded--;
+						amountResourcesTradable = amountResourcesTradable-2;
+						boolean loop = true;
+						int counter = 0;
+						while(loop && counter<5){
+							if(resourcesNeeded[counter]>0){
+								resourcesNeeded[counter]--;
+								loop = false;
 							}
+							counter++;
 						}
 					}
 				}
 			}
 			if(amountResourcesNeeded>0){
 				if(hasCornHarbour()){
-					for(int i = 0 ; i<5; i++){
-						while(tradableResources[4]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
-							tradableResources[4] = tradableResources[4]-2;
-							amountResourcesNeeded--;
-							amountResourcesTradable = amountResourcesTradable-2;
-							boolean loop = true;
-							int counter = 0;
-							while(loop && counter<5){
-								if(resourcesNeeded[counter]>0){
-									resourcesNeeded[counter]--;
-									loop = false;
-								}
-								counter++;
+					while(tradableResources[4]>1 && amountResourcesNeeded>0 && resourcesNeeded[4]<=0){
+						tradableResources[4] = tradableResources[4]-2;
+						amountResourcesNeeded--;
+						amountResourcesTradable = amountResourcesTradable-2;
+						boolean loop = true;
+						int counter = 0;
+						while(loop && counter<5){
+							if(resourcesNeeded[counter]>0){
+								resourcesNeeded[counter]--;
+								loop = false;
 							}
+							counter++;
 						}
 					}
 				}
