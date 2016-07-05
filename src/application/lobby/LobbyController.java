@@ -146,9 +146,9 @@ public class LobbyController {
 		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getClientController().connectToServer(server, port);
 		colorNameSelectPane.setDisable(false);
-        Soundeffects.LOGIN.play();
+       // Soundeffects.LOGIN.play();
 
-		//playButtonSound();
+		playConnectSound();
 
 	}
 
@@ -160,7 +160,7 @@ public class LobbyController {
 		String message = chatInput.getText();
 		chatInput.clear();
 		viewController.getClientController().sendChatMessage(message);
-		//playNotificationSound();
+		playNotificationSound();
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class LobbyController {
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
 		Soundeffects.CHATRECEIVE.play();
-		//playNotificationSound();
+		playNotificationSound();
 	}
 
 	/**
