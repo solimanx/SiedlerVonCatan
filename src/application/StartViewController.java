@@ -11,6 +11,7 @@ import ai.PrimitiveAI;
 import audio.Soundeffects;
 import debugging.DebugClient;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,9 +23,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import network.client.controller.ClientController;
 import network.server.controller.ServerController;
-
-
-
 
 // TODO: Auto-generated Javadoc
 public class StartViewController {
@@ -78,6 +76,17 @@ public class StartViewController {
 	public void initialize() {
 		themeChooser.getItems().addAll("Standard", "Biergarten");
 		themeChooser.setValue("Standard");
+		themeChooser.getSelectionModel().selectedItemProperty()
+				.addListener((ObservableValue<? extends String> observable, String oldValue,
+						String newValue) -> reloadTheme(oldValue, newValue));
+	}
+
+	private void reloadTheme(String oldValue, String newValue) {
+		this.primaryStage.getScene().getStylesheets().remove(
+				getClass().getResource("/network/client/view/" + oldValue.toLowerCase() + ".css").toExternalForm());
+		this.primaryStage.getScene().getStylesheets().add(
+				getClass().getResource("/network/client/view/" + newValue.toLowerCase() + ".css").toExternalForm());
+		
 	}
 
 	/**
