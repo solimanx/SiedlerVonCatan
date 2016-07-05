@@ -30,6 +30,16 @@ public class TradeAgent {
 		this.ra = ra;
 		updateAgent();
 	}
+	
+	//debug method //TODO
+//	public void setHarbor(){
+//		woodHarbour = false;
+//		clayHarbour = true;
+//		woolHarbour = true;
+//		cornHarbour = true;
+//		oreHarbour = true;
+//		threeOneHarbour = false;
+//	}
 
 	/**
 	 * Calculate hand.
@@ -118,9 +128,9 @@ public class TradeAgent {
 	 * @param projekt 0,1,2,3
 	 * @return
 	 */
-	public boolean isBuildableAfterTrade(int projekt){
+	public boolean isBuildableAfterTrade(int projekt, int[] res){
 		int[] costs;
-		int[] ownResources = aai.getResourceAgent().getOwnResources();
+		int[] ownResources =  res ;//aai.getResourceAgent().getOwnResources();
 		int[] resourcesNeeded = new int[5];
 		int[] tradableResources = new int[5];
 		switch (projekt) {
@@ -159,8 +169,12 @@ public class TradeAgent {
 		}
 
 			// check if has harbor
+		
+		if(amountResourcesNeeded*2> amountResourcesTradable){
+			return false;
+		}
 
-			if(tradableResources[0]>2 && amountResourcesNeeded>0){
+			if(amountResourcesNeeded>0){
 				if(hasWoodHarbour()){
 					for(int i = 0 ; i<5; i++){
 						while(tradableResources[0]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
@@ -180,7 +194,7 @@ public class TradeAgent {
 					}
 				}
 			}
-			if(tradableResources[1]>2 && amountResourcesNeeded>0){
+			if(amountResourcesNeeded>0){
 				if(hasClayHarbour()){
 					for(int i = 0 ; i<5; i++){
 						while(tradableResources[1]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
@@ -200,7 +214,7 @@ public class TradeAgent {
 					}
 				}
 			}
-			if(tradableResources[2]>2 && amountResourcesNeeded>0){
+			if(amountResourcesNeeded>0){
 				if(hasOreHarbour()){
 					for(int i = 0 ; i<5; i++){
 						while(tradableResources[2]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
@@ -220,7 +234,7 @@ public class TradeAgent {
 					}
 				}
 			}
-			if(tradableResources[3]>2 && amountResourcesNeeded>0){
+			if(amountResourcesNeeded>0){
 				if(hasWoolHarbour()){
 					for(int i = 0 ; i<5; i++){
 						while(tradableResources[3]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
@@ -240,7 +254,7 @@ public class TradeAgent {
 					}
 				}
 			}
-			if(tradableResources[4]>2 && amountResourcesNeeded>0){
+			if(amountResourcesNeeded>0){
 				if(hasCornHarbour()){
 					for(int i = 0 ; i<5; i++){
 						while(tradableResources[4]>1 && amountResourcesNeeded>0 && resourcesNeeded[i]>0){
@@ -263,14 +277,14 @@ public class TradeAgent {
 
 			// check if has 3:1
 
-			if(amountResourcesNeeded> 3* amountResourcesTradable){
+			if(amountResourcesNeeded*3> amountResourcesTradable){
 				return false;
 			}
 
 			if(amountResourcesNeeded>0){
 				if(hasThreeOneHarbour()){
 					for(int i = 0 ; i<5; i++){
-						while(amountResourcesNeeded>0 && tradableResources[i]>2 && resourcesNeeded[i] == 0){
+						while(amountResourcesNeeded>0 && tradableResources[i]>2 && resourcesNeeded[i] <= 0){
 							amountResourcesNeeded--;
 							amountResourcesTradable = amountResourcesTradable-3;
 							tradableResources[i] = tradableResources[i]-3;
@@ -290,14 +304,14 @@ public class TradeAgent {
 
 			// 4:1
 
-			if(amountResourcesNeeded> 4* amountResourcesTradable){
+			if(amountResourcesNeeded * 4 > amountResourcesTradable){
 				return false;
 			}
 
 			if(amountResourcesNeeded>0){
 
 					for(int i = 0 ; i<5; i++){
-						while(amountResourcesNeeded>0 && tradableResources[i]>3 && resourcesNeeded[i] == 0){
+						while(amountResourcesNeeded>0 && tradableResources[i]>3 && resourcesNeeded[i] <= 0){
 							amountResourcesNeeded--;
 							amountResourcesTradable = amountResourcesTradable-4;
 							tradableResources[i] = tradableResources[i]-4;
