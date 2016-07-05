@@ -9,7 +9,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -117,31 +116,11 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                                       <image>
-                                          <Image url="/textures/standard/iconLumber.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-                                       <image>
-                                          <Image url="/textures/standard/iconBrick.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
-                                       <image>
-                                          <Image url="/textures/standard/iconWool.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
-                                       <image>
-                                          <Image url="/textures/standard/iconGrain.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
-                                       <image>
-                                          <Image url="/textures/standard/iconOre.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.rowIndex="2" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.rowIndex="3" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.rowIndex="4" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.rowIndex="5" />
                                  </children>
                               </GridPane>
                               <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="500.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
@@ -230,31 +209,11 @@
                                     <Label text="2:1" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                                     <Label text="3:1" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                                     <Label text="4:1" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                                       <image>
-                                          <Image url="/textures/standard/iconLumber.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <image>
-                                          <Image url="/textures/standard/iconBrick.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <image>
-                                          <Image url="/textures/standard/iconWool.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                       <image>
-                                          <Image url="/textures/standard/iconGrain.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                       <image>
-                                          <Image url="/textures/standard/iconOre.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                               <GridPane fx:id="harbourGrid" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="200.0" vgap="5.0">
@@ -288,31 +247,11 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                                       <image>
-                                          <Image url="/textures/standard/iconLumber.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-                                       <image>
-                                          <Image url="/textures/standard/iconBrick.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
-                                       <image>
-                                          <Image url="/textures/standard/iconWool.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
-                                       <image>
-                                          <Image url="/textures/standard/iconGrain.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
-                                       <image>
-                                          <Image url="/textures/standard/iconOre.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.rowIndex="2" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.rowIndex="3" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.rowIndex="4" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.rowIndex="5" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="30.0" />
