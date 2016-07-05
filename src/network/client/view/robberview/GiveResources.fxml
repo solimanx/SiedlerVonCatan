@@ -53,11 +53,11 @@
         </rowConstraints>
          <children>
             <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOKButton" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.rowIndex="1" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.rowIndex="2" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.rowIndex="3" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.rowIndex="4" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.rowIndex="1" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.rowIndex="2" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.rowIndex="3" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </content>

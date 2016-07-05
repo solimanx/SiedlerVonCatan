@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="background" stylesheets="/network/client/view/standard.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.tradeview.TradeViewController">
+<AnchorPane styleClass="background" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.tradeview.TradeViewController">
    <children>
       <TabPane>
          <tabs>
@@ -116,11 +116,11 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.rowIndex="2" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.rowIndex="3" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.rowIndex="4" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.rowIndex="5" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.rowIndex="2" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.rowIndex="3" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.rowIndex="4" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.rowIndex="5" />
                                  </children>
                               </GridPane>
                               <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="500.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
@@ -209,11 +209,11 @@
                                     <Label text="2:1" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                                     <Label text="3:1" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                                     <Label text="4:1" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                               <GridPane fx:id="harbourGrid" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="200.0" vgap="5.0">
@@ -247,11 +247,11 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.rowIndex="2" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.rowIndex="3" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.rowIndex="4" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.rowIndex="5" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber" GridPane.rowIndex="1" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay" GridPane.rowIndex="2" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool" GridPane.rowIndex="3" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain" GridPane.rowIndex="4" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre" GridPane.rowIndex="5" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="30.0" />

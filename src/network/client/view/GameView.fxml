@@ -41,7 +41,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -55,7 +55,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -69,7 +69,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -83,7 +83,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain">
+                        <ImageView id="iconGrain" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -97,7 +97,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>

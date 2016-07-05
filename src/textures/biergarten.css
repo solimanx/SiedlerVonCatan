@@ -36,6 +36,7 @@
 
 .player-board {
 	-fx-background-image: url(/textures/biergarten/schneidebrett.jpg);
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);	
 	-fx-background-color: #062D92;
 	-fx-background-radius: 5.0;
 	-fx-border-radius: 5.0;
@@ -146,6 +147,9 @@
 }
 
 .iconGrain {
+	-fx-image: url(/textures/biergarten/iconGrain.png);
+}
+#iconGrain {
 	-fx-image: url(/textures/biergarten/iconGrain.png);
 }
 

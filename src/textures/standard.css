@@ -124,3 +124,23 @@
 	-fx-background-color: #5D4037;
 	-fx-background-insets: 0,0,0,0,0;
 }
+
+.iconLumber {
+	-fx-image: url(/textures/standard/iconLumber.png);
+}
+
+.iconClay {
+	-fx-image: url(/textures/standard/iconClay.png);
+}
+
+.iconWool {
+	-fx-image: url(/textures/standard/iconWool.png);
+}
+
+.iconGrain {
+	-fx-image: url(/textures/standard/iconGrain.png);
+}
+
+.iconOre {
+	-fx-image: url(/textures/standard/iconOre.png);
+}

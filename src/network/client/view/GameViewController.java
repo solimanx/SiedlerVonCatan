@@ -374,6 +374,7 @@ public class GameViewController implements Initializable {
 			root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
 			tradeViewController = (TradeViewController) loader.getController();
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add("/textures/"+ theme + ".css");
 			tradeStage = new Stage();
 			tradeStage.setScene(scene);
 
@@ -604,14 +605,6 @@ public class GameViewController implements Initializable {
 		fieldColors = vFactory.getFieldColors();
 		imagePatterns = vFactory.getImagePatterns();
 		harbourImages = vFactory.getHarbourImages();
-
-		String folder = theme + "/";
-
-		iconLumber.setImage(new Image("/textures/" + folder + "iconLumber.png"));
-		iconClay.setImage(new Image("/textures/" + folder + "iconClay.png"));
-		iconWool.setImage(new Image("/textures/" + folder + "iconWool.png"));
-		iconGrain.setImage(new Image("/textures/" + folder + "iconGrain.png"));
-		iconOre.setImage(new Image("/textures/" + folder + "iconOre.png"));
 	}
 
 	/**
@@ -730,6 +723,7 @@ public class GameViewController implements Initializable {
 		try {
 			root = loader.load(getClass().getResource("/network/client/view/helpview/HelpView.fxml").openStream());
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add("/textures/"+theme+".css");
 			Stage helpView = new Stage();
 			helpView.setScene(scene);
 			helpView.show();
