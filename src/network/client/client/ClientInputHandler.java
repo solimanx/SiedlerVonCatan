@@ -429,7 +429,9 @@ public class ClientInputHandler {
 		CardType ct = boughtDevelopmentCard.getDevelopmentCard();
 		int playerID = boughtDevelopmentCard.getPlayerID();
 		DevelopmentCard dc = ProtocolToModel.getDevCard(ct);
+		if (dc != null){
 		clientController.addToDeck(playerID, dc);
+		}
 
 	}
 
@@ -514,7 +516,7 @@ public class ClientInputHandler {
 	 * @param knightCardInfo the knight card info
 	 */
 	protected void handle(ProtocolPlayKnightCard knightCardInfo) {
-		if (knightCardInfo.getPlayerID() != null) {
+		if (knightCardInfo.getPlayerID() == clientController.getOwnPlayerID()) {
 			// TODO smth with information
 			int playerID = knightCardInfo.getPlayerID();
 			clientController.removeFromDeck(playerID, new KnightCard());
@@ -534,7 +536,7 @@ public class ClientInputHandler {
 	 * @param roadBuildingCardInfo the road building card info
 	 */
 	protected void handle(ProtocolPlayRoadCard roadBuildingCardInfo) {
-		if (roadBuildingCardInfo.getPlayerID() != null) {
+		if (roadBuildingCardInfo.getPlayerID() == clientController.getOwnPlayerID()) {
 			int playerID = roadBuildingCardInfo.getPlayerID();
 			clientController.removeFromDeck(playerID, new StreetBuildingCard());
 
@@ -553,7 +555,7 @@ public class ClientInputHandler {
 	 */
 
 	protected void handle(ProtocolPlayMonopolyCard monopolyCardInfo) {
-		if (monopolyCardInfo.getPlayerID() != null) {
+		if (monopolyCardInfo.getPlayerID() == clientController.getOwnPlayerID()) {
 			int playerID = monopolyCardInfo.getPlayerID();
 			clientController.removeFromDeck(playerID, new MonopolyCard());
 			ResourceType rt = monopolyCardInfo.getResourceType();
@@ -568,7 +570,7 @@ public class ClientInputHandler {
 	 * @param inventionCardInfo the invention card info
 	 */
 	protected void handle(ProtocolPlayInventionCard inventionCardInfo) {
-		if (inventionCardInfo.getPlayerID() != null) {
+		if (inventionCardInfo.getPlayerID() == clientController.getOwnPlayerID()) {
 			int playerID = inventionCardInfo.getPlayerID();
 			clientController.removeFromDeck(playerID, new InventionCard());
 

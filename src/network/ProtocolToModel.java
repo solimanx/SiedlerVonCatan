@@ -457,7 +457,8 @@ public final class ProtocolToModel {
 			return new StreetBuildingCard();
 		case VICTORYPOINT:
 			return new VictoryPointCard();
-		case UNKNOWN: // ??
+		case UNKNOWN: 
+			return null;
 		}
 
 		throw new IllegalArgumentException("CardType doesn't exit");
