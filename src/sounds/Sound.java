@@ -5,6 +5,8 @@ import javafx.scene.media.MediaPlayer;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+
 import java.io.File;
 import java.net.URL;
 
@@ -23,13 +25,14 @@ public class Sound {
 
 	}
 
-	@Deprecated // see SELECT
 	public static void playConnectSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/button-3.wav");
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(-20.0f);
 			clip.start();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -51,7 +54,7 @@ public class Sound {
 		}
 	}
 
-	@Deprecated //see BANDIT
+	@Deprecated // see BANDIT
 	public static void playMoveRobberSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/Cinematic.wav");
@@ -90,8 +93,7 @@ public class Sound {
 			System.err.println(e.getMessage());
 		}
 	}
-	
-	
+
 	public static void playNotificationSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/notification.wav");
@@ -196,10 +198,10 @@ public class Sound {
 		}
 	}
 
-	@Deprecated //see BUILD
+	@Deprecated // see BUILD
 	public static void playSelectSound() {
 		try {
-			//this sound doesn't exist..
+			// this sound doesn't exist..
 			URL url = Sound.class.getResource("/sounds/select.wav");
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();

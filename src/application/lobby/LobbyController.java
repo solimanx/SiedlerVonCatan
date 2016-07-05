@@ -145,10 +145,9 @@ public class LobbyController {
 		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getClientController().connectToServer(server, port);
 		colorNameSelectPane.setDisable(false);
-		Soundeffects.SELECT.play();
+		// Soundeffects.SELECT.play();
 
-		// playConnectSound();
-		// this gives us headaches ^^
+		playConnectSound();
 
 	}
 
@@ -172,7 +171,7 @@ public class LobbyController {
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
 		Soundeffects.CHATRECEIVE.play();
-		//playNotificationSound();
+		// playNotificationSound();
 	}
 
 	/**
