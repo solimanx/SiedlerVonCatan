@@ -22,7 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
 
-import static sounds.Sound.playMakeOfferSound;
+import static sounds.Sound.*;
 
 // TODO: Auto-generated Javadoc
 public class TradeViewController {
@@ -296,12 +296,14 @@ public class TradeViewController {
 		viewController.getClientController().acceptTrade(tradeID);
 		int index = tradeList.indexOf(selectedTrade);
 		tradeList.set(index, selectedTrade + "\nYOU ACCEPTED");
+		playTradeButtonSound();
 	}
 
 	@FXML
 	void handleDeclineTrade(ActionEvent event) {
 		int tradeID = stringToTradeID.get(selectedTrade);
 		viewController.getClientController().declineTrade(tradeID);
+		playDeclineTradeOfferSound();
 	}
 
 	/**
@@ -333,6 +335,7 @@ public class TradeViewController {
 		viewController.getClientController().cancelTrade(ownTradeID);
 		resultDemand = new int[5];
 		resultOffer = new int[5];
+		playCancelOfferSound();
 	}
 
 	/**
@@ -346,6 +349,7 @@ public class TradeViewController {
 		viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToModelID.get(selectedOffer));
 		tradeButton.setDisable(false);
 		stage.hide();
+		playFullFillTradeSound();
 	}
 
 	/**
@@ -360,6 +364,7 @@ public class TradeViewController {
 		if (tID != null) {
 			viewController.getClientController().cancelTrade(tID);
 		}
+		playCancelTradeSound();
 	}
 
 	/**
@@ -385,6 +390,7 @@ public class TradeViewController {
 		} catch (Exception e) {
 			viewController.getGameViewController().alert("Couldn't delete trade!");
 		}
+
 
 	}
 
