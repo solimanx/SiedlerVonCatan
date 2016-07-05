@@ -83,9 +83,9 @@ public class StartViewController {
 
 	private void reloadTheme(String oldValue, String newValue) {
 		this.primaryStage.getScene().getStylesheets().remove(
-				getClass().getResource("/network/client/view/" + oldValue.toLowerCase() + ".css").toExternalForm());
+				getClass().getResource("/textures/" + oldValue.toLowerCase() + ".css").toExternalForm());
 		this.primaryStage.getScene().getStylesheets().add(
-				getClass().getResource("/network/client/view/" + newValue.toLowerCase() + ".css").toExternalForm());
+				getClass().getResource("/textures/" + newValue.toLowerCase() + ".css").toExternalForm());
 		
 	}
 

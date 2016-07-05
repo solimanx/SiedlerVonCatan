@@ -85,7 +85,7 @@ public class ViewController {
 
 		Parent root = loader.load(getClass().getResource("/application/lobby/LobbyFXML.fxml").openStream());
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/network/client/view/" + theme + ".css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/textures/" + theme + ".css").toExternalForm());
 
 		lobbyController = (LobbyController) loader.getController();
 		lobbyController.setViewController(this);
@@ -143,7 +143,7 @@ public class ViewController {
 		try {
 			root = loader.load(getClass().getResource("/network/client/view/GameView.fxml").openStream());
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/network/client/view/" + theme + ".css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/textures/" + theme + ".css").toExternalForm());
 			primaryStage.setScene(scene);
 			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 			primaryStage.setX(primaryScreenBounds.getMinX());
