@@ -27,6 +27,7 @@ import model.objects.DevCards.InventionCard;
 import model.objects.DevCards.KnightCard;
 import model.objects.DevCards.MonopolyCard;
 import model.objects.DevCards.StreetBuildingCard;
+import model.objects.DevCards.UnknownCard;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
 import network.client.client.Client;
@@ -85,7 +86,7 @@ public class ClientController {
 
 		// threadID => ModelPlayerID
 		threadPlayerIdMap = new HashMap<Integer, Integer>();
-		
+
 		this.theme = theme;
 		this.clientInputHandler = new ClientInputHandler(this);
 		this.viewController = new ViewController(primaryStage, this, this.theme);
@@ -909,7 +910,7 @@ public class ClientController {
 		if (getOwnTradingID() != null && getOwnTradingID() == tradingID) {
 			viewController.getGameViewController().getTradeViewController()
 					.acceptingOffer(threadPlayerIdMap.get(threadID), tradingID);
-		} 
+		}
 	}
 
 	/**
@@ -1264,7 +1265,12 @@ public class ClientController {
 	 */
 	public void removeFromDeck(int playerID, KnightCard knightCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(knightCard);
+		if (modelID == getOwnPlayerID()) {
+			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(knightCard);
+
+		} else {
+			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(new UnknownCard());
+		}
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayedKnightCards();
 
 	}
@@ -1279,7 +1285,11 @@ public class ClientController {
 	 */
 	public void removeFromDeck(int playerID, StreetBuildingCard streetBuildCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(streetBuildCard);
+		if (modelID == getOwnPlayerID()) {
+			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(streetBuildCard);
+		} else {
+			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(new UnknownCard());
+		}
 	}
 
 	/**
@@ -1292,7 +1302,12 @@ public class ClientController {
 	 */
 	public void removeFromDeck(int playerID, MonopolyCard monopolyCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(monopolyCard);
+		if (modelID == getOwnPlayerID()) {
+			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(monopolyCard);
+		} else {
+			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(new UnknownCard());
+
+		}
 	}
 
 	/**
@@ -1305,7 +1320,12 @@ public class ClientController {
 	 */
 	public void removeFromDeck(int playerID, InventionCard inventionCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(inventionCard);
+		if (modelID == getOwnPlayerID()) {
+			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(inventionCard);
+
+		} else {
+			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(new UnknownCard());
+		}
 	}
 
 }

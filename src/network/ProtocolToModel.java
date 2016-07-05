@@ -18,6 +18,7 @@ import model.objects.DevCards.InventionCard;
 import model.objects.DevCards.KnightCard;
 import model.objects.DevCards.MonopolyCard;
 import model.objects.DevCards.StreetBuildingCard;
+import model.objects.DevCards.UnknownCard;
 import model.objects.DevCards.VictoryPointCard;
 import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
@@ -42,7 +43,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the field coordinates.
 	 *
-	 * @param fieldID the field ID
+	 * @param fieldID
+	 *            the field ID
 	 * @return the field coordinates
 	 */
 	public static int[] getFieldCoordinates(String fieldID) {
@@ -54,9 +56,11 @@ public final class ProtocolToModel {
 	 * Get Corner axial coordinates + direction through a three-character ID
 	 * <p>
 	 * Example EFJ -> (0,0,0)
-	 * </p>.
+	 * </p>
+	 * .
 	 *
-	 * @param location            3-character-string
+	 * @param location
+	 *            3-character-string
 	 * @return the corner coordinates
 	 */
 	public static int[] getCornerCoordinates(String location) {
@@ -81,9 +85,11 @@ public final class ProtocolToModel {
 	 * Get Corner axial coordinates + direction through a 2-character ID
 	 * <p>
 	 * Example EJ -> (0,0,0)
-	 * </p>.
+	 * </p>
+	 * .
 	 *
-	 * @param location            3-character-string
+	 * @param location
+	 *            3-character-string
 	 * @return the edge coordinates
 	 */
 	public static int[] getEdgeCoordinates(String location) {
@@ -103,7 +109,8 @@ public final class ProtocolToModel {
 	/**
 	 * Convert a land type to enum.ResourceType
 	 *
-	 * @param resourceString the resource string
+	 * @param resourceString
+	 *            the resource string
 	 * @return Resource Type
 	 */
 	public static enums.ResourceType getResourceType(String resourceString) {
@@ -160,7 +167,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the protocol one index.
 	 *
-	 * @param s the s
+	 * @param s
+	 *            the s
 	 * @return the protocol one index
 	 */
 	public static Index getProtocolOneIndex(String s) {
@@ -170,7 +178,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the protocol one ID.
 	 *
-	 * @param i the i
+	 * @param i
+	 *            the i
 	 * @return the protocol one ID
 	 */
 	public static String getProtocolOneID(Index i) {
@@ -180,7 +189,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the player state.
 	 *
-	 * @param state the state
+	 * @param state
+	 *            the state
 	 * @return the player state
 	 */
 	@Deprecated
@@ -216,7 +226,8 @@ public final class ProtocolToModel {
 	/**
 	 * Convert protocol resource to own resource array.
 	 *
-	 * @param resources the resources
+	 * @param resources
+	 *            the resources
 	 * @return ResourceArray
 	 */
 	public static enums.ResourceType[] getResources(ProtocolResource resources) {
@@ -268,7 +279,8 @@ public final class ProtocolToModel {
 	/**
 	 * Convert Building type to match CornerStatus.
 	 *
-	 * @param pBuildingType the building type
+	 * @param pBuildingType
+	 *            the building type
 	 * @return the corner type
 	 */
 	/*
@@ -289,7 +301,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the harbour type.
 	 *
-	 * @param pHarbourType the harbour type
+	 * @param pHarbourType
+	 *            the harbour type
 	 * @return the harbour type
 	 */
 	@Deprecated
@@ -316,11 +329,16 @@ public final class ProtocolToModel {
 	/**
 	 * Convert resources.
 	 *
-	 * @param wood the wood
-	 * @param clay the clay
-	 * @param ore the ore
-	 * @param wool the wool
-	 * @param corn the corn
+	 * @param wood
+	 *            the wood
+	 * @param clay
+	 *            the clay
+	 * @param ore
+	 *            the ore
+	 * @param wool
+	 *            the wool
+	 * @param corn
+	 *            the corn
 	 * @return the int[]
 	 */
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
@@ -338,7 +356,8 @@ public final class ProtocolToModel {
 	/**
 	 * Convert resources.
 	 *
-	 * @param resource the resource
+	 * @param resource
+	 *            the resource
 	 * @return the int[]
 	 */
 	public static int[] convertResources(ProtocolResource resource) {
@@ -362,7 +381,8 @@ public final class ProtocolToModel {
 	/**
 	 * Intended for use by ClientInputHandler after buying a card only.
 	 *
-	 * @param pdv the pdv
+	 * @param pdv
+	 *            the pdv
 	 * @return the card type
 	 */
 	public static DevelopmentCard getCardType(ProtocolDevCard pdv) {
@@ -392,7 +412,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the corner coordinates.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the corner coordinates
 	 */
 	public static int[] getCornerCoordinates(Index[] id) {
@@ -405,7 +426,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the edge coordinates.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the edge coordinates
 	 */
 	public static int[] getEdgeCoordinates(Index[] id) {
@@ -417,7 +439,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the corner ID index.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the corner ID index
 	 */
 	public static String getCornerIDIndex(Index[] id) {
@@ -430,7 +453,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the edge ID index.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the edge ID index
 	 */
 	public static String getEdgeIDIndex(Index[] id) {
@@ -442,7 +466,8 @@ public final class ProtocolToModel {
 	/**
 	 * Gets the dev card.
 	 *
-	 * @param ct the ct
+	 * @param ct
+	 *            the ct
 	 * @return the dev card
 	 */
 	public static DevelopmentCard getDevCard(CardType ct) {
@@ -457,8 +482,8 @@ public final class ProtocolToModel {
 			return new StreetBuildingCard();
 		case VICTORYPOINT:
 			return new VictoryPointCard();
-		case UNKNOWN: 
-			return null;
+		case UNKNOWN:
+			return new UnknownCard();
 		}
 
 		throw new IllegalArgumentException("CardType doesn't exit");

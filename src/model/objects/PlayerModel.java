@@ -21,6 +21,7 @@ public class PlayerModel {
 	private int victoryPoints = 0;
 
 	private int hiddenVictoryPoints;
+
 	/**
 	 * @return the hiddenVictoryPoints
 	 */
@@ -29,7 +30,8 @@ public class PlayerModel {
 	}
 
 	/**
-	 * @param hiddenVictoryPoints the hiddenVictoryPoints to set
+	 * @param hiddenVictoryPoints
+	 *            the hiddenVictoryPoints to set
 	 */
 	public void setHiddenVictoryPoints(int hiddenVictoryPoints) {
 		this.hiddenVictoryPoints = hiddenVictoryPoints;
@@ -51,6 +53,7 @@ public class PlayerModel {
 
 	// {KnightCard, VictoryCard, InventionCard, MonopolyCard, StreetBuilding}
 	private int[] playerDevCard = { 0, 0, 0, 0, 0 };
+	private int playerUnknownCards;
 
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 	// is hidden to other players
@@ -62,7 +65,8 @@ public class PlayerModel {
 	/**
 	 * Instantiates a new player model.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 */
 	public PlayerModel(int id) {
 		this.playerID = id;
@@ -88,7 +92,8 @@ public class PlayerModel {
 	 * sets the playerDevCards new {KnightCard, VictoryCard, InventionCard,
 	 * MonopolyCard, StreetBuilding}.
 	 *
-	 * @param devCards the new player dev cards
+	 * @param devCards
+	 *            the new player dev cards
 	 */
 	public void setPlayerDevCards(int[] devCards) {
 		if (devCards.length != 5) {
@@ -100,7 +105,8 @@ public class PlayerModel {
 	/**
 	 * increments the amount of the card.
 	 *
-	 * @param devCard            DevelopmentCard
+	 * @param devCard
+	 *            DevelopmentCard
 	 */
 	public void incrementPlayerDevCard(DevelopmentCard devCard) {
 		switch (devCard.getName()) {
@@ -119,6 +125,9 @@ public class PlayerModel {
 		case "Street Building Card":
 			playerDevCard[4]++;
 			break;
+		case "Unknown":
+			playerUnknownCards++;
+			break;
 		default:
 			throw new IllegalArgumentException("Card Type doesn't exist");
 		}
@@ -127,14 +136,16 @@ public class PlayerModel {
 	/**
 	 * decrements the specific playerDevCards by 1.
 	 *
-	 * @param devCard            specific DevelopmentCard
+	 * @param devCard
+	 *            specific DevelopmentCard
 	 */
 	public void decrementPlayerDevCard(DevelopmentCard devCard) {
 		if (devCard.getName() == "Knight Card") {
 			if (playerDevCard[0] != 0) {
 				playerDevCard[0] = playerDevCard[0] - 1;
 			} else {
-				//throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
+				// throw new IllegalArgumentException("not enough " +
+				// devCard.getName() + "s");
 			}
 		}
 		if (devCard.getName() == "Victory Card") {
@@ -163,6 +174,13 @@ public class PlayerModel {
 				playerDevCard[4] = playerDevCard[4] - 1;
 			} else {
 				throw new IllegalArgumentException("not enough " + devCard.getName() + "s");
+			}
+		}
+		if (devCard.getName() == "Unknown") {
+			if (playerUnknownCards != 0) {
+				playerUnknownCards -= 1;
+			} else {
+				throw new IllegalArgumentException("");
 			}
 		}
 	}
@@ -195,7 +213,8 @@ public class PlayerModel {
 	/**
 	 * Sets the color.
 	 *
-	 * @param color the new color
+	 * @param color
+	 *            the new color
 	 */
 	public void setColor(Color color) {
 		this.color = color;
@@ -213,7 +232,8 @@ public class PlayerModel {
 	/**
 	 * Sets the name.
 	 *
-	 * @param name the new name
+	 * @param name
+	 *            the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -231,8 +251,7 @@ public class PlayerModel {
 	}
 
 	/**
-	 * Sets the id.
-	 * AI Only!
+	 * Sets the id. AI Only!
 	 */
 	public void setID(int id) {
 		this.playerID = id;
@@ -305,7 +324,8 @@ public class PlayerModel {
 	/**
 	 * Sets the victory points.
 	 *
-	 * @param victoryPoints the new victory points
+	 * @param victoryPoints
+	 *            the new victory points
 	 */
 	public void setVictoryPoints(int victoryPoints) {
 		this.victoryPoints = victoryPoints;
@@ -323,7 +343,8 @@ public class PlayerModel {
 	/**
 	 * Sets the checks for longest road.
 	 *
-	 * @param hasLongestRoad the new checks for longest road
+	 * @param hasLongestRoad
+	 *            the new checks for longest road
 	 */
 	public void setHasLongestRoad(boolean hasLongestRoad) {
 		this.hasLongestRoad = hasLongestRoad;
@@ -341,7 +362,8 @@ public class PlayerModel {
 	/**
 	 * Sets the checks for largest army.
 	 *
-	 * @param hasLargestArmy the new checks for largest army
+	 * @param hasLargestArmy
+	 *            the new checks for largest army
 	 */
 	public void setHasLargestArmy(boolean hasLargestArmy) {
 		this.hasLargestArmy = hasLargestArmy;
@@ -359,7 +381,8 @@ public class PlayerModel {
 	/**
 	 * Sets the player state.
 	 *
-	 * @param playerState the new player state
+	 * @param playerState
+	 *            the new player state
 	 */
 	public void setPlayerState(PlayerState playerState) {
 		this.playerState = playerState;
@@ -368,7 +391,8 @@ public class PlayerModel {
 	/**
 	 * Sets the resources.
 	 *
-	 * @param resources the new resources
+	 * @param resources
+	 *            the new resources
 	 */
 	public void setResources(int[] resources) {
 		this.resources = resources;
@@ -377,7 +401,8 @@ public class PlayerModel {
 	/**
 	 * Sets the amount villages.
 	 *
-	 * @param amountVillages the new amount villages
+	 * @param amountVillages
+	 *            the new amount villages
 	 */
 	public void setAmountVillages(int amountVillages) {
 		this.amountVillages = amountVillages;
@@ -386,7 +411,8 @@ public class PlayerModel {
 	/**
 	 * Sets the amount cities.
 	 *
-	 * @param amountCities the new amount cities
+	 * @param amountCities
+	 *            the new amount cities
 	 */
 	public void setAmountCities(int amountCities) {
 		this.amountCities = amountCities;
@@ -395,7 +421,8 @@ public class PlayerModel {
 	/**
 	 * Sets the amount streets.
 	 *
-	 * @param amountStreets the new amount streets
+	 * @param amountStreets
+	 *            the new amount streets
 	 */
 	public void setAmountStreets(int amountStreets) {
 		this.amountStreets = amountStreets;
@@ -406,7 +433,8 @@ public class PlayerModel {
 	/**
 	 * Decrement resources.
 	 *
-	 * @param resources the resources
+	 * @param resources
+	 *            the resources
 	 * @return the resources
 	 */
 	public void decrementResources(int[] resources) {
@@ -423,7 +451,8 @@ public class PlayerModel {
 	/**
 	 * Increment resources.
 	 *
-	 * @param resources            the resources to set
+	 * @param resources
+	 *            the resources to set
 	 */
 	public void incrementResources(int[] resources) {
 		if (resources.length == 5) {
@@ -440,7 +469,8 @@ public class PlayerModel {
 	/**
 	 * Get specific resource.
 	 *
-	 * @param i the i
+	 * @param i
+	 *            the i
 	 * @return the resource amount of
 	 */
 	public int getResourceAmountOf(int i) {
@@ -451,7 +481,8 @@ public class PlayerModel {
 	/**
 	 * Decrement resource at.
 	 *
-	 * @param i the i
+	 * @param i
+	 *            the i
 	 */
 	public void decrementResourceAt(int i) {
 		resources[i] -= 1;
@@ -480,7 +511,8 @@ public class PlayerModel {
 	/**
 	 * Sets the hidden resources.
 	 *
-	 * @param hiddenResources            the hiddenResources to set
+	 * @param hiddenResources
+	 *            the hiddenResources to set
 	 */
 	public void setHiddenResources(Integer hiddenResources) {
 		this.hiddenResources = hiddenResources;
@@ -489,7 +521,8 @@ public class PlayerModel {
 	/**
 	 * Increment hidden resources.
 	 *
-	 * @param increment the increment
+	 * @param increment
+	 *            the increment
 	 */
 	public void incrementHiddenResources(int increment) {
 		this.hiddenResources += increment;
@@ -498,7 +531,8 @@ public class PlayerModel {
 	/**
 	 * Decrement hidden resources.
 	 *
-	 * @param decrement the decrement
+	 * @param decrement
+	 *            the decrement
 	 */
 	public void decrementHiddenResources(int decrement) {
 		this.hiddenResources -= decrement;
@@ -528,7 +562,8 @@ public class PlayerModel {
 	/**
 	 * Sets the checks for played dev card.
 	 *
-	 * @param flag the new checks for played dev card
+	 * @param flag
+	 *            the new checks for played dev card
 	 */
 	public void setHasPlayedDevCard(boolean flag) {
 		hasPlayedDevCard = flag;
@@ -547,7 +582,8 @@ public class PlayerModel {
 	/**
 	 * Adds the to player harbours.
 	 *
-	 * @param harbour the harbour
+	 * @param harbour
+	 *            the harbour
 	 */
 	public void addToPlayerHarbours(HarbourStatus harbour) {
 		harbours.add(harbour);
@@ -569,6 +605,14 @@ public class PlayerModel {
 	 */
 	public int sumDevCards() {
 		return playerDevCard[0] + playerDevCard[1] + playerDevCard[2] + playerDevCard[3] + playerDevCard[4];
+	}
+
+	public int getPlayerUnknownCards() {
+		return playerUnknownCards;
+	}
+
+	public void setPlayerUnknownCards(int playerUnknownCards) {
+		this.playerUnknownCards = playerUnknownCards;
 	}
 
 }
