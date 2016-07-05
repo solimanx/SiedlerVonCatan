@@ -611,7 +611,7 @@ public class GameViewController implements Initializable {
     @FXML
     void handleEndTurnButton(ActionEvent event) {
         viewController.getClientController().endTurn();
-        Soundeffects.LOGIN.play();
+        Soundeffects.SELECT.play();
 
         //playButtonSound();
     }
@@ -716,7 +716,7 @@ public class GameViewController implements Initializable {
             logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
-        Soundeffects.LOGIN.play();
+        Soundeffects.SELECT.play();
 
 
     }
@@ -734,7 +734,7 @@ public class GameViewController implements Initializable {
         Scene cheatScene = new Scene(cheatRoot);
         TextField cheatField = new TextField();
         Button ok = new Button("Send Cheat");
-       Soundeffects.LOGIN.play();
+       Soundeffects.SELECT.play();
         ok.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

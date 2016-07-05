@@ -26,7 +26,6 @@ import network.client.controller.ViewController;
 
 import static sounds.Sound.*;
 
-
 // TODO: Auto-generated Javadoc
 public class LobbyController {
 
@@ -146,9 +145,10 @@ public class LobbyController {
 		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getClientController().connectToServer(server, port);
 		colorNameSelectPane.setDisable(false);
-       // Soundeffects.LOGIN.play();
+		Soundeffects.SELECT.play();
 
-		playConnectSound();
+		// playConnectSound();
+		// this gives us headaches ^^
 
 	}
 
@@ -166,7 +166,8 @@ public class LobbyController {
 	/**
 	 * Receive chat message.
 	 *
-	 * @param string the string
+	 * @param string
+	 *            the string
 	 */
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
@@ -202,7 +203,8 @@ public class LobbyController {
 	/**
 	 * Sets the view controller.
 	 *
-	 * @param viewController the new view controller
+	 * @param viewController
+	 *            the new view controller
 	 */
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
@@ -211,16 +213,17 @@ public class LobbyController {
 	/**
 	 * Sets the server color answer.
 	 *
-	 * @param server_response the new server color answer
+	 * @param server_response
+	 *            the new server color answer
 	 */
 	public void setServerColorAnswer(String server_response) {
-		Platform.runLater(new Runnable(){
+		Platform.runLater(new Runnable() {
 
 			@Override
 			public void run() {
-				serverColorAnswer.setText(server_response);				
+				serverColorAnswer.setText(server_response);
 			}
-			
+
 		});
 	}
 
@@ -242,11 +245,10 @@ public class LobbyController {
 			// FOR DEBUG ONLY ASSUME SERVER CONFIRMED
 			logger.debug("Profile" + name + chosenColor);
 			readyButton.setDisable(false);
-			Soundeffects.LOGIN.play();
+			Soundeffects.SELECT.play();
 
 			// playButtonSound();
 		}
-        
 
 	}
 
@@ -266,10 +268,14 @@ public class LobbyController {
 	/**
 	 * Update player.
 	 *
-	 * @param threadID the thread ID
-	 * @param name the name
-	 * @param color the color
-	 * @param status the status
+	 * @param threadID
+	 *            the thread ID
+	 * @param name
+	 *            the name
+	 * @param color
+	 *            the color
+	 * @param status
+	 *            the status
 	 */
 	public void updatePlayer(int threadID, String name, Color color, PlayerState status) {
 		Boolean playerFound = false;
