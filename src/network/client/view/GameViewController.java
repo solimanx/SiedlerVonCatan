@@ -248,7 +248,7 @@ public class GameViewController implements Initializable {
 	public Circle bandit;
 
 	// Constant values for calculations
-	public static double radius = 50.0;
+	public static double radius = 60.0;
 	public double[] boardCenter = new double[2];
 	public double[] screenCenter = new double[2];// [2]
 	public static double sin60 = Math.sqrt(3) / 2;
@@ -364,8 +364,8 @@ public class GameViewController implements Initializable {
 		viewController.getClientController().initializeGUI();
 
 		shadow = new DropShadow();
-		shadow.setRadius(4);
-		shadow.setColor(Color.SLATEGRAY);
+		shadow.setRadius(5);
+		shadow.setColor(Color.BLACK);
 
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = new Pane();
@@ -608,6 +608,10 @@ public class GameViewController implements Initializable {
 		String folder = theme + "/";
 
 		iconLumber.setImage(new Image("/textures/" + folder + "iconLumber.png"));
+		iconClay.setImage(new Image("/textures/" + folder + "iconClay.png"));
+		iconWool.setImage(new Image("/textures/" + folder + "iconWool.png"));
+		iconGrain.setImage(new Image("/textures/" + folder + "iconGrain.png"));
+		iconOre.setImage(new Image("/textures/" + folder + "iconOre.png"));
 	}
 
 	/**
@@ -633,8 +637,6 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleRollDiceButton(ActionEvent event) {
 		viewController.getClientController().diceRollRequest();
-		// there's already a dice roll sound effect  
-		// audio.Soundeffects.DICEROLL
 		// playDiceRollSound();
 	}
 
@@ -710,7 +712,7 @@ public class GameViewController implements Initializable {
 			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
-		playCardButtonSound();
+		// playCardButtonSound();
 	}
 
 	/**
@@ -737,6 +739,7 @@ public class GameViewController implements Initializable {
 		}
 		Soundeffects.SELECT.play();
 
+		// playButtonSound();
 	}
 
 	/**
@@ -755,6 +758,7 @@ public class GameViewController implements Initializable {
 		TextField cheatField = new TextField();
 		Button ok = new Button("Send Cheat");
 		Soundeffects.SELECT.play();
+		// playButtonSound();
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -781,7 +785,7 @@ public class GameViewController implements Initializable {
 		String message = messageInput.getText();
 		messageInput.clear();
 		viewController.getClientController().sendChatMessage(message);
-		playNotificationSound();
+		// playNotificationSound();
 	}
 
 	/**
@@ -800,7 +804,6 @@ public class GameViewController implements Initializable {
 		if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
 			viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
 					villageCoordinates[2]);
-		//playSelectSound();
 
 	}
 
@@ -829,7 +832,6 @@ public class GameViewController implements Initializable {
 		} else if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET) {
 			viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
 		}
-		//playSelectSound();
 	}
 
 	/**
@@ -882,7 +884,7 @@ public class GameViewController implements Initializable {
 
 			}
 		}
-		//playSelectSound();
+
 	}
 
 	/**
@@ -894,7 +896,7 @@ public class GameViewController implements Initializable {
 	public void receiveChatMessage(String line) {
 		messages.appendText(line + "\n");
 		Soundeffects.CHATRECEIVE.play();
-		//playNotificationSound();
+		// playNotificationSound();
 	}
 
 	/**
@@ -991,7 +993,7 @@ public class GameViewController implements Initializable {
 	private void cityClick(int[] coordinates) {
 
 		viewController.getClientController().requestBuildCity(coordinates[0], coordinates[1], coordinates[2]);
-		//playSelectSound();
+
 	}
 
 	/**
@@ -1205,7 +1207,7 @@ public class GameViewController implements Initializable {
 		alert.initOwner(gameStage);
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.showAndWait();
-
+		// playMoveRobberSound();
 	}
 
 	/**
@@ -1376,7 +1378,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void run() {
-				// Soundeffects.VICTORY.play();
+				Soundeffects.VICTORY.play();
 				// TODO Loss Sound
 				VBox vBox = new VBox(10);
 				vBox.setPadding(new Insets(5));
@@ -1385,8 +1387,7 @@ public class GameViewController implements Initializable {
 				Text text = new Text("Glückwunsch zum verdienten Sieg.");
 				Text text1 = new Text("Unser Gewinner ist: " + winner);
 
-				ImageView image = new ImageView(
-						new Image(getClass().getResourceAsStream("/textures/standard/winner.png")));
+				ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/textures/standard/winner.png")));
 				vBox.getChildren().addAll(title, text, text1, image);
 
 				Scene scene = new Scene(vBox, 600, 600, Color.BEIGE);
@@ -1398,7 +1399,6 @@ public class GameViewController implements Initializable {
 				victoryStage.initModality(Modality.APPLICATION_MODAL);
 				victoryStage.initOwner(gameStage);
 				victoryStage.show();
-				playWinnerSound();
 			}
 
 			public Runnable init(String winnerName) {
@@ -1427,7 +1427,6 @@ public class GameViewController implements Initializable {
 				alert.initOwner(gameStage);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.showAndWait();
-				playAlertSound();
 			}
 
 			public Runnable init(String message) {
@@ -1517,7 +1516,6 @@ public class GameViewController implements Initializable {
 			alert.setContentText(message);
 
 			alert.showAndWait();
-			playAlertSound();
 
 		}
 
@@ -1643,8 +1641,8 @@ public class GameViewController implements Initializable {
 			double[] points = new double[12];
 			int j = 1;
 			for (int i = 0; i < points.length; i = i + 2) {
-				points[i] = (double) (x + radius * Math.sin(j * rad60));
-				points[i + 1] = (double) (y + radius * Math.cos(j * rad60));
+				points[i] = (double) (x + (radius) * Math.sin(j * rad60));
+				points[i + 1] = (double) (y + (radius) * Math.cos(j * rad60));
 				j++;
 			}
 			return points;
@@ -1709,7 +1707,8 @@ public class GameViewController implements Initializable {
 		public Polygon drawHexagon(double[] points) {
 			Polygon hexagon = new Polygon(points);
 			hexagon.setFill(Color.LIGHTSKYBLUE);
-			hexagon.setStroke(Color.LIGHTGRAY);
+			hexagon.setStroke(Color.WHITE);
+			hexagon.setStrokeWidth(3);
 			return hexagon;
 		}
 
@@ -1979,5 +1978,7 @@ public class GameViewController implements Initializable {
 			selfName.setText(name);
 
 		}
+
 	}
+
 }
