@@ -1,5 +1,8 @@
 package sounds;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
@@ -8,20 +11,33 @@ import java.net.URL;
 /**
  * Created by Amina on 03.07.2016.
  */
-public class Sound { public static void playButtonSound() {
-    try {
-        URL url = Sound.class.getResource("/sounds/button-3.wav");
-        File file = new File(url.getPath());
-        Clip clip = AudioSystem.getClip();
-        clip.open(AudioSystem.getAudioInputStream(file));
-        clip.start();
-    } catch (Exception e) {
-        System.err.println(e.getMessage());
+public class Sound {
+
+    public static void musicLoop() {
+
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(Sound.class.getResource("/sounds/background.wav").toExternalForm()));
+        mediaPlayer.setVolume(0.5);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+
     }
-}
+
+    public static void playConnectSound() {
+        try {
+            URL url = Sound.class.getResource("/sounds/button-3.wav");
+            File file = new File(url.getPath());
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.start();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
 
     public static void playDiceRollSound() {
-        try {URL url = Sound.class.getResource("/sounds/Shake.wav");
+        try {
+            URL url = Sound.class.getResource("/sounds/Shake.wav");
             File file = new File(url.getPath());
 
             Clip clip = AudioSystem.getClip();
@@ -124,6 +140,7 @@ public class Sound { public static void playButtonSound() {
             System.err.println(e.getMessage());
         }
     }
+
     public static void playDeclineTradeOfferSound() {
         try {
             URL url = Sound.class.getResource("/sounds/decline.wav");
@@ -136,6 +153,86 @@ public class Sound { public static void playButtonSound() {
             System.err.println(e.getMessage());
         }
     }
+
+
+    public static void playCancelTradeSound() {
+        try {
+            URL url = Sound.class.getResource("/sounds/cancel.wav");
+            File file = new File(url.getPath());
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.start();
+            //Thread.sleep(clip.getMicrosecondLength());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void playAcceptTradeSound() {
+        try {
+            URL url = Sound.class.getResource("/sounds/accept.wav");
+            File file = new File(url.getPath());
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.start();
+            //Thread.sleep(clip.getMicrosecondLength());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void playFullFillTradeSound() {
+        try {
+            URL url = Sound.class.getResource("/sounds/accept.wav");
+            File file = new File(url.getPath());
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.start();
+            //Thread.sleep(clip.getMicrosecondLength());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void playSelectSound() {
+        try {
+            URL url = Sound.class.getResource("/sounds/select.wav");
+            File file = new File(url.getPath());
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.start();
+            //Thread.sleep(clip.getMicrosecondLength());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void playWinnerSound() {
+        try {
+            URL url = Sound.class.getResource("/sounds/winnerSound.wav");
+            File file = new File(url.getPath());
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.start();
+            //Thread.sleep(clip.getMicrosecondLength());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void playAlertSound() {
+        try {
+            URL url = Sound.class.getResource("/sounds/invalidAction.wav");
+            File file = new File(url.getPath());
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.start();
+            //Thread.sleep(clip.getMicrosecondLength());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
 
 }
 
