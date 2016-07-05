@@ -103,19 +103,19 @@ public class GameViewController implements Initializable {
 
     @FXML
     private TextFlow selfOre;
-    
+
     @FXML
     private ImageView iconLumber;
-    
+
     @FXML
     private ImageView iconClay;
-    
+
     @FXML
     private ImageView iconWool;
-    
+
     @FXML
     private ImageView iconGrain;
-    
+
     @FXML
     private ImageView iconOre;
 
@@ -303,7 +303,7 @@ public class GameViewController implements Initializable {
     private Boolean isStreetDevCard = false;
 
     public boolean knight = false;
-    
+
     public String theme;
 
     /**
@@ -354,8 +354,8 @@ public class GameViewController implements Initializable {
      * @param stage the stage
      */
     public void startScene(Stage stage, String theme) {
-    	this.theme = theme;
-    	initFieldColors();
+        this.theme = theme;
+        initFieldColors();
         this.gameStage = stage;
         board.getChildren().add(factory.getViewBoard(stage));
         board.toBack();
@@ -597,10 +597,10 @@ public class GameViewController implements Initializable {
         fieldColors = vFactory.getFieldColors();
         imagePatterns = vFactory.getImagePatterns();
         harbourImages = vFactory.getHarbourImages();
-        
-        String folder = theme +"/";
-        
-        iconLumber.setImage(new Image("/textures/"+ folder + "iconLumber.png"));
+
+        String folder = theme + "/";
+
+        iconLumber.setImage(new Image("/textures/" + folder + "iconLumber.png"));
     }
 
     /**
@@ -624,7 +624,7 @@ public class GameViewController implements Initializable {
     @FXML
     void handleRollDiceButton(ActionEvent event) {
         viewController.getClientController().diceRollRequest();
-        //playDiceRollSound();
+        playDiceRollSound();
     }
 
     /**
@@ -693,7 +693,7 @@ public class GameViewController implements Initializable {
             logger.catching(Level.ERROR, e);
             e.printStackTrace();
         }
-        //playCardButtonSound();
+        playCardButtonSound();
     }
 
     /**
@@ -718,7 +718,7 @@ public class GameViewController implements Initializable {
         }
         Soundeffects.LOGIN.play();
 
-        //playButtonSound();
+
     }
 
     /**
@@ -734,8 +734,7 @@ public class GameViewController implements Initializable {
         Scene cheatScene = new Scene(cheatRoot);
         TextField cheatField = new TextField();
         Button ok = new Button("Send Cheat");
-        Soundeffects.LOGIN.play();
-        //playButtonSound();
+       Soundeffects.LOGIN.play();
         ok.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -761,7 +760,7 @@ public class GameViewController implements Initializable {
         String message = messageInput.getText();
         messageInput.clear();
         viewController.getClientController().sendChatMessage(message);
-        //playNotificationSound();
+        playNotificationSound();
     }
 
     /**
@@ -779,6 +778,7 @@ public class GameViewController implements Initializable {
         if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_VILLAGE)
             viewController.getClientController().requestBuildVillage(villageCoordinates[0], villageCoordinates[1],
                     villageCoordinates[2]);
+        playSelectSound();
 
     }
 
@@ -806,6 +806,7 @@ public class GameViewController implements Initializable {
         } else if (selfState == PlayerState.TRADING_OR_BUILDING || selfState == PlayerState.BUILDING_STREET) {
             viewController.getClientController().requestBuildStreet(streetCoord[0], streetCoord[1], streetCoord[2]);
         }
+        playSelectSound();
     }
 
     /**
@@ -856,7 +857,7 @@ public class GameViewController implements Initializable {
 
             }
         }
-
+        playSelectSound();
     }
 
     /**
@@ -867,7 +868,7 @@ public class GameViewController implements Initializable {
     public void receiveChatMessage(String line) {
         messages.appendText(line + "\n");
         Soundeffects.CHATRECEIVE.play();
-        //playNotificationSound();
+        playNotificationSound();
     }
 
     /**
@@ -880,7 +881,7 @@ public class GameViewController implements Initializable {
      * @param modelID the model ID
      */
     public void setStreet(int u, int v, int dir, int modelID) {
-    	Soundeffects.BUILD.play();
+        Soundeffects.BUILD.play();
         Line street = streets[u + 3][v + 3][dir];
         street.setOpacity(1.0);
         street.setStroke(playerColors.get(modelID));
@@ -928,7 +929,7 @@ public class GameViewController implements Initializable {
      * @param playerColor the player color
      */
     public void setVillage(int u, int v, int dir, Color playerColor) {
-    	Soundeffects.BUILD.play();
+        Soundeffects.BUILD.play();
         Polygon village = villages[u + 3][v + 3][dir];
         village.setFill(playerColor);
         village.setOpacity(1.0);
@@ -948,7 +949,7 @@ public class GameViewController implements Initializable {
     private void cityClick(int[] coordinates) {
 
         viewController.getClientController().requestBuildCity(coordinates[0], coordinates[1], coordinates[2]);
-
+        playSelectSound();
     }
 
     /**
@@ -1084,13 +1085,13 @@ public class GameViewController implements Initializable {
                 playerStatusOne.setText(state.toString());
                 selfState = state;
                 if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLongestRoad()) {
-                	Soundeffects.LONGESTROAD.play();
+                    Soundeffects.LONGESTROAD.play();
                     selfLongestTradeRoute.setText("Longest Trade Road");
                 } else {
                     selfLongestTradeRoute.setText("");
                 }
                 if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLargestArmy()) {
-                	Soundeffects.SWORD.play();
+                    Soundeffects.SWORD.play();
                     selfGreatestKnightForce.setText("Largest Army");
                 } else {
                     selfGreatestKnightForce.setText("");
@@ -1150,7 +1151,7 @@ public class GameViewController implements Initializable {
         alert.initOwner(gameStage);
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.showAndWait();
-        //playMoveRobberSound();
+
     }
 
     /**
@@ -1207,7 +1208,7 @@ public class GameViewController implements Initializable {
      * @param playerColor the player color
      */
     public void setCity(int u, int v, int dir, Color playerColor) {
-    	Soundeffects.BUILD.play();
+        Soundeffects.BUILD.play();
         Polygon city = cities[u + 3][v + 3][dir];
         city.setFill(playerColor);
         city.setOpacity(1.0);
@@ -1312,8 +1313,8 @@ public class GameViewController implements Initializable {
 
             @Override
             public void run() {
-            	Soundeffects.VICTORY.play();
-            	//TODO Loss Sound
+                //       	Soundeffects.VICTORY.play();
+                //TODO Loss Sound
                 VBox vBox = new VBox(10);
                 vBox.setPadding(new Insets(5));
                 vBox.setSpacing(8);
@@ -1333,6 +1334,7 @@ public class GameViewController implements Initializable {
                 victoryStage.initModality(Modality.APPLICATION_MODAL);
                 victoryStage.initOwner(gameStage);
                 victoryStage.show();
+                playWinnerSound();
             }
 
             public Runnable init(String winnerName) {
@@ -1360,6 +1362,7 @@ public class GameViewController implements Initializable {
                 alert.initOwner(gameStage);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 alert.showAndWait();
+                playAlertSound();
             }
 
             public Runnable init(String message) {
@@ -1444,6 +1447,7 @@ public class GameViewController implements Initializable {
             alert.setContentText(message);
 
             alert.showAndWait();
+            playAlertSound();
 
         }
 
@@ -1888,7 +1892,5 @@ public class GameViewController implements Initializable {
             selfName.setText(name);
 
         }
-
     }
-
 }
