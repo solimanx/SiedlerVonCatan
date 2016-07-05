@@ -130,7 +130,7 @@
 }
 
 .iconClay {
-	-fx-image: url(/textures/standard/iconClay.png);
+	-fx-image: url(/textures/standard/iconBrick.png);
 }
 
 .iconWool {

@@ -139,7 +139,7 @@
 }
 
 .iconClay {
-	-fx-image: url(/textures/biergarten/iconClay.png);
+	-fx-image: url(/textures/biergarten/iconBrick.png);
 }
 
 .iconWool {
@@ -147,9 +147,6 @@
 }
 
 .iconGrain {
-	-fx-image: url(/textures/biergarten/iconGrain.png);
-}
-#iconGrain {
 	-fx-image: url(/textures/biergarten/iconGrain.png);
 }
 
