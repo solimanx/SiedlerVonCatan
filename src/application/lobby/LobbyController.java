@@ -172,7 +172,7 @@ public class LobbyController {
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
 		Soundeffects.CHATRECEIVE.play();
-		playNotificationSound();
+		//playNotificationSound();
 	}
 
 	/**
