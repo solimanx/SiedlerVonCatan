@@ -18,7 +18,7 @@
 }
 
 .background{
-	-fx-background-image: url(/textures/background.jpg)
+	-fx-background-image: url(/textures/standard/background.jpg)
 }
 
 .button {
@@ -35,7 +35,7 @@
 }
 
 .player-board {
-	-fx-background-image: url(/textures/background.jpg);
+	-fx-background-image: url(/textures/standard/background.jpg);
 	-fx-background-color: #5D4037;
 	-fx-background-radius: 5.0;
 	-fx-border-radius: 5.0;
