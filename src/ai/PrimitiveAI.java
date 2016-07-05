@@ -146,7 +146,6 @@ public class PrimitiveAI extends Thread {
 			// logger.debug("Server"+ line);
 			/*
 			 * try { Thread.sleep(500); } catch (InterruptedException e) { //
-			 * TODO Auto-generated catch block e.printStackTrace(); }
 			 */
 			pI.sendToParser(line);
 		}
@@ -306,7 +305,7 @@ public class PrimitiveAI extends Thread {
 		// choose random character between A-S
 		String alphabet = "ABCDEFGHIJKLMNOPQRS";
 		int n = alphabet.length();
-		String newRobber = new String();
+		String newRobber = "";
 		do {
 			newRobber = alphabet.charAt(new Random().nextInt(n)) + "";
 		} while (newRobber.equals(robber));

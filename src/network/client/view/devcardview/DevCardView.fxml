@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="200.0" prefWidth="325.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" styleClass="background" stylesheets="/network/client/view/application.css" fx:controller="network.client.view.devcardview.DevCardViewController">
+<VBox prefHeight="200.0" prefWidth="325.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" styleClass="background" stylesheets="/network/client/view/standard.css" fx:controller="network.client.view.devcardview.DevCardViewController">
    <children>
       <HBox spacing="10.0">
          <children>
