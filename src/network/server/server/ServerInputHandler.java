@@ -34,19 +34,6 @@ import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolResource;
-import protocol.serverinstructions.ProtocolBoughtDevelopmentCard;
-import protocol.serverinstructions.ProtocolBuild;
-import protocol.serverinstructions.ProtocolCosts;
-import protocol.serverinstructions.ProtocolDiceRollResult;
-import protocol.serverinstructions.ProtocolLargestArmy;
-import protocol.serverinstructions.ProtocolLongestRoad;
-import protocol.serverinstructions.ProtocolResourceObtain;
-import protocol.serverinstructions.ProtocolRobberMovement;
-import protocol.serverinstructions.ProtocolStatusUpdate;
-import protocol.serverinstructions.trade.ProtocolTradeCancellation;
-import protocol.serverinstructions.trade.ProtocolTradeCompletion;
-import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
-import protocol.serverinstructions.trade.ProtocolTradePreview;
 
 // TODO: Auto-generated Javadoc
 public class ServerInputHandler {
@@ -58,7 +45,8 @@ public class ServerInputHandler {
 	/**
 	 * Instantiates a new server input handler.
 	 *
-	 * @param serverController the server controller
+	 * @param serverController
+	 *            the server controller
 	 */
 	public ServerInputHandler(ServerController serverController) {
 		parser = new Parser();
@@ -68,7 +56,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param o the o
+	 * @param o
+	 *            the o
 	 */
 	protected void handle(Object o) {
 		switch (o.getClass().getSimpleName()) {
@@ -99,18 +88,6 @@ public class ServerInputHandler {
 		case "ProtocolServerResponse":
 			handle((ProtocolServerResponse) o);
 			break;
-		case "ProtocolBuild":
-			handle((ProtocolBuild) o);
-			break;
-		case "ProtocolDiceRollResult":
-			handle((ProtocolDiceRollResult) o);
-			break;
-		case "ProtocolResourceObtain":
-			handle((ProtocolResourceObtain) o);
-			break;
-		case "ProtocolStatusUpdate":
-			handle((ProtocolStatusUpdate) o);
-			break;
 		case "ProtocolBuildRequest":
 			handle((ProtocolBuildRequest) o);
 			break;
@@ -120,20 +97,14 @@ public class ServerInputHandler {
 		case "ProtocolEndTurn":
 			handle((ProtocolEndTurn) o);
 			break;
-		case "ProtocolRobberMovement": // 0.2
-			handle((ProtocolRobberMovement) o);
-			break;
 		case "ProtocolRobberMovementRequest": // 0.2
 			handle((ProtocolRobberMovementRequest) o);
 			break;
 		case "String":
-			handle(new ProtocolServerResponse((String) o));
+			handle((String) o);//handle(new ProtocolServerResponse((String) o));
 			break;
 		case "ProtocolVictory":
 			handle((ProtocolVictory) o);
-			break;
-		case "ProtocolCosts":
-			handle((ProtocolCosts) o);
 			break;
 		case "ProtocolRobberLoss":
 			handle((ProtocolRobberLoss) o);
@@ -144,38 +115,20 @@ public class ServerInputHandler {
 		case "ProtocolTradeRequest":
 			handle((ProtocolTradeRequest) o);
 			break;
-		case "ProtocolTradePreview":
-			handle((ProtocolTradePreview) o);
-			break;
 		case "ProtocolTradeAccept":
 			handle((ProtocolTradeAccept) o);
-			break;
-		case "ProtocolTradeConfirmation":
-			handle((ProtocolTradeConfirmation) o);
 			break;
 		case "ProtocolTradeComplete":
 			handle((ProtocolTradeComplete) o);
 			break;
-		case "ProtocolTradeCompletion":
-			handle((ProtocolTradeCompletion) o);
-			break;
 		case "ProtocolTradeCancel":
 			handle((ProtocolTradeCancel) o);
-			break;
-		case "ProtocolTradeCancellation":
-			handle((ProtocolTradeCancellation) o);
 			break;
 		case "ProtocolBuyDevCard":
 			handle((ProtocolBuyDevCard) o);
 			break;
-		case "ProtocolLargestArmy":
-			handle((ProtocolLargestArmy) o);
-			break;
 		case "ProtocolPlayInventionCard":
 			handle((ProtocolPlayInventionCard) o);
-			break;
-		case "ProtocolLongestRoad":
-			handle((ProtocolLongestRoad) o);
 			break;
 		case "ProtocolPlayMonopolyCard":
 			handle((ProtocolPlayMonopolyCard) o);
@@ -186,11 +139,8 @@ public class ServerInputHandler {
 		case "ProtocolPlayRoadCard":
 			handle((ProtocolPlayRoadCard) o);
 			break;
-		case "ProtocolBoughtDevelopmentCard":
-			handle((ProtocolBoughtDevelopmentCard) o);
-			break;
-
 		default:
+			handle((String) o);
 			logger.info("Class not found");
 		}
 
@@ -209,8 +159,10 @@ public class ServerInputHandler {
 	 * sends JSON formatted string to parser and initiates handling of parsed
 	 * object.
 	 *
-	 * @param s the s
-	 * @param threadID the thread ID
+	 * @param s
+	 *            the s
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void sendToParser(String s, int threadID) {
 		// speichert die threadID, falls sie in handle(Protocol...) gebraucht
@@ -221,10 +173,15 @@ public class ServerInputHandler {
 		handle(object);
 	}
 
+	protected void handle(String o) {
+		serverController.sendInvalidJSON(currentThreadID);
+	}
+
 	/**
 	 * Hello.
 	 *
-	 * @param threadID the thread ID
+	 * @param threadID
+	 *            the thread ID
 	 */
 	protected void hello(int threadID) {
 		serverController.hello(threadID);
@@ -233,7 +190,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param hello the hello
+	 * @param hello
+	 *            the hello
 	 */
 	protected void handle(ProtocolHello hello) {
 		logger.debug("SERVER: Hello gelesen!");
@@ -244,7 +202,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param chatSendMessage the chat send message
+	 * @param chatSendMessage
+	 *            the chat send message
 	 */
 	protected void handle(ProtocolChatSendMessage chatSendMessage) {
 		String s = chatSendMessage.getMessage();
@@ -254,7 +213,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param clientReady the client ready
+	 * @param clientReady
+	 *            the client ready
 	 */
 	protected void handle(ProtocolClientReady clientReady) {
 		serverController.clientReady(currentThreadID);
@@ -264,7 +224,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param playerProfile the player profile
+	 * @param playerProfile
+	 *            the player profile
 	 */
 	protected void handle(ProtocolPlayerProfile playerProfile) {
 		String name = playerProfile.getName();
@@ -276,7 +237,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param diceRollRequest the dice roll request
+	 * @param diceRollRequest
+	 *            the dice roll request
 	 */
 	protected void handle(ProtocolDiceRollRequest diceRollRequest) {
 		serverController.diceRollRequest(currentThreadID);
@@ -286,7 +248,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param robberLoss the robber loss
+	 * @param robberLoss
+	 *            the robber loss
 	 */
 	protected void handle(ProtocolRobberLoss robberLoss) {
 		ProtocolResource prl = robberLoss.getLosses();
@@ -296,7 +259,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param robberMovementRequest the robber movement request
+	 * @param robberMovementRequest
+	 *            the robber movement request
 	 */
 	protected void handle(ProtocolRobberMovementRequest robberMovementRequest) {
 		String location_id = ProtocolToModel.getProtocolOneID(robberMovementRequest.getLocationID());
@@ -309,7 +273,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param endTurn the end turn
+	 * @param endTurn
+	 *            the end turn
 	 */
 	protected void handle(ProtocolEndTurn endTurn) {
 		serverController.endTurn(currentThreadID);
@@ -318,7 +283,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param buildRequest the build request
+	 * @param buildRequest
+	 *            the build request
 	 */
 	protected void handle(ProtocolBuildRequest buildRequest) {
 		if (buildRequest.getBuildingType().equals("Straße")) {
@@ -338,7 +304,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param buyDevelopmentCards the buy development cards
+	 * @param buyDevelopmentCards
+	 *            the buy development cards
 	 */
 	protected void handle(ProtocolBuyDevCard buyDevelopmentCards) {
 		serverController.requestBuyDevCard(currentThreadID);
@@ -347,7 +314,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param harbourRequest the harbour request
+	 * @param harbourRequest
+	 *            the harbour request
 	 */
 	protected void handle(ProtocolHarbourRequest harbourRequest) {
 		ProtocolResource rOf = harbourRequest.getOffer();
@@ -360,7 +328,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param tradeRequest the trade request
+	 * @param tradeRequest
+	 *            the trade request
 	 */
 	protected void handle(ProtocolTradeRequest tradeRequest) {
 		ProtocolResource offer = tradeRequest.getOffer();
@@ -372,7 +341,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param tradeAccept the trade accept
+	 * @param tradeAccept
+	 *            the trade accept
 	 */
 	protected void handle(ProtocolTradeAccept tradeAccept) {
 		int tradeID = tradeAccept.getTradeID();
@@ -383,7 +353,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param tradeComplete the trade complete
+	 * @param tradeComplete
+	 *            the trade complete
 	 */
 	protected void handle(ProtocolTradeComplete tradeComplete) {
 		int tradeID = tradeComplete.getTradeID();
@@ -394,7 +365,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param tradeCancel the trade cancel
+	 * @param tradeCancel
+	 *            the trade cancel
 	 */
 	protected void handle(ProtocolTradeCancel tradeCancel) {
 		int tradeID = tradeCancel.getTradeID();
@@ -404,7 +376,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param playInventionCard the play invention card
+	 * @param playInventionCard
+	 *            the play invention card
 	 */
 	protected void handle(ProtocolPlayInventionCard playInventionCard) {
 		int[] resources = ProtocolToModel.convertResources(playInventionCard.getResource());
@@ -415,7 +388,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param monopolyCard the monopoly card
+	 * @param monopolyCard
+	 *            the monopoly card
 	 */
 	protected void handle(ProtocolPlayMonopolyCard monopolyCard) {
 		serverController.playMonopolyCard(currentThreadID, monopolyCard.getResourceType());
@@ -424,7 +398,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param knightCard the knight card
+	 * @param knightCard
+	 *            the knight card
 	 */
 	protected void handle(ProtocolPlayKnightCard knightCard) {
 		String fieldID = ProtocolToModel.getProtocolOneID(knightCard.getLocationID());
@@ -436,12 +411,14 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param roadBuildingCard the road building card
+	 * @param roadBuildingCard
+	 *            the road building card
 	 */
 	protected void handle(ProtocolPlayRoadCard roadBuildingCard) {
 		int coords1[] = ProtocolToModel.getEdgeCoordinates(roadBuildingCard.getRoadID1());
 		int coords2[] = ProtocolToModel.getEdgeCoordinates(roadBuildingCard.getRoadID2());
-		serverController.playStreetCard(currentThreadID, coords1[0], coords1[1], coords1[2], coords2[0], coords1[1], coords2[2]);
+		serverController.playStreetCard(currentThreadID, coords1[0], coords1[1], coords1[2], coords2[0], coords1[1],
+				coords2[2]);
 
 	}
 
@@ -458,7 +435,7 @@ public class ServerInputHandler {
 	public void lostConnection(int threadID) {
 		serverController.connectionLost(threadID);
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

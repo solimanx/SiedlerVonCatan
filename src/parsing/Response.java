@@ -167,5 +167,7 @@ public class Response {
 
 	@SerializedName("Entwicklungskarte gekauft")
 	public ProtocolBoughtDevelopmentCard pBoughtDevelopmentCard;// new in 0.3
+	
+	public String invalid;
 
 }

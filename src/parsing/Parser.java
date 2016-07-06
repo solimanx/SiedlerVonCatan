@@ -20,7 +20,9 @@ public class Parser {
 	public <T> T parseString(String string) {
 
 		Gson gson = new GsonBuilder().create();
+		try{
 		Response response = gson.fromJson(string, Response.class);
+		
 
 		if (response.pHello != null) {
 			return (T) response.pHello;
@@ -184,7 +186,10 @@ public class Parser {
 
 		logger.warn("CANNOT READ INPUT");
 		return null;
-
+		}
+		catch(com.google.gson.JsonSyntaxException je){
+			return (T) string;
+		}
 	}
 
 	/**

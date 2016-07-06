@@ -93,11 +93,9 @@ public class Main extends Application {
                 @Override
                 public void handle(KeyEvent t) {
                     if (t.getCode() == KeyCode.ESCAPE) {
-                        Stage sb = (Stage) root.getScene().getWindow();// use
-                        // any
-                        // one
-                        // object
+                        Stage sb = (Stage) root.getScene().getWindow();
                         sb.close();
+                        System.exit(0);
                     } else if (t.getCode() == KeyCode.ENTER) {
                         startViewCtrl.handleStartButton(null);
                     }

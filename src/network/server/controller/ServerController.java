@@ -1415,7 +1415,7 @@ public class ServerController {
 	 * threadPlayerIdMap.get(threadID); subFromPlayersResources(modelID,
 	 * DefaultSettings.DEVCARD_BUILD_COST);
 	 * resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
-	 * DevelopmentCard currCard = devStack.getNextCard(); //TODO: Only one dev
+	 * DevelopmentCard currCard = devStack.getNextCard();
 	 * card per round
 	 * gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(currCard);
 	 * serverOutputHandler.boughtDevelopmentCard(threadID, currCard); }
@@ -1985,6 +1985,11 @@ public class ServerController {
 			amountPlayers--;
 			
 		}
+		
+	}
+
+	public void sendInvalidJSON(int currentThreadID) {
+		serverResponse(currentThreadID, "Unzulässige Aktion");
 		
 	}
 
