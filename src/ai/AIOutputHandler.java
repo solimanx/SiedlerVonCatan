@@ -26,6 +26,7 @@ import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
+import protocol.dualinstructions.ProtocolPlayInventionCard;
 import protocol.dualinstructions.ProtocolPlayKnightCard;
 import protocol.dualinstructions.ProtocolPlayMonopolyCard;
 import protocol.dualinstructions.ProtocolPlayRoadCard;
@@ -388,6 +389,21 @@ public class AIOutputHandler {
 		ProtocolPlayMonopolyCard pmci = new ProtocolPlayMonopolyCard(rt);
 		Response r = new Response();
 		r.pPlayMonopolyCard = pmci;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw an Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
+
+	}
+
+	public void requestPlayInventionCard(int[] resources) {
+		ProtocolResource pr = ModelToProtocol.convertToProtocolResource(resources);
+		ProtocolPlayInventionCard pici = new ProtocolPlayInventionCard(pr);
+		Response r = new Response();
+		r.pPlayInventionCard = pici;
 		try {
 			ai.write(parser.createString(r));
 		} catch (IOException e) {

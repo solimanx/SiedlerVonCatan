@@ -165,9 +165,9 @@ public class AdvancedAI extends PrimitiveAI {
 			cardAgent.playMonopolyCard();
 		}
 		// DEBUG ONLY
-//		if (cardAgent.hasInvention()) {
-//			cardAgent.playInventionCard();
-//		}
+		if (cardAgent.hasInvention()) {
+			cardAgent.playInventionCard();
+		}
 
 		if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()) {
 			cardAgent.playRoadCard();
@@ -463,5 +463,13 @@ public class AdvancedAI extends PrimitiveAI {
 	public void playMonopolyCard(ResourceType rt) {
 		pO.requestPlayMonopolyCard(rt);
 
+	}
+
+	public void playInventionCard(ResourceType rt, ResourceType rt2) {
+		int[] resources = {0,0,0,0,0};
+		resources[ModelToProtocol.getIndexResource(rt)]++;
+		resources[ModelToProtocol.getIndexResource(rt2)]++;
+		pO.requestPlayInventionCard(resources);
+		
 	}
 }

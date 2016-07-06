@@ -93,8 +93,8 @@ public class CardAgent {
 	}
 
 	public void playMonopolyCard() {
-		// TODO for now
-		ResourceType rt = (aai.getResourceAgent().getLowestResource());
+		// TODO DEBUG ONLY
+		ResourceType rt = (aai.getResourceAgent().getLowestResource(null));
 		aai.playMonopolyCard(rt);
 
 	}
@@ -105,8 +105,10 @@ public class CardAgent {
 	}
 
 	public void playInventionCard() {
-	
-
+		// TODO DEBUG ONLY
+		ResourceType rt = (aai.getResourceAgent().getLowestResource(null));
+		ResourceType rt2 = (aai.getResourceAgent().getLowestResource(rt));
+		aai.playInventionCard(rt, rt2);
 	}
 
 	public void playRoadCard() {
@@ -116,7 +118,7 @@ public class CardAgent {
 		int[] coords2 = null;
 		if (aai.getMe().getAmountStreets() > 1) {
 			Edge e2 = aai.getResourceAgent().getBestStreet();
-		    coords2 = ProtocolToModel.getEdgeCoordinates(e2.getEdgeID());
+			coords2 = ProtocolToModel.getEdgeCoordinates(e2.getEdgeID());
 		}
 
 		ArrayList<StreetSet> myStreetSets = aai.getResourceAgent().getMyStreetSets();

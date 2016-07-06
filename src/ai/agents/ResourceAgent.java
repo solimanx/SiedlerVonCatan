@@ -10,6 +10,7 @@ import enums.ResourceType;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
+import network.ModelToProtocol;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
 
@@ -606,11 +607,15 @@ public class ResourceAgent {
 		return ownResources;
 	}
 
-	public ResourceType getLowestResource() {
-		//importance (ORE -> CORN -> SHEEP -> CLAY -> WOOD)
+	public ResourceType getLowestResource(ResourceType rt) {
+		// importance (ORE -> CORN -> SHEEP -> CLAY -> WOOD)
 		// (2,4,3,1,0)
-		int[] priority = {2,4,3,1,0};
-		
+		int[] priority = { 2, 4, 3, 1, 0 };
+		int id2 = -1;
+		if (rt != null) {
+			id2 = ModelToProtocol.getIndexResource(rt);
+			ownResources[id2]++;
+		}
 		int min = ownResources[priority[0]];
 		int c = priority[0];
 		for (int i = 0; i < ownResources.length; i++) {
@@ -619,21 +624,13 @@ public class ResourceAgent {
 				c = priority[i];
 			}
 		}
-		// {WOOD, CLAY, ORE, SHEEP, CORN}
-		switch (c) {
-		case 0:
-			return ResourceType.WOOD;
-		case 1:
-			return ResourceType.CLAY;
-		case 2:
-			return ResourceType.ORE;
-		case 3:
-			return ResourceType.SHEEP;
-		case 4:
-			return ResourceType.CORN;
-		default:
-			throw new IllegalArgumentException("Resource " + c + " doesn't exist");
+
+		if (rt != null) {
+			ownResources[id2] -= 1;
 		}
+		// {WOOD, CLAY, ORE, SHEEP, CORN}
+		return ProtocolToModel.getResourceFromIndex(c);
+
 	}
 
 }

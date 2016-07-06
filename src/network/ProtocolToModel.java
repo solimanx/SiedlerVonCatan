@@ -489,4 +489,21 @@ public final class ProtocolToModel {
 		throw new IllegalArgumentException("CardType doesn't exit");
 	}
 
+	public static ResourceType getResourceFromIndex(int c) {
+		switch (c) {
+		case 0:
+			return ResourceType.WOOD;
+		case 1:
+			return ResourceType.CLAY;
+		case 2:
+			return ResourceType.ORE;
+		case 3:
+			return ResourceType.SHEEP;
+		case 4:
+			return ResourceType.CORN;
+		default:
+			throw new IllegalArgumentException("Resource " + c + " doesn't exist");
+		}
+	}
+
 }

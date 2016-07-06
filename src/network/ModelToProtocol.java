@@ -46,7 +46,8 @@ public final class ModelToProtocol {
 	/**
 	 * Gets the player id.
 	 *
-	 * @param threadID the thread ID
+	 * @param threadID
+	 *            the thread ID
 	 * @return the player id
 	 */
 	@Deprecated
@@ -56,9 +57,30 @@ public final class ModelToProtocol {
 	}
 
 	/**
+	 * Gets index of resource
+	 */
+	public static int getIndexResource(ResourceType rt) {
+		switch (rt) {
+		case WOOD:
+			return 0;
+		case CLAY:
+			return 1;
+		case ORE:
+			return 2;
+		case SHEEP:
+			return 3;
+		case CORN:
+			return 4;
+		default:
+			throw new IllegalArgumentException("ResourceType " + rt + " doesn't have an index.");
+		}
+	}
+
+	/**
 	 * Gets the resources.
 	 *
-	 * @param resources the resources
+	 * @param resources
+	 *            the resources
 	 * @return the resources
 	 */
 	// TODO what ?
@@ -100,9 +122,12 @@ public final class ModelToProtocol {
 	/**
 	 * Gets the corner ID.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
 	 * @return the corner ID
 	 */
 	public static String getCornerID(int x, int y, int dir) {
@@ -126,9 +151,12 @@ public final class ModelToProtocol {
 	/**
 	 * Gets the edge ID.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
 	 * @return the edge ID
 	 */
 	public static String getEdgeID(int x, int y, int dir) {
@@ -154,8 +182,10 @@ public final class ModelToProtocol {
 	/**
 	 * Gets the field ID.
 	 *
-	 * @param x the x
-	 * @param y the y
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
 	 * @return the field ID
 	 */
 	public static String getFieldID(int x, int y) {
@@ -166,7 +196,8 @@ public final class ModelToProtocol {
 	/**
 	 * CONVERTS NON UNKNOWN RESOURCE ARRAYS TO PROTOCOLRESOURCE.
 	 *
-	 * @param resources the resources
+	 * @param resources
+	 *            the resources
 	 * @return the protocol resource
 	 */
 	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN,
@@ -183,7 +214,8 @@ public final class ModelToProtocol {
 	/**
 	 * Dev card to card type.
 	 *
-	 * @param devCard the dev card
+	 * @param devCard
+	 *            the dev card
 	 * @return the card type
 	 */
 	public static CardType devCardToCardType(DevelopmentCard devCard) {
@@ -207,7 +239,8 @@ public final class ModelToProtocol {
 	/**
 	 * Convert to edge index.
 	 *
-	 * @param locationString the location string
+	 * @param locationString
+	 *            the location string
 	 * @return the index[]
 	 */
 	public static Index[] convertToEdgeIndex(String locationString) {
@@ -226,7 +259,8 @@ public final class ModelToProtocol {
 	/**
 	 * Convert corner index.
 	 *
-	 * @param locationString the location string
+	 * @param locationString
+	 *            the location string
 	 * @return the index[]
 	 */
 	public static Index[] convertCornerIndex(String locationString) {
@@ -247,7 +281,8 @@ public final class ModelToProtocol {
 	/**
 	 * Gets the field index.
 	 *
-	 * @param field the field
+	 * @param field
+	 *            the field
 	 * @return the field index
 	 */
 	public static Index getFieldIndex(String field) {
