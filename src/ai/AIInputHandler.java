@@ -25,6 +25,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
+import ai.agents.OpponentAgent;
 import protocol.configuration.*;
 import protocol.connection.*;
 import protocol.dualinstructions.ProtocolPlayInventionCard;
@@ -161,13 +162,16 @@ public class AIInputHandler extends ClientInputHandler {
 		String banditLocation = ProtocolToModel.getProtocolOneID(pBoard.getRobber_location());
 		ai.updateBoard(fields, corners, streets, harbourCorners, banditLocation);
 
-		//ID MATCHING
+		// ID MATCHING
 
 		ai.getGl().getBoard().deletePlayers();
 		ai.getGl().getBoard().insertPlayers(opponentID.size());
-		for(int i=0; i<opponentID.size(); i++){
+		for (int i = 0; i < opponentID.size(); i++) {
 			ai.getGl().getBoard().getPlayer(i).setID(opponentID.get(i));
 		}
+		OpponentAgent oA = new OpponentAgent(ai.getGl().getBoard().getPlayerModels());
+		ai.setOpponentAgent(oA);
+
 	}
 
 	/*
@@ -291,7 +295,6 @@ public class AIInputHandler extends ClientInputHandler {
 		int ID = resourceObtain.getPlayerID();
 		int[] gain;
 		gain = ProtocolToModel.convertResources(resourceObtain.getResource());
-		ai.getOpponentAgent().ressourceObtainEnemy(ID, gain);
 
 		// if it's me
 		if (ID == ai.getID()) {
@@ -300,6 +303,7 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it isn't me
 
 		else {
+			ai.getOpponentAgent().ressourceObtainEnemy(ID, gain);
 
 		}
 
@@ -414,13 +418,13 @@ public class AIInputHandler extends ClientInputHandler {
 		int ID = costs.getPlayerID();
 		int[] loss;
 		loss = ProtocolToModel.convertResources(costs.getResource());
-		ai.getOpponentAgent().CostsEnemy(ID, loss);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementResources(loss);
 		}
 		// if it isn't me
 		else {
+			ai.getOpponentAgent().CostsEnemy(ID, loss);
 
 		}
 
@@ -487,7 +491,7 @@ public class AIInputHandler extends ClientInputHandler {
 			ai.getMe().setHasLargestArmy(true);
 		} else {
 			ai.getMe().setHasLargestArmy(false);
-			// TODO Mark opponent
+
 		}
 	}
 
@@ -523,7 +527,6 @@ public class AIInputHandler extends ClientInputHandler {
 		// Get ID and resources
 		int ID = inventionCardInfo.getPlayerID();
 		// opponent agent
-		ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new InventionCard());
@@ -533,7 +536,7 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
-
+			ai.getOpponentAgent().devCardPlayed(CardType.INVENTION, ID);
 		}
 
 	}

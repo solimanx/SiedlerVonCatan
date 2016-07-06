@@ -33,7 +33,7 @@ public class AdvancedAI extends PrimitiveAI {
 	private CornerAgent[] cornerAgent = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
 	private CardAgent cardAgent = new CardAgent(this);
 	private ResourceAgent resourceAgent = new ResourceAgent(this);
-	private OpponentAgent opponentAgent = new OpponentAgent(this);
+	private OpponentAgent opponentAgent = new OpponentAgent();
 	private TradeAgent tradeAgent = new TradeAgent(this, resourceAgent);
 	private BanditAgent banditAgent = new BanditAgent(this, opponentAgent);
 
@@ -44,8 +44,7 @@ public class AdvancedAI extends PrimitiveAI {
 	private int[] initialResourceWeight = { 0, 0, Integer.parseInt(rb.getString("ORE_INITIAL_BENEFIT")), 0,
 			Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 
-
-	private int[] globalResourceWeight = {100,100,100,100,100};
+	private int[] globalResourceWeight = { 100, 100, 100, 100, 100 };
 
 	private int initialRoundCounter = 0;
 
@@ -53,7 +52,6 @@ public class AdvancedAI extends PrimitiveAI {
 	private double monopolyValue;
 	private double inventionValue;
 	private double roadBuildingValue;
-
 
 	/**
 	 * Instantiates a new advanced AI.
@@ -105,8 +103,9 @@ public class AdvancedAI extends PrimitiveAI {
 				z = cornerAgent[i].getLocation()[2];
 				d = i;
 			}
-			//System.out.println(
-				//	cornerAgent[i].getLocationString() + " " + cornerAgent[i].calculateInitialVillageUtility());
+			// System.out.println(
+			// cornerAgent[i].getLocationString() + " " +
+			// cornerAgent[i].calculateInitialVillageUtility());
 		}
 		myCornerAgents.add(cornerAgent[d]);
 		super.pO.requestBuildVillage(x, y, z);
@@ -140,51 +139,35 @@ public class AdvancedAI extends PrimitiveAI {
 		resourceAgent.update();
 
 		receiveProposals();
-		/*if (cardAgent.getSum() > 0) {
-			if (cardAgent.getSum() == 1) {
-				if (cardAgent.hasKnight()) {
-					if (knightValue > 1.0) {
-						cardAgent.playKnightCard();
-					}
-				} else if (cardAgent.hasMonopoly()
-						&& (getMe().getVictoryPoints() == 8 || getMe().getVictoryPoints() == 9)) {
-					if (monopolyValue > 0.5) {
-						cardAgent.playMonopolyCard();
-					}
-				} else if (cardAgent.hasMonopoly()) {
-					if (monopolyValue > 1.5) {
-						cardAgent.playMonopolyCard();
-					}
-				} else if (cardAgent.hasInvention()) {
-					if (inventionValue > 0.5) {
-						cardAgent.playInventionCard();
-					}
-				} else if (cardAgent.hasRoad()) {
-					if (roadBuildingValue > 0.5) {
-						cardAgent.playRoadCard();
-					}
-				}
-			} else {
-				double max = Math.max(knightValue,
-						Math.max(monopolyValue, Math.max(inventionValue, roadBuildingValue)));
-				if (max > 0.5) {
-					if (knightValue == max) {
-						cardAgent.playKnightCard();
-					} else if (monopolyValue == max) {
-						cardAgent.playMonopolyCard();
-					} else if (inventionValue == max) {
-						cardAgent.playInventionCard();
-					} else if (roadBuildingValue == max) {
-						cardAgent.playRoadCard();
-					}
-				}
-			}
+		/*
+		 * if (cardAgent.getSum() > 0) { if (cardAgent.getSum() == 1) { if
+		 * (cardAgent.hasKnight()) { if (knightValue > 1.0) {
+		 * cardAgent.playKnightCard(); } } else if (cardAgent.hasMonopoly() &&
+		 * (getMe().getVictoryPoints() == 8 || getMe().getVictoryPoints() == 9))
+		 * { if (monopolyValue > 0.5) { cardAgent.playMonopolyCard(); } } else
+		 * if (cardAgent.hasMonopoly()) { if (monopolyValue > 1.5) {
+		 * cardAgent.playMonopolyCard(); } } else if (cardAgent.hasInvention())
+		 * { if (inventionValue > 0.5) { cardAgent.playInventionCard(); } } else
+		 * if (cardAgent.hasRoad()) { if (roadBuildingValue > 0.5) {
+		 * cardAgent.playRoadCard(); } } } else { double max =
+		 * Math.max(knightValue, Math.max(monopolyValue,
+		 * Math.max(inventionValue, roadBuildingValue))); if (max > 0.5) { if
+		 * (knightValue == max) { cardAgent.playKnightCard(); } else if
+		 * (monopolyValue == max) { cardAgent.playMonopolyCard(); } else if
+		 * (inventionValue == max) { cardAgent.playInventionCard(); } else if
+		 * (roadBuildingValue == max) { cardAgent.playRoadCard(); } } }
+		 * 
+		 * }
+		 */
 
-		}*/
-
-		if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()){
-			cardAgent.playRoadCard();
+		// DEBUG ONLY
+		if (cardAgent.hasMonopoly()) {
+			cardAgent.playMonopolyCard();
+			pO.respondEndTurn();
 		}
+		// if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()) {
+		// cardAgent.playRoadCard();
+		// }
 
 		if (getMe().getAmountCities() != 0 && resourceAgent.canBuildCity()) {
 			boolean notFound = true;
@@ -215,6 +198,8 @@ public class AdvancedAI extends PrimitiveAI {
 			if (bestCorner != null) {
 				int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
 				pO.requestBuildVillage(coords[0], coords[1], coords[2]);
+				// DEBUG
+				pO.respondEndTurn();
 			} else { // try to build street
 				if (!getMe().hasLongestRoad() && getMe().getAmountStreets() > 0 && resourceAgent.canBuildRoad()) {
 					Edge bestEdge = resourceAgent.getBestStreet();
@@ -246,10 +231,9 @@ public class AdvancedAI extends PrimitiveAI {
 		else {
 			getOutput().respondEndTurn();
 		}
-
 	}
 
-	public void myActuate(){
+	public void myActuate() {
 
 	}
 
@@ -430,25 +414,28 @@ public class AdvancedAI extends PrimitiveAI {
 		return opponentAgent;
 	}
 
+	@Override
+	public void setOpponentAgent(OpponentAgent opponentAgent) {
+		this.opponentAgent = opponentAgent;
+	}
 
-	public int[] getGlobalResourceWeight(){
+	public int[] getGlobalResourceWeight() {
 		return globalResourceWeight;
 	}
 
-
 	/**
 	 *
-	 * @param changes value of the change
-	 * positive values to increment
-	 * negative values to decrement
+	 * @param changes
+	 *            value of the change positive values to increment negative
+	 *            values to decrement
 	 *
 	 *
 	 */
-	public void setGlobalResourceWeight(int[] changes){
-		if(changes.length != 5){
+	public void setGlobalResourceWeight(int[] changes) {
+		if (changes.length != 5) {
 			throw new IllegalArgumentException("int Array length != 5 in aai.setGlobalResourceWeight");
 		}
-		for(int i = 0; i<globalResourceWeight.length; i++){
+		for (int i = 0; i < globalResourceWeight.length; i++) {
 			globalResourceWeight[i] = globalResourceWeight[i] + changes[i];
 		}
 	}
@@ -461,11 +448,16 @@ public class AdvancedAI extends PrimitiveAI {
 	}
 
 	public void playStreetCard(int[] coords1, int[] coords2) {
-		if (coords2 == null){
-			pO.requestPlayStreetCard(coords1,null);
+		if (coords2 == null) {
+			pO.requestPlayStreetCard(coords1, null);
 		} else {
-			pO.requestPlayStreetCard(coords1,coords2);
+			pO.requestPlayStreetCard(coords1, coords2);
 		}
+
+	}
+
+	public void playMonopolyCard(ResourceType rt) {
+		pO.requestPlayMonopolyCard(rt);
 
 	}
 }

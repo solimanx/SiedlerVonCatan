@@ -671,4 +671,8 @@ public class PrimitiveAI extends Thread {
 		return null;
 
 	}
+
+	public void setOpponentAgent(OpponentAgent opponentAgent) {
+		
+	}
 }

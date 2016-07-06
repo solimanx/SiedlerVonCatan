@@ -3,7 +3,7 @@ package ai.agents;
 import java.util.ArrayList;
 
 import ai.AdvancedAI;
-import enums.CardType;
+import enums.ResourceType;
 import model.objects.Edge;
 import network.ProtocolToModel;
 
@@ -93,7 +93,9 @@ public class CardAgent {
 	}
 
 	public void playMonopolyCard() {
-		// TODO Auto-generated method stub
+		// TODO for now
+		ResourceType rt = (aai.getResourceAgent().getLowestResource());
+		aai.playMonopolyCard(rt);
 
 	}
 

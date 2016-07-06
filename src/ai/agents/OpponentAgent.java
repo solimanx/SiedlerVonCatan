@@ -41,14 +41,17 @@ public class OpponentAgent {
 	 * @param aai
 	 *            the aai
 	 */
-	public OpponentAgent(AdvancedAI aai) {
-		board = aai.getGl().getBoard();
-		amountPlayer = board.getAmountPlayers();
+	public OpponentAgent(PlayerModel[] pm) {
+		amountPlayer = pm.length;
 		opponentsRessources = new int[amountPlayer][7];
 		for (int i = 0; i < amountPlayer; i++) {
 			opponentsRessources[i] = initialRessources;
-			opponents.add(aai.getGl().getBoard().getPlayer(i));
+			opponents.add(pm[i]);
 		}
+	}
+
+	public OpponentAgent() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**

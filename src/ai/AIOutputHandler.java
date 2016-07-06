@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import enums.Color;
+import enums.ResourceType;
 import model.Index;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
@@ -26,6 +27,7 @@ import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;
 import protocol.dualinstructions.ProtocolPlayKnightCard;
+import protocol.dualinstructions.ProtocolPlayMonopolyCard;
 import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
@@ -39,7 +41,8 @@ public class AIOutputHandler {
 	/**
 	 * Instantiates a new AI output handler.
 	 *
-	 * @param primitiveAI the primitive AI
+	 * @param primitiveAI
+	 *            the primitive AI
 	 */
 	public AIOutputHandler(PrimitiveAI primitiveAI) {
 		ai = primitiveAI;
@@ -49,7 +52,8 @@ public class AIOutputHandler {
 	/**
 	 * Say hello to server.
 	 *
-	 * @param version the version
+	 * @param version
+	 *            the version
 	 */
 	protected void respondHello(String version) {
 		ProtocolHello ph = new ProtocolHello(version, null);
@@ -86,7 +90,8 @@ public class AIOutputHandler {
 	/**
 	 * Goes on a loop to find the first non taken color.
 	 *
-	 * @param colorCounter the color counter
+	 * @param colorCounter
+	 *            the color counter
 	 */
 	public void respondProfile(int colorCounter) {
 		ProtocolPlayerProfile ppp;
@@ -122,9 +127,12 @@ public class AIOutputHandler {
 	/**
 	 * Building the first (and second) village of the initial round.
 	 *
-	 * @param j the j
-	 * @param i the i
-	 * @param k the k
+	 * @param j
+	 *            the j
+	 * @param i
+	 *            the i
+	 * @param k
+	 *            the k
 	 */
 	public void requestBuildVillage(int j, int i, int k) {
 		String location = ModelToProtocol.getCornerID(j, i, k);
@@ -147,9 +155,12 @@ public class AIOutputHandler {
 	/**
 	 * Building the first (and second) road of the initial round.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
 	 */
 
 	public void requestBuildRoad(int x, int y, int dir) {
@@ -191,7 +202,8 @@ public class AIOutputHandler {
 	/**
 	 * Send a message to others.
 	 *
-	 * @param message            random message
+	 * @param message
+	 *            random message
 	 */
 	public void respondWithMessage(String message) {
 		ProtocolChatSendMessage pcsm = new ProtocolChatSendMessage(message);
@@ -229,7 +241,8 @@ public class AIOutputHandler {
 	/**
 	 * Lose resources to robber.
 	 *
-	 * @param losses the losses
+	 * @param losses
+	 *            the losses
 	 */
 	public void respondRobberLoss(int[] losses) {
 		ProtocolResource loss = ModelToProtocol.convertToProtocolResource(losses);
@@ -248,8 +261,10 @@ public class AIOutputHandler {
 	/**
 	 * Move robber to a new position.
 	 *
-	 * @param newRobber the new robber
-	 * @param target the target
+	 * @param newRobber
+	 *            the new robber
+	 * @param target
+	 *            the target
 	 */
 	public void respondMoveRobber(String newRobber, Integer target) {
 		Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
@@ -285,9 +300,12 @@ public class AIOutputHandler {
 	/**
 	 * Request build city.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
 	 */
 	public void requestBuildCity(int x, int y, int dir) {
 		String locationString = ModelToProtocol.getCornerID(x, y, dir);
@@ -307,12 +325,14 @@ public class AIOutputHandler {
 	/**
 	 * Respond knight card.
 	 *
-	 * @param newRobber the new robber
-	 * @param target the target
+	 * @param newRobber
+	 *            the new robber
+	 * @param target
+	 *            the target
 	 */
 	public void respondKnightCard(String newRobber, Integer target) {
 		Index i = ProtocolToModel.getProtocolOneIndex(newRobber);
-		//TODO fix null opponent targeting
+		// TODO fix null opponent targeting
 		ProtocolPlayKnightCard pkc = new ProtocolPlayKnightCard(i, null);
 		Response r = new Response();
 		r.pPlayKnightCard = pkc;
@@ -324,13 +344,13 @@ public class AIOutputHandler {
 
 	}
 
-
-
 	/**
 	 * Request trade.
 	 *
-	 * @param offer the offer
-	 * @param demand the demand
+	 * @param offer
+	 *            the offer
+	 * @param demand
+	 *            the demand
 	 */
 	public void requestTrade(int[] offer, int[] demand) {
 		ProtocolResource prOff = ModelToProtocol.convertToProtocolResource(offer);
@@ -347,14 +367,29 @@ public class AIOutputHandler {
 		}
 	}
 
-
 	public void requestPlayStreetCard(int[] coords1, int[] coords2) {
-		Index[] road1 = ModelToProtocol.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords1[0], coords1[1], coords1[2]));
-		Index[] road2 = coords2 == null ? null : ModelToProtocol.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords2[0], coords2[1], coords2[2]));
+		Index[] road1 = ModelToProtocol
+				.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords1[0], coords1[1], coords1[2]));
+		Index[] road2 = coords2 == null ? null
+				: ModelToProtocol.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords2[0], coords2[1], coords2[2]));
 
 		ProtocolPlayRoadCard prbci = new ProtocolPlayRoadCard(road1, road2);
 		Response r = new Response();
 		r.pPlayRoadCard = prbci;
+		try {
+			ai.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw an Input/Output Exception ", e);
+			logger.catching(Level.ERROR, e);
+			e.printStackTrace();
+		}
+
+	}
+
+	public void requestPlayMonopolyCard(ResourceType rt) {
+		ProtocolPlayMonopolyCard pmci = new ProtocolPlayMonopolyCard(rt);
+		Response r = new Response();
+		r.pPlayMonopolyCard = pmci;
 		try {
 			ai.write(parser.createString(r));
 		} catch (IOException e) {

@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import ai.AdvancedAI;
 import enums.CornerStatus;
+import enums.ResourceType;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
@@ -17,7 +18,7 @@ import settings.DefaultSettings;
  */
 public class ResourceAgent {
 	private AdvancedAI aai;
-
+	// {WOOD, CLAY, ORE, SHEEP, CORN}
 	private int[] ownResources;
 	private int currentBuyingFocus; // 0 = Street; 1 = Village; 2 = City; 3 =
 									// DevCard
@@ -48,7 +49,8 @@ public class ResourceAgent {
 	/**
 	 * Instantiates a new resource agent.
 	 *
-	 * @param ai the ai
+	 * @param ai
+	 *            the ai
 	 */
 	public ResourceAgent(AdvancedAI ai) {
 		this.aai = ai;
@@ -163,7 +165,8 @@ public class ResourceAgent {
 	/**
 	 * returns the resources missing for building a certain type.
 	 *
-	 * @param bType the b type
+	 * @param bType
+	 *            the b type
 	 * @return int[] resourcesMissing
 	 */
 	public int[] getResourcesMissingForBuilding(int bType) {
@@ -181,8 +184,10 @@ public class ResourceAgent {
 	/**
 	 * compares two resource arrays.
 	 *
-	 * @param playerResources the player resources
-	 * @param resource the resource
+	 * @param playerResources
+	 *            the player resources
+	 * @param resource
+	 *            the resource
 	 * @return true if the second array is <= for every resource, else false
 	 */
 	public static boolean compareResources(int[] playerResources, int[] resource) {
@@ -197,7 +202,8 @@ public class ResourceAgent {
 	/**
 	 * Sum array.
 	 *
-	 * @param array the array
+	 * @param array
+	 *            the array
 	 * @return the int
 	 */
 	private int sumArray(int[] array) {
@@ -211,7 +217,8 @@ public class ResourceAgent {
 	/**
 	 * Adds the.
 	 *
-	 * @param cornerAt the corner at
+	 * @param cornerAt
+	 *            the corner at
 	 */
 	public void add(Corner cornerAt) {
 		myCorners.add(cornerAt);
@@ -220,7 +227,8 @@ public class ResourceAgent {
 	/**
 	 * Adds the.
 	 *
-	 * @param edgeAt the edge at
+	 * @param edgeAt
+	 *            the edge at
 	 */
 	public void add(Edge edgeAt) {
 		myEdges.add(edgeAt);
@@ -292,7 +300,8 @@ public class ResourceAgent {
 	/**
 	 * adds a specified street (edge object) to a street set.
 	 *
-	 * @param e the e
+	 * @param e
+	 *            the e
 	 */
 	public void addToOwnStreetSet(Edge e) {
 		int[] coord = ProtocolToModel.getEdgeCoordinates(e.getEdgeID());
@@ -392,7 +401,7 @@ public class ResourceAgent {
 	 */
 	public ArrayList<Object> getPossibleLTRExtensions() {
 		ArrayList<ArrayList<Edge>> bestNeighbours = new ArrayList<ArrayList<Edge>>();
-		
+
 		int[] maxIndex = { 0, 0 };
 		for (int i = 0; i < myStreetSets.size(); i++) {
 			ArrayList<Integer> longestStreets = new ArrayList<Integer>();
@@ -400,7 +409,7 @@ public class ResourceAgent {
 			ArrayList<Edge> bestEdges = new ArrayList<Edge>();
 			bestNeighbours.add(new ArrayList<Edge>());
 			StreetSet currStreetSet = null;
-			
+
 			currStreetSet = myStreetSets.get(i);
 			// berechne zuerst alle endständigen Straßen dieses Street Sets
 			for (int j = 0; j < currStreetSet.size(); j++) {
@@ -481,7 +490,7 @@ public class ResourceAgent {
 				currEndingStreets.clear();
 			}
 			// berechne gültige Nachbarn für die besten Edges
-			
+
 			Edge[] currEdges;
 			int[] currCoords;
 			for (int j = 0; j < bestEdges.size(); j++) {
@@ -489,7 +498,8 @@ public class ResourceAgent {
 				currCoords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
 				currEdges = aai.getGl().getBoard().getLinkedEdges(currCoords[0], currCoords[1], currCoords[2]);
 				for (int k = 0; k < currEdges.length; k++) {
-					if (currEdges[k] != null && ! currStreetSet.getEdges().contains(currEdges[k]) && currEdges[k].getOwnerID() == null) {
+					if (currEdges[k] != null && !currStreetSet.getEdges().contains(currEdges[k])
+							&& currEdges[k].getOwnerID() == null) {
 						bestNeighbours.get(i).add(currEdges[k]);
 					}
 				}
@@ -513,10 +523,14 @@ public class ResourceAgent {
 	 * recursive method for calculating the longest route starting from an
 	 * specific edge.
 	 *
-	 * @param edge            starting street
-	 * @param currStreetSet            street set which contains the street
-	 * @param alreadyChecked            streets which are already counted
-	 * @param lastNeighbours            neighbours, which are prohibited to check
+	 * @param edge
+	 *            starting street
+	 * @param currStreetSet
+	 *            street set which contains the street
+	 * @param alreadyChecked
+	 *            streets which are already counted
+	 * @param lastNeighbours
+	 *            neighbours, which are prohibited to check
 	 * @return longest rout of not checked streets
 	 */
 	private Integer depthFirstSearch(Edge edge, StreetSet currStreetSet, ArrayList<Edge> alreadyChecked,
@@ -547,18 +561,18 @@ public class ResourceAgent {
 		int max = Integer.MIN_VALUE;
 		int currVal;
 		int maxIndex = 0;
-		for (int i = 0; i < validPositions.size();i++){
-			
+		for (int i = 0; i < validPositions.size(); i++) {
+
 			currVal = aai.getCornerAgentByID(validPositions.get(i).getCornerID()).calculateInitialVillageUtility();
-            if (currVal > max){
-            	max = currVal;
-            	maxIndex  = i;
-            }
+			if (currVal > max) {
+				max = currVal;
+				maxIndex = i;
+			}
 		}
-		if (max == Integer.MIN_VALUE){
+		if (max == Integer.MIN_VALUE) {
 			return null;
 		} else {
-		return validPositions.get(maxIndex);
+			return validPositions.get(maxIndex);
 		}
 	}
 
@@ -567,14 +581,15 @@ public class ResourceAgent {
 		StreetSet currStreetSet;
 		Corner[] currNeighbours;
 		int[] currCoords;
-		for (int i = 0; i < myStreetSets.size();i++){
+		for (int i = 0; i < myStreetSets.size(); i++) {
 			currStreetSet = myStreetSets.get(i);
-			for (int j = 0; j < currStreetSet.size();j++){
+			for (int j = 0; j < currStreetSet.size(); j++) {
 				String id = currStreetSet.getEdgeAt(j).getEdgeID();
 				currCoords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
 				currNeighbours = aai.getGl().getBoard().getAttachedCorners(currCoords[0], currCoords[1], currCoords[2]);
 				for (int k = 0; k < currNeighbours.length; k++) {
-					if (currNeighbours[k] != null && currNeighbours[k].getStatus() == CornerStatus.EMPTY && !allCorners.contains(currNeighbours[k])){
+					if (currNeighbours[k] != null && currNeighbours[k].getStatus() == CornerStatus.EMPTY
+							&& !allCorners.contains(currNeighbours[k])) {
 						allCorners.add(currNeighbours[k]);
 					}
 				}
@@ -583,12 +598,38 @@ public class ResourceAgent {
 		return allCorners;
 	}
 
-	public int getCurrentBuyingFocus(){
+	public int getCurrentBuyingFocus() {
 		return currentBuyingFocus;
 	}
 
-	public int[] getOwnResources(){
+	public int[] getOwnResources() {
 		return ownResources;
+	}
+
+	public ResourceType getLowestResource() {
+		int min = ownResources[0];
+		int c = 0;
+		for (int i = 0; i < ownResources.length; i++) {
+			if (ownResources[i] < min) {
+				min = ownResources[i];
+				c = i;
+			}
+		}
+		// {WOOD, CLAY, ORE, SHEEP, CORN}
+		switch (c) {
+		case 0:
+			return ResourceType.WOOD;
+		case 1:
+			return ResourceType.CLAY;
+		case 2:
+			return ResourceType.ORE;
+		case 3:
+			return ResourceType.SHEEP;
+		case 4:
+			return ResourceType.CORN;
+		default:
+			throw new IllegalArgumentException("Resource " + c + " doesn't exist");
+		}
 	}
 
 }
