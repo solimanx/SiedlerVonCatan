@@ -105,7 +105,7 @@ public class CardAgent {
 	}
 
 	public void playInventionCard() {
-		// TODO Auto-generated method stub
+	
 
 	}
 

@@ -163,16 +163,15 @@ public class AdvancedAI extends PrimitiveAI {
 		// DEBUG ONLY
 		if (cardAgent.hasMonopoly()) {
 			cardAgent.playMonopolyCard();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
-		// if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()) {
-		// cardAgent.playRoadCard();
-		// }
+		// DEBUG ONLY
+//		if (cardAgent.hasInvention()) {
+//			cardAgent.playInventionCard();
+//		}
+
+		if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()) {
+			cardAgent.playRoadCard();
+		}
 
 		if (getMe().getAmountCities() != 0 && resourceAgent.canBuildCity()) {
 			boolean notFound = true;

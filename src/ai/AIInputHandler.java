@@ -620,6 +620,12 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new StreetBuildingCard());
+
+			if (roadBuildingCardInfo.getRoadID2() != null) {
+				ai.getMe().decreaseAmountStreets();
+			}
+			ai.getMe().decreaseAmountStreets();
+
 			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 				ai.actuate(); // actuate after played a card
 			}
