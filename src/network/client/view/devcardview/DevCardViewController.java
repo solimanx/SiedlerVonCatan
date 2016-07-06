@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
+import network.client.view.GameViewController;
 
 // TODO: Auto-generated Javadoc
 public class DevCardViewController implements Initializable {
@@ -241,6 +242,7 @@ public class DevCardViewController implements Initializable {
 			monopolyBox.setPadding(new Insets(20, 20, 20, 20));
 			monopolyBox.setSpacing(20);
 			Scene scene = new Scene(monopolyBox);
+			scene.getStylesheets().add("/textures/" + viewController.getGameViewController().theme + ".css");
 			monopolyStage = new Stage();
 			monopolyStage.setScene(scene);
 			monopolyStage.initModality(Modality.WINDOW_MODAL);
@@ -264,6 +266,7 @@ public class DevCardViewController implements Initializable {
 			inventionBox.setPadding(new Insets(20, 20, 20, 20));
 			inventionBox.setSpacing(20);
 			Scene scene = new Scene(inventionBox);
+			scene.getStylesheets().add("/textures/" + viewController.getGameViewController().theme + ".css");
 			inventionStage = new Stage();
 			inventionStage.setScene(scene);
 			inventionStage.initModality(Modality.WINDOW_MODAL);

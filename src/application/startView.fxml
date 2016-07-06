@@ -58,7 +58,7 @@
             </VBox>
             <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1">
                <children>
-                  <Label prefWidth="80.0" text="Theme:" />
+                  <Label prefHeight="17.0" prefWidth="110.0" text="Theme:" />
                   <ChoiceBox fx:id="themeChooser" prefHeight="25.0" prefWidth="200.0" />
                </children>
             </HBox>

@@ -27,7 +27,7 @@
 
 #board {
 	-fx-background-image: url(/textures/standard/game-background.jpg);
-	-fx-background-repeat: cover;
+	-fx-background-repeat: no-repeat;
 }
 
 .button {

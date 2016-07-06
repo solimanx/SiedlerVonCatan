@@ -86,7 +86,7 @@ public class StartViewController {
 				getClass().getResource("/textures/" + oldValue.toLowerCase() + ".css").toExternalForm());
 		this.primaryStage.getScene().getStylesheets().add(
 				getClass().getResource("/textures/" + newValue.toLowerCase() + ".css").toExternalForm());
-		
+
 	}
 
 	/**
@@ -107,6 +107,8 @@ public class StartViewController {
 	 */
 	@FXML
 	void handleAiSelected(ActionEvent event) {
+		themeChooser.setDisable(true);
+		startButton.setDisable(false);
 		aiPort.setDisable(false);
 		aiServer.setDisable(false);
 		serverPort.setDisable(true);
@@ -122,6 +124,8 @@ public class StartViewController {
 	 */
 	@FXML
 	void handleClientSelected(ActionEvent event) {
+		themeChooser.setDisable(false);
+		startButton.setDisable(false);
 		serverPort.setDisable(true);
 		aiPort.setDisable(true);
 		aiServer.setDisable(true);
@@ -138,10 +142,16 @@ public class StartViewController {
 	 */
 	@FXML
 	void handleServerSelected(ActionEvent event) {
+		themeChooser.setDisable(true);
 		serverPort.setDisable(false);
 		aiPort.setDisable(true);
 		aiServer.setDisable(true);
 		Soundeffects.SELECT.play();
+		if (stopServer.disabledProperty().getValue()){
+			startButton.setDisable(false);
+		} else {
+			startButton.setDisable(true);
+		}
 
 		// playButtonSound();
 	}
@@ -200,6 +210,7 @@ public class StartViewController {
 			// startAI.setDisable(true);
 			// startButton.setDisable(true);
 			serverPort.setDisable(true);
+			startButton.setDisable(true);
 			InetAddress IP;
 			try {
 				IP = InetAddress.getLocalHost();
