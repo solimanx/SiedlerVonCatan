@@ -68,12 +68,12 @@ public class ViewFactory {
         imagePatterns.put(ResourceType.NOTHING, desertPattern);
         imagePatterns.put(ResourceType.SEA, seaPattern);
 
-        ImagePattern woodHarbour = new ImagePattern(new Image("/textures/"+ folder + "woodHarbour.jpg"));
-        ImagePattern clayHarbour = new ImagePattern(new Image("/textures/"+ folder + "clayHarbour.jpg"));
-        ImagePattern woolHarbour = new ImagePattern(new Image("/textures/"+ folder+  "sheepHarbour.jpg"));
-        ImagePattern cornHarbour = new ImagePattern(new Image("/textures/"+ folder + "cornHarbour.jpg"));
-        ImagePattern oreHarbour = new ImagePattern(new Image("/textures/"+ folder + "oreHarbour.jpg"));
-        ImagePattern genericHarbour = new ImagePattern(new Image("/textures/"+ folder+ "genericHarbour.jpg"));
+        ImagePattern woodHarbour = new ImagePattern(new Image("/textures/"+ folder + "woodHarbour.png"));
+        ImagePattern clayHarbour = new ImagePattern(new Image("/textures/"+ folder + "clayHarbour.png"));
+        ImagePattern woolHarbour = new ImagePattern(new Image("/textures/"+ folder+  "sheepHarbour.png"));
+        ImagePattern cornHarbour = new ImagePattern(new Image("/textures/"+ folder + "cornHarbour.png"));
+        ImagePattern oreHarbour = new ImagePattern(new Image("/textures/"+ folder + "oreHarbour.png"));
+        ImagePattern genericHarbour = new ImagePattern(new Image("/textures/"+ folder+ "genericHarbour.png"));
 
         harbourImages.put(HarbourStatus.WOOD, woodHarbour);
         harbourImages.put(HarbourStatus.CLAY, clayHarbour);

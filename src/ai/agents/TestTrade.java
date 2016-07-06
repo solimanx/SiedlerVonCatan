@@ -10,7 +10,7 @@ public class TestTrade {
 		TradeAgent ta = new TradeAgent(null, null);
 		//ta.setHarbor();
 		int[] resources = { 4, 2, 1, 0, 2};
-		System.out.println(ta.isBuildableAfterTrade(2, resources));
+		System.out.println(ta.isBuildableAfterTrade(1));
 	}
 
 //	//debug method //TODO
