@@ -268,8 +268,7 @@ public class AIOutputHandler {
 	 */
 	public void respondMoveRobber(String newRobber, Integer target) {
 		Index newRobberIndex = ProtocolToModel.getProtocolOneIndex(newRobber);
-		// todo fix
-		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, null);
+		ProtocolRobberMovementRequest prmr = new ProtocolRobberMovementRequest(newRobberIndex, target);
 		Response r = new Response();
 
 		r.pRobberMoveRequest = prmr;
@@ -332,8 +331,7 @@ public class AIOutputHandler {
 	 */
 	public void respondKnightCard(String newRobber, Integer target) {
 		Index i = ProtocolToModel.getProtocolOneIndex(newRobber);
-		// TODO fix null opponent targeting
-		ProtocolPlayKnightCard pkc = new ProtocolPlayKnightCard(i, null);
+		ProtocolPlayKnightCard pkc = new ProtocolPlayKnightCard(i, target);
 		Response r = new Response();
 		r.pPlayKnightCard = pkc;
 		try {
