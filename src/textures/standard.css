@@ -21,6 +21,15 @@
 	-fx-background-image: url(/textures/standard/background.jpg)
 }
 
+.dialog-background {
+	-fx-background-image: url(/textures/standard/dialogbackground.jpg);
+}
+
+#board {
+	-fx-background-image: url(/textures/standard/game-background.jpg);
+	-fx-background-repeat: cover;
+}
+
 .button {
 	-fx-background-radius: 3.0;
 	-fx-text-fill: #fff;
@@ -29,6 +38,8 @@
 	-fx-effect: dropshadow(gaussian , #3E2723 , 0.0,0.0,0.0,3.0);
 }
 
+
+
 .button:pressed {
 	-fx-background-color: linear-gradient( #5D4037 , #795548 );
 	-fx-effect: dropshadow(gaussian , #3E2723 , 0.0,0.0,0.0,1);
@@ -36,6 +47,7 @@
 
 .player-board {
 	-fx-background-image: url(/textures/standard/background.jpg);
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.95), 15, 0, 0, 0);
 	-fx-background-color: #5D4037;
 	-fx-background-radius: 5.0;
 	-fx-border-radius: 5.0;
@@ -143,4 +155,8 @@
 
 .iconOre {
 	-fx-image: url(/textures/standard/iconOre.png);
+}
+
+.shadow {
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 10, 0, 0, 0);
 }

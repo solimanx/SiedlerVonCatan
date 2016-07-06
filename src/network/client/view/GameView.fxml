@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-text-base-color: white;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.GameViewController">
+<AnchorPane id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-text-base-color: white;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.GameViewController">
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -27,7 +27,7 @@
       </BorderPane>
       <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="170.0" styleClass="player-board" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label fx:id="playerNameOne" text="Player 1">
+            <Label fx:id="playerNameOne" styleClass="shadow" text="Player 1">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -41,7 +41,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" styleClass="iconLumber">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -55,7 +55,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" styleClass="iconClay">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -69,7 +69,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" styleClass="iconWool">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -83,7 +83,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView id="iconGrain" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain">
+                        <ImageView id="iconGrain" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" styleClass="iconGrain">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -97,7 +97,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" styleClass="iconOre">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#ffffff66" />
                            </effect>
@@ -136,7 +136,7 @@
       </VBox>
       <VBox fx:id="playerFourBox" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="170.0" styleClass="player-board" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <children>
-            <Label fx:id="playerNameFour" text="Player 4">
+            <Label fx:id="playerNameFour" styleClass="shadow" text="Player 4">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -181,7 +181,7 @@
       </VBox>
       <VBox layoutX="30.0" layoutY="390.0" prefHeight="200.0" prefWidth="170.0" styleClass="player-board" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label fx:id="playerNameTwo" text="Player 2">
+            <Label fx:id="playerNameTwo" styleClass="shadow" text="Player 2">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -226,7 +226,7 @@
       </VBox>
       <VBox layoutX="675.0" layoutY="20.0" prefHeight="200.0" prefWidth="170.0" styleClass="player-board" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <Label fx:id="playerNameThree" text="Player 3">
+            <Label fx:id="playerNameThree" styleClass="shadow" text="Player 3">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -283,27 +283,27 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Dice roll:" textFill="WHITE">
+                  <Label styleClass="shadow" text="Dice roll:" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
                   <StackPane>
                      <children>
-                        <Circle fill="WHITE" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fill="WHITE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="shadow" />
                         <Text fx:id="diceResult" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" />
                      </children>
                   </StackPane>
-                  <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#handleRollDiceButton" prefHeight="27.0" prefWidth="100.0" text="Roll dices" />
-                  <Button fx:id="startTradingButton" mnemonicParsing="false" onAction="#handleStartTradingButton" prefWidth="80.0" text="Trading" />
-                  <Button fx:id="buyCardButton" mnemonicParsing="false" onAction="#handleBuyCardButton" prefHeight="27.0" prefWidth="89.0" text="Buy Card" />
-                  <Button fx:id="playCardButton" layoutX="407.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePlayCardButton" prefHeight="27.0" prefWidth="85.0" text="Play Card" />
-                  <Button fx:id="helpButton" mnemonicParsing="false" onAction="#handleHelpButton" text="Help" />
-                  <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#handleEndTurnButton" prefHeight="27.0" prefWidth="92.0" text="End turn">
+                  <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#handleRollDiceButton" prefHeight="27.0" prefWidth="100.0" styleClass="shadow" text="Roll dices" />
+                  <Button fx:id="startTradingButton" mnemonicParsing="false" onAction="#handleStartTradingButton" prefWidth="80.0" styleClass="shadow" text="Trading" />
+                  <Button fx:id="buyCardButton" mnemonicParsing="false" onAction="#handleBuyCardButton" prefHeight="27.0" prefWidth="89.0" styleClass="shadow" text="Buy Card" />
+                  <Button fx:id="playCardButton" layoutX="407.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePlayCardButton" prefHeight="27.0" prefWidth="85.0" styleClass="shadow" text="Play Card" />
+                  <Button fx:id="helpButton" mnemonicParsing="false" onAction="#handleHelpButton" styleClass="shadow" text="Help" />
+                  <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#handleEndTurnButton" prefHeight="27.0" prefWidth="92.0" styleClass="shadow" text="End turn">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="cheatButton" mnemonicParsing="false" onAction="#handleCheatButton" text="DEBUG" textFill="RED" />
+                  <Button fx:id="cheatButton" mnemonicParsing="false" onAction="#handleCheatButton" styleClass="shadow" text="DEBUG" textFill="RED" />
                </children>
             </HBox>
             <HBox alignment="CENTER" />

@@ -693,6 +693,7 @@ public class GameViewController implements Initializable {
 			root = loader
 					.load(getClass().getResource("/network/client/view/devcardview/DevCardView.fxml").openStream());
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add("/textures/"+ theme + ".css");
 			Stage devCardStage = new Stage();
 			devCardStage.setScene(scene);
 			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -1215,6 +1216,7 @@ public class GameViewController implements Initializable {
 			root = loader
 					.load(getClass().getResource("/network/client/view/robberview/GiveResources.fxml").openStream());
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add("/textures/" + theme +".css");
 			Stage robberStage = new Stage();
 			robberStage.setScene(scene);
 			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -1500,7 +1502,7 @@ public class GameViewController implements Initializable {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override

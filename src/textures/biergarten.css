@@ -36,7 +36,7 @@
 
 .player-board {
 	-fx-background-image: url(/textures/biergarten/schneidebrett.jpg);
-	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);	
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.95), 15, 0, 0, 0);
 	-fx-background-color: #062D92;
 	-fx-background-radius: 5.0;
 	-fx-border-radius: 5.0;
@@ -136,22 +136,31 @@
 
 .iconLumber {
 	-fx-image: url(/textures/biergarten/iconLumber.png);
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 }
 
 .iconClay {
 	-fx-image: url(/textures/biergarten/iconBrick.png);
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 }
 
 .iconWool {
 	-fx-image: url(/textures/biergarten/iconWool.png);
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 }
 
 .iconGrain {
 	-fx-image: url(/textures/biergarten/iconGrain.png);
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 }
 
 .iconOre {
 	-fx-image: url(/textures/biergarten/iconOre.png);
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+.shadow {
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 }
 
 
