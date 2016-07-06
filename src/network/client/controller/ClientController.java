@@ -657,7 +657,15 @@ public class ClientController {
 			@Override
 			public void run() {
 				viewController.getGameViewController().setCorner(x, y, dir, enums.CornerStatus.VILLAGE, modelID);
-				// TODO Auto-generated method stub
+				// remove other corners around it
+				Corner[] aC = viewController.getClientController().getGameLogic().getBoard().getAdjacentCorners(x, y,
+						dir);
+				for(int i=0; i<aC.length; i++){
+					if(aC[i]!=null){
+						int[] coords = ProtocolToModel.getCornerCoordinates(aC[i].getCornerID());
+						viewController.getGameViewController().removeVillage(coords[0], coords[1], coords[2]);
+					}
+				}
 
 			}
 		});

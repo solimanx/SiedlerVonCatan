@@ -949,6 +949,7 @@ public class GameViewController implements Initializable {
 	public void setCorner(int u, int v, int dir, CornerStatus buildType, int modelID) {
 		if (buildType == enums.CornerStatus.VILLAGE) {
 			setVillage(u, v, dir, playerColors.get(modelID));
+			
 		} else {
 			setCity(u, v, dir, playerColors.get(modelID));
 		}
@@ -978,7 +979,16 @@ public class GameViewController implements Initializable {
 			cityClick(coordinates);
 		});
 	}
-
+	/**
+	 * Hides village hover
+	 * @param u
+	 * @param v
+	 * @param dir
+	 */
+	public void removeVillage(int u, int v, int dir) {
+		Polygon village = villages[u + 3][v + 3][dir];
+		village.getStyleClass().remove("village");
+	}
 	/**
 	 * City click.
 	 *
