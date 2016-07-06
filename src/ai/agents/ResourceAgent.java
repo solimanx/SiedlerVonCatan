@@ -607,12 +607,16 @@ public class ResourceAgent {
 	}
 
 	public ResourceType getLowestResource() {
-		int min = ownResources[0];
-		int c = 0;
+		//importance (ORE -> CORN -> SHEEP -> CLAY -> WOOD)
+		// (2,4,3,1,0)
+		int[] priority = {2,4,3,1,0};
+		
+		int min = ownResources[priority[0]];
+		int c = priority[0];
 		for (int i = 0; i < ownResources.length; i++) {
-			if (ownResources[i] < min) {
-				min = ownResources[i];
-				c = i;
+			if (ownResources[priority[i]] < min) {
+				min = ownResources[priority[i]];
+				c = priority[i];
 			}
 		}
 		// {WOOD, CLAY, ORE, SHEEP, CORN}

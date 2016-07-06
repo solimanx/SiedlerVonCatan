@@ -163,7 +163,12 @@ public class AdvancedAI extends PrimitiveAI {
 		// DEBUG ONLY
 		if (cardAgent.hasMonopoly()) {
 			cardAgent.playMonopolyCard();
-			pO.respondEndTurn();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		// if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()) {
 		// cardAgent.playRoadCard();
