@@ -1541,6 +1541,8 @@ public class GameViewController implements Initializable {
 			boardPane = new Pane();
 			boardCenter[0] = stage.getWidth() / 2;
 			boardCenter[1] = stage.getHeight() / 2 - 40;
+			radius = stage.getHeight() / 16;
+			halfWidth = sin60 * radius;
 
 			calculateFieldCenters(boardCenter);
 			calculateCornerCenters();
