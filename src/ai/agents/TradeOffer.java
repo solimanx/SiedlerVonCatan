@@ -2,8 +2,8 @@ package ai.agents;
 
 public class TradeOffer {
 
-	int[] offer;
-	int[] demand;
+	private int[] offer;
+	private int[] demand;
 
 	public TradeOffer(int[] initOffer, int[] initDemand){
 		if(initDemand.length != 5 || initOffer.length != 5){
@@ -11,5 +11,13 @@ public class TradeOffer {
 		}
 		offer = initOffer;
 		demand = initDemand;
+	}
+
+	public int[] getOffer(){
+		return offer;
+	}
+
+	public int[] getDemand(){
+		return demand;
 	}
 }
