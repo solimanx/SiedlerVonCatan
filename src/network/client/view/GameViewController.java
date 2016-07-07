@@ -1780,7 +1780,7 @@ public class GameViewController implements Initializable {
 		 */
 		public Line drawStreet(double[] coordinates) {
 			Line street = new Line(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
-			street.setStrokeWidth(6.0);
+			street.setStrokeWidth(8.0);
 
 			return street;
 		}
