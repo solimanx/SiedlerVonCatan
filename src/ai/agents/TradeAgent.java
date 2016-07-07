@@ -143,11 +143,9 @@ public class TradeAgent {
 
 	/**
 	 *
-	 * @param projekt 0,1,2,3
-	 * @return
-	 *
-	 *
-	 *
+	 * @param projekt legal values : 0=STREET,1=VILLAGE,2=CITY,3=DEVCARD
+	 * @return true, if it is possible to build this building after sea trade
+	 * 			false, if it is not possible
 	 *
 	 * {WOOD, CLAY, ORE, SHEEP, CORN}
 	 */
@@ -355,16 +353,16 @@ public class TradeAgent {
 	/**
 	 *  call this method only if isBuildableAfterTrade is true!!
 	 *
-	 * @param projekt legal values : 0=STREET,1=VILLAGE,2=CITY,3=DEVCARD
+	 * @param project legal values : 0=STREET,1=VILLAGE,2=CITY,3=DEVCARD
 	 * @return ArrayList of TradeOffers of required trades for building
 	 */
-	public ArrayList<TradeOffer> tradesForBuilding(int projekt){
+	public ArrayList<TradeOffer> tradesForBuilding(int project){
 		ArrayList<TradeOffer> result = new ArrayList<TradeOffer>();
 		int[] costs;
 		int[] ownResources = aai.getResourceAgent().getOwnResources();
 		int[] resourcesNeeded = new int[5];
 		int[] tradableResources = new int[5];
-		switch (projekt) {
+		switch (project) {
 		case 0: costs = DefaultSettings.STREET_BUILD_COST;
 			break;
 		case 1:
