@@ -16,8 +16,10 @@ public class TradeController {
 	/**
 	 * Instantiates a new trade controller.
 	 *
-	 * @param serverController the server controller
-	 * @param amountPlayers the amount players
+	 * @param serverController
+	 *            the server controller
+	 * @param amountPlayers
+	 *            the amount players
 	 */
 	public TradeController(ServerController serverController, int amountPlayers) {
 		this.serverController = serverController;
@@ -26,45 +28,81 @@ public class TradeController {
 	/**
 	 * Client offers trade.
 	 *
-	 * @param modelID the model ID
-	 * @param supply the supply
-	 * @param demand the demand
+	 * @param modelID
+	 *            the model ID
+	 * @param supply
+	 *            the supply
+	 * @param demand
+	 *            the demand
 	 */
 	public void clientOffersTrade(int modelID, int[] supply, int[] demand) {
-		TradeOffer offer = new TradeOffer(modelID, tradeCounter, supply, demand);
-		tradeOffers.add(offer);
-		serverController.sendClientOffer(modelID, tradeCounter, supply, demand);
-		tradeCounter++;
+		if (checkValidTrade(modelID, supply, demand)) {
+			TradeOffer offer = new TradeOffer(modelID, tradeCounter, supply, demand);
+			tradeOffers.add(offer);
+			serverController.sendClientOffer(modelID, tradeCounter, supply, demand);
+			tradeCounter++;
+		} else {
+			serverController.serverResponse(modelID, "Unzulässiges Handel");
+		}
+	}
+
+	/**
+	 * Checks whether the trade is valid.
+	 * @param modelID
+	 * @param supply
+	 * @param demand
+	 * @return
+	 */
+	private boolean checkValidTrade(int modelID, int[] supply, int[] demand) {
+		//TODO correct iD ?
+		int[] resources = serverController.gameLogic.getBoard().getPlayer(modelID).getResources();
+		for(int i=0; i<supply.length;i++){
+			if(supply[i]<0 || demand[i]<0){
+				return false;
+			}
+			else if (supply[i]>resources[i]){
+				return false;
+			}
+			else if (supply[i]>0 && demand[i]>0){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
 	 * Accept trade.
 	 *
-	 * @param modelID the model ID
-	 * @param tradingID the trading ID
-	 * @param accept the accept
+	 * @param modelID
+	 *            the model ID
+	 * @param tradingID
+	 *            the trading ID
+	 * @param accept
+	 *            the accept
 	 */
 	public void acceptTrade(int modelID, int tradingID, boolean accept) {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID) {
-				if (accept){
+				if (accept) {
 					tradeOffers.get(i).acceptingPlayers.add(modelID);
 				} else {
 					tradeOffers.get(i).decliningPlayers.add(modelID);
 				}
-				
+
 				serverController.tradeAccepted(modelID, tradingID, accept);
 			}
 		}
 	}
 
-
 	/**
 	 * Fulfill trade.
 	 *
-	 * @param modelID the model ID
-	 * @param tradingID the trading ID
-	 * @param partnerModelID the partner model ID
+	 * @param modelID
+	 *            the model ID
+	 * @param tradingID
+	 *            the trading ID
+	 * @param partnerModelID
+	 *            the partner model ID
 	 */
 	public void fulfillTrade(int modelID, int tradingID, int partnerModelID) {
 		for (int i = 0; i < tradeOffers.size(); i++) {
@@ -81,18 +119,18 @@ public class TradeController {
 				} else {
 					int[] offer = tOf.getSupply();
 					int[] demand = tOf.getDemand();
-					if (serverController.gameLogic.checkPlayerResources(modelID, offer)){
-						if (serverController.gameLogic.checkPlayerResources(partnerModelID, demand)){
-							
+					if (serverController.gameLogic.checkPlayerResources(modelID, offer)) {
+						if (serverController.gameLogic.checkPlayerResources(partnerModelID, demand)) {
+
 							serverController.subFromPlayersResources(modelID, offer);
 							serverController.subFromPlayersResources(partnerModelID, demand);
 
 							serverController.addToPlayersResource(modelID, demand);
 							serverController.addToPlayersResource(partnerModelID, offer);
-							
+
 							serverController.costsToAll(modelID, offer, true);
 							serverController.costsToAll(partnerModelID, demand, true);
-							
+
 							serverController.obtainToAll(modelID, demand, true);
 							serverController.obtainToAll(partnerModelID, offer, true);
 
@@ -104,7 +142,8 @@ public class TradeController {
 							serverController.error(modelID, "Your partner hasn't got enough resources for this trade");
 						}
 					} else {
-						serverController.error(partnerModelID, "Your partner hasn't got enough resources for this trade");
+						serverController.error(partnerModelID,
+								"Your partner hasn't got enough resources for this trade");
 						serverController.error(modelID, "You haven't got enough resources for the trade");
 					}
 				}
@@ -117,8 +156,10 @@ public class TradeController {
 	/**
 	 * Cancel trade.
 	 *
-	 * @param modelID the model ID
-	 * @param tradingID the trading ID
+	 * @param modelID
+	 *            the model ID
+	 * @param tradingID
+	 *            the trading ID
 	 */
 	public void cancelTrade(int modelID, int tradingID) {
 		TradeOffer currOf;
@@ -142,14 +183,16 @@ public class TradeController {
 		}
 
 	}
-	
 
 	/**
 	 * Request sea trade.
 	 *
-	 * @param modelID the model ID
-	 * @param offer the offer
-	 * @param demand the demand
+	 * @param modelID
+	 *            the model ID
+	 * @param offer
+	 *            the offer
+	 * @param demand
+	 *            the demand
 	 */
 	public void requestSeaTrade(int modelID, int[] offer, int[] demand) {
 		ResourceType offerResType = null;
@@ -167,12 +210,14 @@ public class TradeController {
 			}
 
 		}
-		if (offerResType != null && demandAmount == 1) { //currently only single trade allowed
+		if (offerResType != null && demandAmount == 1) { // currently only
+															// single trade
+															// allowed
 			switch (offerAmount) {
 			case 2:
 				boolean contains = false;
 				for (int i = 0; i < harbours.size(); i++) {
-					if (harbours.get(i).name().equals(offerResType.name())){
+					if (harbours.get(i).name().equals(offerResType.name())) {
 						contains = true;
 					}
 				}
@@ -230,7 +275,8 @@ public class TradeController {
 	/**
 	 * Gets the player harbours.
 	 *
-	 * @param modelID the model ID
+	 * @param modelID
+	 *            the model ID
 	 * @return the player harbours
 	 */
 	private ArrayList<HarbourStatus> getPlayerHarbours(int modelID) {
