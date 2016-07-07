@@ -78,7 +78,8 @@ public class ServerController {
 	/**
 	 * Instantiates a new server controller.
 	 *
-	 * @param serverPort the server port
+	 * @param serverPort
+	 *            the server port
 	 */
 	public ServerController(int serverPort) {
 		board = new Board();
@@ -107,7 +108,8 @@ public class ServerController {
 	/**
 	 * Sets the server output handler.
 	 *
-	 * @param sNC the new server output handler
+	 * @param sNC
+	 *            the new server output handler
 	 */
 	@Deprecated
 	public void setServerOutputHandler(ServerOutputHandler sNC) {
@@ -118,7 +120,8 @@ public class ServerController {
 	/**
 	 * sends a hello message at server start.
 	 *
-	 * @param currentThreadID the current thread ID
+	 * @param currentThreadID
+	 *            the current thread ID
 	 */
 	public void hello(int currentThreadID) {
 		serverOutputHandler.hello(DefaultSettings.SERVER_VERSION, DefaultSettings.PROTOCOL_VERSION, currentThreadID);
@@ -128,7 +131,8 @@ public class ServerController {
 	 * is called when a client sends hello message registers threadID and sends
 	 * status update.
 	 *
-	 * @param currentThreadID the current thread ID
+	 * @param currentThreadID
+	 *            the current thread ID
 	 */
 	public void receiveHello(int currentThreadID) {
 		threadPlayerIdMap.put(currentThreadID, amountPlayers);
@@ -151,7 +155,8 @@ public class ServerController {
 	/**
 	 * sends a welcome message to client.
 	 *
-	 * @param modelPlayerID the model player ID
+	 * @param modelPlayerID
+	 *            the model player ID
 	 */
 	public void welcome(int modelPlayerID) {
 		serverOutputHandler.welcome(modelPlayerIdMap.get(modelPlayerID));
@@ -161,7 +166,8 @@ public class ServerController {
 	 * is called when a client is ready, if all clients are ready then start
 	 * game.
 	 *
-	 * @param currentThreadID the current thread ID
+	 * @param currentThreadID
+	 *            the current thread ID
 	 */
 	public void clientReady(int currentThreadID) {
 		int playerID = threadPlayerIdMap.get(currentThreadID);
@@ -186,8 +192,10 @@ public class ServerController {
 	/**
 	 * sends server response to specified client.
 	 *
-	 * @param modelID the model ID
-	 * @param server_response the server response
+	 * @param modelID
+	 *            the model ID
+	 * @param server_response
+	 *            the server response
 	 */
 	public void serverResponse(int modelID, String server_response) {
 		serverOutputHandler.serverConfirm(server_response, modelPlayerIdMap.get(modelID));
@@ -197,8 +205,10 @@ public class ServerController {
 	/**
 	 * sends an error to specified client.
 	 *
-	 * @param modelID the model ID
-	 * @param string the string
+	 * @param modelID
+	 *            the model ID
+	 * @param string
+	 *            the string
 	 */
 	protected void error(int modelID, String string) {
 		serverOutputHandler.error(string, modelPlayerIdMap.get(modelID));
@@ -208,13 +218,16 @@ public class ServerController {
 	/**
 	 * is called when client sets own name and color before gamestart.
 	 *
-	 * @param color the color
-	 * @param name the name
-	 * @param currentThreadID the current thread ID
+	 * @param color
+	 *            the color
+	 * @param name
+	 *            the name
+	 * @param currentThreadID
+	 *            the current thread ID
 	 */
 	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
-		if (currentPlayer != null){
-			serverResponse(modelPlayerIdMap.get(currentThreadID),"Spiel bereits gestratet");
+		if (currentPlayer != null) {
+			serverResponse(modelPlayerIdMap.get(currentThreadID), "Spiel bereits gestratet");
 		}
 
 		boolean colorAvailable = true;
@@ -245,8 +258,10 @@ public class ServerController {
 	/**
 	 * sends a received chat message to all clients.
 	 *
-	 * @param playerId the player id
-	 * @param s the s
+	 * @param playerId
+	 *            the player id
+	 * @param s
+	 *            the s
 	 */
 	public void chatReceiveMessage(int playerId, String s) {
 		serverOutputHandler.chatReceiveMessage(playerId, s);
@@ -256,8 +271,10 @@ public class ServerController {
 	/**
 	 * is called when client sends a chat message.
 	 *
-	 * @param s the s
-	 * @param currentThreadID the current thread ID
+	 * @param s
+	 *            the s
+	 * @param currentThreadID
+	 *            the current thread ID
 	 */
 	public void chatSendMessage(String s, int currentThreadID) {
 		serverOutputHandler.serverConfirm("OK", currentThreadID);
@@ -277,7 +294,8 @@ public class ServerController {
 	/**
 	 * sends status update of specified player to all clients.
 	 *
-	 * @param playerModelID the player model ID
+	 * @param playerModelID
+	 *            the player model ID
 	 */
 	public void statusUpdate(int playerModelID) {
 		for (int i = 0; i < amountPlayers; i++) {
@@ -288,8 +306,10 @@ public class ServerController {
 	/**
 	 * sends status update of a player to specified client.
 	 *
-	 * @param sendToPlayer the send to player
-	 * @param playerModelID the player model ID
+	 * @param sendToPlayer
+	 *            the send to player
+	 * @param playerModelID
+	 *            the player model ID
 	 */
 	public void statusUpdateToPlayer(int sendToPlayer, int playerModelID) {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(playerModelID);
@@ -298,8 +318,9 @@ public class ServerController {
 			int[] resources = getPlayerResources(playerModelID);
 			int[] devCards = pM.getPlayerDevCards();
 			serverOutputHandler.statusUpdate(modelPlayerIdMap.get(playerModelID), pM.getColor(), pM.getName(),
-					pM.getPlayerState(), pM.getVictoryPoints() + pM.getHiddenVictoryPoints(), resources, pM.getPlayedKnightCards(), devCards,
-					pM.hasLongestRoad(), pM.hasLargestArmy(), modelPlayerIdMap.get(sendToPlayer));
+					pM.getPlayerState(), pM.getVictoryPoints() + pM.getHiddenVictoryPoints(), resources,
+					pM.getPlayedKnightCards(), devCards, pM.hasLongestRoad(), pM.hasLargestArmy(),
+					modelPlayerIdMap.get(sendToPlayer));
 		} else {
 			int[] resources = { gameLogic.getBoard().getPlayer(playerModelID).sumResources() };
 			int[] devCards = { pM.sumDevCards() };
@@ -424,7 +445,8 @@ public class ServerController {
 	/**
 	 * Shuffle array.
 	 *
-	 * @param harbourOrder the harbour order
+	 * @param harbourOrder
+	 *            the harbour order
 	 * @return the harbour status[]
 	 */
 	public HarbourStatus[] shuffleArray(HarbourStatus[] harbourOrder) {
@@ -441,7 +463,8 @@ public class ServerController {
 	/**
 	 * dice roll request from client.
 	 *
-	 * @param threadID the thread ID
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void diceRollRequest(int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -498,10 +521,14 @@ public class ServerController {
 	 * is called when client wants to build a village if initialBuildingPhase
 	 * then jumps to requestBuildInitialVillage.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param threadID the thread ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void requestBuildVillage(int x, int y, int dir, int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -517,13 +544,13 @@ public class ServerController {
 					Corner c = buildVillage(x, y, dir, modelID);
 					subFromPlayersResources(modelID, DefaultSettings.VILLAGE_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.VILLAGE_BUILD_COST);
-					increaseVictoryPoints(modelID,1);
+					increaseVictoryPoints(modelID, 1);
 					checkIfVillageInterruptsStreetSet(c);
 					// evtl. auch in initial village?
 					costsToAll(modelID, DefaultSettings.VILLAGE_BUILD_COST, true);
 					serverOutputHandler.buildVillage(x, y, dir, threadID);
-					
-					//statusUpdate(modelID);
+
+					// statusUpdate(modelID);
 				}
 			}
 		}
@@ -533,9 +560,12 @@ public class ServerController {
 	/**
 	 * Costs to all.
 	 *
-	 * @param modelID the model ID
-	 * @param resources the resources
-	 * @param visible the visible
+	 * @param modelID
+	 *            the model ID
+	 * @param resources
+	 *            the resources
+	 * @param visible
+	 *            the visible
 	 */
 	protected void costsToAll(int modelID, int[] resources, boolean visible) {
 		int threadID = modelPlayerIdMap.get(modelID);
@@ -558,9 +588,12 @@ public class ServerController {
 	/**
 	 * Obtain to all.
 	 *
-	 * @param modelID the model ID
-	 * @param resources the resources
-	 * @param visible the visible
+	 * @param modelID
+	 *            the model ID
+	 * @param resources
+	 *            the resources
+	 * @param visible
+	 *            the visible
 	 */
 	protected void obtainToAll(int modelID, int[] resources, boolean visible) {
 		int threadID = modelPlayerIdMap.get(modelID);
@@ -584,10 +617,14 @@ public class ServerController {
 	 * builds a village on specified position checks if position is a harbour
 	 * and adds it to player model.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param modelID the model ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param modelID
+	 *            the model ID
 	 * @return corner object
 	 */
 	private Corner buildVillage(int x, int y, int dir, int modelID) {
@@ -611,47 +648,51 @@ public class ServerController {
 	/**
 	 * increases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID the model ID
+	 * @param modelID
+	 *            the model ID
 	 */
-	private void increaseVictoryPoints(int modelID,int amount) {
+	private void increaseVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
 		gameLogic.getBoard().getPlayer(modelID).setVictoryPoints(points + amount);
 		checkVictory(modelID);
 	}
-	
+
 	/**
 	 * decreases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID the model ID
+	 * @param modelID
+	 *            the model ID
 	 */
-	private void decreaseVictoryPoints(int modelID,int amount) {
+	private void decreaseVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
 		gameLogic.getBoard().getPlayer(modelID).setVictoryPoints(points - amount);
-	}	
+	}
 
 	/**
 	 * increases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID the model ID
+	 * @param modelID
+	 *            the model ID
 	 */
-	private void increaseHiddenVictoryPoints(int modelID,int amount) {
+	private void increaseHiddenVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getHiddenVictoryPoints();
 		gameLogic.getBoard().getPlayer(modelID).setHiddenVictoryPoints(points + amount);
 		checkVictory(modelID);
-	}	
-	
+	}
+
 	private void checkVictory(int modelID) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
 		int hiddenpoints = gameLogic.getBoard().getPlayer(modelID).getHiddenVictoryPoints();
 		if (points >= DefaultSettings.MAX_VICTORY_POINTS) {
 			victory(modelID);
-		}			
+		}
 	}
 
 	/**
 	 * is called when a player has or more 10 victory points.
 	 *
-	 * @param modelID the model ID
+	 * @param modelID
+	 *            the model ID
 	 */
 	private void victory(int modelID) {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
@@ -664,10 +705,14 @@ public class ServerController {
 	/**
 	 * builds a street is called by the server controller.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param threadID the thread ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void requestBuildStreet(int x, int y, int dir, int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -684,8 +729,8 @@ public class ServerController {
 					subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
 					resourceStackIncrease(DefaultSettings.STREET_BUILD_COST);
 					costsToAll(modelID, DefaultSettings.STREET_BUILD_COST, true);
-					serverOutputHandler.buildStreet(x, y, dir, threadID);					
-					//statusUpdate(modelID);
+					serverOutputHandler.buildStreet(x, y, dir, threadID);
+					// statusUpdate(modelID);
 
 				} else {
 					serverResponse(modelID, "Kein Straßenbau möglich");
@@ -699,10 +744,14 @@ public class ServerController {
 	 * builds a street at the specified position checks if street changes
 	 * longest trading route.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param modelID the model ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param modelID
+	 *            the model ID
 	 */
 	private void buildStreet(int x, int y, int dir, int modelID) {
 		Edge e = gameLogic.getBoard().getEdgeAt(x, y, dir);
@@ -717,7 +766,8 @@ public class ServerController {
 	/**
 	 * checks if a village interrupts a street set.
 	 *
-	 * @param c the c
+	 * @param c
+	 *            the c
 	 */
 	public void checkIfVillageInterruptsStreetSet(Corner c) {
 		String id = c.getCornerID();
@@ -777,7 +827,8 @@ public class ServerController {
 	 * 
 	 * don't use this method, if the edge has no street!!!.
 	 *
-	 * @param e            Edge with street
+	 * @param e
+	 *            Edge with street
 	 * @return StreetSet containing the Edge
 	 */
 	public StreetSet EdgeToStreetSet(Edge e) {
@@ -794,8 +845,10 @@ public class ServerController {
 	/**
 	 * adds a specified street (edge object) to a street set.
 	 *
-	 * @param e the e
-	 * @param modelID the model ID
+	 * @param e
+	 *            the e
+	 * @param modelID
+	 *            the model ID
 	 */
 	private void addToStreetSet(Edge e, int modelID) {
 		int[] coord = ProtocolToModel.getEdgeCoordinates(e.getEdgeID());
@@ -834,7 +887,8 @@ public class ServerController {
 	/**
 	 * Check longest trading route.
 	 *
-	 * @param modelID the model ID
+	 * @param modelID
+	 *            the model ID
 	 */
 	public void checkLongestTradingRoute(int modelID) {
 		int max = getLongestTradingRoute(modelID);
@@ -843,24 +897,24 @@ public class ServerController {
 			if (longestTradingRoutePlayer != -1) {
 				if (longestTradingRoutePlayer != modelID && longestRoutes[longestTradingRoutePlayer] < max) {
 					gameLogic.getBoard().getPlayer(longestTradingRoutePlayer).setHasLongestRoad(false);
-					decreaseVictoryPoints(longestTradingRoutePlayer,2);
+					decreaseVictoryPoints(longestTradingRoutePlayer, 2);
 					gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
-					
-					increaseVictoryPoints(modelID,2);
-					
+
+					increaseVictoryPoints(modelID, 2);
+
 					longestTradingRoutePlayer = modelID;
 					serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));
 				}
 			} else {
 				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(true);
-				increaseVictoryPoints(modelID,2);
+				increaseVictoryPoints(modelID, 2);
 				longestTradingRoutePlayer = modelID;
 				serverOutputHandler.longestRoad(modelPlayerIdMap.get(modelID));
 			}
 		} else {
 			if (longestTradingRoutePlayer == modelID) { // special case
 				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(false);
-				decreaseVictoryPoints(modelID,2);
+				decreaseVictoryPoints(modelID, 2);
 				longestTradingRoutePlayer = -1;
 				serverOutputHandler.longestRoad(null);
 			}
@@ -874,7 +928,8 @@ public class ServerController {
 	 * DON'T CALL THIS WHEN PLAYER HAS NO STREETS!!! calculates the longest
 	 * trading route for a specific player with streets.
 	 *
-	 * @param modelID the model ID
+	 * @param modelID
+	 *            the model ID
 	 * @return length of the longest trading route of the player
 	 */
 	public int getLongestTradingRoute(int modelID) {
@@ -951,10 +1006,14 @@ public class ServerController {
 	 * recursive method for calculating the longest route starting from an
 	 * specific edge.
 	 *
-	 * @param edge            starting street
-	 * @param currStreetSet            street set which contains the street
-	 * @param alreadyChecked            streets which are already counted
-	 * @param lastNeighbours            neighbours, which are prohibited to check
+	 * @param edge
+	 *            starting street
+	 * @param currStreetSet
+	 *            street set which contains the street
+	 * @param alreadyChecked
+	 *            streets which are already counted
+	 * @param lastNeighbours
+	 *            neighbours, which are prohibited to check
 	 * @return longest rout of not checked streets
 	 */
 	private Integer depthFirstSearch(Edge edge, StreetSet currStreetSet, ArrayList<Edge> alreadyChecked,
@@ -983,32 +1042,33 @@ public class ServerController {
 	/**
 	 * checks if the player has the most played knight cards.
 	 *
-	 * @param modelID            to chaeck player
+	 * @param modelID
+	 *            to chaeck player
 	 */
 	private void checkLargestArmy(int modelID) {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-		if (! pM.hasLargestArmy()){
-		int amountCards = pM.getPlayedKnightCards();
-		boolean hasLargestArmy = true;
-		if (pM.getPlayedKnightCards() >= 3) {
-			for (int i = 0; i < amountPlayers; i++) {
-				if (i != modelID) {
-					if (amountCards <= gameLogic.getBoard().getPlayer(i).getPlayedKnightCards()) {
-						hasLargestArmy = false;
+		if (!pM.hasLargestArmy()) {
+			int amountCards = pM.getPlayedKnightCards();
+			boolean hasLargestArmy = true;
+			if (pM.getPlayedKnightCards() >= 3) {
+				for (int i = 0; i < amountPlayers; i++) {
+					if (i != modelID) {
+						if (amountCards <= gameLogic.getBoard().getPlayer(i).getPlayedKnightCards()) {
+							hasLargestArmy = false;
+						}
 					}
 				}
-			}
-			if (hasLargestArmy) {
-				if (biggestKnightForcePlayer != -1){
-					gameLogic.getBoard().getPlayer(biggestKnightForcePlayer).setHasLargestArmy(false);
-					decreaseVictoryPoints(biggestKnightForcePlayer,2);
+				if (hasLargestArmy) {
+					if (biggestKnightForcePlayer != -1) {
+						gameLogic.getBoard().getPlayer(biggestKnightForcePlayer).setHasLargestArmy(false);
+						decreaseVictoryPoints(biggestKnightForcePlayer, 2);
+					}
+					pM.setHasLargestArmy(true);
+					biggestKnightForcePlayer = modelID;
+					increaseVictoryPoints(modelID, 2);
+					serverOutputHandler.biggestKnightProwess(modelID);
 				}
-				pM.setHasLargestArmy(true);
-				biggestKnightForcePlayer = modelID;
-				increaseVictoryPoints(modelID, 2);
-				serverOutputHandler.biggestKnightProwess(modelID);
 			}
-		}
 		}
 	}
 
@@ -1016,10 +1076,14 @@ public class ServerController {
 	 * is called by the serverController after a build request from a client
 	 * builds a city.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param threadID the thread ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void requestBuildCity(int x, int y, int dir, int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1033,12 +1097,12 @@ public class ServerController {
 
 				subFromPlayersResources(modelID, DefaultSettings.CITY_BUILD_COST);
 				resourceStackIncrease(DefaultSettings.CITY_BUILD_COST);
-				increaseVictoryPoints(modelID,1);
-				
-                costsToAll(modelID, DefaultSettings.CITY_BUILD_COST, true);
+				increaseVictoryPoints(modelID, 1);
+
+				costsToAll(modelID, DefaultSettings.CITY_BUILD_COST, true);
 				serverOutputHandler.buildCity(x, y, dir, threadID);
-				
-				//statusUpdate(modelID);
+
+				// statusUpdate(modelID);
 			}
 		}
 
@@ -1047,10 +1111,14 @@ public class ServerController {
 	/**
 	 * Builds the city.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param modelID the model ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param modelID
+	 *            the model ID
 	 */
 	private void buildCity(int x, int y, int dir, int modelID) {
 		Corner c = gameLogic.getBoard().getCornerAt(x, y, dir);
@@ -1063,7 +1131,8 @@ public class ServerController {
 	/**
 	 * Request buy dev card.
 	 *
-	 * @param threadID the thread ID
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void requestBuyDevCard(int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1073,19 +1142,19 @@ public class ServerController {
 				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
 				costsToAll(modelID, DefaultSettings.DEVCARD_BUILD_COST, true);
 				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
-				if (devCard.getName().equals("Victory Card")){
+				if (devCard.getName().equals("Victory Card")) {
 					increaseHiddenVictoryPoints(modelID, 1);
 					pm.getPlayerDevCards()[4]++;
 				} else {
-				pm.getDevCardsBoughtInThisRound().add(devCard);
+					pm.getDevCardsBoughtInThisRound().add(devCard);
 				}
-				for (int i = 0;i <amountPlayers;i++){
-					if (i == modelID){
-						serverOutputHandler.boughtDevelopmentCard(threadID, devCard,threadID);
+				for (int i = 0; i < amountPlayers; i++) {
+					if (i == modelID) {
+						serverOutputHandler.boughtDevelopmentCard(threadID, devCard, threadID);
 					} else {
-						serverOutputHandler.boughtDevelopmentCard(threadID, null,modelPlayerIdMap.get(i));
-					}					
-				}		
+						serverOutputHandler.boughtDevelopmentCard(threadID, null, modelPlayerIdMap.get(i));
+					}
+				}
 
 			} else {
 				serverResponse(modelID, "Unzulässige Aktion");
@@ -1099,10 +1168,14 @@ public class ServerController {
 	 * Is called by serverController when there is a street build request during
 	 * the initial phase.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param threadID the thread ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void requestBuildInitialStreet(int x, int y, int dir, int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1156,10 +1229,14 @@ public class ServerController {
 	 * is called by serverController when there is a Build Request during the
 	 * initial Phase.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param threadID the thread ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void requestBuildInitialVillage(int x, int y, int dir, int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1173,7 +1250,7 @@ public class ServerController {
 					gainFirstBoardResources(modelID, c);
 				}
 
-				increaseVictoryPoints(modelID,1);
+				increaseVictoryPoints(modelID, 1);
 				checkIfVillageInterruptsStreetSet(c);
 
 				serverOutputHandler.buildVillage(x, y, dir, threadID);
@@ -1189,7 +1266,8 @@ public class ServerController {
 	/**
 	 * is called when client has finished his turn.
 	 *
-	 * @param playerID the player ID
+	 * @param playerID
+	 *            the player ID
 	 */
 	public void endTurn(int playerID) {
 		int modelID = threadPlayerIdMap.get(playerID);
@@ -1221,8 +1299,10 @@ public class ServerController {
 	 * is called when client sends a robber loss message checks if action is
 	 * valid sends status updates.
 	 *
-	 * @param threadID the thread ID
-	 * @param resources the resources
+	 * @param threadID
+	 *            the thread ID
+	 * @param resources
+	 *            the resources
 	 */
 	public void robberLoss(int threadID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1263,10 +1343,14 @@ public class ServerController {
 	/**
 	 * Sends a robberMovementRequest to all clients.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param victimThreadID the victim thread ID
-	 * @param currentThreadID the current thread ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param victimThreadID
+	 *            the victim thread ID
+	 * @param currentThreadID
+	 *            the current thread ID
 	 */
 	public void robberMovementRequest(int x, int y, Integer victimThreadID, int currentThreadID) {
 		int modelID = threadPlayerIdMap.get(currentThreadID);
@@ -1311,9 +1395,12 @@ public class ServerController {
 	/**
 	 * Basic methods for trading.
 	 *
-	 * @param threadID the thread ID
-	 * @param offer the offer
-	 * @param demand the demand
+	 * @param threadID
+	 *            the thread ID
+	 * @param offer
+	 *            the offer
+	 * @param demand
+	 *            the demand
 	 */
 
 	public void requestSeaTrade(int threadID, int[] offer, int[] demand) {
@@ -1326,9 +1413,12 @@ public class ServerController {
 	/**
 	 * Client offers trade.
 	 *
-	 * @param threadID the thread ID
-	 * @param supply the supply
-	 * @param demand the demand
+	 * @param threadID
+	 *            the thread ID
+	 * @param supply
+	 *            the supply
+	 * @param demand
+	 *            the demand
 	 */
 	public void clientOffersTrade(int threadID, int[] supply, int[] demand) {
 		tradeController.clientOffersTrade(threadPlayerIdMap.get(threadID), supply, demand);
@@ -1337,10 +1427,14 @@ public class ServerController {
 	/**
 	 * Send client offer.
 	 *
-	 * @param modelID the model ID
-	 * @param tradingID the trading ID
-	 * @param supply the supply
-	 * @param demand the demand
+	 * @param modelID
+	 *            the model ID
+	 * @param tradingID
+	 *            the trading ID
+	 * @param supply
+	 *            the supply
+	 * @param demand
+	 *            the demand
 	 */
 	public void sendClientOffer(int modelID, int tradingID, int[] supply, int[] demand) {
 		serverOutputHandler.tradePreview(modelPlayerIdMap.get(modelID), tradingID, supply, demand);
@@ -1349,9 +1443,12 @@ public class ServerController {
 	/**
 	 * Accept trade.
 	 *
-	 * @param threadID the thread ID
-	 * @param tradingID the trading ID
-	 * @param accept the accept
+	 * @param threadID
+	 *            the thread ID
+	 * @param tradingID
+	 *            the trading ID
+	 * @param accept
+	 *            the accept
 	 */
 	public void acceptTrade(int threadID, int tradingID, boolean accept) {
 		tradeController.acceptTrade(threadPlayerIdMap.get(threadID), tradingID, accept);
@@ -1360,9 +1457,12 @@ public class ServerController {
 	/**
 	 * Trade accepted.
 	 *
-	 * @param modelID the model ID
-	 * @param tradingID the trading ID
-	 * @param accepted the accepted
+	 * @param modelID
+	 *            the model ID
+	 * @param tradingID
+	 *            the trading ID
+	 * @param accepted
+	 *            the accepted
 	 */
 	public void tradeAccepted(int modelID, int tradingID, boolean accepted) {
 		serverOutputHandler.tradeConfirmation(modelPlayerIdMap.get(modelID), tradingID, accepted);
@@ -1371,9 +1471,12 @@ public class ServerController {
 	/**
 	 * Fulfill trade.
 	 *
-	 * @param threadID the thread ID
-	 * @param tradingID the trading ID
-	 * @param partnerThreadID the partner thread ID
+	 * @param threadID
+	 *            the thread ID
+	 * @param tradingID
+	 *            the trading ID
+	 * @param partnerThreadID
+	 *            the partner thread ID
 	 */
 	public void fulfillTrade(int threadID, int tradingID, int partnerThreadID) {
 		tradeController.fulfillTrade(threadPlayerIdMap.get(threadID), tradingID,
@@ -1383,8 +1486,10 @@ public class ServerController {
 	/**
 	 * Trade fulfilled.
 	 *
-	 * @param modelID the model ID
-	 * @param partnerModelID the partner model ID
+	 * @param modelID
+	 *            the model ID
+	 * @param partnerModelID
+	 *            the partner model ID
 	 */
 	public void tradeFulfilled(int modelID, int partnerModelID) {
 		serverOutputHandler.tradeIsCompleted(modelPlayerIdMap.get(modelID), modelPlayerIdMap.get(partnerModelID));
@@ -1393,8 +1498,10 @@ public class ServerController {
 	/**
 	 * Cancel trade.
 	 *
-	 * @param threadID the thread ID
-	 * @param tradingID the trading ID
+	 * @param threadID
+	 *            the thread ID
+	 * @param tradingID
+	 *            the trading ID
 	 */
 	public void cancelTrade(int threadID, int tradingID) {
 		tradeController.cancelTrade(threadPlayerIdMap.get(threadID), tradingID);
@@ -1403,8 +1510,10 @@ public class ServerController {
 	/**
 	 * Trade cancelled.
 	 *
-	 * @param modelID the model ID
-	 * @param tradingID the trading ID
+	 * @param modelID
+	 *            the model ID
+	 * @param tradingID
+	 *            the trading ID
 	 */
 	public void tradeCancelled(int modelID, int tradingID) {
 		serverOutputHandler.tradeIsCanceled(modelPlayerIdMap.get(modelID), tradingID);
@@ -1415,8 +1524,7 @@ public class ServerController {
 	 * threadPlayerIdMap.get(threadID); subFromPlayersResources(modelID,
 	 * DefaultSettings.DEVCARD_BUILD_COST);
 	 * resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
-	 * DevelopmentCard currCard = devStack.getNextCard();
-	 * card per round
+	 * DevelopmentCard currCard = devStack.getNextCard(); card per round
 	 * gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(currCard);
 	 * serverOutputHandler.boughtDevelopmentCard(threadID, currCard); }
 	 */
@@ -1424,10 +1532,14 @@ public class ServerController {
 	/**
 	 * Play knight card.
 	 *
-	 * @param threadID the thread ID
-	 * @param x the x
-	 * @param y the y
-	 * @param victimThreadID the victim thread ID
+	 * @param threadID
+	 *            the thread ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param victimThreadID
+	 *            the victim thread ID
 	 */
 	public void playKnightCard(int threadID, int x, int y, Integer victimThreadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1480,13 +1592,20 @@ public class ServerController {
 	/**
 	 * Play street card.
 	 *
-	 * @param threadID the thread ID
-	 * @param x1 the x 1
-	 * @param y1 the y 1
-	 * @param dir1 the dir 1
-	 * @param x2 the x 2
-	 * @param y2 the y 2
-	 * @param dir2 the dir 2
+	 * @param threadID
+	 *            the thread ID
+	 * @param x1
+	 *            the x 1
+	 * @param y1
+	 *            the y 1
+	 * @param dir1
+	 *            the dir 1
+	 * @param x2
+	 *            the x 2
+	 * @param y2
+	 *            the y 2
+	 * @param dir2
+	 *            the dir 2
 	 */
 	public void playStreetCard(int threadID, int x1, int y1, int dir1, int x2, int y2, int dir2) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1524,8 +1643,10 @@ public class ServerController {
 	/**
 	 * Play monopoly card.
 	 *
-	 * @param threadID the thread ID
-	 * @param resType the res type
+	 * @param threadID
+	 *            the thread ID
+	 * @param resType
+	 *            the res type
 	 */
 	public void playMonopolyCard(int threadID, ResourceType resType) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1556,8 +1677,10 @@ public class ServerController {
 	/**
 	 * Play invention card.
 	 *
-	 * @param threadID the thread ID
-	 * @param resources the resources
+	 * @param threadID
+	 *            the thread ID
+	 * @param resources
+	 *            the resources
 	 */
 	public void playInventionCard(int threadID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(threadID);
@@ -1595,8 +1718,10 @@ public class ServerController {
 	 * desert will be placed random at the board, else it will be set in the
 	 * middle.
 	 *
-	 * @param initialField            gameLogic.getBoard()ram randomDesert
-	 * @param randomDesert the random desert
+	 * @param initialField
+	 *            gameLogic.getBoard()ram randomDesert
+	 * @param randomDesert
+	 *            the random desert
 	 */
 	private void generateBoard(String initialField, boolean randomDesert) {
 		String fields = HexService.getSpiral(initialField);
@@ -1681,7 +1806,8 @@ public class ServerController {
 	/**
 	 * sets new player resources after dice roll.
 	 *
-	 * @param diceNum the dice num
+	 * @param diceNum
+	 *            the dice num
 	 */
 	public void gainBoardResources(int diceNum) {
 		ArrayList<Field> diceFields = new ArrayList<Field>();
@@ -1733,13 +1859,14 @@ public class ServerController {
 			addToPlayersResource(i, playersObtain[i]);
 			obtainToAll(i, playersObtain[i], true);
 		}
-		//statusUpdateForAllPlayers();
+		// statusUpdateForAllPlayers();
 	}
 
 	/**
 	 * decreases the resource stack.
 	 *
-	 * @param resType the res type
+	 * @param resType
+	 *            the res type
 	 * @return true, if successful
 	 */
 	protected boolean resourceStackDecrease(ResourceType resType) {
@@ -1755,7 +1882,8 @@ public class ServerController {
 	/**
 	 * increases the resource stack.
 	 *
-	 * @param resType the res type
+	 * @param resType
+	 *            the res type
 	 */
 	protected void resourceStackIncrease(ResourceType resType) {
 		int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
@@ -1765,7 +1893,8 @@ public class ServerController {
 	/**
 	 * increases the resource stack with resource array.
 	 *
-	 * @param resources the resources
+	 * @param resources
+	 *            the resources
 	 */
 	private void resourceStackIncrease(int[] resources) {
 		for (int i = 0; i < resources.length; i++) {
@@ -1778,8 +1907,10 @@ public class ServerController {
 	/**
 	 * Gain first board resources.
 	 *
-	 * @param modelID the model ID
-	 * @param c the c
+	 * @param modelID
+	 *            the model ID
+	 * @param c
+	 *            the c
 	 */
 	private void gainFirstBoardResources(int modelID, Corner c) {
 		int[] playersObtain = new int[5];
@@ -1802,7 +1933,8 @@ public class ServerController {
 	/**
 	 * gets next player in the player order.
 	 *
-	 * @param modelPlayerID the model player ID
+	 * @param modelPlayerID
+	 *            the model player ID
 	 * @return nextPlayerID
 	 */
 	private int getNextPlayer(int modelPlayerID) {
@@ -1817,7 +1949,8 @@ public class ServerController {
 	/**
 	 * gets player resources.
 	 *
-	 * @param modelPlayerID the model player ID
+	 * @param modelPlayerID
+	 *            the model player ID
 	 * @return int[] resources
 	 */
 	protected int[] getPlayerResources(int modelPlayerID) {
@@ -1832,8 +1965,10 @@ public class ServerController {
 	/**
 	 * sets player resources.
 	 *
-	 * @param modelID the model ID
-	 * @param resources the resources
+	 * @param modelID
+	 *            the model ID
+	 * @param resources
+	 *            the resources
 	 */
 	private void setPlayerResources(int modelID, int[] resources) {
 		gameLogic.getBoard().getPlayer(modelID).setResources(resources);
@@ -1842,9 +1977,12 @@ public class ServerController {
 	/**
 	 * adds a single resource to players resource.
 	 *
-	 * @param playerID the player ID
-	 * @param resType the res type
-	 * @param amount the amount
+	 * @param playerID
+	 *            the player ID
+	 * @param resType
+	 *            the res type
+	 * @param amount
+	 *            the amount
 	 */
 	public void addToPlayersResource(int playerID, ResourceType resType, int amount) {
 		int[] resources = getPlayerResources(playerID);
@@ -1857,8 +1995,10 @@ public class ServerController {
 	/**
 	 * adds resources to player resource.
 	 *
-	 * @param playerID the player ID
-	 * @param resourcesToAdd the resources to add
+	 * @param playerID
+	 *            the player ID
+	 * @param resourcesToAdd
+	 *            the resources to add
 	 */
 	public void addToPlayersResource(int playerID, int[] resourcesToAdd) {
 		int[] resources = getPlayerResources(playerID);
@@ -1873,8 +2013,10 @@ public class ServerController {
 	/**
 	 * subtracts resources from players resource.
 	 *
-	 * @param playerID the player ID
-	 * @param costs the costs
+	 * @param playerID
+	 *            the player ID
+	 * @param costs
+	 *            the costs
 	 */
 	public void subFromPlayersResources(int playerID, int[] costs) {
 		int[] pResources = getPlayerResources(playerID);
@@ -1887,9 +2029,12 @@ public class ServerController {
 	/**
 	 * Sub from players resources.
 	 *
-	 * @param playerID the player ID
-	 * @param resType the res type
-	 * @param amount the amount
+	 * @param playerID
+	 *            the player ID
+	 * @param resType
+	 *            the res type
+	 * @param amount
+	 *            the amount
 	 */
 	public void subFromPlayersResources(int playerID, ResourceType resType, int amount) {
 		int[] resources = getPlayerResources(playerID);
@@ -1911,7 +2056,8 @@ public class ServerController {
 	/**
 	 * Sets the amount players.
 	 *
-	 * @param amountPlayers the new amount players
+	 * @param amountPlayers
+	 *            the new amount players
 	 */
 	public void setAmountPlayers(int amountPlayers) {
 		this.amountPlayers = amountPlayers;
@@ -1936,61 +2082,63 @@ public class ServerController {
 	}
 
 	public void connectionLost(int threadID) {
-		int modelID = threadPlayerIdMap.get(threadID);
-		/*PlayerModel pM = new PlayerModel();
-				pM =
-		pM.
-		*/
-		if (currentPlayer != null){
-			gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);;
-			statusUpdate(modelID);
-			Integer currTID;
-			for (int i = 0; i < amountPlayers;i++){
-				currTID = modelPlayerIdMap.get(i);
-				if (currTID != null){
-					serverOutputHandler.victory("Verbindung zu einem Spieler verloren!", threadID);
-					server.closeSocket();
-					System.exit(0);
+		Integer modelID = threadPlayerIdMap.get(threadID);
+		/*
+		 * PlayerModel pM = new PlayerModel(); pM = pM.
+		 */
+		if (modelID != null) {
+			if (currentPlayer != null) {
+				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);
+				;
+				statusUpdate(modelID);
+				Integer currTID;
+				for (int i = 0; i < amountPlayers; i++) {
+					currTID = modelPlayerIdMap.get(i);
+					if (currTID != null) {
+						serverOutputHandler.victory("Verbindung zu einem Spieler verloren!", threadID);
+						server.closeSocket();
+						System.exit(0);
+					}
 				}
+
+			} else { // während lobbybetrieb disconnect möglich
+				// zuerst noch ein letztes statusupdate
+				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);
+				statusUpdate(modelID);
+
+				// danach entfernen aus dem speicher
+				PlayerModel[] playerModels = gameLogic.getBoard().getPlayerModels();
+				PlayerModel tempPM = playerModels[amountPlayers - 1];
+				int tempThreadID = modelPlayerIdMap.get(amountPlayers - 1);
+				// temp ModelID = i;
+				// verschiebe alle PlayerModels um 1 nach unten bis zu
+				// spieler der sich disconnected hat...
+				for (int i = amountPlayers - 2; i >= modelID; i--) {
+					PlayerModel currPM = playerModels[i];
+					playerModels[i] = tempPM;
+					tempPM = currPM;
+
+					int newTID = modelPlayerIdMap.get(i);
+					modelPlayerIdMap.replace(i, tempThreadID);
+					threadPlayerIdMap.replace(tempThreadID, i);
+					tempThreadID = newTID;
+
+				}
+				// resette den letzten Eintrag
+				playerModels[amountPlayers - 1] = new PlayerModel();
+				modelPlayerIdMap.remove(amountPlayers - 1);
+				threadPlayerIdMap.remove(threadID);
+
+				amountPlayers--;
+
 			}
-			
-		} else { //während lobbybetrieb disconnect möglich
-			//zuerst noch ein letztes statusupdate
-			gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);
-			statusUpdate(modelID);
-			
-			//danach entfernen aus dem speicher
-			PlayerModel[] playerModels = gameLogic.getBoard().getPlayerModels();
-			PlayerModel tempPM = playerModels[amountPlayers-1];
-			int tempThreadID = modelPlayerIdMap.get(amountPlayers-1);
-			//temp ModelID = i;
-			//verschiebe alle PlayerModels um 1 nach unten bis zu
-			// spieler der sich disconnected hat...
-			for (int i = amountPlayers - 2;i >= modelID;i--){
-				PlayerModel currPM = playerModels[i];
-				playerModels[i] = tempPM;
-				tempPM = currPM;
-				
-				int newTID = modelPlayerIdMap.get(i);
-				modelPlayerIdMap.replace(i, tempThreadID);				
-				threadPlayerIdMap.replace(tempThreadID, i);
-				tempThreadID = newTID;
-								
-			}
-			//resette den letzten Eintrag
-			playerModels[amountPlayers-1] = new PlayerModel();
-			modelPlayerIdMap.remove(amountPlayers-1);
-			threadPlayerIdMap.remove(threadID);
-			
-			amountPlayers--;
-			
 		}
-		
+
 	}
 
 	public void sendInvalidJSON(int currentThreadID) {
 		serverResponse(currentThreadID, "Unzulässige Aktion");
-		
+
 	}
 
 }

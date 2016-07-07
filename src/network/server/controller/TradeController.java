@@ -3,6 +3,7 @@ package network.server.controller;
 import java.util.ArrayList;
 
 import enums.HarbourStatus;
+import enums.PlayerState;
 import enums.ResourceType;
 import settings.DefaultSettings;
 
@@ -55,6 +56,9 @@ public class TradeController {
 	 * @return
 	 */
 	private boolean checkValidTradeRequest(int modelID, int[] supply, int[] demand) {
+		if (serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerState() != PlayerState.TRADING_OR_BUILDING){
+			return false;
+		}
 		int sum = 0;
 		int[] resources = serverController.gameLogic.getBoard().getPlayer(modelID).getResources();
 		for (int i = 0; i < supply.length; i++) {

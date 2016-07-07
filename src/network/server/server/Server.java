@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import network.ModelToProtocol;
@@ -19,7 +20,8 @@ import settings.DefaultSettings;
 public class Server {
 	private static Logger logger = LogManager.getLogger(Server.class.getSimpleName());
 	// HashMap PlayerID => Thread
-	private ClientThread[] clients = new ClientThread[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
+	//private ClientThread[] clients = new ClientThread[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
+	private HashMap<Integer,ClientThread> idToClientThread = new HashMap<Integer,ClientThread>();
 
 	private int clientCounter = 0;
 
@@ -118,6 +120,7 @@ public class Server {
 			} catch (IOException e) {
 				e.printStackTrace();
 				inputHandler.lostConnection(threadID);
+				idToClientThread.remove(threadID);
 				connectedPlayers--;
 				try {
 					socket.close();
@@ -147,7 +150,7 @@ public class Server {
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
 		ClientThread thread = new ClientThread(socket, inputHandler, serverOutputHandler, clientCounter);
 		thread.start();
-		getClients()[clientCounter] = thread;
+		idToClientThread.put(clientCounter, thread);
 		clientCounter++;
 		logger.debug("The Next Client gets Number " + clientCounter);
 	}
@@ -162,10 +165,12 @@ public class Server {
 	 */
 	public void broadcast(String s) throws IOException {
 		logger.info("Broadcast: " + s);
-		for (ClientThread clientThread : getClients()) {
-			if (clientThread != null && clientThread.isAlive()) {
-				clientThread.writer.write(s + "\n");
-				clientThread.writer.flush();
+		ClientThread currClientThread;
+		for (Integer keyIDs : idToClientThread.keySet()) {
+			currClientThread = idToClientThread.get(keyIDs);
+			if (currClientThread != null && currClientThread.isAlive()) {
+				currClientThread.writer.write(s + "\n");
+				currClientThread.writer.flush();
 			}
 		}
 	}
@@ -181,7 +186,7 @@ public class Server {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void sendToClient(String s, int threadID) throws IOException {
-		ClientThread thread = getClients()[threadID];
+		ClientThread thread = idToClientThread.get(threadID);
 		logger.info("Send to Client: " + threadID + " " + s);
 		thread.writer.write(s + "\n");
 		thread.writer.flush();
@@ -191,7 +196,8 @@ public class Server {
 	 * Close socket.
 	 */
 	public void closeSocket() {
-		for (ClientThread clientThread : getClients()) {
+		for (Integer keyIDs : idToClientThread.keySet()) {
+			ClientThread clientThread = idToClientThread.get(keyIDs);
 			if (clientThread != null) {
 				try {
 					clientThread.socket.close();
@@ -219,9 +225,9 @@ public class Server {
 	 *
 	 * @return the clients
 	 */
-	public ClientThread[] getClients() {
+	/*public ClientThread[] getClients() {
 		return clients;
-	}
+	}*/
 
 	/**
 	 * Sets the clients.
@@ -229,9 +235,9 @@ public class Server {
 	 * @param clients
 	 *            the new clients
 	 */
-	public void setClients(ClientThread[] clients) {
+	/*public void setClients(ClientThread[] clients) {
 		this.clients = clients;
-	}
+	} */
 
 	/**
 	 * Gets the client counter.
