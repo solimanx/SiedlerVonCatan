@@ -103,6 +103,7 @@ public class Main extends Application {
             });
             primaryStage.setScene(scene);
             primaryStage.getIcons().add(new Image("/textures/standard/Catan-Logo.png"));
+            primaryStage.setTitle("Start Game");
 
             // primaryStage.sizeToScene();
             // primaryStage.setResizable(false);

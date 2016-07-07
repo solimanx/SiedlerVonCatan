@@ -157,6 +157,10 @@
 	-fx-image: url(/textures/standard/iconOre.png);
 }
 
-.shadow {
+.shadow, .shaddow {
 	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 10, 0, 0, 0);
+}
+
+.harbourGrid .radio-button:disabled {
+  -fx-opacity: 1;
 }

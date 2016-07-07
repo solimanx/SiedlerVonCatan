@@ -22,7 +22,16 @@
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <Pane id="board" fx:id="board" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <Pane fx:id="board" BorderPane.alignment="CENTER">
+               <children>
+                  <StackPane fx:id="fieldPane">
+                     <children>
+                        <Pane fx:id="board" />
+                        <Pane fx:id="overlay" />
+                     </children>
+                  </StackPane>
+               </children>
+            </Pane>
          </center>
       </BorderPane>
       <VBox layoutX="40.0" layoutY="40.0" prefHeight="306.0" prefWidth="170.0" styleClass="player-board" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">

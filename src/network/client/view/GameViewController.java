@@ -173,6 +173,15 @@ public class GameViewController implements Initializable {
 	private Pane board;
 
 	@FXML
+	private Pane overlay;
+
+	@FXML
+	private Pane fieldPane;
+
+	@FXML
+	private StackPane boardStack;
+
+	@FXML
 	private VBox playerVBoxOne;
 
 	@FXML
@@ -949,7 +958,7 @@ public class GameViewController implements Initializable {
 	public void setCorner(int u, int v, int dir, CornerStatus buildType, int modelID) {
 		if (buildType == enums.CornerStatus.VILLAGE) {
 			setVillage(u, v, dir, playerColors.get(modelID));
-			
+
 		} else {
 			setCity(u, v, dir, playerColors.get(modelID));
 		}
@@ -1052,12 +1061,13 @@ public class GameViewController implements Initializable {
 			Circle circle = new Circle(20.0);
 			circle.setTranslateX(fCoord[0]);
 			circle.setTranslateY(fCoord[1]);
+			circle.getStyleClass().add("shaddow");
 			enums.HarbourStatus hstate = viewController.getClientController().getGameLogic().getBoard()
 					.getCornerAt(corner1[0], corner1[1], corner1[2]).getHarbourStatus();
 			circle.setFill(harbourImages.get(hstate));
 			circle.toFront();
 
-			board.getChildren().addAll(triangle, circle);
+			fieldPane.getChildren().addAll(triangle, circle);
 		}
 	}
 
@@ -1547,8 +1557,11 @@ public class GameViewController implements Initializable {
 		 *            the stage
 		 * @return the view board
 		 */
-		public Pane getViewBoard(Stage stage) {
+		public StackPane getViewBoard(Stage stage) {
 			boardPane = new Pane();
+			boardStack = new StackPane();
+			fieldPane = new Pane();
+			overlay = new Pane();
 			boardCenter[0] = stage.getWidth() / 2;
 			boardCenter[1] = stage.getHeight() / 2 - 40;
 			radius = stage.getHeight() / 16;
@@ -1559,12 +1572,21 @@ public class GameViewController implements Initializable {
 			calculateEdgeCorners();
 			initBoard();
 
-			boardPane.getChildren().addAll(0, villageFigures);
-			boardPane.getChildren().addAll(0, streetFigures);
-			boardPane.getChildren().addAll(0, cityFigures);
-			boardPane.getChildren().addAll(0, fieldFigures);
+//			boardPane.getChildren().addAll(0, villageFigures);
+			overlay.getChildren().addAll(0, villageFigures);
+			overlay.getChildren().addAll(0, streetFigures);
+			overlay.getChildren().addAll(0, cityFigures);
 
-			return boardPane;
+			fieldPane.getChildren().addAll(0, fieldFigures);
+
+			boardStack.getChildren().addAll(fieldPane, overlay);
+
+//			boardPane.getChildren().addAll(0, streetFigures);
+//			boardPane.getChildren().addAll(0, cityFigures);
+//			boardPane.getChildren().addAll(0, fieldFigures);
+
+			return boardStack;
+//			return boardPane;
 		}
 
 		/**

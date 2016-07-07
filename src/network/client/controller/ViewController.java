@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import network.client.view.GameViewController;
 import network.client.view.tradeview.TradeViewController;
 import network.server.controller.ServerController;
@@ -95,6 +96,7 @@ public class ViewController {
 		primaryStage.setTitle("Settlers of Catan : Lobby");
 		primaryStage.setResizable(false);
 		primaryStage.setOnCloseRequest(e -> System.exit(0));
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		isChoosingStage = true;
 		// primaryStage.initStyle(StageStyle.UTILITY);
 		//
@@ -155,6 +157,8 @@ public class ViewController {
 			gameViewController.setViewController(this);
 			gameViewController.startScene(primaryStage, theme);
 			isGameView = true;
+			String title = theme.equals("biergarten") ? "Settlers of Biergarten" : "Settlers of Catan";
+			primaryStage.setTitle(title);
 			primaryStage.show();
 
 		} catch (IOException e) {
