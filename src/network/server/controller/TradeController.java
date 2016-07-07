@@ -36,36 +36,46 @@ public class TradeController {
 	 *            the demand
 	 */
 	public void clientOffersTrade(int modelID, int[] supply, int[] demand) {
-		if (checkValidTrade(modelID, supply, demand)) {
+		if (checkValidTradeRequest(modelID, supply, demand)) {
 			TradeOffer offer = new TradeOffer(modelID, tradeCounter, supply, demand);
 			tradeOffers.add(offer);
 			serverController.sendClientOffer(modelID, tradeCounter, supply, demand);
 			tradeCounter++;
 		} else {
-			serverController.serverResponse(modelID, "Unzulässiges Handel");
+			serverController.serverResponse(modelID, "Unzulässiges Handelsangebot");
 		}
 	}
 
 	/**
 	 * Checks whether the trade is valid.
+	 *
 	 * @param modelID
 	 * @param supply
 	 * @param demand
 	 * @return
 	 */
-	private boolean checkValidTrade(int modelID, int[] supply, int[] demand) {
-		//TODO correct iD ?
+	private boolean checkValidTradeRequest(int modelID, int[] supply, int[] demand) {
+		int sum = 0;
 		int[] resources = serverController.gameLogic.getBoard().getPlayer(modelID).getResources();
-		for(int i=0; i<supply.length;i++){
-			if(supply[i]<0 || demand[i]<0){
+		for (int i = 0; i < supply.length; i++) {
+			// negative supply or demand
+			if (supply[i] < 0 || demand[i] < 0) {
 				return false;
 			}
-			else if (supply[i]>resources[i]){
+			// insufficient resources
+			else if (supply[i] > resources[i]) {
 				return false;
 			}
-			else if (supply[i]>0 && demand[i]>0){
+			// trading same resource
+			else if (supply[i] > 0 && demand[i] > 0) {
 				return false;
+			} else {
+				sum += supply[i];
 			}
+		}
+		// 0 supply resources
+		if (sum == 0) {
+			return false;
 		}
 		return true;
 	}
@@ -81,17 +91,53 @@ public class TradeController {
 	 *            the accept
 	 */
 	public void acceptTrade(int modelID, int tradingID, boolean accept) {
-		for (int i = 0; i < tradeOffers.size(); i++) {
-			if (tradeOffers.get(i).getTradingID() == tradingID) {
-				if (accept) {
-					tradeOffers.get(i).acceptingPlayers.add(modelID);
-				} else {
-					tradeOffers.get(i).decliningPlayers.add(modelID);
-				}
+		if (checkValidTradeAccept(modelID, tradingID, accept)) {
+			for (int i = 0; i < tradeOffers.size(); i++) {
+				if (tradeOffers.get(i).getTradingID() == tradingID) {
+					if (accept) {
+						tradeOffers.get(i).acceptingPlayers.add(modelID);
+					} else {
+						tradeOffers.get(i).decliningPlayers.add(modelID);
+					}
 
-				serverController.tradeAccepted(modelID, tradingID, accept);
+					serverController.tradeAccepted(modelID, tradingID, accept);
+				}
+			}
+		} else {
+			serverController.serverResponse(modelID, "Unzulässige Handelsannahme");
+		}
+	}
+
+	/**
+	 * Checks whether the trade can be accepted
+	 *
+	 * @param modelID
+	 * @param tradingID
+	 * @param accept
+	 * @return
+	 */
+	private boolean checkValidTradeAccept(int modelID, int tradingID, boolean accept) {
+		int[] tradeResource = null;
+		// same id check
+		for (int i = 0; i < tradeOffers.size(); i++) {
+			if (tradeOffers.get(i).getTradingID() == tradingID && tradeOffers.get(i).getOwnerID() == modelID) {
+				return false;
+			} else if (tradeOffers.get(i).getTradingID() == tradingID) {
+				tradeResource = tradeOffers.get(i).getDemand();
 			}
 		}
+
+		// afford
+		int[] resources = serverController.gameLogic.getBoard().getPlayer(modelID).getResources();
+
+		if (accept == true) {
+			for (int i = 0; i < resources.length; i++) {
+				if (tradeResource[i] > resources[i]) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	/**
