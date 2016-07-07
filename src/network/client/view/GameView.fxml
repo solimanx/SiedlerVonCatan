@@ -24,10 +24,10 @@
          <center>
             <Pane fx:id="board" BorderPane.alignment="CENTER">
                <children>
-                  <StackPane fx:id="fieldPane">
+                  <StackPane fx:id="boardStack">
                      <children>
-                        <Pane fx:id="board" />
-                        <Pane fx:id="overlay" />
+                        <Pane fx:id="fieldPane" prefHeight="200.0" prefWidth="200.0" />
+                        <Pane fx:id="overlay" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                </children>

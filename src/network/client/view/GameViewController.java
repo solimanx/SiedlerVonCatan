@@ -1061,7 +1061,7 @@ public class GameViewController implements Initializable {
 			Circle circle = new Circle(20.0);
 			circle.setTranslateX(fCoord[0]);
 			circle.setTranslateY(fCoord[1]);
-			circle.getStyleClass().add("shaddow");
+			circle.getStyleClass().add("shadow");
 			enums.HarbourStatus hstate = viewController.getClientController().getGameLogic().getBoard()
 					.getCornerAt(corner1[0], corner1[1], corner1[2]).getHarbourStatus();
 			circle.setFill(harbourImages.get(hstate));

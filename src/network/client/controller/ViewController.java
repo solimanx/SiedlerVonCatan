@@ -96,7 +96,6 @@ public class ViewController {
 		primaryStage.setTitle("Settlers of Catan : Lobby");
 		primaryStage.setResizable(false);
 		primaryStage.setOnCloseRequest(e -> System.exit(0));
-		primaryStage.initStyle(StageStyle.UNDECORATED);
 		isChoosingStage = true;
 		// primaryStage.initStyle(StageStyle.UTILITY);
 		//
