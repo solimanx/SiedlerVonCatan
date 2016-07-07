@@ -1,6 +1,4 @@
-package ai.agents;
-
-import java.util.ArrayList;
+ckage ai.agents;
 
 import ai.AIInputHandler;
 import ai.AdvancedAI;
@@ -30,9 +28,9 @@ public class TradeAgent {
 	public TradeAgent(AdvancedAI aai, ResourceAgent ra) {
 		this.aai = aai;
 		this.ra = ra;
-		//updateAgent();
+		updateAgent();
 	}
-
+	
 	//debug method //TODO
 //	public void setHarbor(){
 //		woodHarbour = false;
@@ -70,17 +68,6 @@ public class TradeAgent {
 			threeOneHarbour = aai.getGl().hasThreeOneHarbour(aai.getID());
 
 	}
-
-
-	//debug method //TODO
-//	public void setHarbor(){
-//		woodHarbour = true;
-//		clayHarbour = true;
-//		woolHarbour = true;
-//		cornHarbour = true;
-//		oreHarbour = true;
-//		threeOneHarbour = true;
-//	}
 
 	/**
 	 * Checks for wood harbour.
@@ -136,20 +123,10 @@ public class TradeAgent {
 		return threeOneHarbour;
 	}
 
-
-	//////////////
-	// SEA TRADE//
-	//////////////
-
 	/**
 	 *
 	 * @param projekt 0,1,2,3
 	 * @return
-	 *
-	 *
-	 *
-	 *
-	 * {WOOD, CLAY, ORE, SHEEP, CORN}
 	 */
 	public boolean isBuildableAfterTrade(int projekt){
 		int[] costs;
@@ -187,12 +164,12 @@ public class TradeAgent {
 				amountResourcesTradable = amountResourcesTradable + tradableResources[i];
 			}
 		}
-		if(amountResourcesNeeded>= 2* amountResourcesTradable){
+		if(amountResourcesNeeded> 2* amountResourcesTradable){
 			return false;
 		}
 
 			// check if has harbor
-
+		
 		if(amountResourcesNeeded*2> amountResourcesTradable){
 			return false;
 		}
@@ -290,7 +267,6 @@ public class TradeAgent {
 
 			// check if has 3:1
 
-
 			if(amountResourcesNeeded*3> amountResourcesTradable){
 				return false;
 			}
@@ -318,9 +294,7 @@ public class TradeAgent {
 
 			// 4:1
 
-
 			if(amountResourcesNeeded * 4 > amountResourcesTradable){
-
 				return false;
 			}
 
@@ -351,221 +325,6 @@ public class TradeAgent {
 				return false;
 			}
 	}
-
-	/**
-	 *  call this method only if isBuildableAfterTrade is true!!
-	 *
-	 * @param projekt legal values : 0=STREET,1=VILLAGE,2=CITY,3=DEVCARD
-	 * @return ArrayList of TradeOffers of required trades for building
-	 */
-	public ArrayList<TradeOffer> tradesForBuilding(int projekt){
-		ArrayList<TradeOffer> result = new ArrayList<TradeOffer>();
-		int[] costs;
-		int[] ownResources = aai.getResourceAgent().getOwnResources();
-		int[] resourcesNeeded = new int[5];
-		int[] tradableResources = new int[5];
-		switch (projekt) {
-		case 0: costs = DefaultSettings.STREET_BUILD_COST;
-			break;
-		case 1:
-			costs = DefaultSettings.VILLAGE_BUILD_COST;
-			break;
-		case 2:
-			costs = DefaultSettings.CITY_BUILD_COST;
-			break;
-		case 3 :
-			costs = DefaultSettings.DEVCARD_BUILD_COST;
-			break;
-		default:
-			throw new IllegalStateException("currentBuyingFocus must not be any other number than 0,1,2,3!!!!");
-		}
-		for(int i = 0; i<5; i++){
-			resourcesNeeded[i] = costs[i] - ownResources[i];
-			tradableResources[i] = ownResources[i] - costs[i];
-		}
-		int amountResourcesNeeded = 0;
-		for(int i = 0; i<5; i++){
-			if(resourcesNeeded[i]>0){
-				amountResourcesNeeded = amountResourcesNeeded + resourcesNeeded[i];
-			}
-		}
-		int amountResourcesTradable = 0;
-		for(int i = 0; i<5; i++){
-			if(tradableResources[i]>0){
-				amountResourcesTradable = amountResourcesTradable + tradableResources[i];
-			}
-		}
-
-			// check if has harbor
-			if(amountResourcesNeeded>0){
-				if(hasWoodHarbour()){
-					while(tradableResources[0]>1 && amountResourcesNeeded>0 && resourcesNeeded[0]<=0){
-						tradableResources[0] = tradableResources[0]-2;
-						amountResourcesNeeded--;
-						amountResourcesTradable = amountResourcesTradable-2;
-						boolean loop = true;
-						int counter = 0;
-						int[] demand = {0,0,0,0,0};
-						int[] offer = {2,0,0,0,0};
-						while(loop && counter<5){
-							if(resourcesNeeded[counter]>0){
-								resourcesNeeded[counter]--;
-								loop = false;
-								demand[counter] = 1;
-							}
-							counter++;
-						}
-						result.add(new TradeOffer(offer, demand));
-					}
-				}
-			}
-			if(amountResourcesNeeded>0){
-				if(hasClayHarbour()){
-					while(tradableResources[1]>1 && amountResourcesNeeded>0 && resourcesNeeded[1]<=0){
-						tradableResources[1] = tradableResources[1]-2;
-						amountResourcesNeeded--;
-						amountResourcesTradable = amountResourcesTradable-2;
-						boolean loop = true;
-						int counter = 0;
-						int[] demand = {0,0,0,0,0};
-						int[] offer = {0,2,0,0,0};
-						while(loop && counter<5){
-							if(resourcesNeeded[counter]>0){
-								resourcesNeeded[counter]--;
-								loop = false;
-								demand[counter] = 1;
-							}
-							counter++;
-						}
-						result.add(new TradeOffer(offer, demand));
-					}
-				}
-			}
-			if(amountResourcesNeeded>0){
-				if(hasOreHarbour()){
-					while(tradableResources[2]>1 && amountResourcesNeeded>0 && resourcesNeeded[2]<=0){
-						tradableResources[2] = tradableResources[2]-2;
-						amountResourcesNeeded--;
-						amountResourcesTradable = amountResourcesTradable-2;
-						boolean loop = true;
-						int counter = 0;
-						int[] demand = {0,0,0,0,0};
-						int[] offer = {0,0,2,0,0};
-						while(loop && counter<5){
-							if(resourcesNeeded[counter]>0){
-								resourcesNeeded[counter]--;
-								loop = false;
-								demand[counter] = 1;
-							}
-							counter++;
-						}
-						result.add(new TradeOffer(offer, demand));
-					}
-				}
-			}
-			if(amountResourcesNeeded>0){
-				if(hasWoolHarbour()){
-					while(tradableResources[3]>1 && amountResourcesNeeded>0 && resourcesNeeded[3]<=0){
-						tradableResources[3] = tradableResources[3]-2;
-						amountResourcesNeeded--;
-						amountResourcesTradable = amountResourcesTradable-2;
-						boolean loop = true;
-						int counter = 0;
-						int[] demand = {0,0,0,0,0};
-						int[] offer = {0,0,0,2,0};
-						while(loop && counter<5){
-							if(resourcesNeeded[counter]>0){
-								resourcesNeeded[counter]--;
-								loop = false;
-								demand[counter] = 1;
-							}
-							counter++;
-						}
-						result.add(new TradeOffer(offer, demand));
-					}
-				}
-			}
-			if(amountResourcesNeeded>0){
-				if(hasCornHarbour()){
-					while(tradableResources[4]>1 && amountResourcesNeeded>0 && resourcesNeeded[4]<=0){
-						tradableResources[4] = tradableResources[4]-2;
-						amountResourcesNeeded--;
-						amountResourcesTradable = amountResourcesTradable-2;
-						boolean loop = true;
-						int counter = 0;
-						int[] demand = {0,0,0,0,0};
-						int[] offer = {0,0,0,0,2};
-						while(loop && counter<5){
-							if(resourcesNeeded[counter]>0){
-								resourcesNeeded[counter]--;
-								loop = false;
-								demand[counter] = 1;
-							}
-							counter++;
-						}
-						result.add(new TradeOffer(offer, demand));
-					}
-				}
-			}
-
-			// check if has 3:1
-
-			if(amountResourcesNeeded>0){
-				if(hasThreeOneHarbour()){
-					for(int i = 0 ; i<5; i++){
-						while(amountResourcesNeeded>0 && tradableResources[i]>2 && resourcesNeeded[i] <= 0){
-							amountResourcesNeeded--;
-							amountResourcesTradable = amountResourcesTradable-3;
-							tradableResources[i] = tradableResources[i]-3;
-							boolean loop = true;
-							int counter = 0;
-							int[] demand = {0,0,0,0,0};
-							int[] offer = {0,0,0,0,0};
-							while(loop && counter<5){
-								if(resourcesNeeded[counter]>0){
-									resourcesNeeded[counter]--;
-									loop = false;
-									demand[counter] = 1;
-								}
-								counter++;
-							}
-							offer[i] = 3;
-							result.add(new TradeOffer(offer, demand));
-						}
-					}
-				}
-			}
-
-			// 4:1
-
-			if(amountResourcesNeeded>0){
-
-					for(int i = 0 ; i<5; i++){
-						while(amountResourcesNeeded>0 && tradableResources[i]>3 && resourcesNeeded[i] <= 0){
-							amountResourcesNeeded--;
-							amountResourcesTradable = amountResourcesTradable-4;
-							tradableResources[i] = tradableResources[i]-4;
-							boolean loop = true;
-							int counter = 0;
-							int[] demand = {0,0,0,0,0};
-							int[] offer = {0,0,0,0,0};
-							while(loop && counter<5){
-								if(resourcesNeeded[counter]>0){
-									resourcesNeeded[counter]--;
-									loop = false;
-									demand[counter] = 1;
-								}
-								counter++;
-							}
-							offer[i] = 4;
-							result.add(new TradeOffer(offer, demand));
-						}
-					}
-			}
-		return result;
-	}
-
-
 
 
 	////////////////////
