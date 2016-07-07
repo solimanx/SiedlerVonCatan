@@ -168,7 +168,7 @@ public class ServerController {
 		gameLogic.getBoard().getPlayer(playerID).setPlayerState(PlayerState.WAITING_FOR_GAMESTART);
 		statusUpdate(playerID);
 
-		if (amountPlayers >= 3 && amountPlayers == server.getClientCounter()) {
+		if (amountPlayers >= 3 && amountPlayers == server.getConnectedPlayers()) {
 			boolean allReady = true;
 			for (int i = 0; i < amountPlayers; i++) {
 				if (gameLogic.getBoard().getPlayer(i).getPlayerState() != PlayerState.WAITING_FOR_GAMESTART) {

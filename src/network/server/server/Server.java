@@ -26,6 +26,8 @@ public class Server {
 	private ServerInputHandler serverInputHandler;
 	private ServerOutputHandler serverOutputHandler;
 	private int serverPort;
+	
+	private int connectedPlayers;
 
 	/**
 	 * Instantiates a new server.
@@ -102,6 +104,7 @@ public class Server {
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				logger.info("Client connected! " + socket.getRemoteSocketAddress());
+				connectedPlayers++;
 				// outputHandler.hello(serverVersion, protocolVersion,
 				// threadID);
 				inputHandler.hello(threadID);
@@ -115,6 +118,7 @@ public class Server {
 			} catch (IOException e) {
 				e.printStackTrace();
 				inputHandler.lostConnection(threadID);
+				connectedPlayers--;
 				try {
 					socket.close();
 				} catch (IOException e1) {
@@ -236,5 +240,9 @@ public class Server {
 	 */
 	public int getClientCounter() {
 		return clientCounter;
+	}
+	
+	public int getConnectedPlayers(){
+		return connectedPlayers;
 	}
 }
