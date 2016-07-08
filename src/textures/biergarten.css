@@ -167,4 +167,8 @@
   -fx-opacity: 1;
 }
 
+.hexborder {
+	-fx-stroke: rgba(110,110,110,0.3);
+}
+
 

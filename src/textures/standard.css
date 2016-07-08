@@ -164,3 +164,7 @@
 .harbourGrid .radio-button:disabled {
   -fx-opacity: 1;
 }
+
+.hexborder {
+	-fx-stroke: #332E2C;
+}

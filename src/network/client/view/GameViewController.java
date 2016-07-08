@@ -1737,7 +1737,7 @@ public class GameViewController implements Initializable {
 		public Polygon drawHexagon(double[] points) {
 			Polygon hexagon = new Polygon(points);
 			hexagon.setFill(Color.LIGHTSKYBLUE);
-			hexagon.setStroke(Color.WHITE);
+			hexagon.getStyleClass().add("hexborder");
 			hexagon.setStrokeWidth(3);
 			return hexagon;
 		}
