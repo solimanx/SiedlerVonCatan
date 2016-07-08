@@ -224,8 +224,7 @@ public class StartViewController {
 			primaryStage.hide();
 			String server = !aiServer.getText().equals("") ? aiServer.getText() : "localhost";
 			int aip = !aiPort.getText().equals("") ? Integer.parseInt(aiPort.getText()) : 8080;
-			pa = new AdvancedAI(server, aip);
-			pa.commence();
+			pa2 = new AdvancedAI(server, aip);
 			break;
 		default:
 			System.out.println(rb.getText());

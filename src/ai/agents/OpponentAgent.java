@@ -305,4 +305,10 @@ public class OpponentAgent {
 		}
 	}
 
+	public int getAmountPlayer() {
+		return amountPlayer;
+	}
+	
+	
+
 }

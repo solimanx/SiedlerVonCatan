@@ -6,6 +6,7 @@ package ai;
 import java.util.ArrayList;
 
 import enums.CardType;
+import enums.CornerStatus;
 import enums.PlayerState;
 import enums.ResourceType;
 import model.HexService;
@@ -25,6 +26,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
+import ai.agents.CornerAgent;
 import ai.agents.OpponentAgent;
 import protocol.configuration.*;
 import protocol.connection.*;
@@ -46,7 +48,7 @@ import settings.DefaultSettings;
  * Handling all input for the AI
  */
 public class AIInputHandler extends ClientInputHandler {
-	private PrimitiveAI ai;
+	private AdvancedAI ai;
 	private static Logger logger = LogManager.getLogger(AIInputHandler.class.getSimpleName());
 	private Parser parser = new Parser();
 
@@ -58,9 +60,9 @@ public class AIInputHandler extends ClientInputHandler {
 	 * @param primitiveAI
 	 *            the primitive AI
 	 */
-	protected AIInputHandler(PrimitiveAI primitiveAI) {
+	protected AIInputHandler(AdvancedAI advAI) {
 		super(null);
-		ai = primitiveAI;
+		ai = advAI;
 
 	}
 
@@ -338,15 +340,11 @@ public class AIInputHandler extends ClientInputHandler {
 				break;
 			// if it's me and i have to build initial villages
 			case BUILDING_VILLAGE:
-				if (ai.getSecondVillageLocation() == null) {
 					ai.initialVillage();
-				}
 				break;
 			// if it's me and i have to build initial roads
 			case BUILDING_STREET:
-				if (ai.getSecondRoadLocation() == null) {
 					ai.initialRoad();
-				}
 				break;
 			// if it's me and i have to roll dice
 			case DICEROLLING:

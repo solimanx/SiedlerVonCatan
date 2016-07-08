@@ -10,6 +10,7 @@ import enums.ResourceType;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
+import model.objects.Field;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
@@ -46,6 +47,8 @@ public class ResourceAgent {
 	// {THREE_TO_ONE, WOOD, CLAY, ORE, SHEEP, CORN}
 	// maybe in trading agent?
 	private boolean[] harbours = { false, false, false, false, false, false };
+	private int[] myResourceWeight;
+	private int[] globalResourceWeight;
 
 	/**
 	 * Instantiates a new resource agent.
@@ -632,5 +635,44 @@ public class ResourceAgent {
 		return ProtocolToModel.getResourceFromIndex(c);
 
 	}
+
+	public void calculateMyResourceWeight() {
+		ArrayList<CornerAgent> agents = aai.getMyCornerAgents();
+		int[] resourceWeighting = {50, 50, 50, 50, 50};
+		Field[] currFields;
+		Integer currResIndex;
+		for (int i = 0; i < agents.size();i++){
+			currFields = agents.get(i).getFields();
+			for (int j = 0; j < currFields.length; j++) {
+				currResIndex = DefaultSettings.RESOURCE_VALUES.get(currFields[j].getResourceType());
+				if (currResIndex != null && currResIndex < 5){
+					resourceWeighting[currResIndex] -= 100 * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+				}
+			}
+		}
+		this.myResourceWeight = resourceWeighting;
+		
+	}
+	
+	public void calculateGlobalResourceWeight() {
+		int decreaseFactor = 100 / (aai.getOpponentAgent().getAmountPlayer() + 1); //ownPlayer
+		int[] resourceWeighting = {50, 50, 50, 50, 50};
+		CornerAgent[] cornerAgents = aai.getCornerAgents();
+		Integer currResIndex;
+		Field[] currFields;
+		for (int i = 0; i < cornerAgents.length;i++){
+			if (cornerAgents[i].getPlayerID() != null){
+				currFields = cornerAgents[i].getFields();
+				for (int j = 0; j < currFields.length; j++) {
+					currResIndex = DefaultSettings.RESOURCE_VALUES.get(currFields[j].getResourceType());
+					if (currResIndex != null && currResIndex < 5){
+						resourceWeighting[currResIndex] -= decreaseFactor * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+					}
+				}
+			}
+		}
+		this.globalResourceWeight = resourceWeighting;
+	}
+	
 
 }

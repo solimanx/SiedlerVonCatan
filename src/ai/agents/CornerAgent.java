@@ -23,6 +23,8 @@ public class CornerAgent {
 	private CornerStatus state;
 	// Whether the corner is also a harbor
 	private HarbourStatus harbour_state;
+	//owned by player
+	private Integer player_id;
 	// Location of the corner
 	private int[] location = new int[3];
 	// Fields around it
@@ -355,6 +357,22 @@ public class CornerAgent {
 	 */
 	public Field[] getFields() {
 		return f;
+	}
+	
+	public CornerStatus getState() {
+		return state;
+	}
+
+	public void setState(CornerStatus state) {
+		this.state = state;
+	}
+
+	public Integer getPlayerID() {
+		return player_id;
+	}
+
+	public void setPlayerID(Integer player_id) {
+		this.player_id = player_id;
 	}
 
 }

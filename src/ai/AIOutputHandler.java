@@ -226,7 +226,6 @@ public class AIOutputHandler {
 	 * End my turn.
 	 */
 	public void respondEndTurn() {
-		ai.updateCards();
 		ProtocolEndTurn pet = new ProtocolEndTurn();
 		Response r = new Response();
 

@@ -3,6 +3,7 @@ package ai;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import ai.agents.BanditAgent;
@@ -13,10 +14,13 @@ import ai.agents.ResourceAgent;
 import ai.agents.TradeAgent;
 import enums.CornerStatus;
 import enums.ResourceType;
+import model.Board;
+import model.GameLogic;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
+import model.objects.PlayerModel;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
@@ -27,15 +31,29 @@ import settings.DefaultSettings;
  * behind the AI.
  *
  */
-public class AdvancedAI extends PrimitiveAI {
+public class AdvancedAI {
+	
+	private GameLogic gl;
+
+	private Board board;
+	
+	private PlayerModel me;
+	private int ID;
+	private int colorCounter = 0;
+	private boolean started = false;
+	
+	private final String PROTOCOL = DefaultSettings.PROTOCOL_VERSION;
+	private final String VERSION = DefaultSettings.AI_VERSION;
+	
 	private ResourceBundle rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 
-	private CornerAgent[] cornerAgent = new CornerAgent[Integer.parseInt(rb.getString("CORNER_AGENTS"))];
-	private CardAgent cardAgent = new CardAgent(this);
-	private ResourceAgent resourceAgent = new ResourceAgent(this);
-	private OpponentAgent opponentAgent = new OpponentAgent();
-	private TradeAgent tradeAgent = new TradeAgent(this, resourceAgent);
-	private BanditAgent banditAgent = new BanditAgent(this, opponentAgent);
+	private CornerAgent[] cornerAgent;
+	private CardAgent cardAgent;
+	private ResourceAgent resourceAgent;
+	private OpponentAgent opponentAgent;
+	private TradeAgent tradeAgent;
+
+	private BanditAgent banditAgent;
 
 	private ArrayList<CornerAgent> myCornerAgents = new ArrayList<CornerAgent>();
 
@@ -45,6 +63,8 @@ public class AdvancedAI extends PrimitiveAI {
 			Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 
 	private int[] globalResourceWeight = { 100, 100, 100, 100, 100 };
+	
+	private int[] buildingWeight = new int[4];
 
 	private int initialRoundCounter = 0;
 
@@ -52,6 +72,10 @@ public class AdvancedAI extends PrimitiveAI {
 	private double monopolyValue;
 	private double inventionValue;
 	private double roadBuildingValue;
+
+	private PrimitiveAI primitiveAI;
+
+	private AIOutputHandler pO;
 
 	/**
 	 * Instantiates a new advanced AI.
@@ -62,20 +86,27 @@ public class AdvancedAI extends PrimitiveAI {
 	 *            the port
 	 */
 	public AdvancedAI(String serverHost, int port) {
-		super(serverHost, port);
+		
+		AIInputHandler inputHa = new AIInputHandler(this);
+		this.primitiveAI = new PrimitiveAI(serverHost,port,inputHa);
+		this.pO = new AIOutputHandler(primitiveAI);
+		
+		this.board = new Board();
+		this.gl = new GameLogic(board);
+		
+		primitiveAI.commence();
+		
 		initializeDiceRollProbabilities();
+		//Integer.parseInt(rb.getString("CORNER_AGENTS"))
+		this.cornerAgent = new CornerAgent[54];
+	    this.cardAgent = new CardAgent(this);
+	    this.resourceAgent = new ResourceAgent(this);
+		this.opponentAgent = new OpponentAgent();
+		this.tradeAgent =  new TradeAgent(this, resourceAgent);
+		this.banditAgent = new BanditAgent(this, opponentAgent);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see ai.PrimitiveAI#initialVillage()
-	 */
-	@Override
-	public void initialVillage() {
-		if (initialRoundCounter == 1) {
-			subtractResources(myCornerAgents.get(0));
-		}
+	
+	private void initializeCornerAgents(){
 		int c = 0;
 		int radius = DefaultSettings.BOARD_RADIUS;
 		for (int i = -radius; i <= radius; i++) {
@@ -88,6 +119,280 @@ public class AdvancedAI extends PrimitiveAI {
 					}
 				}
 			}
+		}
+	}
+
+
+	/**
+	 * Giving up half of resources by order.
+	 */
+	protected void loseToBandit() {
+		// Count all my resources
+		int[] myResources = getMe().getResources().clone();
+		int sum = 0;
+
+		for (int i = 0; i < 5; i++)
+			sum += getMe().getResourceAmountOf(i);
+		// loss is half of sum
+		int loss = sum / 2;
+		// losses array
+		int[] losses = { 0, 0, 0, 0, 0 };
+
+		// until losses amount is reached
+		while (loss > 0) {
+			// scan every resource
+			for (int j = 0; j < 5; j++) {
+				// if there's some of it
+				if (myResources[j] > 0) {
+					// decrement it from your list
+					myResources[j] -= 1;
+					// increment it to losses array
+					losses[j]++;
+					loss -= 1;
+					// check if losses amount is reached
+					break;
+				}
+				// if there's none of it
+				else {
+					// check the next resource type
+					continue;
+				}
+
+			}
+		}
+
+		// send the losses to the output handler
+		pO.respondRobberLoss(losses);
+
+	}
+
+	// ================================================================================
+	// BOARD UPDATES
+	// ================================================================================
+
+	/**
+	 * Initialize board.
+	 *
+	 * @param fields
+	 *            the fields
+	 * @param corners
+	 *            the corners
+	 * @param streets
+	 *            the streets
+	 * @param harbourCorners
+	 *            the harbour corners
+	 * @param banditLocation
+	 *            the bandit location
+	 */
+	protected void updateBoard(Field[] fields, Corner[] corners, ArrayList<Edge> streets, Corner[] harbourCorners,
+			String banditLocation) {
+
+		this.me = new PlayerModel(ID);
+		for (Field f : fields) {
+			String location = f.getFieldID();
+			int[] coords = ProtocolToModel.getFieldCoordinates(location);
+			Field bField = gl.getBoard().getFieldAt(coords[0], coords[1]);
+			bField.setFieldID(location);
+			bField.setDiceIndex(f.getDiceIndex());
+			;
+			bField.setResourceType(f.getResourceType());
+		}
+		for (Corner c : corners) {
+			String location = c.getCornerID();
+			int coords[] = ProtocolToModel.getCornerCoordinates(location);
+			Corner bCorner = gl.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
+			bCorner.setCornerID(location);
+			bCorner.setOwnerID(c.getOwnerID());
+			bCorner.setStatus(c.getStatus());
+		}
+		for (Edge s : streets) {
+			String location = s.getEdgeID();
+			int coords[] = ProtocolToModel.getEdgeCoordinates(location);
+			Edge bEdge = gl.getBoard().getEdgeAt(coords[0], coords[1], coords[2]);
+			bEdge.setEdgeID(location);
+			bEdge.setHasStreet(s.isHasStreet());
+			bEdge.setOwnedByPlayer(s.getOwnerID());
+		}
+		for (Corner c : harbourCorners) {
+			String location = c.getCornerID();
+			int[] coords = ProtocolToModel.getCornerCoordinates(location);
+			Corner bCorner = gl.getBoard().getCornerAt(coords[0], coords[1], coords[2]);
+			bCorner.setCornerID(location);
+			bCorner.setHarbourStatus(c.getHarbourStatus());
+		}
+
+		gl.getBoard().setBandit(banditLocation);
+		gl.getBoard().deletePlayers();
+		initializeCornerAgents();
+	}
+
+	/**
+	 * Updates a new village in the board.
+	 *
+	 * @param x
+	 *            Axial-x corner coordinate
+	 * @param y
+	 *            Axial-y corner coordinate
+	 * @param dir
+	 *            corner direction
+	 * @param playerID
+	 *            owner
+	 */
+	protected void updateVillage(int x, int y, int dir, int playerID) {
+		Corner c = gl.getBoard().getCornerAt(x, y, dir);
+		c.setStatus(enums.CornerStatus.VILLAGE);
+		c.setOwnerID(playerID);
+		CornerAgent ca = getCornerAgentByID(c.getCornerID());
+		ca.setPlayerID(playerID);
+		ca.setState(CornerStatus.VILLAGE);
+		Corner[] neighbors = gl.getBoard().getAdjacentCorners(x, y, dir);
+		for (int i = 0; i < neighbors.length; i++) {
+			if (neighbors[i] != null) {
+				getCornerAgentByID(neighbors[i].getCornerID()).setState(CornerStatus.BLOCKED);
+				neighbors[i].setStatus(CornerStatus.BLOCKED);
+			}
+		}
+	}
+
+	/**
+	 * Updates a new road in the board.
+	 *
+	 * @param i
+	 *            Axial-x edge coordinate
+	 * @param j
+	 *            Axial-y edge coordinate
+	 * @param k
+	 *            edge direction
+	 * @param playerID
+	 *            owner
+	 */
+	protected void updateRoad(int i, int j, int k, int playerID) {
+		Edge e = gl.getBoard().getEdgeAt(i, j, k);
+		e.setHasStreet(true);
+		e.setOwnedByPlayer(playerID);
+
+	}
+
+	/**
+	 * Updates a new city in the board.
+	 *
+	 * @param i
+	 *            Axial-x corner coordinate
+	 * @param j
+	 *            Axial-y corner coordinate
+	 * @param k
+	 *            corner direction
+	 * @param playerID
+	 *            owner
+	 */
+	protected void updateCity(int i, int j, int k, int playerID) {
+		Corner c = gl.getBoard().getCornerAt(i, j, k);
+		c.setStatus(enums.CornerStatus.CITY);
+		getCornerAgentByID(c.getCornerID()).setState(CornerStatus.CITY);
+
+	}
+
+	/**
+	 * Update robber.
+	 *
+	 * @param locationID
+	 *            the location ID
+	 */
+	protected void updateRobber(String locationID) {
+		gl.getBoard().setBandit(locationID);
+
+	}
+
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public int getID() {
+		return ID;
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param playerID
+	 *            the new id
+	 */
+	protected void setID(int playerID) {
+		ID = playerID;
+
+	}
+
+	/**
+	 * Gets the color counter.
+	 *
+	 * @return the color counter
+	 */
+	protected int getColorCounter() {
+		return colorCounter;
+	}
+
+	/**
+	 * Sets the color counter.
+	 *
+	 * @param colorCounter
+	 *            the new color counter
+	 */
+	protected void setColorCounter(int colorCounter) {
+		this.colorCounter = colorCounter;
+	}
+
+	/**
+	 * Checks if is started.
+	 *
+	 * @return true, if is started
+	 */
+	protected boolean isStarted() {
+		return started;
+	}
+
+	/**
+	 * Sets the started.
+	 *
+	 * @param started
+	 *            the new started
+	 */
+	protected void setStarted(boolean started) {
+		this.started = started;
+	}
+
+
+	/**
+	 * Gets the me.
+	 *
+	 * @return the me
+	 */
+	public PlayerModel getMe() {
+		return me;
+	}
+
+	/**
+	 * Gets the gl.
+	 *
+	 * @return the gl
+	 */
+	public GameLogic getGl() {
+		return gl;
+	}
+
+
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see ai.PrimitiveAI#initialVillage()
+	 */
+	public void initialVillage() {
+		if (initialRoundCounter == 1) {	
+			subtractResources(myCornerAgents.get(0));
+			
 		}
 		int x = 0;
 		int y = 0;
@@ -108,7 +413,7 @@ public class AdvancedAI extends PrimitiveAI {
 			// cornerAgent[i].calculateInitialVillageUtility());
 		}
 		myCornerAgents.add(cornerAgent[d]);
-		super.pO.requestBuildVillage(x, y, z);
+		pO.requestBuildVillage(x, y, z);
 
 	}
 
@@ -117,15 +422,20 @@ public class AdvancedAI extends PrimitiveAI {
 	 *
 	 * @see ai.PrimitiveAI#initialRoad()
 	 */
-	@Override
 	public void initialRoad() {
 		setResourceWeighting(new int[] { 0, 0, 0, 0, 0 });
 		myCornerAgents.get(initialRoundCounter).calculateInitialRoad();
 		int[] rC = myCornerAgents.get(initialRoundCounter).getBestRoad();
-		super.pO.requestBuildRoad(rC[0], rC[1], rC[2]);
+		pO.requestBuildRoad(rC[0], rC[1], rC[2]);
 
 		initialRoundCounter++;
 		resourceAgent.initializeResources();
+		if (initialRoundCounter > 1){
+			resourceAgent.calculateMyResourceWeight();
+			//TODO; erst am Ende der initial phase
+			//resourceAgent.calculateGlobalResourceWeight();
+			//TODO: Strategie festlegen
+		}
 
 	}
 
@@ -134,7 +444,6 @@ public class AdvancedAI extends PrimitiveAI {
 	 *
 	 * @see ai.PrimitiveAI#actuate()
 	 */
-	@Override
 	public void actuate() {
 		resourceAgent.update();
 
@@ -246,7 +555,6 @@ public class AdvancedAI extends PrimitiveAI {
 	 *
 	 * @see ai.PrimitiveAI#moveRobber()
 	 */
-	@Override
 	protected void moveRobber() {
 		banditAgent.moveRobber();
 		int[] coords = banditAgent.bestNewRobber();
@@ -398,7 +706,6 @@ public class AdvancedAI extends PrimitiveAI {
 	 *
 	 * @see ai.PrimitiveAI#getResourceAgent()
 	 */
-	@Override
 	public ResourceAgent getResourceAgent() {
 		return this.resourceAgent;
 
@@ -409,7 +716,6 @@ public class AdvancedAI extends PrimitiveAI {
 	 *
 	 * @see ai.PrimitiveAI#updateCards()
 	 */
-	@Override
 	public void updateCards() {
 		cardAgent.updateCards();
 	}
@@ -418,7 +724,6 @@ public class AdvancedAI extends PrimitiveAI {
 		return opponentAgent;
 	}
 
-	@Override
 	public void setOpponentAgent(OpponentAgent opponentAgent) {
 		this.opponentAgent = opponentAgent;
 	}
@@ -471,5 +776,35 @@ public class AdvancedAI extends PrimitiveAI {
 		resources[ModelToProtocol.getIndexResource(rt2)]++;
 		pO.requestPlayInventionCard(resources);
 		
+	}
+	
+	public ArrayList<CornerAgent> getMyCornerAgents() {
+		return myCornerAgents;
+	}
+	
+	public CornerAgent[] getCornerAgents(){
+		return cornerAgent;
+	}
+	
+	protected AIOutputHandler getOutput() {
+		return this.pO;
+	}
+	
+	/**
+	 * Gets the version.
+	 *
+	 * @return the version
+	 */
+	protected String getVersion() {
+		return VERSION;
+	}
+
+	/**
+	 * Gets the protocol.
+	 *
+	 * @return the protocol
+	 */
+	protected String getProtocol() {
+		return PROTOCOL;
 	}
 }
