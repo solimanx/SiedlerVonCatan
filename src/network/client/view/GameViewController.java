@@ -155,6 +155,9 @@ public class GameViewController implements Initializable {
 	private Button buyCardButton;
 
 	@FXML
+	private Button secretButton;
+	
+	@FXML
 	private Text playerTwoCards;
 
 	@FXML
@@ -769,6 +772,38 @@ public class GameViewController implements Initializable {
 			public void handle(ActionEvent event) {
 				cheatStage.close();
 				viewController.getClientController().getClientOuptputHandler().sendCheat(cheatField.getText());
+
+			}
+		});
+
+		cheatRoot.getChildren().addAll(cheatField, ok);
+		cheatStage.setScene(cheatScene);
+		cheatStage.show();
+	}
+	
+	/**
+	 * Handle secret button.
+	 *
+	 * @param event
+	 *            the event
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@FXML
+	void handleSecretButton(ActionEvent event) throws IOException {
+		Stage cheatStage = new Stage();
+		VBox cheatRoot = new VBox();
+		Scene cheatScene = new Scene(cheatRoot);
+		TextField cheatField = new TextField();
+		Button ok = new Button("Send Cheat");
+		Soundeffects.SELECT.play();
+		// playButtonSound();
+		ok.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				viewController.getClientController().getClientOuptputHandler().sendCheat(cheatField.getText());
+				cheatStage.close();
 
 			}
 		});
