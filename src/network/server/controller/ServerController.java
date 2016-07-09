@@ -1139,8 +1139,11 @@ public class ServerController {
 		if (!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
 			if (gameLogic.checkBuyDevCard(modelID)) {
 				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
+				
 				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
 				costsToAll(modelID, DefaultSettings.DEVCARD_BUILD_COST, true);
+				resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
+				
 				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
 				if (devCard.getName().equals("Victory Card")) {
 					increaseHiddenVictoryPoints(modelID, 1);
@@ -1701,7 +1704,8 @@ public class ServerController {
 				}
 			}
 			if (resAmountCheck > 2) {
-				serverResponse(modelID, "Du hast du viele Resourcen angegeben; jetzt bekommst du keine ;)");
+				//TODO: fix?
+				serverResponse(modelID, "Zu viele Resourcen angegeben");
 				resourceStackIncrease(obtain);
 			} else {
 				addToPlayersResource(modelID, obtain);
@@ -1887,7 +1891,7 @@ public class ServerController {
 	 */
 	protected void resourceStackIncrease(ResourceType resType) {
 		int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
-		resourceStack[resIndex] = resourceStack[resIndex]++;
+		resourceStack[resIndex]++;
 	}
 
 	/**
@@ -1896,7 +1900,7 @@ public class ServerController {
 	 * @param resources
 	 *            the resources
 	 */
-	private void resourceStackIncrease(int[] resources) {
+	protected void resourceStackIncrease(int[] resources) {
 		for (int i = 0; i < resources.length; i++) {
 			for (int j = 0; j < resources[i]; j++) {
 				resourceStackIncrease(DefaultSettings.RESOURCE_ORDER[i]);

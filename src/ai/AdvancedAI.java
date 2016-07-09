@@ -71,10 +71,10 @@ public class AdvancedAI {
 
 	private int initialRoundCounter = 0;
 	private int roadCounter = 0;
-	
-	//a counter for the AI InputHandler;
+
+	// a counter for the AI InputHandler;
 	protected int devCardActionCounter = 0;
-	
+
 	protected boolean isInitialPhase;
 
 	private double knightValue;
@@ -89,6 +89,8 @@ public class AdvancedAI {
 	protected Integer tradeWaitForBuilding;
 
 	protected CardType currentDevCard;
+	
+	protected CardType boughtDevCard;
 
 	/**
 	 * Instantiates a new advanced AI.
@@ -265,12 +267,12 @@ public class AdvancedAI {
 				neighbors[i].setStatus(CornerStatus.BLOCKED);
 			}
 		}
-		if (!isInitialPhase){
-		if (playerID == getMe().getID()){
-			resourceAgent.calculateMyResourceWeight();
-		}
-		resourceAgent.calculateGlobalResourceWeight();
-		calculateBuildingWeighting();
+		if (!isInitialPhase) {
+			if (playerID == getMe().getID()) {
+				resourceAgent.calculateMyResourceWeight();
+			}
+			resourceAgent.calculateGlobalResourceWeight();
+			calculateBuildingWeighting();
 		}
 	}
 
@@ -309,15 +311,18 @@ public class AdvancedAI {
 		// & e.g. no streets left the building weight will turn 0
 		buildingWeight[0] = (50.0 - ((resourceWeighting[0] + resourceWeighting[1]) / 2)) * 0.2
 				* ((double) getMe().getAmountStreets() / (double) DefaultSettings.START_AMOUNT_STREETS);
-		buildingWeight[1] = (50.0 - ((resourceWeighting[0] + resourceWeighting[1] + resourceWeighting[3] + resourceWeighting[4])
-				/ 4)) * ((double) getMe().getAmountVillages() / (double) DefaultSettings.START_AMOUNT_VILLAGES);
+		buildingWeight[1] = (50.0
+				- ((resourceWeighting[0] + resourceWeighting[1] + resourceWeighting[3] + resourceWeighting[4]) / 4))
+				* ((double) getMe().getAmountVillages() / (double) DefaultSettings.START_AMOUNT_VILLAGES);
 		buildingWeight[2] = (50.0 - (resourceWeighting[2] * 3 + resourceWeighting[4] * 2) / 5)
 				* ((double) getMe().getAmountCities() / (double) DefaultSettings.START_AMOUNT_CITIES);
 		// TODO: currently only knight cards are considered
 		buildingWeight[3] = (50.0 - (resourceWeighting[2] + resourceWeighting[3] + resourceWeighting[4]) / 3) * 0.5
-				* ((double) (DefaultSettings.AMOUNT_KNIGHT_CARDS - getMe().getPlayedKnightCards()) / (double) DefaultSettings.AMOUNT_KNIGHT_CARDS);
-		
-		System.out.println("Calculated new Building Weight: " + buildingWeight[0] +" " + buildingWeight[1] +" " + buildingWeight[2] +" " + buildingWeight[3]);
+				* ((double) (DefaultSettings.AMOUNT_KNIGHT_CARDS - getMe().getPlayedKnightCards())
+						/ (double) DefaultSettings.AMOUNT_KNIGHT_CARDS);
+
+		System.out.println("Calculated new Building Weight: " + buildingWeight[0] + " " + buildingWeight[1] + " "
+				+ buildingWeight[2] + " " + buildingWeight[3]);
 
 	}
 
@@ -337,7 +342,7 @@ public class AdvancedAI {
 		Corner c = gl.getBoard().getCornerAt(i, j, k);
 		c.setStatus(enums.CornerStatus.CITY);
 		getCornerAgentByID(c.getCornerID()).setState(CornerStatus.CITY);
-		if (playerID == getMe().getID()){
+		if (playerID == getMe().getID()) {
 			resourceAgent.calculateMyResourceWeight();
 		}
 		resourceAgent.calculateGlobalResourceWeight();
@@ -596,7 +601,8 @@ public class AdvancedAI {
 
 	public void actuate() {
 		resourceAgent.update();
-		
+		updateCards();
+
 		// Dev Cards hier
 		if (cardAgent.hasMonopoly()) {
 			cardAgent.playMonopolyCard();
@@ -611,8 +617,7 @@ public class AdvancedAI {
 		else if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()) {
 			cardAgent.playRoadCard();
 			currentDevCard = CardType.STREET;
-		} 
-		else if (cardAgent.hasKnight()) {
+		} else if (cardAgent.hasKnight()) {
 			banditAgent.moveRobber();
 			int[] coords = banditAgent.bestNewRobber();
 			Integer target = banditAgent.getTarget();
@@ -633,22 +638,55 @@ public class AdvancedAI {
 					}
 				}
 				boolean[] possibleBuildings = resourceAgent.getPossibleBuildings();
+				System.out.println("Possible Buildings: " + possibleBuildings[0] + " " + possibleBuildings[1] + " "
+						+ possibleBuildings[2] + " " + possibleBuildings[3]);
 				if (possibleBuildings[max]) {
 					// bester Fall: baue sofort
+					System.out.println("AI: Build " + max);
 					build(max);
 					break;
 				} else if (tradeAgent.isBuildableAfterTrade(max)) {
-					ArrayList<TradeOffer> trades = tradeAgent.tradesForBuilding(max);
-					for (int j = 0; j < trades.size(); j++) {
-						getOutput().requestSeaTrade(trades.get(j).getOffer(), trades.get(j).getDemand());
+					//finalBuild Check nötig, da checks von getPossibleBuildings im Trade Agent nicht stattfinden
+					boolean finalBuildCheck = false;
+					switch (max) {
+					case 0:
+						if (resourceAgent.getBestStreet() != null) {
+							finalBuildCheck = true;
+						}
+						break;
+					case 1:
+						if (resourceAgent.getBestVillage() != null) {
+							finalBuildCheck = true;
+						}
+						break;
+					case 2:
+						if (resourceAgent.getBestCity() != null) {
+							finalBuildCheck = true;
+						}
+					case 3:
+						//if (cardAgent.hasAlreadyPlayedCard() == false) {
+							finalBuildCheck = true;
+						//}
+						break;
+					default:
+						break;
 					}
-					tradeWaitForBuilding = max;
-					break;
+					if (finalBuildCheck) {
+						ArrayList<TradeOffer> trades = tradeAgent.tradesForBuilding(max);
+						for (int j = 0; j < trades.size(); j++) {
+							getOutput().requestSeaTrade(trades.get(j).getOffer(), trades.get(j).getDemand());
+						}
+						tradeWaitForBuilding = max;
+						System.out.println("AI: Trade for " + max);
+						break;
+					}
+
 				} else if (i == buildingWeight.length - 1) {
 					// ende vom Array; nichts ist möglich
-					getOutput().respondEndTurn();
+					endTurn();
 				}
-				//next turn he will check second highest weighting
+				System.out.println("Check next " + max);
+				// next turn he will check second highest weighting
 				buildingWeightCopy[max] = Double.MIN_VALUE;
 			}
 		}
@@ -660,8 +698,8 @@ public class AdvancedAI {
 		boolean[] possibleBuildings = resourceAgent.getPossibleBuildings();
 		if (possibleBuildings[tradeWaitForBuilding]) {
 			build(tradeWaitForBuilding);
-		}
-		tradeWaitForBuilding = null;
+			tradeWaitForBuilding = null;
+		}		
 	}
 
 	public void build(int project) {
@@ -687,7 +725,7 @@ public class AdvancedAI {
 			break;
 		default:
 			// this should never happen
-			pO.respondEndTurn();
+			endTurn();
 			break;
 		}
 	}
@@ -704,6 +742,14 @@ public class AdvancedAI {
 		String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
 		pO.respondMoveRobber(newRobber, target);
 
+	}
+	
+	private void endTurn(){
+		if (boughtDevCard != null){
+			getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(boughtDevCard));
+		}
+		boughtDevCard = null;
+		pO.respondEndTurn();
 	}
 
 	/**

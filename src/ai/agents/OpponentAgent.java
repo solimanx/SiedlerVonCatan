@@ -141,7 +141,7 @@ public class OpponentAgent {
 								if (opponentsRessources[playerID][4] != 0) {
 									opponentsRessources[playerID][4]--;
 								} else {
-									throw new IllegalStateException("Error in calculation of enemy resources");
+									//throw new IllegalStateException("Error in calculation of enemy resources");
 								}
 							}
 						}

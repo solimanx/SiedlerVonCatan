@@ -186,6 +186,7 @@ public class AIInputHandler extends ClientInputHandler {
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		if (ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 			ai.getOutput().respondEndTurn(); // if error then end turn
+		    ai.updateCards();
 		}
 		// Chatbot?
 
@@ -212,6 +213,7 @@ public class AIInputHandler extends ClientInputHandler {
 		// TODO: Fix OK Message
 		else if (ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 			ai.getOutput().respondEndTurn(); // if error then end turn
+			ai.updateCards();
 		}
 
 	}
@@ -662,7 +664,9 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// if it's me
 		if (ID == ai.getID()) {
-			ai.getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(ct));
+			//ai.getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(ct));
+			//this will be done later (after end Turn)
+			ai.boughtDevCard = ct;
 			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 				ai.actuate();
 			}

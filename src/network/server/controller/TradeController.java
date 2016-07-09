@@ -277,12 +277,13 @@ public class TradeController {
 						serverController.obtainToAll(modelID, demand, true);
 						serverController.subFromPlayersResources(modelID, offerResType, 2);
 						serverController.costsToAll(modelID, offer, true);
+						serverController.resourceStackIncrease(offer);
 					} else {
-						serverController.getServerOutputHandler().error("resource stack empty",
+						serverController.getServerOutputHandler().serverConfirm("resource stack empty",
 								serverController.modelPlayerIdMap.get(modelID));
 					}
 				} else {
-					serverController.getServerOutputHandler().error("You don't have a 2:1 harbour of this resource",
+					serverController.getServerOutputHandler().serverConfirm("You don't have a 2:1 harbour of this resource",
 							serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
@@ -293,12 +294,13 @@ public class TradeController {
 						serverController.obtainToAll(modelID, demand, true);
 						serverController.subFromPlayersResources(modelID, offerResType, 3);
 						serverController.costsToAll(modelID, offer, true);
+						serverController.resourceStackIncrease(offer);
 					} else {
-						serverController.getServerOutputHandler().error("resource stack empty",
+						serverController.getServerOutputHandler().serverConfirm("resource stack empty",
 								serverController.modelPlayerIdMap.get(modelID));
 					}
 				} else {
-					serverController.getServerOutputHandler().error("You don't have a 3:1 harbour",
+					serverController.getServerOutputHandler().serverConfirm("You don't have a 3:1 harbour",
 							serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
@@ -308,14 +310,15 @@ public class TradeController {
 					serverController.obtainToAll(modelID, demand, true);
 					serverController.subFromPlayersResources(modelID, offerResType, 4);
 					serverController.costsToAll(modelID, offer, true);
+					serverController.resourceStackIncrease(offer);
 				} else {
-					serverController.getServerOutputHandler().error("resource stack empty",
+					serverController.getServerOutputHandler().serverConfirm("resource stack empty",
 							serverController.modelPlayerIdMap.get(modelID));
 				}
 				break;
 
 			default:
-				serverController.getServerOutputHandler().error("invalid resource argument",
+				serverController.getServerOutputHandler().serverConfirm("invalid resource argument",
 						serverController.modelPlayerIdMap.get(modelID));
 				break;
 			}
