@@ -142,11 +142,12 @@ public class TradeAgent {
 	//////////////
 
 	/**
+	 * Checks if is buildable after trade.
 	 *
 	 * @param projekt legal values : 0=STREET,1=VILLAGE,2=CITY,3=DEVCARD
 	 * @return true, if it is possible to build this building after sea trade
 	 * 			false, if it is not possible
-	 *
+	 * 
 	 * {WOOD, CLAY, ORE, SHEEP, CORN}
 	 */
 	public boolean isBuildableAfterTrade(int projekt){
@@ -351,7 +352,7 @@ public class TradeAgent {
 	}
 
 	/**
-	 *  call this method only if isBuildableAfterTrade is true!!
+	 *  call this method only if isBuildableAfterTrade is true!!.
 	 *
 	 * @param project legal values : 0=STREET,1=VILLAGE,2=CITY,3=DEVCARD
 	 * @return ArrayList of TradeOffers of required trades for building
@@ -571,8 +572,7 @@ public class TradeAgent {
 	////////////////////
 
 	/**
-	 *
-	 * {WOOD, CLAY, ORE, SHEEP, CORN} amount of the needed resource
+	 * {WOOD, CLAY, ORE, SHEEP, CORN} amount of the needed resource.
 	 */
 	public void tradeResourcesOffer(){
 		int[] costs;

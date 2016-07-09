@@ -121,6 +121,9 @@ public class AdvancedAI {
 		this.banditAgent = new BanditAgent(this, opponentAgent);
 	}
 
+	/**
+	 * Initialize corner agents.
+	 */
 	private void initializeCornerAgents() {
 		int c = 0;
 		int radius = DefaultSettings.BOARD_RADIUS;
@@ -302,6 +305,9 @@ public class AdvancedAI {
 
 	}
 
+	/**
+	 * Calculate building weighting.
+	 */
 	private void calculateBuildingWeighting() {
 		Double[] resourceWeighting = resourceAgent.getMyResourceWeight();
 		// buildingWeight[i] = average of resourceWeightings needed for this
@@ -437,6 +443,9 @@ public class AdvancedAI {
 		return gl;
 	}
 
+	/**
+	 * Initial village.
+	 */
 	/*
 	 * (non-Javadoc)
 	 *
@@ -470,6 +479,9 @@ public class AdvancedAI {
 
 	}
 
+	/**
+	 * Initial road.
+	 */
 	/*
 	 * (non-Javadoc)
 	 *
@@ -492,6 +504,9 @@ public class AdvancedAI {
 
 	}
 
+	/**
+	 * Oldactuate.
+	 */
 	/*
 	 * (non-Javadoc)
 	 *
@@ -599,6 +614,9 @@ public class AdvancedAI {
 		}
 	}
 
+	/**
+	 * Actuate.
+	 */
 	public void actuate() {
 		resourceAgent.update();
 		updateCards();
@@ -693,6 +711,9 @@ public class AdvancedAI {
 
 	}
 
+	/**
+	 * Check incoming trade.
+	 */
 	public void checkIncomingTrade() {
 		resourceAgent.update();
 		boolean[] possibleBuildings = resourceAgent.getPossibleBuildings();
@@ -702,6 +723,11 @@ public class AdvancedAI {
 		}		
 	}
 
+	/**
+	 * Builds the.
+	 *
+	 * @param project the project
+	 */
 	public void build(int project) {
 		switch (project) {
 		case 0:
@@ -730,6 +756,9 @@ public class AdvancedAI {
 		}
 	}
 
+	/**
+	 * Move robber.
+	 */
 	/*
 	 * (non-Javadoc)
 	 *
@@ -744,6 +773,9 @@ public class AdvancedAI {
 
 	}
 	
+	/**
+	 * End turn.
+	 */
 	private void endTurn(){
 		if (boughtDevCard != null){
 			getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(boughtDevCard));
@@ -889,6 +921,11 @@ public class AdvancedAI {
 		}
 	}
 
+	/**
+	 * Gets the resource agent.
+	 *
+	 * @return the resource agent
+	 */
 	/*
 	 * (non-Javadoc)
 	 *
@@ -899,6 +936,9 @@ public class AdvancedAI {
 
 	}
 
+	/**
+	 * Update cards.
+	 */
 	/*
 	 * (non-Javadoc)
 	 *
@@ -908,25 +948,38 @@ public class AdvancedAI {
 		cardAgent.updateCards();
 	}
 
+	/**
+	 * Gets the opponent agent.
+	 *
+	 * @return the opponent agent
+	 */
 	public OpponentAgent getOpponentAgent() {
 		return opponentAgent;
 	}
 
+	/**
+	 * Sets the opponent agent.
+	 *
+	 * @param opponentAgent the new opponent agent
+	 */
 	public void setOpponentAgent(OpponentAgent opponentAgent) {
 		this.opponentAgent = opponentAgent;
 	}
 
+	/**
+	 * Gets the global resource weight.
+	 *
+	 * @return the global resource weight
+	 */
 	public int[] getGlobalResourceWeight() {
 		return globalResourceWeight;
 	}
 
 	/**
+	 * Sets the global resource weight.
 	 *
-	 * @param changes
-	 *            value of the change positive values to increment negative
+	 * @param changes            value of the change positive values to increment negative
 	 *            values to decrement
-	 *
-	 *
 	 */
 	public void setGlobalResourceWeight(int[] changes) {
 		if (changes.length != 5) {
@@ -944,6 +997,12 @@ public class AdvancedAI {
 
 	}
 
+	/**
+	 * Play street card.
+	 *
+	 * @param coords1 the coords 1
+	 * @param coords2 the coords 2
+	 */
 	public void playStreetCard(int[] coords1, int[] coords2) {
 		if (coords2 == null) {
 			pO.requestPlayStreetCard(coords1, null);
@@ -955,12 +1014,23 @@ public class AdvancedAI {
 
 	}
 
+	/**
+	 * Play monopoly card.
+	 *
+	 * @param rt the rt
+	 */
 	public void playMonopolyCard(ResourceType rt) {
 		pO.requestPlayMonopolyCard(rt);
 		devCardActionCounter = 1;
 
 	}
 
+	/**
+	 * Play invention card.
+	 *
+	 * @param rt the rt
+	 * @param rt2 the rt 2
+	 */
 	public void playInventionCard(ResourceType rt, ResourceType rt2) {
 		int[] resources = { 0, 0, 0, 0, 0 };
 		resources[ModelToProtocol.getIndexResource(rt)]++;
@@ -970,14 +1040,29 @@ public class AdvancedAI {
 
 	}
 
+	/**
+	 * Gets the my corner agents.
+	 *
+	 * @return the my corner agents
+	 */
 	public ArrayList<CornerAgent> getMyCornerAgents() {
 		return myCornerAgents;
 	}
 
+	/**
+	 * Gets the corner agents.
+	 *
+	 * @return the corner agents
+	 */
 	public CornerAgent[] getCornerAgents() {
 		return cornerAgent;
 	}
 
+	/**
+	 * Gets the output.
+	 *
+	 * @return the output
+	 */
 	protected AIOutputHandler getOutput() {
 		return this.pO;
 	}

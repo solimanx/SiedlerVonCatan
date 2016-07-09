@@ -72,6 +72,9 @@ public class StartViewController {
 
 	private Thread serverThread;
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	public void initialize() {
 		themeChooser.getItems().addAll("Standard", "Biergarten");
@@ -81,6 +84,12 @@ public class StartViewController {
 						String newValue) -> reloadTheme(oldValue, newValue));
 	}
 
+	/**
+	 * Reload theme.
+	 *
+	 * @param oldValue the old value
+	 * @param newValue the new value
+	 */
 	private void reloadTheme(String oldValue, String newValue) {
 		this.primaryStage.getScene().getStylesheets().remove(
 				getClass().getResource("/textures/" + oldValue.toLowerCase() + ".css").toExternalForm());

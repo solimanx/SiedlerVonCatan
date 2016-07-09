@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 
+// TODO: Auto-generated Javadoc
 public class ViewFactory {
 	private String folder = "default/";
 	
@@ -19,7 +20,8 @@ public class ViewFactory {
 
 	/**
 	 * Constructor of ViewFactory.
-	 * @param mode 2 is alternative Theme
+	 *
+	 * @param theme the theme
 	 */
 	public ViewFactory(String theme) {
 		folder = theme + "/";
@@ -27,22 +29,45 @@ public class ViewFactory {
 
 	}
 
+	/**
+	 * Gets the field colors.
+	 *
+	 * @return the field colors
+	 */
 	public HashMap<enums.ResourceType, Color> getFieldColors() {
 		return fieldColors;
 	}
 
+	/**
+	 * Gets the resource images.
+	 *
+	 * @return the resource images
+	 */
 	public HashMap<ResourceType, ImagePattern> getResourceImages() {
 		return resourceImages;
 	}
 
+	/**
+	 * Gets the harbour images.
+	 *
+	 * @return the harbour images
+	 */
 	public HashMap<HarbourStatus, ImagePattern> getHarbourImages() {
 		return harbourImages;
 	}
 
+	/**
+	 * Gets the image patterns.
+	 *
+	 * @return the image patterns
+	 */
 	public HashMap<enums.ResourceType, ImagePattern> getImagePatterns() {
 		return imagePatterns;
 	}
 
+	/**
+	 * Make theme.
+	 */
 	private void makeTheme() {
         fieldColors.put(ResourceType.CLAY, Color.web("#A1887F"));
         fieldColors.put(ResourceType.CORN, Color.web("#FFEE58"));

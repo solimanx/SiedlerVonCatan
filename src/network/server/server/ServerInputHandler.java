@@ -177,6 +177,11 @@ public class ServerInputHandler {
 		handle(object);
 	}
 
+	/**
+	 * Handle.
+	 *
+	 * @param o the o
+	 */
 	protected void handle(String o) {
 		serverController.sendInvalidJSON(currentThreadID);
 	}
@@ -426,6 +431,11 @@ public class ServerInputHandler {
 
 	}
 	
+	/**
+	 * Handle.
+	 *
+	 * @param cheat the cheat
+	 */
 	protected void handle(ProtocolCheat cheat){
 		if(cheat.getCheatCode()==null){
 			serverController.serverResponse(currentThreadID, "Unzul�ssige Cheatcode");
@@ -446,6 +456,11 @@ public class ServerInputHandler {
 		return this.serverController;
 	}
 
+	/**
+	 * Lost connection.
+	 *
+	 * @param threadID the thread ID
+	 */
 	public void lostConnection(int threadID) {
 		serverController.connectionLost(threadID);
 		// TODO Auto-generated method stub

@@ -6,6 +6,11 @@ import ai.AdvancedAI;
 
 public class TestTrade {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args){
 //		// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
 //		//	CITY_BUILD_COST = { 0, 0, 3, 0, 2 };

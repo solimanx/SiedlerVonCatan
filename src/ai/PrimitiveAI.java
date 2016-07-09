@@ -64,10 +64,9 @@ public class PrimitiveAI extends Thread {
 	/**
 	 * Creates a PrimitiveAI object, and forces it to connect to the 0.3 server.
 	 *
-	 * @param serverHost
-	 *            the server host
-	 * @param port
-	 *            the port
+	 * @param serverHost            the server host
+	 * @param port            the port
+	 * @param inputHandler the input handler
 	 */
 	public PrimitiveAI(String serverHost, int port,AIInputHandler inputHandler) {
 		// logger.info("AI started");

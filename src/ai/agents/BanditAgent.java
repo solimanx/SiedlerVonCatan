@@ -9,6 +9,7 @@ import network.ModelToProtocol;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 /**
  * Handles the bandit removing process for the ai.
  */

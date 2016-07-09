@@ -410,6 +410,11 @@ public class Board {
 		return this.players[i] != null ? this.players[i] : null;
 	}
 	
+	/**
+	 * Gets the player models.
+	 *
+	 * @return the player models
+	 */
 	public PlayerModel[] getPlayerModels(){
 		return this.players;
 	}
@@ -1122,14 +1127,16 @@ public class Board {
 	}
 
 	/**
-	 * For ai
+	 * For ai.
 	 */
 	public void deletePlayers() {
 		players = null;
 	}
 
 	/**
+	 * Insert players.
 	 *
+	 * @param n the n
 	 */
 	public void insertPlayers(int n) {
 		players = new PlayerModel[n];

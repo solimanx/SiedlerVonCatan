@@ -648,8 +648,8 @@ public class ServerController {
 	/**
 	 * increases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID
-	 *            the model ID
+	 * @param modelID            the model ID
+	 * @param amount the amount
 	 */
 	private void increaseVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
@@ -660,8 +660,8 @@ public class ServerController {
 	/**
 	 * decreases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID
-	 *            the model ID
+	 * @param modelID            the model ID
+	 * @param amount the amount
 	 */
 	private void decreaseVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
@@ -671,8 +671,8 @@ public class ServerController {
 	/**
 	 * increases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID
-	 *            the model ID
+	 * @param modelID            the model ID
+	 * @param amount the amount
 	 */
 	private void increaseHiddenVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getHiddenVictoryPoints();
@@ -680,6 +680,11 @@ public class ServerController {
 		checkVictory(modelID);
 	}
 
+	/**
+	 * Check victory.
+	 *
+	 * @param modelID the model ID
+	 */
 	private void checkVictory(int modelID) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
 		int hiddenpoints = gameLogic.getBoard().getPlayer(modelID).getHiddenVictoryPoints();
@@ -2085,6 +2090,11 @@ public class ServerController {
 		return serverInputHandler;
 	}
 
+	/**
+	 * Connection lost.
+	 *
+	 * @param threadID the thread ID
+	 */
 	public void connectionLost(int threadID) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
 		/*
@@ -2140,15 +2150,30 @@ public class ServerController {
 
 	}
 
+	/**
+	 * Send invalid JSON.
+	 *
+	 * @param currentThreadID the current thread ID
+	 */
 	public void sendInvalidJSON(int currentThreadID) {
 		serverResponse(currentThreadID, "Unzulässige Aktion");
 
 	}
 
+	/**
+	 * Gets the server.
+	 *
+	 * @return the server
+	 */
 	public Server getServer() {
 		return server;
 	}
 
+	/**
+	 * Gets the thread player id map.
+	 *
+	 * @return the thread player id map
+	 */
 	public Map<Integer, Integer> getThreadPlayerIdMap() {
 		return threadPlayerIdMap;
 	}

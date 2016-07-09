@@ -691,6 +691,7 @@ public class ServerOutputHandler {
 	 *
 	 * @param player_id the player id
 	 * @param devCard the dev card
+	 * @param sendToID the send to ID
 	 */
 	public void boughtDevelopmentCard(int player_id, DevelopmentCard devCard,int sendToID) {
 		CardType pdc;

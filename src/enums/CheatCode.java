@@ -2,6 +2,7 @@ package enums;
 
 import com.google.gson.annotations.SerializedName;
 
+// TODO: Auto-generated Javadoc
 public enum CheatCode {
 
 	@SerializedName("ROLLTWO") DICEROLL_2("ROLLTWO"),
@@ -84,6 +85,12 @@ public enum CheatCode {
 		return value;
 	}
 
+	/**
+	 * From string.
+	 *
+	 * @param value2 the value 2
+	 * @return the cheat code
+	 */
 	public static CheatCode fromString(String value2) {
 		if (value2 != null) {
 			for (CheatCode c : CheatCode.values()) {

@@ -57,8 +57,7 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * Instantiates a new AI input handler.
 	 *
-	 * @param primitiveAI
-	 *            the primitive AI
+	 * @param advAI the adv AI
 	 */
 	protected AIInputHandler(AdvancedAI advAI) {
 		super(null);

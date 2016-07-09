@@ -23,6 +23,8 @@ public class PlayerModel {
 	private int hiddenVictoryPoints;
 
 	/**
+	 * Gets the hidden victory points.
+	 *
 	 * @return the hiddenVictoryPoints
 	 */
 	public int getHiddenVictoryPoints() {
@@ -30,8 +32,9 @@ public class PlayerModel {
 	}
 
 	/**
-	 * @param hiddenVictoryPoints
-	 *            the hiddenVictoryPoints to set
+	 * Sets the hidden victory points.
+	 *
+	 * @param hiddenVictoryPoints            the hiddenVictoryPoints to set
 	 */
 	public void setHiddenVictoryPoints(int hiddenVictoryPoints) {
 		this.hiddenVictoryPoints = hiddenVictoryPoints;
@@ -74,6 +77,9 @@ public class PlayerModel {
 		// this.resourceCards = new ArrayList<ResourceType>();
 	}
 
+	/**
+	 * Instantiates a new player model.
+	 */
 	public PlayerModel() {
 		this.playedKnightCards = 0;
 	}
@@ -252,6 +258,8 @@ public class PlayerModel {
 
 	/**
 	 * Sets the id. AI Only!
+	 *
+	 * @param id the new id
 	 */
 	public void setID(int id) {
 		this.playerID = id;
@@ -607,10 +615,20 @@ public class PlayerModel {
 		return playerDevCard[0] + playerDevCard[1] + playerDevCard[2] + playerDevCard[3] + playerDevCard[4];
 	}
 
+	/**
+	 * Gets the player unknown cards.
+	 *
+	 * @return the player unknown cards
+	 */
 	public int getPlayerUnknownCards() {
 		return playerUnknownCards;
 	}
 
+	/**
+	 * Sets the player unknown cards.
+	 *
+	 * @param playerUnknownCards the new player unknown cards
+	 */
 	public void setPlayerUnknownCards(int playerUnknownCards) {
 		this.playerUnknownCards = playerUnknownCards;
 	}

@@ -299,6 +299,11 @@ public class TradeViewController {
 		playTradeButtonSound();
 	}
 
+	/**
+	 * Handle decline trade.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void handleDeclineTrade(ActionEvent event) {
 		int tradeID = stringToTradeID.get(selectedTrade);
@@ -369,11 +374,12 @@ public class TradeViewController {
 
 	/**
 	 * Offer fulfilled.
-	 *
-	 //* @param threadID
+	 * 
+	 * 	 //* @param threadID
 	 *            the thread ID
-	 * @param partnerModelID
-	 *            the partner model ID
+	 *
+	 * @param modelID the model ID
+	 * @param partnerModelID            the partner model ID
 	 */
 	public void offerFulfilled(int modelID, int partnerModelID) {
 		if (modelID == 0) {

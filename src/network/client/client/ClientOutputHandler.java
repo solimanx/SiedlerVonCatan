@@ -502,6 +502,11 @@ public class ClientOutputHandler {
 
 	}
 	
+	/**
+	 * Send cheat code.
+	 *
+	 * @param value the value
+	 */
 	public void sendCheatCode(String value) {
 		CheatCode cc = CheatCode.fromString(value);
 		ProtocolCheat pc = new ProtocolCheat(cc);

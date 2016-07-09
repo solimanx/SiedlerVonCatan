@@ -50,10 +50,10 @@ public class TradeController {
 	/**
 	 * Checks whether the trade is valid.
 	 *
-	 * @param modelID
-	 * @param supply
-	 * @param demand
-	 * @return
+	 * @param modelID the model ID
+	 * @param supply the supply
+	 * @param demand the demand
+	 * @return true, if successful
 	 */
 	private boolean checkValidTradeRequest(int modelID, int[] supply, int[] demand) {
 		if (serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerState() != PlayerState.TRADING_OR_BUILDING){
@@ -113,12 +113,12 @@ public class TradeController {
 	}
 
 	/**
-	 * Checks whether the trade can be accepted
+	 * Checks whether the trade can be accepted.
 	 *
-	 * @param modelID
-	 * @param tradingID
-	 * @param accept
-	 * @return
+	 * @param modelID the model ID
+	 * @param tradingID the trading ID
+	 * @param accept the accept
+	 * @return true, if successful
 	 */
 	private boolean checkValidTradeAccept(int modelID, int tradingID, boolean accept) {
 		int[] tradeResource = null;

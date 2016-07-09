@@ -10,11 +10,15 @@ import javax.sound.sampled.FloatControl;
 import java.io.File;
 import java.net.URL;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Amina on 03.07.2016.
  */
 public class Sound {
 
+	/**
+	 * Music loop.
+	 */
 	public static void musicLoop() {
 
 		MediaPlayer mediaPlayer = new MediaPlayer(
@@ -25,6 +29,9 @@ public class Sound {
 
 	}
 
+	/**
+	 * Play connect sound.
+	 */
 	public static void playConnectSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/button-3.wav");
@@ -39,6 +46,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play dice roll sound.
+	 */
 	@Deprecated // see DICEROLL
 	public static void playDiceRollSound() {
 		try {
@@ -54,6 +64,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play move robber sound.
+	 */
 	@Deprecated // see BANDIT
 	public static void playMoveRobberSound() {
 		try {
@@ -68,6 +81,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play make offer sound.
+	 */
 	public static void playMakeOfferSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/offer.wav");
@@ -81,6 +97,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play cancel offer sound.
+	 */
 	public static void playCancelOfferSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/cancel.wav");
@@ -94,6 +113,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play notification sound.
+	 */
 	public static void playNotificationSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/notification.wav");
@@ -107,6 +129,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play ready sound.
+	 */
 	public static void playReadySound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/ready.wav");
@@ -120,6 +145,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play trade button sound.
+	 */
 	public static void playTradeButtonSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/trade.wav");
@@ -133,6 +161,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play card button sound.
+	 */
 	public static void playCardButtonSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/Card.wav");
@@ -146,6 +177,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play decline trade offer sound.
+	 */
 	public static void playDeclineTradeOfferSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/decline.wav");
@@ -159,6 +193,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play cancel trade sound.
+	 */
 	public static void playCancelTradeSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/cancel.wav");
@@ -172,6 +209,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play accept trade sound.
+	 */
 	public static void playAcceptTradeSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/accept.wav");
@@ -185,6 +225,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play full fill trade sound.
+	 */
 	public static void playFullFillTradeSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/accept.wav");
@@ -198,6 +241,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play select sound.
+	 */
 	@Deprecated // see BUILD
 	public static void playSelectSound() {
 		try {
@@ -213,6 +259,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play winner sound.
+	 */
 	public static void playWinnerSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/winnerSound.wav");
@@ -226,6 +275,9 @@ public class Sound {
 		}
 	}
 
+	/**
+	 * Play alert sound.
+	 */
 	public static void playAlertSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/invalidAction.wav");

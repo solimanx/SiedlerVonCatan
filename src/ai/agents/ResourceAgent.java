@@ -15,6 +15,7 @@ import network.ModelToProtocol;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
 
+// TODO: Auto-generated Javadoc
 /**
  * Tracks own resources and sees what AI can purchase at any given time.
  */
@@ -30,7 +31,12 @@ public class ResourceAgent {
 																			// import
 																			// ändern
 
-	public ArrayList<StreetSet> getMyStreetSets() {
+	/**
+																			 * Gets the my street sets.
+																			 *
+																			 * @return the my street sets
+																			 */
+																			public ArrayList<StreetSet> getMyStreetSets() {
 		return myStreetSets;
 	}
 
@@ -254,6 +260,11 @@ public class ResourceAgent {
 
 	}
 
+	/**
+	 * Calculate best city.
+	 *
+	 * @return the corner
+	 */
 	private Corner calculateBestCity() {
 		int max = -1;
 		int maxValue = Integer.MIN_VALUE;
@@ -275,14 +286,29 @@ public class ResourceAgent {
 		
 	}
 
+	/**
+	 * Gets the best street.
+	 *
+	 * @return the best street
+	 */
 	public Edge getBestStreet() {
 		return bestStreet;
 	}
 
+	/**
+	 * Gets the best village.
+	 *
+	 * @return the best village
+	 */
 	public Corner getBestVillage() {
 		return bestVillage;
 	}
 	
+	/**
+	 * Gets the best city.
+	 *
+	 * @return the best city
+	 */
 	public Corner getBestCity(){
 		return bestCity;
 	}
@@ -600,6 +626,11 @@ public class ResourceAgent {
 		return greatestValue;
 	}
 
+	/**
+	 * Calculate best village.
+	 *
+	 * @return the corner
+	 */
 	public Corner calculateBestVillage() {
 		ArrayList<Corner> validPositions = getPossibleVillages();
 		int max = Integer.MIN_VALUE;
@@ -620,6 +651,11 @@ public class ResourceAgent {
 		}
 	}
 
+	/**
+	 * Gets the possible villages.
+	 *
+	 * @return the possible villages
+	 */
 	private ArrayList<Corner> getPossibleVillages() {
 		ArrayList<Corner> allCorners = new ArrayList<Corner>();
 		StreetSet currStreetSet;
@@ -642,14 +678,30 @@ public class ResourceAgent {
 		return allCorners;
 	}
 
+	/**
+	 * Gets the current buying focus.
+	 *
+	 * @return the current buying focus
+	 */
 	public int getCurrentBuyingFocus() {
 		return currentBuyingFocus;
 	}
 
+	/**
+	 * Gets the own resources.
+	 *
+	 * @return the own resources
+	 */
 	public int[] getOwnResources() {
 		return ownResources;
 	}
 
+	/**
+	 * Gets the lowest resource.
+	 *
+	 * @param rt the rt
+	 * @return the lowest resource
+	 */
 	public ResourceType getLowestResource(ResourceType rt) {
 		// importance (ORE -> CORN -> SHEEP -> CLAY -> WOOD)
 		// (2,4,3,1,0)
@@ -676,6 +728,9 @@ public class ResourceAgent {
 
 	}
 
+	/**
+	 * Calculate my resource weight.
+	 */
 	public void calculateMyResourceWeight() {
 		ArrayList<CornerAgent> agents = aai.getMyCornerAgents();
 		Double[] resourceWeighting = {50.0, 50.0, 50.0, 50.0, 50.0};
@@ -699,6 +754,9 @@ public class ResourceAgent {
 		
 	}
 	
+	/**
+	 * Calculate global resource weight.
+	 */
 	public void calculateGlobalResourceWeight() {
 		int decreaseFactor = 100 / (aai.getOpponentAgent().getAmountPlayer() + 1); //ownPlayer
 		Double[] resourceWeighting = {50.0, 50.0, 50.0, 50.0, 50.0};
@@ -725,10 +783,20 @@ public class ResourceAgent {
 		this.globalResourceWeight = resourceWeighting;
 	}
 
+	/**
+	 * Gets the my resource weight.
+	 *
+	 * @return the my resource weight
+	 */
 	public Double[] getMyResourceWeight() {
 		return myResourceWeight;
 	}
 
+	/**
+	 * Gets the global resource weight.
+	 *
+	 * @return the global resource weight
+	 */
 	public Double[] getGlobalResourceWeight() {
 		return globalResourceWeight;
 	}

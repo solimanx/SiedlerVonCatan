@@ -36,11 +36,10 @@ public class OpponentAgent {
 													// player
 
 	/**
-	 * Instantiates a new opponent agent.
-	 *
-	 * @param aai
-	 *            the aai
-	 */
+													 * Instantiates a new opponent agent.
+													 *
+													 * @param pm the pm
+													 */
 	public OpponentAgent(PlayerModel[] pm) {
 		amountPlayer = pm.length;
 		opponentsRessources = new int[amountPlayer][7];
@@ -50,6 +49,9 @@ public class OpponentAgent {
 		}
 	}
 
+	/**
+	 * Instantiates a new opponent agent.
+	 */
 	public OpponentAgent() {
 		// TODO Auto-generated constructor stub
 	}
@@ -88,6 +90,9 @@ public class OpponentAgent {
 
 	/**
 	 * Ressource obtain enemy.
+	 *
+	 * @param boardPlayerID the board player ID
+	 * @param ressources the ressources
 	 */
 	// inputhandler an diese methode
 	public void ressourceObtainEnemy(int boardPlayerID, int[] ressources) {
@@ -107,10 +112,8 @@ public class OpponentAgent {
 	/**
 	 * Building cost enemy.
 	 *
-	 * @param playerID
-	 *            the player ID
-	 * @param costs
-	 *            the costs
+	 * @param boardPlayerID the board player ID
+	 * @param costs            the costs
 	 */
 	public void CostsEnemy(int boardPlayerID, int[] costs) {
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
@@ -267,15 +270,21 @@ public class OpponentAgent {
 		return result;
 	}
 
+	/**
+	 * Bought dev card.
+	 *
+	 * @param boardPlayerID the board player ID
+	 */
 	public void boughtDevCard(int boardPlayerID) {
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
 		playerDevCards[playerID]++;
 	}
 
 	/**
-	 * {KNIGHT,INVENTION,STREET,MONOPOLY,VICTORYPOINT}
+	 * {KNIGHT,INVENTION,STREET,MONOPOLY,VICTORYPOINT}.
 	 *
-	 * @param type
+	 * @param type the type
+	 * @param boardPlayerID the board player ID
 	 */
 	public void devCardPlayed(CardType type, int boardPlayerID) {
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
@@ -305,6 +314,11 @@ public class OpponentAgent {
 		}
 	}
 
+	/**
+	 * Gets the amount player.
+	 *
+	 * @return the amount player
+	 */
 	public int getAmountPlayer() {
 		return amountPlayer;
 	}

@@ -77,8 +77,8 @@ public class ClientController {
 	/**
 	 * Default constructor for the ClientController.
 	 *
-	 * @param primaryStage
-	 *            the primary stage
+	 * @param primaryStage            the primary stage
+	 * @param theme the theme
 	 */
 	public ClientController(Stage primaryStage, String theme) {
 		// ModelPlayerID => threadID
@@ -902,6 +902,11 @@ public class ClientController {
 		clientOutputHandler.acceptTrade(tradingID);
 	}
 
+	/**
+	 * Decline trade.
+	 *
+	 * @param tradeID the trade ID
+	 */
 	public void declineTrade(int tradeID) {
 		clientOutputHandler.declineTrade(tradeID);
 	}
@@ -936,10 +941,8 @@ public class ClientController {
 	/**
 	 * trade was fulfilled.
 	 *
-	 * @param threadID
-	 *            the thread ID
-	 * @param partnerModelID
-	 *            the partner model ID
+	 * @param threadID            the thread ID
+	 * @param partnerThreadID the partner thread ID
 	 */
 	public void tradeFulfilled(int threadID, int partnerThreadID) {
 		TradeOffer currTOf;

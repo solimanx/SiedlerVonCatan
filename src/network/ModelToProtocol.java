@@ -57,7 +57,10 @@ public final class ModelToProtocol {
 	}
 
 	/**
-	 * Gets index of resource
+	 * Gets index of resource.
+	 *
+	 * @param rt the rt
+	 * @return the index resource
 	 */
 	public static int getIndexResource(ResourceType rt) {
 		switch (rt) {

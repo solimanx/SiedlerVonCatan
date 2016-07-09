@@ -7,6 +7,7 @@ import enums.ResourceType;
 import model.objects.Edge;
 import network.ProtocolToModel;
 
+// TODO: Auto-generated Javadoc
 /**
  * Tracks all cards, and what strategy to use when having the cards, or seeing
  * the cards getting purchased.
@@ -92,6 +93,9 @@ public class CardAgent {
 		return myCards[0] + myCards[1] + myCards[2] + myCards[3];
 	}
 
+	/**
+	 * Play monopoly card.
+	 */
 	public void playMonopolyCard() {
 		// TODO DEBUG ONLY
 		ResourceType rt = (aai.getResourceAgent().getLowestResource(null));
@@ -99,11 +103,17 @@ public class CardAgent {
 
 	}
 
+	/**
+	 * Play knight card.
+	 */
 	public void playKnightCard() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Play invention card.
+	 */
 	public void playInventionCard() {
 		// TODO DEBUG ONLY
 		ResourceType rt = (aai.getResourceAgent().getLowestResource(null));
@@ -111,6 +121,9 @@ public class CardAgent {
 		aai.playInventionCard(rt, rt2);
 	}
 
+	/**
+	 * Play road card.
+	 */
 	public void playRoadCard() {
 		Edge e1 = aai.getResourceAgent().calculateBestStreet();
 		int[] coords1 = ProtocolToModel.getEdgeCoordinates(e1.getEdgeID());

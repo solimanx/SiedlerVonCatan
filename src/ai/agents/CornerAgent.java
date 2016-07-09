@@ -14,6 +14,7 @@ import model.objects.Field;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
 
+// TODO: Auto-generated Javadoc
 /**
  * Calculates the advantage of occupying the corner, by taking into account what
  * the surrounding fields, their dice index is, and connected edges.
@@ -359,22 +360,47 @@ public class CornerAgent {
 		return f;
 	}
 	
+	/**
+	 * Gets the state.
+	 *
+	 * @return the state
+	 */
 	public CornerStatus getState() {
 		return state;
 	}
 
+	/**
+	 * Sets the state.
+	 *
+	 * @param state the new state
+	 */
 	public void setState(CornerStatus state) {
 		this.state = state;
 	}
 
+	/**
+	 * Gets the player ID.
+	 *
+	 * @return the player ID
+	 */
 	public Integer getPlayerID() {
 		return player_id;
 	}
 
+	/**
+	 * Sets the player ID.
+	 *
+	 * @param player_id the new player ID
+	 */
 	public void setPlayerID(Integer player_id) {
 		this.player_id = player_id;
 	}
 
+	/**
+	 * Gets the utility.
+	 *
+	 * @return the utility
+	 */
 	public int getUtility() {
 		return netUtility;
 	}

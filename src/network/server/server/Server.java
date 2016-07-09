@@ -248,6 +248,11 @@ public class Server {
 		return clientCounter;
 	}
 	
+	/**
+	 * Gets the connected players.
+	 *
+	 * @return the connected players
+	 */
 	public int getConnectedPlayers(){
 		return connectedPlayers;
 	}

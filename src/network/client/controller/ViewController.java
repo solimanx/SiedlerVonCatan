@@ -48,10 +48,9 @@ public class ViewController {
 	/**
 	 * Instantiates a new view controller.
 	 *
-	 * @param primaryStage
-	 *            the primary stage
-	 * @param fc
-	 *            the fc
+	 * @param primaryStage            the primary stage
+	 * @param fc            the fc
+	 * @param theme the theme
 	 */
 	public ViewController(Stage primaryStage, ClientController fc, String theme) {
 		this.primaryStage = primaryStage;

@@ -489,6 +489,12 @@ public final class ProtocolToModel {
 		throw new IllegalArgumentException("CardType doesn't exit");
 	}
 
+	/**
+	 * Gets the resource from index.
+	 *
+	 * @param c the c
+	 * @return the resource from index
+	 */
 	public static ResourceType getResourceFromIndex(int c) {
 		switch (c) {
 		case 0:

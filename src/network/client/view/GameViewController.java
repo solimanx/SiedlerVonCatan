@@ -364,8 +364,8 @@ public class GameViewController implements Initializable {
 	/**
 	 * draws and shows the board Pane with game board.
 	 *
-	 * @param stage
-	 *            the stage
+	 * @param stage            the stage
+	 * @param theme the theme
 	 */
 	public void startScene(Stage stage, String theme) {
 		this.theme = theme;
@@ -1023,11 +1023,13 @@ public class GameViewController implements Initializable {
 			cityClick(coordinates);
 		});
 	}
+	
 	/**
-	 * Hides village hover
-	 * @param u
-	 * @param v
-	 * @param dir
+	 * Hides village hover.
+	 *
+	 * @param u the u
+	 * @param v the v
+	 * @param dir the dir
 	 */
 	public void removeVillage(int u, int v, int dir) {
 		Polygon village = villages[u + 3][v + 3][dir];

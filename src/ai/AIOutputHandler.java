@@ -366,6 +366,12 @@ public class AIOutputHandler {
 		}
 	}
 
+	/**
+	 * Request play street card.
+	 *
+	 * @param coords1 the coords 1
+	 * @param coords2 the coords 2
+	 */
 	public void requestPlayStreetCard(int[] coords1, int[] coords2) {
 		Index[] road1 = ModelToProtocol
 				.convertToEdgeIndex(ModelToProtocol.getEdgeID(coords1[0], coords1[1], coords1[2]));
@@ -385,6 +391,11 @@ public class AIOutputHandler {
 
 	}
 
+	/**
+	 * Request play monopoly card.
+	 *
+	 * @param rt the rt
+	 */
 	public void requestPlayMonopolyCard(ResourceType rt) {
 		ProtocolPlayMonopolyCard pmci = new ProtocolPlayMonopolyCard(rt);
 		Response r = new Response();
@@ -399,6 +410,11 @@ public class AIOutputHandler {
 
 	}
 
+	/**
+	 * Request play invention card.
+	 *
+	 * @param resources the resources
+	 */
 	public void requestPlayInventionCard(int[] resources) {
 		ProtocolResource pr = ModelToProtocol.convertToProtocolResource(resources);
 		ProtocolPlayInventionCard pici = new ProtocolPlayInventionCard(pr);
