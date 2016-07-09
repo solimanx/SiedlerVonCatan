@@ -2145,4 +2145,8 @@ public class ServerController {
 
 	}
 
+	public Server getServer() {
+		return server;
+	}
+
 }

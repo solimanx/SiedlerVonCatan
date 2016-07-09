@@ -2,6 +2,7 @@ package parsing;
 
 import com.google.gson.annotations.SerializedName;
 
+import protocol.cheats.ProtocolCheat;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -168,6 +169,11 @@ public class Response {
 	@SerializedName("Entwicklungskarte gekauft")
 	public ProtocolBoughtDevelopmentCard pBoughtDevelopmentCard;// new in 0.3
 	
+	@SerializedName("Cheat")
+	public ProtocolCheat pCheat ;
+	
 	public String invalid;
+	
+	
 
 }

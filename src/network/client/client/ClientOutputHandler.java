@@ -5,14 +5,15 @@ import java.io.IOException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.net.Protocol;
 
+import enums.CheatCode;
 import enums.ResourceType;
 import model.Index;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
 import parsing.Parser;
 import parsing.Response;
+import protocol.cheats.ProtocolCheat;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -493,6 +494,19 @@ public class ClientOutputHandler {
 		ProtocolPlayKnightCard pkc = new ProtocolPlayKnightCard(i, victimID);
 		Response r = new Response();
 		r.pPlayKnightCard = pkc;
+		try {
+			client.write(parser.createString(r));
+		} catch (IOException e) {
+			logger.trace(Level.ERROR, e);
+		}
+
+	}
+	
+	public void sendCheatCode(String value) {
+		CheatCode cc = CheatCode.fromString(value);
+		ProtocolCheat pc = new ProtocolCheat(cc);
+		Response r = new Response();
+		r.pCheat = pc;
 		try {
 			client.write(parser.createString(r));
 		} catch (IOException e) {

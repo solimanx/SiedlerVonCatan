@@ -4,10 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import enums.Color;
-import enums.ResourceType;
 import network.ProtocolToModel;
 import network.server.controller.ServerController;
+import network.server.server.cheat.CheatHandler;
 import parsing.Parser;
+import protocol.cheats.ProtocolCheat;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -139,6 +140,8 @@ public class ServerInputHandler {
 		case "ProtocolPlayRoadCard":
 			handle((ProtocolPlayRoadCard) o);
 			break;
+		case "ProtocolCheat":
+			handle((ProtocolCheat) o);
 		default:
 			handle((String) o);
 			logger.info("Class not found");
@@ -420,6 +423,16 @@ public class ServerInputHandler {
 		serverController.playStreetCard(currentThreadID, coords1[0], coords1[1], coords1[2], coords2[0], coords1[1],
 				coords2[2]);
 
+	}
+	
+	protected void handle(ProtocolCheat cheat){
+		if(cheat.getCheatCode()==null){
+			serverController.serverResponse(currentThreadID, "Unzulässige Cheatcode");
+		}
+		else{
+			CheatHandler ch = new CheatHandler(serverController.getServer());
+			ch.handle(currentThreadID, cheat.getCheatCode());
+		}
 	}
 
 	/**

@@ -183,6 +183,10 @@ public class Parser {
 		if (response.pLongestRoad != null) {
 			return (T) response.pLongestRoad;
 		}
+		
+		if (response.pCheat != null) {
+			return (T) response.pCheat;
+		}
 
 		logger.warn("CANNOT READ INPUT");
 		return null;
