@@ -2178,4 +2178,8 @@ public class ServerController {
 		return threadPlayerIdMap;
 	}
 
+	public Board getBoard() {
+		return board;
+	}
+
 }
