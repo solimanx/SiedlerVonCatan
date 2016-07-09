@@ -802,7 +802,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				viewController.getClientController().getClientOuptputHandler().sendCheat(cheatField.getText());
+				viewController.getClientController().getClientOuptputHandler().sendCheatCode(cheatField.getText());
 				cheatStage.close();
 
 			}
