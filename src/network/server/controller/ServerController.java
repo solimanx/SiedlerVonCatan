@@ -2149,4 +2149,8 @@ public class ServerController {
 		return server;
 	}
 
+	public Map<Integer, Integer> getThreadPlayerIdMap() {
+		return threadPlayerIdMap;
+	}
+
 }

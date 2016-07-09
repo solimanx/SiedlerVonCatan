@@ -142,6 +142,7 @@ public class ServerInputHandler {
 			break;
 		case "ProtocolCheat":
 			handle((ProtocolCheat) o);
+			break;
 		default:
 			handle((String) o);
 			logger.info("Class not found");
@@ -427,7 +428,7 @@ public class ServerInputHandler {
 	
 	protected void handle(ProtocolCheat cheat){
 		if(cheat.getCheatCode()==null){
-			serverController.serverResponse(currentThreadID, "Unzulässige Cheatcode");
+			serverController.serverResponse(currentThreadID, "Unzulï¿½ssige Cheatcode");
 		}
 		else{
 			CheatHandler ch = new CheatHandler(serverController.getServer());

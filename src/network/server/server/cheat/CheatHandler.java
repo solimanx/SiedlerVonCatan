@@ -1,10 +1,16 @@
 package network.server.server.cheat;
 
+import java.io.IOException;
+
+import enums.CardType;
 import enums.CheatCode;
 import network.server.server.Server;
 import network.server.server.ServerOutputHandler;
+import parsing.Response;
+import protocol.serverinstructions.ProtocolBoughtDevelopmentCard;
 
 public class CheatHandler extends ServerOutputHandler{
+	
 	
 	
 	public CheatHandler(Server server) {
@@ -39,8 +45,17 @@ public class CheatHandler extends ServerOutputHandler{
 	
 		}}
 
-	private static void streetBuildCard(Integer id) {
-		
+	private void streetBuildCard(Integer threadID) {
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		ProtocolBoughtDevelopmentCard pbdc = new ProtocolBoughtDevelopmentCard(threadID, CardType.STREET);
+		Response r = new Response();
+		r.pBoughtDevelopmentCard = pbdc;
+		try {
+			server.sendToClient(parser.createString(r),modelID);
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+			e.printStackTrace();
+		}
 		
 	}
 

@@ -55,8 +55,9 @@ import protocol.serverinstructions.trade.ProtocolTradePreview;
 //import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
 public class ServerOutputHandler {
-	private Server server;
-	private Parser parser;
+	protected Server server;
+	protected Parser parser;
+	protected static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getSimpleName());
 
 	/**
 	 * Instantiates a new server output handler.
@@ -68,7 +69,6 @@ public class ServerOutputHandler {
 		this.parser = new Parser();
 	}
 
-	private static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getSimpleName());
 
 	/**
 	 * Builds the building.
