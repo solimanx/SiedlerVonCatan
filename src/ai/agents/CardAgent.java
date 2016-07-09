@@ -112,12 +112,12 @@ public class CardAgent {
 	}
 
 	public void playRoadCard() {
-		Edge e1 = aai.getResourceAgent().getBestStreet();
+		Edge e1 = aai.getResourceAgent().calculateBestStreet();
 		int[] coords1 = ProtocolToModel.getEdgeCoordinates(e1.getEdgeID());
 		aai.getResourceAgent().addToOwnStreetSet(e1);
 		int[] coords2 = null;
 		if (aai.getMe().getAmountStreets() > 1) {
-			Edge e2 = aai.getResourceAgent().getBestStreet();
+			Edge e2 = aai.getResourceAgent().calculateBestStreet();
 			coords2 = ProtocolToModel.getEdgeCoordinates(e2.getEdgeID());
 		}
 

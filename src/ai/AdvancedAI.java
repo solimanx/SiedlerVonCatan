@@ -1,6 +1,7 @@
 package ai;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -12,6 +13,8 @@ import ai.agents.CornerAgent;
 import ai.agents.OpponentAgent;
 import ai.agents.ResourceAgent;
 import ai.agents.TradeAgent;
+import ai.agents.TradeOffer;
+import enums.CardType;
 import enums.CornerStatus;
 import enums.ResourceType;
 import model.Board;
@@ -32,19 +35,19 @@ import settings.DefaultSettings;
  *
  */
 public class AdvancedAI {
-	
+
 	private GameLogic gl;
 
 	private Board board;
-	
+
 	private PlayerModel me;
 	private int ID;
 	private int colorCounter = 0;
 	private boolean started = false;
-	
+
 	private final String PROTOCOL = DefaultSettings.PROTOCOL_VERSION;
 	private final String VERSION = DefaultSettings.AI_VERSION;
-	
+
 	private ResourceBundle rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 
 	private CornerAgent[] cornerAgent;
@@ -63,10 +66,16 @@ public class AdvancedAI {
 			Integer.parseInt(rb.getString("CORN_INITIAL_BENEFIT")) };
 
 	private int[] globalResourceWeight = { 100, 100, 100, 100, 100 };
-	
-	private int[] buildingWeight = new int[4];
+
+	private Double[] buildingWeight = { 50.0, 50.0, 50.0, 50.0 };
 
 	private int initialRoundCounter = 0;
+	private int roadCounter = 0;
+	
+	//a counter for the AI InputHandler;
+	protected int devCardActionCounter = 0;
+	
+	protected boolean isInitialPhase;
 
 	private double knightValue;
 	private double monopolyValue;
@@ -77,6 +86,10 @@ public class AdvancedAI {
 
 	private AIOutputHandler pO;
 
+	protected Integer tradeWaitForBuilding;
+
+	protected CardType currentDevCard;
+
 	/**
 	 * Instantiates a new advanced AI.
 	 *
@@ -86,27 +99,27 @@ public class AdvancedAI {
 	 *            the port
 	 */
 	public AdvancedAI(String serverHost, int port) {
-		
+
 		AIInputHandler inputHa = new AIInputHandler(this);
-		this.primitiveAI = new PrimitiveAI(serverHost,port,inputHa);
+		this.primitiveAI = new PrimitiveAI(serverHost, port, inputHa);
 		this.pO = new AIOutputHandler(primitiveAI);
-		
+
 		this.board = new Board();
 		this.gl = new GameLogic(board);
-		
+
 		primitiveAI.commence();
-		
+
 		initializeDiceRollProbabilities();
-		//Integer.parseInt(rb.getString("CORNER_AGENTS"))
+		// Integer.parseInt(rb.getString("CORNER_AGENTS"))
 		this.cornerAgent = new CornerAgent[54];
-	    this.cardAgent = new CardAgent(this);
-	    this.resourceAgent = new ResourceAgent(this);
+		this.cardAgent = new CardAgent(this);
+		this.resourceAgent = new ResourceAgent(this);
 		this.opponentAgent = new OpponentAgent();
-		this.tradeAgent =  new TradeAgent(this, resourceAgent);
+		this.tradeAgent = new TradeAgent(this, resourceAgent);
 		this.banditAgent = new BanditAgent(this, opponentAgent);
 	}
-	
-	private void initializeCornerAgents(){
+
+	private void initializeCornerAgents() {
 		int c = 0;
 		int radius = DefaultSettings.BOARD_RADIUS;
 		for (int i = -radius; i <= radius; i++) {
@@ -121,7 +134,6 @@ public class AdvancedAI {
 			}
 		}
 	}
-
 
 	/**
 	 * Giving up half of resources by order.
@@ -223,6 +235,7 @@ public class AdvancedAI {
 
 		gl.getBoard().setBandit(banditLocation);
 		gl.getBoard().deletePlayers();
+		isInitialPhase = true;
 		initializeCornerAgents();
 	}
 
@@ -252,6 +265,13 @@ public class AdvancedAI {
 				neighbors[i].setStatus(CornerStatus.BLOCKED);
 			}
 		}
+		if (!isInitialPhase){
+		if (playerID == getMe().getID()){
+			resourceAgent.calculateMyResourceWeight();
+		}
+		resourceAgent.calculateGlobalResourceWeight();
+		calculateBuildingWeighting();
+		}
 	}
 
 	/**
@@ -267,9 +287,37 @@ public class AdvancedAI {
 	 *            owner
 	 */
 	protected void updateRoad(int i, int j, int k, int playerID) {
+		roadCounter++;
 		Edge e = gl.getBoard().getEdgeAt(i, j, k);
 		e.setHasStreet(true);
 		e.setOwnedByPlayer(playerID);
+		if (roadCounter == (getOpponentAgent().getAmountPlayer() + 1) * 2) {
+			isInitialPhase = false;
+			resourceAgent.calculateMyResourceWeight();
+			resourceAgent.calculateGlobalResourceWeight();
+			calculateBuildingWeighting();
+		}
+
+	}
+
+	private void calculateBuildingWeighting() {
+		Double[] resourceWeighting = resourceAgent.getMyResourceWeight();
+		// buildingWeight[i] = average of resourceWeightings needed for this
+		// building * (estimated) victoryPoints
+		// * amountBoughtAlreadyOfThisType/TotalAmountofThisType (prevents the
+		// ai from doing the same things too often
+		// & e.g. no streets left the building weight will turn 0
+		buildingWeight[0] = (50.0 - ((resourceWeighting[0] + resourceWeighting[1]) / 2)) * 0.2
+				* ((double) getMe().getAmountStreets() / (double) DefaultSettings.START_AMOUNT_STREETS);
+		buildingWeight[1] = (50.0 - ((resourceWeighting[0] + resourceWeighting[1] + resourceWeighting[3] + resourceWeighting[4])
+				/ 4)) * ((double) getMe().getAmountVillages() / (double) DefaultSettings.START_AMOUNT_VILLAGES);
+		buildingWeight[2] = (50.0 - (resourceWeighting[2] * 3 + resourceWeighting[4] * 2) / 5)
+				* ((double) getMe().getAmountCities() / (double) DefaultSettings.START_AMOUNT_CITIES);
+		// TODO: currently only knight cards are considered
+		buildingWeight[3] = (50.0 - (resourceWeighting[2] + resourceWeighting[3] + resourceWeighting[4]) / 3) * 0.5
+				* ((double) (DefaultSettings.AMOUNT_KNIGHT_CARDS - getMe().getPlayedKnightCards()) / (double) DefaultSettings.AMOUNT_KNIGHT_CARDS);
+		
+		System.out.println("Calculated new Building Weight: " + buildingWeight[0] +" " + buildingWeight[1] +" " + buildingWeight[2] +" " + buildingWeight[3]);
 
 	}
 
@@ -289,6 +337,11 @@ public class AdvancedAI {
 		Corner c = gl.getBoard().getCornerAt(i, j, k);
 		c.setStatus(enums.CornerStatus.CITY);
 		getCornerAgentByID(c.getCornerID()).setState(CornerStatus.CITY);
+		if (playerID == getMe().getID()){
+			resourceAgent.calculateMyResourceWeight();
+		}
+		resourceAgent.calculateGlobalResourceWeight();
+		calculateBuildingWeighting();
 
 	}
 
@@ -302,7 +355,6 @@ public class AdvancedAI {
 		gl.getBoard().setBandit(locationID);
 
 	}
-
 
 	/**
 	 * Gets the id.
@@ -362,7 +414,6 @@ public class AdvancedAI {
 		this.started = started;
 	}
 
-
 	/**
 	 * Gets the me.
 	 *
@@ -381,18 +432,15 @@ public class AdvancedAI {
 		return gl;
 	}
 
-
-
-
 	/*
 	 * (non-Javadoc)
 	 *
 	 * @see ai.PrimitiveAI#initialVillage()
 	 */
 	public void initialVillage() {
-		if (initialRoundCounter == 1) {	
+		if (initialRoundCounter == 1) {
 			subtractResources(myCornerAgents.get(0));
-			
+
 		}
 		int x = 0;
 		int y = 0;
@@ -430,11 +478,11 @@ public class AdvancedAI {
 
 		initialRoundCounter++;
 		resourceAgent.initializeResources();
-		if (initialRoundCounter > 1){
+		if (initialRoundCounter > 1) {
 			resourceAgent.calculateMyResourceWeight();
-			//TODO; erst am Ende der initial phase
-			//resourceAgent.calculateGlobalResourceWeight();
-			//TODO: Strategie festlegen
+			// TODO; erst am Ende der initial phase
+			// resourceAgent.calculateGlobalResourceWeight();
+			// TODO: Strategie festlegen
 		}
 
 	}
@@ -444,7 +492,7 @@ public class AdvancedAI {
 	 *
 	 * @see ai.PrimitiveAI#actuate()
 	 */
-	public void actuate() {
+	public void oldactuate() {
 		resourceAgent.update();
 
 		receiveProposals();
@@ -507,7 +555,7 @@ public class AdvancedAI {
 		}
 
 		else if (getMe().getAmountVillages() != 0 && resourceAgent.canBuildVillage()) {
-			Corner bestCorner = resourceAgent.getBestVillage();
+			Corner bestCorner = resourceAgent.calculateBestVillage();
 			if (bestCorner != null) {
 				int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
 				pO.requestBuildVillage(coords[0], coords[1], coords[2]);
@@ -515,7 +563,7 @@ public class AdvancedAI {
 				pO.respondEndTurn();
 			} else { // try to build street
 				if (!getMe().hasLongestRoad() && getMe().getAmountStreets() > 0 && resourceAgent.canBuildRoad()) {
-					Edge bestEdge = resourceAgent.getBestStreet();
+					Edge bestEdge = resourceAgent.calculateBestStreet();
 					String id = bestEdge.getEdgeID();
 					int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
 					pO.requestBuildRoad(coords[0], coords[1], coords[2]);
@@ -535,7 +583,7 @@ public class AdvancedAI {
 		// try getting longest road
 		// TODO: This should also happen when the AI HAS the longest road
 		else if (!getMe().hasLongestRoad() && getMe().getAmountStreets() > 0 && resourceAgent.canBuildRoad()) {
-			Edge bestEdge = resourceAgent.getBestStreet();
+			Edge bestEdge = resourceAgent.calculateBestStreet();
 			String id = bestEdge.getEdgeID();
 			int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
 			pO.requestBuildRoad(coords[0], coords[1], coords[2]);
@@ -546,8 +594,102 @@ public class AdvancedAI {
 		}
 	}
 
-	public void myActuate() {
+	public void actuate() {
+		resourceAgent.update();
+		
+		// Dev Cards hier
+		if (cardAgent.hasMonopoly()) {
+			cardAgent.playMonopolyCard();
+			currentDevCard = CardType.MONOPOLY;
+		}
+		// DEBUG ONLY
+		else if (cardAgent.hasInvention()) {
+			cardAgent.playInventionCard();
+			currentDevCard = CardType.INVENTION;
+		}
 
+		else if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()) {
+			cardAgent.playRoadCard();
+			currentDevCard = CardType.STREET;
+		} 
+		else if (cardAgent.hasKnight()) {
+			banditAgent.moveRobber();
+			int[] coords = banditAgent.bestNewRobber();
+			Integer target = banditAgent.getTarget();
+			String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
+			pO.respondKnightCard(newRobber, target);
+		} else {
+			// keine dev card; versuche zu bauen.
+
+			Double[] buildingWeightCopy = new Double[4];
+			System.arraycopy(buildingWeight, 0, buildingWeightCopy, 0, buildingWeight.length);
+			for (int i = 0; i < buildingWeight.length; i++) {
+				int max = 0;
+				Double maxValue = buildingWeightCopy[0];
+				for (int j = 1; j < buildingWeightCopy.length; j++) {
+					if (maxValue < buildingWeightCopy[j]) {
+						maxValue = buildingWeightCopy[j];
+						max = j;
+					}
+				}
+				boolean[] possibleBuildings = resourceAgent.getPossibleBuildings();
+				if (possibleBuildings[max]) {
+					// bester Fall: baue sofort
+					build(max);
+					break;
+				} else if (tradeAgent.isBuildableAfterTrade(max)) {
+					ArrayList<TradeOffer> trades = tradeAgent.tradesForBuilding(max);
+					for (int j = 0; j < trades.size(); j++) {
+						getOutput().requestSeaTrade(trades.get(j).getOffer(), trades.get(j).getDemand());
+					}
+					tradeWaitForBuilding = max;
+					break;
+				} else if (i == buildingWeight.length - 1) {
+					// ende vom Array; nichts ist möglich
+					getOutput().respondEndTurn();
+				}
+				//next turn he will check second highest weighting
+				buildingWeightCopy[max] = Double.MIN_VALUE;
+			}
+		}
+
+	}
+
+	public void checkIncomingTrade() {
+		resourceAgent.update();
+		boolean[] possibleBuildings = resourceAgent.getPossibleBuildings();
+		if (possibleBuildings[tradeWaitForBuilding]) {
+			build(tradeWaitForBuilding);
+		}
+		tradeWaitForBuilding = null;
+	}
+
+	public void build(int project) {
+		switch (project) {
+		case 0:
+			Edge bestEdge = resourceAgent.getBestStreet();
+			String id = bestEdge.getEdgeID();
+			int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
+			pO.requestBuildRoad(coords[0], coords[1], coords[2]);
+			break;
+		case 1:
+			Corner bestVCorner = resourceAgent.getBestVillage();
+			int[] vCoords = ProtocolToModel.getCornerCoordinates(bestVCorner.getCornerID());
+			pO.requestBuildVillage(vCoords[0], vCoords[1], vCoords[2]);
+			break;
+		case 2:
+			Corner bestCCorner = resourceAgent.getBestCity();
+			int[] cCoords = ProtocolToModel.getCornerCoordinates(bestCCorner.getCornerID());
+			pO.requestBuildCity(cCoords[0], cCoords[1], cCoords[2]);
+			break;
+		case 3:
+			pO.requestBuyCard();
+			break;
+		default:
+			// this should never happen
+			pO.respondEndTurn();
+			break;
+		}
 	}
 
 	/*
@@ -759,37 +901,41 @@ public class AdvancedAI {
 	public void playStreetCard(int[] coords1, int[] coords2) {
 		if (coords2 == null) {
 			pO.requestPlayStreetCard(coords1, null);
+			devCardActionCounter = 1;
 		} else {
 			pO.requestPlayStreetCard(coords1, coords2);
+			devCardActionCounter = 2;
 		}
 
 	}
 
 	public void playMonopolyCard(ResourceType rt) {
 		pO.requestPlayMonopolyCard(rt);
+		devCardActionCounter = 1;
 
 	}
 
 	public void playInventionCard(ResourceType rt, ResourceType rt2) {
-		int[] resources = {0,0,0,0,0};
+		int[] resources = { 0, 0, 0, 0, 0 };
 		resources[ModelToProtocol.getIndexResource(rt)]++;
 		resources[ModelToProtocol.getIndexResource(rt2)]++;
 		pO.requestPlayInventionCard(resources);
-		
+		devCardActionCounter = 1;
+
 	}
-	
+
 	public ArrayList<CornerAgent> getMyCornerAgents() {
 		return myCornerAgents;
 	}
-	
-	public CornerAgent[] getCornerAgents(){
+
+	public CornerAgent[] getCornerAgents() {
 		return cornerAgent;
 	}
-	
+
 	protected AIOutputHandler getOutput() {
 		return this.pO;
 	}
-	
+
 	/**
 	 * Gets the version.
 	 *

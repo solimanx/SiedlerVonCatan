@@ -125,7 +125,7 @@ public class PrimitiveAI extends Thread {
 			logger.debug("Server: " + line);
 			// logger.debug("Server"+ line);
 			
-			 try { Thread.sleep(500); } catch (InterruptedException e) {
+			 try { Thread.sleep(100); } catch (InterruptedException e) {
 				 
 			 }
 			 

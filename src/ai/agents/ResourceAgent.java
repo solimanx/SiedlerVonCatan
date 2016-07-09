@@ -47,8 +47,12 @@ public class ResourceAgent {
 	// {THREE_TO_ONE, WOOD, CLAY, ORE, SHEEP, CORN}
 	// maybe in trading agent?
 	private boolean[] harbours = { false, false, false, false, false, false };
-	private int[] myResourceWeight;
-	private int[] globalResourceWeight;
+	private Double[] myResourceWeight;
+	private Double[] globalResourceWeight;
+	
+	private Edge bestStreet;
+	private Corner bestVillage;
+	private Corner bestCity;
 
 	/**
 	 * Instantiates a new resource agent.
@@ -125,13 +129,13 @@ public class ResourceAgent {
 	 */
 	public boolean[] getPossibleBuildings() {
 		boolean[] results = new boolean[4];
-		if (compareResources(ownResources, DefaultSettings.STREET_BUILD_COST)) {
+		if (compareResources(ownResources, DefaultSettings.STREET_BUILD_COST) && bestStreet != null) {
 			results[0] = true;
 		}
-		if (compareResources(ownResources, DefaultSettings.VILLAGE_BUILD_COST)) {
+		if (compareResources(ownResources, DefaultSettings.VILLAGE_BUILD_COST) && bestVillage != null) {
 			results[1] = true;
 		}
-		if (compareResources(ownResources, DefaultSettings.CITY_BUILD_COST)) {
+		if (compareResources(ownResources, DefaultSettings.CITY_BUILD_COST) && bestCity != null) {
 			results[2] = true;
 		}
 		if (compareResources(ownResources, DefaultSettings.DEVCARD_BUILD_COST)) {
@@ -243,8 +247,44 @@ public class ResourceAgent {
 	 */
 	public void update() {
 		initializeResources();
+		this.bestStreet = calculateBestStreet();
+		this.bestVillage = calculateBestVillage();
+		this.bestCity = calculateBestCity();
 		affords = getPossibleBuildings();
 
+	}
+
+	private Corner calculateBestCity() {
+		int max = -1;
+		int maxValue = Integer.MIN_VALUE;
+		CornerAgent currCa;
+		for (int i = 0; i < aai.getMyCornerAgents().size();i++){
+			currCa = aai.getMyCornerAgents().get(i);
+		    if (currCa.getState() == CornerStatus.VILLAGE && currCa.getUtility() > maxValue){
+		    	maxValue = currCa.getUtility();
+		    	max = i;
+		    }
+		}
+		if (max == -1){
+			return null;
+		} else {
+			String id = aai.getMyCornerAgents().get(max).getID();
+			int[] coords = ProtocolToModel.getCornerCoordinates(id);
+			return aai.getGl().getBoard().getCornerAt(coords[0],coords[1],coords[2]);
+		}
+		
+	}
+
+	public Edge getBestStreet() {
+		return bestStreet;
+	}
+
+	public Corner getBestVillage() {
+		return bestVillage;
+	}
+	
+	public Corner getBestCity(){
+		return bestCity;
 	}
 
 	/**
@@ -346,7 +386,7 @@ public class ResourceAgent {
 	 *
 	 * @return the best street
 	 */
-	public Edge getBestStreet() {
+	public Edge calculateBestStreet() {
 		ArrayList<Object> bestStreets = getPossibleLTRExtensions();
 		StreetSet streetSet = (StreetSet) bestStreets.get(0);
 		ArrayList<Edge> edgeSuggestion = (ArrayList<Edge>) bestStreets.get(1);
@@ -560,7 +600,7 @@ public class ResourceAgent {
 		return greatestValue;
 	}
 
-	public Corner getBestVillage() {
+	public Corner calculateBestVillage() {
 		ArrayList<Corner> validPositions = getPossibleVillages();
 		int max = Integer.MIN_VALUE;
 		int currVal;
@@ -638,7 +678,7 @@ public class ResourceAgent {
 
 	public void calculateMyResourceWeight() {
 		ArrayList<CornerAgent> agents = aai.getMyCornerAgents();
-		int[] resourceWeighting = {50, 50, 50, 50, 50};
+		Double[] resourceWeighting = {50.0, 50.0, 50.0, 50.0, 50.0};
 		Field[] currFields;
 		Integer currResIndex;
 		for (int i = 0; i < agents.size();i++){
@@ -646,17 +686,22 @@ public class ResourceAgent {
 			for (int j = 0; j < currFields.length; j++) {
 				currResIndex = DefaultSettings.RESOURCE_VALUES.get(currFields[j].getResourceType());
 				if (currResIndex != null && currResIndex < 5){
-					resourceWeighting[currResIndex] -= 100 * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+					if (agents.get(i).getState() == CornerStatus.CITY){
+						resourceWeighting[currResIndex] -= 2 * 100 * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+					} else {
+						resourceWeighting[currResIndex] -= 100 * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+					}
 				}
 			}
 		}
+		System.out.println("Calculated new Own Resource Weight: " + resourceWeighting[0] +" " + resourceWeighting[1] +" " + resourceWeighting[2] +" " + resourceWeighting[3] +" " + resourceWeighting[4]);
 		this.myResourceWeight = resourceWeighting;
 		
 	}
 	
 	public void calculateGlobalResourceWeight() {
 		int decreaseFactor = 100 / (aai.getOpponentAgent().getAmountPlayer() + 1); //ownPlayer
-		int[] resourceWeighting = {50, 50, 50, 50, 50};
+		Double[] resourceWeighting = {50.0, 50.0, 50.0, 50.0, 50.0};
 		CornerAgent[] cornerAgents = aai.getCornerAgents();
 		Integer currResIndex;
 		Field[] currFields;
@@ -666,12 +711,26 @@ public class ResourceAgent {
 				for (int j = 0; j < currFields.length; j++) {
 					currResIndex = DefaultSettings.RESOURCE_VALUES.get(currFields[j].getResourceType());
 					if (currResIndex != null && currResIndex < 5){
-						resourceWeighting[currResIndex] -= decreaseFactor * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+						if (cornerAgents[i].getState() == CornerStatus.CITY){
+							resourceWeighting[currResIndex] -= 2 * decreaseFactor * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+						} else {
+							resourceWeighting[currResIndex] -= decreaseFactor * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+						}
+						
 					}
 				}
 			}
 		}
+		System.out.println("Calculated new Global Resource Weight: " + resourceWeighting[0] +" " + resourceWeighting[1] +" " + resourceWeighting[2] +" " + resourceWeighting[3] +" " + resourceWeighting[4]);
 		this.globalResourceWeight = resourceWeighting;
+	}
+
+	public Double[] getMyResourceWeight() {
+		return myResourceWeight;
+	}
+
+	public Double[] getGlobalResourceWeight() {
+		return globalResourceWeight;
 	}
 	
 

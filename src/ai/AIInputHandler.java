@@ -249,7 +249,16 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
 				ai.getResourceAgent()
 						.addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
-				if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+				if (ai.devCardActionCounter == 2){
+					ai.devCardActionCounter--;
+					//wait for second street
+				}
+				else if (ai.devCardActionCounter == 1){
+					ai.devCardActionCounter--;
+					ai.currentDevCard = null;
+					ai.actuate();
+				}
+				else if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 					ai.actuate();
 				}
 			}
@@ -301,6 +310,15 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().incrementResources(gain);
+			if (ai.tradeWaitForBuilding != null){
+				ai.checkIncomingTrade();
+			} 
+			//after monopoly & invention 
+			else if (ai.currentDevCard != CardType.STREET && ai.devCardActionCounter > 0){
+				ai.devCardActionCounter --;
+				ai.currentDevCard = null;
+				ai.actuate();
+			}
 		}
 		// if it isn't me
 
@@ -528,9 +546,6 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new InventionCard());
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
-				ai.actuate(); // actuate after played a card
-			}
 		}
 		// if it isn't me
 		else {
@@ -554,9 +569,6 @@ public class AIInputHandler extends ClientInputHandler {
 		int ID = monopolyCardInfo.getPlayerID();
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new MonopolyCard());
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
-				ai.actuate(); // actuate after played a card
-			}
 		}
 		// if it isn't me
 		else {

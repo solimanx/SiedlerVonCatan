@@ -20,6 +20,7 @@ import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
 import protocol.clientinstructions.ProtocolEndTurn;
+import protocol.clientinstructions.ProtocolHarbourRequest;
 import protocol.clientinstructions.ProtocolRobberLoss;
 import protocol.clientinstructions.ProtocolRobberMovementRequest;
 import protocol.clientinstructions.trade.ProtocolTradeRequest;
@@ -343,19 +344,19 @@ public class AIOutputHandler {
 	}
 
 	/**
-	 * Request trade.
+	 * Request sea trade.
 	 *
 	 * @param offer
 	 *            the offer
 	 * @param demand
 	 *            the demand
 	 */
-	public void requestTrade(int[] offer, int[] demand) {
+	public void requestSeaTrade(int[] offer, int[] demand) {
 		ProtocolResource prOff = ModelToProtocol.convertToProtocolResource(offer);
 		ProtocolResource prDem = ModelToProtocol.convertToProtocolResource(demand);
-		ProtocolTradeRequest ptr = new ProtocolTradeRequest(prOff, prDem);
+		ProtocolHarbourRequest phr = new ProtocolHarbourRequest(prOff, prDem);
 		Response r = new Response();
-		r.pTradeRequest = ptr;
+		r.pHarbourRequest = phr;
 		try {
 			ai.write(parser.createString(r));
 		} catch (IOException e) {

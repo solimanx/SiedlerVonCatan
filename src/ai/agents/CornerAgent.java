@@ -375,4 +375,8 @@ public class CornerAgent {
 		this.player_id = player_id;
 	}
 
+	public int getUtility() {
+		return netUtility;
+	}
+
 }
