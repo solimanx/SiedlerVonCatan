@@ -681,6 +681,7 @@ public class AdvancedAI {
 						if (resourceAgent.getBestCity() != null) {
 							finalBuildCheck = true;
 						}
+						break;
 					case 3:
 						//if (cardAgent.hasAlreadyPlayedCard() == false) {
 							finalBuildCheck = true;
@@ -699,9 +700,17 @@ public class AdvancedAI {
 						break;
 					}
 
-				} else if (i == buildingWeight.length - 1) {
+				}
+				else if (i == buildingWeight.length - 1) {
 					// ende vom Array; nichts ist möglich
 					endTurn();
+				} else {
+					int[] missing = resourceAgent.getResourcesMissingForBuilding(max);
+					if (resourceAgent.sumArray(missing) >= 2 && resourceAgent.sumArray(resourceAgent.getOwnResources()) <= 4){
+						//sparen!!
+						endTurn();
+						break;
+					}
 				}
 				System.out.println("Check next " + max);
 				// next turn he will check second highest weighting

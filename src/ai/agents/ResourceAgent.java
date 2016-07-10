@@ -220,7 +220,7 @@ public class ResourceAgent {
 	 *            the array
 	 * @return the int
 	 */
-	private int sumArray(int[] array) {
+	public int sumArray(int[] array) {
 		int result = 0;
 		for (int i = 0; i < array.length; i++) {
 			result += array[i];
@@ -271,7 +271,7 @@ public class ResourceAgent {
 		CornerAgent currCa;
 		for (int i = 0; i < aai.getMyCornerAgents().size();i++){
 			currCa = aai.getMyCornerAgents().get(i);
-		    if (currCa.getState() == CornerStatus.VILLAGE && currCa.getUtility() > maxValue){
+		    if (currCa.getState() == CornerStatus.VILLAGE && currCa.calculateVillageUtility() > maxValue){
 		    	maxValue = currCa.getUtility();
 		    	max = i;
 		    }

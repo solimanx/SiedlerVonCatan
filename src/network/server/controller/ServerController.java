@@ -688,7 +688,7 @@ public class ServerController {
 	private void checkVictory(int modelID) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
 		int hiddenpoints = gameLogic.getBoard().getPlayer(modelID).getHiddenVictoryPoints();
-		if (points >= DefaultSettings.MAX_VICTORY_POINTS) {
+		if (points + hiddenpoints >= DefaultSettings.MAX_VICTORY_POINTS) {
 			victory(modelID);
 		}
 	}
