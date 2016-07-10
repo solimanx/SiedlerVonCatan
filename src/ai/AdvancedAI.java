@@ -52,6 +52,7 @@ public class AdvancedAI {
 
 	private CornerAgent[] cornerAgent;
 	private CardAgent cardAgent;
+
 	private ResourceAgent resourceAgent;
 	private OpponentAgent opponentAgent;
 	private TradeAgent tradeAgent;
@@ -90,7 +91,7 @@ public class AdvancedAI {
 
 	protected CardType currentDevCard;
 
-	protected CardType boughtDevCard;
+	public CardType boughtDevCard;
 
 	/**
 	 * Instantiates a new advanced AI.
@@ -151,7 +152,7 @@ public class AdvancedAI {
 		int loss = sum / 2;
 		// losses array
 		int[] losses = { 0, 0, 0, 0, 0 };
-		for (int i = 0; i < loss; i++) {	
+		for (int i = 0; i < loss; i++) {
 			Double[] currResWeighting = resourceAgent.getMyResourceWeight().clone();
 			for (int j = 0; j < currResWeighting.length; j++) {
 				currResWeighting[j] = myResources[j] * (51 - currResWeighting[j]);
@@ -159,13 +160,13 @@ public class AdvancedAI {
 			int maxIndex = 0;
 			Double maxValue = currResWeighting[0];
 			for (int j = 0; j < currResWeighting.length; j++) {
-				if (maxValue < currResWeighting[j]){
+				if (maxValue < currResWeighting[j]) {
 					maxValue = currResWeighting[j];
 					maxIndex = j;
 				}
 			}
 			myResources[maxIndex]--;
-			losses[maxIndex]++;	    
+			losses[maxIndex]++;
 		}
 
 		pO.respondRobberLoss(losses);
@@ -716,9 +717,9 @@ public class AdvancedAI {
 						}
 						break;
 					case 3:
-						// if (cardAgent.hasAlreadyPlayedCard() == false) {
-						finalBuildCheck = true;
-						// }
+						if (boughtDevCard == null && cardAgent.getAmountOfBoughtDevCards() < DefaultSettings.AMOUNT_DEVELOPMENT_CARDS) {
+							finalBuildCheck = true;
+						}
 						break;
 					default:
 						break;
@@ -1133,5 +1134,9 @@ public class AdvancedAI {
 	 */
 	protected String getProtocol() {
 		return PROTOCOL;
+	}
+	
+	public CardAgent getCardAgent() {
+		return cardAgent;
 	}
 }

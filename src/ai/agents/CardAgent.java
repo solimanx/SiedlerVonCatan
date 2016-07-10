@@ -16,6 +16,7 @@ public class CardAgent {
 	// {KNIGHT, INVENTION, MONOPOLY, ROADBUILDING}
 	private int[] myCards = { 0, 0, 0, 0 };
 	private AdvancedAI aai;
+	private int amountOfBoughtDevCards;
 
 	/**
 	 * Instantiates a new card agent.
@@ -145,6 +146,14 @@ public class CardAgent {
 
 		aai.playStreetCard(coords1, coords2);
 
+	}
+	
+	public void increaseAmountOfBoughtDevCards(){
+		this.amountOfBoughtDevCards++;
+	}
+
+	public int getAmountOfBoughtDevCards() {
+		return amountOfBoughtDevCards;
 	}
 
 }

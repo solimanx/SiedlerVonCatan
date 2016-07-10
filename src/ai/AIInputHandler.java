@@ -669,6 +669,7 @@ public class AIInputHandler extends ClientInputHandler {
 		int ID = boughtDevelopmentCard.getPlayerID();
 		CardType ct = boughtDevelopmentCard.getDevelopmentCard();
 
+		ai.getCardAgent().increaseAmountOfBoughtDevCards();
 		// if it's me
 		if (ID == ai.getID()) {
 			// ai.getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(ct));
