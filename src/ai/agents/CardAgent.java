@@ -16,7 +16,7 @@ public class CardAgent {
 	// {KNIGHT, INVENTION, MONOPOLY, ROADBUILDING}
 	private int[] myCards = { 0, 0, 0, 0 };
 	private AdvancedAI aai;
-	private int amountOfBoughtDevCards;
+	private int amountOfBoughtDevCards = 0;
 
 	/**
 	 * Instantiates a new card agent.
