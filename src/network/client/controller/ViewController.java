@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -93,6 +94,7 @@ public class ViewController {
 		primaryStage.sizeToScene();
 		//
 		primaryStage.setTitle("Settlers of Catan : Lobby");
+		primaryStage.getIcons().add(new Image("/textures/standard/Catan-Logo.png"));
 		primaryStage.setResizable(false);
 		primaryStage.setOnCloseRequest(e -> System.exit(0));
 		isChoosingStage = true;
@@ -156,6 +158,7 @@ public class ViewController {
 			gameViewController.startScene(primaryStage, theme);
 			isGameView = true;
 			String title = theme.equals("biergarten") ? "Settlers of Biergarten" : "Settlers of Catan";
+            primaryStage.getIcons().add(new Image("/textures/standard/Catan-Logo.png"));
 			primaryStage.setTitle(title);
 			primaryStage.show();
 
@@ -282,7 +285,8 @@ public class ViewController {
 			tradeViewController = (TradeViewController) fxmlLoader.getController();
 			tradeViewController.setViewController(this);
 			Stage tradeStage = new Stage();
-			tradeStage.setTitle("Choose Name and Color");
+            primaryStage.getIcons().add(new Image("/textures/standard/Catan-Logo.png"));
+			tradeStage.setTitle("Settlers of Catan: Trading");
 			tradeStage.setScene(new Scene(root2));
 			tradeStage.show();
 

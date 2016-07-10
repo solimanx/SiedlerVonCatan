@@ -2181,4 +2181,13 @@ public class ServerController {
 		return board;
 	}
 
+	public int getRobberLossCounter() {
+		return robberLossCounter;
+	}
+
+	public void setRobberLossCounter(int i) {
+		robberLossCounter = i;
+		
+	}
+
 }
