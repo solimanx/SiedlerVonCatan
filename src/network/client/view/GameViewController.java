@@ -1613,9 +1613,9 @@ public class GameViewController implements Initializable {
 			overlay.getChildren().addAll(0, villageFigures);
 			overlay.getChildren().addAll(0, streetFigures);
 			overlay.getChildren().addAll(0, cityFigures);
-
+			overlay.setPickOnBounds(false);
 			fieldPane.getChildren().addAll(0, fieldFigures);
-
+			
 			boardStack.getChildren().addAll(fieldPane, overlay);
 
 //			boardPane.getChildren().addAll(0, streetFigures);
