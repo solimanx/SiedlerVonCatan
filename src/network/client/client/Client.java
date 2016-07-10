@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import protocol.messaging.ProtocolChatReceiveMessage;
+
 // TODO: Auto-generated Javadoc
 /**
  * Client class, which is responsible for connecting to a server, as well as
@@ -50,24 +52,32 @@ public class Client extends Thread {
 				socket = new Socket(serverHost, port);
 				writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-				scanning = false;
 				connectionActive = true;
+				stopScanning();
 				logger.info("Connected to server");
 				runClient();
 			} catch (IOException e) {
 				logger.info("Connection to server failed." + " Attempt:" + connectionTry);
+				inputHandler.handle(new ProtocolChatReceiveMessage(null, "Connection to server failed." + " Attempt:" + connectionTry));
 				connectionTry++;
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException ie) {
-					logger.error("Interrupted Exception", ie);
-					logger.catching(Level.ERROR, ie);
 					ie.printStackTrace();
 				}
 			}
 		}
+	
 	}
 
+	/**
+	 * Stop scanning
+	 * 
+	 */
+	public void stopScanning(){
+		scanning = false;
+		connectionTry = 0;
+	}
 	/**
 	 * Commence reading messages from the server.
 	 *
@@ -98,14 +108,10 @@ public class Client extends Thread {
 	 * Shutting down the client and the connection to the server.
 	 */
 	public void stopClient() {
-		try {
-			socket.close();
+		
+			scanning = false;
 			connectionActive = false;
-		} catch (IOException e) {
-			logger.error("Input/Output Exception", e);
-			logger.catching(Level.ERROR, e);
-			e.printStackTrace();
-		}
 	}
+	
 
 }

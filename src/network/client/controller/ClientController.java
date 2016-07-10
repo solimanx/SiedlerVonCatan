@@ -77,8 +77,10 @@ public class ClientController {
 	/**
 	 * Default constructor for the ClientController.
 	 *
-	 * @param primaryStage            the primary stage
-	 * @param theme the theme
+	 * @param primaryStage
+	 *            the primary stage
+	 * @param theme
+	 *            the theme
 	 */
 	public ClientController(Stage primaryStage, String theme) {
 		// ModelPlayerID => threadID
@@ -104,6 +106,10 @@ public class ClientController {
 	 *            the port
 	 */
 	public void connectToServer(String serverHost, int port) {
+		if(client!=null){
+			viewController.getLobbyController().clearChat();
+			client.stopScanning();
+		}
 		this.client = new Client(clientInputHandler, serverHost, port);
 		this.clientOutputHandler = new ClientOutputHandler(client);
 		client.start();
@@ -176,7 +182,10 @@ public class ClientController {
 	 */
 	public void receiveChatMessage(Integer playerID, String message) {
 		if (viewController.isChoosingStage) {
-			viewController.messageReceive("Player " + playerID==null?"unnamed":playerID.toString() + ": " + message);
+			if (playerID == null) {
+				viewController.messageReceive("Error: " + message);
+			}
+
 		} else if (playerID != null) {
 			String playerName = gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerID)).getName();
 			if (!playerName.equals("")) {
@@ -659,8 +668,8 @@ public class ClientController {
 				// remove other corners around it
 				Corner[] aC = viewController.getClientController().getGameLogic().getBoard().getAdjacentCorners(x, y,
 						dir);
-				for(int i=0; i<aC.length; i++){
-					if(aC[i]!=null){
+				for (int i = 0; i < aC.length; i++) {
+					if (aC[i] != null) {
 						int[] coords = ProtocolToModel.getCornerCoordinates(aC[i].getCornerID());
 						viewController.getGameViewController().removeVillage(coords[0], coords[1], coords[2]);
 					}
@@ -904,7 +913,8 @@ public class ClientController {
 	/**
 	 * Decline trade.
 	 *
-	 * @param tradeID the trade ID
+	 * @param tradeID
+	 *            the trade ID
 	 */
 	public void declineTrade(int tradeID) {
 		clientOutputHandler.declineTrade(tradeID);
@@ -940,8 +950,10 @@ public class ClientController {
 	/**
 	 * trade was fulfilled.
 	 *
-	 * @param threadID            the thread ID
-	 * @param partnerThreadID the partner thread ID
+	 * @param threadID
+	 *            the thread ID
+	 * @param partnerThreadID
+	 *            the partner thread ID
 	 */
 	public void tradeFulfilled(int threadID, int partnerThreadID) {
 		TradeOffer currTOf;
@@ -1336,6 +1348,10 @@ public class ClientController {
 		} else {
 			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(new UnknownCard());
 		}
+	}
+
+	public ViewController getViewController() {
+		return viewController;
 	}
 
 }

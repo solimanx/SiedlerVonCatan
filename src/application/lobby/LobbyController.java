@@ -144,7 +144,7 @@ public class LobbyController {
 		String server = serverComboBox.getValue();
 		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getClientController().connectToServer(server, port);
-		colorNameSelectPane.setDisable(false);
+//		colorNameSelectPane.setDisable(false);
 		// Soundeffects.SELECT.play();
 
 		playConnectSound();
@@ -170,7 +170,7 @@ public class LobbyController {
 	 */
 	public void receiveChatMessage(String string) {
 		messages.appendText(currentTime() + string + "\n");
-		Soundeffects.CHATRECEIVE.play();
+		//Soundeffects.CHATRECEIVE.play();
 		// playNotificationSound();
 	}
 
@@ -292,6 +292,14 @@ public class LobbyController {
 		if (!playerFound) {
 			players.add(new TablePlayer(threadID, color, name, status));
 		}
+	}
+
+	public AnchorPane getColorNameSelectPane() {
+		return colorNameSelectPane;
+	}
+
+	public void clearChat() {
+		messages.clear();
 	}
 
 }
