@@ -25,7 +25,7 @@ public class CornerAgent {
 	private CornerStatus state;
 	// Whether the corner is also a harbor
 	private HarbourStatus harbour_state;
-	//owned by player
+	// owned by player
 	private Integer player_id;
 	// Location of the corner
 	private int[] location = new int[3];
@@ -51,9 +51,12 @@ public class CornerAgent {
 	/**
 	 * Instantiates a new corner agent.
 	 *
-	 * @param loc the loc
-	 * @param board the board
-	 * @param aai the aai
+	 * @param loc
+	 *            the loc
+	 * @param board
+	 *            the board
+	 * @param aai
+	 *            the aai
 	 */
 	public CornerAgent(int[] loc, Board board, AdvancedAI aai) {
 		this.aai = aai;
@@ -234,24 +237,31 @@ public class CornerAgent {
 		int utility = 0;
 		final int THREE_HARBOUR_BENEFIT = Integer.parseInt(rb.getString("THREE_HARBOUR_BENEFIT"));
 		final int TWO_HARBOUR_BENEFIT = Integer.parseInt(rb.getString("TWO_HARBOUR_BENEFIT"));
-		for (int i = 0; i < 3; i++) {
-			if (c[i] != null) {
-				// If it's a harbour
-				if (!c[i].getHarbourStatus().equals(HarbourStatus.NULL)) {
-					switch (c[i].getHarbourStatus()) {
-					// If it's a 3-1 harbour
-					case THREE_TO_ONE:
-						utility += THREE_HARBOUR_BENEFIT;
-						break;
-					// Any other harbour type which is 2:1
-					default:
-						utility += TWO_HARBOUR_BENEFIT;
-						break;
-					}
-				}
+		// for (int i = 0; i < 3; i++) {
+		// if (c[i] != null) {
+		// // If it's a harbour
+		// if (!c[i].getHarbourStatus().equals(HarbourStatus.NULL)) {
+		// switch (c[i].getHarbourStatus()) {
+		// // If it's a 3-1 harbour
+		// case THREE_TO_ONE:
+		// utility += THREE_HARBOUR_BENEFIT;
+		// break;
+		// // Any other harbour type which is 2:1
+		// default:
+		// utility += TWO_HARBOUR_BENEFIT;
+		// break;
+		// }
+		// }
+		// }
+		// }
+		if (!harbour_state.equals(HarbourStatus.NULL)) {
+			if(harbour_state.equals(HarbourStatus.THREE_TO_ONE)){
+				utility += THREE_HARBOUR_BENEFIT;
+			}
+			else{
+				utility += TWO_HARBOUR_BENEFIT;
 			}
 		}
-
 		return utility;
 	}
 
@@ -313,8 +323,8 @@ public class CornerAgent {
 		}
 		return bonus;
 	}
-	
-	protected int resourceBonus(){
+
+	protected int resourceBonus() {
 		int bonus = 0;
 		Double[] ownWeighting = aai.getResourceAgent().getMyResourceWeight();
 		Double[] globalWeighting = aai.getResourceAgent().getGlobalResourceWeight();
@@ -322,18 +332,19 @@ public class CornerAgent {
 		for (int i = 0; i < 3; i++) {
 			if (f[i] != null && f[i].getDiceIndex() != null) {
 				currResIndex = DefaultSettings.RESOURCE_VALUES.get(f[i].getResourceType());
-				//max Weight = 50; maximal Bonus 10 + 5 = 15
+				// max Weight = 50; maximal Bonus 10 + 5 = 15
 				bonus += ownWeighting[currResIndex] / 5;
 				bonus += globalWeighting[currResIndex] / 10;
 			}
 		}
-		return bonus;		
+		return bonus;
 	}
 
 	/**
 	 * Sets the difference.
 	 *
-	 * @param i the new difference
+	 * @param i
+	 *            the new difference
 	 */
 	private void setDifference(int i) {
 		difference = i;
@@ -376,7 +387,7 @@ public class CornerAgent {
 	public Field[] getFields() {
 		return f;
 	}
-	
+
 	/**
 	 * Gets the state.
 	 *
@@ -389,7 +400,8 @@ public class CornerAgent {
 	/**
 	 * Sets the state.
 	 *
-	 * @param state the new state
+	 * @param state
+	 *            the new state
 	 */
 	public void setState(CornerStatus state) {
 		this.state = state;
@@ -407,7 +419,8 @@ public class CornerAgent {
 	/**
 	 * Sets the player ID.
 	 *
-	 * @param player_id the new player ID
+	 * @param player_id
+	 *            the new player ID
 	 */
 	public void setPlayerID(Integer player_id) {
 		this.player_id = player_id;
@@ -421,8 +434,8 @@ public class CornerAgent {
 	public int getUtility() {
 		return netUtility;
 	}
-	
-	public int calculateVillageUtility(){
+
+	public int calculateVillageUtility() {
 		if (isBlocked()) {
 			// Random negative number to avoid building here.
 			return -10000;
