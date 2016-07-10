@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import enums.CardType;
 import enums.CheatCode;
-import network.ModelToProtocol;
+import enums.PlayerState;
+import model.objects.PlayerModel;
 import network.server.server.Server;
 import network.server.server.ServerOutputHandler;
 import parsing.Response;
@@ -135,7 +136,7 @@ public class CheatHandler extends ServerOutputHandler {
 	 * @param threadID
 	 *            the thread ID
 	 */
-	//TODO NEEDS TESTING
+	// TODO NEEDS TESTING
 	private void showOtherHand(Integer threadID) {
 		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
 		int resources[][] = new int[server.getConnectedPlayers() - 1][5];
@@ -150,11 +151,11 @@ public class CheatHandler extends ServerOutputHandler {
 				names[i] = server.getServerInputHandler().getServerController().getBoard().getPlayer(i).getName();
 			}
 		}
-		//send all of the information to the cheat code inserter.
+		// send all of the information to the cheat code inserter.
 		for (int i = 0; i < server.getConnectedPlayers() - 1; i++) {
 			String msg = "Player " + names[i] + " has: " + "Wood: " + resources[i][0] + ", Clay: " + resources[i][1]
 					+ ", Ore: " + resources[i][2] + ", Sheep: " + resources[i][3] + ", Corn: " + resources[i][4];
-			
+
 			ProtocolChatReceiveMessage pcrm = new ProtocolChatReceiveMessage(threadID, msg);
 			Response r = new Response();
 			r.pChatReceive = pcrm;
@@ -342,21 +343,79 @@ public class CheatHandler extends ServerOutputHandler {
 	}
 
 	/**
+	 * CHeck if player is in dice roll state
+	 * 
+	 * @param threadID
+	 */
+	private boolean playerRollStateCheck(Integer modelID) {
+		if (server.getServerInputHandler().getServerController().getBoard().getPlayer(modelID).getPlayerState()
+				.equals(PlayerState.DICEROLLING)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Dice roll consequences depending on number.
+	 * 
+	 * @param i
+	 * @param modelID
+	 */
+	private void diceCheats(int i, int modelID) {
+		if (i == 7) {
+			// server.getServerInputHandler().getServerController().
+			PlayerModel pM = server.getServerInputHandler().getServerController().getBoard().getPlayer(modelID);
+			PlayerModel currPM;
+			for (int j = 0; j < server.getServerInputHandler().getServerController().getAmountPlayers(); j++) {
+				currPM = server.getServerInputHandler().getServerController().getBoard().getPlayer(i);
+				if (currPM.sumResources() > 7) {
+					currPM.setPlayerState(PlayerState.DISPENSE_CARDS_ROBBER_LOSS);
+					server.getServerInputHandler().getServerController().statusUpdate(j);
+					server.getServerInputHandler().getServerController().setRobberLossCounter(
+							server.getServerInputHandler().getServerController().getRobberLossCounter() + 1);
+				}
+			}
+			if (server.getServerInputHandler().getServerController().getRobberLossCounter() == 0) {
+				pM.setPlayerState(PlayerState.MOVE_ROBBER);
+				server.getServerInputHandler().getServerController().statusUpdate(modelID);
+			} else {
+				if (pM.getPlayerState() != PlayerState.DISPENSE_CARDS_ROBBER_LOSS) {
+					pM.setPlayerState(PlayerState.WAITING);
+					server.getServerInputHandler().getServerController().statusUpdate(modelID);
+				}
+			}
+		} else {
+			server.getServerInputHandler().getServerController().gainBoardResources(i);
+			server.getServerInputHandler().getServerController().getBoard().getPlayer(modelID)
+					.setPlayerState(PlayerState.TRADING_OR_BUILDING);
+		}
+		server.getServerInputHandler().getServerController().statusUpdate(modelID);
+	}
+
+	/**
 	 * Roll two cheat.
 	 *
 	 * @param threadID
 	 *            the thread ID
 	 */
 	private void rollTwoCheat(Integer threadID) {
-		int[] result = { 1, 1 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-			// TODO change status from roll dice to trading/building
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(2, modelID);
+			int[] result = { 1, 1 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -368,14 +427,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollThreeCheat(Integer threadID) {
-		int[] result = { 1, 2 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(3, modelID);
+			int[] result = { 2, 1 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -387,14 +455,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollFourCheat(Integer threadID) {
-		int[] result = { 2, 2 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(4, modelID);
+			int[] result = { 2, 2 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -406,14 +483,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollFiveCheat(Integer threadID) {
-		int[] result = { 2, 3 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(5, modelID);
+			int[] result = { 3, 2 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -425,14 +511,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollSixCheat(Integer threadID) {
-		int[] result = { 3, 3 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(6, modelID);
+			int[] result = { 4, 2 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -444,14 +539,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollSevenCheat(Integer threadID) {
-		int[] result = { 4, 3 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(7, modelID);
+			int[] result = { 4, 3 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -463,14 +567,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollEightCheat(Integer threadID) {
-		int[] result = { 4, 4 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(8, modelID);
+			int[] result = { 4, 4 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -482,14 +595,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollNineCheat(Integer threadID) {
-		int[] result = { 4, 5 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(9, modelID);
+			int[] result = { 4, 5 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -501,14 +623,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollTenCheat(Integer threadID) {
-		int[] result = { 4, 6 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(10, modelID);
+			int[] result = { 5, 5 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -520,14 +651,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollElevenCheat(Integer threadID) {
-		int[] result = { 5, 6 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(11, modelID);
+			int[] result = { 5, 6 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
@@ -539,14 +679,23 @@ public class CheatHandler extends ServerOutputHandler {
 	 *            the thread ID
 	 */
 	private void rollTwelveCheat(Integer threadID) {
-		int[] result = { 6, 6 };
-		ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
-		Response r = new Response();
-		r.pDRResult = dr;
-		try {
-			server.broadcast(parser.createString(r));
-		} catch (IOException e) {
-			logger.error(e);
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		if (playerRollStateCheck(modelID)) {
+			diceCheats(12, modelID);
+			int[] result = { 6, 6 };
+			ProtocolDiceRollResult dr = new ProtocolDiceRollResult(threadID, result);
+			Response r = new Response();
+			r.pDRResult = dr;
+			try {
+				server.broadcast(parser.createString(r));
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		} else {
+
+			server.getServerInputHandler().getServerController().serverResponse(modelID,
+					"Diese Aktion ist derzeit nicht zulässig");
+
 		}
 
 	}
