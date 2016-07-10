@@ -298,7 +298,7 @@
                      </font></Label>
                   <StackPane>
                      <children>
-                        <Circle fill="WHITE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="shadow" />
+                        <Circle fx:id="diceCircle" fill="WHITE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="shadow" />
                         <Text fx:id="diceResult" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" />
                      </children>
                   </StackPane>

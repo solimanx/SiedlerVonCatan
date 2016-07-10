@@ -74,6 +74,9 @@ import static sounds.Sound.*;
 public class GameViewController implements Initializable {
 
 	@FXML
+	private Circle diceCircle;
+	
+	@FXML
 	private Text selfWoodText;
 
 	@FXML
@@ -1146,8 +1149,9 @@ public class GameViewController implements Initializable {
 	 * @param result
 	 *            the new dice roll result
 	 */
-	public void setDiceRollResult(int result) {
+	public void setDiceRollResult(Integer playerID, int result) {
 		Soundeffects.DICEROLL.play();
+		diceCircle.setFill(playerColors.get(playerID));
 		diceResult.setText(String.valueOf(result));
 	}
 

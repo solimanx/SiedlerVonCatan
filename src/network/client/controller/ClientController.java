@@ -355,7 +355,7 @@ public class ClientController {
 		// TODO WARNING, PLAYERID NOTHING GETS DONE WITH IT
 		if (viewController.getGameViewController() != null) {
 			int res = result[0] + result[1];
-			viewController.getGameViewController().setDiceRollResult(res);
+			viewController.getGameViewController().setDiceRollResult(threadPlayerIdMap.get(playerID), res);
 		}
 
 	}
