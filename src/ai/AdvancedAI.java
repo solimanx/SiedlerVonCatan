@@ -294,7 +294,7 @@ public class AdvancedAI {
 	 * Calculate building weighting.
 	 */
 	private void calculateBuildingWeighting() {
-		Double[] resourceWeighting = resourceAgent.getMyResourceWeight();
+		Double[] resourceWeighting = resourceAgent.getMyResourceWeight().clone();
 		// buildingWeight[i] = average of resourceWeightings needed for this
 		// building * (estimated) victoryPoints
 		// * amountBoughtAlreadyOfThisType/TotalAmountofThisType (prevents the
