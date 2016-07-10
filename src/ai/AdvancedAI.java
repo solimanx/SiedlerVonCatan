@@ -152,7 +152,7 @@ public class AdvancedAI {
 		// losses array
 		int[] losses = { 0, 0, 0, 0, 0 };
 		for (int i = 0; i < loss; i++) {	
-			Double[] currResWeighting = resourceAgent.getMyResourceWeight();
+			Double[] currResWeighting = resourceAgent.getMyResourceWeight().clone();
 			for (int j = 0; j < currResWeighting.length; j++) {
 				currResWeighting[j] = myResources[j] * (51 - currResWeighting[j]);
 			}
