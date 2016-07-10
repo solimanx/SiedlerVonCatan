@@ -78,19 +78,14 @@ public class AdvancedAI {
 
 	protected boolean isInitialPhase;
 
-	private double knightValue;
-	private double monopolyValue;
-	private double inventionValue;
-	private double roadBuildingValue;
-
 	private PrimitiveAI primitiveAI;
 
 	private AIOutputHandler pO;
-
+	//BuildingProject to wait for the resources
 	protected Integer tradeWaitForBuilding;
-
+    //current Development Card played
 	protected CardType currentDevCard;
-
+	//current Development Card bought (for adding it in endTurn)
 	public CardType boughtDevCard;
 
 	/**
@@ -169,49 +164,6 @@ public class AdvancedAI {
 			losses[maxIndex]++;
 		}
 
-		pO.respondRobberLoss(losses);
-
-	}
-
-	/**
-	 * Giving up half of resources by order.
-	 */
-	protected void loseToBandit() {
-		// Count all my resources
-		int[] myResources = getMe().getResources().clone();
-		int sum = 0;
-
-		for (int i = 0; i < 5; i++)
-			sum += getMe().getResourceAmountOf(i);
-		// loss is half of sum
-		int loss = sum / 2;
-		// losses array
-		int[] losses = { 0, 0, 0, 0, 0 };
-
-		// until losses amount is reached
-		while (loss > 0) {
-			// scan every resource
-			for (int j = 0; j < 5; j++) {
-				// if there's some of it
-				if (myResources[j] > 0) {
-					// decrement it from your list
-					myResources[j] -= 1;
-					// increment it to losses array
-					losses[j]++;
-					loss -= 1;
-					// check if losses amount is reached
-					break;
-				}
-				// if there's none of it
-				else {
-					// check the next resource type
-					continue;
-				}
-
-			}
-		}
-
-		// send the losses to the output handler
 		pO.respondRobberLoss(losses);
 
 	}
@@ -527,123 +479,7 @@ public class AdvancedAI {
 
 		initialRoundCounter++;
 		resourceAgent.initializeResources();
-		if (initialRoundCounter > 1) {
-			resourceAgent.calculateMyResourceWeight();
-			// TODO; erst am Ende der initial phase
-			// resourceAgent.calculateGlobalResourceWeight();
-			// TODO: Strategie festlegen
-		}
 
-	}
-
-	/**
-	 * Oldactuate.
-	 */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see ai.PrimitiveAI#actuate()
-	 */
-	public void oldactuate() {
-		resourceAgent.update();
-
-		receiveProposals();
-		/*
-		 * if (cardAgent.getSum() > 0) { if (cardAgent.getSum() == 1) { if
-		 * (cardAgent.hasKnight()) { if (knightValue > 1.0) {
-		 * cardAgent.playKnightCard(); } } else if (cardAgent.hasMonopoly() &&
-		 * (getMe().getVictoryPoints() == 8 || getMe().getVictoryPoints() == 9))
-		 * { if (monopolyValue > 0.5) { cardAgent.playMonopolyCard(); } } else
-		 * if (cardAgent.hasMonopoly()) { if (monopolyValue > 1.5) {
-		 * cardAgent.playMonopolyCard(); } } else if (cardAgent.hasInvention())
-		 * { if (inventionValue > 0.5) { cardAgent.playInventionCard(); } } else
-		 * if (cardAgent.hasRoad()) { if (roadBuildingValue > 0.5) {
-		 * cardAgent.playRoadCard(); } } } else { double max =
-		 * Math.max(knightValue, Math.max(monopolyValue,
-		 * Math.max(inventionValue, roadBuildingValue))); if (max > 0.5) { if
-		 * (knightValue == max) { cardAgent.playKnightCard(); } else if
-		 * (monopolyValue == max) { cardAgent.playMonopolyCard(); } else if
-		 * (inventionValue == max) { cardAgent.playInventionCard(); } else if
-		 * (roadBuildingValue == max) { cardAgent.playRoadCard(); } } }
-		 * 
-		 * }
-		 */
-
-		// DEBUG ONLY
-		if (cardAgent.hasMonopoly()) {
-			cardAgent.playMonopolyCard();
-		}
-		// DEBUG ONLY
-		if (cardAgent.hasInvention()) {
-			cardAgent.playInventionCard();
-		}
-
-		if (getMe().getAmountStreets() > 0 && cardAgent.hasRoad()) {
-			cardAgent.playRoadCard();
-		}
-
-		if (getMe().getAmountCities() != 0 && resourceAgent.canBuildCity()) {
-			boolean notFound = true;
-			for (int i = 0; i < resourceAgent.getMyCorners().size(); i++) {
-				// if it's a village
-				if (resourceAgent.getMyCorners().get(i).getStatus().equals(CornerStatus.VILLAGE)) {
-					// upgrade it
-					int[] coords = ProtocolToModel
-							.getCornerCoordinates(resourceAgent.getMyCorners().get(i).getCornerID());
-					pO.requestBuildCity(coords[0], coords[1], coords[2]);
-					notFound = false;
-					break;
-				}
-			}
-			if (notFound) {
-				// TODO: Fix this, so other possibilities are checked!
-				getOutput().respondEndTurn();
-			}
-		}
-		// if i can get cards
-		else if (resourceAgent.canBuyCard()) {
-			// i'll get them
-			pO.requestBuyCard();
-		}
-
-		else if (getMe().getAmountVillages() != 0 && resourceAgent.canBuildVillage()) {
-			Corner bestCorner = resourceAgent.calculateBestVillage();
-			if (bestCorner != null) {
-				int[] coords = ProtocolToModel.getCornerCoordinates(bestCorner.getCornerID());
-				pO.requestBuildVillage(coords[0], coords[1], coords[2]);
-				// DEBUG
-				pO.respondEndTurn();
-			} else { // try to build street
-				if (!getMe().hasLongestRoad() && getMe().getAmountStreets() > 0 && resourceAgent.canBuildRoad()) {
-					Edge bestEdge = resourceAgent.calculateBestStreet();
-					String id = bestEdge.getEdgeID();
-					int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
-					pO.requestBuildRoad(coords[0], coords[1], coords[2]);
-				}
-			}
-		}
-
-		// try getting largest army
-		else if (!getMe().hasLargestArmy() && cardAgent.hasKnight()) {
-			banditAgent.moveRobber();
-			int[] coords = banditAgent.bestNewRobber();
-			Integer target = banditAgent.getTarget();
-			String newRobber = ModelToProtocol.getFieldID(coords[0], coords[1]);
-			pO.respondKnightCard(newRobber, target);
-		}
-
-		// try getting longest road
-		// TODO: This should also happen when the AI HAS the longest road
-		else if (!getMe().hasLongestRoad() && getMe().getAmountStreets() > 0 && resourceAgent.canBuildRoad()) {
-			Edge bestEdge = resourceAgent.calculateBestStreet();
-			String id = bestEdge.getEdgeID();
-			int[] coords = HexService.getEdgeCoordinates(id.substring(0, 1), id.substring(1, 2));
-			pO.requestBuildRoad(coords[0], coords[1], coords[2]);
-		}
-		// if AI can do nothing
-		else {
-			getOutput().respondEndTurn();
-		}
 	}
 
 	/**
@@ -1136,6 +972,10 @@ public class AdvancedAI {
 		return PROTOCOL;
 	}
 	
+	/**
+	 * gets the Card Agent
+	 * @return the card agent
+	 */
 	public CardAgent getCardAgent() {
 		return cardAgent;
 	}
