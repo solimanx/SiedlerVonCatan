@@ -35,6 +35,7 @@ import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolResource;
+import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
 public class ServerInputHandler {
@@ -102,7 +103,8 @@ public class ServerInputHandler {
 			handle((ProtocolRobberMovementRequest) o);
 			break;
 		case "String":
-			handle((String) o);//handle(new ProtocolServerResponse((String) o));
+			handle((String) o);// handle(new ProtocolServerResponse((String)
+								// o));
 			break;
 		case "ProtocolVictory":
 			handle((ProtocolVictory) o);
@@ -180,7 +182,8 @@ public class ServerInputHandler {
 	/**
 	 * Handle.
 	 *
-	 * @param o the o
+	 * @param o
+	 *            the o
 	 */
 	protected void handle(String o) {
 		serverController.sendInvalidJSON(currentThreadID);
@@ -203,8 +206,8 @@ public class ServerInputHandler {
 	 *            the hello
 	 */
 	protected void handle(ProtocolHello hello) {
-		logger.debug("SERVER: Hello gelesen!");
-		serverController.receiveHello(currentThreadID);
+		
+			serverController.receiveHello(currentThreadID,hello.getVersion());
 
 	}
 
@@ -430,17 +433,17 @@ public class ServerInputHandler {
 				coords2[2]);
 
 	}
-	
+
 	/**
 	 * Handle.
 	 *
-	 * @param cheat the cheat
+	 * @param cheat
+	 *            the cheat
 	 */
-	protected void handle(ProtocolCheat cheat){
-		if(cheat.getCheatCode()==null){
+	protected void handle(ProtocolCheat cheat) {
+		if (cheat.getCheatCode() == null) {
 			serverController.serverResponse(currentThreadID, "Unzul�ssige Cheatcode");
-		}
-		else{
+		} else {
 			CheatHandler ch = new CheatHandler(serverController.getServer());
 			ch.handle(currentThreadID, cheat.getCheatCode());
 		}
@@ -459,7 +462,8 @@ public class ServerInputHandler {
 	/**
 	 * Lost connection.
 	 *
-	 * @param threadID the thread ID
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void lostConnection(int threadID) {
 		serverController.connectionLost(threadID);

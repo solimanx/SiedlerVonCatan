@@ -72,6 +72,7 @@ public class Server {
 		public int threadID;
 		public ServerInputHandler inputHandler;
 		public ServerOutputHandler outputHandler;
+		public boolean connected = true;
 
 		/**
 		 * Instantiates a new client thread.
@@ -112,7 +113,7 @@ public class Server {
 				inputHandler.hello(threadID);
 				logger.debug("Hello sent to " + threadID + " Thread");
 				// socket.setTcpNoDelay(true);
-				while (true) {
+				while (connected) {
 					String line = reader.readLine();
 					logger.debug("Server got message: " + line);
 					inputHandler.sendToParser(line, threadID);
@@ -133,6 +134,18 @@ public class Server {
 				// TODO server beendet sich momentan noch vollständig, wenn
 				// Client abbricht
 			} finally {
+			}
+		}
+		
+		public void disconnect(){
+			try {
+				connected = false;
+				reader.close();
+				socket.close();
+				logger.info("Player disconnected");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
@@ -255,5 +268,10 @@ public class Server {
 	 */
 	public int getConnectedPlayers(){
 		return connectedPlayers;
+	}
+	
+	public void disconnectPlayer(Integer id){
+		clientCounter--;
+		idToClientThread.get(id).disconnect();
 	}
 }

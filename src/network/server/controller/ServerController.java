@@ -133,20 +133,30 @@ public class ServerController {
 	 *
 	 * @param currentThreadID
 	 *            the current thread ID
+	 * @param string
 	 */
-	public void receiveHello(int currentThreadID) {
+	public void receiveHello(int currentThreadID, String string) {
 		threadPlayerIdMap.put(currentThreadID, amountPlayers);
 		modelPlayerIdMap.put(amountPlayers, currentThreadID);
 		amountPlayers++;
+		// if type mismatch
+		if (!string.contains(DefaultSettings.SERVER_VERSION)) {
 
-		int playerID = threadPlayerIdMap.get(currentThreadID);
-		gameLogic.getBoard().getPlayer(playerID).setPlayerState(PlayerState.GAME_STARTING);
+//			serverResponse(threadPlayerIdMap.get(currentThreadID), "Version mismatch");
+			server.disconnectPlayer(currentThreadID);
+			threadPlayerIdMap.remove(currentThreadID);
+			modelPlayerIdMap.remove(amountPlayers);
+			amountPlayers-= 1;
+		} else {
+			int playerID = threadPlayerIdMap.get(currentThreadID);
+			gameLogic.getBoard().getPlayer(playerID).setPlayerState(PlayerState.GAME_STARTING);
 
-		welcome(playerID);
-		statusUpdate(playerID);
-		for (int i = 0; i < amountPlayers; i++) {
-			if (i != playerID) {
-				statusUpdateToPlayer(playerID, i);
+			welcome(playerID);
+			statusUpdate(playerID);
+			for (int i = 0; i < amountPlayers; i++) {
+				if (i != playerID) {
+					statusUpdateToPlayer(playerID, i);
+				}
 			}
 		}
 
@@ -648,8 +658,10 @@ public class ServerController {
 	/**
 	 * increases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID            the model ID
-	 * @param amount the amount
+	 * @param modelID
+	 *            the model ID
+	 * @param amount
+	 *            the amount
 	 */
 	private void increaseVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
@@ -660,8 +672,10 @@ public class ServerController {
 	/**
 	 * decreases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID            the model ID
-	 * @param amount the amount
+	 * @param modelID
+	 *            the model ID
+	 * @param amount
+	 *            the amount
 	 */
 	private void decreaseVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
@@ -671,8 +685,10 @@ public class ServerController {
 	/**
 	 * increases victory points of a player and checks if the player has won.
 	 *
-	 * @param modelID            the model ID
-	 * @param amount the amount
+	 * @param modelID
+	 *            the model ID
+	 * @param amount
+	 *            the amount
 	 */
 	private void increaseHiddenVictoryPoints(int modelID, int amount) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getHiddenVictoryPoints();
@@ -683,7 +699,8 @@ public class ServerController {
 	/**
 	 * Check victory.
 	 *
-	 * @param modelID the model ID
+	 * @param modelID
+	 *            the model ID
 	 */
 	private void checkVictory(int modelID) {
 		int points = gameLogic.getBoard().getPlayer(modelID).getVictoryPoints();
@@ -1144,11 +1161,11 @@ public class ServerController {
 		if (!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
 			if (gameLogic.checkBuyDevCard(modelID)) {
 				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
-				
+
 				subFromPlayersResources(modelID, DefaultSettings.DEVCARD_BUILD_COST);
 				costsToAll(modelID, DefaultSettings.DEVCARD_BUILD_COST, true);
 				resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
-				
+
 				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
 				if (devCard.getName().equals("Victory Card")) {
 					increaseHiddenVictoryPoints(modelID, 1);
@@ -1283,8 +1300,8 @@ public class ServerController {
 			serverResponse(modelID, "Unzulässige Aktion");
 		} else {
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-			
-			if(!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)){	
+
+			if (!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
 				pM.setPlayerState(PlayerState.WAITING);
 				ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
 				if (currDevCards != null) {
@@ -1302,8 +1319,7 @@ public class ServerController {
 				currentPlayer = getNextPlayer(modelID); // next players turn
 				gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
 				statusUpdate(currentPlayer);
-			}
-			else{
+			} else {
 				serverResponse(modelID, "Diese Aktion ist derzeit nicht zulässig");
 
 			}
@@ -1717,7 +1733,7 @@ public class ServerController {
 				}
 			}
 			if (resAmountCheck > 2) {
-				//TODO: fix?
+				// TODO: fix?
 				serverResponse(modelID, "Zu viele Resourcen angegeben");
 				resourceStackIncrease(obtain);
 			} else {
@@ -2101,7 +2117,8 @@ public class ServerController {
 	/**
 	 * Connection lost.
 	 *
-	 * @param threadID the thread ID
+	 * @param threadID
+	 *            the thread ID
 	 */
 	public void connectionLost(int threadID) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
@@ -2160,7 +2177,8 @@ public class ServerController {
 	/**
 	 * Send invalid JSON.
 	 *
-	 * @param currentThreadID the current thread ID
+	 * @param currentThreadID
+	 *            the current thread ID
 	 */
 	public void sendInvalidJSON(int currentThreadID) {
 		serverResponse(currentThreadID, "Unzulässige Aktion");
@@ -2195,7 +2213,7 @@ public class ServerController {
 
 	public void setRobberLossCounter(int i) {
 		robberLossCounter = i;
-		
+
 	}
 
 }

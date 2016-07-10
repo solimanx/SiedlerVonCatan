@@ -161,7 +161,6 @@ public class ClientController {
 		switch (currentState) {
 		case GAME_STARTING:
 		case WAITING_FOR_GAMESTART:
-			viewController.setServerResponse(serverResponse);
 		default:
 			viewController.setServerResponse(serverResponse);
 		}
