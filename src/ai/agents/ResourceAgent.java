@@ -415,13 +415,16 @@ public class ResourceAgent {
 	public Edge calculateBestStreet() {
 		ArrayList<Object> bestStreets = getPossibleLTRExtensions();
 		StreetSet streetSet = (StreetSet) bestStreets.get(0);
+		@SuppressWarnings("unchecked")
 		ArrayList<Edge> edgeSuggestion = (ArrayList<Edge>) bestStreets.get(1);
 		int[] edgeWeighting = new int[edgeSuggestion.size()];
 		Edge[] currNeighbours;
 		int[] currCoords;
+		Corner[] currCornerNeighbours;
 		for (int i = 0; i < edgeSuggestion.size(); i++) {
 			currCoords = ProtocolToModel.getEdgeCoordinates(edgeSuggestion.get(i).getEdgeID());
 			currNeighbours = aai.getGl().getBoard().getLinkedEdges(currCoords[0], currCoords[1], currCoords[2]);
+			currCornerNeighbours = aai.getGl().getBoard().getAttachedCorners(currCoords[0], currCoords[1], currCoords[2]);
 			boolean oneHostileEdge = false;
 			for (int j = 0; j < currNeighbours.length; j++) {
 				// is not already in street set
@@ -444,10 +447,31 @@ public class ResourceAgent {
 						} else { // no street
 							edgeWeighting[i] += 10;
 						}
+						//schaue auf Corner mit Abstand 2
+						int[] secondEdgeCoords = ProtocolToModel.getEdgeCoordinates(currNeighbours[j].getEdgeID());
+						Corner[] secondCornerNeighbours = aai.getGl().getBoard().getAttachedCorners(secondEdgeCoords[0], secondEdgeCoords[1], secondEdgeCoords[2]);
+						for (int k = 0; k < secondCornerNeighbours.length; k++) {
+							if (secondCornerNeighbours[k] != currCornerNeighbours[0] && secondCornerNeighbours[k] != currCornerNeighbours[1]){
+								//then has to be the second corner
+								Integer ownerID = secondCornerNeighbours[k].getOwnerID();
+								//check if either blocked village or city
+								if (secondCornerNeighbours[k].getStatus() != CornerStatus.EMPTY){
+								if (ownerID != null){
+									if (ownerID == aai.getID()){
+										edgeWeighting[i] += 50;
+									} else {
+										edgeWeighting[i] -= 10;
+									}
+								} else {
+									edgeWeighting[i] -= 10;
+								}
+								} else {
+									edgeWeighting[i] += aai.getCornerAgentByID(secondCornerNeighbours[k].getCornerID()).calculateVillageUtility();
+								}
+							}
+						}
 					}
 				}
-				// TODO: Schaue auf unmittelbare Corner Nachbarn und gewichte
-				// nach angrenzenden fields
 
 			}
 		}
@@ -638,7 +662,7 @@ public class ResourceAgent {
 		int maxIndex = 0;
 		for (int i = 0; i < validPositions.size(); i++) {
 
-			currVal = aai.getCornerAgentByID(validPositions.get(i).getCornerID()).calculateInitialVillageUtility();
+			currVal = aai.getCornerAgentByID(validPositions.get(i).getCornerID()).calculateVillageUtility();
 			if (currVal > max) {
 				max = currVal;
 				maxIndex = i;

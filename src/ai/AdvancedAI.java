@@ -470,9 +470,9 @@ public class AdvancedAI {
 				z = cornerAgent[i].getLocation()[2];
 				d = i;
 			}
-			// System.out.println(
-			// cornerAgent[i].getLocationString() + " " +
-			// cornerAgent[i].calculateInitialVillageUtility());
+			System.out.println(
+			cornerAgent[i].getLocationString() + " " +
+			cornerAgent[i].calculateInitialVillageUtility());
 		}
 		myCornerAgents.add(cornerAgent[d]);
 		pO.requestBuildVillage(x, y, z);

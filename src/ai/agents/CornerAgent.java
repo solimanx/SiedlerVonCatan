@@ -13,6 +13,7 @@ import model.objects.Edge;
 import model.objects.Field;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
+import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -134,7 +135,7 @@ public class CornerAgent {
 			int ld = landDiversity();
 			int hd = harbourDiversity();
 			int rp = rollProbability();
-			int rb = resourceBonus();
+			int rb = initialResourceBonus();
 			int bonus = 0;
 			int[] utilities = { ld, hd, rp };
 
@@ -280,7 +281,7 @@ public class CornerAgent {
 	 *
 	 * @return the int
 	 */
-	protected int resourceBonus() {
+	protected int initialResourceBonus() {
 		int bonus = 0;
 		int woodB = aai.getSingleResourceWeight(ResourceType.WOOD);
 		int clayB = aai.getSingleResourceWeight(ResourceType.CLAY);
@@ -311,6 +312,22 @@ public class CornerAgent {
 			}
 		}
 		return bonus;
+	}
+	
+	protected int resourceBonus(){
+		int bonus = 0;
+		Double[] ownWeighting = aai.getResourceAgent().getMyResourceWeight();
+		Double[] globalWeighting = aai.getResourceAgent().getGlobalResourceWeight();
+		int currResIndex;
+		for (int i = 0; i < 3; i++) {
+			if (f[i] != null && f[i].getDiceIndex() != null) {
+				currResIndex = DefaultSettings.RESOURCE_VALUES.get(f[i].getResourceType());
+				//max Weight = 50; maximal Bonus 10 + 5 = 15
+				bonus += ownWeighting[currResIndex] / 5;
+				bonus += globalWeighting[currResIndex] / 10;
+			}
+		}
+		return bonus;		
 	}
 
 	/**
@@ -403,6 +420,46 @@ public class CornerAgent {
 	 */
 	public int getUtility() {
 		return netUtility;
+	}
+	
+	public int calculateVillageUtility(){
+		if (isBlocked()) {
+			// Random negative number to avoid building here.
+			return -10000;
+		} else {
+			int ld = landDiversity();
+			int hd = harbourDiversity();
+			int rp = rollProbability();
+			int rb = resourceBonus();
+			int bonus = 0;
+			int[] utilities = { ld, hd, rp };
+
+			if (difference == 0) {
+				// change nothing
+			} else {
+				// get greatest and second greatest utility
+				int high1 = Integer.MIN_VALUE;
+				int high2 = Integer.MIN_VALUE;
+				for (int num : utilities) {
+					if (num >= high1) {
+						high2 = high1;
+						high1 = num;
+					} else if (num > high2) {
+						high2 = num;
+					}
+
+				}
+				if (difference == 1)
+					bonus = high2;
+				else if (difference == 2)
+					bonus = high1;
+
+			}
+			netUtility = ld + hd + rp + bonus + rb;
+
+			return netUtility;
+
+		}
 	}
 
 }

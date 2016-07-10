@@ -62,7 +62,7 @@ public class ServerController {
 	private ServerInputHandler serverInputHandler;
 	private int InitialStreetCounter;
 	// private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
-	private Integer currentPlayer;
+	private Integer currentPlayer = null;
 	private int robberLossCounter;
 	private TradeController tradeController;
 	private int[] playerOrder;
@@ -242,7 +242,7 @@ public class ServerController {
 				}
 			}
 		}
-		int modelID = threadPlayerIdMap.get(currentThreadID);
+		Integer modelID = threadPlayerIdMap.get(currentThreadID);
 		if (colorAvailable) {
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 			pM.setColor(color);
@@ -2103,7 +2103,6 @@ public class ServerController {
 		if (modelID != null) {
 			if (currentPlayer != null) {
 				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);
-				;
 				statusUpdate(modelID);
 				Integer currTID;
 				for (int i = 0; i < amountPlayers; i++) {
