@@ -55,7 +55,7 @@ public class TradeAgent {
 	/**
 	 * Update agent.
 	 */
-	protected void updateAgent() {
+	public void updateAgent() {
 		if (woodHarbour == false)
 			woodHarbour = aai.getGl().hasWoodHarbour(aai.getID());
 		if (clayHarbour == false)

@@ -89,7 +89,7 @@ public class AdvancedAI {
 	protected Integer tradeWaitForBuilding;
 
 	protected CardType currentDevCard;
-	
+
 	protected CardType boughtDevCard;
 
 	/**
@@ -138,6 +138,38 @@ public class AdvancedAI {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Giving up half of resources by order.
+	 */
+	protected void looseToBandit() {
+		// Count all my resources
+		int[] myResources = getMe().getResources().clone();
+		int sum = resourceAgent.sumArray(myResources);
+		// loss is half of sum
+		int loss = sum / 2;
+		// losses array
+		int[] losses = { 0, 0, 0, 0, 0 };
+		for (int i = 0; i < loss; i++) {	
+			Double[] currResWeighting = resourceAgent.getMyResourceWeight();
+			for (int j = 0; j < currResWeighting.length; j++) {
+				currResWeighting[j] = myResources[j] * (51 - currResWeighting[j]);
+			}
+			int maxIndex = 0;
+			Double maxValue = currResWeighting[0];
+			for (int j = 0; j < currResWeighting.length; j++) {
+				if (maxValue < currResWeighting[j]){
+					maxValue = currResWeighting[j];
+					maxIndex = j;
+				}
+			}
+			myResources[maxIndex]--;
+			losses[maxIndex]++;	    
+		}
+
+		pO.respondRobberLoss(losses);
+
 	}
 
 	/**
@@ -471,8 +503,7 @@ public class AdvancedAI {
 				d = i;
 			}
 			System.out.println(
-			cornerAgent[i].getLocationString() + " " +
-			cornerAgent[i].calculateInitialVillageUtility());
+					cornerAgent[i].getLocationString() + " " + cornerAgent[i].calculateInitialVillageUtility());
 		}
 		myCornerAgents.add(cornerAgent[d]);
 		pO.requestBuildVillage(x, y, z);
@@ -620,6 +651,7 @@ public class AdvancedAI {
 	public void actuate() {
 		resourceAgent.update();
 		updateCards();
+		tradeAgent.updateAgent();
 
 		// Dev Cards hier
 		if (cardAgent.hasMonopoly()) {
@@ -664,7 +696,8 @@ public class AdvancedAI {
 					build(max);
 					break;
 				} else if (tradeAgent.isBuildableAfterTrade(max)) {
-					//finalBuild Check nötig, da checks von getPossibleBuildings im Trade Agent nicht stattfinden
+					// finalBuild Check nötig, da checks von
+					// getPossibleBuildings im Trade Agent nicht stattfinden
 					boolean finalBuildCheck = false;
 					switch (max) {
 					case 0:
@@ -683,9 +716,9 @@ public class AdvancedAI {
 						}
 						break;
 					case 3:
-						//if (cardAgent.hasAlreadyPlayedCard() == false) {
-							finalBuildCheck = true;
-						//}
+						// if (cardAgent.hasAlreadyPlayedCard() == false) {
+						finalBuildCheck = true;
+						// }
 						break;
 					default:
 						break;
@@ -700,14 +733,14 @@ public class AdvancedAI {
 						break;
 					}
 
-				}
-				else if (i == buildingWeight.length - 1) {
+				} else if (i == buildingWeight.length - 1) {
 					// ende vom Array; nichts ist möglich
 					endTurn();
 				} else {
 					int[] missing = resourceAgent.getResourcesMissingForBuilding(max);
-					if (resourceAgent.sumArray(missing) >= 2 && resourceAgent.sumArray(resourceAgent.getOwnResources()) <= 4){
-						//sparen!!
+					if (resourceAgent.sumArray(missing) >= 2
+							&& resourceAgent.sumArray(resourceAgent.getOwnResources()) <= 4) {
+						// sparen!!
 						endTurn();
 						break;
 					}
@@ -729,13 +762,14 @@ public class AdvancedAI {
 		if (possibleBuildings[tradeWaitForBuilding]) {
 			build(tradeWaitForBuilding);
 			tradeWaitForBuilding = null;
-		}		
+		}
 	}
 
 	/**
 	 * Builds the.
 	 *
-	 * @param project the project
+	 * @param project
+	 *            the project
 	 */
 	public void build(int project) {
 		switch (project) {
@@ -781,12 +815,12 @@ public class AdvancedAI {
 		pO.respondMoveRobber(newRobber, target);
 
 	}
-	
+
 	/**
 	 * End turn.
 	 */
-	private void endTurn(){
-		if (boughtDevCard != null){
+	private void endTurn() {
+		if (boughtDevCard != null) {
 			getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(boughtDevCard));
 		}
 		boughtDevCard = null;
@@ -969,7 +1003,8 @@ public class AdvancedAI {
 	/**
 	 * Sets the opponent agent.
 	 *
-	 * @param opponentAgent the new opponent agent
+	 * @param opponentAgent
+	 *            the new opponent agent
 	 */
 	public void setOpponentAgent(OpponentAgent opponentAgent) {
 		this.opponentAgent = opponentAgent;
@@ -987,7 +1022,8 @@ public class AdvancedAI {
 	/**
 	 * Sets the global resource weight.
 	 *
-	 * @param changes            value of the change positive values to increment negative
+	 * @param changes
+	 *            value of the change positive values to increment negative
 	 *            values to decrement
 	 */
 	public void setGlobalResourceWeight(int[] changes) {
@@ -1009,8 +1045,10 @@ public class AdvancedAI {
 	/**
 	 * Play street card.
 	 *
-	 * @param coords1 the coords 1
-	 * @param coords2 the coords 2
+	 * @param coords1
+	 *            the coords 1
+	 * @param coords2
+	 *            the coords 2
 	 */
 	public void playStreetCard(int[] coords1, int[] coords2) {
 		if (coords2 == null) {
@@ -1026,7 +1064,8 @@ public class AdvancedAI {
 	/**
 	 * Play monopoly card.
 	 *
-	 * @param rt the rt
+	 * @param rt
+	 *            the rt
 	 */
 	public void playMonopolyCard(ResourceType rt) {
 		pO.requestPlayMonopolyCard(rt);
@@ -1037,8 +1076,10 @@ public class AdvancedAI {
 	/**
 	 * Play invention card.
 	 *
-	 * @param rt the rt
-	 * @param rt2 the rt 2
+	 * @param rt
+	 *            the rt
+	 * @param rt2
+	 *            the rt 2
 	 */
 	public void playInventionCard(ResourceType rt, ResourceType rt2) {
 		int[] resources = { 0, 0, 0, 0, 0 };

@@ -374,7 +374,7 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.moveRobber();
 				break;
 			case DISPENSE_CARDS_ROBBER_LOSS:
-				ai.loseToBandit();
+				ai.looseToBandit();
 				break;
 			case TRADING_OR_BUILDING:
 				ai.actuate();

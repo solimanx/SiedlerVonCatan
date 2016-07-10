@@ -415,8 +415,11 @@ public class ResourceAgent {
 	public Edge calculateBestStreet() {
 		ArrayList<Object> bestStreets = getPossibleLTRExtensions();
 		StreetSet streetSet = (StreetSet) bestStreets.get(0);
-		@SuppressWarnings("unchecked")
 		ArrayList<Edge> edgeSuggestion = (ArrayList<Edge>) bestStreets.get(1);
+		if (edgeSuggestion.size() == 0){
+			System.out.println("No Edge Suggestion!");
+			return null;
+		}
 		int[] edgeWeighting = new int[edgeSuggestion.size()];
 		Edge[] currNeighbours;
 		int[] currCoords;
