@@ -17,6 +17,7 @@ import model.objects.DevCards.InventionCard;
 import model.objects.DevCards.KnightCard;
 import model.objects.DevCards.MonopolyCard;
 import model.objects.DevCards.StreetBuildingCard;
+import network.ModelToProtocol;
 import network.ProtocolToModel;
 import network.client.client.ClientInputHandler;
 import parsing.Parser;
@@ -57,7 +58,8 @@ public class AIInputHandler extends ClientInputHandler {
 	/**
 	 * Instantiates a new AI input handler.
 	 *
-	 * @param advAI the adv AI
+	 * @param advAI
+	 *            the adv AI
 	 */
 	protected AIInputHandler(AdvancedAI advAI) {
 		super(null);
@@ -185,7 +187,7 @@ public class AIInputHandler extends ClientInputHandler {
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
 		if (ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 			ai.getOutput().respondEndTurn(); // if error then end turn
-		    ai.updateCards();
+			ai.updateCards();
 		}
 		// Chatbot?
 
@@ -250,16 +252,14 @@ public class AIInputHandler extends ClientInputHandler {
 				ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
 				ai.getResourceAgent()
 						.addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
-				if (ai.devCardActionCounter == 2){
+				if (ai.devCardActionCounter == 2) {
 					ai.devCardActionCounter--;
-					//wait for second street
-				}
-				else if (ai.devCardActionCounter == 1){
+					// wait for second street
+				} else if (ai.devCardActionCounter == 1) {
 					ai.devCardActionCounter--;
 					ai.currentDevCard = null;
 					ai.actuate();
-				}
-				else if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+				} else if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 					ai.actuate();
 				}
 			}
@@ -311,12 +311,12 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().incrementResources(gain);
-			if (ai.tradeWaitForBuilding != null){
+			if (ai.tradeWaitForBuilding != null) {
 				ai.checkIncomingTrade();
-			} 
-			//after monopoly & invention 
-			else if (ai.currentDevCard != CardType.STREET && ai.devCardActionCounter > 0){
-				ai.devCardActionCounter --;
+			}
+			// after monopoly & invention
+			else if (ai.currentDevCard != CardType.STREET && ai.devCardActionCounter > 0) {
+				ai.devCardActionCounter--;
 				ai.currentDevCard = null;
 				ai.actuate();
 			}
@@ -359,11 +359,11 @@ public class AIInputHandler extends ClientInputHandler {
 				break;
 			// if it's me and i have to build initial villages
 			case BUILDING_VILLAGE:
-					ai.initialVillage();
+				ai.initialVillage();
 				break;
 			// if it's me and i have to build initial roads
 			case BUILDING_STREET:
-					ai.initialRoad();
+				ai.initialRoad();
 				break;
 			// if it's me and i have to roll dice
 			case DICEROLLING:
@@ -632,7 +632,15 @@ public class AIInputHandler extends ClientInputHandler {
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new StreetBuildingCard());
 
+			int[] coords = ProtocolToModel.getEdgeCoordinates(roadBuildingCardInfo.getRoadID1());
+			ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
+			ai.getResourceAgent().addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
+
 			if (roadBuildingCardInfo.getRoadID2() != null) {
+				int[] coords2 = ProtocolToModel.getEdgeCoordinates(roadBuildingCardInfo.getRoadID2());
+				ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords2[0], coords2[1], coords2[2]));
+				ai.getResourceAgent()
+						.addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords2[0], coords2[1], coords2[2]));
 				ai.getMe().decreaseAmountStreets();
 			}
 			ai.getMe().decreaseAmountStreets();
@@ -663,8 +671,8 @@ public class AIInputHandler extends ClientInputHandler {
 
 		// if it's me
 		if (ID == ai.getID()) {
-			//ai.getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(ct));
-			//this will be done later (after end Turn)
+			// ai.getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(ct));
+			// this will be done later (after end Turn)
 			ai.boughtDevCard = ct;
 			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 				ai.actuate();
