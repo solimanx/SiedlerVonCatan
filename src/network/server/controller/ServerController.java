@@ -1283,22 +1283,30 @@ public class ServerController {
 			serverResponse(modelID, "Unzulässige Aktion");
 		} else {
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-			pM.setPlayerState(PlayerState.WAITING);
-			ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
-			if (currDevCards != null) {
-				for (int i = 0; i < currDevCards.size(); i++) {
-					// erst jetzt kann spieler über development card verfügen
-					pM.incrementPlayerDevCard(currDevCards.get(i));
+			
+			if(!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)){	
+				pM.setPlayerState(PlayerState.WAITING);
+				ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
+				if (currDevCards != null) {
+					for (int i = 0; i < currDevCards.size(); i++) {
+						// erst jetzt kann spieler über development card
+						// verfügen
+						pM.incrementPlayerDevCard(currDevCards.get(i));
+					}
+					pM.getDevCardsBoughtInThisRound().clear();
 				}
-				pM.getDevCardsBoughtInThisRound().clear();
-			}
-			// runde zu ende, nächste runde darf dev card gespielt werden
-			pM.setHasPlayedDevCard(false);
-			statusUpdate(modelID);
+				// runde zu ende, nächste runde darf dev card gespielt werden
+				pM.setHasPlayedDevCard(false);
+				statusUpdate(modelID);
 
-			currentPlayer = getNextPlayer(modelID); // next players turn
-			gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
-			statusUpdate(currentPlayer);
+				currentPlayer = getNextPlayer(modelID); // next players turn
+				gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
+				statusUpdate(currentPlayer);
+			}
+			else{
+				serverResponse(modelID, "Diese Aktion ist derzeit nicht zulässig");
+
+			}
 		}
 
 	}
