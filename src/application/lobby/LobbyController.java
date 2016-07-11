@@ -2,6 +2,7 @@ package application.lobby;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.EnumSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -94,7 +95,7 @@ public class LobbyController {
 	@FXML
 	public void initialize() {
 		playerName.setPromptText("Name in Game (required)");
-		playerColor.getItems().addAll(enums.Color.BLUE, enums.Color.ORANGE, enums.Color.RED, enums.Color.WHITE);
+		playerColor.getItems().addAll(EnumSet.allOf(enums.Color.class));
 		readyButton.setDisable(true);
 		idColumn.setCellValueFactory(cellData -> cellData.getValue().playerIdProperty().asObject());
 		nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
