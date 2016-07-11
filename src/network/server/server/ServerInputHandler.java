@@ -26,7 +26,6 @@ import protocol.configuration.ProtocolGameStarted;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.configuration.ProtocolVictory;
 import protocol.connection.ProtocolHello;
-import protocol.connection.ProtocolWelcome;
 import protocol.dualinstructions.ProtocolPlayInventionCard;
 import protocol.dualinstructions.ProtocolPlayKnightCard;
 import protocol.dualinstructions.ProtocolPlayMonopolyCard;
@@ -35,9 +34,10 @@ import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolResource;
-import settings.DefaultSettings;
 
-// TODO: Auto-generated Javadoc
+/**
+ * Everything the client sends goes through this class, to get passed to the Controller.
+ */
 public class ServerInputHandler {
 	private static Logger logger = LogManager.getLogger(ServerInputHandler.class.getSimpleName());
 	protected Parser parser;
@@ -56,7 +56,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Decides which handle method will be used.
 	 *
 	 * @param o
 	 *            the o
@@ -65,9 +65,6 @@ public class ServerInputHandler {
 		switch (o.getClass().getSimpleName()) {
 		case "ProtocolHello":
 			handle((ProtocolHello) o);
-			break;
-		case "ProtocolWelcome":
-			handle((ProtocolWelcome) o);
 			break;
 		case "ProtocolClientReady":
 			handle((ProtocolClientReady) o);
@@ -103,8 +100,7 @@ public class ServerInputHandler {
 			handle((ProtocolRobberMovementRequest) o);
 			break;
 		case "String":
-			handle((String) o);// handle(new ProtocolServerResponse((String)
-								// o));
+			handle((String) o);
 			break;
 		case "ProtocolVictory":
 			handle((ProtocolVictory) o);
@@ -162,7 +158,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * sends JSON formatted string to parser and initiates handling of parsed
+	 * Sends JSON formatted string to parser and initiates handling of parsed
 	 * object.
 	 *
 	 * @param s
@@ -180,7 +176,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle an invalid JSON.
 	 *
 	 * @param o
 	 *            the o
@@ -189,18 +185,9 @@ public class ServerInputHandler {
 		serverController.sendInvalidJSON(currentThreadID);
 	}
 
-	/**
-	 * Hello.
-	 *
-	 * @param threadID
-	 *            the thread ID
-	 */
-	protected void hello(int threadID) {
-		serverController.hello(threadID);
-	}
 
 	/**
-	 * Handle.
+	 * Handle receiving hello from the client.
 	 *
 	 * @param hello
 	 *            the hello
@@ -212,7 +199,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle receiving a chat message from client.
 	 *
 	 * @param chatSendMessage
 	 *            the chat send message
@@ -223,7 +210,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client ready to start the game.
 	 *
 	 * @param clientReady
 	 *            the client ready
@@ -234,7 +221,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's Profile: choosing of Name and Color 
 	 *
 	 * @param playerProfile
 	 *            the player profile
@@ -247,7 +234,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to dice roll.
 	 *
 	 * @param diceRollRequest
 	 *            the dice roll request
@@ -258,7 +245,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's attempt to giving up resources.
 	 *
 	 * @param robberLoss
 	 *            the robber loss
@@ -269,7 +256,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to relocate the bandit.
 	 *
 	 * @param robberMovementRequest
 	 *            the robber movement request
@@ -283,7 +270,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to end their turn.
 	 *
 	 * @param endTurn
 	 *            the end turn
@@ -293,7 +280,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to build.
 	 *
 	 * @param buildRequest
 	 *            the build request
@@ -314,7 +301,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to purchase a development card.
 	 *
 	 * @param buyDevelopmentCards
 	 *            the buy development cards
@@ -324,7 +311,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to harbour/sea trade.
 	 *
 	 * @param harbourRequest
 	 *            the harbour request
@@ -338,7 +325,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to start a trade.
 	 *
 	 * @param tradeRequest
 	 *            the trade request
@@ -351,7 +338,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to accept a trade.
 	 *
 	 * @param tradeAccept
 	 *            the trade accept
@@ -363,7 +350,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to complete a trade.
 	 *
 	 * @param tradeComplete
 	 *            the trade complete
@@ -375,7 +362,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to cancel a trade.
 	 *
 	 * @param tradeCancel
 	 *            the trade cancel
@@ -386,7 +373,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to play an invention/year of plenty card.
 	 *
 	 * @param playInventionCard
 	 *            the play invention card
@@ -398,7 +385,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to play monopoly card.
 	 *
 	 * @param monopolyCard
 	 *            the monopoly card
@@ -408,7 +395,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to play a knight card.
 	 *
 	 * @param knightCard
 	 *            the knight card
@@ -421,7 +408,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to play road building card.
 	 *
 	 * @param roadBuildingCard
 	 *            the road building card
@@ -435,7 +422,7 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle.
+	 * Handle the client's request to insert a cheat code.
 	 *
 	 * @param cheat
 	 *            the cheat
@@ -460,14 +447,14 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Lost connection.
+	 * Losing connection lost connection.
 	 *
 	 * @param threadID
 	 *            the thread ID
 	 */
+	//TODO DOESN'T BELONG HERE
 	public void lostConnection(int threadID) {
 		serverController.connectionLost(threadID);
-		// TODO Auto-generated method stub
 
 	}
 

@@ -110,7 +110,7 @@ public class Server {
 				connectedPlayers++;
 				// outputHandler.hello(serverVersion, protocolVersion,
 				// threadID);
-				inputHandler.hello(threadID);
+				serverInputHandler.getServerController().hello(threadID);
 				logger.debug("Hello sent to " + threadID + " Thread");
 				// socket.setTcpNoDelay(true);
 				while (connected) {
