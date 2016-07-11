@@ -1826,8 +1826,8 @@ public class GameViewController implements Initializable {
 			// center[1] - 10);
 			Image villageImage = new Image("/textures/village.png");
 			ImageView villageImageView = new ImageView(villageImage);
-			villageImageView.setTranslateX(center[0] - 25);
-			villageImageView.setTranslateY(center[1] - 25);
+			villageImageView.setTranslateX(center[0] - 20);
+			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
 			
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
