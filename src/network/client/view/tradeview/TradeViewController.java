@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
+import network.client.view.GameViewController;
 
 import static sounds.Sound.*;
 
@@ -420,6 +421,9 @@ public class TradeViewController {
 		tradeIDtoModelID.put(tradeID, playerID);
 		playerIDtoString.put(playerID, tradeString);
 		Platform.runLater(new AddTradeStringRunnable(tradeString));
+		viewController.getGameViewController().alert("New trade request:\n" + tradeString);
+		stage.show();
+		stage.toFront();
 
 	}
 
