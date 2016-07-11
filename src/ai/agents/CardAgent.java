@@ -148,10 +148,18 @@ public class CardAgent {
 
 	}
 	
+	/**
+	 * Increase amount of bought dev cards.
+	 */
 	public void increaseAmountOfBoughtDevCards(){
 		this.amountOfBoughtDevCards++;
 	}
 
+	/**
+	 * Gets the amount of bought dev cards.
+	 *
+	 * @return the amount of bought dev cards
+	 */
 	public int getAmountOfBoughtDevCards() {
 		return amountOfBoughtDevCards;
 	}

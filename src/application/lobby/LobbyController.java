@@ -295,10 +295,18 @@ public class LobbyController {
 		}
 	}
 
+	/**
+	 * Gets the color name select pane.
+	 *
+	 * @return the color name select pane
+	 */
 	public AnchorPane getColorNameSelectPane() {
 		return colorNameSelectPane;
 	}
 
+	/**
+	 * Clear chat.
+	 */
 	public void clearChat() {
 		messages.clear();
 	}

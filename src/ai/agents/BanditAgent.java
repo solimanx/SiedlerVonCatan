@@ -6,7 +6,6 @@ import ai.AdvancedAI;
 import enums.ResourceType;
 import model.objects.Corner;
 import network.ModelToProtocol;
-import network.ProtocolToModel;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

@@ -16,6 +16,7 @@ import protocol.serverinstructions.ProtocolBoughtDevelopmentCard;
 import protocol.serverinstructions.ProtocolDiceRollResult;
 import protocol.serverinstructions.ProtocolResourceObtain;
 
+// TODO: Auto-generated Javadoc
 // TODO GENERATE VS DECK PROBLEM
 public class CheatHandler extends ServerOutputHandler {
 
@@ -343,9 +344,10 @@ public class CheatHandler extends ServerOutputHandler {
 	}
 
 	/**
-	 * CHeck if player is in dice roll state
-	 * 
-	 * @param threadID
+	 * CHeck if player is in dice roll state.
+	 *
+	 * @param modelID the model ID
+	 * @return true, if successful
 	 */
 	private boolean playerRollStateCheck(Integer modelID) {
 		if (server.getServerInputHandler().getServerController().getBoard().getPlayer(modelID).getPlayerState()
@@ -357,9 +359,9 @@ public class CheatHandler extends ServerOutputHandler {
 
 	/**
 	 * Dice roll consequences depending on number.
-	 * 
-	 * @param i
-	 * @param modelID
+	 *
+	 * @param i the i
+	 * @param modelID the model ID
 	 */
 	private void diceCheats(int i, int modelID) {
 		if (i == 7) {

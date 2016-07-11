@@ -137,6 +137,9 @@ public class Server {
 			}
 		}
 		
+		/**
+		 * Disconnect.
+		 */
 		public void disconnect(){
 			try {
 				connected = false;
@@ -270,6 +273,11 @@ public class Server {
 		return connectedPlayers;
 	}
 	
+	/**
+	 * Disconnect player.
+	 *
+	 * @param id the id
+	 */
 	public void disconnectPlayer(Integer id){
 		clientCounter--;
 		idToClientThread.get(id).disconnect();

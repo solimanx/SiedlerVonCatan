@@ -1350,6 +1350,11 @@ public class ClientController {
 		}
 	}
 
+	/**
+	 * Gets the view controller.
+	 *
+	 * @return the view controller
+	 */
 	public ViewController getViewController() {
 		return viewController;
 	}

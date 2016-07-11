@@ -134,9 +134,8 @@ public class ServerController {
 	 * is called when a client sends hello message registers threadID and sends
 	 * status update.
 	 *
-	 * @param currentThreadID
-	 *            the current thread ID
-	 * @param string
+	 * @param currentThreadID            the current thread ID
+	 * @param string the string
 	 */
 	public void receiveHello(int currentThreadID, String string) {
 		// if type mismatch
@@ -171,6 +170,12 @@ public class ServerController {
 		serverOutputHandler.welcome(modelPlayerIdMap.get(modelPlayerID));
 	}
 
+	/**
+	 * Lobby status update.
+	 *
+	 * @param modelID the model ID
+	 * @param sendToPlayer the send to player
+	 */
 	private void lobbyStatusUpdate(int modelID, int sendToPlayer) {
 		serverOutputHandler.statusUpdate(modelPlayerIdMap.get(modelID), lobbyPlayers.get(modelID).getColor(),
 				lobbyPlayers.get(modelID).getName(), lobbyPlayers.get(modelID).getPlayerState(), 0, new int[5], null,
@@ -1817,7 +1822,7 @@ public class ServerController {
 	private void generateBoard(String initialField, boolean randomDesert) {
 		String fields = HexService.getSpiral(initialField);
 		Board currBoard = gameLogic.getBoard();
-		int[] cards = DefaultSettings.LANDSCAPE_CARDS;
+		int[] cards = DefaultSettings.landscapeAmount;
 		int currNum;
 		if (randomDesert) {
 			int diceInd = 0;
@@ -1835,7 +1840,7 @@ public class ServerController {
 				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
 				if (currNum != 5) {
 					currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
-							DefaultSettings.DICE_NUMBERS[diceInd]);
+							DefaultSettings.diceNumbers[diceInd]);
 					diceInd++;
 				} else {
 					currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], null);
@@ -1855,7 +1860,7 @@ public class ServerController {
 				cards[currNum]--;
 				int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
 				currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
-						DefaultSettings.DICE_NUMBERS[i]);
+						DefaultSettings.diceNumbers[i]);
 			}
 			int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(fields.length() - 1));
 			currBoard.setFieldAt(coords[0], coords[1], ResourceType.NOTHING, null);
@@ -2267,14 +2272,29 @@ public class ServerController {
 		return threadPlayerIdMap;
 	}
 
+	/**
+	 * Gets the board.
+	 *
+	 * @return the board
+	 */
 	public Board getBoard() {
 		return board;
 	}
 
+	/**
+	 * Gets the robber loss counter.
+	 *
+	 * @return the robber loss counter
+	 */
 	public int getRobberLossCounter() {
 		return robberLossCounter;
 	}
 
+	/**
+	 * Sets the robber loss counter.
+	 *
+	 * @param i the new robber loss counter
+	 */
 	public void setRobberLossCounter(int i) {
 		robberLossCounter = i;
 

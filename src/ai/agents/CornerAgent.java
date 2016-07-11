@@ -7,11 +7,9 @@ import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.ResourceType;
 import model.Board;
-import model.Index;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
-import network.ModelToProtocol;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
 
@@ -205,7 +203,6 @@ public class CornerAgent {
 				}
 			}
 		}
-		// TODO separate to a different method
 		// If all 3 fields they have the same resource type
 		if (f[0].getResourceType().equals(f[1].getResourceType())
 				&& f[1].getResourceType().equals(f[2].getResourceType())
@@ -324,6 +321,11 @@ public class CornerAgent {
 		return bonus;
 	}
 
+	/**
+	 * Resource bonus.
+	 *
+	 * @return the int
+	 */
 	protected int resourceBonus() {
 		int bonus = 0;
 		Double[] ownWeighting = aai.getResourceAgent().getMyResourceWeight();
@@ -435,6 +437,11 @@ public class CornerAgent {
 		return netUtility;
 	}
 
+	/**
+	 * Calculate village utility.
+	 *
+	 * @return the int
+	 */
 	public int calculateVillageUtility() {
 		if (isBlocked()) {
 			// Random negative number to avoid building here.

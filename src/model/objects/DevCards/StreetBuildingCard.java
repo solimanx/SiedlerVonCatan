@@ -27,6 +27,9 @@ public class StreetBuildingCard implements DevelopmentCard {
 		return text;
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.objects.DevCards.DevelopmentCard#getCardType()
+	 */
 	public CardType getCardType(){
 		return cardType;
 	}

@@ -16,6 +16,11 @@ public class DevelopmentCardsStack {
 	private DevelopmentCard[] devCardStack;
 	private int nextCard;
 
+	/**
+	 * Instantiates a new development cards stack.
+	 *
+	 * @param devCardStack the dev card stack
+	 */
 	public DevelopmentCardsStack(DevelopmentCard[] devCardStack){
 		this.devCardStack = devCardStack;
 		this.nextCard = 0;
@@ -25,27 +30,27 @@ public class DevelopmentCardsStack {
 	 */
 	public DevelopmentCardsStack() {
 		devFactory = new DevCardFactory();
-		devCardStack = new DevelopmentCard[DefaultSettings.AMOUNT_DEVELOPMENT_CARDS];
+		devCardStack = new DevelopmentCard[DefaultSettings.amountDevelopmentCards];
 		nextCard = 0;
 		// TODO random order
 		int arrayPosition = 0;
-		for (int j = 0; j < DefaultSettings.AMOUNT_KNIGHT_CARDS; j++) {
+		for (int j = 0; j < DefaultSettings.amountKnightCards; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("knightCard");
 			arrayPosition++;
 		}
-		for (int j = 0; j < DefaultSettings.AMOUNT_VICTORY_CARDS; j++) {
+		for (int j = 0; j < DefaultSettings.amountVictoryCards; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("victoryCard");
 			arrayPosition++;
 		}
-		for (int j = 0; j < DefaultSettings.AMOUNT_MONOPOLY_CARDS; j++) {
+		for (int j = 0; j < DefaultSettings.amountMonopolyCards; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("monopolyCard");
 			arrayPosition++;
 		}
-		for (int j = 0; j < DefaultSettings.AMOUNT_STREETBUILDING_CARDS; j++) {
+		for (int j = 0; j < DefaultSettings.amountStreetBuildingCards; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("streetBuilding");
 			arrayPosition++;
 		}
-		for (int j = 0; j < DefaultSettings.AMOUNT_INVENTION_CARDS; j++) {
+		for (int j = 0; j < DefaultSettings.amountInventionCards; j++) {
 			devCardStack[arrayPosition] = devFactory.createDevelopmentCard("inventionCard");
 			arrayPosition++;
 		}
@@ -107,7 +112,10 @@ public class DevelopmentCardsStack {
 
 	// debug
 	/**
-	 * returns a card of the specific CardType
+	 * returns a card of the specific CardType.
+	 *
+	 * @param c the c
+	 * @return the specific card
 	 */
 	public DevelopmentCard getSpecificCard(CardType c){
 		if(!buyable()){
@@ -144,7 +152,7 @@ public class DevelopmentCardsStack {
 	 * @return true, if successful
 	 */
 	public boolean buyable() {
-		if (nextCard < DefaultSettings.AMOUNT_DEVELOPMENT_CARDS) {
+		if (nextCard < DefaultSettings.amountDevelopmentCards) {
 			return true;
 		}
 		return false;

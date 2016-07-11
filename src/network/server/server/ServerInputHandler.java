@@ -35,6 +35,7 @@ import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolResource;
 
+// TODO: Auto-generated Javadoc
 /**
  * Everything the client sends goes through this class, to get passed to the Controller.
  */
@@ -221,10 +222,9 @@ public class ServerInputHandler {
 	}
 
 	/**
-	 * Handle the client's Profile: choosing of Name and Color 
+	 * Handle the client's Profile: choosing of Name and Color .
 	 *
-	 * @param playerProfile
-	 *            the player profile
+	 * @param playerProfile            the player profile
 	 */
 	protected void handle(ProtocolPlayerProfile playerProfile) {
 		String name = playerProfile.getName();

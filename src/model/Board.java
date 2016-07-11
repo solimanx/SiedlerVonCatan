@@ -41,7 +41,7 @@ public class Board {
 	// Edge
 	private static Map<String, int[]> eMap;
 	private static Logger logger = LogManager.getLogger(Board.class.getSimpleName());
-	// TODO private DevDeck devDeck;
+
 
 	// ================================================================================
 	// CONSTRUCTORS
@@ -69,12 +69,39 @@ public class Board {
 	}
 
 	/**
-	 * Extend board for 5-6 players
-	 * @param board
+	 * Extend board for 5-6 players.
+	 *
+	 * @param board the board
 	 */
-	public void extendBoard(Board board){
+	public static void extendBoard(Board board) {
 		DefaultSettings.boardSize++;
-		DefaultSettings.maxPlayersAmount=6;
+		DefaultSettings.maxPlayersAmount += 2;
+		DefaultSettings.diceNumbers = new int[] { 2, 5, 4, 6, 3, 9, 8, 11, 11, 10, 6, 3, 8, 4, 8, 10, 11, 12, 10, 5, 4,
+				9, 5, 9, 12, 3, 2, 6 };
+		// WOOD
+		DefaultSettings.landscapeAmount[0] += 2;
+		// CLAY
+		DefaultSettings.landscapeAmount[1] += 2;
+		// ORE
+		DefaultSettings.landscapeAmount[2] += 2;
+		// SHEEP
+		DefaultSettings.landscapeAmount[3] += 2;
+		// CORN
+		DefaultSettings.landscapeAmount[4] += 2;
+		// DESERT
+		DefaultSettings.landscapeAmount[5] += 1;
+		
+		//TODO rohstoffkarten
+		//TODO harbours
+		
+		//Knight
+		DefaultSettings.amountKnightCards += 6;
+		//Monopoly
+		DefaultSettings.amountMonopolyCards += 1;
+		//Invention
+		DefaultSettings.amountInventionCards+= 1;
+		//StreetBuilding
+		DefaultSettings.amountStreetBuildingCards += 1;
 		board = new Board();
 	}
 
@@ -425,7 +452,7 @@ public class Board {
 	 *
 	 * @return the player models
 	 */
-	public PlayerModel[] getPlayerModels(){
+	public PlayerModel[] getPlayerModels() {
 		return this.players;
 	}
 
@@ -1024,7 +1051,7 @@ public class Board {
 	 *
 	 * @return the all fields
 	 */
-	// TODO FOR DEBUGGING ONLY
+	// DEBUGGING
 	@Deprecated
 	public ArrayList<Field> getAllFields() {
 		ArrayList<Field> result = new ArrayList<Field>();
@@ -1146,11 +1173,12 @@ public class Board {
 	/**
 	 * Insert players.
 	 *
-	 * @param n the n
+	 * @param n
+	 *            the n
 	 */
 	public void insertPlayers(int n) {
 		players = new PlayerModel[n];
-		for(int i=0; i<players.length;i++){
+		for (int i = 0; i < players.length; i++) {
 			players[i] = new PlayerModel();
 		}
 	}

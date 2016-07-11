@@ -1163,8 +1163,8 @@ public class GameViewController implements Initializable {
 	/**
 	 * shows result of dice roll on game view.
 	 *
-	 * @param result
-	 *            the new dice roll result
+	 * @param playerID the player ID
+	 * @param result            the new dice roll result
 	 */
 	public void setDiceRollResult(Integer playerID, int result) {
 		Soundeffects.DICEROLL.play();
@@ -1597,6 +1597,13 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * Gets the blush effect.
+	 *
+	 * @param playerColor the player color
+	 * @param imageView the image view
+	 * @return the blush effect
+	 */
 	private Effect getBlushEffect(Color playerColor, ImageView imageView) {
 		ColorAdjust monochrome = new ColorAdjust();
 		monochrome.setSaturation(-1.0);

@@ -144,7 +144,7 @@ public class ResourceAgent {
 		if (compareResources(ownResources, DefaultSettings.CITY_BUILD_COST) && bestCity != null) {
 			results[2] = true;
 		}
-		if (compareResources(ownResources, DefaultSettings.DEVCARD_BUILD_COST) && aai.boughtDevCard == null && aai.getCardAgent().getAmountOfBoughtDevCards() < DefaultSettings.AMOUNT_DEVELOPMENT_CARDS) {
+		if (compareResources(ownResources, DefaultSettings.DEVCARD_BUILD_COST) && aai.boughtDevCard == null && aai.getCardAgent().getAmountOfBoughtDevCards() < DefaultSettings.amountDevelopmentCards) {
 			results[3] = true;
 		}
 		return results;

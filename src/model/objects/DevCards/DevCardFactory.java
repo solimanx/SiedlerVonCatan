@@ -5,11 +5,11 @@ import settings.DefaultSettings;
 // TODO: Auto-generated Javadoc
 public class DevCardFactory {
 
-	int knightCards = DefaultSettings.AMOUNT_KNIGHT_CARDS;
-	int victoryCards = DefaultSettings.AMOUNT_VICTORY_CARDS;
-	int monopolyCards = DefaultSettings.AMOUNT_MONOPOLY_CARDS;
-	int buildStreetCards = DefaultSettings.AMOUNT_STREETBUILDING_CARDS;
-	int inventionCards = DefaultSettings.AMOUNT_INVENTION_CARDS;
+	int knightCards = DefaultSettings.amountKnightCards;
+	int victoryCards = DefaultSettings.amountVictoryCards;
+	int monopolyCards = DefaultSettings.amountMonopolyCards;
+	int buildStreetCards = DefaultSettings.amountStreetBuildingCards;
+	int inventionCards = DefaultSettings.amountInventionCards;
 
 	/**
 	 * Creates a new DevCard object.

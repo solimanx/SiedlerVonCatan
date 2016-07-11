@@ -8,6 +8,11 @@ import model.objects.DevCards.MonopolyCard;
 
 public class TestDevCard {
 
+/**
+ * The main method.
+ *
+ * @param Args the arguments
+ */
 //TestClass
 	public static void main(String[] Args) {
 //		DevelopmentCardsStack devStack = new DevelopmentCardsStack();

@@ -37,6 +37,9 @@ public class VictoryPointCard implements DevelopmentCard {
 		return victoryPoints;
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.objects.DevCards.DevelopmentCard#getCardType()
+	 */
 	public CardType getCardType(){
 		return cardType;
 	}

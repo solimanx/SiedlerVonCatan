@@ -22,26 +22,28 @@ public final class DefaultSettings {
 	public final static int START_AMOUNT_CITIES = 4;
 	public final static int START_AMOUNT_STREETS = 15;
 
-	public final static int AMOUNT_KNIGHT_CARDS = 14;
-	public final static int AMOUNT_VICTORY_CARDS = 5;
+	public static int amountKnightCards = 14;
+	public static int amountVictoryCards = 5;
 
-	public final static int AMOUNT_INVENTION_CARDS = 2;
-	public final static int AMOUNT_MONOPOLY_CARDS = 2;
-	public final static int AMOUNT_STREETBUILDING_CARDS = 2;
-	public final static int AMOUNT_DEVELOPMENT_CARDS = AMOUNT_KNIGHT_CARDS + AMOUNT_VICTORY_CARDS
-			+ AMOUNT_INVENTION_CARDS + AMOUNT_MONOPOLY_CARDS + AMOUNT_STREETBUILDING_CARDS;
+	public static int amountInventionCards = 2;
+	public static int amountMonopolyCards = 2;
+	public static int amountStreetBuildingCards = 2;
+	public static int amountDevelopmentCards = amountKnightCards + amountVictoryCards
+			+ amountInventionCards + amountMonopolyCards + amountStreetBuildingCards;
 
+	//TODO rohstoffkarten
 	// Build costs: {WOOD, CLAY, ORE, SHEEP, CORN}
 	public final static int[] VILLAGE_BUILD_COST = { 1, 1, 0, 1, 1 };
-	// TODO Fix this
+	
 	public final static int[] STREET_BUILD_COST = { 1, 1, 0, 0, 0 };
-	// TODO Fix this
+	
 	public final static int[] CITY_BUILD_COST = { 0, 0, 3, 0, 2 };
-	// TODO Fix this
+	
 	public final static int[] DEVCARD_BUILD_COST = { 0, 0, 1, 1, 1 };
-	// Amount of Landscape Resource Cards: {WOOD, CLAY, ORE, SHEEP, CORN}
-	// NOTHING (desert)}
-	public final static int[] LANDSCAPE_CARDS = { 4, 3, 3, 4, 4, 1 };
+	/**
+	 *  Amount of Landscape Field: {WOOD, CLAY, ORE, SHEEP, CORN, DESERT}
+	 */
+	public static int[] landscapeAmount = { 4, 3, 3, 4, 4, 1 };
 
 	public final static ResourceType[] RESOURCE_ORDER = { ResourceType.WOOD, ResourceType.CLAY, ResourceType.ORE,
 			ResourceType.SHEEP, ResourceType.CORN, ResourceType.NOTHING };
@@ -58,7 +60,7 @@ public final class DefaultSettings {
 		}
 	};
 
-	public final static int[] DICE_NUMBERS = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11 };
+	public static int[] diceNumbers = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11 };
 
 	public static int maxPlayersAmount = 4;
 

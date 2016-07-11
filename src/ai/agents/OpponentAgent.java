@@ -4,16 +4,9 @@
 package ai.agents;
 
 import java.util.ArrayList;
-import java.util.Map;
-
-import ai.AdvancedAI;
 import enums.CardType;
 import enums.ResourceType;
-import model.Board;
-import model.objects.Corner;
-import model.objects.Field;
 import model.objects.PlayerModel;
-import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -29,7 +22,6 @@ public class OpponentAgent {
 	// after robber loss
 	private int[] initialRessources = { 0, 0, 0, 0, 0, 0, 0 };
 	private int amountPlayer;
-	private Board board;
 	// DevCards
 	private int[] playedDevCards = { 0, 0, 0, 0, 0 }; // {KNIGHT,INVENTION,STREET,MONOPOLY,VICTORYPOINT}
 	private int[] playerDevCards = { 0, 0, 0, 0 }; // 4 player, amount cards by

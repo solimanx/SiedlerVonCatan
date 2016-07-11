@@ -309,8 +309,8 @@ public class AdvancedAI {
 				* ((double) getMe().getAmountCities() / (double) DefaultSettings.START_AMOUNT_CITIES);
 		// TODO: currently only knight cards are considered
 		buildingWeight[3] = (50.0 - (resourceWeighting[2] + resourceWeighting[3] + resourceWeighting[4]) / 3) * 0.5
-				* ((double) (DefaultSettings.AMOUNT_KNIGHT_CARDS - getMe().getPlayedKnightCards())
-						/ (double) DefaultSettings.AMOUNT_KNIGHT_CARDS);
+				* ((double) (DefaultSettings.amountKnightCards - getMe().getPlayedKnightCards())
+						/ (double) DefaultSettings.amountKnightCards);
 
 		System.out.println("Calculated new Building Weight: " + buildingWeight[0] + " " + buildingWeight[1] + " "
 				+ buildingWeight[2] + " " + buildingWeight[3]);
@@ -553,7 +553,7 @@ public class AdvancedAI {
 						}
 						break;
 					case 3:
-						if (boughtDevCard == null && cardAgent.getAmountOfBoughtDevCards() < DefaultSettings.AMOUNT_DEVELOPMENT_CARDS) {
+						if (boughtDevCard == null && cardAgent.getAmountOfBoughtDevCards() < DefaultSettings.amountDevelopmentCards) {
 							finalBuildCheck = true;
 						}
 						break;
@@ -973,7 +973,8 @@ public class AdvancedAI {
 	}
 	
 	/**
-	 * gets the Card Agent
+	 * gets the Card Agent.
+	 *
 	 * @return the card agent
 	 */
 	public CardAgent getCardAgent() {

@@ -20,6 +20,11 @@ public interface DevelopmentCard {
 	 */
 	public String getText();
 	
+	/**
+	 * Gets the card type.
+	 *
+	 * @return the card type
+	 */
 	public CardType getCardType();
 
 }

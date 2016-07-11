@@ -7,7 +7,7 @@ public class InventionCard implements DevelopmentCard {
 
 	private String name = "Invention Card";
 	private String text = "";
-	private CardType cardType;
+	private CardType cardType = CardType.INVENTION;
 
 	/* (non-Javadoc)
 	 * @see model.objects.DevCards.DevelopmentCard#getName()
@@ -27,6 +27,9 @@ public class InventionCard implements DevelopmentCard {
 		return text;
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.objects.DevCards.DevelopmentCard#getCardType()
+	 */
 	public CardType getCardType(){
 		return cardType;
 	}

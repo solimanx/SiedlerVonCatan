@@ -71,8 +71,7 @@ public class Client extends Thread {
 	}
 
 	/**
-	 * Stop scanning
-	 * 
+	 * Stop scanning.
 	 */
 	public void stopScanning(){
 		scanning = false;
