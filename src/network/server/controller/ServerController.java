@@ -56,6 +56,7 @@ public class ServerController {
 	protected GameLogic gameLogic;
 	private ServerOutputHandler serverOutputHandler;
 	private int amountPlayers = 0;
+	private int lobbyAmountPlayers = 0;
 	private Server server;
 	protected Map<Integer, Integer> modelPlayerIdMap;
 	protected Map<Integer, Integer> threadPlayerIdMap;
@@ -74,6 +75,10 @@ public class ServerController {
 	private int longestTradingRoutePlayer = -1;
 	private int biggestKnightForcePlayer = -1;
 	private DevelopmentCardsStack devStack;
+	private Integer currentExtraPlayer;
+
+	boolean FiveSixGame;
+	ArrayList<PlayerModel> lobbyPlayers = new ArrayList<PlayerModel>();
 
 	/**
 	 * Instantiates a new server controller.
@@ -82,8 +87,6 @@ public class ServerController {
 	 *            the server port
 	 */
 	public ServerController(int serverPort) {
-		board = new Board();
-		this.gameLogic = new GameLogic(board);
 		// ModelPlayerID => threadID
 		modelPlayerIdMap = new HashMap<Integer, Integer>();
 
@@ -136,26 +139,22 @@ public class ServerController {
 	 * @param string
 	 */
 	public void receiveHello(int currentThreadID, String string) {
-		threadPlayerIdMap.put(currentThreadID, amountPlayers);
-		modelPlayerIdMap.put(amountPlayers, currentThreadID);
-		amountPlayers++;
 		// if type mismatch
 		if (!string.contains(DefaultSettings.SERVER_VERSION)) {
-
-//			serverResponse(threadPlayerIdMap.get(currentThreadID), "Version mismatch");
 			server.disconnectPlayer(currentThreadID);
-			threadPlayerIdMap.remove(currentThreadID);
-			modelPlayerIdMap.remove(amountPlayers);
-			amountPlayers-= 1;
 		} else {
-			int playerID = threadPlayerIdMap.get(currentThreadID);
-			gameLogic.getBoard().getPlayer(playerID).setPlayerState(PlayerState.GAME_STARTING);
-
-			welcome(playerID);
-			statusUpdate(playerID);
+			threadPlayerIdMap.put(currentThreadID, amountPlayers);
+			modelPlayerIdMap.put(amountPlayers, currentThreadID);
+			amountPlayers++;
+			lobbyPlayers.add(new PlayerModel(amountPlayers - 1));
+			lobbyPlayers.get(amountPlayers - 1).setPlayerState(PlayerState.GAME_STARTING);
+			welcome(amountPlayers - 1);
 			for (int i = 0; i < amountPlayers; i++) {
-				if (i != playerID) {
-					statusUpdateToPlayer(playerID, i);
+				// send status of all players to new player
+				lobbyStatusUpdate(i, amountPlayers - 1);
+				if (i != amountPlayers - 1) {
+					// send status of new player to others
+					lobbyStatusUpdate(amountPlayers - 1, i);
 				}
 			}
 		}
@@ -172,6 +171,12 @@ public class ServerController {
 		serverOutputHandler.welcome(modelPlayerIdMap.get(modelPlayerID));
 	}
 
+	private void lobbyStatusUpdate(int modelID, int sendToPlayer) {
+		serverOutputHandler.statusUpdate(modelPlayerIdMap.get(modelID), lobbyPlayers.get(modelID).getColor(),
+				lobbyPlayers.get(modelID).getName(), lobbyPlayers.get(modelID).getPlayerState(), 0, new int[5], null,
+				new int[5], false, false, modelPlayerIdMap.get(sendToPlayer));
+	}
+
 	/**
 	 * is called when a client is ready, if all clients are ready then start
 	 * game.
@@ -180,20 +185,47 @@ public class ServerController {
 	 *            the current thread ID
 	 */
 	public void clientReady(int currentThreadID) {
-		int playerID = threadPlayerIdMap.get(currentThreadID);
-		gameLogic.getBoard().getPlayer(playerID).setPlayerState(PlayerState.WAITING_FOR_GAMESTART);
-		statusUpdate(playerID);
+		int modelID = threadPlayerIdMap.get(currentThreadID);
+		if (lobbyPlayers.get(modelID).getColor() == null) {
+			serverResponse(modelID, "Wähle zuerst eine Farbe und einen Namen");
+		} else {
+			boolean colorAvailable = true;
+			Color currColor;
+			Color ownColor = lobbyPlayers.get(modelID).getColor();
 
-		if (amountPlayers >= 3 && amountPlayers == server.getConnectedPlayers()) {
-			boolean allReady = true;
 			for (int i = 0; i < amountPlayers; i++) {
-				if (gameLogic.getBoard().getPlayer(i).getPlayerState() != PlayerState.WAITING_FOR_GAMESTART) {
-					allReady = false;
-					break;
+				currColor = lobbyPlayers.get(i).getColor();
+				if (currColor != null && i != modelID) {
+					if (currColor.equals(ownColor)
+							&& lobbyPlayers.get(i).getPlayerState() == PlayerState.WAITING_FOR_GAMESTART) {
+						colorAvailable = false;
+						break;
+					}
 				}
 			}
-			if (allReady) {
-				initializeBoard();
+			if (!colorAvailable) {
+				error(modelID, "Farbe bereits vergeben!");
+			} else {
+				lobbyPlayers.get(modelID).setPlayerState(PlayerState.WAITING_FOR_GAMESTART);
+				for (int i = 0; i < amountPlayers; i++) {
+					lobbyStatusUpdate(modelID, i);
+				}
+
+				if (amountPlayers >= 3 && amountPlayers == server.getConnectedPlayers()) {
+					boolean allReady = true;
+					for (int i = 0; i < amountPlayers; i++) {
+						if (lobbyPlayers.get(i).getPlayerState() != PlayerState.WAITING_FOR_GAMESTART) {
+							allReady = false;
+							break;
+						}
+					}
+					if (allReady) {
+						if (amountPlayers > 4) {
+							FiveSixGame = true;
+						}
+						initializeBoard();
+					}
+				}
 			}
 		}
 
@@ -236,32 +268,17 @@ public class ServerController {
 	 *            the current thread ID
 	 */
 	public void playerProfileUpdate(Color color, String name, int currentThreadID) {
-		if (currentPlayer != null) {
-			serverResponse(modelPlayerIdMap.get(currentThreadID), "Spiel bereits gestratet");
-		}
-
-		boolean colorAvailable = true;
-		Color currColor;
-
-		for (int i = 0; i < amountPlayers; i++) {
-			currColor = gameLogic.getBoard().getPlayer(i).getColor();
-			if (currColor != null) {
-				if (currColor.equals(color)) {
-					colorAvailable = false;
-					break;
-				}
-			}
-		}
 		Integer modelID = threadPlayerIdMap.get(currentThreadID);
-		if (colorAvailable) {
-			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-			pM.setColor(color);
-			pM.setName(name);
-			pM.setPlayerState(PlayerState.GAME_STARTING);
-			statusUpdate(modelID);
-			serverResponse(modelID, "OK");
+		if (currentPlayer != null) {
+			serverResponse(modelID, "Spiel bereits gestartet");
 		} else {
-			error(modelID, "Farbe bereits vergeben!");
+
+			lobbyPlayers.get(modelID).setColor(color);
+			lobbyPlayers.get(modelID).setName(name);
+			serverResponse(modelID, "OK");
+			for (int i = 0; i < amountPlayers; i++) {
+				lobbyStatusUpdate(modelID, i);
+			}
 		}
 	}
 
@@ -348,8 +365,26 @@ public class ServerController {
 	public void initializeBoard() {
 		longestRoutes = new int[amountPlayers];
 		this.tradeController = new TradeController(this, amountPlayers);
-		generateBoard("A", true);
-		inizializeHarbour();
+
+		board = new Board();
+		this.gameLogic = new GameLogic(board);
+
+		if (FiveSixGame) {
+			System.out.println("Fatal Error: no 5 -6 Board implemented!");
+			// Board.extendBoard(board);
+			// generateFiveSixBoard("A", true);
+			// initializeFiveSixHarbours();
+		} else {
+			generateBoard("A", true);
+			inizializeHarbour();
+		}
+		PlayerModel[] pm = new PlayerModel[lobbyPlayers.size()];
+		pm = lobbyPlayers.toArray(pm);
+		for (int i = 0; i < amountPlayers; i++) {
+			// insert playerModels
+			board.getPlayerModels()[i] = pm[i];
+		}
+
 		serverOutputHandler.initBoard(amountPlayers, gameLogic.getBoard());
 		int[] currDiceRollResult;
 		boolean noDuplicates;
@@ -545,7 +580,8 @@ public class ServerController {
 		if (InitialStreetCounter < amountPlayers * 2) {
 			requestBuildInitialVillage(x, y, dir, threadID);
 		} else {
-			if (gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
+			if (!(gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)
+					^ gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.BUILDING))) {
 				serverResponse(modelID, "Unzulässige Aktion");
 			} else {
 				if (gameLogic.checkBuildVillage(x, y, dir, modelID)) {
@@ -742,7 +778,8 @@ public class ServerController {
 		if (InitialStreetCounter < amountPlayers * 2) {
 			requestBuildInitialStreet(x, y, dir, threadID);
 		} else {
-			if (gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
+			if (!(gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)
+					^ gameLogic.isActionForbidden(modelID, currentExtraPlayer, PlayerState.BUILDING))) {
 				serverResponse(modelID, "Unzulässige Aktion");
 			} else {
 				if (gameLogic.checkBuildStreet(x, y, dir, modelID)) {
@@ -1109,7 +1146,8 @@ public class ServerController {
 	 */
 	public void requestBuildCity(int x, int y, int dir, int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
-		if (gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
+		if (!(gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)
+				^ gameLogic.isActionForbidden(modelID, currentExtraPlayer, PlayerState.BUILDING))) {
 			serverResponse(modelID, "Unzulässige Aktion");
 		} else {
 			if (gameLogic.checkBuildCity(x, y, dir, modelID)) {
@@ -1158,7 +1196,10 @@ public class ServerController {
 	 */
 	public void requestBuyDevCard(int threadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
-		if (!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
+		if (!(gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)
+				^ gameLogic.isActionForbidden(modelID, currentExtraPlayer, PlayerState.BUILDING))) {
+			serverResponse(modelID,"Unzulässige Aktion");
+		} else {
 			if (gameLogic.checkBuyDevCard(modelID)) {
 				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
 
@@ -1184,9 +1225,7 @@ public class ServerController {
 			} else {
 				serverResponse(modelID, "Unzulässige Aktion");
 			}
-		} else {
-			serverResponse(modelID, "Unzulässige Aktion");
-		}
+		} 
 	}
 
 	/**
@@ -1295,34 +1334,53 @@ public class ServerController {
 	 *            the player ID
 	 */
 	public void endTurn(int playerID) {
-		int modelID = threadPlayerIdMap.get(playerID);
-		if (modelID != currentPlayer) {
-			serverResponse(modelID, "Unzulässige Aktion");
-		} else {
+		Integer modelID = threadPlayerIdMap.get(playerID);
+		// XOR
+		if ((modelID == currentPlayer
+				&& !gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING))
+				^ modelID == currentExtraPlayer) {
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-
-			if (!gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)) {
-				pM.setPlayerState(PlayerState.WAITING);
-				ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
-				if (currDevCards != null) {
-					for (int i = 0; i < currDevCards.size(); i++) {
-						// erst jetzt kann spieler über development card
-						// verfügen
-						pM.incrementPlayerDevCard(currDevCards.get(i));
-					}
-					pM.getDevCardsBoughtInThisRound().clear();
+			pM.setPlayerState(PlayerState.WAITING);
+			ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
+			if (currDevCards != null) {
+				for (int i = 0; i < currDevCards.size(); i++) {
+					// erst jetzt kann spieler über development card
+					// verfügen
+					pM.incrementPlayerDevCard(currDevCards.get(i));
 				}
-				// runde zu ende, nächste runde darf dev card gespielt werden
-				pM.setHasPlayedDevCard(false);
-				statusUpdate(modelID);
-
-				currentPlayer = getNextPlayer(modelID); // next players turn
-				gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
-				statusUpdate(currentPlayer);
-			} else {
-				serverResponse(modelID, "Diese Aktion ist derzeit nicht zulässig");
-
+				pM.getDevCardsBoughtInThisRound().clear();
 			}
+			// runde zu ende, nächste runde darf dev card gespielt werden
+			pM.setHasPlayedDevCard(false);
+			statusUpdate(modelID);
+
+			if (modelID == currentExtraPlayer) {
+				currentExtraPlayer = getNextPlayer(currentExtraPlayer);
+				if (currentExtraPlayer == currentPlayer) {
+					// ende der ausserordentlichen Bauphase
+					currentExtraPlayer = null;
+					currentPlayer = getNextPlayer(currentPlayer);
+					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
+					statusUpdate(currentPlayer);
+				} else {
+					gameLogic.getBoard().getPlayer(currentExtraPlayer).setPlayerState(PlayerState.BUILDING);
+					statusUpdate(currentExtraPlayer);
+				}
+			} else {
+				if (FiveSixGame) {
+					currentExtraPlayer = getNextPlayer(modelID); // next players
+																	// turn
+					gameLogic.getBoard().getPlayer(currentExtraPlayer).setPlayerState(PlayerState.BUILDING);
+					statusUpdate(currentExtraPlayer);
+				} else {
+					currentPlayer = getNextPlayer(modelID);
+					gameLogic.getBoard().getPlayer(currentPlayer).setPlayerState(PlayerState.DICEROLLING);
+					statusUpdate(currentPlayer);
+				}
+			}
+
+		} else {
+			serverResponse(modelID, "Unzulässige Aktion");
 		}
 
 	}
@@ -2133,7 +2191,7 @@ public class ServerController {
 				for (int i = 0; i < amountPlayers; i++) {
 					currTID = modelPlayerIdMap.get(i);
 					if (currTID != null) {
-						serverOutputHandler.victory("Verbindung zu einem Spieler verloren!", threadID);
+						serverOutputHandler.victory("Verbindung zu einem Spieler verloren!", -1);
 						server.closeSocket();
 						System.exit(0);
 					}
@@ -2141,20 +2199,26 @@ public class ServerController {
 
 			} else { // während lobbybetrieb disconnect möglich
 				// zuerst noch ein letztes statusupdate
-				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);
-				statusUpdate(modelID);
+				lobbyPlayers.get(modelID).setPlayerState(PlayerState.CONNECTION_LOST);
+				for (int i = 0; i < amountPlayers; i++) {
+					if (i != modelID) {
+						lobbyStatusUpdate(modelID, i);
+					}
+				}
+				lobbyPlayers.remove(modelID);
 
 				// danach entfernen aus dem speicher
-				PlayerModel[] playerModels = gameLogic.getBoard().getPlayerModels();
-				PlayerModel tempPM = playerModels[amountPlayers - 1];
+				// PlayerModel[] playerModels =
+				// gameLogic.getBoard().getPlayerModels();
+				// PlayerModel tempPM = playerModels[amountPlayers - 1];
 				int tempThreadID = modelPlayerIdMap.get(amountPlayers - 1);
 				// temp ModelID = i;
 				// verschiebe alle PlayerModels um 1 nach unten bis zu
 				// spieler der sich disconnected hat...
 				for (int i = amountPlayers - 2; i >= modelID; i--) {
-					PlayerModel currPM = playerModels[i];
-					playerModels[i] = tempPM;
-					tempPM = currPM;
+					// PlayerModel currPM = playerModels[i];
+					// playerModels[i] = tempPM;
+					// tempPM = currPM;
 
 					int newTID = modelPlayerIdMap.get(i);
 					modelPlayerIdMap.replace(i, tempThreadID);
@@ -2163,7 +2227,7 @@ public class ServerController {
 
 				}
 				// resette den letzten Eintrag
-				playerModels[amountPlayers - 1] = new PlayerModel();
+				// playerModels[amountPlayers - 1] = new PlayerModel();
 				modelPlayerIdMap.remove(amountPlayers - 1);
 				threadPlayerIdMap.remove(threadID);
 

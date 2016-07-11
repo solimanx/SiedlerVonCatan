@@ -282,7 +282,7 @@ public class ServerOutputHandler {
 	 * @param sendToPlayerID the send to player ID
 	 */
 	public void statusUpdate(int playerID, Color color, String name, PlayerState status, int victoryPoints,
-			int[] resources,int knightAmount, int[] devCards,boolean longestTR, boolean biggestKP, Integer sendToPlayerID) {
+			int[] resources,Integer knightAmount, int[] devCards,boolean longestTR, boolean biggestKP, Integer sendToPlayerID) {
 		ProtocolResource pResource;
 		if (resources.length != 5) {
 			pResource = new ProtocolResource(null, null, null, null, null, resources[0]);

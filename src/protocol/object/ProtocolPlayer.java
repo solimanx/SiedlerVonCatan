@@ -39,7 +39,7 @@ public class ProtocolPlayer {
 	private ProtocolResource resources;
 
 	@SerializedName("Rittermacht")
-	private int knightCount;
+	private Integer knightCount;
 
 	@SerializedName("Entwicklungskarten")
 	private ProtocolDevCard developmentCards;
@@ -66,7 +66,7 @@ public class ProtocolPlayer {
 	 * @param longestRoad the longest road
 	 */
 	public ProtocolPlayer(int playerID, Color color, String name, PlayerState status, int victoryPoints,
-			ProtocolResource resources, int knightCount, ProtocolDevCard developmentCards, boolean largestArmy, boolean longestRoad ) {
+			ProtocolResource resources, Integer knightCount, ProtocolDevCard developmentCards, boolean largestArmy, boolean longestRoad ) {
 		this.playerID = playerID;
 		this.color = color;
 		this.name = name;
@@ -138,7 +138,7 @@ public class ProtocolPlayer {
 	 *
 	 * @return the knight count
 	 */
-	public int getKnightCount(){
+	public Integer getKnightCount(){
 		return knightCount;
 	}
 
