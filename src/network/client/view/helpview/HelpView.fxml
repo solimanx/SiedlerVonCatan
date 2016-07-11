@@ -255,7 +255,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BorderPane layoutX="73.0" layoutY="142.0" prefHeight="214.0" prefWidth="520.0" stylesheets="/network/client/view/application.css">
+                        <BorderPane layoutX="73.0" layoutY="142.0" prefHeight="214.0" prefWidth="520.0" >
                            <center>
                               <GridPane hgap="5.0" vgap="10.0">
                                  <children>
