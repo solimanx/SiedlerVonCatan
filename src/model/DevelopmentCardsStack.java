@@ -106,13 +106,32 @@ public class DevelopmentCardsStack {
 	 * returns a card of the specific CardType
 	 */
 	public DevelopmentCard getSpecificCard(CardType c){
-		int i = 0;
-		while(true){
-			if(devCardStack[i].getCardType() == c){
-				return devCardStack[i];
-			}
-			i++;
+		if(!buyable()){
+			return null;
 		}
+		
+		int i = nextCard;
+		boolean found = false;
+		while(!found){
+			if(i > devCardStack.length){
+				return null;
+			}
+			if(devCardStack[i].getCardType() == c){
+				found = true;
+			}
+			else{
+				i++;
+			}
+		}
+		DevelopmentCard devCardFound = devCardStack[i];
+		for(int j = i-nextCard; j>0; j--){
+			devCardStack[j] = devCardStack[j-1];
+		}
+		devCardStack[nextCard] = devCardFound;
+		
+		DevelopmentCard result = devCardStack[nextCard];
+		nextCard++;
+		return result;
 	}
 
 	/**
