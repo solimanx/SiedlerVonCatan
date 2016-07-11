@@ -97,7 +97,7 @@ public class TradeViewController {
 
 	private ObservableList<String> tradeList = FXCollections.observableArrayList();
 	private ObservableList<String> ownOfferList = FXCollections.observableArrayList();
-	
+
 	public SimpleBooleanProperty isPlayerTradingStatus = new SimpleBooleanProperty();
 
 	private String selectedTrade;
@@ -162,7 +162,7 @@ public class TradeViewController {
 			}
 
 		});
-		
+
 		placeOfferButton.disableProperty().bind(isPlayerTradingStatus.not());
 	}
 
@@ -282,7 +282,7 @@ public class TradeViewController {
 		resultOffer = new int[5];
 		updateSpinner(resultDemand, grid);
 		tradeButton.setDisable(true);
-      playMakeOfferSound();
+		playMakeOfferSound();
 	}
 
 	/**
@@ -293,23 +293,29 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleTradeButton(ActionEvent event) {
-		int tradeID = stringToTradeID.get(selectedTrade);
-		viewController.getClientController().acceptTrade(tradeID);
-		int index = tradeList.indexOf(selectedTrade);
-		tradeList.set(index, selectedTrade + "\nYOU ACCEPTED");
-		playTradeButtonSound();
+		if (stringToTradeID.get(selectedTrade) != null) {
+			int tradeID = stringToTradeID.get(selectedTrade);
+			viewController.getClientController().acceptTrade(tradeID);
+			int index = tradeList.indexOf(selectedTrade);
+			tradeList.set(index, selectedTrade + "\nYOU ACCEPTED");
+
+			playTradeButtonSound();
+		}
 	}
 
 	/**
 	 * Handle decline trade.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void handleDeclineTrade(ActionEvent event) {
-		int tradeID = stringToTradeID.get(selectedTrade);
-		viewController.getClientController().declineTrade(tradeID);
-		playDeclineTradeOfferSound();
+		if (stringToTradeID.get(selectedTrade) != null) {
+			int tradeID = stringToTradeID.get(selectedTrade);
+			viewController.getClientController().declineTrade(tradeID);
+			playDeclineTradeOfferSound();
+		}
 	}
 
 	/**
@@ -376,11 +382,12 @@ public class TradeViewController {
 	/**
 	 * Offer fulfilled.
 	 * 
-	 * 	 //* @param threadID
-	 *            the thread ID
+	 * //* @param threadID the thread ID
 	 *
-	 * @param modelID the model ID
-	 * @param partnerModelID            the partner model ID
+	 * @param modelID
+	 *            the model ID
+	 * @param partnerModelID
+	 *            the partner model ID
 	 */
 	public void offerFulfilled(int modelID, int partnerModelID) {
 		if (modelID == 0) {
@@ -397,7 +404,6 @@ public class TradeViewController {
 		} catch (Exception e) {
 			viewController.getGameViewController().alert("Couldn't delete trade!");
 		}
-
 
 	}
 
@@ -473,7 +479,6 @@ public class TradeViewController {
 	public void cancelOffer(int tradeID) {
 		Platform.runLater(new RemoveOfferStringRunnable(tradeIDtoString.get(tradeID)));
 	}
-	
 
 	/**
 	 * Trade string generator.

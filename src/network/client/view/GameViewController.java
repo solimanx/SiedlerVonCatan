@@ -682,6 +682,7 @@ public class GameViewController implements Initializable {
 		tradeViewController.start(selfResources);
 		tradeViewController.isPlayerTradingStatus.set((selfState == PlayerState.TRADING_OR_BUILDING) ? true : false);
 		tradeStage.show();
+		tradeStage.toFront();
 		playTradeButtonSound();
 	}
 
