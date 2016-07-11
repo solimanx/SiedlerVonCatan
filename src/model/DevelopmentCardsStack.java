@@ -16,6 +16,10 @@ public class DevelopmentCardsStack {
 	private DevelopmentCard[] devCardStack;
 	private int nextCard;
 
+	public DevelopmentCardsStack(DevelopmentCard[] devCardStack){
+		this.devCardStack = devCardStack;
+		this.nextCard = 0;
+	}
 	/**
 	 * constructor sets standard values creates a stack of DevelopmentCards.
 	 */
@@ -116,7 +120,7 @@ public class DevelopmentCardsStack {
 			if(i > devCardStack.length){
 				return null;
 			}
-			if(devCardStack[i].getCardType() == c){
+			if(devCardStack[i].getCardType().equals(c)){
 				found = true;
 			}
 			else{
