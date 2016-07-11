@@ -185,10 +185,10 @@ public class AIInputHandler extends ClientInputHandler {
 	 */
 	@Override
 	protected void handle(ProtocolChatReceiveMessage chatReceiveMessage) {
-		if (ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+		/*if (ai.getMe() != null && ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
 			ai.getOutput().respondEndTurn(); // if error then end turn
 			ai.updateCards();
-		}
+		}*/
 		// Chatbot?
 
 	}
