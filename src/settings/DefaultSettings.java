@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package settings;
 
@@ -13,8 +13,8 @@ import enums.ResourceType;
 public final class DefaultSettings {
 
 	// 7 equates to 37 hexagons
-	public final static int BOARD_SIZE = 7;
-	public final static int BOARD_RADIUS = BOARD_SIZE / 2;
+	public static int boardSize = 7;
+	public final static int BOARD_RADIUS = boardSize / 2;
 
 	public final static int MAX_VICTORY_POINTS = 10;
 
@@ -60,7 +60,7 @@ public final class DefaultSettings {
 
 	public final static int[] DICE_NUMBERS = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11 };
 
-	public final static int MAXIMUM_PLAYERS_AMOUNT = 4;
+	public static int maxPlayersAmount = 4;
 
 	public final static String PROTOCOL_VERSION = "1.0";
 

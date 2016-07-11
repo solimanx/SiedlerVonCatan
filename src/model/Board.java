@@ -51,7 +51,7 @@ public class Board {
 	 * Instantiates a new board.
 	 */
 	public Board() {
-		int r = DefaultSettings.BOARD_SIZE;
+		int r = DefaultSettings.boardSize;
 		fields = new Field[r][r];
 		initializeFields();
 		initializeHashMaps();
@@ -61,11 +61,21 @@ public class Board {
 		initializeEdges();
 		devCardStack = new DevelopmentCardsStack();
 		initializeID();
-		players = new PlayerModel[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
-		for (int i = 0; i < DefaultSettings.MAXIMUM_PLAYERS_AMOUNT; i++) {
+		players = new PlayerModel[DefaultSettings.maxPlayersAmount];
+		for (int i = 0; i < DefaultSettings.maxPlayersAmount; i++) {
 			players[i] = new PlayerModel(i);
 		}
 
+	}
+
+	/**
+	 * Extend board for 5-6 players
+	 * @param board
+	 */
+	public void extendBoard(Board board){
+		DefaultSettings.boardSize++;
+		DefaultSettings.maxPlayersAmount=6;
+		board = new Board();
 	}
 
 	// ================================================================================
@@ -409,7 +419,7 @@ public class Board {
 	public PlayerModel getPlayer(int i) {
 		return this.players[i] != null ? this.players[i] : null;
 	}
-	
+
 	/**
 	 * Gets the player models.
 	 *
