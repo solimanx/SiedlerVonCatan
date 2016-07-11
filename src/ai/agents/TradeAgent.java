@@ -624,8 +624,6 @@ public class TradeAgent {
 		while(demandValue-offerValue>50){
 			//TODO erstellen des angebots...
 		}
-
-
 	}
 
 

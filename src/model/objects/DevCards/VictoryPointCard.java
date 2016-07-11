@@ -1,11 +1,14 @@
 package model.objects.DevCards;
 
+import enums.CardType;
+
 // TODO: Auto-generated Javadoc
 public class VictoryPointCard implements DevelopmentCard {
 
-	String name = "Victory Card";
-	String text = "";
-	int victoryPoints = 1;
+	private String name = "Victory Card";
+	private String text = "";
+	private int victoryPoints = 1;
+	private CardType cardType = CardType.VICTORYPOINT;
 
 	/* (non-Javadoc)
 	 * @see model.objects.DevCards.DevelopmentCard#getName()
@@ -32,6 +35,10 @@ public class VictoryPointCard implements DevelopmentCard {
 	 */
 	public int getVictorypoints() {
 		return victoryPoints;
+	}
+	
+	public CardType getCardType(){
+		return cardType;
 	}
 
 }

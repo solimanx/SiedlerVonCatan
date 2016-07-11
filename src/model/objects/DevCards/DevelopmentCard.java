@@ -1,7 +1,10 @@
 package model.objects.DevCards;
 
+import enums.CardType;
+
 // TODO: Auto-generated Javadoc
 public interface DevelopmentCard {
+	
 
 	/**
 	 * Gets the name.
@@ -16,5 +19,7 @@ public interface DevelopmentCard {
 	 * @return the text
 	 */
 	public String getText();
+	
+	public CardType getCardType();
 
 }

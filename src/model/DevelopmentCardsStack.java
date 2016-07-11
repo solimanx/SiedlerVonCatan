@@ -7,6 +7,8 @@ import settings.DefaultSettings;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import enums.CardType;
+
 // TODO: Auto-generated Javadoc
 public class DevelopmentCardsStack {
 
@@ -49,7 +51,8 @@ public class DevelopmentCardsStack {
 	/**
 	 * randomizes the order of the DevelopmentCards in the array.
 	 *
-	 * @param stack            Array of DevelopmentCards
+	 * @param stack
+	 *            Array of DevelopmentCards
 	 * @return the same array with randomized order
 	 */
 	public DevelopmentCard[] shuffleArray(DevelopmentCard[] stack) {
@@ -72,14 +75,15 @@ public class DevelopmentCardsStack {
 	public DevelopmentCard[] getCardStack() {
 		return devCardStack;
 	}
-	
+
 	/**
 	 * Sets the card stack.
 	 *
-	 * @param cards the new card stack
+	 * @param cards
+	 *            the new card stack
 	 */
-	//Debug only!!
-	public void setCardStack(DevelopmentCard[] cards){
+	// Debug only!!
+	public void setCardStack(DevelopmentCard[] cards) {
 		this.devCardStack = cards;
 	}
 
@@ -95,6 +99,20 @@ public class DevelopmentCardsStack {
 			return result;
 		}
 		return null;
+	}
+
+	// debug
+	/**
+	 * returns a card of the specific CardType
+	 */
+	public DevelopmentCard getSpecificCard(CardType c){
+		int i = 0;
+		while(true){
+			if(devCardStack[i].getCardType() == c){
+				return devCardStack[i];
+			}
+			i++;
+		}
 	}
 
 	/**

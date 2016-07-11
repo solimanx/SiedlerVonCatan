@@ -1,10 +1,13 @@
 package model.objects.DevCards;
 
+import enums.CardType;
+
 // TODO: Auto-generated Javadoc
 public class StreetBuildingCard implements DevelopmentCard {
 
-	String name = "Street Building Card";
-	String text = "";
+	private String name = "Street Building Card";
+	private String text = "";
+	private CardType cardType = CardType.STREET;
 
 	/* (non-Javadoc)
 	 * @see model.objects.DevCards.DevelopmentCard#getName()
@@ -22,6 +25,10 @@ public class StreetBuildingCard implements DevelopmentCard {
 	public String getText() {
 		// TODO Auto-generated method stub
 		return text;
+	}
+	
+	public CardType getCardType(){
+		return cardType;
 	}
 
 }
