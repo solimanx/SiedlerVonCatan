@@ -501,7 +501,7 @@ public class ClientOutputHandler {
 		}
 
 	}
-	
+
 	/**
 	 * Send cheat code.
 	 *

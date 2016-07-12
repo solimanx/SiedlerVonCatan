@@ -1149,7 +1149,7 @@ public class ClientController {
 	 * @param modelID
 	 *            the model ID
 	 */
-	public void playKnightCard(int x, int y, int modelID) {
+	public void playKnightCard(int x, int y, Integer modelID) {
 		clientOutputHandler.playKnightCard(x, y, modelPlayerIdMap.get(modelID));
 
 	}
