@@ -99,13 +99,25 @@ public class ServerController {
 
 		this.devStack = new DevelopmentCardsStack();
 
-		try {
-			server.start();
-		} catch (IOException e) {
-			logger.catching(Level.ERROR, e);
-			e.printStackTrace();
-		}
 
+		startServer();
+
+
+	}
+	public void startServer(){
+		Thread serverThread = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					server.start();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+		});
+		serverThread.start();
 	}
 
 	/**
@@ -888,7 +900,7 @@ public class ServerController {
 
 	/**
 	 * calculates the StreetSet, which contains the given edge
-	 * 
+	 *
 	 * don't use this method, if the edge has no street!!!.
 	 *
 	 * @param e
@@ -1230,7 +1242,7 @@ public class ServerController {
 			} else {
 				serverResponse(modelID, "Unzulässige Aktion");
 			}
-		} 
+		}
 	}
 
 	/**
@@ -2298,6 +2310,11 @@ public class ServerController {
 	public void setRobberLossCounter(int i) {
 		robberLossCounter = i;
 
+	}
+
+	public void disconnectServer() {
+		System.out.print("ServerController");
+		server.disconnectServer();
 	}
 
 }

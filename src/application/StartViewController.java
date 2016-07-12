@@ -173,7 +173,7 @@ public class StartViewController {
 	 */
 	@FXML
 	void handleStopServer(ActionEvent event) {
-		serverThread.interrupt();
+		gc.disconnectServer();
 		stopServer.setDisable(true);
 		startClient.setDisable(false);
 		startAI.setDisable(false);
@@ -207,13 +207,13 @@ public class StartViewController {
 			break;
 		case "Server":
 			int port = serverPort.getText().equals("") ? 8080 : Integer.parseInt(serverPort.getText());
-			serverThread = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					gc = new ServerController(port);
-				}
-			});
-			serverThread.start();
+			gc = new ServerController(port);
+//			serverThread = new Thread(new Runnable() {
+//				@Override
+//				public void run() {
+//				}
+//			});
+//			serverThread.start();
 			stopServer.setDisable(false);
 			// startClient.setDisable(true);
 			// startAI.setDisable(true);

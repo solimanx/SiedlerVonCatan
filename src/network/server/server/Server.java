@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 
 import network.ModelToProtocol;
 import org.apache.logging.log4j.Level;
@@ -28,8 +29,10 @@ public class Server {
 	private ServerInputHandler serverInputHandler;
 	private ServerOutputHandler serverOutputHandler;
 	private int serverPort;
-	
+
 	private int connectedPlayers;
+	private ArrayList<ClientThread> threadList = new ArrayList<ClientThread>();
+	private boolean shutdown;
 
 	/**
 	 * Instantiates a new server.
@@ -56,10 +59,18 @@ public class Server {
 		logger.info("Server running");
 		try {
 			//geändert weil sonst können sich nur 4 spieler verbinden; keine disconnects möglich
-			while (clientCounter < 10) {
+			while (clientCounter < 10 && !shutdown) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket, serverInputHandler);
+
 			}
+			if(shutdown){
+				for (ClientThread ct : threadList){
+					ct.disconnect();
+				}
+				System.out.println("ClientThreads disconnected");
+			}
+
 		} finally {
 			serverSocket.close();
 		}
@@ -97,7 +108,7 @@ public class Server {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
@@ -129,14 +140,14 @@ public class Server {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				//closeSocket();
 				// TODO server beendet sich momentan noch vollständig, wenn
 				// Client abbricht
 			} finally {
 			}
 		}
-		
+
 		/**
 		 * Disconnect.
 		 */
@@ -165,6 +176,7 @@ public class Server {
 	 */
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
 		ClientThread thread = new ClientThread(socket, inputHandler, serverOutputHandler, clientCounter);
+		threadList .add(thread);
 		thread.start();
 		idToClientThread.put(clientCounter, thread);
 		clientCounter++;
@@ -263,7 +275,7 @@ public class Server {
 	public int getClientCounter() {
 		return clientCounter;
 	}
-	
+
 	/**
 	 * Gets the connected players.
 	 *
@@ -272,7 +284,7 @@ public class Server {
 	public int getConnectedPlayers(){
 		return connectedPlayers;
 	}
-	
+
 	/**
 	 * Disconnect player.
 	 *
@@ -281,5 +293,14 @@ public class Server {
 	public void disconnectPlayer(Integer id){
 		clientCounter--;
 		idToClientThread.get(id).disconnect();
+	}
+
+	public void disconnectServer(){
+		System.out.println("Server");
+		shutdown = true;
+		for (ClientThread ct : threadList){
+			ct.disconnect();
+		}
+		System.out.println("ClientThreads disconnected");
 	}
 }
