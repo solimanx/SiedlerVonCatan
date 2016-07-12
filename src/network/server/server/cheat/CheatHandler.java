@@ -106,10 +106,26 @@ public class CheatHandler extends ServerOutputHandler {
 		case STREET_BUILD_CARD:
 			streetBuildCard(threadID);
 			break;
+		case VICTORY:
+			drawVictoryCard(threadID);
 		default:
 			throw new IllegalArgumentException("Cheat doesn't exist");
 
 		}
+	}
+
+	private void drawVictoryCard(Integer threadID) {
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		ProtocolBoughtDevelopmentCard pbdc = new ProtocolBoughtDevelopmentCard(threadID, CardType.VICTORYPOINT);
+		Response r = new Response();
+		r.pBoughtDevelopmentCard = pbdc;
+		try {
+			server.sendToClient(parser.createString(r), modelID);
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+		}
+
+		
 	}
 
 	/**

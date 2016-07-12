@@ -34,6 +34,8 @@ public enum CheatCode {
 	@SerializedName("MONOPOLY") MONOPOLY_CARD("MONOPOLY"),
 
 	@SerializedName("STREETBUILD") STREET_BUILD_CARD("STREETBUILD"),
+	
+	@SerializedName("VICTORY") VICTORY ("VICTORY"),
 
 	@SerializedName("WIN") INSTANT_WIN("WIN"),
 
@@ -52,6 +54,7 @@ public enum CheatCode {
 	@SerializedName("ELEMENTFIVE") INCREASE_ELEMENTFIVE("ELEMENTFIVE"),
 
 	@SerializedName("OTHERHAND") OTHER_HAND("OTHERHAND");
+	
 
 	private String value;
 
