@@ -883,9 +883,9 @@ public class ServerController {
 				for (int i = 0; i < streetSets.size(); i++) {
 					if (streetSets.get(i).getPlayerID() == currPlayer) {
 						if (streetSets.get(i).getEdges().contains(streetEdges.get(0))) {
-							StreetSet newSet1 = new StreetSet(modelID, null);
+							StreetSet newSet1 = new StreetSet(modelID, new ArrayList<Edge>());
 							newSet1.addEdge(streetEdges.get(0));
-							StreetSet newSet2 = new StreetSet(modelID, null);
+							StreetSet newSet2 = new StreetSet(modelID, new ArrayList<Edge>());
 							newSet2.addEdge(streetEdges.get(1));
 							ArrayList<Edge> tempEdges = streetSets.get(i).getEdges();
 							streetSets.remove(i);
