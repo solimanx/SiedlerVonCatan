@@ -7,6 +7,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
+import audio.Soundeffects;
+
 import java.io.File;
 import java.net.URL;
 
@@ -15,6 +17,34 @@ import java.net.URL;
  * Created by Amina on 03.07.2016.
  */
 public class Sound {
+	
+	public static float globalVolume = 0.5f;
+	
+	public static void setGain(Clip clip, float globalVolume) {
+	    if (globalVolume != -1) {
+	        if ((globalVolume < 0) || (globalVolume > 1)) {
+	            throw new IllegalArgumentException("Volume must be between 0.0 and 1.0");
+	        }
+	    }
+
+	    Sound.globalVolume = globalVolume;
+
+	    try {
+	        FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	        if (globalVolume == -1) {
+	            control.setValue(0);
+	        } else {
+	            float max = control.getMaximum();
+	            float min = control.getMinimum();
+	            float range = max - min;
+
+	            control.setValue(min + (range * globalVolume));
+	        }
+	    } catch (IllegalArgumentException e) {
+	        // gain not supported
+	        e.printStackTrace();
+	    }
+	}
 
 	/**
 	 * Music loop.
@@ -23,7 +53,7 @@ public class Sound {
 
 		MediaPlayer mediaPlayer = new MediaPlayer(
 				new Media(Sound.class.getResource("/sounds/background.wav").toExternalForm()));
-		mediaPlayer.setVolume(0.5);
+		mediaPlayer.setVolume(Soundeffects.globalVolume);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 
@@ -38,8 +68,9 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
-			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-20.0f);
+//			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.VOLUME);
+//			gainControl.setValue(-20.0f);
+			setGain(clip, globalVolume);
 			clip.start();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -57,6 +88,7 @@ public class Sound {
 
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -74,6 +106,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+            setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -90,6 +123,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -122,6 +156,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -154,6 +189,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -170,6 +206,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -202,6 +239,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -218,6 +256,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -234,6 +273,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -252,6 +292,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
@@ -284,6 +325,7 @@ public class Sound {
 			File file = new File(url.getPath());
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
 			clip.start();
 			// Thread.sleep(clip.getMicrosecondLength());
 		} catch (Exception e) {
