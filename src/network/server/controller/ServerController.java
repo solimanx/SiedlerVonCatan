@@ -780,6 +780,7 @@ public class ServerController {
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 		serverOutputHandler.victory("Spieler " + pM.getName() + " hat das Spiel gewonnen.",
 				modelPlayerIdMap.get(modelID));
+		server.disconnectServer();
 		server.closeSocket();
 		System.exit(0);
 	}
