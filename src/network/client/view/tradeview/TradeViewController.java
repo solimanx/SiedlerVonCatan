@@ -296,7 +296,10 @@ public class TradeViewController {
 		int tradeID = stringToTradeID.get(selectedTrade);
 		viewController.getClientController().acceptTrade(tradeID);
 		int index = tradeList.indexOf(selectedTrade);
-		tradeList.set(index, selectedTrade + "\nYOU ACCEPTED");
+		String newTradeString = selectedTrade + "\nYOU ACCEPTED";
+		tradeList.set(index, newTradeString);
+		tradeIDtoString.put(tradeID, newTradeString);
+		stringToTradeID.put(newTradeString, tradeID);
 		playTradeButtonSound();
 	}
 
@@ -422,15 +425,6 @@ public class TradeViewController {
 		playerIDtoString.put(playerID, tradeString);
 		Platform.runLater(new AddTradeStringRunnable(tradeString));
 		viewController.getGameViewController().alert("New trade request:\n" + tradeString);
-		Platform.runLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				stage.show();
-				stage.toFront();
-				
-			}
-		});
 
 	}
 
