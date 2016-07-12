@@ -8,14 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
-import network.ModelToProtocol;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
 public class Server {
@@ -30,7 +25,7 @@ public class Server {
 	private ServerInputHandler serverInputHandler;
 	private ServerOutputHandler serverOutputHandler;
 	private int serverPort;
-
+	ServerSocket serverSocket;
 	private int connectedPlayers;
 	private ArrayList<ClientThread> threadList = new ArrayList<ClientThread>();
 	private boolean shutdown;
@@ -56,15 +51,20 @@ public class Server {
 	 */
 	public void start() throws IOException {
 
-		ServerSocket serverSocket = new ServerSocket(serverPort, 150);
+		serverSocket = new ServerSocket(serverPort, 150);
 		logger.info("Server running");
 		try {
 			// geändert weil sonst können sich nur 4 spieler verbinden; keine
 			// disconnects möglich
 			while (clientCounter < 10 && !shutdown) {
+				try{
 				Socket socket = serverSocket.accept();
 				startHandler(socket, serverInputHandler);
 				clientCounter++;
+				}
+				catch(java.net.SocketException se){
+
+				}
 
 			}
 			if (shutdown) {
@@ -133,8 +133,7 @@ public class Server {
 					if (line != null) {
 						inputHandler.sendToParser(line, threadID);
 
-					}
-					else{
+					} else {
 						connected = false;
 						disconnectPlayer(connectedPlayers);
 					}
@@ -155,6 +154,7 @@ public class Server {
 				// TODO server beendet sich momentan noch vollständig, wenn
 				// Client abbricht
 			} finally {
+				disconnect();
 			}
 		}
 
@@ -165,6 +165,7 @@ public class Server {
 			try {
 				connected = false;
 				reader.close();
+				writer.close();
 				socket.close();
 				logger.info("Player disconnected");
 			} catch (IOException e) {
@@ -236,13 +237,7 @@ public class Server {
 		for (Integer keyIDs : idToClientThread.keySet()) {
 			ClientThread clientThread = idToClientThread.get(keyIDs);
 			if (clientThread != null) {
-				try {
-					clientThread.socket.close();
-				} catch (IOException e) {
-					logger.error("Input/Output Exception ", e);
-					logger.catching(Level.ERROR, e);
-					e.printStackTrace();
-				}
+				clientThread.disconnect();
 			}
 		}
 
@@ -302,17 +297,22 @@ public class Server {
 	 *            the id
 	 */
 	public void disconnectPlayer(Integer id) {
-		idToClientThread.get(id-1).disconnect();
-		serverInputHandler.getServerController().connectionLost(id-1);
+		idToClientThread.get(id - 1).disconnect();
+		serverInputHandler.getServerController().connectionLost(id - 1);
 
 	}
 
 	public void disconnectServer() {
 		System.out.println("Server");
 		shutdown = true;
-		for (ClientThread ct : threadList) {
-			ct.disconnect();
-		}
+		closeSocket();
 		System.out.println("ClientThreads disconnected");
+		try {
+			if (serverSocket != null)
+				serverSocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
