@@ -1,18 +1,16 @@
 package model;
 
-import java.util.ArrayList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import enums.CardType;
 import enums.HarbourStatus;
 import enums.PlayerState;
-import enums.ResourceType;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -25,7 +23,8 @@ public class GameLogic {
 	/**
 	 * Instantiates a new game logic.
 	 *
-	 * @param b the b
+	 * @param b
+	 *            the b
 	 */
 	public GameLogic(Board b) {
 		this.board = b;
@@ -36,10 +35,14 @@ public class GameLogic {
 	/**
 	 * Checks if the player can build a city at the given position.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir            //* @param player
-	 * @param playerID the player ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            //* @param player
+	 * @param playerID
+	 *            the player ID
 	 * @return boolean true/false
 	 */
 
@@ -82,10 +85,14 @@ public class GameLogic {
 	/**
 	 * Checks if the player can build a city at the given position.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir            //* @param player
-	 * @param playerID the player ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            //* @param player
+	 * @param playerID
+	 *            the player ID
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildCity(int x, int y, int dir, int playerID) {
@@ -118,10 +125,14 @@ public class GameLogic {
 	/**
 	 * Checks if the player can build a Street at the given position.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir            // * @param player
-	 * @param playerID the player ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            // * @param player
+	 * @param playerID
+	 *            the player ID
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildStreet(int x, int y, int dir, int playerID) {
@@ -176,9 +187,12 @@ public class GameLogic {
 	/**
 	 * checks if bandit can be set at specified position.
 	 *
-	 * @param x the x
-	 * @param y            // * @param playerId
-	 * @param playerID the player ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            // * @param playerId
+	 * @param playerID
+	 *            the player ID
 	 * @return true/false
 	 */
 	public boolean checkSetBandit(int x, int y, Integer playerID) {
@@ -207,8 +221,10 @@ public class GameLogic {
 	/**
 	 * Check player resources.
 	 *
-	 * @param playerID the player ID
-	 * @param cost the cost
+	 * @param playerID
+	 *            the player ID
+	 * @param cost
+	 *            the cost
 	 * @return true, if successful
 	 */
 	public boolean checkPlayerResources(int playerID, int[] cost) {
@@ -226,10 +242,14 @@ public class GameLogic {
 	 * Checks if the player can build a Street at the given position at the
 	 * beginning of the game.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
-	 * @param playerID the player ID
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
+	 * @param playerID
+	 *            the player ID
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildInitialStreet(int x, int y, int dir, int playerID) {
@@ -239,7 +259,8 @@ public class GameLogic {
 				Corner[] neighbors = board.getAttachedCorners(x, y, dir);
 				for (int i = 0; i < neighbors.length; i++) {
 					if (neighbors[i] != null) {
-						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() == playerID && neighbors[i] == initialLastVillage) {
+						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() == playerID
+								&& neighbors[i] == initialLastVillage) {
 							return true;
 
 						}
@@ -255,9 +276,12 @@ public class GameLogic {
 	 * Checks if the player can build a Street at the given position at the
 	 * beginning of the game.
 	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param dir the dir
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param dir
+	 *            the dir
 	 * @return boolean true/false
 	 */
 	public boolean checkBuildInitialVillage(int x, int y, int dir) {
@@ -294,7 +318,8 @@ public class GameLogic {
 	/**
 	 * Check buy dev card.
 	 *
-	 * @param playerID            ID of the player, who wants to buy a DevelopmentCard
+	 * @param playerID
+	 *            ID of the player, who wants to buy a DevelopmentCard
 	 * @return returns true, if it is possible for the player to buy a
 	 *         Developmentcard else false
 	 */
@@ -305,7 +330,7 @@ public class GameLogic {
 		if (!checkPlayerResources(playerID, settings.DefaultSettings.DEVCARD_BUILD_COST)) {
 			return false;
 		}
-		if (board.getPlayer(playerID).getDevCardsBoughtInThisRound().size() > 0){
+		if (board.getPlayer(playerID).getDevCardsBoughtInThisRound().size() > 0) {
 			return false;
 		}
 		return true;
@@ -314,7 +339,8 @@ public class GameLogic {
 	/**
 	 * Check if player has a settlement on a wood 2:1 harbour.
 	 *
-	 * @param playerID the player ID
+	 * @param playerID
+	 *            the player ID
 	 * @return true, if successful
 	 */
 	public boolean hasWoodHarbour(int playerID) {
@@ -325,7 +351,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.WOOD)) {
-							if (c.getOwnerID()!= null && c.getOwnerID() == playerID) {
+							if (c.getOwnerID() != null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
@@ -340,7 +366,8 @@ public class GameLogic {
 	/**
 	 * Check if player has a settlement on a clay 2:1 harbour.
 	 *
-	 * @param playerID the player ID
+	 * @param playerID
+	 *            the player ID
 	 * @return true, if successful
 	 */
 	public boolean hasClayHarbour(int playerID) {
@@ -366,7 +393,8 @@ public class GameLogic {
 	/**
 	 * Check if player has a settlement on a wool 2:1 harbour.
 	 *
-	 * @param playerID the player ID
+	 * @param playerID
+	 *            the player ID
 	 * @return true, if successful
 	 */
 	public boolean hasWoolHarbour(int playerID) {
@@ -392,7 +420,8 @@ public class GameLogic {
 	/**
 	 * Check if player has a settlement on a corn 2:1 harbour.
 	 *
-	 * @param playerID the player ID
+	 * @param playerID
+	 *            the player ID
 	 * @return true, if successful
 	 */
 	public boolean hasCornHarbour(int playerID) {
@@ -403,7 +432,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.CORN)) {
-							if (c.getOwnerID()!=null && c.getOwnerID() == playerID) {
+							if (c.getOwnerID() != null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
@@ -418,7 +447,8 @@ public class GameLogic {
 	/**
 	 * Check if player has a settlement on a ore 2:1 harbour.
 	 *
-	 * @param playerID the player ID
+	 * @param playerID
+	 *            the player ID
 	 * @return true, if successful
 	 */
 	public boolean hasOreHarbour(int playerID) {
@@ -444,7 +474,8 @@ public class GameLogic {
 	/**
 	 * Check if player has a settlement on a 3:1 harbour.
 	 *
-	 * @param playerID the player ID
+	 * @param playerID
+	 *            the player ID
 	 * @return true, if successful
 	 */
 	public boolean hasThreeOneHarbour(int playerID) {
@@ -455,7 +486,7 @@ public class GameLogic {
 					if (board.getCornerAt(j, i, k) != null) {
 						Corner c = board.getCornerAt(j, i, k);
 						if (c.getHarbourStatus().equals(HarbourStatus.THREE_TO_ONE)) {
-							if (c.getOwnerID()!= null && c.getOwnerID() == playerID) {
+							if (c.getOwnerID() != null && c.getOwnerID() == playerID) {
 								return true;
 							}
 						}
@@ -479,9 +510,12 @@ public class GameLogic {
 	/**
 	 * Checks if is action forbidden.
 	 *
-	 * @param playerID the player ID
-	 * @param currentPlayer the current player
-	 * @param state the state
+	 * @param playerID
+	 *            the player ID
+	 * @param currentPlayer
+	 *            the current player
+	 * @param state
+	 *            the state
 	 * @return true if it is forbidden false if it is not
 	 */
 	public boolean isActionForbidden(Integer playerID, Integer currentPlayer, PlayerState state) {
@@ -495,24 +529,57 @@ public class GameLogic {
 	/**
 	 * Check play dev card.
 	 *
-	 * @param modelID the model ID
-	 * @param currentPlayer the current player
+	 * @param modelID
+	 *            the model ID
+	 * @param currentPlayer
+	 *            the current player
 	 * @return true, if successful
 	 */
-	public boolean checkPlayDevCard(int modelID, int currentPlayer) {
+	public boolean checkPlayDevCard(int modelID, int currentPlayer, CardType ct) {
 		if (isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)
-				|| board.getPlayer(modelID).hasPlayedDevCard()) {
+				|| board.getPlayer(modelID).hasPlayedDevCard() || justBoughtThisCard(modelID, ct)) {
 			return false;
 		}
 		return true;
 	}
-	
+
+	private boolean justBoughtThisCard(int modelID, CardType ct) {
+		int ctIndex;
+		// {KnightCard, VictoryCard, InventionCard, MonopolyCard,
+		// StreetBuilding}
+
+		switch (ct) {
+		case KNIGHT:
+			ctIndex = 0;
+			break;
+		case VICTORYPOINT:
+			ctIndex = 1;
+			break;
+		case INVENTION:
+			ctIndex = 2;
+			break;
+		case MONOPOLY:
+			ctIndex = 3;
+			break;
+		case STREET:
+			ctIndex = 4;
+			break;
+		default:
+			throw new IllegalArgumentException(ct.toString() + "not recognized");
+		}
+		if (board.getPlayer(modelID).getPlayerDevCards()[ctIndex] == 0) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Sets the initial last village.
 	 *
-	 * @param c the new initial last village
+	 * @param c
+	 *            the new initial last village
 	 */
-	public void setInitialLastVillage(Corner c){
+	public void setInitialLastVillage(Corner c) {
 		this.initialLastVillage = c;
 	}
 

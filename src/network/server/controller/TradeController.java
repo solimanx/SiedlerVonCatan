@@ -111,6 +111,9 @@ public class TradeController {
 			serverController.serverResponse(modelID, "Unzulässige Handelsannahme");
 		}
 	}
+	public boolean checkValidSeaTrade(int modelID, int[] offer, int[] demand){
+		return false; //TODO
+	}
 
 	/**
 	 * Checks whether the trade can be accepted.

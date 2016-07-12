@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
+import enums.CardType;
 import enums.Color;
 import enums.HarbourStatus;
 import enums.PlayerState;
@@ -1235,7 +1236,8 @@ public class ServerController {
 				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
 				if (devCard.getName().equals("Victory Card")) {
 					increaseHiddenVictoryPoints(modelID, 1);
-					pm.getPlayerDevCards()[4]++;
+					pm.getPlayerDevCards()[1]++;
+					statusUpdateToPlayer(modelID, modelID);
 				} else {
 					pm.getDevCardsBoughtInThisRound().add(devCard);
 				}
@@ -1523,6 +1525,10 @@ public class ServerController {
 		if (gameLogic.checkPlayerResources(modelID, offer)) {
 			tradeController.requestSeaTrade(modelID, offer, demand);
 		}
+		else //TODO if (!tradeController.checkValidSeaTrade(modelID, offer, demand))
+		{
+			serverResponse(modelID, "Seehandel nicht möglich");
+		}
 	}
 
 	/**
@@ -1659,7 +1665,7 @@ public class ServerController {
 	public void playKnightCard(int threadID, int x, int y, Integer victimThreadID) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer, CardType.KNIGHT)) {
 			serverResponse(modelID, "Ungültiger Spielzug");
 		} else {
 			Integer victimModelID;
@@ -1724,7 +1730,7 @@ public class ServerController {
 	 */
 	public void playStreetCard(int threadID, int x1, int y1, int dir1, int x2, int y2, int dir2) {
 		int modelID = threadPlayerIdMap.get(threadID);
-		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer, CardType.STREET)) {
 			serverResponse(modelID, "Ungültiger Spielzug");
 		} else {
 			serverOutputHandler.roadBuildingCardPlayed(threadID, x1, y1, dir1, x2, y2, dir2);
@@ -1765,7 +1771,7 @@ public class ServerController {
 	 */
 	public void playMonopolyCard(int threadID, ResourceType resType) {
 		int modelID = threadPlayerIdMap.get(threadID);
-		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer, CardType.MONOPOLY)) {
 			serverResponse(modelID, "Ungültiger Spielzug");
 		} else {
 			int resIndex = DefaultSettings.RESOURCE_VALUES.get(resType);
@@ -1799,7 +1805,7 @@ public class ServerController {
 	 */
 	public void playInventionCard(int threadID, int[] resources) {
 		int modelID = threadPlayerIdMap.get(threadID);
-		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer)) {
+		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer, CardType.INVENTION)) {
 			serverResponse(modelID, "Ungültiger Spielzug");
 		} else {
 			int resAmountCheck = 0;
