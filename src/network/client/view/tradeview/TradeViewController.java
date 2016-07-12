@@ -422,8 +422,15 @@ public class TradeViewController {
 		playerIDtoString.put(playerID, tradeString);
 		Platform.runLater(new AddTradeStringRunnable(tradeString));
 		viewController.getGameViewController().alert("New trade request:\n" + tradeString);
-		stage.show();
-		stage.toFront();
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				stage.show();
+				stage.toFront();
+				
+			}
+		});
 
 	}
 
