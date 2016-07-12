@@ -21,8 +21,9 @@ import settings.DefaultSettings;
 public class Server {
 	private static Logger logger = LogManager.getLogger(Server.class.getSimpleName());
 	// HashMap PlayerID => Thread
-	//private ClientThread[] clients = new ClientThread[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
-	private HashMap<Integer,ClientThread> idToClientThread = new HashMap<Integer,ClientThread>();
+	// private ClientThread[] clients = new
+	// ClientThread[DefaultSettings.MAXIMUM_PLAYERS_AMOUNT];
+	private HashMap<Integer, ClientThread> idToClientThread = new HashMap<Integer, ClientThread>();
 
 	private int clientCounter = 0;
 
@@ -58,14 +59,16 @@ public class Server {
 		ServerSocket serverSocket = new ServerSocket(serverPort, 150);
 		logger.info("Server running");
 		try {
-			//geändert weil sonst können sich nur 4 spieler verbinden; keine disconnects möglich
+			// geändert weil sonst können sich nur 4 spieler verbinden; keine
+			// disconnects möglich
 			while (clientCounter < 10 && !shutdown) {
 				Socket socket = serverSocket.accept();
 				startHandler(socket, serverInputHandler);
+				clientCounter++;
 
 			}
-			if(shutdown){
-				for (ClientThread ct : threadList){
+			if (shutdown) {
+				for (ClientThread ct : threadList) {
 					ct.disconnect();
 				}
 				System.out.println("ClientThreads disconnected");
@@ -127,7 +130,14 @@ public class Server {
 				while (connected) {
 					String line = reader.readLine();
 					logger.debug("Server got message: " + line);
-					inputHandler.sendToParser(line, threadID);
+					if (line != null) {
+						inputHandler.sendToParser(line, threadID);
+
+					}
+					else{
+						connected = false;
+						disconnectPlayer(connectedPlayers);
+					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -141,7 +151,7 @@ public class Server {
 					e1.printStackTrace();
 				}
 
-				//closeSocket();
+				// closeSocket();
 				// TODO server beendet sich momentan noch vollständig, wenn
 				// Client abbricht
 			} finally {
@@ -151,7 +161,7 @@ public class Server {
 		/**
 		 * Disconnect.
 		 */
-		public void disconnect(){
+		public void disconnect() {
 			try {
 				connected = false;
 				reader.close();
@@ -176,10 +186,9 @@ public class Server {
 	 */
 	private void startHandler(Socket socket, ServerInputHandler inputHandler) throws IOException {
 		ClientThread thread = new ClientThread(socket, inputHandler, serverOutputHandler, clientCounter);
-		threadList .add(thread);
+		threadList.add(thread);
 		thread.start();
 		idToClientThread.put(clientCounter, thread);
-		clientCounter++;
 		logger.debug("The Next Client gets Number " + clientCounter);
 	}
 
@@ -253,9 +262,9 @@ public class Server {
 	 *
 	 * @return the clients
 	 */
-	/*public ClientThread[] getClients() {
-		return clients;
-	}*/
+	/*
+	 * public ClientThread[] getClients() { return clients; }
+	 */
 
 	/**
 	 * Sets the clients.
@@ -263,9 +272,10 @@ public class Server {
 	 * @param clients
 	 *            the new clients
 	 */
-	/*public void setClients(ClientThread[] clients) {
-		this.clients = clients;
-	} */
+	/*
+	 * public void setClients(ClientThread[] clients) { this.clients = clients;
+	 * }
+	 */
 
 	/**
 	 * Gets the client counter.
@@ -281,24 +291,26 @@ public class Server {
 	 *
 	 * @return the connected players
 	 */
-	public int getConnectedPlayers(){
+	public int getConnectedPlayers() {
 		return connectedPlayers;
 	}
 
 	/**
 	 * Disconnect player.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 */
-	public void disconnectPlayer(Integer id){
-		clientCounter--;
-		idToClientThread.get(id).disconnect();
+	public void disconnectPlayer(Integer id) {
+		idToClientThread.get(id-1).disconnect();
+		serverInputHandler.getServerController().connectionLost(id-1);
+
 	}
 
-	public void disconnectServer(){
+	public void disconnectServer() {
 		System.out.println("Server");
 		shutdown = true;
-		for (ClientThread ct : threadList){
+		for (ClientThread ct : threadList) {
 			ct.disconnect();
 		}
 		System.out.println("ClientThreads disconnected");

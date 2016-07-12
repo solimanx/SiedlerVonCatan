@@ -58,7 +58,14 @@ public class ServerController {
 	private int amountPlayers = 0;
 	private int lobbyAmountPlayers = 0;
 	private Server server;
+
+	/**
+	 *  thread to model
+	 */
 	protected Map<Integer, Integer> modelPlayerIdMap;
+	/**
+	 * model to thread
+	 */
 	protected Map<Integer, Integer> threadPlayerIdMap;
 	private ServerInputHandler serverInputHandler;
 	private int InitialStreetCounter;
@@ -228,7 +235,7 @@ public class ServerController {
 					lobbyStatusUpdate(modelID, i);
 				}
 
-				if (amountPlayers >= 3 && amountPlayers == server.getConnectedPlayers()) {
+				if (amountPlayers >= 3 ){//&& amountPlayers == server.getConnectedPlayers()) {
 					boolean allReady = true;
 					for (int i = 0; i < amountPlayers; i++) {
 						if (lobbyPlayers.get(i).getPlayerState() != PlayerState.WAITING_FOR_GAMESTART) {
