@@ -320,7 +320,7 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleSeaTradeButton(ActionEvent event) {
-		Soundeffects.HARBOUR.play();
+		Soundeffects.HARBOUR.play(Soundeffects.globalVolume);
 		viewController.getClientController().requestSeaTrade(resultOffer, resultDemand);
 		stage.hide();
 		resultDemand = new int[5];

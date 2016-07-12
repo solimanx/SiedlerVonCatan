@@ -83,4 +83,7 @@ public final class DefaultSettings {
 	}
 
 	public final static String SERVER_OK = "OK";
+	
+	
+	
 }

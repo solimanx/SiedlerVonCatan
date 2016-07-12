@@ -577,7 +577,7 @@ public class ClientController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		// if self
 		if (modelID == 0) {
-			Soundeffects.RESOURCE.play();
+			Soundeffects.RESOURCE.play(Soundeffects.globalVolume);
 			gameLogic.getBoard().getPlayer(modelID).decrementResources(resources);
 			// viewController.getGameViewController().setResourceCards(modelID,
 			// getPlayerResources(modelID));

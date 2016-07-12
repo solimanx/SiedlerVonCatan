@@ -3,6 +3,12 @@ package audio;
 import javafx.scene.media.AudioClip;
 
 public class Soundeffects {
+	
+	public static double globalVolume = 0.5;
+	
+	public static void setVolume (double volume){
+		globalVolume = volume;
+	}
 
 	public final static AudioClip BUILD = new AudioClip(Soundeffects.class.getResource("/audio/build.wav").toString());
 	public final static AudioClip BUYCARD = new AudioClip(Soundeffects.class.getResource("/audio/buycard.mp3").toString());
@@ -16,6 +22,8 @@ public class Soundeffects {
 	public final static AudioClip VICTORY = new AudioClip(Soundeffects.class.getResource("/audio/victory.mp3").toString());
 	public final static AudioClip CHATRECEIVE = new AudioClip(Soundeffects.class.getResource("/audio/chatreceive.mp3").toString());
 	public final static AudioClip LONGESTROAD = new AudioClip(Soundeffects.class.getResource("/audio/longestroad.wav").toString());
+	
+	
 	
 
 }

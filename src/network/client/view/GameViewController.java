@@ -639,7 +639,7 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleEndTurnButton(ActionEvent event) {
 		viewController.getClientController().endTurn();
-		Soundeffects.SELECT.play();
+		Soundeffects.SELECT.play(Soundeffects.globalVolume);
 
 		// playButtonSound();
 	}
@@ -697,7 +697,7 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleBuyCardButton(ActionEvent event) throws IOException {
 		viewController.getClientController().requestBuyDevelopmentCard();
-		Soundeffects.BUYCARD.play();
+		Soundeffects.BUYCARD.play(Soundeffects.globalVolume);
 		// playCardButton.setDisable(true);
 	}
 
@@ -756,7 +756,7 @@ public class GameViewController implements Initializable {
 			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
-		Soundeffects.SELECT.play();
+		Soundeffects.SELECT.play(Soundeffects.globalVolume);
 
 		// playButtonSound();
 	}
@@ -776,7 +776,7 @@ public class GameViewController implements Initializable {
 		Scene cheatScene = new Scene(cheatRoot);
 		TextField cheatField = new TextField();
 		Button ok = new Button("Send Cheat");
-		Soundeffects.SELECT.play();
+		Soundeffects.SELECT.play(Soundeffects.globalVolume);
 		// playButtonSound();
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -808,7 +808,7 @@ public class GameViewController implements Initializable {
 		Scene cheatScene = new Scene(cheatRoot);
 		TextField cheatField = new TextField();
 		Button ok = new Button("Send Cheat");
-		Soundeffects.SELECT.play();
+		Soundeffects.SELECT.play(Soundeffects.globalVolume);
 		// playButtonSound();
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -947,7 +947,7 @@ public class GameViewController implements Initializable {
 	 */
 	public void receiveChatMessage(String line) {
 		messages.appendText(line + "\n");
-		Soundeffects.CHATRECEIVE.play();
+		Soundeffects.CHATRECEIVE.play(Soundeffects.globalVolume);
 		// playNotificationSound();
 	}
 
@@ -965,7 +965,7 @@ public class GameViewController implements Initializable {
 	 *            the model ID
 	 */
 	public void setStreet(int u, int v, int dir, int modelID) {
-		Soundeffects.BUILD.play();
+		Soundeffects.BUILD.play(Soundeffects.globalVolume);
 		Line street = streets[u + 3][v + 3][dir];
 		street.setOpacity(1.0);
 		street.setStroke(playerColors.get(modelID));
@@ -985,7 +985,7 @@ public class GameViewController implements Initializable {
 		bandit.setCenterX(fieldCoordinates[u + 3][v + 3][0]);
 		bandit.setCenterY(fieldCoordinates[u + 3][v + 3][1]);
 		bandit.setOpacity(1.0);
-		Soundeffects.ROBBER.play();
+		Soundeffects.ROBBER.play(Soundeffects.globalVolume);
 
 	}
 
@@ -1025,7 +1025,7 @@ public class GameViewController implements Initializable {
 	 *            the player color
 	 */
 	public void setVillage(int u, int v, int dir, Color playerColor) {
-		Soundeffects.BUILD.play();
+		Soundeffects.BUILD.play(Soundeffects.globalVolume);
 		ImageView village = villages[u + 3][v + 3][dir];
 
 		village.setEffect(getBlushEffect(playerColor, village));
@@ -1167,7 +1167,7 @@ public class GameViewController implements Initializable {
 	 * @param result            the new dice roll result
 	 */
 	public void setDiceRollResult(Integer playerID, int result) {
-		Soundeffects.DICEROLL.play();
+		Soundeffects.DICEROLL.play(Soundeffects.globalVolume);
 		diceCircle.setFill(playerColors.get(playerID));
 		diceResult.setText(String.valueOf(result));
 	}
@@ -1214,13 +1214,13 @@ public class GameViewController implements Initializable {
 			playerStatusOne.setText(state.toString());
 			selfState = state;
 			if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLongestRoad()) {
-				Soundeffects.LONGESTROAD.play();
+				Soundeffects.LONGESTROAD.play(Soundeffects.globalVolume);
 				selfLongestTradeRoute.setText("Longest Trade Road");
 			} else {
 				selfLongestTradeRoute.setText("");
 			}
 			if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLargestArmy()) {
-				Soundeffects.SWORD.play();
+				Soundeffects.SWORD.play(Soundeffects.globalVolume);
 				selfGreatestKnightForce.setText("Largest Army");
 			} else {
 				selfGreatestKnightForce.setText("");
@@ -1344,7 +1344,7 @@ public class GameViewController implements Initializable {
 	 *            the player color
 	 */
 	public void setCity(int u, int v, int dir, Color playerColor) {
-		Soundeffects.BUILD.play();
+		Soundeffects.BUILD.play(Soundeffects.globalVolume);
 		ImageView city = villages[u + 3][v + 3][dir];
 		city.setImage(new Image("/textures/city.png"));
 		city.setEffect(getBlushEffect(playerColor, city));
@@ -1453,7 +1453,7 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void run() {
-				Soundeffects.VICTORY.play();
+				Soundeffects.VICTORY.play(Soundeffects.globalVolume);
 				// TODO Loss Sound
 				VBox vBox = new VBox(10);
 				vBox.setPadding(new Insets(5));
