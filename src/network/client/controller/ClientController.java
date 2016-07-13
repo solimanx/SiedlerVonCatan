@@ -181,10 +181,8 @@ public class ClientController {
 	 *            the message
 	 */
 	public void receiveChatMessage(Integer playerID, String message) {
-		if (viewController.isChoosingStage) {
-			if (playerID == null) {
-				viewController.messageReceive("Error: " + message);
-			}
+		if (viewController.isChoosingStage && playerID == null) {
+			viewController.messageReceive("Error: " + message);
 
 		} else if (playerID != null) {
 			String playerName = gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerID)).getName();
