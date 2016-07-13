@@ -390,13 +390,13 @@ public class TradeViewController {
 		Integer tradeID = stringToTradeID.get(selectedTrade);
 		int index = tradeList.indexOf(selectedTrade);
 		if (tradeIDtoString.get(tradeID).endsWith("ACCEPTED")) {
-			selectedTrade.replace("\nYOU ACCEPTED", "");
-			tradeList.set(index, selectedTrade);
-			tradeIDtoString.put(tradeID, selectedTrade);
+			String newSelectedTrade = selectedTrade.replace("\nYOU ACCEPTED", "");
+			tradeList.set(index, newSelectedTrade);
+			tradeIDtoString.put(tradeID, newSelectedTrade);
 			stringToTradeID.remove(selectedTrade);
-			stringToTradeID.put(selectedTrade, tradeID);
+			stringToTradeID.put(newSelectedTrade, tradeID);
 			
-			tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(), selectedTrade);
+			tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(), newSelectedTrade);
 			
 			viewController.getClientController().cancelTrade(tradeID);
 			playCancelTradeSound();
