@@ -328,7 +328,7 @@ public class DebugClientController extends Thread {
 	private void runDebugClient() throws IOException {
 		String line;
 		while ((line = reader.readLine()) != null) {
-			textField.appendText(DefaultSettings.getCurrentTime() + " Server: " + line + "\n");
+//			textField.appendText(DefaultSettings.getCurrentTime() + " Server: " + line + "\n");
 		}
 	}
 
@@ -342,7 +342,7 @@ public class DebugClientController extends Thread {
 		if (writer == null) {
 			textField.appendText("Not connected to server.\n");
 		} else {
-			textField.appendText(DefaultSettings.getCurrentTime() + " DebugClient: " + s + "\n");
+//			textField.appendText(DefaultSettings.getCurrentTime() + " DebugClient: " + s + "\n");
 			writer.write(s + "\n");
 			writer.flush();
 		}

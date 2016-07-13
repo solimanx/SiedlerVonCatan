@@ -79,9 +79,9 @@ public final class DefaultSettings {
 	 * @return the current time
 	 */
 	// Get current time as string
-	public static String getCurrentTime() {
-		return "[" + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")) + "] ";
-	}
+	//public static String getCurrentTime() {
+//		return "[" + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")) + "] ";
+//	}
 
 	public final static String SERVER_OK = "OK";
 
