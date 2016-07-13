@@ -75,7 +75,7 @@ public class Board {
 	 * @return
 	 */
 	public static void extendBoard() {
-		DefaultSettings.boardSize++;
+		DefaultSettings.boardSize+= 2;
 		DefaultSettings.boardRadius++;
 		DefaultSettings.maxPlayersAmount += 2;
 		DefaultSettings.diceNumbers = new int[] { 2, 5, 4, 6, 3, 9, 8, 11, 11, 10, 6, 3, 8, 4, 8, 10, 11, 12, 10, 5, 4,
