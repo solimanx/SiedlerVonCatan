@@ -397,7 +397,7 @@ public class ServerController {
 		this.tradeController = new TradeController(this, amountPlayers);
 
 		board = new Board();
-
+        this.gameLogic = new GameLogic(board);
 
 		if (FiveSixGame) {
 			Board exboard = board.extendBoard(board);
@@ -406,7 +406,6 @@ public class ServerController {
 			initializeFiveSixHarbours();
 		} else {
 			generateBoard("A", true);
-			this.gameLogic = new GameLogic(board);
 			inizializeHarbour();
 		}
 		PlayerModel[] pm = new PlayerModel[lobbyPlayers.size()];
