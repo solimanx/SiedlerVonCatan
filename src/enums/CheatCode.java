@@ -45,7 +45,7 @@ public enum CheatCode {
 
 	@SerializedName("ELEMENTONE") INCREASE_ELEMENTONE("ELEMENTONE"),
 
-	@SerializedName("ELEMENTTWO") INCREASE_ELEMENTTWO("CLAY"),
+	@SerializedName("ELEMENTTWO") INCREASE_ELEMENTTWO("ELEMENTTWO"),
 
 	@SerializedName("ELEMENTTHREE") INCREASE_ELEMENTTHREE("ELEMENTTHREE"),
 
@@ -53,7 +53,11 @@ public enum CheatCode {
 
 	@SerializedName("ELEMENTFIVE") INCREASE_ELEMENTFIVE("ELEMENTFIVE"),
 
-	@SerializedName("OTHERHAND") OTHER_HAND("OTHERHAND");
+	@SerializedName("OTHERHAND") OTHER_HAND("OTHERHAND"),
+	
+	@SerializedName("ACTIVATELT") ACTIVATE_LT("ACTIVATELT"),
+	
+	@SerializedName("DEACTIVATELT") DEACTIVATE_LT("DEACTIVATELT");
 	
 
 	private String value;

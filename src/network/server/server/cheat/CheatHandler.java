@@ -108,10 +108,25 @@ public class CheatHandler extends ServerOutputHandler {
 			break;
 		case VICTORY:
 			drawVictoryCard(threadID);
+		case ACTIVATE_LT:
+			activateLongestTurn(threadID);
+		case DEACTIVATE_LT:
+			deactivateLongestTurn(threadID);
+			
 		default:
 			throw new IllegalArgumentException("Cheat doesn't exist");
 
 		}
+	}
+
+	private void deactivateLongestTurn(Integer threadID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void activateLongestTurn(Integer threadID) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void drawVictoryCard(Integer threadID) {
