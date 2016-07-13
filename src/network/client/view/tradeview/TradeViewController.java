@@ -282,7 +282,7 @@ public class TradeViewController {
 		resultOffer = new int[5];
 		updateSpinner(resultDemand, grid);
 		tradeButton.setDisable(true);
-      playMakeOfferSound();
+		playMakeOfferSound();
 	}
 
 	/**
@@ -294,27 +294,37 @@ public class TradeViewController {
 	@FXML
 	void handleTradeButton(ActionEvent event) {
 		int tradeID = stringToTradeID.get(selectedTrade);
-		viewController.getClientController().acceptTrade(tradeID);
 		int index = tradeList.indexOf(selectedTrade);
 		String newTradeString = selectedTrade + "\nYOU ACCEPTED";
-		if(!tradeIDtoString.get(tradeID).equals(newTradeString)){
+		if (!tradeIDtoString.get(tradeID).endsWith("ACCEPTED")) {
 			tradeList.set(index, newTradeString);
 			tradeIDtoString.put(tradeID, newTradeString);
+			stringToTradeID.remove(selectedTrade);
 			stringToTradeID.put(newTradeString, tradeID);
+			viewController.getClientController().acceptTrade(tradeID);
+			playTradeButtonSound();
 		}
-		playTradeButtonSound();
 	}
 
 	/**
 	 * Handle decline trade.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void handleDeclineTrade(ActionEvent event) {
 		int tradeID = stringToTradeID.get(selectedTrade);
-		viewController.getClientController().declineTrade(tradeID);
-		playDeclineTradeOfferSound();
+		int index = tradeList.indexOf(selectedTrade);
+		if (!tradeIDtoString.get(tradeID).endsWith("ACCEPTED") && !tradeIDtoString.get(tradeID).endsWith("DECLINED")) {
+			String newTradeString = selectedTrade + "\nYOU DECLINED";
+			tradeList.set(index, newTradeString);
+			tradeIDtoString.put(tradeID, newTradeString);
+			stringToTradeID.remove(selectedTrade);
+			stringToTradeID.put(newTradeString, tradeID);		
+			viewController.getClientController().declineTrade(tradeID);
+		    playDeclineTradeOfferSound();
+		}	
 	}
 
 	/**
@@ -371,21 +381,28 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleCancelTrade(ActionEvent event) {
-		Integer tID = stringToTradeID.get(selectedTrade);
-		if (tID != null) {
-			viewController.getClientController().cancelTrade(tID);
+		Integer tradeID = stringToTradeID.get(selectedTrade);
+		int index = tradeList.indexOf(selectedTrade);
+		if (tradeIDtoString.get(tradeID).endsWith("ACCEPTED")) {
+			selectedTrade.replace("\nYOU ACCEPTED", "");
+			tradeList.set(index, selectedTrade);
+			tradeIDtoString.put(tradeID, selectedTrade);
+			stringToTradeID.remove(selectedTrade);
+			stringToTradeID.put(selectedTrade, tradeID);
+			viewController.getClientController().cancelTrade(tradeID);
+			playCancelTradeSound();
 		}
-		playCancelTradeSound();
 	}
 
 	/**
 	 * Offer fulfilled.
 	 *
-	 * 	 //* @param threadID
-	 *            the thread ID
+	 * //* @param threadID the thread ID
 	 *
-	 * @param modelID the model ID
-	 * @param partnerModelID            the partner model ID
+	 * @param modelID
+	 *            the model ID
+	 * @param partnerModelID
+	 *            the partner model ID
 	 */
 	public void offerFulfilled(int modelID, int partnerModelID) {
 		if (modelID == 0) {
@@ -402,7 +419,6 @@ public class TradeViewController {
 		} catch (Exception e) {
 			viewController.getGameViewController().alert("Couldn't delete trade!");
 		}
-
 
 	}
 
@@ -476,7 +492,6 @@ public class TradeViewController {
 	public void cancelOffer(int tradeID) {
 		Platform.runLater(new RemoveOfferStringRunnable(tradeIDtoString.get(tradeID)));
 	}
-
 
 	/**
 	 * Trade string generator.
