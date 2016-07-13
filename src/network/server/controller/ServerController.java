@@ -61,7 +61,7 @@ public class ServerController {
 	private Server server;
 
 	/**
-	 *  thread to model
+	 * thread to model
 	 */
 	protected Map<Integer, Integer> modelPlayerIdMap;
 	/**
@@ -108,12 +108,11 @@ public class ServerController {
 
 		this.devStack = new DevelopmentCardsStack();
 
-
 		startServer();
 
-
 	}
-	public void startServer(){
+
+	public void startServer() {
 		Thread serverThread = new Thread(new Runnable() {
 
 			@Override
@@ -155,8 +154,10 @@ public class ServerController {
 	 * is called when a client sends hello message registers threadID and sends
 	 * status update.
 	 *
-	 * @param currentThreadID            the current thread ID
-	 * @param string the string
+	 * @param currentThreadID
+	 *            the current thread ID
+	 * @param string
+	 *            the string
 	 */
 	public void receiveHello(int currentThreadID, String string) {
 		// if type mismatch
@@ -194,8 +195,10 @@ public class ServerController {
 	/**
 	 * Lobby status update.
 	 *
-	 * @param modelID the model ID
-	 * @param sendToPlayer the send to player
+	 * @param modelID
+	 *            the model ID
+	 * @param sendToPlayer
+	 *            the send to player
 	 */
 	private void lobbyStatusUpdate(int modelID, int sendToPlayer) {
 		serverOutputHandler.statusUpdate(modelPlayerIdMap.get(modelID), lobbyPlayers.get(modelID).getColor(),
@@ -237,7 +240,8 @@ public class ServerController {
 					lobbyStatusUpdate(modelID, i);
 				}
 
-				if (amountPlayers >= 3 ){//&& amountPlayers == server.getConnectedPlayers()) {
+				if (amountPlayers >= 3) {// && amountPlayers ==
+											// server.getConnectedPlayers()) {
 					boolean allReady = true;
 					for (int i = 0; i < amountPlayers; i++) {
 						if (lobbyPlayers.get(i).getPlayerState() != PlayerState.WAITING_FOR_GAMESTART) {
@@ -397,9 +401,9 @@ public class ServerController {
 
 		if (FiveSixGame) {
 			System.out.println("Fatal Error: no 5 -6 Board implemented!");
-			// Board.extendBoard(board);
-			// generateFiveSixBoard("A", true);
-			// initializeFiveSixHarbours();
+			Board.extendBoard(board);
+			generateFiveSixBoard("A");
+			initializeFiveSixHarbours();
 		} else {
 			generateBoard("A", true);
 			inizializeHarbour();
@@ -446,6 +450,40 @@ public class ServerController {
 			statusUpdate(playerOrder[i]);
 		}
 		InitialStreetCounter = 0;
+
+	}
+
+	private void generateFiveSixBoard(String string) {
+		String fields = HexService.getSpiral(string);
+		Board currBoard = gameLogic.getBoard();
+		int[] cards = DefaultSettings.landscapeAmount.clone();
+		int currNum;
+		int diceInd = 0;
+		for (int i = 0; i < fields.length(); i++) {
+			Random r = new Random();
+			boolean notFound = true;
+			do {
+				currNum = r.nextInt(6); // desert allowed
+				if (cards[currNum] > 0) {
+					notFound = false;
+				}
+			} while (notFound);
+			cards[currNum]--;
+			int[] coords = ProtocolToModel.getFieldCoordinates("" + fields.charAt(i));
+			if (currNum != 5) {
+				currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum],
+						DefaultSettings.diceNumbers[diceInd]);
+				diceInd++;
+			} else {
+				currBoard.setFieldAt(coords[0], coords[1], DefaultSettings.RESOURCE_ORDER[currNum], null);
+				currBoard.setBandit("" + fields.charAt(i));
+			}
+		}
+		String outerRing = currBoard.getOuterRing();
+		for (int i = 0; i < outerRing.length(); i++) {
+			int[] coords = ProtocolToModel.getFieldCoordinates("" + outerRing.charAt(i));
+			currBoard.setFieldAt(coords[0], coords[1], ResourceType.SEA, null);
+		}
 
 	}
 
@@ -1286,7 +1324,7 @@ public class ServerController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (!(gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING)
 				^ gameLogic.isActionForbidden(modelID, currentExtraPlayer, PlayerState.BUILDING))) {
-			serverResponse(modelID,"Unzulässige Aktion");
+			serverResponse(modelID, "Unzulässige Aktion");
 		} else {
 			if (gameLogic.checkBuyDevCard(modelID)) {
 				PlayerModel pm = gameLogic.getBoard().getPlayer(modelID);
@@ -1586,8 +1624,8 @@ public class ServerController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (gameLogic.checkPlayerResources(modelID, offer)) {
 			tradeController.requestSeaTrade(modelID, offer, demand);
-		}
-		else //TODO if (!tradeController.checkValidSeaTrade(modelID, offer, demand))
+		} else // TODO if (!tradeController.checkValidSeaTrade(modelID, offer,
+				// demand))
 		{
 			serverResponse(modelID, "Seehandel nicht möglich");
 		}
@@ -2381,7 +2419,8 @@ public class ServerController {
 	/**
 	 * Sets the robber loss counter.
 	 *
-	 * @param i the new robber loss counter
+	 * @param i
+	 *            the new robber loss counter
 	 */
 	public void setRobberLossCounter(int i) {
 		robberLossCounter = i;
@@ -2392,9 +2431,11 @@ public class ServerController {
 		System.out.print("ServerController");
 		server.disconnectServer();
 	}
+
 	public boolean isLongestTurnEnabled() {
 		return longestTurnEnabled;
 	}
+
 	public void setLongestTurnEnabled(boolean longestTurnEnabled) {
 		this.longestTurnEnabled = longestTurnEnabled;
 	}
