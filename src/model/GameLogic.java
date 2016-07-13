@@ -583,4 +583,8 @@ public class GameLogic {
 		this.initialLastVillage = c;
 	}
 
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
 }

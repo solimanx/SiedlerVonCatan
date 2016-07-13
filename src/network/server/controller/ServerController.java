@@ -395,18 +395,19 @@ public class ServerController {
 	public void initializeBoard() {
 		longestRoutes = new int[amountPlayers];
 		this.tradeController = new TradeController(this, amountPlayers);
-
+		
+		if(FiveSixGame){
+			Board.extendBoard();
+		}
 		board = new Board();
         this.gameLogic = new GameLogic(board);
 
 		if (FiveSixGame) {
-			Board exboard = board.extendBoard(board);
-			this.gameLogic = new GameLogic(exboard);
 			generateFiveSixBoard("A");
 			initializeFiveSixHarbours();
 		} else {
 			generateBoard("A", true);
-			inizializeHarbour();
+			initializeHarbour();
 		}
 		PlayerModel[] pm = new PlayerModel[lobbyPlayers.size()];
 		pm = lobbyPlayers.toArray(pm);
@@ -490,7 +491,7 @@ public class ServerController {
 	/**
 	 * sets the harbors.
 	 */
-	public void inizializeHarbour() {
+	public void initializeHarbour() {
 		String outerRing = "abcdfhjlnrqpomkige";
 		Random generator = new Random();
 		int random = generator.nextInt() % 2;

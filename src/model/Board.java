@@ -74,7 +74,7 @@ public class Board {
 	 * @param board the board
 	 * @return
 	 */
-	public Board extendBoard(Board board) {
+	public static void extendBoard() {
 		DefaultSettings.boardSize++;
 		DefaultSettings.maxPlayersAmount += 2;
 		DefaultSettings.diceNumbers = new int[] { 2, 5, 4, 6, 3, 9, 8, 11, 11, 10, 6, 3, 8, 4, 8, 10, 11, 12, 10, 5, 4,
@@ -105,7 +105,6 @@ public class Board {
 		DefaultSettings.amountInventionCards+= 1;
 		//StreetBuilding
 		DefaultSettings.amountStreetBuildingCards += 1;
-		return board = new Board();
 	}
 
 	// ================================================================================

@@ -292,7 +292,11 @@ public class ClientController {
 	 */
 	public void initializeBoard(Field[] serverFields, Corner[] corners, ArrayList<Edge> streets,
 			Corner[] harbourCorners, String banditLocation) {
-
+		if(serverFields.length == 52){
+			Board.extendBoard();
+			Board board = new Board();
+			gameLogic.setBoard(board);
+		}
 		for (Field f : serverFields) {
 			String location = f.getFieldID();
 			int[] coords = ProtocolToModel.getFieldCoordinates(location);
