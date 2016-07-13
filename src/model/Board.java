@@ -296,7 +296,7 @@ public class Board {
 						Field[] tF = getTouchingFields(j, i, k);
 						String ID1 = tF[0] == null ? "" : tF[0].getFieldID();
 						String ID2 = tF[1] == null ? "" : tF[1].getFieldID();
-						String ID3 = tF[1] == null ? "" : tF[2].getFieldID();
+						String ID3 = tF[2] == null ? "" : tF[2].getFieldID();
 						String ID = ID1 + ID2 + ID3;
 						getCornerAt(j, i, k).setCornerID(ID);
 						cMap.put(ID, new int[] { j, i, k });
