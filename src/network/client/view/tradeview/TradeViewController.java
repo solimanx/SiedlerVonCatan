@@ -97,7 +97,7 @@ public class TradeViewController {
 
 	private ObservableList<String> tradeList = FXCollections.observableArrayList();
 	private ObservableList<String> ownOfferList = FXCollections.observableArrayList();
-	
+
 	public SimpleBooleanProperty isPlayerTradingStatus = new SimpleBooleanProperty();
 
 	private String selectedTrade;
@@ -162,7 +162,7 @@ public class TradeViewController {
 			}
 
 		});
-		
+
 		placeOfferButton.disableProperty().bind(isPlayerTradingStatus.not());
 	}
 
@@ -297,9 +297,11 @@ public class TradeViewController {
 		viewController.getClientController().acceptTrade(tradeID);
 		int index = tradeList.indexOf(selectedTrade);
 		String newTradeString = selectedTrade + "\nYOU ACCEPTED";
-		tradeList.set(index, newTradeString);
-		tradeIDtoString.put(tradeID, newTradeString);
-		stringToTradeID.put(newTradeString, tradeID);
+		if(!tradeIDtoString.get(tradeID).equals(newTradeString)){
+			tradeList.set(index, newTradeString);
+			tradeIDtoString.put(tradeID, newTradeString);
+			stringToTradeID.put(newTradeString, tradeID);
+		}
 		playTradeButtonSound();
 	}
 
@@ -378,7 +380,7 @@ public class TradeViewController {
 
 	/**
 	 * Offer fulfilled.
-	 * 
+	 *
 	 * 	 //* @param threadID
 	 *            the thread ID
 	 *
@@ -474,7 +476,7 @@ public class TradeViewController {
 	public void cancelOffer(int tradeID) {
 		Platform.runLater(new RemoveOfferStringRunnable(tradeIDtoString.get(tradeID)));
 	}
-	
+
 
 	/**
 	 * Trade string generator.
@@ -585,7 +587,7 @@ public class TradeViewController {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -611,7 +613,7 @@ public class TradeViewController {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -637,7 +639,7 @@ public class TradeViewController {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -663,7 +665,7 @@ public class TradeViewController {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
