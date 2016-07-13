@@ -254,6 +254,13 @@ public class ClientController {
 				amountPlayers++;
 			}
 		default:
+			//five six
+			if(modelID>3){
+				PlayerModel[] oldPM = gameLogic.getBoard().getPlayerModels();
+				Board.extendBoard();
+				gameLogic.setBoard(new Board());
+				gameLogic.getBoard().extendPlayers(oldPM);
+			}
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 			if (pM.getColor() == null) {
 				pM.setColor(color);

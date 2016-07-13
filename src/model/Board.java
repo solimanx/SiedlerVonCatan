@@ -1185,4 +1185,11 @@ public class Board {
 		}
 	}
 
+	public void extendPlayers(PlayerModel[] oldPM) {
+		for(int i=0; i<oldPM.length; i++){
+			players[i] = oldPM[i];
+		}
+		
+	}
+
 }

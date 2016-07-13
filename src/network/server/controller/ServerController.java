@@ -457,7 +457,9 @@ public class ServerController {
 	}
 
 	private void generateFiveSixBoard(String string) {
-		String fields = HexService.getSpiralFifeSix(string);
+		//String fields = HexService.getSpiralFifeSix(string);
+		//TODO  ONLY FOR DEBUG
+		String fields = "CBADHMSX\\]^[WRLGFEINTYZVQKJOUP";
 		Board currBoard = gameLogic.getBoard();
 		int[] cards = DefaultSettings.landscapeAmount.clone();
 		int currNum;
