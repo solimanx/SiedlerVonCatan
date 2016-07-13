@@ -99,7 +99,7 @@ public class DevCardViewController implements Initializable {
 		this.viewController = viewController;
 
 		//DEBUG
-		debugChoice.setItems(FXCollections.observableArrayList(CardType.INVENTION, CardType.STREET, CardType.KNIGHT, CardType.MONOPOLY));
+//		debugChoice.setItems(FXCollections.observableArrayList(CardType.INVENTION, CardType.STREET, CardType.KNIGHT, CardType.MONOPOLY));
 		//END DEBUG
 
 		devCardList.clear();
