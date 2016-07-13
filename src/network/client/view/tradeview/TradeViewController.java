@@ -426,7 +426,7 @@ public class TradeViewController {
 		tradeIDtoModelID.put(tradeID, playerID);
 		playerIDtoString.put(playerID, tradeString);
 		Platform.runLater(new AddTradeStringRunnable(tradeString));
-		viewController.getGameViewController().alert("New trade request:\n" + tradeString);
+		viewController.getGameViewController().notify("New Trade", "New trade request:\n" + tradeString);
 
 	}
 

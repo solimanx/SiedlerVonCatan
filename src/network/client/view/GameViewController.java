@@ -353,7 +353,7 @@ public class GameViewController implements Initializable {
 	 */
 	public void setIsStreetDev(Boolean isStreetDev) {
 		this.isStreetDevCard = isStreetDev;
-		Platform.runLater(new NewAlert("Street build Developement Card",
+		Platform.runLater(new NewNotification("Street build Developement Card",
 				"Build two streets, or double-click on a new street to build just one."));
 	}
 
@@ -1513,6 +1513,11 @@ public class GameViewController implements Initializable {
 
 	}
 
+	public void notify(String title, String message){
+		NewNotification newNotification = new NewNotification(title, message);
+		Platform.runLater(newNotification);
+	}
+
 	/**
 	 * Checks if is knight.
 	 *
@@ -1562,7 +1567,7 @@ public class GameViewController implements Initializable {
 
 	};
 
-	public class NewAlert implements Runnable {
+	public class NewNotification implements Runnable {
 
 		String message;
 		String title;
@@ -1575,7 +1580,7 @@ public class GameViewController implements Initializable {
 		 * @param message
 		 *            the message
 		 */
-		public NewAlert(String title, String message) {
+		public NewNotification(String title, String message) {
 			this.title = title;
 			this.message = message;
 		}
@@ -1836,7 +1841,7 @@ public class GameViewController implements Initializable {
 			villageImageView.setTranslateX(center[0] - 20);
 			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
-			
+
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
 			villageImageView.setCache(true);
 			villageImageView.setCacheHint(CacheHint.SPEED);
@@ -1852,7 +1857,7 @@ public class GameViewController implements Initializable {
 		 * @return Polygon city
 		 */
 		private Polygon drawCity(double[] center) {
-			
+
 			Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
 					center[1] - 20, center[0] + 10, center[1] + 10, center[0] - 10, center[1] + 10, center[0] - 10,
 					center[1] - 20, center[0] - 5, center[1] - 20, center[0] - 5, center[1] - 10);
