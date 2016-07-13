@@ -419,7 +419,7 @@ public class ServerInputHandler {
 		Index[] id2 = roadBuildingCard.getRoadID2();
 		if (id2 != null){
 			int coords2[] = ProtocolToModel.getEdgeCoordinates(id2);
-			serverController.playStreetCard(currentThreadID, coords1[0], coords1[1], coords1[2], coords2[0], coords1[1],
+			serverController.playStreetCard(currentThreadID, coords1[0], coords1[1], coords1[2], coords2[0], coords2[1],
 					coords2[2]);		
 		} else {
 			serverController.playStreetCard(currentThreadID, coords1[0], coords1[1], coords1[2], null, null, null);
