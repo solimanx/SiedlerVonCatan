@@ -72,8 +72,9 @@ public class Board {
 	 * Extend board for 5-6 players.
 	 *
 	 * @param board the board
+	 * @return
 	 */
-	public static void extendBoard(Board board) {
+	public Board extendBoard(Board board) {
 		DefaultSettings.boardSize++;
 		DefaultSettings.maxPlayersAmount += 2;
 		DefaultSettings.diceNumbers = new int[] { 2, 5, 4, 6, 3, 9, 8, 11, 11, 10, 6, 3, 8, 4, 8, 10, 11, 12, 10, 5, 4,
@@ -104,7 +105,7 @@ public class Board {
 		DefaultSettings.amountInventionCards+= 1;
 		//StreetBuilding
 		DefaultSettings.amountStreetBuildingCards += 1;
-		board = new Board();
+		return board = new Board();
 	}
 
 	// ================================================================================

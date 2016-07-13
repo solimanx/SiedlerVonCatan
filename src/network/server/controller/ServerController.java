@@ -397,15 +397,16 @@ public class ServerController {
 		this.tradeController = new TradeController(this, amountPlayers);
 
 		board = new Board();
-		this.gameLogic = new GameLogic(board);
+
 
 		if (FiveSixGame) {
-			System.out.println("Fatal Error: no 5 -6 Board implemented!");
-			Board.extendBoard(board);
+			Board exboard = board.extendBoard(board);
+			this.gameLogic = new GameLogic(exboard);
 			generateFiveSixBoard("A");
 			initializeFiveSixHarbours();
 		} else {
 			generateBoard("A", true);
+			this.gameLogic = new GameLogic(board);
 			inizializeHarbour();
 		}
 		PlayerModel[] pm = new PlayerModel[lobbyPlayers.size()];
@@ -454,7 +455,7 @@ public class ServerController {
 	}
 
 	private void generateFiveSixBoard(String string) {
-		String fields = HexService.getSpiral(string);
+		String fields = HexService.getSpiralFifeSix(string);
 		Board currBoard = gameLogic.getBoard();
 		int[] cards = DefaultSettings.landscapeAmount.clone();
 		int currNum;
