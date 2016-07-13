@@ -76,6 +76,7 @@ public class Board {
 	 */
 	public static void extendBoard() {
 		DefaultSettings.boardSize++;
+		DefaultSettings.boardRadius++;
 		DefaultSettings.maxPlayersAmount += 2;
 		DefaultSettings.diceNumbers = new int[] { 2, 5, 4, 6, 3, 9, 8, 11, 11, 10, 6, 3, 8, 4, 8, 10, 11, 12, 10, 5, 4,
 				9, 5, 9, 12, 3, 2, 6 };
@@ -120,7 +121,7 @@ public class Board {
 		int aX; // axial x coordinate
 		int aY; // axial y coordinate
 		int absoluteValue;
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int x = 0; x < fields.length; x++) {
 			for (int y = 0; y < fields[0].length; y++) {
 				aX = x - radius;
@@ -149,7 +150,7 @@ public class Board {
 		cMap = new HashMap<String, int[]>();
 		eMap = new HashMap<String, int[]>();
 		// temp to make code look clearer
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 
 		// Starting indices.
 		char outerFieldsBegin = 'a';
@@ -185,7 +186,7 @@ public class Board {
 	private void initializeCorners() {
 		// temporary variables to make code appear clearer
 		int[] temp;
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		// Go through HashMap<String,int[]>
 		for (Map.Entry<String, int[]> entry : stringToCoordMap.entrySet()) {
 			// entry of key
@@ -225,7 +226,7 @@ public class Board {
 	private void initializeEdges() {
 		// temporary variables to make code appear clearer
 		int[] temp;
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		// Go through HashMap<String,int[]>
 		for (Map.Entry<String, int[]> entry : stringToCoordMap.entrySet()) {
 			// entry of key
@@ -276,7 +277,7 @@ public class Board {
 	 */
 	private void initializeID() {
 		// fields
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
 				if (getFieldAt(j, i) != null) {
@@ -332,7 +333,7 @@ public class Board {
 
 	public Field getFieldAt(int aX, int aY) {
 		// temp to make code clearer
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		// if out of range
 		if (aX < -radius || aX > radius || aY < -radius || aY > radius) {
 			return null;
@@ -356,7 +357,7 @@ public class Board {
 
 	public Corner getCornerAt(int aX, int aY, int dir) {
 		// temp to make code clearer
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		// if out of range
 		if (aX < -radius || aX > radius || aY < -radius || aY > radius || dir < 0 || dir > 1) {
 			return null;
@@ -380,7 +381,7 @@ public class Board {
 
 	public Edge getEdgeAt(int aX, int aY, int dir) {
 		// temp to make code clearer
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		// if out of range
 		if (aX < -radius || aX > radius || aY < -radius || aY > radius || dir < 0 || dir > 2) {
 			return null;
@@ -521,7 +522,7 @@ public class Board {
 	 *            the dice index
 	 */
 	public void setFieldAt(int i, int j, ResourceType resourceType, Integer diceIndex) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		if (fields[i + radius][j + radius] != null) {
 			fields[i + radius][j + radius].setResourceType(resourceType);
 			fields[i + radius][j + radius].setDiceIndex(diceIndex);
@@ -999,7 +1000,7 @@ public class Board {
 	public String getInnerFields() {
 		StringBuffer result = new StringBuffer();
 		for (String key : stringToCoordMap.keySet()) {
-			if (key.matches("[A-Z]")) {
+			if (key.matches("[A-^]")) {
 				result.append(key);
 			}
 		}

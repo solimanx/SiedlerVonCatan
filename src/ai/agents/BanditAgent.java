@@ -37,7 +37,7 @@ public class BanditAgent {
 	 * Finding best location to move bandit to.
 	 */
 	public void moveRobber() {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		// Check all fields
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
@@ -104,7 +104,7 @@ public class BanditAgent {
 	 * @return the int[]
 	 */
 	public int[] bestNewRobber() {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		double max = robberscale[0][0];
 		int x = 0;
 		int y = 0;

@@ -759,7 +759,7 @@ public class ClientController {
 	 */
 	public void requestBuildVillage(int x, int y, int dir) {
 		// view saves coordinates from 0 to 7 system
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		if (initialRoundCount < 2) {
 			logger.info("Building Initial Village");
 			requestBuildInitialVillage(x - radius, y - radius, dir);
@@ -799,7 +799,7 @@ public class ClientController {
 	 *            the dir
 	 */
 	public void requestBuildStreet(int x, int y, int dir) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		if (initialRoundCount < 2) {
 			logger.info("Building Initial Road");
 			requestBuildInitialStreet(x - radius, y - radius, dir);
@@ -840,7 +840,7 @@ public class ClientController {
 	 *            the dir
 	 */
 	public void requestBuildCity(int x, int y, int dir) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		// DEBUG
 		// if (gameLogic.checkBuildCity(x - radius, y - radius, dir,
 		// ownPlayerId)) {
@@ -1142,7 +1142,7 @@ public class ClientController {
 	 *            the dir 2
 	 */
 	public void playStreetBuildCard(int u1, int v1, int dir1, int u2, int v2, int dir2) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		String road1 = ModelToProtocol.getEdgeID(u1 - radius, v1 - radius, dir1);
 		String road2 = ModelToProtocol.getEdgeID(u2 - radius, v2 - radius, dir2);
 		clientOutputHandler.playRoadCard(road1, road2);

@@ -344,7 +344,7 @@ public class GameLogic {
 	 * @return true, if successful
 	 */
 	public boolean hasWoodHarbour(int playerID) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
@@ -371,7 +371,7 @@ public class GameLogic {
 	 * @return true, if successful
 	 */
 	public boolean hasClayHarbour(int playerID) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
@@ -398,7 +398,7 @@ public class GameLogic {
 	 * @return true, if successful
 	 */
 	public boolean hasWoolHarbour(int playerID) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
@@ -425,7 +425,7 @@ public class GameLogic {
 	 * @return true, if successful
 	 */
 	public boolean hasCornHarbour(int playerID) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
@@ -452,7 +452,7 @@ public class GameLogic {
 	 * @return true, if successful
 	 */
 	public boolean hasOreHarbour(int playerID) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
@@ -479,7 +479,7 @@ public class GameLogic {
 	 * @return true, if successful
 	 */
 	public boolean hasThreeOneHarbour(int playerID) {
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {

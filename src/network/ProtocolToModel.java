@@ -138,7 +138,7 @@ public final class ProtocolToModel {
 	 * Inits the protocol to model.
 	 */
 	public static void initProtocolToModel() {
-		int r = DefaultSettings.BOARD_RADIUS;
+		int r = DefaultSettings.boardRadius;
 
 		// Starting indices.
 		char outerFieldsBegin = 'a';

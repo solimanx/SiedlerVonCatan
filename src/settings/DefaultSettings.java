@@ -14,7 +14,7 @@ public final class DefaultSettings {
 
 	// 7 equates to 37 hexagons
 	public static int boardSize = 7;
-	public final static int BOARD_RADIUS = boardSize / 2;
+	public static int boardRadius = 3;
 
 	public final static int MAX_VICTORY_POINTS = 10;
 

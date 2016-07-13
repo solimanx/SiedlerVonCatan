@@ -122,7 +122,7 @@ public class AdvancedAI {
 	 */
 	private void initializeCornerAgents() {
 		int c = 0;
-		int radius = DefaultSettings.BOARD_RADIUS;
+		int radius = DefaultSettings.boardRadius;
 		for (int i = -radius; i <= radius; i++) {
 			for (int j = -radius; j <= radius; j++) {
 				for (int k = 0; k < 2; k++) {
