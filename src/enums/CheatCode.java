@@ -57,7 +57,11 @@ public enum CheatCode {
 	
 	@SerializedName("ACTIVATELT") ACTIVATE_LT("ACTIVATELT"),
 	
-	@SerializedName("DEACTIVATELT") DEACTIVATE_LT("DEACTIVATELT");
+	@SerializedName("DEACTIVATELT") DEACTIVATE_LT("DEACTIVATELT"),
+	
+	@SerializedName("SOUNDTRACKONE") SOUNDTRACK_ONE("SOUNDTRACKONE"),
+	
+	@SerializedName("SOUNDTRACKTWO") SOUNDTRACK_TWO ("SOUNDTRACKTWO");
 	
 
 	private String value;

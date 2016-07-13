@@ -2,6 +2,7 @@ package network.server.server.cheat;
 
 import java.io.IOException;
 
+import audio.Soundeffects;
 import enums.CardType;
 import enums.CheatCode;
 import enums.PlayerState;
@@ -109,15 +110,34 @@ public class CheatHandler extends ServerOutputHandler {
 			break;
 		case VICTORY:
 			drawVictoryCard(threadID);
+			break;
 		case ACTIVATE_LT:
 			activateLongestTurn(threadID);
+			break;
 		case DEACTIVATE_LT:
 			deactivateLongestTurn(threadID);
+			break;
+		case SOUNDTRACK_ONE:
+			playSoundtrackOne(threadID);
+			break;
+		case SOUNDTRACK_TWO:
+			playSoundtrackTwo(threadID);
+		    break;
 			
 		default:
 			throw new IllegalArgumentException("Cheat doesn't exist");
 
 		}
+	}
+
+	private void playSoundtrackTwo(Integer threadID) {
+		Soundeffects.playSoundtrack2();
+		
+	}
+
+	private void playSoundtrackOne(Integer threadID) {
+		Soundeffects.playSoundtrack1();
+		
 	}
 
 	private void deactivateLongestTurn(Integer threadID) {

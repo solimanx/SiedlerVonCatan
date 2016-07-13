@@ -6,6 +6,19 @@ public class Soundeffects {
 	
 	public static double globalVolume = 0.5;
 	
+	public static void playSoundtrack1(){
+		if(SOUNDTRACK2.isPlaying()){
+			SOUNDTRACK2.stop();
+		}
+		SOUNDTRACK1.play();
+	}
+	public static void playSoundtrack2(){
+		if(SOUNDTRACK1.isPlaying()){
+			SOUNDTRACK1.stop();
+		}
+		SOUNDTRACK2.play();
+	}
+	
 	public static void setVolume (double volume){
 		globalVolume = volume;
 	}
@@ -22,6 +35,8 @@ public class Soundeffects {
 	public final static AudioClip VICTORY = new AudioClip(Soundeffects.class.getResource("/audio/victory.mp3").toString());
 	public final static AudioClip CHATRECEIVE = new AudioClip(Soundeffects.class.getResource("/audio/chatreceive.mp3").toString());
 	public final static AudioClip LONGESTROAD = new AudioClip(Soundeffects.class.getResource("/audio/longestroad.wav").toString());
+	public final static AudioClip SOUNDTRACK1 = new AudioClip(Soundeffects.class.getResource("/audio/siedlersoundtrack1.mp3").toString());
+	public final static AudioClip SOUNDTRACK2 = new AudioClip(Soundeffects.class.getResource("/audio/siedlersoundtrack2.mp3").toString());
 	
 	
 	
