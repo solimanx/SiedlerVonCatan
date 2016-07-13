@@ -1339,13 +1339,15 @@ public class ServerController {
 				resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
 
 				DevelopmentCard devCard = gameLogic.getBoard().getDevCardStack().getNextCard();
+				
 				if (devCard.getName().equals("Victory Card")) {
 					increaseHiddenVictoryPoints(modelID, 1);
-					pm.getPlayerDevCards()[1]++;
+					pm.incrementPlayerDevCard(devCard);
 					statusUpdateToPlayer(modelID, modelID);
 				} else {
-					pm.getDevCardsBoughtInThisRound().add(devCard);
-				}
+				    pm.getDevCardsBoughtInThisRound().add(devCard);
+				}    
+				
 				for (int i = 0; i < amountPlayers; i++) {
 					if (i == modelID) {
 						serverOutputHandler.boughtDevelopmentCard(threadID, devCard, threadID);
