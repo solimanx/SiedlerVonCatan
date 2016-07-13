@@ -79,9 +79,9 @@ public class HexService {
 	 * and ending in the middle of the field. example: input: "N" output:
 	 * "NIEFKOJ"
 	 * <p>
-	 * does not work with water
+	 * does not work with sea fields
 	 *
-	 * @param f the f
+	 * @param f the field
 	 * @return the spiral
 	 */
 	// TODO water
@@ -144,7 +144,98 @@ public class HexService {
 	}
 
 	/**
-	 * calculates the distance to center example: (0,0) -> 0 (-2,2) -> 2.
+	 * returns all fieldIDs in the order of a spiral, beginning with the inputID
+	 * and ending in the middle of the field.
+	 *
+	 * does not work with sea fields
+	 *
+	 * @param f the field
+	 * @return the spiral
+	 */
+	public static String getSpiralFifeSix(String f) {
+		StringBuffer result = new StringBuffer();
+		String nextField = f;
+		String plannedNextField = f;
+		int radius = getDistanceFromMidFifeSix(f);
+		int[] coord = new int[2];
+		int smallSide = 0;
+		for (int i = radius; i > 0; i--) {
+			for (int j = 0; j < 7; j++) {
+				for (int k = 0; k < i-smallSide; k++) {
+					switch (j) {
+					case 0:
+						if (i == radius) {
+							if (getRing(nextField).contains(plannedNextField)) {
+								nextField = plannedNextField;
+								result.append(nextField);
+								coord = Board.getStringToCoordMap().get(nextField);
+								plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
+								if(getDirection(nextField) == 1 || getDirection(nextField) == 4){
+									smallSide = 1;
+								}
+								else {
+									smallSide = 0;
+								}
+								break;
+							} else {
+								continue;
+							}
+						} else {
+							if (result.toString().contains(plannedNextField)) {
+								continue;
+							} else {
+								nextField = plannedNextField;
+								result.append(nextField);
+								coord = Board.getStringToCoordMap().get(nextField);
+								plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
+								if(getDirection(nextField) == 1 || getDirection(nextField) == 4){
+									smallSide = 1;
+								}
+								else {
+									smallSide = 0;
+								}
+								break;
+							}
+						}
+					case 6:
+						if (result.toString().contains(plannedNextField)) {
+							k = i;
+							break;
+						} else {
+							nextField = plannedNextField;
+							result.append(nextField);
+							coord = Board.getStringToCoordMap().get(nextField);
+							plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
+							if(getDirection(nextField) == 1 || getDirection(nextField) == 4){
+								smallSide = 1;
+							}
+							else {
+								smallSide = 0;
+							}
+							break;
+						}
+					default:
+						nextField = plannedNextField;
+						result.append(nextField);
+						coord = Board.getStringToCoordMap().get(nextField);
+						plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField));
+						if(getDirection(nextField) == 1 || getDirection(nextField) == 4){
+							smallSide = 1;
+						}
+						else {
+							smallSide = 0;
+						}
+						break;
+					}
+				}
+			}
+			plannedNextField = getNextField(coord[0], coord[1], getDirection(nextField) + 1);
+		}
+		return result.toString();
+	}
+
+	/**
+	 * calculates the distance to center. example: (0,0) -> 0 (-2,2) -> 2.
 	 *
 	 * @param f            Field ID
 	 * @return distance to mid or radius
@@ -154,11 +245,36 @@ public class HexService {
 		String nextField = f;
 		int result = 0;
 		int[] coord;
-		String end = "J";// Board.getCoordToStringMap().get(new Index(0, 0));
+		String[] end = {"J",};// Board.getCoordToStringMap().get(new Index(0, 0));
 		while (!nextField.equals(end)) {
 			coord = Board.getStringToCoordMap().get(nextField);
 			nextField = getNextField(coord[0], coord[1], nextDirection(getDirection(nextField), 1));
 			result++;
+		}
+		return result;
+	}
+
+	/**
+	 * calculates the distance to center.
+	 * @param f Field ID
+	 * @return distance to mid corner
+	 */
+	public static int getDistanceFromMidFifeSix(String f) {
+		Board useless = new Board();
+		String nextField = f;
+		int result = 1;
+		int[] coord;
+		int[][] end = {{0,0},{0,1},{1,0},{1,-1}};// Board.getCoordToStringMap().get(new Index(0, 0));
+		boolean found = false;
+		while (!found) {
+			coord = Board.getStringToCoordMap().get(nextField);
+			nextField = getNextField(coord[0], coord[1], nextDirection(getDirection(nextField), 1));
+			result++;
+			for(int i = 0; i<end.length; i++){
+				if(useless.getCoordToStringMap().get(new Index(end[i][0], end[i][1])) == nextField){
+					found = true;
+				}
+			}
 		}
 		return result;
 	}

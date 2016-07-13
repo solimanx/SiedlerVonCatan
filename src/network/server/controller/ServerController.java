@@ -76,7 +76,7 @@ public class ServerController {
 	private TradeController tradeController;
 	private int[] playerOrder;
 	private Board board;
-	public int[] resourceStack = { 19, 19, 19, 19, 19 };
+	public int[] resourceStack = { DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards };
 	private static Logger logger = LogManager.getLogger(ServerController.class.getSimpleName());
 	private ArrayList<StreetSet> streetSets = new ArrayList<StreetSet>();
 	private int[] longestRoutes;

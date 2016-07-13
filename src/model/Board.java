@@ -90,10 +90,12 @@ public class Board {
 		DefaultSettings.landscapeAmount[4] += 2;
 		// DESERT
 		DefaultSettings.landscapeAmount[5] += 1;
-		
+
 		//TODO rohstoffkarten
+		DefaultSettings.amountResourceCards += 6;
 		//TODO harbours
-		
+		//Dev Cards
+		DefaultSettings.amountDevelopmentCards += 9;
 		//Knight
 		DefaultSettings.amountKnightCards += 6;
 		//Monopoly
