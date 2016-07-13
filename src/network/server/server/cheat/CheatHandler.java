@@ -9,6 +9,7 @@ import model.objects.PlayerModel;
 import network.server.server.Server;
 import network.server.server.ServerOutputHandler;
 import parsing.Response;
+import protocol.cheats.ProtocolLongestTurn;
 import protocol.configuration.ProtocolVictory;
 import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.object.ProtocolResource;
@@ -120,13 +121,26 @@ public class CheatHandler extends ServerOutputHandler {
 	}
 
 	private void deactivateLongestTurn(Integer threadID) {
-		// TODO Auto-generated method stub
+		server.getServerInputHandler().getServerController().setLongestTurnEnabled(false);
 		
 	}
 
 	private void activateLongestTurn(Integer threadID) {
-		// TODO Auto-generated method stub
-		
+		server.getServerInputHandler().getServerController().setLongestTurnEnabled(true);
+
+	}
+	
+	public void longestTurn(Integer threadID){
+		int modelID = server.getServerInputHandler().getServerController().getThreadPlayerIdMap().get(threadID);
+		ProtocolLongestTurn plt = new ProtocolLongestTurn(threadID);
+		Response r = new Response();
+		r.pLongestTurn = plt;
+		try {
+			server.sendToClient(parser.createString(r), modelID);
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+		}
+
 	}
 
 	private void drawVictoryCard(Integer threadID) {

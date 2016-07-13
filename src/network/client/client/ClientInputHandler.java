@@ -21,6 +21,7 @@ import model.objects.DevCards.StreetBuildingCard;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
 import parsing.Parser;
+import protocol.cheats.ProtocolLongestTurn;
 import protocol.configuration.ProtocolError;
 import protocol.configuration.ProtocolGameStarted;
 import protocol.configuration.ProtocolVictory;
@@ -166,6 +167,10 @@ public class ClientInputHandler {
 			break;
 		case "ProtocolPlayMonopolyCard":
 			handle((ProtocolPlayMonopolyCard) o);
+			break;
+		// Cheat
+		case "ProtocolLongestTurn":
+			handle((ProtocolLongestTurn) o);
 			break;
 
 		default:
@@ -605,6 +610,12 @@ public class ClientInputHandler {
 			clientController.receiveInventionCard(playerID, resource);
 		}
 
+	}
+
+	// Cheat
+
+	protected void handle(ProtocolLongestTurn protocolLongestTurn) {
+		// TODO
 	}
 
 	// Custom

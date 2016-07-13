@@ -84,6 +84,7 @@ public class ServerController {
 	private int biggestKnightForcePlayer = -1;
 	private DevelopmentCardsStack devStack;
 	private Integer currentExtraPlayer;
+	private boolean longestTurnEnabled = false;
 
 	boolean FiveSixGame;
 	ArrayList<PlayerModel> lobbyPlayers = new ArrayList<PlayerModel>();
@@ -2329,6 +2330,12 @@ public class ServerController {
 	public void disconnectServer() {
 		System.out.print("ServerController");
 		server.disconnectServer();
+	}
+	public boolean isLongestTurnEnabled() {
+		return longestTurnEnabled;
+	}
+	public void setLongestTurnEnabled(boolean longestTurnEnabled) {
+		this.longestTurnEnabled = longestTurnEnabled;
 	}
 
 }

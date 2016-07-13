@@ -3,6 +3,7 @@ package parsing;
 import com.google.gson.annotations.SerializedName;
 
 import protocol.cheats.ProtocolCheat;
+import protocol.cheats.ProtocolLongestTurn;
 import protocol.clientinstructions.ProtocolBuildRequest;
 import protocol.clientinstructions.ProtocolBuyDevCard;
 import protocol.clientinstructions.ProtocolDiceRollRequest;
@@ -171,6 +172,9 @@ public class Response {
 	
 	@SerializedName("Cheat")
 	public ProtocolCheat pCheat ;
+	
+	@SerializedName("Longest Turn")
+	public ProtocolLongestTurn pLongestTurn;
 	
 	public String invalid;
 	
