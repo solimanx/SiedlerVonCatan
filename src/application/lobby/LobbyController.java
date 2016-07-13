@@ -311,4 +311,7 @@ public class LobbyController {
 		messages.clear();
 	}
 
+	public Button getConnectButton(){
+		return connectButton;
+	}
 }

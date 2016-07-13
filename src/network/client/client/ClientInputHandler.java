@@ -212,6 +212,7 @@ public class ClientInputHandler {
 	protected void handle(ProtocolWelcome welcome) {
 		clientController.receiveWelcome(welcome.getPlayerID());
 		clientController.getViewController().getLobbyController().getColorNameSelectPane().setDisable(false);
+		clientController.getViewController().getLobbyController().getConnectButton().setDisable(true);
 	}
 
 	// Paragraph 7
