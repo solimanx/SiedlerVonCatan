@@ -161,9 +161,9 @@ public class ServerController {
 	 */
 	public void receiveHello(int currentThreadID, String string) {
 		// if type mismatch
-		if (!string.contains(DefaultSettings.SERVER_VERSION)) {
-			server.disconnectPlayer(currentThreadID);
-		} else {
+//		if (!string.contains(DefaultSettings.SERVER_VERSION)) {
+//			server.disconnectPlayer(currentThreadID);
+//		} else {
 			threadPlayerIdMap.put(currentThreadID, amountPlayers);
 			modelPlayerIdMap.put(amountPlayers, currentThreadID);
 			amountPlayers++;
@@ -178,7 +178,7 @@ public class ServerController {
 					lobbyStatusUpdate(amountPlayers - 1, i);
 				}
 			}
-		}
+//		}
 
 	}
 
