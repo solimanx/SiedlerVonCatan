@@ -170,7 +170,7 @@ public class LobbyController {
 	 *            the string
 	 */
 	public void receiveChatMessage(String string) {
-		messages.appendText(currentTime() + string + "\n");
+		messages.appendText(string + "\n");
 		//Soundeffects.CHATRECEIVE.play();
 		// playNotificationSound();
 	}
@@ -179,7 +179,7 @@ public class LobbyController {
 	 * Enable chat.
 	 */
 	public void enableChat() {
-		messages.appendText(currentTime() + "Connected to lobby chat.\n");
+		messages.appendText("Connected to lobby chat.\n");
 		chatInput.setDisable(false);
 	}
 
@@ -187,7 +187,7 @@ public class LobbyController {
 	 * Disconnect.
 	 */
 	public void disconnect() {
-		messages.appendText(currentTime() + "Disconnected.\n");
+		messages.appendText("Disconnected.\n");
 		chatInput.setDisable(true);
 	}
 
@@ -196,6 +196,7 @@ public class LobbyController {
 	 *
 	 * @return the string
 	 */
+	@Deprecated
 	private String currentTime() {
 		return "[" + LocalTime.now().format(dateFormat) + "] ";
 	}
