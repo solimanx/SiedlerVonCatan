@@ -301,6 +301,9 @@ public class TradeViewController {
 			tradeIDtoString.put(tradeID, newTradeString);
 			stringToTradeID.remove(selectedTrade);
 			stringToTradeID.put(newTradeString, tradeID);
+			
+			tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(), newTradeString);
+					
 			viewController.getClientController().acceptTrade(tradeID);
 			playTradeButtonSound();
 		}
@@ -321,7 +324,10 @@ public class TradeViewController {
 			tradeList.set(index, newTradeString);
 			tradeIDtoString.put(tradeID, newTradeString);
 			stringToTradeID.remove(selectedTrade);
-			stringToTradeID.put(newTradeString, tradeID);		
+			stringToTradeID.put(newTradeString, tradeID);	
+			
+			tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(), newTradeString);
+			
 			viewController.getClientController().declineTrade(tradeID);
 		    playDeclineTradeOfferSound();
 		}	
@@ -389,6 +395,9 @@ public class TradeViewController {
 			tradeIDtoString.put(tradeID, selectedTrade);
 			stringToTradeID.remove(selectedTrade);
 			stringToTradeID.put(selectedTrade, tradeID);
+			
+			tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(), selectedTrade);
+			
 			viewController.getClientController().cancelTrade(tradeID);
 			playCancelTradeSound();
 		}
