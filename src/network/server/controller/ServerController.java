@@ -76,7 +76,9 @@ public class ServerController {
 	private TradeController tradeController;
 	private int[] playerOrder;
 	private Board board;
-	public int[] resourceStack = { DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards };
+	public int[] resourceStack = { DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards,
+			DefaultSettings.amountResourceCards, DefaultSettings.amountResourceCards,
+			DefaultSettings.amountResourceCards };
 	private static Logger logger = LogManager.getLogger(ServerController.class.getSimpleName());
 	private ArrayList<StreetSet> streetSets = new ArrayList<StreetSet>();
 	private int[] longestRoutes;
@@ -161,24 +163,24 @@ public class ServerController {
 	 */
 	public void receiveHello(int currentThreadID, String string) {
 		// if type mismatch
-//		if (!string.contains(DefaultSettings.SERVER_VERSION)) {
-//			server.disconnectPlayer(currentThreadID);
-//		} else {
-			threadPlayerIdMap.put(currentThreadID, amountPlayers);
-			modelPlayerIdMap.put(amountPlayers, currentThreadID);
-			amountPlayers++;
-			lobbyPlayers.add(new PlayerModel(amountPlayers - 1));
-			lobbyPlayers.get(amountPlayers - 1).setPlayerState(PlayerState.GAME_STARTING);
-			welcome(amountPlayers - 1);
-			for (int i = 0; i < amountPlayers; i++) {
-				// send status of all players to new player
-				lobbyStatusUpdate(i, amountPlayers - 1);
-				if (i != amountPlayers - 1) {
-					// send status of new player to others
-					lobbyStatusUpdate(amountPlayers - 1, i);
-				}
+		// if (!string.contains(DefaultSettings.SERVER_VERSION)) {
+		// server.disconnectPlayer(currentThreadID);
+		// } else {
+		threadPlayerIdMap.put(currentThreadID, amountPlayers);
+		modelPlayerIdMap.put(amountPlayers, currentThreadID);
+		amountPlayers++;
+		lobbyPlayers.add(new PlayerModel(amountPlayers - 1));
+		lobbyPlayers.get(amountPlayers - 1).setPlayerState(PlayerState.GAME_STARTING);
+		welcome(amountPlayers - 1);
+		for (int i = 0; i < amountPlayers; i++) {
+			// send status of all players to new player
+			lobbyStatusUpdate(i, amountPlayers - 1);
+			if (i != amountPlayers - 1) {
+				// send status of new player to others
+				lobbyStatusUpdate(amountPlayers - 1, i);
 			}
-//		}
+		}
+		// }
 
 	}
 
@@ -400,7 +402,7 @@ public class ServerController {
 			Board.extendBoard();
 		}
 		board = new Board();
-        this.gameLogic = new GameLogic(board);
+		this.gameLogic = new GameLogic(board);
 
 		if (FiveSixGame) {
 			generateFiveSixBoard("A");
@@ -552,7 +554,7 @@ public class ServerController {
 		board.setHarbourCorner(harbourCorners);
 	}
 
-	public void initializeFiveSixHarbours(){
+	public void initializeFiveSixHarbours() {
 		String outerRing = board.getOuterRing();
 		Random generator = new Random();
 		int random = generator.nextInt() % 2;
@@ -563,7 +565,7 @@ public class ServerController {
 		Corner[] harbourCorners = new Corner[22];
 		HarbourStatus[] harbourOrder = { HarbourStatus.THREE_TO_ONE, HarbourStatus.CLAY, HarbourStatus.CORN,
 				HarbourStatus.THREE_TO_ONE, HarbourStatus.ORE, HarbourStatus.THREE_TO_ONE, HarbourStatus.SHEEP,
-				HarbourStatus.WOOD, HarbourStatus.THREE_TO_ONE, HarbourStatus.SHEEP, HarbourStatus.THREE_TO_ONE};
+				HarbourStatus.WOOD, HarbourStatus.THREE_TO_ONE, HarbourStatus.SHEEP, HarbourStatus.THREE_TO_ONE };
 		shuffleArray(harbourOrder);
 		if (random == 0) {
 			for (int i = 0; i < outerRing.length(); i = i + 2) {
@@ -1829,7 +1831,7 @@ public class ServerController {
 	 * @param dir2
 	 *            the dir 2
 	 */
-	public void playStreetCard(int threadID, int x1, int y1, int dir1, int x2, int y2, int dir2) {
+	public void playStreetCard(int threadID, int x1, int y1, int dir1, Integer x2, Integer y2, Integer dir2) {
 		int modelID = threadPlayerIdMap.get(threadID);
 		if (!gameLogic.checkPlayDevCard(modelID, currentPlayer, CardType.STREET)) {
 			serverResponse(modelID, "Ungültiger Spielzug");
@@ -1847,12 +1849,14 @@ public class ServerController {
 			} else {
 				serverResponse(modelID, "Eine Straße konnte nicht gebaut werden");
 			}
-			if (gameLogic.checkBuildStreet(x2, y2, dir2, modelID)) {
-				serverResponse(modelID, "OK");
-				buildStreet(x2, y2, dir2, modelID);
-				serverOutputHandler.buildStreet(x2, y2, dir2, modelID);
-			} else {
-				serverResponse(modelID, "Eine Straße konnte nicht gebaut werden");
+			if (x2 != null) {
+				if (gameLogic.checkBuildStreet(x2, y2, dir2, modelID)) {
+					serverResponse(modelID, "OK");
+					buildStreet(x2, y2, dir2, modelID);
+					serverOutputHandler.buildStreet(x2, y2, dir2, modelID);
+				} else {
+					serverResponse(modelID, "Eine Straße konnte nicht gebaut werden");
+				}
 			}
 			// resourcen für gameLogic wieder abziehen
 			subFromPlayersResources(modelID, DefaultSettings.STREET_BUILD_COST);
