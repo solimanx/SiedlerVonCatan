@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="dialog-background" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.tradeview.TradeViewController">
+<AnchorPane prefWidth="700.0" styleClass="dialog-background" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.tradeview.TradeViewController">
    <children>
       <TabPane>
          <tabs>
@@ -37,10 +39,14 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <ListView fx:id="foreignTrades" prefHeight="402.0" prefWidth="400.0" />
+                              <TableView fx:id="tradeTable" prefHeight="351.0" prefWidth="406.0">
+                                <columns>
+                                  <TableColumn fx:id="tradeStringColumn" prefWidth="298.0" text="Trade" />
+                                  <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="107.0" text="Status" />
+                                </columns>
+                              </TableView>
                               <HBox alignment="CENTER_RIGHT" spacing="20.0">
                                  <children>
-                                    <Button fx:id="cancelTrade" mnemonicParsing="false" onAction="#handleCancelTrade" text="Cancel Trade" />
                                     <Button fx:id="declineTrade" mnemonicParsing="false" onAction="#handleDeclineTrade" text="Decline Trade" />
                                     <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#handleTradeButton" prefHeight="27.0" prefWidth="153.0" text="Accept Trade" />
                                  </children>

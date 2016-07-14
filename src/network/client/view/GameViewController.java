@@ -775,7 +775,7 @@ public class GameViewController implements Initializable {
 		VBox cheatRoot = new VBox();
 		Scene cheatScene = new Scene(cheatRoot);
 		TextField cheatField = new TextField();
-		Button ok = new Button("Send Cheat");
+		Button ok = new Button("Send JSON");
 		Soundeffects.SELECT.play(Soundeffects.globalVolume);
 		// playButtonSound();
 		ok.setOnAction(new EventHandler<ActionEvent>() {

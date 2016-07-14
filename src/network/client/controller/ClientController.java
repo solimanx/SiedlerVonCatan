@@ -1019,17 +1019,19 @@ public class ClientController {
 			}
 		}
 		if (modelID != 0) {
-			if (viewController.getGameViewController().getTradeViewController().tradeIDtoModelID.get(tradingID) != null
-					&& viewController.getGameViewController().getTradeViewController().tradeIDtoModelID
-							.get(tradingID) == modelID) {
-				viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
-			}
+//			if (viewController.getGameViewController().getTradeViewController().tradeIDtoModelID.get(tradingID) != null
+//					&& viewController.getGameViewController().getTradeViewController().tradeIDtoModelID
+//							.get(tradingID) == modelID) {
+//				viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
+//			}
+			viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
 		} else {
-			if (ownTradingID != null && modelID == 0 && tradingID == ownTradingID) {
-				viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
-			} else {
-				viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
-			}
+//			if (ownTradingID != null && modelID == 0 && tradingID == ownTradingID) {
+//				viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
+//			} else {
+//				viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
+//			}
+			viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
 		}
 	}
 

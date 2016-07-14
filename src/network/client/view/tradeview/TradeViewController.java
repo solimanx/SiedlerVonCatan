@@ -1,6 +1,7 @@
 package network.client.view.tradeview;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import application.lobby.TablePlayer;
 import audio.Soundeffects;
@@ -18,6 +19,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -36,13 +38,19 @@ public class TradeViewController {
 	@FXML
 	private Button placeOfferButton;
 
-	@FXML
-	private ListView<String> foreignTrades;
-	
+	// @FXML
+	// private ListView<String> foreignTrades;
+
 	@FXML
 	private TableView<Trade> tradeTable;
-	
+
 	private ObservableList<Trade> trades = FXCollections.observableArrayList();
+
+	@FXML
+	private TableColumn<Trade, String> tradeStringColumn;
+
+	@FXML
+	private TableColumn<Trade, String> statusColumn;
 
 	@FXML
 	private ListView<String> ownOffers;
@@ -107,13 +115,14 @@ public class TradeViewController {
 
 	public SimpleBooleanProperty isPlayerTradingStatus = new SimpleBooleanProperty();
 
-	private String selectedTrade;
+	private Trade selectedTrade;
 	private String selectedOffer;
 
 	public HashMap<String, Integer> stringToTradeID = new HashMap<String, Integer>();
-	public HashMap<String, Integer> acceptedOfferToModelID = new HashMap<String, Integer>();
 	public HashMap<Integer, String> tradeIDtoString = new HashMap<Integer, String>();
-	public HashMap<Integer, Integer> tradeIDtoModelID = new HashMap<Integer, Integer>();
+	public HashMap<String, Integer> acceptedOfferToModelID = new HashMap<String, Integer>();
+	// public HashMap<Integer, Integer> tradeIDtoModelID = new HashMap<Integer,
+	// Integer>();
 	public HashMap<Integer, String> playerIDtoString = new HashMap<Integer, String>();
 
 	private ViewController viewController;
@@ -145,13 +154,11 @@ public class TradeViewController {
 		this.stage = stage;
 		start(resources);
 		cancelOffer.setDisable(true);
-		foreignTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		foreignTrades.setItems(tradeList);
-		foreignTrades.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+		tradeTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		tradeTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Trade>() {
 
 			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
+			public void changed(ObservableValue<? extends Trade> observable, Trade oldValue, Trade newValue) {
 				selectedTrade = newValue;
 
 			}
@@ -171,7 +178,9 @@ public class TradeViewController {
 		});
 
 		placeOfferButton.disableProperty().bind(isPlayerTradingStatus.not());
-		
+
+		tradeStringColumn.setCellValueFactory(cellData -> cellData.getValue().tradeStringProperty());
+		statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 		tradeTable.setItems(trades);
 	}
 
@@ -302,19 +311,26 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleTradeButton(ActionEvent event) {
-		int tradeID = stringToTradeID.get(selectedTrade);
-		int index = tradeList.indexOf(selectedTrade);
-		String newTradeString = selectedTrade + "\nYOU ACCEPTED";
-		if (!tradeIDtoString.get(tradeID).endsWith("ACCEPTED")) {
-			tradeList.set(index, newTradeString);
-			tradeIDtoString.put(tradeID, newTradeString);
-			stringToTradeID.remove(selectedTrade);
-			stringToTradeID.put(newTradeString, tradeID);
-			
-			tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(), newTradeString);
-					
+		int tradeID = selectedTrade.getTradeID();// stringToTradeID.get(selectedTrade);
+		// int index = tradeList.indexOf(selectedTrade);
+		// String newTradeString =
+		// selectedTrade.getTradeString().getValue();//selectedTrade + "\nYOU
+		// ACCEPTED";
+
+		if (!selectedTrade.getStatus().equals("ACCEPTED")) { // tradeIDtoString.get(tradeID).endsWith("ACCEPTED"))
+																// {
+
+			selectedTrade.setStatus("ACCEPTED");
 			viewController.getClientController().acceptTrade(tradeID);
 			playTradeButtonSound();
+
+			// tradeIDtoString.put(tradeID, newTradeString);
+			// stringToTradeID.remove(selectedTrade);
+			// stringToTradeID.put(newTradeString, tradeID);
+
+			// tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(),
+			// newTradeString);
+
 		}
 	}
 
@@ -326,20 +342,34 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleDeclineTrade(ActionEvent event) {
-		int tradeID = stringToTradeID.get(selectedTrade);
-		int index = tradeList.indexOf(selectedTrade);
-		if (!tradeIDtoString.get(tradeID).endsWith("ACCEPTED") && !tradeIDtoString.get(tradeID).endsWith("DECLINED")) {
-			String newTradeString = selectedTrade + "\nYOU DECLINED";
-			tradeList.set(index, newTradeString);
-			tradeIDtoString.put(tradeID, newTradeString);
-			stringToTradeID.remove(selectedTrade);
-			stringToTradeID.put(newTradeString, tradeID);	
-			
-			tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(), newTradeString);
-			
+		int tradeID = selectedTrade.getTradeID();
+
+		if (selectedTrade.getStatus().equals("ACCEPTED")) {
+			viewController.getClientController().cancelTrade(tradeID);
+			playCancelTradeSound();
+			selectedTrade.setStatus("");
+		} else if (selectedTrade.getStatus().equals("")) {
+			selectedTrade.setStatus("DECLINED");
 			viewController.getClientController().declineTrade(tradeID);
-		    playDeclineTradeOfferSound();
-		}	
+			playDeclineTradeOfferSound();
+		}
+
+		// int tradeID = stringToTradeID.get(selectedTrade);
+		// int index = tradeList.indexOf(selectedTrade);
+		// if (!tradeIDtoString.get(tradeID).endsWith("ACCEPTED") &&
+		// !tradeIDtoString.get(tradeID).endsWith("DECLINED")) {
+		// String newTradeString = selectedTrade + "\nYOU DECLINED";
+		// tradeList.set(index, newTradeString);
+		// tradeIDtoString.put(tradeID, newTradeString);
+		// stringToTradeID.remove(selectedTrade);
+		// stringToTradeID.put(newTradeString, tradeID);
+		//
+		// tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(),
+		// newTradeString);
+		//
+		// viewController.getClientController().declineTrade(tradeID);
+		//
+		// }
 	}
 
 	/**
@@ -388,29 +418,29 @@ public class TradeViewController {
 		playFullFillTradeSound();
 	}
 
-	/**
-	 * Handle cancel trade.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	@FXML
-	void handleCancelTrade(ActionEvent event) {
-		Integer tradeID = stringToTradeID.get(selectedTrade);
-		int index = tradeList.indexOf(selectedTrade);
-		if (tradeIDtoString.get(tradeID).endsWith("ACCEPTED")) {
-			String newSelectedTrade = selectedTrade.replace("\nYOU ACCEPTED", "");
-			tradeList.set(index, newSelectedTrade);
-			tradeIDtoString.put(tradeID, newSelectedTrade);
-			stringToTradeID.remove(selectedTrade);
-			stringToTradeID.put(newSelectedTrade, tradeID);
-			
-			tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(), newSelectedTrade);
-			
-			viewController.getClientController().cancelTrade(tradeID);
-			playCancelTradeSound();
-		}
-	}
+	// /**
+	// * Handle cancel trade.
+	// *
+	// * @param event
+	// * the event
+	// */
+	// @FXML
+	// void handleCancelTrade(ActionEvent event) {
+	// Integer tradeID = stringToTradeID.get(selectedTrade);
+	// int index = tradeList.indexOf(selectedTrade);
+	// if (tradeIDtoString.get(tradeID).endsWith("ACCEPTED")) {
+	// String newSelectedTrade = selectedTrade.replace("\nYOU ACCEPTED", "");
+	// tradeList.set(index, newSelectedTrade);
+	// tradeIDtoString.put(tradeID, newSelectedTrade);
+	// stringToTradeID.remove(selectedTrade);
+	// stringToTradeID.put(newSelectedTrade, tradeID);
+	//
+	// tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(),
+	// newSelectedTrade);
+	//
+	// viewController.getClientController().cancelTrade(tradeID);
+	// }
+	// }
 
 	/**
 	 * Offer fulfilled.
@@ -455,10 +485,12 @@ public class TradeViewController {
 	public void addOffer(int[] offer, int[] demand, int tradeID, int playerID) {
 		String tradeString = tradeStringGenerator(offer, demand) + "\n" + "From: "
 				+ viewController.getGameViewController().getPlayerNames(playerID);
-		tradeIDtoString.put(tradeID, tradeString);
-		stringToTradeID.put(tradeString, tradeID);
-		tradeIDtoModelID.put(tradeID, playerID);
-		playerIDtoString.put(playerID, tradeString);
+		Trade trade = new Trade(tradeString, tradeID, playerID);
+		trades.add(trade);
+		// tradeIDtoString.put(tradeID, tradeString);
+		// stringToTradeID.put(tradeString, tradeID);
+		// tradeIDtoModelID.put(tradeID, playerID);
+		// playerIDtoString.put(playerID, tradeString);
 		Platform.runLater(new AddTradeStringRunnable(tradeString));
 		viewController.getGameViewController().notify("New Trade", "New trade request:\n" + tradeString);
 
@@ -508,7 +540,14 @@ public class TradeViewController {
 	 *            the trade ID
 	 */
 	public void cancelOffer(int tradeID) {
-		Platform.runLater(new RemoveOfferStringRunnable(tradeIDtoString.get(tradeID)));
+		for (int i = 0; i < trades.size(); i++) {
+			Trade trade = trades.get(i);
+			if (trade.getTradeID() == tradeID) {
+				Platform.runLater(new RemoveOfferStringRunnable(i));
+				break;
+			}
+
+		}
 	}
 
 	/**
@@ -599,9 +638,17 @@ public class TradeViewController {
 	 * own offer accepting players list.
 	 */
 	public void cancelOwnOffer() {
-		ownOffer.clear();
-		ownOfferList.clear();
-		cancelOffer.setDisable(true);
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				ownOffer.clear();
+				ownOfferList.clear();
+				cancelOffer.setDisable(true);
+
+			}
+
+		});
 
 	}
 
@@ -684,7 +731,7 @@ public class TradeViewController {
 	}
 
 	public class RemoveOfferStringRunnable implements Runnable {
-		final String string;
+		final int index;
 
 		/**
 		 * Instantiates a new removes the offer string runnable.
@@ -692,8 +739,8 @@ public class TradeViewController {
 		 * @param string
 		 *            the string
 		 */
-		public RemoveOfferStringRunnable(String string) {
-			this.string = string;
+		public RemoveOfferStringRunnable(int index) {
+			this.index = index;
 		}
 
 		/*
@@ -703,7 +750,7 @@ public class TradeViewController {
 		 */
 		@Override
 		public void run() {
-			tradeList.remove(string);
+			trades.remove(index);
 
 		}
 
