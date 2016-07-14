@@ -2,6 +2,7 @@ package network.client.view.tradeview;
 
 import java.util.HashMap;
 
+import application.lobby.TablePlayer;
 import audio.Soundeffects;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -17,6 +18,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -36,6 +38,11 @@ public class TradeViewController {
 
 	@FXML
 	private ListView<String> foreignTrades;
+	
+	@FXML
+	private TableView<Trade> tradeTable;
+	
+	private ObservableList<Trade> trades = FXCollections.observableArrayList();
 
 	@FXML
 	private ListView<String> ownOffers;
@@ -164,6 +171,8 @@ public class TradeViewController {
 		});
 
 		placeOfferButton.disableProperty().bind(isPlayerTradingStatus.not());
+		
+		tradeTable.setItems(trades);
 	}
 
 	/**
