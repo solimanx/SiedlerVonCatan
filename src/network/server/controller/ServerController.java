@@ -1484,6 +1484,8 @@ public class ServerController {
 				}
 				pM.getDevCardsBoughtInThisRound().clear();
 			}
+			//remove all trades
+			tradeController.clearTrades();
 			// runde zu ende, nächste runde darf dev card gespielt werden
 			pM.setHasPlayedDevCard(false);
 			statusUpdate(modelID);

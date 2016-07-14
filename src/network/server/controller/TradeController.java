@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
+import network.client.view.ServerResponseRunnable;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
@@ -158,6 +159,9 @@ public class TradeController {
 	 *            the partner model ID
 	 */
 	public void fulfillTrade(int modelID, int tradingID, int partnerModelID) {
+		if (serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerState() != PlayerState.TRADING_OR_BUILDING){
+			serverController.serverResponse(modelID, "Du bist nicht am Zug!");
+		} else {
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			TradeOffer tOf = tradeOffers.get(i);
 			if (tOf.getTradingID() == tradingID) {
@@ -202,6 +206,7 @@ public class TradeController {
 				}
 				break;
 			}
+		}
 		}
 
 	}
@@ -337,6 +342,10 @@ public class TradeController {
 	 */
 	private ArrayList<HarbourStatus> getPlayerHarbours(int modelID) {
 		return serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerHarbours();
+	}
+	
+	public void clearTrades(){
+		tradeOffers.clear();
 	}
 
 }
