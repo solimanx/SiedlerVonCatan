@@ -539,10 +539,10 @@ public class TradeViewController {
 	 * @param tradeID
 	 *            the trade ID
 	 */
-	public void cancelOffer(int tradeID) {
+	public void cancelOffer(int tradeID, int modelID) {
 		for (int i = 0; i < trades.size(); i++) {
 			Trade trade = trades.get(i);
-			if (trade.getTradeID() == tradeID) {
+			if (trade.getTradeID() == tradeID && trade.getPartnerID() == modelID) {
 				Platform.runLater(new RemoveOfferStringRunnable(i));
 				break;
 			}

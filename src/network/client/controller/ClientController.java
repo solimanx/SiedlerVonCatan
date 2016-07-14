@@ -1024,7 +1024,7 @@ public class ClientController {
 //							.get(tradingID) == modelID) {
 //				viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
 //			}
-			viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
+			viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID, modelID);
 		} else {
 //			if (ownTradingID != null && modelID == 0 && tradingID == ownTradingID) {
 //				viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
