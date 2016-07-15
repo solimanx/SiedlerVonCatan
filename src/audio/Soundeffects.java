@@ -1,11 +1,21 @@
 package audio;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
 public class Soundeffects {
-	
+
 	public static double globalVolume = 0.5;
-	
+
+	public static ObjectProperty<Image> volOn = new SimpleObjectProperty<Image>(new Image("/textures/vol_up.png"));
+	public static ObjectProperty<Image> volOff = new SimpleObjectProperty<Image>(new Image("/textures/vol_mute.png"));
+
+	public static ObjectProperty<Image> getVolumeGraphicProperty(){
+		return globalVolume == 0.0 ? volOff : volOn;
+	}
+
 	public static void playSoundtrack1(){
 		if(SOUNDTRACK2.isPlaying()){
 			SOUNDTRACK2.stop();
@@ -18,9 +28,13 @@ public class Soundeffects {
 		}
 		SOUNDTRACK2.play();
 	}
-	
+
 	public static void setVolume (double volume){
 		globalVolume = volume;
+	}
+
+	public static void toggleVolume(){
+		globalVolume = globalVolume > 0.0 ? 0.0 : 0.5;
 	}
 
 	public final static AudioClip BUILD = new AudioClip(Soundeffects.class.getResource("/audio/build.wav").toString());
@@ -37,8 +51,8 @@ public class Soundeffects {
 	public final static AudioClip LONGESTROAD = new AudioClip(Soundeffects.class.getResource("/audio/longestroad.wav").toString());
 	public final static AudioClip SOUNDTRACK1 = new AudioClip(Soundeffects.class.getResource("/audio/siedlersoundtrack1.mp3").toString());
 	public final static AudioClip SOUNDTRACK2 = new AudioClip(Soundeffects.class.getResource("/audio/siedlersoundtrack2.mp3").toString());
-	
-	
-	
+
+
+
 
 }

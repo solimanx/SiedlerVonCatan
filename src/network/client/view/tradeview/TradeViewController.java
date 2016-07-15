@@ -185,8 +185,8 @@ public class TradeViewController {
 		statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 		tradeTable.setItems(trades);
 
-		sbp = new SimpleBooleanProperty(selectedTrade.getStatus().equals("ACCEPTED"));
-		tradeButton.disableProperty().bind(sbp);
+//		sbp = new SimpleBooleanProperty(selectedTrade.getStatus().equals("ACCEPTED"));
+//		tradeButton.disableProperty().bind(sbp);
 
 	}
 

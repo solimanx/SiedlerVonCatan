@@ -248,7 +248,7 @@ public class GameViewController implements Initializable {
 	private Button helpButton;
 
 	@FXML
-	private Button cheatButton;
+	private Button toggleSoundButton;
 
 	// DEBUG
 	@FXML
@@ -528,6 +528,10 @@ public class GameViewController implements Initializable {
 				}
 			}
 		});
+
+		//playerNameFour. graphicProperty().bind(Soundeffects.getVolumeGraphicProperty());
+//		toggleSoundButton.setGraphic(new ImageView("/textures/vol_up.png"));
+
 	}
 
 	/**
@@ -770,6 +774,7 @@ public class GameViewController implements Initializable {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	@FXML
+	@Deprecated
 	void handleCheatButton(ActionEvent event) throws IOException {
 		Stage cheatStage = new Stage();
 		VBox cheatRoot = new VBox();
@@ -791,6 +796,17 @@ public class GameViewController implements Initializable {
 		cheatRoot.getChildren().addAll(cheatField, ok);
 		cheatStage.setScene(cheatScene);
 		cheatStage.show();
+	}
+
+	@FXML
+	void handleToggleSound(ActionEvent event) throws IOException {
+		Soundeffects.toggleVolume();
+
+		if (true) {
+			toggleSoundButton.setGraphic(new ImageView("/textures/vol_mute.png"));
+		} else {
+			toggleSoundButton.setGraphic(new ImageView("/textures/vol_up.png"));
+		}
 	}
 
 	/**
@@ -1841,6 +1857,8 @@ public class GameViewController implements Initializable {
 			villageImageView.setTranslateX(center[0] - 20);
 			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
+			villageImageView.setScaleX(40 * 2 / radius);
+			villageImageView.setScaleY(40 * 2 / radius);
 
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
 			villageImageView.setCache(true);
