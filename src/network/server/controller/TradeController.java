@@ -51,13 +51,17 @@ public class TradeController {
 	/**
 	 * Checks whether the trade is valid.
 	 *
-	 * @param modelID the model ID
-	 * @param supply the supply
-	 * @param demand the demand
+	 * @param modelID
+	 *            the model ID
+	 * @param supply
+	 *            the supply
+	 * @param demand
+	 *            the demand
 	 * @return true, if successful
 	 */
 	private boolean checkValidTradeRequest(int modelID, int[] supply, int[] demand) {
-		if (serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerState() != PlayerState.TRADING_OR_BUILDING){
+		if (serverController.gameLogic.getBoard().getPlayer(modelID)
+				.getPlayerState() != PlayerState.TRADING_OR_BUILDING) {
 			return false;
 		}
 		int sum = 0;
@@ -97,60 +101,83 @@ public class TradeController {
 	 */
 	public void acceptTrade(int modelID, int tradingID, boolean accept) {
 		if (checkValidTradeAccept(modelID, tradingID, accept)) {
-			for (int i = 0; i < tradeOffers.size(); i++) {
-				if (tradeOffers.get(i).getTradingID() == tradingID) {
-					if (accept) {
-						tradeOffers.get(i).acceptingPlayers.add(modelID);
-					} else {
-						tradeOffers.get(i).decliningPlayers.add(modelID);
-					}
-
-					serverController.tradeAccepted(modelID, tradingID, accept);
-				}
+			TradeOffer tOf = getTradeByID(tradingID);
+			// kann nicht null sein wegen check
+			if (accept) {
+				tOf.acceptingPlayers.add(modelID);
+			} else {
+				tOf.decliningPlayers.add(modelID);
 			}
+
+			serverController.tradeAccepted(modelID, tradingID, accept);
 		} else {
 			serverController.serverResponse(modelID, "Unzulässige Handelsannahme");
 		}
 	}
-	public boolean checkValidSeaTrade(int modelID, int[] offer, int[] demand){
-		return false; //TODO
+
+	public boolean checkValidSeaTrade(int modelID, int offResource, int demResource, int offAmount) {
+
+		if (serverController.getPlayerResources(modelID)[offResource] < offAmount) {
+			return false;
+		}
+		ArrayList<HarbourStatus> harbours = getPlayerHarbours(modelID);
+		switch (offAmount) {
+		case 2:
+			for (int i = 0; i < harbours.size(); i++) {
+				if (harbours.get(i).name().equals(DefaultSettings.RESOURCE_ORDER[offResource].name())) {
+					return true;
+				}
+			}
+			break;
+		case 3:
+			for (int i = 0; i < harbours.size(); i++) {
+				if (harbours.get(i).name().equals(HarbourStatus.THREE_TO_ONE)) {
+					return true;
+				}
+			}
+			break;
+		case 4:
+			return true;
+		default:
+			return false;
+
+		}
+		return false;
 	}
 
 	/**
 	 * Checks whether the trade can be accepted.
 	 *
-	 * @param modelID the model ID
-	 * @param tradingID the trading ID
-	 * @param accept the accept
+	 * @param modelID
+	 *            the model ID
+	 * @param tradingID
+	 *            the trading ID
+	 * @param accept
+	 *            the accept
 	 * @return true, if successful
 	 */
 	private boolean checkValidTradeAccept(int modelID, int tradingID, boolean accept) {
-		int[] tradeResource = null;
-		// same id check
-		boolean tradeFound = false;
-		for (int i = 0; i < tradeOffers.size(); i++) {
-			if (tradeOffers.get(i).getTradingID() == tradingID && tradeOffers.get(i).getOwnerID() == modelID) {
+		int[] tradeResource;
+		TradeOffer tOf = getTradeByID(tradingID);
+		if (tOf != null) {
+			if (tOf.getOwnerID() == modelID) {
 				return false;
-			} else if (tradeOffers.get(i).getTradingID() == tradingID) {
-				tradeResource = tradeOffers.get(i).getDemand();
-				tradeFound = true;
+			} else {
+				tradeResource = tOf.getDemand();
 			}
-		}
-		if (!tradeFound){
+		} else {
 			return false;
 		}
 
-		// afford
-		int[] resources = serverController.gameLogic.getBoard().getPlayer(modelID).getResources();
-
 		if (accept == true) {
-			for (int i = 0; i < resources.length; i++) {
-				if (tradeResource[i] > resources[i]) {
-					return false;
-				}
+			if (serverController.gameLogic.checkPlayerResources(modelID, tradeResource)) {
+				return true;
+			} else {
+				return false;
 			}
+		} else {
+			return true;
 		}
-		return true;
 	}
 
 	/**
@@ -164,14 +191,12 @@ public class TradeController {
 	 *            the partner model ID
 	 */
 	public void fulfillTrade(int modelID, int tradingID, int partnerModelID) {
-		if (serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerState() != PlayerState.TRADING_OR_BUILDING){
+		if (serverController.gameLogic.getBoard().getPlayer(modelID)
+				.getPlayerState() != PlayerState.TRADING_OR_BUILDING) {
 			serverController.serverResponse(modelID, "Du bist nicht am Zug!");
 		} else {
-			boolean tradeFound = false;
-		for (int i = 0; i < tradeOffers.size(); i++) {
-			TradeOffer tOf = tradeOffers.get(i);
-			if (tOf.getTradingID() == tradingID) {
-				tradeFound = true;
+			TradeOffer tOf = getTradeByID(tradingID);
+			if (tOf != null) {
 				boolean notFound = true;
 				for (int j = 0; j < tOf.acceptingPlayers.size(); j++) {
 					if (tOf.acceptingPlayers.get(j) == partnerModelID) {
@@ -198,7 +223,7 @@ public class TradeController {
 							serverController.obtainToAll(modelID, demand, true);
 							serverController.obtainToAll(partnerModelID, offer, true);
 
-							tradeOffers.remove(i);
+							tradeOffers.remove(tOf);
 
 							serverController.tradeFulfilled(modelID, partnerModelID);
 						} else {
@@ -211,12 +236,10 @@ public class TradeController {
 						serverController.error(modelID, "You haven't got enough resources for the trade");
 					}
 				}
-				break;
+			} else {
+				serverController.serverResponse(modelID, "Ungültige Handels ID");
+
 			}
-		}
-		if (!tradeFound){
-			serverController.serverResponse(modelID, "Ungültige Handels ID");
-		}
 		}
 
 	}
@@ -230,31 +253,32 @@ public class TradeController {
 	 *            the trading ID
 	 */
 	public void cancelTrade(int modelID, int tradingID) {
-		TradeOffer currOf;
-		boolean found = false;
-		for (int i = 0; i < tradeOffers.size(); i++) {
-			currOf = tradeOffers.get(i);
-			if (currOf.getTradingID() == tradingID) {
-				found = true;
-				if (currOf.getOwnerID() == modelID) {
-					tradeOffers.remove(i);
-				} else {
-					for (int j = 0; j < currOf.acceptingPlayers.size(); j++) {
-						if (currOf.acceptingPlayers.get(j) == modelID) {
-							currOf.acceptingPlayers.remove(j);
-							break;
-						}
-					}
-
-				}
+		TradeOffer offer = getTradeByID(tradingID);
+		if (offer != null) {
+			if (offer.getOwnerID() == modelID) {
+				tradeOffers.remove(offer);
 				serverController.tradeCancelled(modelID, tradingID);
-				break;
+			} else {
+				for (int j = 0; j < offer.acceptingPlayers.size(); j++) {
+					if (offer.acceptingPlayers.get(j) == modelID) {
+						offer.acceptingPlayers.remove(j);
+						serverController.tradeCancelled(modelID, tradingID);
+						break;
+					}
+				}
 			}
-		}
-		if (!found){
+		} else {
 			serverController.serverResponse(modelID, "Ungültige Handels ID");
 		}
+	}
 
+	private TradeOffer getTradeByID(int tradingID) {
+		for (int i = 0; i < tradeOffers.size(); i++) {
+			if (tradeOffers.get(i).getTradingID() == tradingID) {
+				return tradeOffers.get(i);
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -268,84 +292,31 @@ public class TradeController {
 	 *            the demand
 	 */
 	public void requestSeaTrade(int modelID, int[] offer, int[] demand) {
-		ResourceType offerResType = null;
-		ResourceType demandResType = null;
-		int offerAmount = 0;
-		int demandAmount = 0;
-		ArrayList<HarbourStatus> harbours = getPlayerHarbours(modelID);
+		int offResource = 0;
+		int demResource = 0;
 		for (int i = 0; i < offer.length; i++) {
-			if (offer[i] != 0) {
-				offerResType = DefaultSettings.RESOURCE_ORDER[i];
-				offerAmount = offer[i];
-			} else if (demand[i] != 0) {
-				demandResType = DefaultSettings.RESOURCE_ORDER[i];
-				demandAmount = demand[i];
+			if (offer[i] > 0) {
+				offResource = i;
 			}
-
-		}
-		if (offerResType != null && demandAmount == 1) { // currently only
-															// single trade
-															// allowed
-			switch (offerAmount) {
-			case 2:
-				boolean contains = false;
-				for (int i = 0; i < harbours.size(); i++) {
-					if (harbours.get(i).name().equals(offerResType.name())) {
-						contains = true;
-					}
-				}
-				if (contains) {
-					if (serverController.resourceStackDecrease(demandResType)) {
-						serverController.addToPlayersResource(modelID, demandResType, 1);
-						serverController.obtainToAll(modelID, demand, true);
-						serverController.subFromPlayersResources(modelID, offerResType, 2);
-						serverController.costsToAll(modelID, offer, true);
-						serverController.resourceStackIncrease(offer);
-					} else {
-						serverController.getServerOutputHandler().serverConfirm("resource stack empty",
-								serverController.modelPlayerIdMap.get(modelID));
-					}
-				} else {
-					serverController.getServerOutputHandler().serverConfirm("You don't have a 2:1 harbour of this resource",
-							serverController.modelPlayerIdMap.get(modelID));
-				}
-				break;
-			case 3:
-				if (harbours.contains(HarbourStatus.THREE_TO_ONE)) {
-					if (serverController.resourceStackDecrease(demandResType)) {
-						serverController.addToPlayersResource(modelID, demandResType, 1);
-						serverController.obtainToAll(modelID, demand, true);
-						serverController.subFromPlayersResources(modelID, offerResType, 3);
-						serverController.costsToAll(modelID, offer, true);
-						serverController.resourceStackIncrease(offer);
-					} else {
-						serverController.getServerOutputHandler().serverConfirm("resource stack empty",
-								serverController.modelPlayerIdMap.get(modelID));
-					}
-				} else {
-					serverController.getServerOutputHandler().serverConfirm("You don't have a 3:1 harbour",
-							serverController.modelPlayerIdMap.get(modelID));
-				}
-				break;
-			case 4:
-				if (serverController.resourceStackDecrease(demandResType)) {
-					serverController.addToPlayersResource(modelID, demandResType, 1);
-					serverController.obtainToAll(modelID, demand, true);
-					serverController.subFromPlayersResources(modelID, offerResType, 4);
-					serverController.costsToAll(modelID, offer, true);
-					serverController.resourceStackIncrease(offer);
-				} else {
-					serverController.getServerOutputHandler().serverConfirm("resource stack empty",
-							serverController.modelPlayerIdMap.get(modelID));
-				}
-				break;
-
-			default:
-				serverController.getServerOutputHandler().serverConfirm("invalid resource argument",
-						serverController.modelPlayerIdMap.get(modelID));
-				break;
+			if (demand[i] > 0) {
+				demResource = i;
 			}
 		}
+		int offAmount = offer[offResource];
+		ResourceType offerResType = DefaultSettings.RESOURCE_ORDER[offResource];
+		ResourceType demandResType = DefaultSettings.RESOURCE_ORDER[demResource];
+		if (checkValidSeaTrade(modelID, offResource, demResource, offAmount)) {
+			if (serverController.resourceStackDecrease(demandResType)) {
+				serverController.addToPlayersResource(modelID, demandResType, 1);
+				serverController.obtainToAll(modelID, demand, true);
+				serverController.subFromPlayersResources(modelID, offerResType, offAmount);
+				serverController.costsToAll(modelID, offer, true);
+				serverController.resourceStackIncrease(offer);
+			} else {
+				serverController.serverResponse(modelID, "Resourcenstapel leer");
+			}
+		}
+		serverController.serverResponse(modelID, "Unzulässiges Handelsangebot");
 	}
 
 	/**
@@ -358,8 +329,8 @@ public class TradeController {
 	private ArrayList<HarbourStatus> getPlayerHarbours(int modelID) {
 		return serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerHarbours();
 	}
-	
-	public void clearTrades(){
+
+	public void clearTrades() {
 		tradeOffers.clear();
 	}
 
