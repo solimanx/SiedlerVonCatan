@@ -35,6 +35,7 @@ import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolBoard;
 import protocol.object.ProtocolBuilding;
+import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.object.ProtocolPlayer;
@@ -350,8 +351,11 @@ public class ClientInputHandler {
 		// and resources
 		ProtocolResource pRes = pPlayer.getResources();
 
+		ProtocolDevCard pDev = pPlayer.getDevelopmentCards();
+
 		int[] resources = ProtocolToModel.convertResources(pRes);
-		clientController.receiveStatusUpdate(threadID, color, name, status, victoryPoints, resources);
+		Integer devCards = pDev.getUnknown();
+		clientController.receiveStatusUpdate(threadID, color, name, status, victoryPoints, resources, devCards);
 
 	}
 

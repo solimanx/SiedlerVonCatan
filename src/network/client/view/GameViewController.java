@@ -68,6 +68,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import model.objects.Corner;
+import model.objects.DevCards.DevelopmentCard;
 import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.client.view.devcardview.DevCardViewController;
@@ -256,6 +257,18 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	private Button toggleSoundButton;
+
+	@FXML
+	private Text playerOneDevCards;
+
+	@FXML
+	private Text playerTwoDevCards;
+
+	@FXML
+	private Text playerThreeDevCards;
+
+	@FXML
+	private Text playerFourDevCards;
 
 	// DEBUG
 	@FXML
@@ -536,7 +549,6 @@ public class GameViewController implements Initializable {
 			}
 		});
 
-
 		toggleSoundButton.graphicProperty().bind(new ImageSoundBinding(Soundeffects.globalVolumeBoolean));
 
 	}
@@ -600,7 +612,6 @@ public class GameViewController implements Initializable {
 		case 1:
 			playerNameOne.setText(playerName);
 			playerNameOne.setTextFill(playerColor.getValue());
-
 			playerNames.put(1, playerName);
 			break;
 		case 2:
@@ -810,11 +821,12 @@ public class GameViewController implements Initializable {
 	void handleToggleSound(ActionEvent event) throws IOException {
 		Soundeffects.toggleMuteOnOff();
 
-//		if (true) {
-//			toggleSoundButton.setGraphic(new ImageView("/textures/vol_mute.png"));
-//		} else {
-//			toggleSoundButton.setGraphic(new ImageView("/textures/vol_up.png"));
-//		}
+		// if (true) {
+		// toggleSoundButton.setGraphic(new
+		// ImageView("/textures/vol_mute.png"));
+		// } else {
+		// toggleSoundButton.setGraphic(new ImageView("/textures/vol_up.png"));
+		// }
 	}
 
 	/**
@@ -1281,48 +1293,19 @@ public class GameViewController implements Initializable {
 				buyCardButton.setDisable(false);
 				break;
 			}
-			if (state != PlayerState.WAITING) {
-				playerOneVBox.setStyle("-fx-border-color: " + getRGBCode(playerColors.get(modelID)));
-			} else {
-				playerOneVBox.setStyle("-fx-border-color: transparent");
-			}
-			playerNameOne.setTextFill(playerColors.get(modelID));
 			break;
 		case 2:
 			playerStatusTwo.setText(state.toString());
-			if (state != PlayerState.WAITING) {
-				playerTwoVBox.setStyle("-fx-border-color: " + getRGBCode(playerColors.get(modelID)));
-			} else {
-				playerTwoVBox.setStyle("-fx-border-color: transparent");
-			}
-			playerNameTwo.setTextFill(playerColors.get(modelID));
 			break;
 		case 3:
 			playerStatusThree.setText(state.toString());
-			if (state != PlayerState.WAITING) {
-				playerThreeVBox.setStyle("-fx-border-color: " + getRGBCode(playerColors.get(modelID)));
-			} else {
-				playerThreeVBox.setStyle("-fx-border-color: transparent");
-			}
-			playerNameThree.setTextFill(playerColors.get(modelID));
 			break;
 		case 4:
 			playerStatusFour.setText(state.toString());
-			if (state != PlayerState.WAITING) {
-				playerFourBox.setStyle("-fx-border-color: " + getRGBCode(playerColors.get(modelID)));
-			} else {
-				playerFourBox.setStyle("-fx-border-color: transparent");
-			}
-			playerNameFour.setTextFill(playerColors.get(modelID));
 			break;
 		default:
 			break;
 		}
-	}
-
-	public String getRGBCode(Color color) {
-		return String.format("#%02X%02X%02X", (int) (color.getRed() * 255), (int) (color.getGreen() * 255),
-				(int) (color.getBlue() * 255));
 	}
 
 	/**
@@ -1677,6 +1660,27 @@ public class GameViewController implements Initializable {
 		return blush;
 	}
 
+	public void setDevCards(int modelID) {
+		switch (playerIDtoViewPosition.get(modelID)) {
+		case 2:
+			playerTwoCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
+					.getPlayer(modelID).getPlayerUnknownCards());
+			break;
+		case 3:
+			playerThreeCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
+					.getPlayer(modelID).getPlayerUnknownCards());
+			break;
+		case 4:
+			playerFourCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
+					.getPlayer(modelID).getPlayerUnknownCards());
+			break;
+
+		default:
+			break;
+		}
+
+	}
+
 	/**
 	 * Inner Class for constructing the board. Instantiated at initial phase of
 	 * Game
@@ -1900,8 +1904,8 @@ public class GameViewController implements Initializable {
 			villageImageView.setTranslateX(center[0] - 20);
 			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
-			villageImageView.setScaleX(40 * 1.5 / radius);
-			villageImageView.setScaleY(40 * 1.5 / radius);
+			villageImageView.setScaleX(1 - (15 / radius));
+			villageImageView.setScaleY(1 - (15 / radius));
 
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
 			villageImageView.setCache(true);

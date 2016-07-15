@@ -227,7 +227,7 @@ public class ClientController {
 	 *            the resources
 	 */
 	public void receiveStatusUpdate(int threadID, enums.Color color, String name, enums.PlayerState status,
-			int victoryPoints, int[] resources) {
+			int victoryPoints, int[] resources, Integer devCards) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
 		currentState = status;
 		switch (status) {
@@ -274,7 +274,7 @@ public class ClientController {
 				// and here..
 				// modelID = 0,1,2,3
 				Platform.runLater(new PlayerStatusGUIUpdate(modelID, viewController.getGameViewController(),
-						victoryPoints, status, resources));
+						victoryPoints, status, resources, devCards));
 			}
 		}
 
@@ -1203,7 +1203,6 @@ public class ClientController {
 	public void addToDeck(int playerID, DevelopmentCard devCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
 		gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(devCard);
-		// viewController.getGameViewController().card
 	}
 
 	/**

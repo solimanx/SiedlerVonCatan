@@ -163,6 +163,12 @@
                         <Text fx:id="playerFourCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
                      </children>
                   </TextFlow>
+                  <TextFlow layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="120.0" textAlignment="RIGHT">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Dev Cards:  " />
+                        <Text fx:id="playerFourDevCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                     </children>
+                  </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0">
                      <children>
                         <Label fx:id="playerFourVPoints" styleClass="white" />
@@ -208,6 +214,12 @@
                         <Text fx:id="playerTwoCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
                      </children>
                   </TextFlow>
+                  <TextFlow layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="120.0" textAlignment="RIGHT">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="DevCards:  " />
+                        <Text fx:id="playerTwoDevCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                     </children>
+                  </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0" styleClass="white">
                      <children>
                         <Label fx:id="playerTwoVPoints" styleClass="white" />
@@ -251,6 +263,12 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Cards:  " />
                         <Text fx:id="playerThreeCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                     </children>
+                  </TextFlow>
+                  <TextFlow layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="120.0" textAlignment="RIGHT">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="DevCards:  " />
+                        <Text fx:id="playerThreeDevCards" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
                      </children>
                   </TextFlow>
                   <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="140.0">
