@@ -938,10 +938,11 @@ public class ClientController {
 	 *            the trading ID
 	 */
 	public void tradeAccepted(int threadID, int tradingID) {
+		int modelID = threadPlayerIdMap.get(threadID);
 		if (getOwnTradingID() != null && getOwnTradingID() == tradingID) {
 			viewController.getGameViewController().getTradeViewController()
 					.acceptingOffer(threadPlayerIdMap.get(threadID), tradingID);
-		} else if(threadID == this.ownPlayerID) {
+		} else if(modelID == this.ownPlayerID) {
 			viewController.getGameViewController().getTradeViewController().setAccepted(tradingID);
 		}
 	}

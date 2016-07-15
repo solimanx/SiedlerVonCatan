@@ -9,8 +9,8 @@ public class Trade {
 	private SimpleIntegerProperty tradeID;
 	private SimpleIntegerProperty partnerID;
 
-	public Trade(String tradeString, int tradeID,
-			int partnerID) {
+	public Trade(String tradeString, Integer tradeID,
+			Integer partnerID) {
 		super();
 		this.tradeString = new SimpleStringProperty(tradeString);
 		this.status = new SimpleStringProperty("");
@@ -46,11 +46,11 @@ public class Trade {
 		return tradeID;
 	}
 
-	public int getTradeID() {
-		return tradeID.get();
+	public Integer getTradeID() {
+		return tradeID.getValue();
 	}
 
-	public void setTradeID(int tradeID) {
+	public void setTradeID(Integer tradeID) {
 		this.tradeID.set(tradeID);
 	}
 
@@ -58,11 +58,11 @@ public class Trade {
 		return partnerID;
 	}
 
-	public int getPartnerID() {
+	public Integer getPartnerID() {
 		return partnerID.get();
 	}
 
-	public void setPartnerID(int partnerID) {
+	public void setPartnerID(Integer partnerID) {
 		this.partnerID.set(partnerID);
 	}
 

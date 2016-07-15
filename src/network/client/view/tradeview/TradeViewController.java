@@ -185,8 +185,9 @@ public class TradeViewController {
 		statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 		tradeTable.setItems(trades);
 
-//		sbp = new SimpleBooleanProperty(selectedTrade.getStatus().equals("ACCEPTED"));
-//		tradeButton.disableProperty().bind(sbp);
+		// sbp = new
+		// SimpleBooleanProperty(selectedTrade.getStatus().equals("ACCEPTED"));
+		// tradeButton.disableProperty().bind(sbp);
 
 	}
 
@@ -317,24 +318,27 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleTradeButton(ActionEvent event) {
-		int tradeID = selectedTrade.getTradeID();// stringToTradeID.get(selectedTrade);
-		// int index = tradeList.indexOf(selectedTrade);
-		// String newTradeString =
-		// selectedTrade.getTradeString().getValue();//selectedTrade + "\nYOU
-		// ACCEPTED";
+		if (selectedTrade != null) {
+			int tradeID = selectedTrade.getTradeID();// stringToTradeID.get(selectedTrade);
+			// int index = tradeList.indexOf(selectedTrade);
+			// String newTradeString =
+			// selectedTrade.getTradeString().getValue();//selectedTrade +
+			// "\nYOU
+			// ACCEPTED";
 
-		if (!selectedTrade.getStatus().equals("ACCEPTED")) { // tradeIDtoString.get(tradeID).endsWith("ACCEPTED"))
-																// {
+			if (!selectedTrade.getStatus().equals("ACCEPTED")) { // tradeIDtoString.get(tradeID).endsWith("ACCEPTED"))
+																	// {
 
-			viewController.getClientController().acceptTrade(tradeID);
+				viewController.getClientController().acceptTrade(tradeID);
 
-			// tradeIDtoString.put(tradeID, newTradeString);
-			// stringToTradeID.remove(selectedTrade);
-			// stringToTradeID.put(newTradeString, tradeID);
+				// tradeIDtoString.put(tradeID, newTradeString);
+				// stringToTradeID.remove(selectedTrade);
+				// stringToTradeID.put(newTradeString, tradeID);
 
-			// tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(),
-			// newTradeString);
+				// tradeIDtoString.put(viewController.getClientController().getOwnPlayerID(),
+				// newTradeString);
 
+			}
 		}
 	}
 
@@ -372,7 +376,8 @@ public class TradeViewController {
 				viewController.getClientController().declineTrade(tradeID);
 				playDeclineTradeOfferSound();
 			}
-		} catch (NullPointerException e) {	}
+		} catch (NullPointerException e) {
+		}
 
 		// int tradeID = stringToTradeID.get(selectedTrade);
 		// int index = tradeList.indexOf(selectedTrade);
