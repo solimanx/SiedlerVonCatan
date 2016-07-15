@@ -20,7 +20,6 @@ import enums.Color;
 import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
-import javafx.stage.Stage;
 import model.Board;
 import model.DevelopmentCardsStack;
 import model.GameLogic;
@@ -30,19 +29,11 @@ import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
 import model.objects.PlayerModel;
-import model.objects.DevCards.DevCardFactory;
 import model.objects.DevCards.DevelopmentCard;
-import model.objects.DevCards.InventionCard;
-import model.objects.DevCards.KnightCard;
-import model.objects.DevCards.MonopolyCard;
-import model.objects.DevCards.StreetBuildingCard;
-import model.objects.DevCards.VictoryPointCard;
 import network.ProtocolToModel;
-import network.client.controller.ViewController;
 import network.server.server.Server;
 import network.server.server.ServerInputHandler;
 import network.server.server.ServerOutputHandler;
-import protocol.messaging.ProtocolServerResponse;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
@@ -1484,8 +1475,6 @@ public class ServerController {
 				}
 				pM.getDevCardsBoughtInThisRound().clear();
 			}
-			//remove all trades
-			tradeController.clearTrades();
 			// runde zu ende, nächste runde darf dev card gespielt werden
 			pM.setHasPlayedDevCard(false);
 			statusUpdate(modelID);
