@@ -127,12 +127,17 @@ public class TradeController {
 	private boolean checkValidTradeAccept(int modelID, int tradingID, boolean accept) {
 		int[] tradeResource = null;
 		// same id check
+		boolean tradeFound = false;
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			if (tradeOffers.get(i).getTradingID() == tradingID && tradeOffers.get(i).getOwnerID() == modelID) {
 				return false;
 			} else if (tradeOffers.get(i).getTradingID() == tradingID) {
 				tradeResource = tradeOffers.get(i).getDemand();
+				tradeFound = true;
 			}
+		}
+		if (!tradeFound){
+			return false;
 		}
 
 		// afford
@@ -162,9 +167,11 @@ public class TradeController {
 		if (serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerState() != PlayerState.TRADING_OR_BUILDING){
 			serverController.serverResponse(modelID, "Du bist nicht am Zug!");
 		} else {
+			boolean tradeFound = false;
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			TradeOffer tOf = tradeOffers.get(i);
 			if (tOf.getTradingID() == tradingID) {
+				tradeFound = true;
 				boolean notFound = true;
 				for (int j = 0; j < tOf.acceptingPlayers.size(); j++) {
 					if (tOf.acceptingPlayers.get(j) == partnerModelID) {
@@ -207,6 +214,9 @@ public class TradeController {
 				break;
 			}
 		}
+		if (!tradeFound){
+			serverController.serverResponse(modelID, "Ungültige Handels ID");
+		}
 		}
 
 	}
@@ -221,9 +231,11 @@ public class TradeController {
 	 */
 	public void cancelTrade(int modelID, int tradingID) {
 		TradeOffer currOf;
+		boolean found = false;
 		for (int i = 0; i < tradeOffers.size(); i++) {
 			currOf = tradeOffers.get(i);
 			if (currOf.getTradingID() == tradingID) {
+				found = true;
 				if (currOf.getOwnerID() == modelID) {
 					tradeOffers.remove(i);
 				} else {
@@ -238,6 +250,9 @@ public class TradeController {
 				serverController.tradeCancelled(modelID, tradingID);
 				break;
 			}
+		}
+		if (!found){
+			serverController.serverResponse(modelID, "Ungültige Handels ID");
 		}
 
 	}
