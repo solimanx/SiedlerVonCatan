@@ -8,11 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.helpview.HelpViewController">
    <center>
       <TabPane prefHeight="504.0" prefWidth="764.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="Spielanleitung">
+          <Tab fx:id="instructionsTab" onSelectionChanged="#handleInstructionsTab" text="Spielanleitung">
                <content>
                   <Pane>
                      <children>
@@ -63,13 +63,14 @@
                                     <Font size="14.0" />
                                  </font>
                               </TextField>
+                              <Button fx:id="btnOpenNewWindow" mnemonicParsing="false" onAction="#handleQuickInfo" text="Spielregeln" />
                            </children>
                         </VBox>
                      </children>
                   </Pane>
                </content>
             </Tab>
-          <Tab text="Spiel starten">
+          <Tab fx:id="startGameTab" onSelectionChanged="#handleStartGameTab" text="Spiel starten">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -116,7 +117,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Das Spielfeld">
+            <Tab fx:id="gameBoardTab" onSelectionChanged="#handleGameBoardTab" text="Das Spielfeld">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -198,7 +199,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Erträge">
+            <Tab fx:id="resourcesTab" onSelectionChanged="#handleResourcesTab" text="Erträge">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -251,11 +252,11 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Bauen">
+            <Tab fx:id="buildTab" onSelectionChanged="#handleBuildTab" text="Bauen">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BorderPane layoutX="73.0" layoutY="142.0" prefHeight="214.0" prefWidth="520.0" >
+                        <BorderPane layoutX="73.0" layoutY="142.0" prefHeight="214.0" prefWidth="520.0">
                            <center>
                               <GridPane hgap="5.0" vgap="10.0">
                                  <children>
@@ -395,7 +396,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Handeln">
+            <Tab fx:id="tradeTab" onSelectionChanged="#handleTradeTab" text="Handeln">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -419,7 +420,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Räuber">
+            <Tab fx:id="robberTab" onSelectionChanged="#handleRobberTab" text="Räuber">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -451,7 +452,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Entwicklungskarten">
+            <Tab fx:id="developmentCardsTab" onSelectionChanged="#handleDevelopmentCardsTab" text="Entwicklungskarten">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -478,7 +479,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Tipps">
+            <Tab fx:id="tipsTab" onSelectionChanged="#handleTipsTab" text="Tipps">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
