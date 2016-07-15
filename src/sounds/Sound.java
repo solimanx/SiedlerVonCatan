@@ -332,5 +332,18 @@ public class Sound {
 			System.err.println(e.getMessage());
 		}
 	}
+	public static void playHelpButtonSound() {
+		try {
+			URL url = Sound.class.getResource("/sounds/HelpViewButton.wav");
+			File file = new File(url.getPath());
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(file));
+			setGain(clip, globalVolume);
+			clip.start();
+			// Thread.sleep(clip.getMicrosecondLength());
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
 
 }
