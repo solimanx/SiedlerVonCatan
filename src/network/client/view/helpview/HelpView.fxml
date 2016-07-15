@@ -8,621 +8,768 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.helpview.HelpViewController">
-   <center>
-      <TabPane fx:id="pane" prefHeight="504.0" prefWidth="764.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab fx:id="instructionsTab"  text="Spielanleitung" onSelectionChanged="#handleInstructionsTab">
-               <content>
-                  <Pane>
-                     <children>
-                        <VBox layoutY="36.0" prefHeight="394.0" prefWidth="764.0">
-                           <children>
-                              <Text fill="WHITE" strokeWidth="0.0" text="Siedler von Catan: Spielanleitung" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="769.13671875">
-                                 <font>
-                                    <Font name="System Bold Italic" size="36.0" />
-                                 </font>
-                              </Text>
-                              <TextField text="Spiel starten : Das Spiel kann man jeweils als Server, als Client oder als künstliche Intelligenz starten">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <TextField text="Das Spielfeld : Informationen über die Darstellung des Spielfelds und die Funktion der Buttons.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <TextField text="Erträge : Informationen über die Rohstoffe, das Würfeln der Erträge und die Darstellug der Resoursen im Spielfeld">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <TextField text="Bauen : Erklärung der benötigten Rohstoffkombinationen und jeweils eine Siedling, eine Strasse oder eine Stadt zu bauen.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <TextField text="Handeln : Anweisungen wie man einen Handel der Rohstoffe durchführt.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <TextField text="Räuber : Die Auswirkung des Räubers und seine Versetzung.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <TextField text="Entwicklungskarten : Erklärung der Entwicklungskarten.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <TextField text="Tipps : Würfelwahrscheinlichkeit.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <Button fx:id="btnOpenNewWindow" mnemonicParsing="false" onAction="#handleQuickInfo" text="Spielregeln" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </Pane>
-               </content>
-            </Tab>
-          <Tab fx:id="startGameTab" onSelectionChanged="#handleStartGameTab" text="Spiel starten">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <VBox layoutX="-1.0" prefHeight="399.0" prefWidth="764.0">
-                           <children>
-                              <Text fill="#fffdfd" strokeType="OUTSIDE" strokeWidth="0.0" text="Spiel als Server starten:" textAlignment="CENTER" translateY="10.0" wrappingWidth="762.498046875">
-                                 <font>
-                                    <Font name="System Bold Italic" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text=" Als Server kann man in der vorgegebenen Zeile einen Port angeben. Mit einem Click auf Start wird der Server gestartet und die eigene IP Adresse wird unter der Zeile angezeigt. Im Laufe des Spiels kann man den Server jederzeit wieder mit Stop beenden." textAlignment="CENTER" translateY="15.0" wrappingWidth="762.13671875">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#fff9f9" strokeType="OUTSIDE" strokeWidth="0.0" text="Spiel als AI (Künstliche Intelligenz) starten:" textAlignment="CENTER" translateY="20.0" wrappingWidth="762.13671875">
-                                 <font>
-                                    <Font name="System Bold Italic" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#fffdfd" strokeType="OUTSIDE" strokeWidth="0.0" text="Wenn man eine AI starten möchte, so gibt man in die beiden Zeilen IPAdresse und Port ein und drückt ebenfalls auf Start." textAlignment="CENTER" translateY="30.0" wrappingWidth="761.17578125">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Spiel als Client starten:" textAlignment="CENTER" translateY="40.0" wrappingWidth="764.6220703125">
-                                 <font>
-                                    <Font name="System Bold Italic" size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sofern man Client ausgewählt hat, erscheint im nächsten Fenster dieLobby. Hier kann man sich entweder mit einem vorgegebenen Serververbinden (localhost, oder Testserver) oder manuell eine IP Adresse undeinen Port eingeben." textAlignment="CENTER" translateY="50.0" wrappingWidth="763.13671875">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#fff8f8" strokeType="OUTSIDE" strokeWidth="0.0" text="Sobald man verbunden ist, erscheint im Chat Fenster eine Nachricht“Connected to server”. Nun muss man seinen Namen und eine Farbeauswählen und dann auf ready to start game drücken. Sobaldmindestens 3 Clients bereit sind zu spielen wird das Spiel gestartet." textAlignment="CENTER" translateY="70.0" wrappingWidth="762.13671875">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="gameBoardTab" onSelectionChanged="#handleGameBoardTab" text="Das Spielfeld">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Pane layoutY="1.0" prefHeight="408.0" prefWidth="764.0">
-                           <children>
-                              <Text fill="WHITE" layoutX="40.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Im Spiel...">
-                                 <font>
-                                    <Font name="System Bold Italic" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#fffdfd" layoutX="38.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Der eigene Spieler wird immer in der linken oberen Ecke angezeigt.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#fffbfb" layoutX="39.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verwendung der Buttons:" wrappingWidth="242.8271484375">
-                                 <font>
-                                    <Font name="System Bold Italic" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#fffdfd" layoutX="39.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unter dem Namen findet sich der aktuelle Zustand dieses Spielers unddarunter die Resourcen Anzeige in der Reihenfolge Holz, Lehm, Wolle,Getreide und Erz." wrappingWidth="731.13671875">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="31.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statt der Ressourcenanzeige wird bei den anderen Spielern nur dieKartenanzahl angezeigt. Unterhalb der Ressourcenanzeige stehen nochdie aktuellen Siegpunkte, sowie, falls zutreffend, ‘längesteHandelsstraße’ und ‘größte Rittermacht’." wrappingWidth="734.13671875">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Circle fill="WHITE" layoutX="23.0" layoutY="37.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="23.0" layoutY="52.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="23.0" layoutY="96.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Text fill="WHITE" layoutX="39.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Roll dices wird zum Würfeln benutzt, daneben wird das Würfelergebnis einer jeden Runde angezeigt." wrappingWidth="718.13671875">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="39.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bei Klicken des Trading Buttons öffnet sich das Handelsfenster." wrappingWidth="588.306640625">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="40.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechts daneben findet sich ein Button BuyCard mit dem man,sofern man die erforderlichen Rohstoffe besitzt, eineEntwicklungskarte kaufen kann. Weiterhin gibt es einen ButtonPlay Card mit dem sich ein Fesnter mit allen eigenenEntwicklungskarten öffnet. Daraus kann man eine Karteauswählen und spielen, falls erlaubt." wrappingWidth="731.13671875">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="39.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Der Help Button öffnet ein Fenster mit die Spielanleitung.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#fffefe" layoutX="39.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mit dem Button End Turn, signalisiert man dem Server, dassman seinen Zug beenden möchte.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="39.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Der DEBUG Button ist nur dazu da, Json Objekte unabhängigvom Client an den Server zu schicken.">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Circle fill="WHITE" layoutX="28.0" layoutY="228.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="28.0" layoutY="249.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="28.0" layoutY="276.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#fcfcfc" layoutX="28.0" layoutY="338.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="29.0" layoutY="362.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="29.0" layoutY="385.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Text fill="WHITE" layoutX="32.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jede mögliche Straße oder Siedlung wird dem Spieler angezeigt, soferner mit der Maus darüberfährt. Zum Bauen reicht ein einfacher Klick aufden gewünschten Platz. Der Bandit wird auf dem Spielfeld als schwarzerKreis in der Feldmitte angezeigt. Die Häfen werden als Dreieckdargestellt." wrappingWidth="720.13671875">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Circle fill="WHITE" layoutX="25.0" layoutY="143.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0"
+            prefWidth="764.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="network.client.view.helpview.HelpViewController">
+    <center>
+        <TabPane fx:id="pane" prefHeight="504.0" prefWidth="764.0" tabClosingPolicy="UNAVAILABLE"
+                 BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab fx:id="instructionsTab" text="Spielanleitung" onSelectionChanged="#handleInstructionsTab">
+                    <content>
+                        <Pane>
+                            <children>
+                                <VBox layoutY="36.0" prefHeight="394.0" prefWidth="764.0">
+                                    <children>
+                                        <Text fill="WHITE" strokeWidth="0.0" text="Siedler von Catan: Spielanleitung"
+                                              textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="769.13671875">
+                                            <font>
+                                                <Font name="System Bold Italic" size="36.0"/>
+                                            </font>
+                                        </Text>
+                                        <TextField
+                                                text="Spiel starten : Das Spiel kann man jeweils als Server, als Client oder als künstliche Intelligenz starten">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextField>
+                                        <TextField
+                                                text="Das Spielfeld : Informationen über die Darstellung des Spielfelds und die Funktion der Buttons.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextField>
+                                        <TextField
+                                                text="Erträge : Informationen über die Rohstoffe, das Würfeln der Erträge und die Darstellug der Resoursen im Spielfeld">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextField>
+                                        <TextField
+                                                text="Bauen : Erklärung der benötigten Rohstoffkombinationen und jeweils eine Siedling, eine Strasse oder eine Stadt zu bauen.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextField>
+                                        <TextField
+                                                text="Handeln : Anweisungen wie man einen Handel der Rohstoffe durchführt.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextField>
+                                        <TextField text="Räuber : Die Auswirkung des Räubers und seine Versetzung.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextField>
+                                        <TextField text="Entwicklungskarten : Erklärung der Entwicklungskarten.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextField>
+                                        <TextField text="Tipps : Würfelwahrscheinlichkeit.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextField>
+                                        <Button fx:id="btnOpenNewWindow" mnemonicParsing="false"
+                                                onAction="#handleQuickInfo" text="Spielregeln"/>
+                                    </children>
+                                </VBox>
+                            </children>
                         </Pane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="resourcesTab" onSelectionChanged="#handleResourcesTab" text="Erträge">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Text fill="#f5f2f2" layoutX="287.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rohstoffe" textAlignment="CENTER" wrappingWidth="136.953125">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="382.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Holz">
-                           <font>
-                              <Font name="System Italic" size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="379.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lehm">
-                           <font>
-                              <Font name="System Italic" size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="378.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wolle">
-                           <font>
-                              <Font name="System Italic" size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="377.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Getreide">
-                           <font>
-                              <Font name="System Italic" size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="387.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erz">
-                           <font>
-                              <Font name="System Italic" size="15.0" />
-                           </font>
-                        </Text>
-                        <Text fill="#f2f2f2" layoutX="120.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zu Beginn Ihres Zuges clicken Sie auf den Roll dices Button und würfeln damit für alle Spieler die Erträge aus." wrappingWidth="634.13671875">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="54.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeder Spieler enthält für jede Siedlung an einer Landschaft mit der gewürfelten Zah den Rohstoff der Landschaft. Für eine Stadt gibt es 2 Rohstoffe. Unter dem Namen findet sich der aktuelle Zustand dieses Spielers unddarunter die Resourcen Anzeige in der Reihenfolge Holz, Lehm, Wolle,Getreide und Erz." wrappingWidth="701.3515625">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Text>
-                        <Circle fill="#f4f6f8" layoutX="35.0" layoutY="290.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <ImageView fitHeight="167.0" fitWidth="133.0" layoutX="258.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/standard/resources.png" />
-                           </image>
-                        </ImageView>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="buildTab" text="Bauen" onSelectionChanged="#handleBuildTab" >
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane layoutX="73.0" layoutY="142.0" prefHeight="214.0" prefWidth="520.0">
-                           <center>
-                              <GridPane hgap="5.0" vgap="10.0">
-                                 <children>
-                                    <Label text="Street" />
-                                    <Label text="Village" GridPane.rowIndex="1" />
-                                    <Label text="City" GridPane.rowIndex="2" />
-                                    <Label text="Developement Card" GridPane.rowIndex="3" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <children>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconLumber.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconBrick.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconGrain.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconWool.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1">
-                                       <children>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconLumber.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconBrick.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <children>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconGrain.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconGrain.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconOre.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconOre.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconOre.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                       <children>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconGrain.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconWool.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="/textures/standard/iconOre.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </HBox>
-                                    <Label text="0 VP" GridPane.columnIndex="2" />
-                                    <Label text="1 VP" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <Label text="2 VP" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                    <Label text="? VP" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                 </children>
-                                 <columnConstraints>
-                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" percentWidth="30.0" prefWidth="86.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" percentWidth="50.0" prefWidth="114.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
-                                 </columnConstraints>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                              </GridPane>
-                           </center>
-                           <top>
-                              <StackPane prefHeight="35.0" prefWidth="520.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Label text="Building costs">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </StackPane>
-                           </top>
-                        </BorderPane>
-                        <Text fill="WHITE" layoutX="31.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Um zu bauen , muss der Spieler bestimmte Kombinationen von Rohstoffkarten abgeben.">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="298.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bauen">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Text>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="tradeTab" onSelectionChanged="#handleTradeTab" text="Handeln">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Text fill="WHITE" layoutX="315.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Handeln">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Text>
-                        <TextArea layoutX="21.0" layoutY="46.0" prefHeight="319.0" prefWidth="580.0" text="Ein Spieler kann ein Handelsangebot erstellen, man unter Give und Get das Angebot erstellt und &#10;anschließend mit PlaceOffer bestätgt.&#10;&#10;Man kann ein Handelsangebot jederzeit wieder mit Cancel Offer zurückziehen.&#10;&#10;Nun können andere Spieler dieses Angebot links in der AcceptingTrade Liste finden und bei einem&#10; Klick wahlweise akzeptieren oder ablehnen.&#10;&#10;Sobald ein anderer Spieler ein Handlsangebot akzeptiert hat wird diese bei dem ersten Spieler unter&#10; Accepting players angezeigt.&#10;&#10;Durch Anwählen eines kzeptierenden Spielers und anschließender Bestätigung wird ein Handel ausgeführt.&#10;Der Seehandel befindet sich unter dem zweiten Reiter.&#10;&#10; Hier kann man,sofern man einen bestimmten Hafen besitzt, einen auswählen und über Give und Get einen&#10; Handel festlegen." />
-                        <Circle fill="WHITE" layoutX="14.0" layoutY="62.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="14.0" layoutY="123.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="14.0" layoutY="167.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="14.0" layoutY="230.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="14.0" layoutY="296.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="14.0" layoutY="199.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <ImageView fitHeight="369.0" fitWidth="142.0" layoutX="608.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/standard/placeOffer.png" />
-                           </image>
-                        </ImageView>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="robberTab" onSelectionChanged="#handleRobberTab" text="Räuber">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Text fill="WHITE" layoutX="340.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Räuber">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="171.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beim Wurf einer 7 schlagt der Räuber zu. Wer mehr als sieben Rohstoffkarten besitzt, muss die Hälfte abgeben. Anschliessend versetzt man den Räuber." wrappingWidth="572.13671875">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Text>
-                        <TextArea layoutX="212.0" layoutY="149.0" prefHeight="107.0" prefWidth="447.0" text="Räuber auf ein anderes Landfeld versetzen:&#10;Dann raubt er einem Mitspieler, der ine Siedlung oder Stadt&#10;an dem Landfeld besitzt, auf welches der Räuber gestellt &#10;wurde, eine Rohstoffkarte.&#10;&#10;">
-                           <font>
-                              <Font name="System Italic" size="16.0" />
-                           </font>
-                        </TextArea>
-                        <TextArea layoutX="212.0" layoutY="266.0" prefHeight="131.0" prefWidth="448.0" text="&#10;Im Spiel:&#10;Der Räuber wird versetzt indem man auf ein Spielfeld klickt (nicht auf&#10;die Würfelzahl!) und in dem sich öffnenden Fenster einen Spieler&#10;auswählt und mit OK bestätigt">
-                           <font>
-                              <Font name="System Italic" size="14.0" />
-                           </font>
-                        </TextArea>
-                        <ImageView fitHeight="150.0" fitWidth="164.0" layoutX="25.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/standard/robber.png" />
-                           </image>
-                        </ImageView>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="developmentCardsTab" onSelectionChanged="#handleDevelopmentCardsTab" text="Entwicklungskarten">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Text fill="WHITE" layoutX="243.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entwicklungskarten">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In jedem Zug darfst du nur eine einzige Karte ausspielen und es darf keine sein, die du im gleichen Zug gekauft hast." textAlignment="CENTER" wrappingWidth="742.0">
-                           <font>
-                              <Font name="System Italic" size="16.0" />
-                           </font>
-                        </Text>
-                        <TextArea layoutX="14.0" layoutY="116.0" prefHeight="260.0" prefWidth="418.0" text="Erfindung (Invention Card) :&#10;Du darfst dir zwei beliebige Rohstoffe aussuchen.&#10;&#10;Straßenbau (Build Streets) :&#10;Du darfst kostenlos zei Strassen bauen.&#10;&#10;Ritterkarte(Knight) :&#10;Du darfst den Räuber vesetzen.&#10;&#10;Monopol - Monopoly Card :&#10;Du wirst dazu aufgefordert eine Rohstoffsorte zu wählen. &#10;Du erhälst dann von deinen Mitspielern alle Rohstoffe dieser Art.&#10;">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </TextArea>
-                        <ImageView fitHeight="313.0" fitWidth="303.0" layoutX="439.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="/textures/standard/developmentCards.png" />
-                           </image>
-                        </ImageView>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="tipsTab" onSelectionChanged="#handleTipsTab" text="Tipps">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Text fill="WHITE" layoutX="246.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wichtige Tipps" wrappingWidth="206.13671875">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="19.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die Ergiebigkeit jeder Landschaft ist abhängig von ihrer Würfelzahl. Der Abbildung unten kannst du entnehmen, wie oft eine Zahl(Räuber 7) bei insgesamt 36 Wurfelwürfen im Durchschnitt gewürfelt wird." wrappingWidth="725.13671875">
-                           <font>
-                              <Font name="System Italic" size="16.0" />
-                           </font>
-                        </Text>
-                        <Circle fill="WHITE" layoutX="132.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="176.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="217.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="262.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="307.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="#0a0101" layoutX="356.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="398.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="443.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="486.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="524.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="567.0" layoutY="119.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Text layoutX="122.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" wrappingWidth="19.353515625">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="167.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" wrappingWidth="17.353515625">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="207.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" wrappingWidth="20.353515625">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="257.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text fill="#cd0909" layoutX="302.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text fill="#e42b2b" layoutX="393.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="438.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="476.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="515.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="11">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="557.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="120.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="165.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="206.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="256.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="301.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="350.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="392.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="436.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="480.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="518.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="556.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1x">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <TextArea layoutX="24.0" layoutY="298.0" prefHeight="83.0" prefWidth="717.0" text="Vielfalt:&#10;Du solltest deine Siedlung möglichst an vielen verschiedenen Landschaften gründen, damit die&#10; Wahrscheinlichkeit besteht an jedem Rohstoff zu kommen.">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </TextArea>
-                        <TextArea layoutX="22.0" layoutY="186.0" prefHeight="110.0" prefWidth="719.0" text="Du solltest daher versuchen deine Siedlungen möglichst an Landschaften mit guten&#10;Zahlen zu gründen. Man muss aber immer vor Augen halten,dass es sich hierbei nur um&#10;eine erwartete Wahrscheinlichkeit handelt. Das bedeutet eben nicht, dass sie auch so&#10;eintreten muss. ">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </TextArea>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </center>
+                    </content>
+                </Tab>
+                <Tab fx:id="startGameTab" onSelectionChanged="#handleStartGameTab" text="Spiel starten">
+                    <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <VBox layoutX="-1.0" prefHeight="399.0" prefWidth="764.0">
+                                    <children>
+                                        <Text fill="#fffdfd" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Spiel als Server starten:" textAlignment="CENTER" translateY="10.0"
+                                              wrappingWidth="762.498046875">
+                                            <font>
+                                                <Font name="System Bold Italic" size="18.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text=" Als Server kann man in der vorgegebenen Zeile einen Port angeben. Mit einem Click auf Start wird der Server gestartet und die eigene IP Adresse wird unter der Zeile angezeigt. Im Laufe des Spiels kann man den Server jederzeit wieder mit Stop beenden."
+                                              textAlignment="CENTER" translateY="15.0" wrappingWidth="762.13671875">
+                                            <font>
+                                                <Font size="16.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="#fff9f9" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Spiel als AI (Künstliche Intelligenz) starten:"
+                                              textAlignment="CENTER" translateY="20.0" wrappingWidth="762.13671875">
+                                            <font>
+                                                <Font name="System Bold Italic" size="18.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="#fffdfd" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Wenn man eine AI starten möchte, so gibt man in die beiden Zeilen IPAdresse und Port ein und drückt ebenfalls auf Start."
+                                              textAlignment="CENTER" translateY="30.0" wrappingWidth="761.17578125">
+                                            <font>
+                                                <Font size="16.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Spiel als Client starten:" textAlignment="CENTER" translateY="40.0"
+                                              wrappingWidth="764.6220703125">
+                                            <font>
+                                                <Font name="System Bold Italic" size="17.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Sofern man Client ausgewählt hat, erscheint im nächsten Fenster dieLobby. Hier kann man sich entweder mit einem vorgegebenen Serververbinden (localhost, oder Testserver) oder manuell eine IP Adresse undeinen Port eingeben."
+                                              textAlignment="CENTER" translateY="50.0" wrappingWidth="763.13671875">
+                                            <font>
+                                                <Font size="16.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="#fff8f8" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Sobald man verbunden ist, erscheint im Chat Fenster eine Nachricht“Connected to server”. Nun muss man seinen Namen und eine Farbeauswählen und dann auf ready to start game drücken. Sobaldmindestens 3 Clients bereit sind zu spielen wird das Spiel gestartet."
+                                              textAlignment="CENTER" translateY="70.0" wrappingWidth="762.13671875">
+                                            <font>
+                                                <Font size="16.0"/>
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="gameBoardTab" onSelectionChanged="#handleGameBoardTab" text="Das Spielfeld">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Pane layoutY="1.0" prefHeight="408.0" prefWidth="764.0">
+                                    <children>
+                                        <Text fill="WHITE" layoutX="40.0" layoutY="21.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0" text="Im Spiel...">
+                                            <font>
+                                                <Font name="System Bold Italic" size="18.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="#fffdfd" layoutX="38.0" layoutY="43.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Der eigene Spieler wird immer in der linken oberen Ecke angezeigt.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="#fffbfb" layoutX="39.0" layoutY="211.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0" text="Verwendung der Buttons:"
+                                              wrappingWidth="242.8271484375">
+                                            <font>
+                                                <Font name="System Bold Italic" size="18.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="#fffdfd" layoutX="39.0" layoutY="60.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Unter dem Namen findet sich der aktuelle Zustand dieses Spielers unddarunter die Resourcen Anzeige in der Reihenfolge Holz, Lehm, Wolle,Getreide und Erz."
+                                              wrappingWidth="731.13671875">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" layoutX="31.0" layoutY="98.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Statt der Ressourcenanzeige wird bei den anderen Spielern nur dieKartenanzahl angezeigt. Unterhalb der Ressourcenanzeige stehen nochdie aktuellen Siegpunkte, sowie, falls zutreffend, ‘längesteHandelsstraße’ und ‘größte Rittermacht’."
+                                              wrappingWidth="734.13671875">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Circle fill="WHITE" layoutX="23.0" layoutY="37.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                        <Circle fill="WHITE" layoutX="23.0" layoutY="52.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                        <Circle fill="WHITE" layoutX="23.0" layoutY="96.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                        <Text fill="WHITE" layoutX="39.0" layoutY="234.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Roll dices wird zum Würfeln benutzt, daneben wird das Würfelergebnis einer jeden Runde angezeigt."
+                                              wrappingWidth="718.13671875">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" layoutX="39.0" layoutY="255.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Bei Klicken des Trading Buttons öffnet sich das Handelsfenster."
+                                              wrappingWidth="588.306640625">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" layoutX="40.0" layoutY="280.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Rechts daneben findet sich ein Button BuyCard mit dem man,sofern man die erforderlichen Rohstoffe besitzt, eineEntwicklungskarte kaufen kann. Weiterhin gibt es einen ButtonPlay Card mit dem sich ein Fesnter mit allen eigenenEntwicklungskarten öffnet. Daraus kann man eine Karteauswählen und spielen, falls erlaubt."
+                                              wrappingWidth="731.13671875">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" layoutX="39.0" layoutY="343.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Der Help Button öffnet ein Fenster mit die Spielanleitung.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="#fffefe" layoutX="39.0" layoutY="368.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Mit dem Button End Turn, signalisiert man dem Server, dassman seinen Zug beenden möchte.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" layoutX="39.0" layoutY="390.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Der DEBUG Button ist nur dazu da, Json Objekte unabhängigvom Client an den Server zu schicken.">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Circle fill="WHITE" layoutX="28.0" layoutY="228.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                        <Circle fill="WHITE" layoutX="28.0" layoutY="249.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                        <Circle fill="WHITE" layoutX="28.0" layoutY="276.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                        <Circle fill="#fcfcfc" layoutX="28.0" layoutY="338.0" radius="5.0"
+                                                stroke="BLACK" strokeType="INSIDE"/>
+                                        <Circle fill="WHITE" layoutX="29.0" layoutY="362.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                        <Circle fill="WHITE" layoutX="29.0" layoutY="385.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                        <Text fill="WHITE" layoutX="32.0" layoutY="154.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0"
+                                              text="Jede mögliche Straße oder Siedlung wird dem Spieler angezeigt, soferner mit der Maus darüberfährt. Zum Bauen reicht ein einfacher Klick aufden gewünschten Platz. Der Bandit wird auf dem Spielfeld als schwarzerKreis in der Feldmitte angezeigt. Die Häfen werden als Dreieckdargestellt."
+                                              wrappingWidth="720.13671875">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Text>
+                                        <Circle fill="WHITE" layoutX="25.0" layoutY="143.0" radius="5.0" stroke="BLACK"
+                                                strokeType="INSIDE"/>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="resourcesTab" onSelectionChanged="#handleResourcesTab" text="Erträge">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Text fill="#f5f2f2" layoutX="287.0" layoutY="48.0" strokeType="OUTSIDE"
+                                      strokeWidth="0.0" text="Rohstoffe" textAlignment="CENTER"
+                                      wrappingWidth="136.953125">
+                                    <font>
+                                        <Font name="System Bold Italic" size="24.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="382.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Holz">
+                                    <font>
+                                        <Font name="System Italic" size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="379.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Lehm">
+                                    <font>
+                                        <Font name="System Italic" size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="378.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Wolle">
+                                    <font>
+                                        <Font name="System Italic" size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="377.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Getreide">
+                                    <font>
+                                        <Font name="System Italic" size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="387.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erz">
+                                    <font>
+                                        <Font name="System Italic" size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text fill="#f2f2f2" layoutX="120.0" layoutY="255.0" strokeType="OUTSIDE"
+                                      strokeWidth="0.0"
+                                      text="Zu Beginn Ihres Zuges clicken Sie auf den Roll dices Button und würfeln damit für alle Spieler die Erträge aus."
+                                      wrappingWidth="634.13671875">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="54.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Jeder Spieler enthält für jede Siedlung an einer Landschaft mit der gewürfelten Zah den Rohstoff der Landschaft. Für eine Stadt gibt es 2 Rohstoffe. Unter dem Namen findet sich der aktuelle Zustand dieses Spielers unddarunter die Resourcen Anzeige in der Reihenfolge Holz, Lehm, Wolle,Getreide und Erz."
+                                      wrappingWidth="701.3515625">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                </Text>
+                                <Circle fill="#f4f6f8" layoutX="35.0" layoutY="290.0" radius="6.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <ImageView fitHeight="167.0" fitWidth="133.0" layoutX="258.0" layoutY="65.0"
+                                           pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="/textures/standard/resources.png"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="buildTab" text="Bauen" onSelectionChanged="#handleBuildTab">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <BorderPane layoutX="73.0" layoutY="142.0" prefHeight="214.0" prefWidth="520.0">
+                                    <center>
+                                        <GridPane hgap="5.0" vgap="10.0">
+                                            <children>
+                                                <Label text="Street"/>
+                                                <Label text="Village" GridPane.rowIndex="1"/>
+                                                <Label text="City" GridPane.rowIndex="2"/>
+                                                <Label text="Developement Card" GridPane.rowIndex="3"/>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+                                                      spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconLumber.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconBrick.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconGrain.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconWool.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+                                                      spacing="20.0" GridPane.columnIndex="1">
+                                                    <children>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconLumber.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconBrick.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+                                                      spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconGrain.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconGrain.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconOre.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconOre.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconOre.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+                                                      spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                    <children>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconGrain.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconWool.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="/textures/standard/iconOre.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                    </children>
+                                                </HBox>
+                                                <Label text="0 VP" GridPane.columnIndex="2"/>
+                                                <Label text="1 VP" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                                <Label text="2 VP" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                                                <Label text="? VP" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="94.0"
+                                                                   minWidth="10.0" percentWidth="30.0"
+                                                                   prefWidth="86.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0"
+                                                                   percentWidth="50.0" prefWidth="114.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0"
+                                                                   prefWidth="100.0"/>
+                                            </columnConstraints>
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                            </padding>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                        </GridPane>
+                                    </center>
+                                    <top>
+                                        <StackPane prefHeight="35.0" prefWidth="520.0" BorderPane.alignment="CENTER">
+                                            <children>
+                                                <Label text="Building costs">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0"/>
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </StackPane>
+                                    </top>
+                                </BorderPane>
+                                <Text fill="WHITE" layoutX="31.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Um zu bauen , muss der Spieler bestimmte Kombinationen von Rohstoffkarten abgeben.">
+                                    <font>
+                                        <Font size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="298.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Bauen">
+                                    <font>
+                                        <Font name="System Bold Italic" size="24.0"/>
+                                    </font>
+                                </Text>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tradeTab" onSelectionChanged="#handleTradeTab" text="Handeln">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Text fill="WHITE" layoutX="315.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Handeln">
+                                    <font>
+                                        <Font name="System Bold Italic" size="24.0"/>
+                                    </font>
+                                </Text>
+                                <TextArea layoutX="21.0" layoutY="46.0" prefHeight="319.0" prefWidth="580.0"
+                                          text="Ein Spieler kann ein Handelsangebot erstellen, man unter Give und Get das Angebot erstellt und &#10;anschließend mit PlaceOffer bestätgt.&#10;&#10;Man kann ein Handelsangebot jederzeit wieder mit Cancel Offer zurückziehen.&#10;&#10;Nun können andere Spieler dieses Angebot links in der AcceptingTrade Liste finden und bei einem&#10; Klick wahlweise akzeptieren oder ablehnen.&#10;&#10;Sobald ein anderer Spieler ein Handlsangebot akzeptiert hat wird diese bei dem ersten Spieler unter&#10; Accepting players angezeigt.&#10;&#10;Durch Anwählen eines kzeptierenden Spielers und anschließender Bestätigung wird ein Handel ausgeführt.&#10;Der Seehandel befindet sich unter dem zweiten Reiter.&#10;&#10; Hier kann man,sofern man einen bestimmten Hafen besitzt, einen auswählen und über Give und Get einen&#10; Handel festlegen."/>
+                                <Circle fill="WHITE" layoutX="14.0" layoutY="62.0" radius="6.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="14.0" layoutY="123.0" radius="6.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="14.0" layoutY="167.0" radius="6.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="14.0" layoutY="230.0" radius="6.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="14.0" layoutY="296.0" radius="6.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="14.0" layoutY="199.0" radius="6.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <ImageView fitHeight="369.0" fitWidth="142.0" layoutX="608.0" layoutY="65.0"
+                                           pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="/textures/standard/placeOffer.png"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="robberTab" onSelectionChanged="#handleRobberTab" text="Räuber">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Text fill="WHITE" layoutX="340.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Räuber">
+                                    <font>
+                                        <Font name="System Bold Italic" size="24.0"/>
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="171.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Beim Wurf einer 7 schlagt der Räuber zu. Wer mehr als sieben Rohstoffkarten besitzt, muss die Hälfte abgeben. Anschliessend versetzt man den Räuber."
+                                      wrappingWidth="572.13671875">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                </Text>
+                                <TextArea layoutX="212.0" layoutY="149.0" prefHeight="107.0" prefWidth="447.0"
+                                          text="Räuber auf ein anderes Landfeld versetzen:&#10;Dann raubt er einem Mitspieler, der ine Siedlung oder Stadt&#10;an dem Landfeld besitzt, auf welches der Räuber gestellt &#10;wurde, eine Rohstoffkarte.&#10;&#10;">
+                                    <font>
+                                        <Font name="System Italic" size="16.0"/>
+                                    </font>
+                                </TextArea>
+                                <TextArea layoutX="212.0" layoutY="266.0" prefHeight="131.0" prefWidth="448.0"
+                                          text="&#10;Im Spiel:&#10;Der Räuber wird versetzt indem man auf ein Spielfeld klickt (nicht auf&#10;die Würfelzahl!) und in dem sich öffnenden Fenster einen Spieler&#10;auswählt und mit OK bestätigt">
+                                    <font>
+                                        <Font name="System Italic" size="14.0"/>
+                                    </font>
+                                </TextArea>
+                                <ImageView fitHeight="150.0" fitWidth="164.0" layoutX="25.0" layoutY="170.0"
+                                           pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="/textures/standard/robber.png"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="developmentCardsTab" onSelectionChanged="#handleDevelopmentCardsTab"
+                     text="Entwicklungskarten">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Text fill="WHITE" layoutX="243.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Entwicklungskarten">
+                                    <font>
+                                        <Font name="System Bold Italic" size="24.0"/>
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="In jedem Zug darfst du nur eine einzige Karte ausspielen und es darf keine sein, die du im gleichen Zug gekauft hast."
+                                      textAlignment="CENTER" wrappingWidth="742.0">
+                                    <font>
+                                        <Font name="System Italic" size="16.0"/>
+                                    </font>
+                                </Text>
+                                <TextArea layoutX="14.0" layoutY="116.0" prefHeight="260.0" prefWidth="418.0"
+                                          text="Erfindung (Invention Card) :&#10;Du darfst dir zwei beliebige Rohstoffe aussuchen.&#10;&#10;Straßenbau (Build Streets) :&#10;Du darfst kostenlos zei Strassen bauen.&#10;&#10;Ritterkarte(Knight) :&#10;Du darfst den Räuber vesetzen.&#10;&#10;Monopol - Monopoly Card :&#10;Du wirst dazu aufgefordert eine Rohstoffsorte zu wählen. &#10;Du erhälst dann von deinen Mitspielern alle Rohstoffe dieser Art.&#10;">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </TextArea>
+                                <ImageView fitHeight="313.0" fitWidth="303.0" layoutX="439.0" layoutY="116.0"
+                                           pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="/textures/standard/developmentCards.png"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tipsTab" onSelectionChanged="#handleTipsTab" text="Tipps">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Text fill="WHITE" layoutX="246.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Wichtige Tipps" wrappingWidth="206.13671875">
+                                    <font>
+                                        <Font name="System Bold Italic" size="24.0"/>
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="19.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Die Ergiebigkeit jeder Landschaft ist abhängig von ihrer Würfelzahl. Der Abbildung unten kannst du entnehmen, wie oft eine Zahl(Räuber 7) bei insgesamt 36 Wurfelwürfen im Durchschnitt gewürfelt wird."
+                                      wrappingWidth="725.13671875">
+                                    <font>
+                                        <Font name="System Italic" size="16.0"/>
+                                    </font>
+                                </Text>
+                                <Circle fill="WHITE" layoutX="132.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="176.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="217.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="262.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="307.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="#0a0101" layoutX="356.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="398.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="443.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="486.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="524.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Circle fill="WHITE" layoutX="567.0" layoutY="119.0" radius="16.0" stroke="BLACK"
+                                        strokeType="INSIDE"/>
+                                <Text layoutX="122.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2"
+                                      wrappingWidth="19.353515625">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="167.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3"
+                                      wrappingWidth="17.353515625">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="207.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4"
+                                      wrappingWidth="20.353515625">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="257.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text fill="#cd0909" layoutX="302.0" layoutY="126.0" strokeType="OUTSIDE"
+                                      strokeWidth="0.0" text="6">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text fill="#e42b2b" layoutX="393.0" layoutY="126.0" strokeType="OUTSIDE"
+                                      strokeWidth="0.0" text="8">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="438.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="476.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="515.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="11">
+                                    <font>
+                                        <Font name="System Bold" size="16.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="557.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="120.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="165.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="206.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="256.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="301.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="350.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="392.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="436.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="480.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="518.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <Text layoutX="556.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1x">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Text>
+                                <TextArea layoutX="24.0" layoutY="298.0" prefHeight="83.0" prefWidth="717.0"
+                                          text="Vielfalt:&#10;Du solltest deine Siedlung möglichst an vielen verschiedenen Landschaften gründen, damit die&#10; Wahrscheinlichkeit besteht an jedem Rohstoff zu kommen.">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                </TextArea>
+                                <TextArea layoutX="22.0" layoutY="186.0" prefHeight="110.0" prefWidth="719.0"
+                                          text="Du solltest daher versuchen deine Siedlungen möglichst an Landschaften mit guten&#10;Zahlen zu gründen. Man muss aber immer vor Augen halten,dass es sich hierbei nur um&#10;eine erwartete Wahrscheinlichkeit handelt. Das bedeutet eben nicht, dass sie auch so&#10;eintreten muss. ">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                </TextArea>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>

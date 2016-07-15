@@ -55,7 +55,7 @@ public class HelpViewController {
 
 
     /**
-     * Handle Instruction button in Help View.
+     * Handle Instruction tab in Help View.
      *
      * @param event the event
      */
@@ -76,7 +76,7 @@ public class HelpViewController {
     }
 
     /**
-     * Handle Start Game button in Help View.
+     * Handle Start Game tab in Help View.
      *
      * @param event the event
      */
@@ -94,7 +94,7 @@ public class HelpViewController {
     }
 
     /**
-     * Handle Game Board button in Help View.
+     * Handle Game Board tab in Help View.
      *
      * @param event the event
      */
@@ -112,7 +112,7 @@ public class HelpViewController {
     }
 
     /**
-     * Handle Resource button in Help View.
+     * Handle Resource tab in Help View.
      *
      * @param event the event
      */
@@ -129,7 +129,7 @@ public class HelpViewController {
     }
 
     /**
-     * Handle Build button in Help View.
+     * Handle Build tab in Help View.
      *
      * @param event the event
      */
@@ -146,7 +146,7 @@ public class HelpViewController {
     }
 
     /**
-     * Handle Trade button in Help View.
+     * Handle Trade tab in Help View.
      *
      * @param event the event
      */
@@ -163,7 +163,7 @@ public class HelpViewController {
     }
 
     /**
-     * Handle Robber button in Help View.
+     * Handle Robber tab in Help View.
      *
      * @param event the event
      */
@@ -180,7 +180,7 @@ public class HelpViewController {
     }
 
     /**
-     * Handle Development Card button in Help View.
+     * Handle Development Card tab in Help View.
      *
      * @param event the event
      */
@@ -197,7 +197,7 @@ public class HelpViewController {
     }
 
     /**
-     * Handle Tips button in Help View.
+     * Handle Tips tab in Help View.
      *
      * @param event the event
      */
