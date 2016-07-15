@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
-import network.client.view.ServerResponseRunnable;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
@@ -321,8 +320,9 @@ public class TradeController {
 				} else {
 					serverController.serverResponse(modelID, "Resourcenstapel leer");
 				}
+			} else {
+				serverController.serverResponse(modelID, "Unzulässiges Handelsangebot");
 			}
-			serverController.serverResponse(modelID, "Unzulässiges Handelsangebot");
 		}
 	}
 
