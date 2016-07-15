@@ -662,7 +662,9 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleEndTurnButton(ActionEvent event) {
 		viewController.getClientController().endTurn();
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 
 		// playButtonSound();
 	}
@@ -720,7 +722,10 @@ public class GameViewController implements Initializable {
 	@FXML
 	void handleBuyCardButton(ActionEvent event) throws IOException {
 		viewController.getClientController().requestBuyDevelopmentCard();
-		Soundeffects.BUYCARD.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		
+		Soundeffects.BUYCARD.play();
+		}
 		// playCardButton.setDisable(true);
 	}
 
@@ -779,7 +784,9 @@ public class GameViewController implements Initializable {
 			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 
 		// playButtonSound();
 	}
@@ -800,7 +807,9 @@ public class GameViewController implements Initializable {
 		Scene cheatScene = new Scene(cheatRoot);
 		TextField cheatField = new TextField();
 		Button ok = new Button("Send JSON");
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 		// playButtonSound();
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -844,7 +853,9 @@ public class GameViewController implements Initializable {
 		Scene cheatScene = new Scene(cheatRoot);
 		TextField cheatField = new TextField();
 		Button ok = new Button("Send Cheat");
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 		// playButtonSound();
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -983,7 +994,9 @@ public class GameViewController implements Initializable {
 	 */
 	public void receiveChatMessage(String line) {
 		messages.appendText(line + "\n");
-		Soundeffects.CHATRECEIVE.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.CHATRECEIVE.play();
+		}
 		// playNotificationSound();
 	}
 
@@ -1001,7 +1014,9 @@ public class GameViewController implements Initializable {
 	 *            the model ID
 	 */
 	public void setStreet(int u, int v, int dir, int modelID) {
-		Soundeffects.BUILD.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+			Soundeffects.BUILD.play();
+		}
 		Line street = streets[u + 3][v + 3][dir];
 		street.setOpacity(1.0);
 		street.setStroke(playerColors.get(modelID));
@@ -1021,7 +1036,9 @@ public class GameViewController implements Initializable {
 		bandit.setCenterX(fieldCoordinates[u + 3][v + 3][0]);
 		bandit.setCenterY(fieldCoordinates[u + 3][v + 3][1]);
 		bandit.setOpacity(1.0);
-		Soundeffects.ROBBER.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.ROBBER.play();
+		}
 
 	}
 
@@ -1061,8 +1078,9 @@ public class GameViewController implements Initializable {
 	 *            the player color
 	 */
 	public void setVillage(int u, int v, int dir, Color playerColor) {
-		if (!Soundeffects.isMuted())
+		if (!Soundeffects.isMuted()){
 			Soundeffects.BUILD.play();
+		}
 		ImageView village = villages[u + 3][v + 3][dir];
 
 		village.setEffect(getBlushEffect(playerColor, village));
@@ -1206,7 +1224,9 @@ public class GameViewController implements Initializable {
 	 *            the new dice roll result
 	 */
 	public void setDiceRollResult(Integer playerID, int result) {
-		Soundeffects.DICEROLL.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.DICEROLL.play();
+		}
 		diceCircle.setFill(playerColors.get(playerID));
 		diceResult.setText(String.valueOf(result));
 	}
@@ -1253,13 +1273,17 @@ public class GameViewController implements Initializable {
 			playerStatusOne.setText(state.toString());
 			selfState = state;
 			if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLongestRoad()) {
-				Soundeffects.LONGESTROAD.play(Soundeffects.globalVolume);
+				if (!Soundeffects.isMuted()){
+				Soundeffects.LONGESTROAD.play();
+				}
 				selfLongestTradeRoute.setText("Longest Trade Road");
 			} else {
 				selfLongestTradeRoute.setText("");
 			}
 			if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLargestArmy()) {
-				Soundeffects.SWORD.play(Soundeffects.globalVolume);
+				if (!Soundeffects.isMuted()){
+				Soundeffects.SWORD.play();
+				}
 				selfGreatestKnightForce.setText("Largest Army");
 			} else {
 				selfGreatestKnightForce.setText("");
@@ -1383,7 +1407,9 @@ public class GameViewController implements Initializable {
 	 *            the player color
 	 */
 	public void setCity(int u, int v, int dir, Color playerColor) {
-		Soundeffects.BUILD.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+			Soundeffects.BUILD.play();
+		}
 		ImageView city = villages[u + 3][v + 3][dir];
 		city.setImage(new Image("/textures/city.png"));
 		city.setEffect(getBlushEffect(playerColor, city));
@@ -1492,7 +1518,9 @@ public class GameViewController implements Initializable {
 
 			@Override
 			public void run() {
-				Soundeffects.VICTORY.play(Soundeffects.globalVolume);
+				if (!Soundeffects.isMuted()){
+				Soundeffects.VICTORY.play();
+				}
 				// TODO Loss Sound
 				VBox vBox = new VBox(10);
 				vBox.setPadding(new Insets(5));

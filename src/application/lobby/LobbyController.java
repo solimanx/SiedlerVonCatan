@@ -246,7 +246,9 @@ public class LobbyController {
 			// FOR DEBUG ONLY ASSUME SERVER CONFIRMED
 			logger.debug("Profile" + name + chosenColor);
 			readyButton.setDisable(false);
-			Soundeffects.SELECT.play(Soundeffects.globalVolume);
+			if (!Soundeffects.isMuted()){
+			Soundeffects.SELECT.play();
+			}
 
 			// playButtonSound();
 		}

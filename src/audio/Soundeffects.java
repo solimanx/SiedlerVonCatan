@@ -23,14 +23,19 @@ public class Soundeffects {
 		if (SOUNDTRACK2.isPlaying()) {
 			SOUNDTRACK2.stop();
 		}
+		if (!Soundeffects.isMuted()){
 		SOUNDTRACK1.play();
+		}
 	}
 
 	public static void playSoundtrack2() {
 		if (SOUNDTRACK1.isPlaying()) {
 			SOUNDTRACK1.stop();
 		}
+		if (!Soundeffects.isMuted()){
 		SOUNDTRACK2.play();
+		}
+		
 	}
 
 	public static void setVolume(double volume) {

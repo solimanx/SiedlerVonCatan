@@ -408,7 +408,9 @@ public class TradeViewController {
 	void handleSeaTradeButton(ActionEvent event) {
 		if (viewController.getClientController().getGameLogic().getBoard().getPlayer(0)
 				.getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
-			Soundeffects.HARBOUR.play(Soundeffects.globalVolume);
+			if (!Soundeffects.isMuted()){
+			Soundeffects.HARBOUR.play();
+			}
 			viewController.getClientController().requestSeaTrade(resultOffer, resultDemand);
 			stage.hide();
 			resultDemand = new int[5];

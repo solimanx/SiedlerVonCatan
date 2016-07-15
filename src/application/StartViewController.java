@@ -121,7 +121,9 @@ public class StartViewController {
 		aiPort.setDisable(false);
 		aiServer.setDisable(false);
 		serverPort.setDisable(true);
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 		// playButtonSound();
 	}
 
@@ -138,7 +140,9 @@ public class StartViewController {
 		serverPort.setDisable(true);
 		aiPort.setDisable(true);
 		aiServer.setDisable(true);
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 
 		// playButtonSound();
 	}
@@ -155,7 +159,9 @@ public class StartViewController {
 		serverPort.setDisable(false);
 		aiPort.setDisable(true);
 		aiServer.setDisable(true);
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 		if (stopServer.disabledProperty().getValue()){
 			startButton.setDisable(false);
 		} else {
@@ -178,7 +184,9 @@ public class StartViewController {
 		startClient.setDisable(false);
 		startAI.setDisable(false);
 		startButton.setDisable(false);
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 
 		// playButtonSound();
 	}
@@ -192,8 +200,9 @@ public class StartViewController {
 	@FXML
 	void handleStartButton(ActionEvent event) {
 		RadioButton rb = (RadioButton) startMode.getSelectedToggle();
-		Soundeffects.SELECT.play(Soundeffects.globalVolume);
-
+		if (!Soundeffects.isMuted()){
+		Soundeffects.SELECT.play();
+		}
 		switch (rb.getText()) {
 		case "Client":
 			Thread clientThread = new Thread(new Runnable() {
