@@ -1663,15 +1663,15 @@ public class GameViewController implements Initializable {
 	public void setDevCards(int modelID) {
 		switch (playerIDtoViewPosition.get(modelID)) {
 		case 2:
-			playerTwoCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
+			playerTwoDevCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
 					.getPlayer(modelID).getPlayerUnknownCards());
 			break;
 		case 3:
-			playerThreeCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
+			playerThreeDevCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
 					.getPlayer(modelID).getPlayerUnknownCards());
 			break;
 		case 4:
-			playerFourCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
+			playerFourDevCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
 					.getPlayer(modelID).getPlayerUnknownCards());
 			break;
 
@@ -1904,8 +1904,8 @@ public class GameViewController implements Initializable {
 			villageImageView.setTranslateX(center[0] - 20);
 			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
-			villageImageView.setScaleX(1 - (15 / radius));
-			villageImageView.setScaleY(1 - (15 / radius));
+			villageImageView.setScaleX(1 - (10 / radius));
+			villageImageView.setScaleY(1 - (10 / radius));
 
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
 			villageImageView.setCache(true);
