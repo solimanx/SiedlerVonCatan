@@ -160,7 +160,7 @@
 }
 
 .shadow, .shaddow {
-	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 15, 0, 0, 0);
 }
 
 .harbourGrid .radio-button:disabled {
@@ -168,7 +168,7 @@
 }
 
 .hexborder {
-	-fx-stroke: rgba(255,255,255,0.6);
+	-fx-stroke: rgba(0,0,0,0.6);
 }
 
 

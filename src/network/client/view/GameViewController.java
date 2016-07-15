@@ -231,6 +231,15 @@ public class GameViewController implements Initializable {
 	private Label playerFourVPoints;
 
 	@FXML
+	private VBox playerOneVBox;
+
+	@FXML
+	private VBox playerTwoVBox;
+
+	@FXML
+	private VBox playerThreeVBox;
+
+	@FXML
 	private VBox playerFourBox;
 
 	@FXML
@@ -591,6 +600,7 @@ public class GameViewController implements Initializable {
 		case 1:
 			playerNameOne.setText(playerName);
 			playerNameOne.setTextFill(playerColor.getValue());
+
 			playerNames.put(1, playerName);
 			break;
 		case 2:
@@ -1271,19 +1281,48 @@ public class GameViewController implements Initializable {
 				buyCardButton.setDisable(false);
 				break;
 			}
+			if (state != PlayerState.WAITING) {
+				playerOneVBox.setStyle("-fx-border-color: " + getRGBCode(playerColors.get(modelID)));
+			} else {
+				playerOneVBox.setStyle("-fx-border-color: transparent");
+			}
+			playerNameOne.setTextFill(playerColors.get(modelID));
 			break;
 		case 2:
 			playerStatusTwo.setText(state.toString());
+			if (state != PlayerState.WAITING) {
+				playerTwoVBox.setStyle("-fx-border-color: " + getRGBCode(playerColors.get(modelID)));
+			} else {
+				playerTwoVBox.setStyle("-fx-border-color: transparent");
+			}
+			playerNameTwo.setTextFill(playerColors.get(modelID));
 			break;
 		case 3:
 			playerStatusThree.setText(state.toString());
+			if (state != PlayerState.WAITING) {
+				playerThreeVBox.setStyle("-fx-border-color: " + getRGBCode(playerColors.get(modelID)));
+			} else {
+				playerThreeVBox.setStyle("-fx-border-color: transparent");
+			}
+			playerNameThree.setTextFill(playerColors.get(modelID));
 			break;
 		case 4:
 			playerStatusFour.setText(state.toString());
+			if (state != PlayerState.WAITING) {
+				playerFourBox.setStyle("-fx-border-color: " + getRGBCode(playerColors.get(modelID)));
+			} else {
+				playerFourBox.setStyle("-fx-border-color: transparent");
+			}
+			playerNameFour.setTextFill(playerColors.get(modelID));
 			break;
 		default:
 			break;
 		}
+	}
+
+	public String getRGBCode(Color color) {
+		return String.format("#%02X%02X%02X", (int) (color.getRed() * 255), (int) (color.getGreen() * 255),
+				(int) (color.getBlue() * 255));
 	}
 
 	/**
