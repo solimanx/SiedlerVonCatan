@@ -529,8 +529,7 @@ public class GameViewController implements Initializable {
 			}
 		});
 
-		//playerNameFour. graphicProperty().bind(Soundeffects.getVolumeGraphicProperty());
-//		toggleSoundButton.setGraphic(new ImageView("/textures/vol_up.png"));
+		toggleSoundButton.graphicProperty().bind(new ImageSoundBinding(Soundeffects.globalVolumeBoolean));
 
 	}
 
@@ -1857,8 +1856,8 @@ public class GameViewController implements Initializable {
 			villageImageView.setTranslateX(center[0] - 20);
 			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
-			villageImageView.setScaleX(40 * 2 / radius);
-			villageImageView.setScaleY(40 * 2 / radius);
+			villageImageView.setScaleX(40 * 1.5 / radius);
+			villageImageView.setScaleY(40 * 1.5 / radius);
 
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
 			villageImageView.setCache(true);
