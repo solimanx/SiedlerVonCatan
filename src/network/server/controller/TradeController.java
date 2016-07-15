@@ -120,6 +120,9 @@ public class TradeController {
 		if (serverController.getPlayerResources(modelID)[offResource] < offAmount) {
 			return false;
 		}
+		if (offResource == demResource) {
+			return false;
+		}
 		ArrayList<HarbourStatus> harbours = getPlayerHarbours(modelID);
 		switch (offAmount) {
 		case 2:
@@ -302,21 +305,25 @@ public class TradeController {
 				demResource = i;
 			}
 		}
-		int offAmount = offer[offResource];
-		ResourceType offerResType = DefaultSettings.RESOURCE_ORDER[offResource];
-		ResourceType demandResType = DefaultSettings.RESOURCE_ORDER[demResource];
-		if (checkValidSeaTrade(modelID, offResource, demResource, offAmount)) {
-			if (serverController.resourceStackDecrease(demandResType)) {
-				serverController.addToPlayersResource(modelID, demandResType, 1);
-				serverController.obtainToAll(modelID, demand, true);
-				serverController.subFromPlayersResources(modelID, offerResType, offAmount);
-				serverController.costsToAll(modelID, offer, true);
-				serverController.resourceStackIncrease(offer);
-			} else {
-				serverController.serverResponse(modelID, "Resourcenstapel leer");
+		if (demand[demResource] != 1) {
+			serverController.serverResponse(modelID, "Unzulässiger Seehandel");
+		} else {
+			int offAmount = offer[offResource];
+			ResourceType offerResType = DefaultSettings.RESOURCE_ORDER[offResource];
+			ResourceType demandResType = DefaultSettings.RESOURCE_ORDER[demResource];
+			if (checkValidSeaTrade(modelID, offResource, demResource, offAmount)) {
+				if (serverController.resourceStackDecrease(demandResType)) {
+					serverController.addToPlayersResource(modelID, demandResType, 1);
+					serverController.obtainToAll(modelID, demand, true);
+					serverController.subFromPlayersResources(modelID, offerResType, offAmount);
+					serverController.costsToAll(modelID, offer, true);
+					serverController.resourceStackIncrease(offer);
+				} else {
+					serverController.serverResponse(modelID, "Resourcenstapel leer");
+				}
 			}
+			serverController.serverResponse(modelID, "Unzulässiges Handelsangebot");
 		}
-		serverController.serverResponse(modelID, "Unzulässiges Handelsangebot");
 	}
 
 	/**
