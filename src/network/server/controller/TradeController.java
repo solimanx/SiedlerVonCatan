@@ -115,7 +115,9 @@ public class TradeController {
 	}
 
 	public boolean checkValidSeaTrade(int modelID, int offResource, int demResource, int offAmount) {
-
+		if (serverController.gameLogic.getBoard().getPlayer(modelID).getPlayerState() != PlayerState.TRADING_OR_BUILDING){
+			return false;
+		}
 		if (serverController.getPlayerResources(modelID)[offResource] < offAmount) {
 			return false;
 		}

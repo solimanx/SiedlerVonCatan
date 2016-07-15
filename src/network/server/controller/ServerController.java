@@ -1620,13 +1620,7 @@ public class ServerController {
 
 	public void requestSeaTrade(int threadID, int[] offer, int[] demand) {
 		int modelID = threadPlayerIdMap.get(threadID);
-		if (gameLogic.checkPlayerResources(modelID, offer)) {
-			tradeController.requestSeaTrade(modelID, offer, demand);
-		} else // TODO if (!tradeController.checkValidSeaTrade(modelID, offer,
-				// demand))
-		{
-			serverResponse(modelID, "Seehandel nicht möglich");
-		}
+		tradeController.requestSeaTrade(modelID, offer, demand);
 	}
 
 	/**
@@ -1737,16 +1731,6 @@ public class ServerController {
 	public void tradeCancelled(int modelID, int tradingID) {
 		serverOutputHandler.tradeIsCanceled(modelPlayerIdMap.get(modelID), tradingID);
 	}
-
-	/*
-	 * public void buyDevelopmentCard(int threadID) { int modelID =
-	 * threadPlayerIdMap.get(threadID); subFromPlayersResources(modelID,
-	 * DefaultSettings.DEVCARD_BUILD_COST);
-	 * resourceStackIncrease(DefaultSettings.DEVCARD_BUILD_COST);
-	 * DevelopmentCard currCard = devStack.getNextCard(); card per round
-	 * gameLogic.getBoard().getPlayer(modelID).incrementPlayerDevCard(currCard);
-	 * serverOutputHandler.boughtDevelopmentCard(threadID, currCard); }
-	 */
 
 	/**
 	 * Play knight card.
@@ -1922,14 +1906,13 @@ public class ServerController {
 				}
 			}
 			if (resAmountCheck > 2) {
-				// TODO: fix?
 				serverResponse(modelID, "Zu viele Resourcen angegeben");
 				resourceStackIncrease(obtain);
 			} else {
 				addToPlayersResource(modelID, obtain);
 				obtainToAll(modelID, obtain, false);
+				gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
 			}
-			gameLogic.getBoard().getPlayer(modelID).setHasPlayedDevCard(true);
 		}
 
 	}
