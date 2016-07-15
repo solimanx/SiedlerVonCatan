@@ -941,6 +941,8 @@ public class ClientController {
 		if (getOwnTradingID() != null && getOwnTradingID() == tradingID) {
 			viewController.getGameViewController().getTradeViewController()
 					.acceptingOffer(threadPlayerIdMap.get(threadID), tradingID);
+		} else if(threadID == this.ownPlayerID) {
+			viewController.getGameViewController().getTradeViewController().setAccepted(tradingID);
 		}
 	}
 

@@ -129,6 +129,8 @@ public class TradeViewController {
 	private int ownTradeID = 0;
 	private Stage stage;
 
+	private SimpleBooleanProperty sbp;
+
 	/**
 	 * Sets the view controller.
 	 *
@@ -182,6 +184,10 @@ public class TradeViewController {
 		tradeStringColumn.setCellValueFactory(cellData -> cellData.getValue().tradeStringProperty());
 		statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 		tradeTable.setItems(trades);
+
+		sbp = new SimpleBooleanProperty(selectedTrade.getStatus().equals("ACCEPTED"));
+		tradeButton.disableProperty().bind(sbp);
+
 	}
 
 	/**
@@ -320,9 +326,7 @@ public class TradeViewController {
 		if (!selectedTrade.getStatus().equals("ACCEPTED")) { // tradeIDtoString.get(tradeID).endsWith("ACCEPTED"))
 																// {
 
-			selectedTrade.setStatus("ACCEPTED");
 			viewController.getClientController().acceptTrade(tradeID);
-			playTradeButtonSound();
 
 			// tradeIDtoString.put(tradeID, newTradeString);
 			// stringToTradeID.remove(selectedTrade);
@@ -334,6 +338,21 @@ public class TradeViewController {
 		}
 	}
 
+	public void setAccepted(int tradeID) {
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				for (Trade trade : trades) {
+					if (trade.getTradeID() == tradeID) {
+						trade.setStatus("ACCEPTED");
+						playTradeButtonSound();
+					}
+				}
+			};
+		});
+	}
+
 	/**
 	 * Handle decline trade.
 	 *
@@ -342,17 +361,18 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleDeclineTrade(ActionEvent event) {
-		int tradeID = selectedTrade.getTradeID();
-
-		if (selectedTrade.getStatus().equals("ACCEPTED")) {
-			viewController.getClientController().cancelTrade(tradeID);
-			playCancelTradeSound();
-			selectedTrade.setStatus("");
-		} else if (selectedTrade.getStatus().equals("")) {
-			selectedTrade.setStatus("DECLINED");
-			viewController.getClientController().declineTrade(tradeID);
-			playDeclineTradeOfferSound();
-		}
+		try {
+			int tradeID = selectedTrade.getTradeID();
+			if (selectedTrade.getStatus().equals("ACCEPTED")) {
+				viewController.getClientController().cancelTrade(tradeID);
+				playCancelTradeSound();
+				selectedTrade.setStatus("");
+			} else if (selectedTrade.getStatus().equals("")) {
+				selectedTrade.setStatus("DECLINED");
+				viewController.getClientController().declineTrade(tradeID);
+				playDeclineTradeOfferSound();
+			}
+		} catch (NullPointerException e) {	}
 
 		// int tradeID = stringToTradeID.get(selectedTrade);
 		// int index = tradeList.indexOf(selectedTrade);
