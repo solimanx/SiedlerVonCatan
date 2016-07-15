@@ -17,7 +17,7 @@ public class ImageSoundBinding extends javafx.beans.binding.ObjectBinding<ImageV
 	@Override
 	protected ImageView computeValue() {
 		try {
-			String url = !soundStatus.get() ? "/textures/vol_on.png" : "/textures/vol_mute.png";
+			String url = soundStatus.get() ? "/textures/vol_up.png" : "/textures/vol_mute.png";
 			ImageView imageView = new ImageView(new  Image(url));
 			return imageView;
 		} catch (Exception e) {

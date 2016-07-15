@@ -800,11 +800,11 @@ public class GameViewController implements Initializable {
 	void handleToggleSound(ActionEvent event) throws IOException {
 		Soundeffects.toggleMuteOnOff();
 
-		if (true) {
-			toggleSoundButton.setGraphic(new ImageView("/textures/vol_mute.png"));
-		} else {
-			toggleSoundButton.setGraphic(new ImageView("/textures/vol_up.png"));
-		}
+//		if (true) {
+//			toggleSoundButton.setGraphic(new ImageView("/textures/vol_mute.png"));
+//		} else {
+//			toggleSoundButton.setGraphic(new ImageView("/textures/vol_up.png"));
+//		}
 	}
 
 	/**
