@@ -1,5 +1,7 @@
 package network.client.view;
 
+import static sounds.Sound.playTradeButtonSound;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,8 +11,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -73,8 +73,6 @@ import network.client.controller.ViewController;
 import network.client.view.devcardview.DevCardViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
-
-import static sounds.Sound.*;
 
 // TODO: Auto-generated Javadoc
 public class GameViewController implements Initializable {
@@ -529,6 +527,7 @@ public class GameViewController implements Initializable {
 			}
 		});
 
+
 		toggleSoundButton.graphicProperty().bind(new ImageSoundBinding(Soundeffects.globalVolumeBoolean));
 
 	}
@@ -799,7 +798,7 @@ public class GameViewController implements Initializable {
 
 	@FXML
 	void handleToggleSound(ActionEvent event) throws IOException {
-		Soundeffects.toggleVolume();
+		Soundeffects.toggleMuteOnOff();
 
 		if (true) {
 			toggleSoundButton.setGraphic(new ImageView("/textures/vol_mute.png"));
@@ -985,7 +984,7 @@ public class GameViewController implements Initializable {
 		street.setOpacity(1.0);
 		street.setStroke(playerColors.get(modelID));
 		street.getStyleClass().remove("street");
-//		street.setEffect(shadow);
+		// street.setEffect(shadow);
 	}
 
 	/**
@@ -1040,14 +1039,15 @@ public class GameViewController implements Initializable {
 	 *            the player color
 	 */
 	public void setVillage(int u, int v, int dir, Color playerColor) {
-		Soundeffects.BUILD.play(Soundeffects.globalVolume);
+		if (!Soundeffects.isMuted())
+			Soundeffects.BUILD.play();
 		ImageView village = villages[u + 3][v + 3][dir];
 
 		village.setEffect(getBlushEffect(playerColor, village));
 
 		// village.setFill(playerColor);
 		village.setOpacity(1.0);
-//		village.setEffect(shadow);
+		// village.setEffect(shadow);
 		village.getStyleClass().remove("village");
 		int[] coordinates = { u, v, dir };
 		village.setOnMouseClicked(e -> {
@@ -1178,8 +1178,10 @@ public class GameViewController implements Initializable {
 	/**
 	 * shows result of dice roll on game view.
 	 *
-	 * @param playerID the player ID
-	 * @param result            the new dice roll result
+	 * @param playerID
+	 *            the player ID
+	 * @param result
+	 *            the new dice roll result
 	 */
 	public void setDiceRollResult(Integer playerID, int result) {
 		Soundeffects.DICEROLL.play(Soundeffects.globalVolume);
@@ -1364,8 +1366,8 @@ public class GameViewController implements Initializable {
 		city.setImage(new Image("/textures/city.png"));
 		city.setEffect(getBlushEffect(playerColor, city));
 		city.setOpacity(1.0);
-//		city.setEffect(shadow);
-//		city.setStroke(Color.BLACK);
+		// city.setEffect(shadow);
+		// city.setStroke(Color.BLACK);
 	}
 
 	/**
@@ -1528,7 +1530,7 @@ public class GameViewController implements Initializable {
 
 	}
 
-	public void notify(String title, String message){
+	public void notify(String title, String message) {
 		NewNotification newNotification = new NewNotification(title, message);
 		Platform.runLater(newNotification);
 	}
@@ -1620,8 +1622,10 @@ public class GameViewController implements Initializable {
 	/**
 	 * Gets the blush effect.
 	 *
-	 * @param playerColor the player color
-	 * @param imageView the image view
+	 * @param playerColor
+	 *            the player color
+	 * @param imageView
+	 *            the image view
 	 * @return the blush effect
 	 */
 	private Effect getBlushEffect(Color playerColor, ImageView imageView) {
@@ -1735,11 +1739,12 @@ public class GameViewController implements Initializable {
 								village.toFront();
 								villageFigures.add(village);
 
-								//Polygon city = drawCity(cornerCoordinates[i][j][k]);
-//								city.setOpacity(0);
-//								cities[i][j][k] = city;
-//								city.toFront();
-//								cityFigures.add(city);
+								// Polygon city =
+								// drawCity(cornerCoordinates[i][j][k]);
+								// city.setOpacity(0);
+								// cities[i][j][k] = city;
+								// city.toFront();
+								// cityFigures.add(city);
 
 							}
 						}

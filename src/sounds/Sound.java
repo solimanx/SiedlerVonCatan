@@ -17,9 +17,9 @@ import java.net.URL;
  * Created by Amina on 03.07.2016.
  */
 public class Sound {
-	
+
 	public static float globalVolume = 0.5f;
-	
+
 	public static void setGain(Clip clip, float globalVolume) {
 	    if (globalVolume != -1) {
 	        if ((globalVolume < 0) || (globalVolume > 1)) {
