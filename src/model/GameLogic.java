@@ -160,7 +160,7 @@ public class GameLogic {
 						if (neighbors[i].getOwnerID() != null && neighbors[i].getOwnerID() == playerID) {
 							// check if there is a hostile village in between
 							Corner[] thisAdjoiningVillages = board.getAttachedCorners(x, y, dir);
-							String id = e.getEdgeID();
+							String id = neighbors[i].getEdgeID();
 							int[] nCs = ProtocolToModel.getEdgeCoordinates(id);
 							Corner[] neighbourAdjoiningVillages = board.getAttachedCorners(nCs[0], nCs[1], nCs[2]);
 							Corner schnitt = null; // schnittmenge aus Villages;

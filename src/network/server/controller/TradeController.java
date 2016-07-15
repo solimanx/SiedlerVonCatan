@@ -135,7 +135,7 @@ public class TradeController {
 			break;
 		case 3:
 			for (int i = 0; i < harbours.size(); i++) {
-				if (harbours.get(i).name().equals(HarbourStatus.THREE_TO_ONE)) {
+				if (harbours.get(i).name().equals("THREE_TO_ONE")) {
 					return true;
 				}
 			}
