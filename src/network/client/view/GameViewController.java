@@ -598,7 +598,7 @@ public class GameViewController implements Initializable {
 	 *            the player color
 	 */
 	public void initPlayer(int modelID, String playerName, enums.Color playerColor) {
-		if (modelID == viewController.getClientController().getOwnPlayerID()) {
+		if (modelID == viewController.getClientController().getOwnModelID()) {
 			playerIDtoViewPosition.put(modelID, 1);
 
 		} else {
@@ -1904,8 +1904,8 @@ public class GameViewController implements Initializable {
 			villageImageView.setTranslateX(center[0] - 20);
 			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
-			villageImageView.setScaleX(1 - (10 / radius));
-			villageImageView.setScaleY(1 - (10 / radius));
+			villageImageView.setScaleX(1 - (5 / radius));
+			villageImageView.setScaleY(1 - (5 / radius));
 
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
 			villageImageView.setCache(true);

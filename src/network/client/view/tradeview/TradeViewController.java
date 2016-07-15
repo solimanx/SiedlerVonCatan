@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import application.lobby.TablePlayer;
 import audio.Soundeffects;
+import enums.PlayerState;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -405,11 +406,14 @@ public class TradeViewController {
 	 */
 	@FXML
 	void handleSeaTradeButton(ActionEvent event) {
-		Soundeffects.HARBOUR.play(Soundeffects.globalVolume);
-		viewController.getClientController().requestSeaTrade(resultOffer, resultDemand);
-		stage.hide();
-		resultDemand = new int[5];
-		resultOffer = new int[5];
+		if (viewController.getClientController().getGameLogic().getBoard().getPlayer(0)
+				.getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+			Soundeffects.HARBOUR.play(Soundeffects.globalVolume);
+			viewController.getClientController().requestSeaTrade(resultOffer, resultDemand);
+			stage.hide();
+			resultDemand = new int[5];
+			resultOffer = new int[5];
+		}
 
 	}
 
@@ -437,10 +441,13 @@ public class TradeViewController {
 	 */
 	@FXML
 	void fullFillTrade(ActionEvent event) {
-		viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToModelID.get(selectedOffer));
-		tradeButton.setDisable(false);
-		stage.hide();
-		playFullFillTradeSound();
+		if (viewController.getClientController().getGameLogic().getBoard().getPlayer(0)
+				.getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
+			viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToModelID.get(selectedOffer));
+
+			stage.hide();
+			playFullFillTradeSound();
+		}
 	}
 
 	// /**
@@ -779,6 +786,14 @@ public class TradeViewController {
 
 		}
 
+	}
+
+	public void setDeclined(int tradingID) {
+		for (Trade trade : trades) {
+			if (trade.getTradeID() == tradingID) {
+				trade.setStatus("DECLINED");
+			}
+		}
 	}
 
 }

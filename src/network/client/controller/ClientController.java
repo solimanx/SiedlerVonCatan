@@ -57,7 +57,7 @@ public class ClientController {
 	private Board board;
 	private GameLogic gameLogic;
 	private Integer ownTradingID;
-	private int ownPlayerID;
+	private int ownModelID;
 	private int amountPlayers = 1;
 
 	protected ViewController viewController;
@@ -106,7 +106,7 @@ public class ClientController {
 	 *            the port
 	 */
 	public void connectToServer(String serverHost, int port) {
-		if(client!=null){
+		if (client != null) {
 			viewController.getLobbyController().clearChat();
 			client.stopScanning();
 		}
@@ -147,7 +147,7 @@ public class ClientController {
 	 */
 	public void receiveWelcome(int playerID) {
 		// playerID is 42,35, etc.
-		setOwnPlayerID(playerID);
+		setOwnModelID(playerID);
 		// add myself to hashmap
 		threadPlayerIdMap.put(playerID, 0);
 		modelPlayerIdMap.put(0, playerID);
@@ -254,8 +254,8 @@ public class ClientController {
 				amountPlayers++;
 			}
 		default:
-			//five six
-			if(modelID>3){
+			// five six
+			if (modelID > 3) {
 				PlayerModel[] oldPM = gameLogic.getBoard().getPlayerModels();
 				Board.extendBoard();
 				gameLogic.setBoard(new Board());
@@ -299,7 +299,7 @@ public class ClientController {
 	 */
 	public void initializeBoard(Field[] serverFields, Corner[] corners, ArrayList<Edge> streets,
 			Corner[] harbourCorners, String banditLocation) {
-		if(serverFields.length == 52){
+		if (serverFields.length == 52) {
 			Board.extendBoard();
 			Board board = new Board();
 			gameLogic.setBoard(board);
@@ -339,7 +339,7 @@ public class ClientController {
 		}
 
 		gameLogic.getBoard().setBandit(banditLocation);
-		setOwnPlayerID(threadPlayerIdMap.get(getOwnPlayerID()));
+		setOwnModelID(threadPlayerIdMap.get(getOwnModelID()));
 		Platform.runLater(new Runnable() {
 
 			@Override
@@ -507,8 +507,8 @@ public class ClientController {
 	 *
 	 * @return the own player ID
 	 */
-	public int getOwnPlayerID() {
-		return ownPlayerID;
+	public int getOwnModelID() {
+		return ownModelID;
 	}
 
 	/**
@@ -517,8 +517,8 @@ public class ClientController {
 	 * @param ownPlayerID
 	 *            the new own player ID
 	 */
-	public void setOwnPlayerID(int ownPlayerID) {
-		this.ownPlayerID = ownPlayerID;
+	public void setOwnModelID(int ownPlayerID) {
+		this.ownModelID = ownPlayerID;
 	}
 
 	/**
@@ -765,7 +765,7 @@ public class ClientController {
 			requestBuildInitialVillage(x - radius, y - radius, dir);
 
 		}
-		if (gameLogic.checkBuildVillage(x - radius, y - radius, dir, ownPlayerID)) {
+		if (gameLogic.checkBuildVillage(x - radius, y - radius, dir, ownModelID)) {
 			clientOutputHandler.requestBuildVillage(x - radius, y - radius, dir);
 		}
 	}
@@ -804,7 +804,7 @@ public class ClientController {
 			logger.info("Building Initial Road");
 			requestBuildInitialStreet(x - radius, y - radius, dir);
 		}
-		if (gameLogic.checkBuildStreet(x - radius, y - radius, dir, ownPlayerID)) {
+		if (gameLogic.checkBuildStreet(x - radius, y - radius, dir, ownModelID)) {
 			clientOutputHandler.requestBuildStreet(x - radius, y - radius, dir);
 		}
 
@@ -821,7 +821,7 @@ public class ClientController {
 	 *            the dir
 	 */
 	public void requestBuildInitialStreet(int x, int y, int dir) {
-		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownPlayerID)) {
+		if (gameLogic.checkBuildInitialStreet(x, y, dir, ownModelID)) {
 			clientOutputHandler.requestBuildStreet(x, y, dir);
 			initialRoundCount++; // TODO: this should happen after server OK
 		}
@@ -899,7 +899,7 @@ public class ClientController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		TradeOffer tOf = new TradeOffer(threadID, tradingID, supply, demand);
 		tradeOffers.add(tOf);
-		if (modelID == ownPlayerID) {
+		if (modelID == ownModelID) {
 			setOwnTradingID(tradingID);
 			viewController.getGameViewController().getTradeViewController().addOwnOffer(supply, demand, tradingID);
 		} else {
@@ -929,6 +929,15 @@ public class ClientController {
 		clientOutputHandler.declineTrade(tradeID);
 	}
 
+	public void tradeDeclined(int threadID, int tradingID) {
+		int modelID = threadPlayerIdMap.get(threadID);
+
+		if (modelID == this.ownModelID) {
+			if (getOwnTradingID() != null && getOwnTradingID() != tradingID)
+				viewController.getGameViewController().getTradeViewController().setDeclined(tradingID);
+		}
+	}
+
 	/**
 	 * A Player has accepted your offer. Show acceptance on list
 	 *
@@ -942,7 +951,7 @@ public class ClientController {
 		if (getOwnTradingID() != null && getOwnTradingID() == tradingID) {
 			viewController.getGameViewController().getTradeViewController()
 					.acceptingOffer(threadPlayerIdMap.get(threadID), tradingID);
-		} else if(modelID == this.ownPlayerID) {
+		} else if (modelID == this.ownModelID) {
 			viewController.getGameViewController().getTradeViewController().setAccepted(tradingID);
 		}
 	}
@@ -1022,18 +1031,22 @@ public class ClientController {
 			}
 		}
 		if (modelID != 0) {
-//			if (viewController.getGameViewController().getTradeViewController().tradeIDtoModelID.get(tradingID) != null
-//					&& viewController.getGameViewController().getTradeViewController().tradeIDtoModelID
-//							.get(tradingID) == modelID) {
-//				viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
-//			}
+			// if
+			// (viewController.getGameViewController().getTradeViewController().tradeIDtoModelID.get(tradingID)
+			// != null
+			// &&
+			// viewController.getGameViewController().getTradeViewController().tradeIDtoModelID
+			// .get(tradingID) == modelID) {
+			// viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
+			// }
 			viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID, modelID);
 		} else {
-//			if (ownTradingID != null && modelID == 0 && tradingID == ownTradingID) {
-//				viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
-//			} else {
-//				viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
-//			}
+			// if (ownTradingID != null && modelID == 0 && tradingID ==
+			// ownTradingID) {
+			// viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
+			// } else {
+			// viewController.getGameViewController().getTradeViewController().cancelOffer(tradingID);
+			// }
 			viewController.getGameViewController().getTradeViewController().cancelOwnOffer();
 		}
 	}
@@ -1086,7 +1099,7 @@ public class ClientController {
 	 */
 	public void longestRoad(Integer threadID) {
 		if (threadID != null) {
-			if (threadID == ownPlayerID) {
+			if (threadID == ownModelID) {
 				gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(true);
 			} else {
 				gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(false);
@@ -1300,7 +1313,7 @@ public class ClientController {
 	 */
 	public void removeFromDeck(int playerID, KnightCard knightCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		if (modelID == getOwnPlayerID()) {
+		if (modelID == getOwnModelID()) {
 			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(knightCard);
 
 		} else {
@@ -1320,7 +1333,7 @@ public class ClientController {
 	 */
 	public void removeFromDeck(int playerID, StreetBuildingCard streetBuildCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		if (modelID == getOwnPlayerID()) {
+		if (modelID == getOwnModelID()) {
 			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(streetBuildCard);
 		} else {
 			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(new UnknownCard());
@@ -1337,7 +1350,7 @@ public class ClientController {
 	 */
 	public void removeFromDeck(int playerID, MonopolyCard monopolyCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		if (modelID == getOwnPlayerID()) {
+		if (modelID == getOwnModelID()) {
 			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(monopolyCard);
 		} else {
 			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(new UnknownCard());
@@ -1355,7 +1368,7 @@ public class ClientController {
 	 */
 	public void removeFromDeck(int playerID, InventionCard inventionCard) {
 		int modelID = threadPlayerIdMap.get(playerID);
-		if (modelID == getOwnPlayerID()) {
+		if (modelID == getOwnModelID()) {
 			gameLogic.getBoard().getPlayer(modelID).decrementPlayerDevCard(inventionCard);
 
 		} else {

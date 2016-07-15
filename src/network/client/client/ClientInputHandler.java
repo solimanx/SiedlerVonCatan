@@ -513,7 +513,10 @@ public class ClientInputHandler {
 	protected void handle(ProtocolTradeConfirmation tradeConfirmation) {
 		int playerID = tradeConfirmation.getPlayerID();
 		int tradeID = tradeConfirmation.getTradeID();
-		clientController.tradeAccepted(playerID, tradeID);
+		if (tradeConfirmation.getAccepted()){
+			clientController.tradeAccepted(playerID, tradeID);}
+		else{
+			clientController.tradeDeclined(playerID, tradeID);}
 	}
 
 	/**
@@ -550,7 +553,7 @@ public class ClientInputHandler {
 	 *            the knight card info
 	 */
 	protected void handle(ProtocolPlayKnightCard knightCardInfo) {
-		if (knightCardInfo.getPlayerID() == clientController.getOwnPlayerID()) {
+		if (knightCardInfo.getPlayerID() == clientController.getOwnModelID()) {
 			// TODO smth with information
 			int playerID = knightCardInfo.getPlayerID();
 			clientController.removeFromDeck(playerID, new KnightCard());
