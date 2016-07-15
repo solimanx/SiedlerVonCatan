@@ -10,9 +10,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.client.view.helpview.HelpViewController">
    <center>
-      <TabPane prefHeight="504.0" prefWidth="764.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane fx:id="pane" prefHeight="504.0" prefWidth="764.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab fx:id="instructionsTab" onSelectionChanged="#handleInstructionsTab" text="Spielanleitung">
+          <Tab fx:id="instructionsTab"  text="Spielanleitung" onSelectionChanged="#handleInstructionsTab">
                <content>
                   <Pane>
                      <children>
@@ -252,7 +252,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="buildTab" onSelectionChanged="#handleBuildTab" text="Bauen">
+            <Tab fx:id="buildTab" text="Bauen" onSelectionChanged="#handleBuildTab" >
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

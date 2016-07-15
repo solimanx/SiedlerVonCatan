@@ -1,14 +1,18 @@
 package network.client.view.helpview;
 
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 
 
 import static sounds.Sound.playHelpButtonSound;
@@ -40,15 +44,34 @@ public class HelpViewController {
     private Button btn2;
     @FXML
     private Button btnOpenNewWindow;
+    @FXML
+    protected TabPane pane;
+    private boolean tabSelection = false;
+
+    private boolean checkTab() {
+        tabSelection = !tabSelection;
+        return tabSelection;
+    }
+
 
     /**
      * Handle Instruction button in Help View.
      *
      * @param event the event
      */
+
+
     @FXML
-    void handleInstructionsTab(ActionEvent event) {
-        playHelpButtonSound();
+    void handleInstructionsTab(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
+
 
     }
 
@@ -58,8 +81,16 @@ public class HelpViewController {
      * @param event the event
      */
     @FXML
-    void handleStartGameTab(ActionEvent event) {
-        playHelpButtonSound();
+    void handleStartGameTab(Event event) {
+
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
     }
 
     /**
@@ -68,8 +99,16 @@ public class HelpViewController {
      * @param event the event
      */
     @FXML
-    void handleGameBoardTab(ActionEvent event) {
-        playHelpButtonSound();
+    void handleGameBoardTab(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+
+                }
+            }
+        });
     }
 
     /**
@@ -78,8 +117,15 @@ public class HelpViewController {
      * @param event the event
      */
     @FXML
-    void handleResourcesTab(ActionEvent event) {
-        playHelpButtonSound();
+    void handleResourcesTab(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
     }
 
     /**
@@ -88,8 +134,15 @@ public class HelpViewController {
      * @param event the event
      */
     @FXML
-    void handleBuildTab(ActionEvent event) {
-        playHelpButtonSound();
+    void handleBuildTab(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
     }
 
     /**
@@ -98,8 +151,15 @@ public class HelpViewController {
      * @param event the event
      */
     @FXML
-    void handleTradeTab(ActionEvent event) {
-        playHelpButtonSound();
+    void handleTradeTab(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
     }
 
     /**
@@ -108,8 +168,15 @@ public class HelpViewController {
      * @param event the event
      */
     @FXML
-    void handleRobberTab(ActionEvent event) {
-        playHelpButtonSound();
+    void handleRobberTab(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
     }
 
     /**
@@ -118,8 +185,15 @@ public class HelpViewController {
      * @param event the event
      */
     @FXML
-    void handleDevelopmentCardsTab(ActionEvent event) {
-        playHelpButtonSound();
+    void handleDevelopmentCardsTab(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
     }
 
     /**
@@ -129,14 +203,28 @@ public class HelpViewController {
      */
 
     @FXML
-    void handleTipsTab(ActionEvent event) {
-        playHelpButtonSound();
-    }
-    @FXML
-    void handleQuickInfo(ActionEvent event) {
-        playHelpButtonSound();
+    void handleTipsTab(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
     }
 
+    @FXML
+    void handleQuickInfo(Event event) {
+        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                if (checkTab()) {
+                    playHelpButtonSound();
+                }
+            }
+        });
+    }
 
 
 }
