@@ -185,11 +185,16 @@ public class ClientController {
 			viewController.messageReceive("Error: " + message);
 
 		} else if (playerID != null) {
-			String playerName = gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(playerID)).getName();
-			if (!playerName.equals("")) {
-				viewController.messageReceive("Player " + playerName + ": " + message);
-			} else {
+			Integer modelID = threadPlayerIdMap.get(playerID);
+			if (modelID == null) {
 				viewController.messageReceive("Player " + playerID.toString() + ": " + message);
+			} else {
+				String playerName = gameLogic.getBoard().getPlayer(modelID).getName();
+				if (!playerName.equals("")) {
+					viewController.messageReceive("Player " + playerName + ": " + message);
+				} else {
+					viewController.messageReceive("Player " + playerID.toString() + ": " + message);
+				}
 			}
 
 		} else {
@@ -586,8 +591,8 @@ public class ClientController {
 		int modelID = threadPlayerIdMap.get(threadID);
 		// if self
 		if (modelID == 0) {
-			if (!Soundeffects.isMuted()){
-			Soundeffects.RESOURCE.play();
+			if (!Soundeffects.isMuted()) {
+				Soundeffects.RESOURCE.play();
 			}
 			gameLogic.getBoard().getPlayer(modelID).decrementResources(resources);
 			// viewController.getGameViewController().setResourceCards(modelID,
