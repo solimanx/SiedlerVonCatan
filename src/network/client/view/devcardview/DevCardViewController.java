@@ -27,9 +27,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
-import network.client.view.GameViewController;
 
-// TODO: Auto-generated Javadoc
+/**
+ * Controls the DevelopmentCard view when viewing player's deck.
+ */
 public class DevCardViewController implements Initializable {
 
 	@FXML
@@ -76,10 +77,11 @@ public class DevCardViewController implements Initializable {
 
 	private ChoiceBox<ResourceType> monopolyRChooser;
 
-	private static Logger logger = LogManager.getLogger(DevCardViewController.class.getSimpleName());
-
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL,
+	 * java.util.ResourceBundle)
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -88,19 +90,23 @@ public class DevCardViewController implements Initializable {
 	}
 
 	/**
-	 * Inits the.
+	 * Inits the deck view.
 	 *
-	 * @param viewController the view controller
-	 * @param stage the stage
-	 * @param devCards the dev cards
+	 * @param viewController
+	 *            the view controller
+	 * @param stage
+	 *            the stage
+	 * @param devCards
+	 *            the dev cards
 	 */
 	public void init(ViewController viewController, Stage stage, int[] devCards) {
 		this.stage = stage;
 		this.viewController = viewController;
 
-		//DEBUG
-//		debugChoice.setItems(FXCollections.observableArrayList(CardType.INVENTION, CardType.STREET, CardType.KNIGHT, CardType.MONOPOLY));
-		//END DEBUG
+		// DEBUG
+		// debugChoice.setItems(FXCollections.observableArrayList(CardType.INVENTION,
+		// CardType.STREET, CardType.KNIGHT, CardType.MONOPOLY));
+		// END DEBUG
 
 		devCardList.clear();
 		devCardListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -143,9 +149,10 @@ public class DevCardViewController implements Initializable {
 	}
 
 	/**
-	 * Handle cancel.
+	 * Handle clicking the Cancel button.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void handleCancel(ActionEvent event) {
@@ -153,9 +160,10 @@ public class DevCardViewController implements Initializable {
 	}
 
 	/**
-	 * Handle invention OK.
+	 * Handle clicking OK in the invention play menu.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void handleInventionOK(ActionEvent event) {
@@ -176,6 +184,8 @@ public class DevCardViewController implements Initializable {
 		case ORE:
 			resources[2] += 1;
 			break;
+		default:
+			throw new IllegalArgumentException("Resource doesn't exist");
 		}
 		switch (inventRChooser2.getSelectionModel().getSelectedItem()) {
 		case WOOD:
@@ -193,6 +203,8 @@ public class DevCardViewController implements Initializable {
 		case ORE:
 			resources[2] += 1;
 			break;
+		default:
+			throw new IllegalArgumentException("Resource doesn't exist");
 		}
 		viewController.getClientController().playInventionCard(resources);
 		inventionStage.close();
@@ -200,9 +212,10 @@ public class DevCardViewController implements Initializable {
 	}
 
 	/**
-	 * Handle monopoly OK.
+	 * Handle clicking OK in the monopoly play menu.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void handleMonopolyOK(ActionEvent event) {
@@ -213,9 +226,10 @@ public class DevCardViewController implements Initializable {
 	}
 
 	/**
-	 * Handle play card button.
+	 * Handle clicking play card button.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void handlePlayCardButton(ActionEvent event) {
@@ -280,9 +294,10 @@ public class DevCardViewController implements Initializable {
 	}
 
 	/**
-	 * Handle debug button.
+	 * Handle clicking debug button.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void handleDebugButton(ActionEvent event) {

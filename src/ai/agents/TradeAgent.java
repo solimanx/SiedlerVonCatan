@@ -2,8 +2,8 @@ package ai.agents;
 
 import java.util.ArrayList;
 
-import ai.AIInputHandler;
 import ai.AdvancedAI;
+import model.TradeOffer;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

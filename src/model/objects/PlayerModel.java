@@ -2,19 +2,15 @@ package model.objects;
 
 import java.util.ArrayList;
 
-import enums.ResourceType;
 import model.objects.DevCards.DevelopmentCard;
 import enums.Color;
 import enums.HarbourStatus;
-//TODO import DevelopmentCard enum
 import enums.PlayerState;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import settings.DefaultSettings;
 
-// TODO: Auto-generated Javadoc
 public class PlayerModel {
 	private static Logger logger = LogManager.getLogger(PlayerModel.class.getSimpleName());
 
@@ -503,7 +499,6 @@ public class PlayerModel {
 	 * @return the resources
 	 */
 	public int[] getResources() {
-		// TODO Auto-generated method stub
 		return resources;
 	}
 

@@ -5,14 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import protocol.messaging.ProtocolChatReceiveMessage;
 
-// TODO: Auto-generated Javadoc
 /**
  * Client class, which is responsible for connecting to a server, as well as
  * writing and receiving message from the server.

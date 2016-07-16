@@ -5,27 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Random;
-
-import model.Board;
-import model.GameLogic;
-import model.objects.Corner;
-import model.objects.Edge;
-import model.objects.Field;
-import model.objects.PlayerModel;
-import network.ProtocolToModel;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import ai.agents.CornerAgent;
-import ai.agents.OpponentAgent;
-import ai.agents.ResourceAgent;
-import enums.CornerStatus;
-import settings.DefaultSettings;
-
-// TODO: Auto-generated Javadoc
 /**
  * Primivite AI that can connect to server, play the initial rounds, build two
  * villages and two roadss.

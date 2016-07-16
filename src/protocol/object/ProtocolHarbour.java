@@ -6,7 +6,6 @@ import com.google.gson.annotations.Since;
 import enums.HarbourStatus;
 import model.Index;
 
-// TODO: Auto-generated Javadoc
 /**
  * <b>Häfen (Harbours)</b>
  * <p>

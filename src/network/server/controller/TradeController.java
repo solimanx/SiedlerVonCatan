@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
+import model.TradeOffer;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
@@ -103,9 +104,9 @@ public class TradeController {
 			TradeOffer tOf = getTradeByID(tradingID);
 			// kann nicht null sein wegen check
 			if (accept) {
-				tOf.acceptingPlayers.add(modelID);
+				tOf.getAcceptingPlayers().add(modelID);
 			} else {
-				tOf.decliningPlayers.add(modelID);
+				tOf.getDecliningPlayers().add(modelID);
 			}
 
 			serverController.tradeAccepted(modelID, tradingID, accept);
@@ -202,8 +203,8 @@ public class TradeController {
 			TradeOffer tOf = getTradeByID(tradingID);
 			if (tOf != null) {
 				boolean notFound = true;
-				for (int j = 0; j < tOf.acceptingPlayers.size(); j++) {
-					if (tOf.acceptingPlayers.get(j) == partnerModelID) {
+				for (int j = 0; j < tOf.getAcceptingPlayers().size(); j++) {
+					if (tOf.getAcceptingPlayers().get(j) == partnerModelID) {
 						notFound = false;
 					}
 				}
@@ -263,9 +264,9 @@ public class TradeController {
 				tradeOffers.remove(offer);
 				serverController.tradeCancelled(modelID, tradingID);
 			} else {
-				for (int j = 0; j < offer.acceptingPlayers.size(); j++) {
-					if (offer.acceptingPlayers.get(j) == modelID) {
-						offer.acceptingPlayers.remove(j);
+				for (int j = 0; j < offer.getAcceptingPlayers().size(); j++) {
+					if (offer.getAcceptingPlayers().get(j) == modelID) {
+						offer.getAcceptingPlayers().remove(j);
 						serverController.tradeCancelled(modelID, tradingID);
 						break;
 					}

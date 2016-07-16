@@ -1,11 +1,7 @@
-package application.lobby;
+package model;
 
-import enums.Color;
-import enums.PlayerState;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import protocol.object.ProtocolPlayer;
 
 // TODO: Auto-generated Javadoc
 /**

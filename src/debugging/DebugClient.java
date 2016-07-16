@@ -1,6 +1,5 @@
 package debugging;
 
-import application.lobby.LobbyController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +9,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// TODO: Auto-generated Javadoc
 /**
  * To "illegaly" test sending JSONs, and figuring out how the test server
  * responds.

@@ -3,7 +3,6 @@ package protocol.object;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
-// TODO: Auto-generated Javadoc
 /**
  * <b>Rohstoffe (Resources)</b>
  * <p>

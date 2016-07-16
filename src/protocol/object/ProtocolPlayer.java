@@ -5,9 +5,7 @@ import com.google.gson.annotations.Since;
 
 import enums.Color;
 import enums.PlayerState;
-import protocol.dualinstructions.ProtocolPlayKnightCard;
 
-// TODO: Auto-generated Javadoc
 /**
  * <b>Spieler (Player)</b>
  * <p>

@@ -3,7 +3,6 @@ package network.client.view.tradeview;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import application.lobby.TablePlayer;
 import audio.Soundeffects;
 import enums.PlayerState;
 import javafx.application.Platform;
@@ -25,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.TablePlayer;
 import network.client.controller.ViewController;
 import network.client.view.GameViewController;
 

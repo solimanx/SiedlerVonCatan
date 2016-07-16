@@ -23,7 +23,6 @@ import protocol.clientinstructions.ProtocolEndTurn;
 import protocol.clientinstructions.ProtocolHarbourRequest;
 import protocol.clientinstructions.ProtocolRobberLoss;
 import protocol.clientinstructions.ProtocolRobberMovementRequest;
-import protocol.clientinstructions.trade.ProtocolTradeRequest;
 import protocol.configuration.ProtocolClientReady;
 import protocol.configuration.ProtocolPlayerProfile;
 import protocol.connection.ProtocolHello;

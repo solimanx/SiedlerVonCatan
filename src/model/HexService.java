@@ -1,15 +1,10 @@
 package model;
 
-import model.objects.*;
 import network.ProtocolToModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.net.Protocol;
 
-import java.util.ArrayList;
-
-// TODO: Auto-generated Javadoc
 public class HexService {
 	private static Logger logger = LogManager.getLogger(HexService.class.getSimpleName());
 
@@ -84,7 +79,6 @@ public class HexService {
 	 * @param f the field
 	 * @return the spiral
 	 */
-	// TODO water
 	public static String getSpiral(String f) {
 		StringBuffer result = new StringBuffer();
 		String nextField = f;
@@ -241,7 +235,6 @@ public class HexService {
 	 * @return distance to mid or radius
 	 */
 	public static int getDistanceFromMid(String f) {
-		Board useless = new Board();
 		String nextField = f;
 		int result = 0;
 		int[] coord;
@@ -260,7 +253,6 @@ public class HexService {
 	 * @return distance to mid corner
 	 */
 	public static int getDistanceFromMidFifeSix(String f) {
-		Board useless = new Board();
 		String nextField = f;
 		int result = 1;
 		int[] coord;
@@ -271,7 +263,7 @@ public class HexService {
 			nextField = getNextField(coord[0], coord[1], nextDirection(getDirection(nextField), 1));
 			result++;
 			for(int i = 0; i<end.length; i++){
-				if(useless.getCoordToStringMap().get(new Index(end[i][0], end[i][1])) == nextField){
+				if(Board.getCoordToStringMap().get(new Index(end[i][0], end[i][1])) == nextField){
 					found = true;
 				}
 			}

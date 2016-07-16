@@ -3,7 +3,6 @@ package network.client.controller;
 import java.io.IOException;
 
 import application.lobby.LobbyController;
-import application.lobby.PlayerProfileController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -12,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import network.client.view.GameViewController;
 import network.client.view.tradeview.TradeViewController;
 import network.server.controller.ServerController;
@@ -24,23 +22,13 @@ import org.apache.logging.log4j.Logger;
 public class ViewController {
 	private static Logger logger = LogManager.getLogger(ViewController.class.getSimpleName());
 	private FXMLLoader loader;
-	protected ServerController serverController; // DEBUG
+	protected ServerController serverController;
 	private ClientController clientController;
 	private GameViewController gameViewController;
 	private LobbyController lobbyController;
-	// private PlayerProfileController playerProfileController;
 	private Stage primaryStage;
 
-	/**
-	 * Gets the primary stage.
-	 *
-	 * @return the primary stage
-	 */
-	public Stage getPrimaryStage() {
-		return primaryStage;
-	}
 
-	private Stage choosingStage;
 	private boolean isGameView = false;
 	public boolean isChoosingStage = false;
 	private TradeViewController tradeViewController;
@@ -167,40 +155,6 @@ public class ViewController {
 			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
-	}
-	// this.GameViewController = new GameViewController(gameViewStage);
-	// this.mainViewController = new MainViewController(this,
-	// clientController.getGameLogic().getBoard(), gameViewStage);
-	// init();
-	// }
-	//
-	// public View getView() {
-	// return mainViewController.getView();
-	// }
-
-	/**
-	 * Inits the.
-	 */
-	private void init() {
-
-		/*
-		 * view.button.setText("build initial village 2,-2,0");
-		 * view.button.setOnAction(e -> { // setCorner(2, -2, 0,
-		 * CornerStatus.VILLAGE, 23); serverController.buildInitialVillage(2,
-		 * -2, 0, 1); }); view.button2.setText("build initial street 2,-2,1");
-		 * view.button2.setOnAction(e -> { // setStreet(-1,-1,0,1);
-		 * serverController.buildInitialStreet(2, -2, 1, 1);
-		 * serverController.buildStreet(2, -2, 2, 1); //
-		 * view.setFieldResourceType(-1, -1, //
-		 * fieldColors.get(ResourceType.SHEEP)); }); view.button3.setText(
-		 * "build city 2,-2,0"); view.button3.setOnAction(e -> { // setCorner(0,
-		 * -2, 1, CornerStatus.CITY, 1); serverController.buildCity(2, -2, 0,
-		 * 1); serverController.buildVillage(2, -1, 0, 1);
-		 * serverController.buildCity(2, -1, 0, 1); }); view.button4.setText(
-		 * "set bandit 2,-2"); view.button4.setOnAction(e -> { //
-		 * gameController.setBandit(2, -2); });
-		 */
-
 	}
 
 	/**

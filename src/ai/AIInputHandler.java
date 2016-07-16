@@ -6,9 +6,7 @@ package ai;
 import java.util.ArrayList;
 
 import enums.CardType;
-import enums.CornerStatus;
 import enums.PlayerState;
-import enums.ResourceType;
 import model.HexService;
 import model.objects.Corner;
 import model.objects.Edge;
@@ -17,17 +15,11 @@ import model.objects.DevCards.InventionCard;
 import model.objects.DevCards.KnightCard;
 import model.objects.DevCards.MonopolyCard;
 import model.objects.DevCards.StreetBuildingCard;
-import network.ModelToProtocol;
 import network.ProtocolToModel;
 import network.client.client.ClientInputHandler;
 import parsing.Parser;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
-
-import ai.agents.CornerAgent;
 import ai.agents.OpponentAgent;
 import protocol.configuration.*;
 import protocol.connection.*;
@@ -42,7 +34,6 @@ import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.*;
-import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
 /**

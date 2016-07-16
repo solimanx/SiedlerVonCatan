@@ -1,22 +1,18 @@
 package application.lobby;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import enums.Color;
 import enums.PlayerState;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import model.TablePlayer;
 import network.client.controller.ViewController;
-import protocol.object.ProtocolPlayer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

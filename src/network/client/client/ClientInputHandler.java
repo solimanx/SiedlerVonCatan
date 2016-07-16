@@ -12,7 +12,6 @@ import model.Index;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
-import model.objects.DevCards.DevCardFactory;
 import model.objects.DevCards.DevelopmentCard;
 import model.objects.DevCards.InventionCard;
 import model.objects.DevCards.KnightCard;

@@ -1,10 +1,8 @@
 package ai;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import ai.agents.BanditAgent;
@@ -13,13 +11,13 @@ import ai.agents.CornerAgent;
 import ai.agents.OpponentAgent;
 import ai.agents.ResourceAgent;
 import ai.agents.TradeAgent;
-import ai.agents.TradeOffer;
 import enums.CardType;
 import enums.CornerStatus;
 import enums.ResourceType;
 import model.Board;
 import model.GameLogic;
 import model.HexService;
+import model.TradeOffer;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
@@ -563,7 +561,7 @@ public class AdvancedAI {
 					if (finalBuildCheck) {
 						ArrayList<TradeOffer> trades = tradeAgent.tradesForBuilding(max);
 						for (int j = 0; j < trades.size(); j++) {
-							getOutput().requestSeaTrade(trades.get(j).getOffer(), trades.get(j).getDemand());
+							getOutput().requestSeaTrade(trades.get(j).getSupply(), trades.get(j).getDemand());
 						}
 						tradeWaitForBuilding = max;
 						System.out.println("AI: Trade for " + max);

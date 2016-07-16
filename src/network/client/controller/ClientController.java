@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import model.Board;
 import model.GameLogic;
 import model.Index;
+import model.TradeOffer;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
@@ -35,7 +36,6 @@ import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
 import network.client.view.PlayerResourceUpdateRunnable;
 import network.client.view.PlayerStatusGUIUpdate;
-import network.client.view.ServerResponseRunnable;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc
@@ -67,7 +67,6 @@ public class ClientController {
 
 	protected Client client;
 	private int initialRoundCount = 0;
-	private String currentServerResponse;
 	private PlayerState currentState;
 
 	private ArrayList<TradeOffer> tradeOffers = new ArrayList<TradeOffer>();
@@ -162,8 +161,6 @@ public class ClientController {
 	 *            the server response
 	 */
 	public void receiveServerConfirmation(String serverResponse) {
-		// TODO client confirm in later protocols
-		currentServerResponse = serverResponse;
 		switch (currentState) {
 		case GAME_STARTING:
 		case WAITING_FOR_GAMESTART:
@@ -427,7 +424,7 @@ public class ClientController {
 			viewController.getGameViewController().setPlayerStatus(i,
 					gameLogic.getBoard().getPlayer(i).getPlayerState());
 		}
-		for (Map.Entry<String, int[]> entry : this.board.getStringToCoordMap().entrySet()) {
+		for (Map.Entry<String, int[]> entry : Board.getStringToCoordMap().entrySet()) {
 			int[] coord = entry.getValue();
 			Field f = gameLogic.getBoard().getFieldAt(coord[0], coord[1]);
 			viewController.getGameViewController().setField(coord[0], coord[1], f.getResourceType(), f.getDiceIndex());
@@ -439,7 +436,7 @@ public class ClientController {
 		Corner[] hCorners = board.getHarbourCorners();
 		viewController.getGameViewController().setHarbour(hCorners);
 
-		int[] banditCorners = gameLogic.getBoard().getStringToCoordMap().get(gameLogic.getBoard().getBandit());
+		int[] banditCorners = Board.getStringToCoordMap().get(gameLogic.getBoard().getBandit());
 		viewController.getGameViewController().setBandit(banditCorners[0], banditCorners[1]);
 
 		viewController.getGameViewController().startResourceUpdater();
@@ -571,10 +568,6 @@ public class ClientController {
 			}
 			// increment their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).incrementHiddenResources(resources2);
-			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
-			// Platform.runLater(
-			// new PlayerResourceUpdateRunnable(modelID,
-			// viewController.getGameViewController(), hiddenResources));
 		}
 
 	}
@@ -609,7 +602,6 @@ public class ClientController {
 			}
 			// decrement their hiddenresources
 			gameLogic.getBoard().getPlayer(modelID).decrementHiddenResources(resources2);
-			int[] hiddenResources = { gameLogic.getBoard().getPlayer(modelID).getHiddenResources() };
 			// Platform.runLater(
 			// new PlayerResourceUpdateRunnable(modelID,
 			// viewController.getGameViewController(), hiddenResources));
@@ -847,10 +839,6 @@ public class ClientController {
 	 *            the dir
 	 */
 	public void requestBuildCity(int x, int y, int dir) {
-		int radius = DefaultSettings.boardRadius;
-		// DEBUG
-		// if (gameLogic.checkBuildCity(x - radius, y - radius, dir,
-		// ownPlayerId)) {
 		clientOutputHandler.requestBuildCity(x, y, dir);
 		// }
 	}
@@ -1028,9 +1016,9 @@ public class ClientController {
 				if (currTOf.getOwnerID() == modelID) {
 					tradeOffers.remove(i);
 				} else {
-					for (int j = 0; j < currTOf.acceptingPlayers.size(); j++) {
-						if (currTOf.acceptingPlayers.get(j) == modelID) {
-							currTOf.acceptingPlayers.remove(j);
+					for (int j = 0; j < currTOf.getAcceptingPlayers().size(); j++) {
+						if (currTOf.getAcceptingPlayers().get(j) == modelID) {
+							currTOf.getAcceptingPlayers().remove(j);
 						}
 					}
 				}
@@ -1195,6 +1183,8 @@ public class ClientController {
 	 *            the player ID
 	 * @return the player hidden resource
 	 */
+	@SuppressWarnings("unused")
+	@Deprecated
 	private int[] getPlayerHiddenResource(int playerID) {
 		int[] resource = new int[] { gameLogic.getBoard().getPlayer(playerID).getHiddenResources() };
 		return resource;
