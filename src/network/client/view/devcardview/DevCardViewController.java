@@ -3,9 +3,6 @@ package network.client.view.devcardview;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import enums.CardType;
 import enums.ResourceType;
 import javafx.beans.value.ChangeListener;

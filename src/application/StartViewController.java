@@ -7,9 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import ai.AdvancedAI;
-import ai.PrimitiveAI;
 import audio.Soundeffects;
-import debugging.DebugClient;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -31,8 +29,7 @@ public class StartViewController {
 
 	private ServerController gc;
 	private ClientController fc;
-	private DebugClient dc;
-	private PrimitiveAI pa;
+	@SuppressWarnings("unused")
 	private AdvancedAI pa2;
 
 	@FXML
@@ -69,8 +66,6 @@ public class StartViewController {
 	private ChoiceBox<String> themeChooser;
 
 	private Stage primaryStage;
-
-	private Thread serverThread;
 
 	/**
 	 * Initialize.
@@ -215,18 +210,10 @@ public class StartViewController {
 			Platform.runLater(clientThread);
 			break;
 		case "Server":
+			//TODO minimize to tray
 			int port = serverPort.getText().equals("") ? 8080 : Integer.parseInt(serverPort.getText());
 			gc = new ServerController(port);
-//			serverThread = new Thread(new Runnable() {
-//				@Override
-//				public void run() {
-//				}
-//			});
-//			serverThread.start();
 			stopServer.setDisable(false);
-			// startClient.setDisable(true);
-			// startAI.setDisable(true);
-			// startButton.setDisable(true);
 			serverPort.setDisable(true);
 			startButton.setDisable(true);
 			InetAddress IP;
@@ -234,19 +221,18 @@ public class StartViewController {
 				IP = InetAddress.getLocalHost();
 				serverIP.setText(IP.getHostAddress() + ":" + port);
 			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.trace(e);
 			}
 			break;
 		case "AI":
+			//TODO minimize to tray
 			primaryStage.hide();
 			String server = !aiServer.getText().equals("") ? aiServer.getText() : "localhost";
 			int aip = !aiPort.getText().equals("") ? Integer.parseInt(aiPort.getText()) : 8080;
 			pa2 = new AdvancedAI(server, aip);
 			break;
 		default:
-			System.out.println(rb.getText());
-
+			throw new IllegalArgumentException("Mode non existant");
 		}
 	}
 

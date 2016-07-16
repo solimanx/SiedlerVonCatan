@@ -68,7 +68,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import model.objects.Corner;
-import model.objects.DevCards.DevelopmentCard;
 import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.client.view.devcardview.DevCardViewController;
@@ -284,7 +283,6 @@ public class GameViewController implements Initializable {
 	public double[][][][] cornerCoordinates = new double[7][7][2][2]; // [6][6][2][2]
 	private Polygon[][] fields = new Polygon[7][7];
 	private ImageView[][][] villages = new ImageView[7][7][2];
-	private Polygon[][][] cities = new Polygon[7][7][2];
 	public Line[][][] streets = new Line[7][7][3];
 	public Circle bandit;
 
@@ -303,9 +301,6 @@ public class GameViewController implements Initializable {
 	private HashMap<Integer, Integer> viewPositiontoPlayerID = new HashMap<Integer, Integer>(4);
 	private HashMap<Integer, Color> playerColors = new HashMap<Integer, Color>(4);
 	private HashMap<Integer, String> playerNames = new HashMap<Integer, String>(4);
-	// fieldColors kann weg
-	private HashMap<enums.ResourceType, Color> fieldColors = new HashMap<enums.ResourceType, Color>(6);
-	private HashMap<ResourceType, ImagePattern> resourceImages = new HashMap<ResourceType, ImagePattern>(6);
 	private HashMap<HarbourStatus, ImagePattern> harbourImages = new HashMap<HarbourStatus, ImagePattern>(6);
 
 	private HashMap<enums.ResourceType, ImagePattern> imagePatterns = new HashMap<enums.ResourceType, ImagePattern>(6);
@@ -648,7 +643,6 @@ public class GameViewController implements Initializable {
 	 */
 	private void initFieldColors() {
 		ViewFactory vFactory = new ViewFactory(theme);
-		fieldColors = vFactory.getFieldColors();
 		imagePatterns = vFactory.getImagePatterns();
 		harbourImages = vFactory.getHarbourImages();
 	}
@@ -941,7 +935,6 @@ public class GameViewController implements Initializable {
 	 * @param knight
 	 *            the knight
 	 */
-	@SuppressWarnings("null")
 	public void fieldClick(int[] fieldCoordinates, boolean knight) {
 		if (selfState == PlayerState.MOVE_ROBBER || knight == true) {
 			List<String> choices = new ArrayList<>();
@@ -1604,6 +1597,7 @@ public class GameViewController implements Initializable {
 		this.knight = knight;
 	}
 
+	@SuppressWarnings("rawtypes")
 	Task resourceUpdater = new Task<Void>() {
 
 		protected Void call() throws Exception {
@@ -1716,7 +1710,6 @@ public class GameViewController implements Initializable {
 	 * @author mattmoos
 	 */
 	private class ViewBoardFactory {
-		private Pane boardPane;
 		private List<Shape> streetFigures = new LinkedList<Shape>();
 		private List<Shape> fieldFigures = new LinkedList<Shape>();
 		private List<ImageView> villageFigures = new LinkedList<ImageView>();
@@ -1730,7 +1723,6 @@ public class GameViewController implements Initializable {
 		 * @return the view board
 		 */
 		public StackPane getViewBoard(Stage stage) {
-			boardPane = new Pane();
 			boardStack = new StackPane();
 			fieldPane = new Pane();
 			overlay = new Pane();
@@ -1862,6 +1854,8 @@ public class GameViewController implements Initializable {
 		 *            the k
 		 * @return the polygon
 		 */
+		@SuppressWarnings("unused")
+		@Deprecated
 		private ImageView createVillage(int i, int j, int k) {
 			ImageView village;
 			if (k == 0) {
@@ -1887,6 +1881,8 @@ public class GameViewController implements Initializable {
 		 * @param diceIndex
 		 *            the dice index
 		 */
+		@SuppressWarnings("unused")
+		@Deprecated
 		public void setFieldChip(int u, int v, int diceIndex) {
 			Text text = new Text("" + diceIndex);
 			text.setBoundsType(TextBoundsType.VISUAL);
@@ -1949,6 +1945,8 @@ public class GameViewController implements Initializable {
 		 *            the center
 		 * @return Polygon city
 		 */
+		@SuppressWarnings("unused")
+		@Deprecated
 		private Polygon drawCity(double[] center) {
 
 			Polygon city = new Polygon(center[0] + 5, center[1] - 10, center[0] + 5, center[1] - 20, center[0] + 10,
@@ -2189,6 +2187,7 @@ public class GameViewController implements Initializable {
 		 * @param color
 		 *            the color
 		 */
+		@SuppressWarnings("unused")
 		public void initSelf(int ownPlayerId, String name, enums.Color color) {
 			playerIDtoViewPosition.put(ownPlayerId, 0);
 			playerColors.put(0, color.getValue());

@@ -111,7 +111,7 @@ public class AdvancedAI {
 		this.cardAgent = new CardAgent(this);
 		this.resourceAgent = new ResourceAgent(this);
 		this.opponentAgent = new OpponentAgent();
-		this.tradeAgent = new TradeAgent(this, resourceAgent);
+		this.tradeAgent = new TradeAgent(this);
 		this.banditAgent = new BanditAgent(this, opponentAgent);
 	}
 

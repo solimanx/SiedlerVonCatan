@@ -6,7 +6,6 @@ import ai.AdvancedAI;
 import model.TradeOffer;
 import settings.DefaultSettings;
 
-// TODO: Auto-generated Javadoc
 /**
  * Handles the trading process for the ai.
  */
@@ -19,7 +18,6 @@ public class TradeAgent {
 	private boolean threeOneHarbour = false;
 
 	private AdvancedAI aai;
-	private ResourceAgent ra;
 
 	/**
 	 * Instantiates a new trade agent.
@@ -27,30 +25,10 @@ public class TradeAgent {
 	 * @param aai the aai
 	 * @param ra the ra
 	 */
-	public TradeAgent(AdvancedAI aai, ResourceAgent ra) {
+	public TradeAgent(AdvancedAI aai) {
 		this.aai = aai;
-		this.ra = ra;
-		//updateAgent();
 	}
 
-	//debug method //TODO
-//	public void setHarbor(){
-//		woodHarbour = false;
-//		clayHarbour = true;
-//		woolHarbour = true;
-//		cornHarbour = true;
-//		oreHarbour = true;
-//		threeOneHarbour = false;
-//	}
-
-	/**
-	 * Calculate hand.
-	 *
-	 * @param ra the ra
-	 */
-	protected void calculateHand(ResourceAgent ra){
-		//TODO calculates possible hands given resources from resource agent
-	}
 
 	/**
 	 * Update agent.
@@ -70,17 +48,6 @@ public class TradeAgent {
 			threeOneHarbour = aai.getGl().hasThreeOneHarbour(aai.getID());
 
 	}
-
-
-	//debug method //TODO
-//	public void setHarbor(){
-//		woodHarbour = true;
-//		clayHarbour = true;
-//		woolHarbour = true;
-//		cornHarbour = true;
-//		oreHarbour = true;
-//		threeOneHarbour = true;
-//	}
 
 	/**
 	 * Checks for wood harbour.
@@ -574,6 +541,7 @@ public class TradeAgent {
 	/**
 	 * {WOOD, CLAY, ORE, SHEEP, CORN} amount of the needed resource.
 	 */
+	@Deprecated
 	public void tradeResourcesOffer(){
 		int[] costs;
 		int[] ownResources = aai.getResourceAgent().getOwnResources();
@@ -612,7 +580,6 @@ public class TradeAgent {
 			}
 		}
 		int[] demand = {0,0,0,0,0};
-		int[] offer = {0,0,0,0,0};
 		int demandValue = 0;
 		int offerValue = 0;
 		for(int i = 0; i<5; i++){

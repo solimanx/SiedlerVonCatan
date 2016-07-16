@@ -1,10 +1,6 @@
 package application;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -19,134 +15,99 @@ import javafx.stage.StageStyle;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
 
-import static sounds.Sound.musicLoop;
-
-// TODO: Auto-generated Javadoc
 public class Main extends Application {
 
-    StartViewController startViewCtrl;
+	private StartViewController startViewCtrl;
 
-    private int mode = 0;
+	private double xOffset = 0;
+	private double yOffset = 0;
 
-    private double xOffset = 0;
-    private double yOffset = 0;
+	@Override
+	public void start(Stage primaryStage) {
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javafx.application.Application#init()
-     */
-    @Override
-    public void init() throws Exception {
+		ModelToProtocol.initModelToProtocol();
+		ProtocolToModel.initProtocolToModel();
 
-        Parameters p = getParameters();
-        List<String> raw = p.getRaw();
-        for (String string : raw) {
-            if (string.equals("server")) {
-                mode = 1;
-            } else if (string.equals("ai")) {
-                mode = 2;
-            } else if (string.equals("debug")) {
-                mode = 3;
-            } else if (string.equals("ai2")) {
-                mode = 4;
-            }
-        }
-    }
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			Parent root = loader.load(getClass().getResource("/application/startView.fxml").openStream());
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javafx.application.Application#start(javafx.stage.Stage)
-     */
-    @Override
-    public void start(Stage primaryStage) {
+			root.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					xOffset = event.getSceneX();
+					yOffset = event.getSceneY();
+				}
+			});
+			root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					primaryStage.setX(event.getScreenX() - xOffset);
+					primaryStage.setY(event.getScreenY() - yOffset);
+				}
+			});
+			startViewCtrl = loader.getController();
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/textures/standard.css").toExternalForm());
+			scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 
+				@Override
+				public void handle(KeyEvent t) {
+					if (t.getCode() == KeyCode.ESCAPE) {
+						Stage sb = (Stage) root.getScene().getWindow();
+						sb.close();
+						System.exit(0);
+					} else if (t.getCode() == KeyCode.ENTER) {
+						startViewCtrl.handleStartButton(null);
+					}
+				}
+			});
+			primaryStage.setScene(scene);
+			primaryStage.getIcons().add(new Image("/textures/standard/Catan-Logo.png"));
+			primaryStage.setTitle("Settlers of Catan: Launcher");
 
-        ModelToProtocol.initModelToProtocol();
-        ProtocolToModel.initProtocolToModel();
+			// primaryStage.sizeToScene();
+			// primaryStage.setResizable(false);
+			primaryStage.initStyle(StageStyle.UNDECORATED);
+			primaryStage.setOnCloseRequest(e -> System.exit(0));
+			primaryStage.show();
 
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            Parent root = loader.load(getClass().getResource("/application/startView.fxml").openStream());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		startViewCtrl.setStage(primaryStage);
+	}
 
+	// startClient.setUserData(1);
+	// switch (mode) {
+	// case 0:
+	//// setClientController(new ClientController(primaryStage));
+	// break;
+	// case 1:
+	// setServerController(new ServerController(8080));
+	// break;
+	// case 2:
+	// pa = new PrimitiveAI();
+	// pa.commence();
+	// break;
+	// case 3:
+	// dc = new DebugClient(primaryStage);
+	// break;
+	// case 4:
+	// pa = new AdvancedAI();
+	// pa.commence();
+	// }
 
-            root.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    xOffset = event.getSceneX();
-                    yOffset = event.getSceneY();
-                }
-            });
-            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    primaryStage.setX(event.getScreenX() - xOffset);
-                    primaryStage.setY(event.getScreenY() - yOffset);
-                }
-            });
-            startViewCtrl = loader.getController();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("/textures/standard.css").toExternalForm());
-            scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
+	public static void main(String[] args) {
 
-                @Override
-                public void handle(KeyEvent t) {
-                    if (t.getCode() == KeyCode.ESCAPE) {
-                        Stage sb = (Stage) root.getScene().getWindow();
-                        sb.close();
-                        System.exit(0);
-                    } else if (t.getCode() == KeyCode.ENTER) {
-                        startViewCtrl.handleStartButton(null);
-                    }
-                }
-            });
-            primaryStage.setScene(scene);
-            primaryStage.getIcons().add(new Image("/textures/standard/Catan-Logo.png"));
-            primaryStage.setTitle("Settlers of Catan: Launcher");
+		launch(args);
 
-            // primaryStage.sizeToScene();
-            // primaryStage.setResizable(false);
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.setOnCloseRequest(e -> System.exit(0));
-            primaryStage.show();
-
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        startViewCtrl.setStage(primaryStage);
-    }
-
-    // startClient.setUserData(1);
-    // switch (mode) {
-    // case 0:
-    //// setClientController(new ClientController(primaryStage));
-    // break;
-    // case 1:
-    // setServerController(new ServerController(8080));
-    // break;
-    // case 2:
-    // pa = new PrimitiveAI();
-    // pa.commence();
-    // break;
-    // case 3:
-    // dc = new DebugClient(primaryStage);
-    // break;
-    // case 4:
-    // pa = new AdvancedAI();
-    // pa.commence();
-    // }
-
-    /**
-     * The main method.
-     *
-     * @param args the arguments
-     */
-    public static void main(String[] args) {
-
-
-        launch(args);
-
-    }
+	}
 
 }

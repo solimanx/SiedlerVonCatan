@@ -131,8 +131,6 @@ public class BanditAgent {
 	 */
 	// TODO communicate with opponent agent which opponent should be targeted
 	protected void bestVictim(int[] coords) {
-		// if(differentPlayers.size()==1){
-		// FOR NOW
 		differentPlayers = new ArrayList<Integer>();
 		Corner[] c = aai.getGl().getBoard().getSurroundingCorners(coords[0], coords[1]);
 		for (int i = 0; i < c.length; i++) {
@@ -142,16 +140,18 @@ public class BanditAgent {
 				}
 			}
 		}
+
 		setTarget(differentPlayers.get(0));
-		// }
-		// else
-		// for(int i=0; i<differentPlayers.size(); i++){
-		// send differentPlayers.get(i) to newRobber
-		// get their value
-		// choose highest value
-		// combine with bestNewRobber()
-		// and back to requestsetBandit in outputhandler
-		// }
+
+		if (differentPlayers.size() > 1) {
+			int max = oa.playerStrength(differentPlayers.get(0));
+			for (int i = 0; i < differentPlayers.size(); i++) {
+				if (oa.playerStrength(differentPlayers.get(i)) > max) {
+					max = oa.playerStrength(differentPlayers.get(i));
+					setTarget(differentPlayers.get(i));
+				}
+			}
+		}
 	}
 
 	/**

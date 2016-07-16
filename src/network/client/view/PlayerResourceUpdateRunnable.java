@@ -1,7 +1,5 @@
 package network.client.view;
 
-import enums.PlayerState;
-
 // TODO: Auto-generated Javadoc
 public class PlayerResourceUpdateRunnable implements Runnable {
 

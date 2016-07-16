@@ -4,16 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Map;
 
 import enums.CardType;
 import enums.Color;
@@ -21,10 +19,10 @@ import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
 import model.Board;
-import model.DevelopmentCardsStack;
 import model.GameLogic;
 import model.HexService;
 import model.Index;
+import model.StreetSet;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
@@ -48,7 +46,6 @@ public class ServerController {
 	protected GameLogic gameLogic;
 	private ServerOutputHandler serverOutputHandler;
 	private int amountPlayers = 0;
-	private int lobbyAmountPlayers = 0;
 	private Server server;
 
 	/**
@@ -61,7 +58,6 @@ public class ServerController {
 	protected Map<Integer, Integer> threadPlayerIdMap;
 	private ServerInputHandler serverInputHandler;
 	private int InitialStreetCounter;
-	// private ArrayList<Corner> initialVillages = new ArrayList<Corner>();
 	private Integer currentPlayer = null;
 	private int robberLossCounter;
 	private TradeController tradeController;
@@ -75,12 +71,11 @@ public class ServerController {
 	private int[] longestRoutes;
 	private int longestTradingRoutePlayer = -1;
 	private int biggestKnightForcePlayer = -1;
-	private DevelopmentCardsStack devStack;
 	private Integer currentExtraPlayer;
 	private boolean longestTurnEnabled = false;
 
-	boolean FiveSixGame;
-	ArrayList<PlayerModel> lobbyPlayers = new ArrayList<PlayerModel>();
+	private boolean FiveSixGame;
+	private ArrayList<PlayerModel> lobbyPlayers = new ArrayList<PlayerModel>();
 
 	/**
 	 * Instantiates a new server controller.
@@ -89,17 +84,12 @@ public class ServerController {
 	 *            the server port
 	 */
 	public ServerController(int serverPort) {
-		// ModelPlayerID => threadID
 		modelPlayerIdMap = new HashMap<Integer, Integer>();
-
-		// threadID => ModelPlayerID
 		threadPlayerIdMap = new HashMap<Integer, Integer>();
 
 		ServerInputHandler serverInputHandler = new ServerInputHandler(this);
 		this.server = new Server(serverInputHandler, serverPort);
 		this.serverOutputHandler = new ServerOutputHandler(server);
-
-		this.devStack = new DevelopmentCardsStack();
 
 		startServer();
 
@@ -1598,7 +1588,7 @@ public class ServerController {
 					obtainToAll(modelID, costs, false);
 				}
 			}
-			String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
+			String location = Board.getCoordToStringMap().get(new Index(x, y));
 			gameLogic.getBoard().setBandit(location);
 			serverOutputHandler.robberMovement(currentThreadID, location, victimThreadID);
 			gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
@@ -1777,7 +1767,7 @@ public class ServerController {
 						obtainToAll(modelID, costs, false);
 					}
 				}
-				String location = gameLogic.getBoard().getCoordToStringMap().get(new Index(x, y));
+				String location = Board.getCoordToStringMap().get(new Index(x, y));
 				gameLogic.getBoard().setBandit(location);
 				serverOutputHandler.robberMovement(threadID, location, victimThreadID);
 				serverOutputHandler.knightCardPlayed(threadID, location, victimThreadID);
@@ -1989,8 +1979,8 @@ public class ServerController {
 	// DEBUGGING ONLY
 	public void generateDebuggingBoard() {
 
-		for (String key : gameLogic.getBoard().getStringToCoordMap().keySet()) {
-			int coords[] = gameLogic.getBoard().getStringToCoordMap().get(key);
+		for (String key : Board.getStringToCoordMap().keySet()) {
+			int coords[] = Board.getStringToCoordMap().get(key);
 			gameLogic.getBoard().getFieldAt(coords[0], coords[1]).setFieldID(key);
 			// DEBUG assume all resourcetype is corn
 			if (key.matches("[a-z]")) {
@@ -2016,7 +2006,7 @@ public class ServerController {
 	 */
 	public void gainBoardResources(int diceNum) {
 		ArrayList<Field> diceFields = new ArrayList<Field>();
-		for (Map.Entry<String, int[]> entry : gameLogic.getBoard().getStringToCoordMap().entrySet()) {
+		for (Map.Entry<String, int[]> entry : Board.getStringToCoordMap().entrySet()) {
 			int[] coord = entry.getValue();
 			Field f = gameLogic.getBoard().getFieldAt(coord[0], coord[1]);
 			Integer diceInd = f.getDiceIndex();
@@ -2175,6 +2165,8 @@ public class ServerController {
 	 * @param resources
 	 *            the resources
 	 */
+	@Deprecated
+	@SuppressWarnings("unused")
 	private void setPlayerResources(int modelID, int[] resources) {
 		gameLogic.getBoard().getPlayer(modelID).setResources(resources);
 	}

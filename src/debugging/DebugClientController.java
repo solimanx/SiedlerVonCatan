@@ -16,7 +16,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -25,9 +24,10 @@ import parsing.Parser;
 import parsing.Response;
 import protocol.connection.ProtocolHello;
 import protocol.messaging.ProtocolChatSendMessage;
-import settings.DefaultSettings;
 
-// TODO: Auto-generated Javadoc
+/**
+ * Controls the view for the debug view.
+ */
 public class DebugClientController extends Thread {
 	private static Logger logger = LogManager.getLogger(DebugClientController.class.getSimpleName());
 	private Socket socket;
@@ -325,6 +325,8 @@ public class DebugClientController extends Thread {
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
+	@Deprecated
+	@SuppressWarnings("unused")
 	private void runDebugClient() throws IOException {
 		String line;
 		while ((line = reader.readLine()) != null) {

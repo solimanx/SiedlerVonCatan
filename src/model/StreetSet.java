@@ -1,10 +1,9 @@
-package ai.agents;
+package model;
 
 import java.util.ArrayList;
 
 import model.objects.Edge;
 
-// TODO: Auto-generated Javadoc
 public class StreetSet {
 	private int playerID;
 	private ArrayList<Edge> edges;
@@ -24,11 +23,11 @@ public class StreetSet {
 	}
 
 	/**
-	 * Adds the edge.
+	 * Adds the edge to the list.
 	 *
 	 * @param e the e
 	 */
-	protected void addEdge(Edge e) {
+	public void addEdge(Edge e) {
 		edges.add(e);
 	}
 
@@ -37,7 +36,7 @@ public class StreetSet {
 	 *
 	 * @return the player ID
 	 */
-	protected int getPlayerID() {
+	public int getPlayerID() {
 		return playerID;
 	}
 
@@ -46,44 +45,44 @@ public class StreetSet {
 	 *
 	 * @return the edges
 	 */
-	protected ArrayList<Edge> getEdges() {
+	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
 
 	/**
-	 * Gets the checks for circle.
+	 * Checks if the edges make a circle.
 	 *
 	 * @return the checks for circle
 	 */
-	protected boolean getHasCircle() {
+	public boolean getHasCircle() {
 		return hasCircle;
 	}
 
 	/**
-	 * Sets the checks for circle.
+	 * Sets that there is a circle made by the edges.
 	 *
 	 * @param flag the new checks for circle
 	 */
-	protected void setHasCircle(boolean flag) {
+	public void setHasCircle(boolean flag) {
 		hasCircle = flag;
 	}
 
 	/**
-	 * Gets the edge at.
+	 * Gets the edge at the given index.
 	 *
 	 * @param index the index
 	 * @return the edge at
 	 */
-	protected Edge getEdgeAt(int index) {
+	public Edge getEdgeAt(int index) {
 		return edges.get(index);
 	}
 
 	/**
-	 * Size.
+	 * Get size of edge.
 	 *
 	 * @return the int
 	 */
-	protected int size() {
+	public int size() {
 		if (edges != null) {
 			return edges.size();
 		}

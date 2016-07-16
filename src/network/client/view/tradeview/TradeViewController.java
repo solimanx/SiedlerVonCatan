@@ -1,8 +1,6 @@
 package network.client.view.tradeview;
 
 import java.util.HashMap;
-import java.util.Iterator;
-
 import audio.Soundeffects;
 import enums.PlayerState;
 import javafx.application.Platform;
@@ -24,9 +22,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.TablePlayer;
+import model.Trade;
 import network.client.controller.ViewController;
-import network.client.view.GameViewController;
 
 import static sounds.Sound.*;
 
@@ -129,8 +126,6 @@ public class TradeViewController {
 	private ViewController viewController;
 	private int ownTradeID = 0;
 	private Stage stage;
-
-	private SimpleBooleanProperty sbp;
 
 	/**
 	 * Sets the view controller.

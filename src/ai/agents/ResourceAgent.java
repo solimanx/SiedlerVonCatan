@@ -8,6 +8,7 @@ import ai.AdvancedAI;
 import enums.CornerStatus;
 import enums.ResourceType;
 import model.HexService;
+import model.StreetSet;
 import model.objects.Corner;
 import model.objects.Edge;
 import model.objects.Field;
@@ -40,6 +41,7 @@ public class ResourceAgent {
 		return myStreetSets;
 	}
 
+	@SuppressWarnings("serial")
 	public final static HashMap<Integer, int[]> buildingCosts = new HashMap<Integer, int[]>() {
 		{
 			put(0, DefaultSettings.STREET_BUILD_COST);
@@ -50,9 +52,6 @@ public class ResourceAgent {
 	};
 	// (Street,Village,City,DevCard)
 	private boolean[] affords;
-	// {THREE_TO_ONE, WOOD, CLAY, ORE, SHEEP, CORN}
-	// maybe in trading agent?
-	private boolean[] harbours = { false, false, false, false, false, false };
 	private Double[] myResourceWeight;
 	private Double[] globalResourceWeight;
 	
@@ -412,6 +411,7 @@ public class ResourceAgent {
 	 *
 	 * @return the best street
 	 */
+	@SuppressWarnings("unchecked")
 	public Edge calculateBestStreet() {
 		ArrayList<Object> bestStreets = getPossibleLTRExtensions();
 		StreetSet streetSet = (StreetSet) bestStreets.get(0);

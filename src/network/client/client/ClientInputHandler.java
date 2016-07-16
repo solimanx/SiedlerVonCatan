@@ -407,11 +407,7 @@ public class ClientInputHandler {
 	 *            the robber movement
 	 */
 	protected void handle(ProtocolRobberMovement robberMovement) {
-		// TODO smth with information
-		int playerID = robberMovement.getPlayerID();
 		Index locationID = robberMovement.getLocationID();
-		// TODO smth with information
-		Integer victimID = robberMovement.getVictimID();
 		clientController.robberMove(locationID);
 
 	}
@@ -553,13 +549,9 @@ public class ClientInputHandler {
 	 */
 	protected void handle(ProtocolPlayKnightCard knightCardInfo) {
 		if (knightCardInfo.getPlayerID() == clientController.getOwnModelID()) {
-			// TODO smth with information
 			int playerID = knightCardInfo.getPlayerID();
 			clientController.removeFromDeck(playerID, new KnightCard());
-
 			Index locationID = knightCardInfo.getLocationID();
-			// TODO smth with information
-			int victimID = knightCardInfo.getVictimID();
 			clientController.robberMove(locationID);
 
 		}

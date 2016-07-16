@@ -52,7 +52,6 @@ import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 
 // TODO: Auto-generated Javadoc
-//import static org.apache.logging.log4j.FormatterLoggerManualExample.logger;
 
 public class ServerOutputHandler {
 	protected Server server;
@@ -135,11 +134,11 @@ public class ServerOutputHandler {
 	 */
 	public void initBoard(int amountPlayers, Board board) {
 
-		ProtocolField[] pfArray = new ProtocolField[board.getStringToCoordMap().size()];
+		ProtocolField[] pfArray = new ProtocolField[Board.getStringToCoordMap().size()];
 		int counter = 0;
 
-		for (String key : board.getStringToCoordMap().keySet()) {
-			int coords[] = board.getStringToCoordMap().get(key);
+		for (String key : Board.getStringToCoordMap().keySet()) {
+			int coords[] = Board.getStringToCoordMap().get(key);
 			Field f = board.getFieldAt(coords[0], coords[1]);
 			pfArray[counter] = new ProtocolField(ProtocolToModel.getProtocolOneIndex(f.getFieldID()),
 					ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
@@ -295,7 +294,7 @@ public class ServerOutputHandler {
 		} else {
 			pDevCard = new ProtocolDevCard(devCards[0],devCards[4],devCards[2],devCards[3],devCards[1],null);
 		}
-		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, knightAmount, pDevCard, biggestKP,longestTR ); //TODO die 1.0 neue attribute
+		ProtocolPlayer pPlayer = new ProtocolPlayer(playerID, color, name, status, victoryPoints, pResource, knightAmount, pDevCard, biggestKP,longestTR );
 		ProtocolStatusUpdate ps = new ProtocolStatusUpdate(pPlayer);
 		Response r = new Response();
 		r.pSUpdate = ps;
