@@ -6,7 +6,7 @@ import ai.AdvancedAI;
 import enums.ResourceType;
 import model.board.Edge;
 import model.unit.StreetSet;
-import network.ProtocolToModel;
+import service.ProtocolToModel;
 
 // TODO: Auto-generated Javadoc
 /**

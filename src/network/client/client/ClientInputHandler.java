@@ -16,7 +16,6 @@ import model.card.KnightCard;
 import model.card.MonopolyCard;
 import model.card.StreetBuildingCard;
 import model.unit.Index;
-import network.ProtocolToModel;
 import network.client.controller.ClientController;
 import parsing.Parser;
 import protocol.cheats.ProtocolLongestTurn;
@@ -52,6 +51,7 @@ import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
 import service.HexService;
+import service.ProtocolToModel;
 
 // TODO: Auto-generated Javadoc
 /**

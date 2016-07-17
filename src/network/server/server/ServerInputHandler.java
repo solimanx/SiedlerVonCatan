@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 
 import enums.Color;
 import model.unit.Index;
-import network.ProtocolToModel;
 import network.server.controller.ServerController;
 import network.server.server.cheat.CheatHandler;
 import parsing.Parser;
@@ -35,6 +34,7 @@ import protocol.messaging.ProtocolChatReceiveMessage;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.messaging.ProtocolServerResponse;
 import protocol.object.ProtocolResource;
+import service.ProtocolToModel;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -68,11 +68,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import model.board.Corner;
-import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.client.view.devcardview.DevCardViewController;
 import network.client.view.robberview.RobberViewController;
 import network.client.view.tradeview.TradeViewController;
+import service.ProtocolToModel;
 
 // TODO: Auto-generated Javadoc
 public class GameViewController implements Initializable {

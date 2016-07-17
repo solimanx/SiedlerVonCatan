@@ -14,7 +14,6 @@ import model.card.InventionCard;
 import model.card.KnightCard;
 import model.card.MonopolyCard;
 import model.card.StreetBuildingCard;
-import network.ProtocolToModel;
 import network.client.client.ClientInputHandler;
 import parsing.Parser;
 import org.apache.logging.log4j.LogManager;
@@ -34,6 +33,7 @@ import protocol.object.ProtocolHarbour;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.*;
 import service.HexService;
+import service.ProtocolToModel;
 
 // TODO: Auto-generated Javadoc
 /**

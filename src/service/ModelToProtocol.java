@@ -1,4 +1,4 @@
-package network;
+package service;
 
 import java.util.HashMap;
 

@@ -20,10 +20,10 @@ import model.board.Edge;
 import model.board.Field;
 import model.board.PlayerModel;
 import model.unit.TradeOffer;
-import network.ModelToProtocol;
-import network.ProtocolToModel;
 import service.GameLogic;
 import service.HexService;
+import service.ModelToProtocol;
+import service.ProtocolToModel;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

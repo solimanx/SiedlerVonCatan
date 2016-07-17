@@ -26,12 +26,12 @@ import model.board.PlayerModel;
 import model.card.DevelopmentCard;
 import model.unit.Index;
 import model.unit.StreetSet;
-import network.ProtocolToModel;
 import network.server.server.Server;
 import network.server.server.ServerInputHandler;
 import network.server.server.ServerOutputHandler;
 import service.GameLogic;
 import service.HexService;
+import service.ProtocolToModel;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

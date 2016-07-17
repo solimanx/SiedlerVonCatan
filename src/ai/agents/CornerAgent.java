@@ -10,7 +10,7 @@ import model.board.Board;
 import model.board.Corner;
 import model.board.Edge;
 import model.board.Field;
-import network.ProtocolToModel;
+import service.ProtocolToModel;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

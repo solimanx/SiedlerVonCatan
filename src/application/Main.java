@@ -12,8 +12,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import network.ModelToProtocol;
-import network.ProtocolToModel;
+import service.ModelToProtocol;
+import service.ProtocolToModel;
 
 public class Main extends Application {
 

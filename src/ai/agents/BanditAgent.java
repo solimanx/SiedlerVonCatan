@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ai.AdvancedAI;
 import enums.ResourceType;
 import model.board.Corner;
-import network.ModelToProtocol;
+import service.ModelToProtocol;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

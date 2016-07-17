@@ -1,4 +1,4 @@
-package network;
+package service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,6 @@ import model.card.VictoryPointCard;
 import model.unit.Index;
 import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
-import service.HexService;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

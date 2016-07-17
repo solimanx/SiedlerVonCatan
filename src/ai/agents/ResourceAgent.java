@@ -11,9 +11,9 @@ import model.board.Corner;
 import model.board.Edge;
 import model.board.Field;
 import model.unit.StreetSet;
-import network.ModelToProtocol;
-import network.ProtocolToModel;
 import service.HexService;
+import service.ModelToProtocol;
+import service.ProtocolToModel;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

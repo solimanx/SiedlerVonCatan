@@ -15,8 +15,6 @@ import model.board.Edge;
 import model.board.Field;
 import model.card.DevelopmentCard;
 import model.unit.Index;
-import network.ModelToProtocol;
-import network.ProtocolToModel;
 import parsing.Parser;
 import parsing.Response;
 import protocol.configuration.ProtocolError;
@@ -50,6 +48,8 @@ import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
+import service.ModelToProtocol;
+import service.ProtocolToModel;
 
 // TODO: Auto-generated Javadoc
 

@@ -28,14 +28,14 @@ import model.card.StreetBuildingCard;
 import model.card.UnknownCard;
 import model.unit.Index;
 import model.unit.TradeOffer;
-import network.ModelToProtocol;
-import network.ProtocolToModel;
 import network.client.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
 import network.client.view.PlayerResourceUpdateRunnable;
 import network.client.view.PlayerStatusGUIUpdate;
 import service.GameLogic;
+import service.ModelToProtocol;
+import service.ProtocolToModel;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

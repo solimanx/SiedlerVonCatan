@@ -9,8 +9,6 @@ import org.apache.logging.log4j.Logger;
 import enums.CheatCode;
 import enums.ResourceType;
 import model.unit.Index;
-import network.ModelToProtocol;
-import network.ProtocolToModel;
 import parsing.Parser;
 import parsing.Response;
 import protocol.cheats.ProtocolCheat;
@@ -34,6 +32,8 @@ import protocol.dualinstructions.ProtocolPlayMonopolyCard;
 import protocol.dualinstructions.ProtocolPlayRoadCard;
 import protocol.messaging.ProtocolChatSendMessage;
 import protocol.object.ProtocolResource;
+import service.ModelToProtocol;
+import service.ProtocolToModel;
 
 // TODO: Auto-generated Javadoc
 public class ClientOutputHandler {
