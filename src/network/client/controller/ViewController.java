@@ -73,7 +73,7 @@ public class ViewController {
 	 */
 	private void startLobbyView(Stage primaryStage) throws IOException {
 
-		Parent root = loader.load(getClass().getResource("/application/lobby/LobbyFXML.fxml").openStream());
+		Parent root = loader.load(getClass().getResource("/view/lobbyView/LobbyFXML.fxml").openStream());
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/textures/" + theme + ".css").toExternalForm());
 
@@ -132,7 +132,7 @@ public class ViewController {
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
 		try {
-			root = loader.load(getClass().getResource("/network/client/view/GameView.fxml").openStream());
+			root = loader.load(getClass().getResource("/view/gameView/GameView.fxml").openStream());
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/textures/" + theme + ".css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -235,7 +235,7 @@ public class ViewController {
 	public void newTradeView() {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(
-					getClass().getResource("/application/network/client/view/tradeview/tradeView.fxml"));
+					getClass().getResource("/view/tradeview/TradeView.fxml"));
 			Parent root2 = (Parent) fxmlLoader.load();
 			tradeViewController = (TradeViewController) fxmlLoader.getController();
 			tradeViewController.setViewController(this);

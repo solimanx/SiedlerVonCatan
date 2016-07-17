@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0"
             prefWidth="764.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="network.client.view.helpview.HelpViewController">
+            fx:controller="view.helpview.HelpViewController">
     <center>
         <TabPane fx:id="pane" prefHeight="504.0" prefWidth="764.0" tabClosingPolicy="UNAVAILABLE"
                  BorderPane.alignment="CENTER">

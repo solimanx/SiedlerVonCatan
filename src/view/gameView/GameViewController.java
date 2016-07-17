@@ -407,7 +407,7 @@ public class GameViewController implements Initializable {
         Pane root = new Pane();
         try {
 
-            root = loader.load(getClass().getResource("/network/client/view/tradeview/tradeView.fxml").openStream());
+            root = loader.load(getClass().getResource("/view/tradeview/TradeView.fxml").openStream());
             tradeViewController = (TradeViewController) loader.getController();
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/textures/" + theme + ".css");
@@ -722,7 +722,7 @@ public class GameViewController implements Initializable {
         Parent root;
         try {
             root = loader
-                    .load(getClass().getResource("/network/client/view/devcardview/DevCardView.fxml").openStream());
+                    .load(getClass().getResource("/view/devcardview/DevCardView.fxml").openStream());
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/textures/" + theme + ".css");
             Stage devCardStage = new Stage();
@@ -750,9 +750,9 @@ public class GameViewController implements Initializable {
     void handleHelpButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         Parent root;
-        if (theme == "standard") {
+        if (theme.equals("standard")) {
             try {
-                root = loader.load(getClass().getResource("/network/client/view/helpview/HelpView.fxml").openStream());
+                root = loader.load(getClass().getResource("/view/helpview/HelpView.fxml").openStream());
                 Scene scene = new Scene(root);
                 scene.getStylesheets().add("/textures/" + theme + ".css");
                 Stage helpView = new Stage();
@@ -760,11 +760,10 @@ public class GameViewController implements Initializable {
                 helpView.show();
             } catch (IOException e) {
                 logger.catching(Level.ERROR, e);
-                e.printStackTrace();
             }
         } else {
             try {
-                root = loader.load(getClass().getResource("/network/client/view/helpview/BiergartenHelpView.fxml").openStream());
+                root = loader.load(getClass().getResource("/view/helpview/BiergartenHelpView.fxml").openStream());
                 Scene scene = new Scene(root);
                 scene.getStylesheets().add("/textures/" + theme + ".css");
                 Stage helpView = new Stage();
@@ -772,7 +771,6 @@ public class GameViewController implements Initializable {
                 helpView.show();
             } catch (IOException e) {
                 logger.catching(Level.ERROR, e);
-                e.printStackTrace();
             }
         }
         if (!Soundeffects.isMuted()) {
@@ -1303,7 +1301,7 @@ public class GameViewController implements Initializable {
         Parent root;
         try {
             root = loader
-                    .load(getClass().getResource("/network/client/view/robberview/GiveResources.fxml").openStream());
+                    .load(getClass().getResource("/view/robberview/GiveResources.fxml").openStream());
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/textures/" + theme + ".css");
             Stage robberStage = new Stage();
