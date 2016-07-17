@@ -1532,8 +1532,8 @@ public class GameViewController implements Initializable {
 	}
 
 	/**
-	 * Method showing a new window, which displays, who the winner of the game
-	 * is.
+	 * Method creating pop up which shows winner
+	 * 
 	 *
 	 * @param winnerID
 	 *            the winner ID
@@ -1550,26 +1550,32 @@ public class GameViewController implements Initializable {
 				if (!Soundeffects.isMuted()) {
 					Soundeffects.VICTORY.play();
 				}
-				// TODO Loss Sound
 				VBox vBox = new VBox(10);
+				vBox.setAlignment(Pos.CENTER);
 				vBox.setPadding(new Insets(5));
 				vBox.setSpacing(8);
-				Text title = new Text("Das Spiel ist aus!");
-				Text text = new Text("Glückwunsch zum verdienten Sieg.");
-				Text text1 = new Text("Unser Gewinner ist: " + winner);
+				Text text = new Text("Congratulations on your victory, "+winner +"!");
+				text.setFill(playerColors.get(winnerID));
+				Button exit = new Button();
+				exit.setText("Exit Game");
+				exit.setOnAction(e -> System.exit(0));
 
 				ImageView image = new ImageView(
 						new Image(getClass().getResourceAsStream("/textures/standard/winner.png")));
-				vBox.getChildren().addAll(title, text, text1, image);
+				vBox.getChildren().addAll(text, image, exit);
 
-				Scene scene = new Scene(vBox, 600, 600, Color.BEIGE);
+				Scene scene = new Scene(vBox);
+				vBox.setStyle("-fx-background-image: url(/textures/standard/dialogbackground.jpg);");
+				scene.getStylesheets().add("/textures/" + theme + ".css");
 				Stage victoryStage = new Stage();
-				victoryStage.setWidth(415);
-				victoryStage.setHeight(200);
 				victoryStage.setScene(scene);
 				victoryStage.sizeToScene();
+				victoryStage.setTitle("Game Over");
+				victoryStage.initStyle(StageStyle.UTILITY);
 				victoryStage.initModality(Modality.APPLICATION_MODAL);
 				victoryStage.initOwner(gameStage);
+				victoryStage.setResizable(false);
+				victoryStage.setOnCloseRequest(e-> System.exit(0));
 				victoryStage.show();
 			}
 
@@ -1580,7 +1586,6 @@ public class GameViewController implements Initializable {
 		}.init(winnerName));
 
 	}
-
 	/**
 	 * Alert.
 	 *
