@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ai.AdvancedAI;
 import enums.ResourceType;
-import model.objects.Corner;
+import model.board.Corner;
 import network.ModelToProtocol;
 import settings.DefaultSettings;
 

@@ -1,4 +1,4 @@
-package model.objects.DevCards;
+package model.card;
 
 import settings.DefaultSettings;
 

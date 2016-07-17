@@ -10,18 +10,18 @@ import enums.CardType;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.ResourceType;
-import model.Board;
-import model.HexService;
-import model.Index;
-import model.objects.DevCards.DevelopmentCard;
-import model.objects.DevCards.InventionCard;
-import model.objects.DevCards.KnightCard;
-import model.objects.DevCards.MonopolyCard;
-import model.objects.DevCards.StreetBuildingCard;
-import model.objects.DevCards.UnknownCard;
-import model.objects.DevCards.VictoryPointCard;
+import model.board.Board;
+import model.card.DevelopmentCard;
+import model.card.InventionCard;
+import model.card.KnightCard;
+import model.card.MonopolyCard;
+import model.card.StreetBuildingCard;
+import model.card.UnknownCard;
+import model.card.VictoryPointCard;
+import model.unit.Index;
 import protocol.object.ProtocolDevCard;
 import protocol.object.ProtocolResource;
+import service.HexService;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

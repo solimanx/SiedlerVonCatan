@@ -14,16 +14,16 @@ import ai.agents.TradeAgent;
 import enums.CardType;
 import enums.CornerStatus;
 import enums.ResourceType;
-import model.Board;
-import model.GameLogic;
-import model.HexService;
-import model.TradeOffer;
-import model.objects.Corner;
-import model.objects.Edge;
-import model.objects.Field;
-import model.objects.PlayerModel;
+import model.board.Board;
+import model.board.Corner;
+import model.board.Edge;
+import model.board.Field;
+import model.board.PlayerModel;
+import model.unit.TradeOffer;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
+import service.GameLogic;
+import service.HexService;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

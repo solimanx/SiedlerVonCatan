@@ -1,4 +1,4 @@
-package model.objects;
+package model.board;
 
 import enums.ResourceType;
 

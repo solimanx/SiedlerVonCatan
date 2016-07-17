@@ -1,9 +1,12 @@
-package model;
+package service;
 
 import network.ProtocolToModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import model.board.Board;
+import model.unit.Index;
 
 public class HexService {
 	private static Logger logger = LogManager.getLogger(HexService.class.getSimpleName());

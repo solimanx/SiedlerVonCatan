@@ -67,7 +67,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import model.objects.Corner;
+import model.board.Corner;
 import network.ProtocolToModel;
 import network.client.controller.ViewController;
 import network.client.view.devcardview.DevCardViewController;

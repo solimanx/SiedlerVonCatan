@@ -1,8 +1,8 @@
-package model;
+package model.unit;
 
 import java.util.ArrayList;
 
-import model.objects.Edge;
+import model.board.Edge;
 
 public class StreetSet {
 	private int playerID;

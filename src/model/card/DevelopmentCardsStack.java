@@ -1,7 +1,5 @@
-package model;
+package model.card;
 
-import model.objects.DevCards.DevCardFactory;
-import model.objects.DevCards.DevelopmentCard;
 import settings.DefaultSettings;
 
 import java.util.Random;

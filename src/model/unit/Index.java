@@ -1,4 +1,4 @@
-package model;
+package model.unit;
 
 // TODO: Auto-generated Javadoc
 /**

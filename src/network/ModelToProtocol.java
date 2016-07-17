@@ -6,10 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import enums.CardType;
 import enums.ResourceType;
-import model.Board;
-import model.Index;
-import model.objects.PlayerModel;
-import model.objects.DevCards.DevelopmentCard;
+import model.board.Board;
+import model.board.PlayerModel;
+import model.card.DevelopmentCard;
+import model.unit.Index;
 import protocol.object.ProtocolResource;
 
 // TODO: Auto-generated Javadoc

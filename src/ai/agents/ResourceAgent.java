@@ -7,13 +7,13 @@ import java.util.HashMap;
 import ai.AdvancedAI;
 import enums.CornerStatus;
 import enums.ResourceType;
-import model.HexService;
-import model.StreetSet;
-import model.objects.Corner;
-import model.objects.Edge;
-import model.objects.Field;
+import model.board.Corner;
+import model.board.Edge;
+import model.board.Field;
+import model.unit.StreetSet;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
+import service.HexService;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

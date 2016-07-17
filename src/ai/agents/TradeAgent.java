@@ -3,7 +3,7 @@ package ai.agents;
 import java.util.ArrayList;
 
 import ai.AdvancedAI;
-import model.TradeOffer;
+import model.unit.TradeOffer;
 import settings.DefaultSettings;
 
 /**

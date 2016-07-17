@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import enums.CheatCode;
 import enums.ResourceType;
-import model.Index;
+import model.unit.Index;
 import network.ModelToProtocol;
 import network.ProtocolToModel;
 import parsing.Parser;

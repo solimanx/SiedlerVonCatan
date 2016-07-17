@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import model.TablePlayer;
+import model.unit.TablePlayer;
 import network.client.controller.ViewController;
 
 import org.apache.logging.log4j.LogManager;

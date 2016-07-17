@@ -1,4 +1,4 @@
-package model;
+package model.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,10 +7,10 @@ import java.util.Map;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.ResourceType;
-import model.objects.Corner;
-import model.objects.Edge;
-import model.objects.Field;
-import model.objects.PlayerModel;
+import model.card.DevelopmentCardsStack;
+import model.unit.Index;
+import service.HexService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import settings.DefaultSettings;

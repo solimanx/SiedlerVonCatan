@@ -22,7 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.Trade;
+import model.unit.Trade;
 import network.client.controller.ViewController;
 
 import static sounds.Sound.*;

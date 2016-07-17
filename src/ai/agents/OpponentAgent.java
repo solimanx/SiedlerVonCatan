@@ -6,7 +6,7 @@ package ai.agents;
 import java.util.ArrayList;
 import enums.CardType;
 import enums.ResourceType;
-import model.objects.PlayerModel;
+import model.board.PlayerModel;
 
 // TODO: Auto-generated Javadoc
 /**

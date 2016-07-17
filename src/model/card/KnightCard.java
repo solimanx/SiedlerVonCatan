@@ -1,13 +1,13 @@
-package model.objects.DevCards;
+package model.card;
 
 import enums.CardType;
 
 // TODO: Auto-generated Javadoc
-public class UnknownCard implements DevelopmentCard {
+public class KnightCard implements DevelopmentCard {
 
-	private String name = "Unknown";
+	private String name = "Knight Card";
 	private String text = "";
-	private CardType cardType = CardType.UNKNOWN;
+	private CardType cardType = CardType.KNIGHT;
 
 	/* (non-Javadoc)
 	 * @see model.objects.DevCards.DevelopmentCard#getName()

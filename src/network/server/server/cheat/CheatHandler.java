@@ -6,7 +6,7 @@ import audio.Soundeffects;
 import enums.CardType;
 import enums.CheatCode;
 import enums.PlayerState;
-import model.objects.PlayerModel;
+import model.board.PlayerModel;
 import network.server.server.Server;
 import network.server.server.ServerOutputHandler;
 import parsing.Response;

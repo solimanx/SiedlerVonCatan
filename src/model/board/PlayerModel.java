@@ -1,11 +1,12 @@
-package model.objects;
+package model.board;
 
 import java.util.ArrayList;
 
-import model.objects.DevCards.DevelopmentCard;
 import enums.Color;
 import enums.HarbourStatus;
 import enums.PlayerState;
+import model.card.DevelopmentCard;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

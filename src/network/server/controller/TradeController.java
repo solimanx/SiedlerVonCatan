@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import enums.HarbourStatus;
 import enums.PlayerState;
 import enums.ResourceType;
-import model.TradeOffer;
+import model.unit.TradeOffer;
 import settings.DefaultSettings;
 
 // TODO: Auto-generated Javadoc

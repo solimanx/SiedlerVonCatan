@@ -7,16 +7,15 @@ import org.apache.logging.log4j.Logger;
 
 import enums.CardType;
 import enums.ResourceType;
-import model.HexService;
-import model.Index;
-import model.objects.Corner;
-import model.objects.Edge;
-import model.objects.Field;
-import model.objects.DevCards.DevelopmentCard;
-import model.objects.DevCards.InventionCard;
-import model.objects.DevCards.KnightCard;
-import model.objects.DevCards.MonopolyCard;
-import model.objects.DevCards.StreetBuildingCard;
+import model.board.Corner;
+import model.board.Edge;
+import model.board.Field;
+import model.card.DevelopmentCard;
+import model.card.InventionCard;
+import model.card.KnightCard;
+import model.card.MonopolyCard;
+import model.card.StreetBuildingCard;
+import model.unit.Index;
 import network.ProtocolToModel;
 import network.client.controller.ClientController;
 import parsing.Parser;
@@ -52,6 +51,7 @@ import protocol.serverinstructions.trade.ProtocolTradeCancellation;
 import protocol.serverinstructions.trade.ProtocolTradeCompletion;
 import protocol.serverinstructions.trade.ProtocolTradeConfirmation;
 import protocol.serverinstructions.trade.ProtocolTradePreview;
+import service.HexService;
 
 // TODO: Auto-generated Javadoc
 /**

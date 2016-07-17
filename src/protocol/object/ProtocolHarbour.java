@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
 import enums.HarbourStatus;
-import model.Index;
+import model.unit.Index;
 
 /**
  * <b>Häfen (Harbours)</b>

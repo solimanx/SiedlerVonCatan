@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import enums.Color;
-import model.Index;
+import model.unit.Index;
 import network.ProtocolToModel;
 import network.server.controller.ServerController;
 import network.server.server.cheat.CheatHandler;

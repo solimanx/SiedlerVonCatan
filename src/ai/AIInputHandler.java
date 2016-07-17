@@ -7,14 +7,13 @@ import java.util.ArrayList;
 
 import enums.CardType;
 import enums.PlayerState;
-import model.HexService;
-import model.objects.Corner;
-import model.objects.Edge;
-import model.objects.Field;
-import model.objects.DevCards.InventionCard;
-import model.objects.DevCards.KnightCard;
-import model.objects.DevCards.MonopolyCard;
-import model.objects.DevCards.StreetBuildingCard;
+import model.board.Corner;
+import model.board.Edge;
+import model.board.Field;
+import model.card.InventionCard;
+import model.card.KnightCard;
+import model.card.MonopolyCard;
+import model.card.StreetBuildingCard;
 import network.ProtocolToModel;
 import network.client.client.ClientInputHandler;
 import parsing.Parser;
@@ -34,6 +33,7 @@ import protocol.object.ProtocolField;
 import protocol.object.ProtocolHarbour;
 import protocol.serverinstructions.*;
 import protocol.serverinstructions.trade.*;
+import service.HexService;
 
 // TODO: Auto-generated Javadoc
 /**

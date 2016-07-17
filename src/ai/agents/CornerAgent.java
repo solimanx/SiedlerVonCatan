@@ -6,10 +6,10 @@ import ai.AdvancedAI;
 import enums.CornerStatus;
 import enums.HarbourStatus;
 import enums.ResourceType;
-import model.Board;
-import model.objects.Corner;
-import model.objects.Edge;
-import model.objects.Field;
+import model.board.Board;
+import model.board.Corner;
+import model.board.Edge;
+import model.board.Field;
 import network.ProtocolToModel;
 import settings.DefaultSettings;
 

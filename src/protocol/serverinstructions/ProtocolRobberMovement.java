@@ -3,7 +3,7 @@ package protocol.serverinstructions;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 
-import model.Index;
+import model.unit.Index;
 
 // TODO: Auto-generated Javadoc
 /**
