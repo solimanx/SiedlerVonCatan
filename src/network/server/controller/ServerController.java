@@ -951,12 +951,12 @@ public class ServerController {
 		for (int i = 0; i < neighbours.length; i++) {
 			if (neighbours[i] != null) {
 				Integer owner = neighbours[i].getOwnerID();
-				if (owner != null && owner != modelID) {
-					if (currPlayer == owner) {
-						streetEdges.add(neighbours[i]);
-					} else if (currPlayer == null) {
+				if (owner != null && !owner.equals(modelID)) {
+					if (currPlayer == null) {
 						streetEdges.add(neighbours[i]);
 						currPlayer = owner;
+					} else if (currPlayer == owner) {
+						streetEdges.add(neighbours[i]);
 					}
 				}
 			}
@@ -1451,9 +1451,9 @@ public class ServerController {
 	public void endTurn(int playerID) {
 		Integer modelID = threadPlayerIdMap.get(playerID);
 		// XOR
-		if ((modelID == currentPlayer
+		if ((modelID.equals(currentPlayer)
 				&& !gameLogic.isActionForbidden(modelID, currentPlayer, PlayerState.TRADING_OR_BUILDING))
-				^ modelID == currentExtraPlayer) {
+				^ modelID.equals(currentExtraPlayer)) {
 			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
 			pM.setPlayerState(PlayerState.WAITING);
 			ArrayList<DevelopmentCard> currDevCards = pM.getDevCardsBoughtInThisRound();
@@ -1469,9 +1469,9 @@ public class ServerController {
 			pM.setHasPlayedDevCard(false);
 			statusUpdate(modelID);
 
-			if (modelID == currentExtraPlayer) {
+			if (modelID.equals(currentExtraPlayer)) {
 				currentExtraPlayer = getNextPlayer(currentExtraPlayer);
-				if (currentExtraPlayer == currentPlayer) {
+				if (currentExtraPlayer.equals(currentPlayer)) {
 					// ende der ausserordentlichen Bauphase
 					currentExtraPlayer = null;
 					currentPlayer = getNextPlayer(currentPlayer);

@@ -66,7 +66,7 @@ public class GameLogic {
 				Edge[] e = board.getProjectingEdges(x, y, dir);
 				for (int i = 0; i < e.length; i++) {
 					if (e[i] != null) {
-						if (e[i].getOwnerID() != null && e[i].getOwnerID() == playerID) { // is
+						if (e[i].getOwnerID() != null && e[i].getOwnerID().equals(playerID)) { // is
 							// there
 							// an
 							// adjusting
@@ -519,7 +519,7 @@ public class GameLogic {
 	 * @return true if it is forbidden false if it is not
 	 */
 	public boolean isActionForbidden(Integer playerID, Integer currentPlayer, PlayerState state) {
-		if (playerID != currentPlayer || board.getPlayer(currentPlayer).getPlayerState() != state) {
+		if (!playerID.equals(currentPlayer) || board.getPlayer(currentPlayer).getPlayerState() != state) {
 			return true;
 		} else {
 			return false;

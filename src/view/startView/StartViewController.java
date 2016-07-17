@@ -208,7 +208,7 @@ public class StartViewController {
 					setClientController(new ClientController(new Stage(), themeChooser.getValue().toLowerCase()));
 				}
 			});
-			Platform.runLater(clientThread);
+			clientThread.run();
 			break;
 		case "Server":
 			//TODO minimize to tray
