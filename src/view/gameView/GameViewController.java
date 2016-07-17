@@ -1959,8 +1959,8 @@ public class GameViewController implements Initializable {
 			villageImageView.setTranslateX(center[0] - 20);
 			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
-			villageImageView.setScaleX(120 / radius);
-			villageImageView.setScaleY(120 / radius);
+			villageImageView.setScaleX(70 / radius);
+			villageImageView.setScaleY(70 / radius);
 
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
 			villageImageView.setCache(true);
