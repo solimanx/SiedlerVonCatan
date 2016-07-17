@@ -1076,7 +1076,7 @@ public class ClientController {
 				viewController.getGameViewController().showLoss(threadPlayerIdMap.get(threadID));
 			}
 		} else {
-			viewController.getGameViewController().alert(message + " Spieler: " + threadID);
+			viewController.getGameViewController().alert(message + " Spieler: " + threadID, true);
 		}
 	}
 

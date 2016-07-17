@@ -494,7 +494,7 @@ public class TradeViewController {
 		try {
 			tradeList.remove(playerIDtoString.get(partnerModelID));
 		} catch (Exception e) {
-			viewController.getGameViewController().alert("Couldn't delete trade!");
+			viewController.getGameViewController().alert("Couldn't delete trade!", false);
 		}
 
 	}
