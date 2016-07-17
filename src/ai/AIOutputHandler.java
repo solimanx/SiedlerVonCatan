@@ -104,10 +104,16 @@ public class AIOutputHandler {
 			ppp = new ProtocolPlayerProfile("RedBro", Color.RED);
 			break;
 		case 2:
-			ppp = new ProtocolPlayerProfile("Orange Destroyer", Color.ORANGE);
+			ppp = new ProtocolPlayerProfile("OrangeBro", Color.ORANGE);
 			break;
 		case 3:
-			ppp = new ProtocolPlayerProfile("Walter White", Color.WHITE);
+			ppp = new ProtocolPlayerProfile("WhiteBro", Color.WHITE);
+			break;
+		case 4 : 
+			ppp = new ProtocolPlayerProfile("GreenBro", Color.GREEN);
+			break;
+		case 5:
+			ppp = new ProtocolPlayerProfile("OrangeBro", Color.ORANGE);
 			break;
 		default:
 			ppp = null;

@@ -27,7 +27,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
-import view.gameView.GameViewController;
 
 /**
  * Controls the DevelopmentCard view when viewing player's deck.

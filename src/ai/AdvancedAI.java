@@ -654,7 +654,7 @@ public class AdvancedAI {
 	/**
 	 * End turn.
 	 */
-	private void endTurn() {
+	void endTurn() {
 		if (boughtDevCard != null) {
 			getMe().incrementPlayerDevCard(ProtocolToModel.getDevCard(boughtDevCard));
 		}
