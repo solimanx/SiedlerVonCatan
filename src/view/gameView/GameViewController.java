@@ -1426,6 +1426,8 @@ public class GameViewController implements Initializable {
 		ImageView city = villages[u + 3][v + 3][dir];
 		city.setImage(new Image("/textures/" + theme + "/city.png"));
 		city.setEffect(getBlushEffect(playerColor, city));
+		city.setScaleX(radius / 70);
+		city.setScaleY(radius / 80);
 		city.setOpacity(1.0);
 		city.setEffect(shadow);
 		// city.setStroke(Color.BLACK);
@@ -1959,8 +1961,8 @@ public class GameViewController implements Initializable {
 			villageImageView.setTranslateX(center[0] - 20);
 			villageImageView.setTranslateY(center[1] - 20);
 			villageImageView.setClip(new ImageView(villageImage));
-			villageImageView.setScaleX(70 / radius);
-			villageImageView.setScaleY(70 / radius);
+			villageImageView.setScaleX(radius / 70);
+			villageImageView.setScaleY(radius / 70);
 
 			villageImageView.setEffect(getBlushEffect(Color.PINK, villageImageView));
 			villageImageView.setCache(true);
