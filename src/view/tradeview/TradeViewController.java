@@ -302,7 +302,6 @@ public class TradeViewController {
 		resultDemand = new int[5];
 		resultOffer = new int[5];
 		updateSpinner(resultDemand, grid);
-		tradeButton.setDisable(true);
 		playMakeOfferSound();
 	}
 
