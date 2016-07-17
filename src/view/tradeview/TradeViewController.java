@@ -302,7 +302,8 @@ public class TradeViewController {
 		resultDemand = new int[5];
 		resultOffer = new int[5];
 		updateSpinner(resultDemand, grid);
-		playMakeOfferSound();
+		if (!Soundeffects.isMuted())
+			playMakeOfferSound();
 	}
 
 	/**
@@ -345,7 +346,6 @@ public class TradeViewController {
 				for (Trade trade : trades) {
 					if (trade.getTradeID() == tradeID) {
 						trade.setStatus("ACCEPTED");
-						playTradeButtonSound();
 					}
 				}
 			};
@@ -364,12 +364,14 @@ public class TradeViewController {
 			int tradeID = selectedTrade.getTradeID();
 			if (selectedTrade.getStatus().equals("ACCEPTED")) {
 				viewController.getClientController().cancelTrade(tradeID);
-				playCancelTradeSound();
+				if (!Soundeffects.isMuted())
+					playCancelTradeSound();
 				selectedTrade.setStatus("");
 			} else if (selectedTrade.getStatus().equals("")) {
 				selectedTrade.setStatus("DECLINED");
 				viewController.getClientController().declineTrade(tradeID);
-				playDeclineTradeOfferSound();
+				if (!Soundeffects.isMuted())
+					playDeclineTradeOfferSound();
 			}
 		} catch (NullPointerException e) {
 		}
@@ -402,8 +404,8 @@ public class TradeViewController {
 	void handleSeaTradeButton(ActionEvent event) {
 		if (viewController.getClientController().getGameLogic().getBoard().getPlayer(0)
 				.getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
-			if (!Soundeffects.isMuted()){
-			Soundeffects.HARBOUR.play();
+			if (!Soundeffects.isMuted()) {
+				Soundeffects.HARBOUR.play();
 			}
 			viewController.getClientController().requestSeaTrade(resultOffer, resultDemand);
 			stage.hide();
@@ -426,7 +428,8 @@ public class TradeViewController {
 		viewController.getClientController().cancelTrade(ownTradeID);
 		resultDemand = new int[5];
 		resultOffer = new int[5];
-		playCancelOfferSound();
+		if (!Soundeffects.isMuted())
+			playCancelOfferSound();
 	}
 
 	/**
@@ -442,7 +445,8 @@ public class TradeViewController {
 			viewController.getClientController().fulfillTrade(ownTradeID, acceptedOfferToModelID.get(selectedOffer));
 
 			stage.hide();
-			playFullFillTradeSound();
+			if (!Soundeffects.isMuted())
+				playFullFillTradeSound();
 		}
 	}
 

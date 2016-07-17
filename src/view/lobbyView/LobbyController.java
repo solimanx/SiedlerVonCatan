@@ -150,10 +150,11 @@ public class LobbyController {
 		String server = serverComboBox.getValue();
 		int port = Integer.parseInt(portComboBox.getValue());
 		viewController.getClientController().connectToServer(server, port);
-//		colorNameSelectPane.setDisable(false);
+		// colorNameSelectPane.setDisable(false);
 		// Soundeffects.SELECT.play();
 
-		playConnectSound();
+		if (!Soundeffects.isMuted())
+			playConnectSound();
 
 	}
 
@@ -165,7 +166,6 @@ public class LobbyController {
 		String message = chatInput.getText();
 		chatInput.clear();
 		viewController.getClientController().sendChatMessage(message);
-		playNotificationSound();
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class LobbyController {
 	 */
 	public void receiveChatMessage(String string) {
 		messages.appendText(string + "\n");
-		//Soundeffects.CHATRECEIVE.play();
+		// Soundeffects.CHATRECEIVE.play();
 		// playNotificationSound();
 	}
 
@@ -235,9 +235,10 @@ public class LobbyController {
 	}
 
 	@FXML
-	void handleToggleSoundButton(){
+	void handleToggleSoundButton() {
 		Soundeffects.toggleMuteOnOff();
 	}
+
 	/**
 	 * Handle send button.
 	 */
@@ -256,8 +257,8 @@ public class LobbyController {
 			// FOR DEBUG ONLY ASSUME SERVER CONFIRMED
 			logger.debug("Profile" + name + chosenColor);
 			readyButton.setDisable(false);
-			if (!Soundeffects.isMuted()){
-			Soundeffects.SELECT.play();
+			if (!Soundeffects.isMuted()) {
+				Soundeffects.SELECT.play();
 			}
 
 			// playButtonSound();
@@ -271,7 +272,8 @@ public class LobbyController {
 	@FXML
 	private void handleReadyButton() {
 		viewController.getClientController().sendReady();
-		playReadySound();
+		if (!Soundeffects.isMuted())
+			Soundeffects.SELECT.play();
 	}
 
 	// public void deletePlayer(ProtocolPlayer player){
@@ -324,7 +326,7 @@ public class LobbyController {
 		messages.clear();
 	}
 
-	public Button getConnectButton(){
+	public Button getConnectButton() {
 		return connectButton;
 	}
 }

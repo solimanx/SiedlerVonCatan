@@ -150,6 +150,7 @@ public class Sound {
 	/**
 	 * Play notification sound.
 	 */
+	@Deprecated
 	public static void playNotificationSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/notification.wav");
@@ -167,6 +168,7 @@ public class Sound {
 	/**
 	 * Play ready sound.
 	 */
+	@Deprecated
 	public static void playReadySound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/ready.wav");
@@ -200,6 +202,7 @@ public class Sound {
 	/**
 	 * Play card button sound.
 	 */
+	@Deprecated
 	public static void playCardButtonSound() {
 		try {
 			URL url = Sound.class.getResource("/sounds/Card.wav");

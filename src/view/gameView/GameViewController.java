@@ -709,7 +709,8 @@ public class GameViewController implements Initializable {
 		tradeViewController.isPlayerTradingStatus.set((selfState == PlayerState.TRADING_OR_BUILDING) ? true : false);
 		tradeStage.show();
 		tradeStage.toFront();
-		playTradeButtonSound();
+		if (!Soundeffects.isMuted())
+			playTradeButtonSound();
 	}
 
 	/**
@@ -1289,13 +1290,13 @@ public class GameViewController implements Initializable {
 			playerStatusOne.setText(state.toString());
 			selfState = state;
 			if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLongestRoad()) {
-				
+
 				selfLongestTradeRoute.setText("Longest Trade Road");
 			} else {
 				selfLongestTradeRoute.setText("");
 			}
 			if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLargestArmy()) {
-			
+
 				selfGreatestKnightForce.setText("Largest Army");
 			} else {
 				selfGreatestKnightForce.setText("");
@@ -1660,8 +1661,8 @@ public class GameViewController implements Initializable {
 				alert.initOwner(gameStage);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.showAndWait();
-				if(shutdown){
-					alert.setOnCloseRequest(e-> System.exit(0));
+				if (shutdown) {
+					alert.setOnCloseRequest(e -> System.exit(0));
 				}
 			}
 
