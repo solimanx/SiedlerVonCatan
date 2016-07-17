@@ -343,6 +343,8 @@ public class GameViewController implements Initializable {
 
 	public String theme;
 
+	private boolean initialRobberMove;
+
 	/**
 	 * Gets the trade view controller.
 	 *
@@ -1045,9 +1047,10 @@ public class GameViewController implements Initializable {
 		bandit.setCenterX(fieldCoordinates[u + 3][v + 3][0]);
 		bandit.setCenterY(fieldCoordinates[u + 3][v + 3][1]);
 		bandit.setOpacity(1.0);
-		if (!Soundeffects.isMuted()) {
+		if (!Soundeffects.isMuted() && initialRobberMove) {
 			Soundeffects.ROBBER.play();
 		}
+		initialRobberMove = false;
 
 	}
 
