@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-text-base-color: white;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameView.GameViewController">
+<AnchorPane id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-text-base-color: white;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameView.GameViewController">
    <children>
       <BorderPane layoutX="160.0" layoutY="110.0" style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -134,7 +134,10 @@
             <VBox alignment="TOP_RIGHT" spacing="10.0">
                <children>
                   <Label fx:id="selfVictoryPoints" styleClass="white" />
-                  <Label fx:id="selfLongestTradeRoute" styleClass="white" />
+                  <Label fx:id="selfLongestTradeRoute" styleClass="white">
+                     <font>
+                        <Font size="9.0" />
+                     </font></Label>
                   <Label fx:id="selfGreatestKnightForce" styleClass="white" />
                </children>
             </VBox>
@@ -176,7 +179,10 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="fourthLongestTradeRoute" styleClass="white" />
+                        <Label fx:id="fourthLongestTradeRoute" styleClass="white">
+                           <font>
+                              <Font size="9.0" />
+                           </font></Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
@@ -227,7 +233,10 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="secondLongestTradeRoute" styleClass="white" />
+                        <Label fx:id="secondLongestTradeRoute" styleClass="white">
+                           <font>
+                              <Font size="9.0" />
+                           </font></Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
@@ -278,7 +287,10 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="43.0" prefHeight="31.0" prefWidth="140.0">
                      <children>
-                        <Label fx:id="thirdLongestTradeRoute" styleClass="white" />
+                        <Label fx:id="thirdLongestTradeRoute" styleClass="white">
+                           <font>
+                              <Font size="9.0" />
+                           </font></Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="74.0" prefHeight="31.0" prefWidth="140.0">
