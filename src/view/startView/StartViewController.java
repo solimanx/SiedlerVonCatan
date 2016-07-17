@@ -1,17 +1,21 @@
 package view.startView;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import ai.AdvancedAI;
 import audio.Soundeffects;
-import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -21,6 +25,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import network.client.controller.ClientController;
 import network.server.controller.ServerController;
+import view.ImageSoundBinding;
 
 // TODO: Auto-generated Javadoc
 public class StartViewController {
@@ -61,6 +66,11 @@ public class StartViewController {
 
 	@FXML
 	private Label serverIP;
+	
+	@FXML
+	private Button helpButton;
+	@FXML
+	private Button toggleSoundButton;
 
 	@FXML
 	private ChoiceBox<String> themeChooser;
@@ -77,6 +87,8 @@ public class StartViewController {
 		themeChooser.getSelectionModel().selectedItemProperty()
 				.addListener((ObservableValue<? extends String> observable, String oldValue,
 						String newValue) -> reloadTheme(oldValue, newValue));
+		toggleSoundButton.graphicProperty().bind(new ImageSoundBinding(Soundeffects.GLOBAL_VOLUME_BOOLEAN_PROPERTY));
+
 	}
 
 	/**
@@ -185,6 +197,25 @@ public class StartViewController {
 
 		// playButtonSound();
 	}
+	@FXML
+	void handleToggleSound(ActionEvent e){
+		Soundeffects.toggleMuteOnOff();
+	}
+	@FXML
+	void handleHelpButton(ActionEvent e){
+		FXMLLoader loader = new FXMLLoader();
+		Parent root;
+		try {
+			root = loader.load(getClass().getResource("/view/helpview/HelpView.fxml").openStream());
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add("/textures/" + "standard" + ".css");
+			Stage helpView = new Stage();
+			helpView.setScene(scene);
+			helpView.show();
+		} catch (IOException ex) {
+			logger.catching(Level.ERROR, ex);
+		}
+	}
 
 	/**
 	 * Handle start button.
@@ -283,4 +314,6 @@ public class StartViewController {
 	public void setClientController(ClientController fc) {
 		this.fc = fc;
 	}
+	
+
 }

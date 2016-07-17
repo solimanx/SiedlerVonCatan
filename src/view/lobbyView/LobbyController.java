@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.unit.TablePlayer;
 import network.client.controller.ViewController;
+import view.ImageSoundBinding;
 
 import static sounds.Sound.*;
 
@@ -35,6 +36,8 @@ public class LobbyController {
 
 	private DateTimeFormatter dateFormat;
 
+	@FXML
+	private Button toggleSoundButton;
 	@FXML
 	private ComboBox<String> serverComboBox;
 
@@ -105,6 +108,7 @@ public class LobbyController {
 		playerTable.setItems(players);
 		chatInput.setDisable(true);
 		dateFormat = DateTimeFormatter.ofPattern("hh:mm:ss");
+		toggleSoundButton.graphicProperty().bind(new ImageSoundBinding(Soundeffects.GLOBAL_VOLUME_BOOLEAN_PROPERTY));
 
 		// Debug only
 		addServers();
@@ -230,6 +234,10 @@ public class LobbyController {
 		});
 	}
 
+	@FXML
+	void handleToggleSoundButton(){
+		Soundeffects.toggleMuteOnOff();
+	}
 	/**
 	 * Handle send button.
 	 */
