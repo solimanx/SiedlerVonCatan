@@ -582,6 +582,18 @@ public class ServerOutputHandler {
 		}
 
 	}
+	
+	public void removeLongestRoad(){
+		ProtocolLongestRoad plr = new ProtocolLongestRoad();
+		Response r = new Response();
+		r.pLongestRoad = plr;
+		try {
+			server.broadcast(parser.createString(r));
+		} catch (IOException e) {
+			logger.error("Threw a Input/Output Exception ", e);
+		}
+		
+	}
 
 	/**
 	 * Invention card played.

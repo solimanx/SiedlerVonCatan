@@ -1087,7 +1087,7 @@ public class ServerController {
 				gameLogic.getBoard().getPlayer(modelID).setHasLongestRoad(false);
 				decreaseVictoryPoints(modelID, 2);
 				longestTradingRoutePlayer = -1;
-				serverOutputHandler.longestRoad(null);
+				serverOutputHandler.removeLongestRoad();
 			}
 		}
 
