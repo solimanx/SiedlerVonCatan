@@ -1087,7 +1087,20 @@ public class ClientController {
 	 *            the thread ID
 	 */
 	public void largestArmy(int threadID) {
-		gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(true);
+		int modelID = threadPlayerIdMap.get(threadID);
+		for (int i = 0; i < 4; i++) {
+			if (i == modelID) {
+				gameLogic.getBoard().getPlayer(i).setHasLargestArmy(true);
+			} else {
+				gameLogic.getBoard().getPlayer(i).setHasLargestArmy(false);
+			}
+			if (modelID == 0) {
+				if (!Soundeffects.isMuted()) {
+					Soundeffects.SWORD.play();
+				}
+			}
+		}
+
 		viewController.getGameViewController().setGreatestKnightForce(threadPlayerIdMap.get(threadID));
 
 	}
@@ -1102,6 +1115,9 @@ public class ClientController {
 		if (threadID != null) {
 			if (threadID == ownModelID) {
 				gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(true);
+				if (!Soundeffects.isMuted()) {
+					Soundeffects.LONGESTROAD.play();
+				}
 			} else {
 				gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLongestRoad(false);
 			}

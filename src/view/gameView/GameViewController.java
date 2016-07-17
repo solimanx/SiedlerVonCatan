@@ -1289,17 +1289,13 @@ public class GameViewController implements Initializable {
 			playerStatusOne.setText(state.toString());
 			selfState = state;
 			if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLongestRoad()) {
-				if (!Soundeffects.isMuted()) {
-					Soundeffects.LONGESTROAD.play();
-				}
+				
 				selfLongestTradeRoute.setText("Longest Trade Road");
 			} else {
 				selfLongestTradeRoute.setText("");
 			}
 			if (viewController.getClientController().getGameLogic().getBoard().getPlayer(modelID).hasLargestArmy()) {
-				if (!Soundeffects.isMuted()) {
-					Soundeffects.SWORD.play();
-				}
+			
 				selfGreatestKnightForce.setText("Largest Army");
 			} else {
 				selfGreatestKnightForce.setText("");
