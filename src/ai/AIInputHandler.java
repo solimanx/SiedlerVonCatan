@@ -14,7 +14,7 @@ import model.card.InventionCard;
 import model.card.KnightCard;
 import model.card.MonopolyCard;
 import model.card.StreetBuildingCard;
-import network.client.client.ClientInputHandler;
+import network.client.io.ClientInputHandler;
 import parsing.Parser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

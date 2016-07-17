@@ -8,7 +8,7 @@ import java.net.Socket;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import network.client.client.ClientInputHandler;
+import network.client.io.ClientInputHandler;
 import protocol.messaging.ProtocolChatReceiveMessage;
 
 /**

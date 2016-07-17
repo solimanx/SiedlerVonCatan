@@ -1,4 +1,4 @@
-package network.server.server.cheat;
+package network.server.io.cheat;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import enums.CheatCode;
 import enums.PlayerState;
 import model.board.PlayerModel;
 import network.server.Server;
-import network.server.server.ServerOutputHandler;
+import network.server.io.ServerOutputHandler;
 import parsing.Response;
 import protocol.cheats.ProtocolLongestTurn;
 import protocol.configuration.ProtocolVictory;

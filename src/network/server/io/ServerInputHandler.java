@@ -1,4 +1,4 @@
-package network.server.server;
+package network.server.io;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import enums.Color;
 import model.unit.Index;
 import network.server.controller.ServerController;
-import network.server.server.cheat.CheatHandler;
+import network.server.io.cheat.CheatHandler;
 import parsing.Parser;
 import protocol.cheats.ProtocolCheat;
 import protocol.clientinstructions.ProtocolBuildRequest;

@@ -12,8 +12,8 @@ import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import network.server.server.ServerInputHandler;
-import network.server.server.ServerOutputHandler;
+import network.server.io.ServerInputHandler;
+import network.server.io.ServerOutputHandler;
 
 // TODO: Auto-generated Javadoc
 public class Server {
