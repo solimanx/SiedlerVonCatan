@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import network.server.controller.ServerController;
-import view.GameViewController;
+import view.gameView.GameViewController;
 import view.lobbyView.LobbyController;
 import view.tradeview.TradeViewController;
 

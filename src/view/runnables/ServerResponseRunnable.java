@@ -1,6 +1,6 @@
 package view.runnables;
 
-import view.GameViewController;
+import view.gameView.GameViewController;
 
 // TODO: Auto-generated Javadoc
 public class ServerResponseRunnable implements Runnable {

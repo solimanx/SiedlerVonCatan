@@ -31,7 +31,7 @@ public class Main extends Application {
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			Parent root = loader.load(getClass().getResource("/application/startView.fxml").openStream());
+			Parent root = loader.load(getClass().getResource("/view/startView/StartView.fxml").openStream());
 
 			root.setOnMousePressed(new EventHandler<MouseEvent>() {
 				@Override

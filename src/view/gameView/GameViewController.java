@@ -1,4 +1,4 @@
-package view;
+package view.gameView;
 
 import static sounds.Sound.playTradeButtonSound;
 
@@ -70,6 +70,8 @@ import javafx.util.Duration;
 import model.board.Corner;
 import network.client.controller.ViewController;
 import service.ProtocolToModel;
+import view.ImageSoundBinding;
+import view.ViewFactory;
 import view.devcardview.DevCardViewController;
 import view.robberview.RobberViewController;
 import view.tradeview.TradeViewController;

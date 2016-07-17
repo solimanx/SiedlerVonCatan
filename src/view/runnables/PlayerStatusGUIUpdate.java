@@ -1,7 +1,7 @@
 package view.runnables;
 
 import enums.PlayerState;
-import view.GameViewController;
+import view.gameView.GameViewController;
 
 // TODO: Auto-generated Javadoc
 public class PlayerStatusGUIUpdate implements Runnable {

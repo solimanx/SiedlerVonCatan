@@ -13,7 +13,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import view.GameViewController;
+import view.gameView.GameViewController;
 
 // TODO: Auto-generated Javadoc
 public class RobberViewController implements Initializable {
