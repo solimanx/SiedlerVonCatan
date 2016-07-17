@@ -434,7 +434,7 @@ public class CheatHandler extends ServerOutputHandler {
 			PlayerModel pM = server.getServerInputHandler().getServerController().getBoard().getPlayer(modelID);
 			PlayerModel currPM;
 			for (int j = 0; j < server.getServerInputHandler().getServerController().getAmountPlayers(); j++) {
-				currPM = server.getServerInputHandler().getServerController().getBoard().getPlayer(i);
+				currPM = server.getServerInputHandler().getServerController().getBoard().getPlayer(j);
 				if (currPM.sumResources() > 7) {
 					currPM.setPlayerState(PlayerState.DISPENSE_CARDS_ROBBER_LOSS);
 					server.getServerInputHandler().getServerController().statusUpdate(j);
