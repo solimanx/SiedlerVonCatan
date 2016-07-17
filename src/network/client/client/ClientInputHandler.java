@@ -79,7 +79,7 @@ public class ClientInputHandler {
 	 * @param o
 	 *            the o
 	 */
-	protected void handle(Object o) {
+	public void handle(Object o) {
 		switch (o.getClass().getSimpleName()) {
 
 		// Paragraph 5

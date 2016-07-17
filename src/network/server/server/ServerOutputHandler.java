@@ -15,6 +15,7 @@ import model.board.Edge;
 import model.board.Field;
 import model.card.DevelopmentCard;
 import model.unit.Index;
+import network.server.Server;
 import parsing.Parser;
 import parsing.Response;
 import protocol.configuration.ProtocolError;

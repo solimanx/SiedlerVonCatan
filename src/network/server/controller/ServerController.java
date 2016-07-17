@@ -26,7 +26,7 @@ import model.board.PlayerModel;
 import model.card.DevelopmentCard;
 import model.unit.Index;
 import model.unit.StreetSet;
-import network.server.server.Server;
+import network.server.Server;
 import network.server.server.ServerInputHandler;
 import network.server.server.ServerOutputHandler;
 import service.GameLogic;

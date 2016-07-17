@@ -1,4 +1,4 @@
-package network.server.server;
+package network.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +11,9 @@ import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import network.server.server.ServerInputHandler;
+import network.server.server.ServerOutputHandler;
 
 // TODO: Auto-generated Javadoc
 public class Server {

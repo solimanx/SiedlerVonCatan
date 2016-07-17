@@ -28,7 +28,7 @@ import model.card.StreetBuildingCard;
 import model.card.UnknownCard;
 import model.unit.Index;
 import model.unit.TradeOffer;
-import network.client.client.Client;
+import network.client.Client;
 import network.client.client.ClientInputHandler;
 import network.client.client.ClientOutputHandler;
 import network.client.view.PlayerResourceUpdateRunnable;

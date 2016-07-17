@@ -7,7 +7,7 @@ import enums.CardType;
 import enums.CheatCode;
 import enums.PlayerState;
 import model.board.PlayerModel;
-import network.server.server.Server;
+import network.server.Server;
 import network.server.server.ServerOutputHandler;
 import parsing.Response;
 import protocol.cheats.ProtocolLongestTurn;
