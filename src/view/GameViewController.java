@@ -1,4 +1,4 @@
-package network.client.view;
+package view;
 
 import static sounds.Sound.playTradeButtonSound;
 
@@ -69,10 +69,10 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import model.board.Corner;
 import network.client.controller.ViewController;
-import network.client.view.devcardview.DevCardViewController;
-import network.client.view.robberview.RobberViewController;
-import network.client.view.tradeview.TradeViewController;
 import service.ProtocolToModel;
+import view.devcardview.DevCardViewController;
+import view.robberview.RobberViewController;
+import view.tradeview.TradeViewController;
 
 // TODO: Auto-generated Javadoc
 public class GameViewController implements Initializable {

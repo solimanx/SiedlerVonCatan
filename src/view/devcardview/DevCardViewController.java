@@ -1,4 +1,4 @@
-package network.client.view.devcardview;
+package view.devcardview;
 
 import java.net.URL;
 import java.util.ResourceBundle;

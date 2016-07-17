@@ -1,4 +1,4 @@
-package network.client.view;
+package view;
 
 // TODO: Auto-generated Javadoc
 public class PlayerResourceUpdateRunnable implements Runnable {

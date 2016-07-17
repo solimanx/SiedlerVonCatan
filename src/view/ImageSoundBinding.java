@@ -1,4 +1,4 @@
-package network.client.view;
+package view;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;

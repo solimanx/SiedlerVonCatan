@@ -1,4 +1,4 @@
-package application;
+package view.startView;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -193,6 +193,7 @@ public class StartViewController {
 	 *            the event
 	 */
 	@FXML
+	public
 	void handleStartButton(ActionEvent event) {
 		RadioButton rb = (RadioButton) startMode.getSelectedToggle();
 		if (!Soundeffects.isMuted()){

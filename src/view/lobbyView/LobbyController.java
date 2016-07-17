@@ -1,4 +1,4 @@
-package application.lobby;
+package view.lobbyView;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

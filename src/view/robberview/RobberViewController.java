@@ -1,4 +1,4 @@
-package network.client.view.robberview;
+package view.robberview;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +13,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import network.client.view.GameViewController;
+import view.GameViewController;
 
 // TODO: Auto-generated Javadoc
 public class RobberViewController implements Initializable {

@@ -31,12 +31,12 @@ import model.unit.TradeOffer;
 import network.client.Client;
 import network.client.io.ClientInputHandler;
 import network.client.io.ClientOutputHandler;
-import network.client.view.PlayerResourceUpdateRunnable;
-import network.client.view.PlayerStatusGUIUpdate;
 import service.GameLogic;
 import service.ModelToProtocol;
 import service.ProtocolToModel;
 import settings.DefaultSettings;
+import view.PlayerResourceUpdateRunnable;
+import view.PlayerStatusGUIUpdate;
 
 // TODO: Auto-generated Javadoc
 /**

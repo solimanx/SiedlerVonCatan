@@ -1,4 +1,4 @@
-package network.client.view.tradeview;
+package view.tradeview;
 
 import java.util.HashMap;
 import audio.Soundeffects;

@@ -1,4 +1,4 @@
-package network.client.view.helpview;
+package view.helpview;
 
 
 import javafx.beans.value.ChangeListener;

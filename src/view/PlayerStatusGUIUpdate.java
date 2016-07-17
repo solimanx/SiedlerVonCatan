@@ -1,4 +1,4 @@
-package network.client.view;
+package view;
 
 import enums.PlayerState;
 

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import service.ModelToProtocol;
 import service.ProtocolToModel;
+import view.startView.StartViewController;
 
 public class Main extends Application {
 

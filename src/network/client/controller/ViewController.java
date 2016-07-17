@@ -2,7 +2,6 @@ package network.client.controller;
 
 import java.io.IOException;
 
-import application.lobby.LobbyController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -11,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import network.client.view.GameViewController;
-import network.client.view.tradeview.TradeViewController;
 import network.server.controller.ServerController;
+import view.GameViewController;
+import view.lobbyView.LobbyController;
+import view.tradeview.TradeViewController;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

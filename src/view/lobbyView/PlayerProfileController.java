@@ -1,4 +1,4 @@
-package application.lobby;
+package view.lobbyView;
 
 import enums.Color;
 import enums.PlayerState;
