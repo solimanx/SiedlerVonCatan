@@ -548,13 +548,10 @@ public class ClientInputHandler {
 	 *            the knight card info
 	 */
 	protected void handle(ProtocolPlayKnightCard knightCardInfo) {
-		if (knightCardInfo.getPlayerID() == clientController.getOwnModelID()) {
 			int playerID = knightCardInfo.getPlayerID();
 			clientController.removeFromDeck(playerID, new KnightCard());
 			Index locationID = knightCardInfo.getLocationID();
 			clientController.robberMove(locationID);
-
-		}
 
 	}
 
