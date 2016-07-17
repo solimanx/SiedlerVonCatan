@@ -292,7 +292,6 @@ public class GameViewController implements Initializable {
 	// Constant values for calculations
 	static double radius = 60.0;
 	private double[] boardCenter = new double[2];
-	private double[] screenCenter = new double[2];// [2]
 	private final static double SIN60 = Math.sqrt(3) / 2;
 	private final static double RAD60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
 	private static double halfWidth = SIN60 * radius;
@@ -1653,7 +1652,7 @@ public class GameViewController implements Initializable {
 	 * @param message
 	 *            the message
 	 */
-	public void alert(String message) {
+	public void alert(String message, boolean shutdown) {
 		Platform.runLater(new Runnable() {
 			String msg;
 
@@ -1665,6 +1664,9 @@ public class GameViewController implements Initializable {
 				alert.initOwner(gameStage);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.showAndWait();
+				if(shutdown){
+					alert.setOnCloseRequest(e-> System.exit(0));
+				}
 			}
 
 			public Runnable init(String message) {
