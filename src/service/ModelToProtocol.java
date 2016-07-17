@@ -17,7 +17,7 @@ public final class ModelToProtocol {
 
 	private static Logger logger = LogManager.getLogger(PlayerModel.class.getSimpleName());
 
-	public static HashMap<ResourceType, String> resourceToString = new HashMap<ResourceType, String>();
+	private static HashMap<ResourceType, String> resourceToString = new HashMap<ResourceType, String>();
 
 	/**
 	 * Inits the model to protocol.
@@ -30,13 +30,13 @@ public final class ModelToProtocol {
 	 * Fill hash map.
 	 */
 	public static void fillHashMap() {
-		resourceToString.put(ResourceType.SHEEP, "Weideland");
-		resourceToString.put(ResourceType.WOOD, "Wald");
-		resourceToString.put(ResourceType.SEA, "Meer");
-		resourceToString.put(ResourceType.ORE, "Gebirge");
-		resourceToString.put(ResourceType.CLAY, "Hügelland");
-		resourceToString.put(ResourceType.CORN, "Ackerland");
-		resourceToString.put(ResourceType.NOTHING, "Wüste");
+		getResourceToString().put(ResourceType.SHEEP, "Weideland");
+		getResourceToString().put(ResourceType.WOOD, "Wald");
+		getResourceToString().put(ResourceType.SEA, "Meer");
+		getResourceToString().put(ResourceType.ORE, "Gebirge");
+		getResourceToString().put(ResourceType.CLAY, "Hügelland");
+		getResourceToString().put(ResourceType.CORN, "Ackerland");
+		getResourceToString().put(ResourceType.NOTHING, "Wüste");
 	}
 
 	/**
@@ -286,5 +286,19 @@ public final class ModelToProtocol {
 	 */
 	public static Index getFieldIndex(String field) {
 		return ProtocolToModel.getProtocolOneIndex(field);
+	}
+
+	/**
+	 * @return the resourceToString
+	 */
+	public static HashMap<ResourceType, String> getResourceToString() {
+		return resourceToString;
+	}
+
+	/**
+	 * @param resourceToString the resourceToString to set
+	 */
+	public static void setResourceToString(HashMap<ResourceType, String> resourceToString) {
+		ModelToProtocol.resourceToString = resourceToString;
 	}
 }

@@ -18,7 +18,7 @@ import java.net.URL;
  */
 public class Sound {
 
-	public static float globalVolume = 0.5f;
+	static float globalVolume = 0.5f;
 
 	public static void setGain(Clip clip, float globalVolume) {
 	    if (globalVolume != -1) {
@@ -53,7 +53,7 @@ public class Sound {
 
 		MediaPlayer mediaPlayer = new MediaPlayer(
 				new Media(Sound.class.getResource("/sounds/background.wav").toExternalForm()));
-		mediaPlayer.setVolume(Soundeffects.globalVolume);
+		mediaPlayer.setVolume(Soundeffects.getGlobalVolume());
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 

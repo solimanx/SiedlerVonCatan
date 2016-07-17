@@ -57,7 +57,6 @@ public class Main extends Application {
 					if (t.getCode() == KeyCode.ESCAPE) {
 						Stage sb = (Stage) root.getScene().getWindow();
 						sb.close();
-						System.exit(0);
 					} else if (t.getCode() == KeyCode.ENTER) {
 						startViewCtrl.handleStartButton(null);
 					}

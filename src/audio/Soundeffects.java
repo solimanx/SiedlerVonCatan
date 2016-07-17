@@ -8,22 +8,25 @@ import javafx.scene.media.AudioClip;
 
 public class Soundeffects {
 
-	public static double globalVolume = 0.5;
-	public static SimpleBooleanProperty globalVolumeBoolean = new SimpleBooleanProperty(true);
+	public final static SimpleBooleanProperty GLOBAL_VOLUME_BOOLEAN_PROPERTY = new SimpleBooleanProperty(true);
 
-	public static ObjectProperty<Image> volOn = new SimpleObjectProperty<Image>(new Image("/textures/vol_up.png"));
-	public static ObjectProperty<Image> volOff = new SimpleObjectProperty<Image>(new Image("/textures/vol_mute.png"));
+	public final static ObjectProperty<Image> VOL_ON = new SimpleObjectProperty<Image>(
+			new Image("/textures/vol_up.png"));
+	public final static ObjectProperty<Image> VOL_OFF = new SimpleObjectProperty<Image>(
+			new Image("/textures/vol_mute.png"));
+
+	private static double globalVolume = 0.5;
 
 	public static ObjectProperty<Image> getVolumeGraphicProperty() {
-		return globalVolume == 0.0 ? volOff : volOn;
+		return getGlobalVolume() == 0.0 ? VOL_OFF : VOL_ON;
 	}
 
 	public static void playSoundtrack1() {
 		if (SOUNDTRACK2.isPlaying()) {
 			SOUNDTRACK2.stop();
 		}
-		if (!Soundeffects.isMuted()){
-		SOUNDTRACK1.play();
+		if (!Soundeffects.isMuted()) {
+			SOUNDTRACK1.play();
 		}
 	}
 
@@ -31,18 +34,18 @@ public class Soundeffects {
 		if (SOUNDTRACK1.isPlaying()) {
 			SOUNDTRACK1.stop();
 		}
-		if (!Soundeffects.isMuted()){
-		SOUNDTRACK2.play();
+		if (!Soundeffects.isMuted()) {
+			SOUNDTRACK2.play();
 		}
-		
+
 	}
 
 	public static void setVolume(double volume) {
-		globalVolume = volume;
+		setGlobalVolume(volume);
 	}
 
 	public static void toggleVolume() {
-		globalVolume = globalVolume > 0.0 ? 0.0 : 0.5;
+		setGlobalVolume(getGlobalVolume() > 0.0 ? 0.0 : 0.5);
 	}
 
 	public final static AudioClip BUILD = new AudioClip(Soundeffects.class.getResource("/audio/build.wav").toString());
@@ -72,16 +75,30 @@ public class Soundeffects {
 			Soundeffects.class.getResource("/audio/siedlersoundtrack2.mp3").toString());
 
 	public static boolean isMuted() {
-		return !globalVolumeBoolean.get();
+		return !GLOBAL_VOLUME_BOOLEAN_PROPERTY.get();
 
 	}
 
-
 	public static void toggleMuteOnOff() {
-		if (globalVolumeBoolean.get())
-			globalVolumeBoolean.set(false);
+		if (GLOBAL_VOLUME_BOOLEAN_PROPERTY.get())
+			GLOBAL_VOLUME_BOOLEAN_PROPERTY.set(false);
 		else
-			globalVolumeBoolean.set(true);
+			GLOBAL_VOLUME_BOOLEAN_PROPERTY.set(true);
+	}
+
+	/**
+	 * @return the globalVolume
+	 */
+	public static double getGlobalVolume() {
+		return globalVolume;
+	}
+
+	/**
+	 * @param globalVolume
+	 *            the globalVolume to set
+	 */
+	public static void setGlobalVolume(double globalVolume) {
+		Soundeffects.globalVolume = globalVolume;
 	}
 
 }

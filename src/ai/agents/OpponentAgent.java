@@ -107,7 +107,7 @@ public class OpponentAgent {
 	 * @param boardPlayerID the board player ID
 	 * @param costs            the costs
 	 */
-	public void CostsEnemy(int boardPlayerID, int[] costs) {
+	public void costsEnemy(int boardPlayerID, int[] costs) {
 		int playerID = getInternalPlayerID(getOpponentModel(boardPlayerID));
 		if (costs.length == 5 || costs.length == 1) {
 			decrementOpponentsResources(playerID, costs);

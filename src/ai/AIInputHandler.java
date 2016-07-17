@@ -432,7 +432,7 @@ public class AIInputHandler extends ClientInputHandler {
 		}
 		// if it isn't me
 		else {
-			ai.getOpponentAgent().CostsEnemy(ID, loss);
+			ai.getOpponentAgent().costsEnemy(ID, loss);
 
 		}
 

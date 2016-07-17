@@ -151,7 +151,7 @@ public class HexService {
 		StringBuffer result = new StringBuffer();
 		String nextField = f;
 		String plannedNextField = f;
-		int radius = getDistanceFromMidFifeSix(f);
+		int radius = getDistanceFromMidFiveSix(f);
 		int[] coord = new int[2];
 		int smallSide = 0;
 		for (int i = radius; i > 0; i--) {
@@ -253,7 +253,7 @@ public class HexService {
 	 * @param f Field ID
 	 * @return distance to mid corner
 	 */
-	public static int getDistanceFromMidFifeSix(String f) {
+	public static int getDistanceFromMidFiveSix(String f) {
 		String nextField = f;
 		int result = 1;
 		int[] coord;
@@ -264,7 +264,7 @@ public class HexService {
 			nextField = getNextField(coord[0], coord[1], nextDirection(getDirection(nextField), 1));
 			result++;
 			for(int i = 0; i<end.length; i++){
-				if(Board.getCoordToStringMap().get(new Index(end[i][0], end[i][1])) == nextField){
+				if(Board.getCoordToStringMap().get(new Index(end[i][0], end[i][1])).equals(nextField)){
 					found = true;
 				}
 			}

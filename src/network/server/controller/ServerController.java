@@ -869,7 +869,7 @@ public class ServerController {
 				modelPlayerIdMap.get(modelID));
 		server.disconnectServer();
 		server.closeSocket();
-		System.exit(0);
+		//todo reset everything
 	}
 
 	/**
@@ -965,7 +965,7 @@ public class ServerController {
 		// seperate sets; but if street set == circle then only remove the
 		// 'circle' flag
 		if (streetEdges.size() == 2) {
-			if (!EdgeToStreetSet(streetEdges.get(0)).getHasCircle()) {
+			if (!convertEdgeToStreetSet(streetEdges.get(0)).getHasCircle()) {
 				for (int i = 0; i < streetSets.size(); i++) {
 					if (streetSets.get(i).getPlayerID() == currPlayer) {
 						if (streetSets.get(i).getEdges().contains(streetEdges.get(0))) {
@@ -988,7 +988,7 @@ public class ServerController {
 				}
 				checkLongestTradingRoute(currPlayer);
 			} else {
-				EdgeToStreetSet(streetEdges.get(0)).setHasCircle(false);
+				convertEdgeToStreetSet(streetEdges.get(0)).setHasCircle(false);
 			}
 		}
 	}
@@ -1002,7 +1002,7 @@ public class ServerController {
 	 *            Edge with street
 	 * @return StreetSet containing the Edge
 	 */
-	public StreetSet EdgeToStreetSet(Edge e) {
+	public StreetSet convertEdgeToStreetSet(Edge e) {
 		if (e != null) {
 			for (int i = 0; i < streetSets.size(); i++) {
 				if (streetSets.get(i).getEdges().contains(e)) {
@@ -2299,7 +2299,7 @@ public class ServerController {
 					if (currTID != null) {
 						serverOutputHandler.victory("Verbindung zu einem Spieler verloren!", -1);
 						server.closeSocket();
-						System.exit(0);
+						//TODO disconnect everything and reset
 					}
 				}
 

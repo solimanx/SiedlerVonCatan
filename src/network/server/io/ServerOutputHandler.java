@@ -57,7 +57,7 @@ import service.ProtocolToModel;
 public class ServerOutputHandler {
 	protected Server server;
 	protected Parser parser;
-	protected static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getSimpleName());
+	protected final static Logger logger = LogManager.getLogger(ServerOutputHandler.class.getSimpleName());
 
 	/**
 	 * Instantiates a new server output handler.
@@ -142,7 +142,7 @@ public class ServerOutputHandler {
 			int coords[] = Board.getStringToCoordMap().get(key);
 			Field f = board.getFieldAt(coords[0], coords[1]);
 			pfArray[counter] = new ProtocolField(ProtocolToModel.getProtocolOneIndex(f.getFieldID()),
-					ModelToProtocol.resourceToString.get(f.getResourceType()), f.getDiceIndex());
+					ModelToProtocol.getResourceToString().get(f.getResourceType()), f.getDiceIndex());
 			counter++;
 
 		}

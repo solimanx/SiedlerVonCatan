@@ -289,12 +289,12 @@ public class GameViewController implements Initializable {
 	public Circle bandit;
 
 	// Constant values for calculations
-	public static double radius = 60.0;
-	public double[] boardCenter = new double[2];
-	public double[] screenCenter = new double[2];// [2]
-	public static double sin60 = Math.sqrt(3) / 2;
-	public static double rad60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
-	private static double halfWidth = sin60 * radius;
+	static double radius = 60.0;
+	private double[] boardCenter = new double[2];
+	private double[] screenCenter = new double[2];// [2]
+	private final static double SIN60 = Math.sqrt(3) / 2;
+	private final static double RAD60 = Math.PI / 3; // Hilfsvariable sqrt(3)/2
+	private static double halfWidth = SIN60 * radius;
 
 	/**
 	 * modelID => ViewPosition (1, 2, 3, 4)
@@ -546,7 +546,7 @@ public class GameViewController implements Initializable {
 			}
 		});
 
-		toggleSoundButton.graphicProperty().bind(new ImageSoundBinding(Soundeffects.globalVolumeBoolean));
+		toggleSoundButton.graphicProperty().bind(new ImageSoundBinding(Soundeffects.GLOBAL_VOLUME_BOOLEAN_PROPERTY));
 
 	}
 
@@ -1760,7 +1760,7 @@ public class GameViewController implements Initializable {
 			boardCenter[0] = stage.getWidth() / 2;
 			boardCenter[1] = stage.getHeight() / 2 - 40;
 			radius = stage.getHeight() / 16;
-			halfWidth = sin60 * radius;
+			halfWidth = SIN60 * radius;
 
 			calculateFieldCenters(boardCenter);
 			calculateCornerCenters();
@@ -1867,8 +1867,8 @@ public class GameViewController implements Initializable {
 			double[] points = new double[12];
 			int j = 1;
 			for (int i = 0; i < points.length; i = i + 2) {
-				points[i] = (double) (x + (radius) * Math.sin(j * rad60));
-				points[i + 1] = (double) (y + (radius) * Math.cos(j * rad60));
+				points[i] = (double) (x + (radius) * Math.sin(j * RAD60));
+				points[i + 1] = (double) (y + (radius) * Math.cos(j * RAD60));
 				j++;
 			}
 			return points;
