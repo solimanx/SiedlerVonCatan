@@ -1,4 +1,6 @@
-package view;
+package view.runnables;
+
+import view.GameViewController;
 
 // TODO: Auto-generated Javadoc
 public class PlayerResourceUpdateRunnable implements Runnable {

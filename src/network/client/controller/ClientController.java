@@ -35,8 +35,8 @@ import service.GameLogic;
 import service.ModelToProtocol;
 import service.ProtocolToModel;
 import settings.DefaultSettings;
-import view.PlayerResourceUpdateRunnable;
-import view.PlayerStatusGUIUpdate;
+import view.runnables.PlayerResourceUpdateRunnable;
+import view.runnables.PlayerStatusGUIUpdate;
 
 // TODO: Auto-generated Javadoc
 /**
