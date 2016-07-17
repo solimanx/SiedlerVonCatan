@@ -107,7 +107,6 @@ public class Server {
 				int threadID) {
 			this.socket = socket;
 			this.inputHandler = inputHandler;
-			this.outputHandler = inputHandler.getGameController().getServerOutputHandler();
 			this.threadID = threadID;
 
 		}

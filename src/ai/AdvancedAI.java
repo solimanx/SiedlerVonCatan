@@ -43,8 +43,8 @@ public class AdvancedAI {
 	private int colorCounter = 0;
 	private boolean started = false;
 
-	private final String PROTOCOL = DefaultSettings.PROTOCOL_VERSION;
-	private final String VERSION = DefaultSettings.AI_VERSION;
+	private final static String PROTOCOL = DefaultSettings.PROTOCOL_VERSION;
+	private final static String VERSION = DefaultSettings.AI_VERSION;
 
 	private ResourceBundle rb = ResourceBundle.getBundle("ai.bundle.AIProperties");
 
