@@ -1427,7 +1427,7 @@ public class GameViewController implements Initializable {
 		city.setImage(new Image("/textures/" + theme + "/city.png"));
 		city.setEffect(getBlushEffect(playerColor, city));
 		city.setScaleX(radius / 70);
-		city.setScaleY(radius / 80);
+		city.setScaleY(radius / 70);
 		city.setOpacity(1.0);
 		city.setEffect(shadow);
 		// city.setStroke(Color.BLACK);
