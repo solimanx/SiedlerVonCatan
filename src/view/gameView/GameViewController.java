@@ -1555,7 +1555,7 @@ public class GameViewController implements Initializable {
 				vBox.setAlignment(Pos.CENTER);
 				vBox.setPadding(new Insets(5));
 				vBox.setSpacing(8);
-				Text text = new Text("Congratulations on your victory, "+winner +"!");
+				Text text = new Text("Congratulations on your victory, " + winner + "!");
 				text.setFill(playerColors.get(winnerID));
 				Button exit = new Button();
 				exit.setText("Exit Game");
@@ -1576,7 +1576,7 @@ public class GameViewController implements Initializable {
 				victoryStage.initModality(Modality.APPLICATION_MODAL);
 				victoryStage.initOwner(gameStage);
 				victoryStage.setResizable(false);
-				victoryStage.setOnCloseRequest(e-> System.exit(0));
+				victoryStage.setOnCloseRequest(e -> System.exit(0));
 				victoryStage.show();
 			}
 
@@ -1587,6 +1587,66 @@ public class GameViewController implements Initializable {
 		}.init(winnerName));
 
 	}
+
+	/**
+	 * Method creating pop up which shows loser
+	 * 
+	 *
+	 * @param winnerID
+	 *            the winner ID
+	 */
+
+	public void showLoss(int winnerID) {
+		String winnerName = viewController.getClientController().getGameLogic().getBoard().getPlayer(winnerID)
+				.getName();
+
+		Platform.runLater(new Runnable() {
+			String winner;
+
+			@Override
+			public void run() {
+				if (!Soundeffects.isMuted()) {
+					Soundeffects.LOSS.play();
+				}
+				VBox vBox = new VBox(10);
+				vBox.setAlignment(Pos.CENTER);
+				vBox.setPadding(new Insets(5));
+				vBox.setSpacing(8);
+				Text text = new Text("The winner is: " + winner + "!");
+				Text text2 = new Text("Better luck next time, " + playerNameOne.getText());
+				text.setFill(playerColors.get(winnerID));
+				text2.setFill(playerColors.get(1));
+				Button exit = new Button();
+				exit.setText("Exit Game");
+				exit.setOnAction(e -> System.exit(0));
+
+				ImageView image = new ImageView(
+						new Image(getClass().getResourceAsStream("/textures/standard/loser.png")));
+				vBox.getChildren().addAll(text, text2, image, exit);
+
+				Scene scene = new Scene(vBox);
+				vBox.setStyle("-fx-background-image: url(/textures/standard/dialogbackground.jpg);");
+				scene.getStylesheets().add("/textures/" + theme + ".css");
+				Stage victoryStage = new Stage();
+				victoryStage.setScene(scene);
+				victoryStage.sizeToScene();
+				victoryStage.setTitle("Game Over");
+				victoryStage.initStyle(StageStyle.UTILITY);
+				victoryStage.initModality(Modality.APPLICATION_MODAL);
+				victoryStage.initOwner(gameStage);
+				victoryStage.setResizable(false);
+				victoryStage.setOnCloseRequest(e -> System.exit(0));
+				victoryStage.show();
+			}
+
+			public Runnable init(String winnerName) {
+				this.winner = winnerName;
+				return (this);
+			}
+		}.init(winnerName));
+
+	}
+
 	/**
 	 * Alert.
 	 *

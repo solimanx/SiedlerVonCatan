@@ -428,7 +428,8 @@ public class ClientController {
 			int[] coord = entry.getValue();
 			Field f = gameLogic.getBoard().getFieldAt(coord[0], coord[1]);
 			viewController.getGameViewController().setField(coord[0], coord[1], f.getResourceType(), f.getDiceIndex());
-			// TODO set Harbour Fields in GameView. angleFactor * 60° edge,field
+			// TODO set Harbour Fields in GameView. angleFactor * 60°
+			// edge,field
 			// -> int
 			// viewController.getGameViewController().setHarbour(int
 			// angleFactor, int u, int v, enums.HarbourStatus);
@@ -1066,9 +1067,14 @@ public class ClientController {
 	 * @param threadID
 	 *            the thread ID
 	 */
+
 	public void victory(String message, int threadID) {
 		if (threadID != -1) {
-			viewController.getGameViewController().showVictory(threadPlayerIdMap.get(threadID));
+			if (threadPlayerIdMap.get(threadID) == 0) {
+				viewController.getGameViewController().showVictory(threadPlayerIdMap.get(threadID));
+			} else {
+				viewController.getGameViewController().showLoss(threadPlayerIdMap.get(threadID));
+			}
 		} else {
 			viewController.getGameViewController().alert(message + " Spieler: " + threadID);
 		}
