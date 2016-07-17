@@ -481,9 +481,9 @@ public class ServerController {
 		Random generator = new Random();
 		int random = generator.nextInt() % 2;
 		int harbourCounter = 0;
-		int[] coord = new int[2];
-		int[] edgeCoord = new int[3];
-		Corner[] corner = new Corner[2];
+		int[] coord;
+		int[] edgeCoord;
+		Corner[] corner;
 		Corner[] harbourCorners = new Corner[18];
 		HarbourStatus[] harbourOrder = { HarbourStatus.THREE_TO_ONE, HarbourStatus.CLAY, HarbourStatus.CORN,
 				HarbourStatus.THREE_TO_ONE, HarbourStatus.ORE, HarbourStatus.THREE_TO_ONE, HarbourStatus.SHEEP,
@@ -542,9 +542,9 @@ public class ServerController {
 		Random generator = new Random();
 		int random = generator.nextInt() % 2;
 		int harbourCounter = 0;
-		int[] coord = new int[2];
-		int[] edgeCoord = new int[3];
-		Corner[] corner = new Corner[2];
+		int[] coord;
+		int[] edgeCoord;
+		Corner[] corner;
 		Corner[] harbourCorners = new Corner[22];
 		HarbourStatus[] harbourOrder = { HarbourStatus.THREE_TO_ONE, HarbourStatus.CLAY, HarbourStatus.CORN,
 				HarbourStatus.THREE_TO_ONE, HarbourStatus.ORE, HarbourStatus.THREE_TO_ONE, HarbourStatus.SHEEP,

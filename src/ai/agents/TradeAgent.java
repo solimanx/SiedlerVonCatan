@@ -538,60 +538,60 @@ public class TradeAgent {
 	// PLAYER TRADING //
 	////////////////////
 
-	/**
-	 * {WOOD, CLAY, ORE, SHEEP, CORN} amount of the needed resource.
-	 */
-	@Deprecated
-	public void tradeResourcesOffer(){
-		int[] costs;
-		int[] ownResources = aai.getResourceAgent().getOwnResources();
-		int[] resourcesNeeded = new int[5];
-		int[] tradableResources = new int[5];
-		// currentBuyingFocus : 0 = Street; 1 = Village; 2 = City; 3 = DevCard
-		switch (aai.getResourceAgent().getCurrentBuyingFocus()) {
-		case 0: costs = DefaultSettings.STREET_BUILD_COST;
-			break;
-		case 1:
-			costs = DefaultSettings.VILLAGE_BUILD_COST;
-			break;
-		case 2:
-			costs = DefaultSettings.CITY_BUILD_COST;
-			break;
-		case 3 :
-			costs = DefaultSettings.DEVCARD_BUILD_COST;
-			break;
-		default:
-			throw new IllegalStateException("currentBuyingFocus must not be any other number than 0,1,2,3!!!!");
-		}
-		for(int i = 0; i<5; i++){
-			resourcesNeeded[i] = costs[i] - ownResources[i];
-			tradableResources[i] = ownResources[i] - costs[i];
-		}
-		int amountResourcesNeedet = 0;
-		for(int i = 0; i<5; i++){
-			if(resourcesNeeded[i]>0){
-				amountResourcesNeedet = amountResourcesNeedet + resourcesNeeded[i];
-			}
-		}
-		int amountResourcesTradable = 0;
-		for(int i = 0; i<5; i++){
-			if(tradableResources[i]>0){
-				amountResourcesTradable = amountResourcesTradable + tradableResources[i];
-			}
-		}
-		int[] demand = {0,0,0,0,0};
-		int demandValue = 0;
-		int offerValue = 0;
-		for(int i = 0; i<5; i++){
-			if(resourcesNeeded[i]>0){
-				demand[i] = resourcesNeeded[i];
-				demandValue = demandValue + resourcesNeeded[i] * aai.getGlobalResourceWeight()[i];
-			}
-		}
-		while(demandValue-offerValue>50){
-			//TODO erstellen des angebots...
-		}
-	}
+//	/**
+//	 * {WOOD, CLAY, ORE, SHEEP, CORN} amount of the needed resource.
+//	 */
+//	@Deprecated
+//	public void tradeResourcesOffer(){
+//		int[] costs;
+//		int[] ownResources = aai.getResourceAgent().getOwnResources();
+//		int[] resourcesNeeded = new int[5];
+//		int[] tradableResources = new int[5];
+//		// currentBuyingFocus : 0 = Street; 1 = Village; 2 = City; 3 = DevCard
+//		switch (aai.getResourceAgent().getCurrentBuyingFocus()) {
+//		case 0: costs = DefaultSettings.STREET_BUILD_COST;
+//			break;
+//		case 1:
+//			costs = DefaultSettings.VILLAGE_BUILD_COST;
+//			break;
+//		case 2:
+//			costs = DefaultSettings.CITY_BUILD_COST;
+//			break;
+//		case 3 :
+//			costs = DefaultSettings.DEVCARD_BUILD_COST;
+//			break;
+//		default:
+//			throw new IllegalStateException("currentBuyingFocus must not be any other number than 0,1,2,3!!!!");
+//		}
+//		for(int i = 0; i<5; i++){
+//			resourcesNeeded[i] = costs[i] - ownResources[i];
+//			tradableResources[i] = ownResources[i] - costs[i];
+//		}
+//		int amountResourcesNeedet = 0;
+//		for(int i = 0; i<5; i++){
+//			if(resourcesNeeded[i]>0){
+//				amountResourcesNeedet = amountResourcesNeedet + resourcesNeeded[i];
+//			}
+//		}
+//		int amountResourcesTradable = 0;
+//		for(int i = 0; i<5; i++){
+//			if(tradableResources[i]>0){
+//				amountResourcesTradable = amountResourcesTradable + tradableResources[i];
+//			}
+//		}
+//		int[] demand = {0,0,0,0,0};
+//		int demandValue = 0;
+//		int offerValue = 0;
+//		for(int i = 0; i<5; i++){
+//			if(resourcesNeeded[i]>0){
+//				demand[i] = resourcesNeeded[i];
+//				demandValue = demandValue + resourcesNeeded[i] * aai.getGlobalResourceWeight()[i];
+//			}
+//		}
+//		while(demandValue-offerValue>50){
+//			//TODO erstellen des angebots...
+//		}
+//	}
 
 
 }

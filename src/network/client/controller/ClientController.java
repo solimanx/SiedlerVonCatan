@@ -1103,7 +1103,7 @@ public class ClientController {
 		}
 		// special case, if player loses to a settlement block by another player
 		else {
-			gameLogic.getBoard().getPlayer(threadPlayerIdMap.get(threadID)).setHasLargestArmy(false);
+			gameLogic.getBoard().getPlayer(0).setHasLongestRoad(false);
 			viewController.getGameViewController().setLongestTradeRoad(-1);
 		}
 

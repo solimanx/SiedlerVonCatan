@@ -3,6 +3,9 @@ package view.devcardview;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import enums.CardType;
 import enums.ResourceType;
 import javafx.beans.value.ChangeListener;
@@ -24,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.client.controller.ViewController;
+import view.gameView.GameViewController;
 
 /**
  * Controls the DevelopmentCard view when viewing player's deck.
@@ -73,6 +77,8 @@ public class DevCardViewController implements Initializable {
 	private Button inventButton;
 
 	private ChoiceBox<ResourceType> monopolyRChooser;
+
+	private static Logger logger = LogManager.getLogger(DevCardViewController.class.getSimpleName());
 
 	/*
 	 * (non-Javadoc)
@@ -137,6 +143,9 @@ public class DevCardViewController implements Initializable {
 					break;
 				case 4:
 					string = CardType.STREET.toString();
+					break;
+				default:
+					logger.catching(new IllegalArgumentException("DevCard Index " + i + " doesn't exist"));
 					break;
 				}
 				devCardList.add(string);

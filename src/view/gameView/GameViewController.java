@@ -408,7 +408,7 @@ public class GameViewController implements Initializable {
 		shadow.setColor(Color.BLACK);
 
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = new Pane();
+		Pane root;
 		try {
 
 			root = loader.load(getClass().getResource("/view/tradeview/TradeView.fxml").openStream());
@@ -626,6 +626,9 @@ public class GameViewController implements Initializable {
 			playerNameFour.setText(playerName);
 			playerNameFour.setTextFill(playerColor.getValue());
 			playerNames.put(1, playerName);
+			break;
+		default:
+			logger.catching(new IllegalArgumentException("Non existant player!"));
 			break;
 		}
 
@@ -1218,6 +1221,9 @@ public class GameViewController implements Initializable {
 		case 4:
 			playerFourCards.setText(Integer.toString(resources[0]));
 			break;
+		default:
+			logger.catching(new IllegalArgumentException("Non existant player!"));
+			break;
 		}
 	}
 
@@ -1261,6 +1267,7 @@ public class GameViewController implements Initializable {
 			playerFourVPoints.setText(victoryString);
 			break;
 		default:
+			logger.catching(new IllegalArgumentException("Non existant player!"));
 			break;
 		}
 	}
@@ -1334,6 +1341,7 @@ public class GameViewController implements Initializable {
 			playerStatusFour.setText(state.toString());
 			break;
 		default:
+			logger.catching(new IllegalArgumentException("Non existant player!"));
 			break;
 		}
 	}
@@ -1454,7 +1462,15 @@ public class GameViewController implements Initializable {
 					case 4:
 						fourthLongestTradeRoute.setText(string);
 						break;
+					default:
+						logger.catching(new IllegalArgumentException("Non existant player!"));
+						break;
 					}
+				} else if (modelID == -1) {
+					selfLongestTradeRoute.setText("");
+					secondLongestTradeRoute.setText("");
+					thirdLongestTradeRoute.setText("");
+					fourthLongestTradeRoute.setText("");
 				}
 			}
 
@@ -1495,6 +1511,9 @@ public class GameViewController implements Initializable {
 					break;
 				case 4:
 					fourthGreatestKnightForce.setText(string);
+					break;
+				default:
+					logger.catching(new IllegalArgumentException("Non existant player!"));
 					break;
 				}
 			}
@@ -1708,8 +1727,8 @@ public class GameViewController implements Initializable {
 			playerFourDevCards.setText("" + viewController.getClientController().getGameLogic().getBoard()
 					.getPlayer(modelID).getPlayerUnknownCards());
 			break;
-
 		default:
+			logger.catching(new IllegalArgumentException("Non existant player!"));
 			break;
 		}
 

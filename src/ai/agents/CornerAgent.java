@@ -197,9 +197,12 @@ public class CornerAgent {
 				switch (f[i].getResourceType()) {
 				case NOTHING:
 					utility += DESERT_PENALTY;
+					break;
 				case SEA:
 					utility += SEA_PENALTY;
-				default: // nothing
+					break;
+				default:
+					break;
 				}
 			}
 		}
@@ -252,10 +255,9 @@ public class CornerAgent {
 		// }
 		// }
 		if (!harbour_state.equals(HarbourStatus.NULL)) {
-			if(harbour_state.equals(HarbourStatus.THREE_TO_ONE)){
+			if (harbour_state.equals(HarbourStatus.THREE_TO_ONE)) {
 				utility += THREE_HARBOUR_BENEFIT;
-			}
-			else{
+			} else {
 				utility += TWO_HARBOUR_BENEFIT;
 			}
 		}

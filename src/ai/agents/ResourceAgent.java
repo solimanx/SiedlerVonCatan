@@ -28,18 +28,7 @@ public class ResourceAgent {
 									// DevCard
 	private ArrayList<Corner> myCorners = new ArrayList<Corner>();
 	private ArrayList<Edge> myEdges = new ArrayList<Edge>();
-	private ArrayList<StreetSet> myStreetSets = new ArrayList<StreetSet>(); // evtl.
-																			// import
-																			// ändern
-
-	/**
-																			 * Gets the my street sets.
-																			 *
-																			 * @return the my street sets
-																			 */
-																			public ArrayList<StreetSet> getMyStreetSets() {
-		return myStreetSets;
-	}
+	private ArrayList<StreetSet> myStreetSets = new ArrayList<StreetSet>();
 
 	@SuppressWarnings("serial")
 	public final static HashMap<Integer, int[]> buildingCosts = new HashMap<Integer, int[]>() {
@@ -54,7 +43,7 @@ public class ResourceAgent {
 	private boolean[] affords;
 	private Double[] myResourceWeight;
 	private Double[] globalResourceWeight;
-	
+
 	private Edge bestStreet;
 	private Corner bestVillage;
 	private Corner bestCity;
@@ -82,6 +71,7 @@ public class ResourceAgent {
 	 *
 	 * @return int[] to give to robber
 	 */
+	@Deprecated
 	public int[] getRobberLossCards() {
 		int size = sumArray(ownResources) / 2;
 		int[] result = new int[5];
@@ -103,20 +93,17 @@ public class ResourceAgent {
 			return result;
 		} else {
 			for (int i = 0; i < sumArray(ownResources); i++) {
-				if (size == 0) {
-					break;
+				if (ownResources[2] > 0) {
+					ownResources[2]--;
+					result[2]++;
+				} else if (ownResources[3] > 0) {
+					ownResources[3]--;
+					result[3]++;
 				} else {
-					if (ownResources[2] > 0) {
-						ownResources[2]--;
-						result[2]++;
-					} else if (ownResources[3] > 0) {
-						ownResources[3]--;
-						result[3]++;
-					} else {
-						ownResources[4]--;
-						result[4]++;
-					}
+					ownResources[4]--;
+					result[4]++;
 				}
+
 			}
 			return result;
 		}
@@ -143,7 +130,8 @@ public class ResourceAgent {
 		if (compareResources(ownResources, DefaultSettings.CITY_BUILD_COST) && bestCity != null) {
 			results[2] = true;
 		}
-		if (compareResources(ownResources, DefaultSettings.DEVCARD_BUILD_COST) && aai.boughtDevCard == null && aai.getCardAgent().getAmountOfBoughtDevCards() < DefaultSettings.amountDevelopmentCards) {
+		if (compareResources(ownResources, DefaultSettings.DEVCARD_BUILD_COST) && aai.boughtDevCard == null
+				&& aai.getCardAgent().getAmountOfBoughtDevCards() < DefaultSettings.amountDevelopmentCards) {
 			results[3] = true;
 		}
 		return results;
@@ -268,21 +256,21 @@ public class ResourceAgent {
 		int max = -1;
 		int maxValue = Integer.MIN_VALUE;
 		CornerAgent currCa;
-		for (int i = 0; i < aai.getMyCornerAgents().size();i++){
+		for (int i = 0; i < aai.getMyCornerAgents().size(); i++) {
 			currCa = aai.getMyCornerAgents().get(i);
-		    if (currCa.getState() == CornerStatus.VILLAGE && currCa.calculateVillageUtility() > maxValue){
-		    	maxValue = currCa.getUtility();
-		    	max = i;
-		    }
+			if (currCa.getState() == CornerStatus.VILLAGE && currCa.calculateVillageUtility() > maxValue) {
+				maxValue = currCa.getUtility();
+				max = i;
+			}
 		}
-		if (max == -1){
+		if (max == -1) {
 			return null;
 		} else {
 			String id = aai.getMyCornerAgents().get(max).getID();
 			int[] coords = ProtocolToModel.getCornerCoordinates(id);
-			return aai.getGl().getBoard().getCornerAt(coords[0],coords[1],coords[2]);
+			return aai.getGl().getBoard().getCornerAt(coords[0], coords[1], coords[2]);
 		}
-		
+
 	}
 
 	/**
@@ -302,13 +290,13 @@ public class ResourceAgent {
 	public Corner getBestVillage() {
 		return bestVillage;
 	}
-	
+
 	/**
 	 * Gets the best city.
 	 *
 	 * @return the best city
 	 */
-	public Corner getBestCity(){
+	public Corner getBestCity() {
 		return bestCity;
 	}
 
@@ -416,7 +404,7 @@ public class ResourceAgent {
 		ArrayList<Object> bestStreets = getPossibleLTRExtensions();
 		StreetSet streetSet = (StreetSet) bestStreets.get(0);
 		ArrayList<Edge> edgeSuggestion = (ArrayList<Edge>) bestStreets.get(1);
-		if (edgeSuggestion.size() == 0){
+		if (edgeSuggestion.size() == 0) {
 			System.out.println("No Edge Suggestion!");
 			return null;
 		}
@@ -427,7 +415,8 @@ public class ResourceAgent {
 		for (int i = 0; i < edgeSuggestion.size(); i++) {
 			currCoords = ProtocolToModel.getEdgeCoordinates(edgeSuggestion.get(i).getEdgeID());
 			currNeighbours = aai.getGl().getBoard().getLinkedEdges(currCoords[0], currCoords[1], currCoords[2]);
-			currCornerNeighbours = aai.getGl().getBoard().getAttachedCorners(currCoords[0], currCoords[1], currCoords[2]);
+			currCornerNeighbours = aai.getGl().getBoard().getAttachedCorners(currCoords[0], currCoords[1],
+					currCoords[2]);
 			boolean oneHostileEdge = false;
 			for (int j = 0; j < currNeighbours.length; j++) {
 				// is not already in street set
@@ -450,26 +439,29 @@ public class ResourceAgent {
 						} else { // no street
 							edgeWeighting[i] += 10;
 						}
-						//schaue auf Corner mit Abstand 2
+						// schaue auf Corner mit Abstand 2
 						int[] secondEdgeCoords = ProtocolToModel.getEdgeCoordinates(currNeighbours[j].getEdgeID());
-						Corner[] secondCornerNeighbours = aai.getGl().getBoard().getAttachedCorners(secondEdgeCoords[0], secondEdgeCoords[1], secondEdgeCoords[2]);
+						Corner[] secondCornerNeighbours = aai.getGl().getBoard().getAttachedCorners(secondEdgeCoords[0],
+								secondEdgeCoords[1], secondEdgeCoords[2]);
 						for (int k = 0; k < secondCornerNeighbours.length; k++) {
-							if (secondCornerNeighbours[k] != currCornerNeighbours[0] && secondCornerNeighbours[k] != currCornerNeighbours[1]){
-								//then has to be the second corner
+							if (secondCornerNeighbours[k] != currCornerNeighbours[0]
+									&& secondCornerNeighbours[k] != currCornerNeighbours[1]) {
+								// then has to be the second corner
 								Integer ownerID = secondCornerNeighbours[k].getOwnerID();
-								//check if either blocked village or city
-								if (secondCornerNeighbours[k].getStatus() != CornerStatus.EMPTY){
-								if (ownerID != null){
-									if (ownerID == aai.getID()){
-										edgeWeighting[i] += 50;
+								// check if either blocked village or city
+								if (secondCornerNeighbours[k].getStatus() != CornerStatus.EMPTY) {
+									if (ownerID != null) {
+										if (ownerID == aai.getID()) {
+											edgeWeighting[i] += 50;
+										} else {
+											edgeWeighting[i] -= 10;
+										}
 									} else {
 										edgeWeighting[i] -= 10;
 									}
 								} else {
-									edgeWeighting[i] -= 10;
-								}
-								} else {
-									edgeWeighting[i] += aai.getCornerAgentByID(secondCornerNeighbours[k].getCornerID()).calculateVillageUtility();
+									edgeWeighting[i] += aai.getCornerAgentByID(secondCornerNeighbours[k].getCornerID())
+											.calculateVillageUtility();
 								}
 							}
 						}
@@ -726,7 +718,8 @@ public class ResourceAgent {
 	/**
 	 * Gets the lowest resource.
 	 *
-	 * @param rt the rt
+	 * @param rt
+	 *            the rt
 	 * @return the lowest resource
 	 */
 	public ResourceType getLowestResource(ResourceType rt) {
@@ -760,53 +753,59 @@ public class ResourceAgent {
 	 */
 	public void calculateMyResourceWeight() {
 		ArrayList<CornerAgent> agents = aai.getMyCornerAgents();
-		Double[] resourceWeighting = {50.0, 50.0, 50.0, 50.0, 50.0};
+		Double[] resourceWeighting = { 50.0, 50.0, 50.0, 50.0, 50.0 };
 		Field[] currFields;
 		Integer currResIndex;
-		for (int i = 0; i < agents.size();i++){
+		for (int i = 0; i < agents.size(); i++) {
 			currFields = agents.get(i).getFields();
 			for (int j = 0; j < currFields.length; j++) {
 				currResIndex = DefaultSettings.RESOURCE_VALUES.get(currFields[j].getResourceType());
-				if (currResIndex != null && currResIndex < 5){
-					if (agents.get(i).getState() == CornerStatus.CITY){
-						resourceWeighting[currResIndex] -= 2 * 100 * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+				if (currResIndex != null && currResIndex < 5) {
+					if (agents.get(i).getState() == CornerStatus.CITY) {
+						resourceWeighting[currResIndex] -= 2 * 100
+								* aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
 					} else {
-						resourceWeighting[currResIndex] -= 100 * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+						resourceWeighting[currResIndex] -= 100
+								* aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
 					}
 				}
 			}
 		}
-		System.out.println("Calculated new Own Resource Weight: " + resourceWeighting[0] +" " + resourceWeighting[1] +" " + resourceWeighting[2] +" " + resourceWeighting[3] +" " + resourceWeighting[4]);
+		System.out.println("Calculated new Own Resource Weight: " + resourceWeighting[0] + " " + resourceWeighting[1]
+				+ " " + resourceWeighting[2] + " " + resourceWeighting[3] + " " + resourceWeighting[4]);
 		this.myResourceWeight = resourceWeighting;
-		
+
 	}
-	
+
 	/**
 	 * Calculate global resource weight.
 	 */
 	public void calculateGlobalResourceWeight() {
-		int decreaseFactor = 100 / (aai.getOpponentAgent().getAmountPlayer() + 1); //ownPlayer
-		Double[] resourceWeighting = {50.0, 50.0, 50.0, 50.0, 50.0};
+		int decreaseFactor = 100 / (aai.getOpponentAgent().getAmountPlayer() + 1); // ownPlayer
+		Double[] resourceWeighting = { 50.0, 50.0, 50.0, 50.0, 50.0 };
 		CornerAgent[] cornerAgents = aai.getCornerAgents();
 		Integer currResIndex;
 		Field[] currFields;
-		for (int i = 0; i < cornerAgents.length;i++){
-			if (cornerAgents[i].getPlayerID() != null){
+		for (int i = 0; i < cornerAgents.length; i++) {
+			if (cornerAgents[i].getPlayerID() != null) {
 				currFields = cornerAgents[i].getFields();
 				for (int j = 0; j < currFields.length; j++) {
 					currResIndex = DefaultSettings.RESOURCE_VALUES.get(currFields[j].getResourceType());
-					if (currResIndex != null && currResIndex < 5){
-						if (cornerAgents[i].getState() == CornerStatus.CITY){
-							resourceWeighting[currResIndex] -= 2 * decreaseFactor * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+					if (currResIndex != null && currResIndex < 5) {
+						if (cornerAgents[i].getState() == CornerStatus.CITY) {
+							resourceWeighting[currResIndex] -= 2 * decreaseFactor
+									* aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
 						} else {
-							resourceWeighting[currResIndex] -= decreaseFactor * aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
+							resourceWeighting[currResIndex] -= decreaseFactor
+									* aai.getDiceRollProbabilities().get(currFields[j].getDiceIndex());
 						}
-						
+
 					}
 				}
 			}
 		}
-		System.out.println("Calculated new Global Resource Weight: " + resourceWeighting[0] +" " + resourceWeighting[1] +" " + resourceWeighting[2] +" " + resourceWeighting[3] +" " + resourceWeighting[4]);
+		System.out.println("Calculated new Global Resource Weight: " + resourceWeighting[0] + " " + resourceWeighting[1]
+				+ " " + resourceWeighting[2] + " " + resourceWeighting[3] + " " + resourceWeighting[4]);
 		this.globalResourceWeight = resourceWeighting;
 	}
 
@@ -827,6 +826,14 @@ public class ResourceAgent {
 	public Double[] getGlobalResourceWeight() {
 		return globalResourceWeight;
 	}
-	
+
+	/**
+	 * Gets the my street sets.
+	 *
+	 * @return the my street sets
+	 */
+	public ArrayList<StreetSet> getMyStreetSets() {
+		return myStreetSets;
+	}
 
 }
