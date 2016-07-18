@@ -80,7 +80,7 @@
                                                 <Font size="14.0" />
                                             </font>
                                         </TextField>
-                                        <TextField text="Tips: Dice Probability">
+                                        <TextField text="Tips: Dice Probability and Tactics">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
@@ -144,7 +144,7 @@
                             <children>
                                 <Pane layoutY="1.0" prefHeight="408.0" prefWidth="764.0">
                                     <children>
-                                        <Text fill="WHITE" layoutX="40.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Im Spiel...">
+                                        <Text fill="WHITE" layoutX="40.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                             <font>
                                                 <Font name="System Bold Italic" size="18.0" />
                                             </font>
@@ -244,7 +244,7 @@
                                         <Font name="System Italic" size="15.0" />
                                     </font>
                                 </Text>
-                                <Text layoutX="397.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Breze">
+                                <Text layoutX="406.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Breze">
                                     <font>
                                         <Font name="System Italic" size="15.0" />
                                     </font>
@@ -259,7 +259,7 @@
                                         <Font size="13.0" />
                                     </font>
                                 </Text>
-                                <Text fill="#9a3030" layoutX="54.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Each player who has a settlement on an intersection that borders a terrain hex marked with the number rolled receives 1 Resource Card of the hex’s type. If you have 2 or 3 settlements bordering that hex, you receive 1 Resource Card for each settlement. You receive 2 Resource Cards for each city you own that borders that hex. Under the name of the player, there is the current status of this player, including the resources display in the sequence- radieschen , obatzter, bier , breze and hendl." wrappingWidth="701.3515625">
+                                <Text fill="WHITE" layoutX="54.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Each player who has a settlement on an intersection that borders a terrain hex marked with the number rolled receives 1 Resource Card of the hex’s type. If you have 2 or 3 settlements bordering that hex, you receive 1 Resource Card for each settlement. You receive 2 Resource Cards for each city you own that borders that hex. Under the name of the player, there is the current status of this player, including the resources display in the sequence- radieschen , obatzter, bier , breze and hendl." wrappingWidth="701.3515625">
                                     <font>
                                         <Font size="16.0" />
                                     </font>

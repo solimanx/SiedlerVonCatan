@@ -213,17 +213,6 @@ public class HelpViewController {
         });
     }
 
-    @FXML
-    void handleQuickInfo(Event event) {
-        pane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
-            @Override
-            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
-                if (checkTab()) {
-                    playHelpButtonSound();
-                }
-            }
-        });
-    }
 
 
 }
