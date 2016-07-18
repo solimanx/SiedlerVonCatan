@@ -127,7 +127,7 @@
                                                 <Font name="System Bold Italic" size="18.0" />
                                             </font>
                                         </Text>
-                                        <Text fill="#fffdfd" strokeType="OUTSIDE" strokeWidth="0.0" text="Wenn man eine AI starten möchte, so gibt man in die beiden Zeilen IPAdresse und Port ein und drückt ebenfalls auf Start." textAlignment="CENTER" translateY="30.0" wrappingWidth="761.17578125">
+                                        <Text fill="#fffdfd" strokeType="OUTSIDE" strokeWidth="0.0" text="Wenn man eine AI starten möchte, so gibt man in die beiden Zeilen IP Adresse und Port ein und drückt ebenfalls auf Start." textAlignment="CENTER" translateY="30.0" wrappingWidth="761.17578125">
                                             <font>
                                                 <Font size="16.0" />
                                             </font>
