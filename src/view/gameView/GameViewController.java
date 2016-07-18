@@ -4,12 +4,7 @@ import static sounds.Sound.playTradeButtonSound;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -774,9 +769,13 @@ public class GameViewController implements Initializable {
 	void handleHelpButton(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		Parent root;
-		if (theme.equals("standard")) {
-			try {
-				root = loader.load(getClass().getResource("/view/helpview/HelpView.fxml").openStream());
+		try {
+				if (theme.equals("standard")) {
+					root = loader.load(getClass().getResource("/view/helpview/HelpView.fxml").openStream());
+				}
+				else {
+					root = loader.load(getClass().getResource("/view/helpview/BiergartenHelpView.fxml").openStream());
+				}
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add("/textures/" + theme + ".css");
 				Stage helpView = new Stage();
@@ -784,18 +783,6 @@ public class GameViewController implements Initializable {
 				helpView.show();
 			} catch (IOException e) {
 				logger.catching(Level.ERROR, e);
-			}
-		} else {
-			try {
-				root = loader.load(getClass().getResource("/view/helpview/BiergartenHelpView.fxml").openStream());
-				Scene scene = new Scene(root);
-				scene.getStylesheets().add("/textures/" + theme + ".css");
-				Stage helpView = new Stage();
-				helpView.setScene(scene);
-				helpView.show();
-			} catch (IOException e) {
-				logger.catching(Level.ERROR, e);
-			}
 		}
 		if (!Soundeffects.isMuted()) {
 			Soundeffects.SELECT.play();
