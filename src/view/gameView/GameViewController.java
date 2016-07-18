@@ -779,6 +779,7 @@ public class GameViewController implements Initializable {
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add("/textures/" + theme + ".css");
 				Stage helpView = new Stage();
+			    helpView.getIcons().add(new Image("/textures/standard/Catan-Logo.png"));
 				helpView.setScene(scene);
 				helpView.show();
 			} catch (IOException e) {
