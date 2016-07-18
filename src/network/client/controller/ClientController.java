@@ -256,27 +256,29 @@ public class ClientController {
 				amountPlayers++;
 			}
 		default:
-			// five six
-			if (modelID > 3) {
-				PlayerModel[] oldPM = gameLogic.getBoard().getPlayerModels();
-				Board.extendBoard();
-				gameLogic.setBoard(new Board());
-				gameLogic.getBoard().extendPlayers(oldPM);
-			}
-			PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
-			if (pM.getColor() == null) {
-				pM.setColor(color);
-				pM.setName(name);
-			}
-			pM.setPlayerState(status);
-			pM.setVictoryPoints(victoryPoints);
-			// TODO this should be done ONCE
+			if (modelID != null) {
+				// five six
+				if (modelID > 3) {
+					PlayerModel[] oldPM = gameLogic.getBoard().getPlayerModels();
+					Board.extendBoard();
+					gameLogic.setBoard(new Board());
+					gameLogic.getBoard().extendPlayers(oldPM);
+				}
+				PlayerModel pM = gameLogic.getBoard().getPlayer(modelID);
+				if (pM.getColor() == null) {
+					pM.setColor(color);
+					pM.setName(name);
+				}
+				pM.setPlayerState(status);
+				pM.setVictoryPoints(victoryPoints);
+				// TODO this should be done ONCE
 
-			if (viewController.getGameViewController() != null) {
-				// and here..
-				// modelID = 0,1,2,3
-				Platform.runLater(new PlayerStatusGUIUpdate(modelID, viewController.getGameViewController(),
-						victoryPoints, status, resources, devCards));
+				if (viewController.getGameViewController() != null) {
+					// and here..
+					// modelID = 0,1,2,3
+					Platform.runLater(new PlayerStatusGUIUpdate(modelID, viewController.getGameViewController(),
+							victoryPoints, status, resources, devCards));
+				}
 			}
 		}
 

@@ -2286,10 +2286,8 @@ public class ServerController {
 	 */
 	public void connectionLost(int threadID) {
 		Integer modelID = threadPlayerIdMap.get(threadID);
-		/*
-		 * PlayerModel pM = new PlayerModel(); pM = pM.
-		 */
-		if (modelID != null) {
+		PlayerState ps = gameLogic.getBoard().getPlayer(modelID).getPlayerState();
+		if (modelID != null && ps!= null && !ps.equals(PlayerState.WAITING_FOR_GAMESTART) && !ps.equals(PlayerState.GAME_STARTING)) {
 			if (currentPlayer != null) {
 				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.CONNECTION_LOST);
 				statusUpdate(modelID);
