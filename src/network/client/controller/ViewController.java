@@ -141,7 +141,7 @@ public class ViewController {
 			primaryStage.setY(primaryScreenBounds.getMinY());
 			primaryStage.setWidth(primaryScreenBounds.getWidth());
 			primaryStage.setHeight(primaryScreenBounds.getHeight());
-			// primaryStage.setFullScreen(false);
+			// primaryStage.setFullScreen(true);
 			gameViewController = (GameViewController) loader.getController();
 			gameViewController.setViewController(this);
 			gameViewController.startScene(primaryStage, theme);
