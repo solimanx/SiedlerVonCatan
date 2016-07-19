@@ -139,6 +139,8 @@ public class ViewController {
 			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 			primaryStage.setX(primaryScreenBounds.getMinX());
 			primaryStage.setY(primaryScreenBounds.getMinY());
+//			primaryStage.setWidth(1240);
+//			primaryStage.setHeight(960);
 			primaryStage.setWidth(primaryScreenBounds.getWidth());
 			primaryStage.setHeight(primaryScreenBounds.getHeight());
 			// primaryStage.setFullScreen(true);
