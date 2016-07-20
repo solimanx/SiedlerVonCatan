@@ -340,37 +340,6 @@ public class GameViewController implements Initializable {
 
 	private boolean initialRobberMove = true;
 
-	/**
-	 * Gets the trade view controller.
-	 *
-	 * @return the trade view controller
-	 */
-	public TradeViewController getTradeViewController() {
-		return tradeViewController;
-	}
-
-	/**
-	 * Sets the view controller.
-	 *
-	 * @param viewController
-	 *            the new view controller
-	 */
-	public void setViewController(ViewController viewController) {
-		this.viewController = viewController;
-	}
-
-	/**
-	 * Sets the checks if is street dev.
-	 *
-	 * @param isStreetDev
-	 *            the new checks if is street dev
-	 */
-	public void setIsStreetDev(Boolean isStreetDev) {
-		this.isStreetDevCard = isStreetDev;
-		Platform.runLater(new NewNotification("Street build Developement Card",
-				"Build two streets, or double-click on a new street to build just one."));
-	}
-
 	/*
 	 * (non-Javadoc)
 	 *
@@ -381,7 +350,7 @@ public class GameViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		response = new SimpleStringProperty("Server responses will appear here");
 		factory = new ViewBoardFactory();
-
+	
 	}
 
 	/**
@@ -399,80 +368,80 @@ public class GameViewController implements Initializable {
 		board.getChildren().add(factory.getViewBoard(stage));
 		board.toBack();
 		viewController.getClientController().initializeGUI();
-
+	
 		shadow = new DropShadow();
 		shadow.setRadius(5);
 		shadow.setColor(Color.BLACK);
-
+	
 		FXMLLoader loader = new FXMLLoader();
 		Pane root;
 		try {
-
+	
 			root = loader.load(getClass().getResource("/view/tradeview/TradeView.fxml").openStream());
 			tradeViewController = (TradeViewController) loader.getController();
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("/textures/" + theme + ".css");
 			tradeStage = new Stage();
 			tradeStage.setScene(scene);
-
+	
 			tradeViewController.init(selfResources, viewController, tradeStage);
-
+	
 			tradeStage.setOnCloseRequest(e -> {
 				tradeStage.hide();
-
+	
 			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.catching(Level.ERROR, e);
 			e.printStackTrace();
 		}
-
+	
 		woodTransition = generateTransition(selfWoodText);
 		clayTransition = generateTransition(selfClayText);
 		woolTransition = generateTransition(selfSheepText);
 		cornTransition = generateTransition(selfCornText);
 		oreTransition = generateTransition(selfOreText);
-
+	
 		woodTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-
+	
 			@Override
 			public void handle(ActionEvent event) {
 				selfWoodText.setFill(Color.WHITE);
 			}
 		});
-
+	
 		clayTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-
+	
 			@Override
 			public void handle(ActionEvent event) {
 				selfClayText.setFill(Color.WHITE);
 			}
 		});
-
+	
 		woolTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-
+	
 			@Override
 			public void handle(ActionEvent event) {
 				selfSheepText.setFill(Color.WHITE);
 			}
 		});
-
+	
 		cornTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-
+	
 			@Override
 			public void handle(ActionEvent event) {
 				selfCornText.setFill(Color.WHITE);
 			}
 		});
-
+	
 		oreTransition.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-
+	
 			@Override
 			public void handle(ActionEvent event) {
 				selfOreText.setFill(Color.WHITE);
 			}
 		});
-
+	
 		selfWoodText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -482,10 +451,10 @@ public class GameViewController implements Initializable {
 					selfWoodText.setFill(Color.RED);
 				}
 				woodTransition.play();
-
+	
 			}
 		});
-
+	
 		selfClayText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -497,7 +466,7 @@ public class GameViewController implements Initializable {
 				clayTransition.play();
 			}
 		});
-
+	
 		selfSheepText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -509,7 +478,7 @@ public class GameViewController implements Initializable {
 				woolTransition.play();
 			}
 		});
-
+	
 		selfCornText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -521,7 +490,7 @@ public class GameViewController implements Initializable {
 				cornTransition.play();
 			}
 		});
-
+	
 		selfOreText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -533,7 +502,7 @@ public class GameViewController implements Initializable {
 				oreTransition.play();
 			}
 		});
-
+	
 		response.addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -542,9 +511,40 @@ public class GameViewController implements Initializable {
 				}
 			}
 		});
-
+	
 		toggleSoundButton.graphicProperty().bind(new ImageSoundBinding(Soundeffects.GLOBAL_VOLUME_BOOLEAN_PROPERTY));
+	
+	}
 
+	/**
+	 * Sets the view controller.
+	 *
+	 * @param viewController
+	 *            the new view controller
+	 */
+	public void setViewController(ViewController viewController) {
+		this.viewController = viewController;
+	}
+
+	/**
+	 * Gets the trade view controller.
+	 *
+	 * @return the trade view controller
+	 */
+	public TradeViewController getTradeViewController() {
+		return tradeViewController;
+	}
+
+	/**
+	 * Sets the checks if is street dev.
+	 *
+	 * @param isStreetDev
+	 *            the new checks if is street dev
+	 */
+	public void setIsStreetDev(Boolean isStreetDev) {
+		this.isStreetDevCard = isStreetDev;
+		Platform.runLater(new NewNotification("Street build Developement Card",
+				"Build two streets, or double-click on a new street to build just one."));
 	}
 
 	/**
@@ -639,6 +639,7 @@ public class GameViewController implements Initializable {
 		th.setDaemon(true);
 		th.start();
 	}
+	
 
 	/**
 	 * Auxiliary method filling field color hashmap.
@@ -648,6 +649,10 @@ public class GameViewController implements Initializable {
 		imagePatterns = vFactory.getImagePatterns();
 		harbourImages = vFactory.getHarbourImages();
 	}
+
+	//===============================================================================
+	// Button Event Handling
+	//===============================================================================
 
 	/**
 	 * Handle end turn button.
@@ -887,6 +892,12 @@ public class GameViewController implements Initializable {
 		// playNotificationSound();
 	}
 
+	
+	
+	//===============================================================================
+	// Click Handling
+	//===============================================================================
+	
 	/**
 	 * Village click.
 	 *
@@ -986,6 +997,22 @@ public class GameViewController implements Initializable {
 
 	}
 
+	/**
+	 * City click.
+	 *
+	 * @param coordinates
+	 *            the coordinates
+	 */
+	private void cityClick(int[] coordinates) {
+	
+		viewController.getClientController().requestBuildCity(coordinates[0], coordinates[1], coordinates[2]);
+	
+	}
+
+	//===============================================================================
+	// Server Responses
+	//===============================================================================
+	
 	/**
 	 * Receive chat message.
 	 *
@@ -1109,18 +1136,6 @@ public class GameViewController implements Initializable {
 	public void removeVillage(int u, int v, int dir) {
 		ImageView village = villages[u + 3][v + 3][dir];
 		village.getStyleClass().remove("village");
-	}
-
-	/**
-	 * City click.
-	 *
-	 * @param coordinates
-	 *            the coordinates
-	 */
-	private void cityClick(int[] coordinates) {
-
-		viewController.getClientController().requestBuildCity(coordinates[0], coordinates[1], coordinates[2]);
-
 	}
 
 	/**
@@ -1686,8 +1701,10 @@ public class GameViewController implements Initializable {
 		this.knight = knight;
 	}
 
-	@SuppressWarnings("rawtypes")
-	Task resourceUpdater = new Task<Void>() {
+	/**
+	 *  Task for updating resource status during game flow.
+	 */
+	Task<Void> resourceUpdater = new Task<Void>() {
 
 		protected Void call() throws Exception {
 			while (true) {
@@ -1843,7 +1860,8 @@ public class GameViewController implements Initializable {
 		}
 
 		/**
-		 * Inits the board.
+		 * takes arrays of coordinates and adds Fields, Corners and Edges to them
+		 * After drawing the board, it sets the opacity of every item to 0 (except fields).
 		 */
 		private void initBoard() {
 
