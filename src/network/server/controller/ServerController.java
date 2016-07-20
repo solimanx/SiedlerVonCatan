@@ -667,8 +667,8 @@ public class ServerController {
 	 */
 	private int[] rollDice() {
 		Random rand = new Random();
-		int firstDice = 1 + rand.nextInt(5);
-		int secondDice = 1 + rand.nextInt(5);
+		int firstDice = 1 + rand.nextInt(6);
+		int secondDice = 1 + rand.nextInt(6);
 		int[] result = { firstDice, secondDice };
 		return result;
 	}
@@ -1573,7 +1573,7 @@ public class ServerController {
 					Random rand = new Random();
 					int stealResource;
 					do {
-						stealResource = rand.nextInt(4); // random resource
+						stealResource = rand.nextInt(5); // random resource
 						// while no resource of this type
 					} while (victimResources[stealResource] == 0);
 
@@ -1593,8 +1593,15 @@ public class ServerController {
 			serverOutputHandler.robberMovement(currentThreadID, location, victimThreadID);
 			gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
 			statusUpdate(modelID);
+		} else {
+			if (gameLogic.checkSetBandit(x, y, null)){
+				String location = Board.getCoordToStringMap().get(new Index(x, y));
+				gameLogic.getBoard().setBandit(location);
+				serverOutputHandler.robberMovement(currentThreadID, location, null);
+				gameLogic.getBoard().getPlayer(modelID).setPlayerState(PlayerState.TRADING_OR_BUILDING);
+				statusUpdate(modelID);
+			}
 		}
-
 	}
 
 	/**
@@ -1754,7 +1761,7 @@ public class ServerController {
 						Random rand = new Random();
 						int stealResource;
 						do {
-							stealResource = rand.nextInt(4); // random resource
+							stealResource = rand.nextInt(5); // random resource
 							// while no resource of this type
 						} while (victimResources[stealResource] == 0);
 

@@ -622,23 +622,6 @@ public class AIInputHandler extends ClientInputHandler {
 		// if it's me
 		if (ID == ai.getID()) {
 			ai.getMe().decrementPlayerDevCard(new StreetBuildingCard());
-
-			int[] coords = ProtocolToModel.getEdgeCoordinates(roadBuildingCardInfo.getRoadID1());
-			ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
-			ai.getResourceAgent().addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords[0], coords[1], coords[2]));
-
-			if (roadBuildingCardInfo.getRoadID2() != null) {
-				int[] coords2 = ProtocolToModel.getEdgeCoordinates(roadBuildingCardInfo.getRoadID2());
-				ai.getResourceAgent().add(ai.getGl().getBoard().getEdgeAt(coords2[0], coords2[1], coords2[2]));
-				ai.getResourceAgent()
-						.addToOwnStreetSet(ai.getGl().getBoard().getEdgeAt(coords2[0], coords2[1], coords2[2]));
-				ai.getMe().decreaseAmountStreets();
-			}
-			ai.getMe().decreaseAmountStreets();
-
-			if (ai.getMe().getPlayerState() == PlayerState.TRADING_OR_BUILDING) {
-				ai.actuate(); // actuate after played a card
-			}
 		}
 		// if it isn't me
 		else {

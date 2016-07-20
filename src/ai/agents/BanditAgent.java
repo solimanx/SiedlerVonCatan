@@ -16,7 +16,6 @@ public class BanditAgent {
 	private AdvancedAI aai;
 	double[][] robberscale = new double[7][7];
 	int[] bestRobberPosition;
-	private OpponentAgent oa;
 	private ArrayList<Integer> differentPlayers;
 	private Integer myTarget;
 
@@ -28,9 +27,8 @@ public class BanditAgent {
 	 * @param oa
 	 *            the oa
 	 */
-	public BanditAgent(AdvancedAI aai, OpponentAgent oa) {
+	public BanditAgent(AdvancedAI aai) {
 		this.aai = aai;
-		this.oa = oa;
 	}
 
 	/**
@@ -134,7 +132,7 @@ public class BanditAgent {
 		differentPlayers = new ArrayList<Integer>();
 		Corner[] c = aai.getGl().getBoard().getSurroundingCorners(coords[0], coords[1]);
 		for (int i = 0; i < c.length; i++) {
-			if (c[i].getOwnerID() != null) {
+			if (c[i].getOwnerID() != null && c[i].getOwnerID() != aai.getID()) {
 				if (!differentPlayers.contains(c[i].getOwnerID())) {
 					differentPlayers.add(c[i].getOwnerID());
 				}
@@ -144,6 +142,7 @@ public class BanditAgent {
 		setTarget(differentPlayers.get(0));
 
 		if (differentPlayers.size() > 1) {
+			OpponentAgent oa = aai.getOpponentAgent();
 			int max = oa.playerStrength(differentPlayers.get(0));
 			for (int i = 0; i < differentPlayers.size(); i++) {
 				if (oa.playerStrength(differentPlayers.get(i)) > max) {
