@@ -81,7 +81,7 @@ public class DevCardViewController implements Initializable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL,
 	 * java.util.ResourceBundle)
 	 */
@@ -238,61 +238,65 @@ public class DevCardViewController implements Initializable {
 	 */
 	@FXML
 	void handlePlayCardButton(ActionEvent event) {
-		if (devCardSelected.equals(CardType.KNIGHT.toString())) {
-			stage.close();
-			viewController.getGameViewController().setKnight(true);
-			viewController.getGameViewController().setMoveRobberState();
-		} else if (devCardSelected.equals(CardType.STREET.toString())) {
-			stage.close();
-			viewController.getGameViewController().setIsStreetDev(true);
-		} else if (devCardSelected.equals(CardType.MONOPOLY.toString())) {
+		if (devCardSelected != null) {
+			if (devCardSelected.equals(CardType.KNIGHT.toString())) {
+				stage.close();
+				viewController.getGameViewController().setKnight(true);
+				viewController.getGameViewController().setMoveRobberState();
+			} else if (devCardSelected.equals(CardType.STREET.toString())) {
+				stage.close();
+				viewController.getGameViewController().setIsStreetDev(true);
+			} else if (devCardSelected.equals(CardType.MONOPOLY.toString())) {
 
-			monopolyRChooser = new ChoiceBox<enums.ResourceType>();
-			monopolyRChooser.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
-					ResourceType.CORN, ResourceType.ORE);
-			inventButton = new Button("OK");
-			inventButton.setOnAction(e -> {
-				handleMonopolyOK(e);
-			});
-			Label label = new Label("Choose Resource ...");
-			VBox monopolyBox = new VBox(label, monopolyRChooser, inventButton);
-			monopolyBox.setPrefWidth(200);
-			monopolyBox.setPrefHeight(200);
-			monopolyBox.setPadding(new Insets(20, 20, 20, 20));
-			monopolyBox.setSpacing(20);
-			Scene scene = new Scene(monopolyBox);
-			scene.getStylesheets().add("/textures/" + viewController.getGameViewController().theme + ".css");
-			monopolyStage = new Stage();
-			monopolyStage.setScene(scene);
-			monopolyStage.initModality(Modality.WINDOW_MODAL);
-			monopolyStage.initOwner(this.stage);
-			monopolyStage.show();
-		} else if (devCardSelected.equals(CardType.INVENTION.toString())) {
-			inventRChooser1 = new ChoiceBox<enums.ResourceType>();
-			inventRChooser1.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
-					ResourceType.CORN, ResourceType.ORE);
-			inventRChooser2 = new ChoiceBox<enums.ResourceType>();
-			inventRChooser2.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
-					ResourceType.CORN, ResourceType.ORE);
-			inventButton = new Button("OK");
-			inventButton.setOnAction(e -> {
-				handleInventionOK(e);
-			});
-			Label label = new Label("Choose Resources ...");
-			VBox inventionBox = new VBox(label, inventRChooser1, inventRChooser2, inventButton);
-			inventionBox.setPrefWidth(200);
-			inventionBox.setPrefHeight(250);
-			inventionBox.setPadding(new Insets(20, 20, 20, 20));
-			inventionBox.setSpacing(20);
-			Scene scene = new Scene(inventionBox);
-			scene.getStylesheets().add("/textures/" + viewController.getGameViewController().theme + ".css");
-			inventionStage = new Stage();
-			inventionStage.setScene(scene);
-			inventionStage.initModality(Modality.WINDOW_MODAL);
-			inventionStage.initOwner(this.stage);
-			inventionStage.show();
+				monopolyRChooser = new ChoiceBox<enums.ResourceType>();
+				monopolyRChooser.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
+						ResourceType.CORN, ResourceType.ORE);
+				inventButton = new Button("OK");
+				inventButton.setOnAction(e -> {
+					handleMonopolyOK(e);
+				});
+				Label label = new Label("Choose Resource ...");
+				VBox monopolyBox = new VBox(label, monopolyRChooser, inventButton);
+				monopolyBox.setPrefWidth(200);
+				monopolyBox.setPrefHeight(200);
+				monopolyBox.setPadding(new Insets(20, 20, 20, 20));
+				monopolyBox.setSpacing(20);
+				Scene scene = new Scene(monopolyBox);
+				scene.getStylesheets().add("/textures/" + viewController.getGameViewController().theme + ".css");
+				monopolyStage = new Stage();
+				monopolyStage.setScene(scene);
+				monopolyStage.initModality(Modality.WINDOW_MODAL);
+				monopolyStage.initOwner(this.stage);
+				monopolyStage.show();
+			} else if (devCardSelected.equals(CardType.INVENTION.toString())) {
+				inventRChooser1 = new ChoiceBox<enums.ResourceType>();
+				inventRChooser1.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
+						ResourceType.CORN, ResourceType.ORE);
+				inventRChooser2 = new ChoiceBox<enums.ResourceType>();
+				inventRChooser2.getItems().addAll(ResourceType.WOOD, ResourceType.CLAY, ResourceType.SHEEP,
+						ResourceType.CORN, ResourceType.ORE);
+				inventButton = new Button("OK");
+				inventButton.setOnAction(e -> {
+					handleInventionOK(e);
+				});
+				Label label = new Label("Choose Resources ...");
+				VBox inventionBox = new VBox(label, inventRChooser1, inventRChooser2, inventButton);
+				inventionBox.setPrefWidth(200);
+				inventionBox.setPrefHeight(250);
+				inventionBox.setPadding(new Insets(20, 20, 20, 20));
+				inventionBox.setSpacing(20);
+				Scene scene = new Scene(inventionBox);
+				scene.getStylesheets().add("/textures/" + viewController.getGameViewController().theme + ".css");
+				inventionStage = new Stage();
+				inventionStage.setScene(scene);
+				inventionStage.initModality(Modality.WINDOW_MODAL);
+				inventionStage.initOwner(this.stage);
+				inventionStage.show();
 
-		} else if (devCardSelected.equals(CardType.VICTORYPOINT.toString())) {
+			} else if (devCardSelected.equals(CardType.VICTORYPOINT.toString())) {
+				stage.close();
+			}
+		} else {
 			stage.close();
 		}
 
